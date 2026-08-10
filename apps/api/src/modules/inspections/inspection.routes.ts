@@ -1,0 +1,346 @@
+import { Router } from 'express';
+import prisma from '../../lib/prisma';
+
+const router = Router();
+
+// ======================================================
+// GET ALL INSPECTIONS
+// GET /api/v1/inspections
+// ======================================================
+
+router.get('/', async (_req, res) => {
+  try {
+    const inspections = await prisma.inspection.findMany({
+      include: {
+        case: {
+          include: {
+            asset: {
+              include: {
+                department: {
+                  select: {
+                    id: true,
+                    name: true,
+                    code: true
+                  }
+                },
+                jurisdiction: {
+                  select: {
+                    id: true,
+                    name: true,
+                    type: true
+                  }
+                }
+              }
+            }
+          }
+        },
+        inspector: {
+          select: {
+            id: true,
+            employeeCode: true,
+            name: true,
+            email: true,
+            designation: true,
+            role: true,
+            status: true,
+            departmentId: true,
+            jurisdictionId: true,
+            createdAt: true,
+            updatedAt: true,
+            department: {
+              select: {
+                id: true,
+                name: true,
+                code: true
+              }
+            },
+            jurisdiction: {
+              select: {
+                id: true,
+                name: true,
+                type: true
+              }
+            }
+          }
+        }
+      },
+      orderBy: {
+        createdAt: 'asc'
+      }
+    });
+
+    return res.status(200).json({
+      success: true,
+      data: inspections
+    });
+
+  } catch (error) {
+    console.error('Failed to fetch inspections:', error);
+
+    return res.status(500).json({
+      success: false,
+      error: {
+        code: 'INSPECTION_FETCH_FAILED',
+        message: 'Could not fetch inspections.'
+      }
+    });
+  }
+});
+
+
+// ======================================================
+// CREATE INSPECTION
+// POST /api/v1/inspections
+// ======================================================
+
+router.post('/', async (req, res) => {
+  try {
+    const {
+      caseId,
+      inspectorId,
+      inspectionDate,
+      structuralCondition,
+      crackSeverity,
+      corrosionLevel,
+      trafficImportance,
+      hospitalRoute,
+      weatherRisk,
+      heavyRainExpected,
+      estimatedDailyUsers,
+      inspectionNotes
+    } = req.body;
+
+
+    // --------------------------------------------------
+    // Required field validation & type checking
+    // --------------------------------------------------
+
+    if (
+      !caseId || typeof caseId !== 'string' || !caseId.trim() ||
+      !inspectorId || typeof inspectorId !== 'string' || !inspectorId.trim() ||
+      !inspectionDate || (typeof inspectionDate !== 'string' && !(inspectionDate instanceof Date)) ||
+      !structuralCondition || typeof structuralCondition !== 'string' || !structuralCondition.trim() ||
+      !crackSeverity || typeof crackSeverity !== 'string' || !crackSeverity.trim() ||
+      !corrosionLevel || typeof corrosionLevel !== 'string' || !corrosionLevel.trim() ||
+      !trafficImportance || typeof trafficImportance !== 'string' || !trafficImportance.trim() ||
+      typeof hospitalRoute !== 'boolean' ||
+      !weatherRisk || typeof weatherRisk !== 'string' || !weatherRisk.trim() ||
+      typeof heavyRainExpected !== 'boolean'
+    ) {
+      return res.status(400).json({
+        success: false,
+        error: {
+          code: 'INVALID_INPUT',
+          message: 'All required inspection fields must be provided with valid types.'
+        }
+      });
+    }
+
+    const parsedDate = new Date(inspectionDate);
+    if (isNaN(parsedDate.getTime())) {
+      return res.status(400).json({
+        success: false,
+        error: {
+          code: 'INVALID_INPUT',
+          message: 'inspectionDate must be a valid date.'
+        }
+      });
+    }
+
+    if (
+      estimatedDailyUsers !== undefined &&
+      estimatedDailyUsers !== null &&
+      (typeof estimatedDailyUsers !== 'number' || isNaN(estimatedDailyUsers))
+    ) {
+      return res.status(400).json({
+        success: false,
+        error: {
+          code: 'INVALID_INPUT',
+          message: 'estimatedDailyUsers must be a valid number.'
+        }
+      });
+    }
+
+
+    // --------------------------------------------------
+    // Verify Case exists
+    // --------------------------------------------------
+
+    const targetCase = await prisma.case.findUnique({
+      where: {
+        id: caseId.trim()
+      },
+      include: {
+        asset: true
+      }
+    });
+
+    if (!targetCase) {
+      return res.status(404).json({
+        success: false,
+        error: {
+          code: 'CASE_NOT_FOUND',
+          message: 'Case not found.'
+        }
+      });
+    }
+
+
+    // --------------------------------------------------
+    // Verify Inspector User exists
+    // --------------------------------------------------
+
+    const inspector = await prisma.user.findUnique({
+      where: {
+        id: inspectorId.trim()
+      }
+    });
+
+    if (!inspector) {
+      return res.status(404).json({
+        success: false,
+        error: {
+          code: 'INSPECTOR_NOT_FOUND',
+          message: 'Inspector not found.'
+        }
+      });
+    }
+
+
+    // --------------------------------------------------
+    // Verify Inspector belongs to same Department as Asset
+    // --------------------------------------------------
+
+    if (inspector.departmentId !== targetCase.asset.departmentId) {
+      return res.status(400).json({
+        success: false,
+        error: {
+          code: 'INSPECTOR_DEPARTMENT_MISMATCH',
+          message: 'Inspector does not belong to the same department as the case asset.'
+        }
+      });
+    }
+
+
+    // --------------------------------------------------
+    // Verify Inspector belongs to same Jurisdiction as Asset
+    // --------------------------------------------------
+
+    if (inspector.jurisdictionId !== targetCase.asset.jurisdictionId) {
+      return res.status(400).json({
+        success: false,
+        error: {
+          code: 'INSPECTOR_JURISDICTION_MISMATCH',
+          message: 'Inspector does not belong to the same jurisdiction as the case asset.'
+        }
+      });
+    }
+
+
+    // --------------------------------------------------
+    // Field Normalization (Categorical strings to UPPERCASE)
+    // --------------------------------------------------
+
+    const normalizedStructuralCondition = structuralCondition.trim().toUpperCase();
+    const normalizedCrackSeverity = crackSeverity.trim().toUpperCase();
+    const normalizedCorrosionLevel = corrosionLevel.trim().toUpperCase();
+    const normalizedTrafficImportance = trafficImportance.trim().toUpperCase();
+    const normalizedWeatherRisk = weatherRisk.trim().toUpperCase();
+
+
+    // --------------------------------------------------
+    // Create Inspection & Update Case Status if NEW
+    // --------------------------------------------------
+
+    const createdInspection = await prisma.$transaction(async (tx) => {
+      const newInspection = await tx.inspection.create({
+        data: {
+          caseId: targetCase.id,
+          inspectorId: inspector.id,
+          inspectionDate: parsedDate,
+          structuralCondition: normalizedStructuralCondition,
+          crackSeverity: normalizedCrackSeverity,
+          corrosionLevel: normalizedCorrosionLevel,
+          trafficImportance: normalizedTrafficImportance,
+          hospitalRoute: Boolean(hospitalRoute),
+          weatherRisk: normalizedWeatherRisk,
+          heavyRainExpected: Boolean(heavyRainExpected),
+          estimatedDailyUsers:
+            estimatedDailyUsers !== undefined && estimatedDailyUsers !== null
+              ? Number(estimatedDailyUsers)
+              : null,
+          inspectionNotes:
+            inspectionNotes !== undefined && inspectionNotes !== null
+              ? String(inspectionNotes).trim()
+              : null
+        },
+        include: {
+          case: {
+            include: {
+              asset: {
+                include: {
+                  department: {
+                    select: { id: true, name: true, code: true }
+                  },
+                  jurisdiction: {
+                    select: { id: true, name: true, type: true }
+                  }
+                }
+              }
+            }
+          },
+          inspector: {
+            select: {
+              id: true,
+              employeeCode: true,
+              name: true,
+              email: true,
+              designation: true,
+              role: true,
+              status: true,
+              departmentId: true,
+              jurisdictionId: true,
+              createdAt: true,
+              updatedAt: true,
+              department: {
+                select: { id: true, name: true, code: true }
+              },
+              jurisdiction: {
+                select: { id: true, name: true, type: true }
+              }
+            }
+          }
+        }
+      });
+
+      if (targetCase.status === 'NEW') {
+        await tx.case.update({
+          where: { id: targetCase.id },
+          data: { status: 'INSPECTION_IN_PROGRESS' }
+        });
+      }
+
+      return newInspection;
+    });
+
+
+    return res.status(201).json({
+      success: true,
+      data: createdInspection
+    });
+
+  } catch (error) {
+    console.error('Failed to create inspection:', error);
+
+    return res.status(500).json({
+      success: false,
+      error: {
+        code: 'INSPECTION_CREATE_FAILED',
+        message: 'Could not create inspection.'
+      }
+    });
+  }
+});
+
+
+export default router;

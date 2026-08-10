@@ -1,0 +1,238 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../../apps/api/src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserStatus {
+  ACTIVE
+  INACTIVE
+}
+
+enum SystemRole {
+  OFFICER
+  POLICY_ADMIN
+  AUDITOR
+  SYSTEM_ADMIN
+}
+
+enum AssetType {
+  BRIDGE
+  ROAD
+  FLYOVER
+}
+
+enum CaseStatus {
+  NEW
+  INSPECTION_REQUIRED
+  INSPECTION_IN_PROGRESS
+  UNDER_ANALYSIS
+  ORP_READY
+  UNDER_REVIEW
+  APPROVED
+  EXECUTION
+  VERIFICATION
+  CLOSED
+  CANCELLED
+}
+
+enum RiskLevel {
+  VERY_LOW
+  LOW
+  MODERATE
+  HIGH
+  VERY_HIGH
+  CRITICAL
+}
+
+enum PriorityLevel {
+  LOW
+  MEDIUM
+  HIGH
+  VERY_HIGH
+  CRITICAL
+}
+
+model Department {
+  id            String         @id @default(uuid())
+  name          String
+  code          String         @unique
+  users         User[]
+  assets        Asset[]
+  jurisdictions Jurisdiction[]
+  createdAt     DateTime       @default(now())
+}
+
+model Jurisdiction {
+  id           String     @id @default(uuid())
+  name         String
+  type         String
+  departmentId String
+  department   Department @relation(fields: [departmentId], references: [id])
+  users        User[]
+  assets       Asset[]
+  createdAt    DateTime   @default(now())
+
+  @@index([departmentId])
+}
+
+model User {
+  id           String     @id @default(uuid())
+  employeeCode String     @unique
+  name         String
+  email        String     @unique
+  passwordHash String
+  designation  String
+  role         SystemRole @default(OFFICER)
+  status       UserStatus @default(ACTIVE)
+
+  departmentId   String
+  jurisdictionId String
+
+  department   Department   @relation(fields: [departmentId], references: [id])
+  jurisdiction Jurisdiction @relation(fields: [jurisdictionId], references: [id])
+
+  inspections Inspection[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([departmentId])
+  @@index([jurisdictionId])
+  @@index([role])
+  @@index([status])
+}
+
+model Asset {
+  id        String    @id @default(uuid())
+  assetCode String    @unique
+  name      String
+  assetType AssetType
+
+  departmentId   String
+  jurisdictionId String
+
+  latitude  Decimal? @db.Decimal(9, 6)
+  longitude Decimal? @db.Decimal(9, 6)
+
+  constructionYear Int?
+  conditionStatus  String?
+
+  department   Department   @relation(fields: [departmentId], references: [id])
+  jurisdiction Jurisdiction @relation(fields: [jurisdictionId], references: [id])
+
+  cases Case[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([departmentId])
+  @@index([jurisdictionId])
+  @@index([assetType])
+}
+
+model Case {
+  id          String  @id @default(uuid())
+  caseNumber  String  @unique
+  assetId     String
+  title       String
+  description String?
+
+  status        CaseStatus     @default(NEW)
+  riskLevel     RiskLevel?
+  priorityLevel PriorityLevel?
+
+  emergencyFlag Boolean @default(false)
+
+  asset                    Asset                     @relation(fields: [assetId], references: [id])
+  inspections              Inspection[]
+  riskAssessments          RiskAssessment[]
+  operationalResponsePlans OperationalResponsePlan[]
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  closedAt  DateTime?
+
+  @@index([status])
+  @@index([priorityLevel])
+  @@index([riskLevel])
+  @@index([assetId])
+}
+
+model Inspection {
+  id          String @id @default(uuid())
+  caseId      String
+  inspectorId String
+
+  inspectionDate DateTime
+
+  structuralCondition String
+  crackSeverity       String
+  corrosionLevel      String
+
+  trafficImportance String
+  hospitalRoute     Boolean
+
+  weatherRisk       String
+  heavyRainExpected Boolean
+
+  estimatedDailyUsers Int?
+  inspectionNotes     String?
+
+  case            Case             @relation(fields: [caseId], references: [id])
+  inspector       User             @relation(fields: [inspectorId], references: [id])
+  riskAssessments RiskAssessment[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([caseId])
+  @@index([inspectorId])
+}
+
+model RiskAssessment {
+  id                String        @id @default(uuid())
+  caseId            String
+  inspectionId      String
+  riskScore         Int
+  riskLevel         RiskLevel
+  priorityLevel     PriorityLevel
+  reasonCodes       Json
+  reasons           Json
+  assessmentVersion String        @default("ODYSSEY_RISK_V1")
+  createdAt         DateTime      @default(now())
+
+  case                     Case                      @relation(fields: [caseId], references: [id], onDelete: Cascade)
+  inspection               Inspection                @relation(fields: [inspectionId], references: [id], onDelete: Cascade)
+  operationalResponsePlans OperationalResponsePlan[]
+
+  @@index([caseId])
+  @@index([inspectionId])
+}
+
+model OperationalResponsePlan {
+  id                     String   @id @default(uuid())
+  caseId                 String
+  riskAssessmentId       String
+  versionNumber          Int
+  status                 String   @default("AWAITING_REVIEW")
+  urgency                String
+  recommendedActionCodes Json
+  temporaryMeasures      Json
+  reasons                Json
+  alternativeActionCodes Json
+  planVersion            String   @default("ODYSSEY_ORP_V1")
+  createdAt              DateTime @default(now())
+  updatedAt              DateTime @updatedAt
+
+  case           Case           @relation(fields: [caseId], references: [id], onDelete: Cascade)
+  riskAssessment RiskAssessment @relation(fields: [riskAssessmentId], references: [id], onDelete: Cascade)
+
+  @@unique([caseId, versionNumber])
+  @@index([caseId])
+  @@index([riskAssessmentId])
+}
