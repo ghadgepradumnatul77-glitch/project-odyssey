@@ -228,12 +228,49 @@ exports.Prisma.OperationalResponsePlanScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.ApprovalAuthorityScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  departmentId: 'departmentId',
+  jurisdictionId: 'jurisdictionId',
+  canApprove: 'canApprove',
+  canReject: 'canReject',
+  canRequestModification: 'canRequestModification',
+  canRequestReinspection: 'canRequestReinspection',
+  canEscalate: 'canEscalate',
+  maxPriorityLevel: 'maxPriorityLevel',
+  isActive: 'isActive',
+  validFrom: 'validFrom',
+  validUntil: 'validUntil',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.OrpDecisionScalarFieldEnum = {
+  id: 'id',
+  caseId: 'caseId',
+  orpId: 'orpId',
+  reviewerId: 'reviewerId',
+  authorityGrantId: 'authorityGrantId',
+  decisionType: 'decisionType',
+  reason: 'reason',
+  remarks: 'remarks',
+  requestedChanges: 'requestedChanges',
+  forwardToUserId: 'forwardToUserId',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
 };
 
 exports.Prisma.JsonNullValueInput = {
+  JsonNull: Prisma.JsonNull
+};
+
+exports.Prisma.NullableJsonNullValueInput = {
+  DbNull: Prisma.DbNull,
   JsonNull: Prisma.JsonNull
 };
 
@@ -301,6 +338,14 @@ exports.PriorityLevel = exports.$Enums.PriorityLevel = {
   CRITICAL: 'CRITICAL'
 };
 
+exports.OrpDecisionType = exports.$Enums.OrpDecisionType = {
+  APPROVED: 'APPROVED',
+  REJECTED: 'REJECTED',
+  MODIFICATION_REQUESTED: 'MODIFICATION_REQUESTED',
+  REINSPECTION_REQUESTED: 'REINSPECTION_REQUESTED',
+  ESCALATED: 'ESCALATED'
+};
+
 exports.Prisma.ModelName = {
   Department: 'Department',
   Jurisdiction: 'Jurisdiction',
@@ -309,7 +354,9 @@ exports.Prisma.ModelName = {
   Case: 'Case',
   Inspection: 'Inspection',
   RiskAssessment: 'RiskAssessment',
-  OperationalResponsePlan: 'OperationalResponsePlan'
+  OperationalResponsePlan: 'OperationalResponsePlan',
+  ApprovalAuthority: 'ApprovalAuthority',
+  OrpDecision: 'OrpDecision'
 };
 
 /**

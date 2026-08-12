@@ -57,25 +57,35 @@ enum PriorityLevel {
   CRITICAL
 }
 
+enum OrpDecisionType {
+  APPROVED
+  REJECTED
+  MODIFICATION_REQUESTED
+  REINSPECTION_REQUESTED
+  ESCALATED
+}
+
 model Department {
-  id            String         @id @default(uuid())
-  name          String
-  code          String         @unique
-  users         User[]
-  assets        Asset[]
-  jurisdictions Jurisdiction[]
-  createdAt     DateTime       @default(now())
+  id                  String              @id @default(uuid())
+  name                String
+  code                String              @unique
+  users               User[]
+  assets              Asset[]
+  jurisdictions       Jurisdiction[]
+  approvalAuthorities ApprovalAuthority[]
+  createdAt           DateTime            @default(now())
 }
 
 model Jurisdiction {
-  id           String     @id @default(uuid())
-  name         String
-  type         String
-  departmentId String
-  department   Department @relation(fields: [departmentId], references: [id])
-  users        User[]
-  assets       Asset[]
-  createdAt    DateTime   @default(now())
+  id                  String              @id @default(uuid())
+  name                String
+  type                String
+  departmentId        String
+  department          Department          @relation(fields: [departmentId], references: [id])
+  users               User[]
+  assets              Asset[]
+  approvalAuthorities ApprovalAuthority[]
+  createdAt           DateTime            @default(now())
 
   @@index([departmentId])
 }
@@ -96,7 +106,10 @@ model User {
   department   Department   @relation(fields: [departmentId], references: [id])
   jurisdiction Jurisdiction @relation(fields: [jurisdictionId], references: [id])
 
-  inspections Inspection[]
+  inspections           Inspection[]
+  approvalAuthorities   ApprovalAuthority[]
+  reviewedOrpDecisions  OrpDecision[]       @relation("DecisionReviewer")
+  forwardedOrpDecisions OrpDecision[]       @relation("DecisionForwardedUser")
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -152,6 +165,7 @@ model Case {
   inspections              Inspection[]
   riskAssessments          RiskAssessment[]
   operationalResponsePlans OperationalResponsePlan[]
+  orpDecisions             OrpDecision[]
 
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
@@ -231,8 +245,67 @@ model OperationalResponsePlan {
 
   case           Case           @relation(fields: [caseId], references: [id], onDelete: Cascade)
   riskAssessment RiskAssessment @relation(fields: [riskAssessmentId], references: [id], onDelete: Cascade)
+  decisions      OrpDecision[]
 
   @@unique([caseId, versionNumber])
   @@index([caseId])
   @@index([riskAssessmentId])
+}
+
+model ApprovalAuthority {
+  id             String @id @default(uuid())
+  userId         String
+  departmentId   String
+  jurisdictionId String
+
+  canApprove             Boolean @default(false)
+  canReject              Boolean @default(false)
+  canRequestModification Boolean @default(false)
+  canRequestReinspection Boolean @default(false)
+  canEscalate            Boolean @default(false)
+
+  maxPriorityLevel PriorityLevel?
+  isActive         Boolean        @default(true)
+  validFrom        DateTime?
+  validUntil       DateTime?
+
+  user         User          @relation(fields: [userId], references: [id])
+  department   Department    @relation(fields: [departmentId], references: [id])
+  jurisdiction Jurisdiction  @relation(fields: [jurisdictionId], references: [id])
+  decisions    OrpDecision[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+  @@index([departmentId])
+  @@index([jurisdictionId])
+  @@index([isActive])
+}
+
+model OrpDecision {
+  id               String          @id @default(uuid())
+  caseId           String
+  orpId            String          @unique
+  reviewerId       String
+  authorityGrantId String
+  decisionType     OrpDecisionType
+  reason           String?
+  remarks          String?
+  requestedChanges Json?
+  forwardToUserId  String?
+  createdAt        DateTime        @default(now())
+
+  case           Case                    @relation(fields: [caseId], references: [id], onDelete: Restrict)
+  orp            OperationalResponsePlan @relation(fields: [orpId], references: [id], onDelete: Restrict)
+  reviewer       User                    @relation("DecisionReviewer", fields: [reviewerId], references: [id], onDelete: Restrict)
+  authorityGrant ApprovalAuthority       @relation(fields: [authorityGrantId], references: [id], onDelete: Restrict)
+  forwardedUser  User?                   @relation("DecisionForwardedUser", fields: [forwardToUserId], references: [id], onDelete: Restrict)
+
+  @@index([caseId])
+  @@index([reviewerId])
+  @@index([authorityGrantId])
+  @@index([forwardToUserId])
+  @@index([decisionType])
+  @@index([createdAt])
 }

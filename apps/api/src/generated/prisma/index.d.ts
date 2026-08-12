@@ -53,6 +53,16 @@ export type RiskAssessment = $Result.DefaultSelection<Prisma.$RiskAssessmentPayl
  * 
  */
 export type OperationalResponsePlan = $Result.DefaultSelection<Prisma.$OperationalResponsePlanPayload>
+/**
+ * Model ApprovalAuthority
+ * 
+ */
+export type ApprovalAuthority = $Result.DefaultSelection<Prisma.$ApprovalAuthorityPayload>
+/**
+ * Model OrpDecision
+ * 
+ */
+export type OrpDecision = $Result.DefaultSelection<Prisma.$OrpDecisionPayload>
 
 /**
  * Enums
@@ -124,6 +134,17 @@ export const PriorityLevel: {
 
 export type PriorityLevel = (typeof PriorityLevel)[keyof typeof PriorityLevel]
 
+
+export const OrpDecisionType: {
+  APPROVED: 'APPROVED',
+  REJECTED: 'REJECTED',
+  MODIFICATION_REQUESTED: 'MODIFICATION_REQUESTED',
+  REINSPECTION_REQUESTED: 'REINSPECTION_REQUESTED',
+  ESCALATED: 'ESCALATED'
+};
+
+export type OrpDecisionType = (typeof OrpDecisionType)[keyof typeof OrpDecisionType]
+
 }
 
 export type UserStatus = $Enums.UserStatus
@@ -149,6 +170,10 @@ export const RiskLevel: typeof $Enums.RiskLevel
 export type PriorityLevel = $Enums.PriorityLevel
 
 export const PriorityLevel: typeof $Enums.PriorityLevel
+
+export type OrpDecisionType = $Enums.OrpDecisionType
+
+export const OrpDecisionType: typeof $Enums.OrpDecisionType
 
 /**
  * ##  Prisma Client ʲˢ
@@ -347,6 +372,26 @@ export class PrismaClient<
     * ```
     */
   get operationalResponsePlan(): Prisma.OperationalResponsePlanDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.approvalAuthority`: Exposes CRUD operations for the **ApprovalAuthority** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ApprovalAuthorities
+    * const approvalAuthorities = await prisma.approvalAuthority.findMany()
+    * ```
+    */
+  get approvalAuthority(): Prisma.ApprovalAuthorityDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.orpDecision`: Exposes CRUD operations for the **OrpDecision** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more OrpDecisions
+    * const orpDecisions = await prisma.orpDecision.findMany()
+    * ```
+    */
+  get orpDecision(): Prisma.OrpDecisionDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -795,7 +840,9 @@ export namespace Prisma {
     Case: 'Case',
     Inspection: 'Inspection',
     RiskAssessment: 'RiskAssessment',
-    OperationalResponsePlan: 'OperationalResponsePlan'
+    OperationalResponsePlan: 'OperationalResponsePlan',
+    ApprovalAuthority: 'ApprovalAuthority',
+    OrpDecision: 'OrpDecision'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -814,7 +861,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "department" | "jurisdiction" | "user" | "asset" | "case" | "inspection" | "riskAssessment" | "operationalResponsePlan"
+      modelProps: "department" | "jurisdiction" | "user" | "asset" | "case" | "inspection" | "riskAssessment" | "operationalResponsePlan" | "approvalAuthority" | "orpDecision"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1410,6 +1457,154 @@ export namespace Prisma {
           }
         }
       }
+      ApprovalAuthority: {
+        payload: Prisma.$ApprovalAuthorityPayload<ExtArgs>
+        fields: Prisma.ApprovalAuthorityFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ApprovalAuthorityFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ApprovalAuthorityPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ApprovalAuthorityFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ApprovalAuthorityPayload>
+          }
+          findFirst: {
+            args: Prisma.ApprovalAuthorityFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ApprovalAuthorityPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ApprovalAuthorityFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ApprovalAuthorityPayload>
+          }
+          findMany: {
+            args: Prisma.ApprovalAuthorityFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ApprovalAuthorityPayload>[]
+          }
+          create: {
+            args: Prisma.ApprovalAuthorityCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ApprovalAuthorityPayload>
+          }
+          createMany: {
+            args: Prisma.ApprovalAuthorityCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ApprovalAuthorityCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ApprovalAuthorityPayload>[]
+          }
+          delete: {
+            args: Prisma.ApprovalAuthorityDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ApprovalAuthorityPayload>
+          }
+          update: {
+            args: Prisma.ApprovalAuthorityUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ApprovalAuthorityPayload>
+          }
+          deleteMany: {
+            args: Prisma.ApprovalAuthorityDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ApprovalAuthorityUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ApprovalAuthorityUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ApprovalAuthorityPayload>[]
+          }
+          upsert: {
+            args: Prisma.ApprovalAuthorityUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ApprovalAuthorityPayload>
+          }
+          aggregate: {
+            args: Prisma.ApprovalAuthorityAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateApprovalAuthority>
+          }
+          groupBy: {
+            args: Prisma.ApprovalAuthorityGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ApprovalAuthorityGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ApprovalAuthorityCountArgs<ExtArgs>
+            result: $Utils.Optional<ApprovalAuthorityCountAggregateOutputType> | number
+          }
+        }
+      }
+      OrpDecision: {
+        payload: Prisma.$OrpDecisionPayload<ExtArgs>
+        fields: Prisma.OrpDecisionFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.OrpDecisionFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OrpDecisionPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.OrpDecisionFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OrpDecisionPayload>
+          }
+          findFirst: {
+            args: Prisma.OrpDecisionFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OrpDecisionPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.OrpDecisionFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OrpDecisionPayload>
+          }
+          findMany: {
+            args: Prisma.OrpDecisionFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OrpDecisionPayload>[]
+          }
+          create: {
+            args: Prisma.OrpDecisionCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OrpDecisionPayload>
+          }
+          createMany: {
+            args: Prisma.OrpDecisionCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.OrpDecisionCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OrpDecisionPayload>[]
+          }
+          delete: {
+            args: Prisma.OrpDecisionDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OrpDecisionPayload>
+          }
+          update: {
+            args: Prisma.OrpDecisionUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OrpDecisionPayload>
+          }
+          deleteMany: {
+            args: Prisma.OrpDecisionDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.OrpDecisionUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.OrpDecisionUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OrpDecisionPayload>[]
+          }
+          upsert: {
+            args: Prisma.OrpDecisionUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OrpDecisionPayload>
+          }
+          aggregate: {
+            args: Prisma.OrpDecisionAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateOrpDecision>
+          }
+          groupBy: {
+            args: Prisma.OrpDecisionGroupByArgs<ExtArgs>
+            result: $Utils.Optional<OrpDecisionGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.OrpDecisionCountArgs<ExtArgs>
+            result: $Utils.Optional<OrpDecisionCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1514,6 +1709,8 @@ export namespace Prisma {
     inspection?: InspectionOmit
     riskAssessment?: RiskAssessmentOmit
     operationalResponsePlan?: OperationalResponsePlanOmit
+    approvalAuthority?: ApprovalAuthorityOmit
+    orpDecision?: OrpDecisionOmit
   }
 
   /* Types for Logging */
@@ -1597,12 +1794,14 @@ export namespace Prisma {
     users: number
     assets: number
     jurisdictions: number
+    approvalAuthorities: number
   }
 
   export type DepartmentCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     users?: boolean | DepartmentCountOutputTypeCountUsersArgs
     assets?: boolean | DepartmentCountOutputTypeCountAssetsArgs
     jurisdictions?: boolean | DepartmentCountOutputTypeCountJurisdictionsArgs
+    approvalAuthorities?: boolean | DepartmentCountOutputTypeCountApprovalAuthoritiesArgs
   }
 
   // Custom InputTypes
@@ -1637,6 +1836,13 @@ export namespace Prisma {
     where?: JurisdictionWhereInput
   }
 
+  /**
+   * DepartmentCountOutputType without action
+   */
+  export type DepartmentCountOutputTypeCountApprovalAuthoritiesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ApprovalAuthorityWhereInput
+  }
+
 
   /**
    * Count Type JurisdictionCountOutputType
@@ -1645,11 +1851,13 @@ export namespace Prisma {
   export type JurisdictionCountOutputType = {
     users: number
     assets: number
+    approvalAuthorities: number
   }
 
   export type JurisdictionCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     users?: boolean | JurisdictionCountOutputTypeCountUsersArgs
     assets?: boolean | JurisdictionCountOutputTypeCountAssetsArgs
+    approvalAuthorities?: boolean | JurisdictionCountOutputTypeCountApprovalAuthoritiesArgs
   }
 
   // Custom InputTypes
@@ -1677,6 +1885,13 @@ export namespace Prisma {
     where?: AssetWhereInput
   }
 
+  /**
+   * JurisdictionCountOutputType without action
+   */
+  export type JurisdictionCountOutputTypeCountApprovalAuthoritiesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ApprovalAuthorityWhereInput
+  }
+
 
   /**
    * Count Type UserCountOutputType
@@ -1684,10 +1899,16 @@ export namespace Prisma {
 
   export type UserCountOutputType = {
     inspections: number
+    approvalAuthorities: number
+    reviewedOrpDecisions: number
+    forwardedOrpDecisions: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     inspections?: boolean | UserCountOutputTypeCountInspectionsArgs
+    approvalAuthorities?: boolean | UserCountOutputTypeCountApprovalAuthoritiesArgs
+    reviewedOrpDecisions?: boolean | UserCountOutputTypeCountReviewedOrpDecisionsArgs
+    forwardedOrpDecisions?: boolean | UserCountOutputTypeCountForwardedOrpDecisionsArgs
   }
 
   // Custom InputTypes
@@ -1706,6 +1927,27 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountInspectionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: InspectionWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountApprovalAuthoritiesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ApprovalAuthorityWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountReviewedOrpDecisionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: OrpDecisionWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountForwardedOrpDecisionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: OrpDecisionWhereInput
   }
 
 
@@ -1748,12 +1990,14 @@ export namespace Prisma {
     inspections: number
     riskAssessments: number
     operationalResponsePlans: number
+    orpDecisions: number
   }
 
   export type CaseCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     inspections?: boolean | CaseCountOutputTypeCountInspectionsArgs
     riskAssessments?: boolean | CaseCountOutputTypeCountRiskAssessmentsArgs
     operationalResponsePlans?: boolean | CaseCountOutputTypeCountOperationalResponsePlansArgs
+    orpDecisions?: boolean | CaseCountOutputTypeCountOrpDecisionsArgs
   }
 
   // Custom InputTypes
@@ -1786,6 +2030,13 @@ export namespace Prisma {
    */
   export type CaseCountOutputTypeCountOperationalResponsePlansArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: OperationalResponsePlanWhereInput
+  }
+
+  /**
+   * CaseCountOutputType without action
+   */
+  export type CaseCountOutputTypeCountOrpDecisionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: OrpDecisionWhereInput
   }
 
 
@@ -1848,6 +2099,68 @@ export namespace Prisma {
    */
   export type RiskAssessmentCountOutputTypeCountOperationalResponsePlansArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: OperationalResponsePlanWhereInput
+  }
+
+
+  /**
+   * Count Type OperationalResponsePlanCountOutputType
+   */
+
+  export type OperationalResponsePlanCountOutputType = {
+    decisions: number
+  }
+
+  export type OperationalResponsePlanCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    decisions?: boolean | OperationalResponsePlanCountOutputTypeCountDecisionsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * OperationalResponsePlanCountOutputType without action
+   */
+  export type OperationalResponsePlanCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OperationalResponsePlanCountOutputType
+     */
+    select?: OperationalResponsePlanCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * OperationalResponsePlanCountOutputType without action
+   */
+  export type OperationalResponsePlanCountOutputTypeCountDecisionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: OrpDecisionWhereInput
+  }
+
+
+  /**
+   * Count Type ApprovalAuthorityCountOutputType
+   */
+
+  export type ApprovalAuthorityCountOutputType = {
+    decisions: number
+  }
+
+  export type ApprovalAuthorityCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    decisions?: boolean | ApprovalAuthorityCountOutputTypeCountDecisionsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * ApprovalAuthorityCountOutputType without action
+   */
+  export type ApprovalAuthorityCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ApprovalAuthorityCountOutputType
+     */
+    select?: ApprovalAuthorityCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * ApprovalAuthorityCountOutputType without action
+   */
+  export type ApprovalAuthorityCountOutputTypeCountDecisionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: OrpDecisionWhereInput
   }
 
 
@@ -2014,6 +2327,7 @@ export namespace Prisma {
     users?: boolean | Department$usersArgs<ExtArgs>
     assets?: boolean | Department$assetsArgs<ExtArgs>
     jurisdictions?: boolean | Department$jurisdictionsArgs<ExtArgs>
+    approvalAuthorities?: boolean | Department$approvalAuthoritiesArgs<ExtArgs>
     _count?: boolean | DepartmentCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["department"]>
 
@@ -2043,6 +2357,7 @@ export namespace Prisma {
     users?: boolean | Department$usersArgs<ExtArgs>
     assets?: boolean | Department$assetsArgs<ExtArgs>
     jurisdictions?: boolean | Department$jurisdictionsArgs<ExtArgs>
+    approvalAuthorities?: boolean | Department$approvalAuthoritiesArgs<ExtArgs>
     _count?: boolean | DepartmentCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type DepartmentIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -2054,6 +2369,7 @@ export namespace Prisma {
       users: Prisma.$UserPayload<ExtArgs>[]
       assets: Prisma.$AssetPayload<ExtArgs>[]
       jurisdictions: Prisma.$JurisdictionPayload<ExtArgs>[]
+      approvalAuthorities: Prisma.$ApprovalAuthorityPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -2457,6 +2773,7 @@ export namespace Prisma {
     users<T extends Department$usersArgs<ExtArgs> = {}>(args?: Subset<T, Department$usersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     assets<T extends Department$assetsArgs<ExtArgs> = {}>(args?: Subset<T, Department$assetsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AssetPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     jurisdictions<T extends Department$jurisdictionsArgs<ExtArgs> = {}>(args?: Subset<T, Department$jurisdictionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$JurisdictionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    approvalAuthorities<T extends Department$approvalAuthoritiesArgs<ExtArgs> = {}>(args?: Subset<T, Department$approvalAuthoritiesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ApprovalAuthorityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2950,6 +3267,30 @@ export namespace Prisma {
   }
 
   /**
+   * Department.approvalAuthorities
+   */
+  export type Department$approvalAuthoritiesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ApprovalAuthority
+     */
+    select?: ApprovalAuthoritySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ApprovalAuthority
+     */
+    omit?: ApprovalAuthorityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ApprovalAuthorityInclude<ExtArgs> | null
+    where?: ApprovalAuthorityWhereInput
+    orderBy?: ApprovalAuthorityOrderByWithRelationInput | ApprovalAuthorityOrderByWithRelationInput[]
+    cursor?: ApprovalAuthorityWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ApprovalAuthorityScalarFieldEnum | ApprovalAuthorityScalarFieldEnum[]
+  }
+
+  /**
    * Department without action
    */
   export type DepartmentDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3135,6 +3476,7 @@ export namespace Prisma {
     department?: boolean | DepartmentDefaultArgs<ExtArgs>
     users?: boolean | Jurisdiction$usersArgs<ExtArgs>
     assets?: boolean | Jurisdiction$assetsArgs<ExtArgs>
+    approvalAuthorities?: boolean | Jurisdiction$approvalAuthoritiesArgs<ExtArgs>
     _count?: boolean | JurisdictionCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["jurisdiction"]>
 
@@ -3169,6 +3511,7 @@ export namespace Prisma {
     department?: boolean | DepartmentDefaultArgs<ExtArgs>
     users?: boolean | Jurisdiction$usersArgs<ExtArgs>
     assets?: boolean | Jurisdiction$assetsArgs<ExtArgs>
+    approvalAuthorities?: boolean | Jurisdiction$approvalAuthoritiesArgs<ExtArgs>
     _count?: boolean | JurisdictionCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type JurisdictionIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3184,6 +3527,7 @@ export namespace Prisma {
       department: Prisma.$DepartmentPayload<ExtArgs>
       users: Prisma.$UserPayload<ExtArgs>[]
       assets: Prisma.$AssetPayload<ExtArgs>[]
+      approvalAuthorities: Prisma.$ApprovalAuthorityPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -3588,6 +3932,7 @@ export namespace Prisma {
     department<T extends DepartmentDefaultArgs<ExtArgs> = {}>(args?: Subset<T, DepartmentDefaultArgs<ExtArgs>>): Prisma__DepartmentClient<$Result.GetResult<Prisma.$DepartmentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     users<T extends Jurisdiction$usersArgs<ExtArgs> = {}>(args?: Subset<T, Jurisdiction$usersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     assets<T extends Jurisdiction$assetsArgs<ExtArgs> = {}>(args?: Subset<T, Jurisdiction$assetsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AssetPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    approvalAuthorities<T extends Jurisdiction$approvalAuthoritiesArgs<ExtArgs> = {}>(args?: Subset<T, Jurisdiction$approvalAuthoritiesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ApprovalAuthorityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4066,6 +4411,30 @@ export namespace Prisma {
   }
 
   /**
+   * Jurisdiction.approvalAuthorities
+   */
+  export type Jurisdiction$approvalAuthoritiesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ApprovalAuthority
+     */
+    select?: ApprovalAuthoritySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ApprovalAuthority
+     */
+    omit?: ApprovalAuthorityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ApprovalAuthorityInclude<ExtArgs> | null
+    where?: ApprovalAuthorityWhereInput
+    orderBy?: ApprovalAuthorityOrderByWithRelationInput | ApprovalAuthorityOrderByWithRelationInput[]
+    cursor?: ApprovalAuthorityWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ApprovalAuthorityScalarFieldEnum | ApprovalAuthorityScalarFieldEnum[]
+  }
+
+  /**
    * Jurisdiction without action
    */
   export type JurisdictionDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4307,6 +4676,9 @@ export namespace Prisma {
     department?: boolean | DepartmentDefaultArgs<ExtArgs>
     jurisdiction?: boolean | JurisdictionDefaultArgs<ExtArgs>
     inspections?: boolean | User$inspectionsArgs<ExtArgs>
+    approvalAuthorities?: boolean | User$approvalAuthoritiesArgs<ExtArgs>
+    reviewedOrpDecisions?: boolean | User$reviewedOrpDecisionsArgs<ExtArgs>
+    forwardedOrpDecisions?: boolean | User$forwardedOrpDecisionsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -4364,6 +4736,9 @@ export namespace Prisma {
     department?: boolean | DepartmentDefaultArgs<ExtArgs>
     jurisdiction?: boolean | JurisdictionDefaultArgs<ExtArgs>
     inspections?: boolean | User$inspectionsArgs<ExtArgs>
+    approvalAuthorities?: boolean | User$approvalAuthoritiesArgs<ExtArgs>
+    reviewedOrpDecisions?: boolean | User$reviewedOrpDecisionsArgs<ExtArgs>
+    forwardedOrpDecisions?: boolean | User$forwardedOrpDecisionsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4381,6 +4756,9 @@ export namespace Prisma {
       department: Prisma.$DepartmentPayload<ExtArgs>
       jurisdiction: Prisma.$JurisdictionPayload<ExtArgs>
       inspections: Prisma.$InspectionPayload<ExtArgs>[]
+      approvalAuthorities: Prisma.$ApprovalAuthorityPayload<ExtArgs>[]
+      reviewedOrpDecisions: Prisma.$OrpDecisionPayload<ExtArgs>[]
+      forwardedOrpDecisions: Prisma.$OrpDecisionPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -4792,6 +5170,9 @@ export namespace Prisma {
     department<T extends DepartmentDefaultArgs<ExtArgs> = {}>(args?: Subset<T, DepartmentDefaultArgs<ExtArgs>>): Prisma__DepartmentClient<$Result.GetResult<Prisma.$DepartmentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     jurisdiction<T extends JurisdictionDefaultArgs<ExtArgs> = {}>(args?: Subset<T, JurisdictionDefaultArgs<ExtArgs>>): Prisma__JurisdictionClient<$Result.GetResult<Prisma.$JurisdictionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     inspections<T extends User$inspectionsArgs<ExtArgs> = {}>(args?: Subset<T, User$inspectionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InspectionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    approvalAuthorities<T extends User$approvalAuthoritiesArgs<ExtArgs> = {}>(args?: Subset<T, User$approvalAuthoritiesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ApprovalAuthorityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    reviewedOrpDecisions<T extends User$reviewedOrpDecisionsArgs<ExtArgs> = {}>(args?: Subset<T, User$reviewedOrpDecisionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrpDecisionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    forwardedOrpDecisions<T extends User$forwardedOrpDecisionsArgs<ExtArgs> = {}>(args?: Subset<T, User$forwardedOrpDecisionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrpDecisionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5250,6 +5631,78 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: InspectionScalarFieldEnum | InspectionScalarFieldEnum[]
+  }
+
+  /**
+   * User.approvalAuthorities
+   */
+  export type User$approvalAuthoritiesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ApprovalAuthority
+     */
+    select?: ApprovalAuthoritySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ApprovalAuthority
+     */
+    omit?: ApprovalAuthorityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ApprovalAuthorityInclude<ExtArgs> | null
+    where?: ApprovalAuthorityWhereInput
+    orderBy?: ApprovalAuthorityOrderByWithRelationInput | ApprovalAuthorityOrderByWithRelationInput[]
+    cursor?: ApprovalAuthorityWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ApprovalAuthorityScalarFieldEnum | ApprovalAuthorityScalarFieldEnum[]
+  }
+
+  /**
+   * User.reviewedOrpDecisions
+   */
+  export type User$reviewedOrpDecisionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OrpDecision
+     */
+    select?: OrpDecisionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OrpDecision
+     */
+    omit?: OrpDecisionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrpDecisionInclude<ExtArgs> | null
+    where?: OrpDecisionWhereInput
+    orderBy?: OrpDecisionOrderByWithRelationInput | OrpDecisionOrderByWithRelationInput[]
+    cursor?: OrpDecisionWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: OrpDecisionScalarFieldEnum | OrpDecisionScalarFieldEnum[]
+  }
+
+  /**
+   * User.forwardedOrpDecisions
+   */
+  export type User$forwardedOrpDecisionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OrpDecision
+     */
+    select?: OrpDecisionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OrpDecision
+     */
+    omit?: OrpDecisionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrpDecisionInclude<ExtArgs> | null
+    where?: OrpDecisionWhereInput
+    orderBy?: OrpDecisionOrderByWithRelationInput | OrpDecisionOrderByWithRelationInput[]
+    cursor?: OrpDecisionWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: OrpDecisionScalarFieldEnum | OrpDecisionScalarFieldEnum[]
   }
 
   /**
@@ -6724,6 +7177,7 @@ export namespace Prisma {
     inspections?: boolean | Case$inspectionsArgs<ExtArgs>
     riskAssessments?: boolean | Case$riskAssessmentsArgs<ExtArgs>
     operationalResponsePlans?: boolean | Case$operationalResponsePlansArgs<ExtArgs>
+    orpDecisions?: boolean | Case$orpDecisionsArgs<ExtArgs>
     _count?: boolean | CaseCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["case"]>
 
@@ -6780,6 +7234,7 @@ export namespace Prisma {
     inspections?: boolean | Case$inspectionsArgs<ExtArgs>
     riskAssessments?: boolean | Case$riskAssessmentsArgs<ExtArgs>
     operationalResponsePlans?: boolean | Case$operationalResponsePlansArgs<ExtArgs>
+    orpDecisions?: boolean | Case$orpDecisionsArgs<ExtArgs>
     _count?: boolean | CaseCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type CaseIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -6796,6 +7251,7 @@ export namespace Prisma {
       inspections: Prisma.$InspectionPayload<ExtArgs>[]
       riskAssessments: Prisma.$RiskAssessmentPayload<ExtArgs>[]
       operationalResponsePlans: Prisma.$OperationalResponsePlanPayload<ExtArgs>[]
+      orpDecisions: Prisma.$OrpDecisionPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -7208,6 +7664,7 @@ export namespace Prisma {
     inspections<T extends Case$inspectionsArgs<ExtArgs> = {}>(args?: Subset<T, Case$inspectionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InspectionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     riskAssessments<T extends Case$riskAssessmentsArgs<ExtArgs> = {}>(args?: Subset<T, Case$riskAssessmentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RiskAssessmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     operationalResponsePlans<T extends Case$operationalResponsePlansArgs<ExtArgs> = {}>(args?: Subset<T, Case$operationalResponsePlansArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OperationalResponsePlanPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    orpDecisions<T extends Case$orpDecisionsArgs<ExtArgs> = {}>(args?: Subset<T, Case$orpDecisionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrpDecisionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -7714,6 +8171,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: OperationalResponsePlanScalarFieldEnum | OperationalResponsePlanScalarFieldEnum[]
+  }
+
+  /**
+   * Case.orpDecisions
+   */
+  export type Case$orpDecisionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OrpDecision
+     */
+    select?: OrpDecisionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OrpDecision
+     */
+    omit?: OrpDecisionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrpDecisionInclude<ExtArgs> | null
+    where?: OrpDecisionWhereInput
+    orderBy?: OrpDecisionOrderByWithRelationInput | OrpDecisionOrderByWithRelationInput[]
+    cursor?: OrpDecisionWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: OrpDecisionScalarFieldEnum | OrpDecisionScalarFieldEnum[]
   }
 
   /**
@@ -10430,6 +10911,8 @@ export namespace Prisma {
     updatedAt?: boolean
     case?: boolean | CaseDefaultArgs<ExtArgs>
     riskAssessment?: boolean | RiskAssessmentDefaultArgs<ExtArgs>
+    decisions?: boolean | OperationalResponsePlan$decisionsArgs<ExtArgs>
+    _count?: boolean | OperationalResponsePlanCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["operationalResponsePlan"]>
 
   export type OperationalResponsePlanSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -10488,6 +10971,8 @@ export namespace Prisma {
   export type OperationalResponsePlanInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     case?: boolean | CaseDefaultArgs<ExtArgs>
     riskAssessment?: boolean | RiskAssessmentDefaultArgs<ExtArgs>
+    decisions?: boolean | OperationalResponsePlan$decisionsArgs<ExtArgs>
+    _count?: boolean | OperationalResponsePlanCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type OperationalResponsePlanIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     case?: boolean | CaseDefaultArgs<ExtArgs>
@@ -10503,6 +10988,7 @@ export namespace Prisma {
     objects: {
       case: Prisma.$CasePayload<ExtArgs>
       riskAssessment: Prisma.$RiskAssessmentPayload<ExtArgs>
+      decisions: Prisma.$OrpDecisionPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -10914,6 +11400,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     case<T extends CaseDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CaseDefaultArgs<ExtArgs>>): Prisma__CaseClient<$Result.GetResult<Prisma.$CasePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     riskAssessment<T extends RiskAssessmentDefaultArgs<ExtArgs> = {}>(args?: Subset<T, RiskAssessmentDefaultArgs<ExtArgs>>): Prisma__RiskAssessmentClient<$Result.GetResult<Prisma.$RiskAssessmentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    decisions<T extends OperationalResponsePlan$decisionsArgs<ExtArgs> = {}>(args?: Subset<T, OperationalResponsePlan$decisionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrpDecisionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -11352,6 +11839,30 @@ export namespace Prisma {
   }
 
   /**
+   * OperationalResponsePlan.decisions
+   */
+  export type OperationalResponsePlan$decisionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OrpDecision
+     */
+    select?: OrpDecisionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OrpDecision
+     */
+    omit?: OrpDecisionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrpDecisionInclude<ExtArgs> | null
+    where?: OrpDecisionWhereInput
+    orderBy?: OrpDecisionOrderByWithRelationInput | OrpDecisionOrderByWithRelationInput[]
+    cursor?: OrpDecisionWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: OrpDecisionScalarFieldEnum | OrpDecisionScalarFieldEnum[]
+  }
+
+  /**
    * OperationalResponsePlan without action
    */
   export type OperationalResponsePlanDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -11367,6 +11878,2423 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: OperationalResponsePlanInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model ApprovalAuthority
+   */
+
+  export type AggregateApprovalAuthority = {
+    _count: ApprovalAuthorityCountAggregateOutputType | null
+    _min: ApprovalAuthorityMinAggregateOutputType | null
+    _max: ApprovalAuthorityMaxAggregateOutputType | null
+  }
+
+  export type ApprovalAuthorityMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    departmentId: string | null
+    jurisdictionId: string | null
+    canApprove: boolean | null
+    canReject: boolean | null
+    canRequestModification: boolean | null
+    canRequestReinspection: boolean | null
+    canEscalate: boolean | null
+    maxPriorityLevel: $Enums.PriorityLevel | null
+    isActive: boolean | null
+    validFrom: Date | null
+    validUntil: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ApprovalAuthorityMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    departmentId: string | null
+    jurisdictionId: string | null
+    canApprove: boolean | null
+    canReject: boolean | null
+    canRequestModification: boolean | null
+    canRequestReinspection: boolean | null
+    canEscalate: boolean | null
+    maxPriorityLevel: $Enums.PriorityLevel | null
+    isActive: boolean | null
+    validFrom: Date | null
+    validUntil: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ApprovalAuthorityCountAggregateOutputType = {
+    id: number
+    userId: number
+    departmentId: number
+    jurisdictionId: number
+    canApprove: number
+    canReject: number
+    canRequestModification: number
+    canRequestReinspection: number
+    canEscalate: number
+    maxPriorityLevel: number
+    isActive: number
+    validFrom: number
+    validUntil: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type ApprovalAuthorityMinAggregateInputType = {
+    id?: true
+    userId?: true
+    departmentId?: true
+    jurisdictionId?: true
+    canApprove?: true
+    canReject?: true
+    canRequestModification?: true
+    canRequestReinspection?: true
+    canEscalate?: true
+    maxPriorityLevel?: true
+    isActive?: true
+    validFrom?: true
+    validUntil?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ApprovalAuthorityMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    departmentId?: true
+    jurisdictionId?: true
+    canApprove?: true
+    canReject?: true
+    canRequestModification?: true
+    canRequestReinspection?: true
+    canEscalate?: true
+    maxPriorityLevel?: true
+    isActive?: true
+    validFrom?: true
+    validUntil?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ApprovalAuthorityCountAggregateInputType = {
+    id?: true
+    userId?: true
+    departmentId?: true
+    jurisdictionId?: true
+    canApprove?: true
+    canReject?: true
+    canRequestModification?: true
+    canRequestReinspection?: true
+    canEscalate?: true
+    maxPriorityLevel?: true
+    isActive?: true
+    validFrom?: true
+    validUntil?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type ApprovalAuthorityAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ApprovalAuthority to aggregate.
+     */
+    where?: ApprovalAuthorityWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ApprovalAuthorities to fetch.
+     */
+    orderBy?: ApprovalAuthorityOrderByWithRelationInput | ApprovalAuthorityOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ApprovalAuthorityWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ApprovalAuthorities from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ApprovalAuthorities.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ApprovalAuthorities
+    **/
+    _count?: true | ApprovalAuthorityCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ApprovalAuthorityMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ApprovalAuthorityMaxAggregateInputType
+  }
+
+  export type GetApprovalAuthorityAggregateType<T extends ApprovalAuthorityAggregateArgs> = {
+        [P in keyof T & keyof AggregateApprovalAuthority]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateApprovalAuthority[P]>
+      : GetScalarType<T[P], AggregateApprovalAuthority[P]>
+  }
+
+
+
+
+  export type ApprovalAuthorityGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ApprovalAuthorityWhereInput
+    orderBy?: ApprovalAuthorityOrderByWithAggregationInput | ApprovalAuthorityOrderByWithAggregationInput[]
+    by: ApprovalAuthorityScalarFieldEnum[] | ApprovalAuthorityScalarFieldEnum
+    having?: ApprovalAuthorityScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ApprovalAuthorityCountAggregateInputType | true
+    _min?: ApprovalAuthorityMinAggregateInputType
+    _max?: ApprovalAuthorityMaxAggregateInputType
+  }
+
+  export type ApprovalAuthorityGroupByOutputType = {
+    id: string
+    userId: string
+    departmentId: string
+    jurisdictionId: string
+    canApprove: boolean
+    canReject: boolean
+    canRequestModification: boolean
+    canRequestReinspection: boolean
+    canEscalate: boolean
+    maxPriorityLevel: $Enums.PriorityLevel | null
+    isActive: boolean
+    validFrom: Date | null
+    validUntil: Date | null
+    createdAt: Date
+    updatedAt: Date
+    _count: ApprovalAuthorityCountAggregateOutputType | null
+    _min: ApprovalAuthorityMinAggregateOutputType | null
+    _max: ApprovalAuthorityMaxAggregateOutputType | null
+  }
+
+  type GetApprovalAuthorityGroupByPayload<T extends ApprovalAuthorityGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ApprovalAuthorityGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ApprovalAuthorityGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ApprovalAuthorityGroupByOutputType[P]>
+            : GetScalarType<T[P], ApprovalAuthorityGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ApprovalAuthoritySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    departmentId?: boolean
+    jurisdictionId?: boolean
+    canApprove?: boolean
+    canReject?: boolean
+    canRequestModification?: boolean
+    canRequestReinspection?: boolean
+    canEscalate?: boolean
+    maxPriorityLevel?: boolean
+    isActive?: boolean
+    validFrom?: boolean
+    validUntil?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    department?: boolean | DepartmentDefaultArgs<ExtArgs>
+    jurisdiction?: boolean | JurisdictionDefaultArgs<ExtArgs>
+    decisions?: boolean | ApprovalAuthority$decisionsArgs<ExtArgs>
+    _count?: boolean | ApprovalAuthorityCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["approvalAuthority"]>
+
+  export type ApprovalAuthoritySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    departmentId?: boolean
+    jurisdictionId?: boolean
+    canApprove?: boolean
+    canReject?: boolean
+    canRequestModification?: boolean
+    canRequestReinspection?: boolean
+    canEscalate?: boolean
+    maxPriorityLevel?: boolean
+    isActive?: boolean
+    validFrom?: boolean
+    validUntil?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    department?: boolean | DepartmentDefaultArgs<ExtArgs>
+    jurisdiction?: boolean | JurisdictionDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["approvalAuthority"]>
+
+  export type ApprovalAuthoritySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    departmentId?: boolean
+    jurisdictionId?: boolean
+    canApprove?: boolean
+    canReject?: boolean
+    canRequestModification?: boolean
+    canRequestReinspection?: boolean
+    canEscalate?: boolean
+    maxPriorityLevel?: boolean
+    isActive?: boolean
+    validFrom?: boolean
+    validUntil?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    department?: boolean | DepartmentDefaultArgs<ExtArgs>
+    jurisdiction?: boolean | JurisdictionDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["approvalAuthority"]>
+
+  export type ApprovalAuthoritySelectScalar = {
+    id?: boolean
+    userId?: boolean
+    departmentId?: boolean
+    jurisdictionId?: boolean
+    canApprove?: boolean
+    canReject?: boolean
+    canRequestModification?: boolean
+    canRequestReinspection?: boolean
+    canEscalate?: boolean
+    maxPriorityLevel?: boolean
+    isActive?: boolean
+    validFrom?: boolean
+    validUntil?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type ApprovalAuthorityOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "departmentId" | "jurisdictionId" | "canApprove" | "canReject" | "canRequestModification" | "canRequestReinspection" | "canEscalate" | "maxPriorityLevel" | "isActive" | "validFrom" | "validUntil" | "createdAt" | "updatedAt", ExtArgs["result"]["approvalAuthority"]>
+  export type ApprovalAuthorityInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    department?: boolean | DepartmentDefaultArgs<ExtArgs>
+    jurisdiction?: boolean | JurisdictionDefaultArgs<ExtArgs>
+    decisions?: boolean | ApprovalAuthority$decisionsArgs<ExtArgs>
+    _count?: boolean | ApprovalAuthorityCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type ApprovalAuthorityIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    department?: boolean | DepartmentDefaultArgs<ExtArgs>
+    jurisdiction?: boolean | JurisdictionDefaultArgs<ExtArgs>
+  }
+  export type ApprovalAuthorityIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    department?: boolean | DepartmentDefaultArgs<ExtArgs>
+    jurisdiction?: boolean | JurisdictionDefaultArgs<ExtArgs>
+  }
+
+  export type $ApprovalAuthorityPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ApprovalAuthority"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+      department: Prisma.$DepartmentPayload<ExtArgs>
+      jurisdiction: Prisma.$JurisdictionPayload<ExtArgs>
+      decisions: Prisma.$OrpDecisionPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      departmentId: string
+      jurisdictionId: string
+      canApprove: boolean
+      canReject: boolean
+      canRequestModification: boolean
+      canRequestReinspection: boolean
+      canEscalate: boolean
+      maxPriorityLevel: $Enums.PriorityLevel | null
+      isActive: boolean
+      validFrom: Date | null
+      validUntil: Date | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["approvalAuthority"]>
+    composites: {}
+  }
+
+  type ApprovalAuthorityGetPayload<S extends boolean | null | undefined | ApprovalAuthorityDefaultArgs> = $Result.GetResult<Prisma.$ApprovalAuthorityPayload, S>
+
+  type ApprovalAuthorityCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ApprovalAuthorityFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ApprovalAuthorityCountAggregateInputType | true
+    }
+
+  export interface ApprovalAuthorityDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ApprovalAuthority'], meta: { name: 'ApprovalAuthority' } }
+    /**
+     * Find zero or one ApprovalAuthority that matches the filter.
+     * @param {ApprovalAuthorityFindUniqueArgs} args - Arguments to find a ApprovalAuthority
+     * @example
+     * // Get one ApprovalAuthority
+     * const approvalAuthority = await prisma.approvalAuthority.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ApprovalAuthorityFindUniqueArgs>(args: SelectSubset<T, ApprovalAuthorityFindUniqueArgs<ExtArgs>>): Prisma__ApprovalAuthorityClient<$Result.GetResult<Prisma.$ApprovalAuthorityPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one ApprovalAuthority that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ApprovalAuthorityFindUniqueOrThrowArgs} args - Arguments to find a ApprovalAuthority
+     * @example
+     * // Get one ApprovalAuthority
+     * const approvalAuthority = await prisma.approvalAuthority.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ApprovalAuthorityFindUniqueOrThrowArgs>(args: SelectSubset<T, ApprovalAuthorityFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ApprovalAuthorityClient<$Result.GetResult<Prisma.$ApprovalAuthorityPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ApprovalAuthority that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ApprovalAuthorityFindFirstArgs} args - Arguments to find a ApprovalAuthority
+     * @example
+     * // Get one ApprovalAuthority
+     * const approvalAuthority = await prisma.approvalAuthority.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ApprovalAuthorityFindFirstArgs>(args?: SelectSubset<T, ApprovalAuthorityFindFirstArgs<ExtArgs>>): Prisma__ApprovalAuthorityClient<$Result.GetResult<Prisma.$ApprovalAuthorityPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ApprovalAuthority that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ApprovalAuthorityFindFirstOrThrowArgs} args - Arguments to find a ApprovalAuthority
+     * @example
+     * // Get one ApprovalAuthority
+     * const approvalAuthority = await prisma.approvalAuthority.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ApprovalAuthorityFindFirstOrThrowArgs>(args?: SelectSubset<T, ApprovalAuthorityFindFirstOrThrowArgs<ExtArgs>>): Prisma__ApprovalAuthorityClient<$Result.GetResult<Prisma.$ApprovalAuthorityPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more ApprovalAuthorities that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ApprovalAuthorityFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ApprovalAuthorities
+     * const approvalAuthorities = await prisma.approvalAuthority.findMany()
+     * 
+     * // Get first 10 ApprovalAuthorities
+     * const approvalAuthorities = await prisma.approvalAuthority.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const approvalAuthorityWithIdOnly = await prisma.approvalAuthority.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ApprovalAuthorityFindManyArgs>(args?: SelectSubset<T, ApprovalAuthorityFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ApprovalAuthorityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a ApprovalAuthority.
+     * @param {ApprovalAuthorityCreateArgs} args - Arguments to create a ApprovalAuthority.
+     * @example
+     * // Create one ApprovalAuthority
+     * const ApprovalAuthority = await prisma.approvalAuthority.create({
+     *   data: {
+     *     // ... data to create a ApprovalAuthority
+     *   }
+     * })
+     * 
+     */
+    create<T extends ApprovalAuthorityCreateArgs>(args: SelectSubset<T, ApprovalAuthorityCreateArgs<ExtArgs>>): Prisma__ApprovalAuthorityClient<$Result.GetResult<Prisma.$ApprovalAuthorityPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many ApprovalAuthorities.
+     * @param {ApprovalAuthorityCreateManyArgs} args - Arguments to create many ApprovalAuthorities.
+     * @example
+     * // Create many ApprovalAuthorities
+     * const approvalAuthority = await prisma.approvalAuthority.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ApprovalAuthorityCreateManyArgs>(args?: SelectSubset<T, ApprovalAuthorityCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many ApprovalAuthorities and returns the data saved in the database.
+     * @param {ApprovalAuthorityCreateManyAndReturnArgs} args - Arguments to create many ApprovalAuthorities.
+     * @example
+     * // Create many ApprovalAuthorities
+     * const approvalAuthority = await prisma.approvalAuthority.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many ApprovalAuthorities and only return the `id`
+     * const approvalAuthorityWithIdOnly = await prisma.approvalAuthority.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ApprovalAuthorityCreateManyAndReturnArgs>(args?: SelectSubset<T, ApprovalAuthorityCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ApprovalAuthorityPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a ApprovalAuthority.
+     * @param {ApprovalAuthorityDeleteArgs} args - Arguments to delete one ApprovalAuthority.
+     * @example
+     * // Delete one ApprovalAuthority
+     * const ApprovalAuthority = await prisma.approvalAuthority.delete({
+     *   where: {
+     *     // ... filter to delete one ApprovalAuthority
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ApprovalAuthorityDeleteArgs>(args: SelectSubset<T, ApprovalAuthorityDeleteArgs<ExtArgs>>): Prisma__ApprovalAuthorityClient<$Result.GetResult<Prisma.$ApprovalAuthorityPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one ApprovalAuthority.
+     * @param {ApprovalAuthorityUpdateArgs} args - Arguments to update one ApprovalAuthority.
+     * @example
+     * // Update one ApprovalAuthority
+     * const approvalAuthority = await prisma.approvalAuthority.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ApprovalAuthorityUpdateArgs>(args: SelectSubset<T, ApprovalAuthorityUpdateArgs<ExtArgs>>): Prisma__ApprovalAuthorityClient<$Result.GetResult<Prisma.$ApprovalAuthorityPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more ApprovalAuthorities.
+     * @param {ApprovalAuthorityDeleteManyArgs} args - Arguments to filter ApprovalAuthorities to delete.
+     * @example
+     * // Delete a few ApprovalAuthorities
+     * const { count } = await prisma.approvalAuthority.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ApprovalAuthorityDeleteManyArgs>(args?: SelectSubset<T, ApprovalAuthorityDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ApprovalAuthorities.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ApprovalAuthorityUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ApprovalAuthorities
+     * const approvalAuthority = await prisma.approvalAuthority.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ApprovalAuthorityUpdateManyArgs>(args: SelectSubset<T, ApprovalAuthorityUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ApprovalAuthorities and returns the data updated in the database.
+     * @param {ApprovalAuthorityUpdateManyAndReturnArgs} args - Arguments to update many ApprovalAuthorities.
+     * @example
+     * // Update many ApprovalAuthorities
+     * const approvalAuthority = await prisma.approvalAuthority.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more ApprovalAuthorities and only return the `id`
+     * const approvalAuthorityWithIdOnly = await prisma.approvalAuthority.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ApprovalAuthorityUpdateManyAndReturnArgs>(args: SelectSubset<T, ApprovalAuthorityUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ApprovalAuthorityPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one ApprovalAuthority.
+     * @param {ApprovalAuthorityUpsertArgs} args - Arguments to update or create a ApprovalAuthority.
+     * @example
+     * // Update or create a ApprovalAuthority
+     * const approvalAuthority = await prisma.approvalAuthority.upsert({
+     *   create: {
+     *     // ... data to create a ApprovalAuthority
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ApprovalAuthority we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ApprovalAuthorityUpsertArgs>(args: SelectSubset<T, ApprovalAuthorityUpsertArgs<ExtArgs>>): Prisma__ApprovalAuthorityClient<$Result.GetResult<Prisma.$ApprovalAuthorityPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of ApprovalAuthorities.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ApprovalAuthorityCountArgs} args - Arguments to filter ApprovalAuthorities to count.
+     * @example
+     * // Count the number of ApprovalAuthorities
+     * const count = await prisma.approvalAuthority.count({
+     *   where: {
+     *     // ... the filter for the ApprovalAuthorities we want to count
+     *   }
+     * })
+    **/
+    count<T extends ApprovalAuthorityCountArgs>(
+      args?: Subset<T, ApprovalAuthorityCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ApprovalAuthorityCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ApprovalAuthority.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ApprovalAuthorityAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ApprovalAuthorityAggregateArgs>(args: Subset<T, ApprovalAuthorityAggregateArgs>): Prisma.PrismaPromise<GetApprovalAuthorityAggregateType<T>>
+
+    /**
+     * Group by ApprovalAuthority.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ApprovalAuthorityGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ApprovalAuthorityGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ApprovalAuthorityGroupByArgs['orderBy'] }
+        : { orderBy?: ApprovalAuthorityGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ApprovalAuthorityGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetApprovalAuthorityGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ApprovalAuthority model
+   */
+  readonly fields: ApprovalAuthorityFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ApprovalAuthority.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ApprovalAuthorityClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    department<T extends DepartmentDefaultArgs<ExtArgs> = {}>(args?: Subset<T, DepartmentDefaultArgs<ExtArgs>>): Prisma__DepartmentClient<$Result.GetResult<Prisma.$DepartmentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    jurisdiction<T extends JurisdictionDefaultArgs<ExtArgs> = {}>(args?: Subset<T, JurisdictionDefaultArgs<ExtArgs>>): Prisma__JurisdictionClient<$Result.GetResult<Prisma.$JurisdictionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    decisions<T extends ApprovalAuthority$decisionsArgs<ExtArgs> = {}>(args?: Subset<T, ApprovalAuthority$decisionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrpDecisionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ApprovalAuthority model
+   */
+  interface ApprovalAuthorityFieldRefs {
+    readonly id: FieldRef<"ApprovalAuthority", 'String'>
+    readonly userId: FieldRef<"ApprovalAuthority", 'String'>
+    readonly departmentId: FieldRef<"ApprovalAuthority", 'String'>
+    readonly jurisdictionId: FieldRef<"ApprovalAuthority", 'String'>
+    readonly canApprove: FieldRef<"ApprovalAuthority", 'Boolean'>
+    readonly canReject: FieldRef<"ApprovalAuthority", 'Boolean'>
+    readonly canRequestModification: FieldRef<"ApprovalAuthority", 'Boolean'>
+    readonly canRequestReinspection: FieldRef<"ApprovalAuthority", 'Boolean'>
+    readonly canEscalate: FieldRef<"ApprovalAuthority", 'Boolean'>
+    readonly maxPriorityLevel: FieldRef<"ApprovalAuthority", 'PriorityLevel'>
+    readonly isActive: FieldRef<"ApprovalAuthority", 'Boolean'>
+    readonly validFrom: FieldRef<"ApprovalAuthority", 'DateTime'>
+    readonly validUntil: FieldRef<"ApprovalAuthority", 'DateTime'>
+    readonly createdAt: FieldRef<"ApprovalAuthority", 'DateTime'>
+    readonly updatedAt: FieldRef<"ApprovalAuthority", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ApprovalAuthority findUnique
+   */
+  export type ApprovalAuthorityFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ApprovalAuthority
+     */
+    select?: ApprovalAuthoritySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ApprovalAuthority
+     */
+    omit?: ApprovalAuthorityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ApprovalAuthorityInclude<ExtArgs> | null
+    /**
+     * Filter, which ApprovalAuthority to fetch.
+     */
+    where: ApprovalAuthorityWhereUniqueInput
+  }
+
+  /**
+   * ApprovalAuthority findUniqueOrThrow
+   */
+  export type ApprovalAuthorityFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ApprovalAuthority
+     */
+    select?: ApprovalAuthoritySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ApprovalAuthority
+     */
+    omit?: ApprovalAuthorityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ApprovalAuthorityInclude<ExtArgs> | null
+    /**
+     * Filter, which ApprovalAuthority to fetch.
+     */
+    where: ApprovalAuthorityWhereUniqueInput
+  }
+
+  /**
+   * ApprovalAuthority findFirst
+   */
+  export type ApprovalAuthorityFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ApprovalAuthority
+     */
+    select?: ApprovalAuthoritySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ApprovalAuthority
+     */
+    omit?: ApprovalAuthorityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ApprovalAuthorityInclude<ExtArgs> | null
+    /**
+     * Filter, which ApprovalAuthority to fetch.
+     */
+    where?: ApprovalAuthorityWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ApprovalAuthorities to fetch.
+     */
+    orderBy?: ApprovalAuthorityOrderByWithRelationInput | ApprovalAuthorityOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ApprovalAuthorities.
+     */
+    cursor?: ApprovalAuthorityWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ApprovalAuthorities from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ApprovalAuthorities.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ApprovalAuthorities.
+     */
+    distinct?: ApprovalAuthorityScalarFieldEnum | ApprovalAuthorityScalarFieldEnum[]
+  }
+
+  /**
+   * ApprovalAuthority findFirstOrThrow
+   */
+  export type ApprovalAuthorityFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ApprovalAuthority
+     */
+    select?: ApprovalAuthoritySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ApprovalAuthority
+     */
+    omit?: ApprovalAuthorityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ApprovalAuthorityInclude<ExtArgs> | null
+    /**
+     * Filter, which ApprovalAuthority to fetch.
+     */
+    where?: ApprovalAuthorityWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ApprovalAuthorities to fetch.
+     */
+    orderBy?: ApprovalAuthorityOrderByWithRelationInput | ApprovalAuthorityOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ApprovalAuthorities.
+     */
+    cursor?: ApprovalAuthorityWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ApprovalAuthorities from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ApprovalAuthorities.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ApprovalAuthorities.
+     */
+    distinct?: ApprovalAuthorityScalarFieldEnum | ApprovalAuthorityScalarFieldEnum[]
+  }
+
+  /**
+   * ApprovalAuthority findMany
+   */
+  export type ApprovalAuthorityFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ApprovalAuthority
+     */
+    select?: ApprovalAuthoritySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ApprovalAuthority
+     */
+    omit?: ApprovalAuthorityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ApprovalAuthorityInclude<ExtArgs> | null
+    /**
+     * Filter, which ApprovalAuthorities to fetch.
+     */
+    where?: ApprovalAuthorityWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ApprovalAuthorities to fetch.
+     */
+    orderBy?: ApprovalAuthorityOrderByWithRelationInput | ApprovalAuthorityOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ApprovalAuthorities.
+     */
+    cursor?: ApprovalAuthorityWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ApprovalAuthorities from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ApprovalAuthorities.
+     */
+    skip?: number
+    distinct?: ApprovalAuthorityScalarFieldEnum | ApprovalAuthorityScalarFieldEnum[]
+  }
+
+  /**
+   * ApprovalAuthority create
+   */
+  export type ApprovalAuthorityCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ApprovalAuthority
+     */
+    select?: ApprovalAuthoritySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ApprovalAuthority
+     */
+    omit?: ApprovalAuthorityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ApprovalAuthorityInclude<ExtArgs> | null
+    /**
+     * The data needed to create a ApprovalAuthority.
+     */
+    data: XOR<ApprovalAuthorityCreateInput, ApprovalAuthorityUncheckedCreateInput>
+  }
+
+  /**
+   * ApprovalAuthority createMany
+   */
+  export type ApprovalAuthorityCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ApprovalAuthorities.
+     */
+    data: ApprovalAuthorityCreateManyInput | ApprovalAuthorityCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ApprovalAuthority createManyAndReturn
+   */
+  export type ApprovalAuthorityCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ApprovalAuthority
+     */
+    select?: ApprovalAuthoritySelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ApprovalAuthority
+     */
+    omit?: ApprovalAuthorityOmit<ExtArgs> | null
+    /**
+     * The data used to create many ApprovalAuthorities.
+     */
+    data: ApprovalAuthorityCreateManyInput | ApprovalAuthorityCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ApprovalAuthorityIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ApprovalAuthority update
+   */
+  export type ApprovalAuthorityUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ApprovalAuthority
+     */
+    select?: ApprovalAuthoritySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ApprovalAuthority
+     */
+    omit?: ApprovalAuthorityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ApprovalAuthorityInclude<ExtArgs> | null
+    /**
+     * The data needed to update a ApprovalAuthority.
+     */
+    data: XOR<ApprovalAuthorityUpdateInput, ApprovalAuthorityUncheckedUpdateInput>
+    /**
+     * Choose, which ApprovalAuthority to update.
+     */
+    where: ApprovalAuthorityWhereUniqueInput
+  }
+
+  /**
+   * ApprovalAuthority updateMany
+   */
+  export type ApprovalAuthorityUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ApprovalAuthorities.
+     */
+    data: XOR<ApprovalAuthorityUpdateManyMutationInput, ApprovalAuthorityUncheckedUpdateManyInput>
+    /**
+     * Filter which ApprovalAuthorities to update
+     */
+    where?: ApprovalAuthorityWhereInput
+    /**
+     * Limit how many ApprovalAuthorities to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ApprovalAuthority updateManyAndReturn
+   */
+  export type ApprovalAuthorityUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ApprovalAuthority
+     */
+    select?: ApprovalAuthoritySelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ApprovalAuthority
+     */
+    omit?: ApprovalAuthorityOmit<ExtArgs> | null
+    /**
+     * The data used to update ApprovalAuthorities.
+     */
+    data: XOR<ApprovalAuthorityUpdateManyMutationInput, ApprovalAuthorityUncheckedUpdateManyInput>
+    /**
+     * Filter which ApprovalAuthorities to update
+     */
+    where?: ApprovalAuthorityWhereInput
+    /**
+     * Limit how many ApprovalAuthorities to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ApprovalAuthorityIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ApprovalAuthority upsert
+   */
+  export type ApprovalAuthorityUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ApprovalAuthority
+     */
+    select?: ApprovalAuthoritySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ApprovalAuthority
+     */
+    omit?: ApprovalAuthorityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ApprovalAuthorityInclude<ExtArgs> | null
+    /**
+     * The filter to search for the ApprovalAuthority to update in case it exists.
+     */
+    where: ApprovalAuthorityWhereUniqueInput
+    /**
+     * In case the ApprovalAuthority found by the `where` argument doesn't exist, create a new ApprovalAuthority with this data.
+     */
+    create: XOR<ApprovalAuthorityCreateInput, ApprovalAuthorityUncheckedCreateInput>
+    /**
+     * In case the ApprovalAuthority was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ApprovalAuthorityUpdateInput, ApprovalAuthorityUncheckedUpdateInput>
+  }
+
+  /**
+   * ApprovalAuthority delete
+   */
+  export type ApprovalAuthorityDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ApprovalAuthority
+     */
+    select?: ApprovalAuthoritySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ApprovalAuthority
+     */
+    omit?: ApprovalAuthorityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ApprovalAuthorityInclude<ExtArgs> | null
+    /**
+     * Filter which ApprovalAuthority to delete.
+     */
+    where: ApprovalAuthorityWhereUniqueInput
+  }
+
+  /**
+   * ApprovalAuthority deleteMany
+   */
+  export type ApprovalAuthorityDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ApprovalAuthorities to delete
+     */
+    where?: ApprovalAuthorityWhereInput
+    /**
+     * Limit how many ApprovalAuthorities to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * ApprovalAuthority.decisions
+   */
+  export type ApprovalAuthority$decisionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OrpDecision
+     */
+    select?: OrpDecisionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OrpDecision
+     */
+    omit?: OrpDecisionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrpDecisionInclude<ExtArgs> | null
+    where?: OrpDecisionWhereInput
+    orderBy?: OrpDecisionOrderByWithRelationInput | OrpDecisionOrderByWithRelationInput[]
+    cursor?: OrpDecisionWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: OrpDecisionScalarFieldEnum | OrpDecisionScalarFieldEnum[]
+  }
+
+  /**
+   * ApprovalAuthority without action
+   */
+  export type ApprovalAuthorityDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ApprovalAuthority
+     */
+    select?: ApprovalAuthoritySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ApprovalAuthority
+     */
+    omit?: ApprovalAuthorityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ApprovalAuthorityInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model OrpDecision
+   */
+
+  export type AggregateOrpDecision = {
+    _count: OrpDecisionCountAggregateOutputType | null
+    _min: OrpDecisionMinAggregateOutputType | null
+    _max: OrpDecisionMaxAggregateOutputType | null
+  }
+
+  export type OrpDecisionMinAggregateOutputType = {
+    id: string | null
+    caseId: string | null
+    orpId: string | null
+    reviewerId: string | null
+    authorityGrantId: string | null
+    decisionType: $Enums.OrpDecisionType | null
+    reason: string | null
+    remarks: string | null
+    forwardToUserId: string | null
+    createdAt: Date | null
+  }
+
+  export type OrpDecisionMaxAggregateOutputType = {
+    id: string | null
+    caseId: string | null
+    orpId: string | null
+    reviewerId: string | null
+    authorityGrantId: string | null
+    decisionType: $Enums.OrpDecisionType | null
+    reason: string | null
+    remarks: string | null
+    forwardToUserId: string | null
+    createdAt: Date | null
+  }
+
+  export type OrpDecisionCountAggregateOutputType = {
+    id: number
+    caseId: number
+    orpId: number
+    reviewerId: number
+    authorityGrantId: number
+    decisionType: number
+    reason: number
+    remarks: number
+    requestedChanges: number
+    forwardToUserId: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type OrpDecisionMinAggregateInputType = {
+    id?: true
+    caseId?: true
+    orpId?: true
+    reviewerId?: true
+    authorityGrantId?: true
+    decisionType?: true
+    reason?: true
+    remarks?: true
+    forwardToUserId?: true
+    createdAt?: true
+  }
+
+  export type OrpDecisionMaxAggregateInputType = {
+    id?: true
+    caseId?: true
+    orpId?: true
+    reviewerId?: true
+    authorityGrantId?: true
+    decisionType?: true
+    reason?: true
+    remarks?: true
+    forwardToUserId?: true
+    createdAt?: true
+  }
+
+  export type OrpDecisionCountAggregateInputType = {
+    id?: true
+    caseId?: true
+    orpId?: true
+    reviewerId?: true
+    authorityGrantId?: true
+    decisionType?: true
+    reason?: true
+    remarks?: true
+    requestedChanges?: true
+    forwardToUserId?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type OrpDecisionAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which OrpDecision to aggregate.
+     */
+    where?: OrpDecisionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of OrpDecisions to fetch.
+     */
+    orderBy?: OrpDecisionOrderByWithRelationInput | OrpDecisionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: OrpDecisionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` OrpDecisions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` OrpDecisions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned OrpDecisions
+    **/
+    _count?: true | OrpDecisionCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: OrpDecisionMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: OrpDecisionMaxAggregateInputType
+  }
+
+  export type GetOrpDecisionAggregateType<T extends OrpDecisionAggregateArgs> = {
+        [P in keyof T & keyof AggregateOrpDecision]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateOrpDecision[P]>
+      : GetScalarType<T[P], AggregateOrpDecision[P]>
+  }
+
+
+
+
+  export type OrpDecisionGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: OrpDecisionWhereInput
+    orderBy?: OrpDecisionOrderByWithAggregationInput | OrpDecisionOrderByWithAggregationInput[]
+    by: OrpDecisionScalarFieldEnum[] | OrpDecisionScalarFieldEnum
+    having?: OrpDecisionScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: OrpDecisionCountAggregateInputType | true
+    _min?: OrpDecisionMinAggregateInputType
+    _max?: OrpDecisionMaxAggregateInputType
+  }
+
+  export type OrpDecisionGroupByOutputType = {
+    id: string
+    caseId: string
+    orpId: string
+    reviewerId: string
+    authorityGrantId: string
+    decisionType: $Enums.OrpDecisionType
+    reason: string | null
+    remarks: string | null
+    requestedChanges: JsonValue | null
+    forwardToUserId: string | null
+    createdAt: Date
+    _count: OrpDecisionCountAggregateOutputType | null
+    _min: OrpDecisionMinAggregateOutputType | null
+    _max: OrpDecisionMaxAggregateOutputType | null
+  }
+
+  type GetOrpDecisionGroupByPayload<T extends OrpDecisionGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<OrpDecisionGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof OrpDecisionGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], OrpDecisionGroupByOutputType[P]>
+            : GetScalarType<T[P], OrpDecisionGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type OrpDecisionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    caseId?: boolean
+    orpId?: boolean
+    reviewerId?: boolean
+    authorityGrantId?: boolean
+    decisionType?: boolean
+    reason?: boolean
+    remarks?: boolean
+    requestedChanges?: boolean
+    forwardToUserId?: boolean
+    createdAt?: boolean
+    case?: boolean | CaseDefaultArgs<ExtArgs>
+    orp?: boolean | OperationalResponsePlanDefaultArgs<ExtArgs>
+    reviewer?: boolean | UserDefaultArgs<ExtArgs>
+    authorityGrant?: boolean | ApprovalAuthorityDefaultArgs<ExtArgs>
+    forwardedUser?: boolean | OrpDecision$forwardedUserArgs<ExtArgs>
+  }, ExtArgs["result"]["orpDecision"]>
+
+  export type OrpDecisionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    caseId?: boolean
+    orpId?: boolean
+    reviewerId?: boolean
+    authorityGrantId?: boolean
+    decisionType?: boolean
+    reason?: boolean
+    remarks?: boolean
+    requestedChanges?: boolean
+    forwardToUserId?: boolean
+    createdAt?: boolean
+    case?: boolean | CaseDefaultArgs<ExtArgs>
+    orp?: boolean | OperationalResponsePlanDefaultArgs<ExtArgs>
+    reviewer?: boolean | UserDefaultArgs<ExtArgs>
+    authorityGrant?: boolean | ApprovalAuthorityDefaultArgs<ExtArgs>
+    forwardedUser?: boolean | OrpDecision$forwardedUserArgs<ExtArgs>
+  }, ExtArgs["result"]["orpDecision"]>
+
+  export type OrpDecisionSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    caseId?: boolean
+    orpId?: boolean
+    reviewerId?: boolean
+    authorityGrantId?: boolean
+    decisionType?: boolean
+    reason?: boolean
+    remarks?: boolean
+    requestedChanges?: boolean
+    forwardToUserId?: boolean
+    createdAt?: boolean
+    case?: boolean | CaseDefaultArgs<ExtArgs>
+    orp?: boolean | OperationalResponsePlanDefaultArgs<ExtArgs>
+    reviewer?: boolean | UserDefaultArgs<ExtArgs>
+    authorityGrant?: boolean | ApprovalAuthorityDefaultArgs<ExtArgs>
+    forwardedUser?: boolean | OrpDecision$forwardedUserArgs<ExtArgs>
+  }, ExtArgs["result"]["orpDecision"]>
+
+  export type OrpDecisionSelectScalar = {
+    id?: boolean
+    caseId?: boolean
+    orpId?: boolean
+    reviewerId?: boolean
+    authorityGrantId?: boolean
+    decisionType?: boolean
+    reason?: boolean
+    remarks?: boolean
+    requestedChanges?: boolean
+    forwardToUserId?: boolean
+    createdAt?: boolean
+  }
+
+  export type OrpDecisionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "caseId" | "orpId" | "reviewerId" | "authorityGrantId" | "decisionType" | "reason" | "remarks" | "requestedChanges" | "forwardToUserId" | "createdAt", ExtArgs["result"]["orpDecision"]>
+  export type OrpDecisionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    case?: boolean | CaseDefaultArgs<ExtArgs>
+    orp?: boolean | OperationalResponsePlanDefaultArgs<ExtArgs>
+    reviewer?: boolean | UserDefaultArgs<ExtArgs>
+    authorityGrant?: boolean | ApprovalAuthorityDefaultArgs<ExtArgs>
+    forwardedUser?: boolean | OrpDecision$forwardedUserArgs<ExtArgs>
+  }
+  export type OrpDecisionIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    case?: boolean | CaseDefaultArgs<ExtArgs>
+    orp?: boolean | OperationalResponsePlanDefaultArgs<ExtArgs>
+    reviewer?: boolean | UserDefaultArgs<ExtArgs>
+    authorityGrant?: boolean | ApprovalAuthorityDefaultArgs<ExtArgs>
+    forwardedUser?: boolean | OrpDecision$forwardedUserArgs<ExtArgs>
+  }
+  export type OrpDecisionIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    case?: boolean | CaseDefaultArgs<ExtArgs>
+    orp?: boolean | OperationalResponsePlanDefaultArgs<ExtArgs>
+    reviewer?: boolean | UserDefaultArgs<ExtArgs>
+    authorityGrant?: boolean | ApprovalAuthorityDefaultArgs<ExtArgs>
+    forwardedUser?: boolean | OrpDecision$forwardedUserArgs<ExtArgs>
+  }
+
+  export type $OrpDecisionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "OrpDecision"
+    objects: {
+      case: Prisma.$CasePayload<ExtArgs>
+      orp: Prisma.$OperationalResponsePlanPayload<ExtArgs>
+      reviewer: Prisma.$UserPayload<ExtArgs>
+      authorityGrant: Prisma.$ApprovalAuthorityPayload<ExtArgs>
+      forwardedUser: Prisma.$UserPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      caseId: string
+      orpId: string
+      reviewerId: string
+      authorityGrantId: string
+      decisionType: $Enums.OrpDecisionType
+      reason: string | null
+      remarks: string | null
+      requestedChanges: Prisma.JsonValue | null
+      forwardToUserId: string | null
+      createdAt: Date
+    }, ExtArgs["result"]["orpDecision"]>
+    composites: {}
+  }
+
+  type OrpDecisionGetPayload<S extends boolean | null | undefined | OrpDecisionDefaultArgs> = $Result.GetResult<Prisma.$OrpDecisionPayload, S>
+
+  type OrpDecisionCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<OrpDecisionFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: OrpDecisionCountAggregateInputType | true
+    }
+
+  export interface OrpDecisionDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['OrpDecision'], meta: { name: 'OrpDecision' } }
+    /**
+     * Find zero or one OrpDecision that matches the filter.
+     * @param {OrpDecisionFindUniqueArgs} args - Arguments to find a OrpDecision
+     * @example
+     * // Get one OrpDecision
+     * const orpDecision = await prisma.orpDecision.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends OrpDecisionFindUniqueArgs>(args: SelectSubset<T, OrpDecisionFindUniqueArgs<ExtArgs>>): Prisma__OrpDecisionClient<$Result.GetResult<Prisma.$OrpDecisionPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one OrpDecision that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {OrpDecisionFindUniqueOrThrowArgs} args - Arguments to find a OrpDecision
+     * @example
+     * // Get one OrpDecision
+     * const orpDecision = await prisma.orpDecision.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends OrpDecisionFindUniqueOrThrowArgs>(args: SelectSubset<T, OrpDecisionFindUniqueOrThrowArgs<ExtArgs>>): Prisma__OrpDecisionClient<$Result.GetResult<Prisma.$OrpDecisionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first OrpDecision that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OrpDecisionFindFirstArgs} args - Arguments to find a OrpDecision
+     * @example
+     * // Get one OrpDecision
+     * const orpDecision = await prisma.orpDecision.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends OrpDecisionFindFirstArgs>(args?: SelectSubset<T, OrpDecisionFindFirstArgs<ExtArgs>>): Prisma__OrpDecisionClient<$Result.GetResult<Prisma.$OrpDecisionPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first OrpDecision that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OrpDecisionFindFirstOrThrowArgs} args - Arguments to find a OrpDecision
+     * @example
+     * // Get one OrpDecision
+     * const orpDecision = await prisma.orpDecision.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends OrpDecisionFindFirstOrThrowArgs>(args?: SelectSubset<T, OrpDecisionFindFirstOrThrowArgs<ExtArgs>>): Prisma__OrpDecisionClient<$Result.GetResult<Prisma.$OrpDecisionPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more OrpDecisions that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OrpDecisionFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all OrpDecisions
+     * const orpDecisions = await prisma.orpDecision.findMany()
+     * 
+     * // Get first 10 OrpDecisions
+     * const orpDecisions = await prisma.orpDecision.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const orpDecisionWithIdOnly = await prisma.orpDecision.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends OrpDecisionFindManyArgs>(args?: SelectSubset<T, OrpDecisionFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrpDecisionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a OrpDecision.
+     * @param {OrpDecisionCreateArgs} args - Arguments to create a OrpDecision.
+     * @example
+     * // Create one OrpDecision
+     * const OrpDecision = await prisma.orpDecision.create({
+     *   data: {
+     *     // ... data to create a OrpDecision
+     *   }
+     * })
+     * 
+     */
+    create<T extends OrpDecisionCreateArgs>(args: SelectSubset<T, OrpDecisionCreateArgs<ExtArgs>>): Prisma__OrpDecisionClient<$Result.GetResult<Prisma.$OrpDecisionPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many OrpDecisions.
+     * @param {OrpDecisionCreateManyArgs} args - Arguments to create many OrpDecisions.
+     * @example
+     * // Create many OrpDecisions
+     * const orpDecision = await prisma.orpDecision.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends OrpDecisionCreateManyArgs>(args?: SelectSubset<T, OrpDecisionCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many OrpDecisions and returns the data saved in the database.
+     * @param {OrpDecisionCreateManyAndReturnArgs} args - Arguments to create many OrpDecisions.
+     * @example
+     * // Create many OrpDecisions
+     * const orpDecision = await prisma.orpDecision.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many OrpDecisions and only return the `id`
+     * const orpDecisionWithIdOnly = await prisma.orpDecision.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends OrpDecisionCreateManyAndReturnArgs>(args?: SelectSubset<T, OrpDecisionCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrpDecisionPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a OrpDecision.
+     * @param {OrpDecisionDeleteArgs} args - Arguments to delete one OrpDecision.
+     * @example
+     * // Delete one OrpDecision
+     * const OrpDecision = await prisma.orpDecision.delete({
+     *   where: {
+     *     // ... filter to delete one OrpDecision
+     *   }
+     * })
+     * 
+     */
+    delete<T extends OrpDecisionDeleteArgs>(args: SelectSubset<T, OrpDecisionDeleteArgs<ExtArgs>>): Prisma__OrpDecisionClient<$Result.GetResult<Prisma.$OrpDecisionPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one OrpDecision.
+     * @param {OrpDecisionUpdateArgs} args - Arguments to update one OrpDecision.
+     * @example
+     * // Update one OrpDecision
+     * const orpDecision = await prisma.orpDecision.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends OrpDecisionUpdateArgs>(args: SelectSubset<T, OrpDecisionUpdateArgs<ExtArgs>>): Prisma__OrpDecisionClient<$Result.GetResult<Prisma.$OrpDecisionPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more OrpDecisions.
+     * @param {OrpDecisionDeleteManyArgs} args - Arguments to filter OrpDecisions to delete.
+     * @example
+     * // Delete a few OrpDecisions
+     * const { count } = await prisma.orpDecision.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends OrpDecisionDeleteManyArgs>(args?: SelectSubset<T, OrpDecisionDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more OrpDecisions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OrpDecisionUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many OrpDecisions
+     * const orpDecision = await prisma.orpDecision.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends OrpDecisionUpdateManyArgs>(args: SelectSubset<T, OrpDecisionUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more OrpDecisions and returns the data updated in the database.
+     * @param {OrpDecisionUpdateManyAndReturnArgs} args - Arguments to update many OrpDecisions.
+     * @example
+     * // Update many OrpDecisions
+     * const orpDecision = await prisma.orpDecision.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more OrpDecisions and only return the `id`
+     * const orpDecisionWithIdOnly = await prisma.orpDecision.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends OrpDecisionUpdateManyAndReturnArgs>(args: SelectSubset<T, OrpDecisionUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrpDecisionPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one OrpDecision.
+     * @param {OrpDecisionUpsertArgs} args - Arguments to update or create a OrpDecision.
+     * @example
+     * // Update or create a OrpDecision
+     * const orpDecision = await prisma.orpDecision.upsert({
+     *   create: {
+     *     // ... data to create a OrpDecision
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the OrpDecision we want to update
+     *   }
+     * })
+     */
+    upsert<T extends OrpDecisionUpsertArgs>(args: SelectSubset<T, OrpDecisionUpsertArgs<ExtArgs>>): Prisma__OrpDecisionClient<$Result.GetResult<Prisma.$OrpDecisionPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of OrpDecisions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OrpDecisionCountArgs} args - Arguments to filter OrpDecisions to count.
+     * @example
+     * // Count the number of OrpDecisions
+     * const count = await prisma.orpDecision.count({
+     *   where: {
+     *     // ... the filter for the OrpDecisions we want to count
+     *   }
+     * })
+    **/
+    count<T extends OrpDecisionCountArgs>(
+      args?: Subset<T, OrpDecisionCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], OrpDecisionCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a OrpDecision.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OrpDecisionAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends OrpDecisionAggregateArgs>(args: Subset<T, OrpDecisionAggregateArgs>): Prisma.PrismaPromise<GetOrpDecisionAggregateType<T>>
+
+    /**
+     * Group by OrpDecision.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OrpDecisionGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends OrpDecisionGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: OrpDecisionGroupByArgs['orderBy'] }
+        : { orderBy?: OrpDecisionGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, OrpDecisionGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetOrpDecisionGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the OrpDecision model
+   */
+  readonly fields: OrpDecisionFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for OrpDecision.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__OrpDecisionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    case<T extends CaseDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CaseDefaultArgs<ExtArgs>>): Prisma__CaseClient<$Result.GetResult<Prisma.$CasePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    orp<T extends OperationalResponsePlanDefaultArgs<ExtArgs> = {}>(args?: Subset<T, OperationalResponsePlanDefaultArgs<ExtArgs>>): Prisma__OperationalResponsePlanClient<$Result.GetResult<Prisma.$OperationalResponsePlanPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    reviewer<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    authorityGrant<T extends ApprovalAuthorityDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ApprovalAuthorityDefaultArgs<ExtArgs>>): Prisma__ApprovalAuthorityClient<$Result.GetResult<Prisma.$ApprovalAuthorityPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    forwardedUser<T extends OrpDecision$forwardedUserArgs<ExtArgs> = {}>(args?: Subset<T, OrpDecision$forwardedUserArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the OrpDecision model
+   */
+  interface OrpDecisionFieldRefs {
+    readonly id: FieldRef<"OrpDecision", 'String'>
+    readonly caseId: FieldRef<"OrpDecision", 'String'>
+    readonly orpId: FieldRef<"OrpDecision", 'String'>
+    readonly reviewerId: FieldRef<"OrpDecision", 'String'>
+    readonly authorityGrantId: FieldRef<"OrpDecision", 'String'>
+    readonly decisionType: FieldRef<"OrpDecision", 'OrpDecisionType'>
+    readonly reason: FieldRef<"OrpDecision", 'String'>
+    readonly remarks: FieldRef<"OrpDecision", 'String'>
+    readonly requestedChanges: FieldRef<"OrpDecision", 'Json'>
+    readonly forwardToUserId: FieldRef<"OrpDecision", 'String'>
+    readonly createdAt: FieldRef<"OrpDecision", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * OrpDecision findUnique
+   */
+  export type OrpDecisionFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OrpDecision
+     */
+    select?: OrpDecisionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OrpDecision
+     */
+    omit?: OrpDecisionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrpDecisionInclude<ExtArgs> | null
+    /**
+     * Filter, which OrpDecision to fetch.
+     */
+    where: OrpDecisionWhereUniqueInput
+  }
+
+  /**
+   * OrpDecision findUniqueOrThrow
+   */
+  export type OrpDecisionFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OrpDecision
+     */
+    select?: OrpDecisionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OrpDecision
+     */
+    omit?: OrpDecisionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrpDecisionInclude<ExtArgs> | null
+    /**
+     * Filter, which OrpDecision to fetch.
+     */
+    where: OrpDecisionWhereUniqueInput
+  }
+
+  /**
+   * OrpDecision findFirst
+   */
+  export type OrpDecisionFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OrpDecision
+     */
+    select?: OrpDecisionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OrpDecision
+     */
+    omit?: OrpDecisionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrpDecisionInclude<ExtArgs> | null
+    /**
+     * Filter, which OrpDecision to fetch.
+     */
+    where?: OrpDecisionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of OrpDecisions to fetch.
+     */
+    orderBy?: OrpDecisionOrderByWithRelationInput | OrpDecisionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for OrpDecisions.
+     */
+    cursor?: OrpDecisionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` OrpDecisions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` OrpDecisions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of OrpDecisions.
+     */
+    distinct?: OrpDecisionScalarFieldEnum | OrpDecisionScalarFieldEnum[]
+  }
+
+  /**
+   * OrpDecision findFirstOrThrow
+   */
+  export type OrpDecisionFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OrpDecision
+     */
+    select?: OrpDecisionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OrpDecision
+     */
+    omit?: OrpDecisionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrpDecisionInclude<ExtArgs> | null
+    /**
+     * Filter, which OrpDecision to fetch.
+     */
+    where?: OrpDecisionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of OrpDecisions to fetch.
+     */
+    orderBy?: OrpDecisionOrderByWithRelationInput | OrpDecisionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for OrpDecisions.
+     */
+    cursor?: OrpDecisionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` OrpDecisions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` OrpDecisions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of OrpDecisions.
+     */
+    distinct?: OrpDecisionScalarFieldEnum | OrpDecisionScalarFieldEnum[]
+  }
+
+  /**
+   * OrpDecision findMany
+   */
+  export type OrpDecisionFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OrpDecision
+     */
+    select?: OrpDecisionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OrpDecision
+     */
+    omit?: OrpDecisionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrpDecisionInclude<ExtArgs> | null
+    /**
+     * Filter, which OrpDecisions to fetch.
+     */
+    where?: OrpDecisionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of OrpDecisions to fetch.
+     */
+    orderBy?: OrpDecisionOrderByWithRelationInput | OrpDecisionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing OrpDecisions.
+     */
+    cursor?: OrpDecisionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` OrpDecisions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` OrpDecisions.
+     */
+    skip?: number
+    distinct?: OrpDecisionScalarFieldEnum | OrpDecisionScalarFieldEnum[]
+  }
+
+  /**
+   * OrpDecision create
+   */
+  export type OrpDecisionCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OrpDecision
+     */
+    select?: OrpDecisionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OrpDecision
+     */
+    omit?: OrpDecisionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrpDecisionInclude<ExtArgs> | null
+    /**
+     * The data needed to create a OrpDecision.
+     */
+    data: XOR<OrpDecisionCreateInput, OrpDecisionUncheckedCreateInput>
+  }
+
+  /**
+   * OrpDecision createMany
+   */
+  export type OrpDecisionCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many OrpDecisions.
+     */
+    data: OrpDecisionCreateManyInput | OrpDecisionCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * OrpDecision createManyAndReturn
+   */
+  export type OrpDecisionCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OrpDecision
+     */
+    select?: OrpDecisionSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the OrpDecision
+     */
+    omit?: OrpDecisionOmit<ExtArgs> | null
+    /**
+     * The data used to create many OrpDecisions.
+     */
+    data: OrpDecisionCreateManyInput | OrpDecisionCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrpDecisionIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * OrpDecision update
+   */
+  export type OrpDecisionUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OrpDecision
+     */
+    select?: OrpDecisionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OrpDecision
+     */
+    omit?: OrpDecisionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrpDecisionInclude<ExtArgs> | null
+    /**
+     * The data needed to update a OrpDecision.
+     */
+    data: XOR<OrpDecisionUpdateInput, OrpDecisionUncheckedUpdateInput>
+    /**
+     * Choose, which OrpDecision to update.
+     */
+    where: OrpDecisionWhereUniqueInput
+  }
+
+  /**
+   * OrpDecision updateMany
+   */
+  export type OrpDecisionUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update OrpDecisions.
+     */
+    data: XOR<OrpDecisionUpdateManyMutationInput, OrpDecisionUncheckedUpdateManyInput>
+    /**
+     * Filter which OrpDecisions to update
+     */
+    where?: OrpDecisionWhereInput
+    /**
+     * Limit how many OrpDecisions to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * OrpDecision updateManyAndReturn
+   */
+  export type OrpDecisionUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OrpDecision
+     */
+    select?: OrpDecisionSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the OrpDecision
+     */
+    omit?: OrpDecisionOmit<ExtArgs> | null
+    /**
+     * The data used to update OrpDecisions.
+     */
+    data: XOR<OrpDecisionUpdateManyMutationInput, OrpDecisionUncheckedUpdateManyInput>
+    /**
+     * Filter which OrpDecisions to update
+     */
+    where?: OrpDecisionWhereInput
+    /**
+     * Limit how many OrpDecisions to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrpDecisionIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * OrpDecision upsert
+   */
+  export type OrpDecisionUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OrpDecision
+     */
+    select?: OrpDecisionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OrpDecision
+     */
+    omit?: OrpDecisionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrpDecisionInclude<ExtArgs> | null
+    /**
+     * The filter to search for the OrpDecision to update in case it exists.
+     */
+    where: OrpDecisionWhereUniqueInput
+    /**
+     * In case the OrpDecision found by the `where` argument doesn't exist, create a new OrpDecision with this data.
+     */
+    create: XOR<OrpDecisionCreateInput, OrpDecisionUncheckedCreateInput>
+    /**
+     * In case the OrpDecision was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<OrpDecisionUpdateInput, OrpDecisionUncheckedUpdateInput>
+  }
+
+  /**
+   * OrpDecision delete
+   */
+  export type OrpDecisionDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OrpDecision
+     */
+    select?: OrpDecisionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OrpDecision
+     */
+    omit?: OrpDecisionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrpDecisionInclude<ExtArgs> | null
+    /**
+     * Filter which OrpDecision to delete.
+     */
+    where: OrpDecisionWhereUniqueInput
+  }
+
+  /**
+   * OrpDecision deleteMany
+   */
+  export type OrpDecisionDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which OrpDecisions to delete
+     */
+    where?: OrpDecisionWhereInput
+    /**
+     * Limit how many OrpDecisions to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * OrpDecision.forwardedUser
+   */
+  export type OrpDecision$forwardedUserArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+  }
+
+  /**
+   * OrpDecision without action
+   */
+  export type OrpDecisionDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OrpDecision
+     */
+    select?: OrpDecisionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OrpDecision
+     */
+    omit?: OrpDecisionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrpDecisionInclude<ExtArgs> | null
   }
 
 
@@ -11515,6 +14443,44 @@ export namespace Prisma {
   export type OperationalResponsePlanScalarFieldEnum = (typeof OperationalResponsePlanScalarFieldEnum)[keyof typeof OperationalResponsePlanScalarFieldEnum]
 
 
+  export const ApprovalAuthorityScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    departmentId: 'departmentId',
+    jurisdictionId: 'jurisdictionId',
+    canApprove: 'canApprove',
+    canReject: 'canReject',
+    canRequestModification: 'canRequestModification',
+    canRequestReinspection: 'canRequestReinspection',
+    canEscalate: 'canEscalate',
+    maxPriorityLevel: 'maxPriorityLevel',
+    isActive: 'isActive',
+    validFrom: 'validFrom',
+    validUntil: 'validUntil',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type ApprovalAuthorityScalarFieldEnum = (typeof ApprovalAuthorityScalarFieldEnum)[keyof typeof ApprovalAuthorityScalarFieldEnum]
+
+
+  export const OrpDecisionScalarFieldEnum: {
+    id: 'id',
+    caseId: 'caseId',
+    orpId: 'orpId',
+    reviewerId: 'reviewerId',
+    authorityGrantId: 'authorityGrantId',
+    decisionType: 'decisionType',
+    reason: 'reason',
+    remarks: 'remarks',
+    requestedChanges: 'requestedChanges',
+    forwardToUserId: 'forwardToUserId',
+    createdAt: 'createdAt'
+  };
+
+  export type OrpDecisionScalarFieldEnum = (typeof OrpDecisionScalarFieldEnum)[keyof typeof OrpDecisionScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
@@ -11528,6 +14494,14 @@ export namespace Prisma {
   };
 
   export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
+
+
+  export const NullableJsonNullValueInput: {
+    DbNull: typeof DbNull,
+    JsonNull: typeof JsonNull
+  };
+
+  export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
 
 
   export const QueryMode: {
@@ -11722,6 +14696,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'OrpDecisionType'
+   */
+  export type EnumOrpDecisionTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'OrpDecisionType'>
+    
+
+
+  /**
+   * Reference to a field of type 'OrpDecisionType[]'
+   */
+  export type ListEnumOrpDecisionTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'OrpDecisionType[]'>
+    
+
+
+  /**
    * Reference to a field of type 'Float'
    */
   export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -11749,6 +14737,7 @@ export namespace Prisma {
     users?: UserListRelationFilter
     assets?: AssetListRelationFilter
     jurisdictions?: JurisdictionListRelationFilter
+    approvalAuthorities?: ApprovalAuthorityListRelationFilter
   }
 
   export type DepartmentOrderByWithRelationInput = {
@@ -11759,6 +14748,7 @@ export namespace Prisma {
     users?: UserOrderByRelationAggregateInput
     assets?: AssetOrderByRelationAggregateInput
     jurisdictions?: JurisdictionOrderByRelationAggregateInput
+    approvalAuthorities?: ApprovalAuthorityOrderByRelationAggregateInput
   }
 
   export type DepartmentWhereUniqueInput = Prisma.AtLeast<{
@@ -11772,6 +14762,7 @@ export namespace Prisma {
     users?: UserListRelationFilter
     assets?: AssetListRelationFilter
     jurisdictions?: JurisdictionListRelationFilter
+    approvalAuthorities?: ApprovalAuthorityListRelationFilter
   }, "id" | "code">
 
   export type DepartmentOrderByWithAggregationInput = {
@@ -11806,6 +14797,7 @@ export namespace Prisma {
     department?: XOR<DepartmentScalarRelationFilter, DepartmentWhereInput>
     users?: UserListRelationFilter
     assets?: AssetListRelationFilter
+    approvalAuthorities?: ApprovalAuthorityListRelationFilter
   }
 
   export type JurisdictionOrderByWithRelationInput = {
@@ -11817,6 +14809,7 @@ export namespace Prisma {
     department?: DepartmentOrderByWithRelationInput
     users?: UserOrderByRelationAggregateInput
     assets?: AssetOrderByRelationAggregateInput
+    approvalAuthorities?: ApprovalAuthorityOrderByRelationAggregateInput
   }
 
   export type JurisdictionWhereUniqueInput = Prisma.AtLeast<{
@@ -11831,6 +14824,7 @@ export namespace Prisma {
     department?: XOR<DepartmentScalarRelationFilter, DepartmentWhereInput>
     users?: UserListRelationFilter
     assets?: AssetListRelationFilter
+    approvalAuthorities?: ApprovalAuthorityListRelationFilter
   }, "id">
 
   export type JurisdictionOrderByWithAggregationInput = {
@@ -11874,6 +14868,9 @@ export namespace Prisma {
     department?: XOR<DepartmentScalarRelationFilter, DepartmentWhereInput>
     jurisdiction?: XOR<JurisdictionScalarRelationFilter, JurisdictionWhereInput>
     inspections?: InspectionListRelationFilter
+    approvalAuthorities?: ApprovalAuthorityListRelationFilter
+    reviewedOrpDecisions?: OrpDecisionListRelationFilter
+    forwardedOrpDecisions?: OrpDecisionListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -11892,6 +14889,9 @@ export namespace Prisma {
     department?: DepartmentOrderByWithRelationInput
     jurisdiction?: JurisdictionOrderByWithRelationInput
     inspections?: InspectionOrderByRelationAggregateInput
+    approvalAuthorities?: ApprovalAuthorityOrderByRelationAggregateInput
+    reviewedOrpDecisions?: OrpDecisionOrderByRelationAggregateInput
+    forwardedOrpDecisions?: OrpDecisionOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -11913,6 +14913,9 @@ export namespace Prisma {
     department?: XOR<DepartmentScalarRelationFilter, DepartmentWhereInput>
     jurisdiction?: XOR<JurisdictionScalarRelationFilter, JurisdictionWhereInput>
     inspections?: InspectionListRelationFilter
+    approvalAuthorities?: ApprovalAuthorityListRelationFilter
+    reviewedOrpDecisions?: OrpDecisionListRelationFilter
+    forwardedOrpDecisions?: OrpDecisionListRelationFilter
   }, "id" | "employeeCode" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -12069,6 +15072,7 @@ export namespace Prisma {
     inspections?: InspectionListRelationFilter
     riskAssessments?: RiskAssessmentListRelationFilter
     operationalResponsePlans?: OperationalResponsePlanListRelationFilter
+    orpDecisions?: OrpDecisionListRelationFilter
   }
 
   export type CaseOrderByWithRelationInput = {
@@ -12088,6 +15092,7 @@ export namespace Prisma {
     inspections?: InspectionOrderByRelationAggregateInput
     riskAssessments?: RiskAssessmentOrderByRelationAggregateInput
     operationalResponsePlans?: OperationalResponsePlanOrderByRelationAggregateInput
+    orpDecisions?: OrpDecisionOrderByRelationAggregateInput
   }
 
   export type CaseWhereUniqueInput = Prisma.AtLeast<{
@@ -12110,6 +15115,7 @@ export namespace Prisma {
     inspections?: InspectionListRelationFilter
     riskAssessments?: RiskAssessmentListRelationFilter
     operationalResponsePlans?: OperationalResponsePlanListRelationFilter
+    orpDecisions?: OrpDecisionListRelationFilter
   }, "id" | "caseNumber">
 
   export type CaseOrderByWithAggregationInput = {
@@ -12368,6 +15374,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"OperationalResponsePlan"> | Date | string
     case?: XOR<CaseScalarRelationFilter, CaseWhereInput>
     riskAssessment?: XOR<RiskAssessmentScalarRelationFilter, RiskAssessmentWhereInput>
+    decisions?: OrpDecisionListRelationFilter
   }
 
   export type OperationalResponsePlanOrderByWithRelationInput = {
@@ -12386,6 +15393,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     case?: CaseOrderByWithRelationInput
     riskAssessment?: RiskAssessmentOrderByWithRelationInput
+    decisions?: OrpDecisionOrderByRelationAggregateInput
   }
 
   export type OperationalResponsePlanWhereUniqueInput = Prisma.AtLeast<{
@@ -12408,6 +15416,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"OperationalResponsePlan"> | Date | string
     case?: XOR<CaseScalarRelationFilter, CaseWhereInput>
     riskAssessment?: XOR<RiskAssessmentScalarRelationFilter, RiskAssessmentWhereInput>
+    decisions?: OrpDecisionListRelationFilter
   }, "id" | "caseId_versionNumber">
 
   export type OperationalResponsePlanOrderByWithAggregationInput = {
@@ -12450,6 +15459,217 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"OperationalResponsePlan"> | Date | string
   }
 
+  export type ApprovalAuthorityWhereInput = {
+    AND?: ApprovalAuthorityWhereInput | ApprovalAuthorityWhereInput[]
+    OR?: ApprovalAuthorityWhereInput[]
+    NOT?: ApprovalAuthorityWhereInput | ApprovalAuthorityWhereInput[]
+    id?: StringFilter<"ApprovalAuthority"> | string
+    userId?: StringFilter<"ApprovalAuthority"> | string
+    departmentId?: StringFilter<"ApprovalAuthority"> | string
+    jurisdictionId?: StringFilter<"ApprovalAuthority"> | string
+    canApprove?: BoolFilter<"ApprovalAuthority"> | boolean
+    canReject?: BoolFilter<"ApprovalAuthority"> | boolean
+    canRequestModification?: BoolFilter<"ApprovalAuthority"> | boolean
+    canRequestReinspection?: BoolFilter<"ApprovalAuthority"> | boolean
+    canEscalate?: BoolFilter<"ApprovalAuthority"> | boolean
+    maxPriorityLevel?: EnumPriorityLevelNullableFilter<"ApprovalAuthority"> | $Enums.PriorityLevel | null
+    isActive?: BoolFilter<"ApprovalAuthority"> | boolean
+    validFrom?: DateTimeNullableFilter<"ApprovalAuthority"> | Date | string | null
+    validUntil?: DateTimeNullableFilter<"ApprovalAuthority"> | Date | string | null
+    createdAt?: DateTimeFilter<"ApprovalAuthority"> | Date | string
+    updatedAt?: DateTimeFilter<"ApprovalAuthority"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    department?: XOR<DepartmentScalarRelationFilter, DepartmentWhereInput>
+    jurisdiction?: XOR<JurisdictionScalarRelationFilter, JurisdictionWhereInput>
+    decisions?: OrpDecisionListRelationFilter
+  }
+
+  export type ApprovalAuthorityOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    departmentId?: SortOrder
+    jurisdictionId?: SortOrder
+    canApprove?: SortOrder
+    canReject?: SortOrder
+    canRequestModification?: SortOrder
+    canRequestReinspection?: SortOrder
+    canEscalate?: SortOrder
+    maxPriorityLevel?: SortOrderInput | SortOrder
+    isActive?: SortOrder
+    validFrom?: SortOrderInput | SortOrder
+    validUntil?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+    department?: DepartmentOrderByWithRelationInput
+    jurisdiction?: JurisdictionOrderByWithRelationInput
+    decisions?: OrpDecisionOrderByRelationAggregateInput
+  }
+
+  export type ApprovalAuthorityWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: ApprovalAuthorityWhereInput | ApprovalAuthorityWhereInput[]
+    OR?: ApprovalAuthorityWhereInput[]
+    NOT?: ApprovalAuthorityWhereInput | ApprovalAuthorityWhereInput[]
+    userId?: StringFilter<"ApprovalAuthority"> | string
+    departmentId?: StringFilter<"ApprovalAuthority"> | string
+    jurisdictionId?: StringFilter<"ApprovalAuthority"> | string
+    canApprove?: BoolFilter<"ApprovalAuthority"> | boolean
+    canReject?: BoolFilter<"ApprovalAuthority"> | boolean
+    canRequestModification?: BoolFilter<"ApprovalAuthority"> | boolean
+    canRequestReinspection?: BoolFilter<"ApprovalAuthority"> | boolean
+    canEscalate?: BoolFilter<"ApprovalAuthority"> | boolean
+    maxPriorityLevel?: EnumPriorityLevelNullableFilter<"ApprovalAuthority"> | $Enums.PriorityLevel | null
+    isActive?: BoolFilter<"ApprovalAuthority"> | boolean
+    validFrom?: DateTimeNullableFilter<"ApprovalAuthority"> | Date | string | null
+    validUntil?: DateTimeNullableFilter<"ApprovalAuthority"> | Date | string | null
+    createdAt?: DateTimeFilter<"ApprovalAuthority"> | Date | string
+    updatedAt?: DateTimeFilter<"ApprovalAuthority"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    department?: XOR<DepartmentScalarRelationFilter, DepartmentWhereInput>
+    jurisdiction?: XOR<JurisdictionScalarRelationFilter, JurisdictionWhereInput>
+    decisions?: OrpDecisionListRelationFilter
+  }, "id">
+
+  export type ApprovalAuthorityOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    departmentId?: SortOrder
+    jurisdictionId?: SortOrder
+    canApprove?: SortOrder
+    canReject?: SortOrder
+    canRequestModification?: SortOrder
+    canRequestReinspection?: SortOrder
+    canEscalate?: SortOrder
+    maxPriorityLevel?: SortOrderInput | SortOrder
+    isActive?: SortOrder
+    validFrom?: SortOrderInput | SortOrder
+    validUntil?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: ApprovalAuthorityCountOrderByAggregateInput
+    _max?: ApprovalAuthorityMaxOrderByAggregateInput
+    _min?: ApprovalAuthorityMinOrderByAggregateInput
+  }
+
+  export type ApprovalAuthorityScalarWhereWithAggregatesInput = {
+    AND?: ApprovalAuthorityScalarWhereWithAggregatesInput | ApprovalAuthorityScalarWhereWithAggregatesInput[]
+    OR?: ApprovalAuthorityScalarWhereWithAggregatesInput[]
+    NOT?: ApprovalAuthorityScalarWhereWithAggregatesInput | ApprovalAuthorityScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"ApprovalAuthority"> | string
+    userId?: StringWithAggregatesFilter<"ApprovalAuthority"> | string
+    departmentId?: StringWithAggregatesFilter<"ApprovalAuthority"> | string
+    jurisdictionId?: StringWithAggregatesFilter<"ApprovalAuthority"> | string
+    canApprove?: BoolWithAggregatesFilter<"ApprovalAuthority"> | boolean
+    canReject?: BoolWithAggregatesFilter<"ApprovalAuthority"> | boolean
+    canRequestModification?: BoolWithAggregatesFilter<"ApprovalAuthority"> | boolean
+    canRequestReinspection?: BoolWithAggregatesFilter<"ApprovalAuthority"> | boolean
+    canEscalate?: BoolWithAggregatesFilter<"ApprovalAuthority"> | boolean
+    maxPriorityLevel?: EnumPriorityLevelNullableWithAggregatesFilter<"ApprovalAuthority"> | $Enums.PriorityLevel | null
+    isActive?: BoolWithAggregatesFilter<"ApprovalAuthority"> | boolean
+    validFrom?: DateTimeNullableWithAggregatesFilter<"ApprovalAuthority"> | Date | string | null
+    validUntil?: DateTimeNullableWithAggregatesFilter<"ApprovalAuthority"> | Date | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"ApprovalAuthority"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"ApprovalAuthority"> | Date | string
+  }
+
+  export type OrpDecisionWhereInput = {
+    AND?: OrpDecisionWhereInput | OrpDecisionWhereInput[]
+    OR?: OrpDecisionWhereInput[]
+    NOT?: OrpDecisionWhereInput | OrpDecisionWhereInput[]
+    id?: StringFilter<"OrpDecision"> | string
+    caseId?: StringFilter<"OrpDecision"> | string
+    orpId?: StringFilter<"OrpDecision"> | string
+    reviewerId?: StringFilter<"OrpDecision"> | string
+    authorityGrantId?: StringFilter<"OrpDecision"> | string
+    decisionType?: EnumOrpDecisionTypeFilter<"OrpDecision"> | $Enums.OrpDecisionType
+    reason?: StringNullableFilter<"OrpDecision"> | string | null
+    remarks?: StringNullableFilter<"OrpDecision"> | string | null
+    requestedChanges?: JsonNullableFilter<"OrpDecision">
+    forwardToUserId?: StringNullableFilter<"OrpDecision"> | string | null
+    createdAt?: DateTimeFilter<"OrpDecision"> | Date | string
+    case?: XOR<CaseScalarRelationFilter, CaseWhereInput>
+    orp?: XOR<OperationalResponsePlanScalarRelationFilter, OperationalResponsePlanWhereInput>
+    reviewer?: XOR<UserScalarRelationFilter, UserWhereInput>
+    authorityGrant?: XOR<ApprovalAuthorityScalarRelationFilter, ApprovalAuthorityWhereInput>
+    forwardedUser?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+  }
+
+  export type OrpDecisionOrderByWithRelationInput = {
+    id?: SortOrder
+    caseId?: SortOrder
+    orpId?: SortOrder
+    reviewerId?: SortOrder
+    authorityGrantId?: SortOrder
+    decisionType?: SortOrder
+    reason?: SortOrderInput | SortOrder
+    remarks?: SortOrderInput | SortOrder
+    requestedChanges?: SortOrderInput | SortOrder
+    forwardToUserId?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    case?: CaseOrderByWithRelationInput
+    orp?: OperationalResponsePlanOrderByWithRelationInput
+    reviewer?: UserOrderByWithRelationInput
+    authorityGrant?: ApprovalAuthorityOrderByWithRelationInput
+    forwardedUser?: UserOrderByWithRelationInput
+  }
+
+  export type OrpDecisionWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    orpId?: string
+    AND?: OrpDecisionWhereInput | OrpDecisionWhereInput[]
+    OR?: OrpDecisionWhereInput[]
+    NOT?: OrpDecisionWhereInput | OrpDecisionWhereInput[]
+    caseId?: StringFilter<"OrpDecision"> | string
+    reviewerId?: StringFilter<"OrpDecision"> | string
+    authorityGrantId?: StringFilter<"OrpDecision"> | string
+    decisionType?: EnumOrpDecisionTypeFilter<"OrpDecision"> | $Enums.OrpDecisionType
+    reason?: StringNullableFilter<"OrpDecision"> | string | null
+    remarks?: StringNullableFilter<"OrpDecision"> | string | null
+    requestedChanges?: JsonNullableFilter<"OrpDecision">
+    forwardToUserId?: StringNullableFilter<"OrpDecision"> | string | null
+    createdAt?: DateTimeFilter<"OrpDecision"> | Date | string
+    case?: XOR<CaseScalarRelationFilter, CaseWhereInput>
+    orp?: XOR<OperationalResponsePlanScalarRelationFilter, OperationalResponsePlanWhereInput>
+    reviewer?: XOR<UserScalarRelationFilter, UserWhereInput>
+    authorityGrant?: XOR<ApprovalAuthorityScalarRelationFilter, ApprovalAuthorityWhereInput>
+    forwardedUser?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+  }, "id" | "orpId">
+
+  export type OrpDecisionOrderByWithAggregationInput = {
+    id?: SortOrder
+    caseId?: SortOrder
+    orpId?: SortOrder
+    reviewerId?: SortOrder
+    authorityGrantId?: SortOrder
+    decisionType?: SortOrder
+    reason?: SortOrderInput | SortOrder
+    remarks?: SortOrderInput | SortOrder
+    requestedChanges?: SortOrderInput | SortOrder
+    forwardToUserId?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    _count?: OrpDecisionCountOrderByAggregateInput
+    _max?: OrpDecisionMaxOrderByAggregateInput
+    _min?: OrpDecisionMinOrderByAggregateInput
+  }
+
+  export type OrpDecisionScalarWhereWithAggregatesInput = {
+    AND?: OrpDecisionScalarWhereWithAggregatesInput | OrpDecisionScalarWhereWithAggregatesInput[]
+    OR?: OrpDecisionScalarWhereWithAggregatesInput[]
+    NOT?: OrpDecisionScalarWhereWithAggregatesInput | OrpDecisionScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"OrpDecision"> | string
+    caseId?: StringWithAggregatesFilter<"OrpDecision"> | string
+    orpId?: StringWithAggregatesFilter<"OrpDecision"> | string
+    reviewerId?: StringWithAggregatesFilter<"OrpDecision"> | string
+    authorityGrantId?: StringWithAggregatesFilter<"OrpDecision"> | string
+    decisionType?: EnumOrpDecisionTypeWithAggregatesFilter<"OrpDecision"> | $Enums.OrpDecisionType
+    reason?: StringNullableWithAggregatesFilter<"OrpDecision"> | string | null
+    remarks?: StringNullableWithAggregatesFilter<"OrpDecision"> | string | null
+    requestedChanges?: JsonNullableWithAggregatesFilter<"OrpDecision">
+    forwardToUserId?: StringNullableWithAggregatesFilter<"OrpDecision"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"OrpDecision"> | Date | string
+  }
+
   export type DepartmentCreateInput = {
     id?: string
     name: string
@@ -12458,6 +15678,7 @@ export namespace Prisma {
     users?: UserCreateNestedManyWithoutDepartmentInput
     assets?: AssetCreateNestedManyWithoutDepartmentInput
     jurisdictions?: JurisdictionCreateNestedManyWithoutDepartmentInput
+    approvalAuthorities?: ApprovalAuthorityCreateNestedManyWithoutDepartmentInput
   }
 
   export type DepartmentUncheckedCreateInput = {
@@ -12468,6 +15689,7 @@ export namespace Prisma {
     users?: UserUncheckedCreateNestedManyWithoutDepartmentInput
     assets?: AssetUncheckedCreateNestedManyWithoutDepartmentInput
     jurisdictions?: JurisdictionUncheckedCreateNestedManyWithoutDepartmentInput
+    approvalAuthorities?: ApprovalAuthorityUncheckedCreateNestedManyWithoutDepartmentInput
   }
 
   export type DepartmentUpdateInput = {
@@ -12478,6 +15700,7 @@ export namespace Prisma {
     users?: UserUpdateManyWithoutDepartmentNestedInput
     assets?: AssetUpdateManyWithoutDepartmentNestedInput
     jurisdictions?: JurisdictionUpdateManyWithoutDepartmentNestedInput
+    approvalAuthorities?: ApprovalAuthorityUpdateManyWithoutDepartmentNestedInput
   }
 
   export type DepartmentUncheckedUpdateInput = {
@@ -12488,6 +15711,7 @@ export namespace Prisma {
     users?: UserUncheckedUpdateManyWithoutDepartmentNestedInput
     assets?: AssetUncheckedUpdateManyWithoutDepartmentNestedInput
     jurisdictions?: JurisdictionUncheckedUpdateManyWithoutDepartmentNestedInput
+    approvalAuthorities?: ApprovalAuthorityUncheckedUpdateManyWithoutDepartmentNestedInput
   }
 
   export type DepartmentCreateManyInput = {
@@ -12519,6 +15743,7 @@ export namespace Prisma {
     department: DepartmentCreateNestedOneWithoutJurisdictionsInput
     users?: UserCreateNestedManyWithoutJurisdictionInput
     assets?: AssetCreateNestedManyWithoutJurisdictionInput
+    approvalAuthorities?: ApprovalAuthorityCreateNestedManyWithoutJurisdictionInput
   }
 
   export type JurisdictionUncheckedCreateInput = {
@@ -12529,6 +15754,7 @@ export namespace Prisma {
     createdAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutJurisdictionInput
     assets?: AssetUncheckedCreateNestedManyWithoutJurisdictionInput
+    approvalAuthorities?: ApprovalAuthorityUncheckedCreateNestedManyWithoutJurisdictionInput
   }
 
   export type JurisdictionUpdateInput = {
@@ -12539,6 +15765,7 @@ export namespace Prisma {
     department?: DepartmentUpdateOneRequiredWithoutJurisdictionsNestedInput
     users?: UserUpdateManyWithoutJurisdictionNestedInput
     assets?: AssetUpdateManyWithoutJurisdictionNestedInput
+    approvalAuthorities?: ApprovalAuthorityUpdateManyWithoutJurisdictionNestedInput
   }
 
   export type JurisdictionUncheckedUpdateInput = {
@@ -12549,6 +15776,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutJurisdictionNestedInput
     assets?: AssetUncheckedUpdateManyWithoutJurisdictionNestedInput
+    approvalAuthorities?: ApprovalAuthorityUncheckedUpdateManyWithoutJurisdictionNestedInput
   }
 
   export type JurisdictionCreateManyInput = {
@@ -12588,6 +15816,9 @@ export namespace Prisma {
     department: DepartmentCreateNestedOneWithoutUsersInput
     jurisdiction: JurisdictionCreateNestedOneWithoutUsersInput
     inspections?: InspectionCreateNestedManyWithoutInspectorInput
+    approvalAuthorities?: ApprovalAuthorityCreateNestedManyWithoutUserInput
+    reviewedOrpDecisions?: OrpDecisionCreateNestedManyWithoutReviewerInput
+    forwardedOrpDecisions?: OrpDecisionCreateNestedManyWithoutForwardedUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -12604,6 +15835,9 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     inspections?: InspectionUncheckedCreateNestedManyWithoutInspectorInput
+    approvalAuthorities?: ApprovalAuthorityUncheckedCreateNestedManyWithoutUserInput
+    reviewedOrpDecisions?: OrpDecisionUncheckedCreateNestedManyWithoutReviewerInput
+    forwardedOrpDecisions?: OrpDecisionUncheckedCreateNestedManyWithoutForwardedUserInput
   }
 
   export type UserUpdateInput = {
@@ -12620,6 +15854,9 @@ export namespace Prisma {
     department?: DepartmentUpdateOneRequiredWithoutUsersNestedInput
     jurisdiction?: JurisdictionUpdateOneRequiredWithoutUsersNestedInput
     inspections?: InspectionUpdateManyWithoutInspectorNestedInput
+    approvalAuthorities?: ApprovalAuthorityUpdateManyWithoutUserNestedInput
+    reviewedOrpDecisions?: OrpDecisionUpdateManyWithoutReviewerNestedInput
+    forwardedOrpDecisions?: OrpDecisionUpdateManyWithoutForwardedUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -12636,6 +15873,9 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     inspections?: InspectionUncheckedUpdateManyWithoutInspectorNestedInput
+    approvalAuthorities?: ApprovalAuthorityUncheckedUpdateManyWithoutUserNestedInput
+    reviewedOrpDecisions?: OrpDecisionUncheckedUpdateManyWithoutReviewerNestedInput
+    forwardedOrpDecisions?: OrpDecisionUncheckedUpdateManyWithoutForwardedUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -12804,6 +16044,7 @@ export namespace Prisma {
     inspections?: InspectionCreateNestedManyWithoutCaseInput
     riskAssessments?: RiskAssessmentCreateNestedManyWithoutCaseInput
     operationalResponsePlans?: OperationalResponsePlanCreateNestedManyWithoutCaseInput
+    orpDecisions?: OrpDecisionCreateNestedManyWithoutCaseInput
   }
 
   export type CaseUncheckedCreateInput = {
@@ -12822,6 +16063,7 @@ export namespace Prisma {
     inspections?: InspectionUncheckedCreateNestedManyWithoutCaseInput
     riskAssessments?: RiskAssessmentUncheckedCreateNestedManyWithoutCaseInput
     operationalResponsePlans?: OperationalResponsePlanUncheckedCreateNestedManyWithoutCaseInput
+    orpDecisions?: OrpDecisionUncheckedCreateNestedManyWithoutCaseInput
   }
 
   export type CaseUpdateInput = {
@@ -12840,6 +16082,7 @@ export namespace Prisma {
     inspections?: InspectionUpdateManyWithoutCaseNestedInput
     riskAssessments?: RiskAssessmentUpdateManyWithoutCaseNestedInput
     operationalResponsePlans?: OperationalResponsePlanUpdateManyWithoutCaseNestedInput
+    orpDecisions?: OrpDecisionUpdateManyWithoutCaseNestedInput
   }
 
   export type CaseUncheckedUpdateInput = {
@@ -12858,6 +16101,7 @@ export namespace Prisma {
     inspections?: InspectionUncheckedUpdateManyWithoutCaseNestedInput
     riskAssessments?: RiskAssessmentUncheckedUpdateManyWithoutCaseNestedInput
     operationalResponsePlans?: OperationalResponsePlanUncheckedUpdateManyWithoutCaseNestedInput
+    orpDecisions?: OrpDecisionUncheckedUpdateManyWithoutCaseNestedInput
   }
 
   export type CaseCreateManyInput = {
@@ -13139,6 +16383,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     case: CaseCreateNestedOneWithoutOperationalResponsePlansInput
     riskAssessment: RiskAssessmentCreateNestedOneWithoutOperationalResponsePlansInput
+    decisions?: OrpDecisionCreateNestedManyWithoutOrpInput
   }
 
   export type OperationalResponsePlanUncheckedCreateInput = {
@@ -13155,6 +16400,7 @@ export namespace Prisma {
     planVersion?: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    decisions?: OrpDecisionUncheckedCreateNestedManyWithoutOrpInput
   }
 
   export type OperationalResponsePlanUpdateInput = {
@@ -13171,6 +16417,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     case?: CaseUpdateOneRequiredWithoutOperationalResponsePlansNestedInput
     riskAssessment?: RiskAssessmentUpdateOneRequiredWithoutOperationalResponsePlansNestedInput
+    decisions?: OrpDecisionUpdateManyWithoutOrpNestedInput
   }
 
   export type OperationalResponsePlanUncheckedUpdateInput = {
@@ -13187,6 +16434,7 @@ export namespace Prisma {
     planVersion?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    decisions?: OrpDecisionUncheckedUpdateManyWithoutOrpNestedInput
   }
 
   export type OperationalResponsePlanCreateManyInput = {
@@ -13235,6 +16483,226 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type ApprovalAuthorityCreateInput = {
+    id?: string
+    canApprove?: boolean
+    canReject?: boolean
+    canRequestModification?: boolean
+    canRequestReinspection?: boolean
+    canEscalate?: boolean
+    maxPriorityLevel?: $Enums.PriorityLevel | null
+    isActive?: boolean
+    validFrom?: Date | string | null
+    validUntil?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutApprovalAuthoritiesInput
+    department: DepartmentCreateNestedOneWithoutApprovalAuthoritiesInput
+    jurisdiction: JurisdictionCreateNestedOneWithoutApprovalAuthoritiesInput
+    decisions?: OrpDecisionCreateNestedManyWithoutAuthorityGrantInput
+  }
+
+  export type ApprovalAuthorityUncheckedCreateInput = {
+    id?: string
+    userId: string
+    departmentId: string
+    jurisdictionId: string
+    canApprove?: boolean
+    canReject?: boolean
+    canRequestModification?: boolean
+    canRequestReinspection?: boolean
+    canEscalate?: boolean
+    maxPriorityLevel?: $Enums.PriorityLevel | null
+    isActive?: boolean
+    validFrom?: Date | string | null
+    validUntil?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    decisions?: OrpDecisionUncheckedCreateNestedManyWithoutAuthorityGrantInput
+  }
+
+  export type ApprovalAuthorityUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    canApprove?: BoolFieldUpdateOperationsInput | boolean
+    canReject?: BoolFieldUpdateOperationsInput | boolean
+    canRequestModification?: BoolFieldUpdateOperationsInput | boolean
+    canRequestReinspection?: BoolFieldUpdateOperationsInput | boolean
+    canEscalate?: BoolFieldUpdateOperationsInput | boolean
+    maxPriorityLevel?: NullableEnumPriorityLevelFieldUpdateOperationsInput | $Enums.PriorityLevel | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    validFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    validUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutApprovalAuthoritiesNestedInput
+    department?: DepartmentUpdateOneRequiredWithoutApprovalAuthoritiesNestedInput
+    jurisdiction?: JurisdictionUpdateOneRequiredWithoutApprovalAuthoritiesNestedInput
+    decisions?: OrpDecisionUpdateManyWithoutAuthorityGrantNestedInput
+  }
+
+  export type ApprovalAuthorityUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    departmentId?: StringFieldUpdateOperationsInput | string
+    jurisdictionId?: StringFieldUpdateOperationsInput | string
+    canApprove?: BoolFieldUpdateOperationsInput | boolean
+    canReject?: BoolFieldUpdateOperationsInput | boolean
+    canRequestModification?: BoolFieldUpdateOperationsInput | boolean
+    canRequestReinspection?: BoolFieldUpdateOperationsInput | boolean
+    canEscalate?: BoolFieldUpdateOperationsInput | boolean
+    maxPriorityLevel?: NullableEnumPriorityLevelFieldUpdateOperationsInput | $Enums.PriorityLevel | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    validFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    validUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    decisions?: OrpDecisionUncheckedUpdateManyWithoutAuthorityGrantNestedInput
+  }
+
+  export type ApprovalAuthorityCreateManyInput = {
+    id?: string
+    userId: string
+    departmentId: string
+    jurisdictionId: string
+    canApprove?: boolean
+    canReject?: boolean
+    canRequestModification?: boolean
+    canRequestReinspection?: boolean
+    canEscalate?: boolean
+    maxPriorityLevel?: $Enums.PriorityLevel | null
+    isActive?: boolean
+    validFrom?: Date | string | null
+    validUntil?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ApprovalAuthorityUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    canApprove?: BoolFieldUpdateOperationsInput | boolean
+    canReject?: BoolFieldUpdateOperationsInput | boolean
+    canRequestModification?: BoolFieldUpdateOperationsInput | boolean
+    canRequestReinspection?: BoolFieldUpdateOperationsInput | boolean
+    canEscalate?: BoolFieldUpdateOperationsInput | boolean
+    maxPriorityLevel?: NullableEnumPriorityLevelFieldUpdateOperationsInput | $Enums.PriorityLevel | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    validFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    validUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ApprovalAuthorityUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    departmentId?: StringFieldUpdateOperationsInput | string
+    jurisdictionId?: StringFieldUpdateOperationsInput | string
+    canApprove?: BoolFieldUpdateOperationsInput | boolean
+    canReject?: BoolFieldUpdateOperationsInput | boolean
+    canRequestModification?: BoolFieldUpdateOperationsInput | boolean
+    canRequestReinspection?: BoolFieldUpdateOperationsInput | boolean
+    canEscalate?: BoolFieldUpdateOperationsInput | boolean
+    maxPriorityLevel?: NullableEnumPriorityLevelFieldUpdateOperationsInput | $Enums.PriorityLevel | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    validFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    validUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type OrpDecisionCreateInput = {
+    id?: string
+    decisionType: $Enums.OrpDecisionType
+    reason?: string | null
+    remarks?: string | null
+    requestedChanges?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    case: CaseCreateNestedOneWithoutOrpDecisionsInput
+    orp: OperationalResponsePlanCreateNestedOneWithoutDecisionsInput
+    reviewer: UserCreateNestedOneWithoutReviewedOrpDecisionsInput
+    authorityGrant: ApprovalAuthorityCreateNestedOneWithoutDecisionsInput
+    forwardedUser?: UserCreateNestedOneWithoutForwardedOrpDecisionsInput
+  }
+
+  export type OrpDecisionUncheckedCreateInput = {
+    id?: string
+    caseId: string
+    orpId: string
+    reviewerId: string
+    authorityGrantId: string
+    decisionType: $Enums.OrpDecisionType
+    reason?: string | null
+    remarks?: string | null
+    requestedChanges?: NullableJsonNullValueInput | InputJsonValue
+    forwardToUserId?: string | null
+    createdAt?: Date | string
+  }
+
+  export type OrpDecisionUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    decisionType?: EnumOrpDecisionTypeFieldUpdateOperationsInput | $Enums.OrpDecisionType
+    reason?: NullableStringFieldUpdateOperationsInput | string | null
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    requestedChanges?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    case?: CaseUpdateOneRequiredWithoutOrpDecisionsNestedInput
+    orp?: OperationalResponsePlanUpdateOneRequiredWithoutDecisionsNestedInput
+    reviewer?: UserUpdateOneRequiredWithoutReviewedOrpDecisionsNestedInput
+    authorityGrant?: ApprovalAuthorityUpdateOneRequiredWithoutDecisionsNestedInput
+    forwardedUser?: UserUpdateOneWithoutForwardedOrpDecisionsNestedInput
+  }
+
+  export type OrpDecisionUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    caseId?: StringFieldUpdateOperationsInput | string
+    orpId?: StringFieldUpdateOperationsInput | string
+    reviewerId?: StringFieldUpdateOperationsInput | string
+    authorityGrantId?: StringFieldUpdateOperationsInput | string
+    decisionType?: EnumOrpDecisionTypeFieldUpdateOperationsInput | $Enums.OrpDecisionType
+    reason?: NullableStringFieldUpdateOperationsInput | string | null
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    requestedChanges?: NullableJsonNullValueInput | InputJsonValue
+    forwardToUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type OrpDecisionCreateManyInput = {
+    id?: string
+    caseId: string
+    orpId: string
+    reviewerId: string
+    authorityGrantId: string
+    decisionType: $Enums.OrpDecisionType
+    reason?: string | null
+    remarks?: string | null
+    requestedChanges?: NullableJsonNullValueInput | InputJsonValue
+    forwardToUserId?: string | null
+    createdAt?: Date | string
+  }
+
+  export type OrpDecisionUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    decisionType?: EnumOrpDecisionTypeFieldUpdateOperationsInput | $Enums.OrpDecisionType
+    reason?: NullableStringFieldUpdateOperationsInput | string | null
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    requestedChanges?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type OrpDecisionUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    caseId?: StringFieldUpdateOperationsInput | string
+    orpId?: StringFieldUpdateOperationsInput | string
+    reviewerId?: StringFieldUpdateOperationsInput | string
+    authorityGrantId?: StringFieldUpdateOperationsInput | string
+    decisionType?: EnumOrpDecisionTypeFieldUpdateOperationsInput | $Enums.OrpDecisionType
+    reason?: NullableStringFieldUpdateOperationsInput | string | null
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    requestedChanges?: NullableJsonNullValueInput | InputJsonValue
+    forwardToUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -13279,6 +16747,12 @@ export namespace Prisma {
     none?: JurisdictionWhereInput
   }
 
+  export type ApprovalAuthorityListRelationFilter = {
+    every?: ApprovalAuthorityWhereInput
+    some?: ApprovalAuthorityWhereInput
+    none?: ApprovalAuthorityWhereInput
+  }
+
   export type UserOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -13288,6 +16762,10 @@ export namespace Prisma {
   }
 
   export type JurisdictionOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ApprovalAuthorityOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -13398,7 +16876,17 @@ export namespace Prisma {
     none?: InspectionWhereInput
   }
 
+  export type OrpDecisionListRelationFilter = {
+    every?: OrpDecisionWhereInput
+    some?: OrpDecisionWhereInput
+    none?: OrpDecisionWhereInput
+  }
+
   export type InspectionOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type OrpDecisionOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -14090,6 +17578,181 @@ export namespace Prisma {
     versionNumber?: SortOrder
   }
 
+  export type ApprovalAuthorityCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    departmentId?: SortOrder
+    jurisdictionId?: SortOrder
+    canApprove?: SortOrder
+    canReject?: SortOrder
+    canRequestModification?: SortOrder
+    canRequestReinspection?: SortOrder
+    canEscalate?: SortOrder
+    maxPriorityLevel?: SortOrder
+    isActive?: SortOrder
+    validFrom?: SortOrder
+    validUntil?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ApprovalAuthorityMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    departmentId?: SortOrder
+    jurisdictionId?: SortOrder
+    canApprove?: SortOrder
+    canReject?: SortOrder
+    canRequestModification?: SortOrder
+    canRequestReinspection?: SortOrder
+    canEscalate?: SortOrder
+    maxPriorityLevel?: SortOrder
+    isActive?: SortOrder
+    validFrom?: SortOrder
+    validUntil?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ApprovalAuthorityMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    departmentId?: SortOrder
+    jurisdictionId?: SortOrder
+    canApprove?: SortOrder
+    canReject?: SortOrder
+    canRequestModification?: SortOrder
+    canRequestReinspection?: SortOrder
+    canEscalate?: SortOrder
+    maxPriorityLevel?: SortOrder
+    isActive?: SortOrder
+    validFrom?: SortOrder
+    validUntil?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EnumOrpDecisionTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.OrpDecisionType | EnumOrpDecisionTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.OrpDecisionType[] | ListEnumOrpDecisionTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.OrpDecisionType[] | ListEnumOrpDecisionTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumOrpDecisionTypeFilter<$PrismaModel> | $Enums.OrpDecisionType
+  }
+  export type JsonNullableFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonNullableFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonNullableFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonNullableFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonNullableFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonNullableFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
+
+  export type OperationalResponsePlanScalarRelationFilter = {
+    is?: OperationalResponsePlanWhereInput
+    isNot?: OperationalResponsePlanWhereInput
+  }
+
+  export type ApprovalAuthorityScalarRelationFilter = {
+    is?: ApprovalAuthorityWhereInput
+    isNot?: ApprovalAuthorityWhereInput
+  }
+
+  export type UserNullableScalarRelationFilter = {
+    is?: UserWhereInput | null
+    isNot?: UserWhereInput | null
+  }
+
+  export type OrpDecisionCountOrderByAggregateInput = {
+    id?: SortOrder
+    caseId?: SortOrder
+    orpId?: SortOrder
+    reviewerId?: SortOrder
+    authorityGrantId?: SortOrder
+    decisionType?: SortOrder
+    reason?: SortOrder
+    remarks?: SortOrder
+    requestedChanges?: SortOrder
+    forwardToUserId?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type OrpDecisionMaxOrderByAggregateInput = {
+    id?: SortOrder
+    caseId?: SortOrder
+    orpId?: SortOrder
+    reviewerId?: SortOrder
+    authorityGrantId?: SortOrder
+    decisionType?: SortOrder
+    reason?: SortOrder
+    remarks?: SortOrder
+    forwardToUserId?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type OrpDecisionMinOrderByAggregateInput = {
+    id?: SortOrder
+    caseId?: SortOrder
+    orpId?: SortOrder
+    reviewerId?: SortOrder
+    authorityGrantId?: SortOrder
+    decisionType?: SortOrder
+    reason?: SortOrder
+    remarks?: SortOrder
+    forwardToUserId?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type EnumOrpDecisionTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.OrpDecisionType | EnumOrpDecisionTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.OrpDecisionType[] | ListEnumOrpDecisionTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.OrpDecisionType[] | ListEnumOrpDecisionTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumOrpDecisionTypeWithAggregatesFilter<$PrismaModel> | $Enums.OrpDecisionType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumOrpDecisionTypeFilter<$PrismaModel>
+    _max?: NestedEnumOrpDecisionTypeFilter<$PrismaModel>
+  }
+  export type JsonNullableWithAggregatesFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonNullableWithAggregatesFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedJsonNullableFilter<$PrismaModel>
+    _max?: NestedJsonNullableFilter<$PrismaModel>
+  }
+
   export type UserCreateNestedManyWithoutDepartmentInput = {
     create?: XOR<UserCreateWithoutDepartmentInput, UserUncheckedCreateWithoutDepartmentInput> | UserCreateWithoutDepartmentInput[] | UserUncheckedCreateWithoutDepartmentInput[]
     connectOrCreate?: UserCreateOrConnectWithoutDepartmentInput | UserCreateOrConnectWithoutDepartmentInput[]
@@ -14111,6 +17774,13 @@ export namespace Prisma {
     connect?: JurisdictionWhereUniqueInput | JurisdictionWhereUniqueInput[]
   }
 
+  export type ApprovalAuthorityCreateNestedManyWithoutDepartmentInput = {
+    create?: XOR<ApprovalAuthorityCreateWithoutDepartmentInput, ApprovalAuthorityUncheckedCreateWithoutDepartmentInput> | ApprovalAuthorityCreateWithoutDepartmentInput[] | ApprovalAuthorityUncheckedCreateWithoutDepartmentInput[]
+    connectOrCreate?: ApprovalAuthorityCreateOrConnectWithoutDepartmentInput | ApprovalAuthorityCreateOrConnectWithoutDepartmentInput[]
+    createMany?: ApprovalAuthorityCreateManyDepartmentInputEnvelope
+    connect?: ApprovalAuthorityWhereUniqueInput | ApprovalAuthorityWhereUniqueInput[]
+  }
+
   export type UserUncheckedCreateNestedManyWithoutDepartmentInput = {
     create?: XOR<UserCreateWithoutDepartmentInput, UserUncheckedCreateWithoutDepartmentInput> | UserCreateWithoutDepartmentInput[] | UserUncheckedCreateWithoutDepartmentInput[]
     connectOrCreate?: UserCreateOrConnectWithoutDepartmentInput | UserCreateOrConnectWithoutDepartmentInput[]
@@ -14130,6 +17800,13 @@ export namespace Prisma {
     connectOrCreate?: JurisdictionCreateOrConnectWithoutDepartmentInput | JurisdictionCreateOrConnectWithoutDepartmentInput[]
     createMany?: JurisdictionCreateManyDepartmentInputEnvelope
     connect?: JurisdictionWhereUniqueInput | JurisdictionWhereUniqueInput[]
+  }
+
+  export type ApprovalAuthorityUncheckedCreateNestedManyWithoutDepartmentInput = {
+    create?: XOR<ApprovalAuthorityCreateWithoutDepartmentInput, ApprovalAuthorityUncheckedCreateWithoutDepartmentInput> | ApprovalAuthorityCreateWithoutDepartmentInput[] | ApprovalAuthorityUncheckedCreateWithoutDepartmentInput[]
+    connectOrCreate?: ApprovalAuthorityCreateOrConnectWithoutDepartmentInput | ApprovalAuthorityCreateOrConnectWithoutDepartmentInput[]
+    createMany?: ApprovalAuthorityCreateManyDepartmentInputEnvelope
+    connect?: ApprovalAuthorityWhereUniqueInput | ApprovalAuthorityWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -14182,6 +17859,20 @@ export namespace Prisma {
     deleteMany?: JurisdictionScalarWhereInput | JurisdictionScalarWhereInput[]
   }
 
+  export type ApprovalAuthorityUpdateManyWithoutDepartmentNestedInput = {
+    create?: XOR<ApprovalAuthorityCreateWithoutDepartmentInput, ApprovalAuthorityUncheckedCreateWithoutDepartmentInput> | ApprovalAuthorityCreateWithoutDepartmentInput[] | ApprovalAuthorityUncheckedCreateWithoutDepartmentInput[]
+    connectOrCreate?: ApprovalAuthorityCreateOrConnectWithoutDepartmentInput | ApprovalAuthorityCreateOrConnectWithoutDepartmentInput[]
+    upsert?: ApprovalAuthorityUpsertWithWhereUniqueWithoutDepartmentInput | ApprovalAuthorityUpsertWithWhereUniqueWithoutDepartmentInput[]
+    createMany?: ApprovalAuthorityCreateManyDepartmentInputEnvelope
+    set?: ApprovalAuthorityWhereUniqueInput | ApprovalAuthorityWhereUniqueInput[]
+    disconnect?: ApprovalAuthorityWhereUniqueInput | ApprovalAuthorityWhereUniqueInput[]
+    delete?: ApprovalAuthorityWhereUniqueInput | ApprovalAuthorityWhereUniqueInput[]
+    connect?: ApprovalAuthorityWhereUniqueInput | ApprovalAuthorityWhereUniqueInput[]
+    update?: ApprovalAuthorityUpdateWithWhereUniqueWithoutDepartmentInput | ApprovalAuthorityUpdateWithWhereUniqueWithoutDepartmentInput[]
+    updateMany?: ApprovalAuthorityUpdateManyWithWhereWithoutDepartmentInput | ApprovalAuthorityUpdateManyWithWhereWithoutDepartmentInput[]
+    deleteMany?: ApprovalAuthorityScalarWhereInput | ApprovalAuthorityScalarWhereInput[]
+  }
+
   export type UserUncheckedUpdateManyWithoutDepartmentNestedInput = {
     create?: XOR<UserCreateWithoutDepartmentInput, UserUncheckedCreateWithoutDepartmentInput> | UserCreateWithoutDepartmentInput[] | UserUncheckedCreateWithoutDepartmentInput[]
     connectOrCreate?: UserCreateOrConnectWithoutDepartmentInput | UserCreateOrConnectWithoutDepartmentInput[]
@@ -14224,6 +17915,20 @@ export namespace Prisma {
     deleteMany?: JurisdictionScalarWhereInput | JurisdictionScalarWhereInput[]
   }
 
+  export type ApprovalAuthorityUncheckedUpdateManyWithoutDepartmentNestedInput = {
+    create?: XOR<ApprovalAuthorityCreateWithoutDepartmentInput, ApprovalAuthorityUncheckedCreateWithoutDepartmentInput> | ApprovalAuthorityCreateWithoutDepartmentInput[] | ApprovalAuthorityUncheckedCreateWithoutDepartmentInput[]
+    connectOrCreate?: ApprovalAuthorityCreateOrConnectWithoutDepartmentInput | ApprovalAuthorityCreateOrConnectWithoutDepartmentInput[]
+    upsert?: ApprovalAuthorityUpsertWithWhereUniqueWithoutDepartmentInput | ApprovalAuthorityUpsertWithWhereUniqueWithoutDepartmentInput[]
+    createMany?: ApprovalAuthorityCreateManyDepartmentInputEnvelope
+    set?: ApprovalAuthorityWhereUniqueInput | ApprovalAuthorityWhereUniqueInput[]
+    disconnect?: ApprovalAuthorityWhereUniqueInput | ApprovalAuthorityWhereUniqueInput[]
+    delete?: ApprovalAuthorityWhereUniqueInput | ApprovalAuthorityWhereUniqueInput[]
+    connect?: ApprovalAuthorityWhereUniqueInput | ApprovalAuthorityWhereUniqueInput[]
+    update?: ApprovalAuthorityUpdateWithWhereUniqueWithoutDepartmentInput | ApprovalAuthorityUpdateWithWhereUniqueWithoutDepartmentInput[]
+    updateMany?: ApprovalAuthorityUpdateManyWithWhereWithoutDepartmentInput | ApprovalAuthorityUpdateManyWithWhereWithoutDepartmentInput[]
+    deleteMany?: ApprovalAuthorityScalarWhereInput | ApprovalAuthorityScalarWhereInput[]
+  }
+
   export type DepartmentCreateNestedOneWithoutJurisdictionsInput = {
     create?: XOR<DepartmentCreateWithoutJurisdictionsInput, DepartmentUncheckedCreateWithoutJurisdictionsInput>
     connectOrCreate?: DepartmentCreateOrConnectWithoutJurisdictionsInput
@@ -14244,6 +17949,13 @@ export namespace Prisma {
     connect?: AssetWhereUniqueInput | AssetWhereUniqueInput[]
   }
 
+  export type ApprovalAuthorityCreateNestedManyWithoutJurisdictionInput = {
+    create?: XOR<ApprovalAuthorityCreateWithoutJurisdictionInput, ApprovalAuthorityUncheckedCreateWithoutJurisdictionInput> | ApprovalAuthorityCreateWithoutJurisdictionInput[] | ApprovalAuthorityUncheckedCreateWithoutJurisdictionInput[]
+    connectOrCreate?: ApprovalAuthorityCreateOrConnectWithoutJurisdictionInput | ApprovalAuthorityCreateOrConnectWithoutJurisdictionInput[]
+    createMany?: ApprovalAuthorityCreateManyJurisdictionInputEnvelope
+    connect?: ApprovalAuthorityWhereUniqueInput | ApprovalAuthorityWhereUniqueInput[]
+  }
+
   export type UserUncheckedCreateNestedManyWithoutJurisdictionInput = {
     create?: XOR<UserCreateWithoutJurisdictionInput, UserUncheckedCreateWithoutJurisdictionInput> | UserCreateWithoutJurisdictionInput[] | UserUncheckedCreateWithoutJurisdictionInput[]
     connectOrCreate?: UserCreateOrConnectWithoutJurisdictionInput | UserCreateOrConnectWithoutJurisdictionInput[]
@@ -14256,6 +17968,13 @@ export namespace Prisma {
     connectOrCreate?: AssetCreateOrConnectWithoutJurisdictionInput | AssetCreateOrConnectWithoutJurisdictionInput[]
     createMany?: AssetCreateManyJurisdictionInputEnvelope
     connect?: AssetWhereUniqueInput | AssetWhereUniqueInput[]
+  }
+
+  export type ApprovalAuthorityUncheckedCreateNestedManyWithoutJurisdictionInput = {
+    create?: XOR<ApprovalAuthorityCreateWithoutJurisdictionInput, ApprovalAuthorityUncheckedCreateWithoutJurisdictionInput> | ApprovalAuthorityCreateWithoutJurisdictionInput[] | ApprovalAuthorityUncheckedCreateWithoutJurisdictionInput[]
+    connectOrCreate?: ApprovalAuthorityCreateOrConnectWithoutJurisdictionInput | ApprovalAuthorityCreateOrConnectWithoutJurisdictionInput[]
+    createMany?: ApprovalAuthorityCreateManyJurisdictionInputEnvelope
+    connect?: ApprovalAuthorityWhereUniqueInput | ApprovalAuthorityWhereUniqueInput[]
   }
 
   export type DepartmentUpdateOneRequiredWithoutJurisdictionsNestedInput = {
@@ -14294,6 +18013,20 @@ export namespace Prisma {
     deleteMany?: AssetScalarWhereInput | AssetScalarWhereInput[]
   }
 
+  export type ApprovalAuthorityUpdateManyWithoutJurisdictionNestedInput = {
+    create?: XOR<ApprovalAuthorityCreateWithoutJurisdictionInput, ApprovalAuthorityUncheckedCreateWithoutJurisdictionInput> | ApprovalAuthorityCreateWithoutJurisdictionInput[] | ApprovalAuthorityUncheckedCreateWithoutJurisdictionInput[]
+    connectOrCreate?: ApprovalAuthorityCreateOrConnectWithoutJurisdictionInput | ApprovalAuthorityCreateOrConnectWithoutJurisdictionInput[]
+    upsert?: ApprovalAuthorityUpsertWithWhereUniqueWithoutJurisdictionInput | ApprovalAuthorityUpsertWithWhereUniqueWithoutJurisdictionInput[]
+    createMany?: ApprovalAuthorityCreateManyJurisdictionInputEnvelope
+    set?: ApprovalAuthorityWhereUniqueInput | ApprovalAuthorityWhereUniqueInput[]
+    disconnect?: ApprovalAuthorityWhereUniqueInput | ApprovalAuthorityWhereUniqueInput[]
+    delete?: ApprovalAuthorityWhereUniqueInput | ApprovalAuthorityWhereUniqueInput[]
+    connect?: ApprovalAuthorityWhereUniqueInput | ApprovalAuthorityWhereUniqueInput[]
+    update?: ApprovalAuthorityUpdateWithWhereUniqueWithoutJurisdictionInput | ApprovalAuthorityUpdateWithWhereUniqueWithoutJurisdictionInput[]
+    updateMany?: ApprovalAuthorityUpdateManyWithWhereWithoutJurisdictionInput | ApprovalAuthorityUpdateManyWithWhereWithoutJurisdictionInput[]
+    deleteMany?: ApprovalAuthorityScalarWhereInput | ApprovalAuthorityScalarWhereInput[]
+  }
+
   export type UserUncheckedUpdateManyWithoutJurisdictionNestedInput = {
     create?: XOR<UserCreateWithoutJurisdictionInput, UserUncheckedCreateWithoutJurisdictionInput> | UserCreateWithoutJurisdictionInput[] | UserUncheckedCreateWithoutJurisdictionInput[]
     connectOrCreate?: UserCreateOrConnectWithoutJurisdictionInput | UserCreateOrConnectWithoutJurisdictionInput[]
@@ -14322,6 +18055,20 @@ export namespace Prisma {
     deleteMany?: AssetScalarWhereInput | AssetScalarWhereInput[]
   }
 
+  export type ApprovalAuthorityUncheckedUpdateManyWithoutJurisdictionNestedInput = {
+    create?: XOR<ApprovalAuthorityCreateWithoutJurisdictionInput, ApprovalAuthorityUncheckedCreateWithoutJurisdictionInput> | ApprovalAuthorityCreateWithoutJurisdictionInput[] | ApprovalAuthorityUncheckedCreateWithoutJurisdictionInput[]
+    connectOrCreate?: ApprovalAuthorityCreateOrConnectWithoutJurisdictionInput | ApprovalAuthorityCreateOrConnectWithoutJurisdictionInput[]
+    upsert?: ApprovalAuthorityUpsertWithWhereUniqueWithoutJurisdictionInput | ApprovalAuthorityUpsertWithWhereUniqueWithoutJurisdictionInput[]
+    createMany?: ApprovalAuthorityCreateManyJurisdictionInputEnvelope
+    set?: ApprovalAuthorityWhereUniqueInput | ApprovalAuthorityWhereUniqueInput[]
+    disconnect?: ApprovalAuthorityWhereUniqueInput | ApprovalAuthorityWhereUniqueInput[]
+    delete?: ApprovalAuthorityWhereUniqueInput | ApprovalAuthorityWhereUniqueInput[]
+    connect?: ApprovalAuthorityWhereUniqueInput | ApprovalAuthorityWhereUniqueInput[]
+    update?: ApprovalAuthorityUpdateWithWhereUniqueWithoutJurisdictionInput | ApprovalAuthorityUpdateWithWhereUniqueWithoutJurisdictionInput[]
+    updateMany?: ApprovalAuthorityUpdateManyWithWhereWithoutJurisdictionInput | ApprovalAuthorityUpdateManyWithWhereWithoutJurisdictionInput[]
+    deleteMany?: ApprovalAuthorityScalarWhereInput | ApprovalAuthorityScalarWhereInput[]
+  }
+
   export type DepartmentCreateNestedOneWithoutUsersInput = {
     create?: XOR<DepartmentCreateWithoutUsersInput, DepartmentUncheckedCreateWithoutUsersInput>
     connectOrCreate?: DepartmentCreateOrConnectWithoutUsersInput
@@ -14341,11 +18088,53 @@ export namespace Prisma {
     connect?: InspectionWhereUniqueInput | InspectionWhereUniqueInput[]
   }
 
+  export type ApprovalAuthorityCreateNestedManyWithoutUserInput = {
+    create?: XOR<ApprovalAuthorityCreateWithoutUserInput, ApprovalAuthorityUncheckedCreateWithoutUserInput> | ApprovalAuthorityCreateWithoutUserInput[] | ApprovalAuthorityUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ApprovalAuthorityCreateOrConnectWithoutUserInput | ApprovalAuthorityCreateOrConnectWithoutUserInput[]
+    createMany?: ApprovalAuthorityCreateManyUserInputEnvelope
+    connect?: ApprovalAuthorityWhereUniqueInput | ApprovalAuthorityWhereUniqueInput[]
+  }
+
+  export type OrpDecisionCreateNestedManyWithoutReviewerInput = {
+    create?: XOR<OrpDecisionCreateWithoutReviewerInput, OrpDecisionUncheckedCreateWithoutReviewerInput> | OrpDecisionCreateWithoutReviewerInput[] | OrpDecisionUncheckedCreateWithoutReviewerInput[]
+    connectOrCreate?: OrpDecisionCreateOrConnectWithoutReviewerInput | OrpDecisionCreateOrConnectWithoutReviewerInput[]
+    createMany?: OrpDecisionCreateManyReviewerInputEnvelope
+    connect?: OrpDecisionWhereUniqueInput | OrpDecisionWhereUniqueInput[]
+  }
+
+  export type OrpDecisionCreateNestedManyWithoutForwardedUserInput = {
+    create?: XOR<OrpDecisionCreateWithoutForwardedUserInput, OrpDecisionUncheckedCreateWithoutForwardedUserInput> | OrpDecisionCreateWithoutForwardedUserInput[] | OrpDecisionUncheckedCreateWithoutForwardedUserInput[]
+    connectOrCreate?: OrpDecisionCreateOrConnectWithoutForwardedUserInput | OrpDecisionCreateOrConnectWithoutForwardedUserInput[]
+    createMany?: OrpDecisionCreateManyForwardedUserInputEnvelope
+    connect?: OrpDecisionWhereUniqueInput | OrpDecisionWhereUniqueInput[]
+  }
+
   export type InspectionUncheckedCreateNestedManyWithoutInspectorInput = {
     create?: XOR<InspectionCreateWithoutInspectorInput, InspectionUncheckedCreateWithoutInspectorInput> | InspectionCreateWithoutInspectorInput[] | InspectionUncheckedCreateWithoutInspectorInput[]
     connectOrCreate?: InspectionCreateOrConnectWithoutInspectorInput | InspectionCreateOrConnectWithoutInspectorInput[]
     createMany?: InspectionCreateManyInspectorInputEnvelope
     connect?: InspectionWhereUniqueInput | InspectionWhereUniqueInput[]
+  }
+
+  export type ApprovalAuthorityUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<ApprovalAuthorityCreateWithoutUserInput, ApprovalAuthorityUncheckedCreateWithoutUserInput> | ApprovalAuthorityCreateWithoutUserInput[] | ApprovalAuthorityUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ApprovalAuthorityCreateOrConnectWithoutUserInput | ApprovalAuthorityCreateOrConnectWithoutUserInput[]
+    createMany?: ApprovalAuthorityCreateManyUserInputEnvelope
+    connect?: ApprovalAuthorityWhereUniqueInput | ApprovalAuthorityWhereUniqueInput[]
+  }
+
+  export type OrpDecisionUncheckedCreateNestedManyWithoutReviewerInput = {
+    create?: XOR<OrpDecisionCreateWithoutReviewerInput, OrpDecisionUncheckedCreateWithoutReviewerInput> | OrpDecisionCreateWithoutReviewerInput[] | OrpDecisionUncheckedCreateWithoutReviewerInput[]
+    connectOrCreate?: OrpDecisionCreateOrConnectWithoutReviewerInput | OrpDecisionCreateOrConnectWithoutReviewerInput[]
+    createMany?: OrpDecisionCreateManyReviewerInputEnvelope
+    connect?: OrpDecisionWhereUniqueInput | OrpDecisionWhereUniqueInput[]
+  }
+
+  export type OrpDecisionUncheckedCreateNestedManyWithoutForwardedUserInput = {
+    create?: XOR<OrpDecisionCreateWithoutForwardedUserInput, OrpDecisionUncheckedCreateWithoutForwardedUserInput> | OrpDecisionCreateWithoutForwardedUserInput[] | OrpDecisionUncheckedCreateWithoutForwardedUserInput[]
+    connectOrCreate?: OrpDecisionCreateOrConnectWithoutForwardedUserInput | OrpDecisionCreateOrConnectWithoutForwardedUserInput[]
+    createMany?: OrpDecisionCreateManyForwardedUserInputEnvelope
+    connect?: OrpDecisionWhereUniqueInput | OrpDecisionWhereUniqueInput[]
   }
 
   export type EnumSystemRoleFieldUpdateOperationsInput = {
@@ -14386,6 +18175,48 @@ export namespace Prisma {
     deleteMany?: InspectionScalarWhereInput | InspectionScalarWhereInput[]
   }
 
+  export type ApprovalAuthorityUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ApprovalAuthorityCreateWithoutUserInput, ApprovalAuthorityUncheckedCreateWithoutUserInput> | ApprovalAuthorityCreateWithoutUserInput[] | ApprovalAuthorityUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ApprovalAuthorityCreateOrConnectWithoutUserInput | ApprovalAuthorityCreateOrConnectWithoutUserInput[]
+    upsert?: ApprovalAuthorityUpsertWithWhereUniqueWithoutUserInput | ApprovalAuthorityUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ApprovalAuthorityCreateManyUserInputEnvelope
+    set?: ApprovalAuthorityWhereUniqueInput | ApprovalAuthorityWhereUniqueInput[]
+    disconnect?: ApprovalAuthorityWhereUniqueInput | ApprovalAuthorityWhereUniqueInput[]
+    delete?: ApprovalAuthorityWhereUniqueInput | ApprovalAuthorityWhereUniqueInput[]
+    connect?: ApprovalAuthorityWhereUniqueInput | ApprovalAuthorityWhereUniqueInput[]
+    update?: ApprovalAuthorityUpdateWithWhereUniqueWithoutUserInput | ApprovalAuthorityUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ApprovalAuthorityUpdateManyWithWhereWithoutUserInput | ApprovalAuthorityUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ApprovalAuthorityScalarWhereInput | ApprovalAuthorityScalarWhereInput[]
+  }
+
+  export type OrpDecisionUpdateManyWithoutReviewerNestedInput = {
+    create?: XOR<OrpDecisionCreateWithoutReviewerInput, OrpDecisionUncheckedCreateWithoutReviewerInput> | OrpDecisionCreateWithoutReviewerInput[] | OrpDecisionUncheckedCreateWithoutReviewerInput[]
+    connectOrCreate?: OrpDecisionCreateOrConnectWithoutReviewerInput | OrpDecisionCreateOrConnectWithoutReviewerInput[]
+    upsert?: OrpDecisionUpsertWithWhereUniqueWithoutReviewerInput | OrpDecisionUpsertWithWhereUniqueWithoutReviewerInput[]
+    createMany?: OrpDecisionCreateManyReviewerInputEnvelope
+    set?: OrpDecisionWhereUniqueInput | OrpDecisionWhereUniqueInput[]
+    disconnect?: OrpDecisionWhereUniqueInput | OrpDecisionWhereUniqueInput[]
+    delete?: OrpDecisionWhereUniqueInput | OrpDecisionWhereUniqueInput[]
+    connect?: OrpDecisionWhereUniqueInput | OrpDecisionWhereUniqueInput[]
+    update?: OrpDecisionUpdateWithWhereUniqueWithoutReviewerInput | OrpDecisionUpdateWithWhereUniqueWithoutReviewerInput[]
+    updateMany?: OrpDecisionUpdateManyWithWhereWithoutReviewerInput | OrpDecisionUpdateManyWithWhereWithoutReviewerInput[]
+    deleteMany?: OrpDecisionScalarWhereInput | OrpDecisionScalarWhereInput[]
+  }
+
+  export type OrpDecisionUpdateManyWithoutForwardedUserNestedInput = {
+    create?: XOR<OrpDecisionCreateWithoutForwardedUserInput, OrpDecisionUncheckedCreateWithoutForwardedUserInput> | OrpDecisionCreateWithoutForwardedUserInput[] | OrpDecisionUncheckedCreateWithoutForwardedUserInput[]
+    connectOrCreate?: OrpDecisionCreateOrConnectWithoutForwardedUserInput | OrpDecisionCreateOrConnectWithoutForwardedUserInput[]
+    upsert?: OrpDecisionUpsertWithWhereUniqueWithoutForwardedUserInput | OrpDecisionUpsertWithWhereUniqueWithoutForwardedUserInput[]
+    createMany?: OrpDecisionCreateManyForwardedUserInputEnvelope
+    set?: OrpDecisionWhereUniqueInput | OrpDecisionWhereUniqueInput[]
+    disconnect?: OrpDecisionWhereUniqueInput | OrpDecisionWhereUniqueInput[]
+    delete?: OrpDecisionWhereUniqueInput | OrpDecisionWhereUniqueInput[]
+    connect?: OrpDecisionWhereUniqueInput | OrpDecisionWhereUniqueInput[]
+    update?: OrpDecisionUpdateWithWhereUniqueWithoutForwardedUserInput | OrpDecisionUpdateWithWhereUniqueWithoutForwardedUserInput[]
+    updateMany?: OrpDecisionUpdateManyWithWhereWithoutForwardedUserInput | OrpDecisionUpdateManyWithWhereWithoutForwardedUserInput[]
+    deleteMany?: OrpDecisionScalarWhereInput | OrpDecisionScalarWhereInput[]
+  }
+
   export type InspectionUncheckedUpdateManyWithoutInspectorNestedInput = {
     create?: XOR<InspectionCreateWithoutInspectorInput, InspectionUncheckedCreateWithoutInspectorInput> | InspectionCreateWithoutInspectorInput[] | InspectionUncheckedCreateWithoutInspectorInput[]
     connectOrCreate?: InspectionCreateOrConnectWithoutInspectorInput | InspectionCreateOrConnectWithoutInspectorInput[]
@@ -14398,6 +18229,48 @@ export namespace Prisma {
     update?: InspectionUpdateWithWhereUniqueWithoutInspectorInput | InspectionUpdateWithWhereUniqueWithoutInspectorInput[]
     updateMany?: InspectionUpdateManyWithWhereWithoutInspectorInput | InspectionUpdateManyWithWhereWithoutInspectorInput[]
     deleteMany?: InspectionScalarWhereInput | InspectionScalarWhereInput[]
+  }
+
+  export type ApprovalAuthorityUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ApprovalAuthorityCreateWithoutUserInput, ApprovalAuthorityUncheckedCreateWithoutUserInput> | ApprovalAuthorityCreateWithoutUserInput[] | ApprovalAuthorityUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ApprovalAuthorityCreateOrConnectWithoutUserInput | ApprovalAuthorityCreateOrConnectWithoutUserInput[]
+    upsert?: ApprovalAuthorityUpsertWithWhereUniqueWithoutUserInput | ApprovalAuthorityUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ApprovalAuthorityCreateManyUserInputEnvelope
+    set?: ApprovalAuthorityWhereUniqueInput | ApprovalAuthorityWhereUniqueInput[]
+    disconnect?: ApprovalAuthorityWhereUniqueInput | ApprovalAuthorityWhereUniqueInput[]
+    delete?: ApprovalAuthorityWhereUniqueInput | ApprovalAuthorityWhereUniqueInput[]
+    connect?: ApprovalAuthorityWhereUniqueInput | ApprovalAuthorityWhereUniqueInput[]
+    update?: ApprovalAuthorityUpdateWithWhereUniqueWithoutUserInput | ApprovalAuthorityUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ApprovalAuthorityUpdateManyWithWhereWithoutUserInput | ApprovalAuthorityUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ApprovalAuthorityScalarWhereInput | ApprovalAuthorityScalarWhereInput[]
+  }
+
+  export type OrpDecisionUncheckedUpdateManyWithoutReviewerNestedInput = {
+    create?: XOR<OrpDecisionCreateWithoutReviewerInput, OrpDecisionUncheckedCreateWithoutReviewerInput> | OrpDecisionCreateWithoutReviewerInput[] | OrpDecisionUncheckedCreateWithoutReviewerInput[]
+    connectOrCreate?: OrpDecisionCreateOrConnectWithoutReviewerInput | OrpDecisionCreateOrConnectWithoutReviewerInput[]
+    upsert?: OrpDecisionUpsertWithWhereUniqueWithoutReviewerInput | OrpDecisionUpsertWithWhereUniqueWithoutReviewerInput[]
+    createMany?: OrpDecisionCreateManyReviewerInputEnvelope
+    set?: OrpDecisionWhereUniqueInput | OrpDecisionWhereUniqueInput[]
+    disconnect?: OrpDecisionWhereUniqueInput | OrpDecisionWhereUniqueInput[]
+    delete?: OrpDecisionWhereUniqueInput | OrpDecisionWhereUniqueInput[]
+    connect?: OrpDecisionWhereUniqueInput | OrpDecisionWhereUniqueInput[]
+    update?: OrpDecisionUpdateWithWhereUniqueWithoutReviewerInput | OrpDecisionUpdateWithWhereUniqueWithoutReviewerInput[]
+    updateMany?: OrpDecisionUpdateManyWithWhereWithoutReviewerInput | OrpDecisionUpdateManyWithWhereWithoutReviewerInput[]
+    deleteMany?: OrpDecisionScalarWhereInput | OrpDecisionScalarWhereInput[]
+  }
+
+  export type OrpDecisionUncheckedUpdateManyWithoutForwardedUserNestedInput = {
+    create?: XOR<OrpDecisionCreateWithoutForwardedUserInput, OrpDecisionUncheckedCreateWithoutForwardedUserInput> | OrpDecisionCreateWithoutForwardedUserInput[] | OrpDecisionUncheckedCreateWithoutForwardedUserInput[]
+    connectOrCreate?: OrpDecisionCreateOrConnectWithoutForwardedUserInput | OrpDecisionCreateOrConnectWithoutForwardedUserInput[]
+    upsert?: OrpDecisionUpsertWithWhereUniqueWithoutForwardedUserInput | OrpDecisionUpsertWithWhereUniqueWithoutForwardedUserInput[]
+    createMany?: OrpDecisionCreateManyForwardedUserInputEnvelope
+    set?: OrpDecisionWhereUniqueInput | OrpDecisionWhereUniqueInput[]
+    disconnect?: OrpDecisionWhereUniqueInput | OrpDecisionWhereUniqueInput[]
+    delete?: OrpDecisionWhereUniqueInput | OrpDecisionWhereUniqueInput[]
+    connect?: OrpDecisionWhereUniqueInput | OrpDecisionWhereUniqueInput[]
+    update?: OrpDecisionUpdateWithWhereUniqueWithoutForwardedUserInput | OrpDecisionUpdateWithWhereUniqueWithoutForwardedUserInput[]
+    updateMany?: OrpDecisionUpdateManyWithWhereWithoutForwardedUserInput | OrpDecisionUpdateManyWithWhereWithoutForwardedUserInput[]
+    deleteMany?: OrpDecisionScalarWhereInput | OrpDecisionScalarWhereInput[]
   }
 
   export type DepartmentCreateNestedOneWithoutAssetsInput = {
@@ -14521,6 +18394,13 @@ export namespace Prisma {
     connect?: OperationalResponsePlanWhereUniqueInput | OperationalResponsePlanWhereUniqueInput[]
   }
 
+  export type OrpDecisionCreateNestedManyWithoutCaseInput = {
+    create?: XOR<OrpDecisionCreateWithoutCaseInput, OrpDecisionUncheckedCreateWithoutCaseInput> | OrpDecisionCreateWithoutCaseInput[] | OrpDecisionUncheckedCreateWithoutCaseInput[]
+    connectOrCreate?: OrpDecisionCreateOrConnectWithoutCaseInput | OrpDecisionCreateOrConnectWithoutCaseInput[]
+    createMany?: OrpDecisionCreateManyCaseInputEnvelope
+    connect?: OrpDecisionWhereUniqueInput | OrpDecisionWhereUniqueInput[]
+  }
+
   export type InspectionUncheckedCreateNestedManyWithoutCaseInput = {
     create?: XOR<InspectionCreateWithoutCaseInput, InspectionUncheckedCreateWithoutCaseInput> | InspectionCreateWithoutCaseInput[] | InspectionUncheckedCreateWithoutCaseInput[]
     connectOrCreate?: InspectionCreateOrConnectWithoutCaseInput | InspectionCreateOrConnectWithoutCaseInput[]
@@ -14540,6 +18420,13 @@ export namespace Prisma {
     connectOrCreate?: OperationalResponsePlanCreateOrConnectWithoutCaseInput | OperationalResponsePlanCreateOrConnectWithoutCaseInput[]
     createMany?: OperationalResponsePlanCreateManyCaseInputEnvelope
     connect?: OperationalResponsePlanWhereUniqueInput | OperationalResponsePlanWhereUniqueInput[]
+  }
+
+  export type OrpDecisionUncheckedCreateNestedManyWithoutCaseInput = {
+    create?: XOR<OrpDecisionCreateWithoutCaseInput, OrpDecisionUncheckedCreateWithoutCaseInput> | OrpDecisionCreateWithoutCaseInput[] | OrpDecisionUncheckedCreateWithoutCaseInput[]
+    connectOrCreate?: OrpDecisionCreateOrConnectWithoutCaseInput | OrpDecisionCreateOrConnectWithoutCaseInput[]
+    createMany?: OrpDecisionCreateManyCaseInputEnvelope
+    connect?: OrpDecisionWhereUniqueInput | OrpDecisionWhereUniqueInput[]
   }
 
   export type EnumCaseStatusFieldUpdateOperationsInput = {
@@ -14612,6 +18499,20 @@ export namespace Prisma {
     deleteMany?: OperationalResponsePlanScalarWhereInput | OperationalResponsePlanScalarWhereInput[]
   }
 
+  export type OrpDecisionUpdateManyWithoutCaseNestedInput = {
+    create?: XOR<OrpDecisionCreateWithoutCaseInput, OrpDecisionUncheckedCreateWithoutCaseInput> | OrpDecisionCreateWithoutCaseInput[] | OrpDecisionUncheckedCreateWithoutCaseInput[]
+    connectOrCreate?: OrpDecisionCreateOrConnectWithoutCaseInput | OrpDecisionCreateOrConnectWithoutCaseInput[]
+    upsert?: OrpDecisionUpsertWithWhereUniqueWithoutCaseInput | OrpDecisionUpsertWithWhereUniqueWithoutCaseInput[]
+    createMany?: OrpDecisionCreateManyCaseInputEnvelope
+    set?: OrpDecisionWhereUniqueInput | OrpDecisionWhereUniqueInput[]
+    disconnect?: OrpDecisionWhereUniqueInput | OrpDecisionWhereUniqueInput[]
+    delete?: OrpDecisionWhereUniqueInput | OrpDecisionWhereUniqueInput[]
+    connect?: OrpDecisionWhereUniqueInput | OrpDecisionWhereUniqueInput[]
+    update?: OrpDecisionUpdateWithWhereUniqueWithoutCaseInput | OrpDecisionUpdateWithWhereUniqueWithoutCaseInput[]
+    updateMany?: OrpDecisionUpdateManyWithWhereWithoutCaseInput | OrpDecisionUpdateManyWithWhereWithoutCaseInput[]
+    deleteMany?: OrpDecisionScalarWhereInput | OrpDecisionScalarWhereInput[]
+  }
+
   export type InspectionUncheckedUpdateManyWithoutCaseNestedInput = {
     create?: XOR<InspectionCreateWithoutCaseInput, InspectionUncheckedCreateWithoutCaseInput> | InspectionCreateWithoutCaseInput[] | InspectionUncheckedCreateWithoutCaseInput[]
     connectOrCreate?: InspectionCreateOrConnectWithoutCaseInput | InspectionCreateOrConnectWithoutCaseInput[]
@@ -14652,6 +18553,20 @@ export namespace Prisma {
     update?: OperationalResponsePlanUpdateWithWhereUniqueWithoutCaseInput | OperationalResponsePlanUpdateWithWhereUniqueWithoutCaseInput[]
     updateMany?: OperationalResponsePlanUpdateManyWithWhereWithoutCaseInput | OperationalResponsePlanUpdateManyWithWhereWithoutCaseInput[]
     deleteMany?: OperationalResponsePlanScalarWhereInput | OperationalResponsePlanScalarWhereInput[]
+  }
+
+  export type OrpDecisionUncheckedUpdateManyWithoutCaseNestedInput = {
+    create?: XOR<OrpDecisionCreateWithoutCaseInput, OrpDecisionUncheckedCreateWithoutCaseInput> | OrpDecisionCreateWithoutCaseInput[] | OrpDecisionUncheckedCreateWithoutCaseInput[]
+    connectOrCreate?: OrpDecisionCreateOrConnectWithoutCaseInput | OrpDecisionCreateOrConnectWithoutCaseInput[]
+    upsert?: OrpDecisionUpsertWithWhereUniqueWithoutCaseInput | OrpDecisionUpsertWithWhereUniqueWithoutCaseInput[]
+    createMany?: OrpDecisionCreateManyCaseInputEnvelope
+    set?: OrpDecisionWhereUniqueInput | OrpDecisionWhereUniqueInput[]
+    disconnect?: OrpDecisionWhereUniqueInput | OrpDecisionWhereUniqueInput[]
+    delete?: OrpDecisionWhereUniqueInput | OrpDecisionWhereUniqueInput[]
+    connect?: OrpDecisionWhereUniqueInput | OrpDecisionWhereUniqueInput[]
+    update?: OrpDecisionUpdateWithWhereUniqueWithoutCaseInput | OrpDecisionUpdateWithWhereUniqueWithoutCaseInput[]
+    updateMany?: OrpDecisionUpdateManyWithWhereWithoutCaseInput | OrpDecisionUpdateManyWithWhereWithoutCaseInput[]
+    deleteMany?: OrpDecisionScalarWhereInput | OrpDecisionScalarWhereInput[]
   }
 
   export type CaseCreateNestedOneWithoutInspectionsInput = {
@@ -14822,6 +18737,20 @@ export namespace Prisma {
     connect?: RiskAssessmentWhereUniqueInput
   }
 
+  export type OrpDecisionCreateNestedManyWithoutOrpInput = {
+    create?: XOR<OrpDecisionCreateWithoutOrpInput, OrpDecisionUncheckedCreateWithoutOrpInput> | OrpDecisionCreateWithoutOrpInput[] | OrpDecisionUncheckedCreateWithoutOrpInput[]
+    connectOrCreate?: OrpDecisionCreateOrConnectWithoutOrpInput | OrpDecisionCreateOrConnectWithoutOrpInput[]
+    createMany?: OrpDecisionCreateManyOrpInputEnvelope
+    connect?: OrpDecisionWhereUniqueInput | OrpDecisionWhereUniqueInput[]
+  }
+
+  export type OrpDecisionUncheckedCreateNestedManyWithoutOrpInput = {
+    create?: XOR<OrpDecisionCreateWithoutOrpInput, OrpDecisionUncheckedCreateWithoutOrpInput> | OrpDecisionCreateWithoutOrpInput[] | OrpDecisionUncheckedCreateWithoutOrpInput[]
+    connectOrCreate?: OrpDecisionCreateOrConnectWithoutOrpInput | OrpDecisionCreateOrConnectWithoutOrpInput[]
+    createMany?: OrpDecisionCreateManyOrpInputEnvelope
+    connect?: OrpDecisionWhereUniqueInput | OrpDecisionWhereUniqueInput[]
+  }
+
   export type CaseUpdateOneRequiredWithoutOperationalResponsePlansNestedInput = {
     create?: XOR<CaseCreateWithoutOperationalResponsePlansInput, CaseUncheckedCreateWithoutOperationalResponsePlansInput>
     connectOrCreate?: CaseCreateOrConnectWithoutOperationalResponsePlansInput
@@ -14836,6 +18765,194 @@ export namespace Prisma {
     upsert?: RiskAssessmentUpsertWithoutOperationalResponsePlansInput
     connect?: RiskAssessmentWhereUniqueInput
     update?: XOR<XOR<RiskAssessmentUpdateToOneWithWhereWithoutOperationalResponsePlansInput, RiskAssessmentUpdateWithoutOperationalResponsePlansInput>, RiskAssessmentUncheckedUpdateWithoutOperationalResponsePlansInput>
+  }
+
+  export type OrpDecisionUpdateManyWithoutOrpNestedInput = {
+    create?: XOR<OrpDecisionCreateWithoutOrpInput, OrpDecisionUncheckedCreateWithoutOrpInput> | OrpDecisionCreateWithoutOrpInput[] | OrpDecisionUncheckedCreateWithoutOrpInput[]
+    connectOrCreate?: OrpDecisionCreateOrConnectWithoutOrpInput | OrpDecisionCreateOrConnectWithoutOrpInput[]
+    upsert?: OrpDecisionUpsertWithWhereUniqueWithoutOrpInput | OrpDecisionUpsertWithWhereUniqueWithoutOrpInput[]
+    createMany?: OrpDecisionCreateManyOrpInputEnvelope
+    set?: OrpDecisionWhereUniqueInput | OrpDecisionWhereUniqueInput[]
+    disconnect?: OrpDecisionWhereUniqueInput | OrpDecisionWhereUniqueInput[]
+    delete?: OrpDecisionWhereUniqueInput | OrpDecisionWhereUniqueInput[]
+    connect?: OrpDecisionWhereUniqueInput | OrpDecisionWhereUniqueInput[]
+    update?: OrpDecisionUpdateWithWhereUniqueWithoutOrpInput | OrpDecisionUpdateWithWhereUniqueWithoutOrpInput[]
+    updateMany?: OrpDecisionUpdateManyWithWhereWithoutOrpInput | OrpDecisionUpdateManyWithWhereWithoutOrpInput[]
+    deleteMany?: OrpDecisionScalarWhereInput | OrpDecisionScalarWhereInput[]
+  }
+
+  export type OrpDecisionUncheckedUpdateManyWithoutOrpNestedInput = {
+    create?: XOR<OrpDecisionCreateWithoutOrpInput, OrpDecisionUncheckedCreateWithoutOrpInput> | OrpDecisionCreateWithoutOrpInput[] | OrpDecisionUncheckedCreateWithoutOrpInput[]
+    connectOrCreate?: OrpDecisionCreateOrConnectWithoutOrpInput | OrpDecisionCreateOrConnectWithoutOrpInput[]
+    upsert?: OrpDecisionUpsertWithWhereUniqueWithoutOrpInput | OrpDecisionUpsertWithWhereUniqueWithoutOrpInput[]
+    createMany?: OrpDecisionCreateManyOrpInputEnvelope
+    set?: OrpDecisionWhereUniqueInput | OrpDecisionWhereUniqueInput[]
+    disconnect?: OrpDecisionWhereUniqueInput | OrpDecisionWhereUniqueInput[]
+    delete?: OrpDecisionWhereUniqueInput | OrpDecisionWhereUniqueInput[]
+    connect?: OrpDecisionWhereUniqueInput | OrpDecisionWhereUniqueInput[]
+    update?: OrpDecisionUpdateWithWhereUniqueWithoutOrpInput | OrpDecisionUpdateWithWhereUniqueWithoutOrpInput[]
+    updateMany?: OrpDecisionUpdateManyWithWhereWithoutOrpInput | OrpDecisionUpdateManyWithWhereWithoutOrpInput[]
+    deleteMany?: OrpDecisionScalarWhereInput | OrpDecisionScalarWhereInput[]
+  }
+
+  export type UserCreateNestedOneWithoutApprovalAuthoritiesInput = {
+    create?: XOR<UserCreateWithoutApprovalAuthoritiesInput, UserUncheckedCreateWithoutApprovalAuthoritiesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutApprovalAuthoritiesInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type DepartmentCreateNestedOneWithoutApprovalAuthoritiesInput = {
+    create?: XOR<DepartmentCreateWithoutApprovalAuthoritiesInput, DepartmentUncheckedCreateWithoutApprovalAuthoritiesInput>
+    connectOrCreate?: DepartmentCreateOrConnectWithoutApprovalAuthoritiesInput
+    connect?: DepartmentWhereUniqueInput
+  }
+
+  export type JurisdictionCreateNestedOneWithoutApprovalAuthoritiesInput = {
+    create?: XOR<JurisdictionCreateWithoutApprovalAuthoritiesInput, JurisdictionUncheckedCreateWithoutApprovalAuthoritiesInput>
+    connectOrCreate?: JurisdictionCreateOrConnectWithoutApprovalAuthoritiesInput
+    connect?: JurisdictionWhereUniqueInput
+  }
+
+  export type OrpDecisionCreateNestedManyWithoutAuthorityGrantInput = {
+    create?: XOR<OrpDecisionCreateWithoutAuthorityGrantInput, OrpDecisionUncheckedCreateWithoutAuthorityGrantInput> | OrpDecisionCreateWithoutAuthorityGrantInput[] | OrpDecisionUncheckedCreateWithoutAuthorityGrantInput[]
+    connectOrCreate?: OrpDecisionCreateOrConnectWithoutAuthorityGrantInput | OrpDecisionCreateOrConnectWithoutAuthorityGrantInput[]
+    createMany?: OrpDecisionCreateManyAuthorityGrantInputEnvelope
+    connect?: OrpDecisionWhereUniqueInput | OrpDecisionWhereUniqueInput[]
+  }
+
+  export type OrpDecisionUncheckedCreateNestedManyWithoutAuthorityGrantInput = {
+    create?: XOR<OrpDecisionCreateWithoutAuthorityGrantInput, OrpDecisionUncheckedCreateWithoutAuthorityGrantInput> | OrpDecisionCreateWithoutAuthorityGrantInput[] | OrpDecisionUncheckedCreateWithoutAuthorityGrantInput[]
+    connectOrCreate?: OrpDecisionCreateOrConnectWithoutAuthorityGrantInput | OrpDecisionCreateOrConnectWithoutAuthorityGrantInput[]
+    createMany?: OrpDecisionCreateManyAuthorityGrantInputEnvelope
+    connect?: OrpDecisionWhereUniqueInput | OrpDecisionWhereUniqueInput[]
+  }
+
+  export type UserUpdateOneRequiredWithoutApprovalAuthoritiesNestedInput = {
+    create?: XOR<UserCreateWithoutApprovalAuthoritiesInput, UserUncheckedCreateWithoutApprovalAuthoritiesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutApprovalAuthoritiesInput
+    upsert?: UserUpsertWithoutApprovalAuthoritiesInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutApprovalAuthoritiesInput, UserUpdateWithoutApprovalAuthoritiesInput>, UserUncheckedUpdateWithoutApprovalAuthoritiesInput>
+  }
+
+  export type DepartmentUpdateOneRequiredWithoutApprovalAuthoritiesNestedInput = {
+    create?: XOR<DepartmentCreateWithoutApprovalAuthoritiesInput, DepartmentUncheckedCreateWithoutApprovalAuthoritiesInput>
+    connectOrCreate?: DepartmentCreateOrConnectWithoutApprovalAuthoritiesInput
+    upsert?: DepartmentUpsertWithoutApprovalAuthoritiesInput
+    connect?: DepartmentWhereUniqueInput
+    update?: XOR<XOR<DepartmentUpdateToOneWithWhereWithoutApprovalAuthoritiesInput, DepartmentUpdateWithoutApprovalAuthoritiesInput>, DepartmentUncheckedUpdateWithoutApprovalAuthoritiesInput>
+  }
+
+  export type JurisdictionUpdateOneRequiredWithoutApprovalAuthoritiesNestedInput = {
+    create?: XOR<JurisdictionCreateWithoutApprovalAuthoritiesInput, JurisdictionUncheckedCreateWithoutApprovalAuthoritiesInput>
+    connectOrCreate?: JurisdictionCreateOrConnectWithoutApprovalAuthoritiesInput
+    upsert?: JurisdictionUpsertWithoutApprovalAuthoritiesInput
+    connect?: JurisdictionWhereUniqueInput
+    update?: XOR<XOR<JurisdictionUpdateToOneWithWhereWithoutApprovalAuthoritiesInput, JurisdictionUpdateWithoutApprovalAuthoritiesInput>, JurisdictionUncheckedUpdateWithoutApprovalAuthoritiesInput>
+  }
+
+  export type OrpDecisionUpdateManyWithoutAuthorityGrantNestedInput = {
+    create?: XOR<OrpDecisionCreateWithoutAuthorityGrantInput, OrpDecisionUncheckedCreateWithoutAuthorityGrantInput> | OrpDecisionCreateWithoutAuthorityGrantInput[] | OrpDecisionUncheckedCreateWithoutAuthorityGrantInput[]
+    connectOrCreate?: OrpDecisionCreateOrConnectWithoutAuthorityGrantInput | OrpDecisionCreateOrConnectWithoutAuthorityGrantInput[]
+    upsert?: OrpDecisionUpsertWithWhereUniqueWithoutAuthorityGrantInput | OrpDecisionUpsertWithWhereUniqueWithoutAuthorityGrantInput[]
+    createMany?: OrpDecisionCreateManyAuthorityGrantInputEnvelope
+    set?: OrpDecisionWhereUniqueInput | OrpDecisionWhereUniqueInput[]
+    disconnect?: OrpDecisionWhereUniqueInput | OrpDecisionWhereUniqueInput[]
+    delete?: OrpDecisionWhereUniqueInput | OrpDecisionWhereUniqueInput[]
+    connect?: OrpDecisionWhereUniqueInput | OrpDecisionWhereUniqueInput[]
+    update?: OrpDecisionUpdateWithWhereUniqueWithoutAuthorityGrantInput | OrpDecisionUpdateWithWhereUniqueWithoutAuthorityGrantInput[]
+    updateMany?: OrpDecisionUpdateManyWithWhereWithoutAuthorityGrantInput | OrpDecisionUpdateManyWithWhereWithoutAuthorityGrantInput[]
+    deleteMany?: OrpDecisionScalarWhereInput | OrpDecisionScalarWhereInput[]
+  }
+
+  export type OrpDecisionUncheckedUpdateManyWithoutAuthorityGrantNestedInput = {
+    create?: XOR<OrpDecisionCreateWithoutAuthorityGrantInput, OrpDecisionUncheckedCreateWithoutAuthorityGrantInput> | OrpDecisionCreateWithoutAuthorityGrantInput[] | OrpDecisionUncheckedCreateWithoutAuthorityGrantInput[]
+    connectOrCreate?: OrpDecisionCreateOrConnectWithoutAuthorityGrantInput | OrpDecisionCreateOrConnectWithoutAuthorityGrantInput[]
+    upsert?: OrpDecisionUpsertWithWhereUniqueWithoutAuthorityGrantInput | OrpDecisionUpsertWithWhereUniqueWithoutAuthorityGrantInput[]
+    createMany?: OrpDecisionCreateManyAuthorityGrantInputEnvelope
+    set?: OrpDecisionWhereUniqueInput | OrpDecisionWhereUniqueInput[]
+    disconnect?: OrpDecisionWhereUniqueInput | OrpDecisionWhereUniqueInput[]
+    delete?: OrpDecisionWhereUniqueInput | OrpDecisionWhereUniqueInput[]
+    connect?: OrpDecisionWhereUniqueInput | OrpDecisionWhereUniqueInput[]
+    update?: OrpDecisionUpdateWithWhereUniqueWithoutAuthorityGrantInput | OrpDecisionUpdateWithWhereUniqueWithoutAuthorityGrantInput[]
+    updateMany?: OrpDecisionUpdateManyWithWhereWithoutAuthorityGrantInput | OrpDecisionUpdateManyWithWhereWithoutAuthorityGrantInput[]
+    deleteMany?: OrpDecisionScalarWhereInput | OrpDecisionScalarWhereInput[]
+  }
+
+  export type CaseCreateNestedOneWithoutOrpDecisionsInput = {
+    create?: XOR<CaseCreateWithoutOrpDecisionsInput, CaseUncheckedCreateWithoutOrpDecisionsInput>
+    connectOrCreate?: CaseCreateOrConnectWithoutOrpDecisionsInput
+    connect?: CaseWhereUniqueInput
+  }
+
+  export type OperationalResponsePlanCreateNestedOneWithoutDecisionsInput = {
+    create?: XOR<OperationalResponsePlanCreateWithoutDecisionsInput, OperationalResponsePlanUncheckedCreateWithoutDecisionsInput>
+    connectOrCreate?: OperationalResponsePlanCreateOrConnectWithoutDecisionsInput
+    connect?: OperationalResponsePlanWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutReviewedOrpDecisionsInput = {
+    create?: XOR<UserCreateWithoutReviewedOrpDecisionsInput, UserUncheckedCreateWithoutReviewedOrpDecisionsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutReviewedOrpDecisionsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type ApprovalAuthorityCreateNestedOneWithoutDecisionsInput = {
+    create?: XOR<ApprovalAuthorityCreateWithoutDecisionsInput, ApprovalAuthorityUncheckedCreateWithoutDecisionsInput>
+    connectOrCreate?: ApprovalAuthorityCreateOrConnectWithoutDecisionsInput
+    connect?: ApprovalAuthorityWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutForwardedOrpDecisionsInput = {
+    create?: XOR<UserCreateWithoutForwardedOrpDecisionsInput, UserUncheckedCreateWithoutForwardedOrpDecisionsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutForwardedOrpDecisionsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type EnumOrpDecisionTypeFieldUpdateOperationsInput = {
+    set?: $Enums.OrpDecisionType
+  }
+
+  export type CaseUpdateOneRequiredWithoutOrpDecisionsNestedInput = {
+    create?: XOR<CaseCreateWithoutOrpDecisionsInput, CaseUncheckedCreateWithoutOrpDecisionsInput>
+    connectOrCreate?: CaseCreateOrConnectWithoutOrpDecisionsInput
+    upsert?: CaseUpsertWithoutOrpDecisionsInput
+    connect?: CaseWhereUniqueInput
+    update?: XOR<XOR<CaseUpdateToOneWithWhereWithoutOrpDecisionsInput, CaseUpdateWithoutOrpDecisionsInput>, CaseUncheckedUpdateWithoutOrpDecisionsInput>
+  }
+
+  export type OperationalResponsePlanUpdateOneRequiredWithoutDecisionsNestedInput = {
+    create?: XOR<OperationalResponsePlanCreateWithoutDecisionsInput, OperationalResponsePlanUncheckedCreateWithoutDecisionsInput>
+    connectOrCreate?: OperationalResponsePlanCreateOrConnectWithoutDecisionsInput
+    upsert?: OperationalResponsePlanUpsertWithoutDecisionsInput
+    connect?: OperationalResponsePlanWhereUniqueInput
+    update?: XOR<XOR<OperationalResponsePlanUpdateToOneWithWhereWithoutDecisionsInput, OperationalResponsePlanUpdateWithoutDecisionsInput>, OperationalResponsePlanUncheckedUpdateWithoutDecisionsInput>
+  }
+
+  export type UserUpdateOneRequiredWithoutReviewedOrpDecisionsNestedInput = {
+    create?: XOR<UserCreateWithoutReviewedOrpDecisionsInput, UserUncheckedCreateWithoutReviewedOrpDecisionsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutReviewedOrpDecisionsInput
+    upsert?: UserUpsertWithoutReviewedOrpDecisionsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutReviewedOrpDecisionsInput, UserUpdateWithoutReviewedOrpDecisionsInput>, UserUncheckedUpdateWithoutReviewedOrpDecisionsInput>
+  }
+
+  export type ApprovalAuthorityUpdateOneRequiredWithoutDecisionsNestedInput = {
+    create?: XOR<ApprovalAuthorityCreateWithoutDecisionsInput, ApprovalAuthorityUncheckedCreateWithoutDecisionsInput>
+    connectOrCreate?: ApprovalAuthorityCreateOrConnectWithoutDecisionsInput
+    upsert?: ApprovalAuthorityUpsertWithoutDecisionsInput
+    connect?: ApprovalAuthorityWhereUniqueInput
+    update?: XOR<XOR<ApprovalAuthorityUpdateToOneWithWhereWithoutDecisionsInput, ApprovalAuthorityUpdateWithoutDecisionsInput>, ApprovalAuthorityUncheckedUpdateWithoutDecisionsInput>
+  }
+
+  export type UserUpdateOneWithoutForwardedOrpDecisionsNestedInput = {
+    create?: XOR<UserCreateWithoutForwardedOrpDecisionsInput, UserUncheckedCreateWithoutForwardedOrpDecisionsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutForwardedOrpDecisionsInput
+    upsert?: UserUpsertWithoutForwardedOrpDecisionsInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutForwardedOrpDecisionsInput, UserUpdateWithoutForwardedOrpDecisionsInput>, UserUncheckedUpdateWithoutForwardedOrpDecisionsInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -15225,6 +19342,46 @@ export namespace Prisma {
     not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
   }
 
+  export type NestedEnumOrpDecisionTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.OrpDecisionType | EnumOrpDecisionTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.OrpDecisionType[] | ListEnumOrpDecisionTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.OrpDecisionType[] | ListEnumOrpDecisionTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumOrpDecisionTypeFilter<$PrismaModel> | $Enums.OrpDecisionType
+  }
+
+  export type NestedEnumOrpDecisionTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.OrpDecisionType | EnumOrpDecisionTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.OrpDecisionType[] | ListEnumOrpDecisionTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.OrpDecisionType[] | ListEnumOrpDecisionTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumOrpDecisionTypeWithAggregatesFilter<$PrismaModel> | $Enums.OrpDecisionType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumOrpDecisionTypeFilter<$PrismaModel>
+    _max?: NestedEnumOrpDecisionTypeFilter<$PrismaModel>
+  }
+  export type NestedJsonNullableFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<NestedJsonNullableFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonNullableFilterBase<$PrismaModel>>, 'path'>>,
+        Required<NestedJsonNullableFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<NestedJsonNullableFilterBase<$PrismaModel>>, 'path'>>
+
+  export type NestedJsonNullableFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
+
   export type UserCreateWithoutDepartmentInput = {
     id?: string
     employeeCode: string
@@ -15238,6 +19395,9 @@ export namespace Prisma {
     updatedAt?: Date | string
     jurisdiction: JurisdictionCreateNestedOneWithoutUsersInput
     inspections?: InspectionCreateNestedManyWithoutInspectorInput
+    approvalAuthorities?: ApprovalAuthorityCreateNestedManyWithoutUserInput
+    reviewedOrpDecisions?: OrpDecisionCreateNestedManyWithoutReviewerInput
+    forwardedOrpDecisions?: OrpDecisionCreateNestedManyWithoutForwardedUserInput
   }
 
   export type UserUncheckedCreateWithoutDepartmentInput = {
@@ -15253,6 +19413,9 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     inspections?: InspectionUncheckedCreateNestedManyWithoutInspectorInput
+    approvalAuthorities?: ApprovalAuthorityUncheckedCreateNestedManyWithoutUserInput
+    reviewedOrpDecisions?: OrpDecisionUncheckedCreateNestedManyWithoutReviewerInput
+    forwardedOrpDecisions?: OrpDecisionUncheckedCreateNestedManyWithoutForwardedUserInput
   }
 
   export type UserCreateOrConnectWithoutDepartmentInput = {
@@ -15312,6 +19475,7 @@ export namespace Prisma {
     createdAt?: Date | string
     users?: UserCreateNestedManyWithoutJurisdictionInput
     assets?: AssetCreateNestedManyWithoutJurisdictionInput
+    approvalAuthorities?: ApprovalAuthorityCreateNestedManyWithoutJurisdictionInput
   }
 
   export type JurisdictionUncheckedCreateWithoutDepartmentInput = {
@@ -15321,6 +19485,7 @@ export namespace Prisma {
     createdAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutJurisdictionInput
     assets?: AssetUncheckedCreateNestedManyWithoutJurisdictionInput
+    approvalAuthorities?: ApprovalAuthorityUncheckedCreateNestedManyWithoutJurisdictionInput
   }
 
   export type JurisdictionCreateOrConnectWithoutDepartmentInput = {
@@ -15330,6 +19495,52 @@ export namespace Prisma {
 
   export type JurisdictionCreateManyDepartmentInputEnvelope = {
     data: JurisdictionCreateManyDepartmentInput | JurisdictionCreateManyDepartmentInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ApprovalAuthorityCreateWithoutDepartmentInput = {
+    id?: string
+    canApprove?: boolean
+    canReject?: boolean
+    canRequestModification?: boolean
+    canRequestReinspection?: boolean
+    canEscalate?: boolean
+    maxPriorityLevel?: $Enums.PriorityLevel | null
+    isActive?: boolean
+    validFrom?: Date | string | null
+    validUntil?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutApprovalAuthoritiesInput
+    jurisdiction: JurisdictionCreateNestedOneWithoutApprovalAuthoritiesInput
+    decisions?: OrpDecisionCreateNestedManyWithoutAuthorityGrantInput
+  }
+
+  export type ApprovalAuthorityUncheckedCreateWithoutDepartmentInput = {
+    id?: string
+    userId: string
+    jurisdictionId: string
+    canApprove?: boolean
+    canReject?: boolean
+    canRequestModification?: boolean
+    canRequestReinspection?: boolean
+    canEscalate?: boolean
+    maxPriorityLevel?: $Enums.PriorityLevel | null
+    isActive?: boolean
+    validFrom?: Date | string | null
+    validUntil?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    decisions?: OrpDecisionUncheckedCreateNestedManyWithoutAuthorityGrantInput
+  }
+
+  export type ApprovalAuthorityCreateOrConnectWithoutDepartmentInput = {
+    where: ApprovalAuthorityWhereUniqueInput
+    create: XOR<ApprovalAuthorityCreateWithoutDepartmentInput, ApprovalAuthorityUncheckedCreateWithoutDepartmentInput>
+  }
+
+  export type ApprovalAuthorityCreateManyDepartmentInputEnvelope = {
+    data: ApprovalAuthorityCreateManyDepartmentInput | ApprovalAuthorityCreateManyDepartmentInput[]
     skipDuplicates?: boolean
   }
 
@@ -15428,6 +19639,43 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Jurisdiction"> | Date | string
   }
 
+  export type ApprovalAuthorityUpsertWithWhereUniqueWithoutDepartmentInput = {
+    where: ApprovalAuthorityWhereUniqueInput
+    update: XOR<ApprovalAuthorityUpdateWithoutDepartmentInput, ApprovalAuthorityUncheckedUpdateWithoutDepartmentInput>
+    create: XOR<ApprovalAuthorityCreateWithoutDepartmentInput, ApprovalAuthorityUncheckedCreateWithoutDepartmentInput>
+  }
+
+  export type ApprovalAuthorityUpdateWithWhereUniqueWithoutDepartmentInput = {
+    where: ApprovalAuthorityWhereUniqueInput
+    data: XOR<ApprovalAuthorityUpdateWithoutDepartmentInput, ApprovalAuthorityUncheckedUpdateWithoutDepartmentInput>
+  }
+
+  export type ApprovalAuthorityUpdateManyWithWhereWithoutDepartmentInput = {
+    where: ApprovalAuthorityScalarWhereInput
+    data: XOR<ApprovalAuthorityUpdateManyMutationInput, ApprovalAuthorityUncheckedUpdateManyWithoutDepartmentInput>
+  }
+
+  export type ApprovalAuthorityScalarWhereInput = {
+    AND?: ApprovalAuthorityScalarWhereInput | ApprovalAuthorityScalarWhereInput[]
+    OR?: ApprovalAuthorityScalarWhereInput[]
+    NOT?: ApprovalAuthorityScalarWhereInput | ApprovalAuthorityScalarWhereInput[]
+    id?: StringFilter<"ApprovalAuthority"> | string
+    userId?: StringFilter<"ApprovalAuthority"> | string
+    departmentId?: StringFilter<"ApprovalAuthority"> | string
+    jurisdictionId?: StringFilter<"ApprovalAuthority"> | string
+    canApprove?: BoolFilter<"ApprovalAuthority"> | boolean
+    canReject?: BoolFilter<"ApprovalAuthority"> | boolean
+    canRequestModification?: BoolFilter<"ApprovalAuthority"> | boolean
+    canRequestReinspection?: BoolFilter<"ApprovalAuthority"> | boolean
+    canEscalate?: BoolFilter<"ApprovalAuthority"> | boolean
+    maxPriorityLevel?: EnumPriorityLevelNullableFilter<"ApprovalAuthority"> | $Enums.PriorityLevel | null
+    isActive?: BoolFilter<"ApprovalAuthority"> | boolean
+    validFrom?: DateTimeNullableFilter<"ApprovalAuthority"> | Date | string | null
+    validUntil?: DateTimeNullableFilter<"ApprovalAuthority"> | Date | string | null
+    createdAt?: DateTimeFilter<"ApprovalAuthority"> | Date | string
+    updatedAt?: DateTimeFilter<"ApprovalAuthority"> | Date | string
+  }
+
   export type DepartmentCreateWithoutJurisdictionsInput = {
     id?: string
     name: string
@@ -15435,6 +19683,7 @@ export namespace Prisma {
     createdAt?: Date | string
     users?: UserCreateNestedManyWithoutDepartmentInput
     assets?: AssetCreateNestedManyWithoutDepartmentInput
+    approvalAuthorities?: ApprovalAuthorityCreateNestedManyWithoutDepartmentInput
   }
 
   export type DepartmentUncheckedCreateWithoutJurisdictionsInput = {
@@ -15444,6 +19693,7 @@ export namespace Prisma {
     createdAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutDepartmentInput
     assets?: AssetUncheckedCreateNestedManyWithoutDepartmentInput
+    approvalAuthorities?: ApprovalAuthorityUncheckedCreateNestedManyWithoutDepartmentInput
   }
 
   export type DepartmentCreateOrConnectWithoutJurisdictionsInput = {
@@ -15464,6 +19714,9 @@ export namespace Prisma {
     updatedAt?: Date | string
     department: DepartmentCreateNestedOneWithoutUsersInput
     inspections?: InspectionCreateNestedManyWithoutInspectorInput
+    approvalAuthorities?: ApprovalAuthorityCreateNestedManyWithoutUserInput
+    reviewedOrpDecisions?: OrpDecisionCreateNestedManyWithoutReviewerInput
+    forwardedOrpDecisions?: OrpDecisionCreateNestedManyWithoutForwardedUserInput
   }
 
   export type UserUncheckedCreateWithoutJurisdictionInput = {
@@ -15479,6 +19732,9 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     inspections?: InspectionUncheckedCreateNestedManyWithoutInspectorInput
+    approvalAuthorities?: ApprovalAuthorityUncheckedCreateNestedManyWithoutUserInput
+    reviewedOrpDecisions?: OrpDecisionUncheckedCreateNestedManyWithoutReviewerInput
+    forwardedOrpDecisions?: OrpDecisionUncheckedCreateNestedManyWithoutForwardedUserInput
   }
 
   export type UserCreateOrConnectWithoutJurisdictionInput = {
@@ -15531,6 +19787,52 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type ApprovalAuthorityCreateWithoutJurisdictionInput = {
+    id?: string
+    canApprove?: boolean
+    canReject?: boolean
+    canRequestModification?: boolean
+    canRequestReinspection?: boolean
+    canEscalate?: boolean
+    maxPriorityLevel?: $Enums.PriorityLevel | null
+    isActive?: boolean
+    validFrom?: Date | string | null
+    validUntil?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutApprovalAuthoritiesInput
+    department: DepartmentCreateNestedOneWithoutApprovalAuthoritiesInput
+    decisions?: OrpDecisionCreateNestedManyWithoutAuthorityGrantInput
+  }
+
+  export type ApprovalAuthorityUncheckedCreateWithoutJurisdictionInput = {
+    id?: string
+    userId: string
+    departmentId: string
+    canApprove?: boolean
+    canReject?: boolean
+    canRequestModification?: boolean
+    canRequestReinspection?: boolean
+    canEscalate?: boolean
+    maxPriorityLevel?: $Enums.PriorityLevel | null
+    isActive?: boolean
+    validFrom?: Date | string | null
+    validUntil?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    decisions?: OrpDecisionUncheckedCreateNestedManyWithoutAuthorityGrantInput
+  }
+
+  export type ApprovalAuthorityCreateOrConnectWithoutJurisdictionInput = {
+    where: ApprovalAuthorityWhereUniqueInput
+    create: XOR<ApprovalAuthorityCreateWithoutJurisdictionInput, ApprovalAuthorityUncheckedCreateWithoutJurisdictionInput>
+  }
+
+  export type ApprovalAuthorityCreateManyJurisdictionInputEnvelope = {
+    data: ApprovalAuthorityCreateManyJurisdictionInput | ApprovalAuthorityCreateManyJurisdictionInput[]
+    skipDuplicates?: boolean
+  }
+
   export type DepartmentUpsertWithoutJurisdictionsInput = {
     update: XOR<DepartmentUpdateWithoutJurisdictionsInput, DepartmentUncheckedUpdateWithoutJurisdictionsInput>
     create: XOR<DepartmentCreateWithoutJurisdictionsInput, DepartmentUncheckedCreateWithoutJurisdictionsInput>
@@ -15549,6 +19851,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutDepartmentNestedInput
     assets?: AssetUpdateManyWithoutDepartmentNestedInput
+    approvalAuthorities?: ApprovalAuthorityUpdateManyWithoutDepartmentNestedInput
   }
 
   export type DepartmentUncheckedUpdateWithoutJurisdictionsInput = {
@@ -15558,6 +19861,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutDepartmentNestedInput
     assets?: AssetUncheckedUpdateManyWithoutDepartmentNestedInput
+    approvalAuthorities?: ApprovalAuthorityUncheckedUpdateManyWithoutDepartmentNestedInput
   }
 
   export type UserUpsertWithWhereUniqueWithoutJurisdictionInput = {
@@ -15592,6 +19896,22 @@ export namespace Prisma {
     data: XOR<AssetUpdateManyMutationInput, AssetUncheckedUpdateManyWithoutJurisdictionInput>
   }
 
+  export type ApprovalAuthorityUpsertWithWhereUniqueWithoutJurisdictionInput = {
+    where: ApprovalAuthorityWhereUniqueInput
+    update: XOR<ApprovalAuthorityUpdateWithoutJurisdictionInput, ApprovalAuthorityUncheckedUpdateWithoutJurisdictionInput>
+    create: XOR<ApprovalAuthorityCreateWithoutJurisdictionInput, ApprovalAuthorityUncheckedCreateWithoutJurisdictionInput>
+  }
+
+  export type ApprovalAuthorityUpdateWithWhereUniqueWithoutJurisdictionInput = {
+    where: ApprovalAuthorityWhereUniqueInput
+    data: XOR<ApprovalAuthorityUpdateWithoutJurisdictionInput, ApprovalAuthorityUncheckedUpdateWithoutJurisdictionInput>
+  }
+
+  export type ApprovalAuthorityUpdateManyWithWhereWithoutJurisdictionInput = {
+    where: ApprovalAuthorityScalarWhereInput
+    data: XOR<ApprovalAuthorityUpdateManyMutationInput, ApprovalAuthorityUncheckedUpdateManyWithoutJurisdictionInput>
+  }
+
   export type DepartmentCreateWithoutUsersInput = {
     id?: string
     name: string
@@ -15599,6 +19919,7 @@ export namespace Prisma {
     createdAt?: Date | string
     assets?: AssetCreateNestedManyWithoutDepartmentInput
     jurisdictions?: JurisdictionCreateNestedManyWithoutDepartmentInput
+    approvalAuthorities?: ApprovalAuthorityCreateNestedManyWithoutDepartmentInput
   }
 
   export type DepartmentUncheckedCreateWithoutUsersInput = {
@@ -15608,6 +19929,7 @@ export namespace Prisma {
     createdAt?: Date | string
     assets?: AssetUncheckedCreateNestedManyWithoutDepartmentInput
     jurisdictions?: JurisdictionUncheckedCreateNestedManyWithoutDepartmentInput
+    approvalAuthorities?: ApprovalAuthorityUncheckedCreateNestedManyWithoutDepartmentInput
   }
 
   export type DepartmentCreateOrConnectWithoutUsersInput = {
@@ -15622,6 +19944,7 @@ export namespace Prisma {
     createdAt?: Date | string
     department: DepartmentCreateNestedOneWithoutJurisdictionsInput
     assets?: AssetCreateNestedManyWithoutJurisdictionInput
+    approvalAuthorities?: ApprovalAuthorityCreateNestedManyWithoutJurisdictionInput
   }
 
   export type JurisdictionUncheckedCreateWithoutUsersInput = {
@@ -15631,6 +19954,7 @@ export namespace Prisma {
     departmentId: string
     createdAt?: Date | string
     assets?: AssetUncheckedCreateNestedManyWithoutJurisdictionInput
+    approvalAuthorities?: ApprovalAuthorityUncheckedCreateNestedManyWithoutJurisdictionInput
   }
 
   export type JurisdictionCreateOrConnectWithoutUsersInput = {
@@ -15684,6 +20008,124 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type ApprovalAuthorityCreateWithoutUserInput = {
+    id?: string
+    canApprove?: boolean
+    canReject?: boolean
+    canRequestModification?: boolean
+    canRequestReinspection?: boolean
+    canEscalate?: boolean
+    maxPriorityLevel?: $Enums.PriorityLevel | null
+    isActive?: boolean
+    validFrom?: Date | string | null
+    validUntil?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    department: DepartmentCreateNestedOneWithoutApprovalAuthoritiesInput
+    jurisdiction: JurisdictionCreateNestedOneWithoutApprovalAuthoritiesInput
+    decisions?: OrpDecisionCreateNestedManyWithoutAuthorityGrantInput
+  }
+
+  export type ApprovalAuthorityUncheckedCreateWithoutUserInput = {
+    id?: string
+    departmentId: string
+    jurisdictionId: string
+    canApprove?: boolean
+    canReject?: boolean
+    canRequestModification?: boolean
+    canRequestReinspection?: boolean
+    canEscalate?: boolean
+    maxPriorityLevel?: $Enums.PriorityLevel | null
+    isActive?: boolean
+    validFrom?: Date | string | null
+    validUntil?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    decisions?: OrpDecisionUncheckedCreateNestedManyWithoutAuthorityGrantInput
+  }
+
+  export type ApprovalAuthorityCreateOrConnectWithoutUserInput = {
+    where: ApprovalAuthorityWhereUniqueInput
+    create: XOR<ApprovalAuthorityCreateWithoutUserInput, ApprovalAuthorityUncheckedCreateWithoutUserInput>
+  }
+
+  export type ApprovalAuthorityCreateManyUserInputEnvelope = {
+    data: ApprovalAuthorityCreateManyUserInput | ApprovalAuthorityCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type OrpDecisionCreateWithoutReviewerInput = {
+    id?: string
+    decisionType: $Enums.OrpDecisionType
+    reason?: string | null
+    remarks?: string | null
+    requestedChanges?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    case: CaseCreateNestedOneWithoutOrpDecisionsInput
+    orp: OperationalResponsePlanCreateNestedOneWithoutDecisionsInput
+    authorityGrant: ApprovalAuthorityCreateNestedOneWithoutDecisionsInput
+    forwardedUser?: UserCreateNestedOneWithoutForwardedOrpDecisionsInput
+  }
+
+  export type OrpDecisionUncheckedCreateWithoutReviewerInput = {
+    id?: string
+    caseId: string
+    orpId: string
+    authorityGrantId: string
+    decisionType: $Enums.OrpDecisionType
+    reason?: string | null
+    remarks?: string | null
+    requestedChanges?: NullableJsonNullValueInput | InputJsonValue
+    forwardToUserId?: string | null
+    createdAt?: Date | string
+  }
+
+  export type OrpDecisionCreateOrConnectWithoutReviewerInput = {
+    where: OrpDecisionWhereUniqueInput
+    create: XOR<OrpDecisionCreateWithoutReviewerInput, OrpDecisionUncheckedCreateWithoutReviewerInput>
+  }
+
+  export type OrpDecisionCreateManyReviewerInputEnvelope = {
+    data: OrpDecisionCreateManyReviewerInput | OrpDecisionCreateManyReviewerInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type OrpDecisionCreateWithoutForwardedUserInput = {
+    id?: string
+    decisionType: $Enums.OrpDecisionType
+    reason?: string | null
+    remarks?: string | null
+    requestedChanges?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    case: CaseCreateNestedOneWithoutOrpDecisionsInput
+    orp: OperationalResponsePlanCreateNestedOneWithoutDecisionsInput
+    reviewer: UserCreateNestedOneWithoutReviewedOrpDecisionsInput
+    authorityGrant: ApprovalAuthorityCreateNestedOneWithoutDecisionsInput
+  }
+
+  export type OrpDecisionUncheckedCreateWithoutForwardedUserInput = {
+    id?: string
+    caseId: string
+    orpId: string
+    reviewerId: string
+    authorityGrantId: string
+    decisionType: $Enums.OrpDecisionType
+    reason?: string | null
+    remarks?: string | null
+    requestedChanges?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+  }
+
+  export type OrpDecisionCreateOrConnectWithoutForwardedUserInput = {
+    where: OrpDecisionWhereUniqueInput
+    create: XOR<OrpDecisionCreateWithoutForwardedUserInput, OrpDecisionUncheckedCreateWithoutForwardedUserInput>
+  }
+
+  export type OrpDecisionCreateManyForwardedUserInputEnvelope = {
+    data: OrpDecisionCreateManyForwardedUserInput | OrpDecisionCreateManyForwardedUserInput[]
+    skipDuplicates?: boolean
+  }
+
   export type DepartmentUpsertWithoutUsersInput = {
     update: XOR<DepartmentUpdateWithoutUsersInput, DepartmentUncheckedUpdateWithoutUsersInput>
     create: XOR<DepartmentCreateWithoutUsersInput, DepartmentUncheckedCreateWithoutUsersInput>
@@ -15702,6 +20144,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     assets?: AssetUpdateManyWithoutDepartmentNestedInput
     jurisdictions?: JurisdictionUpdateManyWithoutDepartmentNestedInput
+    approvalAuthorities?: ApprovalAuthorityUpdateManyWithoutDepartmentNestedInput
   }
 
   export type DepartmentUncheckedUpdateWithoutUsersInput = {
@@ -15711,6 +20154,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     assets?: AssetUncheckedUpdateManyWithoutDepartmentNestedInput
     jurisdictions?: JurisdictionUncheckedUpdateManyWithoutDepartmentNestedInput
+    approvalAuthorities?: ApprovalAuthorityUncheckedUpdateManyWithoutDepartmentNestedInput
   }
 
   export type JurisdictionUpsertWithoutUsersInput = {
@@ -15731,6 +20175,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     department?: DepartmentUpdateOneRequiredWithoutJurisdictionsNestedInput
     assets?: AssetUpdateManyWithoutJurisdictionNestedInput
+    approvalAuthorities?: ApprovalAuthorityUpdateManyWithoutJurisdictionNestedInput
   }
 
   export type JurisdictionUncheckedUpdateWithoutUsersInput = {
@@ -15740,6 +20185,7 @@ export namespace Prisma {
     departmentId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     assets?: AssetUncheckedUpdateManyWithoutJurisdictionNestedInput
+    approvalAuthorities?: ApprovalAuthorityUncheckedUpdateManyWithoutJurisdictionNestedInput
   }
 
   export type InspectionUpsertWithWhereUniqueWithoutInspectorInput = {
@@ -15779,6 +20225,71 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Inspection"> | Date | string
   }
 
+  export type ApprovalAuthorityUpsertWithWhereUniqueWithoutUserInput = {
+    where: ApprovalAuthorityWhereUniqueInput
+    update: XOR<ApprovalAuthorityUpdateWithoutUserInput, ApprovalAuthorityUncheckedUpdateWithoutUserInput>
+    create: XOR<ApprovalAuthorityCreateWithoutUserInput, ApprovalAuthorityUncheckedCreateWithoutUserInput>
+  }
+
+  export type ApprovalAuthorityUpdateWithWhereUniqueWithoutUserInput = {
+    where: ApprovalAuthorityWhereUniqueInput
+    data: XOR<ApprovalAuthorityUpdateWithoutUserInput, ApprovalAuthorityUncheckedUpdateWithoutUserInput>
+  }
+
+  export type ApprovalAuthorityUpdateManyWithWhereWithoutUserInput = {
+    where: ApprovalAuthorityScalarWhereInput
+    data: XOR<ApprovalAuthorityUpdateManyMutationInput, ApprovalAuthorityUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type OrpDecisionUpsertWithWhereUniqueWithoutReviewerInput = {
+    where: OrpDecisionWhereUniqueInput
+    update: XOR<OrpDecisionUpdateWithoutReviewerInput, OrpDecisionUncheckedUpdateWithoutReviewerInput>
+    create: XOR<OrpDecisionCreateWithoutReviewerInput, OrpDecisionUncheckedCreateWithoutReviewerInput>
+  }
+
+  export type OrpDecisionUpdateWithWhereUniqueWithoutReviewerInput = {
+    where: OrpDecisionWhereUniqueInput
+    data: XOR<OrpDecisionUpdateWithoutReviewerInput, OrpDecisionUncheckedUpdateWithoutReviewerInput>
+  }
+
+  export type OrpDecisionUpdateManyWithWhereWithoutReviewerInput = {
+    where: OrpDecisionScalarWhereInput
+    data: XOR<OrpDecisionUpdateManyMutationInput, OrpDecisionUncheckedUpdateManyWithoutReviewerInput>
+  }
+
+  export type OrpDecisionScalarWhereInput = {
+    AND?: OrpDecisionScalarWhereInput | OrpDecisionScalarWhereInput[]
+    OR?: OrpDecisionScalarWhereInput[]
+    NOT?: OrpDecisionScalarWhereInput | OrpDecisionScalarWhereInput[]
+    id?: StringFilter<"OrpDecision"> | string
+    caseId?: StringFilter<"OrpDecision"> | string
+    orpId?: StringFilter<"OrpDecision"> | string
+    reviewerId?: StringFilter<"OrpDecision"> | string
+    authorityGrantId?: StringFilter<"OrpDecision"> | string
+    decisionType?: EnumOrpDecisionTypeFilter<"OrpDecision"> | $Enums.OrpDecisionType
+    reason?: StringNullableFilter<"OrpDecision"> | string | null
+    remarks?: StringNullableFilter<"OrpDecision"> | string | null
+    requestedChanges?: JsonNullableFilter<"OrpDecision">
+    forwardToUserId?: StringNullableFilter<"OrpDecision"> | string | null
+    createdAt?: DateTimeFilter<"OrpDecision"> | Date | string
+  }
+
+  export type OrpDecisionUpsertWithWhereUniqueWithoutForwardedUserInput = {
+    where: OrpDecisionWhereUniqueInput
+    update: XOR<OrpDecisionUpdateWithoutForwardedUserInput, OrpDecisionUncheckedUpdateWithoutForwardedUserInput>
+    create: XOR<OrpDecisionCreateWithoutForwardedUserInput, OrpDecisionUncheckedCreateWithoutForwardedUserInput>
+  }
+
+  export type OrpDecisionUpdateWithWhereUniqueWithoutForwardedUserInput = {
+    where: OrpDecisionWhereUniqueInput
+    data: XOR<OrpDecisionUpdateWithoutForwardedUserInput, OrpDecisionUncheckedUpdateWithoutForwardedUserInput>
+  }
+
+  export type OrpDecisionUpdateManyWithWhereWithoutForwardedUserInput = {
+    where: OrpDecisionScalarWhereInput
+    data: XOR<OrpDecisionUpdateManyMutationInput, OrpDecisionUncheckedUpdateManyWithoutForwardedUserInput>
+  }
+
   export type DepartmentCreateWithoutAssetsInput = {
     id?: string
     name: string
@@ -15786,6 +20297,7 @@ export namespace Prisma {
     createdAt?: Date | string
     users?: UserCreateNestedManyWithoutDepartmentInput
     jurisdictions?: JurisdictionCreateNestedManyWithoutDepartmentInput
+    approvalAuthorities?: ApprovalAuthorityCreateNestedManyWithoutDepartmentInput
   }
 
   export type DepartmentUncheckedCreateWithoutAssetsInput = {
@@ -15795,6 +20307,7 @@ export namespace Prisma {
     createdAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutDepartmentInput
     jurisdictions?: JurisdictionUncheckedCreateNestedManyWithoutDepartmentInput
+    approvalAuthorities?: ApprovalAuthorityUncheckedCreateNestedManyWithoutDepartmentInput
   }
 
   export type DepartmentCreateOrConnectWithoutAssetsInput = {
@@ -15809,6 +20322,7 @@ export namespace Prisma {
     createdAt?: Date | string
     department: DepartmentCreateNestedOneWithoutJurisdictionsInput
     users?: UserCreateNestedManyWithoutJurisdictionInput
+    approvalAuthorities?: ApprovalAuthorityCreateNestedManyWithoutJurisdictionInput
   }
 
   export type JurisdictionUncheckedCreateWithoutAssetsInput = {
@@ -15818,6 +20332,7 @@ export namespace Prisma {
     departmentId: string
     createdAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutJurisdictionInput
+    approvalAuthorities?: ApprovalAuthorityUncheckedCreateNestedManyWithoutJurisdictionInput
   }
 
   export type JurisdictionCreateOrConnectWithoutAssetsInput = {
@@ -15840,6 +20355,7 @@ export namespace Prisma {
     inspections?: InspectionCreateNestedManyWithoutCaseInput
     riskAssessments?: RiskAssessmentCreateNestedManyWithoutCaseInput
     operationalResponsePlans?: OperationalResponsePlanCreateNestedManyWithoutCaseInput
+    orpDecisions?: OrpDecisionCreateNestedManyWithoutCaseInput
   }
 
   export type CaseUncheckedCreateWithoutAssetInput = {
@@ -15857,6 +20373,7 @@ export namespace Prisma {
     inspections?: InspectionUncheckedCreateNestedManyWithoutCaseInput
     riskAssessments?: RiskAssessmentUncheckedCreateNestedManyWithoutCaseInput
     operationalResponsePlans?: OperationalResponsePlanUncheckedCreateNestedManyWithoutCaseInput
+    orpDecisions?: OrpDecisionUncheckedCreateNestedManyWithoutCaseInput
   }
 
   export type CaseCreateOrConnectWithoutAssetInput = {
@@ -15887,6 +20404,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutDepartmentNestedInput
     jurisdictions?: JurisdictionUpdateManyWithoutDepartmentNestedInput
+    approvalAuthorities?: ApprovalAuthorityUpdateManyWithoutDepartmentNestedInput
   }
 
   export type DepartmentUncheckedUpdateWithoutAssetsInput = {
@@ -15896,6 +20414,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutDepartmentNestedInput
     jurisdictions?: JurisdictionUncheckedUpdateManyWithoutDepartmentNestedInput
+    approvalAuthorities?: ApprovalAuthorityUncheckedUpdateManyWithoutDepartmentNestedInput
   }
 
   export type JurisdictionUpsertWithoutAssetsInput = {
@@ -15916,6 +20435,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     department?: DepartmentUpdateOneRequiredWithoutJurisdictionsNestedInput
     users?: UserUpdateManyWithoutJurisdictionNestedInput
+    approvalAuthorities?: ApprovalAuthorityUpdateManyWithoutJurisdictionNestedInput
   }
 
   export type JurisdictionUncheckedUpdateWithoutAssetsInput = {
@@ -15925,6 +20445,7 @@ export namespace Prisma {
     departmentId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutJurisdictionNestedInput
+    approvalAuthorities?: ApprovalAuthorityUncheckedUpdateManyWithoutJurisdictionNestedInput
   }
 
   export type CaseUpsertWithWhereUniqueWithoutAssetInput = {
@@ -16091,6 +20612,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     riskAssessment: RiskAssessmentCreateNestedOneWithoutOperationalResponsePlansInput
+    decisions?: OrpDecisionCreateNestedManyWithoutOrpInput
   }
 
   export type OperationalResponsePlanUncheckedCreateWithoutCaseInput = {
@@ -16106,6 +20628,7 @@ export namespace Prisma {
     planVersion?: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    decisions?: OrpDecisionUncheckedCreateNestedManyWithoutOrpInput
   }
 
   export type OperationalResponsePlanCreateOrConnectWithoutCaseInput = {
@@ -16115,6 +20638,42 @@ export namespace Prisma {
 
   export type OperationalResponsePlanCreateManyCaseInputEnvelope = {
     data: OperationalResponsePlanCreateManyCaseInput | OperationalResponsePlanCreateManyCaseInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type OrpDecisionCreateWithoutCaseInput = {
+    id?: string
+    decisionType: $Enums.OrpDecisionType
+    reason?: string | null
+    remarks?: string | null
+    requestedChanges?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    orp: OperationalResponsePlanCreateNestedOneWithoutDecisionsInput
+    reviewer: UserCreateNestedOneWithoutReviewedOrpDecisionsInput
+    authorityGrant: ApprovalAuthorityCreateNestedOneWithoutDecisionsInput
+    forwardedUser?: UserCreateNestedOneWithoutForwardedOrpDecisionsInput
+  }
+
+  export type OrpDecisionUncheckedCreateWithoutCaseInput = {
+    id?: string
+    orpId: string
+    reviewerId: string
+    authorityGrantId: string
+    decisionType: $Enums.OrpDecisionType
+    reason?: string | null
+    remarks?: string | null
+    requestedChanges?: NullableJsonNullValueInput | InputJsonValue
+    forwardToUserId?: string | null
+    createdAt?: Date | string
+  }
+
+  export type OrpDecisionCreateOrConnectWithoutCaseInput = {
+    where: OrpDecisionWhereUniqueInput
+    create: XOR<OrpDecisionCreateWithoutCaseInput, OrpDecisionUncheckedCreateWithoutCaseInput>
+  }
+
+  export type OrpDecisionCreateManyCaseInputEnvelope = {
+    data: OrpDecisionCreateManyCaseInput | OrpDecisionCreateManyCaseInput[]
     skipDuplicates?: boolean
   }
 
@@ -16242,6 +20801,22 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"OperationalResponsePlan"> | Date | string
   }
 
+  export type OrpDecisionUpsertWithWhereUniqueWithoutCaseInput = {
+    where: OrpDecisionWhereUniqueInput
+    update: XOR<OrpDecisionUpdateWithoutCaseInput, OrpDecisionUncheckedUpdateWithoutCaseInput>
+    create: XOR<OrpDecisionCreateWithoutCaseInput, OrpDecisionUncheckedCreateWithoutCaseInput>
+  }
+
+  export type OrpDecisionUpdateWithWhereUniqueWithoutCaseInput = {
+    where: OrpDecisionWhereUniqueInput
+    data: XOR<OrpDecisionUpdateWithoutCaseInput, OrpDecisionUncheckedUpdateWithoutCaseInput>
+  }
+
+  export type OrpDecisionUpdateManyWithWhereWithoutCaseInput = {
+    where: OrpDecisionScalarWhereInput
+    data: XOR<OrpDecisionUpdateManyMutationInput, OrpDecisionUncheckedUpdateManyWithoutCaseInput>
+  }
+
   export type CaseCreateWithoutInspectionsInput = {
     id?: string
     caseNumber: string
@@ -16257,6 +20832,7 @@ export namespace Prisma {
     asset: AssetCreateNestedOneWithoutCasesInput
     riskAssessments?: RiskAssessmentCreateNestedManyWithoutCaseInput
     operationalResponsePlans?: OperationalResponsePlanCreateNestedManyWithoutCaseInput
+    orpDecisions?: OrpDecisionCreateNestedManyWithoutCaseInput
   }
 
   export type CaseUncheckedCreateWithoutInspectionsInput = {
@@ -16274,6 +20850,7 @@ export namespace Prisma {
     closedAt?: Date | string | null
     riskAssessments?: RiskAssessmentUncheckedCreateNestedManyWithoutCaseInput
     operationalResponsePlans?: OperationalResponsePlanUncheckedCreateNestedManyWithoutCaseInput
+    orpDecisions?: OrpDecisionUncheckedCreateNestedManyWithoutCaseInput
   }
 
   export type CaseCreateOrConnectWithoutInspectionsInput = {
@@ -16294,6 +20871,9 @@ export namespace Prisma {
     updatedAt?: Date | string
     department: DepartmentCreateNestedOneWithoutUsersInput
     jurisdiction: JurisdictionCreateNestedOneWithoutUsersInput
+    approvalAuthorities?: ApprovalAuthorityCreateNestedManyWithoutUserInput
+    reviewedOrpDecisions?: OrpDecisionCreateNestedManyWithoutReviewerInput
+    forwardedOrpDecisions?: OrpDecisionCreateNestedManyWithoutForwardedUserInput
   }
 
   export type UserUncheckedCreateWithoutInspectionsInput = {
@@ -16309,6 +20889,9 @@ export namespace Prisma {
     jurisdictionId: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    approvalAuthorities?: ApprovalAuthorityUncheckedCreateNestedManyWithoutUserInput
+    reviewedOrpDecisions?: OrpDecisionUncheckedCreateNestedManyWithoutReviewerInput
+    forwardedOrpDecisions?: OrpDecisionUncheckedCreateNestedManyWithoutForwardedUserInput
   }
 
   export type UserCreateOrConnectWithoutInspectionsInput = {
@@ -16378,6 +20961,7 @@ export namespace Prisma {
     asset?: AssetUpdateOneRequiredWithoutCasesNestedInput
     riskAssessments?: RiskAssessmentUpdateManyWithoutCaseNestedInput
     operationalResponsePlans?: OperationalResponsePlanUpdateManyWithoutCaseNestedInput
+    orpDecisions?: OrpDecisionUpdateManyWithoutCaseNestedInput
   }
 
   export type CaseUncheckedUpdateWithoutInspectionsInput = {
@@ -16395,6 +20979,7 @@ export namespace Prisma {
     closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     riskAssessments?: RiskAssessmentUncheckedUpdateManyWithoutCaseNestedInput
     operationalResponsePlans?: OperationalResponsePlanUncheckedUpdateManyWithoutCaseNestedInput
+    orpDecisions?: OrpDecisionUncheckedUpdateManyWithoutCaseNestedInput
   }
 
   export type UserUpsertWithoutInspectionsInput = {
@@ -16421,6 +21006,9 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     department?: DepartmentUpdateOneRequiredWithoutUsersNestedInput
     jurisdiction?: JurisdictionUpdateOneRequiredWithoutUsersNestedInput
+    approvalAuthorities?: ApprovalAuthorityUpdateManyWithoutUserNestedInput
+    reviewedOrpDecisions?: OrpDecisionUpdateManyWithoutReviewerNestedInput
+    forwardedOrpDecisions?: OrpDecisionUpdateManyWithoutForwardedUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutInspectionsInput = {
@@ -16436,6 +21024,9 @@ export namespace Prisma {
     jurisdictionId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    approvalAuthorities?: ApprovalAuthorityUncheckedUpdateManyWithoutUserNestedInput
+    reviewedOrpDecisions?: OrpDecisionUncheckedUpdateManyWithoutReviewerNestedInput
+    forwardedOrpDecisions?: OrpDecisionUncheckedUpdateManyWithoutForwardedUserNestedInput
   }
 
   export type RiskAssessmentUpsertWithWhereUniqueWithoutInspectionInput = {
@@ -16469,6 +21060,7 @@ export namespace Prisma {
     asset: AssetCreateNestedOneWithoutCasesInput
     inspections?: InspectionCreateNestedManyWithoutCaseInput
     operationalResponsePlans?: OperationalResponsePlanCreateNestedManyWithoutCaseInput
+    orpDecisions?: OrpDecisionCreateNestedManyWithoutCaseInput
   }
 
   export type CaseUncheckedCreateWithoutRiskAssessmentsInput = {
@@ -16486,6 +21078,7 @@ export namespace Prisma {
     closedAt?: Date | string | null
     inspections?: InspectionUncheckedCreateNestedManyWithoutCaseInput
     operationalResponsePlans?: OperationalResponsePlanUncheckedCreateNestedManyWithoutCaseInput
+    orpDecisions?: OrpDecisionUncheckedCreateNestedManyWithoutCaseInput
   }
 
   export type CaseCreateOrConnectWithoutRiskAssessmentsInput = {
@@ -16547,6 +21140,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     case: CaseCreateNestedOneWithoutOperationalResponsePlansInput
+    decisions?: OrpDecisionCreateNestedManyWithoutOrpInput
   }
 
   export type OperationalResponsePlanUncheckedCreateWithoutRiskAssessmentInput = {
@@ -16562,6 +21156,7 @@ export namespace Prisma {
     planVersion?: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    decisions?: OrpDecisionUncheckedCreateNestedManyWithoutOrpInput
   }
 
   export type OperationalResponsePlanCreateOrConnectWithoutRiskAssessmentInput = {
@@ -16600,6 +21195,7 @@ export namespace Prisma {
     asset?: AssetUpdateOneRequiredWithoutCasesNestedInput
     inspections?: InspectionUpdateManyWithoutCaseNestedInput
     operationalResponsePlans?: OperationalResponsePlanUpdateManyWithoutCaseNestedInput
+    orpDecisions?: OrpDecisionUpdateManyWithoutCaseNestedInput
   }
 
   export type CaseUncheckedUpdateWithoutRiskAssessmentsInput = {
@@ -16617,6 +21213,7 @@ export namespace Prisma {
     closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     inspections?: InspectionUncheckedUpdateManyWithoutCaseNestedInput
     operationalResponsePlans?: OperationalResponsePlanUncheckedUpdateManyWithoutCaseNestedInput
+    orpDecisions?: OrpDecisionUncheckedUpdateManyWithoutCaseNestedInput
   }
 
   export type InspectionUpsertWithoutRiskAssessmentsInput = {
@@ -16697,6 +21294,7 @@ export namespace Prisma {
     asset: AssetCreateNestedOneWithoutCasesInput
     inspections?: InspectionCreateNestedManyWithoutCaseInput
     riskAssessments?: RiskAssessmentCreateNestedManyWithoutCaseInput
+    orpDecisions?: OrpDecisionCreateNestedManyWithoutCaseInput
   }
 
   export type CaseUncheckedCreateWithoutOperationalResponsePlansInput = {
@@ -16714,6 +21312,7 @@ export namespace Prisma {
     closedAt?: Date | string | null
     inspections?: InspectionUncheckedCreateNestedManyWithoutCaseInput
     riskAssessments?: RiskAssessmentUncheckedCreateNestedManyWithoutCaseInput
+    orpDecisions?: OrpDecisionUncheckedCreateNestedManyWithoutCaseInput
   }
 
   export type CaseCreateOrConnectWithoutOperationalResponsePlansInput = {
@@ -16752,6 +21351,42 @@ export namespace Prisma {
     create: XOR<RiskAssessmentCreateWithoutOperationalResponsePlansInput, RiskAssessmentUncheckedCreateWithoutOperationalResponsePlansInput>
   }
 
+  export type OrpDecisionCreateWithoutOrpInput = {
+    id?: string
+    decisionType: $Enums.OrpDecisionType
+    reason?: string | null
+    remarks?: string | null
+    requestedChanges?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    case: CaseCreateNestedOneWithoutOrpDecisionsInput
+    reviewer: UserCreateNestedOneWithoutReviewedOrpDecisionsInput
+    authorityGrant: ApprovalAuthorityCreateNestedOneWithoutDecisionsInput
+    forwardedUser?: UserCreateNestedOneWithoutForwardedOrpDecisionsInput
+  }
+
+  export type OrpDecisionUncheckedCreateWithoutOrpInput = {
+    id?: string
+    caseId: string
+    reviewerId: string
+    authorityGrantId: string
+    decisionType: $Enums.OrpDecisionType
+    reason?: string | null
+    remarks?: string | null
+    requestedChanges?: NullableJsonNullValueInput | InputJsonValue
+    forwardToUserId?: string | null
+    createdAt?: Date | string
+  }
+
+  export type OrpDecisionCreateOrConnectWithoutOrpInput = {
+    where: OrpDecisionWhereUniqueInput
+    create: XOR<OrpDecisionCreateWithoutOrpInput, OrpDecisionUncheckedCreateWithoutOrpInput>
+  }
+
+  export type OrpDecisionCreateManyOrpInputEnvelope = {
+    data: OrpDecisionCreateManyOrpInput | OrpDecisionCreateManyOrpInput[]
+    skipDuplicates?: boolean
+  }
+
   export type CaseUpsertWithoutOperationalResponsePlansInput = {
     update: XOR<CaseUpdateWithoutOperationalResponsePlansInput, CaseUncheckedUpdateWithoutOperationalResponsePlansInput>
     create: XOR<CaseCreateWithoutOperationalResponsePlansInput, CaseUncheckedCreateWithoutOperationalResponsePlansInput>
@@ -16778,6 +21413,7 @@ export namespace Prisma {
     asset?: AssetUpdateOneRequiredWithoutCasesNestedInput
     inspections?: InspectionUpdateManyWithoutCaseNestedInput
     riskAssessments?: RiskAssessmentUpdateManyWithoutCaseNestedInput
+    orpDecisions?: OrpDecisionUpdateManyWithoutCaseNestedInput
   }
 
   export type CaseUncheckedUpdateWithoutOperationalResponsePlansInput = {
@@ -16795,6 +21431,7 @@ export namespace Prisma {
     closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     inspections?: InspectionUncheckedUpdateManyWithoutCaseNestedInput
     riskAssessments?: RiskAssessmentUncheckedUpdateManyWithoutCaseNestedInput
+    orpDecisions?: OrpDecisionUncheckedUpdateManyWithoutCaseNestedInput
   }
 
   export type RiskAssessmentUpsertWithoutOperationalResponsePlansInput = {
@@ -16834,6 +21471,706 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type OrpDecisionUpsertWithWhereUniqueWithoutOrpInput = {
+    where: OrpDecisionWhereUniqueInput
+    update: XOR<OrpDecisionUpdateWithoutOrpInput, OrpDecisionUncheckedUpdateWithoutOrpInput>
+    create: XOR<OrpDecisionCreateWithoutOrpInput, OrpDecisionUncheckedCreateWithoutOrpInput>
+  }
+
+  export type OrpDecisionUpdateWithWhereUniqueWithoutOrpInput = {
+    where: OrpDecisionWhereUniqueInput
+    data: XOR<OrpDecisionUpdateWithoutOrpInput, OrpDecisionUncheckedUpdateWithoutOrpInput>
+  }
+
+  export type OrpDecisionUpdateManyWithWhereWithoutOrpInput = {
+    where: OrpDecisionScalarWhereInput
+    data: XOR<OrpDecisionUpdateManyMutationInput, OrpDecisionUncheckedUpdateManyWithoutOrpInput>
+  }
+
+  export type UserCreateWithoutApprovalAuthoritiesInput = {
+    id?: string
+    employeeCode: string
+    name: string
+    email: string
+    passwordHash: string
+    designation: string
+    role?: $Enums.SystemRole
+    status?: $Enums.UserStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    department: DepartmentCreateNestedOneWithoutUsersInput
+    jurisdiction: JurisdictionCreateNestedOneWithoutUsersInput
+    inspections?: InspectionCreateNestedManyWithoutInspectorInput
+    reviewedOrpDecisions?: OrpDecisionCreateNestedManyWithoutReviewerInput
+    forwardedOrpDecisions?: OrpDecisionCreateNestedManyWithoutForwardedUserInput
+  }
+
+  export type UserUncheckedCreateWithoutApprovalAuthoritiesInput = {
+    id?: string
+    employeeCode: string
+    name: string
+    email: string
+    passwordHash: string
+    designation: string
+    role?: $Enums.SystemRole
+    status?: $Enums.UserStatus
+    departmentId: string
+    jurisdictionId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    inspections?: InspectionUncheckedCreateNestedManyWithoutInspectorInput
+    reviewedOrpDecisions?: OrpDecisionUncheckedCreateNestedManyWithoutReviewerInput
+    forwardedOrpDecisions?: OrpDecisionUncheckedCreateNestedManyWithoutForwardedUserInput
+  }
+
+  export type UserCreateOrConnectWithoutApprovalAuthoritiesInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutApprovalAuthoritiesInput, UserUncheckedCreateWithoutApprovalAuthoritiesInput>
+  }
+
+  export type DepartmentCreateWithoutApprovalAuthoritiesInput = {
+    id?: string
+    name: string
+    code: string
+    createdAt?: Date | string
+    users?: UserCreateNestedManyWithoutDepartmentInput
+    assets?: AssetCreateNestedManyWithoutDepartmentInput
+    jurisdictions?: JurisdictionCreateNestedManyWithoutDepartmentInput
+  }
+
+  export type DepartmentUncheckedCreateWithoutApprovalAuthoritiesInput = {
+    id?: string
+    name: string
+    code: string
+    createdAt?: Date | string
+    users?: UserUncheckedCreateNestedManyWithoutDepartmentInput
+    assets?: AssetUncheckedCreateNestedManyWithoutDepartmentInput
+    jurisdictions?: JurisdictionUncheckedCreateNestedManyWithoutDepartmentInput
+  }
+
+  export type DepartmentCreateOrConnectWithoutApprovalAuthoritiesInput = {
+    where: DepartmentWhereUniqueInput
+    create: XOR<DepartmentCreateWithoutApprovalAuthoritiesInput, DepartmentUncheckedCreateWithoutApprovalAuthoritiesInput>
+  }
+
+  export type JurisdictionCreateWithoutApprovalAuthoritiesInput = {
+    id?: string
+    name: string
+    type: string
+    createdAt?: Date | string
+    department: DepartmentCreateNestedOneWithoutJurisdictionsInput
+    users?: UserCreateNestedManyWithoutJurisdictionInput
+    assets?: AssetCreateNestedManyWithoutJurisdictionInput
+  }
+
+  export type JurisdictionUncheckedCreateWithoutApprovalAuthoritiesInput = {
+    id?: string
+    name: string
+    type: string
+    departmentId: string
+    createdAt?: Date | string
+    users?: UserUncheckedCreateNestedManyWithoutJurisdictionInput
+    assets?: AssetUncheckedCreateNestedManyWithoutJurisdictionInput
+  }
+
+  export type JurisdictionCreateOrConnectWithoutApprovalAuthoritiesInput = {
+    where: JurisdictionWhereUniqueInput
+    create: XOR<JurisdictionCreateWithoutApprovalAuthoritiesInput, JurisdictionUncheckedCreateWithoutApprovalAuthoritiesInput>
+  }
+
+  export type OrpDecisionCreateWithoutAuthorityGrantInput = {
+    id?: string
+    decisionType: $Enums.OrpDecisionType
+    reason?: string | null
+    remarks?: string | null
+    requestedChanges?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    case: CaseCreateNestedOneWithoutOrpDecisionsInput
+    orp: OperationalResponsePlanCreateNestedOneWithoutDecisionsInput
+    reviewer: UserCreateNestedOneWithoutReviewedOrpDecisionsInput
+    forwardedUser?: UserCreateNestedOneWithoutForwardedOrpDecisionsInput
+  }
+
+  export type OrpDecisionUncheckedCreateWithoutAuthorityGrantInput = {
+    id?: string
+    caseId: string
+    orpId: string
+    reviewerId: string
+    decisionType: $Enums.OrpDecisionType
+    reason?: string | null
+    remarks?: string | null
+    requestedChanges?: NullableJsonNullValueInput | InputJsonValue
+    forwardToUserId?: string | null
+    createdAt?: Date | string
+  }
+
+  export type OrpDecisionCreateOrConnectWithoutAuthorityGrantInput = {
+    where: OrpDecisionWhereUniqueInput
+    create: XOR<OrpDecisionCreateWithoutAuthorityGrantInput, OrpDecisionUncheckedCreateWithoutAuthorityGrantInput>
+  }
+
+  export type OrpDecisionCreateManyAuthorityGrantInputEnvelope = {
+    data: OrpDecisionCreateManyAuthorityGrantInput | OrpDecisionCreateManyAuthorityGrantInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type UserUpsertWithoutApprovalAuthoritiesInput = {
+    update: XOR<UserUpdateWithoutApprovalAuthoritiesInput, UserUncheckedUpdateWithoutApprovalAuthoritiesInput>
+    create: XOR<UserCreateWithoutApprovalAuthoritiesInput, UserUncheckedCreateWithoutApprovalAuthoritiesInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutApprovalAuthoritiesInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutApprovalAuthoritiesInput, UserUncheckedUpdateWithoutApprovalAuthoritiesInput>
+  }
+
+  export type UserUpdateWithoutApprovalAuthoritiesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    employeeCode?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    designation?: StringFieldUpdateOperationsInput | string
+    role?: EnumSystemRoleFieldUpdateOperationsInput | $Enums.SystemRole
+    status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    department?: DepartmentUpdateOneRequiredWithoutUsersNestedInput
+    jurisdiction?: JurisdictionUpdateOneRequiredWithoutUsersNestedInput
+    inspections?: InspectionUpdateManyWithoutInspectorNestedInput
+    reviewedOrpDecisions?: OrpDecisionUpdateManyWithoutReviewerNestedInput
+    forwardedOrpDecisions?: OrpDecisionUpdateManyWithoutForwardedUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutApprovalAuthoritiesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    employeeCode?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    designation?: StringFieldUpdateOperationsInput | string
+    role?: EnumSystemRoleFieldUpdateOperationsInput | $Enums.SystemRole
+    status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+    departmentId?: StringFieldUpdateOperationsInput | string
+    jurisdictionId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    inspections?: InspectionUncheckedUpdateManyWithoutInspectorNestedInput
+    reviewedOrpDecisions?: OrpDecisionUncheckedUpdateManyWithoutReviewerNestedInput
+    forwardedOrpDecisions?: OrpDecisionUncheckedUpdateManyWithoutForwardedUserNestedInput
+  }
+
+  export type DepartmentUpsertWithoutApprovalAuthoritiesInput = {
+    update: XOR<DepartmentUpdateWithoutApprovalAuthoritiesInput, DepartmentUncheckedUpdateWithoutApprovalAuthoritiesInput>
+    create: XOR<DepartmentCreateWithoutApprovalAuthoritiesInput, DepartmentUncheckedCreateWithoutApprovalAuthoritiesInput>
+    where?: DepartmentWhereInput
+  }
+
+  export type DepartmentUpdateToOneWithWhereWithoutApprovalAuthoritiesInput = {
+    where?: DepartmentWhereInput
+    data: XOR<DepartmentUpdateWithoutApprovalAuthoritiesInput, DepartmentUncheckedUpdateWithoutApprovalAuthoritiesInput>
+  }
+
+  export type DepartmentUpdateWithoutApprovalAuthoritiesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    users?: UserUpdateManyWithoutDepartmentNestedInput
+    assets?: AssetUpdateManyWithoutDepartmentNestedInput
+    jurisdictions?: JurisdictionUpdateManyWithoutDepartmentNestedInput
+  }
+
+  export type DepartmentUncheckedUpdateWithoutApprovalAuthoritiesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    users?: UserUncheckedUpdateManyWithoutDepartmentNestedInput
+    assets?: AssetUncheckedUpdateManyWithoutDepartmentNestedInput
+    jurisdictions?: JurisdictionUncheckedUpdateManyWithoutDepartmentNestedInput
+  }
+
+  export type JurisdictionUpsertWithoutApprovalAuthoritiesInput = {
+    update: XOR<JurisdictionUpdateWithoutApprovalAuthoritiesInput, JurisdictionUncheckedUpdateWithoutApprovalAuthoritiesInput>
+    create: XOR<JurisdictionCreateWithoutApprovalAuthoritiesInput, JurisdictionUncheckedCreateWithoutApprovalAuthoritiesInput>
+    where?: JurisdictionWhereInput
+  }
+
+  export type JurisdictionUpdateToOneWithWhereWithoutApprovalAuthoritiesInput = {
+    where?: JurisdictionWhereInput
+    data: XOR<JurisdictionUpdateWithoutApprovalAuthoritiesInput, JurisdictionUncheckedUpdateWithoutApprovalAuthoritiesInput>
+  }
+
+  export type JurisdictionUpdateWithoutApprovalAuthoritiesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    department?: DepartmentUpdateOneRequiredWithoutJurisdictionsNestedInput
+    users?: UserUpdateManyWithoutJurisdictionNestedInput
+    assets?: AssetUpdateManyWithoutJurisdictionNestedInput
+  }
+
+  export type JurisdictionUncheckedUpdateWithoutApprovalAuthoritiesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    departmentId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    users?: UserUncheckedUpdateManyWithoutJurisdictionNestedInput
+    assets?: AssetUncheckedUpdateManyWithoutJurisdictionNestedInput
+  }
+
+  export type OrpDecisionUpsertWithWhereUniqueWithoutAuthorityGrantInput = {
+    where: OrpDecisionWhereUniqueInput
+    update: XOR<OrpDecisionUpdateWithoutAuthorityGrantInput, OrpDecisionUncheckedUpdateWithoutAuthorityGrantInput>
+    create: XOR<OrpDecisionCreateWithoutAuthorityGrantInput, OrpDecisionUncheckedCreateWithoutAuthorityGrantInput>
+  }
+
+  export type OrpDecisionUpdateWithWhereUniqueWithoutAuthorityGrantInput = {
+    where: OrpDecisionWhereUniqueInput
+    data: XOR<OrpDecisionUpdateWithoutAuthorityGrantInput, OrpDecisionUncheckedUpdateWithoutAuthorityGrantInput>
+  }
+
+  export type OrpDecisionUpdateManyWithWhereWithoutAuthorityGrantInput = {
+    where: OrpDecisionScalarWhereInput
+    data: XOR<OrpDecisionUpdateManyMutationInput, OrpDecisionUncheckedUpdateManyWithoutAuthorityGrantInput>
+  }
+
+  export type CaseCreateWithoutOrpDecisionsInput = {
+    id?: string
+    caseNumber: string
+    title: string
+    description?: string | null
+    status?: $Enums.CaseStatus
+    riskLevel?: $Enums.RiskLevel | null
+    priorityLevel?: $Enums.PriorityLevel | null
+    emergencyFlag?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    closedAt?: Date | string | null
+    asset: AssetCreateNestedOneWithoutCasesInput
+    inspections?: InspectionCreateNestedManyWithoutCaseInput
+    riskAssessments?: RiskAssessmentCreateNestedManyWithoutCaseInput
+    operationalResponsePlans?: OperationalResponsePlanCreateNestedManyWithoutCaseInput
+  }
+
+  export type CaseUncheckedCreateWithoutOrpDecisionsInput = {
+    id?: string
+    caseNumber: string
+    assetId: string
+    title: string
+    description?: string | null
+    status?: $Enums.CaseStatus
+    riskLevel?: $Enums.RiskLevel | null
+    priorityLevel?: $Enums.PriorityLevel | null
+    emergencyFlag?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    closedAt?: Date | string | null
+    inspections?: InspectionUncheckedCreateNestedManyWithoutCaseInput
+    riskAssessments?: RiskAssessmentUncheckedCreateNestedManyWithoutCaseInput
+    operationalResponsePlans?: OperationalResponsePlanUncheckedCreateNestedManyWithoutCaseInput
+  }
+
+  export type CaseCreateOrConnectWithoutOrpDecisionsInput = {
+    where: CaseWhereUniqueInput
+    create: XOR<CaseCreateWithoutOrpDecisionsInput, CaseUncheckedCreateWithoutOrpDecisionsInput>
+  }
+
+  export type OperationalResponsePlanCreateWithoutDecisionsInput = {
+    id?: string
+    versionNumber: number
+    status?: string
+    urgency: string
+    recommendedActionCodes: JsonNullValueInput | InputJsonValue
+    temporaryMeasures: JsonNullValueInput | InputJsonValue
+    reasons: JsonNullValueInput | InputJsonValue
+    alternativeActionCodes: JsonNullValueInput | InputJsonValue
+    planVersion?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    case: CaseCreateNestedOneWithoutOperationalResponsePlansInput
+    riskAssessment: RiskAssessmentCreateNestedOneWithoutOperationalResponsePlansInput
+  }
+
+  export type OperationalResponsePlanUncheckedCreateWithoutDecisionsInput = {
+    id?: string
+    caseId: string
+    riskAssessmentId: string
+    versionNumber: number
+    status?: string
+    urgency: string
+    recommendedActionCodes: JsonNullValueInput | InputJsonValue
+    temporaryMeasures: JsonNullValueInput | InputJsonValue
+    reasons: JsonNullValueInput | InputJsonValue
+    alternativeActionCodes: JsonNullValueInput | InputJsonValue
+    planVersion?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type OperationalResponsePlanCreateOrConnectWithoutDecisionsInput = {
+    where: OperationalResponsePlanWhereUniqueInput
+    create: XOR<OperationalResponsePlanCreateWithoutDecisionsInput, OperationalResponsePlanUncheckedCreateWithoutDecisionsInput>
+  }
+
+  export type UserCreateWithoutReviewedOrpDecisionsInput = {
+    id?: string
+    employeeCode: string
+    name: string
+    email: string
+    passwordHash: string
+    designation: string
+    role?: $Enums.SystemRole
+    status?: $Enums.UserStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    department: DepartmentCreateNestedOneWithoutUsersInput
+    jurisdiction: JurisdictionCreateNestedOneWithoutUsersInput
+    inspections?: InspectionCreateNestedManyWithoutInspectorInput
+    approvalAuthorities?: ApprovalAuthorityCreateNestedManyWithoutUserInput
+    forwardedOrpDecisions?: OrpDecisionCreateNestedManyWithoutForwardedUserInput
+  }
+
+  export type UserUncheckedCreateWithoutReviewedOrpDecisionsInput = {
+    id?: string
+    employeeCode: string
+    name: string
+    email: string
+    passwordHash: string
+    designation: string
+    role?: $Enums.SystemRole
+    status?: $Enums.UserStatus
+    departmentId: string
+    jurisdictionId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    inspections?: InspectionUncheckedCreateNestedManyWithoutInspectorInput
+    approvalAuthorities?: ApprovalAuthorityUncheckedCreateNestedManyWithoutUserInput
+    forwardedOrpDecisions?: OrpDecisionUncheckedCreateNestedManyWithoutForwardedUserInput
+  }
+
+  export type UserCreateOrConnectWithoutReviewedOrpDecisionsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutReviewedOrpDecisionsInput, UserUncheckedCreateWithoutReviewedOrpDecisionsInput>
+  }
+
+  export type ApprovalAuthorityCreateWithoutDecisionsInput = {
+    id?: string
+    canApprove?: boolean
+    canReject?: boolean
+    canRequestModification?: boolean
+    canRequestReinspection?: boolean
+    canEscalate?: boolean
+    maxPriorityLevel?: $Enums.PriorityLevel | null
+    isActive?: boolean
+    validFrom?: Date | string | null
+    validUntil?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutApprovalAuthoritiesInput
+    department: DepartmentCreateNestedOneWithoutApprovalAuthoritiesInput
+    jurisdiction: JurisdictionCreateNestedOneWithoutApprovalAuthoritiesInput
+  }
+
+  export type ApprovalAuthorityUncheckedCreateWithoutDecisionsInput = {
+    id?: string
+    userId: string
+    departmentId: string
+    jurisdictionId: string
+    canApprove?: boolean
+    canReject?: boolean
+    canRequestModification?: boolean
+    canRequestReinspection?: boolean
+    canEscalate?: boolean
+    maxPriorityLevel?: $Enums.PriorityLevel | null
+    isActive?: boolean
+    validFrom?: Date | string | null
+    validUntil?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ApprovalAuthorityCreateOrConnectWithoutDecisionsInput = {
+    where: ApprovalAuthorityWhereUniqueInput
+    create: XOR<ApprovalAuthorityCreateWithoutDecisionsInput, ApprovalAuthorityUncheckedCreateWithoutDecisionsInput>
+  }
+
+  export type UserCreateWithoutForwardedOrpDecisionsInput = {
+    id?: string
+    employeeCode: string
+    name: string
+    email: string
+    passwordHash: string
+    designation: string
+    role?: $Enums.SystemRole
+    status?: $Enums.UserStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    department: DepartmentCreateNestedOneWithoutUsersInput
+    jurisdiction: JurisdictionCreateNestedOneWithoutUsersInput
+    inspections?: InspectionCreateNestedManyWithoutInspectorInput
+    approvalAuthorities?: ApprovalAuthorityCreateNestedManyWithoutUserInput
+    reviewedOrpDecisions?: OrpDecisionCreateNestedManyWithoutReviewerInput
+  }
+
+  export type UserUncheckedCreateWithoutForwardedOrpDecisionsInput = {
+    id?: string
+    employeeCode: string
+    name: string
+    email: string
+    passwordHash: string
+    designation: string
+    role?: $Enums.SystemRole
+    status?: $Enums.UserStatus
+    departmentId: string
+    jurisdictionId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    inspections?: InspectionUncheckedCreateNestedManyWithoutInspectorInput
+    approvalAuthorities?: ApprovalAuthorityUncheckedCreateNestedManyWithoutUserInput
+    reviewedOrpDecisions?: OrpDecisionUncheckedCreateNestedManyWithoutReviewerInput
+  }
+
+  export type UserCreateOrConnectWithoutForwardedOrpDecisionsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutForwardedOrpDecisionsInput, UserUncheckedCreateWithoutForwardedOrpDecisionsInput>
+  }
+
+  export type CaseUpsertWithoutOrpDecisionsInput = {
+    update: XOR<CaseUpdateWithoutOrpDecisionsInput, CaseUncheckedUpdateWithoutOrpDecisionsInput>
+    create: XOR<CaseCreateWithoutOrpDecisionsInput, CaseUncheckedCreateWithoutOrpDecisionsInput>
+    where?: CaseWhereInput
+  }
+
+  export type CaseUpdateToOneWithWhereWithoutOrpDecisionsInput = {
+    where?: CaseWhereInput
+    data: XOR<CaseUpdateWithoutOrpDecisionsInput, CaseUncheckedUpdateWithoutOrpDecisionsInput>
+  }
+
+  export type CaseUpdateWithoutOrpDecisionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    caseNumber?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumCaseStatusFieldUpdateOperationsInput | $Enums.CaseStatus
+    riskLevel?: NullableEnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel | null
+    priorityLevel?: NullableEnumPriorityLevelFieldUpdateOperationsInput | $Enums.PriorityLevel | null
+    emergencyFlag?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    asset?: AssetUpdateOneRequiredWithoutCasesNestedInput
+    inspections?: InspectionUpdateManyWithoutCaseNestedInput
+    riskAssessments?: RiskAssessmentUpdateManyWithoutCaseNestedInput
+    operationalResponsePlans?: OperationalResponsePlanUpdateManyWithoutCaseNestedInput
+  }
+
+  export type CaseUncheckedUpdateWithoutOrpDecisionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    caseNumber?: StringFieldUpdateOperationsInput | string
+    assetId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumCaseStatusFieldUpdateOperationsInput | $Enums.CaseStatus
+    riskLevel?: NullableEnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel | null
+    priorityLevel?: NullableEnumPriorityLevelFieldUpdateOperationsInput | $Enums.PriorityLevel | null
+    emergencyFlag?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    inspections?: InspectionUncheckedUpdateManyWithoutCaseNestedInput
+    riskAssessments?: RiskAssessmentUncheckedUpdateManyWithoutCaseNestedInput
+    operationalResponsePlans?: OperationalResponsePlanUncheckedUpdateManyWithoutCaseNestedInput
+  }
+
+  export type OperationalResponsePlanUpsertWithoutDecisionsInput = {
+    update: XOR<OperationalResponsePlanUpdateWithoutDecisionsInput, OperationalResponsePlanUncheckedUpdateWithoutDecisionsInput>
+    create: XOR<OperationalResponsePlanCreateWithoutDecisionsInput, OperationalResponsePlanUncheckedCreateWithoutDecisionsInput>
+    where?: OperationalResponsePlanWhereInput
+  }
+
+  export type OperationalResponsePlanUpdateToOneWithWhereWithoutDecisionsInput = {
+    where?: OperationalResponsePlanWhereInput
+    data: XOR<OperationalResponsePlanUpdateWithoutDecisionsInput, OperationalResponsePlanUncheckedUpdateWithoutDecisionsInput>
+  }
+
+  export type OperationalResponsePlanUpdateWithoutDecisionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    versionNumber?: IntFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
+    urgency?: StringFieldUpdateOperationsInput | string
+    recommendedActionCodes?: JsonNullValueInput | InputJsonValue
+    temporaryMeasures?: JsonNullValueInput | InputJsonValue
+    reasons?: JsonNullValueInput | InputJsonValue
+    alternativeActionCodes?: JsonNullValueInput | InputJsonValue
+    planVersion?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    case?: CaseUpdateOneRequiredWithoutOperationalResponsePlansNestedInput
+    riskAssessment?: RiskAssessmentUpdateOneRequiredWithoutOperationalResponsePlansNestedInput
+  }
+
+  export type OperationalResponsePlanUncheckedUpdateWithoutDecisionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    caseId?: StringFieldUpdateOperationsInput | string
+    riskAssessmentId?: StringFieldUpdateOperationsInput | string
+    versionNumber?: IntFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
+    urgency?: StringFieldUpdateOperationsInput | string
+    recommendedActionCodes?: JsonNullValueInput | InputJsonValue
+    temporaryMeasures?: JsonNullValueInput | InputJsonValue
+    reasons?: JsonNullValueInput | InputJsonValue
+    alternativeActionCodes?: JsonNullValueInput | InputJsonValue
+    planVersion?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserUpsertWithoutReviewedOrpDecisionsInput = {
+    update: XOR<UserUpdateWithoutReviewedOrpDecisionsInput, UserUncheckedUpdateWithoutReviewedOrpDecisionsInput>
+    create: XOR<UserCreateWithoutReviewedOrpDecisionsInput, UserUncheckedCreateWithoutReviewedOrpDecisionsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutReviewedOrpDecisionsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutReviewedOrpDecisionsInput, UserUncheckedUpdateWithoutReviewedOrpDecisionsInput>
+  }
+
+  export type UserUpdateWithoutReviewedOrpDecisionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    employeeCode?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    designation?: StringFieldUpdateOperationsInput | string
+    role?: EnumSystemRoleFieldUpdateOperationsInput | $Enums.SystemRole
+    status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    department?: DepartmentUpdateOneRequiredWithoutUsersNestedInput
+    jurisdiction?: JurisdictionUpdateOneRequiredWithoutUsersNestedInput
+    inspections?: InspectionUpdateManyWithoutInspectorNestedInput
+    approvalAuthorities?: ApprovalAuthorityUpdateManyWithoutUserNestedInput
+    forwardedOrpDecisions?: OrpDecisionUpdateManyWithoutForwardedUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutReviewedOrpDecisionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    employeeCode?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    designation?: StringFieldUpdateOperationsInput | string
+    role?: EnumSystemRoleFieldUpdateOperationsInput | $Enums.SystemRole
+    status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+    departmentId?: StringFieldUpdateOperationsInput | string
+    jurisdictionId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    inspections?: InspectionUncheckedUpdateManyWithoutInspectorNestedInput
+    approvalAuthorities?: ApprovalAuthorityUncheckedUpdateManyWithoutUserNestedInput
+    forwardedOrpDecisions?: OrpDecisionUncheckedUpdateManyWithoutForwardedUserNestedInput
+  }
+
+  export type ApprovalAuthorityUpsertWithoutDecisionsInput = {
+    update: XOR<ApprovalAuthorityUpdateWithoutDecisionsInput, ApprovalAuthorityUncheckedUpdateWithoutDecisionsInput>
+    create: XOR<ApprovalAuthorityCreateWithoutDecisionsInput, ApprovalAuthorityUncheckedCreateWithoutDecisionsInput>
+    where?: ApprovalAuthorityWhereInput
+  }
+
+  export type ApprovalAuthorityUpdateToOneWithWhereWithoutDecisionsInput = {
+    where?: ApprovalAuthorityWhereInput
+    data: XOR<ApprovalAuthorityUpdateWithoutDecisionsInput, ApprovalAuthorityUncheckedUpdateWithoutDecisionsInput>
+  }
+
+  export type ApprovalAuthorityUpdateWithoutDecisionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    canApprove?: BoolFieldUpdateOperationsInput | boolean
+    canReject?: BoolFieldUpdateOperationsInput | boolean
+    canRequestModification?: BoolFieldUpdateOperationsInput | boolean
+    canRequestReinspection?: BoolFieldUpdateOperationsInput | boolean
+    canEscalate?: BoolFieldUpdateOperationsInput | boolean
+    maxPriorityLevel?: NullableEnumPriorityLevelFieldUpdateOperationsInput | $Enums.PriorityLevel | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    validFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    validUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutApprovalAuthoritiesNestedInput
+    department?: DepartmentUpdateOneRequiredWithoutApprovalAuthoritiesNestedInput
+    jurisdiction?: JurisdictionUpdateOneRequiredWithoutApprovalAuthoritiesNestedInput
+  }
+
+  export type ApprovalAuthorityUncheckedUpdateWithoutDecisionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    departmentId?: StringFieldUpdateOperationsInput | string
+    jurisdictionId?: StringFieldUpdateOperationsInput | string
+    canApprove?: BoolFieldUpdateOperationsInput | boolean
+    canReject?: BoolFieldUpdateOperationsInput | boolean
+    canRequestModification?: BoolFieldUpdateOperationsInput | boolean
+    canRequestReinspection?: BoolFieldUpdateOperationsInput | boolean
+    canEscalate?: BoolFieldUpdateOperationsInput | boolean
+    maxPriorityLevel?: NullableEnumPriorityLevelFieldUpdateOperationsInput | $Enums.PriorityLevel | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    validFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    validUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserUpsertWithoutForwardedOrpDecisionsInput = {
+    update: XOR<UserUpdateWithoutForwardedOrpDecisionsInput, UserUncheckedUpdateWithoutForwardedOrpDecisionsInput>
+    create: XOR<UserCreateWithoutForwardedOrpDecisionsInput, UserUncheckedCreateWithoutForwardedOrpDecisionsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutForwardedOrpDecisionsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutForwardedOrpDecisionsInput, UserUncheckedUpdateWithoutForwardedOrpDecisionsInput>
+  }
+
+  export type UserUpdateWithoutForwardedOrpDecisionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    employeeCode?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    designation?: StringFieldUpdateOperationsInput | string
+    role?: EnumSystemRoleFieldUpdateOperationsInput | $Enums.SystemRole
+    status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    department?: DepartmentUpdateOneRequiredWithoutUsersNestedInput
+    jurisdiction?: JurisdictionUpdateOneRequiredWithoutUsersNestedInput
+    inspections?: InspectionUpdateManyWithoutInspectorNestedInput
+    approvalAuthorities?: ApprovalAuthorityUpdateManyWithoutUserNestedInput
+    reviewedOrpDecisions?: OrpDecisionUpdateManyWithoutReviewerNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutForwardedOrpDecisionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    employeeCode?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    designation?: StringFieldUpdateOperationsInput | string
+    role?: EnumSystemRoleFieldUpdateOperationsInput | $Enums.SystemRole
+    status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+    departmentId?: StringFieldUpdateOperationsInput | string
+    jurisdictionId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    inspections?: InspectionUncheckedUpdateManyWithoutInspectorNestedInput
+    approvalAuthorities?: ApprovalAuthorityUncheckedUpdateManyWithoutUserNestedInput
+    reviewedOrpDecisions?: OrpDecisionUncheckedUpdateManyWithoutReviewerNestedInput
+  }
+
   export type UserCreateManyDepartmentInput = {
     id?: string
     employeeCode: string
@@ -16869,6 +22206,23 @@ export namespace Prisma {
     createdAt?: Date | string
   }
 
+  export type ApprovalAuthorityCreateManyDepartmentInput = {
+    id?: string
+    userId: string
+    jurisdictionId: string
+    canApprove?: boolean
+    canReject?: boolean
+    canRequestModification?: boolean
+    canRequestReinspection?: boolean
+    canEscalate?: boolean
+    maxPriorityLevel?: $Enums.PriorityLevel | null
+    isActive?: boolean
+    validFrom?: Date | string | null
+    validUntil?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type UserUpdateWithoutDepartmentInput = {
     id?: StringFieldUpdateOperationsInput | string
     employeeCode?: StringFieldUpdateOperationsInput | string
@@ -16882,6 +22236,9 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     jurisdiction?: JurisdictionUpdateOneRequiredWithoutUsersNestedInput
     inspections?: InspectionUpdateManyWithoutInspectorNestedInput
+    approvalAuthorities?: ApprovalAuthorityUpdateManyWithoutUserNestedInput
+    reviewedOrpDecisions?: OrpDecisionUpdateManyWithoutReviewerNestedInput
+    forwardedOrpDecisions?: OrpDecisionUpdateManyWithoutForwardedUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutDepartmentInput = {
@@ -16897,6 +22254,9 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     inspections?: InspectionUncheckedUpdateManyWithoutInspectorNestedInput
+    approvalAuthorities?: ApprovalAuthorityUncheckedUpdateManyWithoutUserNestedInput
+    reviewedOrpDecisions?: OrpDecisionUncheckedUpdateManyWithoutReviewerNestedInput
+    forwardedOrpDecisions?: OrpDecisionUncheckedUpdateManyWithoutForwardedUserNestedInput
   }
 
   export type UserUncheckedUpdateManyWithoutDepartmentInput = {
@@ -16964,6 +22324,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutJurisdictionNestedInput
     assets?: AssetUpdateManyWithoutJurisdictionNestedInput
+    approvalAuthorities?: ApprovalAuthorityUpdateManyWithoutJurisdictionNestedInput
   }
 
   export type JurisdictionUncheckedUpdateWithoutDepartmentInput = {
@@ -16973,6 +22334,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutJurisdictionNestedInput
     assets?: AssetUncheckedUpdateManyWithoutJurisdictionNestedInput
+    approvalAuthorities?: ApprovalAuthorityUncheckedUpdateManyWithoutJurisdictionNestedInput
   }
 
   export type JurisdictionUncheckedUpdateManyWithoutDepartmentInput = {
@@ -16980,6 +22342,59 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     type?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ApprovalAuthorityUpdateWithoutDepartmentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    canApprove?: BoolFieldUpdateOperationsInput | boolean
+    canReject?: BoolFieldUpdateOperationsInput | boolean
+    canRequestModification?: BoolFieldUpdateOperationsInput | boolean
+    canRequestReinspection?: BoolFieldUpdateOperationsInput | boolean
+    canEscalate?: BoolFieldUpdateOperationsInput | boolean
+    maxPriorityLevel?: NullableEnumPriorityLevelFieldUpdateOperationsInput | $Enums.PriorityLevel | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    validFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    validUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutApprovalAuthoritiesNestedInput
+    jurisdiction?: JurisdictionUpdateOneRequiredWithoutApprovalAuthoritiesNestedInput
+    decisions?: OrpDecisionUpdateManyWithoutAuthorityGrantNestedInput
+  }
+
+  export type ApprovalAuthorityUncheckedUpdateWithoutDepartmentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    jurisdictionId?: StringFieldUpdateOperationsInput | string
+    canApprove?: BoolFieldUpdateOperationsInput | boolean
+    canReject?: BoolFieldUpdateOperationsInput | boolean
+    canRequestModification?: BoolFieldUpdateOperationsInput | boolean
+    canRequestReinspection?: BoolFieldUpdateOperationsInput | boolean
+    canEscalate?: BoolFieldUpdateOperationsInput | boolean
+    maxPriorityLevel?: NullableEnumPriorityLevelFieldUpdateOperationsInput | $Enums.PriorityLevel | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    validFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    validUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    decisions?: OrpDecisionUncheckedUpdateManyWithoutAuthorityGrantNestedInput
+  }
+
+  export type ApprovalAuthorityUncheckedUpdateManyWithoutDepartmentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    jurisdictionId?: StringFieldUpdateOperationsInput | string
+    canApprove?: BoolFieldUpdateOperationsInput | boolean
+    canReject?: BoolFieldUpdateOperationsInput | boolean
+    canRequestModification?: BoolFieldUpdateOperationsInput | boolean
+    canRequestReinspection?: BoolFieldUpdateOperationsInput | boolean
+    canEscalate?: BoolFieldUpdateOperationsInput | boolean
+    maxPriorityLevel?: NullableEnumPriorityLevelFieldUpdateOperationsInput | $Enums.PriorityLevel | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    validFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    validUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type UserCreateManyJurisdictionInput = {
@@ -17010,6 +22425,23 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
+  export type ApprovalAuthorityCreateManyJurisdictionInput = {
+    id?: string
+    userId: string
+    departmentId: string
+    canApprove?: boolean
+    canReject?: boolean
+    canRequestModification?: boolean
+    canRequestReinspection?: boolean
+    canEscalate?: boolean
+    maxPriorityLevel?: $Enums.PriorityLevel | null
+    isActive?: boolean
+    validFrom?: Date | string | null
+    validUntil?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type UserUpdateWithoutJurisdictionInput = {
     id?: StringFieldUpdateOperationsInput | string
     employeeCode?: StringFieldUpdateOperationsInput | string
@@ -17023,6 +22455,9 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     department?: DepartmentUpdateOneRequiredWithoutUsersNestedInput
     inspections?: InspectionUpdateManyWithoutInspectorNestedInput
+    approvalAuthorities?: ApprovalAuthorityUpdateManyWithoutUserNestedInput
+    reviewedOrpDecisions?: OrpDecisionUpdateManyWithoutReviewerNestedInput
+    forwardedOrpDecisions?: OrpDecisionUpdateManyWithoutForwardedUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutJurisdictionInput = {
@@ -17038,6 +22473,9 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     inspections?: InspectionUncheckedUpdateManyWithoutInspectorNestedInput
+    approvalAuthorities?: ApprovalAuthorityUncheckedUpdateManyWithoutUserNestedInput
+    reviewedOrpDecisions?: OrpDecisionUncheckedUpdateManyWithoutReviewerNestedInput
+    forwardedOrpDecisions?: OrpDecisionUncheckedUpdateManyWithoutForwardedUserNestedInput
   }
 
   export type UserUncheckedUpdateManyWithoutJurisdictionInput = {
@@ -17098,6 +22536,59 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type ApprovalAuthorityUpdateWithoutJurisdictionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    canApprove?: BoolFieldUpdateOperationsInput | boolean
+    canReject?: BoolFieldUpdateOperationsInput | boolean
+    canRequestModification?: BoolFieldUpdateOperationsInput | boolean
+    canRequestReinspection?: BoolFieldUpdateOperationsInput | boolean
+    canEscalate?: BoolFieldUpdateOperationsInput | boolean
+    maxPriorityLevel?: NullableEnumPriorityLevelFieldUpdateOperationsInput | $Enums.PriorityLevel | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    validFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    validUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutApprovalAuthoritiesNestedInput
+    department?: DepartmentUpdateOneRequiredWithoutApprovalAuthoritiesNestedInput
+    decisions?: OrpDecisionUpdateManyWithoutAuthorityGrantNestedInput
+  }
+
+  export type ApprovalAuthorityUncheckedUpdateWithoutJurisdictionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    departmentId?: StringFieldUpdateOperationsInput | string
+    canApprove?: BoolFieldUpdateOperationsInput | boolean
+    canReject?: BoolFieldUpdateOperationsInput | boolean
+    canRequestModification?: BoolFieldUpdateOperationsInput | boolean
+    canRequestReinspection?: BoolFieldUpdateOperationsInput | boolean
+    canEscalate?: BoolFieldUpdateOperationsInput | boolean
+    maxPriorityLevel?: NullableEnumPriorityLevelFieldUpdateOperationsInput | $Enums.PriorityLevel | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    validFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    validUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    decisions?: OrpDecisionUncheckedUpdateManyWithoutAuthorityGrantNestedInput
+  }
+
+  export type ApprovalAuthorityUncheckedUpdateManyWithoutJurisdictionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    departmentId?: StringFieldUpdateOperationsInput | string
+    canApprove?: BoolFieldUpdateOperationsInput | boolean
+    canReject?: BoolFieldUpdateOperationsInput | boolean
+    canRequestModification?: BoolFieldUpdateOperationsInput | boolean
+    canRequestReinspection?: BoolFieldUpdateOperationsInput | boolean
+    canEscalate?: BoolFieldUpdateOperationsInput | boolean
+    maxPriorityLevel?: NullableEnumPriorityLevelFieldUpdateOperationsInput | $Enums.PriorityLevel | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    validFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    validUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type InspectionCreateManyInspectorInput = {
     id?: string
     caseId: string
@@ -17113,6 +22604,49 @@ export namespace Prisma {
     inspectionNotes?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+  }
+
+  export type ApprovalAuthorityCreateManyUserInput = {
+    id?: string
+    departmentId: string
+    jurisdictionId: string
+    canApprove?: boolean
+    canReject?: boolean
+    canRequestModification?: boolean
+    canRequestReinspection?: boolean
+    canEscalate?: boolean
+    maxPriorityLevel?: $Enums.PriorityLevel | null
+    isActive?: boolean
+    validFrom?: Date | string | null
+    validUntil?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type OrpDecisionCreateManyReviewerInput = {
+    id?: string
+    caseId: string
+    orpId: string
+    authorityGrantId: string
+    decisionType: $Enums.OrpDecisionType
+    reason?: string | null
+    remarks?: string | null
+    requestedChanges?: NullableJsonNullValueInput | InputJsonValue
+    forwardToUserId?: string | null
+    createdAt?: Date | string
+  }
+
+  export type OrpDecisionCreateManyForwardedUserInput = {
+    id?: string
+    caseId: string
+    orpId: string
+    reviewerId: string
+    authorityGrantId: string
+    decisionType: $Enums.OrpDecisionType
+    reason?: string | null
+    remarks?: string | null
+    requestedChanges?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
   }
 
   export type InspectionUpdateWithoutInspectorInput = {
@@ -17168,6 +22702,137 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type ApprovalAuthorityUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    canApprove?: BoolFieldUpdateOperationsInput | boolean
+    canReject?: BoolFieldUpdateOperationsInput | boolean
+    canRequestModification?: BoolFieldUpdateOperationsInput | boolean
+    canRequestReinspection?: BoolFieldUpdateOperationsInput | boolean
+    canEscalate?: BoolFieldUpdateOperationsInput | boolean
+    maxPriorityLevel?: NullableEnumPriorityLevelFieldUpdateOperationsInput | $Enums.PriorityLevel | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    validFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    validUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    department?: DepartmentUpdateOneRequiredWithoutApprovalAuthoritiesNestedInput
+    jurisdiction?: JurisdictionUpdateOneRequiredWithoutApprovalAuthoritiesNestedInput
+    decisions?: OrpDecisionUpdateManyWithoutAuthorityGrantNestedInput
+  }
+
+  export type ApprovalAuthorityUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    departmentId?: StringFieldUpdateOperationsInput | string
+    jurisdictionId?: StringFieldUpdateOperationsInput | string
+    canApprove?: BoolFieldUpdateOperationsInput | boolean
+    canReject?: BoolFieldUpdateOperationsInput | boolean
+    canRequestModification?: BoolFieldUpdateOperationsInput | boolean
+    canRequestReinspection?: BoolFieldUpdateOperationsInput | boolean
+    canEscalate?: BoolFieldUpdateOperationsInput | boolean
+    maxPriorityLevel?: NullableEnumPriorityLevelFieldUpdateOperationsInput | $Enums.PriorityLevel | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    validFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    validUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    decisions?: OrpDecisionUncheckedUpdateManyWithoutAuthorityGrantNestedInput
+  }
+
+  export type ApprovalAuthorityUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    departmentId?: StringFieldUpdateOperationsInput | string
+    jurisdictionId?: StringFieldUpdateOperationsInput | string
+    canApprove?: BoolFieldUpdateOperationsInput | boolean
+    canReject?: BoolFieldUpdateOperationsInput | boolean
+    canRequestModification?: BoolFieldUpdateOperationsInput | boolean
+    canRequestReinspection?: BoolFieldUpdateOperationsInput | boolean
+    canEscalate?: BoolFieldUpdateOperationsInput | boolean
+    maxPriorityLevel?: NullableEnumPriorityLevelFieldUpdateOperationsInput | $Enums.PriorityLevel | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    validFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    validUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type OrpDecisionUpdateWithoutReviewerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    decisionType?: EnumOrpDecisionTypeFieldUpdateOperationsInput | $Enums.OrpDecisionType
+    reason?: NullableStringFieldUpdateOperationsInput | string | null
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    requestedChanges?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    case?: CaseUpdateOneRequiredWithoutOrpDecisionsNestedInput
+    orp?: OperationalResponsePlanUpdateOneRequiredWithoutDecisionsNestedInput
+    authorityGrant?: ApprovalAuthorityUpdateOneRequiredWithoutDecisionsNestedInput
+    forwardedUser?: UserUpdateOneWithoutForwardedOrpDecisionsNestedInput
+  }
+
+  export type OrpDecisionUncheckedUpdateWithoutReviewerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    caseId?: StringFieldUpdateOperationsInput | string
+    orpId?: StringFieldUpdateOperationsInput | string
+    authorityGrantId?: StringFieldUpdateOperationsInput | string
+    decisionType?: EnumOrpDecisionTypeFieldUpdateOperationsInput | $Enums.OrpDecisionType
+    reason?: NullableStringFieldUpdateOperationsInput | string | null
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    requestedChanges?: NullableJsonNullValueInput | InputJsonValue
+    forwardToUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type OrpDecisionUncheckedUpdateManyWithoutReviewerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    caseId?: StringFieldUpdateOperationsInput | string
+    orpId?: StringFieldUpdateOperationsInput | string
+    authorityGrantId?: StringFieldUpdateOperationsInput | string
+    decisionType?: EnumOrpDecisionTypeFieldUpdateOperationsInput | $Enums.OrpDecisionType
+    reason?: NullableStringFieldUpdateOperationsInput | string | null
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    requestedChanges?: NullableJsonNullValueInput | InputJsonValue
+    forwardToUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type OrpDecisionUpdateWithoutForwardedUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    decisionType?: EnumOrpDecisionTypeFieldUpdateOperationsInput | $Enums.OrpDecisionType
+    reason?: NullableStringFieldUpdateOperationsInput | string | null
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    requestedChanges?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    case?: CaseUpdateOneRequiredWithoutOrpDecisionsNestedInput
+    orp?: OperationalResponsePlanUpdateOneRequiredWithoutDecisionsNestedInput
+    reviewer?: UserUpdateOneRequiredWithoutReviewedOrpDecisionsNestedInput
+    authorityGrant?: ApprovalAuthorityUpdateOneRequiredWithoutDecisionsNestedInput
+  }
+
+  export type OrpDecisionUncheckedUpdateWithoutForwardedUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    caseId?: StringFieldUpdateOperationsInput | string
+    orpId?: StringFieldUpdateOperationsInput | string
+    reviewerId?: StringFieldUpdateOperationsInput | string
+    authorityGrantId?: StringFieldUpdateOperationsInput | string
+    decisionType?: EnumOrpDecisionTypeFieldUpdateOperationsInput | $Enums.OrpDecisionType
+    reason?: NullableStringFieldUpdateOperationsInput | string | null
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    requestedChanges?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type OrpDecisionUncheckedUpdateManyWithoutForwardedUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    caseId?: StringFieldUpdateOperationsInput | string
+    orpId?: StringFieldUpdateOperationsInput | string
+    reviewerId?: StringFieldUpdateOperationsInput | string
+    authorityGrantId?: StringFieldUpdateOperationsInput | string
+    decisionType?: EnumOrpDecisionTypeFieldUpdateOperationsInput | $Enums.OrpDecisionType
+    reason?: NullableStringFieldUpdateOperationsInput | string | null
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    requestedChanges?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type CaseCreateManyAssetInput = {
     id?: string
     caseNumber: string
@@ -17197,6 +22862,7 @@ export namespace Prisma {
     inspections?: InspectionUpdateManyWithoutCaseNestedInput
     riskAssessments?: RiskAssessmentUpdateManyWithoutCaseNestedInput
     operationalResponsePlans?: OperationalResponsePlanUpdateManyWithoutCaseNestedInput
+    orpDecisions?: OrpDecisionUpdateManyWithoutCaseNestedInput
   }
 
   export type CaseUncheckedUpdateWithoutAssetInput = {
@@ -17214,6 +22880,7 @@ export namespace Prisma {
     inspections?: InspectionUncheckedUpdateManyWithoutCaseNestedInput
     riskAssessments?: RiskAssessmentUncheckedUpdateManyWithoutCaseNestedInput
     operationalResponsePlans?: OperationalResponsePlanUncheckedUpdateManyWithoutCaseNestedInput
+    orpDecisions?: OrpDecisionUncheckedUpdateManyWithoutCaseNestedInput
   }
 
   export type CaseUncheckedUpdateManyWithoutAssetInput = {
@@ -17272,6 +22939,19 @@ export namespace Prisma {
     planVersion?: string
     createdAt?: Date | string
     updatedAt?: Date | string
+  }
+
+  export type OrpDecisionCreateManyCaseInput = {
+    id?: string
+    orpId: string
+    reviewerId: string
+    authorityGrantId: string
+    decisionType: $Enums.OrpDecisionType
+    reason?: string | null
+    remarks?: string | null
+    requestedChanges?: NullableJsonNullValueInput | InputJsonValue
+    forwardToUserId?: string | null
+    createdAt?: Date | string
   }
 
   export type InspectionUpdateWithoutCaseInput = {
@@ -17378,6 +23058,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     riskAssessment?: RiskAssessmentUpdateOneRequiredWithoutOperationalResponsePlansNestedInput
+    decisions?: OrpDecisionUpdateManyWithoutOrpNestedInput
   }
 
   export type OperationalResponsePlanUncheckedUpdateWithoutCaseInput = {
@@ -17393,6 +23074,7 @@ export namespace Prisma {
     planVersion?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    decisions?: OrpDecisionUncheckedUpdateManyWithoutOrpNestedInput
   }
 
   export type OperationalResponsePlanUncheckedUpdateManyWithoutCaseInput = {
@@ -17408,6 +23090,45 @@ export namespace Prisma {
     planVersion?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type OrpDecisionUpdateWithoutCaseInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    decisionType?: EnumOrpDecisionTypeFieldUpdateOperationsInput | $Enums.OrpDecisionType
+    reason?: NullableStringFieldUpdateOperationsInput | string | null
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    requestedChanges?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    orp?: OperationalResponsePlanUpdateOneRequiredWithoutDecisionsNestedInput
+    reviewer?: UserUpdateOneRequiredWithoutReviewedOrpDecisionsNestedInput
+    authorityGrant?: ApprovalAuthorityUpdateOneRequiredWithoutDecisionsNestedInput
+    forwardedUser?: UserUpdateOneWithoutForwardedOrpDecisionsNestedInput
+  }
+
+  export type OrpDecisionUncheckedUpdateWithoutCaseInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    orpId?: StringFieldUpdateOperationsInput | string
+    reviewerId?: StringFieldUpdateOperationsInput | string
+    authorityGrantId?: StringFieldUpdateOperationsInput | string
+    decisionType?: EnumOrpDecisionTypeFieldUpdateOperationsInput | $Enums.OrpDecisionType
+    reason?: NullableStringFieldUpdateOperationsInput | string | null
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    requestedChanges?: NullableJsonNullValueInput | InputJsonValue
+    forwardToUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type OrpDecisionUncheckedUpdateManyWithoutCaseInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    orpId?: StringFieldUpdateOperationsInput | string
+    reviewerId?: StringFieldUpdateOperationsInput | string
+    authorityGrantId?: StringFieldUpdateOperationsInput | string
+    decisionType?: EnumOrpDecisionTypeFieldUpdateOperationsInput | $Enums.OrpDecisionType
+    reason?: NullableStringFieldUpdateOperationsInput | string | null
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    requestedChanges?: NullableJsonNullValueInput | InputJsonValue
+    forwardToUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type RiskAssessmentCreateManyInspectionInput = {
@@ -17488,6 +23209,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     case?: CaseUpdateOneRequiredWithoutOperationalResponsePlansNestedInput
+    decisions?: OrpDecisionUpdateManyWithoutOrpNestedInput
   }
 
   export type OperationalResponsePlanUncheckedUpdateWithoutRiskAssessmentInput = {
@@ -17503,6 +23225,7 @@ export namespace Prisma {
     planVersion?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    decisions?: OrpDecisionUncheckedUpdateManyWithoutOrpNestedInput
   }
 
   export type OperationalResponsePlanUncheckedUpdateManyWithoutRiskAssessmentInput = {
@@ -17518,6 +23241,110 @@ export namespace Prisma {
     planVersion?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type OrpDecisionCreateManyOrpInput = {
+    id?: string
+    caseId: string
+    reviewerId: string
+    authorityGrantId: string
+    decisionType: $Enums.OrpDecisionType
+    reason?: string | null
+    remarks?: string | null
+    requestedChanges?: NullableJsonNullValueInput | InputJsonValue
+    forwardToUserId?: string | null
+    createdAt?: Date | string
+  }
+
+  export type OrpDecisionUpdateWithoutOrpInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    decisionType?: EnumOrpDecisionTypeFieldUpdateOperationsInput | $Enums.OrpDecisionType
+    reason?: NullableStringFieldUpdateOperationsInput | string | null
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    requestedChanges?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    case?: CaseUpdateOneRequiredWithoutOrpDecisionsNestedInput
+    reviewer?: UserUpdateOneRequiredWithoutReviewedOrpDecisionsNestedInput
+    authorityGrant?: ApprovalAuthorityUpdateOneRequiredWithoutDecisionsNestedInput
+    forwardedUser?: UserUpdateOneWithoutForwardedOrpDecisionsNestedInput
+  }
+
+  export type OrpDecisionUncheckedUpdateWithoutOrpInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    caseId?: StringFieldUpdateOperationsInput | string
+    reviewerId?: StringFieldUpdateOperationsInput | string
+    authorityGrantId?: StringFieldUpdateOperationsInput | string
+    decisionType?: EnumOrpDecisionTypeFieldUpdateOperationsInput | $Enums.OrpDecisionType
+    reason?: NullableStringFieldUpdateOperationsInput | string | null
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    requestedChanges?: NullableJsonNullValueInput | InputJsonValue
+    forwardToUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type OrpDecisionUncheckedUpdateManyWithoutOrpInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    caseId?: StringFieldUpdateOperationsInput | string
+    reviewerId?: StringFieldUpdateOperationsInput | string
+    authorityGrantId?: StringFieldUpdateOperationsInput | string
+    decisionType?: EnumOrpDecisionTypeFieldUpdateOperationsInput | $Enums.OrpDecisionType
+    reason?: NullableStringFieldUpdateOperationsInput | string | null
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    requestedChanges?: NullableJsonNullValueInput | InputJsonValue
+    forwardToUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type OrpDecisionCreateManyAuthorityGrantInput = {
+    id?: string
+    caseId: string
+    orpId: string
+    reviewerId: string
+    decisionType: $Enums.OrpDecisionType
+    reason?: string | null
+    remarks?: string | null
+    requestedChanges?: NullableJsonNullValueInput | InputJsonValue
+    forwardToUserId?: string | null
+    createdAt?: Date | string
+  }
+
+  export type OrpDecisionUpdateWithoutAuthorityGrantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    decisionType?: EnumOrpDecisionTypeFieldUpdateOperationsInput | $Enums.OrpDecisionType
+    reason?: NullableStringFieldUpdateOperationsInput | string | null
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    requestedChanges?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    case?: CaseUpdateOneRequiredWithoutOrpDecisionsNestedInput
+    orp?: OperationalResponsePlanUpdateOneRequiredWithoutDecisionsNestedInput
+    reviewer?: UserUpdateOneRequiredWithoutReviewedOrpDecisionsNestedInput
+    forwardedUser?: UserUpdateOneWithoutForwardedOrpDecisionsNestedInput
+  }
+
+  export type OrpDecisionUncheckedUpdateWithoutAuthorityGrantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    caseId?: StringFieldUpdateOperationsInput | string
+    orpId?: StringFieldUpdateOperationsInput | string
+    reviewerId?: StringFieldUpdateOperationsInput | string
+    decisionType?: EnumOrpDecisionTypeFieldUpdateOperationsInput | $Enums.OrpDecisionType
+    reason?: NullableStringFieldUpdateOperationsInput | string | null
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    requestedChanges?: NullableJsonNullValueInput | InputJsonValue
+    forwardToUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type OrpDecisionUncheckedUpdateManyWithoutAuthorityGrantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    caseId?: StringFieldUpdateOperationsInput | string
+    orpId?: StringFieldUpdateOperationsInput | string
+    reviewerId?: StringFieldUpdateOperationsInput | string
+    decisionType?: EnumOrpDecisionTypeFieldUpdateOperationsInput | $Enums.OrpDecisionType
+    reason?: NullableStringFieldUpdateOperationsInput | string | null
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    requestedChanges?: NullableJsonNullValueInput | InputJsonValue
+    forwardToUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 

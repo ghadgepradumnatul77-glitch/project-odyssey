@@ -19,3 +19,11 @@ Phase-1 foundation for the Government Infrastructure Decision Intelligence Platf
 - API: `http://localhost:4000/api/v1/health`
 - AI: `http://localhost:8000/health`
 - Web: `http://localhost:5173`
+
+## Phase 1 approval identity limitation
+
+Human decision endpoints currently accept `reviewerId` in the request body. This
+provides domain-level validation against explicit `ApprovalAuthority` grants, but
+it is not production-grade authentication. Authentication middleware must later
+bind reviewer identity to the authenticated session or token. A job title or
+designation never grants approval authority.

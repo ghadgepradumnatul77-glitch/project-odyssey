@@ -30,6 +30,12 @@ import riskRoutes
 import orpRoutes
   from './modules/orp/orp.routes';
 
+import decisionRoutes
+  from './modules/decisions/decision.routes';
+
+import authorityRoutes
+  from './modules/authorities/authority.routes';
+
 
 const app = express();
 
@@ -176,6 +182,16 @@ app.use(
 app.use(
   '/api/v1',
   orpRoutes
+);
+
+app.use(
+  '/api/v1',
+  decisionRoutes
+);
+
+app.use(
+  '/api/v1',
+  authorityRoutes
 );
 
 
