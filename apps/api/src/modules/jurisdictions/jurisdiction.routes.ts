@@ -1,10 +1,13 @@
 import { Router } from 'express';
 import prisma from '../../lib/prisma';
+import { SystemRole } from '../../generated/prisma';
+import { authenticate } from '../../middleware/authenticate';
+import { requireRole } from '../../middleware/require-role';
 
 const router = Router();
 
 // GET /api/v1/jurisdictions
-router.get('/', async (_req, res) => {
+router.get('/', authenticate, async (_req, res) => {
   try {
     const jurisdictions = await prisma.jurisdiction.findMany({
       include: {
@@ -39,7 +42,7 @@ router.get('/', async (_req, res) => {
 });
 
 // POST /api/v1/jurisdictions
-router.post('/', async (req, res) => {
+router.post('/', authenticate, requireRole(SystemRole.SYSTEM_ADMIN), async (req, res) => {
   try {
     const { name, type, departmentId } = req.body;
 

@@ -81,14 +81,14 @@ describe('decision routes', () => {
 
   it('GET returns deterministic ORP decision history', async () => {
     mocks.orpHistory.mockResolvedValue([{ id: 'decision-1', reviewer: { employeeCode: 'PWD-EE-001' } }]);
-    const response = await request(app).get('/api/v1/orps/orp-1/decisions').expect(200);
+    const response = await request(app).get('/api/v1/orps/orp-1/decisions').set('Authorization', `Bearer ${await token()}`).expect(200);
     expect(response.body.data[0].reviewer.employeeCode).toBe('PWD-EE-001');
     expect(response.body.ordering).toBe('createdAt ASC, id ASC');
   });
 
   it('GET returns deterministic case decision history', async () => {
     mocks.caseHistory.mockResolvedValue([{ id: 'decision-1', orp: { versionNumber: 1 } }]);
-    const response = await request(app).get('/api/v1/cases/case-1/decisions').expect(200);
+    const response = await request(app).get('/api/v1/cases/case-1/decisions').set('Authorization', `Bearer ${await token()}`).expect(200);
     expect(response.body.data[0].orp.versionNumber).toBe(1);
     expect(response.body.ordering).toBe('createdAt ASC, id ASC');
   });

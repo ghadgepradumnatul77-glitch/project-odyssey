@@ -29,3 +29,11 @@ client-side token disposal in Phase 1; access-token revocation and refresh token
 are not implemented. Authentication establishes identity only. Operational-plan
 authority still comes exclusively from explicit `ApprovalAuthority` grants, never
 from a job title, authentication, or system role alone.
+
+All registry and operational endpoints require authentication. Operational reads
+are available to authenticated users. Registry writes require `SYSTEM_ADMIN`;
+case creation permits `OFFICER` and `SYSTEM_ADMIN`; inspection, risk-assessment,
+ORP-generation, and ORP-decision mutations require `OFFICER`. Full user and
+approval-authority administration remain `SYSTEM_ADMIN` only. The basic health
+endpoint and login remain public. The database diagnostic endpoint is retained
+for development utility but requires `SYSTEM_ADMIN`.

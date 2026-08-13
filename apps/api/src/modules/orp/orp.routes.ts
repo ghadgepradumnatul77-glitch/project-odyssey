@@ -1,10 +1,14 @@
 import { Router } from 'express';
 import prisma from '../../lib/prisma';
 import { createORPForCase, getApprovedActions } from './orp.service';
+import { SystemRole } from '../../generated/prisma';
+import { authenticate } from '../../middleware/authenticate';
+import { requireRole } from '../../middleware/require-role';
 
 const router = Router();
 
-function requiredParam(value: string | undefined): string | null {
+function requiredParam(value: string | string[] | undefined): string | null {
+  if (Array.isArray(value)) return null;
   const normalized = value?.trim();
   return normalized ? normalized : null;
 }
@@ -24,7 +28,7 @@ export function parseStoredActionCodes(value: unknown, fieldName: string, orpId:
 // POST /api/v1/cases/:caseId/orps
 // ======================================================
 
-router.post('/cases/:caseId/orps', async (req, res) => {
+router.post('/cases/:caseId/orps', authenticate, requireRole(SystemRole.OFFICER), async (req, res) => {
   try {
     const caseId = requiredParam(req.params.caseId);
     if (!caseId) {
@@ -109,7 +113,7 @@ router.post('/cases/:caseId/orps', async (req, res) => {
 // GET /api/v1/cases/:caseId/orps
 // ======================================================
 
-router.get('/cases/:caseId/orps', async (req, res) => {
+router.get('/cases/:caseId/orps', authenticate, async (req, res) => {
   try {
     const caseId = requiredParam(req.params.caseId);
     if (!caseId) {
@@ -164,7 +168,7 @@ router.get('/cases/:caseId/orps', async (req, res) => {
 // GET /api/v1/orps/:orpId
 // ======================================================
 
-router.get('/orps/:orpId', async (req, res) => {
+router.get('/orps/:orpId', authenticate, async (req, res) => {
   try {
     const orpId = requiredParam(req.params.orpId);
     if (!orpId) {

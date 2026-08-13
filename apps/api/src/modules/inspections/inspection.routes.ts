@@ -1,5 +1,8 @@
 import { Router } from 'express';
 import prisma from '../../lib/prisma';
+import { SystemRole } from '../../generated/prisma';
+import { authenticate } from '../../middleware/authenticate';
+import { requireRole } from '../../middleware/require-role';
 
 const router = Router();
 
@@ -8,7 +11,7 @@ const router = Router();
 // GET /api/v1/inspections
 // ======================================================
 
-router.get('/', async (_req, res) => {
+router.get('/', authenticate, async (_req, res) => {
   try {
     const inspections = await prisma.inspection.findMany({
       include: {
@@ -93,11 +96,10 @@ router.get('/', async (_req, res) => {
 // POST /api/v1/inspections
 // ======================================================
 
-router.post('/', async (req, res) => {
+router.post('/', authenticate, requireRole(SystemRole.OFFICER), async (req, res) => {
   try {
     const {
       caseId,
-      inspectorId,
       inspectionDate,
       structuralCondition,
       crackSeverity,
@@ -117,7 +119,6 @@ router.post('/', async (req, res) => {
 
     if (
       !caseId || typeof caseId !== 'string' || !caseId.trim() ||
-      !inspectorId || typeof inspectorId !== 'string' || !inspectorId.trim() ||
       !inspectionDate || (typeof inspectionDate !== 'string' && !(inspectionDate instanceof Date)) ||
       !structuralCondition || typeof structuralCondition !== 'string' || !structuralCondition.trim() ||
       !crackSeverity || typeof crackSeverity !== 'string' || !crackSeverity.trim() ||
@@ -132,6 +133,16 @@ router.post('/', async (req, res) => {
         error: {
           code: 'INVALID_INPUT',
           message: 'All required inspection fields must be provided with valid types.'
+        }
+      });
+    }
+
+    if (Object.prototype.hasOwnProperty.call(req.body, 'inspectorId')) {
+      return res.status(400).json({
+        success: false,
+        error: {
+          code: 'INSPECTOR_ID_NOT_ALLOWED',
+          message: 'inspectorId is derived from the authenticated identity and must not be supplied.'
         }
       });
     }
@@ -192,7 +203,7 @@ router.post('/', async (req, res) => {
 
     const inspector = await prisma.user.findUnique({
       where: {
-        id: inspectorId.trim()
+        id: req.user!.id
       }
     });
 

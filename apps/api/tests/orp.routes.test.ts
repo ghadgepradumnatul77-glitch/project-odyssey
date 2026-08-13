@@ -1,16 +1,20 @@
 import express from 'express';
 import request from 'supertest';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { SignJWT } from 'jose';
+import { getAuthConfig } from '../src/config/auth';
 
 const mocks = vi.hoisted(() => ({
   createORPForCase: vi.fn(),
   caseFindUnique: vi.fn(),
   orpFindMany: vi.fn(),
-  orpFindUnique: vi.fn()
+  orpFindUnique: vi.fn(),
+  userFindUnique: vi.fn()
 }));
 
 vi.mock('../src/lib/prisma', () => ({
   default: {
+    user: { findUnique: mocks.userFindUnique },
     case: { findUnique: mocks.caseFindUnique },
     operationalResponsePlan: {
       findMany: mocks.orpFindMany,
@@ -46,12 +50,20 @@ const storedOrp = {
   updatedAt: new Date('2026-08-10T00:00:00Z')
 };
 
+async function authorization(role = 'OFFICER') {
+  mocks.userFindUnique.mockResolvedValue({ id: 'user-1', role, status: 'ACTIVE', departmentId: 'dep-1', jurisdictionId: 'jur-1' });
+  const config = getAuthConfig();
+  const token = await new SignJWT({}).setProtectedHeader({ alg: 'HS256' }).setSubject('user-1')
+    .setIssuer(config.issuer).setAudience(config.audience).setIssuedAt().setExpirationTime('5m').sign(config.secret);
+  return `Bearer ${token}`;
+}
+
 beforeEach(() => vi.clearAllMocks());
 
 describe('ORP routes', () => {
   it('POST creates an ORP through the service', async () => {
     mocks.createORPForCase.mockResolvedValue(storedOrp);
-    const response = await request(app).post('/api/v1/cases/case-1/orps').expect(201);
+    const response = await request(app).post('/api/v1/cases/case-1/orps').set('Authorization', await authorization()).expect(201);
     expect(mocks.createORPForCase).toHaveBeenCalledWith('case-1');
     expect(response.body.data.versionNumber).toBe(1);
   });
@@ -63,14 +75,14 @@ describe('ORP routes', () => {
     ['ORP_VERSION_CONFLICT', 409]
   ])('POST maps %s to HTTP %s', async (code, status) => {
     mocks.createORPForCase.mockRejectedValue(new Error(code));
-    const response = await request(app).post('/api/v1/cases/case-1/orps').expect(status);
+    const response = await request(app).post('/api/v1/cases/case-1/orps').set('Authorization', await authorization()).expect(status);
     expect(response.body.error.code).toBe(code);
   });
 
   it('GET returns ORP history newest first', async () => {
     mocks.caseFindUnique.mockResolvedValue({ id: 'case-1' });
     mocks.orpFindMany.mockResolvedValue([storedOrp]);
-    const response = await request(app).get('/api/v1/cases/case-1/orps').expect(200);
+    const response = await request(app).get('/api/v1/cases/case-1/orps').set('Authorization', await authorization()).expect(200);
     expect(response.body.data[0].versionNumber).toBe(1);
     expect(mocks.orpFindMany).toHaveBeenCalledWith(expect.objectContaining({
       orderBy: [{ createdAt: 'desc' }, { versionNumber: 'desc' }]
@@ -79,7 +91,7 @@ describe('ORP routes', () => {
 
   it('GET history returns CASE_NOT_FOUND', async () => {
     mocks.caseFindUnique.mockResolvedValue(null);
-    const response = await request(app).get('/api/v1/cases/missing/orps').expect(404);
+    const response = await request(app).get('/api/v1/cases/missing/orps').set('Authorization', await authorization()).expect(404);
     expect(response.body.error.code).toBe('CASE_NOT_FOUND');
   });
 
@@ -89,7 +101,7 @@ describe('ORP routes', () => {
       case: { id: 'case-1', asset: { id: 'asset-1' } },
       riskAssessment: { id: 'risk-1' }
     });
-    const response = await request(app).get('/api/v1/orps/orp-1').expect(200);
+    const response = await request(app).get('/api/v1/orps/orp-1').set('Authorization', await authorization()).expect(200);
     expect(response.body.data.case.asset.id).toBe('asset-1');
     expect(response.body.data.riskAssessment.id).toBe('risk-1');
     expect(response.body.data.recommendedActions[0].actionCode).toBe('ACT_INSPECT_DETAILED');
@@ -105,14 +117,15 @@ describe('ORP routes', () => {
       case: { id: 'case-1', asset: { id: 'asset-1' } },
       riskAssessment: { id: 'risk-1' }
     });
-    const response = await request(app).get('/api/v1/orps/orp-1').expect(200);
+    const response = await request(app).get('/api/v1/orps/orp-1').set('Authorization', await authorization()).expect(200);
     expect(response.body.data.recommendedActions).toEqual([]);
     expect(response.body.data.alternativeActions).toEqual([]);
   });
 
   it('rejects whitespace-only route IDs', async () => {
-    const post = await request(app).post('/api/v1/cases/%20/orps').expect(400);
-    const detail = await request(app).get('/api/v1/orps/%20').expect(400);
+    const auth = await authorization();
+    const post = await request(app).post('/api/v1/cases/%20/orps').set('Authorization', auth).expect(400);
+    const detail = await request(app).get('/api/v1/orps/%20').set('Authorization', auth).expect(400);
     expect(post.body.error.code).toBe('INVALID_INPUT');
     expect(detail.body.error.code).toBe('INVALID_INPUT');
   });

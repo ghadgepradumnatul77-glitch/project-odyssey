@@ -41,6 +41,12 @@ import authRoutes
 
 import { getAuthConfig }
   from './config/auth';
+import { authenticate }
+  from './middleware/authenticate';
+import { requireRole }
+  from './middleware/require-role';
+import { SystemRole }
+  from './generated/prisma';
 
 
 const app = express();
@@ -98,7 +104,7 @@ app.get('/api/v1/health', (_req, res) => {
 // DATABASE TEST
 // ======================================================
 
-app.get('/api/v1/db-test', async (_req, res) => {
+app.get('/api/v1/db-test', authenticate, requireRole(SystemRole.SYSTEM_ADMIN), async (_req, res) => {
 
   try {
 
@@ -233,10 +239,12 @@ app.use((_req, res) => {
 // START SERVER
 // ======================================================
 
-app.listen(port, () => {
+if (process.env.NODE_ENV !== 'test') app.listen(port, () => {
 
   console.log(
     `ODYSSEY API running on http://localhost:${port}`
   );
 
 });
+
+export { app };

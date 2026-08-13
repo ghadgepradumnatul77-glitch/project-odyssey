@@ -1,5 +1,8 @@
 import { Router } from 'express';
 import prisma from '../../lib/prisma';
+import { SystemRole } from '../../generated/prisma';
+import { authenticate } from '../../middleware/authenticate';
+import { requireRole } from '../../middleware/require-role';
 
 const router = Router();
 
@@ -8,7 +11,7 @@ const router = Router();
 // GET /api/v1/cases
 // ======================================================
 
-router.get('/', async (_req, res) => {
+router.get('/', authenticate, async (_req, res) => {
   try {
     const cases = await prisma.case.findMany({
       include: {
@@ -60,7 +63,7 @@ router.get('/', async (_req, res) => {
 // POST /api/v1/cases
 // ======================================================
 
-router.post('/', async (req, res) => {
+router.post('/', authenticate, requireRole(SystemRole.OFFICER, SystemRole.SYSTEM_ADMIN), async (req, res) => {
   try {
     const {
       caseNumber,
@@ -205,9 +208,16 @@ router.post('/', async (req, res) => {
 // GET /api/v1/cases/:caseId/inspections
 // ======================================================
 
-router.get('/:caseId/inspections', async (req, res) => {
+router.get('/:caseId/inspections', authenticate, async (req, res) => {
   try {
-    const { caseId } = req.params;
+    const caseId = Array.isArray(req.params.caseId) ? '' : req.params.caseId;
+
+    if (!caseId || !caseId.trim()) {
+      return res.status(400).json({
+        success: false,
+        error: { code: 'INVALID_INPUT', message: 'caseId is required.' }
+      });
+    }
 
     const existingCase = await prisma.case.findUnique({
       where: {
@@ -307,4 +317,3 @@ router.get('/:caseId/inspections', async (req, res) => {
 
 
 export default router;
-

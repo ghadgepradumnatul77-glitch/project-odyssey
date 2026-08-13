@@ -1,10 +1,13 @@
 import { Router } from 'express';
 import prisma from '../../lib/prisma';
+import { SystemRole } from '../../generated/prisma';
+import { authenticate } from '../../middleware/authenticate';
+import { requireRole } from '../../middleware/require-role';
 
 const router = Router();
 
 // GET /api/v1/departments
-router.get('/', async (_req, res) => {
+router.get('/', authenticate, async (_req, res) => {
   try {
     const departments = await prisma.department.findMany({
       orderBy: {
@@ -30,7 +33,7 @@ router.get('/', async (_req, res) => {
 });
 
 // POST /api/v1/departments
-router.post('/', async (req, res) => {
+router.post('/', authenticate, requireRole(SystemRole.SYSTEM_ADMIN), async (req, res) => {
   try {
     const { name, code } = req.body;
 

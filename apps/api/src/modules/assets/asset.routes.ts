@@ -1,5 +1,8 @@
 import { Router } from 'express';
 import prisma from '../../lib/prisma';
+import { SystemRole } from '../../generated/prisma';
+import { authenticate } from '../../middleware/authenticate';
+import { requireRole } from '../../middleware/require-role';
 
 const router = Router();
 
@@ -8,7 +11,7 @@ const router = Router();
 // GET /api/v1/assets
 // ======================================================
 
-router.get('/', async (_req, res) => {
+router.get('/', authenticate, async (_req, res) => {
   try {
     const assets = await prisma.asset.findMany({
       include: {
@@ -58,7 +61,7 @@ router.get('/', async (_req, res) => {
 // POST /api/v1/assets
 // ======================================================
 
-router.post('/', async (req, res) => {
+router.post('/', authenticate, requireRole(SystemRole.SYSTEM_ADMIN), async (req, res) => {
   try {
     const {
       assetCode,

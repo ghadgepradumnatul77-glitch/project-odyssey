@@ -1,6 +1,9 @@
 import { Router } from 'express';
 import prisma from '../../lib/prisma';
 import { runAssessmentForCase } from './risk.service';
+import { SystemRole } from '../../generated/prisma';
+import { authenticate } from '../../middleware/authenticate';
+import { requireRole } from '../../middleware/require-role';
 
 const router = Router();
 
@@ -8,7 +11,7 @@ const router = Router();
 // ASSESS RISK FOR A CASE
 // POST /api/v1/cases/:caseId/assess-risk
 // ======================================================
-router.post('/:caseId/assess-risk', async (req, res) => {
+router.post('/:caseId/assess-risk', authenticate, requireRole(SystemRole.OFFICER), async (req, res) => {
   try {
     const { caseId } = req.params;
 
@@ -65,7 +68,7 @@ router.post('/:caseId/assess-risk', async (req, res) => {
 // GET RISK ASSESSMENTS FOR A CASE
 // GET /api/v1/cases/:caseId/risk-assessments
 // ======================================================
-router.get('/:caseId/risk-assessments', async (req, res) => {
+router.get('/:caseId/risk-assessments', authenticate, async (req, res) => {
   try {
     const { caseId } = req.params;
 
