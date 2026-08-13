@@ -4,6 +4,10 @@ import { runAssessmentForCase } from './risk.service';
 import { SystemRole } from '../../generated/prisma';
 import { authenticate } from '../../middleware/authenticate';
 import { requireRole } from '../../middleware/require-role';
+import {
+  assertVisibleCase,
+  ScopedResourceNotFoundError
+} from '../../security/organizational-scope';
 
 const router = Router();
 
@@ -25,7 +29,7 @@ router.post('/:caseId/assess-risk', authenticate, requireRole(SystemRole.OFFICER
       });
     }
 
-    const result = await runAssessmentForCase(caseId.trim());
+    const result = await runAssessmentForCase(caseId.trim(), req.user!);
 
     return res.status(200).json({
       success: true,
@@ -82,19 +86,7 @@ router.get('/:caseId/risk-assessments', authenticate, async (req, res) => {
       });
     }
 
-    const existingCase = await prisma.case.findUnique({
-      where: { id: caseId.trim() }
-    });
-
-    if (!existingCase) {
-      return res.status(404).json({
-        success: false,
-        error: {
-          code: 'CASE_NOT_FOUND',
-          message: 'Case not found.'
-        }
-      });
-    }
+    await assertVisibleCase(caseId.trim(), req.user!);
 
     const assessments = await prisma.riskAssessment.findMany({
       where: { caseId: caseId.trim() },
@@ -107,6 +99,9 @@ router.get('/:caseId/risk-assessments', authenticate, async (req, res) => {
     });
 
   } catch (error) {
+    if (error instanceof ScopedResourceNotFoundError) {
+      return res.status(404).json({ success: false, error: { code: 'CASE_NOT_FOUND', message: 'Case not found.' } });
+    }
     console.error('Failed to fetch risk assessments:', error);
     return res.status(500).json({
       success: false,

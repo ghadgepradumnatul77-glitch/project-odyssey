@@ -104,7 +104,7 @@ describe('authorization surface', () => {
     }));
   });
 
-  it('preserves department scope rejection for the authenticated inspector', async () => {
+  it('hides a cross-scope inspection target from the authenticated inspector', async () => {
     mocks.caseFindUnique.mockResolvedValue({ id: 'case-1', asset: { departmentId: 'dep-2', jurisdictionId: 'jur-1' } });
     const body = {
       caseId: 'case-1', inspectionDate: '2026-08-13T00:00:00Z', structuralCondition: 'POOR',
@@ -112,7 +112,7 @@ describe('authorization surface', () => {
       hospitalRoute: true, weatherRisk: 'HIGH', heavyRainExpected: true
     };
     expect((await request(app).post('/api/v1/inspections')
-      .set('Authorization', await authorization('OFFICER')).send(body).expect(400)).body.error.code)
-      .toBe('INSPECTOR_DEPARTMENT_MISMATCH');
+      .set('Authorization', await authorization('OFFICER')).send(body).expect(404)).body.error.code)
+      .toBe('CASE_NOT_FOUND');
   });
 });

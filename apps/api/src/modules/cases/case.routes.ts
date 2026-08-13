@@ -3,6 +3,12 @@ import prisma from '../../lib/prisma';
 import { SystemRole } from '../../generated/prisma';
 import { authenticate } from '../../middleware/authenticate';
 import { requireRole } from '../../middleware/require-role';
+import {
+  assertCaseCreationAsset,
+  assertVisibleCase,
+  buildCaseReadWhere,
+  ScopedResourceNotFoundError
+} from '../../security/organizational-scope';
 
 const router = Router();
 
@@ -11,9 +17,10 @@ const router = Router();
 // GET /api/v1/cases
 // ======================================================
 
-router.get('/', authenticate, async (_req, res) => {
+router.get('/', authenticate, async (req, res) => {
   try {
     const cases = await prisma.case.findMany({
+      where: buildCaseReadWhere(req.user!),
       include: {
         asset: {
           include: {
@@ -103,21 +110,7 @@ router.post('/', authenticate, requireRole(SystemRole.OFFICER, SystemRole.SYSTEM
     // Check asset exists
     // --------------------------------------------------
 
-    const asset = await prisma.asset.findUnique({
-      where: {
-        id: assetId.trim()
-      }
-    });
-
-    if (!asset) {
-      return res.status(404).json({
-        success: false,
-        error: {
-          code: 'ASSET_NOT_FOUND',
-          message: 'Selected asset does not exist.'
-        }
-      });
-    }
+    await assertCaseCreationAsset(assetId.trim(), req.user!);
 
 
     // --------------------------------------------------
@@ -190,6 +183,9 @@ router.post('/', authenticate, requireRole(SystemRole.OFFICER, SystemRole.SYSTEM
     });
 
   } catch (error) {
+    if (error instanceof ScopedResourceNotFoundError) {
+      return res.status(404).json({ success: false, error: { code: 'ASSET_NOT_FOUND', message: 'Selected asset does not exist.' } });
+    }
     console.error('Failed to create case:', error);
 
     return res.status(500).json({
@@ -219,21 +215,7 @@ router.get('/:caseId/inspections', authenticate, async (req, res) => {
       });
     }
 
-    const existingCase = await prisma.case.findUnique({
-      where: {
-        id: caseId
-      }
-    });
-
-    if (!existingCase) {
-      return res.status(404).json({
-        success: false,
-        error: {
-          code: 'CASE_NOT_FOUND',
-          message: 'Case not found.'
-        }
-      });
-    }
+    await assertVisibleCase(caseId, req.user!);
 
     const inspections = await prisma.inspection.findMany({
       where: {
@@ -303,6 +285,9 @@ router.get('/:caseId/inspections', authenticate, async (req, res) => {
     });
 
   } catch (error) {
+    if (error instanceof ScopedResourceNotFoundError) {
+      return res.status(404).json({ success: false, error: { code: error.code, message: error.code === 'ASSET_NOT_FOUND' ? 'Selected asset does not exist.' : 'Case not found.' } });
+    }
     console.error('Failed to fetch case inspections:', error);
 
     return res.status(500).json({

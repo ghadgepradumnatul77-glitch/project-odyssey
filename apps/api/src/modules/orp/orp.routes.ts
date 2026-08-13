@@ -4,6 +4,11 @@ import { createORPForCase, getApprovedActions } from './orp.service';
 import { SystemRole } from '../../generated/prisma';
 import { authenticate } from '../../middleware/authenticate';
 import { requireRole } from '../../middleware/require-role';
+import {
+  assertVisibleCase,
+  buildOrpReadWhere,
+  ScopedResourceNotFoundError
+} from '../../security/organizational-scope';
 
 const router = Router();
 
@@ -38,7 +43,7 @@ router.post('/cases/:caseId/orps', authenticate, requireRole(SystemRole.OFFICER)
       });
     }
 
-    const orp = await createORPForCase(caseId);
+    const orp = await createORPForCase(caseId, req.user!);
 
     return res.status(201).json({
       success: true,
@@ -123,19 +128,7 @@ router.get('/cases/:caseId/orps', authenticate, async (req, res) => {
       });
     }
 
-    const existingCase = await prisma.case.findUnique({
-      where: { id: caseId }
-    });
-
-    if (!existingCase) {
-      return res.status(404).json({
-        success: false,
-        error: {
-          code: 'CASE_NOT_FOUND',
-          message: 'Case not found.'
-        }
-      });
-    }
+    await assertVisibleCase(caseId, req.user!);
 
     const orps = await prisma.operationalResponsePlan.findMany({
       where: { caseId },
@@ -151,6 +144,9 @@ router.get('/cases/:caseId/orps', authenticate, async (req, res) => {
     });
 
   } catch (error) {
+    if (error instanceof ScopedResourceNotFoundError) {
+      return res.status(404).json({ success: false, error: { code: 'CASE_NOT_FOUND', message: 'Case not found.' } });
+    }
     console.error('Failed to fetch ORPs:', error);
     return res.status(500).json({
       success: false,
@@ -179,7 +175,7 @@ router.get('/orps/:orpId', authenticate, async (req, res) => {
     }
 
     const orp = await prisma.operationalResponsePlan.findUnique({
-      where: { id: orpId },
+      where: { id: orpId, AND: [buildOrpReadWhere(req.user!)] },
       include: {
         case: {
           include: {

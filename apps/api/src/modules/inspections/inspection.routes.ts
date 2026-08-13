@@ -3,6 +3,11 @@ import prisma from '../../lib/prisma';
 import { SystemRole } from '../../generated/prisma';
 import { authenticate } from '../../middleware/authenticate';
 import { requireRole } from '../../middleware/require-role';
+import {
+  assertOperationalCaseScope,
+  buildInspectionReadWhere,
+  ScopedResourceNotFoundError
+} from '../../security/organizational-scope';
 
 const router = Router();
 
@@ -11,9 +16,10 @@ const router = Router();
 // GET /api/v1/inspections
 // ======================================================
 
-router.get('/', authenticate, async (_req, res) => {
+router.get('/', authenticate, async (req, res) => {
   try {
     const inspections = await prisma.inspection.findMany({
+      where: buildInspectionReadWhere(req.user!),
       include: {
         case: {
           include: {
@@ -177,24 +183,7 @@ router.post('/', authenticate, requireRole(SystemRole.OFFICER), async (req, res)
     // Verify Case exists
     // --------------------------------------------------
 
-    const targetCase = await prisma.case.findUnique({
-      where: {
-        id: caseId.trim()
-      },
-      include: {
-        asset: true
-      }
-    });
-
-    if (!targetCase) {
-      return res.status(404).json({
-        success: false,
-        error: {
-          code: 'CASE_NOT_FOUND',
-          message: 'Case not found.'
-        }
-      });
-    }
+    const targetCase = await assertOperationalCaseScope(caseId.trim(), req.user!);
 
 
     // --------------------------------------------------
@@ -213,36 +202,6 @@ router.post('/', authenticate, requireRole(SystemRole.OFFICER), async (req, res)
         error: {
           code: 'INSPECTOR_NOT_FOUND',
           message: 'Inspector not found.'
-        }
-      });
-    }
-
-
-    // --------------------------------------------------
-    // Verify Inspector belongs to same Department as Asset
-    // --------------------------------------------------
-
-    if (inspector.departmentId !== targetCase.asset.departmentId) {
-      return res.status(400).json({
-        success: false,
-        error: {
-          code: 'INSPECTOR_DEPARTMENT_MISMATCH',
-          message: 'Inspector does not belong to the same department as the case asset.'
-        }
-      });
-    }
-
-
-    // --------------------------------------------------
-    // Verify Inspector belongs to same Jurisdiction as Asset
-    // --------------------------------------------------
-
-    if (inspector.jurisdictionId !== targetCase.asset.jurisdictionId) {
-      return res.status(400).json({
-        success: false,
-        error: {
-          code: 'INSPECTOR_JURISDICTION_MISMATCH',
-          message: 'Inspector does not belong to the same jurisdiction as the case asset.'
         }
       });
     }
@@ -341,6 +300,9 @@ router.post('/', authenticate, requireRole(SystemRole.OFFICER), async (req, res)
     });
 
   } catch (error) {
+    if (error instanceof ScopedResourceNotFoundError) {
+      return res.status(404).json({ success: false, error: { code: 'CASE_NOT_FOUND', message: 'Case not found.' } });
+    }
     console.error('Failed to create inspection:', error);
 
     return res.status(500).json({

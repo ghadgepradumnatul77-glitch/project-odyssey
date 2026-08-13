@@ -64,7 +64,9 @@ describe('ORP routes', () => {
   it('POST creates an ORP through the service', async () => {
     mocks.createORPForCase.mockResolvedValue(storedOrp);
     const response = await request(app).post('/api/v1/cases/case-1/orps').set('Authorization', await authorization()).expect(201);
-    expect(mocks.createORPForCase).toHaveBeenCalledWith('case-1');
+    expect(mocks.createORPForCase).toHaveBeenCalledWith('case-1', expect.objectContaining({
+      id: 'user-1', departmentId: 'dep-1', jurisdictionId: 'jur-1'
+    }));
     expect(response.body.data.versionNumber).toBe(1);
   });
 

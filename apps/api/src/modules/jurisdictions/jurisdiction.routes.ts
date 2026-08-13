@@ -3,13 +3,15 @@ import prisma from '../../lib/prisma';
 import { SystemRole } from '../../generated/prisma';
 import { authenticate } from '../../middleware/authenticate';
 import { requireRole } from '../../middleware/require-role';
+import { hasGlobalReadVisibility } from '../../security/organizational-scope';
 
 const router = Router();
 
 // GET /api/v1/jurisdictions
-router.get('/', authenticate, async (_req, res) => {
+router.get('/', authenticate, async (req, res) => {
   try {
     const jurisdictions = await prisma.jurisdiction.findMany({
+      where: hasGlobalReadVisibility(req.user!) ? {} : { id: req.user!.jurisdictionId },
       include: {
         department: {
           select: {

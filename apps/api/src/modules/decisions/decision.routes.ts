@@ -27,7 +27,7 @@ router.post('/orps/:orpId/decisions', authenticate, requireRole(SystemRole.OFFIC
     if (!orpId || !decisionTypes.has(decisionType)) {
       return res.status(400).json({ success: false, error: { code: 'INVALID_INPUT', message: 'orpId and a valid decisionType are required.' } });
     }
-    const decision = await submitOrpDecision(orpId, req.user!.id, {
+    const decision = await submitOrpDecision(orpId, req.user!, {
       decisionType,
       reason: req.body.reason,
       remarks: req.body.remarks,
@@ -44,7 +44,7 @@ router.get('/orps/:orpId/decisions', authenticate, async (req, res) => {
   try {
     const orpId = requiredText(req.params.orpId);
     if (!orpId) return res.status(400).json({ success: false, error: { code: 'INVALID_INPUT', message: 'orpId is required.' } });
-    return res.status(200).json({ success: true, data: await getOrpDecisionHistory(orpId), ordering: 'createdAt ASC, id ASC' });
+    return res.status(200).json({ success: true, data: await getOrpDecisionHistory(orpId, req.user!), ordering: 'createdAt ASC, id ASC' });
   } catch (error) {
     return sendError(res, error);
   }
@@ -54,7 +54,7 @@ router.get('/cases/:caseId/decisions', authenticate, async (req, res) => {
   try {
     const caseId = requiredText(req.params.caseId);
     if (!caseId) return res.status(400).json({ success: false, error: { code: 'INVALID_INPUT', message: 'caseId is required.' } });
-    return res.status(200).json({ success: true, data: await getCaseDecisionHistory(caseId), ordering: 'createdAt ASC, id ASC' });
+    return res.status(200).json({ success: true, data: await getCaseDecisionHistory(caseId, req.user!), ordering: 'createdAt ASC, id ASC' });
   } catch (error) {
     return sendError(res, error);
   }

@@ -1,5 +1,9 @@
 import prisma from '../../lib/prisma';
 import { RiskLevel, PriorityLevel, CaseStatus, Inspection } from '../../generated/prisma';
+import {
+  assertOperationalCaseScope,
+  OrganizationalPrincipal
+} from '../../security/organizational-scope';
 
 // Type definitions for output
 export interface RiskCalculationResult {
@@ -292,14 +296,9 @@ export function calculateRiskAndPriority(inspection: Inspection): RiskCalculatio
  * Loads the latest inspection for a case, executes risk assessment calculations,
  * and updates the case details within an atomic Prisma transaction.
  */
-export async function runAssessmentForCase(caseId: string) {
+export async function runAssessmentForCase(caseId: string, principal: OrganizationalPrincipal) {
   // Find case
-  const existingCase = await prisma.case.findUnique({
-    where: { id: caseId }
-  });
-  if (!existingCase) {
-    throw new Error('CASE_NOT_FOUND');
-  }
+  const existingCase = await assertOperationalCaseScope(caseId, principal);
 
   // Find latest inspection
   const latestInspection = await prisma.inspection.findFirst({

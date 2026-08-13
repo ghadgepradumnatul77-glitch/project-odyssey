@@ -46,7 +46,11 @@ describe('decision routes', () => {
     if (decisionType === OrpDecisionType.ESCALATED) body.forwardToUserId = 'officer-2';
     const response = await request(app).post('/api/v1/orps/orp-1/decisions').set('Authorization', `Bearer ${await token()}`).send(body).expect(201);
     expect(response.body.data.decisionType).toBe(decisionType);
-    expect(mocks.submit).toHaveBeenCalledWith('orp-1', 'authenticated-reviewer', expect.objectContaining({ decisionType }));
+    expect(mocks.submit).toHaveBeenCalledWith(
+      'orp-1',
+      expect.objectContaining({ id: 'authenticated-reviewer', departmentId: 'dep-1', jurisdictionId: 'jur-1' }),
+      expect.objectContaining({ decisionType })
+    );
   });
 
   it.each([
@@ -82,6 +86,7 @@ describe('decision routes', () => {
   it('GET returns deterministic ORP decision history', async () => {
     mocks.orpHistory.mockResolvedValue([{ id: 'decision-1', reviewer: { employeeCode: 'PWD-EE-001' } }]);
     const response = await request(app).get('/api/v1/orps/orp-1/decisions').set('Authorization', `Bearer ${await token()}`).expect(200);
+    expect(mocks.orpHistory).toHaveBeenCalledWith('orp-1', expect.objectContaining({ id: 'authenticated-reviewer' }));
     expect(response.body.data[0].reviewer.employeeCode).toBe('PWD-EE-001');
     expect(response.body.ordering).toBe('createdAt ASC, id ASC');
   });
@@ -89,6 +94,7 @@ describe('decision routes', () => {
   it('GET returns deterministic case decision history', async () => {
     mocks.caseHistory.mockResolvedValue([{ id: 'decision-1', orp: { versionNumber: 1 } }]);
     const response = await request(app).get('/api/v1/cases/case-1/decisions').set('Authorization', `Bearer ${await token()}`).expect(200);
+    expect(mocks.caseHistory).toHaveBeenCalledWith('case-1', expect.objectContaining({ id: 'authenticated-reviewer' }));
     expect(response.body.data[0].orp.versionNumber).toBe(1);
     expect(response.body.ordering).toBe('createdAt ASC, id ASC');
   });

@@ -9,6 +9,14 @@ import {
   UserStatus
 } from '../../generated/prisma';
 import { WorkflowError } from './workflow-error';
+import {
+  buildCaseReadWhere,
+  buildDecisionReadWhere,
+  buildOrpMutationWhere,
+  buildOrpReadWhere,
+  isSameOrganizationalScope,
+  OrganizationalPrincipal
+} from '../../security/organizational-scope';
 
 export interface SubmitDecisionInput {
   decisionType: OrpDecisionType;
@@ -60,6 +68,7 @@ export function reviewerScopeError(
   reviewer: { departmentId: string; jurisdictionId: string },
   asset: { departmentId: string; jurisdictionId: string }
 ): 'REVIEWER_DEPARTMENT_MISMATCH' | 'REVIEWER_JURISDICTION_MISMATCH' | null {
+  if (isSameOrganizationalScope(reviewer, asset)) return null;
   if (reviewer.departmentId !== asset.departmentId) return 'REVIEWER_DEPARTMENT_MISMATCH';
   if (reviewer.jurisdictionId !== asset.jurisdictionId) return 'REVIEWER_JURISDICTION_MISMATCH';
   return null;
@@ -83,11 +92,11 @@ function requireReason(decisionType: OrpDecisionType, reason?: string | null): s
   return normalized;
 }
 
-export async function submitOrpDecision(orpId: string, authenticatedReviewerId: string, input: SubmitDecisionInput) {
+export async function submitOrpDecision(orpId: string, principal: OrganizationalPrincipal, input: SubmitDecisionInput) {
   const now = new Date();
   const reason = requireReason(input.decisionType, input.reason);
   const orp = await prisma.operationalResponsePlan.findUnique({
-    where: { id: orpId },
+    where: { id: orpId, AND: [buildOrpMutationWhere(principal)] },
     include: { case: { include: { asset: true } }, decisions: { select: { id: true } } }
   });
   if (!orp) throw new WorkflowError('ORP_NOT_FOUND', 404, 'Operational response plan not found.');
@@ -104,7 +113,7 @@ export async function submitOrpDecision(orpId: string, authenticatedReviewerId: 
     throw new WorkflowError('ORP_ALREADY_DECIDED', 409, 'This operational response plan has already been decided.');
   }
 
-  const reviewer = await prisma.user.findUnique({ where: { id: authenticatedReviewerId } });
+  const reviewer = await prisma.user.findUnique({ where: { id: principal.id } });
   if (!reviewer) throw new WorkflowError('REVIEWER_NOT_FOUND', 404, 'Reviewer not found.');
   if (reviewer.status !== UserStatus.ACTIVE) throw new WorkflowError('REVIEWER_INACTIVE', 403, 'Reviewer is inactive.');
   if (reviewer.role !== SystemRole.OFFICER) throw new WorkflowError('REVIEWER_ROLE_INVALID', 403, 'Reviewer must have the OFFICER system role.');
@@ -193,14 +202,14 @@ const decisionInclude = {
   orp: { select: { id: true, versionNumber: true } }
 } satisfies Prisma.OrpDecisionInclude;
 
-export async function getOrpDecisionHistory(orpId: string) {
-  const orp = await prisma.operationalResponsePlan.findUnique({ where: { id: orpId }, select: { id: true } });
+export async function getOrpDecisionHistory(orpId: string, principal: OrganizationalPrincipal) {
+  const orp = await prisma.operationalResponsePlan.findUnique({ where: { id: orpId, AND: [buildOrpReadWhere(principal)] }, select: { id: true } });
   if (!orp) throw new WorkflowError('ORP_NOT_FOUND', 404, 'Operational response plan not found.');
-  return prisma.orpDecision.findMany({ where: { orpId }, include: decisionInclude, orderBy: [{ createdAt: 'asc' }, { id: 'asc' }] });
+  return prisma.orpDecision.findMany({ where: { orpId, ...buildDecisionReadWhere(principal) }, include: decisionInclude, orderBy: [{ createdAt: 'asc' }, { id: 'asc' }] });
 }
 
-export async function getCaseDecisionHistory(caseId: string) {
-  const existingCase = await prisma.case.findUnique({ where: { id: caseId }, select: { id: true } });
+export async function getCaseDecisionHistory(caseId: string, principal: OrganizationalPrincipal) {
+  const existingCase = await prisma.case.findUnique({ where: { id: caseId, AND: [buildCaseReadWhere(principal)] }, select: { id: true } });
   if (!existingCase) throw new WorkflowError('CASE_NOT_FOUND', 404, 'Case not found.');
-  return prisma.orpDecision.findMany({ where: { caseId }, include: decisionInclude, orderBy: [{ createdAt: 'asc' }, { id: 'asc' }] });
+  return prisma.orpDecision.findMany({ where: { caseId, ...buildDecisionReadWhere(principal) }, include: decisionInclude, orderBy: [{ createdAt: 'asc' }, { id: 'asc' }] });
 }

@@ -1,5 +1,9 @@
 import prisma from '../../lib/prisma';
 import { CaseStatus, Prisma, RiskLevel, PriorityLevel, Inspection } from '../../generated/prisma';
+import {
+  assertOperationalCaseScope,
+  OrganizationalPrincipal
+} from '../../security/organizational-scope';
 
 
 // ======================================================
@@ -297,14 +301,9 @@ export function generateORPActions(
 // CREATE ORP FOR A CASE
 // ======================================================
 
-export async function createORPForCase(caseId: string) {
+export async function createORPForCase(caseId: string, principal: OrganizationalPrincipal) {
   // 1. Find the Case
-  const existingCase = await prisma.case.findUnique({
-    where: { id: caseId }
-  });
-  if (!existingCase) {
-    throw new Error('CASE_NOT_FOUND');
-  }
+  const existingCase = await assertOperationalCaseScope(caseId, principal);
   if (existingCase.status !== CaseStatus.ORP_READY) {
     throw new Error('CASE_NOT_READY_FOR_ORP');
   }

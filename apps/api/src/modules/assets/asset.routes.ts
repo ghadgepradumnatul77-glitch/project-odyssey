@@ -3,6 +3,7 @@ import prisma from '../../lib/prisma';
 import { SystemRole } from '../../generated/prisma';
 import { authenticate } from '../../middleware/authenticate';
 import { requireRole } from '../../middleware/require-role';
+import { buildAssetReadWhere } from '../../security/organizational-scope';
 
 const router = Router();
 
@@ -11,9 +12,10 @@ const router = Router();
 // GET /api/v1/assets
 // ======================================================
 
-router.get('/', authenticate, async (_req, res) => {
+router.get('/', authenticate, async (req, res) => {
   try {
     const assets = await prisma.asset.findMany({
+      where: buildAssetReadWhere(req.user!),
       include: {
         department: {
           select: {
