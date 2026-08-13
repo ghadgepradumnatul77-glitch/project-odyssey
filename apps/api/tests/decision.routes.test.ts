@@ -2,13 +2,18 @@ import express from 'express';
 import request from 'supertest';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { OrpDecisionType } from '../src/generated/prisma';
+import { SignJWT } from 'jose';
+import { getAuthConfig } from '../src/config/auth';
 import { WorkflowError } from '../src/modules/decisions/workflow-error';
 
 const mocks = vi.hoisted(() => ({
   submit: vi.fn(),
   orpHistory: vi.fn(),
   caseHistory: vi.fn()
+  , userFindUnique: vi.fn()
 }));
+
+vi.mock('../src/lib/prisma', () => ({ default: { user: { findUnique: mocks.userFindUnique } } }));
 
 vi.mock('../src/modules/decisions/decision.service', () => ({
   submitOrpDecision: mocks.submit,
@@ -22,17 +27,26 @@ const app = express();
 app.use(express.json());
 app.use('/api/v1', decisionRoutes);
 
-beforeEach(() => vi.clearAllMocks());
+async function token(role = 'OFFICER', id = 'authenticated-reviewer') {
+  const config = getAuthConfig();
+  return new SignJWT({}).setProtectedHeader({ alg: 'HS256' }).setSubject(id)
+    .setIssuer(config.issuer).setAudience(config.audience).setIssuedAt().setExpirationTime('5m').sign(config.secret);
+}
+
+beforeEach(() => {
+  vi.clearAllMocks();
+  mocks.userFindUnique.mockResolvedValue({ id: 'authenticated-reviewer', role: 'OFFICER', status: 'ACTIVE', departmentId: 'dep-1', jurisdictionId: 'jur-1' });
+});
 
 describe('decision routes', () => {
   it.each(Object.values(OrpDecisionType))('POST accepts %s through the decision service', async (decisionType) => {
     mocks.submit.mockResolvedValue({ id: `decision-${decisionType}`, decisionType });
-    const body: Record<string, unknown> = { reviewerId: 'reviewer-1', decisionType };
+    const body: Record<string, unknown> = { decisionType };
     if (decisionType !== OrpDecisionType.APPROVED) body.reason = 'Required reason';
     if (decisionType === OrpDecisionType.ESCALATED) body.forwardToUserId = 'officer-2';
-    const response = await request(app).post('/api/v1/orps/orp-1/decisions').send(body).expect(201);
+    const response = await request(app).post('/api/v1/orps/orp-1/decisions').set('Authorization', `Bearer ${await token()}`).send(body).expect(201);
     expect(response.body.data.decisionType).toBe(decisionType);
-    expect(mocks.submit).toHaveBeenCalledWith('orp-1', expect.objectContaining({ reviewerId: 'reviewer-1', decisionType }));
+    expect(mocks.submit).toHaveBeenCalledWith('orp-1', 'authenticated-reviewer', expect.objectContaining({ decisionType }));
   });
 
   it.each([
@@ -46,10 +60,23 @@ describe('decision routes', () => {
     ['REVIEWER_JURISDICTION_MISMATCH', 403]
   ])('POST maps %s to HTTP %s', async (code, status) => {
     mocks.submit.mockRejectedValue(new WorkflowError(code, status, 'controlled'));
-    const response = await request(app).post('/api/v1/orps/orp-1/decisions').send({
-      reviewerId: 'reviewer-1', decisionType: 'APPROVED'
+    const response = await request(app).post('/api/v1/orps/orp-1/decisions').set('Authorization', `Bearer ${await token()}`).send({
+      decisionType: 'APPROVED'
     }).expect(status);
     expect(response.body.error.code).toBe(code);
+  });
+
+  it('rejects unauthenticated decision submission', async () => {
+    const response = await request(app).post('/api/v1/orps/orp-1/decisions').send({ decisionType: 'APPROVED' }).expect(401);
+    expect(response.body.error.code).toBe('AUTHENTICATION_REQUIRED');
+  });
+
+  it('rejects a body-supplied reviewerId and cannot impersonate another officer', async () => {
+    const response = await request(app).post('/api/v1/orps/orp-1/decisions')
+      .set('Authorization', `Bearer ${await token()}`)
+      .send({ reviewerId: 'another-officer', decisionType: 'APPROVED' }).expect(400);
+    expect(response.body.error.code).toBe('REVIEWER_ID_NOT_ALLOWED');
+    expect(mocks.submit).not.toHaveBeenCalled();
   });
 
   it('GET returns deterministic ORP decision history', async () => {

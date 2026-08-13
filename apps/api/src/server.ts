@@ -36,8 +36,17 @@ import decisionRoutes
 import authorityRoutes
   from './modules/authorities/authority.routes';
 
+import authRoutes
+  from './modules/auth/auth.routes';
+
+import { getAuthConfig }
+  from './config/auth';
+
 
 const app = express();
+
+// Validate authentication configuration during startup, before accepting traffic.
+getAuthConfig();
 
 const port =
   Number(process.env.API_PORT || 4000);
@@ -143,6 +152,11 @@ app.get('/api/v1/db-test', async (_req, res) => {
 // ======================================================
 // ODYSSEY API ROUTES
 // ======================================================
+
+app.use(
+  '/api/v1',
+  authRoutes
+);
 
 app.use(
   '/api/v1/departments',

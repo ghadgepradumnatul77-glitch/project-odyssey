@@ -1,9 +1,12 @@
 import { Router } from 'express';
-import { PriorityLevel } from '../../generated/prisma';
+import { PriorityLevel, SystemRole } from '../../generated/prisma';
 import { createApprovalAuthority, listApprovalAuthorities } from './authority.service';
 import { requiredText, WorkflowError } from '../decisions/workflow-error';
+import { authenticate } from '../../middleware/authenticate';
+import { requireRole } from '../../middleware/require-role';
 
 const router = Router();
+router.use(authenticate, requireRole(SystemRole.SYSTEM_ADMIN));
 const priorities = new Set(Object.values(PriorityLevel));
 
 function optionalBoolean(value: unknown): boolean | undefined | null {
@@ -19,6 +22,7 @@ function optionalDate(value: unknown): Date | null | undefined | 'INVALID' {
 }
 
 router.post('/approval-authorities', async (req, res) => {
+  console.info('Security: authority-management create attempted.', { userId: req.user!.id });
   try {
     const userId = requiredText(req.body.userId);
     const departmentId = requiredText(req.body.departmentId);
@@ -59,7 +63,8 @@ router.post('/approval-authorities', async (req, res) => {
   }
 });
 
-router.get('/approval-authorities', async (_req, res) => {
+router.get('/approval-authorities', async (req, res) => {
+  console.info('Security: authority-management list attempted.', { userId: req.user!.id });
   try {
     return res.status(200).json({ success: true, data: await listApprovalAuthorities() });
   } catch (error) {

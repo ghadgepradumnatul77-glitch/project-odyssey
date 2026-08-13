@@ -11,7 +11,6 @@ import {
 import { WorkflowError } from './workflow-error';
 
 export interface SubmitDecisionInput {
-  reviewerId: string;
   decisionType: OrpDecisionType;
   reason?: string | null;
   remarks?: string | null;
@@ -84,7 +83,7 @@ function requireReason(decisionType: OrpDecisionType, reason?: string | null): s
   return normalized;
 }
 
-export async function submitOrpDecision(orpId: string, input: SubmitDecisionInput) {
+export async function submitOrpDecision(orpId: string, authenticatedReviewerId: string, input: SubmitDecisionInput) {
   const now = new Date();
   const reason = requireReason(input.decisionType, input.reason);
   const orp = await prisma.operationalResponsePlan.findUnique({
@@ -105,7 +104,7 @@ export async function submitOrpDecision(orpId: string, input: SubmitDecisionInpu
     throw new WorkflowError('ORP_ALREADY_DECIDED', 409, 'This operational response plan has already been decided.');
   }
 
-  const reviewer = await prisma.user.findUnique({ where: { id: input.reviewerId } });
+  const reviewer = await prisma.user.findUnique({ where: { id: authenticatedReviewerId } });
   if (!reviewer) throw new WorkflowError('REVIEWER_NOT_FOUND', 404, 'Reviewer not found.');
   if (reviewer.status !== UserStatus.ACTIVE) throw new WorkflowError('REVIEWER_INACTIVE', 403, 'Reviewer is inactive.');
   if (reviewer.role !== SystemRole.OFFICER) throw new WorkflowError('REVIEWER_ROLE_INVALID', 403, 'Reviewer must have the OFFICER system role.');

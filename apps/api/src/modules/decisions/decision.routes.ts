@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { OrpDecisionType } from '../../generated/prisma';
 import { getCaseDecisionHistory, getOrpDecisionHistory, submitOrpDecision } from './decision.service';
 import { requiredText, WorkflowError } from './workflow-error';
+import { authenticate } from '../../middleware/authenticate';
 
 const router = Router();
 const decisionTypes = new Set(Object.values(OrpDecisionType));
@@ -14,16 +15,17 @@ function sendError(res: Parameters<Parameters<typeof router.post>[1]>[1], error:
   return res.status(500).json({ success: false, error: { code: 'DECISION_WORKFLOW_FAILED', message: 'Could not process decision workflow.' } });
 }
 
-router.post('/orps/:orpId/decisions', async (req, res) => {
+router.post('/orps/:orpId/decisions', authenticate, async (req, res) => {
   try {
     const orpId = requiredText(req.params.orpId);
-    const reviewerId = requiredText(req.body.reviewerId);
     const decisionType = req.body.decisionType;
-    if (!orpId || !reviewerId || !decisionTypes.has(decisionType)) {
-      return res.status(400).json({ success: false, error: { code: 'INVALID_INPUT', message: 'orpId, reviewerId and a valid decisionType are required.' } });
+    if (Object.prototype.hasOwnProperty.call(req.body, 'reviewerId')) {
+      return res.status(400).json({ success: false, error: { code: 'REVIEWER_ID_NOT_ALLOWED', message: 'reviewerId is derived from the authenticated identity and must not be supplied.' } });
     }
-    const decision = await submitOrpDecision(orpId, {
-      reviewerId,
+    if (!orpId || !decisionTypes.has(decisionType)) {
+      return res.status(400).json({ success: false, error: { code: 'INVALID_INPUT', message: 'orpId and a valid decisionType are required.' } });
+    }
+    const decision = await submitOrpDecision(orpId, req.user!.id, {
       decisionType,
       reason: req.body.reason,
       remarks: req.body.remarks,

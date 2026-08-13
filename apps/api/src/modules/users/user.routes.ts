@@ -1,8 +1,12 @@
 import { Router } from 'express';
 import bcrypt from 'bcryptjs';
 import prisma from '../../lib/prisma';
+import { SystemRole } from '../../generated/prisma';
+import { authenticate } from '../../middleware/authenticate';
+import { requireRole } from '../../middleware/require-role';
 
 const router = Router();
+router.use(authenticate, requireRole(SystemRole.SYSTEM_ADMIN));
 
 // ======================================================
 // GET ALL USERS

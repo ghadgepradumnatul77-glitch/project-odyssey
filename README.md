@@ -20,10 +20,12 @@ Phase-1 foundation for the Government Infrastructure Decision Intelligence Platf
 - AI: `http://localhost:8000/health`
 - Web: `http://localhost:5173`
 
-## Phase 1 approval identity limitation
+## Phase 1 authentication
 
-Human decision endpoints currently accept `reviewerId` in the request body. This
-provides domain-level validation against explicit `ApprovalAuthority` grants, but
-it is not production-grade authentication. Authentication middleware must later
-bind reviewer identity to the authenticated session or token. A job title or
-designation never grants approval authority.
+The API uses short-lived Bearer access tokens. Obtain one from
+`POST /api/v1/auth/login` and send it as `Authorization: Bearer <token>`.
+`GET /api/v1/auth/me` returns the current database-backed user. Logout is
+client-side token disposal in Phase 1; access-token revocation and refresh tokens
+are not implemented. Authentication establishes identity only. Operational-plan
+authority still comes exclusively from explicit `ApprovalAuthority` grants, never
+from a job title, authentication, or system role alone.
