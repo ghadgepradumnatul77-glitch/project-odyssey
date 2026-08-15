@@ -65,3 +65,14 @@ cannot close a Case. Closure is terminal in Phase 1 and has no reopen endpoint.
 governance only: it does not certify permanent safety, statutory compliance,
 payment, procurement, budget completion, or legal settlement, and it triggers no
 external or physical action.
+
+## Executive reporting
+
+Authenticated users can read a privacy-conscious, query-time projection through
+`GET /api/v1/cases/:caseId/decision-brief` and a deterministic, cursor-paginated
+history through `GET /api/v1/cases/:caseId/timeline`. Both endpoints use the
+existing organizational visibility rules (`SYSTEM_ADMIN` has global read access),
+perform no workflow mutations, and return `404` for missing or out-of-scope Cases.
+The brief follows one persisted Case-to-execution relationship chain and does not
+recalculate risk or regenerate an ORP. The timeline includes only milestones with
+persisted timestamps; it does not infer block, resume, or generic status history.

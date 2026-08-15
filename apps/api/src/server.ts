@@ -42,6 +42,8 @@ import executionRoutes
   from './modules/execution/execution.routes';
 import caseClosureRoutes
   from './modules/closures/case-closure.routes';
+import reportingRoutes
+  from './modules/reporting/reporting.routes';
 
 import { getAuthConfig }
   from './config/auth';
@@ -221,6 +223,11 @@ app.use(
 app.use(
   '/api/v1',
   caseClosureRoutes
+);
+
+app.use(
+  '/api/v1',
+  reportingRoutes
 );
 
 app.use(
