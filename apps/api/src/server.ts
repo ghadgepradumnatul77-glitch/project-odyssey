@@ -38,6 +38,8 @@ import authorityRoutes
 
 import authRoutes
   from './modules/auth/auth.routes';
+import executionRoutes
+  from './modules/execution/execution.routes';
 
 import { getAuthConfig }
   from './config/auth';
@@ -207,6 +209,11 @@ app.use(
 app.use(
   '/api/v1',
   decisionRoutes
+);
+
+app.use(
+  '/api/v1',
+  executionRoutes
 );
 
 app.use(

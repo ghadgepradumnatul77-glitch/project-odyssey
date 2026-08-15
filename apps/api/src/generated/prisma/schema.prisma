@@ -65,6 +65,33 @@ enum OrpDecisionType {
   ESCALATED
 }
 
+enum ExecutionPlanStatus {
+  PLANNED
+  IN_PROGRESS
+  VERIFICATION_PENDING
+  COMPLETED
+  CANCELLED
+}
+
+enum ExecutionTaskStatus {
+  PENDING
+  ASSIGNED
+  IN_PROGRESS
+  BLOCKED
+  COMPLETION_SUBMITTED
+  VERIFIED
+  CANCELLED
+}
+
+enum ExecutionEvidenceType {
+  PHOTO_REFERENCE
+  DOCUMENT_REFERENCE
+  MEASUREMENT
+  COMPLETION_NOTE
+  INSPECTION_REPORT
+  OTHER
+}
+
 model Department {
   id                  String              @id @default(uuid())
   name                String
@@ -106,10 +133,17 @@ model User {
   department   Department   @relation(fields: [departmentId], references: [id])
   jurisdiction Jurisdiction @relation(fields: [jurisdictionId], references: [id])
 
-  inspections           Inspection[]
-  approvalAuthorities   ApprovalAuthority[]
-  reviewedOrpDecisions  OrpDecision[]       @relation("DecisionReviewer")
-  forwardedOrpDecisions OrpDecision[]       @relation("DecisionForwardedUser")
+  inspections                Inspection[]
+  approvalAuthorities        ApprovalAuthority[]
+  reviewedOrpDecisions       OrpDecision[]       @relation("DecisionReviewer")
+  forwardedOrpDecisions      OrpDecision[]       @relation("DecisionForwardedUser")
+  createdExecutionPlans      ExecutionPlan[]     @relation("ExecutionPlanCreator")
+  assignedExecutionTasks     ExecutionTask[]     @relation("ExecutionTaskAssignee")
+  assignedByExecutionTasks   ExecutionTask[]     @relation("ExecutionTaskAssigner")
+  completedExecutionTasks    ExecutionTask[]     @relation("ExecutionTaskCompleter")
+  verifiedExecutionTasks     ExecutionTask[]     @relation("ExecutionTaskVerifier")
+  cancelledExecutionTasks    ExecutionTask[]     @relation("ExecutionTaskCanceller")
+  submittedExecutionEvidence ExecutionEvidence[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -166,6 +200,7 @@ model Case {
   riskAssessments          RiskAssessment[]
   operationalResponsePlans OperationalResponsePlan[]
   orpDecisions             OrpDecision[]
+  executionPlans           ExecutionPlan[]
 
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
@@ -246,6 +281,7 @@ model OperationalResponsePlan {
   case           Case           @relation(fields: [caseId], references: [id], onDelete: Cascade)
   riskAssessment RiskAssessment @relation(fields: [riskAssessmentId], references: [id], onDelete: Cascade)
   decisions      OrpDecision[]
+  executionPlan  ExecutionPlan?
 
   @@unique([caseId, versionNumber])
   @@index([caseId])
@@ -301,6 +337,7 @@ model OrpDecision {
   reviewer       User                    @relation("DecisionReviewer", fields: [reviewerId], references: [id], onDelete: Restrict)
   authorityGrant ApprovalAuthority       @relation(fields: [authorityGrantId], references: [id], onDelete: Restrict)
   forwardedUser  User?                   @relation("DecisionForwardedUser", fields: [forwardToUserId], references: [id], onDelete: Restrict)
+  executionPlan  ExecutionPlan?
 
   @@index([caseId])
   @@index([reviewerId])
@@ -308,4 +345,95 @@ model OrpDecision {
   @@index([forwardToUserId])
   @@index([decisionType])
   @@index([createdAt])
+}
+
+model ExecutionPlan {
+  id                 String              @id @default(uuid())
+  orpId              String              @unique
+  caseId             String
+  approvalDecisionId String              @unique
+  status             ExecutionPlanStatus @default(PLANNED)
+  createdById        String
+  templateVersion    String              @default("ODYSSEY_EXECUTION_V1")
+  createdAt          DateTime            @default(now())
+  updatedAt          DateTime            @updatedAt
+  startedAt          DateTime?
+  completedAt        DateTime?
+  cancelledAt        DateTime?
+  cancellationReason String?
+
+  orp              OperationalResponsePlan @relation(fields: [orpId], references: [id], onDelete: Restrict)
+  case             Case                    @relation(fields: [caseId], references: [id], onDelete: Restrict)
+  approvalDecision OrpDecision             @relation(fields: [approvalDecisionId], references: [id], onDelete: Restrict)
+  createdBy        User                    @relation("ExecutionPlanCreator", fields: [createdById], references: [id], onDelete: Restrict)
+  tasks            ExecutionTask[]
+
+  @@index([caseId])
+  @@index([status])
+  @@index([createdById])
+}
+
+model ExecutionTask {
+  id                      String              @id @default(uuid())
+  executionPlanId         String
+  sequenceNumber          Int
+  sourceActionCode        String
+  templateTaskKey         String
+  titleSnapshot           String
+  descriptionSnapshot     String
+  categorySnapshot        String
+  isMandatory             Boolean             @default(true)
+  status                  ExecutionTaskStatus @default(PENDING)
+  assignedToId            String?
+  assignedById            String?
+  assignedAt              DateTime?
+  startedAt               DateTime?
+  completionSubmittedById String?
+  completionSubmittedAt   DateTime?
+  completionNote          String?
+  verifiedById            String?
+  verifiedAt              DateTime?
+  verificationNote        String?
+  blockedReason           String?
+  cancelledById           String?
+  cancelledAt             DateTime?
+  cancellationReason      String?
+  createdAt               DateTime            @default(now())
+  updatedAt               DateTime            @updatedAt
+
+  executionPlan         ExecutionPlan       @relation(fields: [executionPlanId], references: [id], onDelete: Restrict)
+  assignedTo            User?               @relation("ExecutionTaskAssignee", fields: [assignedToId], references: [id], onDelete: Restrict)
+  assignedBy            User?               @relation("ExecutionTaskAssigner", fields: [assignedById], references: [id], onDelete: Restrict)
+  completionSubmittedBy User?               @relation("ExecutionTaskCompleter", fields: [completionSubmittedById], references: [id], onDelete: Restrict)
+  verifiedBy            User?               @relation("ExecutionTaskVerifier", fields: [verifiedById], references: [id], onDelete: Restrict)
+  cancelledBy           User?               @relation("ExecutionTaskCanceller", fields: [cancelledById], references: [id], onDelete: Restrict)
+  evidence              ExecutionEvidence[]
+
+  @@unique([executionPlanId, sequenceNumber])
+  @@unique([executionPlanId, sourceActionCode, templateTaskKey])
+  @@index([executionPlanId])
+  @@index([status])
+  @@index([assignedToId])
+  @@index([verifiedById])
+}
+
+model ExecutionEvidence {
+  id                String                @id @default(uuid())
+  executionTaskId   String
+  submittedById     String
+  evidenceType      ExecutionEvidenceType
+  description       String
+  referenceUrl      String?
+  documentReference String?
+  measurementData   Json?
+  capturedAt        DateTime?
+  submittedAt       DateTime              @default(now())
+
+  executionTask ExecutionTask @relation(fields: [executionTaskId], references: [id], onDelete: Restrict)
+  submittedBy   User          @relation(fields: [submittedById], references: [id], onDelete: Restrict)
+
+  @@index([executionTaskId])
+  @@index([submittedById])
+  @@index([evidenceType])
+  @@index([submittedAt])
 }

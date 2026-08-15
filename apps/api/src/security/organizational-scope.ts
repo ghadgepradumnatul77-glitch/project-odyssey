@@ -61,6 +61,26 @@ export function buildDecisionReadWhere(principal: OrganizationalPrincipal): Pris
   return hasGlobalReadVisibility(principal) ? {} : { case: { asset: assetScope(principal) } };
 }
 
+export function buildExecutionPlanReadWhere(principal: OrganizationalPrincipal): Prisma.ExecutionPlanWhereInput {
+  return hasGlobalReadVisibility(principal) ? {} : { case: { asset: assetScope(principal) } };
+}
+
+export function buildExecutionTaskReadWhere(principal: OrganizationalPrincipal): Prisma.ExecutionTaskWhereInput {
+  return hasGlobalReadVisibility(principal) ? {} : { executionPlan: { case: { asset: assetScope(principal) } } };
+}
+
+export function buildExecutionEvidenceReadWhere(principal: OrganizationalPrincipal): Prisma.ExecutionEvidenceWhereInput {
+  return hasGlobalReadVisibility(principal) ? {} : { executionTask: { executionPlan: { case: { asset: assetScope(principal) } } } };
+}
+
+export function buildExecutionPlanMutationWhere(principal: OrganizationalPrincipal): Prisma.ExecutionPlanWhereInput {
+  return { case: { asset: assetScope(principal) } };
+}
+
+export function buildExecutionTaskMutationWhere(principal: OrganizationalPrincipal): Prisma.ExecutionTaskWhereInput {
+  return { executionPlan: { case: { asset: assetScope(principal) } } };
+}
+
 export function buildAssetMutationWhere(principal: OrganizationalPrincipal): Prisma.AssetWhereInput {
   return assetScope(principal);
 }

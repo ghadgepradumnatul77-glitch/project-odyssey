@@ -260,6 +260,64 @@ exports.Prisma.OrpDecisionScalarFieldEnum = {
   createdAt: 'createdAt'
 };
 
+exports.Prisma.ExecutionPlanScalarFieldEnum = {
+  id: 'id',
+  orpId: 'orpId',
+  caseId: 'caseId',
+  approvalDecisionId: 'approvalDecisionId',
+  status: 'status',
+  createdById: 'createdById',
+  templateVersion: 'templateVersion',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  startedAt: 'startedAt',
+  completedAt: 'completedAt',
+  cancelledAt: 'cancelledAt',
+  cancellationReason: 'cancellationReason'
+};
+
+exports.Prisma.ExecutionTaskScalarFieldEnum = {
+  id: 'id',
+  executionPlanId: 'executionPlanId',
+  sequenceNumber: 'sequenceNumber',
+  sourceActionCode: 'sourceActionCode',
+  templateTaskKey: 'templateTaskKey',
+  titleSnapshot: 'titleSnapshot',
+  descriptionSnapshot: 'descriptionSnapshot',
+  categorySnapshot: 'categorySnapshot',
+  isMandatory: 'isMandatory',
+  status: 'status',
+  assignedToId: 'assignedToId',
+  assignedById: 'assignedById',
+  assignedAt: 'assignedAt',
+  startedAt: 'startedAt',
+  completionSubmittedById: 'completionSubmittedById',
+  completionSubmittedAt: 'completionSubmittedAt',
+  completionNote: 'completionNote',
+  verifiedById: 'verifiedById',
+  verifiedAt: 'verifiedAt',
+  verificationNote: 'verificationNote',
+  blockedReason: 'blockedReason',
+  cancelledById: 'cancelledById',
+  cancelledAt: 'cancelledAt',
+  cancellationReason: 'cancellationReason',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ExecutionEvidenceScalarFieldEnum = {
+  id: 'id',
+  executionTaskId: 'executionTaskId',
+  submittedById: 'submittedById',
+  evidenceType: 'evidenceType',
+  description: 'description',
+  referenceUrl: 'referenceUrl',
+  documentReference: 'documentReference',
+  measurementData: 'measurementData',
+  capturedAt: 'capturedAt',
+  submittedAt: 'submittedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -346,6 +404,33 @@ exports.OrpDecisionType = exports.$Enums.OrpDecisionType = {
   ESCALATED: 'ESCALATED'
 };
 
+exports.ExecutionPlanStatus = exports.$Enums.ExecutionPlanStatus = {
+  PLANNED: 'PLANNED',
+  IN_PROGRESS: 'IN_PROGRESS',
+  VERIFICATION_PENDING: 'VERIFICATION_PENDING',
+  COMPLETED: 'COMPLETED',
+  CANCELLED: 'CANCELLED'
+};
+
+exports.ExecutionTaskStatus = exports.$Enums.ExecutionTaskStatus = {
+  PENDING: 'PENDING',
+  ASSIGNED: 'ASSIGNED',
+  IN_PROGRESS: 'IN_PROGRESS',
+  BLOCKED: 'BLOCKED',
+  COMPLETION_SUBMITTED: 'COMPLETION_SUBMITTED',
+  VERIFIED: 'VERIFIED',
+  CANCELLED: 'CANCELLED'
+};
+
+exports.ExecutionEvidenceType = exports.$Enums.ExecutionEvidenceType = {
+  PHOTO_REFERENCE: 'PHOTO_REFERENCE',
+  DOCUMENT_REFERENCE: 'DOCUMENT_REFERENCE',
+  MEASUREMENT: 'MEASUREMENT',
+  COMPLETION_NOTE: 'COMPLETION_NOTE',
+  INSPECTION_REPORT: 'INSPECTION_REPORT',
+  OTHER: 'OTHER'
+};
+
 exports.Prisma.ModelName = {
   Department: 'Department',
   Jurisdiction: 'Jurisdiction',
@@ -356,7 +441,10 @@ exports.Prisma.ModelName = {
   RiskAssessment: 'RiskAssessment',
   OperationalResponsePlan: 'OperationalResponsePlan',
   ApprovalAuthority: 'ApprovalAuthority',
-  OrpDecision: 'OrpDecision'
+  OrpDecision: 'OrpDecision',
+  ExecutionPlan: 'ExecutionPlan',
+  ExecutionTask: 'ExecutionTask',
+  ExecutionEvidence: 'ExecutionEvidence'
 };
 
 /**

@@ -37,3 +37,16 @@ ORP-generation, and ORP-decision mutations require `OFFICER`. Full user and
 approval-authority administration remain `SYSTEM_ADMIN` only. The basic health
 endpoint and login remain public. The database diagnostic endpoint is retained
 for development utility but requires `SYSTEM_ADMIN`.
+
+## Execution and accountability
+
+An approved ORP can be translated by an explicit, same-scope `OFFICER` request
+into an internal execution plan and deterministic task snapshots. Assigned
+officers record progress and append evidence references; a different same-scope
+officer must verify completion. `AUDITOR` and `POLICY_ADMIN` remain read-only,
+and `SYSTEM_ADMIN` has global reads but no execution-mutation authority.
+
+This module coordinates and audits human work. It does not close roads, dispatch
+personnel, issue legal orders, control infrastructure, contact external agencies,
+commit funds, or implement procurement. Case closure remains a future explicit
+human governance workflow.
