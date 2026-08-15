@@ -185,6 +185,13 @@ router.post('/', authenticate, requireRole(SystemRole.OFFICER), async (req, res)
 
     const targetCase = await assertOperationalCaseScope(caseId.trim(), req.user!);
 
+    if (targetCase.status === 'CLOSED') {
+      return res.status(409).json({
+        success: false,
+        error: { code: 'INVALID_CASE_STATE', message: 'A closed Case cannot receive new inspections.' }
+      });
+    }
+
 
     // --------------------------------------------------
     // Verify Inspector User exists

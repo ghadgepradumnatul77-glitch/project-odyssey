@@ -73,6 +73,14 @@ export function buildExecutionEvidenceReadWhere(principal: OrganizationalPrincip
   return hasGlobalReadVisibility(principal) ? {} : { executionTask: { executionPlan: { case: { asset: assetScope(principal) } } } };
 }
 
+export function buildCaseClosureReadWhere(principal: OrganizationalPrincipal): Prisma.CaseClosureWhereInput {
+  return hasGlobalReadVisibility(principal) ? {} : { case: { asset: assetScope(principal) } };
+}
+
+export function buildCaseClosureMutationWhere(principal: OrganizationalPrincipal): Prisma.CaseClosureWhereInput {
+  return { case: { asset: assetScope(principal) } };
+}
+
 export function buildExecutionPlanMutationWhere(principal: OrganizationalPrincipal): Prisma.ExecutionPlanWhereInput {
   return { case: { asset: assetScope(principal) } };
 }

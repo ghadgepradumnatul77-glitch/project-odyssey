@@ -78,6 +78,11 @@ export type ExecutionTask = $Result.DefaultSelection<Prisma.$ExecutionTaskPayloa
  *
  */
 export type ExecutionEvidence = $Result.DefaultSelection<Prisma.$ExecutionEvidencePayload>
+/**
+ * Model CaseClosure
+ *
+ */
+export type CaseClosure = $Result.DefaultSelection<Prisma.$CaseClosurePayload>
 
 /**
  * Enums
@@ -196,6 +201,13 @@ export const ExecutionEvidenceType: {
 
 export type ExecutionEvidenceType = (typeof ExecutionEvidenceType)[keyof typeof ExecutionEvidenceType]
 
+
+export const CaseClosureReason: {
+  EXECUTION_VERIFIED: 'EXECUTION_VERIFIED'
+};
+
+export type CaseClosureReason = (typeof CaseClosureReason)[keyof typeof CaseClosureReason]
+
 }
 
 export type UserStatus = $Enums.UserStatus
@@ -237,6 +249,10 @@ export const ExecutionTaskStatus: typeof $Enums.ExecutionTaskStatus
 export type ExecutionEvidenceType = $Enums.ExecutionEvidenceType
 
 export const ExecutionEvidenceType: typeof $Enums.ExecutionEvidenceType
+
+export type CaseClosureReason = $Enums.CaseClosureReason
+
+export const CaseClosureReason: typeof $Enums.CaseClosureReason
 
 /**
  * ##  Prisma Client ʲˢ
@@ -485,6 +501,16 @@ export class PrismaClient<
     * ```
     */
   get executionEvidence(): Prisma.ExecutionEvidenceDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.caseClosure`: Exposes CRUD operations for the **CaseClosure** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more CaseClosures
+    * const caseClosures = await prisma.caseClosure.findMany()
+    * ```
+    */
+  get caseClosure(): Prisma.CaseClosureDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -938,7 +964,8 @@ export namespace Prisma {
     OrpDecision: 'OrpDecision',
     ExecutionPlan: 'ExecutionPlan',
     ExecutionTask: 'ExecutionTask',
-    ExecutionEvidence: 'ExecutionEvidence'
+    ExecutionEvidence: 'ExecutionEvidence',
+    CaseClosure: 'CaseClosure'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -957,7 +984,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "department" | "jurisdiction" | "user" | "asset" | "case" | "inspection" | "riskAssessment" | "operationalResponsePlan" | "approvalAuthority" | "orpDecision" | "executionPlan" | "executionTask" | "executionEvidence"
+      modelProps: "department" | "jurisdiction" | "user" | "asset" | "case" | "inspection" | "riskAssessment" | "operationalResponsePlan" | "approvalAuthority" | "orpDecision" | "executionPlan" | "executionTask" | "executionEvidence" | "caseClosure"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1923,6 +1950,80 @@ export namespace Prisma {
           }
         }
       }
+      CaseClosure: {
+        payload: Prisma.$CaseClosurePayload<ExtArgs>
+        fields: Prisma.CaseClosureFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.CaseClosureFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CaseClosurePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.CaseClosureFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CaseClosurePayload>
+          }
+          findFirst: {
+            args: Prisma.CaseClosureFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CaseClosurePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.CaseClosureFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CaseClosurePayload>
+          }
+          findMany: {
+            args: Prisma.CaseClosureFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CaseClosurePayload>[]
+          }
+          create: {
+            args: Prisma.CaseClosureCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CaseClosurePayload>
+          }
+          createMany: {
+            args: Prisma.CaseClosureCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.CaseClosureCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CaseClosurePayload>[]
+          }
+          delete: {
+            args: Prisma.CaseClosureDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CaseClosurePayload>
+          }
+          update: {
+            args: Prisma.CaseClosureUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CaseClosurePayload>
+          }
+          deleteMany: {
+            args: Prisma.CaseClosureDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.CaseClosureUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.CaseClosureUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CaseClosurePayload>[]
+          }
+          upsert: {
+            args: Prisma.CaseClosureUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CaseClosurePayload>
+          }
+          aggregate: {
+            args: Prisma.CaseClosureAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateCaseClosure>
+          }
+          groupBy: {
+            args: Prisma.CaseClosureGroupByArgs<ExtArgs>
+            result: $Utils.Optional<CaseClosureGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.CaseClosureCountArgs<ExtArgs>
+            result: $Utils.Optional<CaseClosureCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -2032,6 +2133,7 @@ export namespace Prisma {
     executionPlan?: ExecutionPlanOmit
     executionTask?: ExecutionTaskOmit
     executionEvidence?: ExecutionEvidenceOmit
+    caseClosure?: CaseClosureOmit
   }
 
   /* Types for Logging */
@@ -2230,6 +2332,7 @@ export namespace Prisma {
     verifiedExecutionTasks: number
     cancelledExecutionTasks: number
     submittedExecutionEvidence: number
+    closedCases: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2244,6 +2347,7 @@ export namespace Prisma {
     verifiedExecutionTasks?: boolean | UserCountOutputTypeCountVerifiedExecutionTasksArgs
     cancelledExecutionTasks?: boolean | UserCountOutputTypeCountCancelledExecutionTasksArgs
     submittedExecutionEvidence?: boolean | UserCountOutputTypeCountSubmittedExecutionEvidenceArgs
+    closedCases?: boolean | UserCountOutputTypeCountClosedCasesArgs
   }
 
   // Custom InputTypes
@@ -2332,6 +2436,13 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountSubmittedExecutionEvidenceArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ExecutionEvidenceWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountClosedCasesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CaseClosureWhereInput
   }
 
 
@@ -2532,10 +2643,12 @@ export namespace Prisma {
 
   export type ApprovalAuthorityCountOutputType = {
     decisions: number
+    caseClosures: number
   }
 
   export type ApprovalAuthorityCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     decisions?: boolean | ApprovalAuthorityCountOutputTypeCountDecisionsArgs
+    caseClosures?: boolean | ApprovalAuthorityCountOutputTypeCountCaseClosuresArgs
   }
 
   // Custom InputTypes
@@ -2554,6 +2667,13 @@ export namespace Prisma {
    */
   export type ApprovalAuthorityCountOutputTypeCountDecisionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: OrpDecisionWhereInput
+  }
+
+  /**
+   * ApprovalAuthorityCountOutputType without action
+   */
+  export type ApprovalAuthorityCountOutputTypeCountCaseClosuresArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CaseClosureWhereInput
   }
 
 
@@ -5141,6 +5261,7 @@ export namespace Prisma {
     verifiedExecutionTasks?: boolean | User$verifiedExecutionTasksArgs<ExtArgs>
     cancelledExecutionTasks?: boolean | User$cancelledExecutionTasksArgs<ExtArgs>
     submittedExecutionEvidence?: boolean | User$submittedExecutionEvidenceArgs<ExtArgs>
+    closedCases?: boolean | User$closedCasesArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -5208,6 +5329,7 @@ export namespace Prisma {
     verifiedExecutionTasks?: boolean | User$verifiedExecutionTasksArgs<ExtArgs>
     cancelledExecutionTasks?: boolean | User$cancelledExecutionTasksArgs<ExtArgs>
     submittedExecutionEvidence?: boolean | User$submittedExecutionEvidenceArgs<ExtArgs>
+    closedCases?: boolean | User$closedCasesArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5235,6 +5357,7 @@ export namespace Prisma {
       verifiedExecutionTasks: Prisma.$ExecutionTaskPayload<ExtArgs>[]
       cancelledExecutionTasks: Prisma.$ExecutionTaskPayload<ExtArgs>[]
       submittedExecutionEvidence: Prisma.$ExecutionEvidencePayload<ExtArgs>[]
+      closedCases: Prisma.$CaseClosurePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -5656,6 +5779,7 @@ export namespace Prisma {
     verifiedExecutionTasks<T extends User$verifiedExecutionTasksArgs<ExtArgs> = {}>(args?: Subset<T, User$verifiedExecutionTasksArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExecutionTaskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     cancelledExecutionTasks<T extends User$cancelledExecutionTasksArgs<ExtArgs> = {}>(args?: Subset<T, User$cancelledExecutionTasksArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExecutionTaskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     submittedExecutionEvidence<T extends User$submittedExecutionEvidenceArgs<ExtArgs> = {}>(args?: Subset<T, User$submittedExecutionEvidenceArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExecutionEvidencePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    closedCases<T extends User$closedCasesArgs<ExtArgs> = {}>(args?: Subset<T, User$closedCasesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CaseClosurePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -6354,6 +6478,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ExecutionEvidenceScalarFieldEnum | ExecutionEvidenceScalarFieldEnum[]
+  }
+
+  /**
+   * User.closedCases
+   */
+  export type User$closedCasesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CaseClosure
+     */
+    select?: CaseClosureSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CaseClosure
+     */
+    omit?: CaseClosureOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CaseClosureInclude<ExtArgs> | null
+    where?: CaseClosureWhereInput
+    orderBy?: CaseClosureOrderByWithRelationInput | CaseClosureOrderByWithRelationInput[]
+    cursor?: CaseClosureWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: CaseClosureScalarFieldEnum | CaseClosureScalarFieldEnum[]
   }
 
   /**
@@ -7830,6 +7978,7 @@ export namespace Prisma {
     operationalResponsePlans?: boolean | Case$operationalResponsePlansArgs<ExtArgs>
     orpDecisions?: boolean | Case$orpDecisionsArgs<ExtArgs>
     executionPlans?: boolean | Case$executionPlansArgs<ExtArgs>
+    closure?: boolean | Case$closureArgs<ExtArgs>
     _count?: boolean | CaseCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["case"]>
 
@@ -7888,6 +8037,7 @@ export namespace Prisma {
     operationalResponsePlans?: boolean | Case$operationalResponsePlansArgs<ExtArgs>
     orpDecisions?: boolean | Case$orpDecisionsArgs<ExtArgs>
     executionPlans?: boolean | Case$executionPlansArgs<ExtArgs>
+    closure?: boolean | Case$closureArgs<ExtArgs>
     _count?: boolean | CaseCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type CaseIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -7906,6 +8056,7 @@ export namespace Prisma {
       operationalResponsePlans: Prisma.$OperationalResponsePlanPayload<ExtArgs>[]
       orpDecisions: Prisma.$OrpDecisionPayload<ExtArgs>[]
       executionPlans: Prisma.$ExecutionPlanPayload<ExtArgs>[]
+      closure: Prisma.$CaseClosurePayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -8320,6 +8471,7 @@ export namespace Prisma {
     operationalResponsePlans<T extends Case$operationalResponsePlansArgs<ExtArgs> = {}>(args?: Subset<T, Case$operationalResponsePlansArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OperationalResponsePlanPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     orpDecisions<T extends Case$orpDecisionsArgs<ExtArgs> = {}>(args?: Subset<T, Case$orpDecisionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrpDecisionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     executionPlans<T extends Case$executionPlansArgs<ExtArgs> = {}>(args?: Subset<T, Case$executionPlansArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExecutionPlanPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    closure<T extends Case$closureArgs<ExtArgs> = {}>(args?: Subset<T, Case$closureArgs<ExtArgs>>): Prisma__CaseClosureClient<$Result.GetResult<Prisma.$CaseClosurePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -8874,6 +9026,25 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ExecutionPlanScalarFieldEnum | ExecutionPlanScalarFieldEnum[]
+  }
+
+  /**
+   * Case.closure
+   */
+  export type Case$closureArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CaseClosure
+     */
+    select?: CaseClosureSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CaseClosure
+     */
+    omit?: CaseClosureOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CaseClosureInclude<ExtArgs> | null
+    where?: CaseClosureWhereInput
   }
 
   /**
@@ -12603,6 +12774,7 @@ export namespace Prisma {
     canRequestModification: boolean | null
     canRequestReinspection: boolean | null
     canEscalate: boolean | null
+    canCloseCase: boolean | null
     maxPriorityLevel: $Enums.PriorityLevel | null
     isActive: boolean | null
     validFrom: Date | null
@@ -12621,6 +12793,7 @@ export namespace Prisma {
     canRequestModification: boolean | null
     canRequestReinspection: boolean | null
     canEscalate: boolean | null
+    canCloseCase: boolean | null
     maxPriorityLevel: $Enums.PriorityLevel | null
     isActive: boolean | null
     validFrom: Date | null
@@ -12639,6 +12812,7 @@ export namespace Prisma {
     canRequestModification: number
     canRequestReinspection: number
     canEscalate: number
+    canCloseCase: number
     maxPriorityLevel: number
     isActive: number
     validFrom: number
@@ -12659,6 +12833,7 @@ export namespace Prisma {
     canRequestModification?: true
     canRequestReinspection?: true
     canEscalate?: true
+    canCloseCase?: true
     maxPriorityLevel?: true
     isActive?: true
     validFrom?: true
@@ -12677,6 +12852,7 @@ export namespace Prisma {
     canRequestModification?: true
     canRequestReinspection?: true
     canEscalate?: true
+    canCloseCase?: true
     maxPriorityLevel?: true
     isActive?: true
     validFrom?: true
@@ -12695,6 +12871,7 @@ export namespace Prisma {
     canRequestModification?: true
     canRequestReinspection?: true
     canEscalate?: true
+    canCloseCase?: true
     maxPriorityLevel?: true
     isActive?: true
     validFrom?: true
@@ -12786,6 +12963,7 @@ export namespace Prisma {
     canRequestModification: boolean
     canRequestReinspection: boolean
     canEscalate: boolean
+    canCloseCase: boolean
     maxPriorityLevel: $Enums.PriorityLevel | null
     isActive: boolean
     validFrom: Date | null
@@ -12821,6 +12999,7 @@ export namespace Prisma {
     canRequestModification?: boolean
     canRequestReinspection?: boolean
     canEscalate?: boolean
+    canCloseCase?: boolean
     maxPriorityLevel?: boolean
     isActive?: boolean
     validFrom?: boolean
@@ -12831,6 +13010,7 @@ export namespace Prisma {
     department?: boolean | DepartmentDefaultArgs<ExtArgs>
     jurisdiction?: boolean | JurisdictionDefaultArgs<ExtArgs>
     decisions?: boolean | ApprovalAuthority$decisionsArgs<ExtArgs>
+    caseClosures?: boolean | ApprovalAuthority$caseClosuresArgs<ExtArgs>
     _count?: boolean | ApprovalAuthorityCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["approvalAuthority"]>
 
@@ -12844,6 +13024,7 @@ export namespace Prisma {
     canRequestModification?: boolean
     canRequestReinspection?: boolean
     canEscalate?: boolean
+    canCloseCase?: boolean
     maxPriorityLevel?: boolean
     isActive?: boolean
     validFrom?: boolean
@@ -12865,6 +13046,7 @@ export namespace Prisma {
     canRequestModification?: boolean
     canRequestReinspection?: boolean
     canEscalate?: boolean
+    canCloseCase?: boolean
     maxPriorityLevel?: boolean
     isActive?: boolean
     validFrom?: boolean
@@ -12886,6 +13068,7 @@ export namespace Prisma {
     canRequestModification?: boolean
     canRequestReinspection?: boolean
     canEscalate?: boolean
+    canCloseCase?: boolean
     maxPriorityLevel?: boolean
     isActive?: boolean
     validFrom?: boolean
@@ -12894,12 +13077,13 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type ApprovalAuthorityOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "departmentId" | "jurisdictionId" | "canApprove" | "canReject" | "canRequestModification" | "canRequestReinspection" | "canEscalate" | "maxPriorityLevel" | "isActive" | "validFrom" | "validUntil" | "createdAt" | "updatedAt", ExtArgs["result"]["approvalAuthority"]>
+  export type ApprovalAuthorityOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "departmentId" | "jurisdictionId" | "canApprove" | "canReject" | "canRequestModification" | "canRequestReinspection" | "canEscalate" | "canCloseCase" | "maxPriorityLevel" | "isActive" | "validFrom" | "validUntil" | "createdAt" | "updatedAt", ExtArgs["result"]["approvalAuthority"]>
   export type ApprovalAuthorityInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     department?: boolean | DepartmentDefaultArgs<ExtArgs>
     jurisdiction?: boolean | JurisdictionDefaultArgs<ExtArgs>
     decisions?: boolean | ApprovalAuthority$decisionsArgs<ExtArgs>
+    caseClosures?: boolean | ApprovalAuthority$caseClosuresArgs<ExtArgs>
     _count?: boolean | ApprovalAuthorityCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ApprovalAuthorityIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -12920,6 +13104,7 @@ export namespace Prisma {
       department: Prisma.$DepartmentPayload<ExtArgs>
       jurisdiction: Prisma.$JurisdictionPayload<ExtArgs>
       decisions: Prisma.$OrpDecisionPayload<ExtArgs>[]
+      caseClosures: Prisma.$CaseClosurePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -12931,6 +13116,7 @@ export namespace Prisma {
       canRequestModification: boolean
       canRequestReinspection: boolean
       canEscalate: boolean
+      canCloseCase: boolean
       maxPriorityLevel: $Enums.PriorityLevel | null
       isActive: boolean
       validFrom: Date | null
@@ -13335,6 +13521,7 @@ export namespace Prisma {
     department<T extends DepartmentDefaultArgs<ExtArgs> = {}>(args?: Subset<T, DepartmentDefaultArgs<ExtArgs>>): Prisma__DepartmentClient<$Result.GetResult<Prisma.$DepartmentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     jurisdiction<T extends JurisdictionDefaultArgs<ExtArgs> = {}>(args?: Subset<T, JurisdictionDefaultArgs<ExtArgs>>): Prisma__JurisdictionClient<$Result.GetResult<Prisma.$JurisdictionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     decisions<T extends ApprovalAuthority$decisionsArgs<ExtArgs> = {}>(args?: Subset<T, ApprovalAuthority$decisionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrpDecisionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    caseClosures<T extends ApprovalAuthority$caseClosuresArgs<ExtArgs> = {}>(args?: Subset<T, ApprovalAuthority$caseClosuresArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CaseClosurePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -13373,6 +13560,7 @@ export namespace Prisma {
     readonly canRequestModification: FieldRef<"ApprovalAuthority", 'Boolean'>
     readonly canRequestReinspection: FieldRef<"ApprovalAuthority", 'Boolean'>
     readonly canEscalate: FieldRef<"ApprovalAuthority", 'Boolean'>
+    readonly canCloseCase: FieldRef<"ApprovalAuthority", 'Boolean'>
     readonly maxPriorityLevel: FieldRef<"ApprovalAuthority", 'PriorityLevel'>
     readonly isActive: FieldRef<"ApprovalAuthority", 'Boolean'>
     readonly validFrom: FieldRef<"ApprovalAuthority", 'DateTime'>
@@ -13796,6 +13984,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: OrpDecisionScalarFieldEnum | OrpDecisionScalarFieldEnum[]
+  }
+
+  /**
+   * ApprovalAuthority.caseClosures
+   */
+  export type ApprovalAuthority$caseClosuresArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CaseClosure
+     */
+    select?: CaseClosureSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CaseClosure
+     */
+    omit?: CaseClosureOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CaseClosureInclude<ExtArgs> | null
+    where?: CaseClosureWhereInput
+    orderBy?: CaseClosureOrderByWithRelationInput | CaseClosureOrderByWithRelationInput[]
+    cursor?: CaseClosureWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: CaseClosureScalarFieldEnum | CaseClosureScalarFieldEnum[]
   }
 
   /**
@@ -15256,6 +15468,7 @@ export namespace Prisma {
     approvalDecision?: boolean | OrpDecisionDefaultArgs<ExtArgs>
     createdBy?: boolean | UserDefaultArgs<ExtArgs>
     tasks?: boolean | ExecutionPlan$tasksArgs<ExtArgs>
+    closure?: boolean | ExecutionPlan$closureArgs<ExtArgs>
     _count?: boolean | ExecutionPlanCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["executionPlan"]>
 
@@ -15322,6 +15535,7 @@ export namespace Prisma {
     approvalDecision?: boolean | OrpDecisionDefaultArgs<ExtArgs>
     createdBy?: boolean | UserDefaultArgs<ExtArgs>
     tasks?: boolean | ExecutionPlan$tasksArgs<ExtArgs>
+    closure?: boolean | ExecutionPlan$closureArgs<ExtArgs>
     _count?: boolean | ExecutionPlanCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ExecutionPlanIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -15345,6 +15559,7 @@ export namespace Prisma {
       approvalDecision: Prisma.$OrpDecisionPayload<ExtArgs>
       createdBy: Prisma.$UserPayload<ExtArgs>
       tasks: Prisma.$ExecutionTaskPayload<ExtArgs>[]
+      closure: Prisma.$CaseClosurePayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -15759,6 +15974,7 @@ export namespace Prisma {
     approvalDecision<T extends OrpDecisionDefaultArgs<ExtArgs> = {}>(args?: Subset<T, OrpDecisionDefaultArgs<ExtArgs>>): Prisma__OrpDecisionClient<$Result.GetResult<Prisma.$OrpDecisionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     createdBy<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     tasks<T extends ExecutionPlan$tasksArgs<ExtArgs> = {}>(args?: Subset<T, ExecutionPlan$tasksArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExecutionTaskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    closure<T extends ExecutionPlan$closureArgs<ExtArgs> = {}>(args?: Subset<T, ExecutionPlan$closureArgs<ExtArgs>>): Prisma__CaseClosureClient<$Result.GetResult<Prisma.$CaseClosurePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -16218,6 +16434,25 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ExecutionTaskScalarFieldEnum | ExecutionTaskScalarFieldEnum[]
+  }
+
+  /**
+   * ExecutionPlan.closure
+   */
+  export type ExecutionPlan$closureArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CaseClosure
+     */
+    select?: CaseClosureSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CaseClosure
+     */
+    omit?: CaseClosureOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CaseClosureInclude<ExtArgs> | null
+    where?: CaseClosureWhereInput
   }
 
   /**
@@ -18897,6 +19132,1127 @@ export namespace Prisma {
 
 
   /**
+   * Model CaseClosure
+   */
+
+  export type AggregateCaseClosure = {
+    _count: CaseClosureCountAggregateOutputType | null
+    _min: CaseClosureMinAggregateOutputType | null
+    _max: CaseClosureMaxAggregateOutputType | null
+  }
+
+  export type CaseClosureMinAggregateOutputType = {
+    id: string | null
+    caseId: string | null
+    executionPlanId: string | null
+    closedById: string | null
+    closureAuthorityGrantId: string | null
+    closureReason: $Enums.CaseClosureReason | null
+    closureSummary: string | null
+    createdAt: Date | null
+  }
+
+  export type CaseClosureMaxAggregateOutputType = {
+    id: string | null
+    caseId: string | null
+    executionPlanId: string | null
+    closedById: string | null
+    closureAuthorityGrantId: string | null
+    closureReason: $Enums.CaseClosureReason | null
+    closureSummary: string | null
+    createdAt: Date | null
+  }
+
+  export type CaseClosureCountAggregateOutputType = {
+    id: number
+    caseId: number
+    executionPlanId: number
+    closedById: number
+    closureAuthorityGrantId: number
+    closureReason: number
+    closureSummary: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type CaseClosureMinAggregateInputType = {
+    id?: true
+    caseId?: true
+    executionPlanId?: true
+    closedById?: true
+    closureAuthorityGrantId?: true
+    closureReason?: true
+    closureSummary?: true
+    createdAt?: true
+  }
+
+  export type CaseClosureMaxAggregateInputType = {
+    id?: true
+    caseId?: true
+    executionPlanId?: true
+    closedById?: true
+    closureAuthorityGrantId?: true
+    closureReason?: true
+    closureSummary?: true
+    createdAt?: true
+  }
+
+  export type CaseClosureCountAggregateInputType = {
+    id?: true
+    caseId?: true
+    executionPlanId?: true
+    closedById?: true
+    closureAuthorityGrantId?: true
+    closureReason?: true
+    closureSummary?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type CaseClosureAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which CaseClosure to aggregate.
+     */
+    where?: CaseClosureWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     *
+     * Determine the order of CaseClosures to fetch.
+     */
+    orderBy?: CaseClosureOrderByWithRelationInput | CaseClosureOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     *
+     * Sets the start position
+     */
+    cursor?: CaseClosureWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Take `±n` CaseClosures from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Skip the first `n` CaseClosures.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Count returned CaseClosures
+    **/
+    _count?: true | CaseClosureCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Select which fields to find the minimum value
+    **/
+    _min?: CaseClosureMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Select which fields to find the maximum value
+    **/
+    _max?: CaseClosureMaxAggregateInputType
+  }
+
+  export type GetCaseClosureAggregateType<T extends CaseClosureAggregateArgs> = {
+        [P in keyof T & keyof AggregateCaseClosure]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateCaseClosure[P]>
+      : GetScalarType<T[P], AggregateCaseClosure[P]>
+  }
+
+
+
+
+  export type CaseClosureGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CaseClosureWhereInput
+    orderBy?: CaseClosureOrderByWithAggregationInput | CaseClosureOrderByWithAggregationInput[]
+    by: CaseClosureScalarFieldEnum[] | CaseClosureScalarFieldEnum
+    having?: CaseClosureScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: CaseClosureCountAggregateInputType | true
+    _min?: CaseClosureMinAggregateInputType
+    _max?: CaseClosureMaxAggregateInputType
+  }
+
+  export type CaseClosureGroupByOutputType = {
+    id: string
+    caseId: string
+    executionPlanId: string
+    closedById: string
+    closureAuthorityGrantId: string
+    closureReason: $Enums.CaseClosureReason
+    closureSummary: string
+    createdAt: Date
+    _count: CaseClosureCountAggregateOutputType | null
+    _min: CaseClosureMinAggregateOutputType | null
+    _max: CaseClosureMaxAggregateOutputType | null
+  }
+
+  type GetCaseClosureGroupByPayload<T extends CaseClosureGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<CaseClosureGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof CaseClosureGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], CaseClosureGroupByOutputType[P]>
+            : GetScalarType<T[P], CaseClosureGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type CaseClosureSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    caseId?: boolean
+    executionPlanId?: boolean
+    closedById?: boolean
+    closureAuthorityGrantId?: boolean
+    closureReason?: boolean
+    closureSummary?: boolean
+    createdAt?: boolean
+    case?: boolean | CaseDefaultArgs<ExtArgs>
+    executionPlan?: boolean | ExecutionPlanDefaultArgs<ExtArgs>
+    closedBy?: boolean | UserDefaultArgs<ExtArgs>
+    closureAuthorityGrant?: boolean | ApprovalAuthorityDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["caseClosure"]>
+
+  export type CaseClosureSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    caseId?: boolean
+    executionPlanId?: boolean
+    closedById?: boolean
+    closureAuthorityGrantId?: boolean
+    closureReason?: boolean
+    closureSummary?: boolean
+    createdAt?: boolean
+    case?: boolean | CaseDefaultArgs<ExtArgs>
+    executionPlan?: boolean | ExecutionPlanDefaultArgs<ExtArgs>
+    closedBy?: boolean | UserDefaultArgs<ExtArgs>
+    closureAuthorityGrant?: boolean | ApprovalAuthorityDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["caseClosure"]>
+
+  export type CaseClosureSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    caseId?: boolean
+    executionPlanId?: boolean
+    closedById?: boolean
+    closureAuthorityGrantId?: boolean
+    closureReason?: boolean
+    closureSummary?: boolean
+    createdAt?: boolean
+    case?: boolean | CaseDefaultArgs<ExtArgs>
+    executionPlan?: boolean | ExecutionPlanDefaultArgs<ExtArgs>
+    closedBy?: boolean | UserDefaultArgs<ExtArgs>
+    closureAuthorityGrant?: boolean | ApprovalAuthorityDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["caseClosure"]>
+
+  export type CaseClosureSelectScalar = {
+    id?: boolean
+    caseId?: boolean
+    executionPlanId?: boolean
+    closedById?: boolean
+    closureAuthorityGrantId?: boolean
+    closureReason?: boolean
+    closureSummary?: boolean
+    createdAt?: boolean
+  }
+
+  export type CaseClosureOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "caseId" | "executionPlanId" | "closedById" | "closureAuthorityGrantId" | "closureReason" | "closureSummary" | "createdAt", ExtArgs["result"]["caseClosure"]>
+  export type CaseClosureInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    case?: boolean | CaseDefaultArgs<ExtArgs>
+    executionPlan?: boolean | ExecutionPlanDefaultArgs<ExtArgs>
+    closedBy?: boolean | UserDefaultArgs<ExtArgs>
+    closureAuthorityGrant?: boolean | ApprovalAuthorityDefaultArgs<ExtArgs>
+  }
+  export type CaseClosureIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    case?: boolean | CaseDefaultArgs<ExtArgs>
+    executionPlan?: boolean | ExecutionPlanDefaultArgs<ExtArgs>
+    closedBy?: boolean | UserDefaultArgs<ExtArgs>
+    closureAuthorityGrant?: boolean | ApprovalAuthorityDefaultArgs<ExtArgs>
+  }
+  export type CaseClosureIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    case?: boolean | CaseDefaultArgs<ExtArgs>
+    executionPlan?: boolean | ExecutionPlanDefaultArgs<ExtArgs>
+    closedBy?: boolean | UserDefaultArgs<ExtArgs>
+    closureAuthorityGrant?: boolean | ApprovalAuthorityDefaultArgs<ExtArgs>
+  }
+
+  export type $CaseClosurePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "CaseClosure"
+    objects: {
+      case: Prisma.$CasePayload<ExtArgs>
+      executionPlan: Prisma.$ExecutionPlanPayload<ExtArgs>
+      closedBy: Prisma.$UserPayload<ExtArgs>
+      closureAuthorityGrant: Prisma.$ApprovalAuthorityPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      caseId: string
+      executionPlanId: string
+      closedById: string
+      closureAuthorityGrantId: string
+      closureReason: $Enums.CaseClosureReason
+      closureSummary: string
+      createdAt: Date
+    }, ExtArgs["result"]["caseClosure"]>
+    composites: {}
+  }
+
+  type CaseClosureGetPayload<S extends boolean | null | undefined | CaseClosureDefaultArgs> = $Result.GetResult<Prisma.$CaseClosurePayload, S>
+
+  type CaseClosureCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<CaseClosureFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: CaseClosureCountAggregateInputType | true
+    }
+
+  export interface CaseClosureDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['CaseClosure'], meta: { name: 'CaseClosure' } }
+    /**
+     * Find zero or one CaseClosure that matches the filter.
+     * @param {CaseClosureFindUniqueArgs} args - Arguments to find a CaseClosure
+     * @example
+     * // Get one CaseClosure
+     * const caseClosure = await prisma.caseClosure.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends CaseClosureFindUniqueArgs>(args: SelectSubset<T, CaseClosureFindUniqueArgs<ExtArgs>>): Prisma__CaseClosureClient<$Result.GetResult<Prisma.$CaseClosurePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one CaseClosure that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {CaseClosureFindUniqueOrThrowArgs} args - Arguments to find a CaseClosure
+     * @example
+     * // Get one CaseClosure
+     * const caseClosure = await prisma.caseClosure.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends CaseClosureFindUniqueOrThrowArgs>(args: SelectSubset<T, CaseClosureFindUniqueOrThrowArgs<ExtArgs>>): Prisma__CaseClosureClient<$Result.GetResult<Prisma.$CaseClosurePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first CaseClosure that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CaseClosureFindFirstArgs} args - Arguments to find a CaseClosure
+     * @example
+     * // Get one CaseClosure
+     * const caseClosure = await prisma.caseClosure.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends CaseClosureFindFirstArgs>(args?: SelectSubset<T, CaseClosureFindFirstArgs<ExtArgs>>): Prisma__CaseClosureClient<$Result.GetResult<Prisma.$CaseClosurePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first CaseClosure that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CaseClosureFindFirstOrThrowArgs} args - Arguments to find a CaseClosure
+     * @example
+     * // Get one CaseClosure
+     * const caseClosure = await prisma.caseClosure.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends CaseClosureFindFirstOrThrowArgs>(args?: SelectSubset<T, CaseClosureFindFirstOrThrowArgs<ExtArgs>>): Prisma__CaseClosureClient<$Result.GetResult<Prisma.$CaseClosurePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more CaseClosures that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CaseClosureFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all CaseClosures
+     * const caseClosures = await prisma.caseClosure.findMany()
+     *
+     * // Get first 10 CaseClosures
+     * const caseClosures = await prisma.caseClosure.findMany({ take: 10 })
+     *
+     * // Only select the `id`
+     * const caseClosureWithIdOnly = await prisma.caseClosure.findMany({ select: { id: true } })
+     *
+     */
+    findMany<T extends CaseClosureFindManyArgs>(args?: SelectSubset<T, CaseClosureFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CaseClosurePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a CaseClosure.
+     * @param {CaseClosureCreateArgs} args - Arguments to create a CaseClosure.
+     * @example
+     * // Create one CaseClosure
+     * const CaseClosure = await prisma.caseClosure.create({
+     *   data: {
+     *     // ... data to create a CaseClosure
+     *   }
+     * })
+     *
+     */
+    create<T extends CaseClosureCreateArgs>(args: SelectSubset<T, CaseClosureCreateArgs<ExtArgs>>): Prisma__CaseClosureClient<$Result.GetResult<Prisma.$CaseClosurePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many CaseClosures.
+     * @param {CaseClosureCreateManyArgs} args - Arguments to create many CaseClosures.
+     * @example
+     * // Create many CaseClosures
+     * const caseClosure = await prisma.caseClosure.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *
+     */
+    createMany<T extends CaseClosureCreateManyArgs>(args?: SelectSubset<T, CaseClosureCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many CaseClosures and returns the data saved in the database.
+     * @param {CaseClosureCreateManyAndReturnArgs} args - Arguments to create many CaseClosures.
+     * @example
+     * // Create many CaseClosures
+     * const caseClosure = await prisma.caseClosure.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *
+     * // Create many CaseClosures and only return the `id`
+     * const caseClosureWithIdOnly = await prisma.caseClosure.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     *
+     */
+    createManyAndReturn<T extends CaseClosureCreateManyAndReturnArgs>(args?: SelectSubset<T, CaseClosureCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CaseClosurePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a CaseClosure.
+     * @param {CaseClosureDeleteArgs} args - Arguments to delete one CaseClosure.
+     * @example
+     * // Delete one CaseClosure
+     * const CaseClosure = await prisma.caseClosure.delete({
+     *   where: {
+     *     // ... filter to delete one CaseClosure
+     *   }
+     * })
+     *
+     */
+    delete<T extends CaseClosureDeleteArgs>(args: SelectSubset<T, CaseClosureDeleteArgs<ExtArgs>>): Prisma__CaseClosureClient<$Result.GetResult<Prisma.$CaseClosurePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one CaseClosure.
+     * @param {CaseClosureUpdateArgs} args - Arguments to update one CaseClosure.
+     * @example
+     * // Update one CaseClosure
+     * const caseClosure = await prisma.caseClosure.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     *
+     */
+    update<T extends CaseClosureUpdateArgs>(args: SelectSubset<T, CaseClosureUpdateArgs<ExtArgs>>): Prisma__CaseClosureClient<$Result.GetResult<Prisma.$CaseClosurePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more CaseClosures.
+     * @param {CaseClosureDeleteManyArgs} args - Arguments to filter CaseClosures to delete.
+     * @example
+     * // Delete a few CaseClosures
+     * const { count } = await prisma.caseClosure.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     *
+     */
+    deleteMany<T extends CaseClosureDeleteManyArgs>(args?: SelectSubset<T, CaseClosureDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more CaseClosures.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CaseClosureUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many CaseClosures
+     * const caseClosure = await prisma.caseClosure.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     *
+     */
+    updateMany<T extends CaseClosureUpdateManyArgs>(args: SelectSubset<T, CaseClosureUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more CaseClosures and returns the data updated in the database.
+     * @param {CaseClosureUpdateManyAndReturnArgs} args - Arguments to update many CaseClosures.
+     * @example
+     * // Update many CaseClosures
+     * const caseClosure = await prisma.caseClosure.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *
+     * // Update zero or more CaseClosures and only return the `id`
+     * const caseClosureWithIdOnly = await prisma.caseClosure.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     *
+     */
+    updateManyAndReturn<T extends CaseClosureUpdateManyAndReturnArgs>(args: SelectSubset<T, CaseClosureUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CaseClosurePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one CaseClosure.
+     * @param {CaseClosureUpsertArgs} args - Arguments to update or create a CaseClosure.
+     * @example
+     * // Update or create a CaseClosure
+     * const caseClosure = await prisma.caseClosure.upsert({
+     *   create: {
+     *     // ... data to create a CaseClosure
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the CaseClosure we want to update
+     *   }
+     * })
+     */
+    upsert<T extends CaseClosureUpsertArgs>(args: SelectSubset<T, CaseClosureUpsertArgs<ExtArgs>>): Prisma__CaseClosureClient<$Result.GetResult<Prisma.$CaseClosurePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of CaseClosures.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CaseClosureCountArgs} args - Arguments to filter CaseClosures to count.
+     * @example
+     * // Count the number of CaseClosures
+     * const count = await prisma.caseClosure.count({
+     *   where: {
+     *     // ... the filter for the CaseClosures we want to count
+     *   }
+     * })
+    **/
+    count<T extends CaseClosureCountArgs>(
+      args?: Subset<T, CaseClosureCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], CaseClosureCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a CaseClosure.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CaseClosureAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends CaseClosureAggregateArgs>(args: Subset<T, CaseClosureAggregateArgs>): Prisma.PrismaPromise<GetCaseClosureAggregateType<T>>
+
+    /**
+     * Group by CaseClosure.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CaseClosureGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     *
+    **/
+    groupBy<
+      T extends CaseClosureGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: CaseClosureGroupByArgs['orderBy'] }
+        : { orderBy?: CaseClosureGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, CaseClosureGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCaseClosureGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the CaseClosure model
+   */
+  readonly fields: CaseClosureFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for CaseClosure.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__CaseClosureClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    case<T extends CaseDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CaseDefaultArgs<ExtArgs>>): Prisma__CaseClient<$Result.GetResult<Prisma.$CasePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    executionPlan<T extends ExecutionPlanDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ExecutionPlanDefaultArgs<ExtArgs>>): Prisma__ExecutionPlanClient<$Result.GetResult<Prisma.$ExecutionPlanPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    closedBy<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    closureAuthorityGrant<T extends ApprovalAuthorityDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ApprovalAuthorityDefaultArgs<ExtArgs>>): Prisma__ApprovalAuthorityClient<$Result.GetResult<Prisma.$ApprovalAuthorityPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the CaseClosure model
+   */
+  interface CaseClosureFieldRefs {
+    readonly id: FieldRef<"CaseClosure", 'String'>
+    readonly caseId: FieldRef<"CaseClosure", 'String'>
+    readonly executionPlanId: FieldRef<"CaseClosure", 'String'>
+    readonly closedById: FieldRef<"CaseClosure", 'String'>
+    readonly closureAuthorityGrantId: FieldRef<"CaseClosure", 'String'>
+    readonly closureReason: FieldRef<"CaseClosure", 'CaseClosureReason'>
+    readonly closureSummary: FieldRef<"CaseClosure", 'String'>
+    readonly createdAt: FieldRef<"CaseClosure", 'DateTime'>
+  }
+
+
+  // Custom InputTypes
+  /**
+   * CaseClosure findUnique
+   */
+  export type CaseClosureFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CaseClosure
+     */
+    select?: CaseClosureSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CaseClosure
+     */
+    omit?: CaseClosureOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CaseClosureInclude<ExtArgs> | null
+    /**
+     * Filter, which CaseClosure to fetch.
+     */
+    where: CaseClosureWhereUniqueInput
+  }
+
+  /**
+   * CaseClosure findUniqueOrThrow
+   */
+  export type CaseClosureFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CaseClosure
+     */
+    select?: CaseClosureSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CaseClosure
+     */
+    omit?: CaseClosureOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CaseClosureInclude<ExtArgs> | null
+    /**
+     * Filter, which CaseClosure to fetch.
+     */
+    where: CaseClosureWhereUniqueInput
+  }
+
+  /**
+   * CaseClosure findFirst
+   */
+  export type CaseClosureFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CaseClosure
+     */
+    select?: CaseClosureSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CaseClosure
+     */
+    omit?: CaseClosureOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CaseClosureInclude<ExtArgs> | null
+    /**
+     * Filter, which CaseClosure to fetch.
+     */
+    where?: CaseClosureWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     *
+     * Determine the order of CaseClosures to fetch.
+     */
+    orderBy?: CaseClosureOrderByWithRelationInput | CaseClosureOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     *
+     * Sets the position for searching for CaseClosures.
+     */
+    cursor?: CaseClosureWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Take `±n` CaseClosures from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Skip the first `n` CaseClosures.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     *
+     * Filter by unique combinations of CaseClosures.
+     */
+    distinct?: CaseClosureScalarFieldEnum | CaseClosureScalarFieldEnum[]
+  }
+
+  /**
+   * CaseClosure findFirstOrThrow
+   */
+  export type CaseClosureFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CaseClosure
+     */
+    select?: CaseClosureSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CaseClosure
+     */
+    omit?: CaseClosureOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CaseClosureInclude<ExtArgs> | null
+    /**
+     * Filter, which CaseClosure to fetch.
+     */
+    where?: CaseClosureWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     *
+     * Determine the order of CaseClosures to fetch.
+     */
+    orderBy?: CaseClosureOrderByWithRelationInput | CaseClosureOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     *
+     * Sets the position for searching for CaseClosures.
+     */
+    cursor?: CaseClosureWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Take `±n` CaseClosures from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Skip the first `n` CaseClosures.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     *
+     * Filter by unique combinations of CaseClosures.
+     */
+    distinct?: CaseClosureScalarFieldEnum | CaseClosureScalarFieldEnum[]
+  }
+
+  /**
+   * CaseClosure findMany
+   */
+  export type CaseClosureFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CaseClosure
+     */
+    select?: CaseClosureSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CaseClosure
+     */
+    omit?: CaseClosureOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CaseClosureInclude<ExtArgs> | null
+    /**
+     * Filter, which CaseClosures to fetch.
+     */
+    where?: CaseClosureWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     *
+     * Determine the order of CaseClosures to fetch.
+     */
+    orderBy?: CaseClosureOrderByWithRelationInput | CaseClosureOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     *
+     * Sets the position for listing CaseClosures.
+     */
+    cursor?: CaseClosureWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Take `±n` CaseClosures from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Skip the first `n` CaseClosures.
+     */
+    skip?: number
+    distinct?: CaseClosureScalarFieldEnum | CaseClosureScalarFieldEnum[]
+  }
+
+  /**
+   * CaseClosure create
+   */
+  export type CaseClosureCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CaseClosure
+     */
+    select?: CaseClosureSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CaseClosure
+     */
+    omit?: CaseClosureOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CaseClosureInclude<ExtArgs> | null
+    /**
+     * The data needed to create a CaseClosure.
+     */
+    data: XOR<CaseClosureCreateInput, CaseClosureUncheckedCreateInput>
+  }
+
+  /**
+   * CaseClosure createMany
+   */
+  export type CaseClosureCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many CaseClosures.
+     */
+    data: CaseClosureCreateManyInput | CaseClosureCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * CaseClosure createManyAndReturn
+   */
+  export type CaseClosureCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CaseClosure
+     */
+    select?: CaseClosureSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the CaseClosure
+     */
+    omit?: CaseClosureOmit<ExtArgs> | null
+    /**
+     * The data used to create many CaseClosures.
+     */
+    data: CaseClosureCreateManyInput | CaseClosureCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CaseClosureIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * CaseClosure update
+   */
+  export type CaseClosureUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CaseClosure
+     */
+    select?: CaseClosureSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CaseClosure
+     */
+    omit?: CaseClosureOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CaseClosureInclude<ExtArgs> | null
+    /**
+     * The data needed to update a CaseClosure.
+     */
+    data: XOR<CaseClosureUpdateInput, CaseClosureUncheckedUpdateInput>
+    /**
+     * Choose, which CaseClosure to update.
+     */
+    where: CaseClosureWhereUniqueInput
+  }
+
+  /**
+   * CaseClosure updateMany
+   */
+  export type CaseClosureUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update CaseClosures.
+     */
+    data: XOR<CaseClosureUpdateManyMutationInput, CaseClosureUncheckedUpdateManyInput>
+    /**
+     * Filter which CaseClosures to update
+     */
+    where?: CaseClosureWhereInput
+    /**
+     * Limit how many CaseClosures to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * CaseClosure updateManyAndReturn
+   */
+  export type CaseClosureUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CaseClosure
+     */
+    select?: CaseClosureSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the CaseClosure
+     */
+    omit?: CaseClosureOmit<ExtArgs> | null
+    /**
+     * The data used to update CaseClosures.
+     */
+    data: XOR<CaseClosureUpdateManyMutationInput, CaseClosureUncheckedUpdateManyInput>
+    /**
+     * Filter which CaseClosures to update
+     */
+    where?: CaseClosureWhereInput
+    /**
+     * Limit how many CaseClosures to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CaseClosureIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * CaseClosure upsert
+   */
+  export type CaseClosureUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CaseClosure
+     */
+    select?: CaseClosureSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CaseClosure
+     */
+    omit?: CaseClosureOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CaseClosureInclude<ExtArgs> | null
+    /**
+     * The filter to search for the CaseClosure to update in case it exists.
+     */
+    where: CaseClosureWhereUniqueInput
+    /**
+     * In case the CaseClosure found by the `where` argument doesn't exist, create a new CaseClosure with this data.
+     */
+    create: XOR<CaseClosureCreateInput, CaseClosureUncheckedCreateInput>
+    /**
+     * In case the CaseClosure was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<CaseClosureUpdateInput, CaseClosureUncheckedUpdateInput>
+  }
+
+  /**
+   * CaseClosure delete
+   */
+  export type CaseClosureDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CaseClosure
+     */
+    select?: CaseClosureSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CaseClosure
+     */
+    omit?: CaseClosureOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CaseClosureInclude<ExtArgs> | null
+    /**
+     * Filter which CaseClosure to delete.
+     */
+    where: CaseClosureWhereUniqueInput
+  }
+
+  /**
+   * CaseClosure deleteMany
+   */
+  export type CaseClosureDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which CaseClosures to delete
+     */
+    where?: CaseClosureWhereInput
+    /**
+     * Limit how many CaseClosures to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * CaseClosure without action
+   */
+  export type CaseClosureDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CaseClosure
+     */
+    select?: CaseClosureSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CaseClosure
+     */
+    omit?: CaseClosureOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CaseClosureInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -19051,6 +20407,7 @@ export namespace Prisma {
     canRequestModification: 'canRequestModification',
     canRequestReinspection: 'canRequestReinspection',
     canEscalate: 'canEscalate',
+    canCloseCase: 'canCloseCase',
     maxPriorityLevel: 'maxPriorityLevel',
     isActive: 'isActive',
     validFrom: 'validFrom',
@@ -19144,6 +20501,20 @@ export namespace Prisma {
   };
 
   export type ExecutionEvidenceScalarFieldEnum = (typeof ExecutionEvidenceScalarFieldEnum)[keyof typeof ExecutionEvidenceScalarFieldEnum]
+
+
+  export const CaseClosureScalarFieldEnum: {
+    id: 'id',
+    caseId: 'caseId',
+    executionPlanId: 'executionPlanId',
+    closedById: 'closedById',
+    closureAuthorityGrantId: 'closureAuthorityGrantId',
+    closureReason: 'closureReason',
+    closureSummary: 'closureSummary',
+    createdAt: 'createdAt'
+  };
+
+  export type CaseClosureScalarFieldEnum = (typeof CaseClosureScalarFieldEnum)[keyof typeof CaseClosureScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -19417,6 +20788,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'CaseClosureReason'
+   */
+  export type EnumCaseClosureReasonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CaseClosureReason'>
+
+
+
+  /**
+   * Reference to a field of type 'CaseClosureReason[]'
+   */
+  export type ListEnumCaseClosureReasonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CaseClosureReason[]'>
+
+
+
+  /**
    * Reference to a field of type 'Float'
    */
   export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -19585,6 +20970,7 @@ export namespace Prisma {
     verifiedExecutionTasks?: ExecutionTaskListRelationFilter
     cancelledExecutionTasks?: ExecutionTaskListRelationFilter
     submittedExecutionEvidence?: ExecutionEvidenceListRelationFilter
+    closedCases?: CaseClosureListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -19613,6 +20999,7 @@ export namespace Prisma {
     verifiedExecutionTasks?: ExecutionTaskOrderByRelationAggregateInput
     cancelledExecutionTasks?: ExecutionTaskOrderByRelationAggregateInput
     submittedExecutionEvidence?: ExecutionEvidenceOrderByRelationAggregateInput
+    closedCases?: CaseClosureOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -19644,6 +21031,7 @@ export namespace Prisma {
     verifiedExecutionTasks?: ExecutionTaskListRelationFilter
     cancelledExecutionTasks?: ExecutionTaskListRelationFilter
     submittedExecutionEvidence?: ExecutionEvidenceListRelationFilter
+    closedCases?: CaseClosureListRelationFilter
   }, "id" | "employeeCode" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -19802,6 +21190,7 @@ export namespace Prisma {
     operationalResponsePlans?: OperationalResponsePlanListRelationFilter
     orpDecisions?: OrpDecisionListRelationFilter
     executionPlans?: ExecutionPlanListRelationFilter
+    closure?: XOR<CaseClosureNullableScalarRelationFilter, CaseClosureWhereInput> | null
   }
 
   export type CaseOrderByWithRelationInput = {
@@ -19823,6 +21212,7 @@ export namespace Prisma {
     operationalResponsePlans?: OperationalResponsePlanOrderByRelationAggregateInput
     orpDecisions?: OrpDecisionOrderByRelationAggregateInput
     executionPlans?: ExecutionPlanOrderByRelationAggregateInput
+    closure?: CaseClosureOrderByWithRelationInput
   }
 
   export type CaseWhereUniqueInput = Prisma.AtLeast<{
@@ -19847,6 +21237,7 @@ export namespace Prisma {
     operationalResponsePlans?: OperationalResponsePlanListRelationFilter
     orpDecisions?: OrpDecisionListRelationFilter
     executionPlans?: ExecutionPlanListRelationFilter
+    closure?: XOR<CaseClosureNullableScalarRelationFilter, CaseClosureWhereInput> | null
   }, "id" | "caseNumber">
 
   export type CaseOrderByWithAggregationInput = {
@@ -20206,6 +21597,7 @@ export namespace Prisma {
     canRequestModification?: BoolFilter<"ApprovalAuthority"> | boolean
     canRequestReinspection?: BoolFilter<"ApprovalAuthority"> | boolean
     canEscalate?: BoolFilter<"ApprovalAuthority"> | boolean
+    canCloseCase?: BoolFilter<"ApprovalAuthority"> | boolean
     maxPriorityLevel?: EnumPriorityLevelNullableFilter<"ApprovalAuthority"> | $Enums.PriorityLevel | null
     isActive?: BoolFilter<"ApprovalAuthority"> | boolean
     validFrom?: DateTimeNullableFilter<"ApprovalAuthority"> | Date | string | null
@@ -20216,6 +21608,7 @@ export namespace Prisma {
     department?: XOR<DepartmentScalarRelationFilter, DepartmentWhereInput>
     jurisdiction?: XOR<JurisdictionScalarRelationFilter, JurisdictionWhereInput>
     decisions?: OrpDecisionListRelationFilter
+    caseClosures?: CaseClosureListRelationFilter
   }
 
   export type ApprovalAuthorityOrderByWithRelationInput = {
@@ -20228,6 +21621,7 @@ export namespace Prisma {
     canRequestModification?: SortOrder
     canRequestReinspection?: SortOrder
     canEscalate?: SortOrder
+    canCloseCase?: SortOrder
     maxPriorityLevel?: SortOrderInput | SortOrder
     isActive?: SortOrder
     validFrom?: SortOrderInput | SortOrder
@@ -20238,6 +21632,7 @@ export namespace Prisma {
     department?: DepartmentOrderByWithRelationInput
     jurisdiction?: JurisdictionOrderByWithRelationInput
     decisions?: OrpDecisionOrderByRelationAggregateInput
+    caseClosures?: CaseClosureOrderByRelationAggregateInput
   }
 
   export type ApprovalAuthorityWhereUniqueInput = Prisma.AtLeast<{
@@ -20253,6 +21648,7 @@ export namespace Prisma {
     canRequestModification?: BoolFilter<"ApprovalAuthority"> | boolean
     canRequestReinspection?: BoolFilter<"ApprovalAuthority"> | boolean
     canEscalate?: BoolFilter<"ApprovalAuthority"> | boolean
+    canCloseCase?: BoolFilter<"ApprovalAuthority"> | boolean
     maxPriorityLevel?: EnumPriorityLevelNullableFilter<"ApprovalAuthority"> | $Enums.PriorityLevel | null
     isActive?: BoolFilter<"ApprovalAuthority"> | boolean
     validFrom?: DateTimeNullableFilter<"ApprovalAuthority"> | Date | string | null
@@ -20263,6 +21659,7 @@ export namespace Prisma {
     department?: XOR<DepartmentScalarRelationFilter, DepartmentWhereInput>
     jurisdiction?: XOR<JurisdictionScalarRelationFilter, JurisdictionWhereInput>
     decisions?: OrpDecisionListRelationFilter
+    caseClosures?: CaseClosureListRelationFilter
   }, "id">
 
   export type ApprovalAuthorityOrderByWithAggregationInput = {
@@ -20275,6 +21672,7 @@ export namespace Prisma {
     canRequestModification?: SortOrder
     canRequestReinspection?: SortOrder
     canEscalate?: SortOrder
+    canCloseCase?: SortOrder
     maxPriorityLevel?: SortOrderInput | SortOrder
     isActive?: SortOrder
     validFrom?: SortOrderInput | SortOrder
@@ -20299,6 +21697,7 @@ export namespace Prisma {
     canRequestModification?: BoolWithAggregatesFilter<"ApprovalAuthority"> | boolean
     canRequestReinspection?: BoolWithAggregatesFilter<"ApprovalAuthority"> | boolean
     canEscalate?: BoolWithAggregatesFilter<"ApprovalAuthority"> | boolean
+    canCloseCase?: BoolWithAggregatesFilter<"ApprovalAuthority"> | boolean
     maxPriorityLevel?: EnumPriorityLevelNullableWithAggregatesFilter<"ApprovalAuthority"> | $Enums.PriorityLevel | null
     isActive?: BoolWithAggregatesFilter<"ApprovalAuthority"> | boolean
     validFrom?: DateTimeNullableWithAggregatesFilter<"ApprovalAuthority"> | Date | string | null
@@ -20429,6 +21828,7 @@ export namespace Prisma {
     approvalDecision?: XOR<OrpDecisionScalarRelationFilter, OrpDecisionWhereInput>
     createdBy?: XOR<UserScalarRelationFilter, UserWhereInput>
     tasks?: ExecutionTaskListRelationFilter
+    closure?: XOR<CaseClosureNullableScalarRelationFilter, CaseClosureWhereInput> | null
   }
 
   export type ExecutionPlanOrderByWithRelationInput = {
@@ -20450,6 +21850,7 @@ export namespace Prisma {
     approvalDecision?: OrpDecisionOrderByWithRelationInput
     createdBy?: UserOrderByWithRelationInput
     tasks?: ExecutionTaskOrderByRelationAggregateInput
+    closure?: CaseClosureOrderByWithRelationInput
   }
 
   export type ExecutionPlanWhereUniqueInput = Prisma.AtLeast<{
@@ -20474,6 +21875,7 @@ export namespace Prisma {
     approvalDecision?: XOR<OrpDecisionScalarRelationFilter, OrpDecisionWhereInput>
     createdBy?: XOR<UserScalarRelationFilter, UserWhereInput>
     tasks?: ExecutionTaskListRelationFilter
+    closure?: XOR<CaseClosureNullableScalarRelationFilter, CaseClosureWhereInput> | null
   }, "id" | "orpId" | "approvalDecisionId">
 
   export type ExecutionPlanOrderByWithAggregationInput = {
@@ -20779,6 +22181,85 @@ export namespace Prisma {
     submittedAt?: DateTimeWithAggregatesFilter<"ExecutionEvidence"> | Date | string
   }
 
+  export type CaseClosureWhereInput = {
+    AND?: CaseClosureWhereInput | CaseClosureWhereInput[]
+    OR?: CaseClosureWhereInput[]
+    NOT?: CaseClosureWhereInput | CaseClosureWhereInput[]
+    id?: StringFilter<"CaseClosure"> | string
+    caseId?: StringFilter<"CaseClosure"> | string
+    executionPlanId?: StringFilter<"CaseClosure"> | string
+    closedById?: StringFilter<"CaseClosure"> | string
+    closureAuthorityGrantId?: StringFilter<"CaseClosure"> | string
+    closureReason?: EnumCaseClosureReasonFilter<"CaseClosure"> | $Enums.CaseClosureReason
+    closureSummary?: StringFilter<"CaseClosure"> | string
+    createdAt?: DateTimeFilter<"CaseClosure"> | Date | string
+    case?: XOR<CaseScalarRelationFilter, CaseWhereInput>
+    executionPlan?: XOR<ExecutionPlanScalarRelationFilter, ExecutionPlanWhereInput>
+    closedBy?: XOR<UserScalarRelationFilter, UserWhereInput>
+    closureAuthorityGrant?: XOR<ApprovalAuthorityScalarRelationFilter, ApprovalAuthorityWhereInput>
+  }
+
+  export type CaseClosureOrderByWithRelationInput = {
+    id?: SortOrder
+    caseId?: SortOrder
+    executionPlanId?: SortOrder
+    closedById?: SortOrder
+    closureAuthorityGrantId?: SortOrder
+    closureReason?: SortOrder
+    closureSummary?: SortOrder
+    createdAt?: SortOrder
+    case?: CaseOrderByWithRelationInput
+    executionPlan?: ExecutionPlanOrderByWithRelationInput
+    closedBy?: UserOrderByWithRelationInput
+    closureAuthorityGrant?: ApprovalAuthorityOrderByWithRelationInput
+  }
+
+  export type CaseClosureWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    caseId?: string
+    executionPlanId?: string
+    AND?: CaseClosureWhereInput | CaseClosureWhereInput[]
+    OR?: CaseClosureWhereInput[]
+    NOT?: CaseClosureWhereInput | CaseClosureWhereInput[]
+    closedById?: StringFilter<"CaseClosure"> | string
+    closureAuthorityGrantId?: StringFilter<"CaseClosure"> | string
+    closureReason?: EnumCaseClosureReasonFilter<"CaseClosure"> | $Enums.CaseClosureReason
+    closureSummary?: StringFilter<"CaseClosure"> | string
+    createdAt?: DateTimeFilter<"CaseClosure"> | Date | string
+    case?: XOR<CaseScalarRelationFilter, CaseWhereInput>
+    executionPlan?: XOR<ExecutionPlanScalarRelationFilter, ExecutionPlanWhereInput>
+    closedBy?: XOR<UserScalarRelationFilter, UserWhereInput>
+    closureAuthorityGrant?: XOR<ApprovalAuthorityScalarRelationFilter, ApprovalAuthorityWhereInput>
+  }, "id" | "caseId" | "executionPlanId">
+
+  export type CaseClosureOrderByWithAggregationInput = {
+    id?: SortOrder
+    caseId?: SortOrder
+    executionPlanId?: SortOrder
+    closedById?: SortOrder
+    closureAuthorityGrantId?: SortOrder
+    closureReason?: SortOrder
+    closureSummary?: SortOrder
+    createdAt?: SortOrder
+    _count?: CaseClosureCountOrderByAggregateInput
+    _max?: CaseClosureMaxOrderByAggregateInput
+    _min?: CaseClosureMinOrderByAggregateInput
+  }
+
+  export type CaseClosureScalarWhereWithAggregatesInput = {
+    AND?: CaseClosureScalarWhereWithAggregatesInput | CaseClosureScalarWhereWithAggregatesInput[]
+    OR?: CaseClosureScalarWhereWithAggregatesInput[]
+    NOT?: CaseClosureScalarWhereWithAggregatesInput | CaseClosureScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"CaseClosure"> | string
+    caseId?: StringWithAggregatesFilter<"CaseClosure"> | string
+    executionPlanId?: StringWithAggregatesFilter<"CaseClosure"> | string
+    closedById?: StringWithAggregatesFilter<"CaseClosure"> | string
+    closureAuthorityGrantId?: StringWithAggregatesFilter<"CaseClosure"> | string
+    closureReason?: EnumCaseClosureReasonWithAggregatesFilter<"CaseClosure"> | $Enums.CaseClosureReason
+    closureSummary?: StringWithAggregatesFilter<"CaseClosure"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"CaseClosure"> | Date | string
+  }
+
   export type DepartmentCreateInput = {
     id?: string
     name: string
@@ -20935,6 +22416,7 @@ export namespace Prisma {
     verifiedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutVerifiedByInput
     cancelledExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCancelledByInput
     submittedExecutionEvidence?: ExecutionEvidenceCreateNestedManyWithoutSubmittedByInput
+    closedCases?: CaseClosureCreateNestedManyWithoutClosedByInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -20961,6 +22443,7 @@ export namespace Prisma {
     verifiedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutVerifiedByInput
     cancelledExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCancelledByInput
     submittedExecutionEvidence?: ExecutionEvidenceUncheckedCreateNestedManyWithoutSubmittedByInput
+    closedCases?: CaseClosureUncheckedCreateNestedManyWithoutClosedByInput
   }
 
   export type UserUpdateInput = {
@@ -20987,6 +22470,7 @@ export namespace Prisma {
     verifiedExecutionTasks?: ExecutionTaskUpdateManyWithoutVerifiedByNestedInput
     cancelledExecutionTasks?: ExecutionTaskUpdateManyWithoutCancelledByNestedInput
     submittedExecutionEvidence?: ExecutionEvidenceUpdateManyWithoutSubmittedByNestedInput
+    closedCases?: CaseClosureUpdateManyWithoutClosedByNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -21013,6 +22497,7 @@ export namespace Prisma {
     verifiedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutVerifiedByNestedInput
     cancelledExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCancelledByNestedInput
     submittedExecutionEvidence?: ExecutionEvidenceUncheckedUpdateManyWithoutSubmittedByNestedInput
+    closedCases?: CaseClosureUncheckedUpdateManyWithoutClosedByNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -21183,6 +22668,7 @@ export namespace Prisma {
     operationalResponsePlans?: OperationalResponsePlanCreateNestedManyWithoutCaseInput
     orpDecisions?: OrpDecisionCreateNestedManyWithoutCaseInput
     executionPlans?: ExecutionPlanCreateNestedManyWithoutCaseInput
+    closure?: CaseClosureCreateNestedOneWithoutCaseInput
   }
 
   export type CaseUncheckedCreateInput = {
@@ -21203,6 +22689,7 @@ export namespace Prisma {
     operationalResponsePlans?: OperationalResponsePlanUncheckedCreateNestedManyWithoutCaseInput
     orpDecisions?: OrpDecisionUncheckedCreateNestedManyWithoutCaseInput
     executionPlans?: ExecutionPlanUncheckedCreateNestedManyWithoutCaseInput
+    closure?: CaseClosureUncheckedCreateNestedOneWithoutCaseInput
   }
 
   export type CaseUpdateInput = {
@@ -21223,6 +22710,7 @@ export namespace Prisma {
     operationalResponsePlans?: OperationalResponsePlanUpdateManyWithoutCaseNestedInput
     orpDecisions?: OrpDecisionUpdateManyWithoutCaseNestedInput
     executionPlans?: ExecutionPlanUpdateManyWithoutCaseNestedInput
+    closure?: CaseClosureUpdateOneWithoutCaseNestedInput
   }
 
   export type CaseUncheckedUpdateInput = {
@@ -21243,6 +22731,7 @@ export namespace Prisma {
     operationalResponsePlans?: OperationalResponsePlanUncheckedUpdateManyWithoutCaseNestedInput
     orpDecisions?: OrpDecisionUncheckedUpdateManyWithoutCaseNestedInput
     executionPlans?: ExecutionPlanUncheckedUpdateManyWithoutCaseNestedInput
+    closure?: CaseClosureUncheckedUpdateOneWithoutCaseNestedInput
   }
 
   export type CaseCreateManyInput = {
@@ -21635,6 +23124,7 @@ export namespace Prisma {
     canRequestModification?: boolean
     canRequestReinspection?: boolean
     canEscalate?: boolean
+    canCloseCase?: boolean
     maxPriorityLevel?: $Enums.PriorityLevel | null
     isActive?: boolean
     validFrom?: Date | string | null
@@ -21645,6 +23135,7 @@ export namespace Prisma {
     department: DepartmentCreateNestedOneWithoutApprovalAuthoritiesInput
     jurisdiction: JurisdictionCreateNestedOneWithoutApprovalAuthoritiesInput
     decisions?: OrpDecisionCreateNestedManyWithoutAuthorityGrantInput
+    caseClosures?: CaseClosureCreateNestedManyWithoutClosureAuthorityGrantInput
   }
 
   export type ApprovalAuthorityUncheckedCreateInput = {
@@ -21657,6 +23148,7 @@ export namespace Prisma {
     canRequestModification?: boolean
     canRequestReinspection?: boolean
     canEscalate?: boolean
+    canCloseCase?: boolean
     maxPriorityLevel?: $Enums.PriorityLevel | null
     isActive?: boolean
     validFrom?: Date | string | null
@@ -21664,6 +23156,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     decisions?: OrpDecisionUncheckedCreateNestedManyWithoutAuthorityGrantInput
+    caseClosures?: CaseClosureUncheckedCreateNestedManyWithoutClosureAuthorityGrantInput
   }
 
   export type ApprovalAuthorityUpdateInput = {
@@ -21673,6 +23166,7 @@ export namespace Prisma {
     canRequestModification?: BoolFieldUpdateOperationsInput | boolean
     canRequestReinspection?: BoolFieldUpdateOperationsInput | boolean
     canEscalate?: BoolFieldUpdateOperationsInput | boolean
+    canCloseCase?: BoolFieldUpdateOperationsInput | boolean
     maxPriorityLevel?: NullableEnumPriorityLevelFieldUpdateOperationsInput | $Enums.PriorityLevel | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     validFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -21683,6 +23177,7 @@ export namespace Prisma {
     department?: DepartmentUpdateOneRequiredWithoutApprovalAuthoritiesNestedInput
     jurisdiction?: JurisdictionUpdateOneRequiredWithoutApprovalAuthoritiesNestedInput
     decisions?: OrpDecisionUpdateManyWithoutAuthorityGrantNestedInput
+    caseClosures?: CaseClosureUpdateManyWithoutClosureAuthorityGrantNestedInput
   }
 
   export type ApprovalAuthorityUncheckedUpdateInput = {
@@ -21695,6 +23190,7 @@ export namespace Prisma {
     canRequestModification?: BoolFieldUpdateOperationsInput | boolean
     canRequestReinspection?: BoolFieldUpdateOperationsInput | boolean
     canEscalate?: BoolFieldUpdateOperationsInput | boolean
+    canCloseCase?: BoolFieldUpdateOperationsInput | boolean
     maxPriorityLevel?: NullableEnumPriorityLevelFieldUpdateOperationsInput | $Enums.PriorityLevel | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     validFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -21702,6 +23198,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     decisions?: OrpDecisionUncheckedUpdateManyWithoutAuthorityGrantNestedInput
+    caseClosures?: CaseClosureUncheckedUpdateManyWithoutClosureAuthorityGrantNestedInput
   }
 
   export type ApprovalAuthorityCreateManyInput = {
@@ -21714,6 +23211,7 @@ export namespace Prisma {
     canRequestModification?: boolean
     canRequestReinspection?: boolean
     canEscalate?: boolean
+    canCloseCase?: boolean
     maxPriorityLevel?: $Enums.PriorityLevel | null
     isActive?: boolean
     validFrom?: Date | string | null
@@ -21729,6 +23227,7 @@ export namespace Prisma {
     canRequestModification?: BoolFieldUpdateOperationsInput | boolean
     canRequestReinspection?: BoolFieldUpdateOperationsInput | boolean
     canEscalate?: BoolFieldUpdateOperationsInput | boolean
+    canCloseCase?: BoolFieldUpdateOperationsInput | boolean
     maxPriorityLevel?: NullableEnumPriorityLevelFieldUpdateOperationsInput | $Enums.PriorityLevel | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     validFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -21747,6 +23246,7 @@ export namespace Prisma {
     canRequestModification?: BoolFieldUpdateOperationsInput | boolean
     canRequestReinspection?: BoolFieldUpdateOperationsInput | boolean
     canEscalate?: BoolFieldUpdateOperationsInput | boolean
+    canCloseCase?: BoolFieldUpdateOperationsInput | boolean
     maxPriorityLevel?: NullableEnumPriorityLevelFieldUpdateOperationsInput | $Enums.PriorityLevel | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     validFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -21867,6 +23367,7 @@ export namespace Prisma {
     approvalDecision: OrpDecisionCreateNestedOneWithoutExecutionPlanInput
     createdBy: UserCreateNestedOneWithoutCreatedExecutionPlansInput
     tasks?: ExecutionTaskCreateNestedManyWithoutExecutionPlanInput
+    closure?: CaseClosureCreateNestedOneWithoutExecutionPlanInput
   }
 
   export type ExecutionPlanUncheckedCreateInput = {
@@ -21884,6 +23385,7 @@ export namespace Prisma {
     cancelledAt?: Date | string | null
     cancellationReason?: string | null
     tasks?: ExecutionTaskUncheckedCreateNestedManyWithoutExecutionPlanInput
+    closure?: CaseClosureUncheckedCreateNestedOneWithoutExecutionPlanInput
   }
 
   export type ExecutionPlanUpdateInput = {
@@ -21901,6 +23403,7 @@ export namespace Prisma {
     approvalDecision?: OrpDecisionUpdateOneRequiredWithoutExecutionPlanNestedInput
     createdBy?: UserUpdateOneRequiredWithoutCreatedExecutionPlansNestedInput
     tasks?: ExecutionTaskUpdateManyWithoutExecutionPlanNestedInput
+    closure?: CaseClosureUpdateOneWithoutExecutionPlanNestedInput
   }
 
   export type ExecutionPlanUncheckedUpdateInput = {
@@ -21918,6 +23421,7 @@ export namespace Prisma {
     cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
     tasks?: ExecutionTaskUncheckedUpdateManyWithoutExecutionPlanNestedInput
+    closure?: CaseClosureUncheckedUpdateOneWithoutExecutionPlanNestedInput
   }
 
   export type ExecutionPlanCreateManyInput = {
@@ -22254,6 +23758,79 @@ export namespace Prisma {
     submittedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type CaseClosureCreateInput = {
+    id?: string
+    closureReason: $Enums.CaseClosureReason
+    closureSummary: string
+    createdAt?: Date | string
+    case: CaseCreateNestedOneWithoutClosureInput
+    executionPlan: ExecutionPlanCreateNestedOneWithoutClosureInput
+    closedBy: UserCreateNestedOneWithoutClosedCasesInput
+    closureAuthorityGrant: ApprovalAuthorityCreateNestedOneWithoutCaseClosuresInput
+  }
+
+  export type CaseClosureUncheckedCreateInput = {
+    id?: string
+    caseId: string
+    executionPlanId: string
+    closedById: string
+    closureAuthorityGrantId: string
+    closureReason: $Enums.CaseClosureReason
+    closureSummary: string
+    createdAt?: Date | string
+  }
+
+  export type CaseClosureUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    closureReason?: EnumCaseClosureReasonFieldUpdateOperationsInput | $Enums.CaseClosureReason
+    closureSummary?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    case?: CaseUpdateOneRequiredWithoutClosureNestedInput
+    executionPlan?: ExecutionPlanUpdateOneRequiredWithoutClosureNestedInput
+    closedBy?: UserUpdateOneRequiredWithoutClosedCasesNestedInput
+    closureAuthorityGrant?: ApprovalAuthorityUpdateOneRequiredWithoutCaseClosuresNestedInput
+  }
+
+  export type CaseClosureUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    caseId?: StringFieldUpdateOperationsInput | string
+    executionPlanId?: StringFieldUpdateOperationsInput | string
+    closedById?: StringFieldUpdateOperationsInput | string
+    closureAuthorityGrantId?: StringFieldUpdateOperationsInput | string
+    closureReason?: EnumCaseClosureReasonFieldUpdateOperationsInput | $Enums.CaseClosureReason
+    closureSummary?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CaseClosureCreateManyInput = {
+    id?: string
+    caseId: string
+    executionPlanId: string
+    closedById: string
+    closureAuthorityGrantId: string
+    closureReason: $Enums.CaseClosureReason
+    closureSummary: string
+    createdAt?: Date | string
+  }
+
+  export type CaseClosureUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    closureReason?: EnumCaseClosureReasonFieldUpdateOperationsInput | $Enums.CaseClosureReason
+    closureSummary?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CaseClosureUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    caseId?: StringFieldUpdateOperationsInput | string
+    executionPlanId?: StringFieldUpdateOperationsInput | string
+    closedById?: StringFieldUpdateOperationsInput | string
+    closureAuthorityGrantId?: StringFieldUpdateOperationsInput | string
+    closureReason?: EnumCaseClosureReasonFieldUpdateOperationsInput | $Enums.CaseClosureReason
+    closureSummary?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -22451,6 +24028,12 @@ export namespace Prisma {
     none?: ExecutionEvidenceWhereInput
   }
 
+  export type CaseClosureListRelationFilter = {
+    every?: CaseClosureWhereInput
+    some?: CaseClosureWhereInput
+    none?: CaseClosureWhereInput
+  }
+
   export type InspectionOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -22468,6 +24051,10 @@ export namespace Prisma {
   }
 
   export type ExecutionEvidenceOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type CaseClosureOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -22764,6 +24351,11 @@ export namespace Prisma {
     every?: OperationalResponsePlanWhereInput
     some?: OperationalResponsePlanWhereInput
     none?: OperationalResponsePlanWhereInput
+  }
+
+  export type CaseClosureNullableScalarRelationFilter = {
+    is?: CaseClosureWhereInput | null
+    isNot?: CaseClosureWhereInput | null
   }
 
   export type RiskAssessmentOrderByRelationAggregateInput = {
@@ -23174,6 +24766,7 @@ export namespace Prisma {
     canRequestModification?: SortOrder
     canRequestReinspection?: SortOrder
     canEscalate?: SortOrder
+    canCloseCase?: SortOrder
     maxPriorityLevel?: SortOrder
     isActive?: SortOrder
     validFrom?: SortOrder
@@ -23192,6 +24785,7 @@ export namespace Prisma {
     canRequestModification?: SortOrder
     canRequestReinspection?: SortOrder
     canEscalate?: SortOrder
+    canCloseCase?: SortOrder
     maxPriorityLevel?: SortOrder
     isActive?: SortOrder
     validFrom?: SortOrder
@@ -23210,6 +24804,7 @@ export namespace Prisma {
     canRequestModification?: SortOrder
     canRequestReinspection?: SortOrder
     canEscalate?: SortOrder
+    canCloseCase?: SortOrder
     maxPriorityLevel?: SortOrder
     isActive?: SortOrder
     validFrom?: SortOrder
@@ -23594,6 +25189,56 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumExecutionEvidenceTypeFilter<$PrismaModel>
     _max?: NestedEnumExecutionEvidenceTypeFilter<$PrismaModel>
+  }
+
+  export type EnumCaseClosureReasonFilter<$PrismaModel = never> = {
+    equals?: $Enums.CaseClosureReason | EnumCaseClosureReasonFieldRefInput<$PrismaModel>
+    in?: $Enums.CaseClosureReason[] | ListEnumCaseClosureReasonFieldRefInput<$PrismaModel>
+    notIn?: $Enums.CaseClosureReason[] | ListEnumCaseClosureReasonFieldRefInput<$PrismaModel>
+    not?: NestedEnumCaseClosureReasonFilter<$PrismaModel> | $Enums.CaseClosureReason
+  }
+
+  export type CaseClosureCountOrderByAggregateInput = {
+    id?: SortOrder
+    caseId?: SortOrder
+    executionPlanId?: SortOrder
+    closedById?: SortOrder
+    closureAuthorityGrantId?: SortOrder
+    closureReason?: SortOrder
+    closureSummary?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type CaseClosureMaxOrderByAggregateInput = {
+    id?: SortOrder
+    caseId?: SortOrder
+    executionPlanId?: SortOrder
+    closedById?: SortOrder
+    closureAuthorityGrantId?: SortOrder
+    closureReason?: SortOrder
+    closureSummary?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type CaseClosureMinOrderByAggregateInput = {
+    id?: SortOrder
+    caseId?: SortOrder
+    executionPlanId?: SortOrder
+    closedById?: SortOrder
+    closureAuthorityGrantId?: SortOrder
+    closureReason?: SortOrder
+    closureSummary?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type EnumCaseClosureReasonWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.CaseClosureReason | EnumCaseClosureReasonFieldRefInput<$PrismaModel>
+    in?: $Enums.CaseClosureReason[] | ListEnumCaseClosureReasonFieldRefInput<$PrismaModel>
+    notIn?: $Enums.CaseClosureReason[] | ListEnumCaseClosureReasonFieldRefInput<$PrismaModel>
+    not?: NestedEnumCaseClosureReasonWithAggregatesFilter<$PrismaModel> | $Enums.CaseClosureReason
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumCaseClosureReasonFilter<$PrismaModel>
+    _max?: NestedEnumCaseClosureReasonFilter<$PrismaModel>
   }
 
   export type UserCreateNestedManyWithoutDepartmentInput = {
@@ -24001,6 +25646,13 @@ export namespace Prisma {
     connect?: ExecutionEvidenceWhereUniqueInput | ExecutionEvidenceWhereUniqueInput[]
   }
 
+  export type CaseClosureCreateNestedManyWithoutClosedByInput = {
+    create?: XOR<CaseClosureCreateWithoutClosedByInput, CaseClosureUncheckedCreateWithoutClosedByInput> | CaseClosureCreateWithoutClosedByInput[] | CaseClosureUncheckedCreateWithoutClosedByInput[]
+    connectOrCreate?: CaseClosureCreateOrConnectWithoutClosedByInput | CaseClosureCreateOrConnectWithoutClosedByInput[]
+    createMany?: CaseClosureCreateManyClosedByInputEnvelope
+    connect?: CaseClosureWhereUniqueInput | CaseClosureWhereUniqueInput[]
+  }
+
   export type InspectionUncheckedCreateNestedManyWithoutInspectorInput = {
     create?: XOR<InspectionCreateWithoutInspectorInput, InspectionUncheckedCreateWithoutInspectorInput> | InspectionCreateWithoutInspectorInput[] | InspectionUncheckedCreateWithoutInspectorInput[]
     connectOrCreate?: InspectionCreateOrConnectWithoutInspectorInput | InspectionCreateOrConnectWithoutInspectorInput[]
@@ -24076,6 +25728,13 @@ export namespace Prisma {
     connectOrCreate?: ExecutionEvidenceCreateOrConnectWithoutSubmittedByInput | ExecutionEvidenceCreateOrConnectWithoutSubmittedByInput[]
     createMany?: ExecutionEvidenceCreateManySubmittedByInputEnvelope
     connect?: ExecutionEvidenceWhereUniqueInput | ExecutionEvidenceWhereUniqueInput[]
+  }
+
+  export type CaseClosureUncheckedCreateNestedManyWithoutClosedByInput = {
+    create?: XOR<CaseClosureCreateWithoutClosedByInput, CaseClosureUncheckedCreateWithoutClosedByInput> | CaseClosureCreateWithoutClosedByInput[] | CaseClosureUncheckedCreateWithoutClosedByInput[]
+    connectOrCreate?: CaseClosureCreateOrConnectWithoutClosedByInput | CaseClosureCreateOrConnectWithoutClosedByInput[]
+    createMany?: CaseClosureCreateManyClosedByInputEnvelope
+    connect?: CaseClosureWhereUniqueInput | CaseClosureWhereUniqueInput[]
   }
 
   export type EnumSystemRoleFieldUpdateOperationsInput = {
@@ -24256,6 +25915,20 @@ export namespace Prisma {
     deleteMany?: ExecutionEvidenceScalarWhereInput | ExecutionEvidenceScalarWhereInput[]
   }
 
+  export type CaseClosureUpdateManyWithoutClosedByNestedInput = {
+    create?: XOR<CaseClosureCreateWithoutClosedByInput, CaseClosureUncheckedCreateWithoutClosedByInput> | CaseClosureCreateWithoutClosedByInput[] | CaseClosureUncheckedCreateWithoutClosedByInput[]
+    connectOrCreate?: CaseClosureCreateOrConnectWithoutClosedByInput | CaseClosureCreateOrConnectWithoutClosedByInput[]
+    upsert?: CaseClosureUpsertWithWhereUniqueWithoutClosedByInput | CaseClosureUpsertWithWhereUniqueWithoutClosedByInput[]
+    createMany?: CaseClosureCreateManyClosedByInputEnvelope
+    set?: CaseClosureWhereUniqueInput | CaseClosureWhereUniqueInput[]
+    disconnect?: CaseClosureWhereUniqueInput | CaseClosureWhereUniqueInput[]
+    delete?: CaseClosureWhereUniqueInput | CaseClosureWhereUniqueInput[]
+    connect?: CaseClosureWhereUniqueInput | CaseClosureWhereUniqueInput[]
+    update?: CaseClosureUpdateWithWhereUniqueWithoutClosedByInput | CaseClosureUpdateWithWhereUniqueWithoutClosedByInput[]
+    updateMany?: CaseClosureUpdateManyWithWhereWithoutClosedByInput | CaseClosureUpdateManyWithWhereWithoutClosedByInput[]
+    deleteMany?: CaseClosureScalarWhereInput | CaseClosureScalarWhereInput[]
+  }
+
   export type InspectionUncheckedUpdateManyWithoutInspectorNestedInput = {
     create?: XOR<InspectionCreateWithoutInspectorInput, InspectionUncheckedCreateWithoutInspectorInput> | InspectionCreateWithoutInspectorInput[] | InspectionUncheckedCreateWithoutInspectorInput[]
     connectOrCreate?: InspectionCreateOrConnectWithoutInspectorInput | InspectionCreateOrConnectWithoutInspectorInput[]
@@ -24410,6 +26083,20 @@ export namespace Prisma {
     deleteMany?: ExecutionEvidenceScalarWhereInput | ExecutionEvidenceScalarWhereInput[]
   }
 
+  export type CaseClosureUncheckedUpdateManyWithoutClosedByNestedInput = {
+    create?: XOR<CaseClosureCreateWithoutClosedByInput, CaseClosureUncheckedCreateWithoutClosedByInput> | CaseClosureCreateWithoutClosedByInput[] | CaseClosureUncheckedCreateWithoutClosedByInput[]
+    connectOrCreate?: CaseClosureCreateOrConnectWithoutClosedByInput | CaseClosureCreateOrConnectWithoutClosedByInput[]
+    upsert?: CaseClosureUpsertWithWhereUniqueWithoutClosedByInput | CaseClosureUpsertWithWhereUniqueWithoutClosedByInput[]
+    createMany?: CaseClosureCreateManyClosedByInputEnvelope
+    set?: CaseClosureWhereUniqueInput | CaseClosureWhereUniqueInput[]
+    disconnect?: CaseClosureWhereUniqueInput | CaseClosureWhereUniqueInput[]
+    delete?: CaseClosureWhereUniqueInput | CaseClosureWhereUniqueInput[]
+    connect?: CaseClosureWhereUniqueInput | CaseClosureWhereUniqueInput[]
+    update?: CaseClosureUpdateWithWhereUniqueWithoutClosedByInput | CaseClosureUpdateWithWhereUniqueWithoutClosedByInput[]
+    updateMany?: CaseClosureUpdateManyWithWhereWithoutClosedByInput | CaseClosureUpdateManyWithWhereWithoutClosedByInput[]
+    deleteMany?: CaseClosureScalarWhereInput | CaseClosureScalarWhereInput[]
+  }
+
   export type DepartmentCreateNestedOneWithoutAssetsInput = {
     create?: XOR<DepartmentCreateWithoutAssetsInput, DepartmentUncheckedCreateWithoutAssetsInput>
     connectOrCreate?: DepartmentCreateOrConnectWithoutAssetsInput
@@ -24545,6 +26232,12 @@ export namespace Prisma {
     connect?: ExecutionPlanWhereUniqueInput | ExecutionPlanWhereUniqueInput[]
   }
 
+  export type CaseClosureCreateNestedOneWithoutCaseInput = {
+    create?: XOR<CaseClosureCreateWithoutCaseInput, CaseClosureUncheckedCreateWithoutCaseInput>
+    connectOrCreate?: CaseClosureCreateOrConnectWithoutCaseInput
+    connect?: CaseClosureWhereUniqueInput
+  }
+
   export type InspectionUncheckedCreateNestedManyWithoutCaseInput = {
     create?: XOR<InspectionCreateWithoutCaseInput, InspectionUncheckedCreateWithoutCaseInput> | InspectionCreateWithoutCaseInput[] | InspectionUncheckedCreateWithoutCaseInput[]
     connectOrCreate?: InspectionCreateOrConnectWithoutCaseInput | InspectionCreateOrConnectWithoutCaseInput[]
@@ -24578,6 +26271,12 @@ export namespace Prisma {
     connectOrCreate?: ExecutionPlanCreateOrConnectWithoutCaseInput | ExecutionPlanCreateOrConnectWithoutCaseInput[]
     createMany?: ExecutionPlanCreateManyCaseInputEnvelope
     connect?: ExecutionPlanWhereUniqueInput | ExecutionPlanWhereUniqueInput[]
+  }
+
+  export type CaseClosureUncheckedCreateNestedOneWithoutCaseInput = {
+    create?: XOR<CaseClosureCreateWithoutCaseInput, CaseClosureUncheckedCreateWithoutCaseInput>
+    connectOrCreate?: CaseClosureCreateOrConnectWithoutCaseInput
+    connect?: CaseClosureWhereUniqueInput
   }
 
   export type EnumCaseStatusFieldUpdateOperationsInput = {
@@ -24678,6 +26377,16 @@ export namespace Prisma {
     deleteMany?: ExecutionPlanScalarWhereInput | ExecutionPlanScalarWhereInput[]
   }
 
+  export type CaseClosureUpdateOneWithoutCaseNestedInput = {
+    create?: XOR<CaseClosureCreateWithoutCaseInput, CaseClosureUncheckedCreateWithoutCaseInput>
+    connectOrCreate?: CaseClosureCreateOrConnectWithoutCaseInput
+    upsert?: CaseClosureUpsertWithoutCaseInput
+    disconnect?: CaseClosureWhereInput | boolean
+    delete?: CaseClosureWhereInput | boolean
+    connect?: CaseClosureWhereUniqueInput
+    update?: XOR<XOR<CaseClosureUpdateToOneWithWhereWithoutCaseInput, CaseClosureUpdateWithoutCaseInput>, CaseClosureUncheckedUpdateWithoutCaseInput>
+  }
+
   export type InspectionUncheckedUpdateManyWithoutCaseNestedInput = {
     create?: XOR<InspectionCreateWithoutCaseInput, InspectionUncheckedCreateWithoutCaseInput> | InspectionCreateWithoutCaseInput[] | InspectionUncheckedCreateWithoutCaseInput[]
     connectOrCreate?: InspectionCreateOrConnectWithoutCaseInput | InspectionCreateOrConnectWithoutCaseInput[]
@@ -24746,6 +26455,16 @@ export namespace Prisma {
     update?: ExecutionPlanUpdateWithWhereUniqueWithoutCaseInput | ExecutionPlanUpdateWithWhereUniqueWithoutCaseInput[]
     updateMany?: ExecutionPlanUpdateManyWithWhereWithoutCaseInput | ExecutionPlanUpdateManyWithWhereWithoutCaseInput[]
     deleteMany?: ExecutionPlanScalarWhereInput | ExecutionPlanScalarWhereInput[]
+  }
+
+  export type CaseClosureUncheckedUpdateOneWithoutCaseNestedInput = {
+    create?: XOR<CaseClosureCreateWithoutCaseInput, CaseClosureUncheckedCreateWithoutCaseInput>
+    connectOrCreate?: CaseClosureCreateOrConnectWithoutCaseInput
+    upsert?: CaseClosureUpsertWithoutCaseInput
+    disconnect?: CaseClosureWhereInput | boolean
+    delete?: CaseClosureWhereInput | boolean
+    connect?: CaseClosureWhereUniqueInput
+    update?: XOR<XOR<CaseClosureUpdateToOneWithWhereWithoutCaseInput, CaseClosureUpdateWithoutCaseInput>, CaseClosureUncheckedUpdateWithoutCaseInput>
   }
 
   export type CaseCreateNestedOneWithoutInspectionsInput = {
@@ -25031,11 +26750,25 @@ export namespace Prisma {
     connect?: OrpDecisionWhereUniqueInput | OrpDecisionWhereUniqueInput[]
   }
 
+  export type CaseClosureCreateNestedManyWithoutClosureAuthorityGrantInput = {
+    create?: XOR<CaseClosureCreateWithoutClosureAuthorityGrantInput, CaseClosureUncheckedCreateWithoutClosureAuthorityGrantInput> | CaseClosureCreateWithoutClosureAuthorityGrantInput[] | CaseClosureUncheckedCreateWithoutClosureAuthorityGrantInput[]
+    connectOrCreate?: CaseClosureCreateOrConnectWithoutClosureAuthorityGrantInput | CaseClosureCreateOrConnectWithoutClosureAuthorityGrantInput[]
+    createMany?: CaseClosureCreateManyClosureAuthorityGrantInputEnvelope
+    connect?: CaseClosureWhereUniqueInput | CaseClosureWhereUniqueInput[]
+  }
+
   export type OrpDecisionUncheckedCreateNestedManyWithoutAuthorityGrantInput = {
     create?: XOR<OrpDecisionCreateWithoutAuthorityGrantInput, OrpDecisionUncheckedCreateWithoutAuthorityGrantInput> | OrpDecisionCreateWithoutAuthorityGrantInput[] | OrpDecisionUncheckedCreateWithoutAuthorityGrantInput[]
     connectOrCreate?: OrpDecisionCreateOrConnectWithoutAuthorityGrantInput | OrpDecisionCreateOrConnectWithoutAuthorityGrantInput[]
     createMany?: OrpDecisionCreateManyAuthorityGrantInputEnvelope
     connect?: OrpDecisionWhereUniqueInput | OrpDecisionWhereUniqueInput[]
+  }
+
+  export type CaseClosureUncheckedCreateNestedManyWithoutClosureAuthorityGrantInput = {
+    create?: XOR<CaseClosureCreateWithoutClosureAuthorityGrantInput, CaseClosureUncheckedCreateWithoutClosureAuthorityGrantInput> | CaseClosureCreateWithoutClosureAuthorityGrantInput[] | CaseClosureUncheckedCreateWithoutClosureAuthorityGrantInput[]
+    connectOrCreate?: CaseClosureCreateOrConnectWithoutClosureAuthorityGrantInput | CaseClosureCreateOrConnectWithoutClosureAuthorityGrantInput[]
+    createMany?: CaseClosureCreateManyClosureAuthorityGrantInputEnvelope
+    connect?: CaseClosureWhereUniqueInput | CaseClosureWhereUniqueInput[]
   }
 
   export type UserUpdateOneRequiredWithoutApprovalAuthoritiesNestedInput = {
@@ -25076,6 +26809,20 @@ export namespace Prisma {
     deleteMany?: OrpDecisionScalarWhereInput | OrpDecisionScalarWhereInput[]
   }
 
+  export type CaseClosureUpdateManyWithoutClosureAuthorityGrantNestedInput = {
+    create?: XOR<CaseClosureCreateWithoutClosureAuthorityGrantInput, CaseClosureUncheckedCreateWithoutClosureAuthorityGrantInput> | CaseClosureCreateWithoutClosureAuthorityGrantInput[] | CaseClosureUncheckedCreateWithoutClosureAuthorityGrantInput[]
+    connectOrCreate?: CaseClosureCreateOrConnectWithoutClosureAuthorityGrantInput | CaseClosureCreateOrConnectWithoutClosureAuthorityGrantInput[]
+    upsert?: CaseClosureUpsertWithWhereUniqueWithoutClosureAuthorityGrantInput | CaseClosureUpsertWithWhereUniqueWithoutClosureAuthorityGrantInput[]
+    createMany?: CaseClosureCreateManyClosureAuthorityGrantInputEnvelope
+    set?: CaseClosureWhereUniqueInput | CaseClosureWhereUniqueInput[]
+    disconnect?: CaseClosureWhereUniqueInput | CaseClosureWhereUniqueInput[]
+    delete?: CaseClosureWhereUniqueInput | CaseClosureWhereUniqueInput[]
+    connect?: CaseClosureWhereUniqueInput | CaseClosureWhereUniqueInput[]
+    update?: CaseClosureUpdateWithWhereUniqueWithoutClosureAuthorityGrantInput | CaseClosureUpdateWithWhereUniqueWithoutClosureAuthorityGrantInput[]
+    updateMany?: CaseClosureUpdateManyWithWhereWithoutClosureAuthorityGrantInput | CaseClosureUpdateManyWithWhereWithoutClosureAuthorityGrantInput[]
+    deleteMany?: CaseClosureScalarWhereInput | CaseClosureScalarWhereInput[]
+  }
+
   export type OrpDecisionUncheckedUpdateManyWithoutAuthorityGrantNestedInput = {
     create?: XOR<OrpDecisionCreateWithoutAuthorityGrantInput, OrpDecisionUncheckedCreateWithoutAuthorityGrantInput> | OrpDecisionCreateWithoutAuthorityGrantInput[] | OrpDecisionUncheckedCreateWithoutAuthorityGrantInput[]
     connectOrCreate?: OrpDecisionCreateOrConnectWithoutAuthorityGrantInput | OrpDecisionCreateOrConnectWithoutAuthorityGrantInput[]
@@ -25088,6 +26835,20 @@ export namespace Prisma {
     update?: OrpDecisionUpdateWithWhereUniqueWithoutAuthorityGrantInput | OrpDecisionUpdateWithWhereUniqueWithoutAuthorityGrantInput[]
     updateMany?: OrpDecisionUpdateManyWithWhereWithoutAuthorityGrantInput | OrpDecisionUpdateManyWithWhereWithoutAuthorityGrantInput[]
     deleteMany?: OrpDecisionScalarWhereInput | OrpDecisionScalarWhereInput[]
+  }
+
+  export type CaseClosureUncheckedUpdateManyWithoutClosureAuthorityGrantNestedInput = {
+    create?: XOR<CaseClosureCreateWithoutClosureAuthorityGrantInput, CaseClosureUncheckedCreateWithoutClosureAuthorityGrantInput> | CaseClosureCreateWithoutClosureAuthorityGrantInput[] | CaseClosureUncheckedCreateWithoutClosureAuthorityGrantInput[]
+    connectOrCreate?: CaseClosureCreateOrConnectWithoutClosureAuthorityGrantInput | CaseClosureCreateOrConnectWithoutClosureAuthorityGrantInput[]
+    upsert?: CaseClosureUpsertWithWhereUniqueWithoutClosureAuthorityGrantInput | CaseClosureUpsertWithWhereUniqueWithoutClosureAuthorityGrantInput[]
+    createMany?: CaseClosureCreateManyClosureAuthorityGrantInputEnvelope
+    set?: CaseClosureWhereUniqueInput | CaseClosureWhereUniqueInput[]
+    disconnect?: CaseClosureWhereUniqueInput | CaseClosureWhereUniqueInput[]
+    delete?: CaseClosureWhereUniqueInput | CaseClosureWhereUniqueInput[]
+    connect?: CaseClosureWhereUniqueInput | CaseClosureWhereUniqueInput[]
+    update?: CaseClosureUpdateWithWhereUniqueWithoutClosureAuthorityGrantInput | CaseClosureUpdateWithWhereUniqueWithoutClosureAuthorityGrantInput[]
+    updateMany?: CaseClosureUpdateManyWithWhereWithoutClosureAuthorityGrantInput | CaseClosureUpdateManyWithWhereWithoutClosureAuthorityGrantInput[]
+    deleteMany?: CaseClosureScalarWhereInput | CaseClosureScalarWhereInput[]
   }
 
   export type CaseCreateNestedOneWithoutOrpDecisionsInput = {
@@ -25229,11 +26990,23 @@ export namespace Prisma {
     connect?: ExecutionTaskWhereUniqueInput | ExecutionTaskWhereUniqueInput[]
   }
 
+  export type CaseClosureCreateNestedOneWithoutExecutionPlanInput = {
+    create?: XOR<CaseClosureCreateWithoutExecutionPlanInput, CaseClosureUncheckedCreateWithoutExecutionPlanInput>
+    connectOrCreate?: CaseClosureCreateOrConnectWithoutExecutionPlanInput
+    connect?: CaseClosureWhereUniqueInput
+  }
+
   export type ExecutionTaskUncheckedCreateNestedManyWithoutExecutionPlanInput = {
     create?: XOR<ExecutionTaskCreateWithoutExecutionPlanInput, ExecutionTaskUncheckedCreateWithoutExecutionPlanInput> | ExecutionTaskCreateWithoutExecutionPlanInput[] | ExecutionTaskUncheckedCreateWithoutExecutionPlanInput[]
     connectOrCreate?: ExecutionTaskCreateOrConnectWithoutExecutionPlanInput | ExecutionTaskCreateOrConnectWithoutExecutionPlanInput[]
     createMany?: ExecutionTaskCreateManyExecutionPlanInputEnvelope
     connect?: ExecutionTaskWhereUniqueInput | ExecutionTaskWhereUniqueInput[]
+  }
+
+  export type CaseClosureUncheckedCreateNestedOneWithoutExecutionPlanInput = {
+    create?: XOR<CaseClosureCreateWithoutExecutionPlanInput, CaseClosureUncheckedCreateWithoutExecutionPlanInput>
+    connectOrCreate?: CaseClosureCreateOrConnectWithoutExecutionPlanInput
+    connect?: CaseClosureWhereUniqueInput
   }
 
   export type EnumExecutionPlanStatusFieldUpdateOperationsInput = {
@@ -25286,6 +27059,16 @@ export namespace Prisma {
     deleteMany?: ExecutionTaskScalarWhereInput | ExecutionTaskScalarWhereInput[]
   }
 
+  export type CaseClosureUpdateOneWithoutExecutionPlanNestedInput = {
+    create?: XOR<CaseClosureCreateWithoutExecutionPlanInput, CaseClosureUncheckedCreateWithoutExecutionPlanInput>
+    connectOrCreate?: CaseClosureCreateOrConnectWithoutExecutionPlanInput
+    upsert?: CaseClosureUpsertWithoutExecutionPlanInput
+    disconnect?: CaseClosureWhereInput | boolean
+    delete?: CaseClosureWhereInput | boolean
+    connect?: CaseClosureWhereUniqueInput
+    update?: XOR<XOR<CaseClosureUpdateToOneWithWhereWithoutExecutionPlanInput, CaseClosureUpdateWithoutExecutionPlanInput>, CaseClosureUncheckedUpdateWithoutExecutionPlanInput>
+  }
+
   export type ExecutionTaskUncheckedUpdateManyWithoutExecutionPlanNestedInput = {
     create?: XOR<ExecutionTaskCreateWithoutExecutionPlanInput, ExecutionTaskUncheckedCreateWithoutExecutionPlanInput> | ExecutionTaskCreateWithoutExecutionPlanInput[] | ExecutionTaskUncheckedCreateWithoutExecutionPlanInput[]
     connectOrCreate?: ExecutionTaskCreateOrConnectWithoutExecutionPlanInput | ExecutionTaskCreateOrConnectWithoutExecutionPlanInput[]
@@ -25298,6 +27081,16 @@ export namespace Prisma {
     update?: ExecutionTaskUpdateWithWhereUniqueWithoutExecutionPlanInput | ExecutionTaskUpdateWithWhereUniqueWithoutExecutionPlanInput[]
     updateMany?: ExecutionTaskUpdateManyWithWhereWithoutExecutionPlanInput | ExecutionTaskUpdateManyWithWhereWithoutExecutionPlanInput[]
     deleteMany?: ExecutionTaskScalarWhereInput | ExecutionTaskScalarWhereInput[]
+  }
+
+  export type CaseClosureUncheckedUpdateOneWithoutExecutionPlanNestedInput = {
+    create?: XOR<CaseClosureCreateWithoutExecutionPlanInput, CaseClosureUncheckedCreateWithoutExecutionPlanInput>
+    connectOrCreate?: CaseClosureCreateOrConnectWithoutExecutionPlanInput
+    upsert?: CaseClosureUpsertWithoutExecutionPlanInput
+    disconnect?: CaseClosureWhereInput | boolean
+    delete?: CaseClosureWhereInput | boolean
+    connect?: CaseClosureWhereUniqueInput
+    update?: XOR<XOR<CaseClosureUpdateToOneWithWhereWithoutExecutionPlanInput, CaseClosureUpdateWithoutExecutionPlanInput>, CaseClosureUncheckedUpdateWithoutExecutionPlanInput>
   }
 
   export type ExecutionPlanCreateNestedOneWithoutTasksInput = {
@@ -25470,6 +27263,66 @@ export namespace Prisma {
     upsert?: UserUpsertWithoutSubmittedExecutionEvidenceInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutSubmittedExecutionEvidenceInput, UserUpdateWithoutSubmittedExecutionEvidenceInput>, UserUncheckedUpdateWithoutSubmittedExecutionEvidenceInput>
+  }
+
+  export type CaseCreateNestedOneWithoutClosureInput = {
+    create?: XOR<CaseCreateWithoutClosureInput, CaseUncheckedCreateWithoutClosureInput>
+    connectOrCreate?: CaseCreateOrConnectWithoutClosureInput
+    connect?: CaseWhereUniqueInput
+  }
+
+  export type ExecutionPlanCreateNestedOneWithoutClosureInput = {
+    create?: XOR<ExecutionPlanCreateWithoutClosureInput, ExecutionPlanUncheckedCreateWithoutClosureInput>
+    connectOrCreate?: ExecutionPlanCreateOrConnectWithoutClosureInput
+    connect?: ExecutionPlanWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutClosedCasesInput = {
+    create?: XOR<UserCreateWithoutClosedCasesInput, UserUncheckedCreateWithoutClosedCasesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutClosedCasesInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type ApprovalAuthorityCreateNestedOneWithoutCaseClosuresInput = {
+    create?: XOR<ApprovalAuthorityCreateWithoutCaseClosuresInput, ApprovalAuthorityUncheckedCreateWithoutCaseClosuresInput>
+    connectOrCreate?: ApprovalAuthorityCreateOrConnectWithoutCaseClosuresInput
+    connect?: ApprovalAuthorityWhereUniqueInput
+  }
+
+  export type EnumCaseClosureReasonFieldUpdateOperationsInput = {
+    set?: $Enums.CaseClosureReason
+  }
+
+  export type CaseUpdateOneRequiredWithoutClosureNestedInput = {
+    create?: XOR<CaseCreateWithoutClosureInput, CaseUncheckedCreateWithoutClosureInput>
+    connectOrCreate?: CaseCreateOrConnectWithoutClosureInput
+    upsert?: CaseUpsertWithoutClosureInput
+    connect?: CaseWhereUniqueInput
+    update?: XOR<XOR<CaseUpdateToOneWithWhereWithoutClosureInput, CaseUpdateWithoutClosureInput>, CaseUncheckedUpdateWithoutClosureInput>
+  }
+
+  export type ExecutionPlanUpdateOneRequiredWithoutClosureNestedInput = {
+    create?: XOR<ExecutionPlanCreateWithoutClosureInput, ExecutionPlanUncheckedCreateWithoutClosureInput>
+    connectOrCreate?: ExecutionPlanCreateOrConnectWithoutClosureInput
+    upsert?: ExecutionPlanUpsertWithoutClosureInput
+    connect?: ExecutionPlanWhereUniqueInput
+    update?: XOR<XOR<ExecutionPlanUpdateToOneWithWhereWithoutClosureInput, ExecutionPlanUpdateWithoutClosureInput>, ExecutionPlanUncheckedUpdateWithoutClosureInput>
+  }
+
+  export type UserUpdateOneRequiredWithoutClosedCasesNestedInput = {
+    create?: XOR<UserCreateWithoutClosedCasesInput, UserUncheckedCreateWithoutClosedCasesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutClosedCasesInput
+    upsert?: UserUpsertWithoutClosedCasesInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutClosedCasesInput, UserUpdateWithoutClosedCasesInput>, UserUncheckedUpdateWithoutClosedCasesInput>
+  }
+
+  export type ApprovalAuthorityUpdateOneRequiredWithoutCaseClosuresNestedInput = {
+    create?: XOR<ApprovalAuthorityCreateWithoutCaseClosuresInput, ApprovalAuthorityUncheckedCreateWithoutCaseClosuresInput>
+    connectOrCreate?: ApprovalAuthorityCreateOrConnectWithoutCaseClosuresInput
+    upsert?: ApprovalAuthorityUpsertWithoutCaseClosuresInput
+    connect?: ApprovalAuthorityWhereUniqueInput
+    update?: XOR<XOR<ApprovalAuthorityUpdateToOneWithWhereWithoutCaseClosuresInput, ApprovalAuthorityUpdateWithoutCaseClosuresInput>, ApprovalAuthorityUncheckedUpdateWithoutCaseClosuresInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -25950,6 +27803,23 @@ export namespace Prisma {
     _max?: NestedEnumExecutionEvidenceTypeFilter<$PrismaModel>
   }
 
+  export type NestedEnumCaseClosureReasonFilter<$PrismaModel = never> = {
+    equals?: $Enums.CaseClosureReason | EnumCaseClosureReasonFieldRefInput<$PrismaModel>
+    in?: $Enums.CaseClosureReason[] | ListEnumCaseClosureReasonFieldRefInput<$PrismaModel>
+    notIn?: $Enums.CaseClosureReason[] | ListEnumCaseClosureReasonFieldRefInput<$PrismaModel>
+    not?: NestedEnumCaseClosureReasonFilter<$PrismaModel> | $Enums.CaseClosureReason
+  }
+
+  export type NestedEnumCaseClosureReasonWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.CaseClosureReason | EnumCaseClosureReasonFieldRefInput<$PrismaModel>
+    in?: $Enums.CaseClosureReason[] | ListEnumCaseClosureReasonFieldRefInput<$PrismaModel>
+    notIn?: $Enums.CaseClosureReason[] | ListEnumCaseClosureReasonFieldRefInput<$PrismaModel>
+    not?: NestedEnumCaseClosureReasonWithAggregatesFilter<$PrismaModel> | $Enums.CaseClosureReason
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumCaseClosureReasonFilter<$PrismaModel>
+    _max?: NestedEnumCaseClosureReasonFilter<$PrismaModel>
+  }
+
   export type UserCreateWithoutDepartmentInput = {
     id?: string
     employeeCode: string
@@ -25973,6 +27843,7 @@ export namespace Prisma {
     verifiedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutVerifiedByInput
     cancelledExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCancelledByInput
     submittedExecutionEvidence?: ExecutionEvidenceCreateNestedManyWithoutSubmittedByInput
+    closedCases?: CaseClosureCreateNestedManyWithoutClosedByInput
   }
 
   export type UserUncheckedCreateWithoutDepartmentInput = {
@@ -25998,6 +27869,7 @@ export namespace Prisma {
     verifiedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutVerifiedByInput
     cancelledExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCancelledByInput
     submittedExecutionEvidence?: ExecutionEvidenceUncheckedCreateNestedManyWithoutSubmittedByInput
+    closedCases?: CaseClosureUncheckedCreateNestedManyWithoutClosedByInput
   }
 
   export type UserCreateOrConnectWithoutDepartmentInput = {
@@ -26087,6 +27959,7 @@ export namespace Prisma {
     canRequestModification?: boolean
     canRequestReinspection?: boolean
     canEscalate?: boolean
+    canCloseCase?: boolean
     maxPriorityLevel?: $Enums.PriorityLevel | null
     isActive?: boolean
     validFrom?: Date | string | null
@@ -26096,6 +27969,7 @@ export namespace Prisma {
     user: UserCreateNestedOneWithoutApprovalAuthoritiesInput
     jurisdiction: JurisdictionCreateNestedOneWithoutApprovalAuthoritiesInput
     decisions?: OrpDecisionCreateNestedManyWithoutAuthorityGrantInput
+    caseClosures?: CaseClosureCreateNestedManyWithoutClosureAuthorityGrantInput
   }
 
   export type ApprovalAuthorityUncheckedCreateWithoutDepartmentInput = {
@@ -26107,6 +27981,7 @@ export namespace Prisma {
     canRequestModification?: boolean
     canRequestReinspection?: boolean
     canEscalate?: boolean
+    canCloseCase?: boolean
     maxPriorityLevel?: $Enums.PriorityLevel | null
     isActive?: boolean
     validFrom?: Date | string | null
@@ -26114,6 +27989,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     decisions?: OrpDecisionUncheckedCreateNestedManyWithoutAuthorityGrantInput
+    caseClosures?: CaseClosureUncheckedCreateNestedManyWithoutClosureAuthorityGrantInput
   }
 
   export type ApprovalAuthorityCreateOrConnectWithoutDepartmentInput = {
@@ -26250,6 +28126,7 @@ export namespace Prisma {
     canRequestModification?: BoolFilter<"ApprovalAuthority"> | boolean
     canRequestReinspection?: BoolFilter<"ApprovalAuthority"> | boolean
     canEscalate?: BoolFilter<"ApprovalAuthority"> | boolean
+    canCloseCase?: BoolFilter<"ApprovalAuthority"> | boolean
     maxPriorityLevel?: EnumPriorityLevelNullableFilter<"ApprovalAuthority"> | $Enums.PriorityLevel | null
     isActive?: BoolFilter<"ApprovalAuthority"> | boolean
     validFrom?: DateTimeNullableFilter<"ApprovalAuthority"> | Date | string | null
@@ -26306,6 +28183,7 @@ export namespace Prisma {
     verifiedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutVerifiedByInput
     cancelledExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCancelledByInput
     submittedExecutionEvidence?: ExecutionEvidenceCreateNestedManyWithoutSubmittedByInput
+    closedCases?: CaseClosureCreateNestedManyWithoutClosedByInput
   }
 
   export type UserUncheckedCreateWithoutJurisdictionInput = {
@@ -26331,6 +28209,7 @@ export namespace Prisma {
     verifiedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutVerifiedByInput
     cancelledExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCancelledByInput
     submittedExecutionEvidence?: ExecutionEvidenceUncheckedCreateNestedManyWithoutSubmittedByInput
+    closedCases?: CaseClosureUncheckedCreateNestedManyWithoutClosedByInput
   }
 
   export type UserCreateOrConnectWithoutJurisdictionInput = {
@@ -26390,6 +28269,7 @@ export namespace Prisma {
     canRequestModification?: boolean
     canRequestReinspection?: boolean
     canEscalate?: boolean
+    canCloseCase?: boolean
     maxPriorityLevel?: $Enums.PriorityLevel | null
     isActive?: boolean
     validFrom?: Date | string | null
@@ -26399,6 +28279,7 @@ export namespace Prisma {
     user: UserCreateNestedOneWithoutApprovalAuthoritiesInput
     department: DepartmentCreateNestedOneWithoutApprovalAuthoritiesInput
     decisions?: OrpDecisionCreateNestedManyWithoutAuthorityGrantInput
+    caseClosures?: CaseClosureCreateNestedManyWithoutClosureAuthorityGrantInput
   }
 
   export type ApprovalAuthorityUncheckedCreateWithoutJurisdictionInput = {
@@ -26410,6 +28291,7 @@ export namespace Prisma {
     canRequestModification?: boolean
     canRequestReinspection?: boolean
     canEscalate?: boolean
+    canCloseCase?: boolean
     maxPriorityLevel?: $Enums.PriorityLevel | null
     isActive?: boolean
     validFrom?: Date | string | null
@@ -26417,6 +28299,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     decisions?: OrpDecisionUncheckedCreateNestedManyWithoutAuthorityGrantInput
+    caseClosures?: CaseClosureUncheckedCreateNestedManyWithoutClosureAuthorityGrantInput
   }
 
   export type ApprovalAuthorityCreateOrConnectWithoutJurisdictionInput = {
@@ -26611,6 +28494,7 @@ export namespace Prisma {
     canRequestModification?: boolean
     canRequestReinspection?: boolean
     canEscalate?: boolean
+    canCloseCase?: boolean
     maxPriorityLevel?: $Enums.PriorityLevel | null
     isActive?: boolean
     validFrom?: Date | string | null
@@ -26620,6 +28504,7 @@ export namespace Prisma {
     department: DepartmentCreateNestedOneWithoutApprovalAuthoritiesInput
     jurisdiction: JurisdictionCreateNestedOneWithoutApprovalAuthoritiesInput
     decisions?: OrpDecisionCreateNestedManyWithoutAuthorityGrantInput
+    caseClosures?: CaseClosureCreateNestedManyWithoutClosureAuthorityGrantInput
   }
 
   export type ApprovalAuthorityUncheckedCreateWithoutUserInput = {
@@ -26631,6 +28516,7 @@ export namespace Prisma {
     canRequestModification?: boolean
     canRequestReinspection?: boolean
     canEscalate?: boolean
+    canCloseCase?: boolean
     maxPriorityLevel?: $Enums.PriorityLevel | null
     isActive?: boolean
     validFrom?: Date | string | null
@@ -26638,6 +28524,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     decisions?: OrpDecisionUncheckedCreateNestedManyWithoutAuthorityGrantInput
+    caseClosures?: CaseClosureUncheckedCreateNestedManyWithoutClosureAuthorityGrantInput
   }
 
   export type ApprovalAuthorityCreateOrConnectWithoutUserInput = {
@@ -26740,6 +28627,7 @@ export namespace Prisma {
     case: CaseCreateNestedOneWithoutExecutionPlansInput
     approvalDecision: OrpDecisionCreateNestedOneWithoutExecutionPlanInput
     tasks?: ExecutionTaskCreateNestedManyWithoutExecutionPlanInput
+    closure?: CaseClosureCreateNestedOneWithoutExecutionPlanInput
   }
 
   export type ExecutionPlanUncheckedCreateWithoutCreatedByInput = {
@@ -26756,6 +28644,7 @@ export namespace Prisma {
     cancelledAt?: Date | string | null
     cancellationReason?: string | null
     tasks?: ExecutionTaskUncheckedCreateNestedManyWithoutExecutionPlanInput
+    closure?: CaseClosureUncheckedCreateNestedOneWithoutExecutionPlanInput
   }
 
   export type ExecutionPlanCreateOrConnectWithoutCreatedByInput = {
@@ -27142,6 +29031,36 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type CaseClosureCreateWithoutClosedByInput = {
+    id?: string
+    closureReason: $Enums.CaseClosureReason
+    closureSummary: string
+    createdAt?: Date | string
+    case: CaseCreateNestedOneWithoutClosureInput
+    executionPlan: ExecutionPlanCreateNestedOneWithoutClosureInput
+    closureAuthorityGrant: ApprovalAuthorityCreateNestedOneWithoutCaseClosuresInput
+  }
+
+  export type CaseClosureUncheckedCreateWithoutClosedByInput = {
+    id?: string
+    caseId: string
+    executionPlanId: string
+    closureAuthorityGrantId: string
+    closureReason: $Enums.CaseClosureReason
+    closureSummary: string
+    createdAt?: Date | string
+  }
+
+  export type CaseClosureCreateOrConnectWithoutClosedByInput = {
+    where: CaseClosureWhereUniqueInput
+    create: XOR<CaseClosureCreateWithoutClosedByInput, CaseClosureUncheckedCreateWithoutClosedByInput>
+  }
+
+  export type CaseClosureCreateManyClosedByInputEnvelope = {
+    data: CaseClosureCreateManyClosedByInput | CaseClosureCreateManyClosedByInput[]
+    skipDuplicates?: boolean
+  }
+
   export type DepartmentUpsertWithoutUsersInput = {
     update: XOR<DepartmentUpdateWithoutUsersInput, DepartmentUncheckedUpdateWithoutUsersInput>
     create: XOR<DepartmentCreateWithoutUsersInput, DepartmentUncheckedCreateWithoutUsersInput>
@@ -27485,6 +29404,36 @@ export namespace Prisma {
     submittedAt?: DateTimeFilter<"ExecutionEvidence"> | Date | string
   }
 
+  export type CaseClosureUpsertWithWhereUniqueWithoutClosedByInput = {
+    where: CaseClosureWhereUniqueInput
+    update: XOR<CaseClosureUpdateWithoutClosedByInput, CaseClosureUncheckedUpdateWithoutClosedByInput>
+    create: XOR<CaseClosureCreateWithoutClosedByInput, CaseClosureUncheckedCreateWithoutClosedByInput>
+  }
+
+  export type CaseClosureUpdateWithWhereUniqueWithoutClosedByInput = {
+    where: CaseClosureWhereUniqueInput
+    data: XOR<CaseClosureUpdateWithoutClosedByInput, CaseClosureUncheckedUpdateWithoutClosedByInput>
+  }
+
+  export type CaseClosureUpdateManyWithWhereWithoutClosedByInput = {
+    where: CaseClosureScalarWhereInput
+    data: XOR<CaseClosureUpdateManyMutationInput, CaseClosureUncheckedUpdateManyWithoutClosedByInput>
+  }
+
+  export type CaseClosureScalarWhereInput = {
+    AND?: CaseClosureScalarWhereInput | CaseClosureScalarWhereInput[]
+    OR?: CaseClosureScalarWhereInput[]
+    NOT?: CaseClosureScalarWhereInput | CaseClosureScalarWhereInput[]
+    id?: StringFilter<"CaseClosure"> | string
+    caseId?: StringFilter<"CaseClosure"> | string
+    executionPlanId?: StringFilter<"CaseClosure"> | string
+    closedById?: StringFilter<"CaseClosure"> | string
+    closureAuthorityGrantId?: StringFilter<"CaseClosure"> | string
+    closureReason?: EnumCaseClosureReasonFilter<"CaseClosure"> | $Enums.CaseClosureReason
+    closureSummary?: StringFilter<"CaseClosure"> | string
+    createdAt?: DateTimeFilter<"CaseClosure"> | Date | string
+  }
+
   export type DepartmentCreateWithoutAssetsInput = {
     id?: string
     name: string
@@ -27552,6 +29501,7 @@ export namespace Prisma {
     operationalResponsePlans?: OperationalResponsePlanCreateNestedManyWithoutCaseInput
     orpDecisions?: OrpDecisionCreateNestedManyWithoutCaseInput
     executionPlans?: ExecutionPlanCreateNestedManyWithoutCaseInput
+    closure?: CaseClosureCreateNestedOneWithoutCaseInput
   }
 
   export type CaseUncheckedCreateWithoutAssetInput = {
@@ -27571,6 +29521,7 @@ export namespace Prisma {
     operationalResponsePlans?: OperationalResponsePlanUncheckedCreateNestedManyWithoutCaseInput
     orpDecisions?: OrpDecisionUncheckedCreateNestedManyWithoutCaseInput
     executionPlans?: ExecutionPlanUncheckedCreateNestedManyWithoutCaseInput
+    closure?: CaseClosureUncheckedCreateNestedOneWithoutCaseInput
   }
 
   export type CaseCreateOrConnectWithoutAssetInput = {
@@ -27892,6 +29843,7 @@ export namespace Prisma {
     approvalDecision: OrpDecisionCreateNestedOneWithoutExecutionPlanInput
     createdBy: UserCreateNestedOneWithoutCreatedExecutionPlansInput
     tasks?: ExecutionTaskCreateNestedManyWithoutExecutionPlanInput
+    closure?: CaseClosureCreateNestedOneWithoutExecutionPlanInput
   }
 
   export type ExecutionPlanUncheckedCreateWithoutCaseInput = {
@@ -27908,6 +29860,7 @@ export namespace Prisma {
     cancelledAt?: Date | string | null
     cancellationReason?: string | null
     tasks?: ExecutionTaskUncheckedCreateNestedManyWithoutExecutionPlanInput
+    closure?: CaseClosureUncheckedCreateNestedOneWithoutExecutionPlanInput
   }
 
   export type ExecutionPlanCreateOrConnectWithoutCaseInput = {
@@ -27918,6 +29871,31 @@ export namespace Prisma {
   export type ExecutionPlanCreateManyCaseInputEnvelope = {
     data: ExecutionPlanCreateManyCaseInput | ExecutionPlanCreateManyCaseInput[]
     skipDuplicates?: boolean
+  }
+
+  export type CaseClosureCreateWithoutCaseInput = {
+    id?: string
+    closureReason: $Enums.CaseClosureReason
+    closureSummary: string
+    createdAt?: Date | string
+    executionPlan: ExecutionPlanCreateNestedOneWithoutClosureInput
+    closedBy: UserCreateNestedOneWithoutClosedCasesInput
+    closureAuthorityGrant: ApprovalAuthorityCreateNestedOneWithoutCaseClosuresInput
+  }
+
+  export type CaseClosureUncheckedCreateWithoutCaseInput = {
+    id?: string
+    executionPlanId: string
+    closedById: string
+    closureAuthorityGrantId: string
+    closureReason: $Enums.CaseClosureReason
+    closureSummary: string
+    createdAt?: Date | string
+  }
+
+  export type CaseClosureCreateOrConnectWithoutCaseInput = {
+    where: CaseClosureWhereUniqueInput
+    create: XOR<CaseClosureCreateWithoutCaseInput, CaseClosureUncheckedCreateWithoutCaseInput>
   }
 
   export type AssetUpsertWithoutCasesInput = {
@@ -28076,6 +30054,37 @@ export namespace Prisma {
     data: XOR<ExecutionPlanUpdateManyMutationInput, ExecutionPlanUncheckedUpdateManyWithoutCaseInput>
   }
 
+  export type CaseClosureUpsertWithoutCaseInput = {
+    update: XOR<CaseClosureUpdateWithoutCaseInput, CaseClosureUncheckedUpdateWithoutCaseInput>
+    create: XOR<CaseClosureCreateWithoutCaseInput, CaseClosureUncheckedCreateWithoutCaseInput>
+    where?: CaseClosureWhereInput
+  }
+
+  export type CaseClosureUpdateToOneWithWhereWithoutCaseInput = {
+    where?: CaseClosureWhereInput
+    data: XOR<CaseClosureUpdateWithoutCaseInput, CaseClosureUncheckedUpdateWithoutCaseInput>
+  }
+
+  export type CaseClosureUpdateWithoutCaseInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    closureReason?: EnumCaseClosureReasonFieldUpdateOperationsInput | $Enums.CaseClosureReason
+    closureSummary?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    executionPlan?: ExecutionPlanUpdateOneRequiredWithoutClosureNestedInput
+    closedBy?: UserUpdateOneRequiredWithoutClosedCasesNestedInput
+    closureAuthorityGrant?: ApprovalAuthorityUpdateOneRequiredWithoutCaseClosuresNestedInput
+  }
+
+  export type CaseClosureUncheckedUpdateWithoutCaseInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    executionPlanId?: StringFieldUpdateOperationsInput | string
+    closedById?: StringFieldUpdateOperationsInput | string
+    closureAuthorityGrantId?: StringFieldUpdateOperationsInput | string
+    closureReason?: EnumCaseClosureReasonFieldUpdateOperationsInput | $Enums.CaseClosureReason
+    closureSummary?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type CaseCreateWithoutInspectionsInput = {
     id?: string
     caseNumber: string
@@ -28093,6 +30102,7 @@ export namespace Prisma {
     operationalResponsePlans?: OperationalResponsePlanCreateNestedManyWithoutCaseInput
     orpDecisions?: OrpDecisionCreateNestedManyWithoutCaseInput
     executionPlans?: ExecutionPlanCreateNestedManyWithoutCaseInput
+    closure?: CaseClosureCreateNestedOneWithoutCaseInput
   }
 
   export type CaseUncheckedCreateWithoutInspectionsInput = {
@@ -28112,6 +30122,7 @@ export namespace Prisma {
     operationalResponsePlans?: OperationalResponsePlanUncheckedCreateNestedManyWithoutCaseInput
     orpDecisions?: OrpDecisionUncheckedCreateNestedManyWithoutCaseInput
     executionPlans?: ExecutionPlanUncheckedCreateNestedManyWithoutCaseInput
+    closure?: CaseClosureUncheckedCreateNestedOneWithoutCaseInput
   }
 
   export type CaseCreateOrConnectWithoutInspectionsInput = {
@@ -28142,6 +30153,7 @@ export namespace Prisma {
     verifiedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutVerifiedByInput
     cancelledExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCancelledByInput
     submittedExecutionEvidence?: ExecutionEvidenceCreateNestedManyWithoutSubmittedByInput
+    closedCases?: CaseClosureCreateNestedManyWithoutClosedByInput
   }
 
   export type UserUncheckedCreateWithoutInspectionsInput = {
@@ -28167,6 +30179,7 @@ export namespace Prisma {
     verifiedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutVerifiedByInput
     cancelledExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCancelledByInput
     submittedExecutionEvidence?: ExecutionEvidenceUncheckedCreateNestedManyWithoutSubmittedByInput
+    closedCases?: CaseClosureUncheckedCreateNestedManyWithoutClosedByInput
   }
 
   export type UserCreateOrConnectWithoutInspectionsInput = {
@@ -28238,6 +30251,7 @@ export namespace Prisma {
     operationalResponsePlans?: OperationalResponsePlanUpdateManyWithoutCaseNestedInput
     orpDecisions?: OrpDecisionUpdateManyWithoutCaseNestedInput
     executionPlans?: ExecutionPlanUpdateManyWithoutCaseNestedInput
+    closure?: CaseClosureUpdateOneWithoutCaseNestedInput
   }
 
   export type CaseUncheckedUpdateWithoutInspectionsInput = {
@@ -28257,6 +30271,7 @@ export namespace Prisma {
     operationalResponsePlans?: OperationalResponsePlanUncheckedUpdateManyWithoutCaseNestedInput
     orpDecisions?: OrpDecisionUncheckedUpdateManyWithoutCaseNestedInput
     executionPlans?: ExecutionPlanUncheckedUpdateManyWithoutCaseNestedInput
+    closure?: CaseClosureUncheckedUpdateOneWithoutCaseNestedInput
   }
 
   export type UserUpsertWithoutInspectionsInput = {
@@ -28293,6 +30308,7 @@ export namespace Prisma {
     verifiedExecutionTasks?: ExecutionTaskUpdateManyWithoutVerifiedByNestedInput
     cancelledExecutionTasks?: ExecutionTaskUpdateManyWithoutCancelledByNestedInput
     submittedExecutionEvidence?: ExecutionEvidenceUpdateManyWithoutSubmittedByNestedInput
+    closedCases?: CaseClosureUpdateManyWithoutClosedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutInspectionsInput = {
@@ -28318,6 +30334,7 @@ export namespace Prisma {
     verifiedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutVerifiedByNestedInput
     cancelledExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCancelledByNestedInput
     submittedExecutionEvidence?: ExecutionEvidenceUncheckedUpdateManyWithoutSubmittedByNestedInput
+    closedCases?: CaseClosureUncheckedUpdateManyWithoutClosedByNestedInput
   }
 
   export type RiskAssessmentUpsertWithWhereUniqueWithoutInspectionInput = {
@@ -28353,6 +30370,7 @@ export namespace Prisma {
     operationalResponsePlans?: OperationalResponsePlanCreateNestedManyWithoutCaseInput
     orpDecisions?: OrpDecisionCreateNestedManyWithoutCaseInput
     executionPlans?: ExecutionPlanCreateNestedManyWithoutCaseInput
+    closure?: CaseClosureCreateNestedOneWithoutCaseInput
   }
 
   export type CaseUncheckedCreateWithoutRiskAssessmentsInput = {
@@ -28372,6 +30390,7 @@ export namespace Prisma {
     operationalResponsePlans?: OperationalResponsePlanUncheckedCreateNestedManyWithoutCaseInput
     orpDecisions?: OrpDecisionUncheckedCreateNestedManyWithoutCaseInput
     executionPlans?: ExecutionPlanUncheckedCreateNestedManyWithoutCaseInput
+    closure?: CaseClosureUncheckedCreateNestedOneWithoutCaseInput
   }
 
   export type CaseCreateOrConnectWithoutRiskAssessmentsInput = {
@@ -28492,6 +30511,7 @@ export namespace Prisma {
     operationalResponsePlans?: OperationalResponsePlanUpdateManyWithoutCaseNestedInput
     orpDecisions?: OrpDecisionUpdateManyWithoutCaseNestedInput
     executionPlans?: ExecutionPlanUpdateManyWithoutCaseNestedInput
+    closure?: CaseClosureUpdateOneWithoutCaseNestedInput
   }
 
   export type CaseUncheckedUpdateWithoutRiskAssessmentsInput = {
@@ -28511,6 +30531,7 @@ export namespace Prisma {
     operationalResponsePlans?: OperationalResponsePlanUncheckedUpdateManyWithoutCaseNestedInput
     orpDecisions?: OrpDecisionUncheckedUpdateManyWithoutCaseNestedInput
     executionPlans?: ExecutionPlanUncheckedUpdateManyWithoutCaseNestedInput
+    closure?: CaseClosureUncheckedUpdateOneWithoutCaseNestedInput
   }
 
   export type InspectionUpsertWithoutRiskAssessmentsInput = {
@@ -28593,6 +30614,7 @@ export namespace Prisma {
     riskAssessments?: RiskAssessmentCreateNestedManyWithoutCaseInput
     orpDecisions?: OrpDecisionCreateNestedManyWithoutCaseInput
     executionPlans?: ExecutionPlanCreateNestedManyWithoutCaseInput
+    closure?: CaseClosureCreateNestedOneWithoutCaseInput
   }
 
   export type CaseUncheckedCreateWithoutOperationalResponsePlansInput = {
@@ -28612,6 +30634,7 @@ export namespace Prisma {
     riskAssessments?: RiskAssessmentUncheckedCreateNestedManyWithoutCaseInput
     orpDecisions?: OrpDecisionUncheckedCreateNestedManyWithoutCaseInput
     executionPlans?: ExecutionPlanUncheckedCreateNestedManyWithoutCaseInput
+    closure?: CaseClosureUncheckedCreateNestedOneWithoutCaseInput
   }
 
   export type CaseCreateOrConnectWithoutOperationalResponsePlansInput = {
@@ -28702,6 +30725,7 @@ export namespace Prisma {
     approvalDecision: OrpDecisionCreateNestedOneWithoutExecutionPlanInput
     createdBy: UserCreateNestedOneWithoutCreatedExecutionPlansInput
     tasks?: ExecutionTaskCreateNestedManyWithoutExecutionPlanInput
+    closure?: CaseClosureCreateNestedOneWithoutExecutionPlanInput
   }
 
   export type ExecutionPlanUncheckedCreateWithoutOrpInput = {
@@ -28718,6 +30742,7 @@ export namespace Prisma {
     cancelledAt?: Date | string | null
     cancellationReason?: string | null
     tasks?: ExecutionTaskUncheckedCreateNestedManyWithoutExecutionPlanInput
+    closure?: CaseClosureUncheckedCreateNestedOneWithoutExecutionPlanInput
   }
 
   export type ExecutionPlanCreateOrConnectWithoutOrpInput = {
@@ -28753,6 +30778,7 @@ export namespace Prisma {
     riskAssessments?: RiskAssessmentUpdateManyWithoutCaseNestedInput
     orpDecisions?: OrpDecisionUpdateManyWithoutCaseNestedInput
     executionPlans?: ExecutionPlanUpdateManyWithoutCaseNestedInput
+    closure?: CaseClosureUpdateOneWithoutCaseNestedInput
   }
 
   export type CaseUncheckedUpdateWithoutOperationalResponsePlansInput = {
@@ -28772,6 +30798,7 @@ export namespace Prisma {
     riskAssessments?: RiskAssessmentUncheckedUpdateManyWithoutCaseNestedInput
     orpDecisions?: OrpDecisionUncheckedUpdateManyWithoutCaseNestedInput
     executionPlans?: ExecutionPlanUncheckedUpdateManyWithoutCaseNestedInput
+    closure?: CaseClosureUncheckedUpdateOneWithoutCaseNestedInput
   }
 
   export type RiskAssessmentUpsertWithoutOperationalResponsePlansInput = {
@@ -28852,6 +30879,7 @@ export namespace Prisma {
     approvalDecision?: OrpDecisionUpdateOneRequiredWithoutExecutionPlanNestedInput
     createdBy?: UserUpdateOneRequiredWithoutCreatedExecutionPlansNestedInput
     tasks?: ExecutionTaskUpdateManyWithoutExecutionPlanNestedInput
+    closure?: CaseClosureUpdateOneWithoutExecutionPlanNestedInput
   }
 
   export type ExecutionPlanUncheckedUpdateWithoutOrpInput = {
@@ -28868,6 +30896,7 @@ export namespace Prisma {
     cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
     tasks?: ExecutionTaskUncheckedUpdateManyWithoutExecutionPlanNestedInput
+    closure?: CaseClosureUncheckedUpdateOneWithoutExecutionPlanNestedInput
   }
 
   export type UserCreateWithoutApprovalAuthoritiesInput = {
@@ -28893,6 +30922,7 @@ export namespace Prisma {
     verifiedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutVerifiedByInput
     cancelledExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCancelledByInput
     submittedExecutionEvidence?: ExecutionEvidenceCreateNestedManyWithoutSubmittedByInput
+    closedCases?: CaseClosureCreateNestedManyWithoutClosedByInput
   }
 
   export type UserUncheckedCreateWithoutApprovalAuthoritiesInput = {
@@ -28918,6 +30948,7 @@ export namespace Prisma {
     verifiedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutVerifiedByInput
     cancelledExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCancelledByInput
     submittedExecutionEvidence?: ExecutionEvidenceUncheckedCreateNestedManyWithoutSubmittedByInput
+    closedCases?: CaseClosureUncheckedCreateNestedManyWithoutClosedByInput
   }
 
   export type UserCreateOrConnectWithoutApprovalAuthoritiesInput = {
@@ -29013,6 +31044,36 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type CaseClosureCreateWithoutClosureAuthorityGrantInput = {
+    id?: string
+    closureReason: $Enums.CaseClosureReason
+    closureSummary: string
+    createdAt?: Date | string
+    case: CaseCreateNestedOneWithoutClosureInput
+    executionPlan: ExecutionPlanCreateNestedOneWithoutClosureInput
+    closedBy: UserCreateNestedOneWithoutClosedCasesInput
+  }
+
+  export type CaseClosureUncheckedCreateWithoutClosureAuthorityGrantInput = {
+    id?: string
+    caseId: string
+    executionPlanId: string
+    closedById: string
+    closureReason: $Enums.CaseClosureReason
+    closureSummary: string
+    createdAt?: Date | string
+  }
+
+  export type CaseClosureCreateOrConnectWithoutClosureAuthorityGrantInput = {
+    where: CaseClosureWhereUniqueInput
+    create: XOR<CaseClosureCreateWithoutClosureAuthorityGrantInput, CaseClosureUncheckedCreateWithoutClosureAuthorityGrantInput>
+  }
+
+  export type CaseClosureCreateManyClosureAuthorityGrantInputEnvelope = {
+    data: CaseClosureCreateManyClosureAuthorityGrantInput | CaseClosureCreateManyClosureAuthorityGrantInput[]
+    skipDuplicates?: boolean
+  }
+
   export type UserUpsertWithoutApprovalAuthoritiesInput = {
     update: XOR<UserUpdateWithoutApprovalAuthoritiesInput, UserUncheckedUpdateWithoutApprovalAuthoritiesInput>
     create: XOR<UserCreateWithoutApprovalAuthoritiesInput, UserUncheckedCreateWithoutApprovalAuthoritiesInput>
@@ -29047,6 +31108,7 @@ export namespace Prisma {
     verifiedExecutionTasks?: ExecutionTaskUpdateManyWithoutVerifiedByNestedInput
     cancelledExecutionTasks?: ExecutionTaskUpdateManyWithoutCancelledByNestedInput
     submittedExecutionEvidence?: ExecutionEvidenceUpdateManyWithoutSubmittedByNestedInput
+    closedCases?: CaseClosureUpdateManyWithoutClosedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutApprovalAuthoritiesInput = {
@@ -29072,6 +31134,7 @@ export namespace Prisma {
     verifiedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutVerifiedByNestedInput
     cancelledExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCancelledByNestedInput
     submittedExecutionEvidence?: ExecutionEvidenceUncheckedUpdateManyWithoutSubmittedByNestedInput
+    closedCases?: CaseClosureUncheckedUpdateManyWithoutClosedByNestedInput
   }
 
   export type DepartmentUpsertWithoutApprovalAuthoritiesInput = {
@@ -29152,6 +31215,22 @@ export namespace Prisma {
     data: XOR<OrpDecisionUpdateManyMutationInput, OrpDecisionUncheckedUpdateManyWithoutAuthorityGrantInput>
   }
 
+  export type CaseClosureUpsertWithWhereUniqueWithoutClosureAuthorityGrantInput = {
+    where: CaseClosureWhereUniqueInput
+    update: XOR<CaseClosureUpdateWithoutClosureAuthorityGrantInput, CaseClosureUncheckedUpdateWithoutClosureAuthorityGrantInput>
+    create: XOR<CaseClosureCreateWithoutClosureAuthorityGrantInput, CaseClosureUncheckedCreateWithoutClosureAuthorityGrantInput>
+  }
+
+  export type CaseClosureUpdateWithWhereUniqueWithoutClosureAuthorityGrantInput = {
+    where: CaseClosureWhereUniqueInput
+    data: XOR<CaseClosureUpdateWithoutClosureAuthorityGrantInput, CaseClosureUncheckedUpdateWithoutClosureAuthorityGrantInput>
+  }
+
+  export type CaseClosureUpdateManyWithWhereWithoutClosureAuthorityGrantInput = {
+    where: CaseClosureScalarWhereInput
+    data: XOR<CaseClosureUpdateManyMutationInput, CaseClosureUncheckedUpdateManyWithoutClosureAuthorityGrantInput>
+  }
+
   export type CaseCreateWithoutOrpDecisionsInput = {
     id?: string
     caseNumber: string
@@ -29169,6 +31248,7 @@ export namespace Prisma {
     riskAssessments?: RiskAssessmentCreateNestedManyWithoutCaseInput
     operationalResponsePlans?: OperationalResponsePlanCreateNestedManyWithoutCaseInput
     executionPlans?: ExecutionPlanCreateNestedManyWithoutCaseInput
+    closure?: CaseClosureCreateNestedOneWithoutCaseInput
   }
 
   export type CaseUncheckedCreateWithoutOrpDecisionsInput = {
@@ -29188,6 +31268,7 @@ export namespace Prisma {
     riskAssessments?: RiskAssessmentUncheckedCreateNestedManyWithoutCaseInput
     operationalResponsePlans?: OperationalResponsePlanUncheckedCreateNestedManyWithoutCaseInput
     executionPlans?: ExecutionPlanUncheckedCreateNestedManyWithoutCaseInput
+    closure?: CaseClosureUncheckedCreateNestedOneWithoutCaseInput
   }
 
   export type CaseCreateOrConnectWithoutOrpDecisionsInput = {
@@ -29257,6 +31338,7 @@ export namespace Prisma {
     verifiedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutVerifiedByInput
     cancelledExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCancelledByInput
     submittedExecutionEvidence?: ExecutionEvidenceCreateNestedManyWithoutSubmittedByInput
+    closedCases?: CaseClosureCreateNestedManyWithoutClosedByInput
   }
 
   export type UserUncheckedCreateWithoutReviewedOrpDecisionsInput = {
@@ -29282,6 +31364,7 @@ export namespace Prisma {
     verifiedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutVerifiedByInput
     cancelledExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCancelledByInput
     submittedExecutionEvidence?: ExecutionEvidenceUncheckedCreateNestedManyWithoutSubmittedByInput
+    closedCases?: CaseClosureUncheckedCreateNestedManyWithoutClosedByInput
   }
 
   export type UserCreateOrConnectWithoutReviewedOrpDecisionsInput = {
@@ -29296,6 +31379,7 @@ export namespace Prisma {
     canRequestModification?: boolean
     canRequestReinspection?: boolean
     canEscalate?: boolean
+    canCloseCase?: boolean
     maxPriorityLevel?: $Enums.PriorityLevel | null
     isActive?: boolean
     validFrom?: Date | string | null
@@ -29305,6 +31389,7 @@ export namespace Prisma {
     user: UserCreateNestedOneWithoutApprovalAuthoritiesInput
     department: DepartmentCreateNestedOneWithoutApprovalAuthoritiesInput
     jurisdiction: JurisdictionCreateNestedOneWithoutApprovalAuthoritiesInput
+    caseClosures?: CaseClosureCreateNestedManyWithoutClosureAuthorityGrantInput
   }
 
   export type ApprovalAuthorityUncheckedCreateWithoutDecisionsInput = {
@@ -29317,12 +31402,14 @@ export namespace Prisma {
     canRequestModification?: boolean
     canRequestReinspection?: boolean
     canEscalate?: boolean
+    canCloseCase?: boolean
     maxPriorityLevel?: $Enums.PriorityLevel | null
     isActive?: boolean
     validFrom?: Date | string | null
     validUntil?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    caseClosures?: CaseClosureUncheckedCreateNestedManyWithoutClosureAuthorityGrantInput
   }
 
   export type ApprovalAuthorityCreateOrConnectWithoutDecisionsInput = {
@@ -29353,6 +31440,7 @@ export namespace Prisma {
     verifiedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutVerifiedByInput
     cancelledExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCancelledByInput
     submittedExecutionEvidence?: ExecutionEvidenceCreateNestedManyWithoutSubmittedByInput
+    closedCases?: CaseClosureCreateNestedManyWithoutClosedByInput
   }
 
   export type UserUncheckedCreateWithoutForwardedOrpDecisionsInput = {
@@ -29378,6 +31466,7 @@ export namespace Prisma {
     verifiedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutVerifiedByInput
     cancelledExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCancelledByInput
     submittedExecutionEvidence?: ExecutionEvidenceUncheckedCreateNestedManyWithoutSubmittedByInput
+    closedCases?: CaseClosureUncheckedCreateNestedManyWithoutClosedByInput
   }
 
   export type UserCreateOrConnectWithoutForwardedOrpDecisionsInput = {
@@ -29399,6 +31488,7 @@ export namespace Prisma {
     case: CaseCreateNestedOneWithoutExecutionPlansInput
     createdBy: UserCreateNestedOneWithoutCreatedExecutionPlansInput
     tasks?: ExecutionTaskCreateNestedManyWithoutExecutionPlanInput
+    closure?: CaseClosureCreateNestedOneWithoutExecutionPlanInput
   }
 
   export type ExecutionPlanUncheckedCreateWithoutApprovalDecisionInput = {
@@ -29415,6 +31505,7 @@ export namespace Prisma {
     cancelledAt?: Date | string | null
     cancellationReason?: string | null
     tasks?: ExecutionTaskUncheckedCreateNestedManyWithoutExecutionPlanInput
+    closure?: CaseClosureUncheckedCreateNestedOneWithoutExecutionPlanInput
   }
 
   export type ExecutionPlanCreateOrConnectWithoutApprovalDecisionInput = {
@@ -29450,6 +31541,7 @@ export namespace Prisma {
     riskAssessments?: RiskAssessmentUpdateManyWithoutCaseNestedInput
     operationalResponsePlans?: OperationalResponsePlanUpdateManyWithoutCaseNestedInput
     executionPlans?: ExecutionPlanUpdateManyWithoutCaseNestedInput
+    closure?: CaseClosureUpdateOneWithoutCaseNestedInput
   }
 
   export type CaseUncheckedUpdateWithoutOrpDecisionsInput = {
@@ -29469,6 +31561,7 @@ export namespace Prisma {
     riskAssessments?: RiskAssessmentUncheckedUpdateManyWithoutCaseNestedInput
     operationalResponsePlans?: OperationalResponsePlanUncheckedUpdateManyWithoutCaseNestedInput
     executionPlans?: ExecutionPlanUncheckedUpdateManyWithoutCaseNestedInput
+    closure?: CaseClosureUncheckedUpdateOneWithoutCaseNestedInput
   }
 
   export type OperationalResponsePlanUpsertWithoutDecisionsInput = {
@@ -29550,6 +31643,7 @@ export namespace Prisma {
     verifiedExecutionTasks?: ExecutionTaskUpdateManyWithoutVerifiedByNestedInput
     cancelledExecutionTasks?: ExecutionTaskUpdateManyWithoutCancelledByNestedInput
     submittedExecutionEvidence?: ExecutionEvidenceUpdateManyWithoutSubmittedByNestedInput
+    closedCases?: CaseClosureUpdateManyWithoutClosedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutReviewedOrpDecisionsInput = {
@@ -29575,6 +31669,7 @@ export namespace Prisma {
     verifiedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutVerifiedByNestedInput
     cancelledExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCancelledByNestedInput
     submittedExecutionEvidence?: ExecutionEvidenceUncheckedUpdateManyWithoutSubmittedByNestedInput
+    closedCases?: CaseClosureUncheckedUpdateManyWithoutClosedByNestedInput
   }
 
   export type ApprovalAuthorityUpsertWithoutDecisionsInput = {
@@ -29595,6 +31690,7 @@ export namespace Prisma {
     canRequestModification?: BoolFieldUpdateOperationsInput | boolean
     canRequestReinspection?: BoolFieldUpdateOperationsInput | boolean
     canEscalate?: BoolFieldUpdateOperationsInput | boolean
+    canCloseCase?: BoolFieldUpdateOperationsInput | boolean
     maxPriorityLevel?: NullableEnumPriorityLevelFieldUpdateOperationsInput | $Enums.PriorityLevel | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     validFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -29604,6 +31700,7 @@ export namespace Prisma {
     user?: UserUpdateOneRequiredWithoutApprovalAuthoritiesNestedInput
     department?: DepartmentUpdateOneRequiredWithoutApprovalAuthoritiesNestedInput
     jurisdiction?: JurisdictionUpdateOneRequiredWithoutApprovalAuthoritiesNestedInput
+    caseClosures?: CaseClosureUpdateManyWithoutClosureAuthorityGrantNestedInput
   }
 
   export type ApprovalAuthorityUncheckedUpdateWithoutDecisionsInput = {
@@ -29616,12 +31713,14 @@ export namespace Prisma {
     canRequestModification?: BoolFieldUpdateOperationsInput | boolean
     canRequestReinspection?: BoolFieldUpdateOperationsInput | boolean
     canEscalate?: BoolFieldUpdateOperationsInput | boolean
+    canCloseCase?: BoolFieldUpdateOperationsInput | boolean
     maxPriorityLevel?: NullableEnumPriorityLevelFieldUpdateOperationsInput | $Enums.PriorityLevel | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     validFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     validUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    caseClosures?: CaseClosureUncheckedUpdateManyWithoutClosureAuthorityGrantNestedInput
   }
 
   export type UserUpsertWithoutForwardedOrpDecisionsInput = {
@@ -29658,6 +31757,7 @@ export namespace Prisma {
     verifiedExecutionTasks?: ExecutionTaskUpdateManyWithoutVerifiedByNestedInput
     cancelledExecutionTasks?: ExecutionTaskUpdateManyWithoutCancelledByNestedInput
     submittedExecutionEvidence?: ExecutionEvidenceUpdateManyWithoutSubmittedByNestedInput
+    closedCases?: CaseClosureUpdateManyWithoutClosedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutForwardedOrpDecisionsInput = {
@@ -29683,6 +31783,7 @@ export namespace Prisma {
     verifiedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutVerifiedByNestedInput
     cancelledExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCancelledByNestedInput
     submittedExecutionEvidence?: ExecutionEvidenceUncheckedUpdateManyWithoutSubmittedByNestedInput
+    closedCases?: CaseClosureUncheckedUpdateManyWithoutClosedByNestedInput
   }
 
   export type ExecutionPlanUpsertWithoutApprovalDecisionInput = {
@@ -29710,6 +31811,7 @@ export namespace Prisma {
     case?: CaseUpdateOneRequiredWithoutExecutionPlansNestedInput
     createdBy?: UserUpdateOneRequiredWithoutCreatedExecutionPlansNestedInput
     tasks?: ExecutionTaskUpdateManyWithoutExecutionPlanNestedInput
+    closure?: CaseClosureUpdateOneWithoutExecutionPlanNestedInput
   }
 
   export type ExecutionPlanUncheckedUpdateWithoutApprovalDecisionInput = {
@@ -29726,6 +31828,7 @@ export namespace Prisma {
     cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
     tasks?: ExecutionTaskUncheckedUpdateManyWithoutExecutionPlanNestedInput
+    closure?: CaseClosureUncheckedUpdateOneWithoutExecutionPlanNestedInput
   }
 
   export type OperationalResponsePlanCreateWithoutExecutionPlanInput = {
@@ -29784,6 +31887,7 @@ export namespace Prisma {
     riskAssessments?: RiskAssessmentCreateNestedManyWithoutCaseInput
     operationalResponsePlans?: OperationalResponsePlanCreateNestedManyWithoutCaseInput
     orpDecisions?: OrpDecisionCreateNestedManyWithoutCaseInput
+    closure?: CaseClosureCreateNestedOneWithoutCaseInput
   }
 
   export type CaseUncheckedCreateWithoutExecutionPlansInput = {
@@ -29803,6 +31907,7 @@ export namespace Prisma {
     riskAssessments?: RiskAssessmentUncheckedCreateNestedManyWithoutCaseInput
     operationalResponsePlans?: OperationalResponsePlanUncheckedCreateNestedManyWithoutCaseInput
     orpDecisions?: OrpDecisionUncheckedCreateNestedManyWithoutCaseInput
+    closure?: CaseClosureUncheckedCreateNestedOneWithoutCaseInput
   }
 
   export type CaseCreateOrConnectWithoutExecutionPlansInput = {
@@ -29866,6 +31971,7 @@ export namespace Prisma {
     verifiedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutVerifiedByInput
     cancelledExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCancelledByInput
     submittedExecutionEvidence?: ExecutionEvidenceCreateNestedManyWithoutSubmittedByInput
+    closedCases?: CaseClosureCreateNestedManyWithoutClosedByInput
   }
 
   export type UserUncheckedCreateWithoutCreatedExecutionPlansInput = {
@@ -29891,6 +31997,7 @@ export namespace Prisma {
     verifiedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutVerifiedByInput
     cancelledExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCancelledByInput
     submittedExecutionEvidence?: ExecutionEvidenceUncheckedCreateNestedManyWithoutSubmittedByInput
+    closedCases?: CaseClosureUncheckedCreateNestedManyWithoutClosedByInput
   }
 
   export type UserCreateOrConnectWithoutCreatedExecutionPlansInput = {
@@ -29966,6 +32073,31 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type CaseClosureCreateWithoutExecutionPlanInput = {
+    id?: string
+    closureReason: $Enums.CaseClosureReason
+    closureSummary: string
+    createdAt?: Date | string
+    case: CaseCreateNestedOneWithoutClosureInput
+    closedBy: UserCreateNestedOneWithoutClosedCasesInput
+    closureAuthorityGrant: ApprovalAuthorityCreateNestedOneWithoutCaseClosuresInput
+  }
+
+  export type CaseClosureUncheckedCreateWithoutExecutionPlanInput = {
+    id?: string
+    caseId: string
+    closedById: string
+    closureAuthorityGrantId: string
+    closureReason: $Enums.CaseClosureReason
+    closureSummary: string
+    createdAt?: Date | string
+  }
+
+  export type CaseClosureCreateOrConnectWithoutExecutionPlanInput = {
+    where: CaseClosureWhereUniqueInput
+    create: XOR<CaseClosureCreateWithoutExecutionPlanInput, CaseClosureUncheckedCreateWithoutExecutionPlanInput>
+  }
+
   export type OperationalResponsePlanUpsertWithoutExecutionPlanInput = {
     update: XOR<OperationalResponsePlanUpdateWithoutExecutionPlanInput, OperationalResponsePlanUncheckedUpdateWithoutExecutionPlanInput>
     create: XOR<OperationalResponsePlanCreateWithoutExecutionPlanInput, OperationalResponsePlanUncheckedCreateWithoutExecutionPlanInput>
@@ -30039,6 +32171,7 @@ export namespace Prisma {
     riskAssessments?: RiskAssessmentUpdateManyWithoutCaseNestedInput
     operationalResponsePlans?: OperationalResponsePlanUpdateManyWithoutCaseNestedInput
     orpDecisions?: OrpDecisionUpdateManyWithoutCaseNestedInput
+    closure?: CaseClosureUpdateOneWithoutCaseNestedInput
   }
 
   export type CaseUncheckedUpdateWithoutExecutionPlansInput = {
@@ -30058,6 +32191,7 @@ export namespace Prisma {
     riskAssessments?: RiskAssessmentUncheckedUpdateManyWithoutCaseNestedInput
     operationalResponsePlans?: OperationalResponsePlanUncheckedUpdateManyWithoutCaseNestedInput
     orpDecisions?: OrpDecisionUncheckedUpdateManyWithoutCaseNestedInput
+    closure?: CaseClosureUncheckedUpdateOneWithoutCaseNestedInput
   }
 
   export type OrpDecisionUpsertWithoutExecutionPlanInput = {
@@ -30133,6 +32267,7 @@ export namespace Prisma {
     verifiedExecutionTasks?: ExecutionTaskUpdateManyWithoutVerifiedByNestedInput
     cancelledExecutionTasks?: ExecutionTaskUpdateManyWithoutCancelledByNestedInput
     submittedExecutionEvidence?: ExecutionEvidenceUpdateManyWithoutSubmittedByNestedInput
+    closedCases?: CaseClosureUpdateManyWithoutClosedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCreatedExecutionPlansInput = {
@@ -30158,6 +32293,7 @@ export namespace Prisma {
     verifiedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutVerifiedByNestedInput
     cancelledExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCancelledByNestedInput
     submittedExecutionEvidence?: ExecutionEvidenceUncheckedUpdateManyWithoutSubmittedByNestedInput
+    closedCases?: CaseClosureUncheckedUpdateManyWithoutClosedByNestedInput
   }
 
   export type ExecutionTaskUpsertWithWhereUniqueWithoutExecutionPlanInput = {
@@ -30176,6 +32312,37 @@ export namespace Prisma {
     data: XOR<ExecutionTaskUpdateManyMutationInput, ExecutionTaskUncheckedUpdateManyWithoutExecutionPlanInput>
   }
 
+  export type CaseClosureUpsertWithoutExecutionPlanInput = {
+    update: XOR<CaseClosureUpdateWithoutExecutionPlanInput, CaseClosureUncheckedUpdateWithoutExecutionPlanInput>
+    create: XOR<CaseClosureCreateWithoutExecutionPlanInput, CaseClosureUncheckedCreateWithoutExecutionPlanInput>
+    where?: CaseClosureWhereInput
+  }
+
+  export type CaseClosureUpdateToOneWithWhereWithoutExecutionPlanInput = {
+    where?: CaseClosureWhereInput
+    data: XOR<CaseClosureUpdateWithoutExecutionPlanInput, CaseClosureUncheckedUpdateWithoutExecutionPlanInput>
+  }
+
+  export type CaseClosureUpdateWithoutExecutionPlanInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    closureReason?: EnumCaseClosureReasonFieldUpdateOperationsInput | $Enums.CaseClosureReason
+    closureSummary?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    case?: CaseUpdateOneRequiredWithoutClosureNestedInput
+    closedBy?: UserUpdateOneRequiredWithoutClosedCasesNestedInput
+    closureAuthorityGrant?: ApprovalAuthorityUpdateOneRequiredWithoutCaseClosuresNestedInput
+  }
+
+  export type CaseClosureUncheckedUpdateWithoutExecutionPlanInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    caseId?: StringFieldUpdateOperationsInput | string
+    closedById?: StringFieldUpdateOperationsInput | string
+    closureAuthorityGrantId?: StringFieldUpdateOperationsInput | string
+    closureReason?: EnumCaseClosureReasonFieldUpdateOperationsInput | $Enums.CaseClosureReason
+    closureSummary?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type ExecutionPlanCreateWithoutTasksInput = {
     id?: string
     status?: $Enums.ExecutionPlanStatus
@@ -30190,6 +32357,7 @@ export namespace Prisma {
     case: CaseCreateNestedOneWithoutExecutionPlansInput
     approvalDecision: OrpDecisionCreateNestedOneWithoutExecutionPlanInput
     createdBy: UserCreateNestedOneWithoutCreatedExecutionPlansInput
+    closure?: CaseClosureCreateNestedOneWithoutExecutionPlanInput
   }
 
   export type ExecutionPlanUncheckedCreateWithoutTasksInput = {
@@ -30206,6 +32374,7 @@ export namespace Prisma {
     completedAt?: Date | string | null
     cancelledAt?: Date | string | null
     cancellationReason?: string | null
+    closure?: CaseClosureUncheckedCreateNestedOneWithoutExecutionPlanInput
   }
 
   export type ExecutionPlanCreateOrConnectWithoutTasksInput = {
@@ -30236,6 +32405,7 @@ export namespace Prisma {
     verifiedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutVerifiedByInput
     cancelledExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCancelledByInput
     submittedExecutionEvidence?: ExecutionEvidenceCreateNestedManyWithoutSubmittedByInput
+    closedCases?: CaseClosureCreateNestedManyWithoutClosedByInput
   }
 
   export type UserUncheckedCreateWithoutAssignedExecutionTasksInput = {
@@ -30261,6 +32431,7 @@ export namespace Prisma {
     verifiedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutVerifiedByInput
     cancelledExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCancelledByInput
     submittedExecutionEvidence?: ExecutionEvidenceUncheckedCreateNestedManyWithoutSubmittedByInput
+    closedCases?: CaseClosureUncheckedCreateNestedManyWithoutClosedByInput
   }
 
   export type UserCreateOrConnectWithoutAssignedExecutionTasksInput = {
@@ -30291,6 +32462,7 @@ export namespace Prisma {
     verifiedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutVerifiedByInput
     cancelledExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCancelledByInput
     submittedExecutionEvidence?: ExecutionEvidenceCreateNestedManyWithoutSubmittedByInput
+    closedCases?: CaseClosureCreateNestedManyWithoutClosedByInput
   }
 
   export type UserUncheckedCreateWithoutAssignedByExecutionTasksInput = {
@@ -30316,6 +32488,7 @@ export namespace Prisma {
     verifiedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutVerifiedByInput
     cancelledExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCancelledByInput
     submittedExecutionEvidence?: ExecutionEvidenceUncheckedCreateNestedManyWithoutSubmittedByInput
+    closedCases?: CaseClosureUncheckedCreateNestedManyWithoutClosedByInput
   }
 
   export type UserCreateOrConnectWithoutAssignedByExecutionTasksInput = {
@@ -30346,6 +32519,7 @@ export namespace Prisma {
     verifiedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutVerifiedByInput
     cancelledExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCancelledByInput
     submittedExecutionEvidence?: ExecutionEvidenceCreateNestedManyWithoutSubmittedByInput
+    closedCases?: CaseClosureCreateNestedManyWithoutClosedByInput
   }
 
   export type UserUncheckedCreateWithoutCompletedExecutionTasksInput = {
@@ -30371,6 +32545,7 @@ export namespace Prisma {
     verifiedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutVerifiedByInput
     cancelledExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCancelledByInput
     submittedExecutionEvidence?: ExecutionEvidenceUncheckedCreateNestedManyWithoutSubmittedByInput
+    closedCases?: CaseClosureUncheckedCreateNestedManyWithoutClosedByInput
   }
 
   export type UserCreateOrConnectWithoutCompletedExecutionTasksInput = {
@@ -30401,6 +32576,7 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCompletionSubmittedByInput
     cancelledExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCancelledByInput
     submittedExecutionEvidence?: ExecutionEvidenceCreateNestedManyWithoutSubmittedByInput
+    closedCases?: CaseClosureCreateNestedManyWithoutClosedByInput
   }
 
   export type UserUncheckedCreateWithoutVerifiedExecutionTasksInput = {
@@ -30426,6 +32602,7 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCompletionSubmittedByInput
     cancelledExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCancelledByInput
     submittedExecutionEvidence?: ExecutionEvidenceUncheckedCreateNestedManyWithoutSubmittedByInput
+    closedCases?: CaseClosureUncheckedCreateNestedManyWithoutClosedByInput
   }
 
   export type UserCreateOrConnectWithoutVerifiedExecutionTasksInput = {
@@ -30456,6 +32633,7 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCompletionSubmittedByInput
     verifiedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutVerifiedByInput
     submittedExecutionEvidence?: ExecutionEvidenceCreateNestedManyWithoutSubmittedByInput
+    closedCases?: CaseClosureCreateNestedManyWithoutClosedByInput
   }
 
   export type UserUncheckedCreateWithoutCancelledExecutionTasksInput = {
@@ -30481,6 +32659,7 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCompletionSubmittedByInput
     verifiedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutVerifiedByInput
     submittedExecutionEvidence?: ExecutionEvidenceUncheckedCreateNestedManyWithoutSubmittedByInput
+    closedCases?: CaseClosureUncheckedCreateNestedManyWithoutClosedByInput
   }
 
   export type UserCreateOrConnectWithoutCancelledExecutionTasksInput = {
@@ -30547,6 +32726,7 @@ export namespace Prisma {
     case?: CaseUpdateOneRequiredWithoutExecutionPlansNestedInput
     approvalDecision?: OrpDecisionUpdateOneRequiredWithoutExecutionPlanNestedInput
     createdBy?: UserUpdateOneRequiredWithoutCreatedExecutionPlansNestedInput
+    closure?: CaseClosureUpdateOneWithoutExecutionPlanNestedInput
   }
 
   export type ExecutionPlanUncheckedUpdateWithoutTasksInput = {
@@ -30563,6 +32743,7 @@ export namespace Prisma {
     completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    closure?: CaseClosureUncheckedUpdateOneWithoutExecutionPlanNestedInput
   }
 
   export type UserUpsertWithoutAssignedExecutionTasksInput = {
@@ -30599,6 +32780,7 @@ export namespace Prisma {
     verifiedExecutionTasks?: ExecutionTaskUpdateManyWithoutVerifiedByNestedInput
     cancelledExecutionTasks?: ExecutionTaskUpdateManyWithoutCancelledByNestedInput
     submittedExecutionEvidence?: ExecutionEvidenceUpdateManyWithoutSubmittedByNestedInput
+    closedCases?: CaseClosureUpdateManyWithoutClosedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAssignedExecutionTasksInput = {
@@ -30624,6 +32806,7 @@ export namespace Prisma {
     verifiedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutVerifiedByNestedInput
     cancelledExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCancelledByNestedInput
     submittedExecutionEvidence?: ExecutionEvidenceUncheckedUpdateManyWithoutSubmittedByNestedInput
+    closedCases?: CaseClosureUncheckedUpdateManyWithoutClosedByNestedInput
   }
 
   export type UserUpsertWithoutAssignedByExecutionTasksInput = {
@@ -30660,6 +32843,7 @@ export namespace Prisma {
     verifiedExecutionTasks?: ExecutionTaskUpdateManyWithoutVerifiedByNestedInput
     cancelledExecutionTasks?: ExecutionTaskUpdateManyWithoutCancelledByNestedInput
     submittedExecutionEvidence?: ExecutionEvidenceUpdateManyWithoutSubmittedByNestedInput
+    closedCases?: CaseClosureUpdateManyWithoutClosedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAssignedByExecutionTasksInput = {
@@ -30685,6 +32869,7 @@ export namespace Prisma {
     verifiedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutVerifiedByNestedInput
     cancelledExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCancelledByNestedInput
     submittedExecutionEvidence?: ExecutionEvidenceUncheckedUpdateManyWithoutSubmittedByNestedInput
+    closedCases?: CaseClosureUncheckedUpdateManyWithoutClosedByNestedInput
   }
 
   export type UserUpsertWithoutCompletedExecutionTasksInput = {
@@ -30721,6 +32906,7 @@ export namespace Prisma {
     verifiedExecutionTasks?: ExecutionTaskUpdateManyWithoutVerifiedByNestedInput
     cancelledExecutionTasks?: ExecutionTaskUpdateManyWithoutCancelledByNestedInput
     submittedExecutionEvidence?: ExecutionEvidenceUpdateManyWithoutSubmittedByNestedInput
+    closedCases?: CaseClosureUpdateManyWithoutClosedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCompletedExecutionTasksInput = {
@@ -30746,6 +32932,7 @@ export namespace Prisma {
     verifiedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutVerifiedByNestedInput
     cancelledExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCancelledByNestedInput
     submittedExecutionEvidence?: ExecutionEvidenceUncheckedUpdateManyWithoutSubmittedByNestedInput
+    closedCases?: CaseClosureUncheckedUpdateManyWithoutClosedByNestedInput
   }
 
   export type UserUpsertWithoutVerifiedExecutionTasksInput = {
@@ -30782,6 +32969,7 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskUpdateManyWithoutCompletionSubmittedByNestedInput
     cancelledExecutionTasks?: ExecutionTaskUpdateManyWithoutCancelledByNestedInput
     submittedExecutionEvidence?: ExecutionEvidenceUpdateManyWithoutSubmittedByNestedInput
+    closedCases?: CaseClosureUpdateManyWithoutClosedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutVerifiedExecutionTasksInput = {
@@ -30807,6 +32995,7 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCompletionSubmittedByNestedInput
     cancelledExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCancelledByNestedInput
     submittedExecutionEvidence?: ExecutionEvidenceUncheckedUpdateManyWithoutSubmittedByNestedInput
+    closedCases?: CaseClosureUncheckedUpdateManyWithoutClosedByNestedInput
   }
 
   export type UserUpsertWithoutCancelledExecutionTasksInput = {
@@ -30843,6 +33032,7 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskUpdateManyWithoutCompletionSubmittedByNestedInput
     verifiedExecutionTasks?: ExecutionTaskUpdateManyWithoutVerifiedByNestedInput
     submittedExecutionEvidence?: ExecutionEvidenceUpdateManyWithoutSubmittedByNestedInput
+    closedCases?: CaseClosureUpdateManyWithoutClosedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCancelledExecutionTasksInput = {
@@ -30868,6 +33058,7 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCompletionSubmittedByNestedInput
     verifiedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutVerifiedByNestedInput
     submittedExecutionEvidence?: ExecutionEvidenceUncheckedUpdateManyWithoutSubmittedByNestedInput
+    closedCases?: CaseClosureUncheckedUpdateManyWithoutClosedByNestedInput
   }
 
   export type ExecutionEvidenceUpsertWithWhereUniqueWithoutExecutionTaskInput = {
@@ -30972,6 +33163,7 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCompletionSubmittedByInput
     verifiedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutVerifiedByInput
     cancelledExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCancelledByInput
+    closedCases?: CaseClosureCreateNestedManyWithoutClosedByInput
   }
 
   export type UserUncheckedCreateWithoutSubmittedExecutionEvidenceInput = {
@@ -30997,6 +33189,7 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCompletionSubmittedByInput
     verifiedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutVerifiedByInput
     cancelledExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCancelledByInput
+    closedCases?: CaseClosureUncheckedCreateNestedManyWithoutClosedByInput
   }
 
   export type UserCreateOrConnectWithoutSubmittedExecutionEvidenceInput = {
@@ -31107,6 +33300,7 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskUpdateManyWithoutCompletionSubmittedByNestedInput
     verifiedExecutionTasks?: ExecutionTaskUpdateManyWithoutVerifiedByNestedInput
     cancelledExecutionTasks?: ExecutionTaskUpdateManyWithoutCancelledByNestedInput
+    closedCases?: CaseClosureUpdateManyWithoutClosedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSubmittedExecutionEvidenceInput = {
@@ -31132,6 +33326,403 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCompletionSubmittedByNestedInput
     verifiedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutVerifiedByNestedInput
     cancelledExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCancelledByNestedInput
+    closedCases?: CaseClosureUncheckedUpdateManyWithoutClosedByNestedInput
+  }
+
+  export type CaseCreateWithoutClosureInput = {
+    id?: string
+    caseNumber: string
+    title: string
+    description?: string | null
+    status?: $Enums.CaseStatus
+    riskLevel?: $Enums.RiskLevel | null
+    priorityLevel?: $Enums.PriorityLevel | null
+    emergencyFlag?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    closedAt?: Date | string | null
+    asset: AssetCreateNestedOneWithoutCasesInput
+    inspections?: InspectionCreateNestedManyWithoutCaseInput
+    riskAssessments?: RiskAssessmentCreateNestedManyWithoutCaseInput
+    operationalResponsePlans?: OperationalResponsePlanCreateNestedManyWithoutCaseInput
+    orpDecisions?: OrpDecisionCreateNestedManyWithoutCaseInput
+    executionPlans?: ExecutionPlanCreateNestedManyWithoutCaseInput
+  }
+
+  export type CaseUncheckedCreateWithoutClosureInput = {
+    id?: string
+    caseNumber: string
+    assetId: string
+    title: string
+    description?: string | null
+    status?: $Enums.CaseStatus
+    riskLevel?: $Enums.RiskLevel | null
+    priorityLevel?: $Enums.PriorityLevel | null
+    emergencyFlag?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    closedAt?: Date | string | null
+    inspections?: InspectionUncheckedCreateNestedManyWithoutCaseInput
+    riskAssessments?: RiskAssessmentUncheckedCreateNestedManyWithoutCaseInput
+    operationalResponsePlans?: OperationalResponsePlanUncheckedCreateNestedManyWithoutCaseInput
+    orpDecisions?: OrpDecisionUncheckedCreateNestedManyWithoutCaseInput
+    executionPlans?: ExecutionPlanUncheckedCreateNestedManyWithoutCaseInput
+  }
+
+  export type CaseCreateOrConnectWithoutClosureInput = {
+    where: CaseWhereUniqueInput
+    create: XOR<CaseCreateWithoutClosureInput, CaseUncheckedCreateWithoutClosureInput>
+  }
+
+  export type ExecutionPlanCreateWithoutClosureInput = {
+    id?: string
+    status?: $Enums.ExecutionPlanStatus
+    templateVersion?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    startedAt?: Date | string | null
+    completedAt?: Date | string | null
+    cancelledAt?: Date | string | null
+    cancellationReason?: string | null
+    orp: OperationalResponsePlanCreateNestedOneWithoutExecutionPlanInput
+    case: CaseCreateNestedOneWithoutExecutionPlansInput
+    approvalDecision: OrpDecisionCreateNestedOneWithoutExecutionPlanInput
+    createdBy: UserCreateNestedOneWithoutCreatedExecutionPlansInput
+    tasks?: ExecutionTaskCreateNestedManyWithoutExecutionPlanInput
+  }
+
+  export type ExecutionPlanUncheckedCreateWithoutClosureInput = {
+    id?: string
+    orpId: string
+    caseId: string
+    approvalDecisionId: string
+    status?: $Enums.ExecutionPlanStatus
+    createdById: string
+    templateVersion?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    startedAt?: Date | string | null
+    completedAt?: Date | string | null
+    cancelledAt?: Date | string | null
+    cancellationReason?: string | null
+    tasks?: ExecutionTaskUncheckedCreateNestedManyWithoutExecutionPlanInput
+  }
+
+  export type ExecutionPlanCreateOrConnectWithoutClosureInput = {
+    where: ExecutionPlanWhereUniqueInput
+    create: XOR<ExecutionPlanCreateWithoutClosureInput, ExecutionPlanUncheckedCreateWithoutClosureInput>
+  }
+
+  export type UserCreateWithoutClosedCasesInput = {
+    id?: string
+    employeeCode: string
+    name: string
+    email: string
+    passwordHash: string
+    designation: string
+    role?: $Enums.SystemRole
+    status?: $Enums.UserStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    department: DepartmentCreateNestedOneWithoutUsersInput
+    jurisdiction: JurisdictionCreateNestedOneWithoutUsersInput
+    inspections?: InspectionCreateNestedManyWithoutInspectorInput
+    approvalAuthorities?: ApprovalAuthorityCreateNestedManyWithoutUserInput
+    reviewedOrpDecisions?: OrpDecisionCreateNestedManyWithoutReviewerInput
+    forwardedOrpDecisions?: OrpDecisionCreateNestedManyWithoutForwardedUserInput
+    createdExecutionPlans?: ExecutionPlanCreateNestedManyWithoutCreatedByInput
+    assignedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutAssignedToInput
+    assignedByExecutionTasks?: ExecutionTaskCreateNestedManyWithoutAssignedByInput
+    completedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCompletionSubmittedByInput
+    verifiedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutVerifiedByInput
+    cancelledExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCancelledByInput
+    submittedExecutionEvidence?: ExecutionEvidenceCreateNestedManyWithoutSubmittedByInput
+  }
+
+  export type UserUncheckedCreateWithoutClosedCasesInput = {
+    id?: string
+    employeeCode: string
+    name: string
+    email: string
+    passwordHash: string
+    designation: string
+    role?: $Enums.SystemRole
+    status?: $Enums.UserStatus
+    departmentId: string
+    jurisdictionId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    inspections?: InspectionUncheckedCreateNestedManyWithoutInspectorInput
+    approvalAuthorities?: ApprovalAuthorityUncheckedCreateNestedManyWithoutUserInput
+    reviewedOrpDecisions?: OrpDecisionUncheckedCreateNestedManyWithoutReviewerInput
+    forwardedOrpDecisions?: OrpDecisionUncheckedCreateNestedManyWithoutForwardedUserInput
+    createdExecutionPlans?: ExecutionPlanUncheckedCreateNestedManyWithoutCreatedByInput
+    assignedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutAssignedToInput
+    assignedByExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutAssignedByInput
+    completedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCompletionSubmittedByInput
+    verifiedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutVerifiedByInput
+    cancelledExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCancelledByInput
+    submittedExecutionEvidence?: ExecutionEvidenceUncheckedCreateNestedManyWithoutSubmittedByInput
+  }
+
+  export type UserCreateOrConnectWithoutClosedCasesInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutClosedCasesInput, UserUncheckedCreateWithoutClosedCasesInput>
+  }
+
+  export type ApprovalAuthorityCreateWithoutCaseClosuresInput = {
+    id?: string
+    canApprove?: boolean
+    canReject?: boolean
+    canRequestModification?: boolean
+    canRequestReinspection?: boolean
+    canEscalate?: boolean
+    canCloseCase?: boolean
+    maxPriorityLevel?: $Enums.PriorityLevel | null
+    isActive?: boolean
+    validFrom?: Date | string | null
+    validUntil?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutApprovalAuthoritiesInput
+    department: DepartmentCreateNestedOneWithoutApprovalAuthoritiesInput
+    jurisdiction: JurisdictionCreateNestedOneWithoutApprovalAuthoritiesInput
+    decisions?: OrpDecisionCreateNestedManyWithoutAuthorityGrantInput
+  }
+
+  export type ApprovalAuthorityUncheckedCreateWithoutCaseClosuresInput = {
+    id?: string
+    userId: string
+    departmentId: string
+    jurisdictionId: string
+    canApprove?: boolean
+    canReject?: boolean
+    canRequestModification?: boolean
+    canRequestReinspection?: boolean
+    canEscalate?: boolean
+    canCloseCase?: boolean
+    maxPriorityLevel?: $Enums.PriorityLevel | null
+    isActive?: boolean
+    validFrom?: Date | string | null
+    validUntil?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    decisions?: OrpDecisionUncheckedCreateNestedManyWithoutAuthorityGrantInput
+  }
+
+  export type ApprovalAuthorityCreateOrConnectWithoutCaseClosuresInput = {
+    where: ApprovalAuthorityWhereUniqueInput
+    create: XOR<ApprovalAuthorityCreateWithoutCaseClosuresInput, ApprovalAuthorityUncheckedCreateWithoutCaseClosuresInput>
+  }
+
+  export type CaseUpsertWithoutClosureInput = {
+    update: XOR<CaseUpdateWithoutClosureInput, CaseUncheckedUpdateWithoutClosureInput>
+    create: XOR<CaseCreateWithoutClosureInput, CaseUncheckedCreateWithoutClosureInput>
+    where?: CaseWhereInput
+  }
+
+  export type CaseUpdateToOneWithWhereWithoutClosureInput = {
+    where?: CaseWhereInput
+    data: XOR<CaseUpdateWithoutClosureInput, CaseUncheckedUpdateWithoutClosureInput>
+  }
+
+  export type CaseUpdateWithoutClosureInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    caseNumber?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumCaseStatusFieldUpdateOperationsInput | $Enums.CaseStatus
+    riskLevel?: NullableEnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel | null
+    priorityLevel?: NullableEnumPriorityLevelFieldUpdateOperationsInput | $Enums.PriorityLevel | null
+    emergencyFlag?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    asset?: AssetUpdateOneRequiredWithoutCasesNestedInput
+    inspections?: InspectionUpdateManyWithoutCaseNestedInput
+    riskAssessments?: RiskAssessmentUpdateManyWithoutCaseNestedInput
+    operationalResponsePlans?: OperationalResponsePlanUpdateManyWithoutCaseNestedInput
+    orpDecisions?: OrpDecisionUpdateManyWithoutCaseNestedInput
+    executionPlans?: ExecutionPlanUpdateManyWithoutCaseNestedInput
+  }
+
+  export type CaseUncheckedUpdateWithoutClosureInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    caseNumber?: StringFieldUpdateOperationsInput | string
+    assetId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumCaseStatusFieldUpdateOperationsInput | $Enums.CaseStatus
+    riskLevel?: NullableEnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel | null
+    priorityLevel?: NullableEnumPriorityLevelFieldUpdateOperationsInput | $Enums.PriorityLevel | null
+    emergencyFlag?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    inspections?: InspectionUncheckedUpdateManyWithoutCaseNestedInput
+    riskAssessments?: RiskAssessmentUncheckedUpdateManyWithoutCaseNestedInput
+    operationalResponsePlans?: OperationalResponsePlanUncheckedUpdateManyWithoutCaseNestedInput
+    orpDecisions?: OrpDecisionUncheckedUpdateManyWithoutCaseNestedInput
+    executionPlans?: ExecutionPlanUncheckedUpdateManyWithoutCaseNestedInput
+  }
+
+  export type ExecutionPlanUpsertWithoutClosureInput = {
+    update: XOR<ExecutionPlanUpdateWithoutClosureInput, ExecutionPlanUncheckedUpdateWithoutClosureInput>
+    create: XOR<ExecutionPlanCreateWithoutClosureInput, ExecutionPlanUncheckedCreateWithoutClosureInput>
+    where?: ExecutionPlanWhereInput
+  }
+
+  export type ExecutionPlanUpdateToOneWithWhereWithoutClosureInput = {
+    where?: ExecutionPlanWhereInput
+    data: XOR<ExecutionPlanUpdateWithoutClosureInput, ExecutionPlanUncheckedUpdateWithoutClosureInput>
+  }
+
+  export type ExecutionPlanUpdateWithoutClosureInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: EnumExecutionPlanStatusFieldUpdateOperationsInput | $Enums.ExecutionPlanStatus
+    templateVersion?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    startedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    orp?: OperationalResponsePlanUpdateOneRequiredWithoutExecutionPlanNestedInput
+    case?: CaseUpdateOneRequiredWithoutExecutionPlansNestedInput
+    approvalDecision?: OrpDecisionUpdateOneRequiredWithoutExecutionPlanNestedInput
+    createdBy?: UserUpdateOneRequiredWithoutCreatedExecutionPlansNestedInput
+    tasks?: ExecutionTaskUpdateManyWithoutExecutionPlanNestedInput
+  }
+
+  export type ExecutionPlanUncheckedUpdateWithoutClosureInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    orpId?: StringFieldUpdateOperationsInput | string
+    caseId?: StringFieldUpdateOperationsInput | string
+    approvalDecisionId?: StringFieldUpdateOperationsInput | string
+    status?: EnumExecutionPlanStatusFieldUpdateOperationsInput | $Enums.ExecutionPlanStatus
+    createdById?: StringFieldUpdateOperationsInput | string
+    templateVersion?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    startedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    tasks?: ExecutionTaskUncheckedUpdateManyWithoutExecutionPlanNestedInput
+  }
+
+  export type UserUpsertWithoutClosedCasesInput = {
+    update: XOR<UserUpdateWithoutClosedCasesInput, UserUncheckedUpdateWithoutClosedCasesInput>
+    create: XOR<UserCreateWithoutClosedCasesInput, UserUncheckedCreateWithoutClosedCasesInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutClosedCasesInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutClosedCasesInput, UserUncheckedUpdateWithoutClosedCasesInput>
+  }
+
+  export type UserUpdateWithoutClosedCasesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    employeeCode?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    designation?: StringFieldUpdateOperationsInput | string
+    role?: EnumSystemRoleFieldUpdateOperationsInput | $Enums.SystemRole
+    status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    department?: DepartmentUpdateOneRequiredWithoutUsersNestedInput
+    jurisdiction?: JurisdictionUpdateOneRequiredWithoutUsersNestedInput
+    inspections?: InspectionUpdateManyWithoutInspectorNestedInput
+    approvalAuthorities?: ApprovalAuthorityUpdateManyWithoutUserNestedInput
+    reviewedOrpDecisions?: OrpDecisionUpdateManyWithoutReviewerNestedInput
+    forwardedOrpDecisions?: OrpDecisionUpdateManyWithoutForwardedUserNestedInput
+    createdExecutionPlans?: ExecutionPlanUpdateManyWithoutCreatedByNestedInput
+    assignedExecutionTasks?: ExecutionTaskUpdateManyWithoutAssignedToNestedInput
+    assignedByExecutionTasks?: ExecutionTaskUpdateManyWithoutAssignedByNestedInput
+    completedExecutionTasks?: ExecutionTaskUpdateManyWithoutCompletionSubmittedByNestedInput
+    verifiedExecutionTasks?: ExecutionTaskUpdateManyWithoutVerifiedByNestedInput
+    cancelledExecutionTasks?: ExecutionTaskUpdateManyWithoutCancelledByNestedInput
+    submittedExecutionEvidence?: ExecutionEvidenceUpdateManyWithoutSubmittedByNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutClosedCasesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    employeeCode?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    designation?: StringFieldUpdateOperationsInput | string
+    role?: EnumSystemRoleFieldUpdateOperationsInput | $Enums.SystemRole
+    status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+    departmentId?: StringFieldUpdateOperationsInput | string
+    jurisdictionId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    inspections?: InspectionUncheckedUpdateManyWithoutInspectorNestedInput
+    approvalAuthorities?: ApprovalAuthorityUncheckedUpdateManyWithoutUserNestedInput
+    reviewedOrpDecisions?: OrpDecisionUncheckedUpdateManyWithoutReviewerNestedInput
+    forwardedOrpDecisions?: OrpDecisionUncheckedUpdateManyWithoutForwardedUserNestedInput
+    createdExecutionPlans?: ExecutionPlanUncheckedUpdateManyWithoutCreatedByNestedInput
+    assignedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutAssignedToNestedInput
+    assignedByExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutAssignedByNestedInput
+    completedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCompletionSubmittedByNestedInput
+    verifiedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutVerifiedByNestedInput
+    cancelledExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCancelledByNestedInput
+    submittedExecutionEvidence?: ExecutionEvidenceUncheckedUpdateManyWithoutSubmittedByNestedInput
+  }
+
+  export type ApprovalAuthorityUpsertWithoutCaseClosuresInput = {
+    update: XOR<ApprovalAuthorityUpdateWithoutCaseClosuresInput, ApprovalAuthorityUncheckedUpdateWithoutCaseClosuresInput>
+    create: XOR<ApprovalAuthorityCreateWithoutCaseClosuresInput, ApprovalAuthorityUncheckedCreateWithoutCaseClosuresInput>
+    where?: ApprovalAuthorityWhereInput
+  }
+
+  export type ApprovalAuthorityUpdateToOneWithWhereWithoutCaseClosuresInput = {
+    where?: ApprovalAuthorityWhereInput
+    data: XOR<ApprovalAuthorityUpdateWithoutCaseClosuresInput, ApprovalAuthorityUncheckedUpdateWithoutCaseClosuresInput>
+  }
+
+  export type ApprovalAuthorityUpdateWithoutCaseClosuresInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    canApprove?: BoolFieldUpdateOperationsInput | boolean
+    canReject?: BoolFieldUpdateOperationsInput | boolean
+    canRequestModification?: BoolFieldUpdateOperationsInput | boolean
+    canRequestReinspection?: BoolFieldUpdateOperationsInput | boolean
+    canEscalate?: BoolFieldUpdateOperationsInput | boolean
+    canCloseCase?: BoolFieldUpdateOperationsInput | boolean
+    maxPriorityLevel?: NullableEnumPriorityLevelFieldUpdateOperationsInput | $Enums.PriorityLevel | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    validFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    validUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutApprovalAuthoritiesNestedInput
+    department?: DepartmentUpdateOneRequiredWithoutApprovalAuthoritiesNestedInput
+    jurisdiction?: JurisdictionUpdateOneRequiredWithoutApprovalAuthoritiesNestedInput
+    decisions?: OrpDecisionUpdateManyWithoutAuthorityGrantNestedInput
+  }
+
+  export type ApprovalAuthorityUncheckedUpdateWithoutCaseClosuresInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    departmentId?: StringFieldUpdateOperationsInput | string
+    jurisdictionId?: StringFieldUpdateOperationsInput | string
+    canApprove?: BoolFieldUpdateOperationsInput | boolean
+    canReject?: BoolFieldUpdateOperationsInput | boolean
+    canRequestModification?: BoolFieldUpdateOperationsInput | boolean
+    canRequestReinspection?: BoolFieldUpdateOperationsInput | boolean
+    canEscalate?: BoolFieldUpdateOperationsInput | boolean
+    canCloseCase?: BoolFieldUpdateOperationsInput | boolean
+    maxPriorityLevel?: NullableEnumPriorityLevelFieldUpdateOperationsInput | $Enums.PriorityLevel | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    validFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    validUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    decisions?: OrpDecisionUncheckedUpdateManyWithoutAuthorityGrantNestedInput
   }
 
   export type UserCreateManyDepartmentInput = {
@@ -31178,6 +33769,7 @@ export namespace Prisma {
     canRequestModification?: boolean
     canRequestReinspection?: boolean
     canEscalate?: boolean
+    canCloseCase?: boolean
     maxPriorityLevel?: $Enums.PriorityLevel | null
     isActive?: boolean
     validFrom?: Date | string | null
@@ -31209,6 +33801,7 @@ export namespace Prisma {
     verifiedExecutionTasks?: ExecutionTaskUpdateManyWithoutVerifiedByNestedInput
     cancelledExecutionTasks?: ExecutionTaskUpdateManyWithoutCancelledByNestedInput
     submittedExecutionEvidence?: ExecutionEvidenceUpdateManyWithoutSubmittedByNestedInput
+    closedCases?: CaseClosureUpdateManyWithoutClosedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutDepartmentInput = {
@@ -31234,6 +33827,7 @@ export namespace Prisma {
     verifiedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutVerifiedByNestedInput
     cancelledExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCancelledByNestedInput
     submittedExecutionEvidence?: ExecutionEvidenceUncheckedUpdateManyWithoutSubmittedByNestedInput
+    closedCases?: CaseClosureUncheckedUpdateManyWithoutClosedByNestedInput
   }
 
   export type UserUncheckedUpdateManyWithoutDepartmentInput = {
@@ -31328,6 +33922,7 @@ export namespace Prisma {
     canRequestModification?: BoolFieldUpdateOperationsInput | boolean
     canRequestReinspection?: BoolFieldUpdateOperationsInput | boolean
     canEscalate?: BoolFieldUpdateOperationsInput | boolean
+    canCloseCase?: BoolFieldUpdateOperationsInput | boolean
     maxPriorityLevel?: NullableEnumPriorityLevelFieldUpdateOperationsInput | $Enums.PriorityLevel | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     validFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -31337,6 +33932,7 @@ export namespace Prisma {
     user?: UserUpdateOneRequiredWithoutApprovalAuthoritiesNestedInput
     jurisdiction?: JurisdictionUpdateOneRequiredWithoutApprovalAuthoritiesNestedInput
     decisions?: OrpDecisionUpdateManyWithoutAuthorityGrantNestedInput
+    caseClosures?: CaseClosureUpdateManyWithoutClosureAuthorityGrantNestedInput
   }
 
   export type ApprovalAuthorityUncheckedUpdateWithoutDepartmentInput = {
@@ -31348,6 +33944,7 @@ export namespace Prisma {
     canRequestModification?: BoolFieldUpdateOperationsInput | boolean
     canRequestReinspection?: BoolFieldUpdateOperationsInput | boolean
     canEscalate?: BoolFieldUpdateOperationsInput | boolean
+    canCloseCase?: BoolFieldUpdateOperationsInput | boolean
     maxPriorityLevel?: NullableEnumPriorityLevelFieldUpdateOperationsInput | $Enums.PriorityLevel | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     validFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -31355,6 +33952,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     decisions?: OrpDecisionUncheckedUpdateManyWithoutAuthorityGrantNestedInput
+    caseClosures?: CaseClosureUncheckedUpdateManyWithoutClosureAuthorityGrantNestedInput
   }
 
   export type ApprovalAuthorityUncheckedUpdateManyWithoutDepartmentInput = {
@@ -31366,6 +33964,7 @@ export namespace Prisma {
     canRequestModification?: BoolFieldUpdateOperationsInput | boolean
     canRequestReinspection?: BoolFieldUpdateOperationsInput | boolean
     canEscalate?: BoolFieldUpdateOperationsInput | boolean
+    canCloseCase?: BoolFieldUpdateOperationsInput | boolean
     maxPriorityLevel?: NullableEnumPriorityLevelFieldUpdateOperationsInput | $Enums.PriorityLevel | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     validFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -31411,6 +34010,7 @@ export namespace Prisma {
     canRequestModification?: boolean
     canRequestReinspection?: boolean
     canEscalate?: boolean
+    canCloseCase?: boolean
     maxPriorityLevel?: $Enums.PriorityLevel | null
     isActive?: boolean
     validFrom?: Date | string | null
@@ -31442,6 +34042,7 @@ export namespace Prisma {
     verifiedExecutionTasks?: ExecutionTaskUpdateManyWithoutVerifiedByNestedInput
     cancelledExecutionTasks?: ExecutionTaskUpdateManyWithoutCancelledByNestedInput
     submittedExecutionEvidence?: ExecutionEvidenceUpdateManyWithoutSubmittedByNestedInput
+    closedCases?: CaseClosureUpdateManyWithoutClosedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutJurisdictionInput = {
@@ -31467,6 +34068,7 @@ export namespace Prisma {
     verifiedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutVerifiedByNestedInput
     cancelledExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCancelledByNestedInput
     submittedExecutionEvidence?: ExecutionEvidenceUncheckedUpdateManyWithoutSubmittedByNestedInput
+    closedCases?: CaseClosureUncheckedUpdateManyWithoutClosedByNestedInput
   }
 
   export type UserUncheckedUpdateManyWithoutJurisdictionInput = {
@@ -31534,6 +34136,7 @@ export namespace Prisma {
     canRequestModification?: BoolFieldUpdateOperationsInput | boolean
     canRequestReinspection?: BoolFieldUpdateOperationsInput | boolean
     canEscalate?: BoolFieldUpdateOperationsInput | boolean
+    canCloseCase?: BoolFieldUpdateOperationsInput | boolean
     maxPriorityLevel?: NullableEnumPriorityLevelFieldUpdateOperationsInput | $Enums.PriorityLevel | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     validFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -31543,6 +34146,7 @@ export namespace Prisma {
     user?: UserUpdateOneRequiredWithoutApprovalAuthoritiesNestedInput
     department?: DepartmentUpdateOneRequiredWithoutApprovalAuthoritiesNestedInput
     decisions?: OrpDecisionUpdateManyWithoutAuthorityGrantNestedInput
+    caseClosures?: CaseClosureUpdateManyWithoutClosureAuthorityGrantNestedInput
   }
 
   export type ApprovalAuthorityUncheckedUpdateWithoutJurisdictionInput = {
@@ -31554,6 +34158,7 @@ export namespace Prisma {
     canRequestModification?: BoolFieldUpdateOperationsInput | boolean
     canRequestReinspection?: BoolFieldUpdateOperationsInput | boolean
     canEscalate?: BoolFieldUpdateOperationsInput | boolean
+    canCloseCase?: BoolFieldUpdateOperationsInput | boolean
     maxPriorityLevel?: NullableEnumPriorityLevelFieldUpdateOperationsInput | $Enums.PriorityLevel | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     validFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -31561,6 +34166,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     decisions?: OrpDecisionUncheckedUpdateManyWithoutAuthorityGrantNestedInput
+    caseClosures?: CaseClosureUncheckedUpdateManyWithoutClosureAuthorityGrantNestedInput
   }
 
   export type ApprovalAuthorityUncheckedUpdateManyWithoutJurisdictionInput = {
@@ -31572,6 +34178,7 @@ export namespace Prisma {
     canRequestModification?: BoolFieldUpdateOperationsInput | boolean
     canRequestReinspection?: BoolFieldUpdateOperationsInput | boolean
     canEscalate?: BoolFieldUpdateOperationsInput | boolean
+    canCloseCase?: BoolFieldUpdateOperationsInput | boolean
     maxPriorityLevel?: NullableEnumPriorityLevelFieldUpdateOperationsInput | $Enums.PriorityLevel | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     validFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -31606,6 +34213,7 @@ export namespace Prisma {
     canRequestModification?: boolean
     canRequestReinspection?: boolean
     canEscalate?: boolean
+    canCloseCase?: boolean
     maxPriorityLevel?: $Enums.PriorityLevel | null
     isActive?: boolean
     validFrom?: Date | string | null
@@ -31807,6 +34415,16 @@ export namespace Prisma {
     submittedAt?: Date | string
   }
 
+  export type CaseClosureCreateManyClosedByInput = {
+    id?: string
+    caseId: string
+    executionPlanId: string
+    closureAuthorityGrantId: string
+    closureReason: $Enums.CaseClosureReason
+    closureSummary: string
+    createdAt?: Date | string
+  }
+
   export type InspectionUpdateWithoutInspectorInput = {
     id?: StringFieldUpdateOperationsInput | string
     inspectionDate?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -31867,6 +34485,7 @@ export namespace Prisma {
     canRequestModification?: BoolFieldUpdateOperationsInput | boolean
     canRequestReinspection?: BoolFieldUpdateOperationsInput | boolean
     canEscalate?: BoolFieldUpdateOperationsInput | boolean
+    canCloseCase?: BoolFieldUpdateOperationsInput | boolean
     maxPriorityLevel?: NullableEnumPriorityLevelFieldUpdateOperationsInput | $Enums.PriorityLevel | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     validFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -31876,6 +34495,7 @@ export namespace Prisma {
     department?: DepartmentUpdateOneRequiredWithoutApprovalAuthoritiesNestedInput
     jurisdiction?: JurisdictionUpdateOneRequiredWithoutApprovalAuthoritiesNestedInput
     decisions?: OrpDecisionUpdateManyWithoutAuthorityGrantNestedInput
+    caseClosures?: CaseClosureUpdateManyWithoutClosureAuthorityGrantNestedInput
   }
 
   export type ApprovalAuthorityUncheckedUpdateWithoutUserInput = {
@@ -31887,6 +34507,7 @@ export namespace Prisma {
     canRequestModification?: BoolFieldUpdateOperationsInput | boolean
     canRequestReinspection?: BoolFieldUpdateOperationsInput | boolean
     canEscalate?: BoolFieldUpdateOperationsInput | boolean
+    canCloseCase?: BoolFieldUpdateOperationsInput | boolean
     maxPriorityLevel?: NullableEnumPriorityLevelFieldUpdateOperationsInput | $Enums.PriorityLevel | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     validFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -31894,6 +34515,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     decisions?: OrpDecisionUncheckedUpdateManyWithoutAuthorityGrantNestedInput
+    caseClosures?: CaseClosureUncheckedUpdateManyWithoutClosureAuthorityGrantNestedInput
   }
 
   export type ApprovalAuthorityUncheckedUpdateManyWithoutUserInput = {
@@ -31905,6 +34527,7 @@ export namespace Prisma {
     canRequestModification?: BoolFieldUpdateOperationsInput | boolean
     canRequestReinspection?: BoolFieldUpdateOperationsInput | boolean
     canEscalate?: BoolFieldUpdateOperationsInput | boolean
+    canCloseCase?: BoolFieldUpdateOperationsInput | boolean
     maxPriorityLevel?: NullableEnumPriorityLevelFieldUpdateOperationsInput | $Enums.PriorityLevel | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     validFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -32009,6 +34632,7 @@ export namespace Prisma {
     case?: CaseUpdateOneRequiredWithoutExecutionPlansNestedInput
     approvalDecision?: OrpDecisionUpdateOneRequiredWithoutExecutionPlanNestedInput
     tasks?: ExecutionTaskUpdateManyWithoutExecutionPlanNestedInput
+    closure?: CaseClosureUpdateOneWithoutExecutionPlanNestedInput
   }
 
   export type ExecutionPlanUncheckedUpdateWithoutCreatedByInput = {
@@ -32025,6 +34649,7 @@ export namespace Prisma {
     cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
     tasks?: ExecutionTaskUncheckedUpdateManyWithoutExecutionPlanNestedInput
+    closure?: CaseClosureUncheckedUpdateOneWithoutExecutionPlanNestedInput
   }
 
   export type ExecutionPlanUncheckedUpdateManyWithoutCreatedByInput = {
@@ -32508,6 +35133,36 @@ export namespace Prisma {
     submittedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type CaseClosureUpdateWithoutClosedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    closureReason?: EnumCaseClosureReasonFieldUpdateOperationsInput | $Enums.CaseClosureReason
+    closureSummary?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    case?: CaseUpdateOneRequiredWithoutClosureNestedInput
+    executionPlan?: ExecutionPlanUpdateOneRequiredWithoutClosureNestedInput
+    closureAuthorityGrant?: ApprovalAuthorityUpdateOneRequiredWithoutCaseClosuresNestedInput
+  }
+
+  export type CaseClosureUncheckedUpdateWithoutClosedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    caseId?: StringFieldUpdateOperationsInput | string
+    executionPlanId?: StringFieldUpdateOperationsInput | string
+    closureAuthorityGrantId?: StringFieldUpdateOperationsInput | string
+    closureReason?: EnumCaseClosureReasonFieldUpdateOperationsInput | $Enums.CaseClosureReason
+    closureSummary?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CaseClosureUncheckedUpdateManyWithoutClosedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    caseId?: StringFieldUpdateOperationsInput | string
+    executionPlanId?: StringFieldUpdateOperationsInput | string
+    closureAuthorityGrantId?: StringFieldUpdateOperationsInput | string
+    closureReason?: EnumCaseClosureReasonFieldUpdateOperationsInput | $Enums.CaseClosureReason
+    closureSummary?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type CaseCreateManyAssetInput = {
     id?: string
     caseNumber: string
@@ -32539,6 +35194,7 @@ export namespace Prisma {
     operationalResponsePlans?: OperationalResponsePlanUpdateManyWithoutCaseNestedInput
     orpDecisions?: OrpDecisionUpdateManyWithoutCaseNestedInput
     executionPlans?: ExecutionPlanUpdateManyWithoutCaseNestedInput
+    closure?: CaseClosureUpdateOneWithoutCaseNestedInput
   }
 
   export type CaseUncheckedUpdateWithoutAssetInput = {
@@ -32558,6 +35214,7 @@ export namespace Prisma {
     operationalResponsePlans?: OperationalResponsePlanUncheckedUpdateManyWithoutCaseNestedInput
     orpDecisions?: OrpDecisionUncheckedUpdateManyWithoutCaseNestedInput
     executionPlans?: ExecutionPlanUncheckedUpdateManyWithoutCaseNestedInput
+    closure?: CaseClosureUncheckedUpdateOneWithoutCaseNestedInput
   }
 
   export type CaseUncheckedUpdateManyWithoutAssetInput = {
@@ -32841,6 +35498,7 @@ export namespace Prisma {
     approvalDecision?: OrpDecisionUpdateOneRequiredWithoutExecutionPlanNestedInput
     createdBy?: UserUpdateOneRequiredWithoutCreatedExecutionPlansNestedInput
     tasks?: ExecutionTaskUpdateManyWithoutExecutionPlanNestedInput
+    closure?: CaseClosureUpdateOneWithoutExecutionPlanNestedInput
   }
 
   export type ExecutionPlanUncheckedUpdateWithoutCaseInput = {
@@ -32857,6 +35515,7 @@ export namespace Prisma {
     cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
     tasks?: ExecutionTaskUncheckedUpdateManyWithoutExecutionPlanNestedInput
+    closure?: CaseClosureUncheckedUpdateOneWithoutExecutionPlanNestedInput
   }
 
   export type ExecutionPlanUncheckedUpdateManyWithoutCaseInput = {
@@ -33055,6 +35714,16 @@ export namespace Prisma {
     createdAt?: Date | string
   }
 
+  export type CaseClosureCreateManyClosureAuthorityGrantInput = {
+    id?: string
+    caseId: string
+    executionPlanId: string
+    closedById: string
+    closureReason: $Enums.CaseClosureReason
+    closureSummary: string
+    createdAt?: Date | string
+  }
+
   export type OrpDecisionUpdateWithoutAuthorityGrantInput = {
     id?: StringFieldUpdateOperationsInput | string
     decisionType?: EnumOrpDecisionTypeFieldUpdateOperationsInput | $Enums.OrpDecisionType
@@ -33093,6 +35762,36 @@ export namespace Prisma {
     remarks?: NullableStringFieldUpdateOperationsInput | string | null
     requestedChanges?: NullableJsonNullValueInput | InputJsonValue
     forwardToUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CaseClosureUpdateWithoutClosureAuthorityGrantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    closureReason?: EnumCaseClosureReasonFieldUpdateOperationsInput | $Enums.CaseClosureReason
+    closureSummary?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    case?: CaseUpdateOneRequiredWithoutClosureNestedInput
+    executionPlan?: ExecutionPlanUpdateOneRequiredWithoutClosureNestedInput
+    closedBy?: UserUpdateOneRequiredWithoutClosedCasesNestedInput
+  }
+
+  export type CaseClosureUncheckedUpdateWithoutClosureAuthorityGrantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    caseId?: StringFieldUpdateOperationsInput | string
+    executionPlanId?: StringFieldUpdateOperationsInput | string
+    closedById?: StringFieldUpdateOperationsInput | string
+    closureReason?: EnumCaseClosureReasonFieldUpdateOperationsInput | $Enums.CaseClosureReason
+    closureSummary?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CaseClosureUncheckedUpdateManyWithoutClosureAuthorityGrantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    caseId?: StringFieldUpdateOperationsInput | string
+    executionPlanId?: StringFieldUpdateOperationsInput | string
+    closedById?: StringFieldUpdateOperationsInput | string
+    closureReason?: EnumCaseClosureReasonFieldUpdateOperationsInput | $Enums.CaseClosureReason
+    closureSummary?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 

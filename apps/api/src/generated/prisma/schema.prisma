@@ -92,6 +92,10 @@ enum ExecutionEvidenceType {
   OTHER
 }
 
+enum CaseClosureReason {
+  EXECUTION_VERIFIED
+}
+
 model Department {
   id                  String              @id @default(uuid())
   name                String
@@ -144,6 +148,7 @@ model User {
   verifiedExecutionTasks     ExecutionTask[]     @relation("ExecutionTaskVerifier")
   cancelledExecutionTasks    ExecutionTask[]     @relation("ExecutionTaskCanceller")
   submittedExecutionEvidence ExecutionEvidence[]
+  closedCases                CaseClosure[]       @relation("CaseClosureCloser")
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -201,6 +206,7 @@ model Case {
   operationalResponsePlans OperationalResponsePlan[]
   orpDecisions             OrpDecision[]
   executionPlans           ExecutionPlan[]
+  closure                  CaseClosure?
 
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
@@ -299,6 +305,7 @@ model ApprovalAuthority {
   canRequestModification Boolean @default(false)
   canRequestReinspection Boolean @default(false)
   canEscalate            Boolean @default(false)
+  canCloseCase           Boolean @default(false)
 
   maxPriorityLevel PriorityLevel?
   isActive         Boolean        @default(true)
@@ -309,6 +316,7 @@ model ApprovalAuthority {
   department   Department    @relation(fields: [departmentId], references: [id])
   jurisdiction Jurisdiction  @relation(fields: [jurisdictionId], references: [id])
   decisions    OrpDecision[]
+  caseClosures CaseClosure[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -367,6 +375,7 @@ model ExecutionPlan {
   approvalDecision OrpDecision             @relation(fields: [approvalDecisionId], references: [id], onDelete: Restrict)
   createdBy        User                    @relation("ExecutionPlanCreator", fields: [createdById], references: [id], onDelete: Restrict)
   tasks            ExecutionTask[]
+  closure          CaseClosure?
 
   @@index([caseId])
   @@index([status])
@@ -436,4 +445,25 @@ model ExecutionEvidence {
   @@index([submittedById])
   @@index([evidenceType])
   @@index([submittedAt])
+}
+
+model CaseClosure {
+  id                      String            @id @default(uuid())
+  caseId                  String            @unique
+  executionPlanId         String            @unique
+  closedById              String
+  closureAuthorityGrantId String
+  closureReason           CaseClosureReason
+  closureSummary          String
+  createdAt               DateTime          @default(now())
+
+  case                  Case              @relation(fields: [caseId], references: [id], onDelete: Restrict)
+  executionPlan         ExecutionPlan     @relation(fields: [executionPlanId], references: [id], onDelete: Restrict)
+  closedBy              User              @relation("CaseClosureCloser", fields: [closedById], references: [id], onDelete: Restrict)
+  closureAuthorityGrant ApprovalAuthority @relation(fields: [closureAuthorityGrantId], references: [id], onDelete: Restrict)
+
+  @@index([closedById])
+  @@index([closureAuthorityGrantId])
+  @@index([closureReason])
+  @@index([createdAt])
 }

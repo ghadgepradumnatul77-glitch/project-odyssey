@@ -238,6 +238,7 @@ exports.Prisma.ApprovalAuthorityScalarFieldEnum = {
   canRequestModification: 'canRequestModification',
   canRequestReinspection: 'canRequestReinspection',
   canEscalate: 'canEscalate',
+  canCloseCase: 'canCloseCase',
   maxPriorityLevel: 'maxPriorityLevel',
   isActive: 'isActive',
   validFrom: 'validFrom',
@@ -316,6 +317,17 @@ exports.Prisma.ExecutionEvidenceScalarFieldEnum = {
   measurementData: 'measurementData',
   capturedAt: 'capturedAt',
   submittedAt: 'submittedAt'
+};
+
+exports.Prisma.CaseClosureScalarFieldEnum = {
+  id: 'id',
+  caseId: 'caseId',
+  executionPlanId: 'executionPlanId',
+  closedById: 'closedById',
+  closureAuthorityGrantId: 'closureAuthorityGrantId',
+  closureReason: 'closureReason',
+  closureSummary: 'closureSummary',
+  createdAt: 'createdAt'
 };
 
 exports.Prisma.SortOrder = {
@@ -431,6 +443,10 @@ exports.ExecutionEvidenceType = exports.$Enums.ExecutionEvidenceType = {
   OTHER: 'OTHER'
 };
 
+exports.CaseClosureReason = exports.$Enums.CaseClosureReason = {
+  EXECUTION_VERIFIED: 'EXECUTION_VERIFIED'
+};
+
 exports.Prisma.ModelName = {
   Department: 'Department',
   Jurisdiction: 'Jurisdiction',
@@ -444,7 +460,8 @@ exports.Prisma.ModelName = {
   OrpDecision: 'OrpDecision',
   ExecutionPlan: 'ExecutionPlan',
   ExecutionTask: 'ExecutionTask',
-  ExecutionEvidence: 'ExecutionEvidence'
+  ExecutionEvidence: 'ExecutionEvidence',
+  CaseClosure: 'CaseClosure'
 };
 
 /**

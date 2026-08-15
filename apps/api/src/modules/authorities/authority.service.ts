@@ -11,6 +11,7 @@ export interface CreateAuthorityInput {
   canRequestModification?: boolean;
   canRequestReinspection?: boolean;
   canEscalate?: boolean;
+  canCloseCase?: boolean;
   maxPriorityLevel?: PriorityLevel | null;
   validFrom?: Date | null;
   validUntil?: Date | null;
@@ -58,7 +59,8 @@ export async function createApprovalAuthority(input: CreateAuthorityInput) {
       canReject: input.canReject ?? false,
       canRequestModification: input.canRequestModification ?? false,
       canRequestReinspection: input.canRequestReinspection ?? false,
-      canEscalate: input.canEscalate ?? false
+      canEscalate: input.canEscalate ?? false,
+      canCloseCase: input.canCloseCase ?? false
     },
     include: {
       user: { select: { id: true, name: true, employeeCode: true, designation: true, role: true, status: true } },

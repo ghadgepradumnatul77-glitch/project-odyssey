@@ -41,10 +41,11 @@ describe('approval authority routes', () => {
       departmentId: 'dep-1',
       jurisdictionId: 'jur-1',
       canApprove: true,
+      canCloseCase: true,
       maxPriorityLevel: 'CRITICAL'
     }).expect(201);
     expect(response.body.data.id).toBe('grant-1');
-    expect(mocks.create).toHaveBeenCalledWith(expect.objectContaining({ userId: 'user-1', canApprove: true }));
+    expect(mocks.create).toHaveBeenCalledWith(expect.objectContaining({ userId: 'user-1', canApprove: true, canCloseCase: true }));
   });
 
   it('POST rejects invalid booleans', async () => {

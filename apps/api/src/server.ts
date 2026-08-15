@@ -40,6 +40,8 @@ import authRoutes
   from './modules/auth/auth.routes';
 import executionRoutes
   from './modules/execution/execution.routes';
+import caseClosureRoutes
+  from './modules/closures/case-closure.routes';
 
 import { getAuthConfig }
   from './config/auth';
@@ -214,6 +216,11 @@ app.use(
 app.use(
   '/api/v1',
   executionRoutes
+);
+
+app.use(
+  '/api/v1',
+  caseClosureRoutes
 );
 
 app.use(

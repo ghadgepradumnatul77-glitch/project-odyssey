@@ -50,3 +50,18 @@ This module coordinates and audits human work. It does not close roads, dispatch
 personnel, issue legal orders, control infrastructure, contact external agencies,
 commit funds, or implement procurement. Case closure remains a future explicit
 human governance workflow.
+
+## Case closure and final accountability
+
+An active same-scope `OFFICER` with an explicit `canCloseCase` authority grant
+may formally close a Case only after its approved execution workflow is complete
+and independently verified. Closure creates an immutable accountability record;
+the actor is always derived from the authenticated user. `SYSTEM_ADMIN`,
+`AUDITOR`, and `POLICY_ADMIN` may read according to their existing visibility but
+cannot close a Case. Closure is terminal in Phase 1 and has no reopen endpoint.
+
+`POST /api/v1/cases/:caseId/close` performs the human closure and
+`GET /api/v1/cases/:caseId/closure` reads its record. Closure records operational
+governance only: it does not certify permanent safety, statutory compliance,
+payment, procurement, budget completion, or legal settlement, and it triggers no
+external or physical action.

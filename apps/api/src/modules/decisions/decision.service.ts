@@ -100,6 +100,9 @@ export async function submitOrpDecision(orpId: string, principal: Organizational
     include: { case: { include: { asset: true } }, decisions: { select: { id: true } } }
   });
   if (!orp) throw new WorkflowError('ORP_NOT_FOUND', 404, 'Operational response plan not found.');
+  if (orp.case.status === CaseStatus.CLOSED) {
+    throw new WorkflowError('INVALID_CASE_STATE', 409, 'A closed Case cannot receive an ORP decision.');
+  }
 
   const latest = await prisma.operationalResponsePlan.findFirst({
     where: { caseId: orp.caseId },

@@ -28,7 +28,7 @@ router.post('/approval-authorities', async (req, res) => {
     const departmentId = requiredText(req.body.departmentId);
     const jurisdictionId = requiredText(req.body.jurisdictionId);
     const booleanFields = [
-      'canApprove', 'canReject', 'canRequestModification', 'canRequestReinspection', 'canEscalate'
+      'canApprove', 'canReject', 'canRequestModification', 'canRequestReinspection', 'canEscalate', 'canCloseCase'
     ] as const;
     const booleans = Object.fromEntries(booleanFields.map((field) => [field, optionalBoolean(req.body[field])]));
     const validFrom = optionalDate(req.body.validFrom);

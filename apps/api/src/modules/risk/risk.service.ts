@@ -299,6 +299,9 @@ export function calculateRiskAndPriority(inspection: Inspection): RiskCalculatio
 export async function runAssessmentForCase(caseId: string, principal: OrganizationalPrincipal) {
   // Find case
   const existingCase = await assertOperationalCaseScope(caseId, principal);
+  if (existingCase.status === CaseStatus.CLOSED) {
+    throw new Error('INVALID_CASE_STATE');
+  }
 
   // Find latest inspection
   const latestInspection = await prisma.inspection.findFirst({

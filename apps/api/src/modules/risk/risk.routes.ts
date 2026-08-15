@@ -57,6 +57,13 @@ router.post('/:caseId/assess-risk', authenticate, requireRole(SystemRole.OFFICER
       });
     }
 
+    if (error.message === 'INVALID_CASE_STATE') {
+      return res.status(409).json({
+        success: false,
+        error: { code: 'INVALID_CASE_STATE', message: 'A closed Case cannot be reassessed.' }
+      });
+    }
+
     console.error('Failed to assess risk:', error);
     return res.status(500).json({
       success: false,
