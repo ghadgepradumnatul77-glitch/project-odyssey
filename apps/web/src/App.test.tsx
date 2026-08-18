@@ -10,13 +10,14 @@ function successfulLoginFetch() {
     .mockResolvedValueOnce(response({ success: true, data: { accessToken: 'secret-token', tokenType: 'Bearer', expiresIn: 900, user } }))
     .mockResolvedValueOnce(response({ success: true, data: user }))
     .mockResolvedValueOnce(response({ success: true, data: [{ id: 'dep', name: 'Public Works Department', code: 'PWD' }] }))
-    .mockResolvedValueOnce(response({ success: true, data: [{ id: 'jur', name: 'Pune Division', type: 'DIVISION' }] }));
+    .mockResolvedValueOnce(response({ success: true, data: [{ id: 'jur', name: 'Pune Division', type: 'DIVISION' }] }))
+    .mockResolvedValueOnce(response({ success: true, data: [] }));
 }
 async function submitLogin() {
   fireEvent.change(screen.getByLabelText(/organizational email/i), { target: { value: 'rahul@example.test' } });
   fireEvent.change(screen.getByLabelText('Password'), { target: { value: 'password' } });
   fireEvent.click(screen.getByRole('button', { name: /sign in securely/i }));
-  await screen.findByRole('heading', { name: 'Dashboard' });
+  await screen.findByRole('heading', { name: 'Operational overview' });
 }
 
 afterEach(() => vi.unstubAllGlobals());
@@ -25,7 +26,7 @@ describe('authenticated application', () => {
   it('starts unauthenticated with no restored session', () => {
     render(<App />);
     expect(screen.getByRole('heading', { name: /infrastructure decision/i })).toBeInTheDocument();
-    expect(screen.queryByRole('heading', { name: 'Dashboard' })).not.toBeInTheDocument();
+    expect(screen.queryByRole('heading', { name: 'Operational overview' })).not.toBeInTheDocument();
   });
   it('validates identity with auth/me, renders organization, and logs out', async () => {
     const fetchMock = successfulLoginFetch(); vi.stubGlobal('fetch', fetchMock);
@@ -42,7 +43,7 @@ describe('authenticated application', () => {
     render(<App />);
     fireEvent.change(screen.getByLabelText(/organizational email/i), { target: { value: 'a@b.test' } }); fireEvent.change(screen.getByLabelText('Password'), { target: { value: 'password' } }); fireEvent.click(screen.getByRole('button', { name: /sign in/i }));
     expect(await screen.findByText('Invalid email or password.')).toBeInTheDocument();
-    expect(screen.queryByRole('heading', { name: 'Dashboard' })).not.toBeInTheDocument();
+    expect(screen.queryByRole('heading', { name: 'Operational overview' })).not.toBeInTheDocument();
   });
   it('clears an authenticated session after a 401 and shows one safe message', async () => {
     const fetchMock = successfulLoginFetch(); vi.stubGlobal('fetch', fetchMock);
