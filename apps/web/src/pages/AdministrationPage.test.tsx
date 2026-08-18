@@ -4,8 +4,13 @@ import AdministrationPage from './AdministrationPage';
 import { AuthContext, type AuthContextValue } from '../auth/AuthProvider';
 
 const department = { id: 'd', name: 'Public Works', code: 'PWD', createdAt: '2026' };
+const roadsDepartment = { id: 'd2', name: 'Roads', code: 'RD', createdAt: '2026' };
 const jurisdiction = {
   id: 'j', name: 'Pune', type: 'DIVISION', departmentId: 'd', createdAt: '2026', department,
+};
+const roadsJurisdiction = {
+  id: 'j2', name: 'Mumbai', type: 'DIVISION', departmentId: 'd2', createdAt: '2026',
+  department: roadsDepartment,
 };
 const user = {
   id: 'u', name: 'Officer', designation: 'Engineer', employeeCode: 'E', email: 'u@test',
@@ -21,8 +26,8 @@ const authValue: AuthContextValue = {
 function show() {
   const fetchMock = vi.fn(async (url: string, init?: RequestInit) => {
     if (init?.method === 'POST') return ok({ id: 'new' });
-    if (url.endsWith('/departments')) return ok([department]);
-    if (url.endsWith('/jurisdictions')) return ok([jurisdiction]);
+    if (url.endsWith('/departments')) return ok([department, roadsDepartment]);
+    if (url.endsWith('/jurisdictions')) return ok([jurisdiction, roadsJurisdiction]);
     if (url.endsWith('/users')) return ok([user]);
     return ok([]);
   });
@@ -58,5 +63,17 @@ describe('Administration', () => {
     }
     expect(screen.getAllByText(/Public Works/).length).toBeGreaterThan(0);
     expect(screen.queryByRole('button', { name: /delete|edit|revoke/i })).not.toBeInTheDocument();
+  });
+
+  it('limits jurisdiction choices to the selected department', async () => {
+    show();
+    await screen.findByText('Public Works');
+    fireEvent.click(screen.getByRole('button', { name: 'Assets' }));
+    const jurisdictionSelect = screen.getByLabelText('Jurisdiction');
+    expect(jurisdictionSelect).toBeDisabled();
+    fireEvent.change(screen.getByLabelText('Department'), { target: { value: 'd' } });
+    expect(jurisdictionSelect).toBeEnabled();
+    expect(screen.getByRole('option', { name: 'Pune' })).toBeInTheDocument();
+    expect(screen.queryByRole('option', { name: 'Mumbai' })).not.toBeInTheDocument();
   });
 });

@@ -1,7 +1,7 @@
 import { apiRequest } from './client';
 import type { PriorityLevel, RiskLevel } from './cases.api';
 
-export interface SafeActor { name: string; designation: string; }
+export interface SafeActor { id: string; name: string; designation: string; }
 export interface InspectionDto {
   id: string; inspectionDate: string; structuralCondition: string; crackSeverity: string; corrosionLevel: string;
   trafficImportance: string; hospitalRoute: boolean; weatherRisk: string; heavyRainExpected: boolean;
