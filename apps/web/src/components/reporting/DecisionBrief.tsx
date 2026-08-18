@@ -5,9 +5,9 @@ import { ErrorState, Loading } from '../AsyncState';
 import StatusBadge, { humanize } from '../StatusBadge';
 import { formatDate } from '../../pages/CasesPage';
 
-export default function DecisionBrief({ caseId }: { caseId: string }) {
+export default function DecisionBrief({ caseId, refreshKey = 0 }: { caseId: string; refreshKey?: number }) {
   const { token } = useAuth(); const [brief, setBrief] = useState<DecisionBriefDto | null>(null); const [error, setError] = useState<unknown>(null); const [loading, setLoading] = useState(true); const [reload, setReload] = useState(0);
-  useEffect(() => { if (!token) return; const controller = new AbortController(); setLoading(true); setError(null); getDecisionBrief(caseId, token, controller.signal).then(setBrief).catch((reason) => { if (!controller.signal.aborted) setError(reason); }).finally(() => { if (!controller.signal.aborted) setLoading(false); }); return () => controller.abort(); }, [caseId, reload, token]);
+  useEffect(() => { if (!token) return; const controller = new AbortController(); setLoading(true); setError(null); getDecisionBrief(caseId, token, controller.signal).then(setBrief).catch((reason) => { if (!controller.signal.aborted) setError(reason); }).finally(() => { if (!controller.signal.aborted) setLoading(false); }); return () => controller.abort(); }, [caseId, refreshKey, reload, token]);
   if (loading) return <div aria-busy="true"><Loading label="decision brief" /></div>;
   if (error) return <ErrorState error={error} retry={() => setReload((v) => v + 1)} />;
   if (!brief) return null;

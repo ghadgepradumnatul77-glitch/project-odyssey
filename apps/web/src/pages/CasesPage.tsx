@@ -34,7 +34,8 @@ export default function CasesPage() {
       .sort((a, b) => sort === 'priority' ? (priorityOrder[b.priorityLevel ?? ''] ?? 0) - (priorityOrder[a.priorityLevel ?? ''] ?? 0) || a.caseNumber.localeCompare(b.caseNumber) : sort === 'created' ? Date.parse(b.createdAt) - Date.parse(a.createdAt) : a.caseNumber.localeCompare(b.caseNumber));
   }, [cases, department, emergency, jurisdiction, priority, risk, search, sort, status]);
   const clear = () => { setSearch(''); setStatus(''); setRisk(''); setPriority(''); setEmergency(''); setDepartment(''); setJurisdiction(''); setSort('priority'); };
-  if (selected) return <CaseWorkspace caseItem={selected} onBack={() => setSelected(null)} />;
+  async function refreshSelectedCase() { if (!token || !selected) return; const authoritative = await listCases(token); setCases(authoritative); setSelected(authoritative.find((item) => item.id === selected.id) ?? null); }
+  if (selected) return <CaseWorkspace caseItem={selected} onBack={() => setSelected(null)} onCaseRefresh={refreshSelectedCase} />;
   const departments = [...new Map(cases.map((item) => [item.asset.department.id, item.asset.department])).values()];
   const jurisdictions = [...new Map(cases.map((item) => [item.asset.jurisdiction.id, item.asset.jurisdiction])).values()];
 
