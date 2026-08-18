@@ -2,7 +2,9 @@ import { isApiClientError } from '../api/errors';
 
 export function safeErrorMessage(error: unknown) {
   if (!isApiClientError(error)) return 'This data is currently unavailable.';
-  if (error.status === 403) return 'You do not have authority to view this resource.';
+  if (error.code === 'REPORTING_DATA_INTEGRITY_ERROR') return 'The authoritative workflow record could not be presented because related records are inconsistent.';
+  if (error.code === 'INVALID_INPUT') return 'The requested reporting page could not be loaded. Refresh and try again.';
+  if (error.status === 403) return 'You do not have authority to view this information.';
   if (error.status === 404) return 'Case unavailable or no longer accessible.';
   if (error.status === 409) return 'This information changed during the workflow. Refresh and try again.';
   if (error.kind === 'network') return 'The service could not be reached. Check your connection and retry.';

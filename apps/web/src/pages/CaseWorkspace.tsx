@@ -5,9 +5,11 @@ import { useAuth } from '../auth/useAuth';
 import { Empty, ErrorState, Loading } from '../components/AsyncState';
 import StatusBadge, { humanize } from '../components/StatusBadge';
 import { formatDate } from './CasesPage';
+import DecisionBrief from '../components/reporting/DecisionBrief';
+import CaseTimeline from '../components/reporting/CaseTimeline';
 
-type Tab = 'overview' | 'inspection' | 'risk' | 'response' | 'execution';
-const tabs: Array<{ id: Tab; label: string }> = [{ id: 'overview', label: 'Overview' }, { id: 'inspection', label: 'Inspection' }, { id: 'risk', label: 'Risk' }, { id: 'response', label: 'Response & Decision' }, { id: 'execution', label: 'Execution' }];
+type Tab = 'overview' | 'inspection' | 'risk' | 'response' | 'execution' | 'brief' | 'timeline';
+const tabs: Array<{ id: Tab; label: string }> = [{ id: 'overview', label: 'Overview' }, { id: 'inspection', label: 'Inspection' }, { id: 'risk', label: 'Risk' }, { id: 'response', label: 'Response & Decision' }, { id: 'execution', label: 'Execution' }, { id: 'brief', label: 'Decision Brief' }, { id: 'timeline', label: 'Timeline' }];
 
 export default function CaseWorkspace({ caseItem, onBack }: { caseItem: CaseSummary; onBack(): void }) {
   const [tab, setTab] = useState<Tab>('overview');
@@ -16,7 +18,7 @@ export default function CaseWorkspace({ caseItem, onBack }: { caseItem: CaseSumm
     <div className="case-workspace-header"><div><p className="eyebrow">CASE WORKSPACE</p><h1 id="workspace-heading">{caseItem.caseNumber}</h1><p className="workspace-title">{caseItem.title}</p></div><div className="header-badges"><StatusBadge value={caseItem.status} /><StatusBadge value={caseItem.priorityLevel} kind="priority" />{caseItem.emergencyFlag && <span className="emergency-marker">Emergency case</span>}</div></div>
     <p className="case-context"><strong>{caseItem.asset.name}</strong> · {caseItem.asset.assetCode} · {caseItem.asset.department.name} · {caseItem.asset.jurisdiction.name}</p>
     <nav className="workspace-tabs" aria-label="Case workspace sections">{tabs.map((item) => <button key={item.id} aria-current={tab === item.id ? 'page' : undefined} className={tab === item.id ? 'active' : ''} onClick={() => setTab(item.id)}>{item.label}</button>)}</nav>
-    <div className="workspace-section">{tab === 'overview' && <Overview item={caseItem} />}{tab === 'inspection' && <InspectionHistory caseId={caseItem.id} />}{tab === 'risk' && <RiskHistory caseId={caseItem.id} />}{tab === 'response' && <ResponseHistory caseId={caseItem.id} />}{tab === 'execution' && <ExecutionHistory caseId={caseItem.id} />}</div>
+    <div className="workspace-section">{tab === 'overview' && <Overview item={caseItem} />}{tab === 'inspection' && <InspectionHistory caseId={caseItem.id} />}{tab === 'risk' && <RiskHistory caseId={caseItem.id} />}{tab === 'response' && <ResponseHistory caseId={caseItem.id} />}{tab === 'execution' && <ExecutionHistory caseId={caseItem.id} />}{tab === 'brief' && <DecisionBrief caseId={caseItem.id} />}{tab === 'timeline' && <CaseTimeline caseId={caseItem.id} />}</div>
   </section>;
 }
 
