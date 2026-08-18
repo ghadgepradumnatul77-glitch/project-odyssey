@@ -1,0 +1,15 @@
+import { fireEvent, render, screen } from '@testing-library/react';
+import { describe, expect, it, vi } from 'vitest';
+import { ApiClientError } from '../api/errors';
+import { AuthContext, type AuthContextValue } from '../auth/AuthProvider';
+import LoginPage from './LoginPage';
+function renderLogin(overrides: Partial<AuthContextValue> = {}) {
+  const value: AuthContextValue = { user: null, token: null, organization: null, isAuthenticated: false, authStatus: 'unauthenticated', sessionMessage: null, login: vi.fn(), logout: vi.fn(), ...overrides };
+  render(<AuthContext.Provider value={value}><LoginPage /></AuthContext.Provider>); return value;
+}
+describe('Login page', () => {
+  it('renders labeled fields and validates empty submission', () => { renderLogin(); expect(screen.getByLabelText(/organizational email/i)).toHaveAttribute('type', 'email'); expect(screen.getByLabelText('Password')).toHaveAttribute('type', 'password'); fireEvent.click(screen.getByRole('button', { name: /sign in securely/i })); expect(screen.getByRole('alert')).toHaveTextContent('Email and password are required.'); });
+  it('submits entered credentials', async () => { const value = renderLogin(); fireEvent.change(screen.getByLabelText(/organizational email/i), { target: { value: ' user@test ' } }); fireEvent.change(screen.getByLabelText('Password'), { target: { value: 'password' } }); fireEvent.submit(screen.getByRole('button', { name: /sign in securely/i }).closest('form')!); expect(value.login).toHaveBeenCalledWith('user@test', 'password'); });
+  it.each([[401, 'Invalid email or password.'], [429, 'Too many login attempts. Please wait before trying again.']])('maps HTTP %s safely', async (status, message) => { const login = vi.fn().mockRejectedValue(new ApiClientError('backend text', 'api', status as number, 'ERROR')); renderLogin({ login }); fireEvent.change(screen.getByLabelText(/organizational email/i), { target: { value: 'user@test' } }); fireEvent.change(screen.getByLabelText('Password'), { target: { value: 'password' } }); fireEvent.click(screen.getByRole('button', { name: /sign in securely/i })); expect(await screen.findByText(message as string)).toBeInTheDocument(); });
+  it('disables fields and announces progress while authenticating', () => { renderLogin({ authStatus: 'authenticating' }); expect(screen.getByRole('button', { name: /signing in/i })).toBeDisabled(); expect(screen.getByLabelText('Password')).toBeDisabled(); });
+});

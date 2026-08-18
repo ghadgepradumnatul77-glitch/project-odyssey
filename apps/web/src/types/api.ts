@@ -14,3 +14,18 @@ export interface ApiErrorEnvelope {
 }
 
 export type ApiResponse<T> = ApiSuccess<T> | ApiErrorEnvelope;
+
+export type SystemRole = 'OFFICER' | 'AUDITOR' | 'POLICY_ADMIN' | 'SYSTEM_ADMIN';
+export type UserStatus = 'ACTIVE' | 'INACTIVE';
+
+export interface SafeUser {
+  id: string;
+  employeeCode: string;
+  name: string;
+  email: string;
+  designation: string;
+  role: SystemRole;
+  status: UserStatus;
+  departmentId: string;
+  jurisdictionId: string;
+}

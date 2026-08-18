@@ -8,6 +8,16 @@ export interface ApiRequestOptions extends Omit<RequestInit, 'body' | 'headers'>
   headers?: HeadersInit;
 }
 
+type UnauthorizedHandler = () => void;
+let unauthorizedHandler: UnauthorizedHandler | null = null;
+
+export function setUnauthorizedHandler(handler: UnauthorizedHandler | null): () => void {
+  unauthorizedHandler = handler;
+  return () => {
+    if (unauthorizedHandler === handler) unauthorizedHandler = null;
+  };
+}
+
 function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === 'object' && value !== null;
 }
@@ -47,6 +57,7 @@ export async function apiRequest<T>(path: string, options: ApiRequestOptions = {
     throw new ApiClientError('The Odyssey API could not be reached.', 'network', null, 'NETWORK_ERROR');
   }
 
+  if (response.status === 401 && accessToken) unauthorizedHandler?.();
   const payload = await parseJson(response);
   if (response.ok && isSuccess<T>(payload)) return payload.data;
   if (isErrorEnvelope(payload)) {
