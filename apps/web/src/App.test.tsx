@@ -25,7 +25,7 @@ afterEach(() => vi.unstubAllGlobals());
 describe('authenticated application', () => {
   it('starts unauthenticated with no restored session', () => {
     render(<App />);
-    expect(screen.getByRole('heading', { name: /infrastructure decision/i })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /public infrastructure decision intelligence/i })).toBeInTheDocument();
     expect(screen.queryByRole('heading', { name: 'Operational overview' })).not.toBeInTheDocument();
   });
   it('validates identity with auth/me, renders organization, and logs out', async () => {
@@ -34,9 +34,11 @@ describe('authenticated application', () => {
     expect(fetchMock.mock.calls[1][0]).toContain('/auth/me');
     expect((fetchMock.mock.calls[1][1].headers as Headers).get('Authorization')).toBe('Bearer secret-token');
     expect(screen.getByText('Rahul Patil')).toBeInTheDocument();
-    expect(screen.getByText(/Public Works Department/)).toHaveTextContent('Pune Division');
+    expect(screen.getByText('JanSeva IntelliGov')).toBeInTheDocument();
+    expect(screen.getByText('Decision Intelligence for Explainable & Accountable Public Infrastructure')).toBeInTheDocument();
+    expect(screen.getAllByText(/Public Works Department/).find((node) => node.textContent?.includes('Pune Division'))).toBeTruthy();
     fireEvent.click(screen.getByRole('button', { name: /log out/i }));
-    expect(screen.getByRole('heading', { name: /infrastructure decision/i })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /public infrastructure decision intelligence/i })).toBeInTheDocument();
   });
   it('does not authenticate when auth/me fails', async () => {
     vi.stubGlobal('fetch', vi.fn().mockResolvedValueOnce(response({ success: true, data: { accessToken: 'token', tokenType: 'Bearer', expiresIn: 900, user } })).mockResolvedValueOnce(response({ success: false, error: { code: 'INVALID_TOKEN', message: 'Expired.' } }, 401)));

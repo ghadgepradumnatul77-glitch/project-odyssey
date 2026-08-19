@@ -25,18 +25,21 @@ describe('Decision Brief projection', () => {
   });
   it('uses the execution relationship chain and returns privacy-safe persisted projections', async () => {
     const inspection = { id: 'inspection-linked', caseId: 'case', inspectionDate: date, structuralCondition: 'POOR', crackSeverity: 'SEVERE', corrosionLevel: 'MODERATE', trafficImportance: 'HIGH', hospitalRoute: true, weatherRisk: 'HIGH', heavyRainExpected: true, estimatedDailyUsers: 42000, createdAt: date, inspector: actor };
-    const risk = { id: 'risk-linked', caseId: 'case', inspectionId: inspection.id, riskScore: 77, riskLevel: 'VERY_HIGH', priorityLevel: 'CRITICAL', reasonCodes: ['POLICY_R002'], reasons: ['Persisted risk reason'], assessmentVersion: 'ODYSSEY_RISK_V1', createdAt: date, inspection };
-    const orp: any = { id: 'orp-linked', caseId: 'case', riskAssessmentId: risk.id, versionNumber: 1, status: 'APPROVED', urgency: 'IMMEDIATE', recommendedActionCodes: ['ACT_TEMP_STABILIZATION'], temporaryMeasures: ['Persisted measure'], alternativeActionCodes: [], reasons: ['Persisted ORP reason'], planVersion: 'ODYSSEY_ORP_V1', createdAt: date, riskAssessment: risk, decisions: [] };
+    const risk = { id: 'risk-linked', caseId: 'case', inspectionId: inspection.id, riskScore: 77, riskLevel: 'VERY_HIGH', priorityLevel: 'CRITICAL', reasonCodes: ['POLICY_R002'], reasons: [{ reasonCode: 'POLICY_R002', message: 'Persisted risk reason', internal: 'not exposed' }], assessmentVersion: 'ODYSSEY_RISK_V1', createdAt: date, inspection };
+    const orp: any = { id: 'orp-linked', caseId: 'case', riskAssessmentId: risk.id, versionNumber: 1, status: 'APPROVED', urgency: 'IMMEDIATE', recommendedActionCodes: ['ACT_TEMP_STABILIZATION'], temporaryMeasures: ['Persisted measure'], alternativeActionCodes: [], reasons: [{ reasonCode: 'ORP_RULE_A002', message: 'Persisted ORP reason', internal: 'not exposed' }], planVersion: 'ODYSSEY_ORP_V1', createdAt: date, riskAssessment: risk, decisions: [] };
     const decision = { id: 'decision', caseId: 'case', orpId: orp.id, decisionType: 'APPROVED', reason: 'Approved', remarks: null, createdAt: date, reviewer: actor };
     orp.decisions = [decision];
     const tasks = [{ id: 'task', isMandatory: true, status: ExecutionTaskStatus.VERIFIED, assignedTo: actor, completionSubmittedBy: actor, verifiedBy: { id: 'u2', name: 'Verifier', designation: 'Engineer' }, evidence: [{ evidenceType: 'PHOTO_REFERENCE' }] }];
     const plan = { id: 'plan', caseId: 'case', orpId: orp.id, approvalDecisionId: decision.id, status: 'COMPLETED', templateVersion: 'V1', createdAt: date, startedAt: date, completedAt: date, approvalDecision: decision, orp, tasks };
-    mocks.caseFindFirst.mockResolvedValue({ ...baseCase(), status: 'VERIFICATION', executionPlans: [plan], operationalResponsePlans: [{ ...orp, id: 'newer-unrelated' }], riskAssessments: [], inspections: [] });
+    const closure = { id: 'closure', caseId: 'case', executionPlanId: plan.id, closureReason: 'EXECUTION_VERIFIED', closureSummary: 'Verified workflow complete', createdAt: date, closedBy: actor, executionPlan: plan };
+    mocks.caseFindFirst.mockResolvedValue({ ...baseCase(), status: 'CLOSED', closedAt: date, closure, executionPlans: [plan], operationalResponsePlans: [{ ...orp, id: 'newer-unrelated' }], riskAssessments: [], inspections: [] });
     const brief = await getDecisionBrief('case', principal);
     expect(brief.orp?.id).toBe('orp-linked');
-    expect(brief.risk?.reasons).toEqual(['Persisted risk reason']);
+    expect(brief.risk?.reasons).toEqual([{ code: 'POLICY_R002', message: 'Persisted risk reason' }]);
+    expect(brief.orp?.reasons).toEqual([{ code: 'ORP_RULE_A002', message: 'Persisted ORP reason' }]);
     expect(brief.execution?.metrics.completionPercentage).toBe(100);
     expect(brief.evidence).toEqual({ totalEvidence: 1, countsByType: { PHOTO_REFERENCE: 1 } });
+    expect(brief.closure).toMatchObject({ id: 'closure', closureSummary: 'Verified workflow complete' });
     expect(JSON.stringify(brief)).not.toMatch(/email|employeeCode|passwordHash|referenceUrl|measurementData|authorityGrant/i);
   });
   it('projects the selected ORP human decision before execution planning', async () => {
@@ -60,5 +63,15 @@ describe('Decision Brief projection', () => {
   it('computes mandatory-only completion metrics and handles zero mandatory tasks', () => {
     expect(executionMetrics([{ isMandatory: true, status: ExecutionTaskStatus.VERIFIED, evidence: [{}] }, { isMandatory: true, status: ExecutionTaskStatus.PENDING, evidence: [] }, { isMandatory: false, status: ExecutionTaskStatus.CANCELLED, evidence: [] }])).toMatchObject({ mandatoryTasks: 2, verifiedMandatoryTasks: 1, optionalTasks: 1, terminalOptionalTasks: 1, completionPercentage: 50, evidenceCount: 1 });
     expect(executionMetrics([{ isMandatory: false, status: ExecutionTaskStatus.VERIFIED, evidence: [] }]).completionPercentage).toBeNull();
+  });
+  it('supports empty and legacy string reasons but rejects malformed structured reasons', async () => {
+    const inspection: any = { id: 'i', caseId: 'case', inspectionDate: date, structuralCondition: 'GOOD', crackSeverity: 'NONE', corrosionLevel: 'NONE', trafficImportance: 'LOW', hospitalRoute: false, weatherRisk: 'LOW', heavyRainExpected: false, estimatedDailyUsers: 1, createdAt: date, inspector: actor };
+    const risk: any = { id: 'r', caseId: 'case', inspectionId: 'i', riskScore: 1, riskLevel: 'LOW', priorityLevel: 'LOW', reasonCodes: [], reasons: ['Legacy reason'], assessmentVersion: 'v', createdAt: date, inspection };
+    mocks.caseFindFirst.mockResolvedValue({ ...baseCase(), riskAssessments: [risk] });
+    expect((await getDecisionBrief('case', principal)).risk?.reasons).toEqual([{ code: null, message: 'Legacy reason' }]);
+    risk.reasons = [];
+    expect((await getDecisionBrief('case', principal)).risk?.reasons).toEqual([]);
+    risk.reasons = [{ reasonCode: 'R1', message: 42 }];
+    await expect(getDecisionBrief('case', principal)).rejects.toMatchObject({ code: 'REPORTING_DATA_INTEGRITY_ERROR' });
   });
 });

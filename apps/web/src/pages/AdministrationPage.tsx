@@ -11,12 +11,13 @@ import { MutationFeedback } from '../components/workflow/MutationFeedback';
 import type { PriorityLevel } from '../api/cases.api';
 import type { SystemRole } from '../types/api';
 
-type Tab = 'Departments' | 'Jurisdictions' | 'Assets' | 'Users' | 'Approval Authorities';
-const tabs: Tab[] = ['Departments', 'Jurisdictions', 'Assets', 'Users', 'Approval Authorities'];
+export type AdminTab = 'Departments' | 'Jurisdictions' | 'Assets' | 'Users' | 'Approval Authorities';
+const tabs: AdminTab[] = ['Departments', 'Jurisdictions', 'Assets', 'Users', 'Approval Authorities'];
 
-export default function AdministrationPage() {
+export default function AdministrationPage({ initialTab = 'Departments' }: { initialTab?: AdminTab }) {
   const { token } = useAuth();
-  const [tab, setTab] = useState<Tab>('Departments');
+  const [tab, setTab] = useState<AdminTab>(initialTab);
+  const [search, setSearch] = useState('');
   const [departments, setDepartments] = useState<DepartmentDto[]>([]);
   const [jurisdictions, setJurisdictions] = useState<JurisdictionDto[]>([]);
   const [assets, setAssets] = useState<AssetDto[]>([]);
@@ -28,6 +29,8 @@ export default function AdministrationPage() {
   const [success, setSuccess] = useState<string | null>(null);
   const [sending, setSending] = useState(false);
   const [reload, setReload] = useState(0);
+
+  useEffect(() => { setTab(initialTab); setSearch(''); }, [initialTab]);
 
   useEffect(() => {
     if (!token) return;
@@ -103,31 +106,36 @@ export default function AdministrationPage() {
   if (error) return <ErrorState error={error} retry={() => setReload((current) => current + 1)} />;
   const rows = tab === 'Departments' ? departments : tab === 'Jurisdictions' ? jurisdictions
     : tab === 'Assets' ? assets : tab === 'Users' ? users : authorities;
+  const needle = search.trim().toLowerCase();
+  const filteredRows = rows.filter((row) => !needle || recordSearchText(tab, row).includes(needle));
 
   return <section aria-labelledby="administration-heading">
     <p className="eyebrow">SYSTEM ADMINISTRATION</p>
     <h1 id="administration-heading">Administration</h1>
-    <p className="summary">Registry management is separate from operational workflow authority.</p>
+    <p className="summary">Manage organizational registries and authority configuration.</p>
     <nav className="admin-tabs" aria-label="Administration resources">
       {tabs.map((item) => <button type="button" className={tab === item ? 'active' : ''}
         aria-current={tab === item ? 'page' : undefined}
-        onClick={() => { setTab(item); setMutationError(null); setSuccess(null); }} key={item}>{item}</button>)}
+        onClick={() => { setTab(item); setSearch(''); setMutationError(null); setSuccess(null); }} key={item}>{item}</button>)}
     </nav>
-    <form className="workflow-form admin-form" onSubmit={submit} aria-busy={sending}>
-      <h2>Create {tab}</h2>
-      <Fields tab={tab} departments={departments} jurisdictions={jurisdictions} users={users} />
-      <button className="primary-button" disabled={sending}>{sending ? 'Creating…' : 'Create record'}</button>
-    </form>
     <MutationFeedback error={mutationError} success={success} />
-    <h2>{tab}</h2>
-    {rows.length ? <div className="admin-list">{rows.map((row) =>
-      <AdminRecord key={row.id} tab={tab} row={row} />)}</div> :
-      <Empty>{`No ${tab.toLowerCase()} records are available.`}</Empty>}
+    <div className="admin-workbench"><section className="admin-registry" aria-labelledby="registry-heading">
+      <div className="admin-register-heading"><div><p className="section-label">PERSISTED REGISTRY</p><h2 id="registry-heading">{tab}</h2></div></div>
+      <label className="admin-search">Search {tab.toLowerCase()}<input type="search" value={search}
+        onChange={(event) => setSearch(event.target.value)} placeholder="Filter current records" /></label>
+      {filteredRows.length ? <div className="admin-list">{filteredRows.map((row) =>
+        <AdminRecord key={row.id} tab={tab} row={row} />)}</div> :
+        <Empty>{rows.length ? `No ${tab.toLowerCase()} match this search.` : `No ${tab.toLowerCase()} records are available.`}</Empty>}
+    </section><aside className="admin-create-panel"><p className="section-label">ADMINISTRATIVE ACTION</p>
+      <form className="workflow-form admin-form" onSubmit={submit} aria-busy={sending}>
+        <h2>Create {tab}</h2><Fields tab={tab} departments={departments} jurisdictions={jurisdictions} users={users} />
+        <button className="primary-button" disabled={sending}>{sending ? 'Creating…' : 'Create record'}</button>
+      </form></aside></div>
   </section>;
 }
 
 function Fields({ tab, departments, jurisdictions, users }: {
-  tab: Tab; departments: DepartmentDto[]; jurisdictions: JurisdictionDto[]; users: AdminUserDto[];
+  tab: AdminTab; departments: DepartmentDto[]; jurisdictions: JurisdictionDto[]; users: AdminUserDto[];
 }) {
   const [departmentId, setDepartmentId] = useState('');
   useEffect(() => setDepartmentId(''), [tab]);
@@ -177,7 +185,7 @@ function Fields({ tab, departments, jurisdictions, users }: {
     <label>Valid until<input name="validUntil" type="datetime-local" /></label></>;
 }
 
-function AdminRecord({ tab, row }: { tab: Tab; row: DepartmentDto | JurisdictionDto | AssetDto | AdminUserDto | AuthorityDto }) {
+function AdminRecord({ tab, row }: { tab: AdminTab; row: DepartmentDto | JurisdictionDto | AssetDto | AdminUserDto | AuthorityDto }) {
   let title: ReactNode; let detail: ReactNode;
   if (tab === 'Departments') { const item = row as DepartmentDto; title = item.name; detail = item.code; }
   else if (tab === 'Jurisdictions') { const item = row as JurisdictionDto; title = item.name; detail = item.type; }
@@ -185,6 +193,14 @@ function AdminRecord({ tab, row }: { tab: Tab; row: DepartmentDto | Jurisdiction
   else if (tab === 'Users') { const item = row as AdminUserDto; title = item.name; detail = `${item.designation} · ${item.role}`; }
   else { const item = row as AuthorityDto; title = item.user.name; detail = permissionText(item); }
   return <article><strong>{title}</strong><span>{detail}</span></article>;
+}
+
+function recordSearchText(tab: AdminTab, row: DepartmentDto | JurisdictionDto | AssetDto | AdminUserDto | AuthorityDto) {
+  if (tab === 'Departments') { const item = row as DepartmentDto; return `${item.name} ${item.code}`.toLowerCase(); }
+  if (tab === 'Jurisdictions') { const item = row as JurisdictionDto; return `${item.name} ${item.type} ${item.department.name}`.toLowerCase(); }
+  if (tab === 'Assets') { const item = row as AssetDto; return `${item.name} ${item.assetCode} ${item.assetType} ${item.department.name} ${item.jurisdiction.name}`.toLowerCase(); }
+  if (tab === 'Users') { const item = row as AdminUserDto; return `${item.name} ${item.employeeCode} ${item.designation} ${item.role} ${item.status}`.toLowerCase(); }
+  const item = row as AuthorityDto; return `${item.user.name} ${item.user.designation} ${item.department.name} ${item.jurisdiction.name} ${permissionText(item)}`.toLowerCase();
 }
 
 function permissionText(authority: AuthorityDto) {

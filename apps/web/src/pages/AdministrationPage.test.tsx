@@ -76,4 +76,14 @@ describe('Administration', () => {
     expect(screen.getByRole('option', { name: 'Pune' })).toBeInTheDocument();
     expect(screen.queryByRole('option', { name: 'Mumbai' })).not.toBeInTheDocument();
   });
+
+  it('filters the current persisted registry without changing server data', async () => {
+    show();
+    await screen.findByText('Public Works');
+    fireEvent.change(screen.getByLabelText('Search departments'), { target: { value: 'PWD' } });
+    expect(screen.getByText('Public Works')).toBeInTheDocument();
+    expect(screen.queryByText('Roads')).not.toBeInTheDocument();
+    fireEvent.change(screen.getByLabelText('Search departments'), { target: { value: 'missing' } });
+    expect(screen.getByText(/No departments match this search/)).toBeInTheDocument();
+  });
 });

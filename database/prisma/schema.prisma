@@ -96,6 +96,57 @@ enum CaseClosureReason {
   EXECUTION_VERIFIED
 }
 
+enum PublicReportStatus {
+  SUBMITTED
+  UNDER_REVIEW
+  ACCEPTED
+  REJECTED
+}
+
+enum PublicReportCategory {
+  ROAD_DAMAGE
+  BRIDGE_OR_FLYOVER
+  WATERLOGGING
+  STREETLIGHT
+  DRAINAGE
+  PUBLIC_BUILDING
+  OTHER
+}
+
+enum PublicReportTriageUrgency {
+  LOW
+  MODERATE
+  HIGH
+  URGENT
+}
+
+enum RegistryLifecycleStatus {
+  DRAFT
+  VALIDATION
+  APPROVED
+  ACTIVE
+  SUPERSEDED
+  ARCHIVED
+}
+
+enum PolicyValidationState {
+  NOT_VALIDATED
+  VALIDATED
+  REJECTED
+}
+
+enum EnforcementClassification {
+  MANDATORY
+  RECOMMENDED
+  OPTIONAL
+  PROHIBITED
+}
+
+enum DecisionPackageStatus {
+  PREPARED
+  SUPERSEDED
+}
+
 model Department {
   id                  String              @id @default(uuid())
   name                String
@@ -104,6 +155,9 @@ model Department {
   assets              Asset[]
   jurisdictions       Jurisdiction[]
   approvalAuthorities ApprovalAuthority[]
+  publicReports       PublicReport[]
+  policyDocuments     PolicyDocument[]
+  approvedActions     ApprovedActionVersion[]
   createdAt           DateTime            @default(now())
 }
 
@@ -116,6 +170,9 @@ model Jurisdiction {
   users               User[]
   assets              Asset[]
   approvalAuthorities ApprovalAuthority[]
+  publicReports       PublicReport[]
+  policyDocuments     PolicyDocument[]
+  approvedActions     ApprovedActionVersion[]
   createdAt           DateTime            @default(now())
 
   @@index([departmentId])
@@ -139,16 +196,24 @@ model User {
 
   inspections                Inspection[]
   approvalAuthorities        ApprovalAuthority[]
-  reviewedOrpDecisions       OrpDecision[]       @relation("DecisionReviewer")
-  forwardedOrpDecisions      OrpDecision[]       @relation("DecisionForwardedUser")
-  createdExecutionPlans      ExecutionPlan[]     @relation("ExecutionPlanCreator")
-  assignedExecutionTasks     ExecutionTask[]     @relation("ExecutionTaskAssignee")
-  assignedByExecutionTasks   ExecutionTask[]     @relation("ExecutionTaskAssigner")
-  completedExecutionTasks    ExecutionTask[]     @relation("ExecutionTaskCompleter")
-  verifiedExecutionTasks     ExecutionTask[]     @relation("ExecutionTaskVerifier")
-  cancelledExecutionTasks    ExecutionTask[]     @relation("ExecutionTaskCanceller")
+  reviewedOrpDecisions       OrpDecision[]                @relation("DecisionReviewer")
+  forwardedOrpDecisions      OrpDecision[]                @relation("DecisionForwardedUser")
+  createdExecutionPlans      ExecutionPlan[]              @relation("ExecutionPlanCreator")
+  assignedExecutionTasks     ExecutionTask[]              @relation("ExecutionTaskAssignee")
+  assignedByExecutionTasks   ExecutionTask[]              @relation("ExecutionTaskAssigner")
+  completedExecutionTasks    ExecutionTask[]              @relation("ExecutionTaskCompleter")
+  verifiedExecutionTasks     ExecutionTask[]              @relation("ExecutionTaskVerifier")
+  cancelledExecutionTasks    ExecutionTask[]              @relation("ExecutionTaskCanceller")
   submittedExecutionEvidence ExecutionEvidence[]
-  closedCases                CaseClosure[]       @relation("CaseClosureCloser")
+  closedCases                CaseClosure[]                @relation("CaseClosureCloser")
+  reviewedPublicReports      PublicReport[]               @relation("PublicReportReviewer")
+  decidedPublicReports       PublicReport[]               @relation("PublicReportDecisionActor")
+  createdTriageAnalyses      PublicReportTriageAnalysis[]
+  createdPolicyDocuments     PolicyDocument[]              @relation("PolicyDocumentCreator")
+  approvedPolicyDocuments    PolicyDocument[]              @relation("PolicyDocumentApprover")
+  createdApprovedActions     ApprovedActionVersion[]        @relation("ApprovedActionCreator")
+  approvedApprovedActions    ApprovedActionVersion[]        @relation("ApprovedActionApprover")
+  preparedDecisionPackages   DecisionPackage[]               @relation("DecisionPackagePreparer")
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -177,7 +242,9 @@ model Asset {
   department   Department   @relation(fields: [departmentId], references: [id])
   jurisdiction Jurisdiction @relation(fields: [jurisdictionId], references: [id])
 
-  cases Case[]
+  cases                      Case[]
+  publicReports              PublicReport[]
+  suggestedForTriageAnalyses PublicReportTriageAnalysis[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -185,6 +252,161 @@ model Asset {
   @@index([departmentId])
   @@index([jurisdictionId])
   @@index([assetType])
+}
+
+model PublicReport {
+  id              String                       @id @default(uuid())
+  reportNumber    String                       @unique
+  title           String
+  description     String
+  category        PublicReportCategory
+  locationText    String
+  latitude        Decimal?                     @db.Decimal(9, 6)
+  longitude       Decimal?                     @db.Decimal(9, 6)
+  reporterName    String?
+  reporterContact String?
+  submittedAt     DateTime                     @default(now())
+  status          PublicReportStatus           @default(SUBMITTED)
+  departmentId    String?
+  jurisdictionId  String?
+  assetId         String?
+  reviewStartedAt DateTime?
+  reviewedById    String?
+  decisionAt      DateTime?
+  decisionById    String?
+  rejectionReason String?
+  createdCaseId   String?                      @unique
+  department      Department?                  @relation(fields: [departmentId], references: [id], onDelete: SetNull)
+  jurisdiction    Jurisdiction?                @relation(fields: [jurisdictionId], references: [id], onDelete: SetNull)
+  asset           Asset?                       @relation(fields: [assetId], references: [id], onDelete: SetNull)
+  reviewedBy      User?                        @relation("PublicReportReviewer", fields: [reviewedById], references: [id], onDelete: Restrict)
+  decisionBy      User?                        @relation("PublicReportDecisionActor", fields: [decisionById], references: [id], onDelete: Restrict)
+  createdCase     Case?                        @relation("PublicReportCreatedCase", fields: [createdCaseId], references: [id], onDelete: Restrict)
+  triageAnalyses  PublicReportTriageAnalysis[]
+  createdAt       DateTime                     @default(now())
+  updatedAt       DateTime                     @updatedAt
+
+  @@index([status])
+  @@index([category])
+  @@index([submittedAt])
+  @@index([departmentId, jurisdictionId])
+  @@index([assetId])
+  @@index([reviewedById])
+  @@index([decisionById])
+}
+
+model PublicReportTriageAnalysis {
+  id                  String                    @id @default(uuid())
+  publicReportId      String
+  analysisVersion     String
+  suggestedCategory   PublicReportCategory
+  urgencyLevel        PublicReportTriageUrgency
+  confidence          Int
+  reasonCodes         Json
+  reasons             Json
+  possibleAssetId     String?
+  duplicateCandidates Json
+  createdById         String
+  publicReport        PublicReport              @relation(fields: [publicReportId], references: [id], onDelete: Restrict)
+  possibleAsset       Asset?                    @relation(fields: [possibleAssetId], references: [id], onDelete: SetNull)
+  createdBy           User                      @relation(fields: [createdById], references: [id], onDelete: Restrict)
+  createdAt           DateTime                  @default(now())
+
+  @@unique([publicReportId, analysisVersion])
+  @@index([publicReportId, createdAt])
+  @@index([possibleAssetId])
+  @@index([createdById])
+}
+
+model PolicyDocument {
+  id              String                  @id @default(uuid())
+  policyCode      String
+  versionNumber   Int
+  title           String
+  sourceTitle     String
+  sourceReference String
+  sourceUrl       String?
+  departmentId    String?
+  jurisdictionId  String?
+  effectiveFrom   DateTime
+  effectiveUntil  DateTime?
+  status          RegistryLifecycleStatus @default(DRAFT)
+  validationState PolicyValidationState    @default(NOT_VALIDATED)
+  createdById     String
+  approvedById    String?
+  approvedAt      DateTime?
+  createdAt       DateTime                 @default(now())
+  updatedAt       DateTime                 @updatedAt
+
+  department   Department? @relation(fields: [departmentId], references: [id], onDelete: Restrict)
+  jurisdiction Jurisdiction? @relation(fields: [jurisdictionId], references: [id], onDelete: Restrict)
+  createdBy    User @relation("PolicyDocumentCreator", fields: [createdById], references: [id], onDelete: Restrict)
+  approvedBy   User? @relation("PolicyDocumentApprover", fields: [approvedById], references: [id], onDelete: Restrict)
+  rules        PolicyRule[]
+  actionProvenance ApprovedActionVersion[]
+
+  @@unique([policyCode, versionNumber])
+  @@index([status, effectiveFrom, effectiveUntil])
+  @@index([departmentId, jurisdictionId])
+  @@index([createdById])
+  @@index([approvedById])
+}
+
+model ApprovedActionVersion {
+  id                        String                    @id @default(uuid())
+  actionCode                String
+  versionNumber             Int
+  title                     String
+  category                  String
+  description               String
+  applicability             Json
+  enforcementClassification EnforcementClassification
+  provenancePolicyDocumentId String?
+  sourceReference           String
+  departmentId              String?
+  jurisdictionId            String?
+  effectiveFrom             DateTime
+  effectiveUntil            DateTime?
+  status                    RegistryLifecycleStatus @default(DRAFT)
+  createdById               String
+  approvedById              String?
+  approvedAt                DateTime?
+  createdAt                 DateTime                @default(now())
+  updatedAt                 DateTime                @updatedAt
+
+  provenancePolicyDocument PolicyDocument? @relation(fields: [provenancePolicyDocumentId], references: [id], onDelete: Restrict)
+  department Department? @relation(fields: [departmentId], references: [id], onDelete: Restrict)
+  jurisdiction Jurisdiction? @relation(fields: [jurisdictionId], references: [id], onDelete: Restrict)
+  createdBy User @relation("ApprovedActionCreator", fields: [createdById], references: [id], onDelete: Restrict)
+  approvedBy User? @relation("ApprovedActionApprover", fields: [approvedById], references: [id], onDelete: Restrict)
+  rules PolicyRule[]
+
+  @@unique([actionCode, versionNumber])
+  @@index([status, effectiveFrom, effectiveUntil])
+  @@index([departmentId, jurisdictionId])
+  @@index([provenancePolicyDocumentId])
+  @@index([createdById])
+  @@index([approvedById])
+}
+
+model PolicyRule {
+  id               String                    @id @default(uuid())
+  policyDocumentId String
+  ruleCode         String
+  description      String
+  conditions       Json
+  actionId         String
+  enforcementLevel EnforcementClassification
+  enabled          Boolean                   @default(true)
+  createdAt        DateTime                  @default(now())
+  updatedAt        DateTime                  @updatedAt
+
+  policyDocument PolicyDocument @relation(fields: [policyDocumentId], references: [id], onDelete: Restrict)
+  action ApprovedActionVersion @relation(fields: [actionId], references: [id], onDelete: Restrict)
+
+  @@unique([policyDocumentId, ruleCode])
+  @@index([actionId])
+  @@index([enforcementLevel])
 }
 
 model Case {
@@ -207,6 +429,8 @@ model Case {
   orpDecisions             OrpDecision[]
   executionPlans           ExecutionPlan[]
   closure                  CaseClosure?
+  sourcePublicReport       PublicReport?             @relation("PublicReportCreatedCase")
+  decisionPackages         DecisionPackage[]
 
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
@@ -241,6 +465,7 @@ model Inspection {
   case            Case             @relation(fields: [caseId], references: [id])
   inspector       User             @relation(fields: [inspectorId], references: [id])
   riskAssessments RiskAssessment[]
+  decisionPackages DecisionPackage[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -264,6 +489,7 @@ model RiskAssessment {
   case                     Case                      @relation(fields: [caseId], references: [id], onDelete: Cascade)
   inspection               Inspection                @relation(fields: [inspectionId], references: [id], onDelete: Cascade)
   operationalResponsePlans OperationalResponsePlan[]
+  decisionPackages         DecisionPackage[]
 
   @@index([caseId])
   @@index([inspectionId])
@@ -283,15 +509,53 @@ model OperationalResponsePlan {
   planVersion            String   @default("ODYSSEY_ORP_V1")
   createdAt              DateTime @default(now())
   updatedAt              DateTime @updatedAt
+  decisionPackageId      String?
 
   case           Case           @relation(fields: [caseId], references: [id], onDelete: Cascade)
   riskAssessment RiskAssessment @relation(fields: [riskAssessmentId], references: [id], onDelete: Cascade)
   decisions      OrpDecision[]
   executionPlan  ExecutionPlan?
+  decisionPackage DecisionPackage? @relation(fields: [decisionPackageId], references: [id], onDelete: Restrict)
 
   @@unique([caseId, versionNumber])
   @@index([caseId])
   @@index([riskAssessmentId])
+  @@index([decisionPackageId])
+}
+
+model DecisionPackage {
+  id                     String                @id @default(uuid())
+  caseId                 String
+  inspectionId           String
+  riskAssessmentId       String
+  packageVersion         Int
+  packageContractVersion String                @default("ODYSSEY_DECISION_PACKAGE_V1")
+  status                 DecisionPackageStatus @default(PREPARED)
+  sourceFingerprint      String
+  caseSnapshot           Json
+  inspectionSnapshot     Json
+  riskSnapshot           Json
+  readinessSnapshot      Json
+  policySnapshot         Json
+  actionSnapshot         Json
+  preparedById           String
+  preparedAt             DateTime              @default(now())
+  createdAt              DateTime              @default(now())
+  updatedAt              DateTime              @updatedAt
+
+  case           Case                      @relation(fields: [caseId], references: [id], onDelete: Restrict)
+  inspection     Inspection                @relation(fields: [inspectionId], references: [id], onDelete: Restrict)
+  riskAssessment RiskAssessment            @relation(fields: [riskAssessmentId], references: [id], onDelete: Restrict)
+  preparedBy     User                      @relation("DecisionPackagePreparer", fields: [preparedById], references: [id], onDelete: Restrict)
+  responsePlans  OperationalResponsePlan[]
+
+  @@unique([caseId, packageVersion])
+  @@unique([caseId, sourceFingerprint])
+  @@index([caseId, status, packageVersion])
+  @@index([inspectionId])
+  @@index([riskAssessmentId])
+  @@index([preparedById])
+  @@index([preparedAt])
 }
 
 model ApprovalAuthority {

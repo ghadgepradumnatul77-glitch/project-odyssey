@@ -22,6 +22,7 @@ router.get('/', authenticate, async (req, res) => {
     const cases = await prisma.case.findMany({
       where: buildCaseReadWhere(req.user!),
       include: {
+        sourcePublicReport: { select: { id: true, reportNumber: true } },
         asset: {
           include: {
             department: {

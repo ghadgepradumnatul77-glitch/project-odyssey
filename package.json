@@ -1,4 +1,7 @@
 {
+  "scripts": {
+    "dev": "node scripts/dev.mjs"
+  },
   "devDependencies": {
     "prisma": "^6.19.3"
   },

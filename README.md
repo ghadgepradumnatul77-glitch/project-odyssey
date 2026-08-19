@@ -2,6 +2,12 @@
 
 Phase-1 foundation for the Government Infrastructure Decision Intelligence Platform.
 
+## Local development
+
+From the repository root, run `npm run dev`. This supervised workflow builds and starts the API on port 4000 and starts the Vite frontend on port 5173. If either process fails, the workflow reports the failure and stops the other process instead of leaving a partially running workspace.
+
+The API development command intentionally runs compiled JavaScript on this project's current Node/Windows environment. Every API build packages the custom generated Prisma runtime into `dist`, so startup does not depend on stale build artifacts or the `tsx` temporary-directory launcher.
+
 ## Services
 - `apps/web` — React + TypeScript frontend
 - `apps/api` — Node.js + Express + TypeScript API
@@ -76,3 +82,19 @@ perform no workflow mutations, and return `404` for missing or out-of-scope Case
 The brief follows one persisted Case-to-execution relationship chain and does not
 recalculate risk or regenerate an ORP. The timeline includes only milestones with
 persisted timestamps; it does not infer block, resume, or generic status history.
+
+## Governed demonstration bootstrap
+
+The API provides an explicit development-only Pune Division bootstrap. It never runs during startup, installation, migrations, builds, or tests. It creates input records through authenticated APIs and advances derived workflow state only through the existing risk, ORP, decision, execution, evidence, verification, and closure endpoints.
+
+Required secret variable names are `ODYSSEY_DEMO_ADMIN_PASSWORD`, `ODYSSEY_DEMO_OFFICER_PRIMARY_PASSWORD`, `ODYSSEY_DEMO_OFFICER_VERIFIER_PASSWORD`, `ODYSSEY_DEMO_OFFICER_CLOSER_PASSWORD`, `ODYSSEY_DEMO_POLICY_ADMIN_PASSWORD`, and `ODYSSEY_DEMO_AUDITOR_PASSWORD`. `ODYSSEY_DEMO_ADMIN_EMAIL` is optional and defaults to `admin@odyssey.local`; `ODYSSEY_API_BASE_URL` optionally overrides `http://localhost:4000/api/v1`. Never commit the values.
+
+From `apps/api`, run the non-mutating inspection with `npm run demo:bootstrap -- --dry-run`. After reviewing that plan, run `npm run demo:bootstrap` explicitly in a non-production environment. Mutation mode refuses `NODE_ENV=production`.
+
+### Synthetic demonstration geolocation
+
+The Infrastructure Intelligence Map can be populated with stable, representative Pune-area test coordinates for the controlled demo records. These coordinates are synthetic presentation metadata, not surveyed, verified, or operational GIS data. The command never runs during startup, installation, migrations, builds, tests, or the normal bootstrap.
+
+From `apps/api`, inspect the complete plan without mutation using `npm run demo:geo -- --dry-run`. After separate authorization, apply only the manifest latitude/longitude values with `npm run demo:geo`. Mutation mode refuses `NODE_ENV=production`, preserves compatible coordinates, and stops without changes when a controlled record conflicts with the manifest.
+
+Stable codes, emails, case numbers, persisted relationships, and stage checks make reruns idempotent. Compatible records are reused, ahead-of-target Cases are preserved, and conflicts stop execution without deleting or rewinding history. The intended distribution is one Case each at NEW, INSPECTION_IN_PROGRESS, risk-only ORP_READY, awaiting-review ORP_READY, APPROVED, EXECUTION, VERIFICATION, and CLOSED. Three distinct officers preserve performer, verifier, and closer separation.

@@ -44,6 +44,16 @@ import caseClosureRoutes
   from './modules/closures/case-closure.routes';
 import reportingRoutes
   from './modules/reporting/reporting.routes';
+import publicReportRoutes
+  from './modules/public-reports/public-report.routes';
+import publicTrackingRoutes
+  from './modules/public-reports/public-tracking.routes';
+import policyRegistryRoutes
+  from './modules/policy-registry/policy-registry.routes';
+import readinessRoutes
+  from './modules/readiness/readiness.routes';
+import decisionPackageRoutes
+  from './modules/decision-packages/decision-package.routes';
 
 import { getAuthConfig }
   from './config/auth';
@@ -234,6 +244,22 @@ app.use(
   '/api/v1',
   authorityRoutes
 );
+
+app.use(
+  '/api/v1/public-reports',
+  publicReportRoutes
+);
+
+app.use(
+  '/api/v1/public/tracking',
+  publicTrackingRoutes
+);
+
+app.use('/api/v1', policyRegistryRoutes);
+
+app.use('/api/v1', readinessRoutes);
+
+app.use('/api/v1', decisionPackageRoutes);
 
 
 

@@ -25,11 +25,11 @@ function show(role: SystemRole, fetchMock = vi.fn(async (url: string) =>
     token: 't', organization: null, isAuthenticated: true, authStatus: 'authenticated',
     sessionMessage: null, login: vi.fn(), logout: vi.fn(),
   };
-  const onCases = vi.fn(); const onAdmin = vi.fn();
+  const onCases = vi.fn(); const onCase = vi.fn(); const onAdmin = vi.fn();
   render(<AuthContext.Provider value={value}>
-    <DashboardPage onCases={onCases} onAdmin={onAdmin} />
+    <DashboardPage onCases={onCases} onCase={onCase} onAdmin={onAdmin} />
   </AuthContext.Provider>);
-  return { onCases, onAdmin };
+  return { onCases, onCase, onAdmin };
 }
 
 afterEach(() => vi.unstubAllGlobals());
@@ -48,17 +48,19 @@ describe('role dashboards', () => {
   it('renders SYSTEM_ADMIN administration navigation without operational controls', async () => {
     const { onAdmin } = show('SYSTEM_ADMIN');
     expect(await screen.findByRole('heading', { name: 'System administration overview' })).toBeInTheDocument();
-    fireEvent.click(screen.getByRole('button', { name: 'Open Administration' }));
-    expect(onAdmin).toHaveBeenCalled();
+    fireEvent.click(screen.getByRole('button', { name: /Manage departments/ }));
+    expect(onAdmin).toHaveBeenCalledWith('Departments');
     expect(screen.queryByText(/Run deterministic assessment|Record inspection/)).not.toBeInTheDocument();
   });
 
   it('navigates into the existing Cases experience', async () => {
-    const { onCases } = show('AUDITOR');
-    await screen.findByText('CASE-1');
+    const { onCase } = show('AUDITOR');
+    await screen.findAllByText('CASE-1');
     fireEvent.click(screen.getByRole('button', { name: /CASE-1/ }));
-    expect(onCases).toHaveBeenCalled();
+    expect(onCase).toHaveBeenCalledWith('c');
   });
+
+  it('exposes operational metrics as accessible filter navigation',async()=>{const {onCases}=show('AUDITOR');await screen.findByRole('heading',{name:'Governance and accountability overview'});fireEvent.click(screen.getByRole('button',{name:'Open Visible cases'}));expect(onCases).toHaveBeenLastCalledWith(null);fireEvent.click(screen.getByRole('button',{name:'Open Emergency cases'}));expect(onCases).toHaveBeenLastCalledWith('emergency');fireEvent.click(screen.getByRole('button',{name:'Open Critical / Very High'}));expect(onCases).toHaveBeenLastCalledWith('priority-attention');});
 
   it('recovers from a failed dashboard request when retried', async () => {
     const fetchMock = vi.fn().mockResolvedValueOnce(failure()).mockResolvedValueOnce(ok(cases));

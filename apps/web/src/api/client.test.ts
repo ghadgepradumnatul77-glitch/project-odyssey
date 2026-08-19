@@ -20,7 +20,7 @@ describe('API client', () => {
 
   it('uses a safe error for network failures without exposing raw internals', async () => {
     vi.stubGlobal('fetch', vi.fn().mockRejectedValue(new Error('socket details and credentials')));
-    await expect(apiRequest('/health')).rejects.toEqual(expect.objectContaining({ kind: 'network', status: null, code: 'NETWORK_ERROR', message: 'The Odyssey API could not be reached.' }));
+    await expect(apiRequest('/health')).rejects.toEqual(expect.objectContaining({ kind: 'network', status: null, code: 'NETWORK_ERROR', message: 'The JanSeva IntelliGov service could not be reached.' }));
   });
 
   it('rejects malformed responses without returning their raw content', async () => {

@@ -55,6 +55,17 @@ function stringArray(value: unknown, field: string): string[] {
   return value as string[];
 }
 
+function reasonArray(value: unknown, field: string): Array<{ code: string | null; message: string }> {
+  if (!Array.isArray(value)) reportingIntegrity(`Stored ${field} is malformed.`);
+  return value.map((item) => {
+    if (typeof item === 'string') return { code: null, message: item };
+    if (!item || typeof item !== 'object' || Array.isArray(item)) reportingIntegrity(`Stored ${field} is malformed.`);
+    const reason = item as Record<string, unknown>;
+    if (typeof reason.reasonCode !== 'string' || typeof reason.message !== 'string') reportingIntegrity(`Stored ${field} is malformed.`);
+    return { code: reason.reasonCode, message: reason.message };
+  });
+}
+
 function actors(values: Array<{ id: string; name: string; designation: string } | null>) {
   const unique = new Map<string, { id: string; name: string; designation: string }>();
   for (const value of values) if (value) unique.set(value.id, value);
@@ -115,8 +126,8 @@ export async function getDecisionBrief(caseId: string, principal: Organizational
     asset: target.asset,
     workflow: { coherent: true, warnings: [], statusExplanationVersion: 'ODYSSEY_CASE_STATUS_V1', anchor: target.closure ? 'CASE_CLOSURE' : plan ? 'EXECUTION_PLAN' : orp ? 'ORP' : risk ? 'RISK_ASSESSMENT' : inspection ? 'INSPECTION' : 'CASE' },
     inspection: inspection && { id: inspection.id, inspectionDate: inspection.inspectionDate, structuralCondition: inspection.structuralCondition, crackSeverity: inspection.crackSeverity, corrosionLevel: inspection.corrosionLevel, trafficImportance: inspection.trafficImportance, hospitalRoute: inspection.hospitalRoute, weatherRisk: inspection.weatherRisk, heavyRainExpected: inspection.heavyRainExpected, estimatedDailyUsers: inspection.estimatedDailyUsers, createdAt: inspection.createdAt, inspector: inspection.inspector },
-    risk: risk && { id: risk.id, riskScore: risk.riskScore, riskLevel: risk.riskLevel, priorityLevel: risk.priorityLevel, reasonCodes: stringArray(risk.reasonCodes, 'risk reasonCodes'), reasons: stringArray(risk.reasons, 'risk reasons'), assessmentVersion: risk.assessmentVersion, createdAt: risk.createdAt },
-    orp: orp && { id: orp.id, versionNumber: orp.versionNumber, status: orp.status, urgency: orp.urgency, recommendedActionCodes: stringArray(orp.recommendedActionCodes, 'ORP recommendedActionCodes'), temporaryMeasures: stringArray(orp.temporaryMeasures, 'ORP temporaryMeasures'), alternativeActionCodes: stringArray(orp.alternativeActionCodes, 'ORP alternativeActionCodes'), reasons: stringArray(orp.reasons, 'ORP reasons'), planVersion: orp.planVersion, createdAt: orp.createdAt },
+    risk: risk && { id: risk.id, riskScore: risk.riskScore, riskLevel: risk.riskLevel, priorityLevel: risk.priorityLevel, reasonCodes: stringArray(risk.reasonCodes, 'risk reasonCodes'), reasons: reasonArray(risk.reasons, 'risk reasons'), assessmentVersion: risk.assessmentVersion, createdAt: risk.createdAt },
+    orp: orp && { id: orp.id, versionNumber: orp.versionNumber, status: orp.status, urgency: orp.urgency, recommendedActionCodes: stringArray(orp.recommendedActionCodes, 'ORP recommendedActionCodes'), temporaryMeasures: stringArray(orp.temporaryMeasures, 'ORP temporaryMeasures'), alternativeActionCodes: stringArray(orp.alternativeActionCodes, 'ORP alternativeActionCodes'), reasons: reasonArray(orp.reasons, 'ORP reasons'), planVersion: orp.planVersion, createdAt: orp.createdAt },
     decision: decision && { id: decision.id, decisionType: decision.decisionType, reason: decision.reason, remarks: decision.remarks, createdAt: decision.createdAt, reviewer: decision.reviewer },
     execution: plan && { id: plan.id, status: plan.status, templateVersion: plan.templateVersion, createdAt: plan.createdAt, startedAt: plan.startedAt, completedAt: plan.completedAt, metrics: executionMetrics(plan.tasks), accountability: { assignees: actors(plan.tasks.map((task) => task.assignedTo)), completionSubmitters: actors(plan.tasks.map((task) => task.completionSubmittedBy)), verifiers: actors(plan.tasks.map((task) => task.verifiedBy)) } },
     evidence: plan && { totalEvidence: evidenceTypes.length, countsByType },

@@ -1,6 +1,13 @@
-import { describe, expect, it } from 'vitest';
-import { navigationForRole } from './Sidebar';
+import { render, screen } from '@testing-library/react';
+import { createElement } from 'react';
+import { describe, expect, it, vi } from 'vitest';
+import Sidebar, { navigationForRole } from './Sidebar';
 describe('role-aware navigation', () => {
-  it.each(['OFFICER', 'AUDITOR', 'POLICY_ADMIN'] as const)('keeps %s navigation non-administrative', (role) => expect(navigationForRole(role).map((item) => item.label)).toEqual(['Dashboard', 'Cases']));
-  it('shows Administration only to SYSTEM_ADMIN', () => expect(navigationForRole('SYSTEM_ADMIN').map((item) => item.label)).toEqual(['Dashboard', 'Cases', 'Administration']));
+  it('presents JanSeva IntelliGov as the visible product brand',()=>{render(createElement(Sidebar,{role:'OFFICER',activeItem:'dashboard',onSelect:vi.fn()}));expect(screen.getByText('JANSEVA INTELLIGOV')).toBeInTheDocument();expect(screen.queryByText(/Project Odyssey/i)).not.toBeInTheDocument();});
+  it('adds Public Reports and Infrastructure Map to the officer workspace',()=>expect(navigationForRole('OFFICER').map((item)=>item.label)).toEqual(['Dashboard','Public Reports','Infrastructure Map','Cases']));
+  it('keeps AUDITOR navigation read-governance focused', () => expect(navigationForRole('AUDITOR').map((item) => item.label)).toEqual(['Dashboard', 'Cases']));
+  it('gives POLICY_ADMIN the governed registry workspace', () => expect(navigationForRole('POLICY_ADMIN').map((item) => item.label)).toEqual(['Dashboard', 'Cases', 'Policy & Actions']));
+  it('shows governed registries and system administration to SYSTEM_ADMIN', () => expect(navigationForRole('SYSTEM_ADMIN').map((item) => item.label)).toEqual(['Dashboard', 'Public Reports', 'Infrastructure Map', 'Cases', 'Policy & Actions', 'Administration']));
+  it('provides accessible Infrastructure Map navigation',()=>{const onSelect=vi.fn();render(createElement(Sidebar,{role:'OFFICER',activeItem:'infrastructure-map',onSelect}));const button=screen.getByRole('button',{name:/Infrastructure Map Geospatial infrastructure intelligence/});expect(button).toHaveAttribute('aria-current','page');button.click();expect(onSelect).toHaveBeenCalledWith('infrastructure-map');});
+  it('provides accessible Public Reports navigation',()=>{const onSelect=vi.fn();render(createElement(Sidebar,{role:'OFFICER',activeItem:'public-reports',onSelect}));const button=screen.getByRole('button',{name:/Public Reports Citizen infrastructure intake/});expect(button).toHaveAttribute('aria-current','page');button.click();expect(onSelect).toHaveBeenCalledWith('public-reports');});
 });

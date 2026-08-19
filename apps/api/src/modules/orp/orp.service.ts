@@ -4,6 +4,7 @@ import {
   assertOperationalCaseScope,
   OrganizationalPrincipal
 } from '../../security/organizational-scope';
+import { requireCurrentDecisionPackage } from '../decision-packages/decision-package.service';
 
 
 // ======================================================
@@ -308,6 +309,10 @@ export async function createORPForCase(caseId: string, principal: Organizational
     throw new Error('CASE_NOT_READY_FOR_ORP');
   }
 
+  // New Action Plans must be traceable to a current, governed Decision Package.
+  // Historical plans remain valid with a null package reference.
+  const decisionPackage = await requireCurrentDecisionPackage(caseId, principal);
+
   // 2. Find the latest RiskAssessment
   const latestAssessment = await prisma.riskAssessment.findFirst({
     where: { caseId },
@@ -356,7 +361,8 @@ export async function createORPForCase(caseId: string, principal: Organizational
         temporaryMeasures: orpResult.temporaryMeasures,
         reasons: orpResult.reasons,
         alternativeActionCodes: orpResult.alternativeActionCodes,
-        planVersion: 'ODYSSEY_ORP_V1'
+        planVersion: 'ODYSSEY_ORP_V1',
+        decisionPackageId: decisionPackage.id
       }
     });
 

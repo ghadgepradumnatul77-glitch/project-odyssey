@@ -1,0 +1,11 @@
+import { beforeEach, describe, expect, it, vi } from 'vitest';
+const mocks = vi.hoisted(() => ({ scope: vi.fn(), requirePackage: vi.fn(), risk: vi.fn(), inspection: vi.fn(), latestOrp: vi.fn(), createOrp: vi.fn(), transaction: vi.fn() }));
+vi.mock('../src/security/organizational-scope', () => ({ assertOperationalCaseScope: mocks.scope }));
+vi.mock('../src/modules/decision-packages/decision-package.service', () => ({ requireCurrentDecisionPackage: mocks.requirePackage }));
+vi.mock('../src/lib/prisma', () => ({ default: { riskAssessment: { findFirst: mocks.risk }, inspection: { findUnique: mocks.inspection }, $transaction: mocks.transaction } }));
+import { createORPForCase } from '../src/modules/orp/orp.service';
+const principal = { id: 'officer', role: 'OFFICER', status: 'ACTIVE', departmentId: 'dep', jurisdictionId: 'jur' } as any;
+describe('new Action Plan Decision Package provenance', () => { beforeEach(() => { vi.clearAllMocks(); mocks.scope.mockResolvedValue({ id: 'case', status: 'ORP_READY' }); mocks.requirePackage.mockResolvedValue({ id: 'package' }); mocks.risk.mockResolvedValue({ id: 'risk', inspectionId: 'inspection', riskLevel: 'HIGH', priorityLevel: 'HIGH' }); mocks.inspection.mockResolvedValue({ id: 'inspection', structuralCondition: 'GOOD', crackSeverity: 'NONE', corrosionLevel: 'LOW', trafficImportance: 'LOW', hospitalRoute: false, weatherRisk: 'LOW', heavyRainExpected: false }); mocks.latestOrp.mockResolvedValue(null); mocks.createOrp.mockImplementation(({ data }: any) => ({ id: 'orp', ...data })); mocks.transaction.mockImplementation((callback: any) => callback({ operationalResponsePlan: { findFirst: mocks.latestOrp, create: mocks.createOrp } })); });
+  it('derives the current package server-side and persists its exact reference', async () => { await createORPForCase('case', principal); expect(mocks.requirePackage).toHaveBeenCalledWith('case', principal); expect(mocks.createOrp.mock.calls[0][0].data.decisionPackageId).toBe('package'); });
+  it('cannot create a new Action Plan when no current package exists', async () => { mocks.requirePackage.mockRejectedValue(new Error('CURRENT_DECISION_PACKAGE_REQUIRED')); await expect(createORPForCase('case', principal)).rejects.toThrow('CURRENT_DECISION_PACKAGE_REQUIRED'); expect(mocks.createOrp).not.toHaveBeenCalled(); });
+});

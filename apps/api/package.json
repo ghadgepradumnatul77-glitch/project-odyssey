@@ -2,10 +2,13 @@
   "name": "odyssey-api",
   "private": true,
   "scripts": {
-    "dev": "tsx watch src/server.ts",
-    "build": "tsc",
+    "dev": "npm run build && node dist/server.js",
+    "build": "tsc && node scripts/copy-generated-prisma.cjs",
     "start": "node dist/server.js",
-    "test": "vitest run"
+    "test": "vitest run",
+    "demo": "node --experimental-strip-types scripts/bootstrap-demo.ts --public-reports-only",
+    "demo:bootstrap": "tsx scripts/bootstrap-demo.ts",
+    "demo:geo": "node --experimental-strip-types scripts/enrich-demo-geolocation.ts"
   },
   "dependencies": {
     "@prisma/client": "^6.0.0",

@@ -54,7 +54,7 @@ export async function apiRequest<T>(path: string, options: ApiRequestOptions = {
       body: body === undefined ? undefined : JSON.stringify(body)
     });
   } catch {
-    throw new ApiClientError('The Odyssey API could not be reached.', 'network', null, 'NETWORK_ERROR');
+    throw new ApiClientError('The JanSeva IntelliGov service could not be reached.', 'network', null, 'NETWORK_ERROR');
   }
 
   if (response.status === 401 && accessToken) unauthorizedHandler?.();

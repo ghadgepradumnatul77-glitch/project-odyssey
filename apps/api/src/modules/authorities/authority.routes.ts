@@ -6,7 +6,7 @@ import { authenticate } from '../../middleware/authenticate';
 import { requireRole } from '../../middleware/require-role';
 
 const router = Router();
-router.use(authenticate, requireRole(SystemRole.SYSTEM_ADMIN));
+router.use('/approval-authorities', authenticate, requireRole(SystemRole.SYSTEM_ADMIN));
 const priorities = new Set(Object.values(PriorityLevel));
 
 function optionalBoolean(value: unknown): boolean | undefined | null {

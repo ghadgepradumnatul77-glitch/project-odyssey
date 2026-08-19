@@ -9,6 +9,7 @@ import {
   buildOrpReadWhere,
   ScopedResourceNotFoundError
 } from '../../security/organizational-scope';
+import { DecisionPackageError } from '../decision-packages/decision-package.service';
 
 const router = Router();
 
@@ -51,6 +52,9 @@ router.post('/cases/:caseId/orps', authenticate, requireRole(SystemRole.OFFICER)
     });
 
   } catch (error: any) {
+    if (error instanceof DecisionPackageError) {
+      return res.status(error.status).json({ success: false, error: { code: error.code, message: error.message, reasons: error.reasons } });
+    }
     if (error.message === 'CASE_NOT_FOUND') {
       return res.status(404).json({
         success: false,

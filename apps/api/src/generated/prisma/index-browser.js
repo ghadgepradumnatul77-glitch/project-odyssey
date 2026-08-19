@@ -166,6 +166,104 @@ exports.Prisma.AssetScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.PublicReportScalarFieldEnum = {
+  id: 'id',
+  reportNumber: 'reportNumber',
+  title: 'title',
+  description: 'description',
+  category: 'category',
+  locationText: 'locationText',
+  latitude: 'latitude',
+  longitude: 'longitude',
+  reporterName: 'reporterName',
+  reporterContact: 'reporterContact',
+  submittedAt: 'submittedAt',
+  status: 'status',
+  departmentId: 'departmentId',
+  jurisdictionId: 'jurisdictionId',
+  assetId: 'assetId',
+  reviewStartedAt: 'reviewStartedAt',
+  reviewedById: 'reviewedById',
+  decisionAt: 'decisionAt',
+  decisionById: 'decisionById',
+  rejectionReason: 'rejectionReason',
+  createdCaseId: 'createdCaseId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.PublicReportTriageAnalysisScalarFieldEnum = {
+  id: 'id',
+  publicReportId: 'publicReportId',
+  analysisVersion: 'analysisVersion',
+  suggestedCategory: 'suggestedCategory',
+  urgencyLevel: 'urgencyLevel',
+  confidence: 'confidence',
+  reasonCodes: 'reasonCodes',
+  reasons: 'reasons',
+  possibleAssetId: 'possibleAssetId',
+  duplicateCandidates: 'duplicateCandidates',
+  createdById: 'createdById',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.PolicyDocumentScalarFieldEnum = {
+  id: 'id',
+  policyCode: 'policyCode',
+  versionNumber: 'versionNumber',
+  title: 'title',
+  sourceTitle: 'sourceTitle',
+  sourceReference: 'sourceReference',
+  sourceUrl: 'sourceUrl',
+  departmentId: 'departmentId',
+  jurisdictionId: 'jurisdictionId',
+  effectiveFrom: 'effectiveFrom',
+  effectiveUntil: 'effectiveUntil',
+  status: 'status',
+  validationState: 'validationState',
+  createdById: 'createdById',
+  approvedById: 'approvedById',
+  approvedAt: 'approvedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ApprovedActionVersionScalarFieldEnum = {
+  id: 'id',
+  actionCode: 'actionCode',
+  versionNumber: 'versionNumber',
+  title: 'title',
+  category: 'category',
+  description: 'description',
+  applicability: 'applicability',
+  enforcementClassification: 'enforcementClassification',
+  provenancePolicyDocumentId: 'provenancePolicyDocumentId',
+  sourceReference: 'sourceReference',
+  departmentId: 'departmentId',
+  jurisdictionId: 'jurisdictionId',
+  effectiveFrom: 'effectiveFrom',
+  effectiveUntil: 'effectiveUntil',
+  status: 'status',
+  createdById: 'createdById',
+  approvedById: 'approvedById',
+  approvedAt: 'approvedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.PolicyRuleScalarFieldEnum = {
+  id: 'id',
+  policyDocumentId: 'policyDocumentId',
+  ruleCode: 'ruleCode',
+  description: 'description',
+  conditions: 'conditions',
+  actionId: 'actionId',
+  enforcementLevel: 'enforcementLevel',
+  enabled: 'enabled',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.CaseScalarFieldEnum = {
   id: 'id',
   caseNumber: 'caseNumber',
@@ -224,6 +322,28 @@ exports.Prisma.OperationalResponsePlanScalarFieldEnum = {
   reasons: 'reasons',
   alternativeActionCodes: 'alternativeActionCodes',
   planVersion: 'planVersion',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  decisionPackageId: 'decisionPackageId'
+};
+
+exports.Prisma.DecisionPackageScalarFieldEnum = {
+  id: 'id',
+  caseId: 'caseId',
+  inspectionId: 'inspectionId',
+  riskAssessmentId: 'riskAssessmentId',
+  packageVersion: 'packageVersion',
+  packageContractVersion: 'packageContractVersion',
+  status: 'status',
+  sourceFingerprint: 'sourceFingerprint',
+  caseSnapshot: 'caseSnapshot',
+  inspectionSnapshot: 'inspectionSnapshot',
+  riskSnapshot: 'riskSnapshot',
+  readinessSnapshot: 'readinessSnapshot',
+  policySnapshot: 'policySnapshot',
+  actionSnapshot: 'actionSnapshot',
+  preparedById: 'preparedById',
+  preparedAt: 'preparedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -377,6 +497,52 @@ exports.AssetType = exports.$Enums.AssetType = {
   FLYOVER: 'FLYOVER'
 };
 
+exports.PublicReportCategory = exports.$Enums.PublicReportCategory = {
+  ROAD_DAMAGE: 'ROAD_DAMAGE',
+  BRIDGE_OR_FLYOVER: 'BRIDGE_OR_FLYOVER',
+  WATERLOGGING: 'WATERLOGGING',
+  STREETLIGHT: 'STREETLIGHT',
+  DRAINAGE: 'DRAINAGE',
+  PUBLIC_BUILDING: 'PUBLIC_BUILDING',
+  OTHER: 'OTHER'
+};
+
+exports.PublicReportStatus = exports.$Enums.PublicReportStatus = {
+  SUBMITTED: 'SUBMITTED',
+  UNDER_REVIEW: 'UNDER_REVIEW',
+  ACCEPTED: 'ACCEPTED',
+  REJECTED: 'REJECTED'
+};
+
+exports.PublicReportTriageUrgency = exports.$Enums.PublicReportTriageUrgency = {
+  LOW: 'LOW',
+  MODERATE: 'MODERATE',
+  HIGH: 'HIGH',
+  URGENT: 'URGENT'
+};
+
+exports.RegistryLifecycleStatus = exports.$Enums.RegistryLifecycleStatus = {
+  DRAFT: 'DRAFT',
+  VALIDATION: 'VALIDATION',
+  APPROVED: 'APPROVED',
+  ACTIVE: 'ACTIVE',
+  SUPERSEDED: 'SUPERSEDED',
+  ARCHIVED: 'ARCHIVED'
+};
+
+exports.PolicyValidationState = exports.$Enums.PolicyValidationState = {
+  NOT_VALIDATED: 'NOT_VALIDATED',
+  VALIDATED: 'VALIDATED',
+  REJECTED: 'REJECTED'
+};
+
+exports.EnforcementClassification = exports.$Enums.EnforcementClassification = {
+  MANDATORY: 'MANDATORY',
+  RECOMMENDED: 'RECOMMENDED',
+  OPTIONAL: 'OPTIONAL',
+  PROHIBITED: 'PROHIBITED'
+};
+
 exports.CaseStatus = exports.$Enums.CaseStatus = {
   NEW: 'NEW',
   INSPECTION_REQUIRED: 'INSPECTION_REQUIRED',
@@ -406,6 +572,11 @@ exports.PriorityLevel = exports.$Enums.PriorityLevel = {
   HIGH: 'HIGH',
   VERY_HIGH: 'VERY_HIGH',
   CRITICAL: 'CRITICAL'
+};
+
+exports.DecisionPackageStatus = exports.$Enums.DecisionPackageStatus = {
+  PREPARED: 'PREPARED',
+  SUPERSEDED: 'SUPERSEDED'
 };
 
 exports.OrpDecisionType = exports.$Enums.OrpDecisionType = {
@@ -452,10 +623,16 @@ exports.Prisma.ModelName = {
   Jurisdiction: 'Jurisdiction',
   User: 'User',
   Asset: 'Asset',
+  PublicReport: 'PublicReport',
+  PublicReportTriageAnalysis: 'PublicReportTriageAnalysis',
+  PolicyDocument: 'PolicyDocument',
+  ApprovedActionVersion: 'ApprovedActionVersion',
+  PolicyRule: 'PolicyRule',
   Case: 'Case',
   Inspection: 'Inspection',
   RiskAssessment: 'RiskAssessment',
   OperationalResponsePlan: 'OperationalResponsePlan',
+  DecisionPackage: 'DecisionPackage',
   ApprovalAuthority: 'ApprovalAuthority',
   OrpDecision: 'OrpDecision',
   ExecutionPlan: 'ExecutionPlan',

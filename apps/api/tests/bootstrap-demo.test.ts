@@ -1,0 +1,22 @@
+import { describe,expect,it } from 'vitest';
+import { assertFourEyes,assertMutationAllowed,compatible,createActorAuthenticator,hasMatchingEvidence,missingSecrets,publicReportDemoPlan,publicReportScenarios,shouldIssueMutation,stageAction,TARGET_ORDER } from '../scripts/bootstrap-demo';
+
+describe('governed demo bootstrap safeguards',()=>{
+  it('allows dry-run in production but refuses mutations',()=>{expect(()=>assertMutationAllowed({NODE_ENV:'production'},true)).not.toThrow();expect(()=>assertMutationAllowed({NODE_ENV:'production'},false)).toThrow(/Refusing/);});
+  it('dry-run permits reads and login but performs no application mutation',()=>{expect(shouldIssueMutation(true,'GET','/cases')).toBe(true);expect(shouldIssueMutation(true,'POST','/auth/login')).toBe(true);expect(shouldIssueMutation(true,'POST','/inspections')).toBe(false);expect(shouldIssueMutation(true,'PATCH','/execution-tasks/1/status')).toBe(false);});
+  it('initializes and caches actor sessions before mutation workflow operations request them',async()=>{const calls:Array<[string,string]>=[];const actorToken=createActorAuthenticator(async(email,password)=>{calls.push([email,password]);return`token-${calls.length}`;},{ODYSSEY_DEMO_OFFICER_PRIMARY_PASSWORD:'primary-secret',ODYSSEY_DEMO_OFFICER_VERIFIER_PASSWORD:'verifier-secret',ODYSSEY_DEMO_OFFICER_CLOSER_PASSWORD:'closer-secret'});const mutation=async()=>({performer:await actorToken('primary'),reviewer:await actorToken('verifier'),performerAgain:await actorToken('primary')});await expect(mutation()).resolves.toEqual({performer:'token-1',reviewer:'token-2',performerAgain:'token-1'});expect(calls).toEqual([['arjun.deshmukh@odyssey.local','primary-secret'],['meera.kulkarni@odyssey.local','verifier-secret']]);});
+  it('reports only missing secret variable names',()=>{const names=missingSecrets({ODYSSEY_DEMO_ADMIN_PASSWORD:'x'});expect(names).not.toContain('ODYSSEY_DEMO_ADMIN_PASSWORD');expect(names).toContain('ODYSSEY_DEMO_AUDITOR_PASSWORD');});
+  it('requires only the admin secret for the public-report-only workflow',()=>{expect(missingSecrets({ODYSSEY_DEMO_ADMIN_PASSWORD:'configured'},true)).toEqual([]);expect(missingSecrets({},true)).toEqual(['ODYSSEY_DEMO_ADMIN_PASSWORD']);});
+  it('defines six stable synthetic reports with a deliberate lifecycle distribution',()=>{expect(publicReportScenarios).toHaveLength(6);expect(new Set(publicReportScenarios.map((item)=>item.title)).size).toBe(6);expect(publicReportDemoPlan.map((item)=>item.target)).toEqual(['SUBMITTED','SUBMITTED','UNDER_REVIEW','ROUTED','REJECTED','ACCEPTED']);});
+  it('links only the routed and accepted demonstrations to existing manifest assets',()=>{expect(publicReportDemoPlan.find((item)=>item.target==='ROUTED')).toMatchObject({assetCode:'RD-330'});expect(publicReportDemoPlan.find((item)=>item.target==='ACCEPTED')).toMatchObject({assetCode:'FL-301'});});
+  it('reuses compatible stable records and rejects incompatible attributes',()=>{expect(compatible({code:'PWD',name:'Public Works Department'},{code:'PWD',name:'Public Works Department'},['code','name'])).toBe(true);expect(compatible({code:'PWD',name:'Other'},{code:'PWD',name:'Public Works Department'},['code','name'])).toBe(false);});
+  it('does not duplicate a risk assessment',()=>expect(stageAction('RISK_ONLY','RISK_ONLY')).toBe('SKIP'));
+  it('does not duplicate an ORP version',()=>expect(stageAction('AWAITING_REVIEW','AWAITING_REVIEW')).toBe('SKIP'));
+  it('does not duplicate an approved decision',()=>expect(stageAction('APPROVED','APPROVED')).toBe('SKIP'));
+  it('does not duplicate an execution plan',()=>expect(stageAction('EXECUTION','EXECUTION')).toBe('SKIP'));
+  it('does not duplicate a closure',()=>expect(stageAction('CLOSED','CLOSED')).toBe('SKIP'));
+  it('recognizes every stable target and advances only when behind',()=>{for(const stage of TARGET_ORDER)expect(stageAction(stage,stage)).toBe('SKIP');expect(stageAction('RISK_ONLY','AWAITING_REVIEW')).toBe('ADVANCE');});
+  it('prevents duplicate deterministic evidence',()=>{expect(hasMatchingEvidence([{evidenceType:'COMPLETION_NOTE',description:'demo'}],'COMPLETION_NOTE','demo')).toBe(true);expect(hasMatchingEvidence([],'COMPLETION_NOTE','demo')).toBe(false);});
+  it('requires distinct performer, verifier, and closer identities',()=>{expect(()=>assertFourEyes('a','b','c')).not.toThrow();expect(()=>assertFourEyes('a','a','c')).toThrow(/three distinct/);});
+  it('never rewinds an ahead case',()=>expect(stageAction('VERIFICATION','EXECUTION')).toBe('AHEAD'));
+});
