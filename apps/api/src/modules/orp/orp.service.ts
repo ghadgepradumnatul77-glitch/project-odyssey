@@ -1,10 +1,13 @@
 import prisma from '../../lib/prisma';
-import { CaseStatus, Prisma, RiskLevel, PriorityLevel, Inspection } from '../../generated/prisma';
+import { ActionPlanGovernanceMode, CaseStatus, Prisma, RiskLevel, PriorityLevel, Inspection } from '../../generated/prisma';
 import {
   assertOperationalCaseScope,
   OrganizationalPrincipal
 } from '../../security/organizational-scope';
-import { requireCurrentDecisionPackage } from '../decision-packages/decision-package.service';
+import { DecisionPackageError, requireCurrentDecisionPackage } from '../decision-packages/decision-package.service';
+import { z } from 'zod';
+
+export const GOVERNED_ACTION_PLAN_VERSION = 'ODYSSEY_ORP_GOVERNED_V1';
 
 
 // ======================================================
@@ -126,6 +129,54 @@ export interface ORPGenerationResult {
   alternativeActionCodes: string[];
   urgency: Urgency;
   reasons: Array<{ reasonCode: string; message: string }>;
+}
+
+const enforcementLevels = ['MANDATORY', 'RECOMMENDED', 'OPTIONAL', 'PROHIBITED'] as const;
+const packageActionSchema = z.object({
+  actionId: z.string().uuid(), actionCode: z.string().min(1), actionVersion: z.number().int().positive(), title: z.string().min(1),
+  category: z.string().min(1), description: z.string().min(1), sourceReference: z.string().min(1), enforcementClassification: z.enum(enforcementLevels)
+}).strict();
+const actionSnapshotSchema = z.object({ MANDATORY: z.array(packageActionSchema), RECOMMENDED: z.array(packageActionSchema), OPTIONAL: z.array(packageActionSchema), PROHIBITED: z.array(packageActionSchema) }).strict();
+const policySourceSchema = z.object({
+  state: z.string(), rules: z.array(z.object({
+    rule: z.object({ id: z.string().uuid(), code: z.string().min(1), description: z.string().min(1), enforcementLevel: z.enum(enforcementLevels) }).passthrough(),
+    policy: z.object({ id: z.string().uuid(), policyCode: z.string().min(1), versionNumber: z.number().int().positive(), title: z.string().min(1), sourceReference: z.string().min(1) }).passthrough(),
+    action: z.object({ id: z.string().uuid(), actionCode: z.string().min(1), versionNumber: z.number().int().positive() }).passthrough()
+  }).strict())
+}).passthrough();
+
+type GovernedPackage = { id:string;packageVersion:number;packageContractVersion:string;preparedAt:Date;policySnapshot:unknown;actionSnapshot:unknown };
+export function generateGovernedORPActions(decisionPackage: GovernedPackage, riskLevel: RiskLevel, priorityLevel: PriorityLevel, inspection: Inspection) {
+  const policy = policySourceSchema.safeParse(decisionPackage.policySnapshot), actions = actionSnapshotSchema.safeParse(decisionPackage.actionSnapshot);
+  if (!policy.success || !actions.success) throw new DecisionPackageError('ORP_GOVERNANCE_CONFLICT', 409, 'Decision Package governance snapshots are malformed or unsupported.');
+  if (policy.data.state === 'NO_APPLICABLE_ACTIVE_POLICY_GOVERNANCE') {
+    if (enforcementLevels.some((level) => actions.data[level].length > 0) || policy.data.rules.length > 0) throw new DecisionPackageError('ORP_GOVERNANCE_CONFLICT', 409, 'No-policy package contains contradictory policy actions.');
+    const engineering = generateORPActions(riskLevel, priorityLevel, inspection);
+    const recommendations = engineering.recommendedActionCodes.map((code) => {
+      const action = getApprovedAction(code); if (!action) throw new DecisionPackageError('ORP_GOVERNANCE_CONFLICT', 409, 'Engineering recommendation is not present in the legacy engineering catalogue.');
+      return { actionCode: code, title: action.title, category: action.category, description: action.description, classification: 'ENGINEERING_RECOMMENDED', basis: 'ENGINEERING_RECOMMENDATION_NO_POLICY' };
+    });
+    return { ...engineering, governanceMode: ActionPlanGovernanceMode.GOVERNED_ENGINEERING_NO_POLICY, governedActions: { basis: 'ENGINEERING_RECOMMENDATION_NO_POLICY', packageId: decisionPackage.id, packageVersion: decisionPackage.packageVersion, MANDATORY: [], RECOMMENDED: [], OPTIONAL: [], PROHIBITED: [], ENGINEERING_RECOMMENDED: recommendations } };
+  }
+  if (policy.data.state !== 'APPLICABLE_GOVERNANCE') throw new DecisionPackageError('ORP_GOVERNANCE_CONFLICT', 409, 'Decision Package policy state is unsupported.');
+  const seenIds = new Set<string>(), seenCodes = new Set<string>();
+  const projection: Record<(typeof enforcementLevels)[number], unknown[]> = { MANDATORY: [], RECOMMENDED: [], OPTIONAL: [], PROHIBITED: [] };
+  for (const level of enforcementLevels) for (const action of actions.data[level]) {
+    if (action.enforcementClassification !== level || seenIds.has(action.actionId) || seenCodes.has(action.actionCode)) throw new DecisionPackageError('ORP_GOVERNANCE_CONFLICT', 409, 'Decision Package contains conflicting governed action classifications or versions.');
+    seenIds.add(action.actionId); seenCodes.add(action.actionCode);
+    const sources = policy.data.rules.filter((item) => item.action.id === action.actionId && item.action.versionNumber === action.actionVersion && item.rule.enforcementLevel === level)
+      .sort((a,b) => a.policy.policyCode.localeCompare(b.policy.policyCode) || a.rule.code.localeCompare(b.rule.code));
+    if (!sources.length) throw new DecisionPackageError('ORP_GOVERNANCE_CONFLICT', 409, 'A governed action lacks exact policy and rule provenance.');
+    projection[level].push({ ...action, classification: level, basis: 'POLICY_BACKED', sources: sources.map((item) => ({ policyId: item.policy.id, policyCode: item.policy.policyCode, policyVersion: item.policy.versionNumber, policyTitle: item.policy.title, policySourceReference: item.policy.sourceReference, ruleId: item.rule.id, ruleCode: item.rule.code, ruleDescription: item.rule.description })) });
+  }
+  const selected = [...actions.data.MANDATORY, ...actions.data.RECOMMENDED];
+  const urgency = priorityLevel === PriorityLevel.CRITICAL ? 'IMMEDIATE' : riskLevelToUrgency(riskLevel);
+  return {
+    recommendedActionCodes: selected.map((item) => item.actionCode), temporaryMeasures: [], alternativeActionCodes: actions.data.OPTIONAL.map((item) => item.actionCode), urgency,
+    reasons: selected.map((item) => ({ reasonCode: `GOVERNED_${item.enforcementClassification}_ACTION`, message: `${item.title} is included as a ${item.enforcementClassification.toLowerCase()} action from the exact governed Decision Package.` })),
+    governanceMode: ActionPlanGovernanceMode.GOVERNED_POLICY,
+    governedActions: { basis: 'POLICY_BACKED', packageId: decisionPackage.id, packageVersion: decisionPackage.packageVersion, ...projection, ENGINEERING_RECOMMENDED: [] }
+  };
 }
 
 
@@ -311,7 +362,15 @@ export async function createORPForCase(caseId: string, principal: Organizational
 
   // New Action Plans must be traceable to a current, governed Decision Package.
   // Historical plans remain valid with a null package reference.
-  const decisionPackage = await requireCurrentDecisionPackage(caseId, principal);
+  let decisionPackage;
+  try { decisionPackage = await requireCurrentDecisionPackage(caseId, principal); }
+  catch (error) {
+    if (error instanceof DecisionPackageError) {
+      const codes:Record<string,string>={DECISION_PACKAGE_NOT_READY:'ORP_READINESS_NOT_READY',DECISION_PACKAGE_BLOCKED:'ORP_READINESS_BLOCKED',CURRENT_DECISION_PACKAGE_REQUIRED:'ORP_DECISION_PACKAGE_REQUIRED',DECISION_PACKAGE_STALE:'ORP_DECISION_PACKAGE_STALE'};
+      throw new DecisionPackageError(codes[error.code]??error.code,error.status,error.message,error.reasons);
+    }
+    throw error;
+  }
 
   // 2. Find the latest RiskAssessment
   const latestAssessment = await prisma.riskAssessment.findFirst({
@@ -333,8 +392,9 @@ export async function createORPForCase(caseId: string, principal: Organizational
     throw new Error('INSPECTION_NOT_FOUND');
   }
 
-  // 4. Generate deterministic ORP
-  const orpResult = generateORPActions(
+  // 4. Generate a governed Action Plan from the exact Decision Package.
+  const orpResult = generateGovernedORPActions(
+    decisionPackage,
     latestAssessment.riskLevel,
     latestAssessment.priorityLevel,
     inspection
@@ -361,8 +421,11 @@ export async function createORPForCase(caseId: string, principal: Organizational
         temporaryMeasures: orpResult.temporaryMeasures,
         reasons: orpResult.reasons,
         alternativeActionCodes: orpResult.alternativeActionCodes,
-        planVersion: 'ODYSSEY_ORP_V1',
-        decisionPackageId: decisionPackage.id
+        planVersion: GOVERNED_ACTION_PLAN_VERSION,
+        decisionPackageId: decisionPackage.id,
+        governanceMode: orpResult.governanceMode,
+        governedActions: orpResult.governedActions as Prisma.InputJsonValue,
+        actionPlanContractVersion: GOVERNED_ACTION_PLAN_VERSION
       }
     });
 

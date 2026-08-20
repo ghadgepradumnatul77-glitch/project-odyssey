@@ -3,6 +3,13 @@ import { ExecutionEvidenceType, ExecutionPlanStatus, ExecutionTaskStatus, OrpDec
 import { buildCaseReadWhere, buildExecutionPlanMutationWhere, buildExecutionPlanReadWhere, buildExecutionTaskMutationWhere, buildExecutionTaskReadWhere, buildOrpMutationWhere, isSameOrganizationalScope, OrganizationalPrincipal } from '../../security/organizational-scope';
 import { ExecutionError } from './execution-error';
 import { EXECUTION_TEMPLATE_VERSION, translateActionsToTasks } from './execution-templates';
+import { z } from 'zod';
+import { GovernedTemplateError, resolveGovernedTemplate } from '../execution-templates/governed-execution-template.service';
+
+export const GOVERNED_EXECUTION_CONTRACT_VERSION='ODYSSEY_GOVERNED_EXECUTION_V1';
+const governedAction=z.object({actionId:z.string().uuid(),actionCode:z.string().min(1),actionVersion:z.number().int().positive(),classification:z.enum(['MANDATORY','RECOMMENDED','OPTIONAL','PROHIBITED'])}).passthrough();
+const governedProjection=z.object({packageId:z.string().min(1),packageVersion:z.number().int().positive(),MANDATORY:z.array(governedAction),RECOMMENDED:z.array(governedAction),OPTIONAL:z.array(governedAction),PROHIBITED:z.array(governedAction),ENGINEERING_RECOMMENDED:z.array(z.unknown())}).passthrough();
+export function governedExecutableActions(value:unknown,recommendedActionCodes:unknown){const projection=governedProjection.safeParse(value),selected=actionCodes(recommendedActionCodes);if(!projection.success||!selected)throw new ExecutionError('GOVERNED_ORP_INTEGRITY_ERROR',409,'Governed executable action selection is inconsistent.');const executable=[...projection.data.MANDATORY,...projection.data.RECOMMENDED];if(selected.length!==executable.length||selected.some((code,index)=>code!==executable[index].actionCode)||projection.data.PROHIBITED.some(item=>selected.includes(item.actionCode)))throw new ExecutionError('GOVERNED_ORP_INTEGRITY_ERROR',409,'Governed executable action selection is inconsistent.');return{projection:projection.data,executable};}
 
 const safeUser = { id: true, employeeCode: true, name: true, designation: true, role: true, status: true } as const;
 const taskInclude = { assignedTo: { select: safeUser }, assignedBy: { select: safeUser }, completionSubmittedBy: { select: safeUser }, verifiedBy: { select: safeUser }, cancelledBy: { select: safeUser }, evidence: { include: { submittedBy: { select: safeUser } }, orderBy: { submittedAt: 'asc' as const } } };
@@ -15,6 +22,11 @@ export function hasClientActorFields(body: Record<string, unknown>) { return act
 
 function actionCodes(value: unknown): string[] | null {
   return Array.isArray(value) && value.every((item) => typeof item === 'string') ? value : null;
+}
+export function executionGovernanceMode(governanceMode: string, decisionPackageId: string | null) {
+  if (governanceMode === 'LEGACY' && decisionPackageId === null) return 'LEGACY' as const;
+  if (governanceMode !== 'LEGACY' && decisionPackageId !== null) return 'GOVERNED' as const;
+  return 'INVALID' as const;
 }
 
 export function derivePlanStatus(statuses: Array<{ status: ExecutionTaskStatus; isMandatory: boolean }>): ExecutionPlanStatus {
@@ -50,7 +62,7 @@ export async function generateExecutionPlan(orpId: string, principal: Organizati
     if (existingCase?.status === 'CLOSED') throw new ExecutionError('INVALID_CASE_STATE', 409, 'A closed Case cannot generate an execution plan.');
     return { plan: existing, created: false };
   }
-  const orp = await prisma.operationalResponsePlan.findUnique({ where: { id: orpId, AND: [buildOrpMutationWhere(principal)] }, include: { case: true, decisions: true } });
+  const orp = await prisma.operationalResponsePlan.findUnique({ where: { id: orpId, AND: [buildOrpMutationWhere(principal)] }, include: { case: { include: { asset: true } }, decisions: true, decisionPackage: { select: { id:true,packageVersion:true,status:true } } } });
   if (!orp) throw new ExecutionError('ORP_NOT_FOUND', 404, 'Operational response plan not found.');
   if (orp.status !== 'APPROVED') throw new ExecutionError('ORP_NOT_APPROVED', 409, 'Operational response plan is not approved.');
   const decision = orp.decisions.find((item) => item.decisionType === OrpDecisionType.APPROVED);
@@ -58,6 +70,17 @@ export async function generateExecutionPlan(orpId: string, principal: Organizati
   if (orp.case.status !== 'APPROVED') throw new ExecutionError('INVALID_CASE_STATE', 409, 'Case must be APPROVED before execution planning.');
   const latest = await prisma.operationalResponsePlan.findFirst({ where: { caseId: orp.caseId }, orderBy: [{ versionNumber: 'desc' }, { createdAt: 'desc' }, { id: 'desc' }], select: { id: true } });
   if (latest?.id !== orp.id) throw new ExecutionError('STALE_ORP_VERSION', 409, 'A newer operational response plan exists.');
+  const governance = executionGovernanceMode(orp.governanceMode, orp.decisionPackageId);
+  if (governance === 'INVALID') throw new ExecutionError('GOVERNED_ORP_INTEGRITY_ERROR', 409, 'Action Plan governance mode and Decision Package provenance are inconsistent.');
+  if (governance === 'GOVERNED') {
+    const {projection,executable}=governedExecutableActions(orp.governedActions,orp.recommendedActionCodes);
+    if(projection.packageId!==orp.decisionPackageId||orp.decisionPackage?.id!==orp.decisionPackageId||orp.decisionPackage.status!=='PREPARED')throw new ExecutionError('GOVERNED_ORP_INTEGRITY_ERROR',409,'Governed Action Plan and Decision Package provenance are inconsistent.');
+    if(projection.ENGINEERING_RECOMMENDED.length)throw new ExecutionError('EXECUTION_TEMPLATE_NOT_GOVERNED',409,'Engineering recommendations without an Approved Action Version cannot generate governed execution.');
+    let resolved;
+    try{resolved=await Promise.all(executable.map(async action=>({action,template:await resolveGovernedTemplate(action.actionId,orp.case.asset.departmentId,orp.case.asset.jurisdictionId)})));}catch(error){if(error instanceof GovernedTemplateError)throw new ExecutionError(error.code,error.status,error.message);throw error;}
+    const provenance={contractVersion:GOVERNED_EXECUTION_CONTRACT_VERSION,orp:{id:orp.id,versionNumber:orp.versionNumber},decisionPackage:{id:orp.decisionPackage.id,versionNumber:orp.decisionPackage.packageVersion},humanDecision:{id:decision.id},actions:resolved.map(({action,template})=>({approvedActionVersion:{id:action.actionId,code:action.actionCode,versionNumber:action.actionVersion},executionTemplate:{id:template.id,code:template.templateCode,versionNumber:template.versionNumber},tasks:template.tasks.map(task=>({id:task.id,code:task.taskCode,sequenceNumber:task.sequenceNumber}))}))};
+    try{const plan=await prisma.$transaction(async tx=>{const created=await tx.executionPlan.create({data:{orpId:orp.id,caseId:orp.caseId,approvalDecisionId:decision.id,createdById:principal.id,templateVersion:GOVERNED_EXECUTION_CONTRACT_VERSION,governanceMode:'GOVERNED',executionContractVersion:GOVERNED_EXECUTION_CONTRACT_VERSION,governedProvenance:provenance}});let sequence=1;const rows=resolved.flatMap(({action,template})=>template.tasks.map(task=>({executionPlanId:created.id,sequenceNumber:sequence++,sourceActionCode:action.actionCode,templateTaskKey:task.taskCode,titleSnapshot:task.title,descriptionSnapshot:task.description,categorySnapshot:template.approvedActionVersion.category,isMandatory:task.mandatory,approvedActionVersionId:action.actionId,governedExecutionTemplateId:template.id,governedTaskTemplateId:task.id,sourceActionVersion:action.actionVersion,sourceTemplateCode:template.templateCode,sourceTemplateVersion:template.versionNumber,evidenceRequired:task.evidenceRequired,verificationRequired:task.verificationRequired})));if(rows.length)await tx.executionTask.createMany({data:rows});const changed=await tx.case.updateMany({where:{id:orp.caseId,status:'APPROVED'},data:{status:'EXECUTION'}});if(changed.count!==1)throw new ExecutionError('INVALID_CASE_STATE',409,'Case state changed before execution planning.');return tx.executionPlan.findUniqueOrThrow({where:{id:created.id},include:{tasks:{include:taskInclude,orderBy:{sequenceNumber:'asc'}}}});});return{plan,created:true};}catch(error){if(error instanceof Prisma.PrismaClientKnownRequestError&&error.code==='P2002'){const plan=await prisma.executionPlan.findFirst({where:{orpId,...buildExecutionPlanMutationWhere(principal)},include:{tasks:{include:taskInclude,orderBy:{sequenceNumber:'asc'}}}});if(plan)return{plan,created:false};throw new ExecutionError('EXECUTION_PLAN_CONFLICT',409,'Execution plan creation conflicted.');}throw error;}
+  }
   const codes = actionCodes(orp.recommendedActionCodes);
   if (!codes) throw new ExecutionError('INVALID_ORP_ACTIONS', 409, 'Approved ORP actions are invalid.');
   const translated = translateActionsToTasks(codes);

@@ -27,6 +27,12 @@ export function parseStoredActionCodes(value: unknown, fieldName: string, orpId:
   console.error(`ORP data integrity issue: ${fieldName} is not an array of strings.`, { orpId });
   return [];
 }
+function storedGovernedActions(value: unknown) {
+  if (!value || typeof value !== 'object' || Array.isArray(value)) return null;
+  const record=value as Record<string,unknown>;
+  for(const key of ['MANDATORY','RECOMMENDED','OPTIONAL','PROHIBITED','ENGINEERING_RECOMMENDED']) if(!Array.isArray(record[key])) return null;
+  return record;
+}
 
 
 // ======================================================
@@ -136,6 +142,7 @@ router.get('/cases/:caseId/orps', authenticate, async (req, res) => {
 
     const orps = await prisma.operationalResponsePlan.findMany({
       where: { caseId },
+      include: { decisionPackage: { select: { id: true, packageVersion: true, packageContractVersion: true, preparedAt: true } } },
       orderBy: [
         { createdAt: 'desc' },
         { versionNumber: 'desc' }
@@ -195,7 +202,8 @@ router.get('/orps/:orpId', authenticate, async (req, res) => {
             }
           }
         },
-        riskAssessment: true
+        riskAssessment: true,
+        decisionPackage: { select: { id: true, packageVersion: true, packageContractVersion: true, preparedAt: true } }
       }
     });
 
@@ -221,15 +229,20 @@ router.get('/orps/:orpId', authenticate, async (req, res) => {
       orp.id
     );
 
-    const recommendedActions = getApprovedActions(recommendedActionCodes);
-    const alternativeActions = getApprovedActions(alternativeActionCodes);
+    const legacy = orp.decisionPackageId === null && orp.governanceMode === 'LEGACY';
+    const governed = !legacy ? storedGovernedActions(orp.governedActions) : null;
+    if (!legacy && !governed) return res.status(409).json({ success:false,error:{code:'ORP_GOVERNANCE_INTEGRITY_ERROR',message:'Stored governed Action Plan provenance is malformed.'}});
+    const recommendedActions = legacy ? getApprovedActions(recommendedActionCodes) : [...(governed!.MANDATORY as unknown[]),...(governed!.RECOMMENDED as unknown[]),...(governed!.ENGINEERING_RECOMMENDED as unknown[])];
+    const alternativeActions = legacy ? getApprovedActions(alternativeActionCodes) : governed!.OPTIONAL;
 
     return res.status(200).json({
       success: true,
       data: {
         ...orp,
         recommendedActions,
-        alternativeActions
+        alternativeActions,
+        prohibitedActions: legacy ? [] : governed!.PROHIBITED,
+        actionPlanMode: legacy ? 'LEGACY' : 'GOVERNED'
       }
     });
 

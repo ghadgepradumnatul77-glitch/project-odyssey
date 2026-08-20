@@ -4,6 +4,9 @@ export function mutationMessage(error: unknown) {
   if (!isApiClientError(error)) return 'The action could not be recorded. Please try again.';
   if (error.code === 'FOUR_EYES_VIOLATION') return 'Independent verification is required. The same officer cannot verify this recorded completion.';
   if (error.code === 'EVIDENCE_REQUIRED') return 'At least one evidence record is required before recorded completion can proceed.';
+  if (error.code === 'EXECUTION_TEMPLATE_NOT_GOVERNED') return 'Execution cannot be prepared because an authorized execution template has not been established for this action version.';
+  if (error.code === 'EXECUTION_TEMPLATE_GOVERNANCE_CONFLICT') return 'Execution cannot be prepared because multiple applicable authorized templates create an unresolved governance conflict.';
+  if (error.code === 'GOVERNED_ORP_INTEGRITY_ERROR') return 'Execution cannot be prepared because the governed Action Plan provenance is inconsistent.';
   if (error.status === 400) return 'Review the form fields and provide valid required information.';
   if (error.status === 403) return 'You do not have authority for this action.';
   if (error.status === 404) return 'Resource unavailable or outside your accessible scope.';

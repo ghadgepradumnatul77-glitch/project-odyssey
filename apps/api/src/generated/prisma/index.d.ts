@@ -54,6 +54,16 @@ export type PolicyDocument = $Result.DefaultSelection<Prisma.$PolicyDocumentPayl
  */
 export type ApprovedActionVersion = $Result.DefaultSelection<Prisma.$ApprovedActionVersionPayload>
 /**
+ * Model GovernedExecutionTemplate
+ * 
+ */
+export type GovernedExecutionTemplate = $Result.DefaultSelection<Prisma.$GovernedExecutionTemplatePayload>
+/**
+ * Model GovernedExecutionTaskTemplate
+ * 
+ */
+export type GovernedExecutionTaskTemplate = $Result.DefaultSelection<Prisma.$GovernedExecutionTaskTemplatePayload>
+/**
  * Model PolicyRule
  * 
  */
@@ -310,6 +320,23 @@ export const DecisionPackageStatus: {
 
 export type DecisionPackageStatus = (typeof DecisionPackageStatus)[keyof typeof DecisionPackageStatus]
 
+
+export const ActionPlanGovernanceMode: {
+  LEGACY: 'LEGACY',
+  GOVERNED_POLICY: 'GOVERNED_POLICY',
+  GOVERNED_ENGINEERING_NO_POLICY: 'GOVERNED_ENGINEERING_NO_POLICY'
+};
+
+export type ActionPlanGovernanceMode = (typeof ActionPlanGovernanceMode)[keyof typeof ActionPlanGovernanceMode]
+
+
+export const ExecutionPlanGovernanceMode: {
+  LEGACY: 'LEGACY',
+  GOVERNED: 'GOVERNED'
+};
+
+export type ExecutionPlanGovernanceMode = (typeof ExecutionPlanGovernanceMode)[keyof typeof ExecutionPlanGovernanceMode]
+
 }
 
 export type UserStatus = $Enums.UserStatus
@@ -383,6 +410,14 @@ export const EnforcementClassification: typeof $Enums.EnforcementClassification
 export type DecisionPackageStatus = $Enums.DecisionPackageStatus
 
 export const DecisionPackageStatus: typeof $Enums.DecisionPackageStatus
+
+export type ActionPlanGovernanceMode = $Enums.ActionPlanGovernanceMode
+
+export const ActionPlanGovernanceMode: typeof $Enums.ActionPlanGovernanceMode
+
+export type ExecutionPlanGovernanceMode = $Enums.ExecutionPlanGovernanceMode
+
+export const ExecutionPlanGovernanceMode: typeof $Enums.ExecutionPlanGovernanceMode
 
 /**
  * ##  Prisma Client ʲˢ
@@ -581,6 +616,26 @@ export class PrismaClient<
     * ```
     */
   get approvedActionVersion(): Prisma.ApprovedActionVersionDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.governedExecutionTemplate`: Exposes CRUD operations for the **GovernedExecutionTemplate** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more GovernedExecutionTemplates
+    * const governedExecutionTemplates = await prisma.governedExecutionTemplate.findMany()
+    * ```
+    */
+  get governedExecutionTemplate(): Prisma.GovernedExecutionTemplateDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.governedExecutionTaskTemplate`: Exposes CRUD operations for the **GovernedExecutionTaskTemplate** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more GovernedExecutionTaskTemplates
+    * const governedExecutionTaskTemplates = await prisma.governedExecutionTaskTemplate.findMany()
+    * ```
+    */
+  get governedExecutionTaskTemplate(): Prisma.GovernedExecutionTaskTemplateDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.policyRule`: Exposes CRUD operations for the **PolicyRule** model.
@@ -1150,6 +1205,8 @@ export namespace Prisma {
     PublicReportTriageAnalysis: 'PublicReportTriageAnalysis',
     PolicyDocument: 'PolicyDocument',
     ApprovedActionVersion: 'ApprovedActionVersion',
+    GovernedExecutionTemplate: 'GovernedExecutionTemplate',
+    GovernedExecutionTaskTemplate: 'GovernedExecutionTaskTemplate',
     PolicyRule: 'PolicyRule',
     Case: 'Case',
     Inspection: 'Inspection',
@@ -1180,7 +1237,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "department" | "jurisdiction" | "user" | "asset" | "publicReport" | "publicReportTriageAnalysis" | "policyDocument" | "approvedActionVersion" | "policyRule" | "case" | "inspection" | "riskAssessment" | "operationalResponsePlan" | "decisionPackage" | "approvalAuthority" | "orpDecision" | "executionPlan" | "executionTask" | "executionEvidence" | "caseClosure"
+      modelProps: "department" | "jurisdiction" | "user" | "asset" | "publicReport" | "publicReportTriageAnalysis" | "policyDocument" | "approvedActionVersion" | "governedExecutionTemplate" | "governedExecutionTaskTemplate" | "policyRule" | "case" | "inspection" | "riskAssessment" | "operationalResponsePlan" | "decisionPackage" | "approvalAuthority" | "orpDecision" | "executionPlan" | "executionTask" | "executionEvidence" | "caseClosure"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1773,6 +1830,154 @@ export namespace Prisma {
           count: {
             args: Prisma.ApprovedActionVersionCountArgs<ExtArgs>
             result: $Utils.Optional<ApprovedActionVersionCountAggregateOutputType> | number
+          }
+        }
+      }
+      GovernedExecutionTemplate: {
+        payload: Prisma.$GovernedExecutionTemplatePayload<ExtArgs>
+        fields: Prisma.GovernedExecutionTemplateFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.GovernedExecutionTemplateFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GovernedExecutionTemplatePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.GovernedExecutionTemplateFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GovernedExecutionTemplatePayload>
+          }
+          findFirst: {
+            args: Prisma.GovernedExecutionTemplateFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GovernedExecutionTemplatePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.GovernedExecutionTemplateFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GovernedExecutionTemplatePayload>
+          }
+          findMany: {
+            args: Prisma.GovernedExecutionTemplateFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GovernedExecutionTemplatePayload>[]
+          }
+          create: {
+            args: Prisma.GovernedExecutionTemplateCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GovernedExecutionTemplatePayload>
+          }
+          createMany: {
+            args: Prisma.GovernedExecutionTemplateCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.GovernedExecutionTemplateCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GovernedExecutionTemplatePayload>[]
+          }
+          delete: {
+            args: Prisma.GovernedExecutionTemplateDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GovernedExecutionTemplatePayload>
+          }
+          update: {
+            args: Prisma.GovernedExecutionTemplateUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GovernedExecutionTemplatePayload>
+          }
+          deleteMany: {
+            args: Prisma.GovernedExecutionTemplateDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.GovernedExecutionTemplateUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.GovernedExecutionTemplateUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GovernedExecutionTemplatePayload>[]
+          }
+          upsert: {
+            args: Prisma.GovernedExecutionTemplateUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GovernedExecutionTemplatePayload>
+          }
+          aggregate: {
+            args: Prisma.GovernedExecutionTemplateAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateGovernedExecutionTemplate>
+          }
+          groupBy: {
+            args: Prisma.GovernedExecutionTemplateGroupByArgs<ExtArgs>
+            result: $Utils.Optional<GovernedExecutionTemplateGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.GovernedExecutionTemplateCountArgs<ExtArgs>
+            result: $Utils.Optional<GovernedExecutionTemplateCountAggregateOutputType> | number
+          }
+        }
+      }
+      GovernedExecutionTaskTemplate: {
+        payload: Prisma.$GovernedExecutionTaskTemplatePayload<ExtArgs>
+        fields: Prisma.GovernedExecutionTaskTemplateFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.GovernedExecutionTaskTemplateFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GovernedExecutionTaskTemplatePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.GovernedExecutionTaskTemplateFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GovernedExecutionTaskTemplatePayload>
+          }
+          findFirst: {
+            args: Prisma.GovernedExecutionTaskTemplateFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GovernedExecutionTaskTemplatePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.GovernedExecutionTaskTemplateFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GovernedExecutionTaskTemplatePayload>
+          }
+          findMany: {
+            args: Prisma.GovernedExecutionTaskTemplateFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GovernedExecutionTaskTemplatePayload>[]
+          }
+          create: {
+            args: Prisma.GovernedExecutionTaskTemplateCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GovernedExecutionTaskTemplatePayload>
+          }
+          createMany: {
+            args: Prisma.GovernedExecutionTaskTemplateCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.GovernedExecutionTaskTemplateCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GovernedExecutionTaskTemplatePayload>[]
+          }
+          delete: {
+            args: Prisma.GovernedExecutionTaskTemplateDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GovernedExecutionTaskTemplatePayload>
+          }
+          update: {
+            args: Prisma.GovernedExecutionTaskTemplateUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GovernedExecutionTaskTemplatePayload>
+          }
+          deleteMany: {
+            args: Prisma.GovernedExecutionTaskTemplateDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.GovernedExecutionTaskTemplateUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.GovernedExecutionTaskTemplateUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GovernedExecutionTaskTemplatePayload>[]
+          }
+          upsert: {
+            args: Prisma.GovernedExecutionTaskTemplateUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GovernedExecutionTaskTemplatePayload>
+          }
+          aggregate: {
+            args: Prisma.GovernedExecutionTaskTemplateAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateGovernedExecutionTaskTemplate>
+          }
+          groupBy: {
+            args: Prisma.GovernedExecutionTaskTemplateGroupByArgs<ExtArgs>
+            result: $Utils.Optional<GovernedExecutionTaskTemplateGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.GovernedExecutionTaskTemplateCountArgs<ExtArgs>
+            result: $Utils.Optional<GovernedExecutionTaskTemplateCountAggregateOutputType> | number
           }
         }
       }
@@ -2768,6 +2973,8 @@ export namespace Prisma {
     publicReportTriageAnalysis?: PublicReportTriageAnalysisOmit
     policyDocument?: PolicyDocumentOmit
     approvedActionVersion?: ApprovedActionVersionOmit
+    governedExecutionTemplate?: GovernedExecutionTemplateOmit
+    governedExecutionTaskTemplate?: GovernedExecutionTaskTemplateOmit
     policyRule?: PolicyRuleOmit
     case?: CaseOmit
     inspection?: InspectionOmit
@@ -2867,6 +3074,7 @@ export namespace Prisma {
     publicReports: number
     policyDocuments: number
     approvedActions: number
+    governedExecutionTemplates: number
   }
 
   export type DepartmentCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2877,6 +3085,7 @@ export namespace Prisma {
     publicReports?: boolean | DepartmentCountOutputTypeCountPublicReportsArgs
     policyDocuments?: boolean | DepartmentCountOutputTypeCountPolicyDocumentsArgs
     approvedActions?: boolean | DepartmentCountOutputTypeCountApprovedActionsArgs
+    governedExecutionTemplates?: boolean | DepartmentCountOutputTypeCountGovernedExecutionTemplatesArgs
   }
 
   // Custom InputTypes
@@ -2939,6 +3148,13 @@ export namespace Prisma {
     where?: ApprovedActionVersionWhereInput
   }
 
+  /**
+   * DepartmentCountOutputType without action
+   */
+  export type DepartmentCountOutputTypeCountGovernedExecutionTemplatesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: GovernedExecutionTemplateWhereInput
+  }
+
 
   /**
    * Count Type JurisdictionCountOutputType
@@ -2951,6 +3167,7 @@ export namespace Prisma {
     publicReports: number
     policyDocuments: number
     approvedActions: number
+    governedExecutionTemplates: number
   }
 
   export type JurisdictionCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2960,6 +3177,7 @@ export namespace Prisma {
     publicReports?: boolean | JurisdictionCountOutputTypeCountPublicReportsArgs
     policyDocuments?: boolean | JurisdictionCountOutputTypeCountPolicyDocumentsArgs
     approvedActions?: boolean | JurisdictionCountOutputTypeCountApprovedActionsArgs
+    governedExecutionTemplates?: boolean | JurisdictionCountOutputTypeCountGovernedExecutionTemplatesArgs
   }
 
   // Custom InputTypes
@@ -3015,6 +3233,13 @@ export namespace Prisma {
     where?: ApprovedActionVersionWhereInput
   }
 
+  /**
+   * JurisdictionCountOutputType without action
+   */
+  export type JurisdictionCountOutputTypeCountGovernedExecutionTemplatesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: GovernedExecutionTemplateWhereInput
+  }
+
 
   /**
    * Count Type UserCountOutputType
@@ -3041,6 +3266,8 @@ export namespace Prisma {
     createdApprovedActions: number
     approvedApprovedActions: number
     preparedDecisionPackages: number
+    createdGovernedExecutionTemplates: number
+    approvedGovernedExecutionTemplates: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3064,6 +3291,8 @@ export namespace Prisma {
     createdApprovedActions?: boolean | UserCountOutputTypeCountCreatedApprovedActionsArgs
     approvedApprovedActions?: boolean | UserCountOutputTypeCountApprovedApprovedActionsArgs
     preparedDecisionPackages?: boolean | UserCountOutputTypeCountPreparedDecisionPackagesArgs
+    createdGovernedExecutionTemplates?: boolean | UserCountOutputTypeCountCreatedGovernedExecutionTemplatesArgs
+    approvedGovernedExecutionTemplates?: boolean | UserCountOutputTypeCountApprovedGovernedExecutionTemplatesArgs
   }
 
   // Custom InputTypes
@@ -3217,6 +3446,20 @@ export namespace Prisma {
     where?: DecisionPackageWhereInput
   }
 
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountCreatedGovernedExecutionTemplatesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: GovernedExecutionTemplateWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountApprovedGovernedExecutionTemplatesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: GovernedExecutionTemplateWhereInput
+  }
+
 
   /**
    * Count Type AssetCountOutputType
@@ -3344,10 +3587,14 @@ export namespace Prisma {
 
   export type ApprovedActionVersionCountOutputType = {
     rules: number
+    executionTemplates: number
+    executionTasks: number
   }
 
   export type ApprovedActionVersionCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     rules?: boolean | ApprovedActionVersionCountOutputTypeCountRulesArgs
+    executionTemplates?: boolean | ApprovedActionVersionCountOutputTypeCountExecutionTemplatesArgs
+    executionTasks?: boolean | ApprovedActionVersionCountOutputTypeCountExecutionTasksArgs
   }
 
   // Custom InputTypes
@@ -3366,6 +3613,91 @@ export namespace Prisma {
    */
   export type ApprovedActionVersionCountOutputTypeCountRulesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: PolicyRuleWhereInput
+  }
+
+  /**
+   * ApprovedActionVersionCountOutputType without action
+   */
+  export type ApprovedActionVersionCountOutputTypeCountExecutionTemplatesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: GovernedExecutionTemplateWhereInput
+  }
+
+  /**
+   * ApprovedActionVersionCountOutputType without action
+   */
+  export type ApprovedActionVersionCountOutputTypeCountExecutionTasksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ExecutionTaskWhereInput
+  }
+
+
+  /**
+   * Count Type GovernedExecutionTemplateCountOutputType
+   */
+
+  export type GovernedExecutionTemplateCountOutputType = {
+    tasks: number
+    executionTasks: number
+  }
+
+  export type GovernedExecutionTemplateCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tasks?: boolean | GovernedExecutionTemplateCountOutputTypeCountTasksArgs
+    executionTasks?: boolean | GovernedExecutionTemplateCountOutputTypeCountExecutionTasksArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * GovernedExecutionTemplateCountOutputType without action
+   */
+  export type GovernedExecutionTemplateCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GovernedExecutionTemplateCountOutputType
+     */
+    select?: GovernedExecutionTemplateCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * GovernedExecutionTemplateCountOutputType without action
+   */
+  export type GovernedExecutionTemplateCountOutputTypeCountTasksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: GovernedExecutionTaskTemplateWhereInput
+  }
+
+  /**
+   * GovernedExecutionTemplateCountOutputType without action
+   */
+  export type GovernedExecutionTemplateCountOutputTypeCountExecutionTasksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ExecutionTaskWhereInput
+  }
+
+
+  /**
+   * Count Type GovernedExecutionTaskTemplateCountOutputType
+   */
+
+  export type GovernedExecutionTaskTemplateCountOutputType = {
+    executionTasks: number
+  }
+
+  export type GovernedExecutionTaskTemplateCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    executionTasks?: boolean | GovernedExecutionTaskTemplateCountOutputTypeCountExecutionTasksArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * GovernedExecutionTaskTemplateCountOutputType without action
+   */
+  export type GovernedExecutionTaskTemplateCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GovernedExecutionTaskTemplateCountOutputType
+     */
+    select?: GovernedExecutionTaskTemplateCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * GovernedExecutionTaskTemplateCountOutputType without action
+   */
+  export type GovernedExecutionTaskTemplateCountOutputTypeCountExecutionTasksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ExecutionTaskWhereInput
   }
 
 
@@ -3856,6 +4188,7 @@ export namespace Prisma {
     publicReports?: boolean | Department$publicReportsArgs<ExtArgs>
     policyDocuments?: boolean | Department$policyDocumentsArgs<ExtArgs>
     approvedActions?: boolean | Department$approvedActionsArgs<ExtArgs>
+    governedExecutionTemplates?: boolean | Department$governedExecutionTemplatesArgs<ExtArgs>
     _count?: boolean | DepartmentCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["department"]>
 
@@ -3889,6 +4222,7 @@ export namespace Prisma {
     publicReports?: boolean | Department$publicReportsArgs<ExtArgs>
     policyDocuments?: boolean | Department$policyDocumentsArgs<ExtArgs>
     approvedActions?: boolean | Department$approvedActionsArgs<ExtArgs>
+    governedExecutionTemplates?: boolean | Department$governedExecutionTemplatesArgs<ExtArgs>
     _count?: boolean | DepartmentCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type DepartmentIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -3904,6 +4238,7 @@ export namespace Prisma {
       publicReports: Prisma.$PublicReportPayload<ExtArgs>[]
       policyDocuments: Prisma.$PolicyDocumentPayload<ExtArgs>[]
       approvedActions: Prisma.$ApprovedActionVersionPayload<ExtArgs>[]
+      governedExecutionTemplates: Prisma.$GovernedExecutionTemplatePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -4311,6 +4646,7 @@ export namespace Prisma {
     publicReports<T extends Department$publicReportsArgs<ExtArgs> = {}>(args?: Subset<T, Department$publicReportsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PublicReportPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     policyDocuments<T extends Department$policyDocumentsArgs<ExtArgs> = {}>(args?: Subset<T, Department$policyDocumentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PolicyDocumentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     approvedActions<T extends Department$approvedActionsArgs<ExtArgs> = {}>(args?: Subset<T, Department$approvedActionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ApprovedActionVersionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    governedExecutionTemplates<T extends Department$governedExecutionTemplatesArgs<ExtArgs> = {}>(args?: Subset<T, Department$governedExecutionTemplatesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GovernedExecutionTemplatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4900,6 +5236,30 @@ export namespace Prisma {
   }
 
   /**
+   * Department.governedExecutionTemplates
+   */
+  export type Department$governedExecutionTemplatesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GovernedExecutionTemplate
+     */
+    select?: GovernedExecutionTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GovernedExecutionTemplate
+     */
+    omit?: GovernedExecutionTemplateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GovernedExecutionTemplateInclude<ExtArgs> | null
+    where?: GovernedExecutionTemplateWhereInput
+    orderBy?: GovernedExecutionTemplateOrderByWithRelationInput | GovernedExecutionTemplateOrderByWithRelationInput[]
+    cursor?: GovernedExecutionTemplateWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: GovernedExecutionTemplateScalarFieldEnum | GovernedExecutionTemplateScalarFieldEnum[]
+  }
+
+  /**
    * Department without action
    */
   export type DepartmentDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5089,6 +5449,7 @@ export namespace Prisma {
     publicReports?: boolean | Jurisdiction$publicReportsArgs<ExtArgs>
     policyDocuments?: boolean | Jurisdiction$policyDocumentsArgs<ExtArgs>
     approvedActions?: boolean | Jurisdiction$approvedActionsArgs<ExtArgs>
+    governedExecutionTemplates?: boolean | Jurisdiction$governedExecutionTemplatesArgs<ExtArgs>
     _count?: boolean | JurisdictionCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["jurisdiction"]>
 
@@ -5127,6 +5488,7 @@ export namespace Prisma {
     publicReports?: boolean | Jurisdiction$publicReportsArgs<ExtArgs>
     policyDocuments?: boolean | Jurisdiction$policyDocumentsArgs<ExtArgs>
     approvedActions?: boolean | Jurisdiction$approvedActionsArgs<ExtArgs>
+    governedExecutionTemplates?: boolean | Jurisdiction$governedExecutionTemplatesArgs<ExtArgs>
     _count?: boolean | JurisdictionCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type JurisdictionIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5146,6 +5508,7 @@ export namespace Prisma {
       publicReports: Prisma.$PublicReportPayload<ExtArgs>[]
       policyDocuments: Prisma.$PolicyDocumentPayload<ExtArgs>[]
       approvedActions: Prisma.$ApprovedActionVersionPayload<ExtArgs>[]
+      governedExecutionTemplates: Prisma.$GovernedExecutionTemplatePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -5554,6 +5917,7 @@ export namespace Prisma {
     publicReports<T extends Jurisdiction$publicReportsArgs<ExtArgs> = {}>(args?: Subset<T, Jurisdiction$publicReportsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PublicReportPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     policyDocuments<T extends Jurisdiction$policyDocumentsArgs<ExtArgs> = {}>(args?: Subset<T, Jurisdiction$policyDocumentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PolicyDocumentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     approvedActions<T extends Jurisdiction$approvedActionsArgs<ExtArgs> = {}>(args?: Subset<T, Jurisdiction$approvedActionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ApprovedActionVersionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    governedExecutionTemplates<T extends Jurisdiction$governedExecutionTemplatesArgs<ExtArgs> = {}>(args?: Subset<T, Jurisdiction$governedExecutionTemplatesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GovernedExecutionTemplatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -6128,6 +6492,30 @@ export namespace Prisma {
   }
 
   /**
+   * Jurisdiction.governedExecutionTemplates
+   */
+  export type Jurisdiction$governedExecutionTemplatesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GovernedExecutionTemplate
+     */
+    select?: GovernedExecutionTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GovernedExecutionTemplate
+     */
+    omit?: GovernedExecutionTemplateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GovernedExecutionTemplateInclude<ExtArgs> | null
+    where?: GovernedExecutionTemplateWhereInput
+    orderBy?: GovernedExecutionTemplateOrderByWithRelationInput | GovernedExecutionTemplateOrderByWithRelationInput[]
+    cursor?: GovernedExecutionTemplateWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: GovernedExecutionTemplateScalarFieldEnum | GovernedExecutionTemplateScalarFieldEnum[]
+  }
+
+  /**
    * Jurisdiction without action
    */
   export type JurisdictionDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -6388,6 +6776,8 @@ export namespace Prisma {
     createdApprovedActions?: boolean | User$createdApprovedActionsArgs<ExtArgs>
     approvedApprovedActions?: boolean | User$approvedApprovedActionsArgs<ExtArgs>
     preparedDecisionPackages?: boolean | User$preparedDecisionPackagesArgs<ExtArgs>
+    createdGovernedExecutionTemplates?: boolean | User$createdGovernedExecutionTemplatesArgs<ExtArgs>
+    approvedGovernedExecutionTemplates?: boolean | User$approvedGovernedExecutionTemplatesArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -6464,6 +6854,8 @@ export namespace Prisma {
     createdApprovedActions?: boolean | User$createdApprovedActionsArgs<ExtArgs>
     approvedApprovedActions?: boolean | User$approvedApprovedActionsArgs<ExtArgs>
     preparedDecisionPackages?: boolean | User$preparedDecisionPackagesArgs<ExtArgs>
+    createdGovernedExecutionTemplates?: boolean | User$createdGovernedExecutionTemplatesArgs<ExtArgs>
+    approvedGovernedExecutionTemplates?: boolean | User$approvedGovernedExecutionTemplatesArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -6500,6 +6892,8 @@ export namespace Prisma {
       createdApprovedActions: Prisma.$ApprovedActionVersionPayload<ExtArgs>[]
       approvedApprovedActions: Prisma.$ApprovedActionVersionPayload<ExtArgs>[]
       preparedDecisionPackages: Prisma.$DecisionPackagePayload<ExtArgs>[]
+      createdGovernedExecutionTemplates: Prisma.$GovernedExecutionTemplatePayload<ExtArgs>[]
+      approvedGovernedExecutionTemplates: Prisma.$GovernedExecutionTemplatePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -6930,6 +7324,8 @@ export namespace Prisma {
     createdApprovedActions<T extends User$createdApprovedActionsArgs<ExtArgs> = {}>(args?: Subset<T, User$createdApprovedActionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ApprovedActionVersionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     approvedApprovedActions<T extends User$approvedApprovedActionsArgs<ExtArgs> = {}>(args?: Subset<T, User$approvedApprovedActionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ApprovedActionVersionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     preparedDecisionPackages<T extends User$preparedDecisionPackagesArgs<ExtArgs> = {}>(args?: Subset<T, User$preparedDecisionPackagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DecisionPackagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    createdGovernedExecutionTemplates<T extends User$createdGovernedExecutionTemplatesArgs<ExtArgs> = {}>(args?: Subset<T, User$createdGovernedExecutionTemplatesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GovernedExecutionTemplatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    approvedGovernedExecutionTemplates<T extends User$approvedGovernedExecutionTemplatesArgs<ExtArgs> = {}>(args?: Subset<T, User$approvedGovernedExecutionTemplatesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GovernedExecutionTemplatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -7844,6 +8240,54 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: DecisionPackageScalarFieldEnum | DecisionPackageScalarFieldEnum[]
+  }
+
+  /**
+   * User.createdGovernedExecutionTemplates
+   */
+  export type User$createdGovernedExecutionTemplatesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GovernedExecutionTemplate
+     */
+    select?: GovernedExecutionTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GovernedExecutionTemplate
+     */
+    omit?: GovernedExecutionTemplateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GovernedExecutionTemplateInclude<ExtArgs> | null
+    where?: GovernedExecutionTemplateWhereInput
+    orderBy?: GovernedExecutionTemplateOrderByWithRelationInput | GovernedExecutionTemplateOrderByWithRelationInput[]
+    cursor?: GovernedExecutionTemplateWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: GovernedExecutionTemplateScalarFieldEnum | GovernedExecutionTemplateScalarFieldEnum[]
+  }
+
+  /**
+   * User.approvedGovernedExecutionTemplates
+   */
+  export type User$approvedGovernedExecutionTemplatesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GovernedExecutionTemplate
+     */
+    select?: GovernedExecutionTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GovernedExecutionTemplate
+     */
+    omit?: GovernedExecutionTemplateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GovernedExecutionTemplateInclude<ExtArgs> | null
+    where?: GovernedExecutionTemplateWhereInput
+    orderBy?: GovernedExecutionTemplateOrderByWithRelationInput | GovernedExecutionTemplateOrderByWithRelationInput[]
+    cursor?: GovernedExecutionTemplateWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: GovernedExecutionTemplateScalarFieldEnum | GovernedExecutionTemplateScalarFieldEnum[]
   }
 
   /**
@@ -13590,6 +14034,8 @@ export namespace Prisma {
     createdBy?: boolean | UserDefaultArgs<ExtArgs>
     approvedBy?: boolean | ApprovedActionVersion$approvedByArgs<ExtArgs>
     rules?: boolean | ApprovedActionVersion$rulesArgs<ExtArgs>
+    executionTemplates?: boolean | ApprovedActionVersion$executionTemplatesArgs<ExtArgs>
+    executionTasks?: boolean | ApprovedActionVersion$executionTasksArgs<ExtArgs>
     _count?: boolean | ApprovedActionVersionCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["approvedActionVersion"]>
 
@@ -13680,6 +14126,8 @@ export namespace Prisma {
     createdBy?: boolean | UserDefaultArgs<ExtArgs>
     approvedBy?: boolean | ApprovedActionVersion$approvedByArgs<ExtArgs>
     rules?: boolean | ApprovedActionVersion$rulesArgs<ExtArgs>
+    executionTemplates?: boolean | ApprovedActionVersion$executionTemplatesArgs<ExtArgs>
+    executionTasks?: boolean | ApprovedActionVersion$executionTasksArgs<ExtArgs>
     _count?: boolean | ApprovedActionVersionCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ApprovedActionVersionIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -13706,6 +14154,8 @@ export namespace Prisma {
       createdBy: Prisma.$UserPayload<ExtArgs>
       approvedBy: Prisma.$UserPayload<ExtArgs> | null
       rules: Prisma.$PolicyRulePayload<ExtArgs>[]
+      executionTemplates: Prisma.$GovernedExecutionTemplatePayload<ExtArgs>[]
+      executionTasks: Prisma.$ExecutionTaskPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -14128,6 +14578,8 @@ export namespace Prisma {
     createdBy<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     approvedBy<T extends ApprovedActionVersion$approvedByArgs<ExtArgs> = {}>(args?: Subset<T, ApprovedActionVersion$approvedByArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     rules<T extends ApprovedActionVersion$rulesArgs<ExtArgs> = {}>(args?: Subset<T, ApprovedActionVersion$rulesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PolicyRulePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    executionTemplates<T extends ApprovedActionVersion$executionTemplatesArgs<ExtArgs> = {}>(args?: Subset<T, ApprovedActionVersion$executionTemplatesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GovernedExecutionTemplatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    executionTasks<T extends ApprovedActionVersion$executionTasksArgs<ExtArgs> = {}>(args?: Subset<T, ApprovedActionVersion$executionTasksArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExecutionTaskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -14673,6 +15125,54 @@ export namespace Prisma {
   }
 
   /**
+   * ApprovedActionVersion.executionTemplates
+   */
+  export type ApprovedActionVersion$executionTemplatesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GovernedExecutionTemplate
+     */
+    select?: GovernedExecutionTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GovernedExecutionTemplate
+     */
+    omit?: GovernedExecutionTemplateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GovernedExecutionTemplateInclude<ExtArgs> | null
+    where?: GovernedExecutionTemplateWhereInput
+    orderBy?: GovernedExecutionTemplateOrderByWithRelationInput | GovernedExecutionTemplateOrderByWithRelationInput[]
+    cursor?: GovernedExecutionTemplateWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: GovernedExecutionTemplateScalarFieldEnum | GovernedExecutionTemplateScalarFieldEnum[]
+  }
+
+  /**
+   * ApprovedActionVersion.executionTasks
+   */
+  export type ApprovedActionVersion$executionTasksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExecutionTask
+     */
+    select?: ExecutionTaskSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExecutionTask
+     */
+    omit?: ExecutionTaskOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExecutionTaskInclude<ExtArgs> | null
+    where?: ExecutionTaskWhereInput
+    orderBy?: ExecutionTaskOrderByWithRelationInput | ExecutionTaskOrderByWithRelationInput[]
+    cursor?: ExecutionTaskWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ExecutionTaskScalarFieldEnum | ExecutionTaskScalarFieldEnum[]
+  }
+
+  /**
    * ApprovedActionVersion without action
    */
   export type ApprovedActionVersionDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -14688,6 +15188,2601 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: ApprovedActionVersionInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model GovernedExecutionTemplate
+   */
+
+  export type AggregateGovernedExecutionTemplate = {
+    _count: GovernedExecutionTemplateCountAggregateOutputType | null
+    _avg: GovernedExecutionTemplateAvgAggregateOutputType | null
+    _sum: GovernedExecutionTemplateSumAggregateOutputType | null
+    _min: GovernedExecutionTemplateMinAggregateOutputType | null
+    _max: GovernedExecutionTemplateMaxAggregateOutputType | null
+  }
+
+  export type GovernedExecutionTemplateAvgAggregateOutputType = {
+    versionNumber: number | null
+  }
+
+  export type GovernedExecutionTemplateSumAggregateOutputType = {
+    versionNumber: number | null
+  }
+
+  export type GovernedExecutionTemplateMinAggregateOutputType = {
+    id: string | null
+    templateCode: string | null
+    versionNumber: number | null
+    approvedActionVersionId: string | null
+    title: string | null
+    description: string | null
+    status: $Enums.RegistryLifecycleStatus | null
+    effectiveFrom: Date | null
+    effectiveUntil: Date | null
+    departmentId: string | null
+    jurisdictionId: string | null
+    createdById: string | null
+    approvedById: string | null
+    approvedAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type GovernedExecutionTemplateMaxAggregateOutputType = {
+    id: string | null
+    templateCode: string | null
+    versionNumber: number | null
+    approvedActionVersionId: string | null
+    title: string | null
+    description: string | null
+    status: $Enums.RegistryLifecycleStatus | null
+    effectiveFrom: Date | null
+    effectiveUntil: Date | null
+    departmentId: string | null
+    jurisdictionId: string | null
+    createdById: string | null
+    approvedById: string | null
+    approvedAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type GovernedExecutionTemplateCountAggregateOutputType = {
+    id: number
+    templateCode: number
+    versionNumber: number
+    approvedActionVersionId: number
+    title: number
+    description: number
+    status: number
+    effectiveFrom: number
+    effectiveUntil: number
+    departmentId: number
+    jurisdictionId: number
+    createdById: number
+    approvedById: number
+    approvedAt: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type GovernedExecutionTemplateAvgAggregateInputType = {
+    versionNumber?: true
+  }
+
+  export type GovernedExecutionTemplateSumAggregateInputType = {
+    versionNumber?: true
+  }
+
+  export type GovernedExecutionTemplateMinAggregateInputType = {
+    id?: true
+    templateCode?: true
+    versionNumber?: true
+    approvedActionVersionId?: true
+    title?: true
+    description?: true
+    status?: true
+    effectiveFrom?: true
+    effectiveUntil?: true
+    departmentId?: true
+    jurisdictionId?: true
+    createdById?: true
+    approvedById?: true
+    approvedAt?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type GovernedExecutionTemplateMaxAggregateInputType = {
+    id?: true
+    templateCode?: true
+    versionNumber?: true
+    approvedActionVersionId?: true
+    title?: true
+    description?: true
+    status?: true
+    effectiveFrom?: true
+    effectiveUntil?: true
+    departmentId?: true
+    jurisdictionId?: true
+    createdById?: true
+    approvedById?: true
+    approvedAt?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type GovernedExecutionTemplateCountAggregateInputType = {
+    id?: true
+    templateCode?: true
+    versionNumber?: true
+    approvedActionVersionId?: true
+    title?: true
+    description?: true
+    status?: true
+    effectiveFrom?: true
+    effectiveUntil?: true
+    departmentId?: true
+    jurisdictionId?: true
+    createdById?: true
+    approvedById?: true
+    approvedAt?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type GovernedExecutionTemplateAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which GovernedExecutionTemplate to aggregate.
+     */
+    where?: GovernedExecutionTemplateWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of GovernedExecutionTemplates to fetch.
+     */
+    orderBy?: GovernedExecutionTemplateOrderByWithRelationInput | GovernedExecutionTemplateOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: GovernedExecutionTemplateWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` GovernedExecutionTemplates from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` GovernedExecutionTemplates.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned GovernedExecutionTemplates
+    **/
+    _count?: true | GovernedExecutionTemplateCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: GovernedExecutionTemplateAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: GovernedExecutionTemplateSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: GovernedExecutionTemplateMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: GovernedExecutionTemplateMaxAggregateInputType
+  }
+
+  export type GetGovernedExecutionTemplateAggregateType<T extends GovernedExecutionTemplateAggregateArgs> = {
+        [P in keyof T & keyof AggregateGovernedExecutionTemplate]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateGovernedExecutionTemplate[P]>
+      : GetScalarType<T[P], AggregateGovernedExecutionTemplate[P]>
+  }
+
+
+
+
+  export type GovernedExecutionTemplateGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: GovernedExecutionTemplateWhereInput
+    orderBy?: GovernedExecutionTemplateOrderByWithAggregationInput | GovernedExecutionTemplateOrderByWithAggregationInput[]
+    by: GovernedExecutionTemplateScalarFieldEnum[] | GovernedExecutionTemplateScalarFieldEnum
+    having?: GovernedExecutionTemplateScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: GovernedExecutionTemplateCountAggregateInputType | true
+    _avg?: GovernedExecutionTemplateAvgAggregateInputType
+    _sum?: GovernedExecutionTemplateSumAggregateInputType
+    _min?: GovernedExecutionTemplateMinAggregateInputType
+    _max?: GovernedExecutionTemplateMaxAggregateInputType
+  }
+
+  export type GovernedExecutionTemplateGroupByOutputType = {
+    id: string
+    templateCode: string
+    versionNumber: number
+    approvedActionVersionId: string
+    title: string
+    description: string
+    status: $Enums.RegistryLifecycleStatus
+    effectiveFrom: Date
+    effectiveUntil: Date | null
+    departmentId: string | null
+    jurisdictionId: string | null
+    createdById: string
+    approvedById: string | null
+    approvedAt: Date | null
+    createdAt: Date
+    updatedAt: Date
+    _count: GovernedExecutionTemplateCountAggregateOutputType | null
+    _avg: GovernedExecutionTemplateAvgAggregateOutputType | null
+    _sum: GovernedExecutionTemplateSumAggregateOutputType | null
+    _min: GovernedExecutionTemplateMinAggregateOutputType | null
+    _max: GovernedExecutionTemplateMaxAggregateOutputType | null
+  }
+
+  type GetGovernedExecutionTemplateGroupByPayload<T extends GovernedExecutionTemplateGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<GovernedExecutionTemplateGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof GovernedExecutionTemplateGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], GovernedExecutionTemplateGroupByOutputType[P]>
+            : GetScalarType<T[P], GovernedExecutionTemplateGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type GovernedExecutionTemplateSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    templateCode?: boolean
+    versionNumber?: boolean
+    approvedActionVersionId?: boolean
+    title?: boolean
+    description?: boolean
+    status?: boolean
+    effectiveFrom?: boolean
+    effectiveUntil?: boolean
+    departmentId?: boolean
+    jurisdictionId?: boolean
+    createdById?: boolean
+    approvedById?: boolean
+    approvedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    approvedActionVersion?: boolean | ApprovedActionVersionDefaultArgs<ExtArgs>
+    department?: boolean | GovernedExecutionTemplate$departmentArgs<ExtArgs>
+    jurisdiction?: boolean | GovernedExecutionTemplate$jurisdictionArgs<ExtArgs>
+    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+    approvedBy?: boolean | GovernedExecutionTemplate$approvedByArgs<ExtArgs>
+    tasks?: boolean | GovernedExecutionTemplate$tasksArgs<ExtArgs>
+    executionTasks?: boolean | GovernedExecutionTemplate$executionTasksArgs<ExtArgs>
+    _count?: boolean | GovernedExecutionTemplateCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["governedExecutionTemplate"]>
+
+  export type GovernedExecutionTemplateSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    templateCode?: boolean
+    versionNumber?: boolean
+    approvedActionVersionId?: boolean
+    title?: boolean
+    description?: boolean
+    status?: boolean
+    effectiveFrom?: boolean
+    effectiveUntil?: boolean
+    departmentId?: boolean
+    jurisdictionId?: boolean
+    createdById?: boolean
+    approvedById?: boolean
+    approvedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    approvedActionVersion?: boolean | ApprovedActionVersionDefaultArgs<ExtArgs>
+    department?: boolean | GovernedExecutionTemplate$departmentArgs<ExtArgs>
+    jurisdiction?: boolean | GovernedExecutionTemplate$jurisdictionArgs<ExtArgs>
+    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+    approvedBy?: boolean | GovernedExecutionTemplate$approvedByArgs<ExtArgs>
+  }, ExtArgs["result"]["governedExecutionTemplate"]>
+
+  export type GovernedExecutionTemplateSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    templateCode?: boolean
+    versionNumber?: boolean
+    approvedActionVersionId?: boolean
+    title?: boolean
+    description?: boolean
+    status?: boolean
+    effectiveFrom?: boolean
+    effectiveUntil?: boolean
+    departmentId?: boolean
+    jurisdictionId?: boolean
+    createdById?: boolean
+    approvedById?: boolean
+    approvedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    approvedActionVersion?: boolean | ApprovedActionVersionDefaultArgs<ExtArgs>
+    department?: boolean | GovernedExecutionTemplate$departmentArgs<ExtArgs>
+    jurisdiction?: boolean | GovernedExecutionTemplate$jurisdictionArgs<ExtArgs>
+    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+    approvedBy?: boolean | GovernedExecutionTemplate$approvedByArgs<ExtArgs>
+  }, ExtArgs["result"]["governedExecutionTemplate"]>
+
+  export type GovernedExecutionTemplateSelectScalar = {
+    id?: boolean
+    templateCode?: boolean
+    versionNumber?: boolean
+    approvedActionVersionId?: boolean
+    title?: boolean
+    description?: boolean
+    status?: boolean
+    effectiveFrom?: boolean
+    effectiveUntil?: boolean
+    departmentId?: boolean
+    jurisdictionId?: boolean
+    createdById?: boolean
+    approvedById?: boolean
+    approvedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type GovernedExecutionTemplateOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "templateCode" | "versionNumber" | "approvedActionVersionId" | "title" | "description" | "status" | "effectiveFrom" | "effectiveUntil" | "departmentId" | "jurisdictionId" | "createdById" | "approvedById" | "approvedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["governedExecutionTemplate"]>
+  export type GovernedExecutionTemplateInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    approvedActionVersion?: boolean | ApprovedActionVersionDefaultArgs<ExtArgs>
+    department?: boolean | GovernedExecutionTemplate$departmentArgs<ExtArgs>
+    jurisdiction?: boolean | GovernedExecutionTemplate$jurisdictionArgs<ExtArgs>
+    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+    approvedBy?: boolean | GovernedExecutionTemplate$approvedByArgs<ExtArgs>
+    tasks?: boolean | GovernedExecutionTemplate$tasksArgs<ExtArgs>
+    executionTasks?: boolean | GovernedExecutionTemplate$executionTasksArgs<ExtArgs>
+    _count?: boolean | GovernedExecutionTemplateCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type GovernedExecutionTemplateIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    approvedActionVersion?: boolean | ApprovedActionVersionDefaultArgs<ExtArgs>
+    department?: boolean | GovernedExecutionTemplate$departmentArgs<ExtArgs>
+    jurisdiction?: boolean | GovernedExecutionTemplate$jurisdictionArgs<ExtArgs>
+    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+    approvedBy?: boolean | GovernedExecutionTemplate$approvedByArgs<ExtArgs>
+  }
+  export type GovernedExecutionTemplateIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    approvedActionVersion?: boolean | ApprovedActionVersionDefaultArgs<ExtArgs>
+    department?: boolean | GovernedExecutionTemplate$departmentArgs<ExtArgs>
+    jurisdiction?: boolean | GovernedExecutionTemplate$jurisdictionArgs<ExtArgs>
+    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+    approvedBy?: boolean | GovernedExecutionTemplate$approvedByArgs<ExtArgs>
+  }
+
+  export type $GovernedExecutionTemplatePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "GovernedExecutionTemplate"
+    objects: {
+      approvedActionVersion: Prisma.$ApprovedActionVersionPayload<ExtArgs>
+      department: Prisma.$DepartmentPayload<ExtArgs> | null
+      jurisdiction: Prisma.$JurisdictionPayload<ExtArgs> | null
+      createdBy: Prisma.$UserPayload<ExtArgs>
+      approvedBy: Prisma.$UserPayload<ExtArgs> | null
+      tasks: Prisma.$GovernedExecutionTaskTemplatePayload<ExtArgs>[]
+      executionTasks: Prisma.$ExecutionTaskPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      templateCode: string
+      versionNumber: number
+      approvedActionVersionId: string
+      title: string
+      description: string
+      status: $Enums.RegistryLifecycleStatus
+      effectiveFrom: Date
+      effectiveUntil: Date | null
+      departmentId: string | null
+      jurisdictionId: string | null
+      createdById: string
+      approvedById: string | null
+      approvedAt: Date | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["governedExecutionTemplate"]>
+    composites: {}
+  }
+
+  type GovernedExecutionTemplateGetPayload<S extends boolean | null | undefined | GovernedExecutionTemplateDefaultArgs> = $Result.GetResult<Prisma.$GovernedExecutionTemplatePayload, S>
+
+  type GovernedExecutionTemplateCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<GovernedExecutionTemplateFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: GovernedExecutionTemplateCountAggregateInputType | true
+    }
+
+  export interface GovernedExecutionTemplateDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['GovernedExecutionTemplate'], meta: { name: 'GovernedExecutionTemplate' } }
+    /**
+     * Find zero or one GovernedExecutionTemplate that matches the filter.
+     * @param {GovernedExecutionTemplateFindUniqueArgs} args - Arguments to find a GovernedExecutionTemplate
+     * @example
+     * // Get one GovernedExecutionTemplate
+     * const governedExecutionTemplate = await prisma.governedExecutionTemplate.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends GovernedExecutionTemplateFindUniqueArgs>(args: SelectSubset<T, GovernedExecutionTemplateFindUniqueArgs<ExtArgs>>): Prisma__GovernedExecutionTemplateClient<$Result.GetResult<Prisma.$GovernedExecutionTemplatePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one GovernedExecutionTemplate that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {GovernedExecutionTemplateFindUniqueOrThrowArgs} args - Arguments to find a GovernedExecutionTemplate
+     * @example
+     * // Get one GovernedExecutionTemplate
+     * const governedExecutionTemplate = await prisma.governedExecutionTemplate.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends GovernedExecutionTemplateFindUniqueOrThrowArgs>(args: SelectSubset<T, GovernedExecutionTemplateFindUniqueOrThrowArgs<ExtArgs>>): Prisma__GovernedExecutionTemplateClient<$Result.GetResult<Prisma.$GovernedExecutionTemplatePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first GovernedExecutionTemplate that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GovernedExecutionTemplateFindFirstArgs} args - Arguments to find a GovernedExecutionTemplate
+     * @example
+     * // Get one GovernedExecutionTemplate
+     * const governedExecutionTemplate = await prisma.governedExecutionTemplate.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends GovernedExecutionTemplateFindFirstArgs>(args?: SelectSubset<T, GovernedExecutionTemplateFindFirstArgs<ExtArgs>>): Prisma__GovernedExecutionTemplateClient<$Result.GetResult<Prisma.$GovernedExecutionTemplatePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first GovernedExecutionTemplate that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GovernedExecutionTemplateFindFirstOrThrowArgs} args - Arguments to find a GovernedExecutionTemplate
+     * @example
+     * // Get one GovernedExecutionTemplate
+     * const governedExecutionTemplate = await prisma.governedExecutionTemplate.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends GovernedExecutionTemplateFindFirstOrThrowArgs>(args?: SelectSubset<T, GovernedExecutionTemplateFindFirstOrThrowArgs<ExtArgs>>): Prisma__GovernedExecutionTemplateClient<$Result.GetResult<Prisma.$GovernedExecutionTemplatePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more GovernedExecutionTemplates that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GovernedExecutionTemplateFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all GovernedExecutionTemplates
+     * const governedExecutionTemplates = await prisma.governedExecutionTemplate.findMany()
+     * 
+     * // Get first 10 GovernedExecutionTemplates
+     * const governedExecutionTemplates = await prisma.governedExecutionTemplate.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const governedExecutionTemplateWithIdOnly = await prisma.governedExecutionTemplate.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends GovernedExecutionTemplateFindManyArgs>(args?: SelectSubset<T, GovernedExecutionTemplateFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GovernedExecutionTemplatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a GovernedExecutionTemplate.
+     * @param {GovernedExecutionTemplateCreateArgs} args - Arguments to create a GovernedExecutionTemplate.
+     * @example
+     * // Create one GovernedExecutionTemplate
+     * const GovernedExecutionTemplate = await prisma.governedExecutionTemplate.create({
+     *   data: {
+     *     // ... data to create a GovernedExecutionTemplate
+     *   }
+     * })
+     * 
+     */
+    create<T extends GovernedExecutionTemplateCreateArgs>(args: SelectSubset<T, GovernedExecutionTemplateCreateArgs<ExtArgs>>): Prisma__GovernedExecutionTemplateClient<$Result.GetResult<Prisma.$GovernedExecutionTemplatePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many GovernedExecutionTemplates.
+     * @param {GovernedExecutionTemplateCreateManyArgs} args - Arguments to create many GovernedExecutionTemplates.
+     * @example
+     * // Create many GovernedExecutionTemplates
+     * const governedExecutionTemplate = await prisma.governedExecutionTemplate.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends GovernedExecutionTemplateCreateManyArgs>(args?: SelectSubset<T, GovernedExecutionTemplateCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many GovernedExecutionTemplates and returns the data saved in the database.
+     * @param {GovernedExecutionTemplateCreateManyAndReturnArgs} args - Arguments to create many GovernedExecutionTemplates.
+     * @example
+     * // Create many GovernedExecutionTemplates
+     * const governedExecutionTemplate = await prisma.governedExecutionTemplate.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many GovernedExecutionTemplates and only return the `id`
+     * const governedExecutionTemplateWithIdOnly = await prisma.governedExecutionTemplate.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends GovernedExecutionTemplateCreateManyAndReturnArgs>(args?: SelectSubset<T, GovernedExecutionTemplateCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GovernedExecutionTemplatePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a GovernedExecutionTemplate.
+     * @param {GovernedExecutionTemplateDeleteArgs} args - Arguments to delete one GovernedExecutionTemplate.
+     * @example
+     * // Delete one GovernedExecutionTemplate
+     * const GovernedExecutionTemplate = await prisma.governedExecutionTemplate.delete({
+     *   where: {
+     *     // ... filter to delete one GovernedExecutionTemplate
+     *   }
+     * })
+     * 
+     */
+    delete<T extends GovernedExecutionTemplateDeleteArgs>(args: SelectSubset<T, GovernedExecutionTemplateDeleteArgs<ExtArgs>>): Prisma__GovernedExecutionTemplateClient<$Result.GetResult<Prisma.$GovernedExecutionTemplatePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one GovernedExecutionTemplate.
+     * @param {GovernedExecutionTemplateUpdateArgs} args - Arguments to update one GovernedExecutionTemplate.
+     * @example
+     * // Update one GovernedExecutionTemplate
+     * const governedExecutionTemplate = await prisma.governedExecutionTemplate.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends GovernedExecutionTemplateUpdateArgs>(args: SelectSubset<T, GovernedExecutionTemplateUpdateArgs<ExtArgs>>): Prisma__GovernedExecutionTemplateClient<$Result.GetResult<Prisma.$GovernedExecutionTemplatePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more GovernedExecutionTemplates.
+     * @param {GovernedExecutionTemplateDeleteManyArgs} args - Arguments to filter GovernedExecutionTemplates to delete.
+     * @example
+     * // Delete a few GovernedExecutionTemplates
+     * const { count } = await prisma.governedExecutionTemplate.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends GovernedExecutionTemplateDeleteManyArgs>(args?: SelectSubset<T, GovernedExecutionTemplateDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more GovernedExecutionTemplates.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GovernedExecutionTemplateUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many GovernedExecutionTemplates
+     * const governedExecutionTemplate = await prisma.governedExecutionTemplate.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends GovernedExecutionTemplateUpdateManyArgs>(args: SelectSubset<T, GovernedExecutionTemplateUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more GovernedExecutionTemplates and returns the data updated in the database.
+     * @param {GovernedExecutionTemplateUpdateManyAndReturnArgs} args - Arguments to update many GovernedExecutionTemplates.
+     * @example
+     * // Update many GovernedExecutionTemplates
+     * const governedExecutionTemplate = await prisma.governedExecutionTemplate.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more GovernedExecutionTemplates and only return the `id`
+     * const governedExecutionTemplateWithIdOnly = await prisma.governedExecutionTemplate.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends GovernedExecutionTemplateUpdateManyAndReturnArgs>(args: SelectSubset<T, GovernedExecutionTemplateUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GovernedExecutionTemplatePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one GovernedExecutionTemplate.
+     * @param {GovernedExecutionTemplateUpsertArgs} args - Arguments to update or create a GovernedExecutionTemplate.
+     * @example
+     * // Update or create a GovernedExecutionTemplate
+     * const governedExecutionTemplate = await prisma.governedExecutionTemplate.upsert({
+     *   create: {
+     *     // ... data to create a GovernedExecutionTemplate
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the GovernedExecutionTemplate we want to update
+     *   }
+     * })
+     */
+    upsert<T extends GovernedExecutionTemplateUpsertArgs>(args: SelectSubset<T, GovernedExecutionTemplateUpsertArgs<ExtArgs>>): Prisma__GovernedExecutionTemplateClient<$Result.GetResult<Prisma.$GovernedExecutionTemplatePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of GovernedExecutionTemplates.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GovernedExecutionTemplateCountArgs} args - Arguments to filter GovernedExecutionTemplates to count.
+     * @example
+     * // Count the number of GovernedExecutionTemplates
+     * const count = await prisma.governedExecutionTemplate.count({
+     *   where: {
+     *     // ... the filter for the GovernedExecutionTemplates we want to count
+     *   }
+     * })
+    **/
+    count<T extends GovernedExecutionTemplateCountArgs>(
+      args?: Subset<T, GovernedExecutionTemplateCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], GovernedExecutionTemplateCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a GovernedExecutionTemplate.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GovernedExecutionTemplateAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends GovernedExecutionTemplateAggregateArgs>(args: Subset<T, GovernedExecutionTemplateAggregateArgs>): Prisma.PrismaPromise<GetGovernedExecutionTemplateAggregateType<T>>
+
+    /**
+     * Group by GovernedExecutionTemplate.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GovernedExecutionTemplateGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends GovernedExecutionTemplateGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: GovernedExecutionTemplateGroupByArgs['orderBy'] }
+        : { orderBy?: GovernedExecutionTemplateGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, GovernedExecutionTemplateGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetGovernedExecutionTemplateGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the GovernedExecutionTemplate model
+   */
+  readonly fields: GovernedExecutionTemplateFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for GovernedExecutionTemplate.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__GovernedExecutionTemplateClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    approvedActionVersion<T extends ApprovedActionVersionDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ApprovedActionVersionDefaultArgs<ExtArgs>>): Prisma__ApprovedActionVersionClient<$Result.GetResult<Prisma.$ApprovedActionVersionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    department<T extends GovernedExecutionTemplate$departmentArgs<ExtArgs> = {}>(args?: Subset<T, GovernedExecutionTemplate$departmentArgs<ExtArgs>>): Prisma__DepartmentClient<$Result.GetResult<Prisma.$DepartmentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    jurisdiction<T extends GovernedExecutionTemplate$jurisdictionArgs<ExtArgs> = {}>(args?: Subset<T, GovernedExecutionTemplate$jurisdictionArgs<ExtArgs>>): Prisma__JurisdictionClient<$Result.GetResult<Prisma.$JurisdictionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    createdBy<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    approvedBy<T extends GovernedExecutionTemplate$approvedByArgs<ExtArgs> = {}>(args?: Subset<T, GovernedExecutionTemplate$approvedByArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    tasks<T extends GovernedExecutionTemplate$tasksArgs<ExtArgs> = {}>(args?: Subset<T, GovernedExecutionTemplate$tasksArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GovernedExecutionTaskTemplatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    executionTasks<T extends GovernedExecutionTemplate$executionTasksArgs<ExtArgs> = {}>(args?: Subset<T, GovernedExecutionTemplate$executionTasksArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExecutionTaskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the GovernedExecutionTemplate model
+   */
+  interface GovernedExecutionTemplateFieldRefs {
+    readonly id: FieldRef<"GovernedExecutionTemplate", 'String'>
+    readonly templateCode: FieldRef<"GovernedExecutionTemplate", 'String'>
+    readonly versionNumber: FieldRef<"GovernedExecutionTemplate", 'Int'>
+    readonly approvedActionVersionId: FieldRef<"GovernedExecutionTemplate", 'String'>
+    readonly title: FieldRef<"GovernedExecutionTemplate", 'String'>
+    readonly description: FieldRef<"GovernedExecutionTemplate", 'String'>
+    readonly status: FieldRef<"GovernedExecutionTemplate", 'RegistryLifecycleStatus'>
+    readonly effectiveFrom: FieldRef<"GovernedExecutionTemplate", 'DateTime'>
+    readonly effectiveUntil: FieldRef<"GovernedExecutionTemplate", 'DateTime'>
+    readonly departmentId: FieldRef<"GovernedExecutionTemplate", 'String'>
+    readonly jurisdictionId: FieldRef<"GovernedExecutionTemplate", 'String'>
+    readonly createdById: FieldRef<"GovernedExecutionTemplate", 'String'>
+    readonly approvedById: FieldRef<"GovernedExecutionTemplate", 'String'>
+    readonly approvedAt: FieldRef<"GovernedExecutionTemplate", 'DateTime'>
+    readonly createdAt: FieldRef<"GovernedExecutionTemplate", 'DateTime'>
+    readonly updatedAt: FieldRef<"GovernedExecutionTemplate", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * GovernedExecutionTemplate findUnique
+   */
+  export type GovernedExecutionTemplateFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GovernedExecutionTemplate
+     */
+    select?: GovernedExecutionTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GovernedExecutionTemplate
+     */
+    omit?: GovernedExecutionTemplateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GovernedExecutionTemplateInclude<ExtArgs> | null
+    /**
+     * Filter, which GovernedExecutionTemplate to fetch.
+     */
+    where: GovernedExecutionTemplateWhereUniqueInput
+  }
+
+  /**
+   * GovernedExecutionTemplate findUniqueOrThrow
+   */
+  export type GovernedExecutionTemplateFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GovernedExecutionTemplate
+     */
+    select?: GovernedExecutionTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GovernedExecutionTemplate
+     */
+    omit?: GovernedExecutionTemplateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GovernedExecutionTemplateInclude<ExtArgs> | null
+    /**
+     * Filter, which GovernedExecutionTemplate to fetch.
+     */
+    where: GovernedExecutionTemplateWhereUniqueInput
+  }
+
+  /**
+   * GovernedExecutionTemplate findFirst
+   */
+  export type GovernedExecutionTemplateFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GovernedExecutionTemplate
+     */
+    select?: GovernedExecutionTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GovernedExecutionTemplate
+     */
+    omit?: GovernedExecutionTemplateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GovernedExecutionTemplateInclude<ExtArgs> | null
+    /**
+     * Filter, which GovernedExecutionTemplate to fetch.
+     */
+    where?: GovernedExecutionTemplateWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of GovernedExecutionTemplates to fetch.
+     */
+    orderBy?: GovernedExecutionTemplateOrderByWithRelationInput | GovernedExecutionTemplateOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for GovernedExecutionTemplates.
+     */
+    cursor?: GovernedExecutionTemplateWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` GovernedExecutionTemplates from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` GovernedExecutionTemplates.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of GovernedExecutionTemplates.
+     */
+    distinct?: GovernedExecutionTemplateScalarFieldEnum | GovernedExecutionTemplateScalarFieldEnum[]
+  }
+
+  /**
+   * GovernedExecutionTemplate findFirstOrThrow
+   */
+  export type GovernedExecutionTemplateFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GovernedExecutionTemplate
+     */
+    select?: GovernedExecutionTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GovernedExecutionTemplate
+     */
+    omit?: GovernedExecutionTemplateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GovernedExecutionTemplateInclude<ExtArgs> | null
+    /**
+     * Filter, which GovernedExecutionTemplate to fetch.
+     */
+    where?: GovernedExecutionTemplateWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of GovernedExecutionTemplates to fetch.
+     */
+    orderBy?: GovernedExecutionTemplateOrderByWithRelationInput | GovernedExecutionTemplateOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for GovernedExecutionTemplates.
+     */
+    cursor?: GovernedExecutionTemplateWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` GovernedExecutionTemplates from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` GovernedExecutionTemplates.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of GovernedExecutionTemplates.
+     */
+    distinct?: GovernedExecutionTemplateScalarFieldEnum | GovernedExecutionTemplateScalarFieldEnum[]
+  }
+
+  /**
+   * GovernedExecutionTemplate findMany
+   */
+  export type GovernedExecutionTemplateFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GovernedExecutionTemplate
+     */
+    select?: GovernedExecutionTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GovernedExecutionTemplate
+     */
+    omit?: GovernedExecutionTemplateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GovernedExecutionTemplateInclude<ExtArgs> | null
+    /**
+     * Filter, which GovernedExecutionTemplates to fetch.
+     */
+    where?: GovernedExecutionTemplateWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of GovernedExecutionTemplates to fetch.
+     */
+    orderBy?: GovernedExecutionTemplateOrderByWithRelationInput | GovernedExecutionTemplateOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing GovernedExecutionTemplates.
+     */
+    cursor?: GovernedExecutionTemplateWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` GovernedExecutionTemplates from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` GovernedExecutionTemplates.
+     */
+    skip?: number
+    distinct?: GovernedExecutionTemplateScalarFieldEnum | GovernedExecutionTemplateScalarFieldEnum[]
+  }
+
+  /**
+   * GovernedExecutionTemplate create
+   */
+  export type GovernedExecutionTemplateCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GovernedExecutionTemplate
+     */
+    select?: GovernedExecutionTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GovernedExecutionTemplate
+     */
+    omit?: GovernedExecutionTemplateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GovernedExecutionTemplateInclude<ExtArgs> | null
+    /**
+     * The data needed to create a GovernedExecutionTemplate.
+     */
+    data: XOR<GovernedExecutionTemplateCreateInput, GovernedExecutionTemplateUncheckedCreateInput>
+  }
+
+  /**
+   * GovernedExecutionTemplate createMany
+   */
+  export type GovernedExecutionTemplateCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many GovernedExecutionTemplates.
+     */
+    data: GovernedExecutionTemplateCreateManyInput | GovernedExecutionTemplateCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * GovernedExecutionTemplate createManyAndReturn
+   */
+  export type GovernedExecutionTemplateCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GovernedExecutionTemplate
+     */
+    select?: GovernedExecutionTemplateSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the GovernedExecutionTemplate
+     */
+    omit?: GovernedExecutionTemplateOmit<ExtArgs> | null
+    /**
+     * The data used to create many GovernedExecutionTemplates.
+     */
+    data: GovernedExecutionTemplateCreateManyInput | GovernedExecutionTemplateCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GovernedExecutionTemplateIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * GovernedExecutionTemplate update
+   */
+  export type GovernedExecutionTemplateUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GovernedExecutionTemplate
+     */
+    select?: GovernedExecutionTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GovernedExecutionTemplate
+     */
+    omit?: GovernedExecutionTemplateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GovernedExecutionTemplateInclude<ExtArgs> | null
+    /**
+     * The data needed to update a GovernedExecutionTemplate.
+     */
+    data: XOR<GovernedExecutionTemplateUpdateInput, GovernedExecutionTemplateUncheckedUpdateInput>
+    /**
+     * Choose, which GovernedExecutionTemplate to update.
+     */
+    where: GovernedExecutionTemplateWhereUniqueInput
+  }
+
+  /**
+   * GovernedExecutionTemplate updateMany
+   */
+  export type GovernedExecutionTemplateUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update GovernedExecutionTemplates.
+     */
+    data: XOR<GovernedExecutionTemplateUpdateManyMutationInput, GovernedExecutionTemplateUncheckedUpdateManyInput>
+    /**
+     * Filter which GovernedExecutionTemplates to update
+     */
+    where?: GovernedExecutionTemplateWhereInput
+    /**
+     * Limit how many GovernedExecutionTemplates to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * GovernedExecutionTemplate updateManyAndReturn
+   */
+  export type GovernedExecutionTemplateUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GovernedExecutionTemplate
+     */
+    select?: GovernedExecutionTemplateSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the GovernedExecutionTemplate
+     */
+    omit?: GovernedExecutionTemplateOmit<ExtArgs> | null
+    /**
+     * The data used to update GovernedExecutionTemplates.
+     */
+    data: XOR<GovernedExecutionTemplateUpdateManyMutationInput, GovernedExecutionTemplateUncheckedUpdateManyInput>
+    /**
+     * Filter which GovernedExecutionTemplates to update
+     */
+    where?: GovernedExecutionTemplateWhereInput
+    /**
+     * Limit how many GovernedExecutionTemplates to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GovernedExecutionTemplateIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * GovernedExecutionTemplate upsert
+   */
+  export type GovernedExecutionTemplateUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GovernedExecutionTemplate
+     */
+    select?: GovernedExecutionTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GovernedExecutionTemplate
+     */
+    omit?: GovernedExecutionTemplateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GovernedExecutionTemplateInclude<ExtArgs> | null
+    /**
+     * The filter to search for the GovernedExecutionTemplate to update in case it exists.
+     */
+    where: GovernedExecutionTemplateWhereUniqueInput
+    /**
+     * In case the GovernedExecutionTemplate found by the `where` argument doesn't exist, create a new GovernedExecutionTemplate with this data.
+     */
+    create: XOR<GovernedExecutionTemplateCreateInput, GovernedExecutionTemplateUncheckedCreateInput>
+    /**
+     * In case the GovernedExecutionTemplate was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<GovernedExecutionTemplateUpdateInput, GovernedExecutionTemplateUncheckedUpdateInput>
+  }
+
+  /**
+   * GovernedExecutionTemplate delete
+   */
+  export type GovernedExecutionTemplateDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GovernedExecutionTemplate
+     */
+    select?: GovernedExecutionTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GovernedExecutionTemplate
+     */
+    omit?: GovernedExecutionTemplateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GovernedExecutionTemplateInclude<ExtArgs> | null
+    /**
+     * Filter which GovernedExecutionTemplate to delete.
+     */
+    where: GovernedExecutionTemplateWhereUniqueInput
+  }
+
+  /**
+   * GovernedExecutionTemplate deleteMany
+   */
+  export type GovernedExecutionTemplateDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which GovernedExecutionTemplates to delete
+     */
+    where?: GovernedExecutionTemplateWhereInput
+    /**
+     * Limit how many GovernedExecutionTemplates to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * GovernedExecutionTemplate.department
+   */
+  export type GovernedExecutionTemplate$departmentArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Department
+     */
+    select?: DepartmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Department
+     */
+    omit?: DepartmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DepartmentInclude<ExtArgs> | null
+    where?: DepartmentWhereInput
+  }
+
+  /**
+   * GovernedExecutionTemplate.jurisdiction
+   */
+  export type GovernedExecutionTemplate$jurisdictionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Jurisdiction
+     */
+    select?: JurisdictionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Jurisdiction
+     */
+    omit?: JurisdictionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: JurisdictionInclude<ExtArgs> | null
+    where?: JurisdictionWhereInput
+  }
+
+  /**
+   * GovernedExecutionTemplate.approvedBy
+   */
+  export type GovernedExecutionTemplate$approvedByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+  }
+
+  /**
+   * GovernedExecutionTemplate.tasks
+   */
+  export type GovernedExecutionTemplate$tasksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GovernedExecutionTaskTemplate
+     */
+    select?: GovernedExecutionTaskTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GovernedExecutionTaskTemplate
+     */
+    omit?: GovernedExecutionTaskTemplateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GovernedExecutionTaskTemplateInclude<ExtArgs> | null
+    where?: GovernedExecutionTaskTemplateWhereInput
+    orderBy?: GovernedExecutionTaskTemplateOrderByWithRelationInput | GovernedExecutionTaskTemplateOrderByWithRelationInput[]
+    cursor?: GovernedExecutionTaskTemplateWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: GovernedExecutionTaskTemplateScalarFieldEnum | GovernedExecutionTaskTemplateScalarFieldEnum[]
+  }
+
+  /**
+   * GovernedExecutionTemplate.executionTasks
+   */
+  export type GovernedExecutionTemplate$executionTasksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExecutionTask
+     */
+    select?: ExecutionTaskSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExecutionTask
+     */
+    omit?: ExecutionTaskOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExecutionTaskInclude<ExtArgs> | null
+    where?: ExecutionTaskWhereInput
+    orderBy?: ExecutionTaskOrderByWithRelationInput | ExecutionTaskOrderByWithRelationInput[]
+    cursor?: ExecutionTaskWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ExecutionTaskScalarFieldEnum | ExecutionTaskScalarFieldEnum[]
+  }
+
+  /**
+   * GovernedExecutionTemplate without action
+   */
+  export type GovernedExecutionTemplateDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GovernedExecutionTemplate
+     */
+    select?: GovernedExecutionTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GovernedExecutionTemplate
+     */
+    omit?: GovernedExecutionTemplateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GovernedExecutionTemplateInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model GovernedExecutionTaskTemplate
+   */
+
+  export type AggregateGovernedExecutionTaskTemplate = {
+    _count: GovernedExecutionTaskTemplateCountAggregateOutputType | null
+    _avg: GovernedExecutionTaskTemplateAvgAggregateOutputType | null
+    _sum: GovernedExecutionTaskTemplateSumAggregateOutputType | null
+    _min: GovernedExecutionTaskTemplateMinAggregateOutputType | null
+    _max: GovernedExecutionTaskTemplateMaxAggregateOutputType | null
+  }
+
+  export type GovernedExecutionTaskTemplateAvgAggregateOutputType = {
+    sequenceNumber: number | null
+  }
+
+  export type GovernedExecutionTaskTemplateSumAggregateOutputType = {
+    sequenceNumber: number | null
+  }
+
+  export type GovernedExecutionTaskTemplateMinAggregateOutputType = {
+    id: string | null
+    executionTemplateId: string | null
+    sequenceNumber: number | null
+    taskCode: string | null
+    title: string | null
+    description: string | null
+    mandatory: boolean | null
+    evidenceRequired: boolean | null
+    verificationRequired: boolean | null
+    enabled: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type GovernedExecutionTaskTemplateMaxAggregateOutputType = {
+    id: string | null
+    executionTemplateId: string | null
+    sequenceNumber: number | null
+    taskCode: string | null
+    title: string | null
+    description: string | null
+    mandatory: boolean | null
+    evidenceRequired: boolean | null
+    verificationRequired: boolean | null
+    enabled: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type GovernedExecutionTaskTemplateCountAggregateOutputType = {
+    id: number
+    executionTemplateId: number
+    sequenceNumber: number
+    taskCode: number
+    title: number
+    description: number
+    mandatory: number
+    evidenceRequired: number
+    verificationRequired: number
+    enabled: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type GovernedExecutionTaskTemplateAvgAggregateInputType = {
+    sequenceNumber?: true
+  }
+
+  export type GovernedExecutionTaskTemplateSumAggregateInputType = {
+    sequenceNumber?: true
+  }
+
+  export type GovernedExecutionTaskTemplateMinAggregateInputType = {
+    id?: true
+    executionTemplateId?: true
+    sequenceNumber?: true
+    taskCode?: true
+    title?: true
+    description?: true
+    mandatory?: true
+    evidenceRequired?: true
+    verificationRequired?: true
+    enabled?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type GovernedExecutionTaskTemplateMaxAggregateInputType = {
+    id?: true
+    executionTemplateId?: true
+    sequenceNumber?: true
+    taskCode?: true
+    title?: true
+    description?: true
+    mandatory?: true
+    evidenceRequired?: true
+    verificationRequired?: true
+    enabled?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type GovernedExecutionTaskTemplateCountAggregateInputType = {
+    id?: true
+    executionTemplateId?: true
+    sequenceNumber?: true
+    taskCode?: true
+    title?: true
+    description?: true
+    mandatory?: true
+    evidenceRequired?: true
+    verificationRequired?: true
+    enabled?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type GovernedExecutionTaskTemplateAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which GovernedExecutionTaskTemplate to aggregate.
+     */
+    where?: GovernedExecutionTaskTemplateWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of GovernedExecutionTaskTemplates to fetch.
+     */
+    orderBy?: GovernedExecutionTaskTemplateOrderByWithRelationInput | GovernedExecutionTaskTemplateOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: GovernedExecutionTaskTemplateWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` GovernedExecutionTaskTemplates from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` GovernedExecutionTaskTemplates.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned GovernedExecutionTaskTemplates
+    **/
+    _count?: true | GovernedExecutionTaskTemplateCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: GovernedExecutionTaskTemplateAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: GovernedExecutionTaskTemplateSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: GovernedExecutionTaskTemplateMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: GovernedExecutionTaskTemplateMaxAggregateInputType
+  }
+
+  export type GetGovernedExecutionTaskTemplateAggregateType<T extends GovernedExecutionTaskTemplateAggregateArgs> = {
+        [P in keyof T & keyof AggregateGovernedExecutionTaskTemplate]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateGovernedExecutionTaskTemplate[P]>
+      : GetScalarType<T[P], AggregateGovernedExecutionTaskTemplate[P]>
+  }
+
+
+
+
+  export type GovernedExecutionTaskTemplateGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: GovernedExecutionTaskTemplateWhereInput
+    orderBy?: GovernedExecutionTaskTemplateOrderByWithAggregationInput | GovernedExecutionTaskTemplateOrderByWithAggregationInput[]
+    by: GovernedExecutionTaskTemplateScalarFieldEnum[] | GovernedExecutionTaskTemplateScalarFieldEnum
+    having?: GovernedExecutionTaskTemplateScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: GovernedExecutionTaskTemplateCountAggregateInputType | true
+    _avg?: GovernedExecutionTaskTemplateAvgAggregateInputType
+    _sum?: GovernedExecutionTaskTemplateSumAggregateInputType
+    _min?: GovernedExecutionTaskTemplateMinAggregateInputType
+    _max?: GovernedExecutionTaskTemplateMaxAggregateInputType
+  }
+
+  export type GovernedExecutionTaskTemplateGroupByOutputType = {
+    id: string
+    executionTemplateId: string
+    sequenceNumber: number
+    taskCode: string
+    title: string
+    description: string
+    mandatory: boolean
+    evidenceRequired: boolean
+    verificationRequired: boolean
+    enabled: boolean
+    createdAt: Date
+    updatedAt: Date
+    _count: GovernedExecutionTaskTemplateCountAggregateOutputType | null
+    _avg: GovernedExecutionTaskTemplateAvgAggregateOutputType | null
+    _sum: GovernedExecutionTaskTemplateSumAggregateOutputType | null
+    _min: GovernedExecutionTaskTemplateMinAggregateOutputType | null
+    _max: GovernedExecutionTaskTemplateMaxAggregateOutputType | null
+  }
+
+  type GetGovernedExecutionTaskTemplateGroupByPayload<T extends GovernedExecutionTaskTemplateGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<GovernedExecutionTaskTemplateGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof GovernedExecutionTaskTemplateGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], GovernedExecutionTaskTemplateGroupByOutputType[P]>
+            : GetScalarType<T[P], GovernedExecutionTaskTemplateGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type GovernedExecutionTaskTemplateSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    executionTemplateId?: boolean
+    sequenceNumber?: boolean
+    taskCode?: boolean
+    title?: boolean
+    description?: boolean
+    mandatory?: boolean
+    evidenceRequired?: boolean
+    verificationRequired?: boolean
+    enabled?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    executionTemplate?: boolean | GovernedExecutionTemplateDefaultArgs<ExtArgs>
+    executionTasks?: boolean | GovernedExecutionTaskTemplate$executionTasksArgs<ExtArgs>
+    _count?: boolean | GovernedExecutionTaskTemplateCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["governedExecutionTaskTemplate"]>
+
+  export type GovernedExecutionTaskTemplateSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    executionTemplateId?: boolean
+    sequenceNumber?: boolean
+    taskCode?: boolean
+    title?: boolean
+    description?: boolean
+    mandatory?: boolean
+    evidenceRequired?: boolean
+    verificationRequired?: boolean
+    enabled?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    executionTemplate?: boolean | GovernedExecutionTemplateDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["governedExecutionTaskTemplate"]>
+
+  export type GovernedExecutionTaskTemplateSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    executionTemplateId?: boolean
+    sequenceNumber?: boolean
+    taskCode?: boolean
+    title?: boolean
+    description?: boolean
+    mandatory?: boolean
+    evidenceRequired?: boolean
+    verificationRequired?: boolean
+    enabled?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    executionTemplate?: boolean | GovernedExecutionTemplateDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["governedExecutionTaskTemplate"]>
+
+  export type GovernedExecutionTaskTemplateSelectScalar = {
+    id?: boolean
+    executionTemplateId?: boolean
+    sequenceNumber?: boolean
+    taskCode?: boolean
+    title?: boolean
+    description?: boolean
+    mandatory?: boolean
+    evidenceRequired?: boolean
+    verificationRequired?: boolean
+    enabled?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type GovernedExecutionTaskTemplateOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "executionTemplateId" | "sequenceNumber" | "taskCode" | "title" | "description" | "mandatory" | "evidenceRequired" | "verificationRequired" | "enabled" | "createdAt" | "updatedAt", ExtArgs["result"]["governedExecutionTaskTemplate"]>
+  export type GovernedExecutionTaskTemplateInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    executionTemplate?: boolean | GovernedExecutionTemplateDefaultArgs<ExtArgs>
+    executionTasks?: boolean | GovernedExecutionTaskTemplate$executionTasksArgs<ExtArgs>
+    _count?: boolean | GovernedExecutionTaskTemplateCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type GovernedExecutionTaskTemplateIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    executionTemplate?: boolean | GovernedExecutionTemplateDefaultArgs<ExtArgs>
+  }
+  export type GovernedExecutionTaskTemplateIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    executionTemplate?: boolean | GovernedExecutionTemplateDefaultArgs<ExtArgs>
+  }
+
+  export type $GovernedExecutionTaskTemplatePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "GovernedExecutionTaskTemplate"
+    objects: {
+      executionTemplate: Prisma.$GovernedExecutionTemplatePayload<ExtArgs>
+      executionTasks: Prisma.$ExecutionTaskPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      executionTemplateId: string
+      sequenceNumber: number
+      taskCode: string
+      title: string
+      description: string
+      mandatory: boolean
+      evidenceRequired: boolean
+      verificationRequired: boolean
+      enabled: boolean
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["governedExecutionTaskTemplate"]>
+    composites: {}
+  }
+
+  type GovernedExecutionTaskTemplateGetPayload<S extends boolean | null | undefined | GovernedExecutionTaskTemplateDefaultArgs> = $Result.GetResult<Prisma.$GovernedExecutionTaskTemplatePayload, S>
+
+  type GovernedExecutionTaskTemplateCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<GovernedExecutionTaskTemplateFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: GovernedExecutionTaskTemplateCountAggregateInputType | true
+    }
+
+  export interface GovernedExecutionTaskTemplateDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['GovernedExecutionTaskTemplate'], meta: { name: 'GovernedExecutionTaskTemplate' } }
+    /**
+     * Find zero or one GovernedExecutionTaskTemplate that matches the filter.
+     * @param {GovernedExecutionTaskTemplateFindUniqueArgs} args - Arguments to find a GovernedExecutionTaskTemplate
+     * @example
+     * // Get one GovernedExecutionTaskTemplate
+     * const governedExecutionTaskTemplate = await prisma.governedExecutionTaskTemplate.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends GovernedExecutionTaskTemplateFindUniqueArgs>(args: SelectSubset<T, GovernedExecutionTaskTemplateFindUniqueArgs<ExtArgs>>): Prisma__GovernedExecutionTaskTemplateClient<$Result.GetResult<Prisma.$GovernedExecutionTaskTemplatePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one GovernedExecutionTaskTemplate that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {GovernedExecutionTaskTemplateFindUniqueOrThrowArgs} args - Arguments to find a GovernedExecutionTaskTemplate
+     * @example
+     * // Get one GovernedExecutionTaskTemplate
+     * const governedExecutionTaskTemplate = await prisma.governedExecutionTaskTemplate.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends GovernedExecutionTaskTemplateFindUniqueOrThrowArgs>(args: SelectSubset<T, GovernedExecutionTaskTemplateFindUniqueOrThrowArgs<ExtArgs>>): Prisma__GovernedExecutionTaskTemplateClient<$Result.GetResult<Prisma.$GovernedExecutionTaskTemplatePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first GovernedExecutionTaskTemplate that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GovernedExecutionTaskTemplateFindFirstArgs} args - Arguments to find a GovernedExecutionTaskTemplate
+     * @example
+     * // Get one GovernedExecutionTaskTemplate
+     * const governedExecutionTaskTemplate = await prisma.governedExecutionTaskTemplate.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends GovernedExecutionTaskTemplateFindFirstArgs>(args?: SelectSubset<T, GovernedExecutionTaskTemplateFindFirstArgs<ExtArgs>>): Prisma__GovernedExecutionTaskTemplateClient<$Result.GetResult<Prisma.$GovernedExecutionTaskTemplatePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first GovernedExecutionTaskTemplate that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GovernedExecutionTaskTemplateFindFirstOrThrowArgs} args - Arguments to find a GovernedExecutionTaskTemplate
+     * @example
+     * // Get one GovernedExecutionTaskTemplate
+     * const governedExecutionTaskTemplate = await prisma.governedExecutionTaskTemplate.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends GovernedExecutionTaskTemplateFindFirstOrThrowArgs>(args?: SelectSubset<T, GovernedExecutionTaskTemplateFindFirstOrThrowArgs<ExtArgs>>): Prisma__GovernedExecutionTaskTemplateClient<$Result.GetResult<Prisma.$GovernedExecutionTaskTemplatePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more GovernedExecutionTaskTemplates that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GovernedExecutionTaskTemplateFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all GovernedExecutionTaskTemplates
+     * const governedExecutionTaskTemplates = await prisma.governedExecutionTaskTemplate.findMany()
+     * 
+     * // Get first 10 GovernedExecutionTaskTemplates
+     * const governedExecutionTaskTemplates = await prisma.governedExecutionTaskTemplate.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const governedExecutionTaskTemplateWithIdOnly = await prisma.governedExecutionTaskTemplate.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends GovernedExecutionTaskTemplateFindManyArgs>(args?: SelectSubset<T, GovernedExecutionTaskTemplateFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GovernedExecutionTaskTemplatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a GovernedExecutionTaskTemplate.
+     * @param {GovernedExecutionTaskTemplateCreateArgs} args - Arguments to create a GovernedExecutionTaskTemplate.
+     * @example
+     * // Create one GovernedExecutionTaskTemplate
+     * const GovernedExecutionTaskTemplate = await prisma.governedExecutionTaskTemplate.create({
+     *   data: {
+     *     // ... data to create a GovernedExecutionTaskTemplate
+     *   }
+     * })
+     * 
+     */
+    create<T extends GovernedExecutionTaskTemplateCreateArgs>(args: SelectSubset<T, GovernedExecutionTaskTemplateCreateArgs<ExtArgs>>): Prisma__GovernedExecutionTaskTemplateClient<$Result.GetResult<Prisma.$GovernedExecutionTaskTemplatePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many GovernedExecutionTaskTemplates.
+     * @param {GovernedExecutionTaskTemplateCreateManyArgs} args - Arguments to create many GovernedExecutionTaskTemplates.
+     * @example
+     * // Create many GovernedExecutionTaskTemplates
+     * const governedExecutionTaskTemplate = await prisma.governedExecutionTaskTemplate.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends GovernedExecutionTaskTemplateCreateManyArgs>(args?: SelectSubset<T, GovernedExecutionTaskTemplateCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many GovernedExecutionTaskTemplates and returns the data saved in the database.
+     * @param {GovernedExecutionTaskTemplateCreateManyAndReturnArgs} args - Arguments to create many GovernedExecutionTaskTemplates.
+     * @example
+     * // Create many GovernedExecutionTaskTemplates
+     * const governedExecutionTaskTemplate = await prisma.governedExecutionTaskTemplate.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many GovernedExecutionTaskTemplates and only return the `id`
+     * const governedExecutionTaskTemplateWithIdOnly = await prisma.governedExecutionTaskTemplate.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends GovernedExecutionTaskTemplateCreateManyAndReturnArgs>(args?: SelectSubset<T, GovernedExecutionTaskTemplateCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GovernedExecutionTaskTemplatePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a GovernedExecutionTaskTemplate.
+     * @param {GovernedExecutionTaskTemplateDeleteArgs} args - Arguments to delete one GovernedExecutionTaskTemplate.
+     * @example
+     * // Delete one GovernedExecutionTaskTemplate
+     * const GovernedExecutionTaskTemplate = await prisma.governedExecutionTaskTemplate.delete({
+     *   where: {
+     *     // ... filter to delete one GovernedExecutionTaskTemplate
+     *   }
+     * })
+     * 
+     */
+    delete<T extends GovernedExecutionTaskTemplateDeleteArgs>(args: SelectSubset<T, GovernedExecutionTaskTemplateDeleteArgs<ExtArgs>>): Prisma__GovernedExecutionTaskTemplateClient<$Result.GetResult<Prisma.$GovernedExecutionTaskTemplatePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one GovernedExecutionTaskTemplate.
+     * @param {GovernedExecutionTaskTemplateUpdateArgs} args - Arguments to update one GovernedExecutionTaskTemplate.
+     * @example
+     * // Update one GovernedExecutionTaskTemplate
+     * const governedExecutionTaskTemplate = await prisma.governedExecutionTaskTemplate.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends GovernedExecutionTaskTemplateUpdateArgs>(args: SelectSubset<T, GovernedExecutionTaskTemplateUpdateArgs<ExtArgs>>): Prisma__GovernedExecutionTaskTemplateClient<$Result.GetResult<Prisma.$GovernedExecutionTaskTemplatePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more GovernedExecutionTaskTemplates.
+     * @param {GovernedExecutionTaskTemplateDeleteManyArgs} args - Arguments to filter GovernedExecutionTaskTemplates to delete.
+     * @example
+     * // Delete a few GovernedExecutionTaskTemplates
+     * const { count } = await prisma.governedExecutionTaskTemplate.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends GovernedExecutionTaskTemplateDeleteManyArgs>(args?: SelectSubset<T, GovernedExecutionTaskTemplateDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more GovernedExecutionTaskTemplates.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GovernedExecutionTaskTemplateUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many GovernedExecutionTaskTemplates
+     * const governedExecutionTaskTemplate = await prisma.governedExecutionTaskTemplate.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends GovernedExecutionTaskTemplateUpdateManyArgs>(args: SelectSubset<T, GovernedExecutionTaskTemplateUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more GovernedExecutionTaskTemplates and returns the data updated in the database.
+     * @param {GovernedExecutionTaskTemplateUpdateManyAndReturnArgs} args - Arguments to update many GovernedExecutionTaskTemplates.
+     * @example
+     * // Update many GovernedExecutionTaskTemplates
+     * const governedExecutionTaskTemplate = await prisma.governedExecutionTaskTemplate.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more GovernedExecutionTaskTemplates and only return the `id`
+     * const governedExecutionTaskTemplateWithIdOnly = await prisma.governedExecutionTaskTemplate.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends GovernedExecutionTaskTemplateUpdateManyAndReturnArgs>(args: SelectSubset<T, GovernedExecutionTaskTemplateUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GovernedExecutionTaskTemplatePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one GovernedExecutionTaskTemplate.
+     * @param {GovernedExecutionTaskTemplateUpsertArgs} args - Arguments to update or create a GovernedExecutionTaskTemplate.
+     * @example
+     * // Update or create a GovernedExecutionTaskTemplate
+     * const governedExecutionTaskTemplate = await prisma.governedExecutionTaskTemplate.upsert({
+     *   create: {
+     *     // ... data to create a GovernedExecutionTaskTemplate
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the GovernedExecutionTaskTemplate we want to update
+     *   }
+     * })
+     */
+    upsert<T extends GovernedExecutionTaskTemplateUpsertArgs>(args: SelectSubset<T, GovernedExecutionTaskTemplateUpsertArgs<ExtArgs>>): Prisma__GovernedExecutionTaskTemplateClient<$Result.GetResult<Prisma.$GovernedExecutionTaskTemplatePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of GovernedExecutionTaskTemplates.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GovernedExecutionTaskTemplateCountArgs} args - Arguments to filter GovernedExecutionTaskTemplates to count.
+     * @example
+     * // Count the number of GovernedExecutionTaskTemplates
+     * const count = await prisma.governedExecutionTaskTemplate.count({
+     *   where: {
+     *     // ... the filter for the GovernedExecutionTaskTemplates we want to count
+     *   }
+     * })
+    **/
+    count<T extends GovernedExecutionTaskTemplateCountArgs>(
+      args?: Subset<T, GovernedExecutionTaskTemplateCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], GovernedExecutionTaskTemplateCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a GovernedExecutionTaskTemplate.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GovernedExecutionTaskTemplateAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends GovernedExecutionTaskTemplateAggregateArgs>(args: Subset<T, GovernedExecutionTaskTemplateAggregateArgs>): Prisma.PrismaPromise<GetGovernedExecutionTaskTemplateAggregateType<T>>
+
+    /**
+     * Group by GovernedExecutionTaskTemplate.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GovernedExecutionTaskTemplateGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends GovernedExecutionTaskTemplateGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: GovernedExecutionTaskTemplateGroupByArgs['orderBy'] }
+        : { orderBy?: GovernedExecutionTaskTemplateGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, GovernedExecutionTaskTemplateGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetGovernedExecutionTaskTemplateGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the GovernedExecutionTaskTemplate model
+   */
+  readonly fields: GovernedExecutionTaskTemplateFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for GovernedExecutionTaskTemplate.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__GovernedExecutionTaskTemplateClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    executionTemplate<T extends GovernedExecutionTemplateDefaultArgs<ExtArgs> = {}>(args?: Subset<T, GovernedExecutionTemplateDefaultArgs<ExtArgs>>): Prisma__GovernedExecutionTemplateClient<$Result.GetResult<Prisma.$GovernedExecutionTemplatePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    executionTasks<T extends GovernedExecutionTaskTemplate$executionTasksArgs<ExtArgs> = {}>(args?: Subset<T, GovernedExecutionTaskTemplate$executionTasksArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExecutionTaskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the GovernedExecutionTaskTemplate model
+   */
+  interface GovernedExecutionTaskTemplateFieldRefs {
+    readonly id: FieldRef<"GovernedExecutionTaskTemplate", 'String'>
+    readonly executionTemplateId: FieldRef<"GovernedExecutionTaskTemplate", 'String'>
+    readonly sequenceNumber: FieldRef<"GovernedExecutionTaskTemplate", 'Int'>
+    readonly taskCode: FieldRef<"GovernedExecutionTaskTemplate", 'String'>
+    readonly title: FieldRef<"GovernedExecutionTaskTemplate", 'String'>
+    readonly description: FieldRef<"GovernedExecutionTaskTemplate", 'String'>
+    readonly mandatory: FieldRef<"GovernedExecutionTaskTemplate", 'Boolean'>
+    readonly evidenceRequired: FieldRef<"GovernedExecutionTaskTemplate", 'Boolean'>
+    readonly verificationRequired: FieldRef<"GovernedExecutionTaskTemplate", 'Boolean'>
+    readonly enabled: FieldRef<"GovernedExecutionTaskTemplate", 'Boolean'>
+    readonly createdAt: FieldRef<"GovernedExecutionTaskTemplate", 'DateTime'>
+    readonly updatedAt: FieldRef<"GovernedExecutionTaskTemplate", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * GovernedExecutionTaskTemplate findUnique
+   */
+  export type GovernedExecutionTaskTemplateFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GovernedExecutionTaskTemplate
+     */
+    select?: GovernedExecutionTaskTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GovernedExecutionTaskTemplate
+     */
+    omit?: GovernedExecutionTaskTemplateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GovernedExecutionTaskTemplateInclude<ExtArgs> | null
+    /**
+     * Filter, which GovernedExecutionTaskTemplate to fetch.
+     */
+    where: GovernedExecutionTaskTemplateWhereUniqueInput
+  }
+
+  /**
+   * GovernedExecutionTaskTemplate findUniqueOrThrow
+   */
+  export type GovernedExecutionTaskTemplateFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GovernedExecutionTaskTemplate
+     */
+    select?: GovernedExecutionTaskTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GovernedExecutionTaskTemplate
+     */
+    omit?: GovernedExecutionTaskTemplateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GovernedExecutionTaskTemplateInclude<ExtArgs> | null
+    /**
+     * Filter, which GovernedExecutionTaskTemplate to fetch.
+     */
+    where: GovernedExecutionTaskTemplateWhereUniqueInput
+  }
+
+  /**
+   * GovernedExecutionTaskTemplate findFirst
+   */
+  export type GovernedExecutionTaskTemplateFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GovernedExecutionTaskTemplate
+     */
+    select?: GovernedExecutionTaskTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GovernedExecutionTaskTemplate
+     */
+    omit?: GovernedExecutionTaskTemplateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GovernedExecutionTaskTemplateInclude<ExtArgs> | null
+    /**
+     * Filter, which GovernedExecutionTaskTemplate to fetch.
+     */
+    where?: GovernedExecutionTaskTemplateWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of GovernedExecutionTaskTemplates to fetch.
+     */
+    orderBy?: GovernedExecutionTaskTemplateOrderByWithRelationInput | GovernedExecutionTaskTemplateOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for GovernedExecutionTaskTemplates.
+     */
+    cursor?: GovernedExecutionTaskTemplateWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` GovernedExecutionTaskTemplates from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` GovernedExecutionTaskTemplates.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of GovernedExecutionTaskTemplates.
+     */
+    distinct?: GovernedExecutionTaskTemplateScalarFieldEnum | GovernedExecutionTaskTemplateScalarFieldEnum[]
+  }
+
+  /**
+   * GovernedExecutionTaskTemplate findFirstOrThrow
+   */
+  export type GovernedExecutionTaskTemplateFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GovernedExecutionTaskTemplate
+     */
+    select?: GovernedExecutionTaskTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GovernedExecutionTaskTemplate
+     */
+    omit?: GovernedExecutionTaskTemplateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GovernedExecutionTaskTemplateInclude<ExtArgs> | null
+    /**
+     * Filter, which GovernedExecutionTaskTemplate to fetch.
+     */
+    where?: GovernedExecutionTaskTemplateWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of GovernedExecutionTaskTemplates to fetch.
+     */
+    orderBy?: GovernedExecutionTaskTemplateOrderByWithRelationInput | GovernedExecutionTaskTemplateOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for GovernedExecutionTaskTemplates.
+     */
+    cursor?: GovernedExecutionTaskTemplateWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` GovernedExecutionTaskTemplates from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` GovernedExecutionTaskTemplates.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of GovernedExecutionTaskTemplates.
+     */
+    distinct?: GovernedExecutionTaskTemplateScalarFieldEnum | GovernedExecutionTaskTemplateScalarFieldEnum[]
+  }
+
+  /**
+   * GovernedExecutionTaskTemplate findMany
+   */
+  export type GovernedExecutionTaskTemplateFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GovernedExecutionTaskTemplate
+     */
+    select?: GovernedExecutionTaskTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GovernedExecutionTaskTemplate
+     */
+    omit?: GovernedExecutionTaskTemplateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GovernedExecutionTaskTemplateInclude<ExtArgs> | null
+    /**
+     * Filter, which GovernedExecutionTaskTemplates to fetch.
+     */
+    where?: GovernedExecutionTaskTemplateWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of GovernedExecutionTaskTemplates to fetch.
+     */
+    orderBy?: GovernedExecutionTaskTemplateOrderByWithRelationInput | GovernedExecutionTaskTemplateOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing GovernedExecutionTaskTemplates.
+     */
+    cursor?: GovernedExecutionTaskTemplateWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` GovernedExecutionTaskTemplates from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` GovernedExecutionTaskTemplates.
+     */
+    skip?: number
+    distinct?: GovernedExecutionTaskTemplateScalarFieldEnum | GovernedExecutionTaskTemplateScalarFieldEnum[]
+  }
+
+  /**
+   * GovernedExecutionTaskTemplate create
+   */
+  export type GovernedExecutionTaskTemplateCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GovernedExecutionTaskTemplate
+     */
+    select?: GovernedExecutionTaskTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GovernedExecutionTaskTemplate
+     */
+    omit?: GovernedExecutionTaskTemplateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GovernedExecutionTaskTemplateInclude<ExtArgs> | null
+    /**
+     * The data needed to create a GovernedExecutionTaskTemplate.
+     */
+    data: XOR<GovernedExecutionTaskTemplateCreateInput, GovernedExecutionTaskTemplateUncheckedCreateInput>
+  }
+
+  /**
+   * GovernedExecutionTaskTemplate createMany
+   */
+  export type GovernedExecutionTaskTemplateCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many GovernedExecutionTaskTemplates.
+     */
+    data: GovernedExecutionTaskTemplateCreateManyInput | GovernedExecutionTaskTemplateCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * GovernedExecutionTaskTemplate createManyAndReturn
+   */
+  export type GovernedExecutionTaskTemplateCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GovernedExecutionTaskTemplate
+     */
+    select?: GovernedExecutionTaskTemplateSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the GovernedExecutionTaskTemplate
+     */
+    omit?: GovernedExecutionTaskTemplateOmit<ExtArgs> | null
+    /**
+     * The data used to create many GovernedExecutionTaskTemplates.
+     */
+    data: GovernedExecutionTaskTemplateCreateManyInput | GovernedExecutionTaskTemplateCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GovernedExecutionTaskTemplateIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * GovernedExecutionTaskTemplate update
+   */
+  export type GovernedExecutionTaskTemplateUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GovernedExecutionTaskTemplate
+     */
+    select?: GovernedExecutionTaskTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GovernedExecutionTaskTemplate
+     */
+    omit?: GovernedExecutionTaskTemplateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GovernedExecutionTaskTemplateInclude<ExtArgs> | null
+    /**
+     * The data needed to update a GovernedExecutionTaskTemplate.
+     */
+    data: XOR<GovernedExecutionTaskTemplateUpdateInput, GovernedExecutionTaskTemplateUncheckedUpdateInput>
+    /**
+     * Choose, which GovernedExecutionTaskTemplate to update.
+     */
+    where: GovernedExecutionTaskTemplateWhereUniqueInput
+  }
+
+  /**
+   * GovernedExecutionTaskTemplate updateMany
+   */
+  export type GovernedExecutionTaskTemplateUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update GovernedExecutionTaskTemplates.
+     */
+    data: XOR<GovernedExecutionTaskTemplateUpdateManyMutationInput, GovernedExecutionTaskTemplateUncheckedUpdateManyInput>
+    /**
+     * Filter which GovernedExecutionTaskTemplates to update
+     */
+    where?: GovernedExecutionTaskTemplateWhereInput
+    /**
+     * Limit how many GovernedExecutionTaskTemplates to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * GovernedExecutionTaskTemplate updateManyAndReturn
+   */
+  export type GovernedExecutionTaskTemplateUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GovernedExecutionTaskTemplate
+     */
+    select?: GovernedExecutionTaskTemplateSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the GovernedExecutionTaskTemplate
+     */
+    omit?: GovernedExecutionTaskTemplateOmit<ExtArgs> | null
+    /**
+     * The data used to update GovernedExecutionTaskTemplates.
+     */
+    data: XOR<GovernedExecutionTaskTemplateUpdateManyMutationInput, GovernedExecutionTaskTemplateUncheckedUpdateManyInput>
+    /**
+     * Filter which GovernedExecutionTaskTemplates to update
+     */
+    where?: GovernedExecutionTaskTemplateWhereInput
+    /**
+     * Limit how many GovernedExecutionTaskTemplates to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GovernedExecutionTaskTemplateIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * GovernedExecutionTaskTemplate upsert
+   */
+  export type GovernedExecutionTaskTemplateUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GovernedExecutionTaskTemplate
+     */
+    select?: GovernedExecutionTaskTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GovernedExecutionTaskTemplate
+     */
+    omit?: GovernedExecutionTaskTemplateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GovernedExecutionTaskTemplateInclude<ExtArgs> | null
+    /**
+     * The filter to search for the GovernedExecutionTaskTemplate to update in case it exists.
+     */
+    where: GovernedExecutionTaskTemplateWhereUniqueInput
+    /**
+     * In case the GovernedExecutionTaskTemplate found by the `where` argument doesn't exist, create a new GovernedExecutionTaskTemplate with this data.
+     */
+    create: XOR<GovernedExecutionTaskTemplateCreateInput, GovernedExecutionTaskTemplateUncheckedCreateInput>
+    /**
+     * In case the GovernedExecutionTaskTemplate was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<GovernedExecutionTaskTemplateUpdateInput, GovernedExecutionTaskTemplateUncheckedUpdateInput>
+  }
+
+  /**
+   * GovernedExecutionTaskTemplate delete
+   */
+  export type GovernedExecutionTaskTemplateDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GovernedExecutionTaskTemplate
+     */
+    select?: GovernedExecutionTaskTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GovernedExecutionTaskTemplate
+     */
+    omit?: GovernedExecutionTaskTemplateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GovernedExecutionTaskTemplateInclude<ExtArgs> | null
+    /**
+     * Filter which GovernedExecutionTaskTemplate to delete.
+     */
+    where: GovernedExecutionTaskTemplateWhereUniqueInput
+  }
+
+  /**
+   * GovernedExecutionTaskTemplate deleteMany
+   */
+  export type GovernedExecutionTaskTemplateDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which GovernedExecutionTaskTemplates to delete
+     */
+    where?: GovernedExecutionTaskTemplateWhereInput
+    /**
+     * Limit how many GovernedExecutionTaskTemplates to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * GovernedExecutionTaskTemplate.executionTasks
+   */
+  export type GovernedExecutionTaskTemplate$executionTasksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExecutionTask
+     */
+    select?: ExecutionTaskSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExecutionTask
+     */
+    omit?: ExecutionTaskOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExecutionTaskInclude<ExtArgs> | null
+    where?: ExecutionTaskWhereInput
+    orderBy?: ExecutionTaskOrderByWithRelationInput | ExecutionTaskOrderByWithRelationInput[]
+    cursor?: ExecutionTaskWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ExecutionTaskScalarFieldEnum | ExecutionTaskScalarFieldEnum[]
+  }
+
+  /**
+   * GovernedExecutionTaskTemplate without action
+   */
+  export type GovernedExecutionTaskTemplateDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GovernedExecutionTaskTemplate
+     */
+    select?: GovernedExecutionTaskTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GovernedExecutionTaskTemplate
+     */
+    omit?: GovernedExecutionTaskTemplateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GovernedExecutionTaskTemplateInclude<ExtArgs> | null
   }
 
 
@@ -19717,6 +22812,8 @@ export namespace Prisma {
     createdAt: Date | null
     updatedAt: Date | null
     decisionPackageId: string | null
+    governanceMode: $Enums.ActionPlanGovernanceMode | null
+    actionPlanContractVersion: string | null
   }
 
   export type OperationalResponsePlanMaxAggregateOutputType = {
@@ -19730,6 +22827,8 @@ export namespace Prisma {
     createdAt: Date | null
     updatedAt: Date | null
     decisionPackageId: string | null
+    governanceMode: $Enums.ActionPlanGovernanceMode | null
+    actionPlanContractVersion: string | null
   }
 
   export type OperationalResponsePlanCountAggregateOutputType = {
@@ -19747,6 +22846,9 @@ export namespace Prisma {
     createdAt: number
     updatedAt: number
     decisionPackageId: number
+    governanceMode: number
+    governedActions: number
+    actionPlanContractVersion: number
     _all: number
   }
 
@@ -19770,6 +22872,8 @@ export namespace Prisma {
     createdAt?: true
     updatedAt?: true
     decisionPackageId?: true
+    governanceMode?: true
+    actionPlanContractVersion?: true
   }
 
   export type OperationalResponsePlanMaxAggregateInputType = {
@@ -19783,6 +22887,8 @@ export namespace Prisma {
     createdAt?: true
     updatedAt?: true
     decisionPackageId?: true
+    governanceMode?: true
+    actionPlanContractVersion?: true
   }
 
   export type OperationalResponsePlanCountAggregateInputType = {
@@ -19800,6 +22906,9 @@ export namespace Prisma {
     createdAt?: true
     updatedAt?: true
     decisionPackageId?: true
+    governanceMode?: true
+    governedActions?: true
+    actionPlanContractVersion?: true
     _all?: true
   }
 
@@ -19904,6 +23013,9 @@ export namespace Prisma {
     createdAt: Date
     updatedAt: Date
     decisionPackageId: string | null
+    governanceMode: $Enums.ActionPlanGovernanceMode
+    governedActions: JsonValue | null
+    actionPlanContractVersion: string | null
     _count: OperationalResponsePlanCountAggregateOutputType | null
     _avg: OperationalResponsePlanAvgAggregateOutputType | null
     _sum: OperationalResponsePlanSumAggregateOutputType | null
@@ -19940,6 +23052,9 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     decisionPackageId?: boolean
+    governanceMode?: boolean
+    governedActions?: boolean
+    actionPlanContractVersion?: boolean
     case?: boolean | CaseDefaultArgs<ExtArgs>
     riskAssessment?: boolean | RiskAssessmentDefaultArgs<ExtArgs>
     decisions?: boolean | OperationalResponsePlan$decisionsArgs<ExtArgs>
@@ -19963,6 +23078,9 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     decisionPackageId?: boolean
+    governanceMode?: boolean
+    governedActions?: boolean
+    actionPlanContractVersion?: boolean
     case?: boolean | CaseDefaultArgs<ExtArgs>
     riskAssessment?: boolean | RiskAssessmentDefaultArgs<ExtArgs>
     decisionPackage?: boolean | OperationalResponsePlan$decisionPackageArgs<ExtArgs>
@@ -19983,6 +23101,9 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     decisionPackageId?: boolean
+    governanceMode?: boolean
+    governedActions?: boolean
+    actionPlanContractVersion?: boolean
     case?: boolean | CaseDefaultArgs<ExtArgs>
     riskAssessment?: boolean | RiskAssessmentDefaultArgs<ExtArgs>
     decisionPackage?: boolean | OperationalResponsePlan$decisionPackageArgs<ExtArgs>
@@ -20003,9 +23124,12 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     decisionPackageId?: boolean
+    governanceMode?: boolean
+    governedActions?: boolean
+    actionPlanContractVersion?: boolean
   }
 
-  export type OperationalResponsePlanOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "caseId" | "riskAssessmentId" | "versionNumber" | "status" | "urgency" | "recommendedActionCodes" | "temporaryMeasures" | "reasons" | "alternativeActionCodes" | "planVersion" | "createdAt" | "updatedAt" | "decisionPackageId", ExtArgs["result"]["operationalResponsePlan"]>
+  export type OperationalResponsePlanOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "caseId" | "riskAssessmentId" | "versionNumber" | "status" | "urgency" | "recommendedActionCodes" | "temporaryMeasures" | "reasons" | "alternativeActionCodes" | "planVersion" | "createdAt" | "updatedAt" | "decisionPackageId" | "governanceMode" | "governedActions" | "actionPlanContractVersion", ExtArgs["result"]["operationalResponsePlan"]>
   export type OperationalResponsePlanInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     case?: boolean | CaseDefaultArgs<ExtArgs>
     riskAssessment?: boolean | RiskAssessmentDefaultArgs<ExtArgs>
@@ -20049,6 +23173,9 @@ export namespace Prisma {
       createdAt: Date
       updatedAt: Date
       decisionPackageId: string | null
+      governanceMode: $Enums.ActionPlanGovernanceMode
+      governedActions: Prisma.JsonValue | null
+      actionPlanContractVersion: string | null
     }, ExtArgs["result"]["operationalResponsePlan"]>
     composites: {}
   }
@@ -20491,6 +23618,9 @@ export namespace Prisma {
     readonly createdAt: FieldRef<"OperationalResponsePlan", 'DateTime'>
     readonly updatedAt: FieldRef<"OperationalResponsePlan", 'DateTime'>
     readonly decisionPackageId: FieldRef<"OperationalResponsePlan", 'String'>
+    readonly governanceMode: FieldRef<"OperationalResponsePlan", 'ActionPlanGovernanceMode'>
+    readonly governedActions: FieldRef<"OperationalResponsePlan", 'Json'>
+    readonly actionPlanContractVersion: FieldRef<"OperationalResponsePlan", 'String'>
   }
     
 
@@ -24763,6 +27893,8 @@ export namespace Prisma {
     completedAt: Date | null
     cancelledAt: Date | null
     cancellationReason: string | null
+    governanceMode: $Enums.ExecutionPlanGovernanceMode | null
+    executionContractVersion: string | null
   }
 
   export type ExecutionPlanMaxAggregateOutputType = {
@@ -24779,6 +27911,8 @@ export namespace Prisma {
     completedAt: Date | null
     cancelledAt: Date | null
     cancellationReason: string | null
+    governanceMode: $Enums.ExecutionPlanGovernanceMode | null
+    executionContractVersion: string | null
   }
 
   export type ExecutionPlanCountAggregateOutputType = {
@@ -24795,6 +27929,9 @@ export namespace Prisma {
     completedAt: number
     cancelledAt: number
     cancellationReason: number
+    governanceMode: number
+    executionContractVersion: number
+    governedProvenance: number
     _all: number
   }
 
@@ -24813,6 +27950,8 @@ export namespace Prisma {
     completedAt?: true
     cancelledAt?: true
     cancellationReason?: true
+    governanceMode?: true
+    executionContractVersion?: true
   }
 
   export type ExecutionPlanMaxAggregateInputType = {
@@ -24829,6 +27968,8 @@ export namespace Prisma {
     completedAt?: true
     cancelledAt?: true
     cancellationReason?: true
+    governanceMode?: true
+    executionContractVersion?: true
   }
 
   export type ExecutionPlanCountAggregateInputType = {
@@ -24845,6 +27986,9 @@ export namespace Prisma {
     completedAt?: true
     cancelledAt?: true
     cancellationReason?: true
+    governanceMode?: true
+    executionContractVersion?: true
+    governedProvenance?: true
     _all?: true
   }
 
@@ -24934,6 +28078,9 @@ export namespace Prisma {
     completedAt: Date | null
     cancelledAt: Date | null
     cancellationReason: string | null
+    governanceMode: $Enums.ExecutionPlanGovernanceMode
+    executionContractVersion: string | null
+    governedProvenance: JsonValue | null
     _count: ExecutionPlanCountAggregateOutputType | null
     _min: ExecutionPlanMinAggregateOutputType | null
     _max: ExecutionPlanMaxAggregateOutputType | null
@@ -24967,6 +28114,9 @@ export namespace Prisma {
     completedAt?: boolean
     cancelledAt?: boolean
     cancellationReason?: boolean
+    governanceMode?: boolean
+    executionContractVersion?: boolean
+    governedProvenance?: boolean
     orp?: boolean | OperationalResponsePlanDefaultArgs<ExtArgs>
     case?: boolean | CaseDefaultArgs<ExtArgs>
     approvalDecision?: boolean | OrpDecisionDefaultArgs<ExtArgs>
@@ -24990,6 +28140,9 @@ export namespace Prisma {
     completedAt?: boolean
     cancelledAt?: boolean
     cancellationReason?: boolean
+    governanceMode?: boolean
+    executionContractVersion?: boolean
+    governedProvenance?: boolean
     orp?: boolean | OperationalResponsePlanDefaultArgs<ExtArgs>
     case?: boolean | CaseDefaultArgs<ExtArgs>
     approvalDecision?: boolean | OrpDecisionDefaultArgs<ExtArgs>
@@ -25010,6 +28163,9 @@ export namespace Prisma {
     completedAt?: boolean
     cancelledAt?: boolean
     cancellationReason?: boolean
+    governanceMode?: boolean
+    executionContractVersion?: boolean
+    governedProvenance?: boolean
     orp?: boolean | OperationalResponsePlanDefaultArgs<ExtArgs>
     case?: boolean | CaseDefaultArgs<ExtArgs>
     approvalDecision?: boolean | OrpDecisionDefaultArgs<ExtArgs>
@@ -25030,9 +28186,12 @@ export namespace Prisma {
     completedAt?: boolean
     cancelledAt?: boolean
     cancellationReason?: boolean
+    governanceMode?: boolean
+    executionContractVersion?: boolean
+    governedProvenance?: boolean
   }
 
-  export type ExecutionPlanOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "orpId" | "caseId" | "approvalDecisionId" | "status" | "createdById" | "templateVersion" | "createdAt" | "updatedAt" | "startedAt" | "completedAt" | "cancelledAt" | "cancellationReason", ExtArgs["result"]["executionPlan"]>
+  export type ExecutionPlanOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "orpId" | "caseId" | "approvalDecisionId" | "status" | "createdById" | "templateVersion" | "createdAt" | "updatedAt" | "startedAt" | "completedAt" | "cancelledAt" | "cancellationReason" | "governanceMode" | "executionContractVersion" | "governedProvenance", ExtArgs["result"]["executionPlan"]>
   export type ExecutionPlanInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     orp?: boolean | OperationalResponsePlanDefaultArgs<ExtArgs>
     case?: boolean | CaseDefaultArgs<ExtArgs>
@@ -25079,6 +28238,9 @@ export namespace Prisma {
       completedAt: Date | null
       cancelledAt: Date | null
       cancellationReason: string | null
+      governanceMode: $Enums.ExecutionPlanGovernanceMode
+      executionContractVersion: string | null
+      governedProvenance: Prisma.JsonValue | null
     }, ExtArgs["result"]["executionPlan"]>
     composites: {}
   }
@@ -25521,6 +28683,9 @@ export namespace Prisma {
     readonly completedAt: FieldRef<"ExecutionPlan", 'DateTime'>
     readonly cancelledAt: FieldRef<"ExecutionPlan", 'DateTime'>
     readonly cancellationReason: FieldRef<"ExecutionPlan", 'String'>
+    readonly governanceMode: FieldRef<"ExecutionPlan", 'ExecutionPlanGovernanceMode'>
+    readonly executionContractVersion: FieldRef<"ExecutionPlan", 'String'>
+    readonly governedProvenance: FieldRef<"ExecutionPlan", 'Json'>
   }
     
 
@@ -25992,10 +29157,14 @@ export namespace Prisma {
 
   export type ExecutionTaskAvgAggregateOutputType = {
     sequenceNumber: number | null
+    sourceActionVersion: number | null
+    sourceTemplateVersion: number | null
   }
 
   export type ExecutionTaskSumAggregateOutputType = {
     sequenceNumber: number | null
+    sourceActionVersion: number | null
+    sourceTemplateVersion: number | null
   }
 
   export type ExecutionTaskMinAggregateOutputType = {
@@ -26025,6 +29194,14 @@ export namespace Prisma {
     cancellationReason: string | null
     createdAt: Date | null
     updatedAt: Date | null
+    approvedActionVersionId: string | null
+    governedExecutionTemplateId: string | null
+    governedTaskTemplateId: string | null
+    sourceActionVersion: number | null
+    sourceTemplateCode: string | null
+    sourceTemplateVersion: number | null
+    evidenceRequired: boolean | null
+    verificationRequired: boolean | null
   }
 
   export type ExecutionTaskMaxAggregateOutputType = {
@@ -26054,6 +29231,14 @@ export namespace Prisma {
     cancellationReason: string | null
     createdAt: Date | null
     updatedAt: Date | null
+    approvedActionVersionId: string | null
+    governedExecutionTemplateId: string | null
+    governedTaskTemplateId: string | null
+    sourceActionVersion: number | null
+    sourceTemplateCode: string | null
+    sourceTemplateVersion: number | null
+    evidenceRequired: boolean | null
+    verificationRequired: boolean | null
   }
 
   export type ExecutionTaskCountAggregateOutputType = {
@@ -26083,16 +29268,28 @@ export namespace Prisma {
     cancellationReason: number
     createdAt: number
     updatedAt: number
+    approvedActionVersionId: number
+    governedExecutionTemplateId: number
+    governedTaskTemplateId: number
+    sourceActionVersion: number
+    sourceTemplateCode: number
+    sourceTemplateVersion: number
+    evidenceRequired: number
+    verificationRequired: number
     _all: number
   }
 
 
   export type ExecutionTaskAvgAggregateInputType = {
     sequenceNumber?: true
+    sourceActionVersion?: true
+    sourceTemplateVersion?: true
   }
 
   export type ExecutionTaskSumAggregateInputType = {
     sequenceNumber?: true
+    sourceActionVersion?: true
+    sourceTemplateVersion?: true
   }
 
   export type ExecutionTaskMinAggregateInputType = {
@@ -26122,6 +29319,14 @@ export namespace Prisma {
     cancellationReason?: true
     createdAt?: true
     updatedAt?: true
+    approvedActionVersionId?: true
+    governedExecutionTemplateId?: true
+    governedTaskTemplateId?: true
+    sourceActionVersion?: true
+    sourceTemplateCode?: true
+    sourceTemplateVersion?: true
+    evidenceRequired?: true
+    verificationRequired?: true
   }
 
   export type ExecutionTaskMaxAggregateInputType = {
@@ -26151,6 +29356,14 @@ export namespace Prisma {
     cancellationReason?: true
     createdAt?: true
     updatedAt?: true
+    approvedActionVersionId?: true
+    governedExecutionTemplateId?: true
+    governedTaskTemplateId?: true
+    sourceActionVersion?: true
+    sourceTemplateCode?: true
+    sourceTemplateVersion?: true
+    evidenceRequired?: true
+    verificationRequired?: true
   }
 
   export type ExecutionTaskCountAggregateInputType = {
@@ -26180,6 +29393,14 @@ export namespace Prisma {
     cancellationReason?: true
     createdAt?: true
     updatedAt?: true
+    approvedActionVersionId?: true
+    governedExecutionTemplateId?: true
+    governedTaskTemplateId?: true
+    sourceActionVersion?: true
+    sourceTemplateCode?: true
+    sourceTemplateVersion?: true
+    evidenceRequired?: true
+    verificationRequired?: true
     _all?: true
   }
 
@@ -26296,6 +29517,14 @@ export namespace Prisma {
     cancellationReason: string | null
     createdAt: Date
     updatedAt: Date
+    approvedActionVersionId: string | null
+    governedExecutionTemplateId: string | null
+    governedTaskTemplateId: string | null
+    sourceActionVersion: number | null
+    sourceTemplateCode: string | null
+    sourceTemplateVersion: number | null
+    evidenceRequired: boolean
+    verificationRequired: boolean
     _count: ExecutionTaskCountAggregateOutputType | null
     _avg: ExecutionTaskAvgAggregateOutputType | null
     _sum: ExecutionTaskSumAggregateOutputType | null
@@ -26344,6 +29573,14 @@ export namespace Prisma {
     cancellationReason?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    approvedActionVersionId?: boolean
+    governedExecutionTemplateId?: boolean
+    governedTaskTemplateId?: boolean
+    sourceActionVersion?: boolean
+    sourceTemplateCode?: boolean
+    sourceTemplateVersion?: boolean
+    evidenceRequired?: boolean
+    verificationRequired?: boolean
     executionPlan?: boolean | ExecutionPlanDefaultArgs<ExtArgs>
     assignedTo?: boolean | ExecutionTask$assignedToArgs<ExtArgs>
     assignedBy?: boolean | ExecutionTask$assignedByArgs<ExtArgs>
@@ -26351,6 +29588,9 @@ export namespace Prisma {
     verifiedBy?: boolean | ExecutionTask$verifiedByArgs<ExtArgs>
     cancelledBy?: boolean | ExecutionTask$cancelledByArgs<ExtArgs>
     evidence?: boolean | ExecutionTask$evidenceArgs<ExtArgs>
+    approvedActionVersion?: boolean | ExecutionTask$approvedActionVersionArgs<ExtArgs>
+    governedExecutionTemplate?: boolean | ExecutionTask$governedExecutionTemplateArgs<ExtArgs>
+    governedTaskTemplate?: boolean | ExecutionTask$governedTaskTemplateArgs<ExtArgs>
     _count?: boolean | ExecutionTaskCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["executionTask"]>
 
@@ -26381,12 +29621,23 @@ export namespace Prisma {
     cancellationReason?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    approvedActionVersionId?: boolean
+    governedExecutionTemplateId?: boolean
+    governedTaskTemplateId?: boolean
+    sourceActionVersion?: boolean
+    sourceTemplateCode?: boolean
+    sourceTemplateVersion?: boolean
+    evidenceRequired?: boolean
+    verificationRequired?: boolean
     executionPlan?: boolean | ExecutionPlanDefaultArgs<ExtArgs>
     assignedTo?: boolean | ExecutionTask$assignedToArgs<ExtArgs>
     assignedBy?: boolean | ExecutionTask$assignedByArgs<ExtArgs>
     completionSubmittedBy?: boolean | ExecutionTask$completionSubmittedByArgs<ExtArgs>
     verifiedBy?: boolean | ExecutionTask$verifiedByArgs<ExtArgs>
     cancelledBy?: boolean | ExecutionTask$cancelledByArgs<ExtArgs>
+    approvedActionVersion?: boolean | ExecutionTask$approvedActionVersionArgs<ExtArgs>
+    governedExecutionTemplate?: boolean | ExecutionTask$governedExecutionTemplateArgs<ExtArgs>
+    governedTaskTemplate?: boolean | ExecutionTask$governedTaskTemplateArgs<ExtArgs>
   }, ExtArgs["result"]["executionTask"]>
 
   export type ExecutionTaskSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -26416,12 +29667,23 @@ export namespace Prisma {
     cancellationReason?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    approvedActionVersionId?: boolean
+    governedExecutionTemplateId?: boolean
+    governedTaskTemplateId?: boolean
+    sourceActionVersion?: boolean
+    sourceTemplateCode?: boolean
+    sourceTemplateVersion?: boolean
+    evidenceRequired?: boolean
+    verificationRequired?: boolean
     executionPlan?: boolean | ExecutionPlanDefaultArgs<ExtArgs>
     assignedTo?: boolean | ExecutionTask$assignedToArgs<ExtArgs>
     assignedBy?: boolean | ExecutionTask$assignedByArgs<ExtArgs>
     completionSubmittedBy?: boolean | ExecutionTask$completionSubmittedByArgs<ExtArgs>
     verifiedBy?: boolean | ExecutionTask$verifiedByArgs<ExtArgs>
     cancelledBy?: boolean | ExecutionTask$cancelledByArgs<ExtArgs>
+    approvedActionVersion?: boolean | ExecutionTask$approvedActionVersionArgs<ExtArgs>
+    governedExecutionTemplate?: boolean | ExecutionTask$governedExecutionTemplateArgs<ExtArgs>
+    governedTaskTemplate?: boolean | ExecutionTask$governedTaskTemplateArgs<ExtArgs>
   }, ExtArgs["result"]["executionTask"]>
 
   export type ExecutionTaskSelectScalar = {
@@ -26451,9 +29713,17 @@ export namespace Prisma {
     cancellationReason?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    approvedActionVersionId?: boolean
+    governedExecutionTemplateId?: boolean
+    governedTaskTemplateId?: boolean
+    sourceActionVersion?: boolean
+    sourceTemplateCode?: boolean
+    sourceTemplateVersion?: boolean
+    evidenceRequired?: boolean
+    verificationRequired?: boolean
   }
 
-  export type ExecutionTaskOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "executionPlanId" | "sequenceNumber" | "sourceActionCode" | "templateTaskKey" | "titleSnapshot" | "descriptionSnapshot" | "categorySnapshot" | "isMandatory" | "status" | "assignedToId" | "assignedById" | "assignedAt" | "startedAt" | "completionSubmittedById" | "completionSubmittedAt" | "completionNote" | "verifiedById" | "verifiedAt" | "verificationNote" | "blockedReason" | "cancelledById" | "cancelledAt" | "cancellationReason" | "createdAt" | "updatedAt", ExtArgs["result"]["executionTask"]>
+  export type ExecutionTaskOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "executionPlanId" | "sequenceNumber" | "sourceActionCode" | "templateTaskKey" | "titleSnapshot" | "descriptionSnapshot" | "categorySnapshot" | "isMandatory" | "status" | "assignedToId" | "assignedById" | "assignedAt" | "startedAt" | "completionSubmittedById" | "completionSubmittedAt" | "completionNote" | "verifiedById" | "verifiedAt" | "verificationNote" | "blockedReason" | "cancelledById" | "cancelledAt" | "cancellationReason" | "createdAt" | "updatedAt" | "approvedActionVersionId" | "governedExecutionTemplateId" | "governedTaskTemplateId" | "sourceActionVersion" | "sourceTemplateCode" | "sourceTemplateVersion" | "evidenceRequired" | "verificationRequired", ExtArgs["result"]["executionTask"]>
   export type ExecutionTaskInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     executionPlan?: boolean | ExecutionPlanDefaultArgs<ExtArgs>
     assignedTo?: boolean | ExecutionTask$assignedToArgs<ExtArgs>
@@ -26462,6 +29732,9 @@ export namespace Prisma {
     verifiedBy?: boolean | ExecutionTask$verifiedByArgs<ExtArgs>
     cancelledBy?: boolean | ExecutionTask$cancelledByArgs<ExtArgs>
     evidence?: boolean | ExecutionTask$evidenceArgs<ExtArgs>
+    approvedActionVersion?: boolean | ExecutionTask$approvedActionVersionArgs<ExtArgs>
+    governedExecutionTemplate?: boolean | ExecutionTask$governedExecutionTemplateArgs<ExtArgs>
+    governedTaskTemplate?: boolean | ExecutionTask$governedTaskTemplateArgs<ExtArgs>
     _count?: boolean | ExecutionTaskCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ExecutionTaskIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -26471,6 +29744,9 @@ export namespace Prisma {
     completionSubmittedBy?: boolean | ExecutionTask$completionSubmittedByArgs<ExtArgs>
     verifiedBy?: boolean | ExecutionTask$verifiedByArgs<ExtArgs>
     cancelledBy?: boolean | ExecutionTask$cancelledByArgs<ExtArgs>
+    approvedActionVersion?: boolean | ExecutionTask$approvedActionVersionArgs<ExtArgs>
+    governedExecutionTemplate?: boolean | ExecutionTask$governedExecutionTemplateArgs<ExtArgs>
+    governedTaskTemplate?: boolean | ExecutionTask$governedTaskTemplateArgs<ExtArgs>
   }
   export type ExecutionTaskIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     executionPlan?: boolean | ExecutionPlanDefaultArgs<ExtArgs>
@@ -26479,6 +29755,9 @@ export namespace Prisma {
     completionSubmittedBy?: boolean | ExecutionTask$completionSubmittedByArgs<ExtArgs>
     verifiedBy?: boolean | ExecutionTask$verifiedByArgs<ExtArgs>
     cancelledBy?: boolean | ExecutionTask$cancelledByArgs<ExtArgs>
+    approvedActionVersion?: boolean | ExecutionTask$approvedActionVersionArgs<ExtArgs>
+    governedExecutionTemplate?: boolean | ExecutionTask$governedExecutionTemplateArgs<ExtArgs>
+    governedTaskTemplate?: boolean | ExecutionTask$governedTaskTemplateArgs<ExtArgs>
   }
 
   export type $ExecutionTaskPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -26491,6 +29770,9 @@ export namespace Prisma {
       verifiedBy: Prisma.$UserPayload<ExtArgs> | null
       cancelledBy: Prisma.$UserPayload<ExtArgs> | null
       evidence: Prisma.$ExecutionEvidencePayload<ExtArgs>[]
+      approvedActionVersion: Prisma.$ApprovedActionVersionPayload<ExtArgs> | null
+      governedExecutionTemplate: Prisma.$GovernedExecutionTemplatePayload<ExtArgs> | null
+      governedTaskTemplate: Prisma.$GovernedExecutionTaskTemplatePayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -26519,6 +29801,14 @@ export namespace Prisma {
       cancellationReason: string | null
       createdAt: Date
       updatedAt: Date
+      approvedActionVersionId: string | null
+      governedExecutionTemplateId: string | null
+      governedTaskTemplateId: string | null
+      sourceActionVersion: number | null
+      sourceTemplateCode: string | null
+      sourceTemplateVersion: number | null
+      evidenceRequired: boolean
+      verificationRequired: boolean
     }, ExtArgs["result"]["executionTask"]>
     composites: {}
   }
@@ -26920,6 +30210,9 @@ export namespace Prisma {
     verifiedBy<T extends ExecutionTask$verifiedByArgs<ExtArgs> = {}>(args?: Subset<T, ExecutionTask$verifiedByArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     cancelledBy<T extends ExecutionTask$cancelledByArgs<ExtArgs> = {}>(args?: Subset<T, ExecutionTask$cancelledByArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     evidence<T extends ExecutionTask$evidenceArgs<ExtArgs> = {}>(args?: Subset<T, ExecutionTask$evidenceArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExecutionEvidencePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    approvedActionVersion<T extends ExecutionTask$approvedActionVersionArgs<ExtArgs> = {}>(args?: Subset<T, ExecutionTask$approvedActionVersionArgs<ExtArgs>>): Prisma__ApprovedActionVersionClient<$Result.GetResult<Prisma.$ApprovedActionVersionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    governedExecutionTemplate<T extends ExecutionTask$governedExecutionTemplateArgs<ExtArgs> = {}>(args?: Subset<T, ExecutionTask$governedExecutionTemplateArgs<ExtArgs>>): Prisma__GovernedExecutionTemplateClient<$Result.GetResult<Prisma.$GovernedExecutionTemplatePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    governedTaskTemplate<T extends ExecutionTask$governedTaskTemplateArgs<ExtArgs> = {}>(args?: Subset<T, ExecutionTask$governedTaskTemplateArgs<ExtArgs>>): Prisma__GovernedExecutionTaskTemplateClient<$Result.GetResult<Prisma.$GovernedExecutionTaskTemplatePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -26975,6 +30268,14 @@ export namespace Prisma {
     readonly cancellationReason: FieldRef<"ExecutionTask", 'String'>
     readonly createdAt: FieldRef<"ExecutionTask", 'DateTime'>
     readonly updatedAt: FieldRef<"ExecutionTask", 'DateTime'>
+    readonly approvedActionVersionId: FieldRef<"ExecutionTask", 'String'>
+    readonly governedExecutionTemplateId: FieldRef<"ExecutionTask", 'String'>
+    readonly governedTaskTemplateId: FieldRef<"ExecutionTask", 'String'>
+    readonly sourceActionVersion: FieldRef<"ExecutionTask", 'Int'>
+    readonly sourceTemplateCode: FieldRef<"ExecutionTask", 'String'>
+    readonly sourceTemplateVersion: FieldRef<"ExecutionTask", 'Int'>
+    readonly evidenceRequired: FieldRef<"ExecutionTask", 'Boolean'>
+    readonly verificationRequired: FieldRef<"ExecutionTask", 'Boolean'>
   }
     
 
@@ -27487,6 +30788,63 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ExecutionEvidenceScalarFieldEnum | ExecutionEvidenceScalarFieldEnum[]
+  }
+
+  /**
+   * ExecutionTask.approvedActionVersion
+   */
+  export type ExecutionTask$approvedActionVersionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ApprovedActionVersion
+     */
+    select?: ApprovedActionVersionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ApprovedActionVersion
+     */
+    omit?: ApprovedActionVersionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ApprovedActionVersionInclude<ExtArgs> | null
+    where?: ApprovedActionVersionWhereInput
+  }
+
+  /**
+   * ExecutionTask.governedExecutionTemplate
+   */
+  export type ExecutionTask$governedExecutionTemplateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GovernedExecutionTemplate
+     */
+    select?: GovernedExecutionTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GovernedExecutionTemplate
+     */
+    omit?: GovernedExecutionTemplateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GovernedExecutionTemplateInclude<ExtArgs> | null
+    where?: GovernedExecutionTemplateWhereInput
+  }
+
+  /**
+   * ExecutionTask.governedTaskTemplate
+   */
+  export type ExecutionTask$governedTaskTemplateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GovernedExecutionTaskTemplate
+     */
+    select?: GovernedExecutionTaskTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GovernedExecutionTaskTemplate
+     */
+    omit?: GovernedExecutionTaskTemplateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GovernedExecutionTaskTemplateInclude<ExtArgs> | null
+    where?: GovernedExecutionTaskTemplateWhereInput
   }
 
   /**
@@ -29924,6 +33282,46 @@ export namespace Prisma {
   export type ApprovedActionVersionScalarFieldEnum = (typeof ApprovedActionVersionScalarFieldEnum)[keyof typeof ApprovedActionVersionScalarFieldEnum]
 
 
+  export const GovernedExecutionTemplateScalarFieldEnum: {
+    id: 'id',
+    templateCode: 'templateCode',
+    versionNumber: 'versionNumber',
+    approvedActionVersionId: 'approvedActionVersionId',
+    title: 'title',
+    description: 'description',
+    status: 'status',
+    effectiveFrom: 'effectiveFrom',
+    effectiveUntil: 'effectiveUntil',
+    departmentId: 'departmentId',
+    jurisdictionId: 'jurisdictionId',
+    createdById: 'createdById',
+    approvedById: 'approvedById',
+    approvedAt: 'approvedAt',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type GovernedExecutionTemplateScalarFieldEnum = (typeof GovernedExecutionTemplateScalarFieldEnum)[keyof typeof GovernedExecutionTemplateScalarFieldEnum]
+
+
+  export const GovernedExecutionTaskTemplateScalarFieldEnum: {
+    id: 'id',
+    executionTemplateId: 'executionTemplateId',
+    sequenceNumber: 'sequenceNumber',
+    taskCode: 'taskCode',
+    title: 'title',
+    description: 'description',
+    mandatory: 'mandatory',
+    evidenceRequired: 'evidenceRequired',
+    verificationRequired: 'verificationRequired',
+    enabled: 'enabled',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type GovernedExecutionTaskTemplateScalarFieldEnum = (typeof GovernedExecutionTaskTemplateScalarFieldEnum)[keyof typeof GovernedExecutionTaskTemplateScalarFieldEnum]
+
+
   export const PolicyRuleScalarFieldEnum: {
     id: 'id',
     policyDocumentId: 'policyDocumentId',
@@ -30009,7 +33407,10 @@ export namespace Prisma {
     planVersion: 'planVersion',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
-    decisionPackageId: 'decisionPackageId'
+    decisionPackageId: 'decisionPackageId',
+    governanceMode: 'governanceMode',
+    governedActions: 'governedActions',
+    actionPlanContractVersion: 'actionPlanContractVersion'
   };
 
   export type OperationalResponsePlanScalarFieldEnum = (typeof OperationalResponsePlanScalarFieldEnum)[keyof typeof OperationalResponsePlanScalarFieldEnum]
@@ -30091,7 +33492,10 @@ export namespace Prisma {
     startedAt: 'startedAt',
     completedAt: 'completedAt',
     cancelledAt: 'cancelledAt',
-    cancellationReason: 'cancellationReason'
+    cancellationReason: 'cancellationReason',
+    governanceMode: 'governanceMode',
+    executionContractVersion: 'executionContractVersion',
+    governedProvenance: 'governedProvenance'
   };
 
   export type ExecutionPlanScalarFieldEnum = (typeof ExecutionPlanScalarFieldEnum)[keyof typeof ExecutionPlanScalarFieldEnum]
@@ -30123,7 +33527,15 @@ export namespace Prisma {
     cancelledAt: 'cancelledAt',
     cancellationReason: 'cancellationReason',
     createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
+    updatedAt: 'updatedAt',
+    approvedActionVersionId: 'approvedActionVersionId',
+    governedExecutionTemplateId: 'governedExecutionTemplateId',
+    governedTaskTemplateId: 'governedTaskTemplateId',
+    sourceActionVersion: 'sourceActionVersion',
+    sourceTemplateCode: 'sourceTemplateCode',
+    sourceTemplateVersion: 'sourceTemplateVersion',
+    evidenceRequired: 'evidenceRequired',
+    verificationRequired: 'verificationRequired'
   };
 
   export type ExecutionTaskScalarFieldEnum = (typeof ExecutionTaskScalarFieldEnum)[keyof typeof ExecutionTaskScalarFieldEnum]
@@ -30458,6 +33870,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'ActionPlanGovernanceMode'
+   */
+  export type EnumActionPlanGovernanceModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ActionPlanGovernanceMode'>
+    
+
+
+  /**
+   * Reference to a field of type 'ActionPlanGovernanceMode[]'
+   */
+  export type ListEnumActionPlanGovernanceModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ActionPlanGovernanceMode[]'>
+    
+
+
+  /**
    * Reference to a field of type 'DecisionPackageStatus'
    */
   export type EnumDecisionPackageStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DecisionPackageStatus'>
@@ -30496,6 +33922,20 @@ export namespace Prisma {
    * Reference to a field of type 'ExecutionPlanStatus[]'
    */
   export type ListEnumExecutionPlanStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ExecutionPlanStatus[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'ExecutionPlanGovernanceMode'
+   */
+  export type EnumExecutionPlanGovernanceModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ExecutionPlanGovernanceMode'>
+    
+
+
+  /**
+   * Reference to a field of type 'ExecutionPlanGovernanceMode[]'
+   */
+  export type ListEnumExecutionPlanGovernanceModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ExecutionPlanGovernanceMode[]'>
     
 
 
@@ -30573,6 +34013,7 @@ export namespace Prisma {
     publicReports?: PublicReportListRelationFilter
     policyDocuments?: PolicyDocumentListRelationFilter
     approvedActions?: ApprovedActionVersionListRelationFilter
+    governedExecutionTemplates?: GovernedExecutionTemplateListRelationFilter
   }
 
   export type DepartmentOrderByWithRelationInput = {
@@ -30587,6 +34028,7 @@ export namespace Prisma {
     publicReports?: PublicReportOrderByRelationAggregateInput
     policyDocuments?: PolicyDocumentOrderByRelationAggregateInput
     approvedActions?: ApprovedActionVersionOrderByRelationAggregateInput
+    governedExecutionTemplates?: GovernedExecutionTemplateOrderByRelationAggregateInput
   }
 
   export type DepartmentWhereUniqueInput = Prisma.AtLeast<{
@@ -30604,6 +34046,7 @@ export namespace Prisma {
     publicReports?: PublicReportListRelationFilter
     policyDocuments?: PolicyDocumentListRelationFilter
     approvedActions?: ApprovedActionVersionListRelationFilter
+    governedExecutionTemplates?: GovernedExecutionTemplateListRelationFilter
   }, "id" | "code">
 
   export type DepartmentOrderByWithAggregationInput = {
@@ -30642,6 +34085,7 @@ export namespace Prisma {
     publicReports?: PublicReportListRelationFilter
     policyDocuments?: PolicyDocumentListRelationFilter
     approvedActions?: ApprovedActionVersionListRelationFilter
+    governedExecutionTemplates?: GovernedExecutionTemplateListRelationFilter
   }
 
   export type JurisdictionOrderByWithRelationInput = {
@@ -30657,6 +34101,7 @@ export namespace Prisma {
     publicReports?: PublicReportOrderByRelationAggregateInput
     policyDocuments?: PolicyDocumentOrderByRelationAggregateInput
     approvedActions?: ApprovedActionVersionOrderByRelationAggregateInput
+    governedExecutionTemplates?: GovernedExecutionTemplateOrderByRelationAggregateInput
   }
 
   export type JurisdictionWhereUniqueInput = Prisma.AtLeast<{
@@ -30675,6 +34120,7 @@ export namespace Prisma {
     publicReports?: PublicReportListRelationFilter
     policyDocuments?: PolicyDocumentListRelationFilter
     approvedActions?: ApprovedActionVersionListRelationFilter
+    governedExecutionTemplates?: GovernedExecutionTemplateListRelationFilter
   }, "id">
 
   export type JurisdictionOrderByWithAggregationInput = {
@@ -30737,6 +34183,8 @@ export namespace Prisma {
     createdApprovedActions?: ApprovedActionVersionListRelationFilter
     approvedApprovedActions?: ApprovedActionVersionListRelationFilter
     preparedDecisionPackages?: DecisionPackageListRelationFilter
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateListRelationFilter
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -30774,6 +34222,8 @@ export namespace Prisma {
     createdApprovedActions?: ApprovedActionVersionOrderByRelationAggregateInput
     approvedApprovedActions?: ApprovedActionVersionOrderByRelationAggregateInput
     preparedDecisionPackages?: DecisionPackageOrderByRelationAggregateInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateOrderByRelationAggregateInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -30814,6 +34264,8 @@ export namespace Prisma {
     createdApprovedActions?: ApprovedActionVersionListRelationFilter
     approvedApprovedActions?: ApprovedActionVersionListRelationFilter
     preparedDecisionPackages?: DecisionPackageListRelationFilter
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateListRelationFilter
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateListRelationFilter
   }, "id" | "employeeCode" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -31388,6 +34840,8 @@ export namespace Prisma {
     createdBy?: XOR<UserScalarRelationFilter, UserWhereInput>
     approvedBy?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     rules?: PolicyRuleListRelationFilter
+    executionTemplates?: GovernedExecutionTemplateListRelationFilter
+    executionTasks?: ExecutionTaskListRelationFilter
   }
 
   export type ApprovedActionVersionOrderByWithRelationInput = {
@@ -31417,6 +34871,8 @@ export namespace Prisma {
     createdBy?: UserOrderByWithRelationInput
     approvedBy?: UserOrderByWithRelationInput
     rules?: PolicyRuleOrderByRelationAggregateInput
+    executionTemplates?: GovernedExecutionTemplateOrderByRelationAggregateInput
+    executionTasks?: ExecutionTaskOrderByRelationAggregateInput
   }
 
   export type ApprovedActionVersionWhereUniqueInput = Prisma.AtLeast<{
@@ -31450,6 +34906,8 @@ export namespace Prisma {
     createdBy?: XOR<UserScalarRelationFilter, UserWhereInput>
     approvedBy?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     rules?: PolicyRuleListRelationFilter
+    executionTemplates?: GovernedExecutionTemplateListRelationFilter
+    executionTasks?: ExecutionTaskListRelationFilter
   }, "id" | "actionCode_versionNumber">
 
   export type ApprovedActionVersionOrderByWithAggregationInput = {
@@ -31504,6 +34962,234 @@ export namespace Prisma {
     approvedAt?: DateTimeNullableWithAggregatesFilter<"ApprovedActionVersion"> | Date | string | null
     createdAt?: DateTimeWithAggregatesFilter<"ApprovedActionVersion"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"ApprovedActionVersion"> | Date | string
+  }
+
+  export type GovernedExecutionTemplateWhereInput = {
+    AND?: GovernedExecutionTemplateWhereInput | GovernedExecutionTemplateWhereInput[]
+    OR?: GovernedExecutionTemplateWhereInput[]
+    NOT?: GovernedExecutionTemplateWhereInput | GovernedExecutionTemplateWhereInput[]
+    id?: StringFilter<"GovernedExecutionTemplate"> | string
+    templateCode?: StringFilter<"GovernedExecutionTemplate"> | string
+    versionNumber?: IntFilter<"GovernedExecutionTemplate"> | number
+    approvedActionVersionId?: StringFilter<"GovernedExecutionTemplate"> | string
+    title?: StringFilter<"GovernedExecutionTemplate"> | string
+    description?: StringFilter<"GovernedExecutionTemplate"> | string
+    status?: EnumRegistryLifecycleStatusFilter<"GovernedExecutionTemplate"> | $Enums.RegistryLifecycleStatus
+    effectiveFrom?: DateTimeFilter<"GovernedExecutionTemplate"> | Date | string
+    effectiveUntil?: DateTimeNullableFilter<"GovernedExecutionTemplate"> | Date | string | null
+    departmentId?: StringNullableFilter<"GovernedExecutionTemplate"> | string | null
+    jurisdictionId?: StringNullableFilter<"GovernedExecutionTemplate"> | string | null
+    createdById?: StringFilter<"GovernedExecutionTemplate"> | string
+    approvedById?: StringNullableFilter<"GovernedExecutionTemplate"> | string | null
+    approvedAt?: DateTimeNullableFilter<"GovernedExecutionTemplate"> | Date | string | null
+    createdAt?: DateTimeFilter<"GovernedExecutionTemplate"> | Date | string
+    updatedAt?: DateTimeFilter<"GovernedExecutionTemplate"> | Date | string
+    approvedActionVersion?: XOR<ApprovedActionVersionScalarRelationFilter, ApprovedActionVersionWhereInput>
+    department?: XOR<DepartmentNullableScalarRelationFilter, DepartmentWhereInput> | null
+    jurisdiction?: XOR<JurisdictionNullableScalarRelationFilter, JurisdictionWhereInput> | null
+    createdBy?: XOR<UserScalarRelationFilter, UserWhereInput>
+    approvedBy?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+    tasks?: GovernedExecutionTaskTemplateListRelationFilter
+    executionTasks?: ExecutionTaskListRelationFilter
+  }
+
+  export type GovernedExecutionTemplateOrderByWithRelationInput = {
+    id?: SortOrder
+    templateCode?: SortOrder
+    versionNumber?: SortOrder
+    approvedActionVersionId?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    status?: SortOrder
+    effectiveFrom?: SortOrder
+    effectiveUntil?: SortOrderInput | SortOrder
+    departmentId?: SortOrderInput | SortOrder
+    jurisdictionId?: SortOrderInput | SortOrder
+    createdById?: SortOrder
+    approvedById?: SortOrderInput | SortOrder
+    approvedAt?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    approvedActionVersion?: ApprovedActionVersionOrderByWithRelationInput
+    department?: DepartmentOrderByWithRelationInput
+    jurisdiction?: JurisdictionOrderByWithRelationInput
+    createdBy?: UserOrderByWithRelationInput
+    approvedBy?: UserOrderByWithRelationInput
+    tasks?: GovernedExecutionTaskTemplateOrderByRelationAggregateInput
+    executionTasks?: ExecutionTaskOrderByRelationAggregateInput
+  }
+
+  export type GovernedExecutionTemplateWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    templateCode_versionNumber?: GovernedExecutionTemplateTemplateCodeVersionNumberCompoundUniqueInput
+    AND?: GovernedExecutionTemplateWhereInput | GovernedExecutionTemplateWhereInput[]
+    OR?: GovernedExecutionTemplateWhereInput[]
+    NOT?: GovernedExecutionTemplateWhereInput | GovernedExecutionTemplateWhereInput[]
+    templateCode?: StringFilter<"GovernedExecutionTemplate"> | string
+    versionNumber?: IntFilter<"GovernedExecutionTemplate"> | number
+    approvedActionVersionId?: StringFilter<"GovernedExecutionTemplate"> | string
+    title?: StringFilter<"GovernedExecutionTemplate"> | string
+    description?: StringFilter<"GovernedExecutionTemplate"> | string
+    status?: EnumRegistryLifecycleStatusFilter<"GovernedExecutionTemplate"> | $Enums.RegistryLifecycleStatus
+    effectiveFrom?: DateTimeFilter<"GovernedExecutionTemplate"> | Date | string
+    effectiveUntil?: DateTimeNullableFilter<"GovernedExecutionTemplate"> | Date | string | null
+    departmentId?: StringNullableFilter<"GovernedExecutionTemplate"> | string | null
+    jurisdictionId?: StringNullableFilter<"GovernedExecutionTemplate"> | string | null
+    createdById?: StringFilter<"GovernedExecutionTemplate"> | string
+    approvedById?: StringNullableFilter<"GovernedExecutionTemplate"> | string | null
+    approvedAt?: DateTimeNullableFilter<"GovernedExecutionTemplate"> | Date | string | null
+    createdAt?: DateTimeFilter<"GovernedExecutionTemplate"> | Date | string
+    updatedAt?: DateTimeFilter<"GovernedExecutionTemplate"> | Date | string
+    approvedActionVersion?: XOR<ApprovedActionVersionScalarRelationFilter, ApprovedActionVersionWhereInput>
+    department?: XOR<DepartmentNullableScalarRelationFilter, DepartmentWhereInput> | null
+    jurisdiction?: XOR<JurisdictionNullableScalarRelationFilter, JurisdictionWhereInput> | null
+    createdBy?: XOR<UserScalarRelationFilter, UserWhereInput>
+    approvedBy?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+    tasks?: GovernedExecutionTaskTemplateListRelationFilter
+    executionTasks?: ExecutionTaskListRelationFilter
+  }, "id" | "templateCode_versionNumber">
+
+  export type GovernedExecutionTemplateOrderByWithAggregationInput = {
+    id?: SortOrder
+    templateCode?: SortOrder
+    versionNumber?: SortOrder
+    approvedActionVersionId?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    status?: SortOrder
+    effectiveFrom?: SortOrder
+    effectiveUntil?: SortOrderInput | SortOrder
+    departmentId?: SortOrderInput | SortOrder
+    jurisdictionId?: SortOrderInput | SortOrder
+    createdById?: SortOrder
+    approvedById?: SortOrderInput | SortOrder
+    approvedAt?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: GovernedExecutionTemplateCountOrderByAggregateInput
+    _avg?: GovernedExecutionTemplateAvgOrderByAggregateInput
+    _max?: GovernedExecutionTemplateMaxOrderByAggregateInput
+    _min?: GovernedExecutionTemplateMinOrderByAggregateInput
+    _sum?: GovernedExecutionTemplateSumOrderByAggregateInput
+  }
+
+  export type GovernedExecutionTemplateScalarWhereWithAggregatesInput = {
+    AND?: GovernedExecutionTemplateScalarWhereWithAggregatesInput | GovernedExecutionTemplateScalarWhereWithAggregatesInput[]
+    OR?: GovernedExecutionTemplateScalarWhereWithAggregatesInput[]
+    NOT?: GovernedExecutionTemplateScalarWhereWithAggregatesInput | GovernedExecutionTemplateScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"GovernedExecutionTemplate"> | string
+    templateCode?: StringWithAggregatesFilter<"GovernedExecutionTemplate"> | string
+    versionNumber?: IntWithAggregatesFilter<"GovernedExecutionTemplate"> | number
+    approvedActionVersionId?: StringWithAggregatesFilter<"GovernedExecutionTemplate"> | string
+    title?: StringWithAggregatesFilter<"GovernedExecutionTemplate"> | string
+    description?: StringWithAggregatesFilter<"GovernedExecutionTemplate"> | string
+    status?: EnumRegistryLifecycleStatusWithAggregatesFilter<"GovernedExecutionTemplate"> | $Enums.RegistryLifecycleStatus
+    effectiveFrom?: DateTimeWithAggregatesFilter<"GovernedExecutionTemplate"> | Date | string
+    effectiveUntil?: DateTimeNullableWithAggregatesFilter<"GovernedExecutionTemplate"> | Date | string | null
+    departmentId?: StringNullableWithAggregatesFilter<"GovernedExecutionTemplate"> | string | null
+    jurisdictionId?: StringNullableWithAggregatesFilter<"GovernedExecutionTemplate"> | string | null
+    createdById?: StringWithAggregatesFilter<"GovernedExecutionTemplate"> | string
+    approvedById?: StringNullableWithAggregatesFilter<"GovernedExecutionTemplate"> | string | null
+    approvedAt?: DateTimeNullableWithAggregatesFilter<"GovernedExecutionTemplate"> | Date | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"GovernedExecutionTemplate"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"GovernedExecutionTemplate"> | Date | string
+  }
+
+  export type GovernedExecutionTaskTemplateWhereInput = {
+    AND?: GovernedExecutionTaskTemplateWhereInput | GovernedExecutionTaskTemplateWhereInput[]
+    OR?: GovernedExecutionTaskTemplateWhereInput[]
+    NOT?: GovernedExecutionTaskTemplateWhereInput | GovernedExecutionTaskTemplateWhereInput[]
+    id?: StringFilter<"GovernedExecutionTaskTemplate"> | string
+    executionTemplateId?: StringFilter<"GovernedExecutionTaskTemplate"> | string
+    sequenceNumber?: IntFilter<"GovernedExecutionTaskTemplate"> | number
+    taskCode?: StringFilter<"GovernedExecutionTaskTemplate"> | string
+    title?: StringFilter<"GovernedExecutionTaskTemplate"> | string
+    description?: StringFilter<"GovernedExecutionTaskTemplate"> | string
+    mandatory?: BoolFilter<"GovernedExecutionTaskTemplate"> | boolean
+    evidenceRequired?: BoolFilter<"GovernedExecutionTaskTemplate"> | boolean
+    verificationRequired?: BoolFilter<"GovernedExecutionTaskTemplate"> | boolean
+    enabled?: BoolFilter<"GovernedExecutionTaskTemplate"> | boolean
+    createdAt?: DateTimeFilter<"GovernedExecutionTaskTemplate"> | Date | string
+    updatedAt?: DateTimeFilter<"GovernedExecutionTaskTemplate"> | Date | string
+    executionTemplate?: XOR<GovernedExecutionTemplateScalarRelationFilter, GovernedExecutionTemplateWhereInput>
+    executionTasks?: ExecutionTaskListRelationFilter
+  }
+
+  export type GovernedExecutionTaskTemplateOrderByWithRelationInput = {
+    id?: SortOrder
+    executionTemplateId?: SortOrder
+    sequenceNumber?: SortOrder
+    taskCode?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    mandatory?: SortOrder
+    evidenceRequired?: SortOrder
+    verificationRequired?: SortOrder
+    enabled?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    executionTemplate?: GovernedExecutionTemplateOrderByWithRelationInput
+    executionTasks?: ExecutionTaskOrderByRelationAggregateInput
+  }
+
+  export type GovernedExecutionTaskTemplateWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    executionTemplateId_sequenceNumber?: GovernedExecutionTaskTemplateExecutionTemplateIdSequenceNumberCompoundUniqueInput
+    executionTemplateId_taskCode?: GovernedExecutionTaskTemplateExecutionTemplateIdTaskCodeCompoundUniqueInput
+    AND?: GovernedExecutionTaskTemplateWhereInput | GovernedExecutionTaskTemplateWhereInput[]
+    OR?: GovernedExecutionTaskTemplateWhereInput[]
+    NOT?: GovernedExecutionTaskTemplateWhereInput | GovernedExecutionTaskTemplateWhereInput[]
+    executionTemplateId?: StringFilter<"GovernedExecutionTaskTemplate"> | string
+    sequenceNumber?: IntFilter<"GovernedExecutionTaskTemplate"> | number
+    taskCode?: StringFilter<"GovernedExecutionTaskTemplate"> | string
+    title?: StringFilter<"GovernedExecutionTaskTemplate"> | string
+    description?: StringFilter<"GovernedExecutionTaskTemplate"> | string
+    mandatory?: BoolFilter<"GovernedExecutionTaskTemplate"> | boolean
+    evidenceRequired?: BoolFilter<"GovernedExecutionTaskTemplate"> | boolean
+    verificationRequired?: BoolFilter<"GovernedExecutionTaskTemplate"> | boolean
+    enabled?: BoolFilter<"GovernedExecutionTaskTemplate"> | boolean
+    createdAt?: DateTimeFilter<"GovernedExecutionTaskTemplate"> | Date | string
+    updatedAt?: DateTimeFilter<"GovernedExecutionTaskTemplate"> | Date | string
+    executionTemplate?: XOR<GovernedExecutionTemplateScalarRelationFilter, GovernedExecutionTemplateWhereInput>
+    executionTasks?: ExecutionTaskListRelationFilter
+  }, "id" | "executionTemplateId_sequenceNumber" | "executionTemplateId_taskCode">
+
+  export type GovernedExecutionTaskTemplateOrderByWithAggregationInput = {
+    id?: SortOrder
+    executionTemplateId?: SortOrder
+    sequenceNumber?: SortOrder
+    taskCode?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    mandatory?: SortOrder
+    evidenceRequired?: SortOrder
+    verificationRequired?: SortOrder
+    enabled?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: GovernedExecutionTaskTemplateCountOrderByAggregateInput
+    _avg?: GovernedExecutionTaskTemplateAvgOrderByAggregateInput
+    _max?: GovernedExecutionTaskTemplateMaxOrderByAggregateInput
+    _min?: GovernedExecutionTaskTemplateMinOrderByAggregateInput
+    _sum?: GovernedExecutionTaskTemplateSumOrderByAggregateInput
+  }
+
+  export type GovernedExecutionTaskTemplateScalarWhereWithAggregatesInput = {
+    AND?: GovernedExecutionTaskTemplateScalarWhereWithAggregatesInput | GovernedExecutionTaskTemplateScalarWhereWithAggregatesInput[]
+    OR?: GovernedExecutionTaskTemplateScalarWhereWithAggregatesInput[]
+    NOT?: GovernedExecutionTaskTemplateScalarWhereWithAggregatesInput | GovernedExecutionTaskTemplateScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"GovernedExecutionTaskTemplate"> | string
+    executionTemplateId?: StringWithAggregatesFilter<"GovernedExecutionTaskTemplate"> | string
+    sequenceNumber?: IntWithAggregatesFilter<"GovernedExecutionTaskTemplate"> | number
+    taskCode?: StringWithAggregatesFilter<"GovernedExecutionTaskTemplate"> | string
+    title?: StringWithAggregatesFilter<"GovernedExecutionTaskTemplate"> | string
+    description?: StringWithAggregatesFilter<"GovernedExecutionTaskTemplate"> | string
+    mandatory?: BoolWithAggregatesFilter<"GovernedExecutionTaskTemplate"> | boolean
+    evidenceRequired?: BoolWithAggregatesFilter<"GovernedExecutionTaskTemplate"> | boolean
+    verificationRequired?: BoolWithAggregatesFilter<"GovernedExecutionTaskTemplate"> | boolean
+    enabled?: BoolWithAggregatesFilter<"GovernedExecutionTaskTemplate"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"GovernedExecutionTaskTemplate"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"GovernedExecutionTaskTemplate"> | Date | string
   }
 
   export type PolicyRuleWhereInput = {
@@ -31929,6 +35615,9 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"OperationalResponsePlan"> | Date | string
     updatedAt?: DateTimeFilter<"OperationalResponsePlan"> | Date | string
     decisionPackageId?: StringNullableFilter<"OperationalResponsePlan"> | string | null
+    governanceMode?: EnumActionPlanGovernanceModeFilter<"OperationalResponsePlan"> | $Enums.ActionPlanGovernanceMode
+    governedActions?: JsonNullableFilter<"OperationalResponsePlan">
+    actionPlanContractVersion?: StringNullableFilter<"OperationalResponsePlan"> | string | null
     case?: XOR<CaseScalarRelationFilter, CaseWhereInput>
     riskAssessment?: XOR<RiskAssessmentScalarRelationFilter, RiskAssessmentWhereInput>
     decisions?: OrpDecisionListRelationFilter
@@ -31951,6 +35640,9 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     decisionPackageId?: SortOrderInput | SortOrder
+    governanceMode?: SortOrder
+    governedActions?: SortOrderInput | SortOrder
+    actionPlanContractVersion?: SortOrderInput | SortOrder
     case?: CaseOrderByWithRelationInput
     riskAssessment?: RiskAssessmentOrderByWithRelationInput
     decisions?: OrpDecisionOrderByRelationAggregateInput
@@ -31977,6 +35669,9 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"OperationalResponsePlan"> | Date | string
     updatedAt?: DateTimeFilter<"OperationalResponsePlan"> | Date | string
     decisionPackageId?: StringNullableFilter<"OperationalResponsePlan"> | string | null
+    governanceMode?: EnumActionPlanGovernanceModeFilter<"OperationalResponsePlan"> | $Enums.ActionPlanGovernanceMode
+    governedActions?: JsonNullableFilter<"OperationalResponsePlan">
+    actionPlanContractVersion?: StringNullableFilter<"OperationalResponsePlan"> | string | null
     case?: XOR<CaseScalarRelationFilter, CaseWhereInput>
     riskAssessment?: XOR<RiskAssessmentScalarRelationFilter, RiskAssessmentWhereInput>
     decisions?: OrpDecisionListRelationFilter
@@ -31999,6 +35694,9 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     decisionPackageId?: SortOrderInput | SortOrder
+    governanceMode?: SortOrder
+    governedActions?: SortOrderInput | SortOrder
+    actionPlanContractVersion?: SortOrderInput | SortOrder
     _count?: OperationalResponsePlanCountOrderByAggregateInput
     _avg?: OperationalResponsePlanAvgOrderByAggregateInput
     _max?: OperationalResponsePlanMaxOrderByAggregateInput
@@ -32024,6 +35722,9 @@ export namespace Prisma {
     createdAt?: DateTimeWithAggregatesFilter<"OperationalResponsePlan"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"OperationalResponsePlan"> | Date | string
     decisionPackageId?: StringNullableWithAggregatesFilter<"OperationalResponsePlan"> | string | null
+    governanceMode?: EnumActionPlanGovernanceModeWithAggregatesFilter<"OperationalResponsePlan"> | $Enums.ActionPlanGovernanceMode
+    governedActions?: JsonNullableWithAggregatesFilter<"OperationalResponsePlan">
+    actionPlanContractVersion?: StringNullableWithAggregatesFilter<"OperationalResponsePlan"> | string | null
   }
 
   export type DecisionPackageWhereInput = {
@@ -32401,6 +36102,9 @@ export namespace Prisma {
     completedAt?: DateTimeNullableFilter<"ExecutionPlan"> | Date | string | null
     cancelledAt?: DateTimeNullableFilter<"ExecutionPlan"> | Date | string | null
     cancellationReason?: StringNullableFilter<"ExecutionPlan"> | string | null
+    governanceMode?: EnumExecutionPlanGovernanceModeFilter<"ExecutionPlan"> | $Enums.ExecutionPlanGovernanceMode
+    executionContractVersion?: StringNullableFilter<"ExecutionPlan"> | string | null
+    governedProvenance?: JsonNullableFilter<"ExecutionPlan">
     orp?: XOR<OperationalResponsePlanScalarRelationFilter, OperationalResponsePlanWhereInput>
     case?: XOR<CaseScalarRelationFilter, CaseWhereInput>
     approvalDecision?: XOR<OrpDecisionScalarRelationFilter, OrpDecisionWhereInput>
@@ -32423,6 +36127,9 @@ export namespace Prisma {
     completedAt?: SortOrderInput | SortOrder
     cancelledAt?: SortOrderInput | SortOrder
     cancellationReason?: SortOrderInput | SortOrder
+    governanceMode?: SortOrder
+    executionContractVersion?: SortOrderInput | SortOrder
+    governedProvenance?: SortOrderInput | SortOrder
     orp?: OperationalResponsePlanOrderByWithRelationInput
     case?: CaseOrderByWithRelationInput
     approvalDecision?: OrpDecisionOrderByWithRelationInput
@@ -32448,6 +36155,9 @@ export namespace Prisma {
     completedAt?: DateTimeNullableFilter<"ExecutionPlan"> | Date | string | null
     cancelledAt?: DateTimeNullableFilter<"ExecutionPlan"> | Date | string | null
     cancellationReason?: StringNullableFilter<"ExecutionPlan"> | string | null
+    governanceMode?: EnumExecutionPlanGovernanceModeFilter<"ExecutionPlan"> | $Enums.ExecutionPlanGovernanceMode
+    executionContractVersion?: StringNullableFilter<"ExecutionPlan"> | string | null
+    governedProvenance?: JsonNullableFilter<"ExecutionPlan">
     orp?: XOR<OperationalResponsePlanScalarRelationFilter, OperationalResponsePlanWhereInput>
     case?: XOR<CaseScalarRelationFilter, CaseWhereInput>
     approvalDecision?: XOR<OrpDecisionScalarRelationFilter, OrpDecisionWhereInput>
@@ -32470,6 +36180,9 @@ export namespace Prisma {
     completedAt?: SortOrderInput | SortOrder
     cancelledAt?: SortOrderInput | SortOrder
     cancellationReason?: SortOrderInput | SortOrder
+    governanceMode?: SortOrder
+    executionContractVersion?: SortOrderInput | SortOrder
+    governedProvenance?: SortOrderInput | SortOrder
     _count?: ExecutionPlanCountOrderByAggregateInput
     _max?: ExecutionPlanMaxOrderByAggregateInput
     _min?: ExecutionPlanMinOrderByAggregateInput
@@ -32492,6 +36205,9 @@ export namespace Prisma {
     completedAt?: DateTimeNullableWithAggregatesFilter<"ExecutionPlan"> | Date | string | null
     cancelledAt?: DateTimeNullableWithAggregatesFilter<"ExecutionPlan"> | Date | string | null
     cancellationReason?: StringNullableWithAggregatesFilter<"ExecutionPlan"> | string | null
+    governanceMode?: EnumExecutionPlanGovernanceModeWithAggregatesFilter<"ExecutionPlan"> | $Enums.ExecutionPlanGovernanceMode
+    executionContractVersion?: StringNullableWithAggregatesFilter<"ExecutionPlan"> | string | null
+    governedProvenance?: JsonNullableWithAggregatesFilter<"ExecutionPlan">
   }
 
   export type ExecutionTaskWhereInput = {
@@ -32524,6 +36240,14 @@ export namespace Prisma {
     cancellationReason?: StringNullableFilter<"ExecutionTask"> | string | null
     createdAt?: DateTimeFilter<"ExecutionTask"> | Date | string
     updatedAt?: DateTimeFilter<"ExecutionTask"> | Date | string
+    approvedActionVersionId?: StringNullableFilter<"ExecutionTask"> | string | null
+    governedExecutionTemplateId?: StringNullableFilter<"ExecutionTask"> | string | null
+    governedTaskTemplateId?: StringNullableFilter<"ExecutionTask"> | string | null
+    sourceActionVersion?: IntNullableFilter<"ExecutionTask"> | number | null
+    sourceTemplateCode?: StringNullableFilter<"ExecutionTask"> | string | null
+    sourceTemplateVersion?: IntNullableFilter<"ExecutionTask"> | number | null
+    evidenceRequired?: BoolFilter<"ExecutionTask"> | boolean
+    verificationRequired?: BoolFilter<"ExecutionTask"> | boolean
     executionPlan?: XOR<ExecutionPlanScalarRelationFilter, ExecutionPlanWhereInput>
     assignedTo?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     assignedBy?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
@@ -32531,6 +36255,9 @@ export namespace Prisma {
     verifiedBy?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     cancelledBy?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     evidence?: ExecutionEvidenceListRelationFilter
+    approvedActionVersion?: XOR<ApprovedActionVersionNullableScalarRelationFilter, ApprovedActionVersionWhereInput> | null
+    governedExecutionTemplate?: XOR<GovernedExecutionTemplateNullableScalarRelationFilter, GovernedExecutionTemplateWhereInput> | null
+    governedTaskTemplate?: XOR<GovernedExecutionTaskTemplateNullableScalarRelationFilter, GovernedExecutionTaskTemplateWhereInput> | null
   }
 
   export type ExecutionTaskOrderByWithRelationInput = {
@@ -32560,6 +36287,14 @@ export namespace Prisma {
     cancellationReason?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    approvedActionVersionId?: SortOrderInput | SortOrder
+    governedExecutionTemplateId?: SortOrderInput | SortOrder
+    governedTaskTemplateId?: SortOrderInput | SortOrder
+    sourceActionVersion?: SortOrderInput | SortOrder
+    sourceTemplateCode?: SortOrderInput | SortOrder
+    sourceTemplateVersion?: SortOrderInput | SortOrder
+    evidenceRequired?: SortOrder
+    verificationRequired?: SortOrder
     executionPlan?: ExecutionPlanOrderByWithRelationInput
     assignedTo?: UserOrderByWithRelationInput
     assignedBy?: UserOrderByWithRelationInput
@@ -32567,6 +36302,9 @@ export namespace Prisma {
     verifiedBy?: UserOrderByWithRelationInput
     cancelledBy?: UserOrderByWithRelationInput
     evidence?: ExecutionEvidenceOrderByRelationAggregateInput
+    approvedActionVersion?: ApprovedActionVersionOrderByWithRelationInput
+    governedExecutionTemplate?: GovernedExecutionTemplateOrderByWithRelationInput
+    governedTaskTemplate?: GovernedExecutionTaskTemplateOrderByWithRelationInput
   }
 
   export type ExecutionTaskWhereUniqueInput = Prisma.AtLeast<{
@@ -32601,6 +36339,14 @@ export namespace Prisma {
     cancellationReason?: StringNullableFilter<"ExecutionTask"> | string | null
     createdAt?: DateTimeFilter<"ExecutionTask"> | Date | string
     updatedAt?: DateTimeFilter<"ExecutionTask"> | Date | string
+    approvedActionVersionId?: StringNullableFilter<"ExecutionTask"> | string | null
+    governedExecutionTemplateId?: StringNullableFilter<"ExecutionTask"> | string | null
+    governedTaskTemplateId?: StringNullableFilter<"ExecutionTask"> | string | null
+    sourceActionVersion?: IntNullableFilter<"ExecutionTask"> | number | null
+    sourceTemplateCode?: StringNullableFilter<"ExecutionTask"> | string | null
+    sourceTemplateVersion?: IntNullableFilter<"ExecutionTask"> | number | null
+    evidenceRequired?: BoolFilter<"ExecutionTask"> | boolean
+    verificationRequired?: BoolFilter<"ExecutionTask"> | boolean
     executionPlan?: XOR<ExecutionPlanScalarRelationFilter, ExecutionPlanWhereInput>
     assignedTo?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     assignedBy?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
@@ -32608,6 +36354,9 @@ export namespace Prisma {
     verifiedBy?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     cancelledBy?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     evidence?: ExecutionEvidenceListRelationFilter
+    approvedActionVersion?: XOR<ApprovedActionVersionNullableScalarRelationFilter, ApprovedActionVersionWhereInput> | null
+    governedExecutionTemplate?: XOR<GovernedExecutionTemplateNullableScalarRelationFilter, GovernedExecutionTemplateWhereInput> | null
+    governedTaskTemplate?: XOR<GovernedExecutionTaskTemplateNullableScalarRelationFilter, GovernedExecutionTaskTemplateWhereInput> | null
   }, "id" | "executionPlanId_sequenceNumber" | "executionPlanId_sourceActionCode_templateTaskKey">
 
   export type ExecutionTaskOrderByWithAggregationInput = {
@@ -32637,6 +36386,14 @@ export namespace Prisma {
     cancellationReason?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    approvedActionVersionId?: SortOrderInput | SortOrder
+    governedExecutionTemplateId?: SortOrderInput | SortOrder
+    governedTaskTemplateId?: SortOrderInput | SortOrder
+    sourceActionVersion?: SortOrderInput | SortOrder
+    sourceTemplateCode?: SortOrderInput | SortOrder
+    sourceTemplateVersion?: SortOrderInput | SortOrder
+    evidenceRequired?: SortOrder
+    verificationRequired?: SortOrder
     _count?: ExecutionTaskCountOrderByAggregateInput
     _avg?: ExecutionTaskAvgOrderByAggregateInput
     _max?: ExecutionTaskMaxOrderByAggregateInput
@@ -32674,6 +36431,14 @@ export namespace Prisma {
     cancellationReason?: StringNullableWithAggregatesFilter<"ExecutionTask"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"ExecutionTask"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"ExecutionTask"> | Date | string
+    approvedActionVersionId?: StringNullableWithAggregatesFilter<"ExecutionTask"> | string | null
+    governedExecutionTemplateId?: StringNullableWithAggregatesFilter<"ExecutionTask"> | string | null
+    governedTaskTemplateId?: StringNullableWithAggregatesFilter<"ExecutionTask"> | string | null
+    sourceActionVersion?: IntNullableWithAggregatesFilter<"ExecutionTask"> | number | null
+    sourceTemplateCode?: StringNullableWithAggregatesFilter<"ExecutionTask"> | string | null
+    sourceTemplateVersion?: IntNullableWithAggregatesFilter<"ExecutionTask"> | number | null
+    evidenceRequired?: BoolWithAggregatesFilter<"ExecutionTask"> | boolean
+    verificationRequired?: BoolWithAggregatesFilter<"ExecutionTask"> | boolean
   }
 
   export type ExecutionEvidenceWhereInput = {
@@ -32850,6 +36615,7 @@ export namespace Prisma {
     publicReports?: PublicReportCreateNestedManyWithoutDepartmentInput
     policyDocuments?: PolicyDocumentCreateNestedManyWithoutDepartmentInput
     approvedActions?: ApprovedActionVersionCreateNestedManyWithoutDepartmentInput
+    governedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutDepartmentInput
   }
 
   export type DepartmentUncheckedCreateInput = {
@@ -32864,6 +36630,7 @@ export namespace Prisma {
     publicReports?: PublicReportUncheckedCreateNestedManyWithoutDepartmentInput
     policyDocuments?: PolicyDocumentUncheckedCreateNestedManyWithoutDepartmentInput
     approvedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutDepartmentInput
+    governedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutDepartmentInput
   }
 
   export type DepartmentUpdateInput = {
@@ -32878,6 +36645,7 @@ export namespace Prisma {
     publicReports?: PublicReportUpdateManyWithoutDepartmentNestedInput
     policyDocuments?: PolicyDocumentUpdateManyWithoutDepartmentNestedInput
     approvedActions?: ApprovedActionVersionUpdateManyWithoutDepartmentNestedInput
+    governedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutDepartmentNestedInput
   }
 
   export type DepartmentUncheckedUpdateInput = {
@@ -32892,6 +36660,7 @@ export namespace Prisma {
     publicReports?: PublicReportUncheckedUpdateManyWithoutDepartmentNestedInput
     policyDocuments?: PolicyDocumentUncheckedUpdateManyWithoutDepartmentNestedInput
     approvedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutDepartmentNestedInput
+    governedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutDepartmentNestedInput
   }
 
   export type DepartmentCreateManyInput = {
@@ -32927,6 +36696,7 @@ export namespace Prisma {
     publicReports?: PublicReportCreateNestedManyWithoutJurisdictionInput
     policyDocuments?: PolicyDocumentCreateNestedManyWithoutJurisdictionInput
     approvedActions?: ApprovedActionVersionCreateNestedManyWithoutJurisdictionInput
+    governedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutJurisdictionInput
   }
 
   export type JurisdictionUncheckedCreateInput = {
@@ -32941,6 +36711,7 @@ export namespace Prisma {
     publicReports?: PublicReportUncheckedCreateNestedManyWithoutJurisdictionInput
     policyDocuments?: PolicyDocumentUncheckedCreateNestedManyWithoutJurisdictionInput
     approvedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutJurisdictionInput
+    governedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutJurisdictionInput
   }
 
   export type JurisdictionUpdateInput = {
@@ -32955,6 +36726,7 @@ export namespace Prisma {
     publicReports?: PublicReportUpdateManyWithoutJurisdictionNestedInput
     policyDocuments?: PolicyDocumentUpdateManyWithoutJurisdictionNestedInput
     approvedActions?: ApprovedActionVersionUpdateManyWithoutJurisdictionNestedInput
+    governedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutJurisdictionNestedInput
   }
 
   export type JurisdictionUncheckedUpdateInput = {
@@ -32969,6 +36741,7 @@ export namespace Prisma {
     publicReports?: PublicReportUncheckedUpdateManyWithoutJurisdictionNestedInput
     policyDocuments?: PolicyDocumentUncheckedUpdateManyWithoutJurisdictionNestedInput
     approvedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutJurisdictionNestedInput
+    governedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutJurisdictionNestedInput
   }
 
   export type JurisdictionCreateManyInput = {
@@ -33027,6 +36800,8 @@ export namespace Prisma {
     createdApprovedActions?: ApprovedActionVersionCreateNestedManyWithoutCreatedByInput
     approvedApprovedActions?: ApprovedActionVersionCreateNestedManyWithoutApprovedByInput
     preparedDecisionPackages?: DecisionPackageCreateNestedManyWithoutPreparedByInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutCreatedByInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutApprovedByInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -33062,6 +36837,8 @@ export namespace Prisma {
     createdApprovedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutCreatedByInput
     approvedApprovedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutApprovedByInput
     preparedDecisionPackages?: DecisionPackageUncheckedCreateNestedManyWithoutPreparedByInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutCreatedByInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutApprovedByInput
   }
 
   export type UserUpdateInput = {
@@ -33097,6 +36874,8 @@ export namespace Prisma {
     createdApprovedActions?: ApprovedActionVersionUpdateManyWithoutCreatedByNestedInput
     approvedApprovedActions?: ApprovedActionVersionUpdateManyWithoutApprovedByNestedInput
     preparedDecisionPackages?: DecisionPackageUpdateManyWithoutPreparedByNestedInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutCreatedByNestedInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutApprovedByNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -33132,6 +36911,8 @@ export namespace Prisma {
     createdApprovedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutCreatedByNestedInput
     approvedApprovedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutApprovedByNestedInput
     preparedDecisionPackages?: DecisionPackageUncheckedUpdateManyWithoutPreparedByNestedInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutCreatedByNestedInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutApprovedByNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -33747,6 +37528,8 @@ export namespace Prisma {
     createdBy: UserCreateNestedOneWithoutCreatedApprovedActionsInput
     approvedBy?: UserCreateNestedOneWithoutApprovedApprovedActionsInput
     rules?: PolicyRuleCreateNestedManyWithoutActionInput
+    executionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutApprovedActionVersionInput
+    executionTasks?: ExecutionTaskCreateNestedManyWithoutApprovedActionVersionInput
   }
 
   export type ApprovedActionVersionUncheckedCreateInput = {
@@ -33771,6 +37554,8 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     rules?: PolicyRuleUncheckedCreateNestedManyWithoutActionInput
+    executionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutApprovedActionVersionInput
+    executionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutApprovedActionVersionInput
   }
 
   export type ApprovedActionVersionUpdateInput = {
@@ -33795,6 +37580,8 @@ export namespace Prisma {
     createdBy?: UserUpdateOneRequiredWithoutCreatedApprovedActionsNestedInput
     approvedBy?: UserUpdateOneWithoutApprovedApprovedActionsNestedInput
     rules?: PolicyRuleUpdateManyWithoutActionNestedInput
+    executionTemplates?: GovernedExecutionTemplateUpdateManyWithoutApprovedActionVersionNestedInput
+    executionTasks?: ExecutionTaskUpdateManyWithoutApprovedActionVersionNestedInput
   }
 
   export type ApprovedActionVersionUncheckedUpdateInput = {
@@ -33819,6 +37606,8 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     rules?: PolicyRuleUncheckedUpdateManyWithoutActionNestedInput
+    executionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutApprovedActionVersionNestedInput
+    executionTasks?: ExecutionTaskUncheckedUpdateManyWithoutApprovedActionVersionNestedInput
   }
 
   export type ApprovedActionVersionCreateManyInput = {
@@ -33881,6 +37670,250 @@ export namespace Prisma {
     createdById?: StringFieldUpdateOperationsInput | string
     approvedById?: NullableStringFieldUpdateOperationsInput | string | null
     approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GovernedExecutionTemplateCreateInput = {
+    id?: string
+    templateCode: string
+    versionNumber: number
+    title: string
+    description: string
+    status?: $Enums.RegistryLifecycleStatus
+    effectiveFrom: Date | string
+    effectiveUntil?: Date | string | null
+    approvedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    approvedActionVersion: ApprovedActionVersionCreateNestedOneWithoutExecutionTemplatesInput
+    department?: DepartmentCreateNestedOneWithoutGovernedExecutionTemplatesInput
+    jurisdiction?: JurisdictionCreateNestedOneWithoutGovernedExecutionTemplatesInput
+    createdBy: UserCreateNestedOneWithoutCreatedGovernedExecutionTemplatesInput
+    approvedBy?: UserCreateNestedOneWithoutApprovedGovernedExecutionTemplatesInput
+    tasks?: GovernedExecutionTaskTemplateCreateNestedManyWithoutExecutionTemplateInput
+    executionTasks?: ExecutionTaskCreateNestedManyWithoutGovernedExecutionTemplateInput
+  }
+
+  export type GovernedExecutionTemplateUncheckedCreateInput = {
+    id?: string
+    templateCode: string
+    versionNumber: number
+    approvedActionVersionId: string
+    title: string
+    description: string
+    status?: $Enums.RegistryLifecycleStatus
+    effectiveFrom: Date | string
+    effectiveUntil?: Date | string | null
+    departmentId?: string | null
+    jurisdictionId?: string | null
+    createdById: string
+    approvedById?: string | null
+    approvedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tasks?: GovernedExecutionTaskTemplateUncheckedCreateNestedManyWithoutExecutionTemplateInput
+    executionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutGovernedExecutionTemplateInput
+  }
+
+  export type GovernedExecutionTemplateUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    templateCode?: StringFieldUpdateOperationsInput | string
+    versionNumber?: IntFieldUpdateOperationsInput | number
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    status?: EnumRegistryLifecycleStatusFieldUpdateOperationsInput | $Enums.RegistryLifecycleStatus
+    effectiveFrom?: DateTimeFieldUpdateOperationsInput | Date | string
+    effectiveUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    approvedActionVersion?: ApprovedActionVersionUpdateOneRequiredWithoutExecutionTemplatesNestedInput
+    department?: DepartmentUpdateOneWithoutGovernedExecutionTemplatesNestedInput
+    jurisdiction?: JurisdictionUpdateOneWithoutGovernedExecutionTemplatesNestedInput
+    createdBy?: UserUpdateOneRequiredWithoutCreatedGovernedExecutionTemplatesNestedInput
+    approvedBy?: UserUpdateOneWithoutApprovedGovernedExecutionTemplatesNestedInput
+    tasks?: GovernedExecutionTaskTemplateUpdateManyWithoutExecutionTemplateNestedInput
+    executionTasks?: ExecutionTaskUpdateManyWithoutGovernedExecutionTemplateNestedInput
+  }
+
+  export type GovernedExecutionTemplateUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    templateCode?: StringFieldUpdateOperationsInput | string
+    versionNumber?: IntFieldUpdateOperationsInput | number
+    approvedActionVersionId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    status?: EnumRegistryLifecycleStatusFieldUpdateOperationsInput | $Enums.RegistryLifecycleStatus
+    effectiveFrom?: DateTimeFieldUpdateOperationsInput | Date | string
+    effectiveUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    departmentId?: NullableStringFieldUpdateOperationsInput | string | null
+    jurisdictionId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: StringFieldUpdateOperationsInput | string
+    approvedById?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tasks?: GovernedExecutionTaskTemplateUncheckedUpdateManyWithoutExecutionTemplateNestedInput
+    executionTasks?: ExecutionTaskUncheckedUpdateManyWithoutGovernedExecutionTemplateNestedInput
+  }
+
+  export type GovernedExecutionTemplateCreateManyInput = {
+    id?: string
+    templateCode: string
+    versionNumber: number
+    approvedActionVersionId: string
+    title: string
+    description: string
+    status?: $Enums.RegistryLifecycleStatus
+    effectiveFrom: Date | string
+    effectiveUntil?: Date | string | null
+    departmentId?: string | null
+    jurisdictionId?: string | null
+    createdById: string
+    approvedById?: string | null
+    approvedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type GovernedExecutionTemplateUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    templateCode?: StringFieldUpdateOperationsInput | string
+    versionNumber?: IntFieldUpdateOperationsInput | number
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    status?: EnumRegistryLifecycleStatusFieldUpdateOperationsInput | $Enums.RegistryLifecycleStatus
+    effectiveFrom?: DateTimeFieldUpdateOperationsInput | Date | string
+    effectiveUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GovernedExecutionTemplateUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    templateCode?: StringFieldUpdateOperationsInput | string
+    versionNumber?: IntFieldUpdateOperationsInput | number
+    approvedActionVersionId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    status?: EnumRegistryLifecycleStatusFieldUpdateOperationsInput | $Enums.RegistryLifecycleStatus
+    effectiveFrom?: DateTimeFieldUpdateOperationsInput | Date | string
+    effectiveUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    departmentId?: NullableStringFieldUpdateOperationsInput | string | null
+    jurisdictionId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: StringFieldUpdateOperationsInput | string
+    approvedById?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GovernedExecutionTaskTemplateCreateInput = {
+    id?: string
+    sequenceNumber: number
+    taskCode: string
+    title: string
+    description: string
+    mandatory?: boolean
+    evidenceRequired?: boolean
+    verificationRequired?: boolean
+    enabled?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    executionTemplate: GovernedExecutionTemplateCreateNestedOneWithoutTasksInput
+    executionTasks?: ExecutionTaskCreateNestedManyWithoutGovernedTaskTemplateInput
+  }
+
+  export type GovernedExecutionTaskTemplateUncheckedCreateInput = {
+    id?: string
+    executionTemplateId: string
+    sequenceNumber: number
+    taskCode: string
+    title: string
+    description: string
+    mandatory?: boolean
+    evidenceRequired?: boolean
+    verificationRequired?: boolean
+    enabled?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    executionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutGovernedTaskTemplateInput
+  }
+
+  export type GovernedExecutionTaskTemplateUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sequenceNumber?: IntFieldUpdateOperationsInput | number
+    taskCode?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    mandatory?: BoolFieldUpdateOperationsInput | boolean
+    evidenceRequired?: BoolFieldUpdateOperationsInput | boolean
+    verificationRequired?: BoolFieldUpdateOperationsInput | boolean
+    enabled?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    executionTemplate?: GovernedExecutionTemplateUpdateOneRequiredWithoutTasksNestedInput
+    executionTasks?: ExecutionTaskUpdateManyWithoutGovernedTaskTemplateNestedInput
+  }
+
+  export type GovernedExecutionTaskTemplateUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    executionTemplateId?: StringFieldUpdateOperationsInput | string
+    sequenceNumber?: IntFieldUpdateOperationsInput | number
+    taskCode?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    mandatory?: BoolFieldUpdateOperationsInput | boolean
+    evidenceRequired?: BoolFieldUpdateOperationsInput | boolean
+    verificationRequired?: BoolFieldUpdateOperationsInput | boolean
+    enabled?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    executionTasks?: ExecutionTaskUncheckedUpdateManyWithoutGovernedTaskTemplateNestedInput
+  }
+
+  export type GovernedExecutionTaskTemplateCreateManyInput = {
+    id?: string
+    executionTemplateId: string
+    sequenceNumber: number
+    taskCode: string
+    title: string
+    description: string
+    mandatory?: boolean
+    evidenceRequired?: boolean
+    verificationRequired?: boolean
+    enabled?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type GovernedExecutionTaskTemplateUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sequenceNumber?: IntFieldUpdateOperationsInput | number
+    taskCode?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    mandatory?: BoolFieldUpdateOperationsInput | boolean
+    evidenceRequired?: BoolFieldUpdateOperationsInput | boolean
+    verificationRequired?: BoolFieldUpdateOperationsInput | boolean
+    enabled?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GovernedExecutionTaskTemplateUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    executionTemplateId?: StringFieldUpdateOperationsInput | string
+    sequenceNumber?: IntFieldUpdateOperationsInput | number
+    taskCode?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    mandatory?: BoolFieldUpdateOperationsInput | boolean
+    evidenceRequired?: BoolFieldUpdateOperationsInput | boolean
+    verificationRequired?: BoolFieldUpdateOperationsInput | boolean
+    enabled?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -34351,6 +38384,9 @@ export namespace Prisma {
     planVersion?: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    governanceMode?: $Enums.ActionPlanGovernanceMode
+    governedActions?: NullableJsonNullValueInput | InputJsonValue
+    actionPlanContractVersion?: string | null
     case: CaseCreateNestedOneWithoutOperationalResponsePlansInput
     riskAssessment: RiskAssessmentCreateNestedOneWithoutOperationalResponsePlansInput
     decisions?: OrpDecisionCreateNestedManyWithoutOrpInput
@@ -34373,6 +38409,9 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     decisionPackageId?: string | null
+    governanceMode?: $Enums.ActionPlanGovernanceMode
+    governedActions?: NullableJsonNullValueInput | InputJsonValue
+    actionPlanContractVersion?: string | null
     decisions?: OrpDecisionUncheckedCreateNestedManyWithoutOrpInput
     executionPlan?: ExecutionPlanUncheckedCreateNestedOneWithoutOrpInput
   }
@@ -34389,6 +38428,9 @@ export namespace Prisma {
     planVersion?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    governanceMode?: EnumActionPlanGovernanceModeFieldUpdateOperationsInput | $Enums.ActionPlanGovernanceMode
+    governedActions?: NullableJsonNullValueInput | InputJsonValue
+    actionPlanContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
     case?: CaseUpdateOneRequiredWithoutOperationalResponsePlansNestedInput
     riskAssessment?: RiskAssessmentUpdateOneRequiredWithoutOperationalResponsePlansNestedInput
     decisions?: OrpDecisionUpdateManyWithoutOrpNestedInput
@@ -34411,6 +38453,9 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     decisionPackageId?: NullableStringFieldUpdateOperationsInput | string | null
+    governanceMode?: EnumActionPlanGovernanceModeFieldUpdateOperationsInput | $Enums.ActionPlanGovernanceMode
+    governedActions?: NullableJsonNullValueInput | InputJsonValue
+    actionPlanContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
     decisions?: OrpDecisionUncheckedUpdateManyWithoutOrpNestedInput
     executionPlan?: ExecutionPlanUncheckedUpdateOneWithoutOrpNestedInput
   }
@@ -34430,6 +38475,9 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     decisionPackageId?: string | null
+    governanceMode?: $Enums.ActionPlanGovernanceMode
+    governedActions?: NullableJsonNullValueInput | InputJsonValue
+    actionPlanContractVersion?: string | null
   }
 
   export type OperationalResponsePlanUpdateManyMutationInput = {
@@ -34444,6 +38492,9 @@ export namespace Prisma {
     planVersion?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    governanceMode?: EnumActionPlanGovernanceModeFieldUpdateOperationsInput | $Enums.ActionPlanGovernanceMode
+    governedActions?: NullableJsonNullValueInput | InputJsonValue
+    actionPlanContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type OperationalResponsePlanUncheckedUpdateManyInput = {
@@ -34461,6 +38512,9 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     decisionPackageId?: NullableStringFieldUpdateOperationsInput | string | null
+    governanceMode?: EnumActionPlanGovernanceModeFieldUpdateOperationsInput | $Enums.ActionPlanGovernanceMode
+    governedActions?: NullableJsonNullValueInput | InputJsonValue
+    actionPlanContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type DecisionPackageCreateInput = {
@@ -34855,6 +38909,9 @@ export namespace Prisma {
     completedAt?: Date | string | null
     cancelledAt?: Date | string | null
     cancellationReason?: string | null
+    governanceMode?: $Enums.ExecutionPlanGovernanceMode
+    executionContractVersion?: string | null
+    governedProvenance?: NullableJsonNullValueInput | InputJsonValue
     orp: OperationalResponsePlanCreateNestedOneWithoutExecutionPlanInput
     case: CaseCreateNestedOneWithoutExecutionPlansInput
     approvalDecision: OrpDecisionCreateNestedOneWithoutExecutionPlanInput
@@ -34877,6 +38934,9 @@ export namespace Prisma {
     completedAt?: Date | string | null
     cancelledAt?: Date | string | null
     cancellationReason?: string | null
+    governanceMode?: $Enums.ExecutionPlanGovernanceMode
+    executionContractVersion?: string | null
+    governedProvenance?: NullableJsonNullValueInput | InputJsonValue
     tasks?: ExecutionTaskUncheckedCreateNestedManyWithoutExecutionPlanInput
     closure?: CaseClosureUncheckedCreateNestedOneWithoutExecutionPlanInput
   }
@@ -34891,6 +38951,9 @@ export namespace Prisma {
     completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    governanceMode?: EnumExecutionPlanGovernanceModeFieldUpdateOperationsInput | $Enums.ExecutionPlanGovernanceMode
+    executionContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
+    governedProvenance?: NullableJsonNullValueInput | InputJsonValue
     orp?: OperationalResponsePlanUpdateOneRequiredWithoutExecutionPlanNestedInput
     case?: CaseUpdateOneRequiredWithoutExecutionPlansNestedInput
     approvalDecision?: OrpDecisionUpdateOneRequiredWithoutExecutionPlanNestedInput
@@ -34913,6 +38976,9 @@ export namespace Prisma {
     completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    governanceMode?: EnumExecutionPlanGovernanceModeFieldUpdateOperationsInput | $Enums.ExecutionPlanGovernanceMode
+    executionContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
+    governedProvenance?: NullableJsonNullValueInput | InputJsonValue
     tasks?: ExecutionTaskUncheckedUpdateManyWithoutExecutionPlanNestedInput
     closure?: CaseClosureUncheckedUpdateOneWithoutExecutionPlanNestedInput
   }
@@ -34931,6 +38997,9 @@ export namespace Prisma {
     completedAt?: Date | string | null
     cancelledAt?: Date | string | null
     cancellationReason?: string | null
+    governanceMode?: $Enums.ExecutionPlanGovernanceMode
+    executionContractVersion?: string | null
+    governedProvenance?: NullableJsonNullValueInput | InputJsonValue
   }
 
   export type ExecutionPlanUpdateManyMutationInput = {
@@ -34943,6 +39012,9 @@ export namespace Prisma {
     completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    governanceMode?: EnumExecutionPlanGovernanceModeFieldUpdateOperationsInput | $Enums.ExecutionPlanGovernanceMode
+    executionContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
+    governedProvenance?: NullableJsonNullValueInput | InputJsonValue
   }
 
   export type ExecutionPlanUncheckedUpdateManyInput = {
@@ -34959,6 +39031,9 @@ export namespace Prisma {
     completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    governanceMode?: EnumExecutionPlanGovernanceModeFieldUpdateOperationsInput | $Enums.ExecutionPlanGovernanceMode
+    executionContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
+    governedProvenance?: NullableJsonNullValueInput | InputJsonValue
   }
 
   export type ExecutionTaskCreateInput = {
@@ -34982,6 +39057,11 @@ export namespace Prisma {
     cancellationReason?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    sourceActionVersion?: number | null
+    sourceTemplateCode?: string | null
+    sourceTemplateVersion?: number | null
+    evidenceRequired?: boolean
+    verificationRequired?: boolean
     executionPlan: ExecutionPlanCreateNestedOneWithoutTasksInput
     assignedTo?: UserCreateNestedOneWithoutAssignedExecutionTasksInput
     assignedBy?: UserCreateNestedOneWithoutAssignedByExecutionTasksInput
@@ -34989,6 +39069,9 @@ export namespace Prisma {
     verifiedBy?: UserCreateNestedOneWithoutVerifiedExecutionTasksInput
     cancelledBy?: UserCreateNestedOneWithoutCancelledExecutionTasksInput
     evidence?: ExecutionEvidenceCreateNestedManyWithoutExecutionTaskInput
+    approvedActionVersion?: ApprovedActionVersionCreateNestedOneWithoutExecutionTasksInput
+    governedExecutionTemplate?: GovernedExecutionTemplateCreateNestedOneWithoutExecutionTasksInput
+    governedTaskTemplate?: GovernedExecutionTaskTemplateCreateNestedOneWithoutExecutionTasksInput
   }
 
   export type ExecutionTaskUncheckedCreateInput = {
@@ -35018,6 +39101,14 @@ export namespace Prisma {
     cancellationReason?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    approvedActionVersionId?: string | null
+    governedExecutionTemplateId?: string | null
+    governedTaskTemplateId?: string | null
+    sourceActionVersion?: number | null
+    sourceTemplateCode?: string | null
+    sourceTemplateVersion?: number | null
+    evidenceRequired?: boolean
+    verificationRequired?: boolean
     evidence?: ExecutionEvidenceUncheckedCreateNestedManyWithoutExecutionTaskInput
   }
 
@@ -35042,6 +39133,11 @@ export namespace Prisma {
     cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sourceActionVersion?: NullableIntFieldUpdateOperationsInput | number | null
+    sourceTemplateCode?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceTemplateVersion?: NullableIntFieldUpdateOperationsInput | number | null
+    evidenceRequired?: BoolFieldUpdateOperationsInput | boolean
+    verificationRequired?: BoolFieldUpdateOperationsInput | boolean
     executionPlan?: ExecutionPlanUpdateOneRequiredWithoutTasksNestedInput
     assignedTo?: UserUpdateOneWithoutAssignedExecutionTasksNestedInput
     assignedBy?: UserUpdateOneWithoutAssignedByExecutionTasksNestedInput
@@ -35049,6 +39145,9 @@ export namespace Prisma {
     verifiedBy?: UserUpdateOneWithoutVerifiedExecutionTasksNestedInput
     cancelledBy?: UserUpdateOneWithoutCancelledExecutionTasksNestedInput
     evidence?: ExecutionEvidenceUpdateManyWithoutExecutionTaskNestedInput
+    approvedActionVersion?: ApprovedActionVersionUpdateOneWithoutExecutionTasksNestedInput
+    governedExecutionTemplate?: GovernedExecutionTemplateUpdateOneWithoutExecutionTasksNestedInput
+    governedTaskTemplate?: GovernedExecutionTaskTemplateUpdateOneWithoutExecutionTasksNestedInput
   }
 
   export type ExecutionTaskUncheckedUpdateInput = {
@@ -35078,6 +39177,14 @@ export namespace Prisma {
     cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    approvedActionVersionId?: NullableStringFieldUpdateOperationsInput | string | null
+    governedExecutionTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
+    governedTaskTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceActionVersion?: NullableIntFieldUpdateOperationsInput | number | null
+    sourceTemplateCode?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceTemplateVersion?: NullableIntFieldUpdateOperationsInput | number | null
+    evidenceRequired?: BoolFieldUpdateOperationsInput | boolean
+    verificationRequired?: BoolFieldUpdateOperationsInput | boolean
     evidence?: ExecutionEvidenceUncheckedUpdateManyWithoutExecutionTaskNestedInput
   }
 
@@ -35108,6 +39215,14 @@ export namespace Prisma {
     cancellationReason?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    approvedActionVersionId?: string | null
+    governedExecutionTemplateId?: string | null
+    governedTaskTemplateId?: string | null
+    sourceActionVersion?: number | null
+    sourceTemplateCode?: string | null
+    sourceTemplateVersion?: number | null
+    evidenceRequired?: boolean
+    verificationRequired?: boolean
   }
 
   export type ExecutionTaskUpdateManyMutationInput = {
@@ -35131,6 +39246,11 @@ export namespace Prisma {
     cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sourceActionVersion?: NullableIntFieldUpdateOperationsInput | number | null
+    sourceTemplateCode?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceTemplateVersion?: NullableIntFieldUpdateOperationsInput | number | null
+    evidenceRequired?: BoolFieldUpdateOperationsInput | boolean
+    verificationRequired?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type ExecutionTaskUncheckedUpdateManyInput = {
@@ -35160,6 +39280,14 @@ export namespace Prisma {
     cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    approvedActionVersionId?: NullableStringFieldUpdateOperationsInput | string | null
+    governedExecutionTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
+    governedTaskTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceActionVersion?: NullableIntFieldUpdateOperationsInput | number | null
+    sourceTemplateCode?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceTemplateVersion?: NullableIntFieldUpdateOperationsInput | number | null
+    evidenceRequired?: BoolFieldUpdateOperationsInput | boolean
+    verificationRequired?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type ExecutionEvidenceCreateInput = {
@@ -35392,6 +39520,12 @@ export namespace Prisma {
     none?: ApprovedActionVersionWhereInput
   }
 
+  export type GovernedExecutionTemplateListRelationFilter = {
+    every?: GovernedExecutionTemplateWhereInput
+    some?: GovernedExecutionTemplateWhereInput
+    none?: GovernedExecutionTemplateWhereInput
+  }
+
   export type UserOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -35417,6 +39551,10 @@ export namespace Prisma {
   }
 
   export type ApprovedActionVersionOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type GovernedExecutionTemplateOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -36391,19 +40529,175 @@ export namespace Prisma {
     _max?: NestedEnumEnforcementClassificationFilter<$PrismaModel>
   }
 
+  export type ApprovedActionVersionScalarRelationFilter = {
+    is?: ApprovedActionVersionWhereInput
+    isNot?: ApprovedActionVersionWhereInput
+  }
+
+  export type GovernedExecutionTaskTemplateListRelationFilter = {
+    every?: GovernedExecutionTaskTemplateWhereInput
+    some?: GovernedExecutionTaskTemplateWhereInput
+    none?: GovernedExecutionTaskTemplateWhereInput
+  }
+
+  export type GovernedExecutionTaskTemplateOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type GovernedExecutionTemplateTemplateCodeVersionNumberCompoundUniqueInput = {
+    templateCode: string
+    versionNumber: number
+  }
+
+  export type GovernedExecutionTemplateCountOrderByAggregateInput = {
+    id?: SortOrder
+    templateCode?: SortOrder
+    versionNumber?: SortOrder
+    approvedActionVersionId?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    status?: SortOrder
+    effectiveFrom?: SortOrder
+    effectiveUntil?: SortOrder
+    departmentId?: SortOrder
+    jurisdictionId?: SortOrder
+    createdById?: SortOrder
+    approvedById?: SortOrder
+    approvedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type GovernedExecutionTemplateAvgOrderByAggregateInput = {
+    versionNumber?: SortOrder
+  }
+
+  export type GovernedExecutionTemplateMaxOrderByAggregateInput = {
+    id?: SortOrder
+    templateCode?: SortOrder
+    versionNumber?: SortOrder
+    approvedActionVersionId?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    status?: SortOrder
+    effectiveFrom?: SortOrder
+    effectiveUntil?: SortOrder
+    departmentId?: SortOrder
+    jurisdictionId?: SortOrder
+    createdById?: SortOrder
+    approvedById?: SortOrder
+    approvedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type GovernedExecutionTemplateMinOrderByAggregateInput = {
+    id?: SortOrder
+    templateCode?: SortOrder
+    versionNumber?: SortOrder
+    approvedActionVersionId?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    status?: SortOrder
+    effectiveFrom?: SortOrder
+    effectiveUntil?: SortOrder
+    departmentId?: SortOrder
+    jurisdictionId?: SortOrder
+    createdById?: SortOrder
+    approvedById?: SortOrder
+    approvedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type GovernedExecutionTemplateSumOrderByAggregateInput = {
+    versionNumber?: SortOrder
+  }
+
   export type BoolFilter<$PrismaModel = never> = {
     equals?: boolean | BooleanFieldRefInput<$PrismaModel>
     not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
+  export type GovernedExecutionTemplateScalarRelationFilter = {
+    is?: GovernedExecutionTemplateWhereInput
+    isNot?: GovernedExecutionTemplateWhereInput
+  }
+
+  export type GovernedExecutionTaskTemplateExecutionTemplateIdSequenceNumberCompoundUniqueInput = {
+    executionTemplateId: string
+    sequenceNumber: number
+  }
+
+  export type GovernedExecutionTaskTemplateExecutionTemplateIdTaskCodeCompoundUniqueInput = {
+    executionTemplateId: string
+    taskCode: string
+  }
+
+  export type GovernedExecutionTaskTemplateCountOrderByAggregateInput = {
+    id?: SortOrder
+    executionTemplateId?: SortOrder
+    sequenceNumber?: SortOrder
+    taskCode?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    mandatory?: SortOrder
+    evidenceRequired?: SortOrder
+    verificationRequired?: SortOrder
+    enabled?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type GovernedExecutionTaskTemplateAvgOrderByAggregateInput = {
+    sequenceNumber?: SortOrder
+  }
+
+  export type GovernedExecutionTaskTemplateMaxOrderByAggregateInput = {
+    id?: SortOrder
+    executionTemplateId?: SortOrder
+    sequenceNumber?: SortOrder
+    taskCode?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    mandatory?: SortOrder
+    evidenceRequired?: SortOrder
+    verificationRequired?: SortOrder
+    enabled?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type GovernedExecutionTaskTemplateMinOrderByAggregateInput = {
+    id?: SortOrder
+    executionTemplateId?: SortOrder
+    sequenceNumber?: SortOrder
+    taskCode?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    mandatory?: SortOrder
+    evidenceRequired?: SortOrder
+    verificationRequired?: SortOrder
+    enabled?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type GovernedExecutionTaskTemplateSumOrderByAggregateInput = {
+    sequenceNumber?: SortOrder
+  }
+
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
   export type PolicyDocumentScalarRelationFilter = {
     is?: PolicyDocumentWhereInput
     isNot?: PolicyDocumentWhereInput
-  }
-
-  export type ApprovedActionVersionScalarRelationFilter = {
-    is?: ApprovedActionVersionWhereInput
-    isNot?: ApprovedActionVersionWhereInput
   }
 
   export type PolicyRulePolicyDocumentIdRuleCodeCompoundUniqueInput = {
@@ -36446,14 +40740,6 @@ export namespace Prisma {
     enabled?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-  }
-
-  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type EnumCaseStatusFilter<$PrismaModel = never> = {
@@ -36736,6 +41022,36 @@ export namespace Prisma {
     _max?: NestedEnumPriorityLevelFilter<$PrismaModel>
   }
 
+  export type EnumActionPlanGovernanceModeFilter<$PrismaModel = never> = {
+    equals?: $Enums.ActionPlanGovernanceMode | EnumActionPlanGovernanceModeFieldRefInput<$PrismaModel>
+    in?: $Enums.ActionPlanGovernanceMode[] | ListEnumActionPlanGovernanceModeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ActionPlanGovernanceMode[] | ListEnumActionPlanGovernanceModeFieldRefInput<$PrismaModel>
+    not?: NestedEnumActionPlanGovernanceModeFilter<$PrismaModel> | $Enums.ActionPlanGovernanceMode
+  }
+  export type JsonNullableFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonNullableFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonNullableFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonNullableFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonNullableFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonNullableFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
+
   export type RiskAssessmentScalarRelationFilter = {
     is?: RiskAssessmentWhereInput
     isNot?: RiskAssessmentWhereInput
@@ -36771,6 +41087,9 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     decisionPackageId?: SortOrder
+    governanceMode?: SortOrder
+    governedActions?: SortOrder
+    actionPlanContractVersion?: SortOrder
   }
 
   export type OperationalResponsePlanAvgOrderByAggregateInput = {
@@ -36788,6 +41107,8 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     decisionPackageId?: SortOrder
+    governanceMode?: SortOrder
+    actionPlanContractVersion?: SortOrder
   }
 
   export type OperationalResponsePlanMinOrderByAggregateInput = {
@@ -36801,10 +41122,48 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     decisionPackageId?: SortOrder
+    governanceMode?: SortOrder
+    actionPlanContractVersion?: SortOrder
   }
 
   export type OperationalResponsePlanSumOrderByAggregateInput = {
     versionNumber?: SortOrder
+  }
+
+  export type EnumActionPlanGovernanceModeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ActionPlanGovernanceMode | EnumActionPlanGovernanceModeFieldRefInput<$PrismaModel>
+    in?: $Enums.ActionPlanGovernanceMode[] | ListEnumActionPlanGovernanceModeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ActionPlanGovernanceMode[] | ListEnumActionPlanGovernanceModeFieldRefInput<$PrismaModel>
+    not?: NestedEnumActionPlanGovernanceModeWithAggregatesFilter<$PrismaModel> | $Enums.ActionPlanGovernanceMode
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumActionPlanGovernanceModeFilter<$PrismaModel>
+    _max?: NestedEnumActionPlanGovernanceModeFilter<$PrismaModel>
+  }
+  export type JsonNullableWithAggregatesFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonNullableWithAggregatesFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedJsonNullableFilter<$PrismaModel>
+    _max?: NestedJsonNullableFilter<$PrismaModel>
   }
 
   export type EnumDecisionPackageStatusFilter<$PrismaModel = never> = {
@@ -36956,29 +41315,6 @@ export namespace Prisma {
     notIn?: $Enums.OrpDecisionType[] | ListEnumOrpDecisionTypeFieldRefInput<$PrismaModel>
     not?: NestedEnumOrpDecisionTypeFilter<$PrismaModel> | $Enums.OrpDecisionType
   }
-  export type JsonNullableFilter<$PrismaModel = never> =
-    | PatchUndefined<
-        Either<Required<JsonNullableFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonNullableFilterBase<$PrismaModel>>, 'path'>>,
-        Required<JsonNullableFilterBase<$PrismaModel>>
-      >
-    | OptionalFlat<Omit<Required<JsonNullableFilterBase<$PrismaModel>>, 'path'>>
-
-  export type JsonNullableFilterBase<$PrismaModel = never> = {
-    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
-    path?: string[]
-    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
-    string_contains?: string | StringFieldRefInput<$PrismaModel>
-    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
-    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
-    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
-  }
 
   export type OperationalResponsePlanScalarRelationFilter = {
     is?: OperationalResponsePlanWhereInput
@@ -37039,38 +41375,19 @@ export namespace Prisma {
     _min?: NestedEnumOrpDecisionTypeFilter<$PrismaModel>
     _max?: NestedEnumOrpDecisionTypeFilter<$PrismaModel>
   }
-  export type JsonNullableWithAggregatesFilter<$PrismaModel = never> =
-    | PatchUndefined<
-        Either<Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, 'path'>>,
-        Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>
-      >
-    | OptionalFlat<Omit<Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, 'path'>>
-
-  export type JsonNullableWithAggregatesFilterBase<$PrismaModel = never> = {
-    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
-    path?: string[]
-    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
-    string_contains?: string | StringFieldRefInput<$PrismaModel>
-    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
-    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
-    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedJsonNullableFilter<$PrismaModel>
-    _max?: NestedJsonNullableFilter<$PrismaModel>
-  }
 
   export type EnumExecutionPlanStatusFilter<$PrismaModel = never> = {
     equals?: $Enums.ExecutionPlanStatus | EnumExecutionPlanStatusFieldRefInput<$PrismaModel>
     in?: $Enums.ExecutionPlanStatus[] | ListEnumExecutionPlanStatusFieldRefInput<$PrismaModel>
     notIn?: $Enums.ExecutionPlanStatus[] | ListEnumExecutionPlanStatusFieldRefInput<$PrismaModel>
     not?: NestedEnumExecutionPlanStatusFilter<$PrismaModel> | $Enums.ExecutionPlanStatus
+  }
+
+  export type EnumExecutionPlanGovernanceModeFilter<$PrismaModel = never> = {
+    equals?: $Enums.ExecutionPlanGovernanceMode | EnumExecutionPlanGovernanceModeFieldRefInput<$PrismaModel>
+    in?: $Enums.ExecutionPlanGovernanceMode[] | ListEnumExecutionPlanGovernanceModeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ExecutionPlanGovernanceMode[] | ListEnumExecutionPlanGovernanceModeFieldRefInput<$PrismaModel>
+    not?: NestedEnumExecutionPlanGovernanceModeFilter<$PrismaModel> | $Enums.ExecutionPlanGovernanceMode
   }
 
   export type OrpDecisionScalarRelationFilter = {
@@ -37092,6 +41409,9 @@ export namespace Prisma {
     completedAt?: SortOrder
     cancelledAt?: SortOrder
     cancellationReason?: SortOrder
+    governanceMode?: SortOrder
+    executionContractVersion?: SortOrder
+    governedProvenance?: SortOrder
   }
 
   export type ExecutionPlanMaxOrderByAggregateInput = {
@@ -37108,6 +41428,8 @@ export namespace Prisma {
     completedAt?: SortOrder
     cancelledAt?: SortOrder
     cancellationReason?: SortOrder
+    governanceMode?: SortOrder
+    executionContractVersion?: SortOrder
   }
 
   export type ExecutionPlanMinOrderByAggregateInput = {
@@ -37124,6 +41446,8 @@ export namespace Prisma {
     completedAt?: SortOrder
     cancelledAt?: SortOrder
     cancellationReason?: SortOrder
+    governanceMode?: SortOrder
+    executionContractVersion?: SortOrder
   }
 
   export type EnumExecutionPlanStatusWithAggregatesFilter<$PrismaModel = never> = {
@@ -37136,6 +41460,16 @@ export namespace Prisma {
     _max?: NestedEnumExecutionPlanStatusFilter<$PrismaModel>
   }
 
+  export type EnumExecutionPlanGovernanceModeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ExecutionPlanGovernanceMode | EnumExecutionPlanGovernanceModeFieldRefInput<$PrismaModel>
+    in?: $Enums.ExecutionPlanGovernanceMode[] | ListEnumExecutionPlanGovernanceModeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ExecutionPlanGovernanceMode[] | ListEnumExecutionPlanGovernanceModeFieldRefInput<$PrismaModel>
+    not?: NestedEnumExecutionPlanGovernanceModeWithAggregatesFilter<$PrismaModel> | $Enums.ExecutionPlanGovernanceMode
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumExecutionPlanGovernanceModeFilter<$PrismaModel>
+    _max?: NestedEnumExecutionPlanGovernanceModeFilter<$PrismaModel>
+  }
+
   export type EnumExecutionTaskStatusFilter<$PrismaModel = never> = {
     equals?: $Enums.ExecutionTaskStatus | EnumExecutionTaskStatusFieldRefInput<$PrismaModel>
     in?: $Enums.ExecutionTaskStatus[] | ListEnumExecutionTaskStatusFieldRefInput<$PrismaModel>
@@ -37146,6 +41480,21 @@ export namespace Prisma {
   export type ExecutionPlanScalarRelationFilter = {
     is?: ExecutionPlanWhereInput
     isNot?: ExecutionPlanWhereInput
+  }
+
+  export type ApprovedActionVersionNullableScalarRelationFilter = {
+    is?: ApprovedActionVersionWhereInput | null
+    isNot?: ApprovedActionVersionWhereInput | null
+  }
+
+  export type GovernedExecutionTemplateNullableScalarRelationFilter = {
+    is?: GovernedExecutionTemplateWhereInput | null
+    isNot?: GovernedExecutionTemplateWhereInput | null
+  }
+
+  export type GovernedExecutionTaskTemplateNullableScalarRelationFilter = {
+    is?: GovernedExecutionTaskTemplateWhereInput | null
+    isNot?: GovernedExecutionTaskTemplateWhereInput | null
   }
 
   export type ExecutionTaskExecutionPlanIdSequenceNumberCompoundUniqueInput = {
@@ -37186,10 +41535,20 @@ export namespace Prisma {
     cancellationReason?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    approvedActionVersionId?: SortOrder
+    governedExecutionTemplateId?: SortOrder
+    governedTaskTemplateId?: SortOrder
+    sourceActionVersion?: SortOrder
+    sourceTemplateCode?: SortOrder
+    sourceTemplateVersion?: SortOrder
+    evidenceRequired?: SortOrder
+    verificationRequired?: SortOrder
   }
 
   export type ExecutionTaskAvgOrderByAggregateInput = {
     sequenceNumber?: SortOrder
+    sourceActionVersion?: SortOrder
+    sourceTemplateVersion?: SortOrder
   }
 
   export type ExecutionTaskMaxOrderByAggregateInput = {
@@ -37219,6 +41578,14 @@ export namespace Prisma {
     cancellationReason?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    approvedActionVersionId?: SortOrder
+    governedExecutionTemplateId?: SortOrder
+    governedTaskTemplateId?: SortOrder
+    sourceActionVersion?: SortOrder
+    sourceTemplateCode?: SortOrder
+    sourceTemplateVersion?: SortOrder
+    evidenceRequired?: SortOrder
+    verificationRequired?: SortOrder
   }
 
   export type ExecutionTaskMinOrderByAggregateInput = {
@@ -37248,10 +41615,20 @@ export namespace Prisma {
     cancellationReason?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    approvedActionVersionId?: SortOrder
+    governedExecutionTemplateId?: SortOrder
+    governedTaskTemplateId?: SortOrder
+    sourceActionVersion?: SortOrder
+    sourceTemplateCode?: SortOrder
+    sourceTemplateVersion?: SortOrder
+    evidenceRequired?: SortOrder
+    verificationRequired?: SortOrder
   }
 
   export type ExecutionTaskSumOrderByAggregateInput = {
     sequenceNumber?: SortOrder
+    sourceActionVersion?: SortOrder
+    sourceTemplateVersion?: SortOrder
   }
 
   export type EnumExecutionTaskStatusWithAggregatesFilter<$PrismaModel = never> = {
@@ -37422,6 +41799,13 @@ export namespace Prisma {
     connect?: ApprovedActionVersionWhereUniqueInput | ApprovedActionVersionWhereUniqueInput[]
   }
 
+  export type GovernedExecutionTemplateCreateNestedManyWithoutDepartmentInput = {
+    create?: XOR<GovernedExecutionTemplateCreateWithoutDepartmentInput, GovernedExecutionTemplateUncheckedCreateWithoutDepartmentInput> | GovernedExecutionTemplateCreateWithoutDepartmentInput[] | GovernedExecutionTemplateUncheckedCreateWithoutDepartmentInput[]
+    connectOrCreate?: GovernedExecutionTemplateCreateOrConnectWithoutDepartmentInput | GovernedExecutionTemplateCreateOrConnectWithoutDepartmentInput[]
+    createMany?: GovernedExecutionTemplateCreateManyDepartmentInputEnvelope
+    connect?: GovernedExecutionTemplateWhereUniqueInput | GovernedExecutionTemplateWhereUniqueInput[]
+  }
+
   export type UserUncheckedCreateNestedManyWithoutDepartmentInput = {
     create?: XOR<UserCreateWithoutDepartmentInput, UserUncheckedCreateWithoutDepartmentInput> | UserCreateWithoutDepartmentInput[] | UserUncheckedCreateWithoutDepartmentInput[]
     connectOrCreate?: UserCreateOrConnectWithoutDepartmentInput | UserCreateOrConnectWithoutDepartmentInput[]
@@ -37469,6 +41853,13 @@ export namespace Prisma {
     connectOrCreate?: ApprovedActionVersionCreateOrConnectWithoutDepartmentInput | ApprovedActionVersionCreateOrConnectWithoutDepartmentInput[]
     createMany?: ApprovedActionVersionCreateManyDepartmentInputEnvelope
     connect?: ApprovedActionVersionWhereUniqueInput | ApprovedActionVersionWhereUniqueInput[]
+  }
+
+  export type GovernedExecutionTemplateUncheckedCreateNestedManyWithoutDepartmentInput = {
+    create?: XOR<GovernedExecutionTemplateCreateWithoutDepartmentInput, GovernedExecutionTemplateUncheckedCreateWithoutDepartmentInput> | GovernedExecutionTemplateCreateWithoutDepartmentInput[] | GovernedExecutionTemplateUncheckedCreateWithoutDepartmentInput[]
+    connectOrCreate?: GovernedExecutionTemplateCreateOrConnectWithoutDepartmentInput | GovernedExecutionTemplateCreateOrConnectWithoutDepartmentInput[]
+    createMany?: GovernedExecutionTemplateCreateManyDepartmentInputEnvelope
+    connect?: GovernedExecutionTemplateWhereUniqueInput | GovernedExecutionTemplateWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -37577,6 +41968,20 @@ export namespace Prisma {
     deleteMany?: ApprovedActionVersionScalarWhereInput | ApprovedActionVersionScalarWhereInput[]
   }
 
+  export type GovernedExecutionTemplateUpdateManyWithoutDepartmentNestedInput = {
+    create?: XOR<GovernedExecutionTemplateCreateWithoutDepartmentInput, GovernedExecutionTemplateUncheckedCreateWithoutDepartmentInput> | GovernedExecutionTemplateCreateWithoutDepartmentInput[] | GovernedExecutionTemplateUncheckedCreateWithoutDepartmentInput[]
+    connectOrCreate?: GovernedExecutionTemplateCreateOrConnectWithoutDepartmentInput | GovernedExecutionTemplateCreateOrConnectWithoutDepartmentInput[]
+    upsert?: GovernedExecutionTemplateUpsertWithWhereUniqueWithoutDepartmentInput | GovernedExecutionTemplateUpsertWithWhereUniqueWithoutDepartmentInput[]
+    createMany?: GovernedExecutionTemplateCreateManyDepartmentInputEnvelope
+    set?: GovernedExecutionTemplateWhereUniqueInput | GovernedExecutionTemplateWhereUniqueInput[]
+    disconnect?: GovernedExecutionTemplateWhereUniqueInput | GovernedExecutionTemplateWhereUniqueInput[]
+    delete?: GovernedExecutionTemplateWhereUniqueInput | GovernedExecutionTemplateWhereUniqueInput[]
+    connect?: GovernedExecutionTemplateWhereUniqueInput | GovernedExecutionTemplateWhereUniqueInput[]
+    update?: GovernedExecutionTemplateUpdateWithWhereUniqueWithoutDepartmentInput | GovernedExecutionTemplateUpdateWithWhereUniqueWithoutDepartmentInput[]
+    updateMany?: GovernedExecutionTemplateUpdateManyWithWhereWithoutDepartmentInput | GovernedExecutionTemplateUpdateManyWithWhereWithoutDepartmentInput[]
+    deleteMany?: GovernedExecutionTemplateScalarWhereInput | GovernedExecutionTemplateScalarWhereInput[]
+  }
+
   export type UserUncheckedUpdateManyWithoutDepartmentNestedInput = {
     create?: XOR<UserCreateWithoutDepartmentInput, UserUncheckedCreateWithoutDepartmentInput> | UserCreateWithoutDepartmentInput[] | UserUncheckedCreateWithoutDepartmentInput[]
     connectOrCreate?: UserCreateOrConnectWithoutDepartmentInput | UserCreateOrConnectWithoutDepartmentInput[]
@@ -37675,6 +42080,20 @@ export namespace Prisma {
     deleteMany?: ApprovedActionVersionScalarWhereInput | ApprovedActionVersionScalarWhereInput[]
   }
 
+  export type GovernedExecutionTemplateUncheckedUpdateManyWithoutDepartmentNestedInput = {
+    create?: XOR<GovernedExecutionTemplateCreateWithoutDepartmentInput, GovernedExecutionTemplateUncheckedCreateWithoutDepartmentInput> | GovernedExecutionTemplateCreateWithoutDepartmentInput[] | GovernedExecutionTemplateUncheckedCreateWithoutDepartmentInput[]
+    connectOrCreate?: GovernedExecutionTemplateCreateOrConnectWithoutDepartmentInput | GovernedExecutionTemplateCreateOrConnectWithoutDepartmentInput[]
+    upsert?: GovernedExecutionTemplateUpsertWithWhereUniqueWithoutDepartmentInput | GovernedExecutionTemplateUpsertWithWhereUniqueWithoutDepartmentInput[]
+    createMany?: GovernedExecutionTemplateCreateManyDepartmentInputEnvelope
+    set?: GovernedExecutionTemplateWhereUniqueInput | GovernedExecutionTemplateWhereUniqueInput[]
+    disconnect?: GovernedExecutionTemplateWhereUniqueInput | GovernedExecutionTemplateWhereUniqueInput[]
+    delete?: GovernedExecutionTemplateWhereUniqueInput | GovernedExecutionTemplateWhereUniqueInput[]
+    connect?: GovernedExecutionTemplateWhereUniqueInput | GovernedExecutionTemplateWhereUniqueInput[]
+    update?: GovernedExecutionTemplateUpdateWithWhereUniqueWithoutDepartmentInput | GovernedExecutionTemplateUpdateWithWhereUniqueWithoutDepartmentInput[]
+    updateMany?: GovernedExecutionTemplateUpdateManyWithWhereWithoutDepartmentInput | GovernedExecutionTemplateUpdateManyWithWhereWithoutDepartmentInput[]
+    deleteMany?: GovernedExecutionTemplateScalarWhereInput | GovernedExecutionTemplateScalarWhereInput[]
+  }
+
   export type DepartmentCreateNestedOneWithoutJurisdictionsInput = {
     create?: XOR<DepartmentCreateWithoutJurisdictionsInput, DepartmentUncheckedCreateWithoutJurisdictionsInput>
     connectOrCreate?: DepartmentCreateOrConnectWithoutJurisdictionsInput
@@ -37723,6 +42142,13 @@ export namespace Prisma {
     connect?: ApprovedActionVersionWhereUniqueInput | ApprovedActionVersionWhereUniqueInput[]
   }
 
+  export type GovernedExecutionTemplateCreateNestedManyWithoutJurisdictionInput = {
+    create?: XOR<GovernedExecutionTemplateCreateWithoutJurisdictionInput, GovernedExecutionTemplateUncheckedCreateWithoutJurisdictionInput> | GovernedExecutionTemplateCreateWithoutJurisdictionInput[] | GovernedExecutionTemplateUncheckedCreateWithoutJurisdictionInput[]
+    connectOrCreate?: GovernedExecutionTemplateCreateOrConnectWithoutJurisdictionInput | GovernedExecutionTemplateCreateOrConnectWithoutJurisdictionInput[]
+    createMany?: GovernedExecutionTemplateCreateManyJurisdictionInputEnvelope
+    connect?: GovernedExecutionTemplateWhereUniqueInput | GovernedExecutionTemplateWhereUniqueInput[]
+  }
+
   export type UserUncheckedCreateNestedManyWithoutJurisdictionInput = {
     create?: XOR<UserCreateWithoutJurisdictionInput, UserUncheckedCreateWithoutJurisdictionInput> | UserCreateWithoutJurisdictionInput[] | UserUncheckedCreateWithoutJurisdictionInput[]
     connectOrCreate?: UserCreateOrConnectWithoutJurisdictionInput | UserCreateOrConnectWithoutJurisdictionInput[]
@@ -37763,6 +42189,13 @@ export namespace Prisma {
     connectOrCreate?: ApprovedActionVersionCreateOrConnectWithoutJurisdictionInput | ApprovedActionVersionCreateOrConnectWithoutJurisdictionInput[]
     createMany?: ApprovedActionVersionCreateManyJurisdictionInputEnvelope
     connect?: ApprovedActionVersionWhereUniqueInput | ApprovedActionVersionWhereUniqueInput[]
+  }
+
+  export type GovernedExecutionTemplateUncheckedCreateNestedManyWithoutJurisdictionInput = {
+    create?: XOR<GovernedExecutionTemplateCreateWithoutJurisdictionInput, GovernedExecutionTemplateUncheckedCreateWithoutJurisdictionInput> | GovernedExecutionTemplateCreateWithoutJurisdictionInput[] | GovernedExecutionTemplateUncheckedCreateWithoutJurisdictionInput[]
+    connectOrCreate?: GovernedExecutionTemplateCreateOrConnectWithoutJurisdictionInput | GovernedExecutionTemplateCreateOrConnectWithoutJurisdictionInput[]
+    createMany?: GovernedExecutionTemplateCreateManyJurisdictionInputEnvelope
+    connect?: GovernedExecutionTemplateWhereUniqueInput | GovernedExecutionTemplateWhereUniqueInput[]
   }
 
   export type DepartmentUpdateOneRequiredWithoutJurisdictionsNestedInput = {
@@ -37857,6 +42290,20 @@ export namespace Prisma {
     deleteMany?: ApprovedActionVersionScalarWhereInput | ApprovedActionVersionScalarWhereInput[]
   }
 
+  export type GovernedExecutionTemplateUpdateManyWithoutJurisdictionNestedInput = {
+    create?: XOR<GovernedExecutionTemplateCreateWithoutJurisdictionInput, GovernedExecutionTemplateUncheckedCreateWithoutJurisdictionInput> | GovernedExecutionTemplateCreateWithoutJurisdictionInput[] | GovernedExecutionTemplateUncheckedCreateWithoutJurisdictionInput[]
+    connectOrCreate?: GovernedExecutionTemplateCreateOrConnectWithoutJurisdictionInput | GovernedExecutionTemplateCreateOrConnectWithoutJurisdictionInput[]
+    upsert?: GovernedExecutionTemplateUpsertWithWhereUniqueWithoutJurisdictionInput | GovernedExecutionTemplateUpsertWithWhereUniqueWithoutJurisdictionInput[]
+    createMany?: GovernedExecutionTemplateCreateManyJurisdictionInputEnvelope
+    set?: GovernedExecutionTemplateWhereUniqueInput | GovernedExecutionTemplateWhereUniqueInput[]
+    disconnect?: GovernedExecutionTemplateWhereUniqueInput | GovernedExecutionTemplateWhereUniqueInput[]
+    delete?: GovernedExecutionTemplateWhereUniqueInput | GovernedExecutionTemplateWhereUniqueInput[]
+    connect?: GovernedExecutionTemplateWhereUniqueInput | GovernedExecutionTemplateWhereUniqueInput[]
+    update?: GovernedExecutionTemplateUpdateWithWhereUniqueWithoutJurisdictionInput | GovernedExecutionTemplateUpdateWithWhereUniqueWithoutJurisdictionInput[]
+    updateMany?: GovernedExecutionTemplateUpdateManyWithWhereWithoutJurisdictionInput | GovernedExecutionTemplateUpdateManyWithWhereWithoutJurisdictionInput[]
+    deleteMany?: GovernedExecutionTemplateScalarWhereInput | GovernedExecutionTemplateScalarWhereInput[]
+  }
+
   export type UserUncheckedUpdateManyWithoutJurisdictionNestedInput = {
     create?: XOR<UserCreateWithoutJurisdictionInput, UserUncheckedCreateWithoutJurisdictionInput> | UserCreateWithoutJurisdictionInput[] | UserUncheckedCreateWithoutJurisdictionInput[]
     connectOrCreate?: UserCreateOrConnectWithoutJurisdictionInput | UserCreateOrConnectWithoutJurisdictionInput[]
@@ -37939,6 +42386,20 @@ export namespace Prisma {
     update?: ApprovedActionVersionUpdateWithWhereUniqueWithoutJurisdictionInput | ApprovedActionVersionUpdateWithWhereUniqueWithoutJurisdictionInput[]
     updateMany?: ApprovedActionVersionUpdateManyWithWhereWithoutJurisdictionInput | ApprovedActionVersionUpdateManyWithWhereWithoutJurisdictionInput[]
     deleteMany?: ApprovedActionVersionScalarWhereInput | ApprovedActionVersionScalarWhereInput[]
+  }
+
+  export type GovernedExecutionTemplateUncheckedUpdateManyWithoutJurisdictionNestedInput = {
+    create?: XOR<GovernedExecutionTemplateCreateWithoutJurisdictionInput, GovernedExecutionTemplateUncheckedCreateWithoutJurisdictionInput> | GovernedExecutionTemplateCreateWithoutJurisdictionInput[] | GovernedExecutionTemplateUncheckedCreateWithoutJurisdictionInput[]
+    connectOrCreate?: GovernedExecutionTemplateCreateOrConnectWithoutJurisdictionInput | GovernedExecutionTemplateCreateOrConnectWithoutJurisdictionInput[]
+    upsert?: GovernedExecutionTemplateUpsertWithWhereUniqueWithoutJurisdictionInput | GovernedExecutionTemplateUpsertWithWhereUniqueWithoutJurisdictionInput[]
+    createMany?: GovernedExecutionTemplateCreateManyJurisdictionInputEnvelope
+    set?: GovernedExecutionTemplateWhereUniqueInput | GovernedExecutionTemplateWhereUniqueInput[]
+    disconnect?: GovernedExecutionTemplateWhereUniqueInput | GovernedExecutionTemplateWhereUniqueInput[]
+    delete?: GovernedExecutionTemplateWhereUniqueInput | GovernedExecutionTemplateWhereUniqueInput[]
+    connect?: GovernedExecutionTemplateWhereUniqueInput | GovernedExecutionTemplateWhereUniqueInput[]
+    update?: GovernedExecutionTemplateUpdateWithWhereUniqueWithoutJurisdictionInput | GovernedExecutionTemplateUpdateWithWhereUniqueWithoutJurisdictionInput[]
+    updateMany?: GovernedExecutionTemplateUpdateManyWithWhereWithoutJurisdictionInput | GovernedExecutionTemplateUpdateManyWithWhereWithoutJurisdictionInput[]
+    deleteMany?: GovernedExecutionTemplateScalarWhereInput | GovernedExecutionTemplateScalarWhereInput[]
   }
 
   export type DepartmentCreateNestedOneWithoutUsersInput = {
@@ -38093,6 +42554,20 @@ export namespace Prisma {
     connect?: DecisionPackageWhereUniqueInput | DecisionPackageWhereUniqueInput[]
   }
 
+  export type GovernedExecutionTemplateCreateNestedManyWithoutCreatedByInput = {
+    create?: XOR<GovernedExecutionTemplateCreateWithoutCreatedByInput, GovernedExecutionTemplateUncheckedCreateWithoutCreatedByInput> | GovernedExecutionTemplateCreateWithoutCreatedByInput[] | GovernedExecutionTemplateUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: GovernedExecutionTemplateCreateOrConnectWithoutCreatedByInput | GovernedExecutionTemplateCreateOrConnectWithoutCreatedByInput[]
+    createMany?: GovernedExecutionTemplateCreateManyCreatedByInputEnvelope
+    connect?: GovernedExecutionTemplateWhereUniqueInput | GovernedExecutionTemplateWhereUniqueInput[]
+  }
+
+  export type GovernedExecutionTemplateCreateNestedManyWithoutApprovedByInput = {
+    create?: XOR<GovernedExecutionTemplateCreateWithoutApprovedByInput, GovernedExecutionTemplateUncheckedCreateWithoutApprovedByInput> | GovernedExecutionTemplateCreateWithoutApprovedByInput[] | GovernedExecutionTemplateUncheckedCreateWithoutApprovedByInput[]
+    connectOrCreate?: GovernedExecutionTemplateCreateOrConnectWithoutApprovedByInput | GovernedExecutionTemplateCreateOrConnectWithoutApprovedByInput[]
+    createMany?: GovernedExecutionTemplateCreateManyApprovedByInputEnvelope
+    connect?: GovernedExecutionTemplateWhereUniqueInput | GovernedExecutionTemplateWhereUniqueInput[]
+  }
+
   export type InspectionUncheckedCreateNestedManyWithoutInspectorInput = {
     create?: XOR<InspectionCreateWithoutInspectorInput, InspectionUncheckedCreateWithoutInspectorInput> | InspectionCreateWithoutInspectorInput[] | InspectionUncheckedCreateWithoutInspectorInput[]
     connectOrCreate?: InspectionCreateOrConnectWithoutInspectorInput | InspectionCreateOrConnectWithoutInspectorInput[]
@@ -38231,6 +42706,20 @@ export namespace Prisma {
     connectOrCreate?: DecisionPackageCreateOrConnectWithoutPreparedByInput | DecisionPackageCreateOrConnectWithoutPreparedByInput[]
     createMany?: DecisionPackageCreateManyPreparedByInputEnvelope
     connect?: DecisionPackageWhereUniqueInput | DecisionPackageWhereUniqueInput[]
+  }
+
+  export type GovernedExecutionTemplateUncheckedCreateNestedManyWithoutCreatedByInput = {
+    create?: XOR<GovernedExecutionTemplateCreateWithoutCreatedByInput, GovernedExecutionTemplateUncheckedCreateWithoutCreatedByInput> | GovernedExecutionTemplateCreateWithoutCreatedByInput[] | GovernedExecutionTemplateUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: GovernedExecutionTemplateCreateOrConnectWithoutCreatedByInput | GovernedExecutionTemplateCreateOrConnectWithoutCreatedByInput[]
+    createMany?: GovernedExecutionTemplateCreateManyCreatedByInputEnvelope
+    connect?: GovernedExecutionTemplateWhereUniqueInput | GovernedExecutionTemplateWhereUniqueInput[]
+  }
+
+  export type GovernedExecutionTemplateUncheckedCreateNestedManyWithoutApprovedByInput = {
+    create?: XOR<GovernedExecutionTemplateCreateWithoutApprovedByInput, GovernedExecutionTemplateUncheckedCreateWithoutApprovedByInput> | GovernedExecutionTemplateCreateWithoutApprovedByInput[] | GovernedExecutionTemplateUncheckedCreateWithoutApprovedByInput[]
+    connectOrCreate?: GovernedExecutionTemplateCreateOrConnectWithoutApprovedByInput | GovernedExecutionTemplateCreateOrConnectWithoutApprovedByInput[]
+    createMany?: GovernedExecutionTemplateCreateManyApprovedByInputEnvelope
+    connect?: GovernedExecutionTemplateWhereUniqueInput | GovernedExecutionTemplateWhereUniqueInput[]
   }
 
   export type EnumSystemRoleFieldUpdateOperationsInput = {
@@ -38537,6 +43026,34 @@ export namespace Prisma {
     deleteMany?: DecisionPackageScalarWhereInput | DecisionPackageScalarWhereInput[]
   }
 
+  export type GovernedExecutionTemplateUpdateManyWithoutCreatedByNestedInput = {
+    create?: XOR<GovernedExecutionTemplateCreateWithoutCreatedByInput, GovernedExecutionTemplateUncheckedCreateWithoutCreatedByInput> | GovernedExecutionTemplateCreateWithoutCreatedByInput[] | GovernedExecutionTemplateUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: GovernedExecutionTemplateCreateOrConnectWithoutCreatedByInput | GovernedExecutionTemplateCreateOrConnectWithoutCreatedByInput[]
+    upsert?: GovernedExecutionTemplateUpsertWithWhereUniqueWithoutCreatedByInput | GovernedExecutionTemplateUpsertWithWhereUniqueWithoutCreatedByInput[]
+    createMany?: GovernedExecutionTemplateCreateManyCreatedByInputEnvelope
+    set?: GovernedExecutionTemplateWhereUniqueInput | GovernedExecutionTemplateWhereUniqueInput[]
+    disconnect?: GovernedExecutionTemplateWhereUniqueInput | GovernedExecutionTemplateWhereUniqueInput[]
+    delete?: GovernedExecutionTemplateWhereUniqueInput | GovernedExecutionTemplateWhereUniqueInput[]
+    connect?: GovernedExecutionTemplateWhereUniqueInput | GovernedExecutionTemplateWhereUniqueInput[]
+    update?: GovernedExecutionTemplateUpdateWithWhereUniqueWithoutCreatedByInput | GovernedExecutionTemplateUpdateWithWhereUniqueWithoutCreatedByInput[]
+    updateMany?: GovernedExecutionTemplateUpdateManyWithWhereWithoutCreatedByInput | GovernedExecutionTemplateUpdateManyWithWhereWithoutCreatedByInput[]
+    deleteMany?: GovernedExecutionTemplateScalarWhereInput | GovernedExecutionTemplateScalarWhereInput[]
+  }
+
+  export type GovernedExecutionTemplateUpdateManyWithoutApprovedByNestedInput = {
+    create?: XOR<GovernedExecutionTemplateCreateWithoutApprovedByInput, GovernedExecutionTemplateUncheckedCreateWithoutApprovedByInput> | GovernedExecutionTemplateCreateWithoutApprovedByInput[] | GovernedExecutionTemplateUncheckedCreateWithoutApprovedByInput[]
+    connectOrCreate?: GovernedExecutionTemplateCreateOrConnectWithoutApprovedByInput | GovernedExecutionTemplateCreateOrConnectWithoutApprovedByInput[]
+    upsert?: GovernedExecutionTemplateUpsertWithWhereUniqueWithoutApprovedByInput | GovernedExecutionTemplateUpsertWithWhereUniqueWithoutApprovedByInput[]
+    createMany?: GovernedExecutionTemplateCreateManyApprovedByInputEnvelope
+    set?: GovernedExecutionTemplateWhereUniqueInput | GovernedExecutionTemplateWhereUniqueInput[]
+    disconnect?: GovernedExecutionTemplateWhereUniqueInput | GovernedExecutionTemplateWhereUniqueInput[]
+    delete?: GovernedExecutionTemplateWhereUniqueInput | GovernedExecutionTemplateWhereUniqueInput[]
+    connect?: GovernedExecutionTemplateWhereUniqueInput | GovernedExecutionTemplateWhereUniqueInput[]
+    update?: GovernedExecutionTemplateUpdateWithWhereUniqueWithoutApprovedByInput | GovernedExecutionTemplateUpdateWithWhereUniqueWithoutApprovedByInput[]
+    updateMany?: GovernedExecutionTemplateUpdateManyWithWhereWithoutApprovedByInput | GovernedExecutionTemplateUpdateManyWithWhereWithoutApprovedByInput[]
+    deleteMany?: GovernedExecutionTemplateScalarWhereInput | GovernedExecutionTemplateScalarWhereInput[]
+  }
+
   export type InspectionUncheckedUpdateManyWithoutInspectorNestedInput = {
     create?: XOR<InspectionCreateWithoutInspectorInput, InspectionUncheckedCreateWithoutInspectorInput> | InspectionCreateWithoutInspectorInput[] | InspectionUncheckedCreateWithoutInspectorInput[]
     connectOrCreate?: InspectionCreateOrConnectWithoutInspectorInput | InspectionCreateOrConnectWithoutInspectorInput[]
@@ -38815,6 +43332,34 @@ export namespace Prisma {
     update?: DecisionPackageUpdateWithWhereUniqueWithoutPreparedByInput | DecisionPackageUpdateWithWhereUniqueWithoutPreparedByInput[]
     updateMany?: DecisionPackageUpdateManyWithWhereWithoutPreparedByInput | DecisionPackageUpdateManyWithWhereWithoutPreparedByInput[]
     deleteMany?: DecisionPackageScalarWhereInput | DecisionPackageScalarWhereInput[]
+  }
+
+  export type GovernedExecutionTemplateUncheckedUpdateManyWithoutCreatedByNestedInput = {
+    create?: XOR<GovernedExecutionTemplateCreateWithoutCreatedByInput, GovernedExecutionTemplateUncheckedCreateWithoutCreatedByInput> | GovernedExecutionTemplateCreateWithoutCreatedByInput[] | GovernedExecutionTemplateUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: GovernedExecutionTemplateCreateOrConnectWithoutCreatedByInput | GovernedExecutionTemplateCreateOrConnectWithoutCreatedByInput[]
+    upsert?: GovernedExecutionTemplateUpsertWithWhereUniqueWithoutCreatedByInput | GovernedExecutionTemplateUpsertWithWhereUniqueWithoutCreatedByInput[]
+    createMany?: GovernedExecutionTemplateCreateManyCreatedByInputEnvelope
+    set?: GovernedExecutionTemplateWhereUniqueInput | GovernedExecutionTemplateWhereUniqueInput[]
+    disconnect?: GovernedExecutionTemplateWhereUniqueInput | GovernedExecutionTemplateWhereUniqueInput[]
+    delete?: GovernedExecutionTemplateWhereUniqueInput | GovernedExecutionTemplateWhereUniqueInput[]
+    connect?: GovernedExecutionTemplateWhereUniqueInput | GovernedExecutionTemplateWhereUniqueInput[]
+    update?: GovernedExecutionTemplateUpdateWithWhereUniqueWithoutCreatedByInput | GovernedExecutionTemplateUpdateWithWhereUniqueWithoutCreatedByInput[]
+    updateMany?: GovernedExecutionTemplateUpdateManyWithWhereWithoutCreatedByInput | GovernedExecutionTemplateUpdateManyWithWhereWithoutCreatedByInput[]
+    deleteMany?: GovernedExecutionTemplateScalarWhereInput | GovernedExecutionTemplateScalarWhereInput[]
+  }
+
+  export type GovernedExecutionTemplateUncheckedUpdateManyWithoutApprovedByNestedInput = {
+    create?: XOR<GovernedExecutionTemplateCreateWithoutApprovedByInput, GovernedExecutionTemplateUncheckedCreateWithoutApprovedByInput> | GovernedExecutionTemplateCreateWithoutApprovedByInput[] | GovernedExecutionTemplateUncheckedCreateWithoutApprovedByInput[]
+    connectOrCreate?: GovernedExecutionTemplateCreateOrConnectWithoutApprovedByInput | GovernedExecutionTemplateCreateOrConnectWithoutApprovedByInput[]
+    upsert?: GovernedExecutionTemplateUpsertWithWhereUniqueWithoutApprovedByInput | GovernedExecutionTemplateUpsertWithWhereUniqueWithoutApprovedByInput[]
+    createMany?: GovernedExecutionTemplateCreateManyApprovedByInputEnvelope
+    set?: GovernedExecutionTemplateWhereUniqueInput | GovernedExecutionTemplateWhereUniqueInput[]
+    disconnect?: GovernedExecutionTemplateWhereUniqueInput | GovernedExecutionTemplateWhereUniqueInput[]
+    delete?: GovernedExecutionTemplateWhereUniqueInput | GovernedExecutionTemplateWhereUniqueInput[]
+    connect?: GovernedExecutionTemplateWhereUniqueInput | GovernedExecutionTemplateWhereUniqueInput[]
+    update?: GovernedExecutionTemplateUpdateWithWhereUniqueWithoutApprovedByInput | GovernedExecutionTemplateUpdateWithWhereUniqueWithoutApprovedByInput[]
+    updateMany?: GovernedExecutionTemplateUpdateManyWithWhereWithoutApprovedByInput | GovernedExecutionTemplateUpdateManyWithWhereWithoutApprovedByInput[]
+    deleteMany?: GovernedExecutionTemplateScalarWhereInput | GovernedExecutionTemplateScalarWhereInput[]
   }
 
   export type DepartmentCreateNestedOneWithoutAssetsInput = {
@@ -39392,11 +43937,39 @@ export namespace Prisma {
     connect?: PolicyRuleWhereUniqueInput | PolicyRuleWhereUniqueInput[]
   }
 
+  export type GovernedExecutionTemplateCreateNestedManyWithoutApprovedActionVersionInput = {
+    create?: XOR<GovernedExecutionTemplateCreateWithoutApprovedActionVersionInput, GovernedExecutionTemplateUncheckedCreateWithoutApprovedActionVersionInput> | GovernedExecutionTemplateCreateWithoutApprovedActionVersionInput[] | GovernedExecutionTemplateUncheckedCreateWithoutApprovedActionVersionInput[]
+    connectOrCreate?: GovernedExecutionTemplateCreateOrConnectWithoutApprovedActionVersionInput | GovernedExecutionTemplateCreateOrConnectWithoutApprovedActionVersionInput[]
+    createMany?: GovernedExecutionTemplateCreateManyApprovedActionVersionInputEnvelope
+    connect?: GovernedExecutionTemplateWhereUniqueInput | GovernedExecutionTemplateWhereUniqueInput[]
+  }
+
+  export type ExecutionTaskCreateNestedManyWithoutApprovedActionVersionInput = {
+    create?: XOR<ExecutionTaskCreateWithoutApprovedActionVersionInput, ExecutionTaskUncheckedCreateWithoutApprovedActionVersionInput> | ExecutionTaskCreateWithoutApprovedActionVersionInput[] | ExecutionTaskUncheckedCreateWithoutApprovedActionVersionInput[]
+    connectOrCreate?: ExecutionTaskCreateOrConnectWithoutApprovedActionVersionInput | ExecutionTaskCreateOrConnectWithoutApprovedActionVersionInput[]
+    createMany?: ExecutionTaskCreateManyApprovedActionVersionInputEnvelope
+    connect?: ExecutionTaskWhereUniqueInput | ExecutionTaskWhereUniqueInput[]
+  }
+
   export type PolicyRuleUncheckedCreateNestedManyWithoutActionInput = {
     create?: XOR<PolicyRuleCreateWithoutActionInput, PolicyRuleUncheckedCreateWithoutActionInput> | PolicyRuleCreateWithoutActionInput[] | PolicyRuleUncheckedCreateWithoutActionInput[]
     connectOrCreate?: PolicyRuleCreateOrConnectWithoutActionInput | PolicyRuleCreateOrConnectWithoutActionInput[]
     createMany?: PolicyRuleCreateManyActionInputEnvelope
     connect?: PolicyRuleWhereUniqueInput | PolicyRuleWhereUniqueInput[]
+  }
+
+  export type GovernedExecutionTemplateUncheckedCreateNestedManyWithoutApprovedActionVersionInput = {
+    create?: XOR<GovernedExecutionTemplateCreateWithoutApprovedActionVersionInput, GovernedExecutionTemplateUncheckedCreateWithoutApprovedActionVersionInput> | GovernedExecutionTemplateCreateWithoutApprovedActionVersionInput[] | GovernedExecutionTemplateUncheckedCreateWithoutApprovedActionVersionInput[]
+    connectOrCreate?: GovernedExecutionTemplateCreateOrConnectWithoutApprovedActionVersionInput | GovernedExecutionTemplateCreateOrConnectWithoutApprovedActionVersionInput[]
+    createMany?: GovernedExecutionTemplateCreateManyApprovedActionVersionInputEnvelope
+    connect?: GovernedExecutionTemplateWhereUniqueInput | GovernedExecutionTemplateWhereUniqueInput[]
+  }
+
+  export type ExecutionTaskUncheckedCreateNestedManyWithoutApprovedActionVersionInput = {
+    create?: XOR<ExecutionTaskCreateWithoutApprovedActionVersionInput, ExecutionTaskUncheckedCreateWithoutApprovedActionVersionInput> | ExecutionTaskCreateWithoutApprovedActionVersionInput[] | ExecutionTaskUncheckedCreateWithoutApprovedActionVersionInput[]
+    connectOrCreate?: ExecutionTaskCreateOrConnectWithoutApprovedActionVersionInput | ExecutionTaskCreateOrConnectWithoutApprovedActionVersionInput[]
+    createMany?: ExecutionTaskCreateManyApprovedActionVersionInputEnvelope
+    connect?: ExecutionTaskWhereUniqueInput | ExecutionTaskWhereUniqueInput[]
   }
 
   export type EnumEnforcementClassificationFieldUpdateOperationsInput = {
@@ -39465,6 +44038,34 @@ export namespace Prisma {
     deleteMany?: PolicyRuleScalarWhereInput | PolicyRuleScalarWhereInput[]
   }
 
+  export type GovernedExecutionTemplateUpdateManyWithoutApprovedActionVersionNestedInput = {
+    create?: XOR<GovernedExecutionTemplateCreateWithoutApprovedActionVersionInput, GovernedExecutionTemplateUncheckedCreateWithoutApprovedActionVersionInput> | GovernedExecutionTemplateCreateWithoutApprovedActionVersionInput[] | GovernedExecutionTemplateUncheckedCreateWithoutApprovedActionVersionInput[]
+    connectOrCreate?: GovernedExecutionTemplateCreateOrConnectWithoutApprovedActionVersionInput | GovernedExecutionTemplateCreateOrConnectWithoutApprovedActionVersionInput[]
+    upsert?: GovernedExecutionTemplateUpsertWithWhereUniqueWithoutApprovedActionVersionInput | GovernedExecutionTemplateUpsertWithWhereUniqueWithoutApprovedActionVersionInput[]
+    createMany?: GovernedExecutionTemplateCreateManyApprovedActionVersionInputEnvelope
+    set?: GovernedExecutionTemplateWhereUniqueInput | GovernedExecutionTemplateWhereUniqueInput[]
+    disconnect?: GovernedExecutionTemplateWhereUniqueInput | GovernedExecutionTemplateWhereUniqueInput[]
+    delete?: GovernedExecutionTemplateWhereUniqueInput | GovernedExecutionTemplateWhereUniqueInput[]
+    connect?: GovernedExecutionTemplateWhereUniqueInput | GovernedExecutionTemplateWhereUniqueInput[]
+    update?: GovernedExecutionTemplateUpdateWithWhereUniqueWithoutApprovedActionVersionInput | GovernedExecutionTemplateUpdateWithWhereUniqueWithoutApprovedActionVersionInput[]
+    updateMany?: GovernedExecutionTemplateUpdateManyWithWhereWithoutApprovedActionVersionInput | GovernedExecutionTemplateUpdateManyWithWhereWithoutApprovedActionVersionInput[]
+    deleteMany?: GovernedExecutionTemplateScalarWhereInput | GovernedExecutionTemplateScalarWhereInput[]
+  }
+
+  export type ExecutionTaskUpdateManyWithoutApprovedActionVersionNestedInput = {
+    create?: XOR<ExecutionTaskCreateWithoutApprovedActionVersionInput, ExecutionTaskUncheckedCreateWithoutApprovedActionVersionInput> | ExecutionTaskCreateWithoutApprovedActionVersionInput[] | ExecutionTaskUncheckedCreateWithoutApprovedActionVersionInput[]
+    connectOrCreate?: ExecutionTaskCreateOrConnectWithoutApprovedActionVersionInput | ExecutionTaskCreateOrConnectWithoutApprovedActionVersionInput[]
+    upsert?: ExecutionTaskUpsertWithWhereUniqueWithoutApprovedActionVersionInput | ExecutionTaskUpsertWithWhereUniqueWithoutApprovedActionVersionInput[]
+    createMany?: ExecutionTaskCreateManyApprovedActionVersionInputEnvelope
+    set?: ExecutionTaskWhereUniqueInput | ExecutionTaskWhereUniqueInput[]
+    disconnect?: ExecutionTaskWhereUniqueInput | ExecutionTaskWhereUniqueInput[]
+    delete?: ExecutionTaskWhereUniqueInput | ExecutionTaskWhereUniqueInput[]
+    connect?: ExecutionTaskWhereUniqueInput | ExecutionTaskWhereUniqueInput[]
+    update?: ExecutionTaskUpdateWithWhereUniqueWithoutApprovedActionVersionInput | ExecutionTaskUpdateWithWhereUniqueWithoutApprovedActionVersionInput[]
+    updateMany?: ExecutionTaskUpdateManyWithWhereWithoutApprovedActionVersionInput | ExecutionTaskUpdateManyWithWhereWithoutApprovedActionVersionInput[]
+    deleteMany?: ExecutionTaskScalarWhereInput | ExecutionTaskScalarWhereInput[]
+  }
+
   export type PolicyRuleUncheckedUpdateManyWithoutActionNestedInput = {
     create?: XOR<PolicyRuleCreateWithoutActionInput, PolicyRuleUncheckedCreateWithoutActionInput> | PolicyRuleCreateWithoutActionInput[] | PolicyRuleUncheckedCreateWithoutActionInput[]
     connectOrCreate?: PolicyRuleCreateOrConnectWithoutActionInput | PolicyRuleCreateOrConnectWithoutActionInput[]
@@ -39479,6 +44080,254 @@ export namespace Prisma {
     deleteMany?: PolicyRuleScalarWhereInput | PolicyRuleScalarWhereInput[]
   }
 
+  export type GovernedExecutionTemplateUncheckedUpdateManyWithoutApprovedActionVersionNestedInput = {
+    create?: XOR<GovernedExecutionTemplateCreateWithoutApprovedActionVersionInput, GovernedExecutionTemplateUncheckedCreateWithoutApprovedActionVersionInput> | GovernedExecutionTemplateCreateWithoutApprovedActionVersionInput[] | GovernedExecutionTemplateUncheckedCreateWithoutApprovedActionVersionInput[]
+    connectOrCreate?: GovernedExecutionTemplateCreateOrConnectWithoutApprovedActionVersionInput | GovernedExecutionTemplateCreateOrConnectWithoutApprovedActionVersionInput[]
+    upsert?: GovernedExecutionTemplateUpsertWithWhereUniqueWithoutApprovedActionVersionInput | GovernedExecutionTemplateUpsertWithWhereUniqueWithoutApprovedActionVersionInput[]
+    createMany?: GovernedExecutionTemplateCreateManyApprovedActionVersionInputEnvelope
+    set?: GovernedExecutionTemplateWhereUniqueInput | GovernedExecutionTemplateWhereUniqueInput[]
+    disconnect?: GovernedExecutionTemplateWhereUniqueInput | GovernedExecutionTemplateWhereUniqueInput[]
+    delete?: GovernedExecutionTemplateWhereUniqueInput | GovernedExecutionTemplateWhereUniqueInput[]
+    connect?: GovernedExecutionTemplateWhereUniqueInput | GovernedExecutionTemplateWhereUniqueInput[]
+    update?: GovernedExecutionTemplateUpdateWithWhereUniqueWithoutApprovedActionVersionInput | GovernedExecutionTemplateUpdateWithWhereUniqueWithoutApprovedActionVersionInput[]
+    updateMany?: GovernedExecutionTemplateUpdateManyWithWhereWithoutApprovedActionVersionInput | GovernedExecutionTemplateUpdateManyWithWhereWithoutApprovedActionVersionInput[]
+    deleteMany?: GovernedExecutionTemplateScalarWhereInput | GovernedExecutionTemplateScalarWhereInput[]
+  }
+
+  export type ExecutionTaskUncheckedUpdateManyWithoutApprovedActionVersionNestedInput = {
+    create?: XOR<ExecutionTaskCreateWithoutApprovedActionVersionInput, ExecutionTaskUncheckedCreateWithoutApprovedActionVersionInput> | ExecutionTaskCreateWithoutApprovedActionVersionInput[] | ExecutionTaskUncheckedCreateWithoutApprovedActionVersionInput[]
+    connectOrCreate?: ExecutionTaskCreateOrConnectWithoutApprovedActionVersionInput | ExecutionTaskCreateOrConnectWithoutApprovedActionVersionInput[]
+    upsert?: ExecutionTaskUpsertWithWhereUniqueWithoutApprovedActionVersionInput | ExecutionTaskUpsertWithWhereUniqueWithoutApprovedActionVersionInput[]
+    createMany?: ExecutionTaskCreateManyApprovedActionVersionInputEnvelope
+    set?: ExecutionTaskWhereUniqueInput | ExecutionTaskWhereUniqueInput[]
+    disconnect?: ExecutionTaskWhereUniqueInput | ExecutionTaskWhereUniqueInput[]
+    delete?: ExecutionTaskWhereUniqueInput | ExecutionTaskWhereUniqueInput[]
+    connect?: ExecutionTaskWhereUniqueInput | ExecutionTaskWhereUniqueInput[]
+    update?: ExecutionTaskUpdateWithWhereUniqueWithoutApprovedActionVersionInput | ExecutionTaskUpdateWithWhereUniqueWithoutApprovedActionVersionInput[]
+    updateMany?: ExecutionTaskUpdateManyWithWhereWithoutApprovedActionVersionInput | ExecutionTaskUpdateManyWithWhereWithoutApprovedActionVersionInput[]
+    deleteMany?: ExecutionTaskScalarWhereInput | ExecutionTaskScalarWhereInput[]
+  }
+
+  export type ApprovedActionVersionCreateNestedOneWithoutExecutionTemplatesInput = {
+    create?: XOR<ApprovedActionVersionCreateWithoutExecutionTemplatesInput, ApprovedActionVersionUncheckedCreateWithoutExecutionTemplatesInput>
+    connectOrCreate?: ApprovedActionVersionCreateOrConnectWithoutExecutionTemplatesInput
+    connect?: ApprovedActionVersionWhereUniqueInput
+  }
+
+  export type DepartmentCreateNestedOneWithoutGovernedExecutionTemplatesInput = {
+    create?: XOR<DepartmentCreateWithoutGovernedExecutionTemplatesInput, DepartmentUncheckedCreateWithoutGovernedExecutionTemplatesInput>
+    connectOrCreate?: DepartmentCreateOrConnectWithoutGovernedExecutionTemplatesInput
+    connect?: DepartmentWhereUniqueInput
+  }
+
+  export type JurisdictionCreateNestedOneWithoutGovernedExecutionTemplatesInput = {
+    create?: XOR<JurisdictionCreateWithoutGovernedExecutionTemplatesInput, JurisdictionUncheckedCreateWithoutGovernedExecutionTemplatesInput>
+    connectOrCreate?: JurisdictionCreateOrConnectWithoutGovernedExecutionTemplatesInput
+    connect?: JurisdictionWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutCreatedGovernedExecutionTemplatesInput = {
+    create?: XOR<UserCreateWithoutCreatedGovernedExecutionTemplatesInput, UserUncheckedCreateWithoutCreatedGovernedExecutionTemplatesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCreatedGovernedExecutionTemplatesInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutApprovedGovernedExecutionTemplatesInput = {
+    create?: XOR<UserCreateWithoutApprovedGovernedExecutionTemplatesInput, UserUncheckedCreateWithoutApprovedGovernedExecutionTemplatesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutApprovedGovernedExecutionTemplatesInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type GovernedExecutionTaskTemplateCreateNestedManyWithoutExecutionTemplateInput = {
+    create?: XOR<GovernedExecutionTaskTemplateCreateWithoutExecutionTemplateInput, GovernedExecutionTaskTemplateUncheckedCreateWithoutExecutionTemplateInput> | GovernedExecutionTaskTemplateCreateWithoutExecutionTemplateInput[] | GovernedExecutionTaskTemplateUncheckedCreateWithoutExecutionTemplateInput[]
+    connectOrCreate?: GovernedExecutionTaskTemplateCreateOrConnectWithoutExecutionTemplateInput | GovernedExecutionTaskTemplateCreateOrConnectWithoutExecutionTemplateInput[]
+    createMany?: GovernedExecutionTaskTemplateCreateManyExecutionTemplateInputEnvelope
+    connect?: GovernedExecutionTaskTemplateWhereUniqueInput | GovernedExecutionTaskTemplateWhereUniqueInput[]
+  }
+
+  export type ExecutionTaskCreateNestedManyWithoutGovernedExecutionTemplateInput = {
+    create?: XOR<ExecutionTaskCreateWithoutGovernedExecutionTemplateInput, ExecutionTaskUncheckedCreateWithoutGovernedExecutionTemplateInput> | ExecutionTaskCreateWithoutGovernedExecutionTemplateInput[] | ExecutionTaskUncheckedCreateWithoutGovernedExecutionTemplateInput[]
+    connectOrCreate?: ExecutionTaskCreateOrConnectWithoutGovernedExecutionTemplateInput | ExecutionTaskCreateOrConnectWithoutGovernedExecutionTemplateInput[]
+    createMany?: ExecutionTaskCreateManyGovernedExecutionTemplateInputEnvelope
+    connect?: ExecutionTaskWhereUniqueInput | ExecutionTaskWhereUniqueInput[]
+  }
+
+  export type GovernedExecutionTaskTemplateUncheckedCreateNestedManyWithoutExecutionTemplateInput = {
+    create?: XOR<GovernedExecutionTaskTemplateCreateWithoutExecutionTemplateInput, GovernedExecutionTaskTemplateUncheckedCreateWithoutExecutionTemplateInput> | GovernedExecutionTaskTemplateCreateWithoutExecutionTemplateInput[] | GovernedExecutionTaskTemplateUncheckedCreateWithoutExecutionTemplateInput[]
+    connectOrCreate?: GovernedExecutionTaskTemplateCreateOrConnectWithoutExecutionTemplateInput | GovernedExecutionTaskTemplateCreateOrConnectWithoutExecutionTemplateInput[]
+    createMany?: GovernedExecutionTaskTemplateCreateManyExecutionTemplateInputEnvelope
+    connect?: GovernedExecutionTaskTemplateWhereUniqueInput | GovernedExecutionTaskTemplateWhereUniqueInput[]
+  }
+
+  export type ExecutionTaskUncheckedCreateNestedManyWithoutGovernedExecutionTemplateInput = {
+    create?: XOR<ExecutionTaskCreateWithoutGovernedExecutionTemplateInput, ExecutionTaskUncheckedCreateWithoutGovernedExecutionTemplateInput> | ExecutionTaskCreateWithoutGovernedExecutionTemplateInput[] | ExecutionTaskUncheckedCreateWithoutGovernedExecutionTemplateInput[]
+    connectOrCreate?: ExecutionTaskCreateOrConnectWithoutGovernedExecutionTemplateInput | ExecutionTaskCreateOrConnectWithoutGovernedExecutionTemplateInput[]
+    createMany?: ExecutionTaskCreateManyGovernedExecutionTemplateInputEnvelope
+    connect?: ExecutionTaskWhereUniqueInput | ExecutionTaskWhereUniqueInput[]
+  }
+
+  export type ApprovedActionVersionUpdateOneRequiredWithoutExecutionTemplatesNestedInput = {
+    create?: XOR<ApprovedActionVersionCreateWithoutExecutionTemplatesInput, ApprovedActionVersionUncheckedCreateWithoutExecutionTemplatesInput>
+    connectOrCreate?: ApprovedActionVersionCreateOrConnectWithoutExecutionTemplatesInput
+    upsert?: ApprovedActionVersionUpsertWithoutExecutionTemplatesInput
+    connect?: ApprovedActionVersionWhereUniqueInput
+    update?: XOR<XOR<ApprovedActionVersionUpdateToOneWithWhereWithoutExecutionTemplatesInput, ApprovedActionVersionUpdateWithoutExecutionTemplatesInput>, ApprovedActionVersionUncheckedUpdateWithoutExecutionTemplatesInput>
+  }
+
+  export type DepartmentUpdateOneWithoutGovernedExecutionTemplatesNestedInput = {
+    create?: XOR<DepartmentCreateWithoutGovernedExecutionTemplatesInput, DepartmentUncheckedCreateWithoutGovernedExecutionTemplatesInput>
+    connectOrCreate?: DepartmentCreateOrConnectWithoutGovernedExecutionTemplatesInput
+    upsert?: DepartmentUpsertWithoutGovernedExecutionTemplatesInput
+    disconnect?: DepartmentWhereInput | boolean
+    delete?: DepartmentWhereInput | boolean
+    connect?: DepartmentWhereUniqueInput
+    update?: XOR<XOR<DepartmentUpdateToOneWithWhereWithoutGovernedExecutionTemplatesInput, DepartmentUpdateWithoutGovernedExecutionTemplatesInput>, DepartmentUncheckedUpdateWithoutGovernedExecutionTemplatesInput>
+  }
+
+  export type JurisdictionUpdateOneWithoutGovernedExecutionTemplatesNestedInput = {
+    create?: XOR<JurisdictionCreateWithoutGovernedExecutionTemplatesInput, JurisdictionUncheckedCreateWithoutGovernedExecutionTemplatesInput>
+    connectOrCreate?: JurisdictionCreateOrConnectWithoutGovernedExecutionTemplatesInput
+    upsert?: JurisdictionUpsertWithoutGovernedExecutionTemplatesInput
+    disconnect?: JurisdictionWhereInput | boolean
+    delete?: JurisdictionWhereInput | boolean
+    connect?: JurisdictionWhereUniqueInput
+    update?: XOR<XOR<JurisdictionUpdateToOneWithWhereWithoutGovernedExecutionTemplatesInput, JurisdictionUpdateWithoutGovernedExecutionTemplatesInput>, JurisdictionUncheckedUpdateWithoutGovernedExecutionTemplatesInput>
+  }
+
+  export type UserUpdateOneRequiredWithoutCreatedGovernedExecutionTemplatesNestedInput = {
+    create?: XOR<UserCreateWithoutCreatedGovernedExecutionTemplatesInput, UserUncheckedCreateWithoutCreatedGovernedExecutionTemplatesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCreatedGovernedExecutionTemplatesInput
+    upsert?: UserUpsertWithoutCreatedGovernedExecutionTemplatesInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutCreatedGovernedExecutionTemplatesInput, UserUpdateWithoutCreatedGovernedExecutionTemplatesInput>, UserUncheckedUpdateWithoutCreatedGovernedExecutionTemplatesInput>
+  }
+
+  export type UserUpdateOneWithoutApprovedGovernedExecutionTemplatesNestedInput = {
+    create?: XOR<UserCreateWithoutApprovedGovernedExecutionTemplatesInput, UserUncheckedCreateWithoutApprovedGovernedExecutionTemplatesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutApprovedGovernedExecutionTemplatesInput
+    upsert?: UserUpsertWithoutApprovedGovernedExecutionTemplatesInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutApprovedGovernedExecutionTemplatesInput, UserUpdateWithoutApprovedGovernedExecutionTemplatesInput>, UserUncheckedUpdateWithoutApprovedGovernedExecutionTemplatesInput>
+  }
+
+  export type GovernedExecutionTaskTemplateUpdateManyWithoutExecutionTemplateNestedInput = {
+    create?: XOR<GovernedExecutionTaskTemplateCreateWithoutExecutionTemplateInput, GovernedExecutionTaskTemplateUncheckedCreateWithoutExecutionTemplateInput> | GovernedExecutionTaskTemplateCreateWithoutExecutionTemplateInput[] | GovernedExecutionTaskTemplateUncheckedCreateWithoutExecutionTemplateInput[]
+    connectOrCreate?: GovernedExecutionTaskTemplateCreateOrConnectWithoutExecutionTemplateInput | GovernedExecutionTaskTemplateCreateOrConnectWithoutExecutionTemplateInput[]
+    upsert?: GovernedExecutionTaskTemplateUpsertWithWhereUniqueWithoutExecutionTemplateInput | GovernedExecutionTaskTemplateUpsertWithWhereUniqueWithoutExecutionTemplateInput[]
+    createMany?: GovernedExecutionTaskTemplateCreateManyExecutionTemplateInputEnvelope
+    set?: GovernedExecutionTaskTemplateWhereUniqueInput | GovernedExecutionTaskTemplateWhereUniqueInput[]
+    disconnect?: GovernedExecutionTaskTemplateWhereUniqueInput | GovernedExecutionTaskTemplateWhereUniqueInput[]
+    delete?: GovernedExecutionTaskTemplateWhereUniqueInput | GovernedExecutionTaskTemplateWhereUniqueInput[]
+    connect?: GovernedExecutionTaskTemplateWhereUniqueInput | GovernedExecutionTaskTemplateWhereUniqueInput[]
+    update?: GovernedExecutionTaskTemplateUpdateWithWhereUniqueWithoutExecutionTemplateInput | GovernedExecutionTaskTemplateUpdateWithWhereUniqueWithoutExecutionTemplateInput[]
+    updateMany?: GovernedExecutionTaskTemplateUpdateManyWithWhereWithoutExecutionTemplateInput | GovernedExecutionTaskTemplateUpdateManyWithWhereWithoutExecutionTemplateInput[]
+    deleteMany?: GovernedExecutionTaskTemplateScalarWhereInput | GovernedExecutionTaskTemplateScalarWhereInput[]
+  }
+
+  export type ExecutionTaskUpdateManyWithoutGovernedExecutionTemplateNestedInput = {
+    create?: XOR<ExecutionTaskCreateWithoutGovernedExecutionTemplateInput, ExecutionTaskUncheckedCreateWithoutGovernedExecutionTemplateInput> | ExecutionTaskCreateWithoutGovernedExecutionTemplateInput[] | ExecutionTaskUncheckedCreateWithoutGovernedExecutionTemplateInput[]
+    connectOrCreate?: ExecutionTaskCreateOrConnectWithoutGovernedExecutionTemplateInput | ExecutionTaskCreateOrConnectWithoutGovernedExecutionTemplateInput[]
+    upsert?: ExecutionTaskUpsertWithWhereUniqueWithoutGovernedExecutionTemplateInput | ExecutionTaskUpsertWithWhereUniqueWithoutGovernedExecutionTemplateInput[]
+    createMany?: ExecutionTaskCreateManyGovernedExecutionTemplateInputEnvelope
+    set?: ExecutionTaskWhereUniqueInput | ExecutionTaskWhereUniqueInput[]
+    disconnect?: ExecutionTaskWhereUniqueInput | ExecutionTaskWhereUniqueInput[]
+    delete?: ExecutionTaskWhereUniqueInput | ExecutionTaskWhereUniqueInput[]
+    connect?: ExecutionTaskWhereUniqueInput | ExecutionTaskWhereUniqueInput[]
+    update?: ExecutionTaskUpdateWithWhereUniqueWithoutGovernedExecutionTemplateInput | ExecutionTaskUpdateWithWhereUniqueWithoutGovernedExecutionTemplateInput[]
+    updateMany?: ExecutionTaskUpdateManyWithWhereWithoutGovernedExecutionTemplateInput | ExecutionTaskUpdateManyWithWhereWithoutGovernedExecutionTemplateInput[]
+    deleteMany?: ExecutionTaskScalarWhereInput | ExecutionTaskScalarWhereInput[]
+  }
+
+  export type GovernedExecutionTaskTemplateUncheckedUpdateManyWithoutExecutionTemplateNestedInput = {
+    create?: XOR<GovernedExecutionTaskTemplateCreateWithoutExecutionTemplateInput, GovernedExecutionTaskTemplateUncheckedCreateWithoutExecutionTemplateInput> | GovernedExecutionTaskTemplateCreateWithoutExecutionTemplateInput[] | GovernedExecutionTaskTemplateUncheckedCreateWithoutExecutionTemplateInput[]
+    connectOrCreate?: GovernedExecutionTaskTemplateCreateOrConnectWithoutExecutionTemplateInput | GovernedExecutionTaskTemplateCreateOrConnectWithoutExecutionTemplateInput[]
+    upsert?: GovernedExecutionTaskTemplateUpsertWithWhereUniqueWithoutExecutionTemplateInput | GovernedExecutionTaskTemplateUpsertWithWhereUniqueWithoutExecutionTemplateInput[]
+    createMany?: GovernedExecutionTaskTemplateCreateManyExecutionTemplateInputEnvelope
+    set?: GovernedExecutionTaskTemplateWhereUniqueInput | GovernedExecutionTaskTemplateWhereUniqueInput[]
+    disconnect?: GovernedExecutionTaskTemplateWhereUniqueInput | GovernedExecutionTaskTemplateWhereUniqueInput[]
+    delete?: GovernedExecutionTaskTemplateWhereUniqueInput | GovernedExecutionTaskTemplateWhereUniqueInput[]
+    connect?: GovernedExecutionTaskTemplateWhereUniqueInput | GovernedExecutionTaskTemplateWhereUniqueInput[]
+    update?: GovernedExecutionTaskTemplateUpdateWithWhereUniqueWithoutExecutionTemplateInput | GovernedExecutionTaskTemplateUpdateWithWhereUniqueWithoutExecutionTemplateInput[]
+    updateMany?: GovernedExecutionTaskTemplateUpdateManyWithWhereWithoutExecutionTemplateInput | GovernedExecutionTaskTemplateUpdateManyWithWhereWithoutExecutionTemplateInput[]
+    deleteMany?: GovernedExecutionTaskTemplateScalarWhereInput | GovernedExecutionTaskTemplateScalarWhereInput[]
+  }
+
+  export type ExecutionTaskUncheckedUpdateManyWithoutGovernedExecutionTemplateNestedInput = {
+    create?: XOR<ExecutionTaskCreateWithoutGovernedExecutionTemplateInput, ExecutionTaskUncheckedCreateWithoutGovernedExecutionTemplateInput> | ExecutionTaskCreateWithoutGovernedExecutionTemplateInput[] | ExecutionTaskUncheckedCreateWithoutGovernedExecutionTemplateInput[]
+    connectOrCreate?: ExecutionTaskCreateOrConnectWithoutGovernedExecutionTemplateInput | ExecutionTaskCreateOrConnectWithoutGovernedExecutionTemplateInput[]
+    upsert?: ExecutionTaskUpsertWithWhereUniqueWithoutGovernedExecutionTemplateInput | ExecutionTaskUpsertWithWhereUniqueWithoutGovernedExecutionTemplateInput[]
+    createMany?: ExecutionTaskCreateManyGovernedExecutionTemplateInputEnvelope
+    set?: ExecutionTaskWhereUniqueInput | ExecutionTaskWhereUniqueInput[]
+    disconnect?: ExecutionTaskWhereUniqueInput | ExecutionTaskWhereUniqueInput[]
+    delete?: ExecutionTaskWhereUniqueInput | ExecutionTaskWhereUniqueInput[]
+    connect?: ExecutionTaskWhereUniqueInput | ExecutionTaskWhereUniqueInput[]
+    update?: ExecutionTaskUpdateWithWhereUniqueWithoutGovernedExecutionTemplateInput | ExecutionTaskUpdateWithWhereUniqueWithoutGovernedExecutionTemplateInput[]
+    updateMany?: ExecutionTaskUpdateManyWithWhereWithoutGovernedExecutionTemplateInput | ExecutionTaskUpdateManyWithWhereWithoutGovernedExecutionTemplateInput[]
+    deleteMany?: ExecutionTaskScalarWhereInput | ExecutionTaskScalarWhereInput[]
+  }
+
+  export type GovernedExecutionTemplateCreateNestedOneWithoutTasksInput = {
+    create?: XOR<GovernedExecutionTemplateCreateWithoutTasksInput, GovernedExecutionTemplateUncheckedCreateWithoutTasksInput>
+    connectOrCreate?: GovernedExecutionTemplateCreateOrConnectWithoutTasksInput
+    connect?: GovernedExecutionTemplateWhereUniqueInput
+  }
+
+  export type ExecutionTaskCreateNestedManyWithoutGovernedTaskTemplateInput = {
+    create?: XOR<ExecutionTaskCreateWithoutGovernedTaskTemplateInput, ExecutionTaskUncheckedCreateWithoutGovernedTaskTemplateInput> | ExecutionTaskCreateWithoutGovernedTaskTemplateInput[] | ExecutionTaskUncheckedCreateWithoutGovernedTaskTemplateInput[]
+    connectOrCreate?: ExecutionTaskCreateOrConnectWithoutGovernedTaskTemplateInput | ExecutionTaskCreateOrConnectWithoutGovernedTaskTemplateInput[]
+    createMany?: ExecutionTaskCreateManyGovernedTaskTemplateInputEnvelope
+    connect?: ExecutionTaskWhereUniqueInput | ExecutionTaskWhereUniqueInput[]
+  }
+
+  export type ExecutionTaskUncheckedCreateNestedManyWithoutGovernedTaskTemplateInput = {
+    create?: XOR<ExecutionTaskCreateWithoutGovernedTaskTemplateInput, ExecutionTaskUncheckedCreateWithoutGovernedTaskTemplateInput> | ExecutionTaskCreateWithoutGovernedTaskTemplateInput[] | ExecutionTaskUncheckedCreateWithoutGovernedTaskTemplateInput[]
+    connectOrCreate?: ExecutionTaskCreateOrConnectWithoutGovernedTaskTemplateInput | ExecutionTaskCreateOrConnectWithoutGovernedTaskTemplateInput[]
+    createMany?: ExecutionTaskCreateManyGovernedTaskTemplateInputEnvelope
+    connect?: ExecutionTaskWhereUniqueInput | ExecutionTaskWhereUniqueInput[]
+  }
+
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
+  }
+
+  export type GovernedExecutionTemplateUpdateOneRequiredWithoutTasksNestedInput = {
+    create?: XOR<GovernedExecutionTemplateCreateWithoutTasksInput, GovernedExecutionTemplateUncheckedCreateWithoutTasksInput>
+    connectOrCreate?: GovernedExecutionTemplateCreateOrConnectWithoutTasksInput
+    upsert?: GovernedExecutionTemplateUpsertWithoutTasksInput
+    connect?: GovernedExecutionTemplateWhereUniqueInput
+    update?: XOR<XOR<GovernedExecutionTemplateUpdateToOneWithWhereWithoutTasksInput, GovernedExecutionTemplateUpdateWithoutTasksInput>, GovernedExecutionTemplateUncheckedUpdateWithoutTasksInput>
+  }
+
+  export type ExecutionTaskUpdateManyWithoutGovernedTaskTemplateNestedInput = {
+    create?: XOR<ExecutionTaskCreateWithoutGovernedTaskTemplateInput, ExecutionTaskUncheckedCreateWithoutGovernedTaskTemplateInput> | ExecutionTaskCreateWithoutGovernedTaskTemplateInput[] | ExecutionTaskUncheckedCreateWithoutGovernedTaskTemplateInput[]
+    connectOrCreate?: ExecutionTaskCreateOrConnectWithoutGovernedTaskTemplateInput | ExecutionTaskCreateOrConnectWithoutGovernedTaskTemplateInput[]
+    upsert?: ExecutionTaskUpsertWithWhereUniqueWithoutGovernedTaskTemplateInput | ExecutionTaskUpsertWithWhereUniqueWithoutGovernedTaskTemplateInput[]
+    createMany?: ExecutionTaskCreateManyGovernedTaskTemplateInputEnvelope
+    set?: ExecutionTaskWhereUniqueInput | ExecutionTaskWhereUniqueInput[]
+    disconnect?: ExecutionTaskWhereUniqueInput | ExecutionTaskWhereUniqueInput[]
+    delete?: ExecutionTaskWhereUniqueInput | ExecutionTaskWhereUniqueInput[]
+    connect?: ExecutionTaskWhereUniqueInput | ExecutionTaskWhereUniqueInput[]
+    update?: ExecutionTaskUpdateWithWhereUniqueWithoutGovernedTaskTemplateInput | ExecutionTaskUpdateWithWhereUniqueWithoutGovernedTaskTemplateInput[]
+    updateMany?: ExecutionTaskUpdateManyWithWhereWithoutGovernedTaskTemplateInput | ExecutionTaskUpdateManyWithWhereWithoutGovernedTaskTemplateInput[]
+    deleteMany?: ExecutionTaskScalarWhereInput | ExecutionTaskScalarWhereInput[]
+  }
+
+  export type ExecutionTaskUncheckedUpdateManyWithoutGovernedTaskTemplateNestedInput = {
+    create?: XOR<ExecutionTaskCreateWithoutGovernedTaskTemplateInput, ExecutionTaskUncheckedCreateWithoutGovernedTaskTemplateInput> | ExecutionTaskCreateWithoutGovernedTaskTemplateInput[] | ExecutionTaskUncheckedCreateWithoutGovernedTaskTemplateInput[]
+    connectOrCreate?: ExecutionTaskCreateOrConnectWithoutGovernedTaskTemplateInput | ExecutionTaskCreateOrConnectWithoutGovernedTaskTemplateInput[]
+    upsert?: ExecutionTaskUpsertWithWhereUniqueWithoutGovernedTaskTemplateInput | ExecutionTaskUpsertWithWhereUniqueWithoutGovernedTaskTemplateInput[]
+    createMany?: ExecutionTaskCreateManyGovernedTaskTemplateInputEnvelope
+    set?: ExecutionTaskWhereUniqueInput | ExecutionTaskWhereUniqueInput[]
+    disconnect?: ExecutionTaskWhereUniqueInput | ExecutionTaskWhereUniqueInput[]
+    delete?: ExecutionTaskWhereUniqueInput | ExecutionTaskWhereUniqueInput[]
+    connect?: ExecutionTaskWhereUniqueInput | ExecutionTaskWhereUniqueInput[]
+    update?: ExecutionTaskUpdateWithWhereUniqueWithoutGovernedTaskTemplateInput | ExecutionTaskUpdateWithWhereUniqueWithoutGovernedTaskTemplateInput[]
+    updateMany?: ExecutionTaskUpdateManyWithWhereWithoutGovernedTaskTemplateInput | ExecutionTaskUpdateManyWithWhereWithoutGovernedTaskTemplateInput[]
+    deleteMany?: ExecutionTaskScalarWhereInput | ExecutionTaskScalarWhereInput[]
+  }
+
   export type PolicyDocumentCreateNestedOneWithoutRulesInput = {
     create?: XOR<PolicyDocumentCreateWithoutRulesInput, PolicyDocumentUncheckedCreateWithoutRulesInput>
     connectOrCreate?: PolicyDocumentCreateOrConnectWithoutRulesInput
@@ -39489,10 +44338,6 @@ export namespace Prisma {
     create?: XOR<ApprovedActionVersionCreateWithoutRulesInput, ApprovedActionVersionUncheckedCreateWithoutRulesInput>
     connectOrCreate?: ApprovedActionVersionCreateOrConnectWithoutRulesInput
     connect?: ApprovedActionVersionWhereUniqueInput
-  }
-
-  export type BoolFieldUpdateOperationsInput = {
-    set?: boolean
   }
 
   export type PolicyDocumentUpdateOneRequiredWithoutRulesNestedInput = {
@@ -40129,6 +44974,10 @@ export namespace Prisma {
     connect?: ExecutionPlanWhereUniqueInput
   }
 
+  export type EnumActionPlanGovernanceModeFieldUpdateOperationsInput = {
+    set?: $Enums.ActionPlanGovernanceMode
+  }
+
   export type CaseUpdateOneRequiredWithoutOperationalResponsePlansNestedInput = {
     create?: XOR<CaseCreateWithoutOperationalResponsePlansInput, CaseUncheckedCreateWithoutOperationalResponsePlansInput>
     connectOrCreate?: CaseCreateOrConnectWithoutOperationalResponsePlansInput
@@ -40593,6 +45442,10 @@ export namespace Prisma {
     set?: $Enums.ExecutionPlanStatus
   }
 
+  export type EnumExecutionPlanGovernanceModeFieldUpdateOperationsInput = {
+    set?: $Enums.ExecutionPlanGovernanceMode
+  }
+
   export type OperationalResponsePlanUpdateOneRequiredWithoutExecutionPlanNestedInput = {
     create?: XOR<OperationalResponsePlanCreateWithoutExecutionPlanInput, OperationalResponsePlanUncheckedCreateWithoutExecutionPlanInput>
     connectOrCreate?: OperationalResponsePlanCreateOrConnectWithoutExecutionPlanInput
@@ -40716,6 +45569,24 @@ export namespace Prisma {
     connect?: ExecutionEvidenceWhereUniqueInput | ExecutionEvidenceWhereUniqueInput[]
   }
 
+  export type ApprovedActionVersionCreateNestedOneWithoutExecutionTasksInput = {
+    create?: XOR<ApprovedActionVersionCreateWithoutExecutionTasksInput, ApprovedActionVersionUncheckedCreateWithoutExecutionTasksInput>
+    connectOrCreate?: ApprovedActionVersionCreateOrConnectWithoutExecutionTasksInput
+    connect?: ApprovedActionVersionWhereUniqueInput
+  }
+
+  export type GovernedExecutionTemplateCreateNestedOneWithoutExecutionTasksInput = {
+    create?: XOR<GovernedExecutionTemplateCreateWithoutExecutionTasksInput, GovernedExecutionTemplateUncheckedCreateWithoutExecutionTasksInput>
+    connectOrCreate?: GovernedExecutionTemplateCreateOrConnectWithoutExecutionTasksInput
+    connect?: GovernedExecutionTemplateWhereUniqueInput
+  }
+
+  export type GovernedExecutionTaskTemplateCreateNestedOneWithoutExecutionTasksInput = {
+    create?: XOR<GovernedExecutionTaskTemplateCreateWithoutExecutionTasksInput, GovernedExecutionTaskTemplateUncheckedCreateWithoutExecutionTasksInput>
+    connectOrCreate?: GovernedExecutionTaskTemplateCreateOrConnectWithoutExecutionTasksInput
+    connect?: GovernedExecutionTaskTemplateWhereUniqueInput
+  }
+
   export type ExecutionEvidenceUncheckedCreateNestedManyWithoutExecutionTaskInput = {
     create?: XOR<ExecutionEvidenceCreateWithoutExecutionTaskInput, ExecutionEvidenceUncheckedCreateWithoutExecutionTaskInput> | ExecutionEvidenceCreateWithoutExecutionTaskInput[] | ExecutionEvidenceUncheckedCreateWithoutExecutionTaskInput[]
     connectOrCreate?: ExecutionEvidenceCreateOrConnectWithoutExecutionTaskInput | ExecutionEvidenceCreateOrConnectWithoutExecutionTaskInput[]
@@ -40797,6 +45668,36 @@ export namespace Prisma {
     update?: ExecutionEvidenceUpdateWithWhereUniqueWithoutExecutionTaskInput | ExecutionEvidenceUpdateWithWhereUniqueWithoutExecutionTaskInput[]
     updateMany?: ExecutionEvidenceUpdateManyWithWhereWithoutExecutionTaskInput | ExecutionEvidenceUpdateManyWithWhereWithoutExecutionTaskInput[]
     deleteMany?: ExecutionEvidenceScalarWhereInput | ExecutionEvidenceScalarWhereInput[]
+  }
+
+  export type ApprovedActionVersionUpdateOneWithoutExecutionTasksNestedInput = {
+    create?: XOR<ApprovedActionVersionCreateWithoutExecutionTasksInput, ApprovedActionVersionUncheckedCreateWithoutExecutionTasksInput>
+    connectOrCreate?: ApprovedActionVersionCreateOrConnectWithoutExecutionTasksInput
+    upsert?: ApprovedActionVersionUpsertWithoutExecutionTasksInput
+    disconnect?: ApprovedActionVersionWhereInput | boolean
+    delete?: ApprovedActionVersionWhereInput | boolean
+    connect?: ApprovedActionVersionWhereUniqueInput
+    update?: XOR<XOR<ApprovedActionVersionUpdateToOneWithWhereWithoutExecutionTasksInput, ApprovedActionVersionUpdateWithoutExecutionTasksInput>, ApprovedActionVersionUncheckedUpdateWithoutExecutionTasksInput>
+  }
+
+  export type GovernedExecutionTemplateUpdateOneWithoutExecutionTasksNestedInput = {
+    create?: XOR<GovernedExecutionTemplateCreateWithoutExecutionTasksInput, GovernedExecutionTemplateUncheckedCreateWithoutExecutionTasksInput>
+    connectOrCreate?: GovernedExecutionTemplateCreateOrConnectWithoutExecutionTasksInput
+    upsert?: GovernedExecutionTemplateUpsertWithoutExecutionTasksInput
+    disconnect?: GovernedExecutionTemplateWhereInput | boolean
+    delete?: GovernedExecutionTemplateWhereInput | boolean
+    connect?: GovernedExecutionTemplateWhereUniqueInput
+    update?: XOR<XOR<GovernedExecutionTemplateUpdateToOneWithWhereWithoutExecutionTasksInput, GovernedExecutionTemplateUpdateWithoutExecutionTasksInput>, GovernedExecutionTemplateUncheckedUpdateWithoutExecutionTasksInput>
+  }
+
+  export type GovernedExecutionTaskTemplateUpdateOneWithoutExecutionTasksNestedInput = {
+    create?: XOR<GovernedExecutionTaskTemplateCreateWithoutExecutionTasksInput, GovernedExecutionTaskTemplateUncheckedCreateWithoutExecutionTasksInput>
+    connectOrCreate?: GovernedExecutionTaskTemplateCreateOrConnectWithoutExecutionTasksInput
+    upsert?: GovernedExecutionTaskTemplateUpsertWithoutExecutionTasksInput
+    disconnect?: GovernedExecutionTaskTemplateWhereInput | boolean
+    delete?: GovernedExecutionTaskTemplateWhereInput | boolean
+    connect?: GovernedExecutionTaskTemplateWhereUniqueInput
+    update?: XOR<XOR<GovernedExecutionTaskTemplateUpdateToOneWithWhereWithoutExecutionTasksInput, GovernedExecutionTaskTemplateUpdateWithoutExecutionTasksInput>, GovernedExecutionTaskTemplateUncheckedUpdateWithoutExecutionTasksInput>
   }
 
   export type ExecutionEvidenceUncheckedUpdateManyWithoutExecutionTaskNestedInput = {
@@ -41394,6 +46295,46 @@ export namespace Prisma {
     _max?: NestedEnumPriorityLevelFilter<$PrismaModel>
   }
 
+  export type NestedEnumActionPlanGovernanceModeFilter<$PrismaModel = never> = {
+    equals?: $Enums.ActionPlanGovernanceMode | EnumActionPlanGovernanceModeFieldRefInput<$PrismaModel>
+    in?: $Enums.ActionPlanGovernanceMode[] | ListEnumActionPlanGovernanceModeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ActionPlanGovernanceMode[] | ListEnumActionPlanGovernanceModeFieldRefInput<$PrismaModel>
+    not?: NestedEnumActionPlanGovernanceModeFilter<$PrismaModel> | $Enums.ActionPlanGovernanceMode
+  }
+
+  export type NestedEnumActionPlanGovernanceModeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ActionPlanGovernanceMode | EnumActionPlanGovernanceModeFieldRefInput<$PrismaModel>
+    in?: $Enums.ActionPlanGovernanceMode[] | ListEnumActionPlanGovernanceModeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ActionPlanGovernanceMode[] | ListEnumActionPlanGovernanceModeFieldRefInput<$PrismaModel>
+    not?: NestedEnumActionPlanGovernanceModeWithAggregatesFilter<$PrismaModel> | $Enums.ActionPlanGovernanceMode
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumActionPlanGovernanceModeFilter<$PrismaModel>
+    _max?: NestedEnumActionPlanGovernanceModeFilter<$PrismaModel>
+  }
+  export type NestedJsonNullableFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<NestedJsonNullableFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonNullableFilterBase<$PrismaModel>>, 'path'>>,
+        Required<NestedJsonNullableFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<NestedJsonNullableFilterBase<$PrismaModel>>, 'path'>>
+
+  export type NestedJsonNullableFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
+
   export type NestedEnumDecisionPackageStatusFilter<$PrismaModel = never> = {
     equals?: $Enums.DecisionPackageStatus | EnumDecisionPackageStatusFieldRefInput<$PrismaModel>
     in?: $Enums.DecisionPackageStatus[] | ListEnumDecisionPackageStatusFieldRefInput<$PrismaModel>
@@ -41427,35 +46368,19 @@ export namespace Prisma {
     _min?: NestedEnumOrpDecisionTypeFilter<$PrismaModel>
     _max?: NestedEnumOrpDecisionTypeFilter<$PrismaModel>
   }
-  export type NestedJsonNullableFilter<$PrismaModel = never> =
-    | PatchUndefined<
-        Either<Required<NestedJsonNullableFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonNullableFilterBase<$PrismaModel>>, 'path'>>,
-        Required<NestedJsonNullableFilterBase<$PrismaModel>>
-      >
-    | OptionalFlat<Omit<Required<NestedJsonNullableFilterBase<$PrismaModel>>, 'path'>>
-
-  export type NestedJsonNullableFilterBase<$PrismaModel = never> = {
-    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
-    path?: string[]
-    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
-    string_contains?: string | StringFieldRefInput<$PrismaModel>
-    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
-    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
-    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
-  }
 
   export type NestedEnumExecutionPlanStatusFilter<$PrismaModel = never> = {
     equals?: $Enums.ExecutionPlanStatus | EnumExecutionPlanStatusFieldRefInput<$PrismaModel>
     in?: $Enums.ExecutionPlanStatus[] | ListEnumExecutionPlanStatusFieldRefInput<$PrismaModel>
     notIn?: $Enums.ExecutionPlanStatus[] | ListEnumExecutionPlanStatusFieldRefInput<$PrismaModel>
     not?: NestedEnumExecutionPlanStatusFilter<$PrismaModel> | $Enums.ExecutionPlanStatus
+  }
+
+  export type NestedEnumExecutionPlanGovernanceModeFilter<$PrismaModel = never> = {
+    equals?: $Enums.ExecutionPlanGovernanceMode | EnumExecutionPlanGovernanceModeFieldRefInput<$PrismaModel>
+    in?: $Enums.ExecutionPlanGovernanceMode[] | ListEnumExecutionPlanGovernanceModeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ExecutionPlanGovernanceMode[] | ListEnumExecutionPlanGovernanceModeFieldRefInput<$PrismaModel>
+    not?: NestedEnumExecutionPlanGovernanceModeFilter<$PrismaModel> | $Enums.ExecutionPlanGovernanceMode
   }
 
   export type NestedEnumExecutionPlanStatusWithAggregatesFilter<$PrismaModel = never> = {
@@ -41466,6 +46391,16 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumExecutionPlanStatusFilter<$PrismaModel>
     _max?: NestedEnumExecutionPlanStatusFilter<$PrismaModel>
+  }
+
+  export type NestedEnumExecutionPlanGovernanceModeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ExecutionPlanGovernanceMode | EnumExecutionPlanGovernanceModeFieldRefInput<$PrismaModel>
+    in?: $Enums.ExecutionPlanGovernanceMode[] | ListEnumExecutionPlanGovernanceModeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ExecutionPlanGovernanceMode[] | ListEnumExecutionPlanGovernanceModeFieldRefInput<$PrismaModel>
+    not?: NestedEnumExecutionPlanGovernanceModeWithAggregatesFilter<$PrismaModel> | $Enums.ExecutionPlanGovernanceMode
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumExecutionPlanGovernanceModeFilter<$PrismaModel>
+    _max?: NestedEnumExecutionPlanGovernanceModeFilter<$PrismaModel>
   }
 
   export type NestedEnumExecutionTaskStatusFilter<$PrismaModel = never> = {
@@ -41551,6 +46486,8 @@ export namespace Prisma {
     createdApprovedActions?: ApprovedActionVersionCreateNestedManyWithoutCreatedByInput
     approvedApprovedActions?: ApprovedActionVersionCreateNestedManyWithoutApprovedByInput
     preparedDecisionPackages?: DecisionPackageCreateNestedManyWithoutPreparedByInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutCreatedByInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutApprovedByInput
   }
 
   export type UserUncheckedCreateWithoutDepartmentInput = {
@@ -41585,6 +46522,8 @@ export namespace Prisma {
     createdApprovedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutCreatedByInput
     approvedApprovedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutApprovedByInput
     preparedDecisionPackages?: DecisionPackageUncheckedCreateNestedManyWithoutPreparedByInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutCreatedByInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutApprovedByInput
   }
 
   export type UserCreateOrConnectWithoutDepartmentInput = {
@@ -41652,6 +46591,7 @@ export namespace Prisma {
     publicReports?: PublicReportCreateNestedManyWithoutJurisdictionInput
     policyDocuments?: PolicyDocumentCreateNestedManyWithoutJurisdictionInput
     approvedActions?: ApprovedActionVersionCreateNestedManyWithoutJurisdictionInput
+    governedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutJurisdictionInput
   }
 
   export type JurisdictionUncheckedCreateWithoutDepartmentInput = {
@@ -41665,6 +46605,7 @@ export namespace Prisma {
     publicReports?: PublicReportUncheckedCreateNestedManyWithoutJurisdictionInput
     policyDocuments?: PolicyDocumentUncheckedCreateNestedManyWithoutJurisdictionInput
     approvedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutJurisdictionInput
+    governedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutJurisdictionInput
   }
 
   export type JurisdictionCreateOrConnectWithoutDepartmentInput = {
@@ -41864,6 +46805,8 @@ export namespace Prisma {
     createdBy: UserCreateNestedOneWithoutCreatedApprovedActionsInput
     approvedBy?: UserCreateNestedOneWithoutApprovedApprovedActionsInput
     rules?: PolicyRuleCreateNestedManyWithoutActionInput
+    executionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutApprovedActionVersionInput
+    executionTasks?: ExecutionTaskCreateNestedManyWithoutApprovedActionVersionInput
   }
 
   export type ApprovedActionVersionUncheckedCreateWithoutDepartmentInput = {
@@ -41887,6 +46830,8 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     rules?: PolicyRuleUncheckedCreateNestedManyWithoutActionInput
+    executionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutApprovedActionVersionInput
+    executionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutApprovedActionVersionInput
   }
 
   export type ApprovedActionVersionCreateOrConnectWithoutDepartmentInput = {
@@ -41896,6 +46841,56 @@ export namespace Prisma {
 
   export type ApprovedActionVersionCreateManyDepartmentInputEnvelope = {
     data: ApprovedActionVersionCreateManyDepartmentInput | ApprovedActionVersionCreateManyDepartmentInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type GovernedExecutionTemplateCreateWithoutDepartmentInput = {
+    id?: string
+    templateCode: string
+    versionNumber: number
+    title: string
+    description: string
+    status?: $Enums.RegistryLifecycleStatus
+    effectiveFrom: Date | string
+    effectiveUntil?: Date | string | null
+    approvedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    approvedActionVersion: ApprovedActionVersionCreateNestedOneWithoutExecutionTemplatesInput
+    jurisdiction?: JurisdictionCreateNestedOneWithoutGovernedExecutionTemplatesInput
+    createdBy: UserCreateNestedOneWithoutCreatedGovernedExecutionTemplatesInput
+    approvedBy?: UserCreateNestedOneWithoutApprovedGovernedExecutionTemplatesInput
+    tasks?: GovernedExecutionTaskTemplateCreateNestedManyWithoutExecutionTemplateInput
+    executionTasks?: ExecutionTaskCreateNestedManyWithoutGovernedExecutionTemplateInput
+  }
+
+  export type GovernedExecutionTemplateUncheckedCreateWithoutDepartmentInput = {
+    id?: string
+    templateCode: string
+    versionNumber: number
+    approvedActionVersionId: string
+    title: string
+    description: string
+    status?: $Enums.RegistryLifecycleStatus
+    effectiveFrom: Date | string
+    effectiveUntil?: Date | string | null
+    jurisdictionId?: string | null
+    createdById: string
+    approvedById?: string | null
+    approvedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tasks?: GovernedExecutionTaskTemplateUncheckedCreateNestedManyWithoutExecutionTemplateInput
+    executionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutGovernedExecutionTemplateInput
+  }
+
+  export type GovernedExecutionTemplateCreateOrConnectWithoutDepartmentInput = {
+    where: GovernedExecutionTemplateWhereUniqueInput
+    create: XOR<GovernedExecutionTemplateCreateWithoutDepartmentInput, GovernedExecutionTemplateUncheckedCreateWithoutDepartmentInput>
+  }
+
+  export type GovernedExecutionTemplateCreateManyDepartmentInputEnvelope = {
+    data: GovernedExecutionTemplateCreateManyDepartmentInput | GovernedExecutionTemplateCreateManyDepartmentInput[]
     skipDuplicates?: boolean
   }
 
@@ -42159,6 +47154,44 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"ApprovedActionVersion"> | Date | string
   }
 
+  export type GovernedExecutionTemplateUpsertWithWhereUniqueWithoutDepartmentInput = {
+    where: GovernedExecutionTemplateWhereUniqueInput
+    update: XOR<GovernedExecutionTemplateUpdateWithoutDepartmentInput, GovernedExecutionTemplateUncheckedUpdateWithoutDepartmentInput>
+    create: XOR<GovernedExecutionTemplateCreateWithoutDepartmentInput, GovernedExecutionTemplateUncheckedCreateWithoutDepartmentInput>
+  }
+
+  export type GovernedExecutionTemplateUpdateWithWhereUniqueWithoutDepartmentInput = {
+    where: GovernedExecutionTemplateWhereUniqueInput
+    data: XOR<GovernedExecutionTemplateUpdateWithoutDepartmentInput, GovernedExecutionTemplateUncheckedUpdateWithoutDepartmentInput>
+  }
+
+  export type GovernedExecutionTemplateUpdateManyWithWhereWithoutDepartmentInput = {
+    where: GovernedExecutionTemplateScalarWhereInput
+    data: XOR<GovernedExecutionTemplateUpdateManyMutationInput, GovernedExecutionTemplateUncheckedUpdateManyWithoutDepartmentInput>
+  }
+
+  export type GovernedExecutionTemplateScalarWhereInput = {
+    AND?: GovernedExecutionTemplateScalarWhereInput | GovernedExecutionTemplateScalarWhereInput[]
+    OR?: GovernedExecutionTemplateScalarWhereInput[]
+    NOT?: GovernedExecutionTemplateScalarWhereInput | GovernedExecutionTemplateScalarWhereInput[]
+    id?: StringFilter<"GovernedExecutionTemplate"> | string
+    templateCode?: StringFilter<"GovernedExecutionTemplate"> | string
+    versionNumber?: IntFilter<"GovernedExecutionTemplate"> | number
+    approvedActionVersionId?: StringFilter<"GovernedExecutionTemplate"> | string
+    title?: StringFilter<"GovernedExecutionTemplate"> | string
+    description?: StringFilter<"GovernedExecutionTemplate"> | string
+    status?: EnumRegistryLifecycleStatusFilter<"GovernedExecutionTemplate"> | $Enums.RegistryLifecycleStatus
+    effectiveFrom?: DateTimeFilter<"GovernedExecutionTemplate"> | Date | string
+    effectiveUntil?: DateTimeNullableFilter<"GovernedExecutionTemplate"> | Date | string | null
+    departmentId?: StringNullableFilter<"GovernedExecutionTemplate"> | string | null
+    jurisdictionId?: StringNullableFilter<"GovernedExecutionTemplate"> | string | null
+    createdById?: StringFilter<"GovernedExecutionTemplate"> | string
+    approvedById?: StringNullableFilter<"GovernedExecutionTemplate"> | string | null
+    approvedAt?: DateTimeNullableFilter<"GovernedExecutionTemplate"> | Date | string | null
+    createdAt?: DateTimeFilter<"GovernedExecutionTemplate"> | Date | string
+    updatedAt?: DateTimeFilter<"GovernedExecutionTemplate"> | Date | string
+  }
+
   export type DepartmentCreateWithoutJurisdictionsInput = {
     id?: string
     name: string
@@ -42170,6 +47203,7 @@ export namespace Prisma {
     publicReports?: PublicReportCreateNestedManyWithoutDepartmentInput
     policyDocuments?: PolicyDocumentCreateNestedManyWithoutDepartmentInput
     approvedActions?: ApprovedActionVersionCreateNestedManyWithoutDepartmentInput
+    governedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutDepartmentInput
   }
 
   export type DepartmentUncheckedCreateWithoutJurisdictionsInput = {
@@ -42183,6 +47217,7 @@ export namespace Prisma {
     publicReports?: PublicReportUncheckedCreateNestedManyWithoutDepartmentInput
     policyDocuments?: PolicyDocumentUncheckedCreateNestedManyWithoutDepartmentInput
     approvedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutDepartmentInput
+    governedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutDepartmentInput
   }
 
   export type DepartmentCreateOrConnectWithoutJurisdictionsInput = {
@@ -42222,6 +47257,8 @@ export namespace Prisma {
     createdApprovedActions?: ApprovedActionVersionCreateNestedManyWithoutCreatedByInput
     approvedApprovedActions?: ApprovedActionVersionCreateNestedManyWithoutApprovedByInput
     preparedDecisionPackages?: DecisionPackageCreateNestedManyWithoutPreparedByInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutCreatedByInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutApprovedByInput
   }
 
   export type UserUncheckedCreateWithoutJurisdictionInput = {
@@ -42256,6 +47293,8 @@ export namespace Prisma {
     createdApprovedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutCreatedByInput
     approvedApprovedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutApprovedByInput
     preparedDecisionPackages?: DecisionPackageUncheckedCreateNestedManyWithoutPreparedByInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutCreatedByInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutApprovedByInput
   }
 
   export type UserCreateOrConnectWithoutJurisdictionInput = {
@@ -42499,6 +47538,8 @@ export namespace Prisma {
     createdBy: UserCreateNestedOneWithoutCreatedApprovedActionsInput
     approvedBy?: UserCreateNestedOneWithoutApprovedApprovedActionsInput
     rules?: PolicyRuleCreateNestedManyWithoutActionInput
+    executionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutApprovedActionVersionInput
+    executionTasks?: ExecutionTaskCreateNestedManyWithoutApprovedActionVersionInput
   }
 
   export type ApprovedActionVersionUncheckedCreateWithoutJurisdictionInput = {
@@ -42522,6 +47563,8 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     rules?: PolicyRuleUncheckedCreateNestedManyWithoutActionInput
+    executionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutApprovedActionVersionInput
+    executionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutApprovedActionVersionInput
   }
 
   export type ApprovedActionVersionCreateOrConnectWithoutJurisdictionInput = {
@@ -42531,6 +47574,56 @@ export namespace Prisma {
 
   export type ApprovedActionVersionCreateManyJurisdictionInputEnvelope = {
     data: ApprovedActionVersionCreateManyJurisdictionInput | ApprovedActionVersionCreateManyJurisdictionInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type GovernedExecutionTemplateCreateWithoutJurisdictionInput = {
+    id?: string
+    templateCode: string
+    versionNumber: number
+    title: string
+    description: string
+    status?: $Enums.RegistryLifecycleStatus
+    effectiveFrom: Date | string
+    effectiveUntil?: Date | string | null
+    approvedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    approvedActionVersion: ApprovedActionVersionCreateNestedOneWithoutExecutionTemplatesInput
+    department?: DepartmentCreateNestedOneWithoutGovernedExecutionTemplatesInput
+    createdBy: UserCreateNestedOneWithoutCreatedGovernedExecutionTemplatesInput
+    approvedBy?: UserCreateNestedOneWithoutApprovedGovernedExecutionTemplatesInput
+    tasks?: GovernedExecutionTaskTemplateCreateNestedManyWithoutExecutionTemplateInput
+    executionTasks?: ExecutionTaskCreateNestedManyWithoutGovernedExecutionTemplateInput
+  }
+
+  export type GovernedExecutionTemplateUncheckedCreateWithoutJurisdictionInput = {
+    id?: string
+    templateCode: string
+    versionNumber: number
+    approvedActionVersionId: string
+    title: string
+    description: string
+    status?: $Enums.RegistryLifecycleStatus
+    effectiveFrom: Date | string
+    effectiveUntil?: Date | string | null
+    departmentId?: string | null
+    createdById: string
+    approvedById?: string | null
+    approvedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tasks?: GovernedExecutionTaskTemplateUncheckedCreateNestedManyWithoutExecutionTemplateInput
+    executionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutGovernedExecutionTemplateInput
+  }
+
+  export type GovernedExecutionTemplateCreateOrConnectWithoutJurisdictionInput = {
+    where: GovernedExecutionTemplateWhereUniqueInput
+    create: XOR<GovernedExecutionTemplateCreateWithoutJurisdictionInput, GovernedExecutionTemplateUncheckedCreateWithoutJurisdictionInput>
+  }
+
+  export type GovernedExecutionTemplateCreateManyJurisdictionInputEnvelope = {
+    data: GovernedExecutionTemplateCreateManyJurisdictionInput | GovernedExecutionTemplateCreateManyJurisdictionInput[]
     skipDuplicates?: boolean
   }
 
@@ -42556,6 +47649,7 @@ export namespace Prisma {
     publicReports?: PublicReportUpdateManyWithoutDepartmentNestedInput
     policyDocuments?: PolicyDocumentUpdateManyWithoutDepartmentNestedInput
     approvedActions?: ApprovedActionVersionUpdateManyWithoutDepartmentNestedInput
+    governedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutDepartmentNestedInput
   }
 
   export type DepartmentUncheckedUpdateWithoutJurisdictionsInput = {
@@ -42569,6 +47663,7 @@ export namespace Prisma {
     publicReports?: PublicReportUncheckedUpdateManyWithoutDepartmentNestedInput
     policyDocuments?: PolicyDocumentUncheckedUpdateManyWithoutDepartmentNestedInput
     approvedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutDepartmentNestedInput
+    governedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutDepartmentNestedInput
   }
 
   export type UserUpsertWithWhereUniqueWithoutJurisdictionInput = {
@@ -42667,6 +47762,22 @@ export namespace Prisma {
     data: XOR<ApprovedActionVersionUpdateManyMutationInput, ApprovedActionVersionUncheckedUpdateManyWithoutJurisdictionInput>
   }
 
+  export type GovernedExecutionTemplateUpsertWithWhereUniqueWithoutJurisdictionInput = {
+    where: GovernedExecutionTemplateWhereUniqueInput
+    update: XOR<GovernedExecutionTemplateUpdateWithoutJurisdictionInput, GovernedExecutionTemplateUncheckedUpdateWithoutJurisdictionInput>
+    create: XOR<GovernedExecutionTemplateCreateWithoutJurisdictionInput, GovernedExecutionTemplateUncheckedCreateWithoutJurisdictionInput>
+  }
+
+  export type GovernedExecutionTemplateUpdateWithWhereUniqueWithoutJurisdictionInput = {
+    where: GovernedExecutionTemplateWhereUniqueInput
+    data: XOR<GovernedExecutionTemplateUpdateWithoutJurisdictionInput, GovernedExecutionTemplateUncheckedUpdateWithoutJurisdictionInput>
+  }
+
+  export type GovernedExecutionTemplateUpdateManyWithWhereWithoutJurisdictionInput = {
+    where: GovernedExecutionTemplateScalarWhereInput
+    data: XOR<GovernedExecutionTemplateUpdateManyMutationInput, GovernedExecutionTemplateUncheckedUpdateManyWithoutJurisdictionInput>
+  }
+
   export type DepartmentCreateWithoutUsersInput = {
     id?: string
     name: string
@@ -42678,6 +47789,7 @@ export namespace Prisma {
     publicReports?: PublicReportCreateNestedManyWithoutDepartmentInput
     policyDocuments?: PolicyDocumentCreateNestedManyWithoutDepartmentInput
     approvedActions?: ApprovedActionVersionCreateNestedManyWithoutDepartmentInput
+    governedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutDepartmentInput
   }
 
   export type DepartmentUncheckedCreateWithoutUsersInput = {
@@ -42691,6 +47803,7 @@ export namespace Prisma {
     publicReports?: PublicReportUncheckedCreateNestedManyWithoutDepartmentInput
     policyDocuments?: PolicyDocumentUncheckedCreateNestedManyWithoutDepartmentInput
     approvedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutDepartmentInput
+    governedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutDepartmentInput
   }
 
   export type DepartmentCreateOrConnectWithoutUsersInput = {
@@ -42709,6 +47822,7 @@ export namespace Prisma {
     publicReports?: PublicReportCreateNestedManyWithoutJurisdictionInput
     policyDocuments?: PolicyDocumentCreateNestedManyWithoutJurisdictionInput
     approvedActions?: ApprovedActionVersionCreateNestedManyWithoutJurisdictionInput
+    governedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutJurisdictionInput
   }
 
   export type JurisdictionUncheckedCreateWithoutUsersInput = {
@@ -42722,6 +47836,7 @@ export namespace Prisma {
     publicReports?: PublicReportUncheckedCreateNestedManyWithoutJurisdictionInput
     policyDocuments?: PolicyDocumentUncheckedCreateNestedManyWithoutJurisdictionInput
     approvedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutJurisdictionInput
+    governedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutJurisdictionInput
   }
 
   export type JurisdictionCreateOrConnectWithoutUsersInput = {
@@ -42913,6 +48028,9 @@ export namespace Prisma {
     completedAt?: Date | string | null
     cancelledAt?: Date | string | null
     cancellationReason?: string | null
+    governanceMode?: $Enums.ExecutionPlanGovernanceMode
+    executionContractVersion?: string | null
+    governedProvenance?: NullableJsonNullValueInput | InputJsonValue
     orp: OperationalResponsePlanCreateNestedOneWithoutExecutionPlanInput
     case: CaseCreateNestedOneWithoutExecutionPlansInput
     approvalDecision: OrpDecisionCreateNestedOneWithoutExecutionPlanInput
@@ -42933,6 +48051,9 @@ export namespace Prisma {
     completedAt?: Date | string | null
     cancelledAt?: Date | string | null
     cancellationReason?: string | null
+    governanceMode?: $Enums.ExecutionPlanGovernanceMode
+    executionContractVersion?: string | null
+    governedProvenance?: NullableJsonNullValueInput | InputJsonValue
     tasks?: ExecutionTaskUncheckedCreateNestedManyWithoutExecutionPlanInput
     closure?: CaseClosureUncheckedCreateNestedOneWithoutExecutionPlanInput
   }
@@ -42968,12 +48089,20 @@ export namespace Prisma {
     cancellationReason?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    sourceActionVersion?: number | null
+    sourceTemplateCode?: string | null
+    sourceTemplateVersion?: number | null
+    evidenceRequired?: boolean
+    verificationRequired?: boolean
     executionPlan: ExecutionPlanCreateNestedOneWithoutTasksInput
     assignedBy?: UserCreateNestedOneWithoutAssignedByExecutionTasksInput
     completionSubmittedBy?: UserCreateNestedOneWithoutCompletedExecutionTasksInput
     verifiedBy?: UserCreateNestedOneWithoutVerifiedExecutionTasksInput
     cancelledBy?: UserCreateNestedOneWithoutCancelledExecutionTasksInput
     evidence?: ExecutionEvidenceCreateNestedManyWithoutExecutionTaskInput
+    approvedActionVersion?: ApprovedActionVersionCreateNestedOneWithoutExecutionTasksInput
+    governedExecutionTemplate?: GovernedExecutionTemplateCreateNestedOneWithoutExecutionTasksInput
+    governedTaskTemplate?: GovernedExecutionTaskTemplateCreateNestedOneWithoutExecutionTasksInput
   }
 
   export type ExecutionTaskUncheckedCreateWithoutAssignedToInput = {
@@ -43002,6 +48131,14 @@ export namespace Prisma {
     cancellationReason?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    approvedActionVersionId?: string | null
+    governedExecutionTemplateId?: string | null
+    governedTaskTemplateId?: string | null
+    sourceActionVersion?: number | null
+    sourceTemplateCode?: string | null
+    sourceTemplateVersion?: number | null
+    evidenceRequired?: boolean
+    verificationRequired?: boolean
     evidence?: ExecutionEvidenceUncheckedCreateNestedManyWithoutExecutionTaskInput
   }
 
@@ -43036,12 +48173,20 @@ export namespace Prisma {
     cancellationReason?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    sourceActionVersion?: number | null
+    sourceTemplateCode?: string | null
+    sourceTemplateVersion?: number | null
+    evidenceRequired?: boolean
+    verificationRequired?: boolean
     executionPlan: ExecutionPlanCreateNestedOneWithoutTasksInput
     assignedTo?: UserCreateNestedOneWithoutAssignedExecutionTasksInput
     completionSubmittedBy?: UserCreateNestedOneWithoutCompletedExecutionTasksInput
     verifiedBy?: UserCreateNestedOneWithoutVerifiedExecutionTasksInput
     cancelledBy?: UserCreateNestedOneWithoutCancelledExecutionTasksInput
     evidence?: ExecutionEvidenceCreateNestedManyWithoutExecutionTaskInput
+    approvedActionVersion?: ApprovedActionVersionCreateNestedOneWithoutExecutionTasksInput
+    governedExecutionTemplate?: GovernedExecutionTemplateCreateNestedOneWithoutExecutionTasksInput
+    governedTaskTemplate?: GovernedExecutionTaskTemplateCreateNestedOneWithoutExecutionTasksInput
   }
 
   export type ExecutionTaskUncheckedCreateWithoutAssignedByInput = {
@@ -43070,6 +48215,14 @@ export namespace Prisma {
     cancellationReason?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    approvedActionVersionId?: string | null
+    governedExecutionTemplateId?: string | null
+    governedTaskTemplateId?: string | null
+    sourceActionVersion?: number | null
+    sourceTemplateCode?: string | null
+    sourceTemplateVersion?: number | null
+    evidenceRequired?: boolean
+    verificationRequired?: boolean
     evidence?: ExecutionEvidenceUncheckedCreateNestedManyWithoutExecutionTaskInput
   }
 
@@ -43104,12 +48257,20 @@ export namespace Prisma {
     cancellationReason?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    sourceActionVersion?: number | null
+    sourceTemplateCode?: string | null
+    sourceTemplateVersion?: number | null
+    evidenceRequired?: boolean
+    verificationRequired?: boolean
     executionPlan: ExecutionPlanCreateNestedOneWithoutTasksInput
     assignedTo?: UserCreateNestedOneWithoutAssignedExecutionTasksInput
     assignedBy?: UserCreateNestedOneWithoutAssignedByExecutionTasksInput
     verifiedBy?: UserCreateNestedOneWithoutVerifiedExecutionTasksInput
     cancelledBy?: UserCreateNestedOneWithoutCancelledExecutionTasksInput
     evidence?: ExecutionEvidenceCreateNestedManyWithoutExecutionTaskInput
+    approvedActionVersion?: ApprovedActionVersionCreateNestedOneWithoutExecutionTasksInput
+    governedExecutionTemplate?: GovernedExecutionTemplateCreateNestedOneWithoutExecutionTasksInput
+    governedTaskTemplate?: GovernedExecutionTaskTemplateCreateNestedOneWithoutExecutionTasksInput
   }
 
   export type ExecutionTaskUncheckedCreateWithoutCompletionSubmittedByInput = {
@@ -43138,6 +48299,14 @@ export namespace Prisma {
     cancellationReason?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    approvedActionVersionId?: string | null
+    governedExecutionTemplateId?: string | null
+    governedTaskTemplateId?: string | null
+    sourceActionVersion?: number | null
+    sourceTemplateCode?: string | null
+    sourceTemplateVersion?: number | null
+    evidenceRequired?: boolean
+    verificationRequired?: boolean
     evidence?: ExecutionEvidenceUncheckedCreateNestedManyWithoutExecutionTaskInput
   }
 
@@ -43172,12 +48341,20 @@ export namespace Prisma {
     cancellationReason?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    sourceActionVersion?: number | null
+    sourceTemplateCode?: string | null
+    sourceTemplateVersion?: number | null
+    evidenceRequired?: boolean
+    verificationRequired?: boolean
     executionPlan: ExecutionPlanCreateNestedOneWithoutTasksInput
     assignedTo?: UserCreateNestedOneWithoutAssignedExecutionTasksInput
     assignedBy?: UserCreateNestedOneWithoutAssignedByExecutionTasksInput
     completionSubmittedBy?: UserCreateNestedOneWithoutCompletedExecutionTasksInput
     cancelledBy?: UserCreateNestedOneWithoutCancelledExecutionTasksInput
     evidence?: ExecutionEvidenceCreateNestedManyWithoutExecutionTaskInput
+    approvedActionVersion?: ApprovedActionVersionCreateNestedOneWithoutExecutionTasksInput
+    governedExecutionTemplate?: GovernedExecutionTemplateCreateNestedOneWithoutExecutionTasksInput
+    governedTaskTemplate?: GovernedExecutionTaskTemplateCreateNestedOneWithoutExecutionTasksInput
   }
 
   export type ExecutionTaskUncheckedCreateWithoutVerifiedByInput = {
@@ -43206,6 +48383,14 @@ export namespace Prisma {
     cancellationReason?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    approvedActionVersionId?: string | null
+    governedExecutionTemplateId?: string | null
+    governedTaskTemplateId?: string | null
+    sourceActionVersion?: number | null
+    sourceTemplateCode?: string | null
+    sourceTemplateVersion?: number | null
+    evidenceRequired?: boolean
+    verificationRequired?: boolean
     evidence?: ExecutionEvidenceUncheckedCreateNestedManyWithoutExecutionTaskInput
   }
 
@@ -43240,12 +48425,20 @@ export namespace Prisma {
     cancellationReason?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    sourceActionVersion?: number | null
+    sourceTemplateCode?: string | null
+    sourceTemplateVersion?: number | null
+    evidenceRequired?: boolean
+    verificationRequired?: boolean
     executionPlan: ExecutionPlanCreateNestedOneWithoutTasksInput
     assignedTo?: UserCreateNestedOneWithoutAssignedExecutionTasksInput
     assignedBy?: UserCreateNestedOneWithoutAssignedByExecutionTasksInput
     completionSubmittedBy?: UserCreateNestedOneWithoutCompletedExecutionTasksInput
     verifiedBy?: UserCreateNestedOneWithoutVerifiedExecutionTasksInput
     evidence?: ExecutionEvidenceCreateNestedManyWithoutExecutionTaskInput
+    approvedActionVersion?: ApprovedActionVersionCreateNestedOneWithoutExecutionTasksInput
+    governedExecutionTemplate?: GovernedExecutionTemplateCreateNestedOneWithoutExecutionTasksInput
+    governedTaskTemplate?: GovernedExecutionTaskTemplateCreateNestedOneWithoutExecutionTasksInput
   }
 
   export type ExecutionTaskUncheckedCreateWithoutCancelledByInput = {
@@ -43274,6 +48467,14 @@ export namespace Prisma {
     cancellationReason?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    approvedActionVersionId?: string | null
+    governedExecutionTemplateId?: string | null
+    governedTaskTemplateId?: string | null
+    sourceActionVersion?: number | null
+    sourceTemplateCode?: string | null
+    sourceTemplateVersion?: number | null
+    evidenceRequired?: boolean
+    verificationRequired?: boolean
     evidence?: ExecutionEvidenceUncheckedCreateNestedManyWithoutExecutionTaskInput
   }
 
@@ -43642,6 +48843,8 @@ export namespace Prisma {
     jurisdiction?: JurisdictionCreateNestedOneWithoutApprovedActionsInput
     approvedBy?: UserCreateNestedOneWithoutApprovedApprovedActionsInput
     rules?: PolicyRuleCreateNestedManyWithoutActionInput
+    executionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutApprovedActionVersionInput
+    executionTasks?: ExecutionTaskCreateNestedManyWithoutApprovedActionVersionInput
   }
 
   export type ApprovedActionVersionUncheckedCreateWithoutCreatedByInput = {
@@ -43665,6 +48868,8 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     rules?: PolicyRuleUncheckedCreateNestedManyWithoutActionInput
+    executionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutApprovedActionVersionInput
+    executionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutApprovedActionVersionInput
   }
 
   export type ApprovedActionVersionCreateOrConnectWithoutCreatedByInput = {
@@ -43698,6 +48903,8 @@ export namespace Prisma {
     jurisdiction?: JurisdictionCreateNestedOneWithoutApprovedActionsInput
     createdBy: UserCreateNestedOneWithoutCreatedApprovedActionsInput
     rules?: PolicyRuleCreateNestedManyWithoutActionInput
+    executionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutApprovedActionVersionInput
+    executionTasks?: ExecutionTaskCreateNestedManyWithoutApprovedActionVersionInput
   }
 
   export type ApprovedActionVersionUncheckedCreateWithoutApprovedByInput = {
@@ -43721,6 +48928,8 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     rules?: PolicyRuleUncheckedCreateNestedManyWithoutActionInput
+    executionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutApprovedActionVersionInput
+    executionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutApprovedActionVersionInput
   }
 
   export type ApprovedActionVersionCreateOrConnectWithoutApprovedByInput = {
@@ -43785,6 +48994,106 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type GovernedExecutionTemplateCreateWithoutCreatedByInput = {
+    id?: string
+    templateCode: string
+    versionNumber: number
+    title: string
+    description: string
+    status?: $Enums.RegistryLifecycleStatus
+    effectiveFrom: Date | string
+    effectiveUntil?: Date | string | null
+    approvedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    approvedActionVersion: ApprovedActionVersionCreateNestedOneWithoutExecutionTemplatesInput
+    department?: DepartmentCreateNestedOneWithoutGovernedExecutionTemplatesInput
+    jurisdiction?: JurisdictionCreateNestedOneWithoutGovernedExecutionTemplatesInput
+    approvedBy?: UserCreateNestedOneWithoutApprovedGovernedExecutionTemplatesInput
+    tasks?: GovernedExecutionTaskTemplateCreateNestedManyWithoutExecutionTemplateInput
+    executionTasks?: ExecutionTaskCreateNestedManyWithoutGovernedExecutionTemplateInput
+  }
+
+  export type GovernedExecutionTemplateUncheckedCreateWithoutCreatedByInput = {
+    id?: string
+    templateCode: string
+    versionNumber: number
+    approvedActionVersionId: string
+    title: string
+    description: string
+    status?: $Enums.RegistryLifecycleStatus
+    effectiveFrom: Date | string
+    effectiveUntil?: Date | string | null
+    departmentId?: string | null
+    jurisdictionId?: string | null
+    approvedById?: string | null
+    approvedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tasks?: GovernedExecutionTaskTemplateUncheckedCreateNestedManyWithoutExecutionTemplateInput
+    executionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutGovernedExecutionTemplateInput
+  }
+
+  export type GovernedExecutionTemplateCreateOrConnectWithoutCreatedByInput = {
+    where: GovernedExecutionTemplateWhereUniqueInput
+    create: XOR<GovernedExecutionTemplateCreateWithoutCreatedByInput, GovernedExecutionTemplateUncheckedCreateWithoutCreatedByInput>
+  }
+
+  export type GovernedExecutionTemplateCreateManyCreatedByInputEnvelope = {
+    data: GovernedExecutionTemplateCreateManyCreatedByInput | GovernedExecutionTemplateCreateManyCreatedByInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type GovernedExecutionTemplateCreateWithoutApprovedByInput = {
+    id?: string
+    templateCode: string
+    versionNumber: number
+    title: string
+    description: string
+    status?: $Enums.RegistryLifecycleStatus
+    effectiveFrom: Date | string
+    effectiveUntil?: Date | string | null
+    approvedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    approvedActionVersion: ApprovedActionVersionCreateNestedOneWithoutExecutionTemplatesInput
+    department?: DepartmentCreateNestedOneWithoutGovernedExecutionTemplatesInput
+    jurisdiction?: JurisdictionCreateNestedOneWithoutGovernedExecutionTemplatesInput
+    createdBy: UserCreateNestedOneWithoutCreatedGovernedExecutionTemplatesInput
+    tasks?: GovernedExecutionTaskTemplateCreateNestedManyWithoutExecutionTemplateInput
+    executionTasks?: ExecutionTaskCreateNestedManyWithoutGovernedExecutionTemplateInput
+  }
+
+  export type GovernedExecutionTemplateUncheckedCreateWithoutApprovedByInput = {
+    id?: string
+    templateCode: string
+    versionNumber: number
+    approvedActionVersionId: string
+    title: string
+    description: string
+    status?: $Enums.RegistryLifecycleStatus
+    effectiveFrom: Date | string
+    effectiveUntil?: Date | string | null
+    departmentId?: string | null
+    jurisdictionId?: string | null
+    createdById: string
+    approvedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tasks?: GovernedExecutionTaskTemplateUncheckedCreateNestedManyWithoutExecutionTemplateInput
+    executionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutGovernedExecutionTemplateInput
+  }
+
+  export type GovernedExecutionTemplateCreateOrConnectWithoutApprovedByInput = {
+    where: GovernedExecutionTemplateWhereUniqueInput
+    create: XOR<GovernedExecutionTemplateCreateWithoutApprovedByInput, GovernedExecutionTemplateUncheckedCreateWithoutApprovedByInput>
+  }
+
+  export type GovernedExecutionTemplateCreateManyApprovedByInputEnvelope = {
+    data: GovernedExecutionTemplateCreateManyApprovedByInput | GovernedExecutionTemplateCreateManyApprovedByInput[]
+    skipDuplicates?: boolean
+  }
+
   export type DepartmentUpsertWithoutUsersInput = {
     update: XOR<DepartmentUpdateWithoutUsersInput, DepartmentUncheckedUpdateWithoutUsersInput>
     create: XOR<DepartmentCreateWithoutUsersInput, DepartmentUncheckedCreateWithoutUsersInput>
@@ -43807,6 +49116,7 @@ export namespace Prisma {
     publicReports?: PublicReportUpdateManyWithoutDepartmentNestedInput
     policyDocuments?: PolicyDocumentUpdateManyWithoutDepartmentNestedInput
     approvedActions?: ApprovedActionVersionUpdateManyWithoutDepartmentNestedInput
+    governedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutDepartmentNestedInput
   }
 
   export type DepartmentUncheckedUpdateWithoutUsersInput = {
@@ -43820,6 +49130,7 @@ export namespace Prisma {
     publicReports?: PublicReportUncheckedUpdateManyWithoutDepartmentNestedInput
     policyDocuments?: PolicyDocumentUncheckedUpdateManyWithoutDepartmentNestedInput
     approvedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutDepartmentNestedInput
+    governedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutDepartmentNestedInput
   }
 
   export type JurisdictionUpsertWithoutUsersInput = {
@@ -43844,6 +49155,7 @@ export namespace Prisma {
     publicReports?: PublicReportUpdateManyWithoutJurisdictionNestedInput
     policyDocuments?: PolicyDocumentUpdateManyWithoutJurisdictionNestedInput
     approvedActions?: ApprovedActionVersionUpdateManyWithoutJurisdictionNestedInput
+    governedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutJurisdictionNestedInput
   }
 
   export type JurisdictionUncheckedUpdateWithoutUsersInput = {
@@ -43857,6 +49169,7 @@ export namespace Prisma {
     publicReports?: PublicReportUncheckedUpdateManyWithoutJurisdictionNestedInput
     policyDocuments?: PolicyDocumentUncheckedUpdateManyWithoutJurisdictionNestedInput
     approvedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutJurisdictionNestedInput
+    governedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutJurisdictionNestedInput
   }
 
   export type InspectionUpsertWithWhereUniqueWithoutInspectorInput = {
@@ -43994,6 +49307,9 @@ export namespace Prisma {
     completedAt?: DateTimeNullableFilter<"ExecutionPlan"> | Date | string | null
     cancelledAt?: DateTimeNullableFilter<"ExecutionPlan"> | Date | string | null
     cancellationReason?: StringNullableFilter<"ExecutionPlan"> | string | null
+    governanceMode?: EnumExecutionPlanGovernanceModeFilter<"ExecutionPlan"> | $Enums.ExecutionPlanGovernanceMode
+    executionContractVersion?: StringNullableFilter<"ExecutionPlan"> | string | null
+    governedProvenance?: JsonNullableFilter<"ExecutionPlan">
   }
 
   export type ExecutionTaskUpsertWithWhereUniqueWithoutAssignedToInput = {
@@ -44042,6 +49358,14 @@ export namespace Prisma {
     cancellationReason?: StringNullableFilter<"ExecutionTask"> | string | null
     createdAt?: DateTimeFilter<"ExecutionTask"> | Date | string
     updatedAt?: DateTimeFilter<"ExecutionTask"> | Date | string
+    approvedActionVersionId?: StringNullableFilter<"ExecutionTask"> | string | null
+    governedExecutionTemplateId?: StringNullableFilter<"ExecutionTask"> | string | null
+    governedTaskTemplateId?: StringNullableFilter<"ExecutionTask"> | string | null
+    sourceActionVersion?: IntNullableFilter<"ExecutionTask"> | number | null
+    sourceTemplateCode?: StringNullableFilter<"ExecutionTask"> | string | null
+    sourceTemplateVersion?: IntNullableFilter<"ExecutionTask"> | number | null
+    evidenceRequired?: BoolFilter<"ExecutionTask"> | boolean
+    verificationRequired?: BoolFilter<"ExecutionTask"> | boolean
   }
 
   export type ExecutionTaskUpsertWithWhereUniqueWithoutAssignedByInput = {
@@ -44340,6 +49664,38 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"DecisionPackage"> | Date | string
   }
 
+  export type GovernedExecutionTemplateUpsertWithWhereUniqueWithoutCreatedByInput = {
+    where: GovernedExecutionTemplateWhereUniqueInput
+    update: XOR<GovernedExecutionTemplateUpdateWithoutCreatedByInput, GovernedExecutionTemplateUncheckedUpdateWithoutCreatedByInput>
+    create: XOR<GovernedExecutionTemplateCreateWithoutCreatedByInput, GovernedExecutionTemplateUncheckedCreateWithoutCreatedByInput>
+  }
+
+  export type GovernedExecutionTemplateUpdateWithWhereUniqueWithoutCreatedByInput = {
+    where: GovernedExecutionTemplateWhereUniqueInput
+    data: XOR<GovernedExecutionTemplateUpdateWithoutCreatedByInput, GovernedExecutionTemplateUncheckedUpdateWithoutCreatedByInput>
+  }
+
+  export type GovernedExecutionTemplateUpdateManyWithWhereWithoutCreatedByInput = {
+    where: GovernedExecutionTemplateScalarWhereInput
+    data: XOR<GovernedExecutionTemplateUpdateManyMutationInput, GovernedExecutionTemplateUncheckedUpdateManyWithoutCreatedByInput>
+  }
+
+  export type GovernedExecutionTemplateUpsertWithWhereUniqueWithoutApprovedByInput = {
+    where: GovernedExecutionTemplateWhereUniqueInput
+    update: XOR<GovernedExecutionTemplateUpdateWithoutApprovedByInput, GovernedExecutionTemplateUncheckedUpdateWithoutApprovedByInput>
+    create: XOR<GovernedExecutionTemplateCreateWithoutApprovedByInput, GovernedExecutionTemplateUncheckedCreateWithoutApprovedByInput>
+  }
+
+  export type GovernedExecutionTemplateUpdateWithWhereUniqueWithoutApprovedByInput = {
+    where: GovernedExecutionTemplateWhereUniqueInput
+    data: XOR<GovernedExecutionTemplateUpdateWithoutApprovedByInput, GovernedExecutionTemplateUncheckedUpdateWithoutApprovedByInput>
+  }
+
+  export type GovernedExecutionTemplateUpdateManyWithWhereWithoutApprovedByInput = {
+    where: GovernedExecutionTemplateScalarWhereInput
+    data: XOR<GovernedExecutionTemplateUpdateManyMutationInput, GovernedExecutionTemplateUncheckedUpdateManyWithoutApprovedByInput>
+  }
+
   export type DepartmentCreateWithoutAssetsInput = {
     id?: string
     name: string
@@ -44351,6 +49707,7 @@ export namespace Prisma {
     publicReports?: PublicReportCreateNestedManyWithoutDepartmentInput
     policyDocuments?: PolicyDocumentCreateNestedManyWithoutDepartmentInput
     approvedActions?: ApprovedActionVersionCreateNestedManyWithoutDepartmentInput
+    governedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutDepartmentInput
   }
 
   export type DepartmentUncheckedCreateWithoutAssetsInput = {
@@ -44364,6 +49721,7 @@ export namespace Prisma {
     publicReports?: PublicReportUncheckedCreateNestedManyWithoutDepartmentInput
     policyDocuments?: PolicyDocumentUncheckedCreateNestedManyWithoutDepartmentInput
     approvedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutDepartmentInput
+    governedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutDepartmentInput
   }
 
   export type DepartmentCreateOrConnectWithoutAssetsInput = {
@@ -44382,6 +49740,7 @@ export namespace Prisma {
     publicReports?: PublicReportCreateNestedManyWithoutJurisdictionInput
     policyDocuments?: PolicyDocumentCreateNestedManyWithoutJurisdictionInput
     approvedActions?: ApprovedActionVersionCreateNestedManyWithoutJurisdictionInput
+    governedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutJurisdictionInput
   }
 
   export type JurisdictionUncheckedCreateWithoutAssetsInput = {
@@ -44395,6 +49754,7 @@ export namespace Prisma {
     publicReports?: PublicReportUncheckedCreateNestedManyWithoutJurisdictionInput
     policyDocuments?: PolicyDocumentUncheckedCreateNestedManyWithoutJurisdictionInput
     approvedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutJurisdictionInput
+    governedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutJurisdictionInput
   }
 
   export type JurisdictionCreateOrConnectWithoutAssetsInput = {
@@ -44578,6 +49938,7 @@ export namespace Prisma {
     publicReports?: PublicReportUpdateManyWithoutDepartmentNestedInput
     policyDocuments?: PolicyDocumentUpdateManyWithoutDepartmentNestedInput
     approvedActions?: ApprovedActionVersionUpdateManyWithoutDepartmentNestedInput
+    governedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutDepartmentNestedInput
   }
 
   export type DepartmentUncheckedUpdateWithoutAssetsInput = {
@@ -44591,6 +49952,7 @@ export namespace Prisma {
     publicReports?: PublicReportUncheckedUpdateManyWithoutDepartmentNestedInput
     policyDocuments?: PolicyDocumentUncheckedUpdateManyWithoutDepartmentNestedInput
     approvedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutDepartmentNestedInput
+    governedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutDepartmentNestedInput
   }
 
   export type JurisdictionUpsertWithoutAssetsInput = {
@@ -44615,6 +49977,7 @@ export namespace Prisma {
     publicReports?: PublicReportUpdateManyWithoutJurisdictionNestedInput
     policyDocuments?: PolicyDocumentUpdateManyWithoutJurisdictionNestedInput
     approvedActions?: ApprovedActionVersionUpdateManyWithoutJurisdictionNestedInput
+    governedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutJurisdictionNestedInput
   }
 
   export type JurisdictionUncheckedUpdateWithoutAssetsInput = {
@@ -44628,6 +49991,7 @@ export namespace Prisma {
     publicReports?: PublicReportUncheckedUpdateManyWithoutJurisdictionNestedInput
     policyDocuments?: PolicyDocumentUncheckedUpdateManyWithoutJurisdictionNestedInput
     approvedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutJurisdictionNestedInput
+    governedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutJurisdictionNestedInput
   }
 
   export type CaseUpsertWithWhereUniqueWithoutAssetInput = {
@@ -44707,6 +50071,7 @@ export namespace Prisma {
     approvalAuthorities?: ApprovalAuthorityCreateNestedManyWithoutDepartmentInput
     policyDocuments?: PolicyDocumentCreateNestedManyWithoutDepartmentInput
     approvedActions?: ApprovedActionVersionCreateNestedManyWithoutDepartmentInput
+    governedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutDepartmentInput
   }
 
   export type DepartmentUncheckedCreateWithoutPublicReportsInput = {
@@ -44720,6 +50085,7 @@ export namespace Prisma {
     approvalAuthorities?: ApprovalAuthorityUncheckedCreateNestedManyWithoutDepartmentInput
     policyDocuments?: PolicyDocumentUncheckedCreateNestedManyWithoutDepartmentInput
     approvedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutDepartmentInput
+    governedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutDepartmentInput
   }
 
   export type DepartmentCreateOrConnectWithoutPublicReportsInput = {
@@ -44738,6 +50104,7 @@ export namespace Prisma {
     approvalAuthorities?: ApprovalAuthorityCreateNestedManyWithoutJurisdictionInput
     policyDocuments?: PolicyDocumentCreateNestedManyWithoutJurisdictionInput
     approvedActions?: ApprovedActionVersionCreateNestedManyWithoutJurisdictionInput
+    governedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutJurisdictionInput
   }
 
   export type JurisdictionUncheckedCreateWithoutPublicReportsInput = {
@@ -44751,6 +50118,7 @@ export namespace Prisma {
     approvalAuthorities?: ApprovalAuthorityUncheckedCreateNestedManyWithoutJurisdictionInput
     policyDocuments?: PolicyDocumentUncheckedCreateNestedManyWithoutJurisdictionInput
     approvedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutJurisdictionInput
+    governedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutJurisdictionInput
   }
 
   export type JurisdictionCreateOrConnectWithoutPublicReportsInput = {
@@ -44829,6 +50197,8 @@ export namespace Prisma {
     createdApprovedActions?: ApprovedActionVersionCreateNestedManyWithoutCreatedByInput
     approvedApprovedActions?: ApprovedActionVersionCreateNestedManyWithoutApprovedByInput
     preparedDecisionPackages?: DecisionPackageCreateNestedManyWithoutPreparedByInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutCreatedByInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutApprovedByInput
   }
 
   export type UserUncheckedCreateWithoutReviewedPublicReportsInput = {
@@ -44863,6 +50233,8 @@ export namespace Prisma {
     createdApprovedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutCreatedByInput
     approvedApprovedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutApprovedByInput
     preparedDecisionPackages?: DecisionPackageUncheckedCreateNestedManyWithoutPreparedByInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutCreatedByInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutApprovedByInput
   }
 
   export type UserCreateOrConnectWithoutReviewedPublicReportsInput = {
@@ -44902,6 +50274,8 @@ export namespace Prisma {
     createdApprovedActions?: ApprovedActionVersionCreateNestedManyWithoutCreatedByInput
     approvedApprovedActions?: ApprovedActionVersionCreateNestedManyWithoutApprovedByInput
     preparedDecisionPackages?: DecisionPackageCreateNestedManyWithoutPreparedByInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutCreatedByInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutApprovedByInput
   }
 
   export type UserUncheckedCreateWithoutDecidedPublicReportsInput = {
@@ -44936,6 +50310,8 @@ export namespace Prisma {
     createdApprovedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutCreatedByInput
     approvedApprovedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutApprovedByInput
     preparedDecisionPackages?: DecisionPackageUncheckedCreateNestedManyWithoutPreparedByInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutCreatedByInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutApprovedByInput
   }
 
   export type UserCreateOrConnectWithoutDecidedPublicReportsInput = {
@@ -45052,6 +50428,7 @@ export namespace Prisma {
     approvalAuthorities?: ApprovalAuthorityUpdateManyWithoutDepartmentNestedInput
     policyDocuments?: PolicyDocumentUpdateManyWithoutDepartmentNestedInput
     approvedActions?: ApprovedActionVersionUpdateManyWithoutDepartmentNestedInput
+    governedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutDepartmentNestedInput
   }
 
   export type DepartmentUncheckedUpdateWithoutPublicReportsInput = {
@@ -45065,6 +50442,7 @@ export namespace Prisma {
     approvalAuthorities?: ApprovalAuthorityUncheckedUpdateManyWithoutDepartmentNestedInput
     policyDocuments?: PolicyDocumentUncheckedUpdateManyWithoutDepartmentNestedInput
     approvedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutDepartmentNestedInput
+    governedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutDepartmentNestedInput
   }
 
   export type JurisdictionUpsertWithoutPublicReportsInput = {
@@ -45089,6 +50467,7 @@ export namespace Prisma {
     approvalAuthorities?: ApprovalAuthorityUpdateManyWithoutJurisdictionNestedInput
     policyDocuments?: PolicyDocumentUpdateManyWithoutJurisdictionNestedInput
     approvedActions?: ApprovedActionVersionUpdateManyWithoutJurisdictionNestedInput
+    governedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutJurisdictionNestedInput
   }
 
   export type JurisdictionUncheckedUpdateWithoutPublicReportsInput = {
@@ -45102,6 +50481,7 @@ export namespace Prisma {
     approvalAuthorities?: ApprovalAuthorityUncheckedUpdateManyWithoutJurisdictionNestedInput
     policyDocuments?: PolicyDocumentUncheckedUpdateManyWithoutJurisdictionNestedInput
     approvedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutJurisdictionNestedInput
+    governedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutJurisdictionNestedInput
   }
 
   export type AssetUpsertWithoutPublicReportsInput = {
@@ -45192,6 +50572,8 @@ export namespace Prisma {
     createdApprovedActions?: ApprovedActionVersionUpdateManyWithoutCreatedByNestedInput
     approvedApprovedActions?: ApprovedActionVersionUpdateManyWithoutApprovedByNestedInput
     preparedDecisionPackages?: DecisionPackageUpdateManyWithoutPreparedByNestedInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutCreatedByNestedInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutApprovedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutReviewedPublicReportsInput = {
@@ -45226,6 +50608,8 @@ export namespace Prisma {
     createdApprovedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutCreatedByNestedInput
     approvedApprovedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutApprovedByNestedInput
     preparedDecisionPackages?: DecisionPackageUncheckedUpdateManyWithoutPreparedByNestedInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutCreatedByNestedInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutApprovedByNestedInput
   }
 
   export type UserUpsertWithoutDecidedPublicReportsInput = {
@@ -45271,6 +50655,8 @@ export namespace Prisma {
     createdApprovedActions?: ApprovedActionVersionUpdateManyWithoutCreatedByNestedInput
     approvedApprovedActions?: ApprovedActionVersionUpdateManyWithoutApprovedByNestedInput
     preparedDecisionPackages?: DecisionPackageUpdateManyWithoutPreparedByNestedInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutCreatedByNestedInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutApprovedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutDecidedPublicReportsInput = {
@@ -45305,6 +50691,8 @@ export namespace Prisma {
     createdApprovedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutCreatedByNestedInput
     approvedApprovedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutApprovedByNestedInput
     preparedDecisionPackages?: DecisionPackageUncheckedUpdateManyWithoutPreparedByNestedInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutCreatedByNestedInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutApprovedByNestedInput
   }
 
   export type CaseUpsertWithoutSourcePublicReportInput = {
@@ -45506,6 +50894,8 @@ export namespace Prisma {
     createdApprovedActions?: ApprovedActionVersionCreateNestedManyWithoutCreatedByInput
     approvedApprovedActions?: ApprovedActionVersionCreateNestedManyWithoutApprovedByInput
     preparedDecisionPackages?: DecisionPackageCreateNestedManyWithoutPreparedByInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutCreatedByInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutApprovedByInput
   }
 
   export type UserUncheckedCreateWithoutCreatedTriageAnalysesInput = {
@@ -45540,6 +50930,8 @@ export namespace Prisma {
     createdApprovedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutCreatedByInput
     approvedApprovedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutApprovedByInput
     preparedDecisionPackages?: DecisionPackageUncheckedCreateNestedManyWithoutPreparedByInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutCreatedByInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutApprovedByInput
   }
 
   export type UserCreateOrConnectWithoutCreatedTriageAnalysesInput = {
@@ -45698,6 +51090,8 @@ export namespace Prisma {
     createdApprovedActions?: ApprovedActionVersionUpdateManyWithoutCreatedByNestedInput
     approvedApprovedActions?: ApprovedActionVersionUpdateManyWithoutApprovedByNestedInput
     preparedDecisionPackages?: DecisionPackageUpdateManyWithoutPreparedByNestedInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutCreatedByNestedInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutApprovedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCreatedTriageAnalysesInput = {
@@ -45732,6 +51126,8 @@ export namespace Prisma {
     createdApprovedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutCreatedByNestedInput
     approvedApprovedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutApprovedByNestedInput
     preparedDecisionPackages?: DecisionPackageUncheckedUpdateManyWithoutPreparedByNestedInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutCreatedByNestedInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutApprovedByNestedInput
   }
 
   export type DepartmentCreateWithoutPolicyDocumentsInput = {
@@ -45745,6 +51141,7 @@ export namespace Prisma {
     approvalAuthorities?: ApprovalAuthorityCreateNestedManyWithoutDepartmentInput
     publicReports?: PublicReportCreateNestedManyWithoutDepartmentInput
     approvedActions?: ApprovedActionVersionCreateNestedManyWithoutDepartmentInput
+    governedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutDepartmentInput
   }
 
   export type DepartmentUncheckedCreateWithoutPolicyDocumentsInput = {
@@ -45758,6 +51155,7 @@ export namespace Prisma {
     approvalAuthorities?: ApprovalAuthorityUncheckedCreateNestedManyWithoutDepartmentInput
     publicReports?: PublicReportUncheckedCreateNestedManyWithoutDepartmentInput
     approvedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutDepartmentInput
+    governedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutDepartmentInput
   }
 
   export type DepartmentCreateOrConnectWithoutPolicyDocumentsInput = {
@@ -45776,6 +51174,7 @@ export namespace Prisma {
     approvalAuthorities?: ApprovalAuthorityCreateNestedManyWithoutJurisdictionInput
     publicReports?: PublicReportCreateNestedManyWithoutJurisdictionInput
     approvedActions?: ApprovedActionVersionCreateNestedManyWithoutJurisdictionInput
+    governedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutJurisdictionInput
   }
 
   export type JurisdictionUncheckedCreateWithoutPolicyDocumentsInput = {
@@ -45789,6 +51188,7 @@ export namespace Prisma {
     approvalAuthorities?: ApprovalAuthorityUncheckedCreateNestedManyWithoutJurisdictionInput
     publicReports?: PublicReportUncheckedCreateNestedManyWithoutJurisdictionInput
     approvedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutJurisdictionInput
+    governedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutJurisdictionInput
   }
 
   export type JurisdictionCreateOrConnectWithoutPolicyDocumentsInput = {
@@ -45828,6 +51228,8 @@ export namespace Prisma {
     createdApprovedActions?: ApprovedActionVersionCreateNestedManyWithoutCreatedByInput
     approvedApprovedActions?: ApprovedActionVersionCreateNestedManyWithoutApprovedByInput
     preparedDecisionPackages?: DecisionPackageCreateNestedManyWithoutPreparedByInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutCreatedByInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutApprovedByInput
   }
 
   export type UserUncheckedCreateWithoutCreatedPolicyDocumentsInput = {
@@ -45862,6 +51264,8 @@ export namespace Prisma {
     createdApprovedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutCreatedByInput
     approvedApprovedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutApprovedByInput
     preparedDecisionPackages?: DecisionPackageUncheckedCreateNestedManyWithoutPreparedByInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutCreatedByInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutApprovedByInput
   }
 
   export type UserCreateOrConnectWithoutCreatedPolicyDocumentsInput = {
@@ -45901,6 +51305,8 @@ export namespace Prisma {
     createdApprovedActions?: ApprovedActionVersionCreateNestedManyWithoutCreatedByInput
     approvedApprovedActions?: ApprovedActionVersionCreateNestedManyWithoutApprovedByInput
     preparedDecisionPackages?: DecisionPackageCreateNestedManyWithoutPreparedByInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutCreatedByInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutApprovedByInput
   }
 
   export type UserUncheckedCreateWithoutApprovedPolicyDocumentsInput = {
@@ -45935,6 +51341,8 @@ export namespace Prisma {
     createdApprovedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutCreatedByInput
     approvedApprovedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutApprovedByInput
     preparedDecisionPackages?: DecisionPackageUncheckedCreateNestedManyWithoutPreparedByInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutCreatedByInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutApprovedByInput
   }
 
   export type UserCreateOrConnectWithoutApprovedPolicyDocumentsInput = {
@@ -45997,6 +51405,8 @@ export namespace Prisma {
     createdBy: UserCreateNestedOneWithoutCreatedApprovedActionsInput
     approvedBy?: UserCreateNestedOneWithoutApprovedApprovedActionsInput
     rules?: PolicyRuleCreateNestedManyWithoutActionInput
+    executionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutApprovedActionVersionInput
+    executionTasks?: ExecutionTaskCreateNestedManyWithoutApprovedActionVersionInput
   }
 
   export type ApprovedActionVersionUncheckedCreateWithoutProvenancePolicyDocumentInput = {
@@ -46020,6 +51430,8 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     rules?: PolicyRuleUncheckedCreateNestedManyWithoutActionInput
+    executionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutApprovedActionVersionInput
+    executionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutApprovedActionVersionInput
   }
 
   export type ApprovedActionVersionCreateOrConnectWithoutProvenancePolicyDocumentInput = {
@@ -46054,6 +51466,7 @@ export namespace Prisma {
     approvalAuthorities?: ApprovalAuthorityUpdateManyWithoutDepartmentNestedInput
     publicReports?: PublicReportUpdateManyWithoutDepartmentNestedInput
     approvedActions?: ApprovedActionVersionUpdateManyWithoutDepartmentNestedInput
+    governedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutDepartmentNestedInput
   }
 
   export type DepartmentUncheckedUpdateWithoutPolicyDocumentsInput = {
@@ -46067,6 +51480,7 @@ export namespace Prisma {
     approvalAuthorities?: ApprovalAuthorityUncheckedUpdateManyWithoutDepartmentNestedInput
     publicReports?: PublicReportUncheckedUpdateManyWithoutDepartmentNestedInput
     approvedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutDepartmentNestedInput
+    governedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutDepartmentNestedInput
   }
 
   export type JurisdictionUpsertWithoutPolicyDocumentsInput = {
@@ -46091,6 +51505,7 @@ export namespace Prisma {
     approvalAuthorities?: ApprovalAuthorityUpdateManyWithoutJurisdictionNestedInput
     publicReports?: PublicReportUpdateManyWithoutJurisdictionNestedInput
     approvedActions?: ApprovedActionVersionUpdateManyWithoutJurisdictionNestedInput
+    governedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutJurisdictionNestedInput
   }
 
   export type JurisdictionUncheckedUpdateWithoutPolicyDocumentsInput = {
@@ -46104,6 +51519,7 @@ export namespace Prisma {
     approvalAuthorities?: ApprovalAuthorityUncheckedUpdateManyWithoutJurisdictionNestedInput
     publicReports?: PublicReportUncheckedUpdateManyWithoutJurisdictionNestedInput
     approvedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutJurisdictionNestedInput
+    governedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutJurisdictionNestedInput
   }
 
   export type UserUpsertWithoutCreatedPolicyDocumentsInput = {
@@ -46149,6 +51565,8 @@ export namespace Prisma {
     createdApprovedActions?: ApprovedActionVersionUpdateManyWithoutCreatedByNestedInput
     approvedApprovedActions?: ApprovedActionVersionUpdateManyWithoutApprovedByNestedInput
     preparedDecisionPackages?: DecisionPackageUpdateManyWithoutPreparedByNestedInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutCreatedByNestedInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutApprovedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCreatedPolicyDocumentsInput = {
@@ -46183,6 +51601,8 @@ export namespace Prisma {
     createdApprovedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutCreatedByNestedInput
     approvedApprovedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutApprovedByNestedInput
     preparedDecisionPackages?: DecisionPackageUncheckedUpdateManyWithoutPreparedByNestedInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutCreatedByNestedInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutApprovedByNestedInput
   }
 
   export type UserUpsertWithoutApprovedPolicyDocumentsInput = {
@@ -46228,6 +51648,8 @@ export namespace Prisma {
     createdApprovedActions?: ApprovedActionVersionUpdateManyWithoutCreatedByNestedInput
     approvedApprovedActions?: ApprovedActionVersionUpdateManyWithoutApprovedByNestedInput
     preparedDecisionPackages?: DecisionPackageUpdateManyWithoutPreparedByNestedInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutCreatedByNestedInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutApprovedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutApprovedPolicyDocumentsInput = {
@@ -46262,6 +51684,8 @@ export namespace Prisma {
     createdApprovedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutCreatedByNestedInput
     approvedApprovedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutApprovedByNestedInput
     preparedDecisionPackages?: DecisionPackageUncheckedUpdateManyWithoutPreparedByNestedInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutCreatedByNestedInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutApprovedByNestedInput
   }
 
   export type PolicyRuleUpsertWithWhereUniqueWithoutPolicyDocumentInput = {
@@ -46372,6 +51796,7 @@ export namespace Prisma {
     approvalAuthorities?: ApprovalAuthorityCreateNestedManyWithoutDepartmentInput
     publicReports?: PublicReportCreateNestedManyWithoutDepartmentInput
     policyDocuments?: PolicyDocumentCreateNestedManyWithoutDepartmentInput
+    governedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutDepartmentInput
   }
 
   export type DepartmentUncheckedCreateWithoutApprovedActionsInput = {
@@ -46385,6 +51810,7 @@ export namespace Prisma {
     approvalAuthorities?: ApprovalAuthorityUncheckedCreateNestedManyWithoutDepartmentInput
     publicReports?: PublicReportUncheckedCreateNestedManyWithoutDepartmentInput
     policyDocuments?: PolicyDocumentUncheckedCreateNestedManyWithoutDepartmentInput
+    governedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutDepartmentInput
   }
 
   export type DepartmentCreateOrConnectWithoutApprovedActionsInput = {
@@ -46403,6 +51829,7 @@ export namespace Prisma {
     approvalAuthorities?: ApprovalAuthorityCreateNestedManyWithoutJurisdictionInput
     publicReports?: PublicReportCreateNestedManyWithoutJurisdictionInput
     policyDocuments?: PolicyDocumentCreateNestedManyWithoutJurisdictionInput
+    governedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutJurisdictionInput
   }
 
   export type JurisdictionUncheckedCreateWithoutApprovedActionsInput = {
@@ -46416,6 +51843,7 @@ export namespace Prisma {
     approvalAuthorities?: ApprovalAuthorityUncheckedCreateNestedManyWithoutJurisdictionInput
     publicReports?: PublicReportUncheckedCreateNestedManyWithoutJurisdictionInput
     policyDocuments?: PolicyDocumentUncheckedCreateNestedManyWithoutJurisdictionInput
+    governedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutJurisdictionInput
   }
 
   export type JurisdictionCreateOrConnectWithoutApprovedActionsInput = {
@@ -46455,6 +51883,8 @@ export namespace Prisma {
     approvedPolicyDocuments?: PolicyDocumentCreateNestedManyWithoutApprovedByInput
     approvedApprovedActions?: ApprovedActionVersionCreateNestedManyWithoutApprovedByInput
     preparedDecisionPackages?: DecisionPackageCreateNestedManyWithoutPreparedByInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutCreatedByInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutApprovedByInput
   }
 
   export type UserUncheckedCreateWithoutCreatedApprovedActionsInput = {
@@ -46489,6 +51919,8 @@ export namespace Prisma {
     approvedPolicyDocuments?: PolicyDocumentUncheckedCreateNestedManyWithoutApprovedByInput
     approvedApprovedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutApprovedByInput
     preparedDecisionPackages?: DecisionPackageUncheckedCreateNestedManyWithoutPreparedByInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutCreatedByInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutApprovedByInput
   }
 
   export type UserCreateOrConnectWithoutCreatedApprovedActionsInput = {
@@ -46528,6 +51960,8 @@ export namespace Prisma {
     approvedPolicyDocuments?: PolicyDocumentCreateNestedManyWithoutApprovedByInput
     createdApprovedActions?: ApprovedActionVersionCreateNestedManyWithoutCreatedByInput
     preparedDecisionPackages?: DecisionPackageCreateNestedManyWithoutPreparedByInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutCreatedByInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutApprovedByInput
   }
 
   export type UserUncheckedCreateWithoutApprovedApprovedActionsInput = {
@@ -46562,6 +51996,8 @@ export namespace Prisma {
     approvedPolicyDocuments?: PolicyDocumentUncheckedCreateNestedManyWithoutApprovedByInput
     createdApprovedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutCreatedByInput
     preparedDecisionPackages?: DecisionPackageUncheckedCreateNestedManyWithoutPreparedByInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutCreatedByInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutApprovedByInput
   }
 
   export type UserCreateOrConnectWithoutApprovedApprovedActionsInput = {
@@ -46600,6 +52036,140 @@ export namespace Prisma {
 
   export type PolicyRuleCreateManyActionInputEnvelope = {
     data: PolicyRuleCreateManyActionInput | PolicyRuleCreateManyActionInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type GovernedExecutionTemplateCreateWithoutApprovedActionVersionInput = {
+    id?: string
+    templateCode: string
+    versionNumber: number
+    title: string
+    description: string
+    status?: $Enums.RegistryLifecycleStatus
+    effectiveFrom: Date | string
+    effectiveUntil?: Date | string | null
+    approvedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    department?: DepartmentCreateNestedOneWithoutGovernedExecutionTemplatesInput
+    jurisdiction?: JurisdictionCreateNestedOneWithoutGovernedExecutionTemplatesInput
+    createdBy: UserCreateNestedOneWithoutCreatedGovernedExecutionTemplatesInput
+    approvedBy?: UserCreateNestedOneWithoutApprovedGovernedExecutionTemplatesInput
+    tasks?: GovernedExecutionTaskTemplateCreateNestedManyWithoutExecutionTemplateInput
+    executionTasks?: ExecutionTaskCreateNestedManyWithoutGovernedExecutionTemplateInput
+  }
+
+  export type GovernedExecutionTemplateUncheckedCreateWithoutApprovedActionVersionInput = {
+    id?: string
+    templateCode: string
+    versionNumber: number
+    title: string
+    description: string
+    status?: $Enums.RegistryLifecycleStatus
+    effectiveFrom: Date | string
+    effectiveUntil?: Date | string | null
+    departmentId?: string | null
+    jurisdictionId?: string | null
+    createdById: string
+    approvedById?: string | null
+    approvedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tasks?: GovernedExecutionTaskTemplateUncheckedCreateNestedManyWithoutExecutionTemplateInput
+    executionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutGovernedExecutionTemplateInput
+  }
+
+  export type GovernedExecutionTemplateCreateOrConnectWithoutApprovedActionVersionInput = {
+    where: GovernedExecutionTemplateWhereUniqueInput
+    create: XOR<GovernedExecutionTemplateCreateWithoutApprovedActionVersionInput, GovernedExecutionTemplateUncheckedCreateWithoutApprovedActionVersionInput>
+  }
+
+  export type GovernedExecutionTemplateCreateManyApprovedActionVersionInputEnvelope = {
+    data: GovernedExecutionTemplateCreateManyApprovedActionVersionInput | GovernedExecutionTemplateCreateManyApprovedActionVersionInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ExecutionTaskCreateWithoutApprovedActionVersionInput = {
+    id?: string
+    sequenceNumber: number
+    sourceActionCode: string
+    templateTaskKey: string
+    titleSnapshot: string
+    descriptionSnapshot: string
+    categorySnapshot: string
+    isMandatory?: boolean
+    status?: $Enums.ExecutionTaskStatus
+    assignedAt?: Date | string | null
+    startedAt?: Date | string | null
+    completionSubmittedAt?: Date | string | null
+    completionNote?: string | null
+    verifiedAt?: Date | string | null
+    verificationNote?: string | null
+    blockedReason?: string | null
+    cancelledAt?: Date | string | null
+    cancellationReason?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    sourceActionVersion?: number | null
+    sourceTemplateCode?: string | null
+    sourceTemplateVersion?: number | null
+    evidenceRequired?: boolean
+    verificationRequired?: boolean
+    executionPlan: ExecutionPlanCreateNestedOneWithoutTasksInput
+    assignedTo?: UserCreateNestedOneWithoutAssignedExecutionTasksInput
+    assignedBy?: UserCreateNestedOneWithoutAssignedByExecutionTasksInput
+    completionSubmittedBy?: UserCreateNestedOneWithoutCompletedExecutionTasksInput
+    verifiedBy?: UserCreateNestedOneWithoutVerifiedExecutionTasksInput
+    cancelledBy?: UserCreateNestedOneWithoutCancelledExecutionTasksInput
+    evidence?: ExecutionEvidenceCreateNestedManyWithoutExecutionTaskInput
+    governedExecutionTemplate?: GovernedExecutionTemplateCreateNestedOneWithoutExecutionTasksInput
+    governedTaskTemplate?: GovernedExecutionTaskTemplateCreateNestedOneWithoutExecutionTasksInput
+  }
+
+  export type ExecutionTaskUncheckedCreateWithoutApprovedActionVersionInput = {
+    id?: string
+    executionPlanId: string
+    sequenceNumber: number
+    sourceActionCode: string
+    templateTaskKey: string
+    titleSnapshot: string
+    descriptionSnapshot: string
+    categorySnapshot: string
+    isMandatory?: boolean
+    status?: $Enums.ExecutionTaskStatus
+    assignedToId?: string | null
+    assignedById?: string | null
+    assignedAt?: Date | string | null
+    startedAt?: Date | string | null
+    completionSubmittedById?: string | null
+    completionSubmittedAt?: Date | string | null
+    completionNote?: string | null
+    verifiedById?: string | null
+    verifiedAt?: Date | string | null
+    verificationNote?: string | null
+    blockedReason?: string | null
+    cancelledById?: string | null
+    cancelledAt?: Date | string | null
+    cancellationReason?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    governedExecutionTemplateId?: string | null
+    governedTaskTemplateId?: string | null
+    sourceActionVersion?: number | null
+    sourceTemplateCode?: string | null
+    sourceTemplateVersion?: number | null
+    evidenceRequired?: boolean
+    verificationRequired?: boolean
+    evidence?: ExecutionEvidenceUncheckedCreateNestedManyWithoutExecutionTaskInput
+  }
+
+  export type ExecutionTaskCreateOrConnectWithoutApprovedActionVersionInput = {
+    where: ExecutionTaskWhereUniqueInput
+    create: XOR<ExecutionTaskCreateWithoutApprovedActionVersionInput, ExecutionTaskUncheckedCreateWithoutApprovedActionVersionInput>
+  }
+
+  export type ExecutionTaskCreateManyApprovedActionVersionInputEnvelope = {
+    data: ExecutionTaskCreateManyApprovedActionVersionInput | ExecutionTaskCreateManyApprovedActionVersionInput[]
     skipDuplicates?: boolean
   }
 
@@ -46680,6 +52250,7 @@ export namespace Prisma {
     approvalAuthorities?: ApprovalAuthorityUpdateManyWithoutDepartmentNestedInput
     publicReports?: PublicReportUpdateManyWithoutDepartmentNestedInput
     policyDocuments?: PolicyDocumentUpdateManyWithoutDepartmentNestedInput
+    governedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutDepartmentNestedInput
   }
 
   export type DepartmentUncheckedUpdateWithoutApprovedActionsInput = {
@@ -46693,6 +52264,7 @@ export namespace Prisma {
     approvalAuthorities?: ApprovalAuthorityUncheckedUpdateManyWithoutDepartmentNestedInput
     publicReports?: PublicReportUncheckedUpdateManyWithoutDepartmentNestedInput
     policyDocuments?: PolicyDocumentUncheckedUpdateManyWithoutDepartmentNestedInput
+    governedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutDepartmentNestedInput
   }
 
   export type JurisdictionUpsertWithoutApprovedActionsInput = {
@@ -46717,6 +52289,7 @@ export namespace Prisma {
     approvalAuthorities?: ApprovalAuthorityUpdateManyWithoutJurisdictionNestedInput
     publicReports?: PublicReportUpdateManyWithoutJurisdictionNestedInput
     policyDocuments?: PolicyDocumentUpdateManyWithoutJurisdictionNestedInput
+    governedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutJurisdictionNestedInput
   }
 
   export type JurisdictionUncheckedUpdateWithoutApprovedActionsInput = {
@@ -46730,6 +52303,7 @@ export namespace Prisma {
     approvalAuthorities?: ApprovalAuthorityUncheckedUpdateManyWithoutJurisdictionNestedInput
     publicReports?: PublicReportUncheckedUpdateManyWithoutJurisdictionNestedInput
     policyDocuments?: PolicyDocumentUncheckedUpdateManyWithoutJurisdictionNestedInput
+    governedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutJurisdictionNestedInput
   }
 
   export type UserUpsertWithoutCreatedApprovedActionsInput = {
@@ -46775,6 +52349,8 @@ export namespace Prisma {
     approvedPolicyDocuments?: PolicyDocumentUpdateManyWithoutApprovedByNestedInput
     approvedApprovedActions?: ApprovedActionVersionUpdateManyWithoutApprovedByNestedInput
     preparedDecisionPackages?: DecisionPackageUpdateManyWithoutPreparedByNestedInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutCreatedByNestedInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutApprovedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCreatedApprovedActionsInput = {
@@ -46809,6 +52385,8 @@ export namespace Prisma {
     approvedPolicyDocuments?: PolicyDocumentUncheckedUpdateManyWithoutApprovedByNestedInput
     approvedApprovedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutApprovedByNestedInput
     preparedDecisionPackages?: DecisionPackageUncheckedUpdateManyWithoutPreparedByNestedInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutCreatedByNestedInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutApprovedByNestedInput
   }
 
   export type UserUpsertWithoutApprovedApprovedActionsInput = {
@@ -46854,6 +52432,8 @@ export namespace Prisma {
     approvedPolicyDocuments?: PolicyDocumentUpdateManyWithoutApprovedByNestedInput
     createdApprovedActions?: ApprovedActionVersionUpdateManyWithoutCreatedByNestedInput
     preparedDecisionPackages?: DecisionPackageUpdateManyWithoutPreparedByNestedInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutCreatedByNestedInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutApprovedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutApprovedApprovedActionsInput = {
@@ -46888,6 +52468,8 @@ export namespace Prisma {
     approvedPolicyDocuments?: PolicyDocumentUncheckedUpdateManyWithoutApprovedByNestedInput
     createdApprovedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutCreatedByNestedInput
     preparedDecisionPackages?: DecisionPackageUncheckedUpdateManyWithoutPreparedByNestedInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutCreatedByNestedInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutApprovedByNestedInput
   }
 
   export type PolicyRuleUpsertWithWhereUniqueWithoutActionInput = {
@@ -46904,6 +52486,988 @@ export namespace Prisma {
   export type PolicyRuleUpdateManyWithWhereWithoutActionInput = {
     where: PolicyRuleScalarWhereInput
     data: XOR<PolicyRuleUpdateManyMutationInput, PolicyRuleUncheckedUpdateManyWithoutActionInput>
+  }
+
+  export type GovernedExecutionTemplateUpsertWithWhereUniqueWithoutApprovedActionVersionInput = {
+    where: GovernedExecutionTemplateWhereUniqueInput
+    update: XOR<GovernedExecutionTemplateUpdateWithoutApprovedActionVersionInput, GovernedExecutionTemplateUncheckedUpdateWithoutApprovedActionVersionInput>
+    create: XOR<GovernedExecutionTemplateCreateWithoutApprovedActionVersionInput, GovernedExecutionTemplateUncheckedCreateWithoutApprovedActionVersionInput>
+  }
+
+  export type GovernedExecutionTemplateUpdateWithWhereUniqueWithoutApprovedActionVersionInput = {
+    where: GovernedExecutionTemplateWhereUniqueInput
+    data: XOR<GovernedExecutionTemplateUpdateWithoutApprovedActionVersionInput, GovernedExecutionTemplateUncheckedUpdateWithoutApprovedActionVersionInput>
+  }
+
+  export type GovernedExecutionTemplateUpdateManyWithWhereWithoutApprovedActionVersionInput = {
+    where: GovernedExecutionTemplateScalarWhereInput
+    data: XOR<GovernedExecutionTemplateUpdateManyMutationInput, GovernedExecutionTemplateUncheckedUpdateManyWithoutApprovedActionVersionInput>
+  }
+
+  export type ExecutionTaskUpsertWithWhereUniqueWithoutApprovedActionVersionInput = {
+    where: ExecutionTaskWhereUniqueInput
+    update: XOR<ExecutionTaskUpdateWithoutApprovedActionVersionInput, ExecutionTaskUncheckedUpdateWithoutApprovedActionVersionInput>
+    create: XOR<ExecutionTaskCreateWithoutApprovedActionVersionInput, ExecutionTaskUncheckedCreateWithoutApprovedActionVersionInput>
+  }
+
+  export type ExecutionTaskUpdateWithWhereUniqueWithoutApprovedActionVersionInput = {
+    where: ExecutionTaskWhereUniqueInput
+    data: XOR<ExecutionTaskUpdateWithoutApprovedActionVersionInput, ExecutionTaskUncheckedUpdateWithoutApprovedActionVersionInput>
+  }
+
+  export type ExecutionTaskUpdateManyWithWhereWithoutApprovedActionVersionInput = {
+    where: ExecutionTaskScalarWhereInput
+    data: XOR<ExecutionTaskUpdateManyMutationInput, ExecutionTaskUncheckedUpdateManyWithoutApprovedActionVersionInput>
+  }
+
+  export type ApprovedActionVersionCreateWithoutExecutionTemplatesInput = {
+    id?: string
+    actionCode: string
+    versionNumber: number
+    title: string
+    category: string
+    description: string
+    applicability: JsonNullValueInput | InputJsonValue
+    enforcementClassification: $Enums.EnforcementClassification
+    sourceReference: string
+    effectiveFrom: Date | string
+    effectiveUntil?: Date | string | null
+    status?: $Enums.RegistryLifecycleStatus
+    approvedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    provenancePolicyDocument?: PolicyDocumentCreateNestedOneWithoutActionProvenanceInput
+    department?: DepartmentCreateNestedOneWithoutApprovedActionsInput
+    jurisdiction?: JurisdictionCreateNestedOneWithoutApprovedActionsInput
+    createdBy: UserCreateNestedOneWithoutCreatedApprovedActionsInput
+    approvedBy?: UserCreateNestedOneWithoutApprovedApprovedActionsInput
+    rules?: PolicyRuleCreateNestedManyWithoutActionInput
+    executionTasks?: ExecutionTaskCreateNestedManyWithoutApprovedActionVersionInput
+  }
+
+  export type ApprovedActionVersionUncheckedCreateWithoutExecutionTemplatesInput = {
+    id?: string
+    actionCode: string
+    versionNumber: number
+    title: string
+    category: string
+    description: string
+    applicability: JsonNullValueInput | InputJsonValue
+    enforcementClassification: $Enums.EnforcementClassification
+    provenancePolicyDocumentId?: string | null
+    sourceReference: string
+    departmentId?: string | null
+    jurisdictionId?: string | null
+    effectiveFrom: Date | string
+    effectiveUntil?: Date | string | null
+    status?: $Enums.RegistryLifecycleStatus
+    createdById: string
+    approvedById?: string | null
+    approvedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    rules?: PolicyRuleUncheckedCreateNestedManyWithoutActionInput
+    executionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutApprovedActionVersionInput
+  }
+
+  export type ApprovedActionVersionCreateOrConnectWithoutExecutionTemplatesInput = {
+    where: ApprovedActionVersionWhereUniqueInput
+    create: XOR<ApprovedActionVersionCreateWithoutExecutionTemplatesInput, ApprovedActionVersionUncheckedCreateWithoutExecutionTemplatesInput>
+  }
+
+  export type DepartmentCreateWithoutGovernedExecutionTemplatesInput = {
+    id?: string
+    name: string
+    code: string
+    createdAt?: Date | string
+    users?: UserCreateNestedManyWithoutDepartmentInput
+    assets?: AssetCreateNestedManyWithoutDepartmentInput
+    jurisdictions?: JurisdictionCreateNestedManyWithoutDepartmentInput
+    approvalAuthorities?: ApprovalAuthorityCreateNestedManyWithoutDepartmentInput
+    publicReports?: PublicReportCreateNestedManyWithoutDepartmentInput
+    policyDocuments?: PolicyDocumentCreateNestedManyWithoutDepartmentInput
+    approvedActions?: ApprovedActionVersionCreateNestedManyWithoutDepartmentInput
+  }
+
+  export type DepartmentUncheckedCreateWithoutGovernedExecutionTemplatesInput = {
+    id?: string
+    name: string
+    code: string
+    createdAt?: Date | string
+    users?: UserUncheckedCreateNestedManyWithoutDepartmentInput
+    assets?: AssetUncheckedCreateNestedManyWithoutDepartmentInput
+    jurisdictions?: JurisdictionUncheckedCreateNestedManyWithoutDepartmentInput
+    approvalAuthorities?: ApprovalAuthorityUncheckedCreateNestedManyWithoutDepartmentInput
+    publicReports?: PublicReportUncheckedCreateNestedManyWithoutDepartmentInput
+    policyDocuments?: PolicyDocumentUncheckedCreateNestedManyWithoutDepartmentInput
+    approvedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutDepartmentInput
+  }
+
+  export type DepartmentCreateOrConnectWithoutGovernedExecutionTemplatesInput = {
+    where: DepartmentWhereUniqueInput
+    create: XOR<DepartmentCreateWithoutGovernedExecutionTemplatesInput, DepartmentUncheckedCreateWithoutGovernedExecutionTemplatesInput>
+  }
+
+  export type JurisdictionCreateWithoutGovernedExecutionTemplatesInput = {
+    id?: string
+    name: string
+    type: string
+    createdAt?: Date | string
+    department: DepartmentCreateNestedOneWithoutJurisdictionsInput
+    users?: UserCreateNestedManyWithoutJurisdictionInput
+    assets?: AssetCreateNestedManyWithoutJurisdictionInput
+    approvalAuthorities?: ApprovalAuthorityCreateNestedManyWithoutJurisdictionInput
+    publicReports?: PublicReportCreateNestedManyWithoutJurisdictionInput
+    policyDocuments?: PolicyDocumentCreateNestedManyWithoutJurisdictionInput
+    approvedActions?: ApprovedActionVersionCreateNestedManyWithoutJurisdictionInput
+  }
+
+  export type JurisdictionUncheckedCreateWithoutGovernedExecutionTemplatesInput = {
+    id?: string
+    name: string
+    type: string
+    departmentId: string
+    createdAt?: Date | string
+    users?: UserUncheckedCreateNestedManyWithoutJurisdictionInput
+    assets?: AssetUncheckedCreateNestedManyWithoutJurisdictionInput
+    approvalAuthorities?: ApprovalAuthorityUncheckedCreateNestedManyWithoutJurisdictionInput
+    publicReports?: PublicReportUncheckedCreateNestedManyWithoutJurisdictionInput
+    policyDocuments?: PolicyDocumentUncheckedCreateNestedManyWithoutJurisdictionInput
+    approvedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutJurisdictionInput
+  }
+
+  export type JurisdictionCreateOrConnectWithoutGovernedExecutionTemplatesInput = {
+    where: JurisdictionWhereUniqueInput
+    create: XOR<JurisdictionCreateWithoutGovernedExecutionTemplatesInput, JurisdictionUncheckedCreateWithoutGovernedExecutionTemplatesInput>
+  }
+
+  export type UserCreateWithoutCreatedGovernedExecutionTemplatesInput = {
+    id?: string
+    employeeCode: string
+    name: string
+    email: string
+    passwordHash: string
+    designation: string
+    role?: $Enums.SystemRole
+    status?: $Enums.UserStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    department: DepartmentCreateNestedOneWithoutUsersInput
+    jurisdiction: JurisdictionCreateNestedOneWithoutUsersInput
+    inspections?: InspectionCreateNestedManyWithoutInspectorInput
+    approvalAuthorities?: ApprovalAuthorityCreateNestedManyWithoutUserInput
+    reviewedOrpDecisions?: OrpDecisionCreateNestedManyWithoutReviewerInput
+    forwardedOrpDecisions?: OrpDecisionCreateNestedManyWithoutForwardedUserInput
+    createdExecutionPlans?: ExecutionPlanCreateNestedManyWithoutCreatedByInput
+    assignedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutAssignedToInput
+    assignedByExecutionTasks?: ExecutionTaskCreateNestedManyWithoutAssignedByInput
+    completedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCompletionSubmittedByInput
+    verifiedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutVerifiedByInput
+    cancelledExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCancelledByInput
+    submittedExecutionEvidence?: ExecutionEvidenceCreateNestedManyWithoutSubmittedByInput
+    closedCases?: CaseClosureCreateNestedManyWithoutClosedByInput
+    reviewedPublicReports?: PublicReportCreateNestedManyWithoutReviewedByInput
+    decidedPublicReports?: PublicReportCreateNestedManyWithoutDecisionByInput
+    createdTriageAnalyses?: PublicReportTriageAnalysisCreateNestedManyWithoutCreatedByInput
+    createdPolicyDocuments?: PolicyDocumentCreateNestedManyWithoutCreatedByInput
+    approvedPolicyDocuments?: PolicyDocumentCreateNestedManyWithoutApprovedByInput
+    createdApprovedActions?: ApprovedActionVersionCreateNestedManyWithoutCreatedByInput
+    approvedApprovedActions?: ApprovedActionVersionCreateNestedManyWithoutApprovedByInput
+    preparedDecisionPackages?: DecisionPackageCreateNestedManyWithoutPreparedByInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutApprovedByInput
+  }
+
+  export type UserUncheckedCreateWithoutCreatedGovernedExecutionTemplatesInput = {
+    id?: string
+    employeeCode: string
+    name: string
+    email: string
+    passwordHash: string
+    designation: string
+    role?: $Enums.SystemRole
+    status?: $Enums.UserStatus
+    departmentId: string
+    jurisdictionId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    inspections?: InspectionUncheckedCreateNestedManyWithoutInspectorInput
+    approvalAuthorities?: ApprovalAuthorityUncheckedCreateNestedManyWithoutUserInput
+    reviewedOrpDecisions?: OrpDecisionUncheckedCreateNestedManyWithoutReviewerInput
+    forwardedOrpDecisions?: OrpDecisionUncheckedCreateNestedManyWithoutForwardedUserInput
+    createdExecutionPlans?: ExecutionPlanUncheckedCreateNestedManyWithoutCreatedByInput
+    assignedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutAssignedToInput
+    assignedByExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutAssignedByInput
+    completedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCompletionSubmittedByInput
+    verifiedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutVerifiedByInput
+    cancelledExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCancelledByInput
+    submittedExecutionEvidence?: ExecutionEvidenceUncheckedCreateNestedManyWithoutSubmittedByInput
+    closedCases?: CaseClosureUncheckedCreateNestedManyWithoutClosedByInput
+    reviewedPublicReports?: PublicReportUncheckedCreateNestedManyWithoutReviewedByInput
+    decidedPublicReports?: PublicReportUncheckedCreateNestedManyWithoutDecisionByInput
+    createdTriageAnalyses?: PublicReportTriageAnalysisUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPolicyDocuments?: PolicyDocumentUncheckedCreateNestedManyWithoutCreatedByInput
+    approvedPolicyDocuments?: PolicyDocumentUncheckedCreateNestedManyWithoutApprovedByInput
+    createdApprovedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutCreatedByInput
+    approvedApprovedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutApprovedByInput
+    preparedDecisionPackages?: DecisionPackageUncheckedCreateNestedManyWithoutPreparedByInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutApprovedByInput
+  }
+
+  export type UserCreateOrConnectWithoutCreatedGovernedExecutionTemplatesInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutCreatedGovernedExecutionTemplatesInput, UserUncheckedCreateWithoutCreatedGovernedExecutionTemplatesInput>
+  }
+
+  export type UserCreateWithoutApprovedGovernedExecutionTemplatesInput = {
+    id?: string
+    employeeCode: string
+    name: string
+    email: string
+    passwordHash: string
+    designation: string
+    role?: $Enums.SystemRole
+    status?: $Enums.UserStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    department: DepartmentCreateNestedOneWithoutUsersInput
+    jurisdiction: JurisdictionCreateNestedOneWithoutUsersInput
+    inspections?: InspectionCreateNestedManyWithoutInspectorInput
+    approvalAuthorities?: ApprovalAuthorityCreateNestedManyWithoutUserInput
+    reviewedOrpDecisions?: OrpDecisionCreateNestedManyWithoutReviewerInput
+    forwardedOrpDecisions?: OrpDecisionCreateNestedManyWithoutForwardedUserInput
+    createdExecutionPlans?: ExecutionPlanCreateNestedManyWithoutCreatedByInput
+    assignedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutAssignedToInput
+    assignedByExecutionTasks?: ExecutionTaskCreateNestedManyWithoutAssignedByInput
+    completedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCompletionSubmittedByInput
+    verifiedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutVerifiedByInput
+    cancelledExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCancelledByInput
+    submittedExecutionEvidence?: ExecutionEvidenceCreateNestedManyWithoutSubmittedByInput
+    closedCases?: CaseClosureCreateNestedManyWithoutClosedByInput
+    reviewedPublicReports?: PublicReportCreateNestedManyWithoutReviewedByInput
+    decidedPublicReports?: PublicReportCreateNestedManyWithoutDecisionByInput
+    createdTriageAnalyses?: PublicReportTriageAnalysisCreateNestedManyWithoutCreatedByInput
+    createdPolicyDocuments?: PolicyDocumentCreateNestedManyWithoutCreatedByInput
+    approvedPolicyDocuments?: PolicyDocumentCreateNestedManyWithoutApprovedByInput
+    createdApprovedActions?: ApprovedActionVersionCreateNestedManyWithoutCreatedByInput
+    approvedApprovedActions?: ApprovedActionVersionCreateNestedManyWithoutApprovedByInput
+    preparedDecisionPackages?: DecisionPackageCreateNestedManyWithoutPreparedByInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutCreatedByInput
+  }
+
+  export type UserUncheckedCreateWithoutApprovedGovernedExecutionTemplatesInput = {
+    id?: string
+    employeeCode: string
+    name: string
+    email: string
+    passwordHash: string
+    designation: string
+    role?: $Enums.SystemRole
+    status?: $Enums.UserStatus
+    departmentId: string
+    jurisdictionId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    inspections?: InspectionUncheckedCreateNestedManyWithoutInspectorInput
+    approvalAuthorities?: ApprovalAuthorityUncheckedCreateNestedManyWithoutUserInput
+    reviewedOrpDecisions?: OrpDecisionUncheckedCreateNestedManyWithoutReviewerInput
+    forwardedOrpDecisions?: OrpDecisionUncheckedCreateNestedManyWithoutForwardedUserInput
+    createdExecutionPlans?: ExecutionPlanUncheckedCreateNestedManyWithoutCreatedByInput
+    assignedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutAssignedToInput
+    assignedByExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutAssignedByInput
+    completedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCompletionSubmittedByInput
+    verifiedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutVerifiedByInput
+    cancelledExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCancelledByInput
+    submittedExecutionEvidence?: ExecutionEvidenceUncheckedCreateNestedManyWithoutSubmittedByInput
+    closedCases?: CaseClosureUncheckedCreateNestedManyWithoutClosedByInput
+    reviewedPublicReports?: PublicReportUncheckedCreateNestedManyWithoutReviewedByInput
+    decidedPublicReports?: PublicReportUncheckedCreateNestedManyWithoutDecisionByInput
+    createdTriageAnalyses?: PublicReportTriageAnalysisUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPolicyDocuments?: PolicyDocumentUncheckedCreateNestedManyWithoutCreatedByInput
+    approvedPolicyDocuments?: PolicyDocumentUncheckedCreateNestedManyWithoutApprovedByInput
+    createdApprovedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutCreatedByInput
+    approvedApprovedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutApprovedByInput
+    preparedDecisionPackages?: DecisionPackageUncheckedCreateNestedManyWithoutPreparedByInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutCreatedByInput
+  }
+
+  export type UserCreateOrConnectWithoutApprovedGovernedExecutionTemplatesInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutApprovedGovernedExecutionTemplatesInput, UserUncheckedCreateWithoutApprovedGovernedExecutionTemplatesInput>
+  }
+
+  export type GovernedExecutionTaskTemplateCreateWithoutExecutionTemplateInput = {
+    id?: string
+    sequenceNumber: number
+    taskCode: string
+    title: string
+    description: string
+    mandatory?: boolean
+    evidenceRequired?: boolean
+    verificationRequired?: boolean
+    enabled?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    executionTasks?: ExecutionTaskCreateNestedManyWithoutGovernedTaskTemplateInput
+  }
+
+  export type GovernedExecutionTaskTemplateUncheckedCreateWithoutExecutionTemplateInput = {
+    id?: string
+    sequenceNumber: number
+    taskCode: string
+    title: string
+    description: string
+    mandatory?: boolean
+    evidenceRequired?: boolean
+    verificationRequired?: boolean
+    enabled?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    executionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutGovernedTaskTemplateInput
+  }
+
+  export type GovernedExecutionTaskTemplateCreateOrConnectWithoutExecutionTemplateInput = {
+    where: GovernedExecutionTaskTemplateWhereUniqueInput
+    create: XOR<GovernedExecutionTaskTemplateCreateWithoutExecutionTemplateInput, GovernedExecutionTaskTemplateUncheckedCreateWithoutExecutionTemplateInput>
+  }
+
+  export type GovernedExecutionTaskTemplateCreateManyExecutionTemplateInputEnvelope = {
+    data: GovernedExecutionTaskTemplateCreateManyExecutionTemplateInput | GovernedExecutionTaskTemplateCreateManyExecutionTemplateInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ExecutionTaskCreateWithoutGovernedExecutionTemplateInput = {
+    id?: string
+    sequenceNumber: number
+    sourceActionCode: string
+    templateTaskKey: string
+    titleSnapshot: string
+    descriptionSnapshot: string
+    categorySnapshot: string
+    isMandatory?: boolean
+    status?: $Enums.ExecutionTaskStatus
+    assignedAt?: Date | string | null
+    startedAt?: Date | string | null
+    completionSubmittedAt?: Date | string | null
+    completionNote?: string | null
+    verifiedAt?: Date | string | null
+    verificationNote?: string | null
+    blockedReason?: string | null
+    cancelledAt?: Date | string | null
+    cancellationReason?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    sourceActionVersion?: number | null
+    sourceTemplateCode?: string | null
+    sourceTemplateVersion?: number | null
+    evidenceRequired?: boolean
+    verificationRequired?: boolean
+    executionPlan: ExecutionPlanCreateNestedOneWithoutTasksInput
+    assignedTo?: UserCreateNestedOneWithoutAssignedExecutionTasksInput
+    assignedBy?: UserCreateNestedOneWithoutAssignedByExecutionTasksInput
+    completionSubmittedBy?: UserCreateNestedOneWithoutCompletedExecutionTasksInput
+    verifiedBy?: UserCreateNestedOneWithoutVerifiedExecutionTasksInput
+    cancelledBy?: UserCreateNestedOneWithoutCancelledExecutionTasksInput
+    evidence?: ExecutionEvidenceCreateNestedManyWithoutExecutionTaskInput
+    approvedActionVersion?: ApprovedActionVersionCreateNestedOneWithoutExecutionTasksInput
+    governedTaskTemplate?: GovernedExecutionTaskTemplateCreateNestedOneWithoutExecutionTasksInput
+  }
+
+  export type ExecutionTaskUncheckedCreateWithoutGovernedExecutionTemplateInput = {
+    id?: string
+    executionPlanId: string
+    sequenceNumber: number
+    sourceActionCode: string
+    templateTaskKey: string
+    titleSnapshot: string
+    descriptionSnapshot: string
+    categorySnapshot: string
+    isMandatory?: boolean
+    status?: $Enums.ExecutionTaskStatus
+    assignedToId?: string | null
+    assignedById?: string | null
+    assignedAt?: Date | string | null
+    startedAt?: Date | string | null
+    completionSubmittedById?: string | null
+    completionSubmittedAt?: Date | string | null
+    completionNote?: string | null
+    verifiedById?: string | null
+    verifiedAt?: Date | string | null
+    verificationNote?: string | null
+    blockedReason?: string | null
+    cancelledById?: string | null
+    cancelledAt?: Date | string | null
+    cancellationReason?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    approvedActionVersionId?: string | null
+    governedTaskTemplateId?: string | null
+    sourceActionVersion?: number | null
+    sourceTemplateCode?: string | null
+    sourceTemplateVersion?: number | null
+    evidenceRequired?: boolean
+    verificationRequired?: boolean
+    evidence?: ExecutionEvidenceUncheckedCreateNestedManyWithoutExecutionTaskInput
+  }
+
+  export type ExecutionTaskCreateOrConnectWithoutGovernedExecutionTemplateInput = {
+    where: ExecutionTaskWhereUniqueInput
+    create: XOR<ExecutionTaskCreateWithoutGovernedExecutionTemplateInput, ExecutionTaskUncheckedCreateWithoutGovernedExecutionTemplateInput>
+  }
+
+  export type ExecutionTaskCreateManyGovernedExecutionTemplateInputEnvelope = {
+    data: ExecutionTaskCreateManyGovernedExecutionTemplateInput | ExecutionTaskCreateManyGovernedExecutionTemplateInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ApprovedActionVersionUpsertWithoutExecutionTemplatesInput = {
+    update: XOR<ApprovedActionVersionUpdateWithoutExecutionTemplatesInput, ApprovedActionVersionUncheckedUpdateWithoutExecutionTemplatesInput>
+    create: XOR<ApprovedActionVersionCreateWithoutExecutionTemplatesInput, ApprovedActionVersionUncheckedCreateWithoutExecutionTemplatesInput>
+    where?: ApprovedActionVersionWhereInput
+  }
+
+  export type ApprovedActionVersionUpdateToOneWithWhereWithoutExecutionTemplatesInput = {
+    where?: ApprovedActionVersionWhereInput
+    data: XOR<ApprovedActionVersionUpdateWithoutExecutionTemplatesInput, ApprovedActionVersionUncheckedUpdateWithoutExecutionTemplatesInput>
+  }
+
+  export type ApprovedActionVersionUpdateWithoutExecutionTemplatesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    actionCode?: StringFieldUpdateOperationsInput | string
+    versionNumber?: IntFieldUpdateOperationsInput | number
+    title?: StringFieldUpdateOperationsInput | string
+    category?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    applicability?: JsonNullValueInput | InputJsonValue
+    enforcementClassification?: EnumEnforcementClassificationFieldUpdateOperationsInput | $Enums.EnforcementClassification
+    sourceReference?: StringFieldUpdateOperationsInput | string
+    effectiveFrom?: DateTimeFieldUpdateOperationsInput | Date | string
+    effectiveUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumRegistryLifecycleStatusFieldUpdateOperationsInput | $Enums.RegistryLifecycleStatus
+    approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    provenancePolicyDocument?: PolicyDocumentUpdateOneWithoutActionProvenanceNestedInput
+    department?: DepartmentUpdateOneWithoutApprovedActionsNestedInput
+    jurisdiction?: JurisdictionUpdateOneWithoutApprovedActionsNestedInput
+    createdBy?: UserUpdateOneRequiredWithoutCreatedApprovedActionsNestedInput
+    approvedBy?: UserUpdateOneWithoutApprovedApprovedActionsNestedInput
+    rules?: PolicyRuleUpdateManyWithoutActionNestedInput
+    executionTasks?: ExecutionTaskUpdateManyWithoutApprovedActionVersionNestedInput
+  }
+
+  export type ApprovedActionVersionUncheckedUpdateWithoutExecutionTemplatesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    actionCode?: StringFieldUpdateOperationsInput | string
+    versionNumber?: IntFieldUpdateOperationsInput | number
+    title?: StringFieldUpdateOperationsInput | string
+    category?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    applicability?: JsonNullValueInput | InputJsonValue
+    enforcementClassification?: EnumEnforcementClassificationFieldUpdateOperationsInput | $Enums.EnforcementClassification
+    provenancePolicyDocumentId?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceReference?: StringFieldUpdateOperationsInput | string
+    departmentId?: NullableStringFieldUpdateOperationsInput | string | null
+    jurisdictionId?: NullableStringFieldUpdateOperationsInput | string | null
+    effectiveFrom?: DateTimeFieldUpdateOperationsInput | Date | string
+    effectiveUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumRegistryLifecycleStatusFieldUpdateOperationsInput | $Enums.RegistryLifecycleStatus
+    createdById?: StringFieldUpdateOperationsInput | string
+    approvedById?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    rules?: PolicyRuleUncheckedUpdateManyWithoutActionNestedInput
+    executionTasks?: ExecutionTaskUncheckedUpdateManyWithoutApprovedActionVersionNestedInput
+  }
+
+  export type DepartmentUpsertWithoutGovernedExecutionTemplatesInput = {
+    update: XOR<DepartmentUpdateWithoutGovernedExecutionTemplatesInput, DepartmentUncheckedUpdateWithoutGovernedExecutionTemplatesInput>
+    create: XOR<DepartmentCreateWithoutGovernedExecutionTemplatesInput, DepartmentUncheckedCreateWithoutGovernedExecutionTemplatesInput>
+    where?: DepartmentWhereInput
+  }
+
+  export type DepartmentUpdateToOneWithWhereWithoutGovernedExecutionTemplatesInput = {
+    where?: DepartmentWhereInput
+    data: XOR<DepartmentUpdateWithoutGovernedExecutionTemplatesInput, DepartmentUncheckedUpdateWithoutGovernedExecutionTemplatesInput>
+  }
+
+  export type DepartmentUpdateWithoutGovernedExecutionTemplatesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    users?: UserUpdateManyWithoutDepartmentNestedInput
+    assets?: AssetUpdateManyWithoutDepartmentNestedInput
+    jurisdictions?: JurisdictionUpdateManyWithoutDepartmentNestedInput
+    approvalAuthorities?: ApprovalAuthorityUpdateManyWithoutDepartmentNestedInput
+    publicReports?: PublicReportUpdateManyWithoutDepartmentNestedInput
+    policyDocuments?: PolicyDocumentUpdateManyWithoutDepartmentNestedInput
+    approvedActions?: ApprovedActionVersionUpdateManyWithoutDepartmentNestedInput
+  }
+
+  export type DepartmentUncheckedUpdateWithoutGovernedExecutionTemplatesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    users?: UserUncheckedUpdateManyWithoutDepartmentNestedInput
+    assets?: AssetUncheckedUpdateManyWithoutDepartmentNestedInput
+    jurisdictions?: JurisdictionUncheckedUpdateManyWithoutDepartmentNestedInput
+    approvalAuthorities?: ApprovalAuthorityUncheckedUpdateManyWithoutDepartmentNestedInput
+    publicReports?: PublicReportUncheckedUpdateManyWithoutDepartmentNestedInput
+    policyDocuments?: PolicyDocumentUncheckedUpdateManyWithoutDepartmentNestedInput
+    approvedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutDepartmentNestedInput
+  }
+
+  export type JurisdictionUpsertWithoutGovernedExecutionTemplatesInput = {
+    update: XOR<JurisdictionUpdateWithoutGovernedExecutionTemplatesInput, JurisdictionUncheckedUpdateWithoutGovernedExecutionTemplatesInput>
+    create: XOR<JurisdictionCreateWithoutGovernedExecutionTemplatesInput, JurisdictionUncheckedCreateWithoutGovernedExecutionTemplatesInput>
+    where?: JurisdictionWhereInput
+  }
+
+  export type JurisdictionUpdateToOneWithWhereWithoutGovernedExecutionTemplatesInput = {
+    where?: JurisdictionWhereInput
+    data: XOR<JurisdictionUpdateWithoutGovernedExecutionTemplatesInput, JurisdictionUncheckedUpdateWithoutGovernedExecutionTemplatesInput>
+  }
+
+  export type JurisdictionUpdateWithoutGovernedExecutionTemplatesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    department?: DepartmentUpdateOneRequiredWithoutJurisdictionsNestedInput
+    users?: UserUpdateManyWithoutJurisdictionNestedInput
+    assets?: AssetUpdateManyWithoutJurisdictionNestedInput
+    approvalAuthorities?: ApprovalAuthorityUpdateManyWithoutJurisdictionNestedInput
+    publicReports?: PublicReportUpdateManyWithoutJurisdictionNestedInput
+    policyDocuments?: PolicyDocumentUpdateManyWithoutJurisdictionNestedInput
+    approvedActions?: ApprovedActionVersionUpdateManyWithoutJurisdictionNestedInput
+  }
+
+  export type JurisdictionUncheckedUpdateWithoutGovernedExecutionTemplatesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    departmentId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    users?: UserUncheckedUpdateManyWithoutJurisdictionNestedInput
+    assets?: AssetUncheckedUpdateManyWithoutJurisdictionNestedInput
+    approvalAuthorities?: ApprovalAuthorityUncheckedUpdateManyWithoutJurisdictionNestedInput
+    publicReports?: PublicReportUncheckedUpdateManyWithoutJurisdictionNestedInput
+    policyDocuments?: PolicyDocumentUncheckedUpdateManyWithoutJurisdictionNestedInput
+    approvedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutJurisdictionNestedInput
+  }
+
+  export type UserUpsertWithoutCreatedGovernedExecutionTemplatesInput = {
+    update: XOR<UserUpdateWithoutCreatedGovernedExecutionTemplatesInput, UserUncheckedUpdateWithoutCreatedGovernedExecutionTemplatesInput>
+    create: XOR<UserCreateWithoutCreatedGovernedExecutionTemplatesInput, UserUncheckedCreateWithoutCreatedGovernedExecutionTemplatesInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutCreatedGovernedExecutionTemplatesInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutCreatedGovernedExecutionTemplatesInput, UserUncheckedUpdateWithoutCreatedGovernedExecutionTemplatesInput>
+  }
+
+  export type UserUpdateWithoutCreatedGovernedExecutionTemplatesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    employeeCode?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    designation?: StringFieldUpdateOperationsInput | string
+    role?: EnumSystemRoleFieldUpdateOperationsInput | $Enums.SystemRole
+    status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    department?: DepartmentUpdateOneRequiredWithoutUsersNestedInput
+    jurisdiction?: JurisdictionUpdateOneRequiredWithoutUsersNestedInput
+    inspections?: InspectionUpdateManyWithoutInspectorNestedInput
+    approvalAuthorities?: ApprovalAuthorityUpdateManyWithoutUserNestedInput
+    reviewedOrpDecisions?: OrpDecisionUpdateManyWithoutReviewerNestedInput
+    forwardedOrpDecisions?: OrpDecisionUpdateManyWithoutForwardedUserNestedInput
+    createdExecutionPlans?: ExecutionPlanUpdateManyWithoutCreatedByNestedInput
+    assignedExecutionTasks?: ExecutionTaskUpdateManyWithoutAssignedToNestedInput
+    assignedByExecutionTasks?: ExecutionTaskUpdateManyWithoutAssignedByNestedInput
+    completedExecutionTasks?: ExecutionTaskUpdateManyWithoutCompletionSubmittedByNestedInput
+    verifiedExecutionTasks?: ExecutionTaskUpdateManyWithoutVerifiedByNestedInput
+    cancelledExecutionTasks?: ExecutionTaskUpdateManyWithoutCancelledByNestedInput
+    submittedExecutionEvidence?: ExecutionEvidenceUpdateManyWithoutSubmittedByNestedInput
+    closedCases?: CaseClosureUpdateManyWithoutClosedByNestedInput
+    reviewedPublicReports?: PublicReportUpdateManyWithoutReviewedByNestedInput
+    decidedPublicReports?: PublicReportUpdateManyWithoutDecisionByNestedInput
+    createdTriageAnalyses?: PublicReportTriageAnalysisUpdateManyWithoutCreatedByNestedInput
+    createdPolicyDocuments?: PolicyDocumentUpdateManyWithoutCreatedByNestedInput
+    approvedPolicyDocuments?: PolicyDocumentUpdateManyWithoutApprovedByNestedInput
+    createdApprovedActions?: ApprovedActionVersionUpdateManyWithoutCreatedByNestedInput
+    approvedApprovedActions?: ApprovedActionVersionUpdateManyWithoutApprovedByNestedInput
+    preparedDecisionPackages?: DecisionPackageUpdateManyWithoutPreparedByNestedInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutApprovedByNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutCreatedGovernedExecutionTemplatesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    employeeCode?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    designation?: StringFieldUpdateOperationsInput | string
+    role?: EnumSystemRoleFieldUpdateOperationsInput | $Enums.SystemRole
+    status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+    departmentId?: StringFieldUpdateOperationsInput | string
+    jurisdictionId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    inspections?: InspectionUncheckedUpdateManyWithoutInspectorNestedInput
+    approvalAuthorities?: ApprovalAuthorityUncheckedUpdateManyWithoutUserNestedInput
+    reviewedOrpDecisions?: OrpDecisionUncheckedUpdateManyWithoutReviewerNestedInput
+    forwardedOrpDecisions?: OrpDecisionUncheckedUpdateManyWithoutForwardedUserNestedInput
+    createdExecutionPlans?: ExecutionPlanUncheckedUpdateManyWithoutCreatedByNestedInput
+    assignedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutAssignedToNestedInput
+    assignedByExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutAssignedByNestedInput
+    completedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCompletionSubmittedByNestedInput
+    verifiedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutVerifiedByNestedInput
+    cancelledExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCancelledByNestedInput
+    submittedExecutionEvidence?: ExecutionEvidenceUncheckedUpdateManyWithoutSubmittedByNestedInput
+    closedCases?: CaseClosureUncheckedUpdateManyWithoutClosedByNestedInput
+    reviewedPublicReports?: PublicReportUncheckedUpdateManyWithoutReviewedByNestedInput
+    decidedPublicReports?: PublicReportUncheckedUpdateManyWithoutDecisionByNestedInput
+    createdTriageAnalyses?: PublicReportTriageAnalysisUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPolicyDocuments?: PolicyDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
+    approvedPolicyDocuments?: PolicyDocumentUncheckedUpdateManyWithoutApprovedByNestedInput
+    createdApprovedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutCreatedByNestedInput
+    approvedApprovedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutApprovedByNestedInput
+    preparedDecisionPackages?: DecisionPackageUncheckedUpdateManyWithoutPreparedByNestedInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutApprovedByNestedInput
+  }
+
+  export type UserUpsertWithoutApprovedGovernedExecutionTemplatesInput = {
+    update: XOR<UserUpdateWithoutApprovedGovernedExecutionTemplatesInput, UserUncheckedUpdateWithoutApprovedGovernedExecutionTemplatesInput>
+    create: XOR<UserCreateWithoutApprovedGovernedExecutionTemplatesInput, UserUncheckedCreateWithoutApprovedGovernedExecutionTemplatesInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutApprovedGovernedExecutionTemplatesInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutApprovedGovernedExecutionTemplatesInput, UserUncheckedUpdateWithoutApprovedGovernedExecutionTemplatesInput>
+  }
+
+  export type UserUpdateWithoutApprovedGovernedExecutionTemplatesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    employeeCode?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    designation?: StringFieldUpdateOperationsInput | string
+    role?: EnumSystemRoleFieldUpdateOperationsInput | $Enums.SystemRole
+    status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    department?: DepartmentUpdateOneRequiredWithoutUsersNestedInput
+    jurisdiction?: JurisdictionUpdateOneRequiredWithoutUsersNestedInput
+    inspections?: InspectionUpdateManyWithoutInspectorNestedInput
+    approvalAuthorities?: ApprovalAuthorityUpdateManyWithoutUserNestedInput
+    reviewedOrpDecisions?: OrpDecisionUpdateManyWithoutReviewerNestedInput
+    forwardedOrpDecisions?: OrpDecisionUpdateManyWithoutForwardedUserNestedInput
+    createdExecutionPlans?: ExecutionPlanUpdateManyWithoutCreatedByNestedInput
+    assignedExecutionTasks?: ExecutionTaskUpdateManyWithoutAssignedToNestedInput
+    assignedByExecutionTasks?: ExecutionTaskUpdateManyWithoutAssignedByNestedInput
+    completedExecutionTasks?: ExecutionTaskUpdateManyWithoutCompletionSubmittedByNestedInput
+    verifiedExecutionTasks?: ExecutionTaskUpdateManyWithoutVerifiedByNestedInput
+    cancelledExecutionTasks?: ExecutionTaskUpdateManyWithoutCancelledByNestedInput
+    submittedExecutionEvidence?: ExecutionEvidenceUpdateManyWithoutSubmittedByNestedInput
+    closedCases?: CaseClosureUpdateManyWithoutClosedByNestedInput
+    reviewedPublicReports?: PublicReportUpdateManyWithoutReviewedByNestedInput
+    decidedPublicReports?: PublicReportUpdateManyWithoutDecisionByNestedInput
+    createdTriageAnalyses?: PublicReportTriageAnalysisUpdateManyWithoutCreatedByNestedInput
+    createdPolicyDocuments?: PolicyDocumentUpdateManyWithoutCreatedByNestedInput
+    approvedPolicyDocuments?: PolicyDocumentUpdateManyWithoutApprovedByNestedInput
+    createdApprovedActions?: ApprovedActionVersionUpdateManyWithoutCreatedByNestedInput
+    approvedApprovedActions?: ApprovedActionVersionUpdateManyWithoutApprovedByNestedInput
+    preparedDecisionPackages?: DecisionPackageUpdateManyWithoutPreparedByNestedInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutCreatedByNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutApprovedGovernedExecutionTemplatesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    employeeCode?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    designation?: StringFieldUpdateOperationsInput | string
+    role?: EnumSystemRoleFieldUpdateOperationsInput | $Enums.SystemRole
+    status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+    departmentId?: StringFieldUpdateOperationsInput | string
+    jurisdictionId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    inspections?: InspectionUncheckedUpdateManyWithoutInspectorNestedInput
+    approvalAuthorities?: ApprovalAuthorityUncheckedUpdateManyWithoutUserNestedInput
+    reviewedOrpDecisions?: OrpDecisionUncheckedUpdateManyWithoutReviewerNestedInput
+    forwardedOrpDecisions?: OrpDecisionUncheckedUpdateManyWithoutForwardedUserNestedInput
+    createdExecutionPlans?: ExecutionPlanUncheckedUpdateManyWithoutCreatedByNestedInput
+    assignedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutAssignedToNestedInput
+    assignedByExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutAssignedByNestedInput
+    completedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCompletionSubmittedByNestedInput
+    verifiedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutVerifiedByNestedInput
+    cancelledExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCancelledByNestedInput
+    submittedExecutionEvidence?: ExecutionEvidenceUncheckedUpdateManyWithoutSubmittedByNestedInput
+    closedCases?: CaseClosureUncheckedUpdateManyWithoutClosedByNestedInput
+    reviewedPublicReports?: PublicReportUncheckedUpdateManyWithoutReviewedByNestedInput
+    decidedPublicReports?: PublicReportUncheckedUpdateManyWithoutDecisionByNestedInput
+    createdTriageAnalyses?: PublicReportTriageAnalysisUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPolicyDocuments?: PolicyDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
+    approvedPolicyDocuments?: PolicyDocumentUncheckedUpdateManyWithoutApprovedByNestedInput
+    createdApprovedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutCreatedByNestedInput
+    approvedApprovedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutApprovedByNestedInput
+    preparedDecisionPackages?: DecisionPackageUncheckedUpdateManyWithoutPreparedByNestedInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutCreatedByNestedInput
+  }
+
+  export type GovernedExecutionTaskTemplateUpsertWithWhereUniqueWithoutExecutionTemplateInput = {
+    where: GovernedExecutionTaskTemplateWhereUniqueInput
+    update: XOR<GovernedExecutionTaskTemplateUpdateWithoutExecutionTemplateInput, GovernedExecutionTaskTemplateUncheckedUpdateWithoutExecutionTemplateInput>
+    create: XOR<GovernedExecutionTaskTemplateCreateWithoutExecutionTemplateInput, GovernedExecutionTaskTemplateUncheckedCreateWithoutExecutionTemplateInput>
+  }
+
+  export type GovernedExecutionTaskTemplateUpdateWithWhereUniqueWithoutExecutionTemplateInput = {
+    where: GovernedExecutionTaskTemplateWhereUniqueInput
+    data: XOR<GovernedExecutionTaskTemplateUpdateWithoutExecutionTemplateInput, GovernedExecutionTaskTemplateUncheckedUpdateWithoutExecutionTemplateInput>
+  }
+
+  export type GovernedExecutionTaskTemplateUpdateManyWithWhereWithoutExecutionTemplateInput = {
+    where: GovernedExecutionTaskTemplateScalarWhereInput
+    data: XOR<GovernedExecutionTaskTemplateUpdateManyMutationInput, GovernedExecutionTaskTemplateUncheckedUpdateManyWithoutExecutionTemplateInput>
+  }
+
+  export type GovernedExecutionTaskTemplateScalarWhereInput = {
+    AND?: GovernedExecutionTaskTemplateScalarWhereInput | GovernedExecutionTaskTemplateScalarWhereInput[]
+    OR?: GovernedExecutionTaskTemplateScalarWhereInput[]
+    NOT?: GovernedExecutionTaskTemplateScalarWhereInput | GovernedExecutionTaskTemplateScalarWhereInput[]
+    id?: StringFilter<"GovernedExecutionTaskTemplate"> | string
+    executionTemplateId?: StringFilter<"GovernedExecutionTaskTemplate"> | string
+    sequenceNumber?: IntFilter<"GovernedExecutionTaskTemplate"> | number
+    taskCode?: StringFilter<"GovernedExecutionTaskTemplate"> | string
+    title?: StringFilter<"GovernedExecutionTaskTemplate"> | string
+    description?: StringFilter<"GovernedExecutionTaskTemplate"> | string
+    mandatory?: BoolFilter<"GovernedExecutionTaskTemplate"> | boolean
+    evidenceRequired?: BoolFilter<"GovernedExecutionTaskTemplate"> | boolean
+    verificationRequired?: BoolFilter<"GovernedExecutionTaskTemplate"> | boolean
+    enabled?: BoolFilter<"GovernedExecutionTaskTemplate"> | boolean
+    createdAt?: DateTimeFilter<"GovernedExecutionTaskTemplate"> | Date | string
+    updatedAt?: DateTimeFilter<"GovernedExecutionTaskTemplate"> | Date | string
+  }
+
+  export type ExecutionTaskUpsertWithWhereUniqueWithoutGovernedExecutionTemplateInput = {
+    where: ExecutionTaskWhereUniqueInput
+    update: XOR<ExecutionTaskUpdateWithoutGovernedExecutionTemplateInput, ExecutionTaskUncheckedUpdateWithoutGovernedExecutionTemplateInput>
+    create: XOR<ExecutionTaskCreateWithoutGovernedExecutionTemplateInput, ExecutionTaskUncheckedCreateWithoutGovernedExecutionTemplateInput>
+  }
+
+  export type ExecutionTaskUpdateWithWhereUniqueWithoutGovernedExecutionTemplateInput = {
+    where: ExecutionTaskWhereUniqueInput
+    data: XOR<ExecutionTaskUpdateWithoutGovernedExecutionTemplateInput, ExecutionTaskUncheckedUpdateWithoutGovernedExecutionTemplateInput>
+  }
+
+  export type ExecutionTaskUpdateManyWithWhereWithoutGovernedExecutionTemplateInput = {
+    where: ExecutionTaskScalarWhereInput
+    data: XOR<ExecutionTaskUpdateManyMutationInput, ExecutionTaskUncheckedUpdateManyWithoutGovernedExecutionTemplateInput>
+  }
+
+  export type GovernedExecutionTemplateCreateWithoutTasksInput = {
+    id?: string
+    templateCode: string
+    versionNumber: number
+    title: string
+    description: string
+    status?: $Enums.RegistryLifecycleStatus
+    effectiveFrom: Date | string
+    effectiveUntil?: Date | string | null
+    approvedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    approvedActionVersion: ApprovedActionVersionCreateNestedOneWithoutExecutionTemplatesInput
+    department?: DepartmentCreateNestedOneWithoutGovernedExecutionTemplatesInput
+    jurisdiction?: JurisdictionCreateNestedOneWithoutGovernedExecutionTemplatesInput
+    createdBy: UserCreateNestedOneWithoutCreatedGovernedExecutionTemplatesInput
+    approvedBy?: UserCreateNestedOneWithoutApprovedGovernedExecutionTemplatesInput
+    executionTasks?: ExecutionTaskCreateNestedManyWithoutGovernedExecutionTemplateInput
+  }
+
+  export type GovernedExecutionTemplateUncheckedCreateWithoutTasksInput = {
+    id?: string
+    templateCode: string
+    versionNumber: number
+    approvedActionVersionId: string
+    title: string
+    description: string
+    status?: $Enums.RegistryLifecycleStatus
+    effectiveFrom: Date | string
+    effectiveUntil?: Date | string | null
+    departmentId?: string | null
+    jurisdictionId?: string | null
+    createdById: string
+    approvedById?: string | null
+    approvedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    executionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutGovernedExecutionTemplateInput
+  }
+
+  export type GovernedExecutionTemplateCreateOrConnectWithoutTasksInput = {
+    where: GovernedExecutionTemplateWhereUniqueInput
+    create: XOR<GovernedExecutionTemplateCreateWithoutTasksInput, GovernedExecutionTemplateUncheckedCreateWithoutTasksInput>
+  }
+
+  export type ExecutionTaskCreateWithoutGovernedTaskTemplateInput = {
+    id?: string
+    sequenceNumber: number
+    sourceActionCode: string
+    templateTaskKey: string
+    titleSnapshot: string
+    descriptionSnapshot: string
+    categorySnapshot: string
+    isMandatory?: boolean
+    status?: $Enums.ExecutionTaskStatus
+    assignedAt?: Date | string | null
+    startedAt?: Date | string | null
+    completionSubmittedAt?: Date | string | null
+    completionNote?: string | null
+    verifiedAt?: Date | string | null
+    verificationNote?: string | null
+    blockedReason?: string | null
+    cancelledAt?: Date | string | null
+    cancellationReason?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    sourceActionVersion?: number | null
+    sourceTemplateCode?: string | null
+    sourceTemplateVersion?: number | null
+    evidenceRequired?: boolean
+    verificationRequired?: boolean
+    executionPlan: ExecutionPlanCreateNestedOneWithoutTasksInput
+    assignedTo?: UserCreateNestedOneWithoutAssignedExecutionTasksInput
+    assignedBy?: UserCreateNestedOneWithoutAssignedByExecutionTasksInput
+    completionSubmittedBy?: UserCreateNestedOneWithoutCompletedExecutionTasksInput
+    verifiedBy?: UserCreateNestedOneWithoutVerifiedExecutionTasksInput
+    cancelledBy?: UserCreateNestedOneWithoutCancelledExecutionTasksInput
+    evidence?: ExecutionEvidenceCreateNestedManyWithoutExecutionTaskInput
+    approvedActionVersion?: ApprovedActionVersionCreateNestedOneWithoutExecutionTasksInput
+    governedExecutionTemplate?: GovernedExecutionTemplateCreateNestedOneWithoutExecutionTasksInput
+  }
+
+  export type ExecutionTaskUncheckedCreateWithoutGovernedTaskTemplateInput = {
+    id?: string
+    executionPlanId: string
+    sequenceNumber: number
+    sourceActionCode: string
+    templateTaskKey: string
+    titleSnapshot: string
+    descriptionSnapshot: string
+    categorySnapshot: string
+    isMandatory?: boolean
+    status?: $Enums.ExecutionTaskStatus
+    assignedToId?: string | null
+    assignedById?: string | null
+    assignedAt?: Date | string | null
+    startedAt?: Date | string | null
+    completionSubmittedById?: string | null
+    completionSubmittedAt?: Date | string | null
+    completionNote?: string | null
+    verifiedById?: string | null
+    verifiedAt?: Date | string | null
+    verificationNote?: string | null
+    blockedReason?: string | null
+    cancelledById?: string | null
+    cancelledAt?: Date | string | null
+    cancellationReason?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    approvedActionVersionId?: string | null
+    governedExecutionTemplateId?: string | null
+    sourceActionVersion?: number | null
+    sourceTemplateCode?: string | null
+    sourceTemplateVersion?: number | null
+    evidenceRequired?: boolean
+    verificationRequired?: boolean
+    evidence?: ExecutionEvidenceUncheckedCreateNestedManyWithoutExecutionTaskInput
+  }
+
+  export type ExecutionTaskCreateOrConnectWithoutGovernedTaskTemplateInput = {
+    where: ExecutionTaskWhereUniqueInput
+    create: XOR<ExecutionTaskCreateWithoutGovernedTaskTemplateInput, ExecutionTaskUncheckedCreateWithoutGovernedTaskTemplateInput>
+  }
+
+  export type ExecutionTaskCreateManyGovernedTaskTemplateInputEnvelope = {
+    data: ExecutionTaskCreateManyGovernedTaskTemplateInput | ExecutionTaskCreateManyGovernedTaskTemplateInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type GovernedExecutionTemplateUpsertWithoutTasksInput = {
+    update: XOR<GovernedExecutionTemplateUpdateWithoutTasksInput, GovernedExecutionTemplateUncheckedUpdateWithoutTasksInput>
+    create: XOR<GovernedExecutionTemplateCreateWithoutTasksInput, GovernedExecutionTemplateUncheckedCreateWithoutTasksInput>
+    where?: GovernedExecutionTemplateWhereInput
+  }
+
+  export type GovernedExecutionTemplateUpdateToOneWithWhereWithoutTasksInput = {
+    where?: GovernedExecutionTemplateWhereInput
+    data: XOR<GovernedExecutionTemplateUpdateWithoutTasksInput, GovernedExecutionTemplateUncheckedUpdateWithoutTasksInput>
+  }
+
+  export type GovernedExecutionTemplateUpdateWithoutTasksInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    templateCode?: StringFieldUpdateOperationsInput | string
+    versionNumber?: IntFieldUpdateOperationsInput | number
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    status?: EnumRegistryLifecycleStatusFieldUpdateOperationsInput | $Enums.RegistryLifecycleStatus
+    effectiveFrom?: DateTimeFieldUpdateOperationsInput | Date | string
+    effectiveUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    approvedActionVersion?: ApprovedActionVersionUpdateOneRequiredWithoutExecutionTemplatesNestedInput
+    department?: DepartmentUpdateOneWithoutGovernedExecutionTemplatesNestedInput
+    jurisdiction?: JurisdictionUpdateOneWithoutGovernedExecutionTemplatesNestedInput
+    createdBy?: UserUpdateOneRequiredWithoutCreatedGovernedExecutionTemplatesNestedInput
+    approvedBy?: UserUpdateOneWithoutApprovedGovernedExecutionTemplatesNestedInput
+    executionTasks?: ExecutionTaskUpdateManyWithoutGovernedExecutionTemplateNestedInput
+  }
+
+  export type GovernedExecutionTemplateUncheckedUpdateWithoutTasksInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    templateCode?: StringFieldUpdateOperationsInput | string
+    versionNumber?: IntFieldUpdateOperationsInput | number
+    approvedActionVersionId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    status?: EnumRegistryLifecycleStatusFieldUpdateOperationsInput | $Enums.RegistryLifecycleStatus
+    effectiveFrom?: DateTimeFieldUpdateOperationsInput | Date | string
+    effectiveUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    departmentId?: NullableStringFieldUpdateOperationsInput | string | null
+    jurisdictionId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: StringFieldUpdateOperationsInput | string
+    approvedById?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    executionTasks?: ExecutionTaskUncheckedUpdateManyWithoutGovernedExecutionTemplateNestedInput
+  }
+
+  export type ExecutionTaskUpsertWithWhereUniqueWithoutGovernedTaskTemplateInput = {
+    where: ExecutionTaskWhereUniqueInput
+    update: XOR<ExecutionTaskUpdateWithoutGovernedTaskTemplateInput, ExecutionTaskUncheckedUpdateWithoutGovernedTaskTemplateInput>
+    create: XOR<ExecutionTaskCreateWithoutGovernedTaskTemplateInput, ExecutionTaskUncheckedCreateWithoutGovernedTaskTemplateInput>
+  }
+
+  export type ExecutionTaskUpdateWithWhereUniqueWithoutGovernedTaskTemplateInput = {
+    where: ExecutionTaskWhereUniqueInput
+    data: XOR<ExecutionTaskUpdateWithoutGovernedTaskTemplateInput, ExecutionTaskUncheckedUpdateWithoutGovernedTaskTemplateInput>
+  }
+
+  export type ExecutionTaskUpdateManyWithWhereWithoutGovernedTaskTemplateInput = {
+    where: ExecutionTaskScalarWhereInput
+    data: XOR<ExecutionTaskUpdateManyMutationInput, ExecutionTaskUncheckedUpdateManyWithoutGovernedTaskTemplateInput>
   }
 
   export type PolicyDocumentCreateWithoutRulesInput = {
@@ -46976,6 +53540,8 @@ export namespace Prisma {
     jurisdiction?: JurisdictionCreateNestedOneWithoutApprovedActionsInput
     createdBy: UserCreateNestedOneWithoutCreatedApprovedActionsInput
     approvedBy?: UserCreateNestedOneWithoutApprovedApprovedActionsInput
+    executionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutApprovedActionVersionInput
+    executionTasks?: ExecutionTaskCreateNestedManyWithoutApprovedActionVersionInput
   }
 
   export type ApprovedActionVersionUncheckedCreateWithoutRulesInput = {
@@ -46999,6 +53565,8 @@ export namespace Prisma {
     approvedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    executionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutApprovedActionVersionInput
+    executionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutApprovedActionVersionInput
   }
 
   export type ApprovedActionVersionCreateOrConnectWithoutRulesInput = {
@@ -47093,6 +53661,8 @@ export namespace Prisma {
     jurisdiction?: JurisdictionUpdateOneWithoutApprovedActionsNestedInput
     createdBy?: UserUpdateOneRequiredWithoutCreatedApprovedActionsNestedInput
     approvedBy?: UserUpdateOneWithoutApprovedApprovedActionsNestedInput
+    executionTemplates?: GovernedExecutionTemplateUpdateManyWithoutApprovedActionVersionNestedInput
+    executionTasks?: ExecutionTaskUpdateManyWithoutApprovedActionVersionNestedInput
   }
 
   export type ApprovedActionVersionUncheckedUpdateWithoutRulesInput = {
@@ -47116,6 +53686,8 @@ export namespace Prisma {
     approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    executionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutApprovedActionVersionNestedInput
+    executionTasks?: ExecutionTaskUncheckedUpdateManyWithoutApprovedActionVersionNestedInput
   }
 
   export type AssetCreateWithoutCasesInput = {
@@ -47255,6 +53827,9 @@ export namespace Prisma {
     planVersion?: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    governanceMode?: $Enums.ActionPlanGovernanceMode
+    governedActions?: NullableJsonNullValueInput | InputJsonValue
+    actionPlanContractVersion?: string | null
     riskAssessment: RiskAssessmentCreateNestedOneWithoutOperationalResponsePlansInput
     decisions?: OrpDecisionCreateNestedManyWithoutOrpInput
     executionPlan?: ExecutionPlanCreateNestedOneWithoutOrpInput
@@ -47275,6 +53850,9 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     decisionPackageId?: string | null
+    governanceMode?: $Enums.ActionPlanGovernanceMode
+    governedActions?: NullableJsonNullValueInput | InputJsonValue
+    actionPlanContractVersion?: string | null
     decisions?: OrpDecisionUncheckedCreateNestedManyWithoutOrpInput
     executionPlan?: ExecutionPlanUncheckedCreateNestedOneWithoutOrpInput
   }
@@ -47337,6 +53915,9 @@ export namespace Prisma {
     completedAt?: Date | string | null
     cancelledAt?: Date | string | null
     cancellationReason?: string | null
+    governanceMode?: $Enums.ExecutionPlanGovernanceMode
+    executionContractVersion?: string | null
+    governedProvenance?: NullableJsonNullValueInput | InputJsonValue
     orp: OperationalResponsePlanCreateNestedOneWithoutExecutionPlanInput
     approvalDecision: OrpDecisionCreateNestedOneWithoutExecutionPlanInput
     createdBy: UserCreateNestedOneWithoutCreatedExecutionPlansInput
@@ -47357,6 +53938,9 @@ export namespace Prisma {
     completedAt?: Date | string | null
     cancelledAt?: Date | string | null
     cancellationReason?: string | null
+    governanceMode?: $Enums.ExecutionPlanGovernanceMode
+    executionContractVersion?: string | null
+    governedProvenance?: NullableJsonNullValueInput | InputJsonValue
     tasks?: ExecutionTaskUncheckedCreateNestedManyWithoutExecutionPlanInput
     closure?: CaseClosureUncheckedCreateNestedOneWithoutExecutionPlanInput
   }
@@ -47632,6 +54216,9 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"OperationalResponsePlan"> | Date | string
     updatedAt?: DateTimeFilter<"OperationalResponsePlan"> | Date | string
     decisionPackageId?: StringNullableFilter<"OperationalResponsePlan"> | string | null
+    governanceMode?: EnumActionPlanGovernanceModeFilter<"OperationalResponsePlan"> | $Enums.ActionPlanGovernanceMode
+    governedActions?: JsonNullableFilter<"OperationalResponsePlan">
+    actionPlanContractVersion?: StringNullableFilter<"OperationalResponsePlan"> | string | null
   }
 
   export type OrpDecisionUpsertWithWhereUniqueWithoutCaseInput = {
@@ -47857,6 +54444,8 @@ export namespace Prisma {
     createdApprovedActions?: ApprovedActionVersionCreateNestedManyWithoutCreatedByInput
     approvedApprovedActions?: ApprovedActionVersionCreateNestedManyWithoutApprovedByInput
     preparedDecisionPackages?: DecisionPackageCreateNestedManyWithoutPreparedByInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutCreatedByInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutApprovedByInput
   }
 
   export type UserUncheckedCreateWithoutInspectionsInput = {
@@ -47891,6 +54480,8 @@ export namespace Prisma {
     createdApprovedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutCreatedByInput
     approvedApprovedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutApprovedByInput
     preparedDecisionPackages?: DecisionPackageUncheckedCreateNestedManyWithoutPreparedByInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutCreatedByInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutApprovedByInput
   }
 
   export type UserCreateOrConnectWithoutInspectionsInput = {
@@ -48086,6 +54677,8 @@ export namespace Prisma {
     createdApprovedActions?: ApprovedActionVersionUpdateManyWithoutCreatedByNestedInput
     approvedApprovedActions?: ApprovedActionVersionUpdateManyWithoutApprovedByNestedInput
     preparedDecisionPackages?: DecisionPackageUpdateManyWithoutPreparedByNestedInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutCreatedByNestedInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutApprovedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutInspectionsInput = {
@@ -48120,6 +54713,8 @@ export namespace Prisma {
     createdApprovedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutCreatedByNestedInput
     approvedApprovedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutApprovedByNestedInput
     preparedDecisionPackages?: DecisionPackageUncheckedUpdateManyWithoutPreparedByNestedInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutCreatedByNestedInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutApprovedByNestedInput
   }
 
   export type RiskAssessmentUpsertWithWhereUniqueWithoutInspectionInput = {
@@ -48258,6 +54853,9 @@ export namespace Prisma {
     planVersion?: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    governanceMode?: $Enums.ActionPlanGovernanceMode
+    governedActions?: NullableJsonNullValueInput | InputJsonValue
+    actionPlanContractVersion?: string | null
     case: CaseCreateNestedOneWithoutOperationalResponsePlansInput
     decisions?: OrpDecisionCreateNestedManyWithoutOrpInput
     executionPlan?: ExecutionPlanCreateNestedOneWithoutOrpInput
@@ -48278,6 +54876,9 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     decisionPackageId?: string | null
+    governanceMode?: $Enums.ActionPlanGovernanceMode
+    governedActions?: NullableJsonNullValueInput | InputJsonValue
+    actionPlanContractVersion?: string | null
     decisions?: OrpDecisionUncheckedCreateNestedManyWithoutOrpInput
     executionPlan?: ExecutionPlanUncheckedCreateNestedOneWithoutOrpInput
   }
@@ -48610,6 +55211,9 @@ export namespace Prisma {
     completedAt?: Date | string | null
     cancelledAt?: Date | string | null
     cancellationReason?: string | null
+    governanceMode?: $Enums.ExecutionPlanGovernanceMode
+    executionContractVersion?: string | null
+    governedProvenance?: NullableJsonNullValueInput | InputJsonValue
     case: CaseCreateNestedOneWithoutExecutionPlansInput
     approvalDecision: OrpDecisionCreateNestedOneWithoutExecutionPlanInput
     createdBy: UserCreateNestedOneWithoutCreatedExecutionPlansInput
@@ -48630,6 +55234,9 @@ export namespace Prisma {
     completedAt?: Date | string | null
     cancelledAt?: Date | string | null
     cancellationReason?: string | null
+    governanceMode?: $Enums.ExecutionPlanGovernanceMode
+    executionContractVersion?: string | null
+    governedProvenance?: NullableJsonNullValueInput | InputJsonValue
     tasks?: ExecutionTaskUncheckedCreateNestedManyWithoutExecutionPlanInput
     closure?: CaseClosureUncheckedCreateNestedOneWithoutExecutionPlanInput
   }
@@ -48817,6 +55424,9 @@ export namespace Prisma {
     completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    governanceMode?: EnumExecutionPlanGovernanceModeFieldUpdateOperationsInput | $Enums.ExecutionPlanGovernanceMode
+    executionContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
+    governedProvenance?: NullableJsonNullValueInput | InputJsonValue
     case?: CaseUpdateOneRequiredWithoutExecutionPlansNestedInput
     approvalDecision?: OrpDecisionUpdateOneRequiredWithoutExecutionPlanNestedInput
     createdBy?: UserUpdateOneRequiredWithoutCreatedExecutionPlansNestedInput
@@ -48837,6 +55447,9 @@ export namespace Prisma {
     completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    governanceMode?: EnumExecutionPlanGovernanceModeFieldUpdateOperationsInput | $Enums.ExecutionPlanGovernanceMode
+    executionContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
+    governedProvenance?: NullableJsonNullValueInput | InputJsonValue
     tasks?: ExecutionTaskUncheckedUpdateManyWithoutExecutionPlanNestedInput
     closure?: CaseClosureUncheckedUpdateOneWithoutExecutionPlanNestedInput
   }
@@ -49051,6 +55664,8 @@ export namespace Prisma {
     approvedPolicyDocuments?: PolicyDocumentCreateNestedManyWithoutApprovedByInput
     createdApprovedActions?: ApprovedActionVersionCreateNestedManyWithoutCreatedByInput
     approvedApprovedActions?: ApprovedActionVersionCreateNestedManyWithoutApprovedByInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutCreatedByInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutApprovedByInput
   }
 
   export type UserUncheckedCreateWithoutPreparedDecisionPackagesInput = {
@@ -49085,6 +55700,8 @@ export namespace Prisma {
     approvedPolicyDocuments?: PolicyDocumentUncheckedCreateNestedManyWithoutApprovedByInput
     createdApprovedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutCreatedByInput
     approvedApprovedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutApprovedByInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutCreatedByInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutApprovedByInput
   }
 
   export type UserCreateOrConnectWithoutPreparedDecisionPackagesInput = {
@@ -49104,6 +55721,9 @@ export namespace Prisma {
     planVersion?: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    governanceMode?: $Enums.ActionPlanGovernanceMode
+    governedActions?: NullableJsonNullValueInput | InputJsonValue
+    actionPlanContractVersion?: string | null
     case: CaseCreateNestedOneWithoutOperationalResponsePlansInput
     riskAssessment: RiskAssessmentCreateNestedOneWithoutOperationalResponsePlansInput
     decisions?: OrpDecisionCreateNestedManyWithoutOrpInput
@@ -49124,6 +55744,9 @@ export namespace Prisma {
     planVersion?: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    governanceMode?: $Enums.ActionPlanGovernanceMode
+    governedActions?: NullableJsonNullValueInput | InputJsonValue
+    actionPlanContractVersion?: string | null
     decisions?: OrpDecisionUncheckedCreateNestedManyWithoutOrpInput
     executionPlan?: ExecutionPlanUncheckedCreateNestedOneWithoutOrpInput
   }
@@ -49324,6 +55947,8 @@ export namespace Prisma {
     approvedPolicyDocuments?: PolicyDocumentUpdateManyWithoutApprovedByNestedInput
     createdApprovedActions?: ApprovedActionVersionUpdateManyWithoutCreatedByNestedInput
     approvedApprovedActions?: ApprovedActionVersionUpdateManyWithoutApprovedByNestedInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutCreatedByNestedInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutApprovedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPreparedDecisionPackagesInput = {
@@ -49358,6 +55983,8 @@ export namespace Prisma {
     approvedPolicyDocuments?: PolicyDocumentUncheckedUpdateManyWithoutApprovedByNestedInput
     createdApprovedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutCreatedByNestedInput
     approvedApprovedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutApprovedByNestedInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutCreatedByNestedInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutApprovedByNestedInput
   }
 
   export type OperationalResponsePlanUpsertWithWhereUniqueWithoutDecisionPackageInput = {
@@ -49408,6 +56035,8 @@ export namespace Prisma {
     createdApprovedActions?: ApprovedActionVersionCreateNestedManyWithoutCreatedByInput
     approvedApprovedActions?: ApprovedActionVersionCreateNestedManyWithoutApprovedByInput
     preparedDecisionPackages?: DecisionPackageCreateNestedManyWithoutPreparedByInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutCreatedByInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutApprovedByInput
   }
 
   export type UserUncheckedCreateWithoutApprovalAuthoritiesInput = {
@@ -49442,6 +56071,8 @@ export namespace Prisma {
     createdApprovedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutCreatedByInput
     approvedApprovedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutApprovedByInput
     preparedDecisionPackages?: DecisionPackageUncheckedCreateNestedManyWithoutPreparedByInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutCreatedByInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutApprovedByInput
   }
 
   export type UserCreateOrConnectWithoutApprovalAuthoritiesInput = {
@@ -49460,6 +56091,7 @@ export namespace Prisma {
     publicReports?: PublicReportCreateNestedManyWithoutDepartmentInput
     policyDocuments?: PolicyDocumentCreateNestedManyWithoutDepartmentInput
     approvedActions?: ApprovedActionVersionCreateNestedManyWithoutDepartmentInput
+    governedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutDepartmentInput
   }
 
   export type DepartmentUncheckedCreateWithoutApprovalAuthoritiesInput = {
@@ -49473,6 +56105,7 @@ export namespace Prisma {
     publicReports?: PublicReportUncheckedCreateNestedManyWithoutDepartmentInput
     policyDocuments?: PolicyDocumentUncheckedCreateNestedManyWithoutDepartmentInput
     approvedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutDepartmentInput
+    governedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutDepartmentInput
   }
 
   export type DepartmentCreateOrConnectWithoutApprovalAuthoritiesInput = {
@@ -49491,6 +56124,7 @@ export namespace Prisma {
     publicReports?: PublicReportCreateNestedManyWithoutJurisdictionInput
     policyDocuments?: PolicyDocumentCreateNestedManyWithoutJurisdictionInput
     approvedActions?: ApprovedActionVersionCreateNestedManyWithoutJurisdictionInput
+    governedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutJurisdictionInput
   }
 
   export type JurisdictionUncheckedCreateWithoutApprovalAuthoritiesInput = {
@@ -49504,6 +56138,7 @@ export namespace Prisma {
     publicReports?: PublicReportUncheckedCreateNestedManyWithoutJurisdictionInput
     policyDocuments?: PolicyDocumentUncheckedCreateNestedManyWithoutJurisdictionInput
     approvedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutJurisdictionInput
+    governedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutJurisdictionInput
   }
 
   export type JurisdictionCreateOrConnectWithoutApprovalAuthoritiesInput = {
@@ -49622,6 +56257,8 @@ export namespace Prisma {
     createdApprovedActions?: ApprovedActionVersionUpdateManyWithoutCreatedByNestedInput
     approvedApprovedActions?: ApprovedActionVersionUpdateManyWithoutApprovedByNestedInput
     preparedDecisionPackages?: DecisionPackageUpdateManyWithoutPreparedByNestedInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutCreatedByNestedInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutApprovedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutApprovalAuthoritiesInput = {
@@ -49656,6 +56293,8 @@ export namespace Prisma {
     createdApprovedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutCreatedByNestedInput
     approvedApprovedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutApprovedByNestedInput
     preparedDecisionPackages?: DecisionPackageUncheckedUpdateManyWithoutPreparedByNestedInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutCreatedByNestedInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutApprovedByNestedInput
   }
 
   export type DepartmentUpsertWithoutApprovalAuthoritiesInput = {
@@ -49680,6 +56319,7 @@ export namespace Prisma {
     publicReports?: PublicReportUpdateManyWithoutDepartmentNestedInput
     policyDocuments?: PolicyDocumentUpdateManyWithoutDepartmentNestedInput
     approvedActions?: ApprovedActionVersionUpdateManyWithoutDepartmentNestedInput
+    governedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutDepartmentNestedInput
   }
 
   export type DepartmentUncheckedUpdateWithoutApprovalAuthoritiesInput = {
@@ -49693,6 +56333,7 @@ export namespace Prisma {
     publicReports?: PublicReportUncheckedUpdateManyWithoutDepartmentNestedInput
     policyDocuments?: PolicyDocumentUncheckedUpdateManyWithoutDepartmentNestedInput
     approvedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutDepartmentNestedInput
+    governedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutDepartmentNestedInput
   }
 
   export type JurisdictionUpsertWithoutApprovalAuthoritiesInput = {
@@ -49717,6 +56358,7 @@ export namespace Prisma {
     publicReports?: PublicReportUpdateManyWithoutJurisdictionNestedInput
     policyDocuments?: PolicyDocumentUpdateManyWithoutJurisdictionNestedInput
     approvedActions?: ApprovedActionVersionUpdateManyWithoutJurisdictionNestedInput
+    governedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutJurisdictionNestedInput
   }
 
   export type JurisdictionUncheckedUpdateWithoutApprovalAuthoritiesInput = {
@@ -49730,6 +56372,7 @@ export namespace Prisma {
     publicReports?: PublicReportUncheckedUpdateManyWithoutJurisdictionNestedInput
     policyDocuments?: PolicyDocumentUncheckedUpdateManyWithoutJurisdictionNestedInput
     approvedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutJurisdictionNestedInput
+    governedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutJurisdictionNestedInput
   }
 
   export type OrpDecisionUpsertWithWhereUniqueWithoutAuthorityGrantInput = {
@@ -49825,6 +56468,9 @@ export namespace Prisma {
     planVersion?: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    governanceMode?: $Enums.ActionPlanGovernanceMode
+    governedActions?: NullableJsonNullValueInput | InputJsonValue
+    actionPlanContractVersion?: string | null
     case: CaseCreateNestedOneWithoutOperationalResponsePlansInput
     riskAssessment: RiskAssessmentCreateNestedOneWithoutOperationalResponsePlansInput
     executionPlan?: ExecutionPlanCreateNestedOneWithoutOrpInput
@@ -49846,6 +56492,9 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     decisionPackageId?: string | null
+    governanceMode?: $Enums.ActionPlanGovernanceMode
+    governedActions?: NullableJsonNullValueInput | InputJsonValue
+    actionPlanContractVersion?: string | null
     executionPlan?: ExecutionPlanUncheckedCreateNestedOneWithoutOrpInput
   }
 
@@ -49886,6 +56535,8 @@ export namespace Prisma {
     createdApprovedActions?: ApprovedActionVersionCreateNestedManyWithoutCreatedByInput
     approvedApprovedActions?: ApprovedActionVersionCreateNestedManyWithoutApprovedByInput
     preparedDecisionPackages?: DecisionPackageCreateNestedManyWithoutPreparedByInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutCreatedByInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutApprovedByInput
   }
 
   export type UserUncheckedCreateWithoutReviewedOrpDecisionsInput = {
@@ -49920,6 +56571,8 @@ export namespace Prisma {
     createdApprovedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutCreatedByInput
     approvedApprovedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutApprovedByInput
     preparedDecisionPackages?: DecisionPackageUncheckedCreateNestedManyWithoutPreparedByInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutCreatedByInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutApprovedByInput
   }
 
   export type UserCreateOrConnectWithoutReviewedOrpDecisionsInput = {
@@ -50004,6 +56657,8 @@ export namespace Prisma {
     createdApprovedActions?: ApprovedActionVersionCreateNestedManyWithoutCreatedByInput
     approvedApprovedActions?: ApprovedActionVersionCreateNestedManyWithoutApprovedByInput
     preparedDecisionPackages?: DecisionPackageCreateNestedManyWithoutPreparedByInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutCreatedByInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutApprovedByInput
   }
 
   export type UserUncheckedCreateWithoutForwardedOrpDecisionsInput = {
@@ -50038,6 +56693,8 @@ export namespace Prisma {
     createdApprovedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutCreatedByInput
     approvedApprovedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutApprovedByInput
     preparedDecisionPackages?: DecisionPackageUncheckedCreateNestedManyWithoutPreparedByInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutCreatedByInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutApprovedByInput
   }
 
   export type UserCreateOrConnectWithoutForwardedOrpDecisionsInput = {
@@ -50055,6 +56712,9 @@ export namespace Prisma {
     completedAt?: Date | string | null
     cancelledAt?: Date | string | null
     cancellationReason?: string | null
+    governanceMode?: $Enums.ExecutionPlanGovernanceMode
+    executionContractVersion?: string | null
+    governedProvenance?: NullableJsonNullValueInput | InputJsonValue
     orp: OperationalResponsePlanCreateNestedOneWithoutExecutionPlanInput
     case: CaseCreateNestedOneWithoutExecutionPlansInput
     createdBy: UserCreateNestedOneWithoutCreatedExecutionPlansInput
@@ -50075,6 +56735,9 @@ export namespace Prisma {
     completedAt?: Date | string | null
     cancelledAt?: Date | string | null
     cancellationReason?: string | null
+    governanceMode?: $Enums.ExecutionPlanGovernanceMode
+    executionContractVersion?: string | null
+    governedProvenance?: NullableJsonNullValueInput | InputJsonValue
     tasks?: ExecutionTaskUncheckedCreateNestedManyWithoutExecutionPlanInput
     closure?: CaseClosureUncheckedCreateNestedOneWithoutExecutionPlanInput
   }
@@ -50162,6 +56825,9 @@ export namespace Prisma {
     planVersion?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    governanceMode?: EnumActionPlanGovernanceModeFieldUpdateOperationsInput | $Enums.ActionPlanGovernanceMode
+    governedActions?: NullableJsonNullValueInput | InputJsonValue
+    actionPlanContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
     case?: CaseUpdateOneRequiredWithoutOperationalResponsePlansNestedInput
     riskAssessment?: RiskAssessmentUpdateOneRequiredWithoutOperationalResponsePlansNestedInput
     executionPlan?: ExecutionPlanUpdateOneWithoutOrpNestedInput
@@ -50183,6 +56849,9 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     decisionPackageId?: NullableStringFieldUpdateOperationsInput | string | null
+    governanceMode?: EnumActionPlanGovernanceModeFieldUpdateOperationsInput | $Enums.ActionPlanGovernanceMode
+    governedActions?: NullableJsonNullValueInput | InputJsonValue
+    actionPlanContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
     executionPlan?: ExecutionPlanUncheckedUpdateOneWithoutOrpNestedInput
   }
 
@@ -50229,6 +56898,8 @@ export namespace Prisma {
     createdApprovedActions?: ApprovedActionVersionUpdateManyWithoutCreatedByNestedInput
     approvedApprovedActions?: ApprovedActionVersionUpdateManyWithoutApprovedByNestedInput
     preparedDecisionPackages?: DecisionPackageUpdateManyWithoutPreparedByNestedInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutCreatedByNestedInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutApprovedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutReviewedOrpDecisionsInput = {
@@ -50263,6 +56934,8 @@ export namespace Prisma {
     createdApprovedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutCreatedByNestedInput
     approvedApprovedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutApprovedByNestedInput
     preparedDecisionPackages?: DecisionPackageUncheckedUpdateManyWithoutPreparedByNestedInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutCreatedByNestedInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutApprovedByNestedInput
   }
 
   export type ApprovalAuthorityUpsertWithoutDecisionsInput = {
@@ -50359,6 +57032,8 @@ export namespace Prisma {
     createdApprovedActions?: ApprovedActionVersionUpdateManyWithoutCreatedByNestedInput
     approvedApprovedActions?: ApprovedActionVersionUpdateManyWithoutApprovedByNestedInput
     preparedDecisionPackages?: DecisionPackageUpdateManyWithoutPreparedByNestedInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutCreatedByNestedInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutApprovedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutForwardedOrpDecisionsInput = {
@@ -50393,6 +57068,8 @@ export namespace Prisma {
     createdApprovedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutCreatedByNestedInput
     approvedApprovedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutApprovedByNestedInput
     preparedDecisionPackages?: DecisionPackageUncheckedUpdateManyWithoutPreparedByNestedInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutCreatedByNestedInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutApprovedByNestedInput
   }
 
   export type ExecutionPlanUpsertWithoutApprovalDecisionInput = {
@@ -50416,6 +57093,9 @@ export namespace Prisma {
     completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    governanceMode?: EnumExecutionPlanGovernanceModeFieldUpdateOperationsInput | $Enums.ExecutionPlanGovernanceMode
+    executionContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
+    governedProvenance?: NullableJsonNullValueInput | InputJsonValue
     orp?: OperationalResponsePlanUpdateOneRequiredWithoutExecutionPlanNestedInput
     case?: CaseUpdateOneRequiredWithoutExecutionPlansNestedInput
     createdBy?: UserUpdateOneRequiredWithoutCreatedExecutionPlansNestedInput
@@ -50436,6 +57116,9 @@ export namespace Prisma {
     completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    governanceMode?: EnumExecutionPlanGovernanceModeFieldUpdateOperationsInput | $Enums.ExecutionPlanGovernanceMode
+    executionContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
+    governedProvenance?: NullableJsonNullValueInput | InputJsonValue
     tasks?: ExecutionTaskUncheckedUpdateManyWithoutExecutionPlanNestedInput
     closure?: CaseClosureUncheckedUpdateOneWithoutExecutionPlanNestedInput
   }
@@ -50452,6 +57135,9 @@ export namespace Prisma {
     planVersion?: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    governanceMode?: $Enums.ActionPlanGovernanceMode
+    governedActions?: NullableJsonNullValueInput | InputJsonValue
+    actionPlanContractVersion?: string | null
     case: CaseCreateNestedOneWithoutOperationalResponsePlansInput
     riskAssessment: RiskAssessmentCreateNestedOneWithoutOperationalResponsePlansInput
     decisions?: OrpDecisionCreateNestedManyWithoutOrpInput
@@ -50473,6 +57159,9 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     decisionPackageId?: string | null
+    governanceMode?: $Enums.ActionPlanGovernanceMode
+    governedActions?: NullableJsonNullValueInput | InputJsonValue
+    actionPlanContractVersion?: string | null
     decisions?: OrpDecisionUncheckedCreateNestedManyWithoutOrpInput
   }
 
@@ -50595,6 +57284,8 @@ export namespace Prisma {
     createdApprovedActions?: ApprovedActionVersionCreateNestedManyWithoutCreatedByInput
     approvedApprovedActions?: ApprovedActionVersionCreateNestedManyWithoutApprovedByInput
     preparedDecisionPackages?: DecisionPackageCreateNestedManyWithoutPreparedByInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutCreatedByInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutApprovedByInput
   }
 
   export type UserUncheckedCreateWithoutCreatedExecutionPlansInput = {
@@ -50629,6 +57320,8 @@ export namespace Prisma {
     createdApprovedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutCreatedByInput
     approvedApprovedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutApprovedByInput
     preparedDecisionPackages?: DecisionPackageUncheckedCreateNestedManyWithoutPreparedByInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutCreatedByInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutApprovedByInput
   }
 
   export type UserCreateOrConnectWithoutCreatedExecutionPlansInput = {
@@ -50657,12 +57350,20 @@ export namespace Prisma {
     cancellationReason?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    sourceActionVersion?: number | null
+    sourceTemplateCode?: string | null
+    sourceTemplateVersion?: number | null
+    evidenceRequired?: boolean
+    verificationRequired?: boolean
     assignedTo?: UserCreateNestedOneWithoutAssignedExecutionTasksInput
     assignedBy?: UserCreateNestedOneWithoutAssignedByExecutionTasksInput
     completionSubmittedBy?: UserCreateNestedOneWithoutCompletedExecutionTasksInput
     verifiedBy?: UserCreateNestedOneWithoutVerifiedExecutionTasksInput
     cancelledBy?: UserCreateNestedOneWithoutCancelledExecutionTasksInput
     evidence?: ExecutionEvidenceCreateNestedManyWithoutExecutionTaskInput
+    approvedActionVersion?: ApprovedActionVersionCreateNestedOneWithoutExecutionTasksInput
+    governedExecutionTemplate?: GovernedExecutionTemplateCreateNestedOneWithoutExecutionTasksInput
+    governedTaskTemplate?: GovernedExecutionTaskTemplateCreateNestedOneWithoutExecutionTasksInput
   }
 
   export type ExecutionTaskUncheckedCreateWithoutExecutionPlanInput = {
@@ -50691,6 +57392,14 @@ export namespace Prisma {
     cancellationReason?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    approvedActionVersionId?: string | null
+    governedExecutionTemplateId?: string | null
+    governedTaskTemplateId?: string | null
+    sourceActionVersion?: number | null
+    sourceTemplateCode?: string | null
+    sourceTemplateVersion?: number | null
+    evidenceRequired?: boolean
+    verificationRequired?: boolean
     evidence?: ExecutionEvidenceUncheckedCreateNestedManyWithoutExecutionTaskInput
   }
 
@@ -50752,6 +57461,9 @@ export namespace Prisma {
     planVersion?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    governanceMode?: EnumActionPlanGovernanceModeFieldUpdateOperationsInput | $Enums.ActionPlanGovernanceMode
+    governedActions?: NullableJsonNullValueInput | InputJsonValue
+    actionPlanContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
     case?: CaseUpdateOneRequiredWithoutOperationalResponsePlansNestedInput
     riskAssessment?: RiskAssessmentUpdateOneRequiredWithoutOperationalResponsePlansNestedInput
     decisions?: OrpDecisionUpdateManyWithoutOrpNestedInput
@@ -50773,6 +57485,9 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     decisionPackageId?: NullableStringFieldUpdateOperationsInput | string | null
+    governanceMode?: EnumActionPlanGovernanceModeFieldUpdateOperationsInput | $Enums.ActionPlanGovernanceMode
+    governedActions?: NullableJsonNullValueInput | InputJsonValue
+    actionPlanContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
     decisions?: OrpDecisionUncheckedUpdateManyWithoutOrpNestedInput
   }
 
@@ -50913,6 +57628,8 @@ export namespace Prisma {
     createdApprovedActions?: ApprovedActionVersionUpdateManyWithoutCreatedByNestedInput
     approvedApprovedActions?: ApprovedActionVersionUpdateManyWithoutApprovedByNestedInput
     preparedDecisionPackages?: DecisionPackageUpdateManyWithoutPreparedByNestedInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutCreatedByNestedInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutApprovedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCreatedExecutionPlansInput = {
@@ -50947,6 +57664,8 @@ export namespace Prisma {
     createdApprovedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutCreatedByNestedInput
     approvedApprovedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutApprovedByNestedInput
     preparedDecisionPackages?: DecisionPackageUncheckedUpdateManyWithoutPreparedByNestedInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutCreatedByNestedInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutApprovedByNestedInput
   }
 
   export type ExecutionTaskUpsertWithWhereUniqueWithoutExecutionPlanInput = {
@@ -51006,6 +57725,9 @@ export namespace Prisma {
     completedAt?: Date | string | null
     cancelledAt?: Date | string | null
     cancellationReason?: string | null
+    governanceMode?: $Enums.ExecutionPlanGovernanceMode
+    executionContractVersion?: string | null
+    governedProvenance?: NullableJsonNullValueInput | InputJsonValue
     orp: OperationalResponsePlanCreateNestedOneWithoutExecutionPlanInput
     case: CaseCreateNestedOneWithoutExecutionPlansInput
     approvalDecision: OrpDecisionCreateNestedOneWithoutExecutionPlanInput
@@ -51027,6 +57749,9 @@ export namespace Prisma {
     completedAt?: Date | string | null
     cancelledAt?: Date | string | null
     cancellationReason?: string | null
+    governanceMode?: $Enums.ExecutionPlanGovernanceMode
+    executionContractVersion?: string | null
+    governedProvenance?: NullableJsonNullValueInput | InputJsonValue
     closure?: CaseClosureUncheckedCreateNestedOneWithoutExecutionPlanInput
   }
 
@@ -51067,6 +57792,8 @@ export namespace Prisma {
     createdApprovedActions?: ApprovedActionVersionCreateNestedManyWithoutCreatedByInput
     approvedApprovedActions?: ApprovedActionVersionCreateNestedManyWithoutApprovedByInput
     preparedDecisionPackages?: DecisionPackageCreateNestedManyWithoutPreparedByInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutCreatedByInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutApprovedByInput
   }
 
   export type UserUncheckedCreateWithoutAssignedExecutionTasksInput = {
@@ -51101,6 +57828,8 @@ export namespace Prisma {
     createdApprovedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutCreatedByInput
     approvedApprovedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutApprovedByInput
     preparedDecisionPackages?: DecisionPackageUncheckedCreateNestedManyWithoutPreparedByInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutCreatedByInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutApprovedByInput
   }
 
   export type UserCreateOrConnectWithoutAssignedExecutionTasksInput = {
@@ -51140,6 +57869,8 @@ export namespace Prisma {
     createdApprovedActions?: ApprovedActionVersionCreateNestedManyWithoutCreatedByInput
     approvedApprovedActions?: ApprovedActionVersionCreateNestedManyWithoutApprovedByInput
     preparedDecisionPackages?: DecisionPackageCreateNestedManyWithoutPreparedByInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutCreatedByInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutApprovedByInput
   }
 
   export type UserUncheckedCreateWithoutAssignedByExecutionTasksInput = {
@@ -51174,6 +57905,8 @@ export namespace Prisma {
     createdApprovedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutCreatedByInput
     approvedApprovedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutApprovedByInput
     preparedDecisionPackages?: DecisionPackageUncheckedCreateNestedManyWithoutPreparedByInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutCreatedByInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutApprovedByInput
   }
 
   export type UserCreateOrConnectWithoutAssignedByExecutionTasksInput = {
@@ -51213,6 +57946,8 @@ export namespace Prisma {
     createdApprovedActions?: ApprovedActionVersionCreateNestedManyWithoutCreatedByInput
     approvedApprovedActions?: ApprovedActionVersionCreateNestedManyWithoutApprovedByInput
     preparedDecisionPackages?: DecisionPackageCreateNestedManyWithoutPreparedByInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutCreatedByInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutApprovedByInput
   }
 
   export type UserUncheckedCreateWithoutCompletedExecutionTasksInput = {
@@ -51247,6 +57982,8 @@ export namespace Prisma {
     createdApprovedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutCreatedByInput
     approvedApprovedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutApprovedByInput
     preparedDecisionPackages?: DecisionPackageUncheckedCreateNestedManyWithoutPreparedByInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutCreatedByInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutApprovedByInput
   }
 
   export type UserCreateOrConnectWithoutCompletedExecutionTasksInput = {
@@ -51286,6 +58023,8 @@ export namespace Prisma {
     createdApprovedActions?: ApprovedActionVersionCreateNestedManyWithoutCreatedByInput
     approvedApprovedActions?: ApprovedActionVersionCreateNestedManyWithoutApprovedByInput
     preparedDecisionPackages?: DecisionPackageCreateNestedManyWithoutPreparedByInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutCreatedByInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutApprovedByInput
   }
 
   export type UserUncheckedCreateWithoutVerifiedExecutionTasksInput = {
@@ -51320,6 +58059,8 @@ export namespace Prisma {
     createdApprovedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutCreatedByInput
     approvedApprovedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutApprovedByInput
     preparedDecisionPackages?: DecisionPackageUncheckedCreateNestedManyWithoutPreparedByInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutCreatedByInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutApprovedByInput
   }
 
   export type UserCreateOrConnectWithoutVerifiedExecutionTasksInput = {
@@ -51359,6 +58100,8 @@ export namespace Prisma {
     createdApprovedActions?: ApprovedActionVersionCreateNestedManyWithoutCreatedByInput
     approvedApprovedActions?: ApprovedActionVersionCreateNestedManyWithoutApprovedByInput
     preparedDecisionPackages?: DecisionPackageCreateNestedManyWithoutPreparedByInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutCreatedByInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutApprovedByInput
   }
 
   export type UserUncheckedCreateWithoutCancelledExecutionTasksInput = {
@@ -51393,6 +58136,8 @@ export namespace Prisma {
     createdApprovedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutCreatedByInput
     approvedApprovedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutApprovedByInput
     preparedDecisionPackages?: DecisionPackageUncheckedCreateNestedManyWithoutPreparedByInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutCreatedByInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutApprovedByInput
   }
 
   export type UserCreateOrConnectWithoutCancelledExecutionTasksInput = {
@@ -51434,6 +58179,141 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type ApprovedActionVersionCreateWithoutExecutionTasksInput = {
+    id?: string
+    actionCode: string
+    versionNumber: number
+    title: string
+    category: string
+    description: string
+    applicability: JsonNullValueInput | InputJsonValue
+    enforcementClassification: $Enums.EnforcementClassification
+    sourceReference: string
+    effectiveFrom: Date | string
+    effectiveUntil?: Date | string | null
+    status?: $Enums.RegistryLifecycleStatus
+    approvedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    provenancePolicyDocument?: PolicyDocumentCreateNestedOneWithoutActionProvenanceInput
+    department?: DepartmentCreateNestedOneWithoutApprovedActionsInput
+    jurisdiction?: JurisdictionCreateNestedOneWithoutApprovedActionsInput
+    createdBy: UserCreateNestedOneWithoutCreatedApprovedActionsInput
+    approvedBy?: UserCreateNestedOneWithoutApprovedApprovedActionsInput
+    rules?: PolicyRuleCreateNestedManyWithoutActionInput
+    executionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutApprovedActionVersionInput
+  }
+
+  export type ApprovedActionVersionUncheckedCreateWithoutExecutionTasksInput = {
+    id?: string
+    actionCode: string
+    versionNumber: number
+    title: string
+    category: string
+    description: string
+    applicability: JsonNullValueInput | InputJsonValue
+    enforcementClassification: $Enums.EnforcementClassification
+    provenancePolicyDocumentId?: string | null
+    sourceReference: string
+    departmentId?: string | null
+    jurisdictionId?: string | null
+    effectiveFrom: Date | string
+    effectiveUntil?: Date | string | null
+    status?: $Enums.RegistryLifecycleStatus
+    createdById: string
+    approvedById?: string | null
+    approvedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    rules?: PolicyRuleUncheckedCreateNestedManyWithoutActionInput
+    executionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutApprovedActionVersionInput
+  }
+
+  export type ApprovedActionVersionCreateOrConnectWithoutExecutionTasksInput = {
+    where: ApprovedActionVersionWhereUniqueInput
+    create: XOR<ApprovedActionVersionCreateWithoutExecutionTasksInput, ApprovedActionVersionUncheckedCreateWithoutExecutionTasksInput>
+  }
+
+  export type GovernedExecutionTemplateCreateWithoutExecutionTasksInput = {
+    id?: string
+    templateCode: string
+    versionNumber: number
+    title: string
+    description: string
+    status?: $Enums.RegistryLifecycleStatus
+    effectiveFrom: Date | string
+    effectiveUntil?: Date | string | null
+    approvedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    approvedActionVersion: ApprovedActionVersionCreateNestedOneWithoutExecutionTemplatesInput
+    department?: DepartmentCreateNestedOneWithoutGovernedExecutionTemplatesInput
+    jurisdiction?: JurisdictionCreateNestedOneWithoutGovernedExecutionTemplatesInput
+    createdBy: UserCreateNestedOneWithoutCreatedGovernedExecutionTemplatesInput
+    approvedBy?: UserCreateNestedOneWithoutApprovedGovernedExecutionTemplatesInput
+    tasks?: GovernedExecutionTaskTemplateCreateNestedManyWithoutExecutionTemplateInput
+  }
+
+  export type GovernedExecutionTemplateUncheckedCreateWithoutExecutionTasksInput = {
+    id?: string
+    templateCode: string
+    versionNumber: number
+    approvedActionVersionId: string
+    title: string
+    description: string
+    status?: $Enums.RegistryLifecycleStatus
+    effectiveFrom: Date | string
+    effectiveUntil?: Date | string | null
+    departmentId?: string | null
+    jurisdictionId?: string | null
+    createdById: string
+    approvedById?: string | null
+    approvedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tasks?: GovernedExecutionTaskTemplateUncheckedCreateNestedManyWithoutExecutionTemplateInput
+  }
+
+  export type GovernedExecutionTemplateCreateOrConnectWithoutExecutionTasksInput = {
+    where: GovernedExecutionTemplateWhereUniqueInput
+    create: XOR<GovernedExecutionTemplateCreateWithoutExecutionTasksInput, GovernedExecutionTemplateUncheckedCreateWithoutExecutionTasksInput>
+  }
+
+  export type GovernedExecutionTaskTemplateCreateWithoutExecutionTasksInput = {
+    id?: string
+    sequenceNumber: number
+    taskCode: string
+    title: string
+    description: string
+    mandatory?: boolean
+    evidenceRequired?: boolean
+    verificationRequired?: boolean
+    enabled?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    executionTemplate: GovernedExecutionTemplateCreateNestedOneWithoutTasksInput
+  }
+
+  export type GovernedExecutionTaskTemplateUncheckedCreateWithoutExecutionTasksInput = {
+    id?: string
+    executionTemplateId: string
+    sequenceNumber: number
+    taskCode: string
+    title: string
+    description: string
+    mandatory?: boolean
+    evidenceRequired?: boolean
+    verificationRequired?: boolean
+    enabled?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type GovernedExecutionTaskTemplateCreateOrConnectWithoutExecutionTasksInput = {
+    where: GovernedExecutionTaskTemplateWhereUniqueInput
+    create: XOR<GovernedExecutionTaskTemplateCreateWithoutExecutionTasksInput, GovernedExecutionTaskTemplateUncheckedCreateWithoutExecutionTasksInput>
+  }
+
   export type ExecutionPlanUpsertWithoutTasksInput = {
     update: XOR<ExecutionPlanUpdateWithoutTasksInput, ExecutionPlanUncheckedUpdateWithoutTasksInput>
     create: XOR<ExecutionPlanCreateWithoutTasksInput, ExecutionPlanUncheckedCreateWithoutTasksInput>
@@ -51455,6 +58335,9 @@ export namespace Prisma {
     completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    governanceMode?: EnumExecutionPlanGovernanceModeFieldUpdateOperationsInput | $Enums.ExecutionPlanGovernanceMode
+    executionContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
+    governedProvenance?: NullableJsonNullValueInput | InputJsonValue
     orp?: OperationalResponsePlanUpdateOneRequiredWithoutExecutionPlanNestedInput
     case?: CaseUpdateOneRequiredWithoutExecutionPlansNestedInput
     approvalDecision?: OrpDecisionUpdateOneRequiredWithoutExecutionPlanNestedInput
@@ -51476,6 +58359,9 @@ export namespace Prisma {
     completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    governanceMode?: EnumExecutionPlanGovernanceModeFieldUpdateOperationsInput | $Enums.ExecutionPlanGovernanceMode
+    executionContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
+    governedProvenance?: NullableJsonNullValueInput | InputJsonValue
     closure?: CaseClosureUncheckedUpdateOneWithoutExecutionPlanNestedInput
   }
 
@@ -51522,6 +58408,8 @@ export namespace Prisma {
     createdApprovedActions?: ApprovedActionVersionUpdateManyWithoutCreatedByNestedInput
     approvedApprovedActions?: ApprovedActionVersionUpdateManyWithoutApprovedByNestedInput
     preparedDecisionPackages?: DecisionPackageUpdateManyWithoutPreparedByNestedInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutCreatedByNestedInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutApprovedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAssignedExecutionTasksInput = {
@@ -51556,6 +58444,8 @@ export namespace Prisma {
     createdApprovedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutCreatedByNestedInput
     approvedApprovedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutApprovedByNestedInput
     preparedDecisionPackages?: DecisionPackageUncheckedUpdateManyWithoutPreparedByNestedInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutCreatedByNestedInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutApprovedByNestedInput
   }
 
   export type UserUpsertWithoutAssignedByExecutionTasksInput = {
@@ -51601,6 +58491,8 @@ export namespace Prisma {
     createdApprovedActions?: ApprovedActionVersionUpdateManyWithoutCreatedByNestedInput
     approvedApprovedActions?: ApprovedActionVersionUpdateManyWithoutApprovedByNestedInput
     preparedDecisionPackages?: DecisionPackageUpdateManyWithoutPreparedByNestedInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutCreatedByNestedInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutApprovedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAssignedByExecutionTasksInput = {
@@ -51635,6 +58527,8 @@ export namespace Prisma {
     createdApprovedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutCreatedByNestedInput
     approvedApprovedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutApprovedByNestedInput
     preparedDecisionPackages?: DecisionPackageUncheckedUpdateManyWithoutPreparedByNestedInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutCreatedByNestedInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutApprovedByNestedInput
   }
 
   export type UserUpsertWithoutCompletedExecutionTasksInput = {
@@ -51680,6 +58574,8 @@ export namespace Prisma {
     createdApprovedActions?: ApprovedActionVersionUpdateManyWithoutCreatedByNestedInput
     approvedApprovedActions?: ApprovedActionVersionUpdateManyWithoutApprovedByNestedInput
     preparedDecisionPackages?: DecisionPackageUpdateManyWithoutPreparedByNestedInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutCreatedByNestedInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutApprovedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCompletedExecutionTasksInput = {
@@ -51714,6 +58610,8 @@ export namespace Prisma {
     createdApprovedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutCreatedByNestedInput
     approvedApprovedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutApprovedByNestedInput
     preparedDecisionPackages?: DecisionPackageUncheckedUpdateManyWithoutPreparedByNestedInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutCreatedByNestedInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutApprovedByNestedInput
   }
 
   export type UserUpsertWithoutVerifiedExecutionTasksInput = {
@@ -51759,6 +58657,8 @@ export namespace Prisma {
     createdApprovedActions?: ApprovedActionVersionUpdateManyWithoutCreatedByNestedInput
     approvedApprovedActions?: ApprovedActionVersionUpdateManyWithoutApprovedByNestedInput
     preparedDecisionPackages?: DecisionPackageUpdateManyWithoutPreparedByNestedInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutCreatedByNestedInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutApprovedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutVerifiedExecutionTasksInput = {
@@ -51793,6 +58693,8 @@ export namespace Prisma {
     createdApprovedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutCreatedByNestedInput
     approvedApprovedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutApprovedByNestedInput
     preparedDecisionPackages?: DecisionPackageUncheckedUpdateManyWithoutPreparedByNestedInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutCreatedByNestedInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutApprovedByNestedInput
   }
 
   export type UserUpsertWithoutCancelledExecutionTasksInput = {
@@ -51838,6 +58740,8 @@ export namespace Prisma {
     createdApprovedActions?: ApprovedActionVersionUpdateManyWithoutCreatedByNestedInput
     approvedApprovedActions?: ApprovedActionVersionUpdateManyWithoutApprovedByNestedInput
     preparedDecisionPackages?: DecisionPackageUpdateManyWithoutPreparedByNestedInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutCreatedByNestedInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutApprovedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCancelledExecutionTasksInput = {
@@ -51872,6 +58776,8 @@ export namespace Prisma {
     createdApprovedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutCreatedByNestedInput
     approvedApprovedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutApprovedByNestedInput
     preparedDecisionPackages?: DecisionPackageUncheckedUpdateManyWithoutPreparedByNestedInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutCreatedByNestedInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutApprovedByNestedInput
   }
 
   export type ExecutionEvidenceUpsertWithWhereUniqueWithoutExecutionTaskInput = {
@@ -51888,6 +58794,159 @@ export namespace Prisma {
   export type ExecutionEvidenceUpdateManyWithWhereWithoutExecutionTaskInput = {
     where: ExecutionEvidenceScalarWhereInput
     data: XOR<ExecutionEvidenceUpdateManyMutationInput, ExecutionEvidenceUncheckedUpdateManyWithoutExecutionTaskInput>
+  }
+
+  export type ApprovedActionVersionUpsertWithoutExecutionTasksInput = {
+    update: XOR<ApprovedActionVersionUpdateWithoutExecutionTasksInput, ApprovedActionVersionUncheckedUpdateWithoutExecutionTasksInput>
+    create: XOR<ApprovedActionVersionCreateWithoutExecutionTasksInput, ApprovedActionVersionUncheckedCreateWithoutExecutionTasksInput>
+    where?: ApprovedActionVersionWhereInput
+  }
+
+  export type ApprovedActionVersionUpdateToOneWithWhereWithoutExecutionTasksInput = {
+    where?: ApprovedActionVersionWhereInput
+    data: XOR<ApprovedActionVersionUpdateWithoutExecutionTasksInput, ApprovedActionVersionUncheckedUpdateWithoutExecutionTasksInput>
+  }
+
+  export type ApprovedActionVersionUpdateWithoutExecutionTasksInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    actionCode?: StringFieldUpdateOperationsInput | string
+    versionNumber?: IntFieldUpdateOperationsInput | number
+    title?: StringFieldUpdateOperationsInput | string
+    category?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    applicability?: JsonNullValueInput | InputJsonValue
+    enforcementClassification?: EnumEnforcementClassificationFieldUpdateOperationsInput | $Enums.EnforcementClassification
+    sourceReference?: StringFieldUpdateOperationsInput | string
+    effectiveFrom?: DateTimeFieldUpdateOperationsInput | Date | string
+    effectiveUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumRegistryLifecycleStatusFieldUpdateOperationsInput | $Enums.RegistryLifecycleStatus
+    approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    provenancePolicyDocument?: PolicyDocumentUpdateOneWithoutActionProvenanceNestedInput
+    department?: DepartmentUpdateOneWithoutApprovedActionsNestedInput
+    jurisdiction?: JurisdictionUpdateOneWithoutApprovedActionsNestedInput
+    createdBy?: UserUpdateOneRequiredWithoutCreatedApprovedActionsNestedInput
+    approvedBy?: UserUpdateOneWithoutApprovedApprovedActionsNestedInput
+    rules?: PolicyRuleUpdateManyWithoutActionNestedInput
+    executionTemplates?: GovernedExecutionTemplateUpdateManyWithoutApprovedActionVersionNestedInput
+  }
+
+  export type ApprovedActionVersionUncheckedUpdateWithoutExecutionTasksInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    actionCode?: StringFieldUpdateOperationsInput | string
+    versionNumber?: IntFieldUpdateOperationsInput | number
+    title?: StringFieldUpdateOperationsInput | string
+    category?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    applicability?: JsonNullValueInput | InputJsonValue
+    enforcementClassification?: EnumEnforcementClassificationFieldUpdateOperationsInput | $Enums.EnforcementClassification
+    provenancePolicyDocumentId?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceReference?: StringFieldUpdateOperationsInput | string
+    departmentId?: NullableStringFieldUpdateOperationsInput | string | null
+    jurisdictionId?: NullableStringFieldUpdateOperationsInput | string | null
+    effectiveFrom?: DateTimeFieldUpdateOperationsInput | Date | string
+    effectiveUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumRegistryLifecycleStatusFieldUpdateOperationsInput | $Enums.RegistryLifecycleStatus
+    createdById?: StringFieldUpdateOperationsInput | string
+    approvedById?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    rules?: PolicyRuleUncheckedUpdateManyWithoutActionNestedInput
+    executionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutApprovedActionVersionNestedInput
+  }
+
+  export type GovernedExecutionTemplateUpsertWithoutExecutionTasksInput = {
+    update: XOR<GovernedExecutionTemplateUpdateWithoutExecutionTasksInput, GovernedExecutionTemplateUncheckedUpdateWithoutExecutionTasksInput>
+    create: XOR<GovernedExecutionTemplateCreateWithoutExecutionTasksInput, GovernedExecutionTemplateUncheckedCreateWithoutExecutionTasksInput>
+    where?: GovernedExecutionTemplateWhereInput
+  }
+
+  export type GovernedExecutionTemplateUpdateToOneWithWhereWithoutExecutionTasksInput = {
+    where?: GovernedExecutionTemplateWhereInput
+    data: XOR<GovernedExecutionTemplateUpdateWithoutExecutionTasksInput, GovernedExecutionTemplateUncheckedUpdateWithoutExecutionTasksInput>
+  }
+
+  export type GovernedExecutionTemplateUpdateWithoutExecutionTasksInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    templateCode?: StringFieldUpdateOperationsInput | string
+    versionNumber?: IntFieldUpdateOperationsInput | number
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    status?: EnumRegistryLifecycleStatusFieldUpdateOperationsInput | $Enums.RegistryLifecycleStatus
+    effectiveFrom?: DateTimeFieldUpdateOperationsInput | Date | string
+    effectiveUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    approvedActionVersion?: ApprovedActionVersionUpdateOneRequiredWithoutExecutionTemplatesNestedInput
+    department?: DepartmentUpdateOneWithoutGovernedExecutionTemplatesNestedInput
+    jurisdiction?: JurisdictionUpdateOneWithoutGovernedExecutionTemplatesNestedInput
+    createdBy?: UserUpdateOneRequiredWithoutCreatedGovernedExecutionTemplatesNestedInput
+    approvedBy?: UserUpdateOneWithoutApprovedGovernedExecutionTemplatesNestedInput
+    tasks?: GovernedExecutionTaskTemplateUpdateManyWithoutExecutionTemplateNestedInput
+  }
+
+  export type GovernedExecutionTemplateUncheckedUpdateWithoutExecutionTasksInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    templateCode?: StringFieldUpdateOperationsInput | string
+    versionNumber?: IntFieldUpdateOperationsInput | number
+    approvedActionVersionId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    status?: EnumRegistryLifecycleStatusFieldUpdateOperationsInput | $Enums.RegistryLifecycleStatus
+    effectiveFrom?: DateTimeFieldUpdateOperationsInput | Date | string
+    effectiveUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    departmentId?: NullableStringFieldUpdateOperationsInput | string | null
+    jurisdictionId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: StringFieldUpdateOperationsInput | string
+    approvedById?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tasks?: GovernedExecutionTaskTemplateUncheckedUpdateManyWithoutExecutionTemplateNestedInput
+  }
+
+  export type GovernedExecutionTaskTemplateUpsertWithoutExecutionTasksInput = {
+    update: XOR<GovernedExecutionTaskTemplateUpdateWithoutExecutionTasksInput, GovernedExecutionTaskTemplateUncheckedUpdateWithoutExecutionTasksInput>
+    create: XOR<GovernedExecutionTaskTemplateCreateWithoutExecutionTasksInput, GovernedExecutionTaskTemplateUncheckedCreateWithoutExecutionTasksInput>
+    where?: GovernedExecutionTaskTemplateWhereInput
+  }
+
+  export type GovernedExecutionTaskTemplateUpdateToOneWithWhereWithoutExecutionTasksInput = {
+    where?: GovernedExecutionTaskTemplateWhereInput
+    data: XOR<GovernedExecutionTaskTemplateUpdateWithoutExecutionTasksInput, GovernedExecutionTaskTemplateUncheckedUpdateWithoutExecutionTasksInput>
+  }
+
+  export type GovernedExecutionTaskTemplateUpdateWithoutExecutionTasksInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sequenceNumber?: IntFieldUpdateOperationsInput | number
+    taskCode?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    mandatory?: BoolFieldUpdateOperationsInput | boolean
+    evidenceRequired?: BoolFieldUpdateOperationsInput | boolean
+    verificationRequired?: BoolFieldUpdateOperationsInput | boolean
+    enabled?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    executionTemplate?: GovernedExecutionTemplateUpdateOneRequiredWithoutTasksNestedInput
+  }
+
+  export type GovernedExecutionTaskTemplateUncheckedUpdateWithoutExecutionTasksInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    executionTemplateId?: StringFieldUpdateOperationsInput | string
+    sequenceNumber?: IntFieldUpdateOperationsInput | number
+    taskCode?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    mandatory?: BoolFieldUpdateOperationsInput | boolean
+    evidenceRequired?: BoolFieldUpdateOperationsInput | boolean
+    verificationRequired?: BoolFieldUpdateOperationsInput | boolean
+    enabled?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ExecutionTaskCreateWithoutEvidenceInput = {
@@ -51911,12 +58970,20 @@ export namespace Prisma {
     cancellationReason?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    sourceActionVersion?: number | null
+    sourceTemplateCode?: string | null
+    sourceTemplateVersion?: number | null
+    evidenceRequired?: boolean
+    verificationRequired?: boolean
     executionPlan: ExecutionPlanCreateNestedOneWithoutTasksInput
     assignedTo?: UserCreateNestedOneWithoutAssignedExecutionTasksInput
     assignedBy?: UserCreateNestedOneWithoutAssignedByExecutionTasksInput
     completionSubmittedBy?: UserCreateNestedOneWithoutCompletedExecutionTasksInput
     verifiedBy?: UserCreateNestedOneWithoutVerifiedExecutionTasksInput
     cancelledBy?: UserCreateNestedOneWithoutCancelledExecutionTasksInput
+    approvedActionVersion?: ApprovedActionVersionCreateNestedOneWithoutExecutionTasksInput
+    governedExecutionTemplate?: GovernedExecutionTemplateCreateNestedOneWithoutExecutionTasksInput
+    governedTaskTemplate?: GovernedExecutionTaskTemplateCreateNestedOneWithoutExecutionTasksInput
   }
 
   export type ExecutionTaskUncheckedCreateWithoutEvidenceInput = {
@@ -51946,6 +59013,14 @@ export namespace Prisma {
     cancellationReason?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    approvedActionVersionId?: string | null
+    governedExecutionTemplateId?: string | null
+    governedTaskTemplateId?: string | null
+    sourceActionVersion?: number | null
+    sourceTemplateCode?: string | null
+    sourceTemplateVersion?: number | null
+    evidenceRequired?: boolean
+    verificationRequired?: boolean
   }
 
   export type ExecutionTaskCreateOrConnectWithoutEvidenceInput = {
@@ -51985,6 +59060,8 @@ export namespace Prisma {
     createdApprovedActions?: ApprovedActionVersionCreateNestedManyWithoutCreatedByInput
     approvedApprovedActions?: ApprovedActionVersionCreateNestedManyWithoutApprovedByInput
     preparedDecisionPackages?: DecisionPackageCreateNestedManyWithoutPreparedByInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutCreatedByInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutApprovedByInput
   }
 
   export type UserUncheckedCreateWithoutSubmittedExecutionEvidenceInput = {
@@ -52019,6 +59096,8 @@ export namespace Prisma {
     createdApprovedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutCreatedByInput
     approvedApprovedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutApprovedByInput
     preparedDecisionPackages?: DecisionPackageUncheckedCreateNestedManyWithoutPreparedByInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutCreatedByInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutApprovedByInput
   }
 
   export type UserCreateOrConnectWithoutSubmittedExecutionEvidenceInput = {
@@ -52058,12 +59137,20 @@ export namespace Prisma {
     cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sourceActionVersion?: NullableIntFieldUpdateOperationsInput | number | null
+    sourceTemplateCode?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceTemplateVersion?: NullableIntFieldUpdateOperationsInput | number | null
+    evidenceRequired?: BoolFieldUpdateOperationsInput | boolean
+    verificationRequired?: BoolFieldUpdateOperationsInput | boolean
     executionPlan?: ExecutionPlanUpdateOneRequiredWithoutTasksNestedInput
     assignedTo?: UserUpdateOneWithoutAssignedExecutionTasksNestedInput
     assignedBy?: UserUpdateOneWithoutAssignedByExecutionTasksNestedInput
     completionSubmittedBy?: UserUpdateOneWithoutCompletedExecutionTasksNestedInput
     verifiedBy?: UserUpdateOneWithoutVerifiedExecutionTasksNestedInput
     cancelledBy?: UserUpdateOneWithoutCancelledExecutionTasksNestedInput
+    approvedActionVersion?: ApprovedActionVersionUpdateOneWithoutExecutionTasksNestedInput
+    governedExecutionTemplate?: GovernedExecutionTemplateUpdateOneWithoutExecutionTasksNestedInput
+    governedTaskTemplate?: GovernedExecutionTaskTemplateUpdateOneWithoutExecutionTasksNestedInput
   }
 
   export type ExecutionTaskUncheckedUpdateWithoutEvidenceInput = {
@@ -52093,6 +59180,14 @@ export namespace Prisma {
     cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    approvedActionVersionId?: NullableStringFieldUpdateOperationsInput | string | null
+    governedExecutionTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
+    governedTaskTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceActionVersion?: NullableIntFieldUpdateOperationsInput | number | null
+    sourceTemplateCode?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceTemplateVersion?: NullableIntFieldUpdateOperationsInput | number | null
+    evidenceRequired?: BoolFieldUpdateOperationsInput | boolean
+    verificationRequired?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type UserUpsertWithoutSubmittedExecutionEvidenceInput = {
@@ -52138,6 +59233,8 @@ export namespace Prisma {
     createdApprovedActions?: ApprovedActionVersionUpdateManyWithoutCreatedByNestedInput
     approvedApprovedActions?: ApprovedActionVersionUpdateManyWithoutApprovedByNestedInput
     preparedDecisionPackages?: DecisionPackageUpdateManyWithoutPreparedByNestedInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutCreatedByNestedInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutApprovedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSubmittedExecutionEvidenceInput = {
@@ -52172,6 +59269,8 @@ export namespace Prisma {
     createdApprovedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutCreatedByNestedInput
     approvedApprovedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutApprovedByNestedInput
     preparedDecisionPackages?: DecisionPackageUncheckedUpdateManyWithoutPreparedByNestedInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutCreatedByNestedInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutApprovedByNestedInput
   }
 
   export type CaseCreateWithoutClosureInput = {
@@ -52233,6 +59332,9 @@ export namespace Prisma {
     completedAt?: Date | string | null
     cancelledAt?: Date | string | null
     cancellationReason?: string | null
+    governanceMode?: $Enums.ExecutionPlanGovernanceMode
+    executionContractVersion?: string | null
+    governedProvenance?: NullableJsonNullValueInput | InputJsonValue
     orp: OperationalResponsePlanCreateNestedOneWithoutExecutionPlanInput
     case: CaseCreateNestedOneWithoutExecutionPlansInput
     approvalDecision: OrpDecisionCreateNestedOneWithoutExecutionPlanInput
@@ -52254,6 +59356,9 @@ export namespace Prisma {
     completedAt?: Date | string | null
     cancelledAt?: Date | string | null
     cancellationReason?: string | null
+    governanceMode?: $Enums.ExecutionPlanGovernanceMode
+    executionContractVersion?: string | null
+    governedProvenance?: NullableJsonNullValueInput | InputJsonValue
     tasks?: ExecutionTaskUncheckedCreateNestedManyWithoutExecutionPlanInput
   }
 
@@ -52294,6 +59399,8 @@ export namespace Prisma {
     createdApprovedActions?: ApprovedActionVersionCreateNestedManyWithoutCreatedByInput
     approvedApprovedActions?: ApprovedActionVersionCreateNestedManyWithoutApprovedByInput
     preparedDecisionPackages?: DecisionPackageCreateNestedManyWithoutPreparedByInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutCreatedByInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutApprovedByInput
   }
 
   export type UserUncheckedCreateWithoutClosedCasesInput = {
@@ -52328,6 +59435,8 @@ export namespace Prisma {
     createdApprovedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutCreatedByInput
     approvedApprovedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutApprovedByInput
     preparedDecisionPackages?: DecisionPackageUncheckedCreateNestedManyWithoutPreparedByInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutCreatedByInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutApprovedByInput
   }
 
   export type UserCreateOrConnectWithoutClosedCasesInput = {
@@ -52456,6 +59565,9 @@ export namespace Prisma {
     completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    governanceMode?: EnumExecutionPlanGovernanceModeFieldUpdateOperationsInput | $Enums.ExecutionPlanGovernanceMode
+    executionContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
+    governedProvenance?: NullableJsonNullValueInput | InputJsonValue
     orp?: OperationalResponsePlanUpdateOneRequiredWithoutExecutionPlanNestedInput
     case?: CaseUpdateOneRequiredWithoutExecutionPlansNestedInput
     approvalDecision?: OrpDecisionUpdateOneRequiredWithoutExecutionPlanNestedInput
@@ -52477,6 +59589,9 @@ export namespace Prisma {
     completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    governanceMode?: EnumExecutionPlanGovernanceModeFieldUpdateOperationsInput | $Enums.ExecutionPlanGovernanceMode
+    executionContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
+    governedProvenance?: NullableJsonNullValueInput | InputJsonValue
     tasks?: ExecutionTaskUncheckedUpdateManyWithoutExecutionPlanNestedInput
   }
 
@@ -52523,6 +59638,8 @@ export namespace Prisma {
     createdApprovedActions?: ApprovedActionVersionUpdateManyWithoutCreatedByNestedInput
     approvedApprovedActions?: ApprovedActionVersionUpdateManyWithoutApprovedByNestedInput
     preparedDecisionPackages?: DecisionPackageUpdateManyWithoutPreparedByNestedInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutCreatedByNestedInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutApprovedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutClosedCasesInput = {
@@ -52557,6 +59674,8 @@ export namespace Prisma {
     createdApprovedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutCreatedByNestedInput
     approvedApprovedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutApprovedByNestedInput
     preparedDecisionPackages?: DecisionPackageUncheckedUpdateManyWithoutPreparedByNestedInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutCreatedByNestedInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutApprovedByNestedInput
   }
 
   export type ApprovalAuthorityUpsertWithoutCaseClosuresInput = {
@@ -52730,6 +59849,24 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
+  export type GovernedExecutionTemplateCreateManyDepartmentInput = {
+    id?: string
+    templateCode: string
+    versionNumber: number
+    approvedActionVersionId: string
+    title: string
+    description: string
+    status?: $Enums.RegistryLifecycleStatus
+    effectiveFrom: Date | string
+    effectiveUntil?: Date | string | null
+    jurisdictionId?: string | null
+    createdById: string
+    approvedById?: string | null
+    approvedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type UserUpdateWithoutDepartmentInput = {
     id?: StringFieldUpdateOperationsInput | string
     employeeCode?: StringFieldUpdateOperationsInput | string
@@ -52762,6 +59899,8 @@ export namespace Prisma {
     createdApprovedActions?: ApprovedActionVersionUpdateManyWithoutCreatedByNestedInput
     approvedApprovedActions?: ApprovedActionVersionUpdateManyWithoutApprovedByNestedInput
     preparedDecisionPackages?: DecisionPackageUpdateManyWithoutPreparedByNestedInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutCreatedByNestedInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutApprovedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutDepartmentInput = {
@@ -52796,6 +59935,8 @@ export namespace Prisma {
     createdApprovedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutCreatedByNestedInput
     approvedApprovedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutApprovedByNestedInput
     preparedDecisionPackages?: DecisionPackageUncheckedUpdateManyWithoutPreparedByNestedInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutCreatedByNestedInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutApprovedByNestedInput
   }
 
   export type UserUncheckedUpdateManyWithoutDepartmentInput = {
@@ -52871,6 +60012,7 @@ export namespace Prisma {
     publicReports?: PublicReportUpdateManyWithoutJurisdictionNestedInput
     policyDocuments?: PolicyDocumentUpdateManyWithoutJurisdictionNestedInput
     approvedActions?: ApprovedActionVersionUpdateManyWithoutJurisdictionNestedInput
+    governedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutJurisdictionNestedInput
   }
 
   export type JurisdictionUncheckedUpdateWithoutDepartmentInput = {
@@ -52884,6 +60026,7 @@ export namespace Prisma {
     publicReports?: PublicReportUncheckedUpdateManyWithoutJurisdictionNestedInput
     policyDocuments?: PolicyDocumentUncheckedUpdateManyWithoutJurisdictionNestedInput
     approvedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutJurisdictionNestedInput
+    governedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutJurisdictionNestedInput
   }
 
   export type JurisdictionUncheckedUpdateManyWithoutDepartmentInput = {
@@ -53113,6 +60256,8 @@ export namespace Prisma {
     createdBy?: UserUpdateOneRequiredWithoutCreatedApprovedActionsNestedInput
     approvedBy?: UserUpdateOneWithoutApprovedApprovedActionsNestedInput
     rules?: PolicyRuleUpdateManyWithoutActionNestedInput
+    executionTemplates?: GovernedExecutionTemplateUpdateManyWithoutApprovedActionVersionNestedInput
+    executionTasks?: ExecutionTaskUpdateManyWithoutApprovedActionVersionNestedInput
   }
 
   export type ApprovedActionVersionUncheckedUpdateWithoutDepartmentInput = {
@@ -53136,6 +60281,8 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     rules?: PolicyRuleUncheckedUpdateManyWithoutActionNestedInput
+    executionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutApprovedActionVersionNestedInput
+    executionTasks?: ExecutionTaskUncheckedUpdateManyWithoutApprovedActionVersionNestedInput
   }
 
   export type ApprovedActionVersionUncheckedUpdateManyWithoutDepartmentInput = {
@@ -53153,6 +60300,64 @@ export namespace Prisma {
     effectiveFrom?: DateTimeFieldUpdateOperationsInput | Date | string
     effectiveUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: EnumRegistryLifecycleStatusFieldUpdateOperationsInput | $Enums.RegistryLifecycleStatus
+    createdById?: StringFieldUpdateOperationsInput | string
+    approvedById?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GovernedExecutionTemplateUpdateWithoutDepartmentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    templateCode?: StringFieldUpdateOperationsInput | string
+    versionNumber?: IntFieldUpdateOperationsInput | number
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    status?: EnumRegistryLifecycleStatusFieldUpdateOperationsInput | $Enums.RegistryLifecycleStatus
+    effectiveFrom?: DateTimeFieldUpdateOperationsInput | Date | string
+    effectiveUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    approvedActionVersion?: ApprovedActionVersionUpdateOneRequiredWithoutExecutionTemplatesNestedInput
+    jurisdiction?: JurisdictionUpdateOneWithoutGovernedExecutionTemplatesNestedInput
+    createdBy?: UserUpdateOneRequiredWithoutCreatedGovernedExecutionTemplatesNestedInput
+    approvedBy?: UserUpdateOneWithoutApprovedGovernedExecutionTemplatesNestedInput
+    tasks?: GovernedExecutionTaskTemplateUpdateManyWithoutExecutionTemplateNestedInput
+    executionTasks?: ExecutionTaskUpdateManyWithoutGovernedExecutionTemplateNestedInput
+  }
+
+  export type GovernedExecutionTemplateUncheckedUpdateWithoutDepartmentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    templateCode?: StringFieldUpdateOperationsInput | string
+    versionNumber?: IntFieldUpdateOperationsInput | number
+    approvedActionVersionId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    status?: EnumRegistryLifecycleStatusFieldUpdateOperationsInput | $Enums.RegistryLifecycleStatus
+    effectiveFrom?: DateTimeFieldUpdateOperationsInput | Date | string
+    effectiveUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    jurisdictionId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: StringFieldUpdateOperationsInput | string
+    approvedById?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tasks?: GovernedExecutionTaskTemplateUncheckedUpdateManyWithoutExecutionTemplateNestedInput
+    executionTasks?: ExecutionTaskUncheckedUpdateManyWithoutGovernedExecutionTemplateNestedInput
+  }
+
+  export type GovernedExecutionTemplateUncheckedUpdateManyWithoutDepartmentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    templateCode?: StringFieldUpdateOperationsInput | string
+    versionNumber?: IntFieldUpdateOperationsInput | number
+    approvedActionVersionId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    status?: EnumRegistryLifecycleStatusFieldUpdateOperationsInput | $Enums.RegistryLifecycleStatus
+    effectiveFrom?: DateTimeFieldUpdateOperationsInput | Date | string
+    effectiveUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    jurisdictionId?: NullableStringFieldUpdateOperationsInput | string | null
     createdById?: StringFieldUpdateOperationsInput | string
     approvedById?: NullableStringFieldUpdateOperationsInput | string | null
     approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -53273,6 +60478,24 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
+  export type GovernedExecutionTemplateCreateManyJurisdictionInput = {
+    id?: string
+    templateCode: string
+    versionNumber: number
+    approvedActionVersionId: string
+    title: string
+    description: string
+    status?: $Enums.RegistryLifecycleStatus
+    effectiveFrom: Date | string
+    effectiveUntil?: Date | string | null
+    departmentId?: string | null
+    createdById: string
+    approvedById?: string | null
+    approvedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type UserUpdateWithoutJurisdictionInput = {
     id?: StringFieldUpdateOperationsInput | string
     employeeCode?: StringFieldUpdateOperationsInput | string
@@ -53305,6 +60528,8 @@ export namespace Prisma {
     createdApprovedActions?: ApprovedActionVersionUpdateManyWithoutCreatedByNestedInput
     approvedApprovedActions?: ApprovedActionVersionUpdateManyWithoutApprovedByNestedInput
     preparedDecisionPackages?: DecisionPackageUpdateManyWithoutPreparedByNestedInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutCreatedByNestedInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutApprovedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutJurisdictionInput = {
@@ -53339,6 +60564,8 @@ export namespace Prisma {
     createdApprovedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutCreatedByNestedInput
     approvedApprovedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutApprovedByNestedInput
     preparedDecisionPackages?: DecisionPackageUncheckedUpdateManyWithoutPreparedByNestedInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutCreatedByNestedInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutApprovedByNestedInput
   }
 
   export type UserUncheckedUpdateManyWithoutJurisdictionInput = {
@@ -53623,6 +60850,8 @@ export namespace Prisma {
     createdBy?: UserUpdateOneRequiredWithoutCreatedApprovedActionsNestedInput
     approvedBy?: UserUpdateOneWithoutApprovedApprovedActionsNestedInput
     rules?: PolicyRuleUpdateManyWithoutActionNestedInput
+    executionTemplates?: GovernedExecutionTemplateUpdateManyWithoutApprovedActionVersionNestedInput
+    executionTasks?: ExecutionTaskUpdateManyWithoutApprovedActionVersionNestedInput
   }
 
   export type ApprovedActionVersionUncheckedUpdateWithoutJurisdictionInput = {
@@ -53646,6 +60875,8 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     rules?: PolicyRuleUncheckedUpdateManyWithoutActionNestedInput
+    executionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutApprovedActionVersionNestedInput
+    executionTasks?: ExecutionTaskUncheckedUpdateManyWithoutApprovedActionVersionNestedInput
   }
 
   export type ApprovedActionVersionUncheckedUpdateManyWithoutJurisdictionInput = {
@@ -53663,6 +60894,64 @@ export namespace Prisma {
     effectiveFrom?: DateTimeFieldUpdateOperationsInput | Date | string
     effectiveUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: EnumRegistryLifecycleStatusFieldUpdateOperationsInput | $Enums.RegistryLifecycleStatus
+    createdById?: StringFieldUpdateOperationsInput | string
+    approvedById?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GovernedExecutionTemplateUpdateWithoutJurisdictionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    templateCode?: StringFieldUpdateOperationsInput | string
+    versionNumber?: IntFieldUpdateOperationsInput | number
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    status?: EnumRegistryLifecycleStatusFieldUpdateOperationsInput | $Enums.RegistryLifecycleStatus
+    effectiveFrom?: DateTimeFieldUpdateOperationsInput | Date | string
+    effectiveUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    approvedActionVersion?: ApprovedActionVersionUpdateOneRequiredWithoutExecutionTemplatesNestedInput
+    department?: DepartmentUpdateOneWithoutGovernedExecutionTemplatesNestedInput
+    createdBy?: UserUpdateOneRequiredWithoutCreatedGovernedExecutionTemplatesNestedInput
+    approvedBy?: UserUpdateOneWithoutApprovedGovernedExecutionTemplatesNestedInput
+    tasks?: GovernedExecutionTaskTemplateUpdateManyWithoutExecutionTemplateNestedInput
+    executionTasks?: ExecutionTaskUpdateManyWithoutGovernedExecutionTemplateNestedInput
+  }
+
+  export type GovernedExecutionTemplateUncheckedUpdateWithoutJurisdictionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    templateCode?: StringFieldUpdateOperationsInput | string
+    versionNumber?: IntFieldUpdateOperationsInput | number
+    approvedActionVersionId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    status?: EnumRegistryLifecycleStatusFieldUpdateOperationsInput | $Enums.RegistryLifecycleStatus
+    effectiveFrom?: DateTimeFieldUpdateOperationsInput | Date | string
+    effectiveUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    departmentId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: StringFieldUpdateOperationsInput | string
+    approvedById?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tasks?: GovernedExecutionTaskTemplateUncheckedUpdateManyWithoutExecutionTemplateNestedInput
+    executionTasks?: ExecutionTaskUncheckedUpdateManyWithoutGovernedExecutionTemplateNestedInput
+  }
+
+  export type GovernedExecutionTemplateUncheckedUpdateManyWithoutJurisdictionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    templateCode?: StringFieldUpdateOperationsInput | string
+    versionNumber?: IntFieldUpdateOperationsInput | number
+    approvedActionVersionId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    status?: EnumRegistryLifecycleStatusFieldUpdateOperationsInput | $Enums.RegistryLifecycleStatus
+    effectiveFrom?: DateTimeFieldUpdateOperationsInput | Date | string
+    effectiveUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    departmentId?: NullableStringFieldUpdateOperationsInput | string | null
     createdById?: StringFieldUpdateOperationsInput | string
     approvedById?: NullableStringFieldUpdateOperationsInput | string | null
     approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -53744,6 +61033,9 @@ export namespace Prisma {
     completedAt?: Date | string | null
     cancelledAt?: Date | string | null
     cancellationReason?: string | null
+    governanceMode?: $Enums.ExecutionPlanGovernanceMode
+    executionContractVersion?: string | null
+    governedProvenance?: NullableJsonNullValueInput | InputJsonValue
   }
 
   export type ExecutionTaskCreateManyAssignedToInput = {
@@ -53772,6 +61064,14 @@ export namespace Prisma {
     cancellationReason?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    approvedActionVersionId?: string | null
+    governedExecutionTemplateId?: string | null
+    governedTaskTemplateId?: string | null
+    sourceActionVersion?: number | null
+    sourceTemplateCode?: string | null
+    sourceTemplateVersion?: number | null
+    evidenceRequired?: boolean
+    verificationRequired?: boolean
   }
 
   export type ExecutionTaskCreateManyAssignedByInput = {
@@ -53800,6 +61100,14 @@ export namespace Prisma {
     cancellationReason?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    approvedActionVersionId?: string | null
+    governedExecutionTemplateId?: string | null
+    governedTaskTemplateId?: string | null
+    sourceActionVersion?: number | null
+    sourceTemplateCode?: string | null
+    sourceTemplateVersion?: number | null
+    evidenceRequired?: boolean
+    verificationRequired?: boolean
   }
 
   export type ExecutionTaskCreateManyCompletionSubmittedByInput = {
@@ -53828,6 +61136,14 @@ export namespace Prisma {
     cancellationReason?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    approvedActionVersionId?: string | null
+    governedExecutionTemplateId?: string | null
+    governedTaskTemplateId?: string | null
+    sourceActionVersion?: number | null
+    sourceTemplateCode?: string | null
+    sourceTemplateVersion?: number | null
+    evidenceRequired?: boolean
+    verificationRequired?: boolean
   }
 
   export type ExecutionTaskCreateManyVerifiedByInput = {
@@ -53856,6 +61172,14 @@ export namespace Prisma {
     cancellationReason?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    approvedActionVersionId?: string | null
+    governedExecutionTemplateId?: string | null
+    governedTaskTemplateId?: string | null
+    sourceActionVersion?: number | null
+    sourceTemplateCode?: string | null
+    sourceTemplateVersion?: number | null
+    evidenceRequired?: boolean
+    verificationRequired?: boolean
   }
 
   export type ExecutionTaskCreateManyCancelledByInput = {
@@ -53884,6 +61208,14 @@ export namespace Prisma {
     cancellationReason?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    approvedActionVersionId?: string | null
+    governedExecutionTemplateId?: string | null
+    governedTaskTemplateId?: string | null
+    sourceActionVersion?: number | null
+    sourceTemplateCode?: string | null
+    sourceTemplateVersion?: number | null
+    evidenceRequired?: boolean
+    verificationRequired?: boolean
   }
 
   export type ExecutionEvidenceCreateManySubmittedByInput = {
@@ -54072,6 +61404,42 @@ export namespace Prisma {
     policySnapshot: JsonNullValueInput | InputJsonValue
     actionSnapshot: JsonNullValueInput | InputJsonValue
     preparedAt?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type GovernedExecutionTemplateCreateManyCreatedByInput = {
+    id?: string
+    templateCode: string
+    versionNumber: number
+    approvedActionVersionId: string
+    title: string
+    description: string
+    status?: $Enums.RegistryLifecycleStatus
+    effectiveFrom: Date | string
+    effectiveUntil?: Date | string | null
+    departmentId?: string | null
+    jurisdictionId?: string | null
+    approvedById?: string | null
+    approvedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type GovernedExecutionTemplateCreateManyApprovedByInput = {
+    id?: string
+    templateCode: string
+    versionNumber: number
+    approvedActionVersionId: string
+    title: string
+    description: string
+    status?: $Enums.RegistryLifecycleStatus
+    effectiveFrom: Date | string
+    effectiveUntil?: Date | string | null
+    departmentId?: string | null
+    jurisdictionId?: string | null
+    createdById: string
+    approvedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -54281,6 +61649,9 @@ export namespace Prisma {
     completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    governanceMode?: EnumExecutionPlanGovernanceModeFieldUpdateOperationsInput | $Enums.ExecutionPlanGovernanceMode
+    executionContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
+    governedProvenance?: NullableJsonNullValueInput | InputJsonValue
     orp?: OperationalResponsePlanUpdateOneRequiredWithoutExecutionPlanNestedInput
     case?: CaseUpdateOneRequiredWithoutExecutionPlansNestedInput
     approvalDecision?: OrpDecisionUpdateOneRequiredWithoutExecutionPlanNestedInput
@@ -54301,6 +61672,9 @@ export namespace Prisma {
     completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    governanceMode?: EnumExecutionPlanGovernanceModeFieldUpdateOperationsInput | $Enums.ExecutionPlanGovernanceMode
+    executionContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
+    governedProvenance?: NullableJsonNullValueInput | InputJsonValue
     tasks?: ExecutionTaskUncheckedUpdateManyWithoutExecutionPlanNestedInput
     closure?: CaseClosureUncheckedUpdateOneWithoutExecutionPlanNestedInput
   }
@@ -54318,6 +61692,9 @@ export namespace Prisma {
     completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    governanceMode?: EnumExecutionPlanGovernanceModeFieldUpdateOperationsInput | $Enums.ExecutionPlanGovernanceMode
+    executionContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
+    governedProvenance?: NullableJsonNullValueInput | InputJsonValue
   }
 
   export type ExecutionTaskUpdateWithoutAssignedToInput = {
@@ -54341,12 +61718,20 @@ export namespace Prisma {
     cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sourceActionVersion?: NullableIntFieldUpdateOperationsInput | number | null
+    sourceTemplateCode?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceTemplateVersion?: NullableIntFieldUpdateOperationsInput | number | null
+    evidenceRequired?: BoolFieldUpdateOperationsInput | boolean
+    verificationRequired?: BoolFieldUpdateOperationsInput | boolean
     executionPlan?: ExecutionPlanUpdateOneRequiredWithoutTasksNestedInput
     assignedBy?: UserUpdateOneWithoutAssignedByExecutionTasksNestedInput
     completionSubmittedBy?: UserUpdateOneWithoutCompletedExecutionTasksNestedInput
     verifiedBy?: UserUpdateOneWithoutVerifiedExecutionTasksNestedInput
     cancelledBy?: UserUpdateOneWithoutCancelledExecutionTasksNestedInput
     evidence?: ExecutionEvidenceUpdateManyWithoutExecutionTaskNestedInput
+    approvedActionVersion?: ApprovedActionVersionUpdateOneWithoutExecutionTasksNestedInput
+    governedExecutionTemplate?: GovernedExecutionTemplateUpdateOneWithoutExecutionTasksNestedInput
+    governedTaskTemplate?: GovernedExecutionTaskTemplateUpdateOneWithoutExecutionTasksNestedInput
   }
 
   export type ExecutionTaskUncheckedUpdateWithoutAssignedToInput = {
@@ -54375,6 +61760,14 @@ export namespace Prisma {
     cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    approvedActionVersionId?: NullableStringFieldUpdateOperationsInput | string | null
+    governedExecutionTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
+    governedTaskTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceActionVersion?: NullableIntFieldUpdateOperationsInput | number | null
+    sourceTemplateCode?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceTemplateVersion?: NullableIntFieldUpdateOperationsInput | number | null
+    evidenceRequired?: BoolFieldUpdateOperationsInput | boolean
+    verificationRequired?: BoolFieldUpdateOperationsInput | boolean
     evidence?: ExecutionEvidenceUncheckedUpdateManyWithoutExecutionTaskNestedInput
   }
 
@@ -54404,6 +61797,14 @@ export namespace Prisma {
     cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    approvedActionVersionId?: NullableStringFieldUpdateOperationsInput | string | null
+    governedExecutionTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
+    governedTaskTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceActionVersion?: NullableIntFieldUpdateOperationsInput | number | null
+    sourceTemplateCode?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceTemplateVersion?: NullableIntFieldUpdateOperationsInput | number | null
+    evidenceRequired?: BoolFieldUpdateOperationsInput | boolean
+    verificationRequired?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type ExecutionTaskUpdateWithoutAssignedByInput = {
@@ -54427,12 +61828,20 @@ export namespace Prisma {
     cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sourceActionVersion?: NullableIntFieldUpdateOperationsInput | number | null
+    sourceTemplateCode?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceTemplateVersion?: NullableIntFieldUpdateOperationsInput | number | null
+    evidenceRequired?: BoolFieldUpdateOperationsInput | boolean
+    verificationRequired?: BoolFieldUpdateOperationsInput | boolean
     executionPlan?: ExecutionPlanUpdateOneRequiredWithoutTasksNestedInput
     assignedTo?: UserUpdateOneWithoutAssignedExecutionTasksNestedInput
     completionSubmittedBy?: UserUpdateOneWithoutCompletedExecutionTasksNestedInput
     verifiedBy?: UserUpdateOneWithoutVerifiedExecutionTasksNestedInput
     cancelledBy?: UserUpdateOneWithoutCancelledExecutionTasksNestedInput
     evidence?: ExecutionEvidenceUpdateManyWithoutExecutionTaskNestedInput
+    approvedActionVersion?: ApprovedActionVersionUpdateOneWithoutExecutionTasksNestedInput
+    governedExecutionTemplate?: GovernedExecutionTemplateUpdateOneWithoutExecutionTasksNestedInput
+    governedTaskTemplate?: GovernedExecutionTaskTemplateUpdateOneWithoutExecutionTasksNestedInput
   }
 
   export type ExecutionTaskUncheckedUpdateWithoutAssignedByInput = {
@@ -54461,6 +61870,14 @@ export namespace Prisma {
     cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    approvedActionVersionId?: NullableStringFieldUpdateOperationsInput | string | null
+    governedExecutionTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
+    governedTaskTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceActionVersion?: NullableIntFieldUpdateOperationsInput | number | null
+    sourceTemplateCode?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceTemplateVersion?: NullableIntFieldUpdateOperationsInput | number | null
+    evidenceRequired?: BoolFieldUpdateOperationsInput | boolean
+    verificationRequired?: BoolFieldUpdateOperationsInput | boolean
     evidence?: ExecutionEvidenceUncheckedUpdateManyWithoutExecutionTaskNestedInput
   }
 
@@ -54490,6 +61907,14 @@ export namespace Prisma {
     cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    approvedActionVersionId?: NullableStringFieldUpdateOperationsInput | string | null
+    governedExecutionTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
+    governedTaskTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceActionVersion?: NullableIntFieldUpdateOperationsInput | number | null
+    sourceTemplateCode?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceTemplateVersion?: NullableIntFieldUpdateOperationsInput | number | null
+    evidenceRequired?: BoolFieldUpdateOperationsInput | boolean
+    verificationRequired?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type ExecutionTaskUpdateWithoutCompletionSubmittedByInput = {
@@ -54513,12 +61938,20 @@ export namespace Prisma {
     cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sourceActionVersion?: NullableIntFieldUpdateOperationsInput | number | null
+    sourceTemplateCode?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceTemplateVersion?: NullableIntFieldUpdateOperationsInput | number | null
+    evidenceRequired?: BoolFieldUpdateOperationsInput | boolean
+    verificationRequired?: BoolFieldUpdateOperationsInput | boolean
     executionPlan?: ExecutionPlanUpdateOneRequiredWithoutTasksNestedInput
     assignedTo?: UserUpdateOneWithoutAssignedExecutionTasksNestedInput
     assignedBy?: UserUpdateOneWithoutAssignedByExecutionTasksNestedInput
     verifiedBy?: UserUpdateOneWithoutVerifiedExecutionTasksNestedInput
     cancelledBy?: UserUpdateOneWithoutCancelledExecutionTasksNestedInput
     evidence?: ExecutionEvidenceUpdateManyWithoutExecutionTaskNestedInput
+    approvedActionVersion?: ApprovedActionVersionUpdateOneWithoutExecutionTasksNestedInput
+    governedExecutionTemplate?: GovernedExecutionTemplateUpdateOneWithoutExecutionTasksNestedInput
+    governedTaskTemplate?: GovernedExecutionTaskTemplateUpdateOneWithoutExecutionTasksNestedInput
   }
 
   export type ExecutionTaskUncheckedUpdateWithoutCompletionSubmittedByInput = {
@@ -54547,6 +61980,14 @@ export namespace Prisma {
     cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    approvedActionVersionId?: NullableStringFieldUpdateOperationsInput | string | null
+    governedExecutionTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
+    governedTaskTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceActionVersion?: NullableIntFieldUpdateOperationsInput | number | null
+    sourceTemplateCode?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceTemplateVersion?: NullableIntFieldUpdateOperationsInput | number | null
+    evidenceRequired?: BoolFieldUpdateOperationsInput | boolean
+    verificationRequired?: BoolFieldUpdateOperationsInput | boolean
     evidence?: ExecutionEvidenceUncheckedUpdateManyWithoutExecutionTaskNestedInput
   }
 
@@ -54576,6 +62017,14 @@ export namespace Prisma {
     cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    approvedActionVersionId?: NullableStringFieldUpdateOperationsInput | string | null
+    governedExecutionTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
+    governedTaskTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceActionVersion?: NullableIntFieldUpdateOperationsInput | number | null
+    sourceTemplateCode?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceTemplateVersion?: NullableIntFieldUpdateOperationsInput | number | null
+    evidenceRequired?: BoolFieldUpdateOperationsInput | boolean
+    verificationRequired?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type ExecutionTaskUpdateWithoutVerifiedByInput = {
@@ -54599,12 +62048,20 @@ export namespace Prisma {
     cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sourceActionVersion?: NullableIntFieldUpdateOperationsInput | number | null
+    sourceTemplateCode?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceTemplateVersion?: NullableIntFieldUpdateOperationsInput | number | null
+    evidenceRequired?: BoolFieldUpdateOperationsInput | boolean
+    verificationRequired?: BoolFieldUpdateOperationsInput | boolean
     executionPlan?: ExecutionPlanUpdateOneRequiredWithoutTasksNestedInput
     assignedTo?: UserUpdateOneWithoutAssignedExecutionTasksNestedInput
     assignedBy?: UserUpdateOneWithoutAssignedByExecutionTasksNestedInput
     completionSubmittedBy?: UserUpdateOneWithoutCompletedExecutionTasksNestedInput
     cancelledBy?: UserUpdateOneWithoutCancelledExecutionTasksNestedInput
     evidence?: ExecutionEvidenceUpdateManyWithoutExecutionTaskNestedInput
+    approvedActionVersion?: ApprovedActionVersionUpdateOneWithoutExecutionTasksNestedInput
+    governedExecutionTemplate?: GovernedExecutionTemplateUpdateOneWithoutExecutionTasksNestedInput
+    governedTaskTemplate?: GovernedExecutionTaskTemplateUpdateOneWithoutExecutionTasksNestedInput
   }
 
   export type ExecutionTaskUncheckedUpdateWithoutVerifiedByInput = {
@@ -54633,6 +62090,14 @@ export namespace Prisma {
     cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    approvedActionVersionId?: NullableStringFieldUpdateOperationsInput | string | null
+    governedExecutionTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
+    governedTaskTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceActionVersion?: NullableIntFieldUpdateOperationsInput | number | null
+    sourceTemplateCode?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceTemplateVersion?: NullableIntFieldUpdateOperationsInput | number | null
+    evidenceRequired?: BoolFieldUpdateOperationsInput | boolean
+    verificationRequired?: BoolFieldUpdateOperationsInput | boolean
     evidence?: ExecutionEvidenceUncheckedUpdateManyWithoutExecutionTaskNestedInput
   }
 
@@ -54662,6 +62127,14 @@ export namespace Prisma {
     cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    approvedActionVersionId?: NullableStringFieldUpdateOperationsInput | string | null
+    governedExecutionTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
+    governedTaskTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceActionVersion?: NullableIntFieldUpdateOperationsInput | number | null
+    sourceTemplateCode?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceTemplateVersion?: NullableIntFieldUpdateOperationsInput | number | null
+    evidenceRequired?: BoolFieldUpdateOperationsInput | boolean
+    verificationRequired?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type ExecutionTaskUpdateWithoutCancelledByInput = {
@@ -54685,12 +62158,20 @@ export namespace Prisma {
     cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sourceActionVersion?: NullableIntFieldUpdateOperationsInput | number | null
+    sourceTemplateCode?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceTemplateVersion?: NullableIntFieldUpdateOperationsInput | number | null
+    evidenceRequired?: BoolFieldUpdateOperationsInput | boolean
+    verificationRequired?: BoolFieldUpdateOperationsInput | boolean
     executionPlan?: ExecutionPlanUpdateOneRequiredWithoutTasksNestedInput
     assignedTo?: UserUpdateOneWithoutAssignedExecutionTasksNestedInput
     assignedBy?: UserUpdateOneWithoutAssignedByExecutionTasksNestedInput
     completionSubmittedBy?: UserUpdateOneWithoutCompletedExecutionTasksNestedInput
     verifiedBy?: UserUpdateOneWithoutVerifiedExecutionTasksNestedInput
     evidence?: ExecutionEvidenceUpdateManyWithoutExecutionTaskNestedInput
+    approvedActionVersion?: ApprovedActionVersionUpdateOneWithoutExecutionTasksNestedInput
+    governedExecutionTemplate?: GovernedExecutionTemplateUpdateOneWithoutExecutionTasksNestedInput
+    governedTaskTemplate?: GovernedExecutionTaskTemplateUpdateOneWithoutExecutionTasksNestedInput
   }
 
   export type ExecutionTaskUncheckedUpdateWithoutCancelledByInput = {
@@ -54719,6 +62200,14 @@ export namespace Prisma {
     cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    approvedActionVersionId?: NullableStringFieldUpdateOperationsInput | string | null
+    governedExecutionTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
+    governedTaskTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceActionVersion?: NullableIntFieldUpdateOperationsInput | number | null
+    sourceTemplateCode?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceTemplateVersion?: NullableIntFieldUpdateOperationsInput | number | null
+    evidenceRequired?: BoolFieldUpdateOperationsInput | boolean
+    verificationRequired?: BoolFieldUpdateOperationsInput | boolean
     evidence?: ExecutionEvidenceUncheckedUpdateManyWithoutExecutionTaskNestedInput
   }
 
@@ -54748,6 +62237,14 @@ export namespace Prisma {
     cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    approvedActionVersionId?: NullableStringFieldUpdateOperationsInput | string | null
+    governedExecutionTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
+    governedTaskTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceActionVersion?: NullableIntFieldUpdateOperationsInput | number | null
+    sourceTemplateCode?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceTemplateVersion?: NullableIntFieldUpdateOperationsInput | number | null
+    evidenceRequired?: BoolFieldUpdateOperationsInput | boolean
+    verificationRequired?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type ExecutionEvidenceUpdateWithoutSubmittedByInput = {
@@ -55161,6 +62658,8 @@ export namespace Prisma {
     jurisdiction?: JurisdictionUpdateOneWithoutApprovedActionsNestedInput
     approvedBy?: UserUpdateOneWithoutApprovedApprovedActionsNestedInput
     rules?: PolicyRuleUpdateManyWithoutActionNestedInput
+    executionTemplates?: GovernedExecutionTemplateUpdateManyWithoutApprovedActionVersionNestedInput
+    executionTasks?: ExecutionTaskUpdateManyWithoutApprovedActionVersionNestedInput
   }
 
   export type ApprovedActionVersionUncheckedUpdateWithoutCreatedByInput = {
@@ -55184,6 +62683,8 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     rules?: PolicyRuleUncheckedUpdateManyWithoutActionNestedInput
+    executionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutApprovedActionVersionNestedInput
+    executionTasks?: ExecutionTaskUncheckedUpdateManyWithoutApprovedActionVersionNestedInput
   }
 
   export type ApprovedActionVersionUncheckedUpdateManyWithoutCreatedByInput = {
@@ -55229,6 +62730,8 @@ export namespace Prisma {
     jurisdiction?: JurisdictionUpdateOneWithoutApprovedActionsNestedInput
     createdBy?: UserUpdateOneRequiredWithoutCreatedApprovedActionsNestedInput
     rules?: PolicyRuleUpdateManyWithoutActionNestedInput
+    executionTemplates?: GovernedExecutionTemplateUpdateManyWithoutApprovedActionVersionNestedInput
+    executionTasks?: ExecutionTaskUpdateManyWithoutApprovedActionVersionNestedInput
   }
 
   export type ApprovedActionVersionUncheckedUpdateWithoutApprovedByInput = {
@@ -55252,6 +62755,8 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     rules?: PolicyRuleUncheckedUpdateManyWithoutActionNestedInput
+    executionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutApprovedActionVersionNestedInput
+    executionTasks?: ExecutionTaskUncheckedUpdateManyWithoutApprovedActionVersionNestedInput
   }
 
   export type ApprovedActionVersionUncheckedUpdateManyWithoutApprovedByInput = {
@@ -55334,6 +62839,122 @@ export namespace Prisma {
     policySnapshot?: JsonNullValueInput | InputJsonValue
     actionSnapshot?: JsonNullValueInput | InputJsonValue
     preparedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GovernedExecutionTemplateUpdateWithoutCreatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    templateCode?: StringFieldUpdateOperationsInput | string
+    versionNumber?: IntFieldUpdateOperationsInput | number
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    status?: EnumRegistryLifecycleStatusFieldUpdateOperationsInput | $Enums.RegistryLifecycleStatus
+    effectiveFrom?: DateTimeFieldUpdateOperationsInput | Date | string
+    effectiveUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    approvedActionVersion?: ApprovedActionVersionUpdateOneRequiredWithoutExecutionTemplatesNestedInput
+    department?: DepartmentUpdateOneWithoutGovernedExecutionTemplatesNestedInput
+    jurisdiction?: JurisdictionUpdateOneWithoutGovernedExecutionTemplatesNestedInput
+    approvedBy?: UserUpdateOneWithoutApprovedGovernedExecutionTemplatesNestedInput
+    tasks?: GovernedExecutionTaskTemplateUpdateManyWithoutExecutionTemplateNestedInput
+    executionTasks?: ExecutionTaskUpdateManyWithoutGovernedExecutionTemplateNestedInput
+  }
+
+  export type GovernedExecutionTemplateUncheckedUpdateWithoutCreatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    templateCode?: StringFieldUpdateOperationsInput | string
+    versionNumber?: IntFieldUpdateOperationsInput | number
+    approvedActionVersionId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    status?: EnumRegistryLifecycleStatusFieldUpdateOperationsInput | $Enums.RegistryLifecycleStatus
+    effectiveFrom?: DateTimeFieldUpdateOperationsInput | Date | string
+    effectiveUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    departmentId?: NullableStringFieldUpdateOperationsInput | string | null
+    jurisdictionId?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedById?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tasks?: GovernedExecutionTaskTemplateUncheckedUpdateManyWithoutExecutionTemplateNestedInput
+    executionTasks?: ExecutionTaskUncheckedUpdateManyWithoutGovernedExecutionTemplateNestedInput
+  }
+
+  export type GovernedExecutionTemplateUncheckedUpdateManyWithoutCreatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    templateCode?: StringFieldUpdateOperationsInput | string
+    versionNumber?: IntFieldUpdateOperationsInput | number
+    approvedActionVersionId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    status?: EnumRegistryLifecycleStatusFieldUpdateOperationsInput | $Enums.RegistryLifecycleStatus
+    effectiveFrom?: DateTimeFieldUpdateOperationsInput | Date | string
+    effectiveUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    departmentId?: NullableStringFieldUpdateOperationsInput | string | null
+    jurisdictionId?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedById?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GovernedExecutionTemplateUpdateWithoutApprovedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    templateCode?: StringFieldUpdateOperationsInput | string
+    versionNumber?: IntFieldUpdateOperationsInput | number
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    status?: EnumRegistryLifecycleStatusFieldUpdateOperationsInput | $Enums.RegistryLifecycleStatus
+    effectiveFrom?: DateTimeFieldUpdateOperationsInput | Date | string
+    effectiveUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    approvedActionVersion?: ApprovedActionVersionUpdateOneRequiredWithoutExecutionTemplatesNestedInput
+    department?: DepartmentUpdateOneWithoutGovernedExecutionTemplatesNestedInput
+    jurisdiction?: JurisdictionUpdateOneWithoutGovernedExecutionTemplatesNestedInput
+    createdBy?: UserUpdateOneRequiredWithoutCreatedGovernedExecutionTemplatesNestedInput
+    tasks?: GovernedExecutionTaskTemplateUpdateManyWithoutExecutionTemplateNestedInput
+    executionTasks?: ExecutionTaskUpdateManyWithoutGovernedExecutionTemplateNestedInput
+  }
+
+  export type GovernedExecutionTemplateUncheckedUpdateWithoutApprovedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    templateCode?: StringFieldUpdateOperationsInput | string
+    versionNumber?: IntFieldUpdateOperationsInput | number
+    approvedActionVersionId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    status?: EnumRegistryLifecycleStatusFieldUpdateOperationsInput | $Enums.RegistryLifecycleStatus
+    effectiveFrom?: DateTimeFieldUpdateOperationsInput | Date | string
+    effectiveUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    departmentId?: NullableStringFieldUpdateOperationsInput | string | null
+    jurisdictionId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: StringFieldUpdateOperationsInput | string
+    approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tasks?: GovernedExecutionTaskTemplateUncheckedUpdateManyWithoutExecutionTemplateNestedInput
+    executionTasks?: ExecutionTaskUncheckedUpdateManyWithoutGovernedExecutionTemplateNestedInput
+  }
+
+  export type GovernedExecutionTemplateUncheckedUpdateManyWithoutApprovedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    templateCode?: StringFieldUpdateOperationsInput | string
+    versionNumber?: IntFieldUpdateOperationsInput | number
+    approvedActionVersionId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    status?: EnumRegistryLifecycleStatusFieldUpdateOperationsInput | $Enums.RegistryLifecycleStatus
+    effectiveFrom?: DateTimeFieldUpdateOperationsInput | Date | string
+    effectiveUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    departmentId?: NullableStringFieldUpdateOperationsInput | string | null
+    jurisdictionId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: StringFieldUpdateOperationsInput | string
+    approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -55715,6 +63336,8 @@ export namespace Prisma {
     createdBy?: UserUpdateOneRequiredWithoutCreatedApprovedActionsNestedInput
     approvedBy?: UserUpdateOneWithoutApprovedApprovedActionsNestedInput
     rules?: PolicyRuleUpdateManyWithoutActionNestedInput
+    executionTemplates?: GovernedExecutionTemplateUpdateManyWithoutApprovedActionVersionNestedInput
+    executionTasks?: ExecutionTaskUpdateManyWithoutApprovedActionVersionNestedInput
   }
 
   export type ApprovedActionVersionUncheckedUpdateWithoutProvenancePolicyDocumentInput = {
@@ -55738,6 +63361,8 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     rules?: PolicyRuleUncheckedUpdateManyWithoutActionNestedInput
+    executionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutApprovedActionVersionNestedInput
+    executionTasks?: ExecutionTaskUncheckedUpdateManyWithoutApprovedActionVersionNestedInput
   }
 
   export type ApprovedActionVersionUncheckedUpdateManyWithoutProvenancePolicyDocumentInput = {
@@ -55774,6 +63399,60 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
+  export type GovernedExecutionTemplateCreateManyApprovedActionVersionInput = {
+    id?: string
+    templateCode: string
+    versionNumber: number
+    title: string
+    description: string
+    status?: $Enums.RegistryLifecycleStatus
+    effectiveFrom: Date | string
+    effectiveUntil?: Date | string | null
+    departmentId?: string | null
+    jurisdictionId?: string | null
+    createdById: string
+    approvedById?: string | null
+    approvedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ExecutionTaskCreateManyApprovedActionVersionInput = {
+    id?: string
+    executionPlanId: string
+    sequenceNumber: number
+    sourceActionCode: string
+    templateTaskKey: string
+    titleSnapshot: string
+    descriptionSnapshot: string
+    categorySnapshot: string
+    isMandatory?: boolean
+    status?: $Enums.ExecutionTaskStatus
+    assignedToId?: string | null
+    assignedById?: string | null
+    assignedAt?: Date | string | null
+    startedAt?: Date | string | null
+    completionSubmittedById?: string | null
+    completionSubmittedAt?: Date | string | null
+    completionNote?: string | null
+    verifiedById?: string | null
+    verifiedAt?: Date | string | null
+    verificationNote?: string | null
+    blockedReason?: string | null
+    cancelledById?: string | null
+    cancelledAt?: Date | string | null
+    cancellationReason?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    governedExecutionTemplateId?: string | null
+    governedTaskTemplateId?: string | null
+    sourceActionVersion?: number | null
+    sourceTemplateCode?: string | null
+    sourceTemplateVersion?: number | null
+    evidenceRequired?: boolean
+    verificationRequired?: boolean
+  }
+
   export type PolicyRuleUpdateWithoutActionInput = {
     id?: StringFieldUpdateOperationsInput | string
     ruleCode?: StringFieldUpdateOperationsInput | string
@@ -55808,6 +63487,524 @@ export namespace Prisma {
     enabled?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GovernedExecutionTemplateUpdateWithoutApprovedActionVersionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    templateCode?: StringFieldUpdateOperationsInput | string
+    versionNumber?: IntFieldUpdateOperationsInput | number
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    status?: EnumRegistryLifecycleStatusFieldUpdateOperationsInput | $Enums.RegistryLifecycleStatus
+    effectiveFrom?: DateTimeFieldUpdateOperationsInput | Date | string
+    effectiveUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    department?: DepartmentUpdateOneWithoutGovernedExecutionTemplatesNestedInput
+    jurisdiction?: JurisdictionUpdateOneWithoutGovernedExecutionTemplatesNestedInput
+    createdBy?: UserUpdateOneRequiredWithoutCreatedGovernedExecutionTemplatesNestedInput
+    approvedBy?: UserUpdateOneWithoutApprovedGovernedExecutionTemplatesNestedInput
+    tasks?: GovernedExecutionTaskTemplateUpdateManyWithoutExecutionTemplateNestedInput
+    executionTasks?: ExecutionTaskUpdateManyWithoutGovernedExecutionTemplateNestedInput
+  }
+
+  export type GovernedExecutionTemplateUncheckedUpdateWithoutApprovedActionVersionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    templateCode?: StringFieldUpdateOperationsInput | string
+    versionNumber?: IntFieldUpdateOperationsInput | number
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    status?: EnumRegistryLifecycleStatusFieldUpdateOperationsInput | $Enums.RegistryLifecycleStatus
+    effectiveFrom?: DateTimeFieldUpdateOperationsInput | Date | string
+    effectiveUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    departmentId?: NullableStringFieldUpdateOperationsInput | string | null
+    jurisdictionId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: StringFieldUpdateOperationsInput | string
+    approvedById?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tasks?: GovernedExecutionTaskTemplateUncheckedUpdateManyWithoutExecutionTemplateNestedInput
+    executionTasks?: ExecutionTaskUncheckedUpdateManyWithoutGovernedExecutionTemplateNestedInput
+  }
+
+  export type GovernedExecutionTemplateUncheckedUpdateManyWithoutApprovedActionVersionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    templateCode?: StringFieldUpdateOperationsInput | string
+    versionNumber?: IntFieldUpdateOperationsInput | number
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    status?: EnumRegistryLifecycleStatusFieldUpdateOperationsInput | $Enums.RegistryLifecycleStatus
+    effectiveFrom?: DateTimeFieldUpdateOperationsInput | Date | string
+    effectiveUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    departmentId?: NullableStringFieldUpdateOperationsInput | string | null
+    jurisdictionId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: StringFieldUpdateOperationsInput | string
+    approvedById?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ExecutionTaskUpdateWithoutApprovedActionVersionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sequenceNumber?: IntFieldUpdateOperationsInput | number
+    sourceActionCode?: StringFieldUpdateOperationsInput | string
+    templateTaskKey?: StringFieldUpdateOperationsInput | string
+    titleSnapshot?: StringFieldUpdateOperationsInput | string
+    descriptionSnapshot?: StringFieldUpdateOperationsInput | string
+    categorySnapshot?: StringFieldUpdateOperationsInput | string
+    isMandatory?: BoolFieldUpdateOperationsInput | boolean
+    status?: EnumExecutionTaskStatusFieldUpdateOperationsInput | $Enums.ExecutionTaskStatus
+    assignedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    startedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completionSubmittedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completionNote?: NullableStringFieldUpdateOperationsInput | string | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verificationNote?: NullableStringFieldUpdateOperationsInput | string | null
+    blockedReason?: NullableStringFieldUpdateOperationsInput | string | null
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sourceActionVersion?: NullableIntFieldUpdateOperationsInput | number | null
+    sourceTemplateCode?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceTemplateVersion?: NullableIntFieldUpdateOperationsInput | number | null
+    evidenceRequired?: BoolFieldUpdateOperationsInput | boolean
+    verificationRequired?: BoolFieldUpdateOperationsInput | boolean
+    executionPlan?: ExecutionPlanUpdateOneRequiredWithoutTasksNestedInput
+    assignedTo?: UserUpdateOneWithoutAssignedExecutionTasksNestedInput
+    assignedBy?: UserUpdateOneWithoutAssignedByExecutionTasksNestedInput
+    completionSubmittedBy?: UserUpdateOneWithoutCompletedExecutionTasksNestedInput
+    verifiedBy?: UserUpdateOneWithoutVerifiedExecutionTasksNestedInput
+    cancelledBy?: UserUpdateOneWithoutCancelledExecutionTasksNestedInput
+    evidence?: ExecutionEvidenceUpdateManyWithoutExecutionTaskNestedInput
+    governedExecutionTemplate?: GovernedExecutionTemplateUpdateOneWithoutExecutionTasksNestedInput
+    governedTaskTemplate?: GovernedExecutionTaskTemplateUpdateOneWithoutExecutionTasksNestedInput
+  }
+
+  export type ExecutionTaskUncheckedUpdateWithoutApprovedActionVersionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    executionPlanId?: StringFieldUpdateOperationsInput | string
+    sequenceNumber?: IntFieldUpdateOperationsInput | number
+    sourceActionCode?: StringFieldUpdateOperationsInput | string
+    templateTaskKey?: StringFieldUpdateOperationsInput | string
+    titleSnapshot?: StringFieldUpdateOperationsInput | string
+    descriptionSnapshot?: StringFieldUpdateOperationsInput | string
+    categorySnapshot?: StringFieldUpdateOperationsInput | string
+    isMandatory?: BoolFieldUpdateOperationsInput | boolean
+    status?: EnumExecutionTaskStatusFieldUpdateOperationsInput | $Enums.ExecutionTaskStatus
+    assignedToId?: NullableStringFieldUpdateOperationsInput | string | null
+    assignedById?: NullableStringFieldUpdateOperationsInput | string | null
+    assignedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    startedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completionSubmittedById?: NullableStringFieldUpdateOperationsInput | string | null
+    completionSubmittedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completionNote?: NullableStringFieldUpdateOperationsInput | string | null
+    verifiedById?: NullableStringFieldUpdateOperationsInput | string | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verificationNote?: NullableStringFieldUpdateOperationsInput | string | null
+    blockedReason?: NullableStringFieldUpdateOperationsInput | string | null
+    cancelledById?: NullableStringFieldUpdateOperationsInput | string | null
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    governedExecutionTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
+    governedTaskTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceActionVersion?: NullableIntFieldUpdateOperationsInput | number | null
+    sourceTemplateCode?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceTemplateVersion?: NullableIntFieldUpdateOperationsInput | number | null
+    evidenceRequired?: BoolFieldUpdateOperationsInput | boolean
+    verificationRequired?: BoolFieldUpdateOperationsInput | boolean
+    evidence?: ExecutionEvidenceUncheckedUpdateManyWithoutExecutionTaskNestedInput
+  }
+
+  export type ExecutionTaskUncheckedUpdateManyWithoutApprovedActionVersionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    executionPlanId?: StringFieldUpdateOperationsInput | string
+    sequenceNumber?: IntFieldUpdateOperationsInput | number
+    sourceActionCode?: StringFieldUpdateOperationsInput | string
+    templateTaskKey?: StringFieldUpdateOperationsInput | string
+    titleSnapshot?: StringFieldUpdateOperationsInput | string
+    descriptionSnapshot?: StringFieldUpdateOperationsInput | string
+    categorySnapshot?: StringFieldUpdateOperationsInput | string
+    isMandatory?: BoolFieldUpdateOperationsInput | boolean
+    status?: EnumExecutionTaskStatusFieldUpdateOperationsInput | $Enums.ExecutionTaskStatus
+    assignedToId?: NullableStringFieldUpdateOperationsInput | string | null
+    assignedById?: NullableStringFieldUpdateOperationsInput | string | null
+    assignedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    startedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completionSubmittedById?: NullableStringFieldUpdateOperationsInput | string | null
+    completionSubmittedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completionNote?: NullableStringFieldUpdateOperationsInput | string | null
+    verifiedById?: NullableStringFieldUpdateOperationsInput | string | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verificationNote?: NullableStringFieldUpdateOperationsInput | string | null
+    blockedReason?: NullableStringFieldUpdateOperationsInput | string | null
+    cancelledById?: NullableStringFieldUpdateOperationsInput | string | null
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    governedExecutionTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
+    governedTaskTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceActionVersion?: NullableIntFieldUpdateOperationsInput | number | null
+    sourceTemplateCode?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceTemplateVersion?: NullableIntFieldUpdateOperationsInput | number | null
+    evidenceRequired?: BoolFieldUpdateOperationsInput | boolean
+    verificationRequired?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type GovernedExecutionTaskTemplateCreateManyExecutionTemplateInput = {
+    id?: string
+    sequenceNumber: number
+    taskCode: string
+    title: string
+    description: string
+    mandatory?: boolean
+    evidenceRequired?: boolean
+    verificationRequired?: boolean
+    enabled?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ExecutionTaskCreateManyGovernedExecutionTemplateInput = {
+    id?: string
+    executionPlanId: string
+    sequenceNumber: number
+    sourceActionCode: string
+    templateTaskKey: string
+    titleSnapshot: string
+    descriptionSnapshot: string
+    categorySnapshot: string
+    isMandatory?: boolean
+    status?: $Enums.ExecutionTaskStatus
+    assignedToId?: string | null
+    assignedById?: string | null
+    assignedAt?: Date | string | null
+    startedAt?: Date | string | null
+    completionSubmittedById?: string | null
+    completionSubmittedAt?: Date | string | null
+    completionNote?: string | null
+    verifiedById?: string | null
+    verifiedAt?: Date | string | null
+    verificationNote?: string | null
+    blockedReason?: string | null
+    cancelledById?: string | null
+    cancelledAt?: Date | string | null
+    cancellationReason?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    approvedActionVersionId?: string | null
+    governedTaskTemplateId?: string | null
+    sourceActionVersion?: number | null
+    sourceTemplateCode?: string | null
+    sourceTemplateVersion?: number | null
+    evidenceRequired?: boolean
+    verificationRequired?: boolean
+  }
+
+  export type GovernedExecutionTaskTemplateUpdateWithoutExecutionTemplateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sequenceNumber?: IntFieldUpdateOperationsInput | number
+    taskCode?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    mandatory?: BoolFieldUpdateOperationsInput | boolean
+    evidenceRequired?: BoolFieldUpdateOperationsInput | boolean
+    verificationRequired?: BoolFieldUpdateOperationsInput | boolean
+    enabled?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    executionTasks?: ExecutionTaskUpdateManyWithoutGovernedTaskTemplateNestedInput
+  }
+
+  export type GovernedExecutionTaskTemplateUncheckedUpdateWithoutExecutionTemplateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sequenceNumber?: IntFieldUpdateOperationsInput | number
+    taskCode?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    mandatory?: BoolFieldUpdateOperationsInput | boolean
+    evidenceRequired?: BoolFieldUpdateOperationsInput | boolean
+    verificationRequired?: BoolFieldUpdateOperationsInput | boolean
+    enabled?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    executionTasks?: ExecutionTaskUncheckedUpdateManyWithoutGovernedTaskTemplateNestedInput
+  }
+
+  export type GovernedExecutionTaskTemplateUncheckedUpdateManyWithoutExecutionTemplateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sequenceNumber?: IntFieldUpdateOperationsInput | number
+    taskCode?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    mandatory?: BoolFieldUpdateOperationsInput | boolean
+    evidenceRequired?: BoolFieldUpdateOperationsInput | boolean
+    verificationRequired?: BoolFieldUpdateOperationsInput | boolean
+    enabled?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ExecutionTaskUpdateWithoutGovernedExecutionTemplateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sequenceNumber?: IntFieldUpdateOperationsInput | number
+    sourceActionCode?: StringFieldUpdateOperationsInput | string
+    templateTaskKey?: StringFieldUpdateOperationsInput | string
+    titleSnapshot?: StringFieldUpdateOperationsInput | string
+    descriptionSnapshot?: StringFieldUpdateOperationsInput | string
+    categorySnapshot?: StringFieldUpdateOperationsInput | string
+    isMandatory?: BoolFieldUpdateOperationsInput | boolean
+    status?: EnumExecutionTaskStatusFieldUpdateOperationsInput | $Enums.ExecutionTaskStatus
+    assignedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    startedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completionSubmittedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completionNote?: NullableStringFieldUpdateOperationsInput | string | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verificationNote?: NullableStringFieldUpdateOperationsInput | string | null
+    blockedReason?: NullableStringFieldUpdateOperationsInput | string | null
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sourceActionVersion?: NullableIntFieldUpdateOperationsInput | number | null
+    sourceTemplateCode?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceTemplateVersion?: NullableIntFieldUpdateOperationsInput | number | null
+    evidenceRequired?: BoolFieldUpdateOperationsInput | boolean
+    verificationRequired?: BoolFieldUpdateOperationsInput | boolean
+    executionPlan?: ExecutionPlanUpdateOneRequiredWithoutTasksNestedInput
+    assignedTo?: UserUpdateOneWithoutAssignedExecutionTasksNestedInput
+    assignedBy?: UserUpdateOneWithoutAssignedByExecutionTasksNestedInput
+    completionSubmittedBy?: UserUpdateOneWithoutCompletedExecutionTasksNestedInput
+    verifiedBy?: UserUpdateOneWithoutVerifiedExecutionTasksNestedInput
+    cancelledBy?: UserUpdateOneWithoutCancelledExecutionTasksNestedInput
+    evidence?: ExecutionEvidenceUpdateManyWithoutExecutionTaskNestedInput
+    approvedActionVersion?: ApprovedActionVersionUpdateOneWithoutExecutionTasksNestedInput
+    governedTaskTemplate?: GovernedExecutionTaskTemplateUpdateOneWithoutExecutionTasksNestedInput
+  }
+
+  export type ExecutionTaskUncheckedUpdateWithoutGovernedExecutionTemplateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    executionPlanId?: StringFieldUpdateOperationsInput | string
+    sequenceNumber?: IntFieldUpdateOperationsInput | number
+    sourceActionCode?: StringFieldUpdateOperationsInput | string
+    templateTaskKey?: StringFieldUpdateOperationsInput | string
+    titleSnapshot?: StringFieldUpdateOperationsInput | string
+    descriptionSnapshot?: StringFieldUpdateOperationsInput | string
+    categorySnapshot?: StringFieldUpdateOperationsInput | string
+    isMandatory?: BoolFieldUpdateOperationsInput | boolean
+    status?: EnumExecutionTaskStatusFieldUpdateOperationsInput | $Enums.ExecutionTaskStatus
+    assignedToId?: NullableStringFieldUpdateOperationsInput | string | null
+    assignedById?: NullableStringFieldUpdateOperationsInput | string | null
+    assignedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    startedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completionSubmittedById?: NullableStringFieldUpdateOperationsInput | string | null
+    completionSubmittedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completionNote?: NullableStringFieldUpdateOperationsInput | string | null
+    verifiedById?: NullableStringFieldUpdateOperationsInput | string | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verificationNote?: NullableStringFieldUpdateOperationsInput | string | null
+    blockedReason?: NullableStringFieldUpdateOperationsInput | string | null
+    cancelledById?: NullableStringFieldUpdateOperationsInput | string | null
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    approvedActionVersionId?: NullableStringFieldUpdateOperationsInput | string | null
+    governedTaskTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceActionVersion?: NullableIntFieldUpdateOperationsInput | number | null
+    sourceTemplateCode?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceTemplateVersion?: NullableIntFieldUpdateOperationsInput | number | null
+    evidenceRequired?: BoolFieldUpdateOperationsInput | boolean
+    verificationRequired?: BoolFieldUpdateOperationsInput | boolean
+    evidence?: ExecutionEvidenceUncheckedUpdateManyWithoutExecutionTaskNestedInput
+  }
+
+  export type ExecutionTaskUncheckedUpdateManyWithoutGovernedExecutionTemplateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    executionPlanId?: StringFieldUpdateOperationsInput | string
+    sequenceNumber?: IntFieldUpdateOperationsInput | number
+    sourceActionCode?: StringFieldUpdateOperationsInput | string
+    templateTaskKey?: StringFieldUpdateOperationsInput | string
+    titleSnapshot?: StringFieldUpdateOperationsInput | string
+    descriptionSnapshot?: StringFieldUpdateOperationsInput | string
+    categorySnapshot?: StringFieldUpdateOperationsInput | string
+    isMandatory?: BoolFieldUpdateOperationsInput | boolean
+    status?: EnumExecutionTaskStatusFieldUpdateOperationsInput | $Enums.ExecutionTaskStatus
+    assignedToId?: NullableStringFieldUpdateOperationsInput | string | null
+    assignedById?: NullableStringFieldUpdateOperationsInput | string | null
+    assignedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    startedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completionSubmittedById?: NullableStringFieldUpdateOperationsInput | string | null
+    completionSubmittedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completionNote?: NullableStringFieldUpdateOperationsInput | string | null
+    verifiedById?: NullableStringFieldUpdateOperationsInput | string | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verificationNote?: NullableStringFieldUpdateOperationsInput | string | null
+    blockedReason?: NullableStringFieldUpdateOperationsInput | string | null
+    cancelledById?: NullableStringFieldUpdateOperationsInput | string | null
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    approvedActionVersionId?: NullableStringFieldUpdateOperationsInput | string | null
+    governedTaskTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceActionVersion?: NullableIntFieldUpdateOperationsInput | number | null
+    sourceTemplateCode?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceTemplateVersion?: NullableIntFieldUpdateOperationsInput | number | null
+    evidenceRequired?: BoolFieldUpdateOperationsInput | boolean
+    verificationRequired?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type ExecutionTaskCreateManyGovernedTaskTemplateInput = {
+    id?: string
+    executionPlanId: string
+    sequenceNumber: number
+    sourceActionCode: string
+    templateTaskKey: string
+    titleSnapshot: string
+    descriptionSnapshot: string
+    categorySnapshot: string
+    isMandatory?: boolean
+    status?: $Enums.ExecutionTaskStatus
+    assignedToId?: string | null
+    assignedById?: string | null
+    assignedAt?: Date | string | null
+    startedAt?: Date | string | null
+    completionSubmittedById?: string | null
+    completionSubmittedAt?: Date | string | null
+    completionNote?: string | null
+    verifiedById?: string | null
+    verifiedAt?: Date | string | null
+    verificationNote?: string | null
+    blockedReason?: string | null
+    cancelledById?: string | null
+    cancelledAt?: Date | string | null
+    cancellationReason?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    approvedActionVersionId?: string | null
+    governedExecutionTemplateId?: string | null
+    sourceActionVersion?: number | null
+    sourceTemplateCode?: string | null
+    sourceTemplateVersion?: number | null
+    evidenceRequired?: boolean
+    verificationRequired?: boolean
+  }
+
+  export type ExecutionTaskUpdateWithoutGovernedTaskTemplateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sequenceNumber?: IntFieldUpdateOperationsInput | number
+    sourceActionCode?: StringFieldUpdateOperationsInput | string
+    templateTaskKey?: StringFieldUpdateOperationsInput | string
+    titleSnapshot?: StringFieldUpdateOperationsInput | string
+    descriptionSnapshot?: StringFieldUpdateOperationsInput | string
+    categorySnapshot?: StringFieldUpdateOperationsInput | string
+    isMandatory?: BoolFieldUpdateOperationsInput | boolean
+    status?: EnumExecutionTaskStatusFieldUpdateOperationsInput | $Enums.ExecutionTaskStatus
+    assignedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    startedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completionSubmittedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completionNote?: NullableStringFieldUpdateOperationsInput | string | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verificationNote?: NullableStringFieldUpdateOperationsInput | string | null
+    blockedReason?: NullableStringFieldUpdateOperationsInput | string | null
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sourceActionVersion?: NullableIntFieldUpdateOperationsInput | number | null
+    sourceTemplateCode?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceTemplateVersion?: NullableIntFieldUpdateOperationsInput | number | null
+    evidenceRequired?: BoolFieldUpdateOperationsInput | boolean
+    verificationRequired?: BoolFieldUpdateOperationsInput | boolean
+    executionPlan?: ExecutionPlanUpdateOneRequiredWithoutTasksNestedInput
+    assignedTo?: UserUpdateOneWithoutAssignedExecutionTasksNestedInput
+    assignedBy?: UserUpdateOneWithoutAssignedByExecutionTasksNestedInput
+    completionSubmittedBy?: UserUpdateOneWithoutCompletedExecutionTasksNestedInput
+    verifiedBy?: UserUpdateOneWithoutVerifiedExecutionTasksNestedInput
+    cancelledBy?: UserUpdateOneWithoutCancelledExecutionTasksNestedInput
+    evidence?: ExecutionEvidenceUpdateManyWithoutExecutionTaskNestedInput
+    approvedActionVersion?: ApprovedActionVersionUpdateOneWithoutExecutionTasksNestedInput
+    governedExecutionTemplate?: GovernedExecutionTemplateUpdateOneWithoutExecutionTasksNestedInput
+  }
+
+  export type ExecutionTaskUncheckedUpdateWithoutGovernedTaskTemplateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    executionPlanId?: StringFieldUpdateOperationsInput | string
+    sequenceNumber?: IntFieldUpdateOperationsInput | number
+    sourceActionCode?: StringFieldUpdateOperationsInput | string
+    templateTaskKey?: StringFieldUpdateOperationsInput | string
+    titleSnapshot?: StringFieldUpdateOperationsInput | string
+    descriptionSnapshot?: StringFieldUpdateOperationsInput | string
+    categorySnapshot?: StringFieldUpdateOperationsInput | string
+    isMandatory?: BoolFieldUpdateOperationsInput | boolean
+    status?: EnumExecutionTaskStatusFieldUpdateOperationsInput | $Enums.ExecutionTaskStatus
+    assignedToId?: NullableStringFieldUpdateOperationsInput | string | null
+    assignedById?: NullableStringFieldUpdateOperationsInput | string | null
+    assignedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    startedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completionSubmittedById?: NullableStringFieldUpdateOperationsInput | string | null
+    completionSubmittedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completionNote?: NullableStringFieldUpdateOperationsInput | string | null
+    verifiedById?: NullableStringFieldUpdateOperationsInput | string | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verificationNote?: NullableStringFieldUpdateOperationsInput | string | null
+    blockedReason?: NullableStringFieldUpdateOperationsInput | string | null
+    cancelledById?: NullableStringFieldUpdateOperationsInput | string | null
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    approvedActionVersionId?: NullableStringFieldUpdateOperationsInput | string | null
+    governedExecutionTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceActionVersion?: NullableIntFieldUpdateOperationsInput | number | null
+    sourceTemplateCode?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceTemplateVersion?: NullableIntFieldUpdateOperationsInput | number | null
+    evidenceRequired?: BoolFieldUpdateOperationsInput | boolean
+    verificationRequired?: BoolFieldUpdateOperationsInput | boolean
+    evidence?: ExecutionEvidenceUncheckedUpdateManyWithoutExecutionTaskNestedInput
+  }
+
+  export type ExecutionTaskUncheckedUpdateManyWithoutGovernedTaskTemplateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    executionPlanId?: StringFieldUpdateOperationsInput | string
+    sequenceNumber?: IntFieldUpdateOperationsInput | number
+    sourceActionCode?: StringFieldUpdateOperationsInput | string
+    templateTaskKey?: StringFieldUpdateOperationsInput | string
+    titleSnapshot?: StringFieldUpdateOperationsInput | string
+    descriptionSnapshot?: StringFieldUpdateOperationsInput | string
+    categorySnapshot?: StringFieldUpdateOperationsInput | string
+    isMandatory?: BoolFieldUpdateOperationsInput | boolean
+    status?: EnumExecutionTaskStatusFieldUpdateOperationsInput | $Enums.ExecutionTaskStatus
+    assignedToId?: NullableStringFieldUpdateOperationsInput | string | null
+    assignedById?: NullableStringFieldUpdateOperationsInput | string | null
+    assignedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    startedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completionSubmittedById?: NullableStringFieldUpdateOperationsInput | string | null
+    completionSubmittedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completionNote?: NullableStringFieldUpdateOperationsInput | string | null
+    verifiedById?: NullableStringFieldUpdateOperationsInput | string | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verificationNote?: NullableStringFieldUpdateOperationsInput | string | null
+    blockedReason?: NullableStringFieldUpdateOperationsInput | string | null
+    cancelledById?: NullableStringFieldUpdateOperationsInput | string | null
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    approvedActionVersionId?: NullableStringFieldUpdateOperationsInput | string | null
+    governedExecutionTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceActionVersion?: NullableIntFieldUpdateOperationsInput | number | null
+    sourceTemplateCode?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceTemplateVersion?: NullableIntFieldUpdateOperationsInput | number | null
+    evidenceRequired?: BoolFieldUpdateOperationsInput | boolean
+    verificationRequired?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type InspectionCreateManyCaseInput = {
@@ -55853,6 +64050,9 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     decisionPackageId?: string | null
+    governanceMode?: $Enums.ActionPlanGovernanceMode
+    governedActions?: NullableJsonNullValueInput | InputJsonValue
+    actionPlanContractVersion?: string | null
   }
 
   export type OrpDecisionCreateManyCaseInput = {
@@ -55881,6 +64081,9 @@ export namespace Prisma {
     completedAt?: Date | string | null
     cancelledAt?: Date | string | null
     cancellationReason?: string | null
+    governanceMode?: $Enums.ExecutionPlanGovernanceMode
+    executionContractVersion?: string | null
+    governedProvenance?: NullableJsonNullValueInput | InputJsonValue
   }
 
   export type DecisionPackageCreateManyCaseInput = {
@@ -56010,6 +64213,9 @@ export namespace Prisma {
     planVersion?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    governanceMode?: EnumActionPlanGovernanceModeFieldUpdateOperationsInput | $Enums.ActionPlanGovernanceMode
+    governedActions?: NullableJsonNullValueInput | InputJsonValue
+    actionPlanContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
     riskAssessment?: RiskAssessmentUpdateOneRequiredWithoutOperationalResponsePlansNestedInput
     decisions?: OrpDecisionUpdateManyWithoutOrpNestedInput
     executionPlan?: ExecutionPlanUpdateOneWithoutOrpNestedInput
@@ -56030,6 +64236,9 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     decisionPackageId?: NullableStringFieldUpdateOperationsInput | string | null
+    governanceMode?: EnumActionPlanGovernanceModeFieldUpdateOperationsInput | $Enums.ActionPlanGovernanceMode
+    governedActions?: NullableJsonNullValueInput | InputJsonValue
+    actionPlanContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
     decisions?: OrpDecisionUncheckedUpdateManyWithoutOrpNestedInput
     executionPlan?: ExecutionPlanUncheckedUpdateOneWithoutOrpNestedInput
   }
@@ -56048,6 +64257,9 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     decisionPackageId?: NullableStringFieldUpdateOperationsInput | string | null
+    governanceMode?: EnumActionPlanGovernanceModeFieldUpdateOperationsInput | $Enums.ActionPlanGovernanceMode
+    governedActions?: NullableJsonNullValueInput | InputJsonValue
+    actionPlanContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type OrpDecisionUpdateWithoutCaseInput = {
@@ -56101,6 +64313,9 @@ export namespace Prisma {
     completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    governanceMode?: EnumExecutionPlanGovernanceModeFieldUpdateOperationsInput | $Enums.ExecutionPlanGovernanceMode
+    executionContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
+    governedProvenance?: NullableJsonNullValueInput | InputJsonValue
     orp?: OperationalResponsePlanUpdateOneRequiredWithoutExecutionPlanNestedInput
     approvalDecision?: OrpDecisionUpdateOneRequiredWithoutExecutionPlanNestedInput
     createdBy?: UserUpdateOneRequiredWithoutCreatedExecutionPlansNestedInput
@@ -56121,6 +64336,9 @@ export namespace Prisma {
     completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    governanceMode?: EnumExecutionPlanGovernanceModeFieldUpdateOperationsInput | $Enums.ExecutionPlanGovernanceMode
+    executionContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
+    governedProvenance?: NullableJsonNullValueInput | InputJsonValue
     tasks?: ExecutionTaskUncheckedUpdateManyWithoutExecutionPlanNestedInput
     closure?: CaseClosureUncheckedUpdateOneWithoutExecutionPlanNestedInput
   }
@@ -56138,6 +64356,9 @@ export namespace Prisma {
     completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    governanceMode?: EnumExecutionPlanGovernanceModeFieldUpdateOperationsInput | $Enums.ExecutionPlanGovernanceMode
+    executionContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
+    governedProvenance?: NullableJsonNullValueInput | InputJsonValue
   }
 
   export type DecisionPackageUpdateWithoutCaseInput = {
@@ -56350,6 +64571,9 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     decisionPackageId?: string | null
+    governanceMode?: $Enums.ActionPlanGovernanceMode
+    governedActions?: NullableJsonNullValueInput | InputJsonValue
+    actionPlanContractVersion?: string | null
   }
 
   export type DecisionPackageCreateManyRiskAssessmentInput = {
@@ -56384,6 +64608,9 @@ export namespace Prisma {
     planVersion?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    governanceMode?: EnumActionPlanGovernanceModeFieldUpdateOperationsInput | $Enums.ActionPlanGovernanceMode
+    governedActions?: NullableJsonNullValueInput | InputJsonValue
+    actionPlanContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
     case?: CaseUpdateOneRequiredWithoutOperationalResponsePlansNestedInput
     decisions?: OrpDecisionUpdateManyWithoutOrpNestedInput
     executionPlan?: ExecutionPlanUpdateOneWithoutOrpNestedInput
@@ -56404,6 +64631,9 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     decisionPackageId?: NullableStringFieldUpdateOperationsInput | string | null
+    governanceMode?: EnumActionPlanGovernanceModeFieldUpdateOperationsInput | $Enums.ActionPlanGovernanceMode
+    governedActions?: NullableJsonNullValueInput | InputJsonValue
+    actionPlanContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
     decisions?: OrpDecisionUncheckedUpdateManyWithoutOrpNestedInput
     executionPlan?: ExecutionPlanUncheckedUpdateOneWithoutOrpNestedInput
   }
@@ -56422,6 +64652,9 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     decisionPackageId?: NullableStringFieldUpdateOperationsInput | string | null
+    governanceMode?: EnumActionPlanGovernanceModeFieldUpdateOperationsInput | $Enums.ActionPlanGovernanceMode
+    governedActions?: NullableJsonNullValueInput | InputJsonValue
+    actionPlanContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type DecisionPackageUpdateWithoutRiskAssessmentInput = {
@@ -56554,6 +64787,9 @@ export namespace Prisma {
     planVersion?: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    governanceMode?: $Enums.ActionPlanGovernanceMode
+    governedActions?: NullableJsonNullValueInput | InputJsonValue
+    actionPlanContractVersion?: string | null
   }
 
   export type OperationalResponsePlanUpdateWithoutDecisionPackageInput = {
@@ -56568,6 +64804,9 @@ export namespace Prisma {
     planVersion?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    governanceMode?: EnumActionPlanGovernanceModeFieldUpdateOperationsInput | $Enums.ActionPlanGovernanceMode
+    governedActions?: NullableJsonNullValueInput | InputJsonValue
+    actionPlanContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
     case?: CaseUpdateOneRequiredWithoutOperationalResponsePlansNestedInput
     riskAssessment?: RiskAssessmentUpdateOneRequiredWithoutOperationalResponsePlansNestedInput
     decisions?: OrpDecisionUpdateManyWithoutOrpNestedInput
@@ -56588,6 +64827,9 @@ export namespace Prisma {
     planVersion?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    governanceMode?: EnumActionPlanGovernanceModeFieldUpdateOperationsInput | $Enums.ActionPlanGovernanceMode
+    governedActions?: NullableJsonNullValueInput | InputJsonValue
+    actionPlanContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
     decisions?: OrpDecisionUncheckedUpdateManyWithoutOrpNestedInput
     executionPlan?: ExecutionPlanUncheckedUpdateOneWithoutOrpNestedInput
   }
@@ -56606,6 +64848,9 @@ export namespace Prisma {
     planVersion?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    governanceMode?: EnumActionPlanGovernanceModeFieldUpdateOperationsInput | $Enums.ActionPlanGovernanceMode
+    governedActions?: NullableJsonNullValueInput | InputJsonValue
+    actionPlanContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type OrpDecisionCreateManyAuthorityGrantInput = {
@@ -56728,6 +64973,14 @@ export namespace Prisma {
     cancellationReason?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    approvedActionVersionId?: string | null
+    governedExecutionTemplateId?: string | null
+    governedTaskTemplateId?: string | null
+    sourceActionVersion?: number | null
+    sourceTemplateCode?: string | null
+    sourceTemplateVersion?: number | null
+    evidenceRequired?: boolean
+    verificationRequired?: boolean
   }
 
   export type ExecutionTaskUpdateWithoutExecutionPlanInput = {
@@ -56751,12 +65004,20 @@ export namespace Prisma {
     cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sourceActionVersion?: NullableIntFieldUpdateOperationsInput | number | null
+    sourceTemplateCode?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceTemplateVersion?: NullableIntFieldUpdateOperationsInput | number | null
+    evidenceRequired?: BoolFieldUpdateOperationsInput | boolean
+    verificationRequired?: BoolFieldUpdateOperationsInput | boolean
     assignedTo?: UserUpdateOneWithoutAssignedExecutionTasksNestedInput
     assignedBy?: UserUpdateOneWithoutAssignedByExecutionTasksNestedInput
     completionSubmittedBy?: UserUpdateOneWithoutCompletedExecutionTasksNestedInput
     verifiedBy?: UserUpdateOneWithoutVerifiedExecutionTasksNestedInput
     cancelledBy?: UserUpdateOneWithoutCancelledExecutionTasksNestedInput
     evidence?: ExecutionEvidenceUpdateManyWithoutExecutionTaskNestedInput
+    approvedActionVersion?: ApprovedActionVersionUpdateOneWithoutExecutionTasksNestedInput
+    governedExecutionTemplate?: GovernedExecutionTemplateUpdateOneWithoutExecutionTasksNestedInput
+    governedTaskTemplate?: GovernedExecutionTaskTemplateUpdateOneWithoutExecutionTasksNestedInput
   }
 
   export type ExecutionTaskUncheckedUpdateWithoutExecutionPlanInput = {
@@ -56785,6 +65046,14 @@ export namespace Prisma {
     cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    approvedActionVersionId?: NullableStringFieldUpdateOperationsInput | string | null
+    governedExecutionTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
+    governedTaskTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceActionVersion?: NullableIntFieldUpdateOperationsInput | number | null
+    sourceTemplateCode?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceTemplateVersion?: NullableIntFieldUpdateOperationsInput | number | null
+    evidenceRequired?: BoolFieldUpdateOperationsInput | boolean
+    verificationRequired?: BoolFieldUpdateOperationsInput | boolean
     evidence?: ExecutionEvidenceUncheckedUpdateManyWithoutExecutionTaskNestedInput
   }
 
@@ -56814,6 +65083,14 @@ export namespace Prisma {
     cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    approvedActionVersionId?: NullableStringFieldUpdateOperationsInput | string | null
+    governedExecutionTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
+    governedTaskTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceActionVersion?: NullableIntFieldUpdateOperationsInput | number | null
+    sourceTemplateCode?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceTemplateVersion?: NullableIntFieldUpdateOperationsInput | number | null
+    evidenceRequired?: BoolFieldUpdateOperationsInput | boolean
+    verificationRequired?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type ExecutionEvidenceCreateManyExecutionTaskInput = {

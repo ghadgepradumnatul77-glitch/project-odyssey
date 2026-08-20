@@ -147,33 +147,46 @@ enum DecisionPackageStatus {
   SUPERSEDED
 }
 
+enum ActionPlanGovernanceMode {
+  LEGACY
+  GOVERNED_POLICY
+  GOVERNED_ENGINEERING_NO_POLICY
+}
+
+enum ExecutionPlanGovernanceMode {
+  LEGACY
+  GOVERNED
+}
+
 model Department {
-  id                  String                  @id @default(uuid())
-  name                String
-  code                String                  @unique
-  users               User[]
-  assets              Asset[]
-  jurisdictions       Jurisdiction[]
-  approvalAuthorities ApprovalAuthority[]
-  publicReports       PublicReport[]
-  policyDocuments     PolicyDocument[]
-  approvedActions     ApprovedActionVersion[]
-  createdAt           DateTime                @default(now())
+  id                         String                      @id @default(uuid())
+  name                       String
+  code                       String                      @unique
+  users                      User[]
+  assets                     Asset[]
+  jurisdictions              Jurisdiction[]
+  approvalAuthorities        ApprovalAuthority[]
+  publicReports              PublicReport[]
+  policyDocuments            PolicyDocument[]
+  approvedActions            ApprovedActionVersion[]
+  governedExecutionTemplates GovernedExecutionTemplate[]
+  createdAt                  DateTime                    @default(now())
 }
 
 model Jurisdiction {
-  id                  String                  @id @default(uuid())
-  name                String
-  type                String
-  departmentId        String
-  department          Department              @relation(fields: [departmentId], references: [id])
-  users               User[]
-  assets              Asset[]
-  approvalAuthorities ApprovalAuthority[]
-  publicReports       PublicReport[]
-  policyDocuments     PolicyDocument[]
-  approvedActions     ApprovedActionVersion[]
-  createdAt           DateTime                @default(now())
+  id                         String                      @id @default(uuid())
+  name                       String
+  type                       String
+  departmentId               String
+  department                 Department                  @relation(fields: [departmentId], references: [id])
+  users                      User[]
+  assets                     Asset[]
+  approvalAuthorities        ApprovalAuthority[]
+  publicReports              PublicReport[]
+  policyDocuments            PolicyDocument[]
+  approvedActions            ApprovedActionVersion[]
+  governedExecutionTemplates GovernedExecutionTemplate[]
+  createdAt                  DateTime                    @default(now())
 
   @@index([departmentId])
 }
@@ -194,26 +207,28 @@ model User {
   department   Department   @relation(fields: [departmentId], references: [id])
   jurisdiction Jurisdiction @relation(fields: [jurisdictionId], references: [id])
 
-  inspections                Inspection[]
-  approvalAuthorities        ApprovalAuthority[]
-  reviewedOrpDecisions       OrpDecision[]                @relation("DecisionReviewer")
-  forwardedOrpDecisions      OrpDecision[]                @relation("DecisionForwardedUser")
-  createdExecutionPlans      ExecutionPlan[]              @relation("ExecutionPlanCreator")
-  assignedExecutionTasks     ExecutionTask[]              @relation("ExecutionTaskAssignee")
-  assignedByExecutionTasks   ExecutionTask[]              @relation("ExecutionTaskAssigner")
-  completedExecutionTasks    ExecutionTask[]              @relation("ExecutionTaskCompleter")
-  verifiedExecutionTasks     ExecutionTask[]              @relation("ExecutionTaskVerifier")
-  cancelledExecutionTasks    ExecutionTask[]              @relation("ExecutionTaskCanceller")
-  submittedExecutionEvidence ExecutionEvidence[]
-  closedCases                CaseClosure[]                @relation("CaseClosureCloser")
-  reviewedPublicReports      PublicReport[]               @relation("PublicReportReviewer")
-  decidedPublicReports       PublicReport[]               @relation("PublicReportDecisionActor")
-  createdTriageAnalyses      PublicReportTriageAnalysis[]
-  createdPolicyDocuments     PolicyDocument[]             @relation("PolicyDocumentCreator")
-  approvedPolicyDocuments    PolicyDocument[]             @relation("PolicyDocumentApprover")
-  createdApprovedActions     ApprovedActionVersion[]      @relation("ApprovedActionCreator")
-  approvedApprovedActions    ApprovedActionVersion[]      @relation("ApprovedActionApprover")
-  preparedDecisionPackages   DecisionPackage[]            @relation("DecisionPackagePreparer")
+  inspections                        Inspection[]
+  approvalAuthorities                ApprovalAuthority[]
+  reviewedOrpDecisions               OrpDecision[]                @relation("DecisionReviewer")
+  forwardedOrpDecisions              OrpDecision[]                @relation("DecisionForwardedUser")
+  createdExecutionPlans              ExecutionPlan[]              @relation("ExecutionPlanCreator")
+  assignedExecutionTasks             ExecutionTask[]              @relation("ExecutionTaskAssignee")
+  assignedByExecutionTasks           ExecutionTask[]              @relation("ExecutionTaskAssigner")
+  completedExecutionTasks            ExecutionTask[]              @relation("ExecutionTaskCompleter")
+  verifiedExecutionTasks             ExecutionTask[]              @relation("ExecutionTaskVerifier")
+  cancelledExecutionTasks            ExecutionTask[]              @relation("ExecutionTaskCanceller")
+  submittedExecutionEvidence         ExecutionEvidence[]
+  closedCases                        CaseClosure[]                @relation("CaseClosureCloser")
+  reviewedPublicReports              PublicReport[]               @relation("PublicReportReviewer")
+  decidedPublicReports               PublicReport[]               @relation("PublicReportDecisionActor")
+  createdTriageAnalyses              PublicReportTriageAnalysis[]
+  createdPolicyDocuments             PolicyDocument[]             @relation("PolicyDocumentCreator")
+  approvedPolicyDocuments            PolicyDocument[]             @relation("PolicyDocumentApprover")
+  createdApprovedActions             ApprovedActionVersion[]      @relation("ApprovedActionCreator")
+  approvedApprovedActions            ApprovedActionVersion[]      @relation("ApprovedActionApprover")
+  preparedDecisionPackages           DecisionPackage[]            @relation("DecisionPackagePreparer")
+  createdGovernedExecutionTemplates  GovernedExecutionTemplate[]  @relation("GovernedExecutionTemplateCreator")
+  approvedGovernedExecutionTemplates GovernedExecutionTemplate[]  @relation("GovernedExecutionTemplateApprover")
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -374,12 +389,14 @@ model ApprovedActionVersion {
   createdAt                  DateTime                  @default(now())
   updatedAt                  DateTime                  @updatedAt
 
-  provenancePolicyDocument PolicyDocument? @relation(fields: [provenancePolicyDocumentId], references: [id], onDelete: Restrict)
-  department               Department?     @relation(fields: [departmentId], references: [id], onDelete: Restrict)
-  jurisdiction             Jurisdiction?   @relation(fields: [jurisdictionId], references: [id], onDelete: Restrict)
-  createdBy                User            @relation("ApprovedActionCreator", fields: [createdById], references: [id], onDelete: Restrict)
-  approvedBy               User?           @relation("ApprovedActionApprover", fields: [approvedById], references: [id], onDelete: Restrict)
+  provenancePolicyDocument PolicyDocument?             @relation(fields: [provenancePolicyDocumentId], references: [id], onDelete: Restrict)
+  department               Department?                 @relation(fields: [departmentId], references: [id], onDelete: Restrict)
+  jurisdiction             Jurisdiction?               @relation(fields: [jurisdictionId], references: [id], onDelete: Restrict)
+  createdBy                User                        @relation("ApprovedActionCreator", fields: [createdById], references: [id], onDelete: Restrict)
+  approvedBy               User?                       @relation("ApprovedActionApprover", fields: [approvedById], references: [id], onDelete: Restrict)
   rules                    PolicyRule[]
+  executionTemplates       GovernedExecutionTemplate[]
+  executionTasks           ExecutionTask[]
 
   @@unique([actionCode, versionNumber])
   @@index([status, effectiveFrom, effectiveUntil])
@@ -387,6 +404,61 @@ model ApprovedActionVersion {
   @@index([provenancePolicyDocumentId])
   @@index([createdById])
   @@index([approvedById])
+}
+
+model GovernedExecutionTemplate {
+  id                      String                  @id @default(uuid())
+  templateCode            String
+  versionNumber           Int
+  approvedActionVersionId String
+  title                   String
+  description             String
+  status                  RegistryLifecycleStatus @default(DRAFT)
+  effectiveFrom           DateTime
+  effectiveUntil          DateTime?
+  departmentId            String?
+  jurisdictionId          String?
+  createdById             String
+  approvedById            String?
+  approvedAt              DateTime?
+  createdAt               DateTime                @default(now())
+  updatedAt               DateTime                @updatedAt
+
+  approvedActionVersion ApprovedActionVersion           @relation(fields: [approvedActionVersionId], references: [id], onDelete: Restrict)
+  department            Department?                     @relation(fields: [departmentId], references: [id], onDelete: Restrict)
+  jurisdiction          Jurisdiction?                   @relation(fields: [jurisdictionId], references: [id], onDelete: Restrict)
+  createdBy             User                            @relation("GovernedExecutionTemplateCreator", fields: [createdById], references: [id], onDelete: Restrict)
+  approvedBy            User?                           @relation("GovernedExecutionTemplateApprover", fields: [approvedById], references: [id], onDelete: Restrict)
+  tasks                 GovernedExecutionTaskTemplate[]
+  executionTasks        ExecutionTask[]
+
+  @@unique([templateCode, versionNumber])
+  @@index([approvedActionVersionId, status, effectiveFrom, effectiveUntil])
+  @@index([departmentId, jurisdictionId])
+  @@index([createdById])
+  @@index([approvedById])
+}
+
+model GovernedExecutionTaskTemplate {
+  id                   String   @id @default(uuid())
+  executionTemplateId  String
+  sequenceNumber       Int
+  taskCode             String
+  title                String
+  description          String
+  mandatory            Boolean  @default(true)
+  evidenceRequired     Boolean  @default(true)
+  verificationRequired Boolean  @default(true)
+  enabled              Boolean  @default(true)
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+
+  executionTemplate GovernedExecutionTemplate @relation(fields: [executionTemplateId], references: [id], onDelete: Restrict)
+  executionTasks    ExecutionTask[]
+
+  @@unique([executionTemplateId, sequenceNumber])
+  @@unique([executionTemplateId, taskCode])
+  @@index([executionTemplateId, enabled])
 }
 
 model PolicyRule {
@@ -496,20 +568,23 @@ model RiskAssessment {
 }
 
 model OperationalResponsePlan {
-  id                     String   @id @default(uuid())
-  caseId                 String
-  riskAssessmentId       String
-  versionNumber          Int
-  status                 String   @default("AWAITING_REVIEW")
-  urgency                String
-  recommendedActionCodes Json
-  temporaryMeasures      Json
-  reasons                Json
-  alternativeActionCodes Json
-  planVersion            String   @default("ODYSSEY_ORP_V1")
-  createdAt              DateTime @default(now())
-  updatedAt              DateTime @updatedAt
-  decisionPackageId      String?
+  id                        String                   @id @default(uuid())
+  caseId                    String
+  riskAssessmentId          String
+  versionNumber             Int
+  status                    String                   @default("AWAITING_REVIEW")
+  urgency                   String
+  recommendedActionCodes    Json
+  temporaryMeasures         Json
+  reasons                   Json
+  alternativeActionCodes    Json
+  planVersion               String                   @default("ODYSSEY_ORP_V1")
+  createdAt                 DateTime                 @default(now())
+  updatedAt                 DateTime                 @updatedAt
+  decisionPackageId         String?
+  governanceMode            ActionPlanGovernanceMode @default(LEGACY)
+  governedActions           Json?
+  actionPlanContractVersion String?
 
   case            Case             @relation(fields: [caseId], references: [id], onDelete: Cascade)
   riskAssessment  RiskAssessment   @relation(fields: [riskAssessmentId], references: [id], onDelete: Cascade)
@@ -521,6 +596,7 @@ model OperationalResponsePlan {
   @@index([caseId])
   @@index([riskAssessmentId])
   @@index([decisionPackageId])
+  @@index([governanceMode])
 }
 
 model DecisionPackage {
@@ -620,19 +696,22 @@ model OrpDecision {
 }
 
 model ExecutionPlan {
-  id                 String              @id @default(uuid())
-  orpId              String              @unique
-  caseId             String
-  approvalDecisionId String              @unique
-  status             ExecutionPlanStatus @default(PLANNED)
-  createdById        String
-  templateVersion    String              @default("ODYSSEY_EXECUTION_V1")
-  createdAt          DateTime            @default(now())
-  updatedAt          DateTime            @updatedAt
-  startedAt          DateTime?
-  completedAt        DateTime?
-  cancelledAt        DateTime?
-  cancellationReason String?
+  id                       String                      @id @default(uuid())
+  orpId                    String                      @unique
+  caseId                   String
+  approvalDecisionId       String                      @unique
+  status                   ExecutionPlanStatus         @default(PLANNED)
+  createdById              String
+  templateVersion          String                      @default("ODYSSEY_EXECUTION_V1")
+  createdAt                DateTime                    @default(now())
+  updatedAt                DateTime                    @updatedAt
+  startedAt                DateTime?
+  completedAt              DateTime?
+  cancelledAt              DateTime?
+  cancellationReason       String?
+  governanceMode           ExecutionPlanGovernanceMode @default(LEGACY)
+  executionContractVersion String?
+  governedProvenance       Json?
 
   orp              OperationalResponsePlan @relation(fields: [orpId], references: [id], onDelete: Restrict)
   case             Case                    @relation(fields: [caseId], references: [id], onDelete: Restrict)
@@ -647,40 +726,51 @@ model ExecutionPlan {
 }
 
 model ExecutionTask {
-  id                      String              @id @default(uuid())
-  executionPlanId         String
-  sequenceNumber          Int
-  sourceActionCode        String
-  templateTaskKey         String
-  titleSnapshot           String
-  descriptionSnapshot     String
-  categorySnapshot        String
-  isMandatory             Boolean             @default(true)
-  status                  ExecutionTaskStatus @default(PENDING)
-  assignedToId            String?
-  assignedById            String?
-  assignedAt              DateTime?
-  startedAt               DateTime?
-  completionSubmittedById String?
-  completionSubmittedAt   DateTime?
-  completionNote          String?
-  verifiedById            String?
-  verifiedAt              DateTime?
-  verificationNote        String?
-  blockedReason           String?
-  cancelledById           String?
-  cancelledAt             DateTime?
-  cancellationReason      String?
-  createdAt               DateTime            @default(now())
-  updatedAt               DateTime            @updatedAt
+  id                          String              @id @default(uuid())
+  executionPlanId             String
+  sequenceNumber              Int
+  sourceActionCode            String
+  templateTaskKey             String
+  titleSnapshot               String
+  descriptionSnapshot         String
+  categorySnapshot            String
+  isMandatory                 Boolean             @default(true)
+  status                      ExecutionTaskStatus @default(PENDING)
+  assignedToId                String?
+  assignedById                String?
+  assignedAt                  DateTime?
+  startedAt                   DateTime?
+  completionSubmittedById     String?
+  completionSubmittedAt       DateTime?
+  completionNote              String?
+  verifiedById                String?
+  verifiedAt                  DateTime?
+  verificationNote            String?
+  blockedReason               String?
+  cancelledById               String?
+  cancelledAt                 DateTime?
+  cancellationReason          String?
+  createdAt                   DateTime            @default(now())
+  updatedAt                   DateTime            @updatedAt
+  approvedActionVersionId     String?
+  governedExecutionTemplateId String?
+  governedTaskTemplateId      String?
+  sourceActionVersion         Int?
+  sourceTemplateCode          String?
+  sourceTemplateVersion       Int?
+  evidenceRequired            Boolean             @default(true)
+  verificationRequired        Boolean             @default(true)
 
-  executionPlan         ExecutionPlan       @relation(fields: [executionPlanId], references: [id], onDelete: Restrict)
-  assignedTo            User?               @relation("ExecutionTaskAssignee", fields: [assignedToId], references: [id], onDelete: Restrict)
-  assignedBy            User?               @relation("ExecutionTaskAssigner", fields: [assignedById], references: [id], onDelete: Restrict)
-  completionSubmittedBy User?               @relation("ExecutionTaskCompleter", fields: [completionSubmittedById], references: [id], onDelete: Restrict)
-  verifiedBy            User?               @relation("ExecutionTaskVerifier", fields: [verifiedById], references: [id], onDelete: Restrict)
-  cancelledBy           User?               @relation("ExecutionTaskCanceller", fields: [cancelledById], references: [id], onDelete: Restrict)
-  evidence              ExecutionEvidence[]
+  executionPlan             ExecutionPlan                  @relation(fields: [executionPlanId], references: [id], onDelete: Restrict)
+  assignedTo                User?                          @relation("ExecutionTaskAssignee", fields: [assignedToId], references: [id], onDelete: Restrict)
+  assignedBy                User?                          @relation("ExecutionTaskAssigner", fields: [assignedById], references: [id], onDelete: Restrict)
+  completionSubmittedBy     User?                          @relation("ExecutionTaskCompleter", fields: [completionSubmittedById], references: [id], onDelete: Restrict)
+  verifiedBy                User?                          @relation("ExecutionTaskVerifier", fields: [verifiedById], references: [id], onDelete: Restrict)
+  cancelledBy               User?                          @relation("ExecutionTaskCanceller", fields: [cancelledById], references: [id], onDelete: Restrict)
+  evidence                  ExecutionEvidence[]
+  approvedActionVersion     ApprovedActionVersion?         @relation(fields: [approvedActionVersionId], references: [id], onDelete: Restrict)
+  governedExecutionTemplate GovernedExecutionTemplate?     @relation(fields: [governedExecutionTemplateId], references: [id], onDelete: Restrict)
+  governedTaskTemplate      GovernedExecutionTaskTemplate? @relation(fields: [governedTaskTemplateId], references: [id], onDelete: Restrict)
 
   @@unique([executionPlanId, sequenceNumber])
   @@unique([executionPlanId, sourceActionCode, templateTaskKey])
@@ -688,6 +778,9 @@ model ExecutionTask {
   @@index([status])
   @@index([assignedToId])
   @@index([verifiedById])
+  @@index([approvedActionVersionId])
+  @@index([governedExecutionTemplateId])
+  @@index([governedTaskTemplateId])
 }
 
 model ExecutionEvidence {

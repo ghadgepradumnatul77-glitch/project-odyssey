@@ -251,6 +251,40 @@ exports.Prisma.ApprovedActionVersionScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.GovernedExecutionTemplateScalarFieldEnum = {
+  id: 'id',
+  templateCode: 'templateCode',
+  versionNumber: 'versionNumber',
+  approvedActionVersionId: 'approvedActionVersionId',
+  title: 'title',
+  description: 'description',
+  status: 'status',
+  effectiveFrom: 'effectiveFrom',
+  effectiveUntil: 'effectiveUntil',
+  departmentId: 'departmentId',
+  jurisdictionId: 'jurisdictionId',
+  createdById: 'createdById',
+  approvedById: 'approvedById',
+  approvedAt: 'approvedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.GovernedExecutionTaskTemplateScalarFieldEnum = {
+  id: 'id',
+  executionTemplateId: 'executionTemplateId',
+  sequenceNumber: 'sequenceNumber',
+  taskCode: 'taskCode',
+  title: 'title',
+  description: 'description',
+  mandatory: 'mandatory',
+  evidenceRequired: 'evidenceRequired',
+  verificationRequired: 'verificationRequired',
+  enabled: 'enabled',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.PolicyRuleScalarFieldEnum = {
   id: 'id',
   policyDocumentId: 'policyDocumentId',
@@ -324,7 +358,10 @@ exports.Prisma.OperationalResponsePlanScalarFieldEnum = {
   planVersion: 'planVersion',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  decisionPackageId: 'decisionPackageId'
+  decisionPackageId: 'decisionPackageId',
+  governanceMode: 'governanceMode',
+  governedActions: 'governedActions',
+  actionPlanContractVersion: 'actionPlanContractVersion'
 };
 
 exports.Prisma.DecisionPackageScalarFieldEnum = {
@@ -394,7 +431,10 @@ exports.Prisma.ExecutionPlanScalarFieldEnum = {
   startedAt: 'startedAt',
   completedAt: 'completedAt',
   cancelledAt: 'cancelledAt',
-  cancellationReason: 'cancellationReason'
+  cancellationReason: 'cancellationReason',
+  governanceMode: 'governanceMode',
+  executionContractVersion: 'executionContractVersion',
+  governedProvenance: 'governedProvenance'
 };
 
 exports.Prisma.ExecutionTaskScalarFieldEnum = {
@@ -423,7 +463,15 @@ exports.Prisma.ExecutionTaskScalarFieldEnum = {
   cancelledAt: 'cancelledAt',
   cancellationReason: 'cancellationReason',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  approvedActionVersionId: 'approvedActionVersionId',
+  governedExecutionTemplateId: 'governedExecutionTemplateId',
+  governedTaskTemplateId: 'governedTaskTemplateId',
+  sourceActionVersion: 'sourceActionVersion',
+  sourceTemplateCode: 'sourceTemplateCode',
+  sourceTemplateVersion: 'sourceTemplateVersion',
+  evidenceRequired: 'evidenceRequired',
+  verificationRequired: 'verificationRequired'
 };
 
 exports.Prisma.ExecutionEvidenceScalarFieldEnum = {
@@ -574,6 +622,12 @@ exports.PriorityLevel = exports.$Enums.PriorityLevel = {
   CRITICAL: 'CRITICAL'
 };
 
+exports.ActionPlanGovernanceMode = exports.$Enums.ActionPlanGovernanceMode = {
+  LEGACY: 'LEGACY',
+  GOVERNED_POLICY: 'GOVERNED_POLICY',
+  GOVERNED_ENGINEERING_NO_POLICY: 'GOVERNED_ENGINEERING_NO_POLICY'
+};
+
 exports.DecisionPackageStatus = exports.$Enums.DecisionPackageStatus = {
   PREPARED: 'PREPARED',
   SUPERSEDED: 'SUPERSEDED'
@@ -593,6 +647,11 @@ exports.ExecutionPlanStatus = exports.$Enums.ExecutionPlanStatus = {
   VERIFICATION_PENDING: 'VERIFICATION_PENDING',
   COMPLETED: 'COMPLETED',
   CANCELLED: 'CANCELLED'
+};
+
+exports.ExecutionPlanGovernanceMode = exports.$Enums.ExecutionPlanGovernanceMode = {
+  LEGACY: 'LEGACY',
+  GOVERNED: 'GOVERNED'
 };
 
 exports.ExecutionTaskStatus = exports.$Enums.ExecutionTaskStatus = {
@@ -627,6 +686,8 @@ exports.Prisma.ModelName = {
   PublicReportTriageAnalysis: 'PublicReportTriageAnalysis',
   PolicyDocument: 'PolicyDocument',
   ApprovedActionVersion: 'ApprovedActionVersion',
+  GovernedExecutionTemplate: 'GovernedExecutionTemplate',
+  GovernedExecutionTaskTemplate: 'GovernedExecutionTaskTemplate',
   PolicyRule: 'PolicyRule',
   Case: 'Case',
   Inspection: 'Inspection',

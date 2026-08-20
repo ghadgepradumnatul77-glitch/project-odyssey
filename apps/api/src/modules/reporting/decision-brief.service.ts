@@ -22,7 +22,8 @@ const decisionSelect = {
 const orpSelect = {
   id: true, caseId: true, riskAssessmentId: true, versionNumber: true, status: true, urgency: true,
   recommendedActionCodes: true, temporaryMeasures: true, alternativeActionCodes: true, reasons: true,
-  planVersion: true, createdAt: true, riskAssessment: { select: riskSelect },
+  planVersion: true, actionPlanContractVersion: true, governanceMode: true, governedActions: true, decisionPackageId: true, createdAt: true, riskAssessment: { select: riskSelect },
+  decisionPackage: { select: { id: true, packageVersion: true, packageContractVersion: true, preparedAt: true, policySnapshot: true } },
   decisions: { orderBy: [{ createdAt: 'desc' }, { id: 'desc' }] as Prisma.OrpDecisionOrderByWithRelationInput[], take: 1, select: decisionSelect }
 } as const;
 const taskSelect = {
@@ -64,6 +65,12 @@ function reasonArray(value: unknown, field: string): Array<{ code: string | null
     if (typeof reason.reasonCode !== 'string' || typeof reason.message !== 'string') reportingIntegrity(`Stored ${field} is malformed.`);
     return { code: reason.reasonCode, message: reason.message };
   });
+}
+function governedActionProjection(value: unknown) {
+  if (!value || typeof value !== 'object' || Array.isArray(value)) reportingIntegrity('Stored governed Action Plan provenance is malformed.');
+  const record=value as Record<string,unknown>;
+  for(const key of ['MANDATORY','RECOMMENDED','OPTIONAL','PROHIBITED','ENGINEERING_RECOMMENDED']) if(!Array.isArray(record[key])) reportingIntegrity('Stored governed Action Plan provenance is malformed.');
+  return record;
 }
 
 function actors(values: Array<{ id: string; name: string; designation: string } | null>) {
@@ -117,6 +124,10 @@ export async function getDecisionBrief(caseId: string, principal: Organizational
   if (plan && (plan.caseId !== target.id || plan.orpId !== orp?.id || plan.approvalDecisionId !== decision?.id || decision?.orpId !== orp?.id || decision.caseId !== target.id)) reportingIntegrity();
   if (!plan && decision && (decision.orpId !== orp?.id || decision.caseId !== target.id)) reportingIntegrity();
   if (orp && (orp.caseId !== target.id || orp.riskAssessmentId !== risk?.id)) reportingIntegrity();
+  const orpGovernanceMode = orp?.governanceMode ?? 'LEGACY';
+  const orpDecisionPackageId = orp?.decisionPackageId ?? null;
+  if (orp && ((orpGovernanceMode === 'LEGACY') !== (orpDecisionPackageId === null))) reportingIntegrity('Action Plan governance mode and package provenance are inconsistent.');
+  if (orp?.decisionPackageId && orp.decisionPackage?.id !== orp.decisionPackageId) reportingIntegrity('Decision Package provenance is inconsistent.');
   if (risk && (risk.caseId !== target.id || risk.inspectionId !== inspection?.id || inspection.caseId !== target.id)) reportingIntegrity();
 
   const evidenceTypes = plan?.tasks.flatMap((task) => task.evidence.map((item) => item.evidenceType)) ?? [];
@@ -127,7 +138,7 @@ export async function getDecisionBrief(caseId: string, principal: Organizational
     workflow: { coherent: true, warnings: [], statusExplanationVersion: 'ODYSSEY_CASE_STATUS_V1', anchor: target.closure ? 'CASE_CLOSURE' : plan ? 'EXECUTION_PLAN' : orp ? 'ORP' : risk ? 'RISK_ASSESSMENT' : inspection ? 'INSPECTION' : 'CASE' },
     inspection: inspection && { id: inspection.id, inspectionDate: inspection.inspectionDate, structuralCondition: inspection.structuralCondition, crackSeverity: inspection.crackSeverity, corrosionLevel: inspection.corrosionLevel, trafficImportance: inspection.trafficImportance, hospitalRoute: inspection.hospitalRoute, weatherRisk: inspection.weatherRisk, heavyRainExpected: inspection.heavyRainExpected, estimatedDailyUsers: inspection.estimatedDailyUsers, createdAt: inspection.createdAt, inspector: inspection.inspector },
     risk: risk && { id: risk.id, riskScore: risk.riskScore, riskLevel: risk.riskLevel, priorityLevel: risk.priorityLevel, reasonCodes: stringArray(risk.reasonCodes, 'risk reasonCodes'), reasons: reasonArray(risk.reasons, 'risk reasons'), assessmentVersion: risk.assessmentVersion, createdAt: risk.createdAt },
-    orp: orp && { id: orp.id, versionNumber: orp.versionNumber, status: orp.status, urgency: orp.urgency, recommendedActionCodes: stringArray(orp.recommendedActionCodes, 'ORP recommendedActionCodes'), temporaryMeasures: stringArray(orp.temporaryMeasures, 'ORP temporaryMeasures'), alternativeActionCodes: stringArray(orp.alternativeActionCodes, 'ORP alternativeActionCodes'), reasons: reasonArray(orp.reasons, 'ORP reasons'), planVersion: orp.planVersion, createdAt: orp.createdAt },
+    orp: orp && { id: orp.id, versionNumber: orp.versionNumber, status: orp.status, urgency: orp.urgency, recommendedActionCodes: stringArray(orp.recommendedActionCodes, 'ORP recommendedActionCodes'), temporaryMeasures: stringArray(orp.temporaryMeasures, 'ORP temporaryMeasures'), alternativeActionCodes: stringArray(orp.alternativeActionCodes, 'ORP alternativeActionCodes'), reasons: reasonArray(orp.reasons, 'ORP reasons'), planVersion: orp.planVersion, actionPlanContractVersion: orp.actionPlanContractVersion, governanceMode: orpGovernanceMode, governedActions: orpGovernanceMode === 'LEGACY' ? null : governedActionProjection(orp.governedActions), decisionPackage: orp.decisionPackage && { id: orp.decisionPackage.id, packageVersion: orp.decisionPackage.packageVersion, packageContractVersion: orp.decisionPackage.packageContractVersion, preparedAt: orp.decisionPackage.preparedAt, policyGovernance: orp.decisionPackage.policySnapshot }, humanReviewBoundary: { decisionSupportOnly: true, executionAuthorized: false }, createdAt: orp.createdAt },
     decision: decision && { id: decision.id, decisionType: decision.decisionType, reason: decision.reason, remarks: decision.remarks, createdAt: decision.createdAt, reviewer: decision.reviewer },
     execution: plan && { id: plan.id, status: plan.status, templateVersion: plan.templateVersion, createdAt: plan.createdAt, startedAt: plan.startedAt, completedAt: plan.completedAt, metrics: executionMetrics(plan.tasks), accountability: { assignees: actors(plan.tasks.map((task) => task.assignedTo)), completionSubmitters: actors(plan.tasks.map((task) => task.completionSubmittedBy)), verifiers: actors(plan.tasks.map((task) => task.verifiedBy)) } },
     evidence: plan && { totalEvidence: evidenceTypes.length, countsByType },

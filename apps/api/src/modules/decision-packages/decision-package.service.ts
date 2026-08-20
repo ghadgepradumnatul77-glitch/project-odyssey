@@ -129,7 +129,12 @@ export async function getDecisionPackage(caseId: string, packageId: string, prin
 
 export async function requireCurrentDecisionPackage(caseId: string, principal: OrganizationalPrincipal) {
   const source = await authoritativeSource(caseId, principal, new Date());
-  const record = await prisma.decisionPackage.findUnique({ where: { caseId_sourceFingerprint: { caseId, sourceFingerprint: source.fingerprint } }, select: { id: true, status: true } });
-  if (!record || record.status !== DecisionPackageStatus.PREPARED) throw new DecisionPackageError('CURRENT_DECISION_PACKAGE_REQUIRED', 409, 'Prepare a current Decision Package before generating a new Action Plan.');
+  const select = { id: true, status: true, packageVersion: true, packageContractVersion: true, preparedAt: true, policySnapshot: true, actionSnapshot: true } as const;
+  const record = await prisma.decisionPackage.findUnique({ where: { caseId_sourceFingerprint: { caseId, sourceFingerprint: source.fingerprint } }, select });
+  if (!record || record.status !== DecisionPackageStatus.PREPARED) {
+    const latest = await prisma.decisionPackage.findFirst({ where: { caseId, status: DecisionPackageStatus.PREPARED }, orderBy: [{ packageVersion: 'desc' }, { id: 'desc' }], select: { id: true } });
+    if (latest) throw new DecisionPackageError('DECISION_PACKAGE_STALE', 409, 'The prepared Decision Package no longer matches current authoritative Case state.');
+    throw new DecisionPackageError('CURRENT_DECISION_PACKAGE_REQUIRED', 409, 'Prepare a current Decision Package before generating a new Action Plan.');
+  }
   return record;
 }

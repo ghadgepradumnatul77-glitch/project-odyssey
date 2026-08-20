@@ -46,6 +46,11 @@ const storedOrp = {
   reasons: [{ reasonCode: 'ORP_RULE_A002', message: 'reason' }],
   alternativeActionCodes: ['ACT_INCREASE_MONITORING'],
   planVersion: 'ODYSSEY_ORP_V1',
+  actionPlanContractVersion: null,
+  governanceMode: 'LEGACY',
+  governedActions: null,
+  decisionPackageId: null,
+  decisionPackage: null,
   createdAt: new Date('2026-08-10T00:00:00Z'),
   updatedAt: new Date('2026-08-10T00:00:00Z')
 };
