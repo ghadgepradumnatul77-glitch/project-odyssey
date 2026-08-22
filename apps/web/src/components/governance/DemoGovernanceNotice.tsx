@@ -1,0 +1,2 @@
+export function isDemonstrationGovernanceCode(code:string){return code.startsWith('DEMO-')||code.startsWith('ACT_DEMO_')||code.startsWith('EXEC_DEMO_')}
+export default function DemoGovernanceNotice(){return <div className="governance-notice demo-governance-notice" role="note"><strong>DEMONSTRATION GOVERNANCE DATA</strong><p>These records are synthetic demonstration fixtures and are not official government policy.</p></div>}

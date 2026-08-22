@@ -7,7 +7,9 @@
     "start": "node dist/server.js",
     "test": "vitest run",
     "demo": "node --experimental-strip-types scripts/bootstrap-demo.ts --public-reports-only",
-    "demo:bootstrap": "tsx scripts/bootstrap-demo.ts",
+    "demo:bootstrap": "node --experimental-transform-types scripts/governed-demo.ts",
+    "demo:bootstrap:legacy": "tsx scripts/bootstrap-demo.ts",
+    "demo:verify": "node --experimental-transform-types scripts/governed-demo.ts --verify",
     "demo:geo": "node --experimental-strip-types scripts/enrich-demo-geolocation.ts"
   },
   "dependencies": {
