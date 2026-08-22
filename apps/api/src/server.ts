@@ -56,6 +56,7 @@ import decisionPackageRoutes
   from './modules/decision-packages/decision-package.routes';
 import governedExecutionTemplateRoutes
   from './modules/execution-templates/governed-execution-template.routes';
+import intelligenceRoutes from './modules/intelligence/intelligence.routes';
 
 import { getAuthConfig }
   from './config/auth';
@@ -264,6 +265,7 @@ app.use('/api/v1', readinessRoutes);
 app.use('/api/v1', decisionPackageRoutes);
 
 app.use('/api/v1', governedExecutionTemplateRoutes);
+app.use('/api/v1', intelligenceRoutes);
 
 
 

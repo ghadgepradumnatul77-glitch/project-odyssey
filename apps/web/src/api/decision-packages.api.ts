@@ -1,4 +1,5 @@
 import { apiRequest } from './client';
+import type { IntelligenceSnapshot } from './intelligence.api';
 
 export interface DecisionPackageDto {
   id: string; caseId: string; packageVersion: number; packageContractVersion: string; status: 'PREPARED' | 'SUPERSEDED';
@@ -8,6 +9,7 @@ export interface DecisionPackageDto {
   policyGovernance: { state: string; message?: string; rules: any[] };
   governedActions: Record<'MANDATORY' | 'RECOMMENDED' | 'OPTIONAL' | 'PROHIBITED', Array<{ actionId: string; actionCode: string; actionVersion: number; title: string; category: string; description: string; sourceReference: string; enforcementClassification: string }>>;
   humanReviewBoundary: { preparedForHumanReview: boolean; humanDecision: boolean; executionAuthorized: boolean; officerRemainsResponsible: boolean };
+  intelligence?: IntelligenceSnapshot | null;
 }
 
 export function listDecisionPackages(caseId: string, token: string, signal?: AbortSignal) { return apiRequest<DecisionPackageDto[]>(`cases/${encodeURIComponent(caseId)}/decision-packages`, { accessToken: token, signal }); }

@@ -1,8 +1,8 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { Prisma } from '../src/generated/prisma';
 
-const mocks = vi.hoisted(() => { const value = { visible: vi.fn(), readiness: vi.fn(), policy: vi.fn(), caseFind: vi.fn(), packageFindUnique: vi.fn(), packageFindMany: vi.fn(), packageFindFirst: vi.fn(), packageCreate: vi.fn(), packageUpdateMany: vi.fn(), transaction: vi.fn() }; return { ...value, packageDelegate: { findUnique: value.packageFindUnique, findMany: value.packageFindMany, findFirst: value.packageFindFirst, create: value.packageCreate, updateMany: value.packageUpdateMany } }; });
-vi.mock('../src/lib/prisma', () => ({ default: { case: { findUnique: mocks.caseFind }, decisionPackage: mocks.packageDelegate, $transaction: mocks.transaction } }));
+const mocks = vi.hoisted(() => { const value = { visible: vi.fn(), readiness: vi.fn(), policy: vi.fn(), caseFind: vi.fn(), intelligenceFind:vi.fn(), packageFindUnique: vi.fn(), packageFindMany: vi.fn(), packageFindFirst: vi.fn(), packageCreate: vi.fn(), packageUpdateMany: vi.fn(), transaction: vi.fn() }; return { ...value, packageDelegate: { findUnique: value.packageFindUnique, findMany: value.packageFindMany, findFirst: value.packageFindFirst, create: value.packageCreate, updateMany: value.packageUpdateMany } }; });
+vi.mock('../src/lib/prisma', () => ({ default: { case: { findUnique: mocks.caseFind }, infrastructureIntelligenceAssessment:{findFirst:mocks.intelligenceFind}, decisionPackage: mocks.packageDelegate, $transaction: mocks.transaction } }));
 vi.mock('../src/security/organizational-scope', async (importOriginal) => ({ ...await importOriginal<typeof import('../src/security/organizational-scope')>(), assertVisibleCase: mocks.visible }));
 vi.mock('../src/modules/readiness/readiness.service', () => ({ evaluateCaseReadiness: mocks.readiness }));
 vi.mock('../src/modules/policy-registry/policy-registry.service', () => ({ resolveCasePolicy: mocks.policy }));
@@ -16,7 +16,7 @@ const record = { id: 'package', caseId: 'case', inspectionId: 'inspection', risk
 
 describe('Governed Decision Package', () => {
   beforeEach(() => {
-    vi.clearAllMocks(); mocks.visible.mockResolvedValue(target); mocks.readiness.mockResolvedValue(readiness); mocks.caseFind.mockResolvedValue(target); mocks.packageFindUnique.mockResolvedValue(null); mocks.packageFindFirst.mockResolvedValue(null); mocks.packageCreate.mockResolvedValue(record); mocks.packageUpdateMany.mockResolvedValue({ count: 0 }); mocks.transaction.mockImplementation((callback: any) => callback({ decisionPackage: mocks.packageDelegate }));
+    vi.clearAllMocks(); mocks.visible.mockResolvedValue(target); mocks.readiness.mockResolvedValue(readiness); mocks.caseFind.mockResolvedValue(target);mocks.intelligenceFind.mockResolvedValue(null); mocks.packageFindUnique.mockResolvedValue(null); mocks.packageFindFirst.mockResolvedValue(null); mocks.packageCreate.mockResolvedValue(record); mocks.packageUpdateMany.mockResolvedValue({ count: 0 }); mocks.transaction.mockImplementation((callback: any) => callback({ decisionPackage: mocks.packageDelegate }));
   });
   it('requires G2 READY and creates an immutable v1 package from exact inspection and risk provenance', async () => {
     const result = await prepareDecisionPackage('case', principal, at); expect(result.packageVersion).toBe(1);
@@ -56,11 +56,13 @@ describe('Governed Decision Package', () => {
     expect(prepareDecisionPackage).toHaveLength(2); await prepareDecisionPackage('case', principal, at); expect(mocks.packageCreate.mock.calls[0][0].data).toMatchObject({ preparedById: 'officer', packageVersion: 1, riskAssessmentId: 'risk' });
   });
   it('does not recalculate risk or create decisions, execution, closure, or mutate Case state', async () => {
-    await prepareDecisionPackage('case', principal, at); expect(Object.keys((await import('../src/lib/prisma')).default).sort()).toEqual(['$transaction', 'case', 'decisionPackage']);
+    await prepareDecisionPackage('case', principal, at); expect(Object.keys((await import('../src/lib/prisma')).default).sort()).toEqual(['$transaction', 'case', 'decisionPackage', 'infrastructureIntelligenceAssessment'].sort());
   });
   it('returns a privacy-controlled DTO without reporter, auth, notes, hidden reasoning, or raw actor IDs', async () => {
     const body = JSON.stringify(await prepareDecisionPackage('case', principal, at)); for (const key of ['reporterName', 'reporterContact', 'passwordHash', 'inspectionNotes', 'sourceFingerprint', 'preparedById', 'hiddenReasoning']) expect(body).not.toContain(`\"${key}\"`);
   });
+  it('optionally snapshots reconciled intelligence without changing governed action selection',async()=>{mocks.intelligenceFind.mockResolvedValue({id:'intel',status:'COMPLETED',predictedRiskScore:80,predictedRiskLevel:'VERY_HIGH',recommendedPriority:'CRITICAL',confidence:1,provider:'ODYSSEY_REFERENCE_PROVIDER_V1',providerType:'REFERENCE_NON_ML',modelName:'ODYSSEY_REFERENCE_HEURISTIC',modelVersion:'1',featureSchemaVersion:'ODYSSEY_INFRA_FEATURES_V1',contractVersion:'ODYSSEY_INTELLIGENCE_V1',inferredAt:at,reconciliation:{deterministicFloorPreserved:true},governanceReconciliations:[{id:'recon',contractVersion:'ODYSSEY_INTELLIGENCE_GOVERNANCE_V1',policyResolutionStatus:'RESOLVED',policySnapshot:{},reconciledActions:[{actionCode:'ACT_X',resolution:'PROHIBITED'}],issues:[],reconciledAt:at}]});await prepareDecisionPackage('case',principal,at);const data=mocks.packageCreate.mock.calls[0][0].data;expect(data.intelligenceSnapshot).toMatchObject({state:'CURRENT_ADVISORY_WITH_GOVERNANCE',advisoryOnly:true,humanDecision:false,governance:{reconciledActions:[{resolution:'PROHIBITED'}]}});expect(data.actionSnapshot).toEqual({MANDATORY:[],RECOMMENDED:[],OPTIONAL:[],PROHIBITED:[]});});
+  it('queries only current completed intelligence matching authoritative inspection and risk',async()=>{await prepareDecisionPackage('case',principal,at);expect(mocks.intelligenceFind).toHaveBeenCalledWith(expect.objectContaining({where:expect.objectContaining({caseId:'case',inspectionId:'inspection',riskAssessmentId:'risk',status:'COMPLETED',OR:expect.any(Array)})}));expect(mocks.packageCreate.mock.calls[0][0].data.intelligenceSnapshot).toEqual(Prisma.JsonNull);});
   it('refuses package preparation outside the Action Plan preparation boundary', async () => {
     mocks.caseFind.mockResolvedValue({ ...target, status: 'CLOSED' }); await expect(prepareDecisionPackage('case', principal, at)).rejects.toBeInstanceOf(DecisionPackageError); expect(mocks.packageCreate).not.toHaveBeenCalled();
   });

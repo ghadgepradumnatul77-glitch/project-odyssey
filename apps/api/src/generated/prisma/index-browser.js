@@ -344,6 +344,48 @@ exports.Prisma.RiskAssessmentScalarFieldEnum = {
   createdAt: 'createdAt'
 };
 
+exports.Prisma.InfrastructureIntelligenceAssessmentScalarFieldEnum = {
+  id: 'id',
+  caseId: 'caseId',
+  inspectionId: 'inspectionId',
+  riskAssessmentId: 'riskAssessmentId',
+  status: 'status',
+  predictedRiskScore: 'predictedRiskScore',
+  predictedRiskLevel: 'predictedRiskLevel',
+  recommendedPriority: 'recommendedPriority',
+  confidence: 'confidence',
+  provider: 'provider',
+  providerType: 'providerType',
+  modelName: 'modelName',
+  modelVersion: 'modelVersion',
+  modelArtifactDigest: 'modelArtifactDigest',
+  featureSchemaVersion: 'featureSchemaVersion',
+  contractVersion: 'contractVersion',
+  sourceFingerprint: 'sourceFingerprint',
+  inferredAt: 'inferredAt',
+  expiresAt: 'expiresAt',
+  contributingFactors: 'contributingFactors',
+  explanation: 'explanation',
+  recommendedActions: 'recommendedActions',
+  abstentionReasons: 'abstentionReasons',
+  reconciliation: 'reconciliation',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.InfrastructureIntelligenceReconciliationScalarFieldEnum = {
+  id: 'id',
+  intelligenceAssessmentId: 'intelligenceAssessmentId',
+  caseId: 'caseId',
+  contractVersion: 'contractVersion',
+  governanceFingerprint: 'governanceFingerprint',
+  policyResolutionStatus: 'policyResolutionStatus',
+  policySnapshot: 'policySnapshot',
+  reconciledActions: 'reconciledActions',
+  issues: 'issues',
+  reconciledAt: 'reconciledAt',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.OperationalResponsePlanScalarFieldEnum = {
   id: 'id',
   caseId: 'caseId',
@@ -379,6 +421,7 @@ exports.Prisma.DecisionPackageScalarFieldEnum = {
   readinessSnapshot: 'readinessSnapshot',
   policySnapshot: 'policySnapshot',
   actionSnapshot: 'actionSnapshot',
+  intelligenceSnapshot: 'intelligenceSnapshot',
   preparedById: 'preparedById',
   preparedAt: 'preparedAt',
   createdAt: 'createdAt',
@@ -622,6 +665,14 @@ exports.PriorityLevel = exports.$Enums.PriorityLevel = {
   CRITICAL: 'CRITICAL'
 };
 
+exports.IntelligenceAssessmentStatus = exports.$Enums.IntelligenceAssessmentStatus = {
+  COMPLETED: 'COMPLETED',
+  ABSTAINED: 'ABSTAINED',
+  UNAVAILABLE: 'UNAVAILABLE',
+  INVALID_RESPONSE: 'INVALID_RESPONSE',
+  STALE: 'STALE'
+};
+
 exports.ActionPlanGovernanceMode = exports.$Enums.ActionPlanGovernanceMode = {
   LEGACY: 'LEGACY',
   GOVERNED_POLICY: 'GOVERNED_POLICY',
@@ -692,6 +743,8 @@ exports.Prisma.ModelName = {
   Case: 'Case',
   Inspection: 'Inspection',
   RiskAssessment: 'RiskAssessment',
+  InfrastructureIntelligenceAssessment: 'InfrastructureIntelligenceAssessment',
+  InfrastructureIntelligenceReconciliation: 'InfrastructureIntelligenceReconciliation',
   OperationalResponsePlan: 'OperationalResponsePlan',
   DecisionPackage: 'DecisionPackage',
   ApprovalAuthority: 'ApprovalAuthority',

@@ -158,6 +158,14 @@ enum ExecutionPlanGovernanceMode {
   GOVERNED
 }
 
+enum IntelligenceAssessmentStatus {
+  COMPLETED
+  ABSTAINED
+  UNAVAILABLE
+  INVALID_RESPONSE
+  STALE
+}
+
 model Department {
   id                  String              @id @default(uuid())
   name                String
@@ -503,6 +511,8 @@ model Case {
   closure                  CaseClosure?
   sourcePublicReport       PublicReport?             @relation("PublicReportCreatedCase")
   decisionPackages         DecisionPackage[]
+  intelligenceAssessments InfrastructureIntelligenceAssessment[]
+  intelligenceReconciliations InfrastructureIntelligenceReconciliation[]
 
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
@@ -538,6 +548,7 @@ model Inspection {
   inspector       User             @relation(fields: [inspectorId], references: [id])
   riskAssessments RiskAssessment[]
   decisionPackages DecisionPackage[]
+  intelligenceAssessments InfrastructureIntelligenceAssessment[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -562,9 +573,72 @@ model RiskAssessment {
   inspection               Inspection                @relation(fields: [inspectionId], references: [id], onDelete: Cascade)
   operationalResponsePlans OperationalResponsePlan[]
   decisionPackages         DecisionPackage[]
+  intelligenceAssessments InfrastructureIntelligenceAssessment[]
 
   @@index([caseId])
   @@index([inspectionId])
+}
+
+model InfrastructureIntelligenceAssessment {
+  id               String                       @id @default(uuid())
+  caseId           String
+  inspectionId     String
+  riskAssessmentId String
+  status           IntelligenceAssessmentStatus
+
+  predictedRiskScore   Int?
+  predictedRiskLevel   RiskLevel?
+  recommendedPriority PriorityLevel?
+  confidence           Float?
+
+  provider            String
+  providerType        String
+  modelName           String
+  modelVersion        String
+  modelArtifactDigest String?
+  featureSchemaVersion String
+  contractVersion      String
+  sourceFingerprint    String                    @unique
+  inferredAt           DateTime
+  expiresAt            DateTime?
+
+  contributingFactors Json
+  explanation         String?
+  recommendedActions  Json
+  abstentionReasons   Json
+  reconciliation      Json
+  createdAt           DateTime @default(now())
+  governanceReconciliations InfrastructureIntelligenceReconciliation[]
+
+  case           Case           @relation(fields: [caseId], references: [id], onDelete: Restrict)
+  inspection     Inspection     @relation(fields: [inspectionId], references: [id], onDelete: Restrict)
+  riskAssessment RiskAssessment @relation(fields: [riskAssessmentId], references: [id], onDelete: Restrict)
+
+  @@index([caseId, inferredAt])
+  @@index([inspectionId])
+  @@index([riskAssessmentId])
+  @@index([status])
+  @@index([provider, modelName, modelVersion])
+}
+
+model InfrastructureIntelligenceReconciliation {
+  id                       String   @id @default(uuid())
+  intelligenceAssessmentId String
+  caseId                   String
+  contractVersion          String
+  governanceFingerprint    String   @unique
+  policyResolutionStatus   String
+  policySnapshot           Json
+  reconciledActions        Json
+  issues                   Json
+  reconciledAt             DateTime
+  createdAt                DateTime @default(now())
+
+  intelligenceAssessment InfrastructureIntelligenceAssessment @relation(fields: [intelligenceAssessmentId], references: [id], onDelete: Restrict)
+  case                   Case                                 @relation(fields: [caseId], references: [id], onDelete: Restrict)
+
+  @@index([intelligenceAssessmentId, reconciledAt])
+  @@index([caseId, reconciledAt])
 }
 
 model OperationalResponsePlan {
@@ -614,6 +688,7 @@ model DecisionPackage {
   readinessSnapshot      Json
   policySnapshot         Json
   actionSnapshot         Json
+  intelligenceSnapshot   Json?
   preparedById           String
   preparedAt             DateTime              @default(now())
   createdAt              DateTime              @default(now())

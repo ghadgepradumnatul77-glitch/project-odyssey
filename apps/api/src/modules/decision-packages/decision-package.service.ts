@@ -59,8 +59,12 @@ async function authoritativeSource(caseId: string, principal: OrganizationalPrin
     readinessVersion: readiness.assessmentVersion,
     policy: policyRules.map((item) => ({ policyId: item.policy.id, policyVersion: item.policy.versionNumber, ruleId: item.rule.id, actionId: item.action.id, actionVersion: item.action.versionNumber, enforcement: item.rule.enforcementLevel })).sort((a, b) => canonical(a).localeCompare(canonical(b)))
   };
+  const intelligence = await prisma.infrastructureIntelligenceAssessment.findFirst({where:{caseId,inspectionId:inspection.id,riskAssessmentId:risk.id,status:'COMPLETED',OR:[{expiresAt:null},{expiresAt:{gt:evaluatedAt}}]},include:{governanceReconciliations:{orderBy:[{reconciledAt:'desc'},{id:'desc'}],take:1}},orderBy:[{inferredAt:'desc'},{id:'desc'}]});
+  const reconciliation=intelligence?.governanceReconciliations[0]??null;
+  const intelligenceSnapshot=intelligence&&reconciliation?{state:'CURRENT_ADVISORY_WITH_GOVERNANCE',assessment:{id:intelligence.id,status:intelligence.status,predictedRiskScore:intelligence.predictedRiskScore,predictedRiskLevel:intelligence.predictedRiskLevel,recommendedPriority:intelligence.recommendedPriority,confidence:intelligence.confidence,confidenceSemantics:'INPUT_COMPLETENESS_NOT_CALIBRATED_PROBABILITY',provider:intelligence.provider,providerType:intelligence.providerType,productionTrained:false,modelName:intelligence.modelName,modelVersion:intelligence.modelVersion,featureSchemaVersion:intelligence.featureSchemaVersion,contractVersion:intelligence.contractVersion,inferredAt:intelligence.inferredAt,reconciliation:intelligence.reconciliation},governance:{id:reconciliation.id,contractVersion:reconciliation.contractVersion,policyResolutionStatus:reconciliation.policyResolutionStatus,policySnapshot:reconciliation.policySnapshot,reconciledActions:reconciliation.reconciledActions,issues:reconciliation.issues,reconciledAt:reconciliation.reconciledAt},advisoryOnly:true,humanDecision:false}:null;
+  if(intelligenceSnapshot)Object.assign(material,{intelligenceAssessmentId:intelligence!.id,intelligenceReconciliationId:reconciliation!.id});
   return {
-    readiness, target, inspection, risk, actionGroups,
+    readiness, target, inspection, risk, actionGroups,intelligenceSnapshot,
     policySnapshot: policy ? { state: 'APPLICABLE_GOVERNANCE', rules: policyRules.map((item) => ({ rule: item.rule, policy: item.policy, action: item.action })) }
       : { state: 'NO_APPLICABLE_ACTIVE_POLICY_GOVERNANCE', message: 'No applicable active policy governance was established at preparation time.', rules: [] },
     fingerprint: createHash('sha256').update(canonical(material)).digest('hex')
@@ -73,7 +77,7 @@ function dto(record: Prisma.DecisionPackageGetPayload<{ include: typeof packageI
     status: record.status, preparedAt: record.preparedAt, createdAt: record.createdAt, reused,
     preparedBy: record.preparedBy, caseContext: record.caseSnapshot, inspection: record.inspectionSnapshot,
     riskAssessment: record.riskSnapshot, readiness: record.readinessSnapshot, policyGovernance: record.policySnapshot,
-    governedActions: record.actionSnapshot,
+    governedActions: record.actionSnapshot, intelligence: record.intelligenceSnapshot,
     humanReviewBoundary: { preparedForHumanReview: true, humanDecision: false, executionAuthorized: false, officerRemainsResponsible: true }
   };
 }
@@ -96,7 +100,8 @@ export async function prepareDecisionPackage(caseId: string, principal: Organiza
         caseSnapshot: { caseReference: source.target.caseNumber, title: source.target.title, lifecycleState: source.target.status, emergencyFlag: source.target.emergencyFlag, asset: source.target.asset },
         inspectionSnapshot: source.inspection, riskSnapshot: source.risk,
         readinessSnapshot: { outcome: source.readiness.outcome, assessmentVersion: source.readiness.assessmentVersion, evaluatedAt: source.readiness.evaluatedAt.toISOString(), checks: source.readiness.checks, reasons: source.readiness.reasons } as unknown as Prisma.InputJsonValue,
-        policySnapshot: source.policySnapshot as Prisma.InputJsonValue, actionSnapshot: source.actionGroups as Prisma.InputJsonValue
+        policySnapshot: source.policySnapshot as Prisma.InputJsonValue, actionSnapshot: source.actionGroups as Prisma.InputJsonValue,
+        intelligenceSnapshot: source.intelligenceSnapshot ? source.intelligenceSnapshot as Prisma.InputJsonValue : Prisma.JsonNull
       }, include: packageInclude
     });
     await tx.decisionPackage.updateMany({ where: { caseId, id: { not: record.id }, status: DecisionPackageStatus.PREPARED }, data: { status: DecisionPackageStatus.SUPERSEDED } });

@@ -1,5 +1,6 @@
 import { apiRequest } from './client';
 import type { GovernedActionsDto } from './workflow.api';
+import type { IntelligenceSnapshot } from './intelligence.api';
 
 export interface ReportingActor { id: string; name: string; designation: string; }
 export interface ReportingReason { code: string | null; message: string; }
@@ -9,7 +10,7 @@ export interface DecisionBriefDto {
   workflow: { coherent: boolean; warnings: string[]; statusExplanationVersion: string; anchor: string };
   inspection: null | { id: string; inspectionDate: string; structuralCondition: string; crackSeverity: string; corrosionLevel: string; trafficImportance: string; hospitalRoute: boolean; weatherRisk: string; heavyRainExpected: boolean; estimatedDailyUsers: number | null; createdAt: string; inspector: ReportingActor };
   risk: null | { id: string; riskScore: number; riskLevel: string; priorityLevel: string; reasonCodes: string[]; reasons: ReportingReason[]; assessmentVersion: string; createdAt: string };
-  orp: null | { id: string; versionNumber: number; status: string; urgency: string; recommendedActionCodes: string[]; temporaryMeasures: string[]; alternativeActionCodes: string[]; reasons: ReportingReason[]; planVersion: string; actionPlanContractVersion: string | null; governanceMode: 'LEGACY'|'GOVERNED_POLICY'|'GOVERNED_ENGINEERING_NO_POLICY'; governedActions: GovernedActionsDto | null; decisionPackage: null | { id: string; packageVersion: number; packageContractVersion: string; preparedAt: string; policyGovernance: unknown }; humanReviewBoundary: { decisionSupportOnly: boolean; executionAuthorized: boolean }; createdAt: string };
+  orp: null | { id: string; versionNumber: number; status: string; urgency: string; recommendedActionCodes: string[]; temporaryMeasures: string[]; alternativeActionCodes: string[]; reasons: ReportingReason[]; planVersion: string; actionPlanContractVersion: string | null; governanceMode: 'LEGACY'|'GOVERNED_POLICY'|'GOVERNED_ENGINEERING_NO_POLICY'; governedActions: GovernedActionsDto | null; decisionPackage: null | { id: string; packageVersion: number; packageContractVersion: string; preparedAt: string; policyGovernance: unknown; intelligence?:IntelligenceSnapshot|null }; humanReviewBoundary: { decisionSupportOnly: boolean; executionAuthorized: boolean }; createdAt: string };
   decision: null | { id: string; decisionType: string; reason: string | null; remarks: string | null; createdAt: string; reviewer: ReportingActor };
   execution: null | { id: string; status: string; templateVersion: string; createdAt: string; startedAt: string | null; completedAt: string | null; metrics: { totalTasks: number; mandatoryTasks: number; verifiedMandatoryTasks: number; optionalTasks: number; terminalOptionalTasks: number; verifiedTasks: number; blockedTasks: number; cancelledTasks: number; evidenceCount: number; completionPercentage: number | null }; accountability: { assignees: ReportingActor[]; completionSubmitters: ReportingActor[]; verifiers: ReportingActor[] } };
   evidence: null | { totalEvidence: number; countsByType: Record<string, number> };

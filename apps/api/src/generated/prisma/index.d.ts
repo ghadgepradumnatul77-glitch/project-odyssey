@@ -15,112 +15,122 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
 
 /**
  * Model Department
- * 
+ *
  */
 export type Department = $Result.DefaultSelection<Prisma.$DepartmentPayload>
 /**
  * Model Jurisdiction
- * 
+ *
  */
 export type Jurisdiction = $Result.DefaultSelection<Prisma.$JurisdictionPayload>
 /**
  * Model User
- * 
+ *
  */
 export type User = $Result.DefaultSelection<Prisma.$UserPayload>
 /**
  * Model Asset
- * 
+ *
  */
 export type Asset = $Result.DefaultSelection<Prisma.$AssetPayload>
 /**
  * Model PublicReport
- * 
+ *
  */
 export type PublicReport = $Result.DefaultSelection<Prisma.$PublicReportPayload>
 /**
  * Model PublicReportTriageAnalysis
- * 
+ *
  */
 export type PublicReportTriageAnalysis = $Result.DefaultSelection<Prisma.$PublicReportTriageAnalysisPayload>
 /**
  * Model PolicyDocument
- * 
+ *
  */
 export type PolicyDocument = $Result.DefaultSelection<Prisma.$PolicyDocumentPayload>
 /**
  * Model ApprovedActionVersion
- * 
+ *
  */
 export type ApprovedActionVersion = $Result.DefaultSelection<Prisma.$ApprovedActionVersionPayload>
 /**
  * Model GovernedExecutionTemplate
- * 
+ *
  */
 export type GovernedExecutionTemplate = $Result.DefaultSelection<Prisma.$GovernedExecutionTemplatePayload>
 /**
  * Model GovernedExecutionTaskTemplate
- * 
+ *
  */
 export type GovernedExecutionTaskTemplate = $Result.DefaultSelection<Prisma.$GovernedExecutionTaskTemplatePayload>
 /**
  * Model PolicyRule
- * 
+ *
  */
 export type PolicyRule = $Result.DefaultSelection<Prisma.$PolicyRulePayload>
 /**
  * Model Case
- * 
+ *
  */
 export type Case = $Result.DefaultSelection<Prisma.$CasePayload>
 /**
  * Model Inspection
- * 
+ *
  */
 export type Inspection = $Result.DefaultSelection<Prisma.$InspectionPayload>
 /**
  * Model RiskAssessment
- * 
+ *
  */
 export type RiskAssessment = $Result.DefaultSelection<Prisma.$RiskAssessmentPayload>
 /**
+ * Model InfrastructureIntelligenceAssessment
+ *
+ */
+export type InfrastructureIntelligenceAssessment = $Result.DefaultSelection<Prisma.$InfrastructureIntelligenceAssessmentPayload>
+/**
+ * Model InfrastructureIntelligenceReconciliation
+ *
+ */
+export type InfrastructureIntelligenceReconciliation = $Result.DefaultSelection<Prisma.$InfrastructureIntelligenceReconciliationPayload>
+/**
  * Model OperationalResponsePlan
- * 
+ *
  */
 export type OperationalResponsePlan = $Result.DefaultSelection<Prisma.$OperationalResponsePlanPayload>
 /**
  * Model DecisionPackage
- * 
+ *
  */
 export type DecisionPackage = $Result.DefaultSelection<Prisma.$DecisionPackagePayload>
 /**
  * Model ApprovalAuthority
- * 
+ *
  */
 export type ApprovalAuthority = $Result.DefaultSelection<Prisma.$ApprovalAuthorityPayload>
 /**
  * Model OrpDecision
- * 
+ *
  */
 export type OrpDecision = $Result.DefaultSelection<Prisma.$OrpDecisionPayload>
 /**
  * Model ExecutionPlan
- * 
+ *
  */
 export type ExecutionPlan = $Result.DefaultSelection<Prisma.$ExecutionPlanPayload>
 /**
  * Model ExecutionTask
- * 
+ *
  */
 export type ExecutionTask = $Result.DefaultSelection<Prisma.$ExecutionTaskPayload>
 /**
  * Model ExecutionEvidence
- * 
+ *
  */
 export type ExecutionEvidence = $Result.DefaultSelection<Prisma.$ExecutionEvidencePayload>
 /**
  * Model CaseClosure
- * 
+ *
  */
 export type CaseClosure = $Result.DefaultSelection<Prisma.$CaseClosurePayload>
 
@@ -337,6 +347,17 @@ export const ExecutionPlanGovernanceMode: {
 
 export type ExecutionPlanGovernanceMode = (typeof ExecutionPlanGovernanceMode)[keyof typeof ExecutionPlanGovernanceMode]
 
+
+export const IntelligenceAssessmentStatus: {
+  COMPLETED: 'COMPLETED',
+  ABSTAINED: 'ABSTAINED',
+  UNAVAILABLE: 'UNAVAILABLE',
+  INVALID_RESPONSE: 'INVALID_RESPONSE',
+  STALE: 'STALE'
+};
+
+export type IntelligenceAssessmentStatus = (typeof IntelligenceAssessmentStatus)[keyof typeof IntelligenceAssessmentStatus]
+
 }
 
 export type UserStatus = $Enums.UserStatus
@@ -418,6 +439,10 @@ export const ActionPlanGovernanceMode: typeof $Enums.ActionPlanGovernanceMode
 export type ExecutionPlanGovernanceMode = $Enums.ExecutionPlanGovernanceMode
 
 export const ExecutionPlanGovernanceMode: typeof $Enums.ExecutionPlanGovernanceMode
+
+export type IntelligenceAssessmentStatus = $Enums.IntelligenceAssessmentStatus
+
+export const IntelligenceAssessmentStatus: typeof $Enums.IntelligenceAssessmentStatus
 
 /**
  * ##  Prisma Client ʲˢ
@@ -525,7 +550,7 @@ export class PrismaClient<
    *   prisma.user.create({ data: { name: 'Alice' } }),
    * ])
    * ```
-   * 
+   *
    * Read more in our [docs](https://www.prisma.io/docs/concepts/components/prisma-client/transactions).
    */
   $transaction<P extends Prisma.PrismaPromise<any>[]>(arg: [...P], options?: { isolationLevel?: Prisma.TransactionIsolationLevel }): $Utils.JsPromise<runtime.Types.Utils.UnwrapTuple<P>>
@@ -676,6 +701,26 @@ export class PrismaClient<
     * ```
     */
   get riskAssessment(): Prisma.RiskAssessmentDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.infrastructureIntelligenceAssessment`: Exposes CRUD operations for the **InfrastructureIntelligenceAssessment** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more InfrastructureIntelligenceAssessments
+    * const infrastructureIntelligenceAssessments = await prisma.infrastructureIntelligenceAssessment.findMany()
+    * ```
+    */
+  get infrastructureIntelligenceAssessment(): Prisma.InfrastructureIntelligenceAssessmentDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.infrastructureIntelligenceReconciliation`: Exposes CRUD operations for the **InfrastructureIntelligenceReconciliation** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more InfrastructureIntelligenceReconciliations
+    * const infrastructureIntelligenceReconciliations = await prisma.infrastructureIntelligenceReconciliation.findMany()
+    * ```
+    */
+  get infrastructureIntelligenceReconciliation(): Prisma.InfrastructureIntelligenceReconciliationDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.operationalResponsePlan`: Exposes CRUD operations for the **OperationalResponsePlan** model.
@@ -1211,6 +1256,8 @@ export namespace Prisma {
     Case: 'Case',
     Inspection: 'Inspection',
     RiskAssessment: 'RiskAssessment',
+    InfrastructureIntelligenceAssessment: 'InfrastructureIntelligenceAssessment',
+    InfrastructureIntelligenceReconciliation: 'InfrastructureIntelligenceReconciliation',
     OperationalResponsePlan: 'OperationalResponsePlan',
     DecisionPackage: 'DecisionPackage',
     ApprovalAuthority: 'ApprovalAuthority',
@@ -1237,7 +1284,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "department" | "jurisdiction" | "user" | "asset" | "publicReport" | "publicReportTriageAnalysis" | "policyDocument" | "approvedActionVersion" | "governedExecutionTemplate" | "governedExecutionTaskTemplate" | "policyRule" | "case" | "inspection" | "riskAssessment" | "operationalResponsePlan" | "decisionPackage" | "approvalAuthority" | "orpDecision" | "executionPlan" | "executionTask" | "executionEvidence" | "caseClosure"
+      modelProps: "department" | "jurisdiction" | "user" | "asset" | "publicReport" | "publicReportTriageAnalysis" | "policyDocument" | "approvedActionVersion" | "governedExecutionTemplate" | "governedExecutionTaskTemplate" | "policyRule" | "case" | "inspection" | "riskAssessment" | "infrastructureIntelligenceAssessment" | "infrastructureIntelligenceReconciliation" | "operationalResponsePlan" | "decisionPackage" | "approvalAuthority" | "orpDecision" | "executionPlan" | "executionTask" | "executionEvidence" | "caseClosure"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -2277,6 +2324,154 @@ export namespace Prisma {
           }
         }
       }
+      InfrastructureIntelligenceAssessment: {
+        payload: Prisma.$InfrastructureIntelligenceAssessmentPayload<ExtArgs>
+        fields: Prisma.InfrastructureIntelligenceAssessmentFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.InfrastructureIntelligenceAssessmentFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InfrastructureIntelligenceAssessmentPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.InfrastructureIntelligenceAssessmentFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InfrastructureIntelligenceAssessmentPayload>
+          }
+          findFirst: {
+            args: Prisma.InfrastructureIntelligenceAssessmentFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InfrastructureIntelligenceAssessmentPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.InfrastructureIntelligenceAssessmentFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InfrastructureIntelligenceAssessmentPayload>
+          }
+          findMany: {
+            args: Prisma.InfrastructureIntelligenceAssessmentFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InfrastructureIntelligenceAssessmentPayload>[]
+          }
+          create: {
+            args: Prisma.InfrastructureIntelligenceAssessmentCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InfrastructureIntelligenceAssessmentPayload>
+          }
+          createMany: {
+            args: Prisma.InfrastructureIntelligenceAssessmentCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.InfrastructureIntelligenceAssessmentCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InfrastructureIntelligenceAssessmentPayload>[]
+          }
+          delete: {
+            args: Prisma.InfrastructureIntelligenceAssessmentDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InfrastructureIntelligenceAssessmentPayload>
+          }
+          update: {
+            args: Prisma.InfrastructureIntelligenceAssessmentUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InfrastructureIntelligenceAssessmentPayload>
+          }
+          deleteMany: {
+            args: Prisma.InfrastructureIntelligenceAssessmentDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.InfrastructureIntelligenceAssessmentUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.InfrastructureIntelligenceAssessmentUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InfrastructureIntelligenceAssessmentPayload>[]
+          }
+          upsert: {
+            args: Prisma.InfrastructureIntelligenceAssessmentUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InfrastructureIntelligenceAssessmentPayload>
+          }
+          aggregate: {
+            args: Prisma.InfrastructureIntelligenceAssessmentAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateInfrastructureIntelligenceAssessment>
+          }
+          groupBy: {
+            args: Prisma.InfrastructureIntelligenceAssessmentGroupByArgs<ExtArgs>
+            result: $Utils.Optional<InfrastructureIntelligenceAssessmentGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.InfrastructureIntelligenceAssessmentCountArgs<ExtArgs>
+            result: $Utils.Optional<InfrastructureIntelligenceAssessmentCountAggregateOutputType> | number
+          }
+        }
+      }
+      InfrastructureIntelligenceReconciliation: {
+        payload: Prisma.$InfrastructureIntelligenceReconciliationPayload<ExtArgs>
+        fields: Prisma.InfrastructureIntelligenceReconciliationFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.InfrastructureIntelligenceReconciliationFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InfrastructureIntelligenceReconciliationPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.InfrastructureIntelligenceReconciliationFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InfrastructureIntelligenceReconciliationPayload>
+          }
+          findFirst: {
+            args: Prisma.InfrastructureIntelligenceReconciliationFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InfrastructureIntelligenceReconciliationPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.InfrastructureIntelligenceReconciliationFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InfrastructureIntelligenceReconciliationPayload>
+          }
+          findMany: {
+            args: Prisma.InfrastructureIntelligenceReconciliationFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InfrastructureIntelligenceReconciliationPayload>[]
+          }
+          create: {
+            args: Prisma.InfrastructureIntelligenceReconciliationCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InfrastructureIntelligenceReconciliationPayload>
+          }
+          createMany: {
+            args: Prisma.InfrastructureIntelligenceReconciliationCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.InfrastructureIntelligenceReconciliationCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InfrastructureIntelligenceReconciliationPayload>[]
+          }
+          delete: {
+            args: Prisma.InfrastructureIntelligenceReconciliationDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InfrastructureIntelligenceReconciliationPayload>
+          }
+          update: {
+            args: Prisma.InfrastructureIntelligenceReconciliationUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InfrastructureIntelligenceReconciliationPayload>
+          }
+          deleteMany: {
+            args: Prisma.InfrastructureIntelligenceReconciliationDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.InfrastructureIntelligenceReconciliationUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.InfrastructureIntelligenceReconciliationUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InfrastructureIntelligenceReconciliationPayload>[]
+          }
+          upsert: {
+            args: Prisma.InfrastructureIntelligenceReconciliationUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InfrastructureIntelligenceReconciliationPayload>
+          }
+          aggregate: {
+            args: Prisma.InfrastructureIntelligenceReconciliationAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateInfrastructureIntelligenceReconciliation>
+          }
+          groupBy: {
+            args: Prisma.InfrastructureIntelligenceReconciliationGroupByArgs<ExtArgs>
+            result: $Utils.Optional<InfrastructureIntelligenceReconciliationGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.InfrastructureIntelligenceReconciliationCountArgs<ExtArgs>
+            result: $Utils.Optional<InfrastructureIntelligenceReconciliationCountAggregateOutputType> | number
+          }
+        }
+      }
       OperationalResponsePlan: {
         payload: Prisma.$OperationalResponsePlanPayload<ExtArgs>
         fields: Prisma.OperationalResponsePlanFieldRefs
@@ -2914,7 +3109,7 @@ export namespace Prisma {
      * ```
      * // Shorthand for `emit: 'stdout'`
      * log: ['query', 'info', 'warn', 'error']
-     * 
+     *
      * // Emit as events only
      * log: [
      *   { emit: 'event', level: 'query' },
@@ -2922,14 +3117,14 @@ export namespace Prisma {
      *   { emit: 'event', level: 'warn' }
      *   { emit: 'event', level: 'error' }
      * ]
-     * 
+     *
      * / Emit as events and log to stdout
      * og: [
      *  { emit: 'stdout', level: 'query' },
      *  { emit: 'stdout', level: 'info' },
      *  { emit: 'stdout', level: 'warn' }
      *  { emit: 'stdout', level: 'error' }
-     * 
+     *
      * ```
      * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/logging#the-log-option).
      */
@@ -2950,7 +3145,7 @@ export namespace Prisma {
     adapter?: runtime.SqlDriverAdapterFactory | null
     /**
      * Global configuration for omitting model fields by default.
-     * 
+     *
      * @example
      * ```
      * const prisma = new PrismaClient({
@@ -2979,6 +3174,8 @@ export namespace Prisma {
     case?: CaseOmit
     inspection?: InspectionOmit
     riskAssessment?: RiskAssessmentOmit
+    infrastructureIntelligenceAssessment?: InfrastructureIntelligenceAssessmentOmit
+    infrastructureIntelligenceReconciliation?: InfrastructureIntelligenceReconciliationOmit
     operationalResponsePlan?: OperationalResponsePlanOmit
     decisionPackage?: DecisionPackageOmit
     approvalAuthority?: ApprovalAuthorityOmit
@@ -3712,6 +3909,8 @@ export namespace Prisma {
     orpDecisions: number
     executionPlans: number
     decisionPackages: number
+    intelligenceAssessments: number
+    intelligenceReconciliations: number
   }
 
   export type CaseCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3721,6 +3920,8 @@ export namespace Prisma {
     orpDecisions?: boolean | CaseCountOutputTypeCountOrpDecisionsArgs
     executionPlans?: boolean | CaseCountOutputTypeCountExecutionPlansArgs
     decisionPackages?: boolean | CaseCountOutputTypeCountDecisionPackagesArgs
+    intelligenceAssessments?: boolean | CaseCountOutputTypeCountIntelligenceAssessmentsArgs
+    intelligenceReconciliations?: boolean | CaseCountOutputTypeCountIntelligenceReconciliationsArgs
   }
 
   // Custom InputTypes
@@ -3776,6 +3977,20 @@ export namespace Prisma {
     where?: DecisionPackageWhereInput
   }
 
+  /**
+   * CaseCountOutputType without action
+   */
+  export type CaseCountOutputTypeCountIntelligenceAssessmentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: InfrastructureIntelligenceAssessmentWhereInput
+  }
+
+  /**
+   * CaseCountOutputType without action
+   */
+  export type CaseCountOutputTypeCountIntelligenceReconciliationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: InfrastructureIntelligenceReconciliationWhereInput
+  }
+
 
   /**
    * Count Type InspectionCountOutputType
@@ -3784,11 +3999,13 @@ export namespace Prisma {
   export type InspectionCountOutputType = {
     riskAssessments: number
     decisionPackages: number
+    intelligenceAssessments: number
   }
 
   export type InspectionCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     riskAssessments?: boolean | InspectionCountOutputTypeCountRiskAssessmentsArgs
     decisionPackages?: boolean | InspectionCountOutputTypeCountDecisionPackagesArgs
+    intelligenceAssessments?: boolean | InspectionCountOutputTypeCountIntelligenceAssessmentsArgs
   }
 
   // Custom InputTypes
@@ -3816,6 +4033,13 @@ export namespace Prisma {
     where?: DecisionPackageWhereInput
   }
 
+  /**
+   * InspectionCountOutputType without action
+   */
+  export type InspectionCountOutputTypeCountIntelligenceAssessmentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: InfrastructureIntelligenceAssessmentWhereInput
+  }
+
 
   /**
    * Count Type RiskAssessmentCountOutputType
@@ -3824,11 +4048,13 @@ export namespace Prisma {
   export type RiskAssessmentCountOutputType = {
     operationalResponsePlans: number
     decisionPackages: number
+    intelligenceAssessments: number
   }
 
   export type RiskAssessmentCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     operationalResponsePlans?: boolean | RiskAssessmentCountOutputTypeCountOperationalResponsePlansArgs
     decisionPackages?: boolean | RiskAssessmentCountOutputTypeCountDecisionPackagesArgs
+    intelligenceAssessments?: boolean | RiskAssessmentCountOutputTypeCountIntelligenceAssessmentsArgs
   }
 
   // Custom InputTypes
@@ -3854,6 +4080,44 @@ export namespace Prisma {
    */
   export type RiskAssessmentCountOutputTypeCountDecisionPackagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: DecisionPackageWhereInput
+  }
+
+  /**
+   * RiskAssessmentCountOutputType without action
+   */
+  export type RiskAssessmentCountOutputTypeCountIntelligenceAssessmentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: InfrastructureIntelligenceAssessmentWhereInput
+  }
+
+
+  /**
+   * Count Type InfrastructureIntelligenceAssessmentCountOutputType
+   */
+
+  export type InfrastructureIntelligenceAssessmentCountOutputType = {
+    governanceReconciliations: number
+  }
+
+  export type InfrastructureIntelligenceAssessmentCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    governanceReconciliations?: boolean | InfrastructureIntelligenceAssessmentCountOutputTypeCountGovernanceReconciliationsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * InfrastructureIntelligenceAssessmentCountOutputType without action
+   */
+  export type InfrastructureIntelligenceAssessmentCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InfrastructureIntelligenceAssessmentCountOutputType
+     */
+    select?: InfrastructureIntelligenceAssessmentCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * InfrastructureIntelligenceAssessmentCountOutputType without action
+   */
+  export type InfrastructureIntelligenceAssessmentCountOutputTypeCountGovernanceReconciliationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: InfrastructureIntelligenceReconciliationWhereInput
   }
 
 
@@ -4087,43 +4351,43 @@ export namespace Prisma {
     where?: DepartmentWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of Departments to fetch.
      */
     orderBy?: DepartmentOrderByWithRelationInput | DepartmentOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the start position
      */
     cursor?: DepartmentWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` Departments from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` Departments.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Count returned Departments
     **/
     _count?: true | DepartmentCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to find the minimum value
     **/
     _min?: DepartmentMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to find the maximum value
     **/
     _max?: DepartmentMaxAggregateInputType
@@ -4324,13 +4588,13 @@ export namespace Prisma {
      * @example
      * // Get all Departments
      * const departments = await prisma.department.findMany()
-     * 
+     *
      * // Get first 10 Departments
      * const departments = await prisma.department.findMany({ take: 10 })
-     * 
+     *
      * // Only select the `id`
      * const departmentWithIdOnly = await prisma.department.findMany({ select: { id: true } })
-     * 
+     *
      */
     findMany<T extends DepartmentFindManyArgs>(args?: SelectSubset<T, DepartmentFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DepartmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
@@ -4344,7 +4608,7 @@ export namespace Prisma {
      *     // ... data to create a Department
      *   }
      * })
-     * 
+     *
      */
     create<T extends DepartmentCreateArgs>(args: SelectSubset<T, DepartmentCreateArgs<ExtArgs>>): Prisma__DepartmentClient<$Result.GetResult<Prisma.$DepartmentPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -4358,7 +4622,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *     
+     *
      */
     createMany<T extends DepartmentCreateManyArgs>(args?: SelectSubset<T, DepartmentCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -4372,7 +4636,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     * 
+     *
      * // Create many Departments and only return the `id`
      * const departmentWithIdOnly = await prisma.department.createManyAndReturn({
      *   select: { id: true },
@@ -4382,7 +4646,7 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * 
+     *
      */
     createManyAndReturn<T extends DepartmentCreateManyAndReturnArgs>(args?: SelectSubset<T, DepartmentCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DepartmentPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
@@ -4396,7 +4660,7 @@ export namespace Prisma {
      *     // ... filter to delete one Department
      *   }
      * })
-     * 
+     *
      */
     delete<T extends DepartmentDeleteArgs>(args: SelectSubset<T, DepartmentDeleteArgs<ExtArgs>>): Prisma__DepartmentClient<$Result.GetResult<Prisma.$DepartmentPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -4413,7 +4677,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     * 
+     *
      */
     update<T extends DepartmentUpdateArgs>(args: SelectSubset<T, DepartmentUpdateArgs<ExtArgs>>): Prisma__DepartmentClient<$Result.GetResult<Prisma.$DepartmentPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -4427,7 +4691,7 @@ export namespace Prisma {
      *     // ... provide filter here
      *   }
      * })
-     * 
+     *
      */
     deleteMany<T extends DepartmentDeleteManyArgs>(args?: SelectSubset<T, DepartmentDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -4446,7 +4710,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     * 
+     *
      */
     updateMany<T extends DepartmentUpdateManyArgs>(args: SelectSubset<T, DepartmentUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -4463,7 +4727,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     * 
+     *
      * // Update zero or more Departments and only return the `id`
      * const departmentWithIdOnly = await prisma.department.updateManyAndReturn({
      *   select: { id: true },
@@ -4476,7 +4740,7 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * 
+     *
      */
     updateManyAndReturn<T extends DepartmentUpdateManyAndReturnArgs>(args: SelectSubset<T, DepartmentUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DepartmentPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
@@ -4565,7 +4829,7 @@ export namespace Prisma {
      *     _all: true
      *   },
      * })
-     * 
+     *
     **/
     groupBy<
       T extends DepartmentGroupByArgs,
@@ -4681,7 +4945,7 @@ export namespace Prisma {
     readonly code: FieldRef<"Department", 'String'>
     readonly createdAt: FieldRef<"Department", 'DateTime'>
   }
-    
+
 
   // Custom InputTypes
   /**
@@ -4750,31 +5014,31 @@ export namespace Prisma {
     where?: DepartmentWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of Departments to fetch.
      */
     orderBy?: DepartmentOrderByWithRelationInput | DepartmentOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for searching for Departments.
      */
     cursor?: DepartmentWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` Departments from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` Departments.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
+     *
      * Filter by unique combinations of Departments.
      */
     distinct?: DepartmentScalarFieldEnum | DepartmentScalarFieldEnum[]
@@ -4802,31 +5066,31 @@ export namespace Prisma {
     where?: DepartmentWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of Departments to fetch.
      */
     orderBy?: DepartmentOrderByWithRelationInput | DepartmentOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for searching for Departments.
      */
     cursor?: DepartmentWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` Departments from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` Departments.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
+     *
      * Filter by unique combinations of Departments.
      */
     distinct?: DepartmentScalarFieldEnum | DepartmentScalarFieldEnum[]
@@ -4854,25 +5118,25 @@ export namespace Prisma {
     where?: DepartmentWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of Departments to fetch.
      */
     orderBy?: DepartmentOrderByWithRelationInput | DepartmentOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for listing Departments.
      */
     cursor?: DepartmentWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` Departments from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` Departments.
      */
     skip?: number
@@ -5346,43 +5610,43 @@ export namespace Prisma {
     where?: JurisdictionWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of Jurisdictions to fetch.
      */
     orderBy?: JurisdictionOrderByWithRelationInput | JurisdictionOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the start position
      */
     cursor?: JurisdictionWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` Jurisdictions from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` Jurisdictions.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Count returned Jurisdictions
     **/
     _count?: true | JurisdictionCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to find the minimum value
     **/
     _min?: JurisdictionMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to find the maximum value
     **/
     _max?: JurisdictionMaxAggregateInputType
@@ -5595,13 +5859,13 @@ export namespace Prisma {
      * @example
      * // Get all Jurisdictions
      * const jurisdictions = await prisma.jurisdiction.findMany()
-     * 
+     *
      * // Get first 10 Jurisdictions
      * const jurisdictions = await prisma.jurisdiction.findMany({ take: 10 })
-     * 
+     *
      * // Only select the `id`
      * const jurisdictionWithIdOnly = await prisma.jurisdiction.findMany({ select: { id: true } })
-     * 
+     *
      */
     findMany<T extends JurisdictionFindManyArgs>(args?: SelectSubset<T, JurisdictionFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$JurisdictionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
@@ -5615,7 +5879,7 @@ export namespace Prisma {
      *     // ... data to create a Jurisdiction
      *   }
      * })
-     * 
+     *
      */
     create<T extends JurisdictionCreateArgs>(args: SelectSubset<T, JurisdictionCreateArgs<ExtArgs>>): Prisma__JurisdictionClient<$Result.GetResult<Prisma.$JurisdictionPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -5629,7 +5893,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *     
+     *
      */
     createMany<T extends JurisdictionCreateManyArgs>(args?: SelectSubset<T, JurisdictionCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -5643,7 +5907,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     * 
+     *
      * // Create many Jurisdictions and only return the `id`
      * const jurisdictionWithIdOnly = await prisma.jurisdiction.createManyAndReturn({
      *   select: { id: true },
@@ -5653,7 +5917,7 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * 
+     *
      */
     createManyAndReturn<T extends JurisdictionCreateManyAndReturnArgs>(args?: SelectSubset<T, JurisdictionCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$JurisdictionPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
@@ -5667,7 +5931,7 @@ export namespace Prisma {
      *     // ... filter to delete one Jurisdiction
      *   }
      * })
-     * 
+     *
      */
     delete<T extends JurisdictionDeleteArgs>(args: SelectSubset<T, JurisdictionDeleteArgs<ExtArgs>>): Prisma__JurisdictionClient<$Result.GetResult<Prisma.$JurisdictionPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -5684,7 +5948,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     * 
+     *
      */
     update<T extends JurisdictionUpdateArgs>(args: SelectSubset<T, JurisdictionUpdateArgs<ExtArgs>>): Prisma__JurisdictionClient<$Result.GetResult<Prisma.$JurisdictionPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -5698,7 +5962,7 @@ export namespace Prisma {
      *     // ... provide filter here
      *   }
      * })
-     * 
+     *
      */
     deleteMany<T extends JurisdictionDeleteManyArgs>(args?: SelectSubset<T, JurisdictionDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -5717,7 +5981,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     * 
+     *
      */
     updateMany<T extends JurisdictionUpdateManyArgs>(args: SelectSubset<T, JurisdictionUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -5734,7 +5998,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     * 
+     *
      * // Update zero or more Jurisdictions and only return the `id`
      * const jurisdictionWithIdOnly = await prisma.jurisdiction.updateManyAndReturn({
      *   select: { id: true },
@@ -5747,7 +6011,7 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * 
+     *
      */
     updateManyAndReturn<T extends JurisdictionUpdateManyAndReturnArgs>(args: SelectSubset<T, JurisdictionUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$JurisdictionPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
@@ -5836,7 +6100,7 @@ export namespace Prisma {
      *     _all: true
      *   },
      * })
-     * 
+     *
     **/
     groupBy<
       T extends JurisdictionGroupByArgs,
@@ -5953,7 +6217,7 @@ export namespace Prisma {
     readonly departmentId: FieldRef<"Jurisdiction", 'String'>
     readonly createdAt: FieldRef<"Jurisdiction", 'DateTime'>
   }
-    
+
 
   // Custom InputTypes
   /**
@@ -6022,31 +6286,31 @@ export namespace Prisma {
     where?: JurisdictionWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of Jurisdictions to fetch.
      */
     orderBy?: JurisdictionOrderByWithRelationInput | JurisdictionOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for searching for Jurisdictions.
      */
     cursor?: JurisdictionWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` Jurisdictions from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` Jurisdictions.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
+     *
      * Filter by unique combinations of Jurisdictions.
      */
     distinct?: JurisdictionScalarFieldEnum | JurisdictionScalarFieldEnum[]
@@ -6074,31 +6338,31 @@ export namespace Prisma {
     where?: JurisdictionWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of Jurisdictions to fetch.
      */
     orderBy?: JurisdictionOrderByWithRelationInput | JurisdictionOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for searching for Jurisdictions.
      */
     cursor?: JurisdictionWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` Jurisdictions from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` Jurisdictions.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
+     *
      * Filter by unique combinations of Jurisdictions.
      */
     distinct?: JurisdictionScalarFieldEnum | JurisdictionScalarFieldEnum[]
@@ -6126,25 +6390,25 @@ export namespace Prisma {
     where?: JurisdictionWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of Jurisdictions to fetch.
      */
     orderBy?: JurisdictionOrderByWithRelationInput | JurisdictionOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for listing Jurisdictions.
      */
     cursor?: JurisdictionWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` Jurisdictions from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` Jurisdictions.
      */
     skip?: number
@@ -6644,43 +6908,43 @@ export namespace Prisma {
     where?: UserWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of Users to fetch.
      */
     orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the start position
      */
     cursor?: UserWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` Users from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` Users.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Count returned Users
     **/
     _count?: true | UserCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to find the minimum value
     **/
     _min?: UserMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to find the maximum value
     **/
     _max?: UserMaxAggregateInputType
@@ -6987,13 +7251,13 @@ export namespace Prisma {
      * @example
      * // Get all Users
      * const users = await prisma.user.findMany()
-     * 
+     *
      * // Get first 10 Users
      * const users = await prisma.user.findMany({ take: 10 })
-     * 
+     *
      * // Only select the `id`
      * const userWithIdOnly = await prisma.user.findMany({ select: { id: true } })
-     * 
+     *
      */
     findMany<T extends UserFindManyArgs>(args?: SelectSubset<T, UserFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
@@ -7007,7 +7271,7 @@ export namespace Prisma {
      *     // ... data to create a User
      *   }
      * })
-     * 
+     *
      */
     create<T extends UserCreateArgs>(args: SelectSubset<T, UserCreateArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -7021,7 +7285,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *     
+     *
      */
     createMany<T extends UserCreateManyArgs>(args?: SelectSubset<T, UserCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -7035,7 +7299,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     * 
+     *
      * // Create many Users and only return the `id`
      * const userWithIdOnly = await prisma.user.createManyAndReturn({
      *   select: { id: true },
@@ -7045,7 +7309,7 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * 
+     *
      */
     createManyAndReturn<T extends UserCreateManyAndReturnArgs>(args?: SelectSubset<T, UserCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
@@ -7059,7 +7323,7 @@ export namespace Prisma {
      *     // ... filter to delete one User
      *   }
      * })
-     * 
+     *
      */
     delete<T extends UserDeleteArgs>(args: SelectSubset<T, UserDeleteArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -7076,7 +7340,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     * 
+     *
      */
     update<T extends UserUpdateArgs>(args: SelectSubset<T, UserUpdateArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -7090,7 +7354,7 @@ export namespace Prisma {
      *     // ... provide filter here
      *   }
      * })
-     * 
+     *
      */
     deleteMany<T extends UserDeleteManyArgs>(args?: SelectSubset<T, UserDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -7109,7 +7373,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     * 
+     *
      */
     updateMany<T extends UserUpdateManyArgs>(args: SelectSubset<T, UserUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -7126,7 +7390,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     * 
+     *
      * // Update zero or more Users and only return the `id`
      * const userWithIdOnly = await prisma.user.updateManyAndReturn({
      *   select: { id: true },
@@ -7139,7 +7403,7 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * 
+     *
      */
     updateManyAndReturn<T extends UserUpdateManyAndReturnArgs>(args: SelectSubset<T, UserUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
@@ -7228,7 +7492,7 @@ export namespace Prisma {
      *     _all: true
      *   },
      * })
-     * 
+     *
     **/
     groupBy<
       T extends UserGroupByArgs,
@@ -7368,7 +7632,7 @@ export namespace Prisma {
     readonly createdAt: FieldRef<"User", 'DateTime'>
     readonly updatedAt: FieldRef<"User", 'DateTime'>
   }
-    
+
 
   // Custom InputTypes
   /**
@@ -7437,31 +7701,31 @@ export namespace Prisma {
     where?: UserWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of Users to fetch.
      */
     orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for searching for Users.
      */
     cursor?: UserWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` Users from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` Users.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
+     *
      * Filter by unique combinations of Users.
      */
     distinct?: UserScalarFieldEnum | UserScalarFieldEnum[]
@@ -7489,31 +7753,31 @@ export namespace Prisma {
     where?: UserWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of Users to fetch.
      */
     orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for searching for Users.
      */
     cursor?: UserWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` Users from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` Users.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
+     *
      * Filter by unique combinations of Users.
      */
     distinct?: UserScalarFieldEnum | UserScalarFieldEnum[]
@@ -7541,25 +7805,25 @@ export namespace Prisma {
     where?: UserWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of Users to fetch.
      */
     orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for listing Users.
      */
     cursor?: UserWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` Users from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` Users.
      */
     skip?: number
@@ -8445,55 +8709,55 @@ export namespace Prisma {
     where?: AssetWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of Assets to fetch.
      */
     orderBy?: AssetOrderByWithRelationInput | AssetOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the start position
      */
     cursor?: AssetWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` Assets from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` Assets.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Count returned Assets
     **/
     _count?: true | AssetCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to average
     **/
     _avg?: AssetAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to sum
     **/
     _sum?: AssetSumAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to find the minimum value
     **/
     _min?: AssetMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to find the maximum value
     **/
     _max?: AssetMaxAggregateInputType
@@ -8747,13 +9011,13 @@ export namespace Prisma {
      * @example
      * // Get all Assets
      * const assets = await prisma.asset.findMany()
-     * 
+     *
      * // Get first 10 Assets
      * const assets = await prisma.asset.findMany({ take: 10 })
-     * 
+     *
      * // Only select the `id`
      * const assetWithIdOnly = await prisma.asset.findMany({ select: { id: true } })
-     * 
+     *
      */
     findMany<T extends AssetFindManyArgs>(args?: SelectSubset<T, AssetFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AssetPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
@@ -8767,7 +9031,7 @@ export namespace Prisma {
      *     // ... data to create a Asset
      *   }
      * })
-     * 
+     *
      */
     create<T extends AssetCreateArgs>(args: SelectSubset<T, AssetCreateArgs<ExtArgs>>): Prisma__AssetClient<$Result.GetResult<Prisma.$AssetPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -8781,7 +9045,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *     
+     *
      */
     createMany<T extends AssetCreateManyArgs>(args?: SelectSubset<T, AssetCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -8795,7 +9059,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     * 
+     *
      * // Create many Assets and only return the `id`
      * const assetWithIdOnly = await prisma.asset.createManyAndReturn({
      *   select: { id: true },
@@ -8805,7 +9069,7 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * 
+     *
      */
     createManyAndReturn<T extends AssetCreateManyAndReturnArgs>(args?: SelectSubset<T, AssetCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AssetPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
@@ -8819,7 +9083,7 @@ export namespace Prisma {
      *     // ... filter to delete one Asset
      *   }
      * })
-     * 
+     *
      */
     delete<T extends AssetDeleteArgs>(args: SelectSubset<T, AssetDeleteArgs<ExtArgs>>): Prisma__AssetClient<$Result.GetResult<Prisma.$AssetPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -8836,7 +9100,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     * 
+     *
      */
     update<T extends AssetUpdateArgs>(args: SelectSubset<T, AssetUpdateArgs<ExtArgs>>): Prisma__AssetClient<$Result.GetResult<Prisma.$AssetPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -8850,7 +9114,7 @@ export namespace Prisma {
      *     // ... provide filter here
      *   }
      * })
-     * 
+     *
      */
     deleteMany<T extends AssetDeleteManyArgs>(args?: SelectSubset<T, AssetDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -8869,7 +9133,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     * 
+     *
      */
     updateMany<T extends AssetUpdateManyArgs>(args: SelectSubset<T, AssetUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -8886,7 +9150,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     * 
+     *
      * // Update zero or more Assets and only return the `id`
      * const assetWithIdOnly = await prisma.asset.updateManyAndReturn({
      *   select: { id: true },
@@ -8899,7 +9163,7 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * 
+     *
      */
     updateManyAndReturn<T extends AssetUpdateManyAndReturnArgs>(args: SelectSubset<T, AssetUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AssetPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
@@ -8988,7 +9252,7 @@ export namespace Prisma {
      *     _all: true
      *   },
      * })
-     * 
+     *
     **/
     groupBy<
       T extends AssetGroupByArgs,
@@ -9109,7 +9373,7 @@ export namespace Prisma {
     readonly createdAt: FieldRef<"Asset", 'DateTime'>
     readonly updatedAt: FieldRef<"Asset", 'DateTime'>
   }
-    
+
 
   // Custom InputTypes
   /**
@@ -9178,31 +9442,31 @@ export namespace Prisma {
     where?: AssetWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of Assets to fetch.
      */
     orderBy?: AssetOrderByWithRelationInput | AssetOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for searching for Assets.
      */
     cursor?: AssetWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` Assets from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` Assets.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
+     *
      * Filter by unique combinations of Assets.
      */
     distinct?: AssetScalarFieldEnum | AssetScalarFieldEnum[]
@@ -9230,31 +9494,31 @@ export namespace Prisma {
     where?: AssetWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of Assets to fetch.
      */
     orderBy?: AssetOrderByWithRelationInput | AssetOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for searching for Assets.
      */
     cursor?: AssetWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` Assets from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` Assets.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
+     *
      * Filter by unique combinations of Assets.
      */
     distinct?: AssetScalarFieldEnum | AssetScalarFieldEnum[]
@@ -9282,25 +9546,25 @@ export namespace Prisma {
     where?: AssetWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of Assets to fetch.
      */
     orderBy?: AssetOrderByWithRelationInput | AssetOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for listing Assets.
      */
     cursor?: AssetWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` Assets from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` Assets.
      */
     skip?: number
@@ -9792,55 +10056,55 @@ export namespace Prisma {
     where?: PublicReportWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of PublicReports to fetch.
      */
     orderBy?: PublicReportOrderByWithRelationInput | PublicReportOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the start position
      */
     cursor?: PublicReportWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` PublicReports from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` PublicReports.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Count returned PublicReports
     **/
     _count?: true | PublicReportCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to average
     **/
     _avg?: PublicReportAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to sum
     **/
     _sum?: PublicReportSumAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to find the minimum value
     **/
     _min?: PublicReportMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to find the maximum value
     **/
     _max?: PublicReportMaxAggregateInputType
@@ -10182,13 +10446,13 @@ export namespace Prisma {
      * @example
      * // Get all PublicReports
      * const publicReports = await prisma.publicReport.findMany()
-     * 
+     *
      * // Get first 10 PublicReports
      * const publicReports = await prisma.publicReport.findMany({ take: 10 })
-     * 
+     *
      * // Only select the `id`
      * const publicReportWithIdOnly = await prisma.publicReport.findMany({ select: { id: true } })
-     * 
+     *
      */
     findMany<T extends PublicReportFindManyArgs>(args?: SelectSubset<T, PublicReportFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PublicReportPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
@@ -10202,7 +10466,7 @@ export namespace Prisma {
      *     // ... data to create a PublicReport
      *   }
      * })
-     * 
+     *
      */
     create<T extends PublicReportCreateArgs>(args: SelectSubset<T, PublicReportCreateArgs<ExtArgs>>): Prisma__PublicReportClient<$Result.GetResult<Prisma.$PublicReportPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -10216,7 +10480,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *     
+     *
      */
     createMany<T extends PublicReportCreateManyArgs>(args?: SelectSubset<T, PublicReportCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -10230,7 +10494,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     * 
+     *
      * // Create many PublicReports and only return the `id`
      * const publicReportWithIdOnly = await prisma.publicReport.createManyAndReturn({
      *   select: { id: true },
@@ -10240,7 +10504,7 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * 
+     *
      */
     createManyAndReturn<T extends PublicReportCreateManyAndReturnArgs>(args?: SelectSubset<T, PublicReportCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PublicReportPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
@@ -10254,7 +10518,7 @@ export namespace Prisma {
      *     // ... filter to delete one PublicReport
      *   }
      * })
-     * 
+     *
      */
     delete<T extends PublicReportDeleteArgs>(args: SelectSubset<T, PublicReportDeleteArgs<ExtArgs>>): Prisma__PublicReportClient<$Result.GetResult<Prisma.$PublicReportPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -10271,7 +10535,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     * 
+     *
      */
     update<T extends PublicReportUpdateArgs>(args: SelectSubset<T, PublicReportUpdateArgs<ExtArgs>>): Prisma__PublicReportClient<$Result.GetResult<Prisma.$PublicReportPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -10285,7 +10549,7 @@ export namespace Prisma {
      *     // ... provide filter here
      *   }
      * })
-     * 
+     *
      */
     deleteMany<T extends PublicReportDeleteManyArgs>(args?: SelectSubset<T, PublicReportDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -10304,7 +10568,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     * 
+     *
      */
     updateMany<T extends PublicReportUpdateManyArgs>(args: SelectSubset<T, PublicReportUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -10321,7 +10585,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     * 
+     *
      * // Update zero or more PublicReports and only return the `id`
      * const publicReportWithIdOnly = await prisma.publicReport.updateManyAndReturn({
      *   select: { id: true },
@@ -10334,7 +10598,7 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * 
+     *
      */
     updateManyAndReturn<T extends PublicReportUpdateManyAndReturnArgs>(args: SelectSubset<T, PublicReportUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PublicReportPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
@@ -10423,7 +10687,7 @@ export namespace Prisma {
      *     _all: true
      *   },
      * })
-     * 
+     *
     **/
     groupBy<
       T extends PublicReportGroupByArgs,
@@ -10557,7 +10821,7 @@ export namespace Prisma {
     readonly createdAt: FieldRef<"PublicReport", 'DateTime'>
     readonly updatedAt: FieldRef<"PublicReport", 'DateTime'>
   }
-    
+
 
   // Custom InputTypes
   /**
@@ -10626,31 +10890,31 @@ export namespace Prisma {
     where?: PublicReportWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of PublicReports to fetch.
      */
     orderBy?: PublicReportOrderByWithRelationInput | PublicReportOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for searching for PublicReports.
      */
     cursor?: PublicReportWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` PublicReports from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` PublicReports.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
+     *
      * Filter by unique combinations of PublicReports.
      */
     distinct?: PublicReportScalarFieldEnum | PublicReportScalarFieldEnum[]
@@ -10678,31 +10942,31 @@ export namespace Prisma {
     where?: PublicReportWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of PublicReports to fetch.
      */
     orderBy?: PublicReportOrderByWithRelationInput | PublicReportOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for searching for PublicReports.
      */
     cursor?: PublicReportWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` PublicReports from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` PublicReports.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
+     *
      * Filter by unique combinations of PublicReports.
      */
     distinct?: PublicReportScalarFieldEnum | PublicReportScalarFieldEnum[]
@@ -10730,25 +10994,25 @@ export namespace Prisma {
     where?: PublicReportWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of PublicReports to fetch.
      */
     orderBy?: PublicReportOrderByWithRelationInput | PublicReportOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for listing PublicReports.
      */
     cursor?: PublicReportWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` PublicReports from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` PublicReports.
      */
     skip?: number
@@ -11224,55 +11488,55 @@ export namespace Prisma {
     where?: PublicReportTriageAnalysisWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of PublicReportTriageAnalyses to fetch.
      */
     orderBy?: PublicReportTriageAnalysisOrderByWithRelationInput | PublicReportTriageAnalysisOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the start position
      */
     cursor?: PublicReportTriageAnalysisWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` PublicReportTriageAnalyses from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` PublicReportTriageAnalyses.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Count returned PublicReportTriageAnalyses
     **/
     _count?: true | PublicReportTriageAnalysisCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to average
     **/
     _avg?: PublicReportTriageAnalysisAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to sum
     **/
     _sum?: PublicReportTriageAnalysisSumAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to find the minimum value
     **/
     _min?: PublicReportTriageAnalysisMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to find the maximum value
     **/
     _max?: PublicReportTriageAnalysisMaxAggregateInputType
@@ -11522,13 +11786,13 @@ export namespace Prisma {
      * @example
      * // Get all PublicReportTriageAnalyses
      * const publicReportTriageAnalyses = await prisma.publicReportTriageAnalysis.findMany()
-     * 
+     *
      * // Get first 10 PublicReportTriageAnalyses
      * const publicReportTriageAnalyses = await prisma.publicReportTriageAnalysis.findMany({ take: 10 })
-     * 
+     *
      * // Only select the `id`
      * const publicReportTriageAnalysisWithIdOnly = await prisma.publicReportTriageAnalysis.findMany({ select: { id: true } })
-     * 
+     *
      */
     findMany<T extends PublicReportTriageAnalysisFindManyArgs>(args?: SelectSubset<T, PublicReportTriageAnalysisFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PublicReportTriageAnalysisPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
@@ -11542,7 +11806,7 @@ export namespace Prisma {
      *     // ... data to create a PublicReportTriageAnalysis
      *   }
      * })
-     * 
+     *
      */
     create<T extends PublicReportTriageAnalysisCreateArgs>(args: SelectSubset<T, PublicReportTriageAnalysisCreateArgs<ExtArgs>>): Prisma__PublicReportTriageAnalysisClient<$Result.GetResult<Prisma.$PublicReportTriageAnalysisPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -11556,7 +11820,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *     
+     *
      */
     createMany<T extends PublicReportTriageAnalysisCreateManyArgs>(args?: SelectSubset<T, PublicReportTriageAnalysisCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -11570,7 +11834,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     * 
+     *
      * // Create many PublicReportTriageAnalyses and only return the `id`
      * const publicReportTriageAnalysisWithIdOnly = await prisma.publicReportTriageAnalysis.createManyAndReturn({
      *   select: { id: true },
@@ -11580,7 +11844,7 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * 
+     *
      */
     createManyAndReturn<T extends PublicReportTriageAnalysisCreateManyAndReturnArgs>(args?: SelectSubset<T, PublicReportTriageAnalysisCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PublicReportTriageAnalysisPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
@@ -11594,7 +11858,7 @@ export namespace Prisma {
      *     // ... filter to delete one PublicReportTriageAnalysis
      *   }
      * })
-     * 
+     *
      */
     delete<T extends PublicReportTriageAnalysisDeleteArgs>(args: SelectSubset<T, PublicReportTriageAnalysisDeleteArgs<ExtArgs>>): Prisma__PublicReportTriageAnalysisClient<$Result.GetResult<Prisma.$PublicReportTriageAnalysisPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -11611,7 +11875,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     * 
+     *
      */
     update<T extends PublicReportTriageAnalysisUpdateArgs>(args: SelectSubset<T, PublicReportTriageAnalysisUpdateArgs<ExtArgs>>): Prisma__PublicReportTriageAnalysisClient<$Result.GetResult<Prisma.$PublicReportTriageAnalysisPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -11625,7 +11889,7 @@ export namespace Prisma {
      *     // ... provide filter here
      *   }
      * })
-     * 
+     *
      */
     deleteMany<T extends PublicReportTriageAnalysisDeleteManyArgs>(args?: SelectSubset<T, PublicReportTriageAnalysisDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -11644,7 +11908,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     * 
+     *
      */
     updateMany<T extends PublicReportTriageAnalysisUpdateManyArgs>(args: SelectSubset<T, PublicReportTriageAnalysisUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -11661,7 +11925,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     * 
+     *
      * // Update zero or more PublicReportTriageAnalyses and only return the `id`
      * const publicReportTriageAnalysisWithIdOnly = await prisma.publicReportTriageAnalysis.updateManyAndReturn({
      *   select: { id: true },
@@ -11674,7 +11938,7 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * 
+     *
      */
     updateManyAndReturn<T extends PublicReportTriageAnalysisUpdateManyAndReturnArgs>(args: SelectSubset<T, PublicReportTriageAnalysisUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PublicReportTriageAnalysisPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
@@ -11763,7 +12027,7 @@ export namespace Prisma {
      *     _all: true
      *   },
      * })
-     * 
+     *
     **/
     groupBy<
       T extends PublicReportTriageAnalysisGroupByArgs,
@@ -11882,7 +12146,7 @@ export namespace Prisma {
     readonly createdById: FieldRef<"PublicReportTriageAnalysis", 'String'>
     readonly createdAt: FieldRef<"PublicReportTriageAnalysis", 'DateTime'>
   }
-    
+
 
   // Custom InputTypes
   /**
@@ -11951,31 +12215,31 @@ export namespace Prisma {
     where?: PublicReportTriageAnalysisWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of PublicReportTriageAnalyses to fetch.
      */
     orderBy?: PublicReportTriageAnalysisOrderByWithRelationInput | PublicReportTriageAnalysisOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for searching for PublicReportTriageAnalyses.
      */
     cursor?: PublicReportTriageAnalysisWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` PublicReportTriageAnalyses from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` PublicReportTriageAnalyses.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
+     *
      * Filter by unique combinations of PublicReportTriageAnalyses.
      */
     distinct?: PublicReportTriageAnalysisScalarFieldEnum | PublicReportTriageAnalysisScalarFieldEnum[]
@@ -12003,31 +12267,31 @@ export namespace Prisma {
     where?: PublicReportTriageAnalysisWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of PublicReportTriageAnalyses to fetch.
      */
     orderBy?: PublicReportTriageAnalysisOrderByWithRelationInput | PublicReportTriageAnalysisOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for searching for PublicReportTriageAnalyses.
      */
     cursor?: PublicReportTriageAnalysisWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` PublicReportTriageAnalyses from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` PublicReportTriageAnalyses.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
+     *
      * Filter by unique combinations of PublicReportTriageAnalyses.
      */
     distinct?: PublicReportTriageAnalysisScalarFieldEnum | PublicReportTriageAnalysisScalarFieldEnum[]
@@ -12055,25 +12319,25 @@ export namespace Prisma {
     where?: PublicReportTriageAnalysisWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of PublicReportTriageAnalyses to fetch.
      */
     orderBy?: PublicReportTriageAnalysisOrderByWithRelationInput | PublicReportTriageAnalysisOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for listing PublicReportTriageAnalyses.
      */
     cursor?: PublicReportTriageAnalysisWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` PublicReportTriageAnalyses from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` PublicReportTriageAnalyses.
      */
     skip?: number
@@ -12478,55 +12742,55 @@ export namespace Prisma {
     where?: PolicyDocumentWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of PolicyDocuments to fetch.
      */
     orderBy?: PolicyDocumentOrderByWithRelationInput | PolicyDocumentOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the start position
      */
     cursor?: PolicyDocumentWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` PolicyDocuments from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` PolicyDocuments.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Count returned PolicyDocuments
     **/
     _count?: true | PolicyDocumentCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to average
     **/
     _avg?: PolicyDocumentAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to sum
     **/
     _sum?: PolicyDocumentSumAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to find the minimum value
     **/
     _min?: PolicyDocumentMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to find the maximum value
     **/
     _max?: PolicyDocumentMaxAggregateInputType
@@ -12827,13 +13091,13 @@ export namespace Prisma {
      * @example
      * // Get all PolicyDocuments
      * const policyDocuments = await prisma.policyDocument.findMany()
-     * 
+     *
      * // Get first 10 PolicyDocuments
      * const policyDocuments = await prisma.policyDocument.findMany({ take: 10 })
-     * 
+     *
      * // Only select the `id`
      * const policyDocumentWithIdOnly = await prisma.policyDocument.findMany({ select: { id: true } })
-     * 
+     *
      */
     findMany<T extends PolicyDocumentFindManyArgs>(args?: SelectSubset<T, PolicyDocumentFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PolicyDocumentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
@@ -12847,7 +13111,7 @@ export namespace Prisma {
      *     // ... data to create a PolicyDocument
      *   }
      * })
-     * 
+     *
      */
     create<T extends PolicyDocumentCreateArgs>(args: SelectSubset<T, PolicyDocumentCreateArgs<ExtArgs>>): Prisma__PolicyDocumentClient<$Result.GetResult<Prisma.$PolicyDocumentPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -12861,7 +13125,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *     
+     *
      */
     createMany<T extends PolicyDocumentCreateManyArgs>(args?: SelectSubset<T, PolicyDocumentCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -12875,7 +13139,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     * 
+     *
      * // Create many PolicyDocuments and only return the `id`
      * const policyDocumentWithIdOnly = await prisma.policyDocument.createManyAndReturn({
      *   select: { id: true },
@@ -12885,7 +13149,7 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * 
+     *
      */
     createManyAndReturn<T extends PolicyDocumentCreateManyAndReturnArgs>(args?: SelectSubset<T, PolicyDocumentCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PolicyDocumentPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
@@ -12899,7 +13163,7 @@ export namespace Prisma {
      *     // ... filter to delete one PolicyDocument
      *   }
      * })
-     * 
+     *
      */
     delete<T extends PolicyDocumentDeleteArgs>(args: SelectSubset<T, PolicyDocumentDeleteArgs<ExtArgs>>): Prisma__PolicyDocumentClient<$Result.GetResult<Prisma.$PolicyDocumentPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -12916,7 +13180,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     * 
+     *
      */
     update<T extends PolicyDocumentUpdateArgs>(args: SelectSubset<T, PolicyDocumentUpdateArgs<ExtArgs>>): Prisma__PolicyDocumentClient<$Result.GetResult<Prisma.$PolicyDocumentPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -12930,7 +13194,7 @@ export namespace Prisma {
      *     // ... provide filter here
      *   }
      * })
-     * 
+     *
      */
     deleteMany<T extends PolicyDocumentDeleteManyArgs>(args?: SelectSubset<T, PolicyDocumentDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -12949,7 +13213,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     * 
+     *
      */
     updateMany<T extends PolicyDocumentUpdateManyArgs>(args: SelectSubset<T, PolicyDocumentUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -12966,7 +13230,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     * 
+     *
      * // Update zero or more PolicyDocuments and only return the `id`
      * const policyDocumentWithIdOnly = await prisma.policyDocument.updateManyAndReturn({
      *   select: { id: true },
@@ -12979,7 +13243,7 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * 
+     *
      */
     updateManyAndReturn<T extends PolicyDocumentUpdateManyAndReturnArgs>(args: SelectSubset<T, PolicyDocumentUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PolicyDocumentPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
@@ -13068,7 +13332,7 @@ export namespace Prisma {
      *     _all: true
      *   },
      * })
-     * 
+     *
     **/
     groupBy<
       T extends PolicyDocumentGroupByArgs,
@@ -13196,7 +13460,7 @@ export namespace Prisma {
     readonly createdAt: FieldRef<"PolicyDocument", 'DateTime'>
     readonly updatedAt: FieldRef<"PolicyDocument", 'DateTime'>
   }
-    
+
 
   // Custom InputTypes
   /**
@@ -13265,31 +13529,31 @@ export namespace Prisma {
     where?: PolicyDocumentWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of PolicyDocuments to fetch.
      */
     orderBy?: PolicyDocumentOrderByWithRelationInput | PolicyDocumentOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for searching for PolicyDocuments.
      */
     cursor?: PolicyDocumentWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` PolicyDocuments from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` PolicyDocuments.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
+     *
      * Filter by unique combinations of PolicyDocuments.
      */
     distinct?: PolicyDocumentScalarFieldEnum | PolicyDocumentScalarFieldEnum[]
@@ -13317,31 +13581,31 @@ export namespace Prisma {
     where?: PolicyDocumentWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of PolicyDocuments to fetch.
      */
     orderBy?: PolicyDocumentOrderByWithRelationInput | PolicyDocumentOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for searching for PolicyDocuments.
      */
     cursor?: PolicyDocumentWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` PolicyDocuments from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` PolicyDocuments.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
+     *
      * Filter by unique combinations of PolicyDocuments.
      */
     distinct?: PolicyDocumentScalarFieldEnum | PolicyDocumentScalarFieldEnum[]
@@ -13369,25 +13633,25 @@ export namespace Prisma {
     where?: PolicyDocumentWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of PolicyDocuments to fetch.
      */
     orderBy?: PolicyDocumentOrderByWithRelationInput | PolicyDocumentOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for listing PolicyDocuments.
      */
     cursor?: PolicyDocumentWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` PolicyDocuments from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` PolicyDocuments.
      */
     skip?: number
@@ -13886,55 +14150,55 @@ export namespace Prisma {
     where?: ApprovedActionVersionWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of ApprovedActionVersions to fetch.
      */
     orderBy?: ApprovedActionVersionOrderByWithRelationInput | ApprovedActionVersionOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the start position
      */
     cursor?: ApprovedActionVersionWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` ApprovedActionVersions from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` ApprovedActionVersions.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Count returned ApprovedActionVersions
     **/
     _count?: true | ApprovedActionVersionCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to average
     **/
     _avg?: ApprovedActionVersionAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to sum
     **/
     _sum?: ApprovedActionVersionSumAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to find the minimum value
     **/
     _min?: ApprovedActionVersionMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to find the maximum value
     **/
     _max?: ApprovedActionVersionMaxAggregateInputType
@@ -14257,13 +14521,13 @@ export namespace Prisma {
      * @example
      * // Get all ApprovedActionVersions
      * const approvedActionVersions = await prisma.approvedActionVersion.findMany()
-     * 
+     *
      * // Get first 10 ApprovedActionVersions
      * const approvedActionVersions = await prisma.approvedActionVersion.findMany({ take: 10 })
-     * 
+     *
      * // Only select the `id`
      * const approvedActionVersionWithIdOnly = await prisma.approvedActionVersion.findMany({ select: { id: true } })
-     * 
+     *
      */
     findMany<T extends ApprovedActionVersionFindManyArgs>(args?: SelectSubset<T, ApprovedActionVersionFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ApprovedActionVersionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
@@ -14277,7 +14541,7 @@ export namespace Prisma {
      *     // ... data to create a ApprovedActionVersion
      *   }
      * })
-     * 
+     *
      */
     create<T extends ApprovedActionVersionCreateArgs>(args: SelectSubset<T, ApprovedActionVersionCreateArgs<ExtArgs>>): Prisma__ApprovedActionVersionClient<$Result.GetResult<Prisma.$ApprovedActionVersionPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -14291,7 +14555,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *     
+     *
      */
     createMany<T extends ApprovedActionVersionCreateManyArgs>(args?: SelectSubset<T, ApprovedActionVersionCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -14305,7 +14569,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     * 
+     *
      * // Create many ApprovedActionVersions and only return the `id`
      * const approvedActionVersionWithIdOnly = await prisma.approvedActionVersion.createManyAndReturn({
      *   select: { id: true },
@@ -14315,7 +14579,7 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * 
+     *
      */
     createManyAndReturn<T extends ApprovedActionVersionCreateManyAndReturnArgs>(args?: SelectSubset<T, ApprovedActionVersionCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ApprovedActionVersionPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
@@ -14329,7 +14593,7 @@ export namespace Prisma {
      *     // ... filter to delete one ApprovedActionVersion
      *   }
      * })
-     * 
+     *
      */
     delete<T extends ApprovedActionVersionDeleteArgs>(args: SelectSubset<T, ApprovedActionVersionDeleteArgs<ExtArgs>>): Prisma__ApprovedActionVersionClient<$Result.GetResult<Prisma.$ApprovedActionVersionPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -14346,7 +14610,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     * 
+     *
      */
     update<T extends ApprovedActionVersionUpdateArgs>(args: SelectSubset<T, ApprovedActionVersionUpdateArgs<ExtArgs>>): Prisma__ApprovedActionVersionClient<$Result.GetResult<Prisma.$ApprovedActionVersionPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -14360,7 +14624,7 @@ export namespace Prisma {
      *     // ... provide filter here
      *   }
      * })
-     * 
+     *
      */
     deleteMany<T extends ApprovedActionVersionDeleteManyArgs>(args?: SelectSubset<T, ApprovedActionVersionDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -14379,7 +14643,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     * 
+     *
      */
     updateMany<T extends ApprovedActionVersionUpdateManyArgs>(args: SelectSubset<T, ApprovedActionVersionUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -14396,7 +14660,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     * 
+     *
      * // Update zero or more ApprovedActionVersions and only return the `id`
      * const approvedActionVersionWithIdOnly = await prisma.approvedActionVersion.updateManyAndReturn({
      *   select: { id: true },
@@ -14409,7 +14673,7 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * 
+     *
      */
     updateManyAndReturn<T extends ApprovedActionVersionUpdateManyAndReturnArgs>(args: SelectSubset<T, ApprovedActionVersionUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ApprovedActionVersionPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
@@ -14498,7 +14762,7 @@ export namespace Prisma {
      *     _all: true
      *   },
      * })
-     * 
+     *
     **/
     groupBy<
       T extends ApprovedActionVersionGroupByArgs,
@@ -14630,7 +14894,7 @@ export namespace Prisma {
     readonly createdAt: FieldRef<"ApprovedActionVersion", 'DateTime'>
     readonly updatedAt: FieldRef<"ApprovedActionVersion", 'DateTime'>
   }
-    
+
 
   // Custom InputTypes
   /**
@@ -14699,31 +14963,31 @@ export namespace Prisma {
     where?: ApprovedActionVersionWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of ApprovedActionVersions to fetch.
      */
     orderBy?: ApprovedActionVersionOrderByWithRelationInput | ApprovedActionVersionOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for searching for ApprovedActionVersions.
      */
     cursor?: ApprovedActionVersionWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` ApprovedActionVersions from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` ApprovedActionVersions.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
+     *
      * Filter by unique combinations of ApprovedActionVersions.
      */
     distinct?: ApprovedActionVersionScalarFieldEnum | ApprovedActionVersionScalarFieldEnum[]
@@ -14751,31 +15015,31 @@ export namespace Prisma {
     where?: ApprovedActionVersionWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of ApprovedActionVersions to fetch.
      */
     orderBy?: ApprovedActionVersionOrderByWithRelationInput | ApprovedActionVersionOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for searching for ApprovedActionVersions.
      */
     cursor?: ApprovedActionVersionWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` ApprovedActionVersions from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` ApprovedActionVersions.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
+     *
      * Filter by unique combinations of ApprovedActionVersions.
      */
     distinct?: ApprovedActionVersionScalarFieldEnum | ApprovedActionVersionScalarFieldEnum[]
@@ -14803,25 +15067,25 @@ export namespace Prisma {
     where?: ApprovedActionVersionWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of ApprovedActionVersions to fetch.
      */
     orderBy?: ApprovedActionVersionOrderByWithRelationInput | ApprovedActionVersionOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for listing ApprovedActionVersions.
      */
     cursor?: ApprovedActionVersionWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` ApprovedActionVersions from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` ApprovedActionVersions.
      */
     skip?: number
@@ -15343,55 +15607,55 @@ export namespace Prisma {
     where?: GovernedExecutionTemplateWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of GovernedExecutionTemplates to fetch.
      */
     orderBy?: GovernedExecutionTemplateOrderByWithRelationInput | GovernedExecutionTemplateOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the start position
      */
     cursor?: GovernedExecutionTemplateWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` GovernedExecutionTemplates from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` GovernedExecutionTemplates.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Count returned GovernedExecutionTemplates
     **/
     _count?: true | GovernedExecutionTemplateCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to average
     **/
     _avg?: GovernedExecutionTemplateAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to sum
     **/
     _sum?: GovernedExecutionTemplateSumAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to find the minimum value
     **/
     _min?: GovernedExecutionTemplateMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to find the maximum value
     **/
     _max?: GovernedExecutionTemplateMaxAggregateInputType
@@ -15687,13 +15951,13 @@ export namespace Prisma {
      * @example
      * // Get all GovernedExecutionTemplates
      * const governedExecutionTemplates = await prisma.governedExecutionTemplate.findMany()
-     * 
+     *
      * // Get first 10 GovernedExecutionTemplates
      * const governedExecutionTemplates = await prisma.governedExecutionTemplate.findMany({ take: 10 })
-     * 
+     *
      * // Only select the `id`
      * const governedExecutionTemplateWithIdOnly = await prisma.governedExecutionTemplate.findMany({ select: { id: true } })
-     * 
+     *
      */
     findMany<T extends GovernedExecutionTemplateFindManyArgs>(args?: SelectSubset<T, GovernedExecutionTemplateFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GovernedExecutionTemplatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
@@ -15707,7 +15971,7 @@ export namespace Prisma {
      *     // ... data to create a GovernedExecutionTemplate
      *   }
      * })
-     * 
+     *
      */
     create<T extends GovernedExecutionTemplateCreateArgs>(args: SelectSubset<T, GovernedExecutionTemplateCreateArgs<ExtArgs>>): Prisma__GovernedExecutionTemplateClient<$Result.GetResult<Prisma.$GovernedExecutionTemplatePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -15721,7 +15985,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *     
+     *
      */
     createMany<T extends GovernedExecutionTemplateCreateManyArgs>(args?: SelectSubset<T, GovernedExecutionTemplateCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -15735,7 +15999,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     * 
+     *
      * // Create many GovernedExecutionTemplates and only return the `id`
      * const governedExecutionTemplateWithIdOnly = await prisma.governedExecutionTemplate.createManyAndReturn({
      *   select: { id: true },
@@ -15745,7 +16009,7 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * 
+     *
      */
     createManyAndReturn<T extends GovernedExecutionTemplateCreateManyAndReturnArgs>(args?: SelectSubset<T, GovernedExecutionTemplateCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GovernedExecutionTemplatePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
@@ -15759,7 +16023,7 @@ export namespace Prisma {
      *     // ... filter to delete one GovernedExecutionTemplate
      *   }
      * })
-     * 
+     *
      */
     delete<T extends GovernedExecutionTemplateDeleteArgs>(args: SelectSubset<T, GovernedExecutionTemplateDeleteArgs<ExtArgs>>): Prisma__GovernedExecutionTemplateClient<$Result.GetResult<Prisma.$GovernedExecutionTemplatePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -15776,7 +16040,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     * 
+     *
      */
     update<T extends GovernedExecutionTemplateUpdateArgs>(args: SelectSubset<T, GovernedExecutionTemplateUpdateArgs<ExtArgs>>): Prisma__GovernedExecutionTemplateClient<$Result.GetResult<Prisma.$GovernedExecutionTemplatePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -15790,7 +16054,7 @@ export namespace Prisma {
      *     // ... provide filter here
      *   }
      * })
-     * 
+     *
      */
     deleteMany<T extends GovernedExecutionTemplateDeleteManyArgs>(args?: SelectSubset<T, GovernedExecutionTemplateDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -15809,7 +16073,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     * 
+     *
      */
     updateMany<T extends GovernedExecutionTemplateUpdateManyArgs>(args: SelectSubset<T, GovernedExecutionTemplateUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -15826,7 +16090,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     * 
+     *
      * // Update zero or more GovernedExecutionTemplates and only return the `id`
      * const governedExecutionTemplateWithIdOnly = await prisma.governedExecutionTemplate.updateManyAndReturn({
      *   select: { id: true },
@@ -15839,7 +16103,7 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * 
+     *
      */
     updateManyAndReturn<T extends GovernedExecutionTemplateUpdateManyAndReturnArgs>(args: SelectSubset<T, GovernedExecutionTemplateUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GovernedExecutionTemplatePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
@@ -15928,7 +16192,7 @@ export namespace Prisma {
      *     _all: true
      *   },
      * })
-     * 
+     *
     **/
     groupBy<
       T extends GovernedExecutionTemplateGroupByArgs,
@@ -16055,7 +16319,7 @@ export namespace Prisma {
     readonly createdAt: FieldRef<"GovernedExecutionTemplate", 'DateTime'>
     readonly updatedAt: FieldRef<"GovernedExecutionTemplate", 'DateTime'>
   }
-    
+
 
   // Custom InputTypes
   /**
@@ -16124,31 +16388,31 @@ export namespace Prisma {
     where?: GovernedExecutionTemplateWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of GovernedExecutionTemplates to fetch.
      */
     orderBy?: GovernedExecutionTemplateOrderByWithRelationInput | GovernedExecutionTemplateOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for searching for GovernedExecutionTemplates.
      */
     cursor?: GovernedExecutionTemplateWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` GovernedExecutionTemplates from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` GovernedExecutionTemplates.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
+     *
      * Filter by unique combinations of GovernedExecutionTemplates.
      */
     distinct?: GovernedExecutionTemplateScalarFieldEnum | GovernedExecutionTemplateScalarFieldEnum[]
@@ -16176,31 +16440,31 @@ export namespace Prisma {
     where?: GovernedExecutionTemplateWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of GovernedExecutionTemplates to fetch.
      */
     orderBy?: GovernedExecutionTemplateOrderByWithRelationInput | GovernedExecutionTemplateOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for searching for GovernedExecutionTemplates.
      */
     cursor?: GovernedExecutionTemplateWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` GovernedExecutionTemplates from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` GovernedExecutionTemplates.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
+     *
      * Filter by unique combinations of GovernedExecutionTemplates.
      */
     distinct?: GovernedExecutionTemplateScalarFieldEnum | GovernedExecutionTemplateScalarFieldEnum[]
@@ -16228,25 +16492,25 @@ export namespace Prisma {
     where?: GovernedExecutionTemplateWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of GovernedExecutionTemplates to fetch.
      */
     orderBy?: GovernedExecutionTemplateOrderByWithRelationInput | GovernedExecutionTemplateOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for listing GovernedExecutionTemplates.
      */
     cursor?: GovernedExecutionTemplateWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` GovernedExecutionTemplates from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` GovernedExecutionTemplates.
      */
     skip?: number
@@ -16701,55 +16965,55 @@ export namespace Prisma {
     where?: GovernedExecutionTaskTemplateWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of GovernedExecutionTaskTemplates to fetch.
      */
     orderBy?: GovernedExecutionTaskTemplateOrderByWithRelationInput | GovernedExecutionTaskTemplateOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the start position
      */
     cursor?: GovernedExecutionTaskTemplateWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` GovernedExecutionTaskTemplates from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` GovernedExecutionTaskTemplates.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Count returned GovernedExecutionTaskTemplates
     **/
     _count?: true | GovernedExecutionTaskTemplateCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to average
     **/
     _avg?: GovernedExecutionTaskTemplateAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to sum
     **/
     _sum?: GovernedExecutionTaskTemplateSumAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to find the minimum value
     **/
     _min?: GovernedExecutionTaskTemplateMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to find the maximum value
     **/
     _max?: GovernedExecutionTaskTemplateMaxAggregateInputType
@@ -16990,13 +17254,13 @@ export namespace Prisma {
      * @example
      * // Get all GovernedExecutionTaskTemplates
      * const governedExecutionTaskTemplates = await prisma.governedExecutionTaskTemplate.findMany()
-     * 
+     *
      * // Get first 10 GovernedExecutionTaskTemplates
      * const governedExecutionTaskTemplates = await prisma.governedExecutionTaskTemplate.findMany({ take: 10 })
-     * 
+     *
      * // Only select the `id`
      * const governedExecutionTaskTemplateWithIdOnly = await prisma.governedExecutionTaskTemplate.findMany({ select: { id: true } })
-     * 
+     *
      */
     findMany<T extends GovernedExecutionTaskTemplateFindManyArgs>(args?: SelectSubset<T, GovernedExecutionTaskTemplateFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GovernedExecutionTaskTemplatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
@@ -17010,7 +17274,7 @@ export namespace Prisma {
      *     // ... data to create a GovernedExecutionTaskTemplate
      *   }
      * })
-     * 
+     *
      */
     create<T extends GovernedExecutionTaskTemplateCreateArgs>(args: SelectSubset<T, GovernedExecutionTaskTemplateCreateArgs<ExtArgs>>): Prisma__GovernedExecutionTaskTemplateClient<$Result.GetResult<Prisma.$GovernedExecutionTaskTemplatePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -17024,7 +17288,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *     
+     *
      */
     createMany<T extends GovernedExecutionTaskTemplateCreateManyArgs>(args?: SelectSubset<T, GovernedExecutionTaskTemplateCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -17038,7 +17302,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     * 
+     *
      * // Create many GovernedExecutionTaskTemplates and only return the `id`
      * const governedExecutionTaskTemplateWithIdOnly = await prisma.governedExecutionTaskTemplate.createManyAndReturn({
      *   select: { id: true },
@@ -17048,7 +17312,7 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * 
+     *
      */
     createManyAndReturn<T extends GovernedExecutionTaskTemplateCreateManyAndReturnArgs>(args?: SelectSubset<T, GovernedExecutionTaskTemplateCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GovernedExecutionTaskTemplatePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
@@ -17062,7 +17326,7 @@ export namespace Prisma {
      *     // ... filter to delete one GovernedExecutionTaskTemplate
      *   }
      * })
-     * 
+     *
      */
     delete<T extends GovernedExecutionTaskTemplateDeleteArgs>(args: SelectSubset<T, GovernedExecutionTaskTemplateDeleteArgs<ExtArgs>>): Prisma__GovernedExecutionTaskTemplateClient<$Result.GetResult<Prisma.$GovernedExecutionTaskTemplatePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -17079,7 +17343,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     * 
+     *
      */
     update<T extends GovernedExecutionTaskTemplateUpdateArgs>(args: SelectSubset<T, GovernedExecutionTaskTemplateUpdateArgs<ExtArgs>>): Prisma__GovernedExecutionTaskTemplateClient<$Result.GetResult<Prisma.$GovernedExecutionTaskTemplatePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -17093,7 +17357,7 @@ export namespace Prisma {
      *     // ... provide filter here
      *   }
      * })
-     * 
+     *
      */
     deleteMany<T extends GovernedExecutionTaskTemplateDeleteManyArgs>(args?: SelectSubset<T, GovernedExecutionTaskTemplateDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -17112,7 +17376,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     * 
+     *
      */
     updateMany<T extends GovernedExecutionTaskTemplateUpdateManyArgs>(args: SelectSubset<T, GovernedExecutionTaskTemplateUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -17129,7 +17393,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     * 
+     *
      * // Update zero or more GovernedExecutionTaskTemplates and only return the `id`
      * const governedExecutionTaskTemplateWithIdOnly = await prisma.governedExecutionTaskTemplate.updateManyAndReturn({
      *   select: { id: true },
@@ -17142,7 +17406,7 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * 
+     *
      */
     updateManyAndReturn<T extends GovernedExecutionTaskTemplateUpdateManyAndReturnArgs>(args: SelectSubset<T, GovernedExecutionTaskTemplateUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GovernedExecutionTaskTemplatePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
@@ -17231,7 +17495,7 @@ export namespace Prisma {
      *     _all: true
      *   },
      * })
-     * 
+     *
     **/
     groupBy<
       T extends GovernedExecutionTaskTemplateGroupByArgs,
@@ -17349,7 +17613,7 @@ export namespace Prisma {
     readonly createdAt: FieldRef<"GovernedExecutionTaskTemplate", 'DateTime'>
     readonly updatedAt: FieldRef<"GovernedExecutionTaskTemplate", 'DateTime'>
   }
-    
+
 
   // Custom InputTypes
   /**
@@ -17418,31 +17682,31 @@ export namespace Prisma {
     where?: GovernedExecutionTaskTemplateWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of GovernedExecutionTaskTemplates to fetch.
      */
     orderBy?: GovernedExecutionTaskTemplateOrderByWithRelationInput | GovernedExecutionTaskTemplateOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for searching for GovernedExecutionTaskTemplates.
      */
     cursor?: GovernedExecutionTaskTemplateWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` GovernedExecutionTaskTemplates from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` GovernedExecutionTaskTemplates.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
+     *
      * Filter by unique combinations of GovernedExecutionTaskTemplates.
      */
     distinct?: GovernedExecutionTaskTemplateScalarFieldEnum | GovernedExecutionTaskTemplateScalarFieldEnum[]
@@ -17470,31 +17734,31 @@ export namespace Prisma {
     where?: GovernedExecutionTaskTemplateWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of GovernedExecutionTaskTemplates to fetch.
      */
     orderBy?: GovernedExecutionTaskTemplateOrderByWithRelationInput | GovernedExecutionTaskTemplateOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for searching for GovernedExecutionTaskTemplates.
      */
     cursor?: GovernedExecutionTaskTemplateWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` GovernedExecutionTaskTemplates from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` GovernedExecutionTaskTemplates.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
+     *
      * Filter by unique combinations of GovernedExecutionTaskTemplates.
      */
     distinct?: GovernedExecutionTaskTemplateScalarFieldEnum | GovernedExecutionTaskTemplateScalarFieldEnum[]
@@ -17522,25 +17786,25 @@ export namespace Prisma {
     where?: GovernedExecutionTaskTemplateWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of GovernedExecutionTaskTemplates to fetch.
      */
     orderBy?: GovernedExecutionTaskTemplateOrderByWithRelationInput | GovernedExecutionTaskTemplateOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for listing GovernedExecutionTaskTemplates.
      */
     cursor?: GovernedExecutionTaskTemplateWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` GovernedExecutionTaskTemplates from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` GovernedExecutionTaskTemplates.
      */
     skip?: number
@@ -17880,43 +18144,43 @@ export namespace Prisma {
     where?: PolicyRuleWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of PolicyRules to fetch.
      */
     orderBy?: PolicyRuleOrderByWithRelationInput | PolicyRuleOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the start position
      */
     cursor?: PolicyRuleWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` PolicyRules from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` PolicyRules.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Count returned PolicyRules
     **/
     _count?: true | PolicyRuleCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to find the minimum value
     **/
     _min?: PolicyRuleMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to find the maximum value
     **/
     _max?: PolicyRuleMaxAggregateInputType
@@ -18143,13 +18407,13 @@ export namespace Prisma {
      * @example
      * // Get all PolicyRules
      * const policyRules = await prisma.policyRule.findMany()
-     * 
+     *
      * // Get first 10 PolicyRules
      * const policyRules = await prisma.policyRule.findMany({ take: 10 })
-     * 
+     *
      * // Only select the `id`
      * const policyRuleWithIdOnly = await prisma.policyRule.findMany({ select: { id: true } })
-     * 
+     *
      */
     findMany<T extends PolicyRuleFindManyArgs>(args?: SelectSubset<T, PolicyRuleFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PolicyRulePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
@@ -18163,7 +18427,7 @@ export namespace Prisma {
      *     // ... data to create a PolicyRule
      *   }
      * })
-     * 
+     *
      */
     create<T extends PolicyRuleCreateArgs>(args: SelectSubset<T, PolicyRuleCreateArgs<ExtArgs>>): Prisma__PolicyRuleClient<$Result.GetResult<Prisma.$PolicyRulePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -18177,7 +18441,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *     
+     *
      */
     createMany<T extends PolicyRuleCreateManyArgs>(args?: SelectSubset<T, PolicyRuleCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -18191,7 +18455,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     * 
+     *
      * // Create many PolicyRules and only return the `id`
      * const policyRuleWithIdOnly = await prisma.policyRule.createManyAndReturn({
      *   select: { id: true },
@@ -18201,7 +18465,7 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * 
+     *
      */
     createManyAndReturn<T extends PolicyRuleCreateManyAndReturnArgs>(args?: SelectSubset<T, PolicyRuleCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PolicyRulePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
@@ -18215,7 +18479,7 @@ export namespace Prisma {
      *     // ... filter to delete one PolicyRule
      *   }
      * })
-     * 
+     *
      */
     delete<T extends PolicyRuleDeleteArgs>(args: SelectSubset<T, PolicyRuleDeleteArgs<ExtArgs>>): Prisma__PolicyRuleClient<$Result.GetResult<Prisma.$PolicyRulePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -18232,7 +18496,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     * 
+     *
      */
     update<T extends PolicyRuleUpdateArgs>(args: SelectSubset<T, PolicyRuleUpdateArgs<ExtArgs>>): Prisma__PolicyRuleClient<$Result.GetResult<Prisma.$PolicyRulePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -18246,7 +18510,7 @@ export namespace Prisma {
      *     // ... provide filter here
      *   }
      * })
-     * 
+     *
      */
     deleteMany<T extends PolicyRuleDeleteManyArgs>(args?: SelectSubset<T, PolicyRuleDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -18265,7 +18529,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     * 
+     *
      */
     updateMany<T extends PolicyRuleUpdateManyArgs>(args: SelectSubset<T, PolicyRuleUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -18282,7 +18546,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     * 
+     *
      * // Update zero or more PolicyRules and only return the `id`
      * const policyRuleWithIdOnly = await prisma.policyRule.updateManyAndReturn({
      *   select: { id: true },
@@ -18295,7 +18559,7 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * 
+     *
      */
     updateManyAndReturn<T extends PolicyRuleUpdateManyAndReturnArgs>(args: SelectSubset<T, PolicyRuleUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PolicyRulePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
@@ -18384,7 +18648,7 @@ export namespace Prisma {
      *     _all: true
      *   },
      * })
-     * 
+     *
     **/
     groupBy<
       T extends PolicyRuleGroupByArgs,
@@ -18500,7 +18764,7 @@ export namespace Prisma {
     readonly createdAt: FieldRef<"PolicyRule", 'DateTime'>
     readonly updatedAt: FieldRef<"PolicyRule", 'DateTime'>
   }
-    
+
 
   // Custom InputTypes
   /**
@@ -18569,31 +18833,31 @@ export namespace Prisma {
     where?: PolicyRuleWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of PolicyRules to fetch.
      */
     orderBy?: PolicyRuleOrderByWithRelationInput | PolicyRuleOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for searching for PolicyRules.
      */
     cursor?: PolicyRuleWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` PolicyRules from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` PolicyRules.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
+     *
      * Filter by unique combinations of PolicyRules.
      */
     distinct?: PolicyRuleScalarFieldEnum | PolicyRuleScalarFieldEnum[]
@@ -18621,31 +18885,31 @@ export namespace Prisma {
     where?: PolicyRuleWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of PolicyRules to fetch.
      */
     orderBy?: PolicyRuleOrderByWithRelationInput | PolicyRuleOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for searching for PolicyRules.
      */
     cursor?: PolicyRuleWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` PolicyRules from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` PolicyRules.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
+     *
      * Filter by unique combinations of PolicyRules.
      */
     distinct?: PolicyRuleScalarFieldEnum | PolicyRuleScalarFieldEnum[]
@@ -18673,25 +18937,25 @@ export namespace Prisma {
     where?: PolicyRuleWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of PolicyRules to fetch.
      */
     orderBy?: PolicyRuleOrderByWithRelationInput | PolicyRuleOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for listing PolicyRules.
      */
     cursor?: PolicyRuleWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` PolicyRules from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` PolicyRules.
      */
     skip?: number
@@ -19023,43 +19287,43 @@ export namespace Prisma {
     where?: CaseWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of Cases to fetch.
      */
     orderBy?: CaseOrderByWithRelationInput | CaseOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the start position
      */
     cursor?: CaseWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` Cases from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` Cases.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Count returned Cases
     **/
     _count?: true | CaseCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to find the minimum value
     **/
     _min?: CaseMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to find the maximum value
     **/
     _max?: CaseMaxAggregateInputType
@@ -19142,6 +19406,8 @@ export namespace Prisma {
     closure?: boolean | Case$closureArgs<ExtArgs>
     sourcePublicReport?: boolean | Case$sourcePublicReportArgs<ExtArgs>
     decisionPackages?: boolean | Case$decisionPackagesArgs<ExtArgs>
+    intelligenceAssessments?: boolean | Case$intelligenceAssessmentsArgs<ExtArgs>
+    intelligenceReconciliations?: boolean | Case$intelligenceReconciliationsArgs<ExtArgs>
     _count?: boolean | CaseCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["case"]>
 
@@ -19203,6 +19469,8 @@ export namespace Prisma {
     closure?: boolean | Case$closureArgs<ExtArgs>
     sourcePublicReport?: boolean | Case$sourcePublicReportArgs<ExtArgs>
     decisionPackages?: boolean | Case$decisionPackagesArgs<ExtArgs>
+    intelligenceAssessments?: boolean | Case$intelligenceAssessmentsArgs<ExtArgs>
+    intelligenceReconciliations?: boolean | Case$intelligenceReconciliationsArgs<ExtArgs>
     _count?: boolean | CaseCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type CaseIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -19224,6 +19492,8 @@ export namespace Prisma {
       closure: Prisma.$CaseClosurePayload<ExtArgs> | null
       sourcePublicReport: Prisma.$PublicReportPayload<ExtArgs> | null
       decisionPackages: Prisma.$DecisionPackagePayload<ExtArgs>[]
+      intelligenceAssessments: Prisma.$InfrastructureIntelligenceAssessmentPayload<ExtArgs>[]
+      intelligenceReconciliations: Prisma.$InfrastructureIntelligenceReconciliationPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -19317,13 +19587,13 @@ export namespace Prisma {
      * @example
      * // Get all Cases
      * const cases = await prisma.case.findMany()
-     * 
+     *
      * // Get first 10 Cases
      * const cases = await prisma.case.findMany({ take: 10 })
-     * 
+     *
      * // Only select the `id`
      * const caseWithIdOnly = await prisma.case.findMany({ select: { id: true } })
-     * 
+     *
      */
     findMany<T extends CaseFindManyArgs>(args?: SelectSubset<T, CaseFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CasePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
@@ -19337,7 +19607,7 @@ export namespace Prisma {
      *     // ... data to create a Case
      *   }
      * })
-     * 
+     *
      */
     create<T extends CaseCreateArgs>(args: SelectSubset<T, CaseCreateArgs<ExtArgs>>): Prisma__CaseClient<$Result.GetResult<Prisma.$CasePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -19351,7 +19621,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *     
+     *
      */
     createMany<T extends CaseCreateManyArgs>(args?: SelectSubset<T, CaseCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -19365,7 +19635,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     * 
+     *
      * // Create many Cases and only return the `id`
      * const caseWithIdOnly = await prisma.case.createManyAndReturn({
      *   select: { id: true },
@@ -19375,7 +19645,7 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * 
+     *
      */
     createManyAndReturn<T extends CaseCreateManyAndReturnArgs>(args?: SelectSubset<T, CaseCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CasePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
@@ -19389,7 +19659,7 @@ export namespace Prisma {
      *     // ... filter to delete one Case
      *   }
      * })
-     * 
+     *
      */
     delete<T extends CaseDeleteArgs>(args: SelectSubset<T, CaseDeleteArgs<ExtArgs>>): Prisma__CaseClient<$Result.GetResult<Prisma.$CasePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -19406,7 +19676,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     * 
+     *
      */
     update<T extends CaseUpdateArgs>(args: SelectSubset<T, CaseUpdateArgs<ExtArgs>>): Prisma__CaseClient<$Result.GetResult<Prisma.$CasePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -19420,7 +19690,7 @@ export namespace Prisma {
      *     // ... provide filter here
      *   }
      * })
-     * 
+     *
      */
     deleteMany<T extends CaseDeleteManyArgs>(args?: SelectSubset<T, CaseDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -19439,7 +19709,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     * 
+     *
      */
     updateMany<T extends CaseUpdateManyArgs>(args: SelectSubset<T, CaseUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -19456,7 +19726,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     * 
+     *
      * // Update zero or more Cases and only return the `id`
      * const caseWithIdOnly = await prisma.case.updateManyAndReturn({
      *   select: { id: true },
@@ -19469,7 +19739,7 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * 
+     *
      */
     updateManyAndReturn<T extends CaseUpdateManyAndReturnArgs>(args: SelectSubset<T, CaseUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CasePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
@@ -19558,7 +19828,7 @@ export namespace Prisma {
      *     _all: true
      *   },
      * })
-     * 
+     *
     **/
     groupBy<
       T extends CaseGroupByArgs,
@@ -19641,6 +19911,8 @@ export namespace Prisma {
     closure<T extends Case$closureArgs<ExtArgs> = {}>(args?: Subset<T, Case$closureArgs<ExtArgs>>): Prisma__CaseClosureClient<$Result.GetResult<Prisma.$CaseClosurePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     sourcePublicReport<T extends Case$sourcePublicReportArgs<ExtArgs> = {}>(args?: Subset<T, Case$sourcePublicReportArgs<ExtArgs>>): Prisma__PublicReportClient<$Result.GetResult<Prisma.$PublicReportPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     decisionPackages<T extends Case$decisionPackagesArgs<ExtArgs> = {}>(args?: Subset<T, Case$decisionPackagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DecisionPackagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    intelligenceAssessments<T extends Case$intelligenceAssessmentsArgs<ExtArgs> = {}>(args?: Subset<T, Case$intelligenceAssessmentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InfrastructureIntelligenceAssessmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    intelligenceReconciliations<T extends Case$intelligenceReconciliationsArgs<ExtArgs> = {}>(args?: Subset<T, Case$intelligenceReconciliationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InfrastructureIntelligenceReconciliationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -19683,7 +19955,7 @@ export namespace Prisma {
     readonly updatedAt: FieldRef<"Case", 'DateTime'>
     readonly closedAt: FieldRef<"Case", 'DateTime'>
   }
-    
+
 
   // Custom InputTypes
   /**
@@ -19752,31 +20024,31 @@ export namespace Prisma {
     where?: CaseWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of Cases to fetch.
      */
     orderBy?: CaseOrderByWithRelationInput | CaseOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for searching for Cases.
      */
     cursor?: CaseWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` Cases from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` Cases.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
+     *
      * Filter by unique combinations of Cases.
      */
     distinct?: CaseScalarFieldEnum | CaseScalarFieldEnum[]
@@ -19804,31 +20076,31 @@ export namespace Prisma {
     where?: CaseWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of Cases to fetch.
      */
     orderBy?: CaseOrderByWithRelationInput | CaseOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for searching for Cases.
      */
     cursor?: CaseWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` Cases from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` Cases.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
+     *
      * Filter by unique combinations of Cases.
      */
     distinct?: CaseScalarFieldEnum | CaseScalarFieldEnum[]
@@ -19856,25 +20128,25 @@ export namespace Prisma {
     where?: CaseWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of Cases to fetch.
      */
     orderBy?: CaseOrderByWithRelationInput | CaseOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for listing Cases.
      */
     cursor?: CaseWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` Cases from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` Cases.
      */
     skip?: number
@@ -20260,6 +20532,54 @@ export namespace Prisma {
   }
 
   /**
+   * Case.intelligenceAssessments
+   */
+  export type Case$intelligenceAssessmentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InfrastructureIntelligenceAssessment
+     */
+    select?: InfrastructureIntelligenceAssessmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InfrastructureIntelligenceAssessment
+     */
+    omit?: InfrastructureIntelligenceAssessmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InfrastructureIntelligenceAssessmentInclude<ExtArgs> | null
+    where?: InfrastructureIntelligenceAssessmentWhereInput
+    orderBy?: InfrastructureIntelligenceAssessmentOrderByWithRelationInput | InfrastructureIntelligenceAssessmentOrderByWithRelationInput[]
+    cursor?: InfrastructureIntelligenceAssessmentWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: InfrastructureIntelligenceAssessmentScalarFieldEnum | InfrastructureIntelligenceAssessmentScalarFieldEnum[]
+  }
+
+  /**
+   * Case.intelligenceReconciliations
+   */
+  export type Case$intelligenceReconciliationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InfrastructureIntelligenceReconciliation
+     */
+    select?: InfrastructureIntelligenceReconciliationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InfrastructureIntelligenceReconciliation
+     */
+    omit?: InfrastructureIntelligenceReconciliationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InfrastructureIntelligenceReconciliationInclude<ExtArgs> | null
+    where?: InfrastructureIntelligenceReconciliationWhereInput
+    orderBy?: InfrastructureIntelligenceReconciliationOrderByWithRelationInput | InfrastructureIntelligenceReconciliationOrderByWithRelationInput[]
+    cursor?: InfrastructureIntelligenceReconciliationWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: InfrastructureIntelligenceReconciliationScalarFieldEnum | InfrastructureIntelligenceReconciliationScalarFieldEnum[]
+  }
+
+  /**
    * Case without action
    */
   export type CaseDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -20424,55 +20744,55 @@ export namespace Prisma {
     where?: InspectionWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of Inspections to fetch.
      */
     orderBy?: InspectionOrderByWithRelationInput | InspectionOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the start position
      */
     cursor?: InspectionWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` Inspections from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` Inspections.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Count returned Inspections
     **/
     _count?: true | InspectionCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to average
     **/
     _avg?: InspectionAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to sum
     **/
     _sum?: InspectionSumAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to find the minimum value
     **/
     _min?: InspectionMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to find the maximum value
     **/
     _max?: InspectionMaxAggregateInputType
@@ -20560,6 +20880,7 @@ export namespace Prisma {
     inspector?: boolean | UserDefaultArgs<ExtArgs>
     riskAssessments?: boolean | Inspection$riskAssessmentsArgs<ExtArgs>
     decisionPackages?: boolean | Inspection$decisionPackagesArgs<ExtArgs>
+    intelligenceAssessments?: boolean | Inspection$intelligenceAssessmentsArgs<ExtArgs>
     _count?: boolean | InspectionCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["inspection"]>
 
@@ -20627,6 +20948,7 @@ export namespace Prisma {
     inspector?: boolean | UserDefaultArgs<ExtArgs>
     riskAssessments?: boolean | Inspection$riskAssessmentsArgs<ExtArgs>
     decisionPackages?: boolean | Inspection$decisionPackagesArgs<ExtArgs>
+    intelligenceAssessments?: boolean | Inspection$intelligenceAssessmentsArgs<ExtArgs>
     _count?: boolean | InspectionCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type InspectionIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -20645,6 +20967,7 @@ export namespace Prisma {
       inspector: Prisma.$UserPayload<ExtArgs>
       riskAssessments: Prisma.$RiskAssessmentPayload<ExtArgs>[]
       decisionPackages: Prisma.$DecisionPackagePayload<ExtArgs>[]
+      intelligenceAssessments: Prisma.$InfrastructureIntelligenceAssessmentPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -20741,13 +21064,13 @@ export namespace Prisma {
      * @example
      * // Get all Inspections
      * const inspections = await prisma.inspection.findMany()
-     * 
+     *
      * // Get first 10 Inspections
      * const inspections = await prisma.inspection.findMany({ take: 10 })
-     * 
+     *
      * // Only select the `id`
      * const inspectionWithIdOnly = await prisma.inspection.findMany({ select: { id: true } })
-     * 
+     *
      */
     findMany<T extends InspectionFindManyArgs>(args?: SelectSubset<T, InspectionFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InspectionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
@@ -20761,7 +21084,7 @@ export namespace Prisma {
      *     // ... data to create a Inspection
      *   }
      * })
-     * 
+     *
      */
     create<T extends InspectionCreateArgs>(args: SelectSubset<T, InspectionCreateArgs<ExtArgs>>): Prisma__InspectionClient<$Result.GetResult<Prisma.$InspectionPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -20775,7 +21098,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *     
+     *
      */
     createMany<T extends InspectionCreateManyArgs>(args?: SelectSubset<T, InspectionCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -20789,7 +21112,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     * 
+     *
      * // Create many Inspections and only return the `id`
      * const inspectionWithIdOnly = await prisma.inspection.createManyAndReturn({
      *   select: { id: true },
@@ -20799,7 +21122,7 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * 
+     *
      */
     createManyAndReturn<T extends InspectionCreateManyAndReturnArgs>(args?: SelectSubset<T, InspectionCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InspectionPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
@@ -20813,7 +21136,7 @@ export namespace Prisma {
      *     // ... filter to delete one Inspection
      *   }
      * })
-     * 
+     *
      */
     delete<T extends InspectionDeleteArgs>(args: SelectSubset<T, InspectionDeleteArgs<ExtArgs>>): Prisma__InspectionClient<$Result.GetResult<Prisma.$InspectionPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -20830,7 +21153,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     * 
+     *
      */
     update<T extends InspectionUpdateArgs>(args: SelectSubset<T, InspectionUpdateArgs<ExtArgs>>): Prisma__InspectionClient<$Result.GetResult<Prisma.$InspectionPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -20844,7 +21167,7 @@ export namespace Prisma {
      *     // ... provide filter here
      *   }
      * })
-     * 
+     *
      */
     deleteMany<T extends InspectionDeleteManyArgs>(args?: SelectSubset<T, InspectionDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -20863,7 +21186,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     * 
+     *
      */
     updateMany<T extends InspectionUpdateManyArgs>(args: SelectSubset<T, InspectionUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -20880,7 +21203,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     * 
+     *
      * // Update zero or more Inspections and only return the `id`
      * const inspectionWithIdOnly = await prisma.inspection.updateManyAndReturn({
      *   select: { id: true },
@@ -20893,7 +21216,7 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * 
+     *
      */
     updateManyAndReturn<T extends InspectionUpdateManyAndReturnArgs>(args: SelectSubset<T, InspectionUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InspectionPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
@@ -20982,7 +21305,7 @@ export namespace Prisma {
      *     _all: true
      *   },
      * })
-     * 
+     *
     **/
     groupBy<
       T extends InspectionGroupByArgs,
@@ -21060,6 +21383,7 @@ export namespace Prisma {
     inspector<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     riskAssessments<T extends Inspection$riskAssessmentsArgs<ExtArgs> = {}>(args?: Subset<T, Inspection$riskAssessmentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RiskAssessmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     decisionPackages<T extends Inspection$decisionPackagesArgs<ExtArgs> = {}>(args?: Subset<T, Inspection$decisionPackagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DecisionPackagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    intelligenceAssessments<T extends Inspection$intelligenceAssessmentsArgs<ExtArgs> = {}>(args?: Subset<T, Inspection$intelligenceAssessmentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InfrastructureIntelligenceAssessmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -21105,7 +21429,7 @@ export namespace Prisma {
     readonly createdAt: FieldRef<"Inspection", 'DateTime'>
     readonly updatedAt: FieldRef<"Inspection", 'DateTime'>
   }
-    
+
 
   // Custom InputTypes
   /**
@@ -21174,31 +21498,31 @@ export namespace Prisma {
     where?: InspectionWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of Inspections to fetch.
      */
     orderBy?: InspectionOrderByWithRelationInput | InspectionOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for searching for Inspections.
      */
     cursor?: InspectionWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` Inspections from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` Inspections.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
+     *
      * Filter by unique combinations of Inspections.
      */
     distinct?: InspectionScalarFieldEnum | InspectionScalarFieldEnum[]
@@ -21226,31 +21550,31 @@ export namespace Prisma {
     where?: InspectionWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of Inspections to fetch.
      */
     orderBy?: InspectionOrderByWithRelationInput | InspectionOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for searching for Inspections.
      */
     cursor?: InspectionWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` Inspections from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` Inspections.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
+     *
      * Filter by unique combinations of Inspections.
      */
     distinct?: InspectionScalarFieldEnum | InspectionScalarFieldEnum[]
@@ -21278,25 +21602,25 @@ export namespace Prisma {
     where?: InspectionWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of Inspections to fetch.
      */
     orderBy?: InspectionOrderByWithRelationInput | InspectionOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for listing Inspections.
      */
     cursor?: InspectionWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` Inspections from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` Inspections.
      */
     skip?: number
@@ -21548,6 +21872,30 @@ export namespace Prisma {
   }
 
   /**
+   * Inspection.intelligenceAssessments
+   */
+  export type Inspection$intelligenceAssessmentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InfrastructureIntelligenceAssessment
+     */
+    select?: InfrastructureIntelligenceAssessmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InfrastructureIntelligenceAssessment
+     */
+    omit?: InfrastructureIntelligenceAssessmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InfrastructureIntelligenceAssessmentInclude<ExtArgs> | null
+    where?: InfrastructureIntelligenceAssessmentWhereInput
+    orderBy?: InfrastructureIntelligenceAssessmentOrderByWithRelationInput | InfrastructureIntelligenceAssessmentOrderByWithRelationInput[]
+    cursor?: InfrastructureIntelligenceAssessmentWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: InfrastructureIntelligenceAssessmentScalarFieldEnum | InfrastructureIntelligenceAssessmentScalarFieldEnum[]
+  }
+
+  /**
    * Inspection without action
    */
   export type InspectionDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -21674,55 +22022,55 @@ export namespace Prisma {
     where?: RiskAssessmentWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of RiskAssessments to fetch.
      */
     orderBy?: RiskAssessmentOrderByWithRelationInput | RiskAssessmentOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the start position
      */
     cursor?: RiskAssessmentWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` RiskAssessments from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` RiskAssessments.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Count returned RiskAssessments
     **/
     _count?: true | RiskAssessmentCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to average
     **/
     _avg?: RiskAssessmentAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to sum
     **/
     _sum?: RiskAssessmentSumAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to find the minimum value
     **/
     _min?: RiskAssessmentMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to find the maximum value
     **/
     _max?: RiskAssessmentMaxAggregateInputType
@@ -21800,6 +22148,7 @@ export namespace Prisma {
     inspection?: boolean | InspectionDefaultArgs<ExtArgs>
     operationalResponsePlans?: boolean | RiskAssessment$operationalResponsePlansArgs<ExtArgs>
     decisionPackages?: boolean | RiskAssessment$decisionPackagesArgs<ExtArgs>
+    intelligenceAssessments?: boolean | RiskAssessment$intelligenceAssessmentsArgs<ExtArgs>
     _count?: boolean | RiskAssessmentCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["riskAssessment"]>
 
@@ -21852,6 +22201,7 @@ export namespace Prisma {
     inspection?: boolean | InspectionDefaultArgs<ExtArgs>
     operationalResponsePlans?: boolean | RiskAssessment$operationalResponsePlansArgs<ExtArgs>
     decisionPackages?: boolean | RiskAssessment$decisionPackagesArgs<ExtArgs>
+    intelligenceAssessments?: boolean | RiskAssessment$intelligenceAssessmentsArgs<ExtArgs>
     _count?: boolean | RiskAssessmentCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type RiskAssessmentIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -21870,6 +22220,7 @@ export namespace Prisma {
       inspection: Prisma.$InspectionPayload<ExtArgs>
       operationalResponsePlans: Prisma.$OperationalResponsePlanPayload<ExtArgs>[]
       decisionPackages: Prisma.$DecisionPackagePayload<ExtArgs>[]
+      intelligenceAssessments: Prisma.$InfrastructureIntelligenceAssessmentPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -21961,13 +22312,13 @@ export namespace Prisma {
      * @example
      * // Get all RiskAssessments
      * const riskAssessments = await prisma.riskAssessment.findMany()
-     * 
+     *
      * // Get first 10 RiskAssessments
      * const riskAssessments = await prisma.riskAssessment.findMany({ take: 10 })
-     * 
+     *
      * // Only select the `id`
      * const riskAssessmentWithIdOnly = await prisma.riskAssessment.findMany({ select: { id: true } })
-     * 
+     *
      */
     findMany<T extends RiskAssessmentFindManyArgs>(args?: SelectSubset<T, RiskAssessmentFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RiskAssessmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
@@ -21981,7 +22332,7 @@ export namespace Prisma {
      *     // ... data to create a RiskAssessment
      *   }
      * })
-     * 
+     *
      */
     create<T extends RiskAssessmentCreateArgs>(args: SelectSubset<T, RiskAssessmentCreateArgs<ExtArgs>>): Prisma__RiskAssessmentClient<$Result.GetResult<Prisma.$RiskAssessmentPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -21995,7 +22346,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *     
+     *
      */
     createMany<T extends RiskAssessmentCreateManyArgs>(args?: SelectSubset<T, RiskAssessmentCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -22009,7 +22360,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     * 
+     *
      * // Create many RiskAssessments and only return the `id`
      * const riskAssessmentWithIdOnly = await prisma.riskAssessment.createManyAndReturn({
      *   select: { id: true },
@@ -22019,7 +22370,7 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * 
+     *
      */
     createManyAndReturn<T extends RiskAssessmentCreateManyAndReturnArgs>(args?: SelectSubset<T, RiskAssessmentCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RiskAssessmentPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
@@ -22033,7 +22384,7 @@ export namespace Prisma {
      *     // ... filter to delete one RiskAssessment
      *   }
      * })
-     * 
+     *
      */
     delete<T extends RiskAssessmentDeleteArgs>(args: SelectSubset<T, RiskAssessmentDeleteArgs<ExtArgs>>): Prisma__RiskAssessmentClient<$Result.GetResult<Prisma.$RiskAssessmentPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -22050,7 +22401,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     * 
+     *
      */
     update<T extends RiskAssessmentUpdateArgs>(args: SelectSubset<T, RiskAssessmentUpdateArgs<ExtArgs>>): Prisma__RiskAssessmentClient<$Result.GetResult<Prisma.$RiskAssessmentPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -22064,7 +22415,7 @@ export namespace Prisma {
      *     // ... provide filter here
      *   }
      * })
-     * 
+     *
      */
     deleteMany<T extends RiskAssessmentDeleteManyArgs>(args?: SelectSubset<T, RiskAssessmentDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -22083,7 +22434,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     * 
+     *
      */
     updateMany<T extends RiskAssessmentUpdateManyArgs>(args: SelectSubset<T, RiskAssessmentUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -22100,7 +22451,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     * 
+     *
      * // Update zero or more RiskAssessments and only return the `id`
      * const riskAssessmentWithIdOnly = await prisma.riskAssessment.updateManyAndReturn({
      *   select: { id: true },
@@ -22113,7 +22464,7 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * 
+     *
      */
     updateManyAndReturn<T extends RiskAssessmentUpdateManyAndReturnArgs>(args: SelectSubset<T, RiskAssessmentUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RiskAssessmentPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
@@ -22202,7 +22553,7 @@ export namespace Prisma {
      *     _all: true
      *   },
      * })
-     * 
+     *
     **/
     groupBy<
       T extends RiskAssessmentGroupByArgs,
@@ -22280,6 +22631,7 @@ export namespace Prisma {
     inspection<T extends InspectionDefaultArgs<ExtArgs> = {}>(args?: Subset<T, InspectionDefaultArgs<ExtArgs>>): Prisma__InspectionClient<$Result.GetResult<Prisma.$InspectionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     operationalResponsePlans<T extends RiskAssessment$operationalResponsePlansArgs<ExtArgs> = {}>(args?: Subset<T, RiskAssessment$operationalResponsePlansArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OperationalResponsePlanPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     decisionPackages<T extends RiskAssessment$decisionPackagesArgs<ExtArgs> = {}>(args?: Subset<T, RiskAssessment$decisionPackagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DecisionPackagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    intelligenceAssessments<T extends RiskAssessment$intelligenceAssessmentsArgs<ExtArgs> = {}>(args?: Subset<T, RiskAssessment$intelligenceAssessmentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InfrastructureIntelligenceAssessmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -22320,7 +22672,7 @@ export namespace Prisma {
     readonly assessmentVersion: FieldRef<"RiskAssessment", 'String'>
     readonly createdAt: FieldRef<"RiskAssessment", 'DateTime'>
   }
-    
+
 
   // Custom InputTypes
   /**
@@ -22389,31 +22741,31 @@ export namespace Prisma {
     where?: RiskAssessmentWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of RiskAssessments to fetch.
      */
     orderBy?: RiskAssessmentOrderByWithRelationInput | RiskAssessmentOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for searching for RiskAssessments.
      */
     cursor?: RiskAssessmentWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` RiskAssessments from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` RiskAssessments.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
+     *
      * Filter by unique combinations of RiskAssessments.
      */
     distinct?: RiskAssessmentScalarFieldEnum | RiskAssessmentScalarFieldEnum[]
@@ -22441,31 +22793,31 @@ export namespace Prisma {
     where?: RiskAssessmentWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of RiskAssessments to fetch.
      */
     orderBy?: RiskAssessmentOrderByWithRelationInput | RiskAssessmentOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for searching for RiskAssessments.
      */
     cursor?: RiskAssessmentWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` RiskAssessments from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` RiskAssessments.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
+     *
      * Filter by unique combinations of RiskAssessments.
      */
     distinct?: RiskAssessmentScalarFieldEnum | RiskAssessmentScalarFieldEnum[]
@@ -22493,25 +22845,25 @@ export namespace Prisma {
     where?: RiskAssessmentWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of RiskAssessments to fetch.
      */
     orderBy?: RiskAssessmentOrderByWithRelationInput | RiskAssessmentOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for listing RiskAssessments.
      */
     cursor?: RiskAssessmentWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` RiskAssessments from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` RiskAssessments.
      */
     skip?: number
@@ -22763,6 +23115,30 @@ export namespace Prisma {
   }
 
   /**
+   * RiskAssessment.intelligenceAssessments
+   */
+  export type RiskAssessment$intelligenceAssessmentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InfrastructureIntelligenceAssessment
+     */
+    select?: InfrastructureIntelligenceAssessmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InfrastructureIntelligenceAssessment
+     */
+    omit?: InfrastructureIntelligenceAssessmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InfrastructureIntelligenceAssessmentInclude<ExtArgs> | null
+    where?: InfrastructureIntelligenceAssessmentWhereInput
+    orderBy?: InfrastructureIntelligenceAssessmentOrderByWithRelationInput | InfrastructureIntelligenceAssessmentOrderByWithRelationInput[]
+    cursor?: InfrastructureIntelligenceAssessmentWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: InfrastructureIntelligenceAssessmentScalarFieldEnum | InfrastructureIntelligenceAssessmentScalarFieldEnum[]
+  }
+
+  /**
    * RiskAssessment without action
    */
   export type RiskAssessmentDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -22778,6 +23154,2524 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: RiskAssessmentInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model InfrastructureIntelligenceAssessment
+   */
+
+  export type AggregateInfrastructureIntelligenceAssessment = {
+    _count: InfrastructureIntelligenceAssessmentCountAggregateOutputType | null
+    _avg: InfrastructureIntelligenceAssessmentAvgAggregateOutputType | null
+    _sum: InfrastructureIntelligenceAssessmentSumAggregateOutputType | null
+    _min: InfrastructureIntelligenceAssessmentMinAggregateOutputType | null
+    _max: InfrastructureIntelligenceAssessmentMaxAggregateOutputType | null
+  }
+
+  export type InfrastructureIntelligenceAssessmentAvgAggregateOutputType = {
+    predictedRiskScore: number | null
+    confidence: number | null
+  }
+
+  export type InfrastructureIntelligenceAssessmentSumAggregateOutputType = {
+    predictedRiskScore: number | null
+    confidence: number | null
+  }
+
+  export type InfrastructureIntelligenceAssessmentMinAggregateOutputType = {
+    id: string | null
+    caseId: string | null
+    inspectionId: string | null
+    riskAssessmentId: string | null
+    status: $Enums.IntelligenceAssessmentStatus | null
+    predictedRiskScore: number | null
+    predictedRiskLevel: $Enums.RiskLevel | null
+    recommendedPriority: $Enums.PriorityLevel | null
+    confidence: number | null
+    provider: string | null
+    providerType: string | null
+    modelName: string | null
+    modelVersion: string | null
+    modelArtifactDigest: string | null
+    featureSchemaVersion: string | null
+    contractVersion: string | null
+    sourceFingerprint: string | null
+    inferredAt: Date | null
+    expiresAt: Date | null
+    explanation: string | null
+    createdAt: Date | null
+  }
+
+  export type InfrastructureIntelligenceAssessmentMaxAggregateOutputType = {
+    id: string | null
+    caseId: string | null
+    inspectionId: string | null
+    riskAssessmentId: string | null
+    status: $Enums.IntelligenceAssessmentStatus | null
+    predictedRiskScore: number | null
+    predictedRiskLevel: $Enums.RiskLevel | null
+    recommendedPriority: $Enums.PriorityLevel | null
+    confidence: number | null
+    provider: string | null
+    providerType: string | null
+    modelName: string | null
+    modelVersion: string | null
+    modelArtifactDigest: string | null
+    featureSchemaVersion: string | null
+    contractVersion: string | null
+    sourceFingerprint: string | null
+    inferredAt: Date | null
+    expiresAt: Date | null
+    explanation: string | null
+    createdAt: Date | null
+  }
+
+  export type InfrastructureIntelligenceAssessmentCountAggregateOutputType = {
+    id: number
+    caseId: number
+    inspectionId: number
+    riskAssessmentId: number
+    status: number
+    predictedRiskScore: number
+    predictedRiskLevel: number
+    recommendedPriority: number
+    confidence: number
+    provider: number
+    providerType: number
+    modelName: number
+    modelVersion: number
+    modelArtifactDigest: number
+    featureSchemaVersion: number
+    contractVersion: number
+    sourceFingerprint: number
+    inferredAt: number
+    expiresAt: number
+    contributingFactors: number
+    explanation: number
+    recommendedActions: number
+    abstentionReasons: number
+    reconciliation: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type InfrastructureIntelligenceAssessmentAvgAggregateInputType = {
+    predictedRiskScore?: true
+    confidence?: true
+  }
+
+  export type InfrastructureIntelligenceAssessmentSumAggregateInputType = {
+    predictedRiskScore?: true
+    confidence?: true
+  }
+
+  export type InfrastructureIntelligenceAssessmentMinAggregateInputType = {
+    id?: true
+    caseId?: true
+    inspectionId?: true
+    riskAssessmentId?: true
+    status?: true
+    predictedRiskScore?: true
+    predictedRiskLevel?: true
+    recommendedPriority?: true
+    confidence?: true
+    provider?: true
+    providerType?: true
+    modelName?: true
+    modelVersion?: true
+    modelArtifactDigest?: true
+    featureSchemaVersion?: true
+    contractVersion?: true
+    sourceFingerprint?: true
+    inferredAt?: true
+    expiresAt?: true
+    explanation?: true
+    createdAt?: true
+  }
+
+  export type InfrastructureIntelligenceAssessmentMaxAggregateInputType = {
+    id?: true
+    caseId?: true
+    inspectionId?: true
+    riskAssessmentId?: true
+    status?: true
+    predictedRiskScore?: true
+    predictedRiskLevel?: true
+    recommendedPriority?: true
+    confidence?: true
+    provider?: true
+    providerType?: true
+    modelName?: true
+    modelVersion?: true
+    modelArtifactDigest?: true
+    featureSchemaVersion?: true
+    contractVersion?: true
+    sourceFingerprint?: true
+    inferredAt?: true
+    expiresAt?: true
+    explanation?: true
+    createdAt?: true
+  }
+
+  export type InfrastructureIntelligenceAssessmentCountAggregateInputType = {
+    id?: true
+    caseId?: true
+    inspectionId?: true
+    riskAssessmentId?: true
+    status?: true
+    predictedRiskScore?: true
+    predictedRiskLevel?: true
+    recommendedPriority?: true
+    confidence?: true
+    provider?: true
+    providerType?: true
+    modelName?: true
+    modelVersion?: true
+    modelArtifactDigest?: true
+    featureSchemaVersion?: true
+    contractVersion?: true
+    sourceFingerprint?: true
+    inferredAt?: true
+    expiresAt?: true
+    contributingFactors?: true
+    explanation?: true
+    recommendedActions?: true
+    abstentionReasons?: true
+    reconciliation?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type InfrastructureIntelligenceAssessmentAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which InfrastructureIntelligenceAssessment to aggregate.
+     */
+    where?: InfrastructureIntelligenceAssessmentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     *
+     * Determine the order of InfrastructureIntelligenceAssessments to fetch.
+     */
+    orderBy?: InfrastructureIntelligenceAssessmentOrderByWithRelationInput | InfrastructureIntelligenceAssessmentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     *
+     * Sets the start position
+     */
+    cursor?: InfrastructureIntelligenceAssessmentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Take `±n` InfrastructureIntelligenceAssessments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Skip the first `n` InfrastructureIntelligenceAssessments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Count returned InfrastructureIntelligenceAssessments
+    **/
+    _count?: true | InfrastructureIntelligenceAssessmentCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Select which fields to average
+    **/
+    _avg?: InfrastructureIntelligenceAssessmentAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Select which fields to sum
+    **/
+    _sum?: InfrastructureIntelligenceAssessmentSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Select which fields to find the minimum value
+    **/
+    _min?: InfrastructureIntelligenceAssessmentMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Select which fields to find the maximum value
+    **/
+    _max?: InfrastructureIntelligenceAssessmentMaxAggregateInputType
+  }
+
+  export type GetInfrastructureIntelligenceAssessmentAggregateType<T extends InfrastructureIntelligenceAssessmentAggregateArgs> = {
+        [P in keyof T & keyof AggregateInfrastructureIntelligenceAssessment]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateInfrastructureIntelligenceAssessment[P]>
+      : GetScalarType<T[P], AggregateInfrastructureIntelligenceAssessment[P]>
+  }
+
+
+
+
+  export type InfrastructureIntelligenceAssessmentGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: InfrastructureIntelligenceAssessmentWhereInput
+    orderBy?: InfrastructureIntelligenceAssessmentOrderByWithAggregationInput | InfrastructureIntelligenceAssessmentOrderByWithAggregationInput[]
+    by: InfrastructureIntelligenceAssessmentScalarFieldEnum[] | InfrastructureIntelligenceAssessmentScalarFieldEnum
+    having?: InfrastructureIntelligenceAssessmentScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: InfrastructureIntelligenceAssessmentCountAggregateInputType | true
+    _avg?: InfrastructureIntelligenceAssessmentAvgAggregateInputType
+    _sum?: InfrastructureIntelligenceAssessmentSumAggregateInputType
+    _min?: InfrastructureIntelligenceAssessmentMinAggregateInputType
+    _max?: InfrastructureIntelligenceAssessmentMaxAggregateInputType
+  }
+
+  export type InfrastructureIntelligenceAssessmentGroupByOutputType = {
+    id: string
+    caseId: string
+    inspectionId: string
+    riskAssessmentId: string
+    status: $Enums.IntelligenceAssessmentStatus
+    predictedRiskScore: number | null
+    predictedRiskLevel: $Enums.RiskLevel | null
+    recommendedPriority: $Enums.PriorityLevel | null
+    confidence: number | null
+    provider: string
+    providerType: string
+    modelName: string
+    modelVersion: string
+    modelArtifactDigest: string | null
+    featureSchemaVersion: string
+    contractVersion: string
+    sourceFingerprint: string
+    inferredAt: Date
+    expiresAt: Date | null
+    contributingFactors: JsonValue
+    explanation: string | null
+    recommendedActions: JsonValue
+    abstentionReasons: JsonValue
+    reconciliation: JsonValue
+    createdAt: Date
+    _count: InfrastructureIntelligenceAssessmentCountAggregateOutputType | null
+    _avg: InfrastructureIntelligenceAssessmentAvgAggregateOutputType | null
+    _sum: InfrastructureIntelligenceAssessmentSumAggregateOutputType | null
+    _min: InfrastructureIntelligenceAssessmentMinAggregateOutputType | null
+    _max: InfrastructureIntelligenceAssessmentMaxAggregateOutputType | null
+  }
+
+  type GetInfrastructureIntelligenceAssessmentGroupByPayload<T extends InfrastructureIntelligenceAssessmentGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<InfrastructureIntelligenceAssessmentGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof InfrastructureIntelligenceAssessmentGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], InfrastructureIntelligenceAssessmentGroupByOutputType[P]>
+            : GetScalarType<T[P], InfrastructureIntelligenceAssessmentGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type InfrastructureIntelligenceAssessmentSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    caseId?: boolean
+    inspectionId?: boolean
+    riskAssessmentId?: boolean
+    status?: boolean
+    predictedRiskScore?: boolean
+    predictedRiskLevel?: boolean
+    recommendedPriority?: boolean
+    confidence?: boolean
+    provider?: boolean
+    providerType?: boolean
+    modelName?: boolean
+    modelVersion?: boolean
+    modelArtifactDigest?: boolean
+    featureSchemaVersion?: boolean
+    contractVersion?: boolean
+    sourceFingerprint?: boolean
+    inferredAt?: boolean
+    expiresAt?: boolean
+    contributingFactors?: boolean
+    explanation?: boolean
+    recommendedActions?: boolean
+    abstentionReasons?: boolean
+    reconciliation?: boolean
+    createdAt?: boolean
+    governanceReconciliations?: boolean | InfrastructureIntelligenceAssessment$governanceReconciliationsArgs<ExtArgs>
+    case?: boolean | CaseDefaultArgs<ExtArgs>
+    inspection?: boolean | InspectionDefaultArgs<ExtArgs>
+    riskAssessment?: boolean | RiskAssessmentDefaultArgs<ExtArgs>
+    _count?: boolean | InfrastructureIntelligenceAssessmentCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["infrastructureIntelligenceAssessment"]>
+
+  export type InfrastructureIntelligenceAssessmentSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    caseId?: boolean
+    inspectionId?: boolean
+    riskAssessmentId?: boolean
+    status?: boolean
+    predictedRiskScore?: boolean
+    predictedRiskLevel?: boolean
+    recommendedPriority?: boolean
+    confidence?: boolean
+    provider?: boolean
+    providerType?: boolean
+    modelName?: boolean
+    modelVersion?: boolean
+    modelArtifactDigest?: boolean
+    featureSchemaVersion?: boolean
+    contractVersion?: boolean
+    sourceFingerprint?: boolean
+    inferredAt?: boolean
+    expiresAt?: boolean
+    contributingFactors?: boolean
+    explanation?: boolean
+    recommendedActions?: boolean
+    abstentionReasons?: boolean
+    reconciliation?: boolean
+    createdAt?: boolean
+    case?: boolean | CaseDefaultArgs<ExtArgs>
+    inspection?: boolean | InspectionDefaultArgs<ExtArgs>
+    riskAssessment?: boolean | RiskAssessmentDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["infrastructureIntelligenceAssessment"]>
+
+  export type InfrastructureIntelligenceAssessmentSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    caseId?: boolean
+    inspectionId?: boolean
+    riskAssessmentId?: boolean
+    status?: boolean
+    predictedRiskScore?: boolean
+    predictedRiskLevel?: boolean
+    recommendedPriority?: boolean
+    confidence?: boolean
+    provider?: boolean
+    providerType?: boolean
+    modelName?: boolean
+    modelVersion?: boolean
+    modelArtifactDigest?: boolean
+    featureSchemaVersion?: boolean
+    contractVersion?: boolean
+    sourceFingerprint?: boolean
+    inferredAt?: boolean
+    expiresAt?: boolean
+    contributingFactors?: boolean
+    explanation?: boolean
+    recommendedActions?: boolean
+    abstentionReasons?: boolean
+    reconciliation?: boolean
+    createdAt?: boolean
+    case?: boolean | CaseDefaultArgs<ExtArgs>
+    inspection?: boolean | InspectionDefaultArgs<ExtArgs>
+    riskAssessment?: boolean | RiskAssessmentDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["infrastructureIntelligenceAssessment"]>
+
+  export type InfrastructureIntelligenceAssessmentSelectScalar = {
+    id?: boolean
+    caseId?: boolean
+    inspectionId?: boolean
+    riskAssessmentId?: boolean
+    status?: boolean
+    predictedRiskScore?: boolean
+    predictedRiskLevel?: boolean
+    recommendedPriority?: boolean
+    confidence?: boolean
+    provider?: boolean
+    providerType?: boolean
+    modelName?: boolean
+    modelVersion?: boolean
+    modelArtifactDigest?: boolean
+    featureSchemaVersion?: boolean
+    contractVersion?: boolean
+    sourceFingerprint?: boolean
+    inferredAt?: boolean
+    expiresAt?: boolean
+    contributingFactors?: boolean
+    explanation?: boolean
+    recommendedActions?: boolean
+    abstentionReasons?: boolean
+    reconciliation?: boolean
+    createdAt?: boolean
+  }
+
+  export type InfrastructureIntelligenceAssessmentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "caseId" | "inspectionId" | "riskAssessmentId" | "status" | "predictedRiskScore" | "predictedRiskLevel" | "recommendedPriority" | "confidence" | "provider" | "providerType" | "modelName" | "modelVersion" | "modelArtifactDigest" | "featureSchemaVersion" | "contractVersion" | "sourceFingerprint" | "inferredAt" | "expiresAt" | "contributingFactors" | "explanation" | "recommendedActions" | "abstentionReasons" | "reconciliation" | "createdAt", ExtArgs["result"]["infrastructureIntelligenceAssessment"]>
+  export type InfrastructureIntelligenceAssessmentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    governanceReconciliations?: boolean | InfrastructureIntelligenceAssessment$governanceReconciliationsArgs<ExtArgs>
+    case?: boolean | CaseDefaultArgs<ExtArgs>
+    inspection?: boolean | InspectionDefaultArgs<ExtArgs>
+    riskAssessment?: boolean | RiskAssessmentDefaultArgs<ExtArgs>
+    _count?: boolean | InfrastructureIntelligenceAssessmentCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type InfrastructureIntelligenceAssessmentIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    case?: boolean | CaseDefaultArgs<ExtArgs>
+    inspection?: boolean | InspectionDefaultArgs<ExtArgs>
+    riskAssessment?: boolean | RiskAssessmentDefaultArgs<ExtArgs>
+  }
+  export type InfrastructureIntelligenceAssessmentIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    case?: boolean | CaseDefaultArgs<ExtArgs>
+    inspection?: boolean | InspectionDefaultArgs<ExtArgs>
+    riskAssessment?: boolean | RiskAssessmentDefaultArgs<ExtArgs>
+  }
+
+  export type $InfrastructureIntelligenceAssessmentPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "InfrastructureIntelligenceAssessment"
+    objects: {
+      governanceReconciliations: Prisma.$InfrastructureIntelligenceReconciliationPayload<ExtArgs>[]
+      case: Prisma.$CasePayload<ExtArgs>
+      inspection: Prisma.$InspectionPayload<ExtArgs>
+      riskAssessment: Prisma.$RiskAssessmentPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      caseId: string
+      inspectionId: string
+      riskAssessmentId: string
+      status: $Enums.IntelligenceAssessmentStatus
+      predictedRiskScore: number | null
+      predictedRiskLevel: $Enums.RiskLevel | null
+      recommendedPriority: $Enums.PriorityLevel | null
+      confidence: number | null
+      provider: string
+      providerType: string
+      modelName: string
+      modelVersion: string
+      modelArtifactDigest: string | null
+      featureSchemaVersion: string
+      contractVersion: string
+      sourceFingerprint: string
+      inferredAt: Date
+      expiresAt: Date | null
+      contributingFactors: Prisma.JsonValue
+      explanation: string | null
+      recommendedActions: Prisma.JsonValue
+      abstentionReasons: Prisma.JsonValue
+      reconciliation: Prisma.JsonValue
+      createdAt: Date
+    }, ExtArgs["result"]["infrastructureIntelligenceAssessment"]>
+    composites: {}
+  }
+
+  type InfrastructureIntelligenceAssessmentGetPayload<S extends boolean | null | undefined | InfrastructureIntelligenceAssessmentDefaultArgs> = $Result.GetResult<Prisma.$InfrastructureIntelligenceAssessmentPayload, S>
+
+  type InfrastructureIntelligenceAssessmentCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<InfrastructureIntelligenceAssessmentFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: InfrastructureIntelligenceAssessmentCountAggregateInputType | true
+    }
+
+  export interface InfrastructureIntelligenceAssessmentDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['InfrastructureIntelligenceAssessment'], meta: { name: 'InfrastructureIntelligenceAssessment' } }
+    /**
+     * Find zero or one InfrastructureIntelligenceAssessment that matches the filter.
+     * @param {InfrastructureIntelligenceAssessmentFindUniqueArgs} args - Arguments to find a InfrastructureIntelligenceAssessment
+     * @example
+     * // Get one InfrastructureIntelligenceAssessment
+     * const infrastructureIntelligenceAssessment = await prisma.infrastructureIntelligenceAssessment.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends InfrastructureIntelligenceAssessmentFindUniqueArgs>(args: SelectSubset<T, InfrastructureIntelligenceAssessmentFindUniqueArgs<ExtArgs>>): Prisma__InfrastructureIntelligenceAssessmentClient<$Result.GetResult<Prisma.$InfrastructureIntelligenceAssessmentPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one InfrastructureIntelligenceAssessment that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {InfrastructureIntelligenceAssessmentFindUniqueOrThrowArgs} args - Arguments to find a InfrastructureIntelligenceAssessment
+     * @example
+     * // Get one InfrastructureIntelligenceAssessment
+     * const infrastructureIntelligenceAssessment = await prisma.infrastructureIntelligenceAssessment.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends InfrastructureIntelligenceAssessmentFindUniqueOrThrowArgs>(args: SelectSubset<T, InfrastructureIntelligenceAssessmentFindUniqueOrThrowArgs<ExtArgs>>): Prisma__InfrastructureIntelligenceAssessmentClient<$Result.GetResult<Prisma.$InfrastructureIntelligenceAssessmentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first InfrastructureIntelligenceAssessment that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InfrastructureIntelligenceAssessmentFindFirstArgs} args - Arguments to find a InfrastructureIntelligenceAssessment
+     * @example
+     * // Get one InfrastructureIntelligenceAssessment
+     * const infrastructureIntelligenceAssessment = await prisma.infrastructureIntelligenceAssessment.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends InfrastructureIntelligenceAssessmentFindFirstArgs>(args?: SelectSubset<T, InfrastructureIntelligenceAssessmentFindFirstArgs<ExtArgs>>): Prisma__InfrastructureIntelligenceAssessmentClient<$Result.GetResult<Prisma.$InfrastructureIntelligenceAssessmentPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first InfrastructureIntelligenceAssessment that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InfrastructureIntelligenceAssessmentFindFirstOrThrowArgs} args - Arguments to find a InfrastructureIntelligenceAssessment
+     * @example
+     * // Get one InfrastructureIntelligenceAssessment
+     * const infrastructureIntelligenceAssessment = await prisma.infrastructureIntelligenceAssessment.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends InfrastructureIntelligenceAssessmentFindFirstOrThrowArgs>(args?: SelectSubset<T, InfrastructureIntelligenceAssessmentFindFirstOrThrowArgs<ExtArgs>>): Prisma__InfrastructureIntelligenceAssessmentClient<$Result.GetResult<Prisma.$InfrastructureIntelligenceAssessmentPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more InfrastructureIntelligenceAssessments that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InfrastructureIntelligenceAssessmentFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all InfrastructureIntelligenceAssessments
+     * const infrastructureIntelligenceAssessments = await prisma.infrastructureIntelligenceAssessment.findMany()
+     *
+     * // Get first 10 InfrastructureIntelligenceAssessments
+     * const infrastructureIntelligenceAssessments = await prisma.infrastructureIntelligenceAssessment.findMany({ take: 10 })
+     *
+     * // Only select the `id`
+     * const infrastructureIntelligenceAssessmentWithIdOnly = await prisma.infrastructureIntelligenceAssessment.findMany({ select: { id: true } })
+     *
+     */
+    findMany<T extends InfrastructureIntelligenceAssessmentFindManyArgs>(args?: SelectSubset<T, InfrastructureIntelligenceAssessmentFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InfrastructureIntelligenceAssessmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a InfrastructureIntelligenceAssessment.
+     * @param {InfrastructureIntelligenceAssessmentCreateArgs} args - Arguments to create a InfrastructureIntelligenceAssessment.
+     * @example
+     * // Create one InfrastructureIntelligenceAssessment
+     * const InfrastructureIntelligenceAssessment = await prisma.infrastructureIntelligenceAssessment.create({
+     *   data: {
+     *     // ... data to create a InfrastructureIntelligenceAssessment
+     *   }
+     * })
+     *
+     */
+    create<T extends InfrastructureIntelligenceAssessmentCreateArgs>(args: SelectSubset<T, InfrastructureIntelligenceAssessmentCreateArgs<ExtArgs>>): Prisma__InfrastructureIntelligenceAssessmentClient<$Result.GetResult<Prisma.$InfrastructureIntelligenceAssessmentPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many InfrastructureIntelligenceAssessments.
+     * @param {InfrastructureIntelligenceAssessmentCreateManyArgs} args - Arguments to create many InfrastructureIntelligenceAssessments.
+     * @example
+     * // Create many InfrastructureIntelligenceAssessments
+     * const infrastructureIntelligenceAssessment = await prisma.infrastructureIntelligenceAssessment.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *
+     */
+    createMany<T extends InfrastructureIntelligenceAssessmentCreateManyArgs>(args?: SelectSubset<T, InfrastructureIntelligenceAssessmentCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many InfrastructureIntelligenceAssessments and returns the data saved in the database.
+     * @param {InfrastructureIntelligenceAssessmentCreateManyAndReturnArgs} args - Arguments to create many InfrastructureIntelligenceAssessments.
+     * @example
+     * // Create many InfrastructureIntelligenceAssessments
+     * const infrastructureIntelligenceAssessment = await prisma.infrastructureIntelligenceAssessment.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *
+     * // Create many InfrastructureIntelligenceAssessments and only return the `id`
+     * const infrastructureIntelligenceAssessmentWithIdOnly = await prisma.infrastructureIntelligenceAssessment.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     *
+     */
+    createManyAndReturn<T extends InfrastructureIntelligenceAssessmentCreateManyAndReturnArgs>(args?: SelectSubset<T, InfrastructureIntelligenceAssessmentCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InfrastructureIntelligenceAssessmentPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a InfrastructureIntelligenceAssessment.
+     * @param {InfrastructureIntelligenceAssessmentDeleteArgs} args - Arguments to delete one InfrastructureIntelligenceAssessment.
+     * @example
+     * // Delete one InfrastructureIntelligenceAssessment
+     * const InfrastructureIntelligenceAssessment = await prisma.infrastructureIntelligenceAssessment.delete({
+     *   where: {
+     *     // ... filter to delete one InfrastructureIntelligenceAssessment
+     *   }
+     * })
+     *
+     */
+    delete<T extends InfrastructureIntelligenceAssessmentDeleteArgs>(args: SelectSubset<T, InfrastructureIntelligenceAssessmentDeleteArgs<ExtArgs>>): Prisma__InfrastructureIntelligenceAssessmentClient<$Result.GetResult<Prisma.$InfrastructureIntelligenceAssessmentPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one InfrastructureIntelligenceAssessment.
+     * @param {InfrastructureIntelligenceAssessmentUpdateArgs} args - Arguments to update one InfrastructureIntelligenceAssessment.
+     * @example
+     * // Update one InfrastructureIntelligenceAssessment
+     * const infrastructureIntelligenceAssessment = await prisma.infrastructureIntelligenceAssessment.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     *
+     */
+    update<T extends InfrastructureIntelligenceAssessmentUpdateArgs>(args: SelectSubset<T, InfrastructureIntelligenceAssessmentUpdateArgs<ExtArgs>>): Prisma__InfrastructureIntelligenceAssessmentClient<$Result.GetResult<Prisma.$InfrastructureIntelligenceAssessmentPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more InfrastructureIntelligenceAssessments.
+     * @param {InfrastructureIntelligenceAssessmentDeleteManyArgs} args - Arguments to filter InfrastructureIntelligenceAssessments to delete.
+     * @example
+     * // Delete a few InfrastructureIntelligenceAssessments
+     * const { count } = await prisma.infrastructureIntelligenceAssessment.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     *
+     */
+    deleteMany<T extends InfrastructureIntelligenceAssessmentDeleteManyArgs>(args?: SelectSubset<T, InfrastructureIntelligenceAssessmentDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more InfrastructureIntelligenceAssessments.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InfrastructureIntelligenceAssessmentUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many InfrastructureIntelligenceAssessments
+     * const infrastructureIntelligenceAssessment = await prisma.infrastructureIntelligenceAssessment.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     *
+     */
+    updateMany<T extends InfrastructureIntelligenceAssessmentUpdateManyArgs>(args: SelectSubset<T, InfrastructureIntelligenceAssessmentUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more InfrastructureIntelligenceAssessments and returns the data updated in the database.
+     * @param {InfrastructureIntelligenceAssessmentUpdateManyAndReturnArgs} args - Arguments to update many InfrastructureIntelligenceAssessments.
+     * @example
+     * // Update many InfrastructureIntelligenceAssessments
+     * const infrastructureIntelligenceAssessment = await prisma.infrastructureIntelligenceAssessment.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *
+     * // Update zero or more InfrastructureIntelligenceAssessments and only return the `id`
+     * const infrastructureIntelligenceAssessmentWithIdOnly = await prisma.infrastructureIntelligenceAssessment.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     *
+     */
+    updateManyAndReturn<T extends InfrastructureIntelligenceAssessmentUpdateManyAndReturnArgs>(args: SelectSubset<T, InfrastructureIntelligenceAssessmentUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InfrastructureIntelligenceAssessmentPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one InfrastructureIntelligenceAssessment.
+     * @param {InfrastructureIntelligenceAssessmentUpsertArgs} args - Arguments to update or create a InfrastructureIntelligenceAssessment.
+     * @example
+     * // Update or create a InfrastructureIntelligenceAssessment
+     * const infrastructureIntelligenceAssessment = await prisma.infrastructureIntelligenceAssessment.upsert({
+     *   create: {
+     *     // ... data to create a InfrastructureIntelligenceAssessment
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the InfrastructureIntelligenceAssessment we want to update
+     *   }
+     * })
+     */
+    upsert<T extends InfrastructureIntelligenceAssessmentUpsertArgs>(args: SelectSubset<T, InfrastructureIntelligenceAssessmentUpsertArgs<ExtArgs>>): Prisma__InfrastructureIntelligenceAssessmentClient<$Result.GetResult<Prisma.$InfrastructureIntelligenceAssessmentPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of InfrastructureIntelligenceAssessments.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InfrastructureIntelligenceAssessmentCountArgs} args - Arguments to filter InfrastructureIntelligenceAssessments to count.
+     * @example
+     * // Count the number of InfrastructureIntelligenceAssessments
+     * const count = await prisma.infrastructureIntelligenceAssessment.count({
+     *   where: {
+     *     // ... the filter for the InfrastructureIntelligenceAssessments we want to count
+     *   }
+     * })
+    **/
+    count<T extends InfrastructureIntelligenceAssessmentCountArgs>(
+      args?: Subset<T, InfrastructureIntelligenceAssessmentCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], InfrastructureIntelligenceAssessmentCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a InfrastructureIntelligenceAssessment.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InfrastructureIntelligenceAssessmentAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends InfrastructureIntelligenceAssessmentAggregateArgs>(args: Subset<T, InfrastructureIntelligenceAssessmentAggregateArgs>): Prisma.PrismaPromise<GetInfrastructureIntelligenceAssessmentAggregateType<T>>
+
+    /**
+     * Group by InfrastructureIntelligenceAssessment.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InfrastructureIntelligenceAssessmentGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     *
+    **/
+    groupBy<
+      T extends InfrastructureIntelligenceAssessmentGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: InfrastructureIntelligenceAssessmentGroupByArgs['orderBy'] }
+        : { orderBy?: InfrastructureIntelligenceAssessmentGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, InfrastructureIntelligenceAssessmentGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetInfrastructureIntelligenceAssessmentGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the InfrastructureIntelligenceAssessment model
+   */
+  readonly fields: InfrastructureIntelligenceAssessmentFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for InfrastructureIntelligenceAssessment.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__InfrastructureIntelligenceAssessmentClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    governanceReconciliations<T extends InfrastructureIntelligenceAssessment$governanceReconciliationsArgs<ExtArgs> = {}>(args?: Subset<T, InfrastructureIntelligenceAssessment$governanceReconciliationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InfrastructureIntelligenceReconciliationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    case<T extends CaseDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CaseDefaultArgs<ExtArgs>>): Prisma__CaseClient<$Result.GetResult<Prisma.$CasePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    inspection<T extends InspectionDefaultArgs<ExtArgs> = {}>(args?: Subset<T, InspectionDefaultArgs<ExtArgs>>): Prisma__InspectionClient<$Result.GetResult<Prisma.$InspectionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    riskAssessment<T extends RiskAssessmentDefaultArgs<ExtArgs> = {}>(args?: Subset<T, RiskAssessmentDefaultArgs<ExtArgs>>): Prisma__RiskAssessmentClient<$Result.GetResult<Prisma.$RiskAssessmentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the InfrastructureIntelligenceAssessment model
+   */
+  interface InfrastructureIntelligenceAssessmentFieldRefs {
+    readonly id: FieldRef<"InfrastructureIntelligenceAssessment", 'String'>
+    readonly caseId: FieldRef<"InfrastructureIntelligenceAssessment", 'String'>
+    readonly inspectionId: FieldRef<"InfrastructureIntelligenceAssessment", 'String'>
+    readonly riskAssessmentId: FieldRef<"InfrastructureIntelligenceAssessment", 'String'>
+    readonly status: FieldRef<"InfrastructureIntelligenceAssessment", 'IntelligenceAssessmentStatus'>
+    readonly predictedRiskScore: FieldRef<"InfrastructureIntelligenceAssessment", 'Int'>
+    readonly predictedRiskLevel: FieldRef<"InfrastructureIntelligenceAssessment", 'RiskLevel'>
+    readonly recommendedPriority: FieldRef<"InfrastructureIntelligenceAssessment", 'PriorityLevel'>
+    readonly confidence: FieldRef<"InfrastructureIntelligenceAssessment", 'Float'>
+    readonly provider: FieldRef<"InfrastructureIntelligenceAssessment", 'String'>
+    readonly providerType: FieldRef<"InfrastructureIntelligenceAssessment", 'String'>
+    readonly modelName: FieldRef<"InfrastructureIntelligenceAssessment", 'String'>
+    readonly modelVersion: FieldRef<"InfrastructureIntelligenceAssessment", 'String'>
+    readonly modelArtifactDigest: FieldRef<"InfrastructureIntelligenceAssessment", 'String'>
+    readonly featureSchemaVersion: FieldRef<"InfrastructureIntelligenceAssessment", 'String'>
+    readonly contractVersion: FieldRef<"InfrastructureIntelligenceAssessment", 'String'>
+    readonly sourceFingerprint: FieldRef<"InfrastructureIntelligenceAssessment", 'String'>
+    readonly inferredAt: FieldRef<"InfrastructureIntelligenceAssessment", 'DateTime'>
+    readonly expiresAt: FieldRef<"InfrastructureIntelligenceAssessment", 'DateTime'>
+    readonly contributingFactors: FieldRef<"InfrastructureIntelligenceAssessment", 'Json'>
+    readonly explanation: FieldRef<"InfrastructureIntelligenceAssessment", 'String'>
+    readonly recommendedActions: FieldRef<"InfrastructureIntelligenceAssessment", 'Json'>
+    readonly abstentionReasons: FieldRef<"InfrastructureIntelligenceAssessment", 'Json'>
+    readonly reconciliation: FieldRef<"InfrastructureIntelligenceAssessment", 'Json'>
+    readonly createdAt: FieldRef<"InfrastructureIntelligenceAssessment", 'DateTime'>
+  }
+
+
+  // Custom InputTypes
+  /**
+   * InfrastructureIntelligenceAssessment findUnique
+   */
+  export type InfrastructureIntelligenceAssessmentFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InfrastructureIntelligenceAssessment
+     */
+    select?: InfrastructureIntelligenceAssessmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InfrastructureIntelligenceAssessment
+     */
+    omit?: InfrastructureIntelligenceAssessmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InfrastructureIntelligenceAssessmentInclude<ExtArgs> | null
+    /**
+     * Filter, which InfrastructureIntelligenceAssessment to fetch.
+     */
+    where: InfrastructureIntelligenceAssessmentWhereUniqueInput
+  }
+
+  /**
+   * InfrastructureIntelligenceAssessment findUniqueOrThrow
+   */
+  export type InfrastructureIntelligenceAssessmentFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InfrastructureIntelligenceAssessment
+     */
+    select?: InfrastructureIntelligenceAssessmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InfrastructureIntelligenceAssessment
+     */
+    omit?: InfrastructureIntelligenceAssessmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InfrastructureIntelligenceAssessmentInclude<ExtArgs> | null
+    /**
+     * Filter, which InfrastructureIntelligenceAssessment to fetch.
+     */
+    where: InfrastructureIntelligenceAssessmentWhereUniqueInput
+  }
+
+  /**
+   * InfrastructureIntelligenceAssessment findFirst
+   */
+  export type InfrastructureIntelligenceAssessmentFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InfrastructureIntelligenceAssessment
+     */
+    select?: InfrastructureIntelligenceAssessmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InfrastructureIntelligenceAssessment
+     */
+    omit?: InfrastructureIntelligenceAssessmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InfrastructureIntelligenceAssessmentInclude<ExtArgs> | null
+    /**
+     * Filter, which InfrastructureIntelligenceAssessment to fetch.
+     */
+    where?: InfrastructureIntelligenceAssessmentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     *
+     * Determine the order of InfrastructureIntelligenceAssessments to fetch.
+     */
+    orderBy?: InfrastructureIntelligenceAssessmentOrderByWithRelationInput | InfrastructureIntelligenceAssessmentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     *
+     * Sets the position for searching for InfrastructureIntelligenceAssessments.
+     */
+    cursor?: InfrastructureIntelligenceAssessmentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Take `±n` InfrastructureIntelligenceAssessments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Skip the first `n` InfrastructureIntelligenceAssessments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     *
+     * Filter by unique combinations of InfrastructureIntelligenceAssessments.
+     */
+    distinct?: InfrastructureIntelligenceAssessmentScalarFieldEnum | InfrastructureIntelligenceAssessmentScalarFieldEnum[]
+  }
+
+  /**
+   * InfrastructureIntelligenceAssessment findFirstOrThrow
+   */
+  export type InfrastructureIntelligenceAssessmentFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InfrastructureIntelligenceAssessment
+     */
+    select?: InfrastructureIntelligenceAssessmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InfrastructureIntelligenceAssessment
+     */
+    omit?: InfrastructureIntelligenceAssessmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InfrastructureIntelligenceAssessmentInclude<ExtArgs> | null
+    /**
+     * Filter, which InfrastructureIntelligenceAssessment to fetch.
+     */
+    where?: InfrastructureIntelligenceAssessmentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     *
+     * Determine the order of InfrastructureIntelligenceAssessments to fetch.
+     */
+    orderBy?: InfrastructureIntelligenceAssessmentOrderByWithRelationInput | InfrastructureIntelligenceAssessmentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     *
+     * Sets the position for searching for InfrastructureIntelligenceAssessments.
+     */
+    cursor?: InfrastructureIntelligenceAssessmentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Take `±n` InfrastructureIntelligenceAssessments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Skip the first `n` InfrastructureIntelligenceAssessments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     *
+     * Filter by unique combinations of InfrastructureIntelligenceAssessments.
+     */
+    distinct?: InfrastructureIntelligenceAssessmentScalarFieldEnum | InfrastructureIntelligenceAssessmentScalarFieldEnum[]
+  }
+
+  /**
+   * InfrastructureIntelligenceAssessment findMany
+   */
+  export type InfrastructureIntelligenceAssessmentFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InfrastructureIntelligenceAssessment
+     */
+    select?: InfrastructureIntelligenceAssessmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InfrastructureIntelligenceAssessment
+     */
+    omit?: InfrastructureIntelligenceAssessmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InfrastructureIntelligenceAssessmentInclude<ExtArgs> | null
+    /**
+     * Filter, which InfrastructureIntelligenceAssessments to fetch.
+     */
+    where?: InfrastructureIntelligenceAssessmentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     *
+     * Determine the order of InfrastructureIntelligenceAssessments to fetch.
+     */
+    orderBy?: InfrastructureIntelligenceAssessmentOrderByWithRelationInput | InfrastructureIntelligenceAssessmentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     *
+     * Sets the position for listing InfrastructureIntelligenceAssessments.
+     */
+    cursor?: InfrastructureIntelligenceAssessmentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Take `±n` InfrastructureIntelligenceAssessments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Skip the first `n` InfrastructureIntelligenceAssessments.
+     */
+    skip?: number
+    distinct?: InfrastructureIntelligenceAssessmentScalarFieldEnum | InfrastructureIntelligenceAssessmentScalarFieldEnum[]
+  }
+
+  /**
+   * InfrastructureIntelligenceAssessment create
+   */
+  export type InfrastructureIntelligenceAssessmentCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InfrastructureIntelligenceAssessment
+     */
+    select?: InfrastructureIntelligenceAssessmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InfrastructureIntelligenceAssessment
+     */
+    omit?: InfrastructureIntelligenceAssessmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InfrastructureIntelligenceAssessmentInclude<ExtArgs> | null
+    /**
+     * The data needed to create a InfrastructureIntelligenceAssessment.
+     */
+    data: XOR<InfrastructureIntelligenceAssessmentCreateInput, InfrastructureIntelligenceAssessmentUncheckedCreateInput>
+  }
+
+  /**
+   * InfrastructureIntelligenceAssessment createMany
+   */
+  export type InfrastructureIntelligenceAssessmentCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many InfrastructureIntelligenceAssessments.
+     */
+    data: InfrastructureIntelligenceAssessmentCreateManyInput | InfrastructureIntelligenceAssessmentCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * InfrastructureIntelligenceAssessment createManyAndReturn
+   */
+  export type InfrastructureIntelligenceAssessmentCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InfrastructureIntelligenceAssessment
+     */
+    select?: InfrastructureIntelligenceAssessmentSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the InfrastructureIntelligenceAssessment
+     */
+    omit?: InfrastructureIntelligenceAssessmentOmit<ExtArgs> | null
+    /**
+     * The data used to create many InfrastructureIntelligenceAssessments.
+     */
+    data: InfrastructureIntelligenceAssessmentCreateManyInput | InfrastructureIntelligenceAssessmentCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InfrastructureIntelligenceAssessmentIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * InfrastructureIntelligenceAssessment update
+   */
+  export type InfrastructureIntelligenceAssessmentUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InfrastructureIntelligenceAssessment
+     */
+    select?: InfrastructureIntelligenceAssessmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InfrastructureIntelligenceAssessment
+     */
+    omit?: InfrastructureIntelligenceAssessmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InfrastructureIntelligenceAssessmentInclude<ExtArgs> | null
+    /**
+     * The data needed to update a InfrastructureIntelligenceAssessment.
+     */
+    data: XOR<InfrastructureIntelligenceAssessmentUpdateInput, InfrastructureIntelligenceAssessmentUncheckedUpdateInput>
+    /**
+     * Choose, which InfrastructureIntelligenceAssessment to update.
+     */
+    where: InfrastructureIntelligenceAssessmentWhereUniqueInput
+  }
+
+  /**
+   * InfrastructureIntelligenceAssessment updateMany
+   */
+  export type InfrastructureIntelligenceAssessmentUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update InfrastructureIntelligenceAssessments.
+     */
+    data: XOR<InfrastructureIntelligenceAssessmentUpdateManyMutationInput, InfrastructureIntelligenceAssessmentUncheckedUpdateManyInput>
+    /**
+     * Filter which InfrastructureIntelligenceAssessments to update
+     */
+    where?: InfrastructureIntelligenceAssessmentWhereInput
+    /**
+     * Limit how many InfrastructureIntelligenceAssessments to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * InfrastructureIntelligenceAssessment updateManyAndReturn
+   */
+  export type InfrastructureIntelligenceAssessmentUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InfrastructureIntelligenceAssessment
+     */
+    select?: InfrastructureIntelligenceAssessmentSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the InfrastructureIntelligenceAssessment
+     */
+    omit?: InfrastructureIntelligenceAssessmentOmit<ExtArgs> | null
+    /**
+     * The data used to update InfrastructureIntelligenceAssessments.
+     */
+    data: XOR<InfrastructureIntelligenceAssessmentUpdateManyMutationInput, InfrastructureIntelligenceAssessmentUncheckedUpdateManyInput>
+    /**
+     * Filter which InfrastructureIntelligenceAssessments to update
+     */
+    where?: InfrastructureIntelligenceAssessmentWhereInput
+    /**
+     * Limit how many InfrastructureIntelligenceAssessments to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InfrastructureIntelligenceAssessmentIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * InfrastructureIntelligenceAssessment upsert
+   */
+  export type InfrastructureIntelligenceAssessmentUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InfrastructureIntelligenceAssessment
+     */
+    select?: InfrastructureIntelligenceAssessmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InfrastructureIntelligenceAssessment
+     */
+    omit?: InfrastructureIntelligenceAssessmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InfrastructureIntelligenceAssessmentInclude<ExtArgs> | null
+    /**
+     * The filter to search for the InfrastructureIntelligenceAssessment to update in case it exists.
+     */
+    where: InfrastructureIntelligenceAssessmentWhereUniqueInput
+    /**
+     * In case the InfrastructureIntelligenceAssessment found by the `where` argument doesn't exist, create a new InfrastructureIntelligenceAssessment with this data.
+     */
+    create: XOR<InfrastructureIntelligenceAssessmentCreateInput, InfrastructureIntelligenceAssessmentUncheckedCreateInput>
+    /**
+     * In case the InfrastructureIntelligenceAssessment was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<InfrastructureIntelligenceAssessmentUpdateInput, InfrastructureIntelligenceAssessmentUncheckedUpdateInput>
+  }
+
+  /**
+   * InfrastructureIntelligenceAssessment delete
+   */
+  export type InfrastructureIntelligenceAssessmentDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InfrastructureIntelligenceAssessment
+     */
+    select?: InfrastructureIntelligenceAssessmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InfrastructureIntelligenceAssessment
+     */
+    omit?: InfrastructureIntelligenceAssessmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InfrastructureIntelligenceAssessmentInclude<ExtArgs> | null
+    /**
+     * Filter which InfrastructureIntelligenceAssessment to delete.
+     */
+    where: InfrastructureIntelligenceAssessmentWhereUniqueInput
+  }
+
+  /**
+   * InfrastructureIntelligenceAssessment deleteMany
+   */
+  export type InfrastructureIntelligenceAssessmentDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which InfrastructureIntelligenceAssessments to delete
+     */
+    where?: InfrastructureIntelligenceAssessmentWhereInput
+    /**
+     * Limit how many InfrastructureIntelligenceAssessments to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * InfrastructureIntelligenceAssessment.governanceReconciliations
+   */
+  export type InfrastructureIntelligenceAssessment$governanceReconciliationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InfrastructureIntelligenceReconciliation
+     */
+    select?: InfrastructureIntelligenceReconciliationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InfrastructureIntelligenceReconciliation
+     */
+    omit?: InfrastructureIntelligenceReconciliationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InfrastructureIntelligenceReconciliationInclude<ExtArgs> | null
+    where?: InfrastructureIntelligenceReconciliationWhereInput
+    orderBy?: InfrastructureIntelligenceReconciliationOrderByWithRelationInput | InfrastructureIntelligenceReconciliationOrderByWithRelationInput[]
+    cursor?: InfrastructureIntelligenceReconciliationWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: InfrastructureIntelligenceReconciliationScalarFieldEnum | InfrastructureIntelligenceReconciliationScalarFieldEnum[]
+  }
+
+  /**
+   * InfrastructureIntelligenceAssessment without action
+   */
+  export type InfrastructureIntelligenceAssessmentDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InfrastructureIntelligenceAssessment
+     */
+    select?: InfrastructureIntelligenceAssessmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InfrastructureIntelligenceAssessment
+     */
+    omit?: InfrastructureIntelligenceAssessmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InfrastructureIntelligenceAssessmentInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model InfrastructureIntelligenceReconciliation
+   */
+
+  export type AggregateInfrastructureIntelligenceReconciliation = {
+    _count: InfrastructureIntelligenceReconciliationCountAggregateOutputType | null
+    _min: InfrastructureIntelligenceReconciliationMinAggregateOutputType | null
+    _max: InfrastructureIntelligenceReconciliationMaxAggregateOutputType | null
+  }
+
+  export type InfrastructureIntelligenceReconciliationMinAggregateOutputType = {
+    id: string | null
+    intelligenceAssessmentId: string | null
+    caseId: string | null
+    contractVersion: string | null
+    governanceFingerprint: string | null
+    policyResolutionStatus: string | null
+    reconciledAt: Date | null
+    createdAt: Date | null
+  }
+
+  export type InfrastructureIntelligenceReconciliationMaxAggregateOutputType = {
+    id: string | null
+    intelligenceAssessmentId: string | null
+    caseId: string | null
+    contractVersion: string | null
+    governanceFingerprint: string | null
+    policyResolutionStatus: string | null
+    reconciledAt: Date | null
+    createdAt: Date | null
+  }
+
+  export type InfrastructureIntelligenceReconciliationCountAggregateOutputType = {
+    id: number
+    intelligenceAssessmentId: number
+    caseId: number
+    contractVersion: number
+    governanceFingerprint: number
+    policyResolutionStatus: number
+    policySnapshot: number
+    reconciledActions: number
+    issues: number
+    reconciledAt: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type InfrastructureIntelligenceReconciliationMinAggregateInputType = {
+    id?: true
+    intelligenceAssessmentId?: true
+    caseId?: true
+    contractVersion?: true
+    governanceFingerprint?: true
+    policyResolutionStatus?: true
+    reconciledAt?: true
+    createdAt?: true
+  }
+
+  export type InfrastructureIntelligenceReconciliationMaxAggregateInputType = {
+    id?: true
+    intelligenceAssessmentId?: true
+    caseId?: true
+    contractVersion?: true
+    governanceFingerprint?: true
+    policyResolutionStatus?: true
+    reconciledAt?: true
+    createdAt?: true
+  }
+
+  export type InfrastructureIntelligenceReconciliationCountAggregateInputType = {
+    id?: true
+    intelligenceAssessmentId?: true
+    caseId?: true
+    contractVersion?: true
+    governanceFingerprint?: true
+    policyResolutionStatus?: true
+    policySnapshot?: true
+    reconciledActions?: true
+    issues?: true
+    reconciledAt?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type InfrastructureIntelligenceReconciliationAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which InfrastructureIntelligenceReconciliation to aggregate.
+     */
+    where?: InfrastructureIntelligenceReconciliationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     *
+     * Determine the order of InfrastructureIntelligenceReconciliations to fetch.
+     */
+    orderBy?: InfrastructureIntelligenceReconciliationOrderByWithRelationInput | InfrastructureIntelligenceReconciliationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     *
+     * Sets the start position
+     */
+    cursor?: InfrastructureIntelligenceReconciliationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Take `±n` InfrastructureIntelligenceReconciliations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Skip the first `n` InfrastructureIntelligenceReconciliations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Count returned InfrastructureIntelligenceReconciliations
+    **/
+    _count?: true | InfrastructureIntelligenceReconciliationCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Select which fields to find the minimum value
+    **/
+    _min?: InfrastructureIntelligenceReconciliationMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Select which fields to find the maximum value
+    **/
+    _max?: InfrastructureIntelligenceReconciliationMaxAggregateInputType
+  }
+
+  export type GetInfrastructureIntelligenceReconciliationAggregateType<T extends InfrastructureIntelligenceReconciliationAggregateArgs> = {
+        [P in keyof T & keyof AggregateInfrastructureIntelligenceReconciliation]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateInfrastructureIntelligenceReconciliation[P]>
+      : GetScalarType<T[P], AggregateInfrastructureIntelligenceReconciliation[P]>
+  }
+
+
+
+
+  export type InfrastructureIntelligenceReconciliationGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: InfrastructureIntelligenceReconciliationWhereInput
+    orderBy?: InfrastructureIntelligenceReconciliationOrderByWithAggregationInput | InfrastructureIntelligenceReconciliationOrderByWithAggregationInput[]
+    by: InfrastructureIntelligenceReconciliationScalarFieldEnum[] | InfrastructureIntelligenceReconciliationScalarFieldEnum
+    having?: InfrastructureIntelligenceReconciliationScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: InfrastructureIntelligenceReconciliationCountAggregateInputType | true
+    _min?: InfrastructureIntelligenceReconciliationMinAggregateInputType
+    _max?: InfrastructureIntelligenceReconciliationMaxAggregateInputType
+  }
+
+  export type InfrastructureIntelligenceReconciliationGroupByOutputType = {
+    id: string
+    intelligenceAssessmentId: string
+    caseId: string
+    contractVersion: string
+    governanceFingerprint: string
+    policyResolutionStatus: string
+    policySnapshot: JsonValue
+    reconciledActions: JsonValue
+    issues: JsonValue
+    reconciledAt: Date
+    createdAt: Date
+    _count: InfrastructureIntelligenceReconciliationCountAggregateOutputType | null
+    _min: InfrastructureIntelligenceReconciliationMinAggregateOutputType | null
+    _max: InfrastructureIntelligenceReconciliationMaxAggregateOutputType | null
+  }
+
+  type GetInfrastructureIntelligenceReconciliationGroupByPayload<T extends InfrastructureIntelligenceReconciliationGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<InfrastructureIntelligenceReconciliationGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof InfrastructureIntelligenceReconciliationGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], InfrastructureIntelligenceReconciliationGroupByOutputType[P]>
+            : GetScalarType<T[P], InfrastructureIntelligenceReconciliationGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type InfrastructureIntelligenceReconciliationSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    intelligenceAssessmentId?: boolean
+    caseId?: boolean
+    contractVersion?: boolean
+    governanceFingerprint?: boolean
+    policyResolutionStatus?: boolean
+    policySnapshot?: boolean
+    reconciledActions?: boolean
+    issues?: boolean
+    reconciledAt?: boolean
+    createdAt?: boolean
+    intelligenceAssessment?: boolean | InfrastructureIntelligenceAssessmentDefaultArgs<ExtArgs>
+    case?: boolean | CaseDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["infrastructureIntelligenceReconciliation"]>
+
+  export type InfrastructureIntelligenceReconciliationSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    intelligenceAssessmentId?: boolean
+    caseId?: boolean
+    contractVersion?: boolean
+    governanceFingerprint?: boolean
+    policyResolutionStatus?: boolean
+    policySnapshot?: boolean
+    reconciledActions?: boolean
+    issues?: boolean
+    reconciledAt?: boolean
+    createdAt?: boolean
+    intelligenceAssessment?: boolean | InfrastructureIntelligenceAssessmentDefaultArgs<ExtArgs>
+    case?: boolean | CaseDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["infrastructureIntelligenceReconciliation"]>
+
+  export type InfrastructureIntelligenceReconciliationSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    intelligenceAssessmentId?: boolean
+    caseId?: boolean
+    contractVersion?: boolean
+    governanceFingerprint?: boolean
+    policyResolutionStatus?: boolean
+    policySnapshot?: boolean
+    reconciledActions?: boolean
+    issues?: boolean
+    reconciledAt?: boolean
+    createdAt?: boolean
+    intelligenceAssessment?: boolean | InfrastructureIntelligenceAssessmentDefaultArgs<ExtArgs>
+    case?: boolean | CaseDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["infrastructureIntelligenceReconciliation"]>
+
+  export type InfrastructureIntelligenceReconciliationSelectScalar = {
+    id?: boolean
+    intelligenceAssessmentId?: boolean
+    caseId?: boolean
+    contractVersion?: boolean
+    governanceFingerprint?: boolean
+    policyResolutionStatus?: boolean
+    policySnapshot?: boolean
+    reconciledActions?: boolean
+    issues?: boolean
+    reconciledAt?: boolean
+    createdAt?: boolean
+  }
+
+  export type InfrastructureIntelligenceReconciliationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "intelligenceAssessmentId" | "caseId" | "contractVersion" | "governanceFingerprint" | "policyResolutionStatus" | "policySnapshot" | "reconciledActions" | "issues" | "reconciledAt" | "createdAt", ExtArgs["result"]["infrastructureIntelligenceReconciliation"]>
+  export type InfrastructureIntelligenceReconciliationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    intelligenceAssessment?: boolean | InfrastructureIntelligenceAssessmentDefaultArgs<ExtArgs>
+    case?: boolean | CaseDefaultArgs<ExtArgs>
+  }
+  export type InfrastructureIntelligenceReconciliationIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    intelligenceAssessment?: boolean | InfrastructureIntelligenceAssessmentDefaultArgs<ExtArgs>
+    case?: boolean | CaseDefaultArgs<ExtArgs>
+  }
+  export type InfrastructureIntelligenceReconciliationIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    intelligenceAssessment?: boolean | InfrastructureIntelligenceAssessmentDefaultArgs<ExtArgs>
+    case?: boolean | CaseDefaultArgs<ExtArgs>
+  }
+
+  export type $InfrastructureIntelligenceReconciliationPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "InfrastructureIntelligenceReconciliation"
+    objects: {
+      intelligenceAssessment: Prisma.$InfrastructureIntelligenceAssessmentPayload<ExtArgs>
+      case: Prisma.$CasePayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      intelligenceAssessmentId: string
+      caseId: string
+      contractVersion: string
+      governanceFingerprint: string
+      policyResolutionStatus: string
+      policySnapshot: Prisma.JsonValue
+      reconciledActions: Prisma.JsonValue
+      issues: Prisma.JsonValue
+      reconciledAt: Date
+      createdAt: Date
+    }, ExtArgs["result"]["infrastructureIntelligenceReconciliation"]>
+    composites: {}
+  }
+
+  type InfrastructureIntelligenceReconciliationGetPayload<S extends boolean | null | undefined | InfrastructureIntelligenceReconciliationDefaultArgs> = $Result.GetResult<Prisma.$InfrastructureIntelligenceReconciliationPayload, S>
+
+  type InfrastructureIntelligenceReconciliationCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<InfrastructureIntelligenceReconciliationFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: InfrastructureIntelligenceReconciliationCountAggregateInputType | true
+    }
+
+  export interface InfrastructureIntelligenceReconciliationDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['InfrastructureIntelligenceReconciliation'], meta: { name: 'InfrastructureIntelligenceReconciliation' } }
+    /**
+     * Find zero or one InfrastructureIntelligenceReconciliation that matches the filter.
+     * @param {InfrastructureIntelligenceReconciliationFindUniqueArgs} args - Arguments to find a InfrastructureIntelligenceReconciliation
+     * @example
+     * // Get one InfrastructureIntelligenceReconciliation
+     * const infrastructureIntelligenceReconciliation = await prisma.infrastructureIntelligenceReconciliation.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends InfrastructureIntelligenceReconciliationFindUniqueArgs>(args: SelectSubset<T, InfrastructureIntelligenceReconciliationFindUniqueArgs<ExtArgs>>): Prisma__InfrastructureIntelligenceReconciliationClient<$Result.GetResult<Prisma.$InfrastructureIntelligenceReconciliationPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one InfrastructureIntelligenceReconciliation that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {InfrastructureIntelligenceReconciliationFindUniqueOrThrowArgs} args - Arguments to find a InfrastructureIntelligenceReconciliation
+     * @example
+     * // Get one InfrastructureIntelligenceReconciliation
+     * const infrastructureIntelligenceReconciliation = await prisma.infrastructureIntelligenceReconciliation.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends InfrastructureIntelligenceReconciliationFindUniqueOrThrowArgs>(args: SelectSubset<T, InfrastructureIntelligenceReconciliationFindUniqueOrThrowArgs<ExtArgs>>): Prisma__InfrastructureIntelligenceReconciliationClient<$Result.GetResult<Prisma.$InfrastructureIntelligenceReconciliationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first InfrastructureIntelligenceReconciliation that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InfrastructureIntelligenceReconciliationFindFirstArgs} args - Arguments to find a InfrastructureIntelligenceReconciliation
+     * @example
+     * // Get one InfrastructureIntelligenceReconciliation
+     * const infrastructureIntelligenceReconciliation = await prisma.infrastructureIntelligenceReconciliation.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends InfrastructureIntelligenceReconciliationFindFirstArgs>(args?: SelectSubset<T, InfrastructureIntelligenceReconciliationFindFirstArgs<ExtArgs>>): Prisma__InfrastructureIntelligenceReconciliationClient<$Result.GetResult<Prisma.$InfrastructureIntelligenceReconciliationPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first InfrastructureIntelligenceReconciliation that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InfrastructureIntelligenceReconciliationFindFirstOrThrowArgs} args - Arguments to find a InfrastructureIntelligenceReconciliation
+     * @example
+     * // Get one InfrastructureIntelligenceReconciliation
+     * const infrastructureIntelligenceReconciliation = await prisma.infrastructureIntelligenceReconciliation.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends InfrastructureIntelligenceReconciliationFindFirstOrThrowArgs>(args?: SelectSubset<T, InfrastructureIntelligenceReconciliationFindFirstOrThrowArgs<ExtArgs>>): Prisma__InfrastructureIntelligenceReconciliationClient<$Result.GetResult<Prisma.$InfrastructureIntelligenceReconciliationPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more InfrastructureIntelligenceReconciliations that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InfrastructureIntelligenceReconciliationFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all InfrastructureIntelligenceReconciliations
+     * const infrastructureIntelligenceReconciliations = await prisma.infrastructureIntelligenceReconciliation.findMany()
+     *
+     * // Get first 10 InfrastructureIntelligenceReconciliations
+     * const infrastructureIntelligenceReconciliations = await prisma.infrastructureIntelligenceReconciliation.findMany({ take: 10 })
+     *
+     * // Only select the `id`
+     * const infrastructureIntelligenceReconciliationWithIdOnly = await prisma.infrastructureIntelligenceReconciliation.findMany({ select: { id: true } })
+     *
+     */
+    findMany<T extends InfrastructureIntelligenceReconciliationFindManyArgs>(args?: SelectSubset<T, InfrastructureIntelligenceReconciliationFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InfrastructureIntelligenceReconciliationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a InfrastructureIntelligenceReconciliation.
+     * @param {InfrastructureIntelligenceReconciliationCreateArgs} args - Arguments to create a InfrastructureIntelligenceReconciliation.
+     * @example
+     * // Create one InfrastructureIntelligenceReconciliation
+     * const InfrastructureIntelligenceReconciliation = await prisma.infrastructureIntelligenceReconciliation.create({
+     *   data: {
+     *     // ... data to create a InfrastructureIntelligenceReconciliation
+     *   }
+     * })
+     *
+     */
+    create<T extends InfrastructureIntelligenceReconciliationCreateArgs>(args: SelectSubset<T, InfrastructureIntelligenceReconciliationCreateArgs<ExtArgs>>): Prisma__InfrastructureIntelligenceReconciliationClient<$Result.GetResult<Prisma.$InfrastructureIntelligenceReconciliationPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many InfrastructureIntelligenceReconciliations.
+     * @param {InfrastructureIntelligenceReconciliationCreateManyArgs} args - Arguments to create many InfrastructureIntelligenceReconciliations.
+     * @example
+     * // Create many InfrastructureIntelligenceReconciliations
+     * const infrastructureIntelligenceReconciliation = await prisma.infrastructureIntelligenceReconciliation.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *
+     */
+    createMany<T extends InfrastructureIntelligenceReconciliationCreateManyArgs>(args?: SelectSubset<T, InfrastructureIntelligenceReconciliationCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many InfrastructureIntelligenceReconciliations and returns the data saved in the database.
+     * @param {InfrastructureIntelligenceReconciliationCreateManyAndReturnArgs} args - Arguments to create many InfrastructureIntelligenceReconciliations.
+     * @example
+     * // Create many InfrastructureIntelligenceReconciliations
+     * const infrastructureIntelligenceReconciliation = await prisma.infrastructureIntelligenceReconciliation.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *
+     * // Create many InfrastructureIntelligenceReconciliations and only return the `id`
+     * const infrastructureIntelligenceReconciliationWithIdOnly = await prisma.infrastructureIntelligenceReconciliation.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     *
+     */
+    createManyAndReturn<T extends InfrastructureIntelligenceReconciliationCreateManyAndReturnArgs>(args?: SelectSubset<T, InfrastructureIntelligenceReconciliationCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InfrastructureIntelligenceReconciliationPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a InfrastructureIntelligenceReconciliation.
+     * @param {InfrastructureIntelligenceReconciliationDeleteArgs} args - Arguments to delete one InfrastructureIntelligenceReconciliation.
+     * @example
+     * // Delete one InfrastructureIntelligenceReconciliation
+     * const InfrastructureIntelligenceReconciliation = await prisma.infrastructureIntelligenceReconciliation.delete({
+     *   where: {
+     *     // ... filter to delete one InfrastructureIntelligenceReconciliation
+     *   }
+     * })
+     *
+     */
+    delete<T extends InfrastructureIntelligenceReconciliationDeleteArgs>(args: SelectSubset<T, InfrastructureIntelligenceReconciliationDeleteArgs<ExtArgs>>): Prisma__InfrastructureIntelligenceReconciliationClient<$Result.GetResult<Prisma.$InfrastructureIntelligenceReconciliationPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one InfrastructureIntelligenceReconciliation.
+     * @param {InfrastructureIntelligenceReconciliationUpdateArgs} args - Arguments to update one InfrastructureIntelligenceReconciliation.
+     * @example
+     * // Update one InfrastructureIntelligenceReconciliation
+     * const infrastructureIntelligenceReconciliation = await prisma.infrastructureIntelligenceReconciliation.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     *
+     */
+    update<T extends InfrastructureIntelligenceReconciliationUpdateArgs>(args: SelectSubset<T, InfrastructureIntelligenceReconciliationUpdateArgs<ExtArgs>>): Prisma__InfrastructureIntelligenceReconciliationClient<$Result.GetResult<Prisma.$InfrastructureIntelligenceReconciliationPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more InfrastructureIntelligenceReconciliations.
+     * @param {InfrastructureIntelligenceReconciliationDeleteManyArgs} args - Arguments to filter InfrastructureIntelligenceReconciliations to delete.
+     * @example
+     * // Delete a few InfrastructureIntelligenceReconciliations
+     * const { count } = await prisma.infrastructureIntelligenceReconciliation.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     *
+     */
+    deleteMany<T extends InfrastructureIntelligenceReconciliationDeleteManyArgs>(args?: SelectSubset<T, InfrastructureIntelligenceReconciliationDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more InfrastructureIntelligenceReconciliations.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InfrastructureIntelligenceReconciliationUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many InfrastructureIntelligenceReconciliations
+     * const infrastructureIntelligenceReconciliation = await prisma.infrastructureIntelligenceReconciliation.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     *
+     */
+    updateMany<T extends InfrastructureIntelligenceReconciliationUpdateManyArgs>(args: SelectSubset<T, InfrastructureIntelligenceReconciliationUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more InfrastructureIntelligenceReconciliations and returns the data updated in the database.
+     * @param {InfrastructureIntelligenceReconciliationUpdateManyAndReturnArgs} args - Arguments to update many InfrastructureIntelligenceReconciliations.
+     * @example
+     * // Update many InfrastructureIntelligenceReconciliations
+     * const infrastructureIntelligenceReconciliation = await prisma.infrastructureIntelligenceReconciliation.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *
+     * // Update zero or more InfrastructureIntelligenceReconciliations and only return the `id`
+     * const infrastructureIntelligenceReconciliationWithIdOnly = await prisma.infrastructureIntelligenceReconciliation.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     *
+     */
+    updateManyAndReturn<T extends InfrastructureIntelligenceReconciliationUpdateManyAndReturnArgs>(args: SelectSubset<T, InfrastructureIntelligenceReconciliationUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InfrastructureIntelligenceReconciliationPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one InfrastructureIntelligenceReconciliation.
+     * @param {InfrastructureIntelligenceReconciliationUpsertArgs} args - Arguments to update or create a InfrastructureIntelligenceReconciliation.
+     * @example
+     * // Update or create a InfrastructureIntelligenceReconciliation
+     * const infrastructureIntelligenceReconciliation = await prisma.infrastructureIntelligenceReconciliation.upsert({
+     *   create: {
+     *     // ... data to create a InfrastructureIntelligenceReconciliation
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the InfrastructureIntelligenceReconciliation we want to update
+     *   }
+     * })
+     */
+    upsert<T extends InfrastructureIntelligenceReconciliationUpsertArgs>(args: SelectSubset<T, InfrastructureIntelligenceReconciliationUpsertArgs<ExtArgs>>): Prisma__InfrastructureIntelligenceReconciliationClient<$Result.GetResult<Prisma.$InfrastructureIntelligenceReconciliationPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of InfrastructureIntelligenceReconciliations.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InfrastructureIntelligenceReconciliationCountArgs} args - Arguments to filter InfrastructureIntelligenceReconciliations to count.
+     * @example
+     * // Count the number of InfrastructureIntelligenceReconciliations
+     * const count = await prisma.infrastructureIntelligenceReconciliation.count({
+     *   where: {
+     *     // ... the filter for the InfrastructureIntelligenceReconciliations we want to count
+     *   }
+     * })
+    **/
+    count<T extends InfrastructureIntelligenceReconciliationCountArgs>(
+      args?: Subset<T, InfrastructureIntelligenceReconciliationCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], InfrastructureIntelligenceReconciliationCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a InfrastructureIntelligenceReconciliation.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InfrastructureIntelligenceReconciliationAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends InfrastructureIntelligenceReconciliationAggregateArgs>(args: Subset<T, InfrastructureIntelligenceReconciliationAggregateArgs>): Prisma.PrismaPromise<GetInfrastructureIntelligenceReconciliationAggregateType<T>>
+
+    /**
+     * Group by InfrastructureIntelligenceReconciliation.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InfrastructureIntelligenceReconciliationGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     *
+    **/
+    groupBy<
+      T extends InfrastructureIntelligenceReconciliationGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: InfrastructureIntelligenceReconciliationGroupByArgs['orderBy'] }
+        : { orderBy?: InfrastructureIntelligenceReconciliationGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, InfrastructureIntelligenceReconciliationGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetInfrastructureIntelligenceReconciliationGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the InfrastructureIntelligenceReconciliation model
+   */
+  readonly fields: InfrastructureIntelligenceReconciliationFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for InfrastructureIntelligenceReconciliation.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__InfrastructureIntelligenceReconciliationClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    intelligenceAssessment<T extends InfrastructureIntelligenceAssessmentDefaultArgs<ExtArgs> = {}>(args?: Subset<T, InfrastructureIntelligenceAssessmentDefaultArgs<ExtArgs>>): Prisma__InfrastructureIntelligenceAssessmentClient<$Result.GetResult<Prisma.$InfrastructureIntelligenceAssessmentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    case<T extends CaseDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CaseDefaultArgs<ExtArgs>>): Prisma__CaseClient<$Result.GetResult<Prisma.$CasePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the InfrastructureIntelligenceReconciliation model
+   */
+  interface InfrastructureIntelligenceReconciliationFieldRefs {
+    readonly id: FieldRef<"InfrastructureIntelligenceReconciliation", 'String'>
+    readonly intelligenceAssessmentId: FieldRef<"InfrastructureIntelligenceReconciliation", 'String'>
+    readonly caseId: FieldRef<"InfrastructureIntelligenceReconciliation", 'String'>
+    readonly contractVersion: FieldRef<"InfrastructureIntelligenceReconciliation", 'String'>
+    readonly governanceFingerprint: FieldRef<"InfrastructureIntelligenceReconciliation", 'String'>
+    readonly policyResolutionStatus: FieldRef<"InfrastructureIntelligenceReconciliation", 'String'>
+    readonly policySnapshot: FieldRef<"InfrastructureIntelligenceReconciliation", 'Json'>
+    readonly reconciledActions: FieldRef<"InfrastructureIntelligenceReconciliation", 'Json'>
+    readonly issues: FieldRef<"InfrastructureIntelligenceReconciliation", 'Json'>
+    readonly reconciledAt: FieldRef<"InfrastructureIntelligenceReconciliation", 'DateTime'>
+    readonly createdAt: FieldRef<"InfrastructureIntelligenceReconciliation", 'DateTime'>
+  }
+
+
+  // Custom InputTypes
+  /**
+   * InfrastructureIntelligenceReconciliation findUnique
+   */
+  export type InfrastructureIntelligenceReconciliationFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InfrastructureIntelligenceReconciliation
+     */
+    select?: InfrastructureIntelligenceReconciliationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InfrastructureIntelligenceReconciliation
+     */
+    omit?: InfrastructureIntelligenceReconciliationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InfrastructureIntelligenceReconciliationInclude<ExtArgs> | null
+    /**
+     * Filter, which InfrastructureIntelligenceReconciliation to fetch.
+     */
+    where: InfrastructureIntelligenceReconciliationWhereUniqueInput
+  }
+
+  /**
+   * InfrastructureIntelligenceReconciliation findUniqueOrThrow
+   */
+  export type InfrastructureIntelligenceReconciliationFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InfrastructureIntelligenceReconciliation
+     */
+    select?: InfrastructureIntelligenceReconciliationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InfrastructureIntelligenceReconciliation
+     */
+    omit?: InfrastructureIntelligenceReconciliationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InfrastructureIntelligenceReconciliationInclude<ExtArgs> | null
+    /**
+     * Filter, which InfrastructureIntelligenceReconciliation to fetch.
+     */
+    where: InfrastructureIntelligenceReconciliationWhereUniqueInput
+  }
+
+  /**
+   * InfrastructureIntelligenceReconciliation findFirst
+   */
+  export type InfrastructureIntelligenceReconciliationFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InfrastructureIntelligenceReconciliation
+     */
+    select?: InfrastructureIntelligenceReconciliationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InfrastructureIntelligenceReconciliation
+     */
+    omit?: InfrastructureIntelligenceReconciliationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InfrastructureIntelligenceReconciliationInclude<ExtArgs> | null
+    /**
+     * Filter, which InfrastructureIntelligenceReconciliation to fetch.
+     */
+    where?: InfrastructureIntelligenceReconciliationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     *
+     * Determine the order of InfrastructureIntelligenceReconciliations to fetch.
+     */
+    orderBy?: InfrastructureIntelligenceReconciliationOrderByWithRelationInput | InfrastructureIntelligenceReconciliationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     *
+     * Sets the position for searching for InfrastructureIntelligenceReconciliations.
+     */
+    cursor?: InfrastructureIntelligenceReconciliationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Take `±n` InfrastructureIntelligenceReconciliations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Skip the first `n` InfrastructureIntelligenceReconciliations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     *
+     * Filter by unique combinations of InfrastructureIntelligenceReconciliations.
+     */
+    distinct?: InfrastructureIntelligenceReconciliationScalarFieldEnum | InfrastructureIntelligenceReconciliationScalarFieldEnum[]
+  }
+
+  /**
+   * InfrastructureIntelligenceReconciliation findFirstOrThrow
+   */
+  export type InfrastructureIntelligenceReconciliationFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InfrastructureIntelligenceReconciliation
+     */
+    select?: InfrastructureIntelligenceReconciliationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InfrastructureIntelligenceReconciliation
+     */
+    omit?: InfrastructureIntelligenceReconciliationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InfrastructureIntelligenceReconciliationInclude<ExtArgs> | null
+    /**
+     * Filter, which InfrastructureIntelligenceReconciliation to fetch.
+     */
+    where?: InfrastructureIntelligenceReconciliationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     *
+     * Determine the order of InfrastructureIntelligenceReconciliations to fetch.
+     */
+    orderBy?: InfrastructureIntelligenceReconciliationOrderByWithRelationInput | InfrastructureIntelligenceReconciliationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     *
+     * Sets the position for searching for InfrastructureIntelligenceReconciliations.
+     */
+    cursor?: InfrastructureIntelligenceReconciliationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Take `±n` InfrastructureIntelligenceReconciliations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Skip the first `n` InfrastructureIntelligenceReconciliations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     *
+     * Filter by unique combinations of InfrastructureIntelligenceReconciliations.
+     */
+    distinct?: InfrastructureIntelligenceReconciliationScalarFieldEnum | InfrastructureIntelligenceReconciliationScalarFieldEnum[]
+  }
+
+  /**
+   * InfrastructureIntelligenceReconciliation findMany
+   */
+  export type InfrastructureIntelligenceReconciliationFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InfrastructureIntelligenceReconciliation
+     */
+    select?: InfrastructureIntelligenceReconciliationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InfrastructureIntelligenceReconciliation
+     */
+    omit?: InfrastructureIntelligenceReconciliationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InfrastructureIntelligenceReconciliationInclude<ExtArgs> | null
+    /**
+     * Filter, which InfrastructureIntelligenceReconciliations to fetch.
+     */
+    where?: InfrastructureIntelligenceReconciliationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     *
+     * Determine the order of InfrastructureIntelligenceReconciliations to fetch.
+     */
+    orderBy?: InfrastructureIntelligenceReconciliationOrderByWithRelationInput | InfrastructureIntelligenceReconciliationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     *
+     * Sets the position for listing InfrastructureIntelligenceReconciliations.
+     */
+    cursor?: InfrastructureIntelligenceReconciliationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Take `±n` InfrastructureIntelligenceReconciliations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Skip the first `n` InfrastructureIntelligenceReconciliations.
+     */
+    skip?: number
+    distinct?: InfrastructureIntelligenceReconciliationScalarFieldEnum | InfrastructureIntelligenceReconciliationScalarFieldEnum[]
+  }
+
+  /**
+   * InfrastructureIntelligenceReconciliation create
+   */
+  export type InfrastructureIntelligenceReconciliationCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InfrastructureIntelligenceReconciliation
+     */
+    select?: InfrastructureIntelligenceReconciliationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InfrastructureIntelligenceReconciliation
+     */
+    omit?: InfrastructureIntelligenceReconciliationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InfrastructureIntelligenceReconciliationInclude<ExtArgs> | null
+    /**
+     * The data needed to create a InfrastructureIntelligenceReconciliation.
+     */
+    data: XOR<InfrastructureIntelligenceReconciliationCreateInput, InfrastructureIntelligenceReconciliationUncheckedCreateInput>
+  }
+
+  /**
+   * InfrastructureIntelligenceReconciliation createMany
+   */
+  export type InfrastructureIntelligenceReconciliationCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many InfrastructureIntelligenceReconciliations.
+     */
+    data: InfrastructureIntelligenceReconciliationCreateManyInput | InfrastructureIntelligenceReconciliationCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * InfrastructureIntelligenceReconciliation createManyAndReturn
+   */
+  export type InfrastructureIntelligenceReconciliationCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InfrastructureIntelligenceReconciliation
+     */
+    select?: InfrastructureIntelligenceReconciliationSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the InfrastructureIntelligenceReconciliation
+     */
+    omit?: InfrastructureIntelligenceReconciliationOmit<ExtArgs> | null
+    /**
+     * The data used to create many InfrastructureIntelligenceReconciliations.
+     */
+    data: InfrastructureIntelligenceReconciliationCreateManyInput | InfrastructureIntelligenceReconciliationCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InfrastructureIntelligenceReconciliationIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * InfrastructureIntelligenceReconciliation update
+   */
+  export type InfrastructureIntelligenceReconciliationUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InfrastructureIntelligenceReconciliation
+     */
+    select?: InfrastructureIntelligenceReconciliationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InfrastructureIntelligenceReconciliation
+     */
+    omit?: InfrastructureIntelligenceReconciliationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InfrastructureIntelligenceReconciliationInclude<ExtArgs> | null
+    /**
+     * The data needed to update a InfrastructureIntelligenceReconciliation.
+     */
+    data: XOR<InfrastructureIntelligenceReconciliationUpdateInput, InfrastructureIntelligenceReconciliationUncheckedUpdateInput>
+    /**
+     * Choose, which InfrastructureIntelligenceReconciliation to update.
+     */
+    where: InfrastructureIntelligenceReconciliationWhereUniqueInput
+  }
+
+  /**
+   * InfrastructureIntelligenceReconciliation updateMany
+   */
+  export type InfrastructureIntelligenceReconciliationUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update InfrastructureIntelligenceReconciliations.
+     */
+    data: XOR<InfrastructureIntelligenceReconciliationUpdateManyMutationInput, InfrastructureIntelligenceReconciliationUncheckedUpdateManyInput>
+    /**
+     * Filter which InfrastructureIntelligenceReconciliations to update
+     */
+    where?: InfrastructureIntelligenceReconciliationWhereInput
+    /**
+     * Limit how many InfrastructureIntelligenceReconciliations to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * InfrastructureIntelligenceReconciliation updateManyAndReturn
+   */
+  export type InfrastructureIntelligenceReconciliationUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InfrastructureIntelligenceReconciliation
+     */
+    select?: InfrastructureIntelligenceReconciliationSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the InfrastructureIntelligenceReconciliation
+     */
+    omit?: InfrastructureIntelligenceReconciliationOmit<ExtArgs> | null
+    /**
+     * The data used to update InfrastructureIntelligenceReconciliations.
+     */
+    data: XOR<InfrastructureIntelligenceReconciliationUpdateManyMutationInput, InfrastructureIntelligenceReconciliationUncheckedUpdateManyInput>
+    /**
+     * Filter which InfrastructureIntelligenceReconciliations to update
+     */
+    where?: InfrastructureIntelligenceReconciliationWhereInput
+    /**
+     * Limit how many InfrastructureIntelligenceReconciliations to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InfrastructureIntelligenceReconciliationIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * InfrastructureIntelligenceReconciliation upsert
+   */
+  export type InfrastructureIntelligenceReconciliationUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InfrastructureIntelligenceReconciliation
+     */
+    select?: InfrastructureIntelligenceReconciliationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InfrastructureIntelligenceReconciliation
+     */
+    omit?: InfrastructureIntelligenceReconciliationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InfrastructureIntelligenceReconciliationInclude<ExtArgs> | null
+    /**
+     * The filter to search for the InfrastructureIntelligenceReconciliation to update in case it exists.
+     */
+    where: InfrastructureIntelligenceReconciliationWhereUniqueInput
+    /**
+     * In case the InfrastructureIntelligenceReconciliation found by the `where` argument doesn't exist, create a new InfrastructureIntelligenceReconciliation with this data.
+     */
+    create: XOR<InfrastructureIntelligenceReconciliationCreateInput, InfrastructureIntelligenceReconciliationUncheckedCreateInput>
+    /**
+     * In case the InfrastructureIntelligenceReconciliation was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<InfrastructureIntelligenceReconciliationUpdateInput, InfrastructureIntelligenceReconciliationUncheckedUpdateInput>
+  }
+
+  /**
+   * InfrastructureIntelligenceReconciliation delete
+   */
+  export type InfrastructureIntelligenceReconciliationDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InfrastructureIntelligenceReconciliation
+     */
+    select?: InfrastructureIntelligenceReconciliationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InfrastructureIntelligenceReconciliation
+     */
+    omit?: InfrastructureIntelligenceReconciliationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InfrastructureIntelligenceReconciliationInclude<ExtArgs> | null
+    /**
+     * Filter which InfrastructureIntelligenceReconciliation to delete.
+     */
+    where: InfrastructureIntelligenceReconciliationWhereUniqueInput
+  }
+
+  /**
+   * InfrastructureIntelligenceReconciliation deleteMany
+   */
+  export type InfrastructureIntelligenceReconciliationDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which InfrastructureIntelligenceReconciliations to delete
+     */
+    where?: InfrastructureIntelligenceReconciliationWhereInput
+    /**
+     * Limit how many InfrastructureIntelligenceReconciliations to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * InfrastructureIntelligenceReconciliation without action
+   */
+  export type InfrastructureIntelligenceReconciliationDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InfrastructureIntelligenceReconciliation
+     */
+    select?: InfrastructureIntelligenceReconciliationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InfrastructureIntelligenceReconciliation
+     */
+    omit?: InfrastructureIntelligenceReconciliationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InfrastructureIntelligenceReconciliationInclude<ExtArgs> | null
   }
 
 
@@ -22919,55 +25813,55 @@ export namespace Prisma {
     where?: OperationalResponsePlanWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of OperationalResponsePlans to fetch.
      */
     orderBy?: OperationalResponsePlanOrderByWithRelationInput | OperationalResponsePlanOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the start position
      */
     cursor?: OperationalResponsePlanWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` OperationalResponsePlans from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` OperationalResponsePlans.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Count returned OperationalResponsePlans
     **/
     _count?: true | OperationalResponsePlanCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to average
     **/
     _avg?: OperationalResponsePlanAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to sum
     **/
     _sum?: OperationalResponsePlanSumAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to find the minimum value
     **/
     _min?: OperationalResponsePlanMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to find the maximum value
     **/
     _max?: OperationalResponsePlanMaxAggregateInputType
@@ -23255,13 +26149,13 @@ export namespace Prisma {
      * @example
      * // Get all OperationalResponsePlans
      * const operationalResponsePlans = await prisma.operationalResponsePlan.findMany()
-     * 
+     *
      * // Get first 10 OperationalResponsePlans
      * const operationalResponsePlans = await prisma.operationalResponsePlan.findMany({ take: 10 })
-     * 
+     *
      * // Only select the `id`
      * const operationalResponsePlanWithIdOnly = await prisma.operationalResponsePlan.findMany({ select: { id: true } })
-     * 
+     *
      */
     findMany<T extends OperationalResponsePlanFindManyArgs>(args?: SelectSubset<T, OperationalResponsePlanFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OperationalResponsePlanPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
@@ -23275,7 +26169,7 @@ export namespace Prisma {
      *     // ... data to create a OperationalResponsePlan
      *   }
      * })
-     * 
+     *
      */
     create<T extends OperationalResponsePlanCreateArgs>(args: SelectSubset<T, OperationalResponsePlanCreateArgs<ExtArgs>>): Prisma__OperationalResponsePlanClient<$Result.GetResult<Prisma.$OperationalResponsePlanPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -23289,7 +26183,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *     
+     *
      */
     createMany<T extends OperationalResponsePlanCreateManyArgs>(args?: SelectSubset<T, OperationalResponsePlanCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -23303,7 +26197,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     * 
+     *
      * // Create many OperationalResponsePlans and only return the `id`
      * const operationalResponsePlanWithIdOnly = await prisma.operationalResponsePlan.createManyAndReturn({
      *   select: { id: true },
@@ -23313,7 +26207,7 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * 
+     *
      */
     createManyAndReturn<T extends OperationalResponsePlanCreateManyAndReturnArgs>(args?: SelectSubset<T, OperationalResponsePlanCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OperationalResponsePlanPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
@@ -23327,7 +26221,7 @@ export namespace Prisma {
      *     // ... filter to delete one OperationalResponsePlan
      *   }
      * })
-     * 
+     *
      */
     delete<T extends OperationalResponsePlanDeleteArgs>(args: SelectSubset<T, OperationalResponsePlanDeleteArgs<ExtArgs>>): Prisma__OperationalResponsePlanClient<$Result.GetResult<Prisma.$OperationalResponsePlanPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -23344,7 +26238,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     * 
+     *
      */
     update<T extends OperationalResponsePlanUpdateArgs>(args: SelectSubset<T, OperationalResponsePlanUpdateArgs<ExtArgs>>): Prisma__OperationalResponsePlanClient<$Result.GetResult<Prisma.$OperationalResponsePlanPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -23358,7 +26252,7 @@ export namespace Prisma {
      *     // ... provide filter here
      *   }
      * })
-     * 
+     *
      */
     deleteMany<T extends OperationalResponsePlanDeleteManyArgs>(args?: SelectSubset<T, OperationalResponsePlanDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -23377,7 +26271,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     * 
+     *
      */
     updateMany<T extends OperationalResponsePlanUpdateManyArgs>(args: SelectSubset<T, OperationalResponsePlanUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -23394,7 +26288,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     * 
+     *
      * // Update zero or more OperationalResponsePlans and only return the `id`
      * const operationalResponsePlanWithIdOnly = await prisma.operationalResponsePlan.updateManyAndReturn({
      *   select: { id: true },
@@ -23407,7 +26301,7 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * 
+     *
      */
     updateManyAndReturn<T extends OperationalResponsePlanUpdateManyAndReturnArgs>(args: SelectSubset<T, OperationalResponsePlanUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OperationalResponsePlanPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
@@ -23496,7 +26390,7 @@ export namespace Prisma {
      *     _all: true
      *   },
      * })
-     * 
+     *
     **/
     groupBy<
       T extends OperationalResponsePlanGroupByArgs,
@@ -23622,7 +26516,7 @@ export namespace Prisma {
     readonly governedActions: FieldRef<"OperationalResponsePlan", 'Json'>
     readonly actionPlanContractVersion: FieldRef<"OperationalResponsePlan", 'String'>
   }
-    
+
 
   // Custom InputTypes
   /**
@@ -23691,31 +26585,31 @@ export namespace Prisma {
     where?: OperationalResponsePlanWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of OperationalResponsePlans to fetch.
      */
     orderBy?: OperationalResponsePlanOrderByWithRelationInput | OperationalResponsePlanOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for searching for OperationalResponsePlans.
      */
     cursor?: OperationalResponsePlanWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` OperationalResponsePlans from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` OperationalResponsePlans.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
+     *
      * Filter by unique combinations of OperationalResponsePlans.
      */
     distinct?: OperationalResponsePlanScalarFieldEnum | OperationalResponsePlanScalarFieldEnum[]
@@ -23743,31 +26637,31 @@ export namespace Prisma {
     where?: OperationalResponsePlanWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of OperationalResponsePlans to fetch.
      */
     orderBy?: OperationalResponsePlanOrderByWithRelationInput | OperationalResponsePlanOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for searching for OperationalResponsePlans.
      */
     cursor?: OperationalResponsePlanWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` OperationalResponsePlans from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` OperationalResponsePlans.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
+     *
      * Filter by unique combinations of OperationalResponsePlans.
      */
     distinct?: OperationalResponsePlanScalarFieldEnum | OperationalResponsePlanScalarFieldEnum[]
@@ -23795,25 +26689,25 @@ export namespace Prisma {
     where?: OperationalResponsePlanWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of OperationalResponsePlans to fetch.
      */
     orderBy?: OperationalResponsePlanOrderByWithRelationInput | OperationalResponsePlanOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for listing OperationalResponsePlans.
      */
     cursor?: OperationalResponsePlanWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` OperationalResponsePlans from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` OperationalResponsePlans.
      */
     skip?: number
@@ -24162,6 +27056,7 @@ export namespace Prisma {
     readinessSnapshot: number
     policySnapshot: number
     actionSnapshot: number
+    intelligenceSnapshot: number
     preparedById: number
     preparedAt: number
     createdAt: number
@@ -24223,6 +27118,7 @@ export namespace Prisma {
     readinessSnapshot?: true
     policySnapshot?: true
     actionSnapshot?: true
+    intelligenceSnapshot?: true
     preparedById?: true
     preparedAt?: true
     createdAt?: true
@@ -24237,55 +27133,55 @@ export namespace Prisma {
     where?: DecisionPackageWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of DecisionPackages to fetch.
      */
     orderBy?: DecisionPackageOrderByWithRelationInput | DecisionPackageOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the start position
      */
     cursor?: DecisionPackageWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` DecisionPackages from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` DecisionPackages.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Count returned DecisionPackages
     **/
     _count?: true | DecisionPackageCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to average
     **/
     _avg?: DecisionPackageAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to sum
     **/
     _sum?: DecisionPackageSumAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to find the minimum value
     **/
     _min?: DecisionPackageMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to find the maximum value
     **/
     _max?: DecisionPackageMaxAggregateInputType
@@ -24331,6 +27227,7 @@ export namespace Prisma {
     readinessSnapshot: JsonValue
     policySnapshot: JsonValue
     actionSnapshot: JsonValue
+    intelligenceSnapshot: JsonValue | null
     preparedById: string
     preparedAt: Date
     createdAt: Date
@@ -24371,6 +27268,7 @@ export namespace Prisma {
     readinessSnapshot?: boolean
     policySnapshot?: boolean
     actionSnapshot?: boolean
+    intelligenceSnapshot?: boolean
     preparedById?: boolean
     preparedAt?: boolean
     createdAt?: boolean
@@ -24398,6 +27296,7 @@ export namespace Prisma {
     readinessSnapshot?: boolean
     policySnapshot?: boolean
     actionSnapshot?: boolean
+    intelligenceSnapshot?: boolean
     preparedById?: boolean
     preparedAt?: boolean
     createdAt?: boolean
@@ -24423,6 +27322,7 @@ export namespace Prisma {
     readinessSnapshot?: boolean
     policySnapshot?: boolean
     actionSnapshot?: boolean
+    intelligenceSnapshot?: boolean
     preparedById?: boolean
     preparedAt?: boolean
     createdAt?: boolean
@@ -24448,13 +27348,14 @@ export namespace Prisma {
     readinessSnapshot?: boolean
     policySnapshot?: boolean
     actionSnapshot?: boolean
+    intelligenceSnapshot?: boolean
     preparedById?: boolean
     preparedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type DecisionPackageOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "caseId" | "inspectionId" | "riskAssessmentId" | "packageVersion" | "packageContractVersion" | "status" | "sourceFingerprint" | "caseSnapshot" | "inspectionSnapshot" | "riskSnapshot" | "readinessSnapshot" | "policySnapshot" | "actionSnapshot" | "preparedById" | "preparedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["decisionPackage"]>
+  export type DecisionPackageOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "caseId" | "inspectionId" | "riskAssessmentId" | "packageVersion" | "packageContractVersion" | "status" | "sourceFingerprint" | "caseSnapshot" | "inspectionSnapshot" | "riskSnapshot" | "readinessSnapshot" | "policySnapshot" | "actionSnapshot" | "intelligenceSnapshot" | "preparedById" | "preparedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["decisionPackage"]>
   export type DecisionPackageInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     case?: boolean | CaseDefaultArgs<ExtArgs>
     inspection?: boolean | InspectionDefaultArgs<ExtArgs>
@@ -24500,6 +27401,7 @@ export namespace Prisma {
       readinessSnapshot: Prisma.JsonValue
       policySnapshot: Prisma.JsonValue
       actionSnapshot: Prisma.JsonValue
+      intelligenceSnapshot: Prisma.JsonValue | null
       preparedById: string
       preparedAt: Date
       createdAt: Date
@@ -24583,13 +27485,13 @@ export namespace Prisma {
      * @example
      * // Get all DecisionPackages
      * const decisionPackages = await prisma.decisionPackage.findMany()
-     * 
+     *
      * // Get first 10 DecisionPackages
      * const decisionPackages = await prisma.decisionPackage.findMany({ take: 10 })
-     * 
+     *
      * // Only select the `id`
      * const decisionPackageWithIdOnly = await prisma.decisionPackage.findMany({ select: { id: true } })
-     * 
+     *
      */
     findMany<T extends DecisionPackageFindManyArgs>(args?: SelectSubset<T, DecisionPackageFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DecisionPackagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
@@ -24603,7 +27505,7 @@ export namespace Prisma {
      *     // ... data to create a DecisionPackage
      *   }
      * })
-     * 
+     *
      */
     create<T extends DecisionPackageCreateArgs>(args: SelectSubset<T, DecisionPackageCreateArgs<ExtArgs>>): Prisma__DecisionPackageClient<$Result.GetResult<Prisma.$DecisionPackagePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -24617,7 +27519,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *     
+     *
      */
     createMany<T extends DecisionPackageCreateManyArgs>(args?: SelectSubset<T, DecisionPackageCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -24631,7 +27533,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     * 
+     *
      * // Create many DecisionPackages and only return the `id`
      * const decisionPackageWithIdOnly = await prisma.decisionPackage.createManyAndReturn({
      *   select: { id: true },
@@ -24641,7 +27543,7 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * 
+     *
      */
     createManyAndReturn<T extends DecisionPackageCreateManyAndReturnArgs>(args?: SelectSubset<T, DecisionPackageCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DecisionPackagePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
@@ -24655,7 +27557,7 @@ export namespace Prisma {
      *     // ... filter to delete one DecisionPackage
      *   }
      * })
-     * 
+     *
      */
     delete<T extends DecisionPackageDeleteArgs>(args: SelectSubset<T, DecisionPackageDeleteArgs<ExtArgs>>): Prisma__DecisionPackageClient<$Result.GetResult<Prisma.$DecisionPackagePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -24672,7 +27574,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     * 
+     *
      */
     update<T extends DecisionPackageUpdateArgs>(args: SelectSubset<T, DecisionPackageUpdateArgs<ExtArgs>>): Prisma__DecisionPackageClient<$Result.GetResult<Prisma.$DecisionPackagePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -24686,7 +27588,7 @@ export namespace Prisma {
      *     // ... provide filter here
      *   }
      * })
-     * 
+     *
      */
     deleteMany<T extends DecisionPackageDeleteManyArgs>(args?: SelectSubset<T, DecisionPackageDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -24705,7 +27607,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     * 
+     *
      */
     updateMany<T extends DecisionPackageUpdateManyArgs>(args: SelectSubset<T, DecisionPackageUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -24722,7 +27624,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     * 
+     *
      * // Update zero or more DecisionPackages and only return the `id`
      * const decisionPackageWithIdOnly = await prisma.decisionPackage.updateManyAndReturn({
      *   select: { id: true },
@@ -24735,7 +27637,7 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * 
+     *
      */
     updateManyAndReturn<T extends DecisionPackageUpdateManyAndReturnArgs>(args: SelectSubset<T, DecisionPackageUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DecisionPackagePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
@@ -24824,7 +27726,7 @@ export namespace Prisma {
      *     _all: true
      *   },
      * })
-     * 
+     *
     **/
     groupBy<
       T extends DecisionPackageGroupByArgs,
@@ -24946,12 +27848,13 @@ export namespace Prisma {
     readonly readinessSnapshot: FieldRef<"DecisionPackage", 'Json'>
     readonly policySnapshot: FieldRef<"DecisionPackage", 'Json'>
     readonly actionSnapshot: FieldRef<"DecisionPackage", 'Json'>
+    readonly intelligenceSnapshot: FieldRef<"DecisionPackage", 'Json'>
     readonly preparedById: FieldRef<"DecisionPackage", 'String'>
     readonly preparedAt: FieldRef<"DecisionPackage", 'DateTime'>
     readonly createdAt: FieldRef<"DecisionPackage", 'DateTime'>
     readonly updatedAt: FieldRef<"DecisionPackage", 'DateTime'>
   }
-    
+
 
   // Custom InputTypes
   /**
@@ -25020,31 +27923,31 @@ export namespace Prisma {
     where?: DecisionPackageWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of DecisionPackages to fetch.
      */
     orderBy?: DecisionPackageOrderByWithRelationInput | DecisionPackageOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for searching for DecisionPackages.
      */
     cursor?: DecisionPackageWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` DecisionPackages from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` DecisionPackages.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
+     *
      * Filter by unique combinations of DecisionPackages.
      */
     distinct?: DecisionPackageScalarFieldEnum | DecisionPackageScalarFieldEnum[]
@@ -25072,31 +27975,31 @@ export namespace Prisma {
     where?: DecisionPackageWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of DecisionPackages to fetch.
      */
     orderBy?: DecisionPackageOrderByWithRelationInput | DecisionPackageOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for searching for DecisionPackages.
      */
     cursor?: DecisionPackageWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` DecisionPackages from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` DecisionPackages.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
+     *
      * Filter by unique combinations of DecisionPackages.
      */
     distinct?: DecisionPackageScalarFieldEnum | DecisionPackageScalarFieldEnum[]
@@ -25124,25 +28027,25 @@ export namespace Prisma {
     where?: DecisionPackageWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of DecisionPackages to fetch.
      */
     orderBy?: DecisionPackageOrderByWithRelationInput | DecisionPackageOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for listing DecisionPackages.
      */
     cursor?: DecisionPackageWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` DecisionPackages from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` DecisionPackages.
      */
     skip?: number
@@ -25522,43 +28425,43 @@ export namespace Prisma {
     where?: ApprovalAuthorityWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of ApprovalAuthorities to fetch.
      */
     orderBy?: ApprovalAuthorityOrderByWithRelationInput | ApprovalAuthorityOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the start position
      */
     cursor?: ApprovalAuthorityWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` ApprovalAuthorities from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` ApprovalAuthorities.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Count returned ApprovalAuthorities
     **/
     _count?: true | ApprovalAuthorityCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to find the minimum value
     **/
     _min?: ApprovalAuthorityMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to find the maximum value
     **/
     _max?: ApprovalAuthorityMaxAggregateInputType
@@ -25836,13 +28739,13 @@ export namespace Prisma {
      * @example
      * // Get all ApprovalAuthorities
      * const approvalAuthorities = await prisma.approvalAuthority.findMany()
-     * 
+     *
      * // Get first 10 ApprovalAuthorities
      * const approvalAuthorities = await prisma.approvalAuthority.findMany({ take: 10 })
-     * 
+     *
      * // Only select the `id`
      * const approvalAuthorityWithIdOnly = await prisma.approvalAuthority.findMany({ select: { id: true } })
-     * 
+     *
      */
     findMany<T extends ApprovalAuthorityFindManyArgs>(args?: SelectSubset<T, ApprovalAuthorityFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ApprovalAuthorityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
@@ -25856,7 +28759,7 @@ export namespace Prisma {
      *     // ... data to create a ApprovalAuthority
      *   }
      * })
-     * 
+     *
      */
     create<T extends ApprovalAuthorityCreateArgs>(args: SelectSubset<T, ApprovalAuthorityCreateArgs<ExtArgs>>): Prisma__ApprovalAuthorityClient<$Result.GetResult<Prisma.$ApprovalAuthorityPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -25870,7 +28773,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *     
+     *
      */
     createMany<T extends ApprovalAuthorityCreateManyArgs>(args?: SelectSubset<T, ApprovalAuthorityCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -25884,7 +28787,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     * 
+     *
      * // Create many ApprovalAuthorities and only return the `id`
      * const approvalAuthorityWithIdOnly = await prisma.approvalAuthority.createManyAndReturn({
      *   select: { id: true },
@@ -25894,7 +28797,7 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * 
+     *
      */
     createManyAndReturn<T extends ApprovalAuthorityCreateManyAndReturnArgs>(args?: SelectSubset<T, ApprovalAuthorityCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ApprovalAuthorityPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
@@ -25908,7 +28811,7 @@ export namespace Prisma {
      *     // ... filter to delete one ApprovalAuthority
      *   }
      * })
-     * 
+     *
      */
     delete<T extends ApprovalAuthorityDeleteArgs>(args: SelectSubset<T, ApprovalAuthorityDeleteArgs<ExtArgs>>): Prisma__ApprovalAuthorityClient<$Result.GetResult<Prisma.$ApprovalAuthorityPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -25925,7 +28828,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     * 
+     *
      */
     update<T extends ApprovalAuthorityUpdateArgs>(args: SelectSubset<T, ApprovalAuthorityUpdateArgs<ExtArgs>>): Prisma__ApprovalAuthorityClient<$Result.GetResult<Prisma.$ApprovalAuthorityPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -25939,7 +28842,7 @@ export namespace Prisma {
      *     // ... provide filter here
      *   }
      * })
-     * 
+     *
      */
     deleteMany<T extends ApprovalAuthorityDeleteManyArgs>(args?: SelectSubset<T, ApprovalAuthorityDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -25958,7 +28861,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     * 
+     *
      */
     updateMany<T extends ApprovalAuthorityUpdateManyArgs>(args: SelectSubset<T, ApprovalAuthorityUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -25975,7 +28878,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     * 
+     *
      * // Update zero or more ApprovalAuthorities and only return the `id`
      * const approvalAuthorityWithIdOnly = await prisma.approvalAuthority.updateManyAndReturn({
      *   select: { id: true },
@@ -25988,7 +28891,7 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * 
+     *
      */
     updateManyAndReturn<T extends ApprovalAuthorityUpdateManyAndReturnArgs>(args: SelectSubset<T, ApprovalAuthorityUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ApprovalAuthorityPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
@@ -26077,7 +28980,7 @@ export namespace Prisma {
      *     _all: true
      *   },
      * })
-     * 
+     *
     **/
     groupBy<
       T extends ApprovalAuthorityGroupByArgs,
@@ -26202,7 +29105,7 @@ export namespace Prisma {
     readonly createdAt: FieldRef<"ApprovalAuthority", 'DateTime'>
     readonly updatedAt: FieldRef<"ApprovalAuthority", 'DateTime'>
   }
-    
+
 
   // Custom InputTypes
   /**
@@ -26271,31 +29174,31 @@ export namespace Prisma {
     where?: ApprovalAuthorityWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of ApprovalAuthorities to fetch.
      */
     orderBy?: ApprovalAuthorityOrderByWithRelationInput | ApprovalAuthorityOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for searching for ApprovalAuthorities.
      */
     cursor?: ApprovalAuthorityWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` ApprovalAuthorities from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` ApprovalAuthorities.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
+     *
      * Filter by unique combinations of ApprovalAuthorities.
      */
     distinct?: ApprovalAuthorityScalarFieldEnum | ApprovalAuthorityScalarFieldEnum[]
@@ -26323,31 +29226,31 @@ export namespace Prisma {
     where?: ApprovalAuthorityWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of ApprovalAuthorities to fetch.
      */
     orderBy?: ApprovalAuthorityOrderByWithRelationInput | ApprovalAuthorityOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for searching for ApprovalAuthorities.
      */
     cursor?: ApprovalAuthorityWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` ApprovalAuthorities from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` ApprovalAuthorities.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
+     *
      * Filter by unique combinations of ApprovalAuthorities.
      */
     distinct?: ApprovalAuthorityScalarFieldEnum | ApprovalAuthorityScalarFieldEnum[]
@@ -26375,25 +29278,25 @@ export namespace Prisma {
     where?: ApprovalAuthorityWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of ApprovalAuthorities to fetch.
      */
     orderBy?: ApprovalAuthorityOrderByWithRelationInput | ApprovalAuthorityOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for listing ApprovalAuthorities.
      */
     cursor?: ApprovalAuthorityWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` ApprovalAuthorities from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` ApprovalAuthorities.
      */
     skip?: number
@@ -26763,43 +29666,43 @@ export namespace Prisma {
     where?: OrpDecisionWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of OrpDecisions to fetch.
      */
     orderBy?: OrpDecisionOrderByWithRelationInput | OrpDecisionOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the start position
      */
     cursor?: OrpDecisionWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` OrpDecisions from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` OrpDecisions.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Count returned OrpDecisions
     **/
     _count?: true | OrpDecisionCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to find the minimum value
     **/
     _min?: OrpDecisionMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to find the maximum value
     **/
     _max?: OrpDecisionMaxAggregateInputType
@@ -27056,13 +29959,13 @@ export namespace Prisma {
      * @example
      * // Get all OrpDecisions
      * const orpDecisions = await prisma.orpDecision.findMany()
-     * 
+     *
      * // Get first 10 OrpDecisions
      * const orpDecisions = await prisma.orpDecision.findMany({ take: 10 })
-     * 
+     *
      * // Only select the `id`
      * const orpDecisionWithIdOnly = await prisma.orpDecision.findMany({ select: { id: true } })
-     * 
+     *
      */
     findMany<T extends OrpDecisionFindManyArgs>(args?: SelectSubset<T, OrpDecisionFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrpDecisionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
@@ -27076,7 +29979,7 @@ export namespace Prisma {
      *     // ... data to create a OrpDecision
      *   }
      * })
-     * 
+     *
      */
     create<T extends OrpDecisionCreateArgs>(args: SelectSubset<T, OrpDecisionCreateArgs<ExtArgs>>): Prisma__OrpDecisionClient<$Result.GetResult<Prisma.$OrpDecisionPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -27090,7 +29993,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *     
+     *
      */
     createMany<T extends OrpDecisionCreateManyArgs>(args?: SelectSubset<T, OrpDecisionCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -27104,7 +30007,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     * 
+     *
      * // Create many OrpDecisions and only return the `id`
      * const orpDecisionWithIdOnly = await prisma.orpDecision.createManyAndReturn({
      *   select: { id: true },
@@ -27114,7 +30017,7 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * 
+     *
      */
     createManyAndReturn<T extends OrpDecisionCreateManyAndReturnArgs>(args?: SelectSubset<T, OrpDecisionCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrpDecisionPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
@@ -27128,7 +30031,7 @@ export namespace Prisma {
      *     // ... filter to delete one OrpDecision
      *   }
      * })
-     * 
+     *
      */
     delete<T extends OrpDecisionDeleteArgs>(args: SelectSubset<T, OrpDecisionDeleteArgs<ExtArgs>>): Prisma__OrpDecisionClient<$Result.GetResult<Prisma.$OrpDecisionPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -27145,7 +30048,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     * 
+     *
      */
     update<T extends OrpDecisionUpdateArgs>(args: SelectSubset<T, OrpDecisionUpdateArgs<ExtArgs>>): Prisma__OrpDecisionClient<$Result.GetResult<Prisma.$OrpDecisionPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -27159,7 +30062,7 @@ export namespace Prisma {
      *     // ... provide filter here
      *   }
      * })
-     * 
+     *
      */
     deleteMany<T extends OrpDecisionDeleteManyArgs>(args?: SelectSubset<T, OrpDecisionDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -27178,7 +30081,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     * 
+     *
      */
     updateMany<T extends OrpDecisionUpdateManyArgs>(args: SelectSubset<T, OrpDecisionUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -27195,7 +30098,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     * 
+     *
      * // Update zero or more OrpDecisions and only return the `id`
      * const orpDecisionWithIdOnly = await prisma.orpDecision.updateManyAndReturn({
      *   select: { id: true },
@@ -27208,7 +30111,7 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * 
+     *
      */
     updateManyAndReturn<T extends OrpDecisionUpdateManyAndReturnArgs>(args: SelectSubset<T, OrpDecisionUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrpDecisionPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
@@ -27297,7 +30200,7 @@ export namespace Prisma {
      *     _all: true
      *   },
      * })
-     * 
+     *
     **/
     groupBy<
       T extends OrpDecisionGroupByArgs,
@@ -27418,7 +30321,7 @@ export namespace Prisma {
     readonly forwardToUserId: FieldRef<"OrpDecision", 'String'>
     readonly createdAt: FieldRef<"OrpDecision", 'DateTime'>
   }
-    
+
 
   // Custom InputTypes
   /**
@@ -27487,31 +30390,31 @@ export namespace Prisma {
     where?: OrpDecisionWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of OrpDecisions to fetch.
      */
     orderBy?: OrpDecisionOrderByWithRelationInput | OrpDecisionOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for searching for OrpDecisions.
      */
     cursor?: OrpDecisionWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` OrpDecisions from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` OrpDecisions.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
+     *
      * Filter by unique combinations of OrpDecisions.
      */
     distinct?: OrpDecisionScalarFieldEnum | OrpDecisionScalarFieldEnum[]
@@ -27539,31 +30442,31 @@ export namespace Prisma {
     where?: OrpDecisionWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of OrpDecisions to fetch.
      */
     orderBy?: OrpDecisionOrderByWithRelationInput | OrpDecisionOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for searching for OrpDecisions.
      */
     cursor?: OrpDecisionWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` OrpDecisions from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` OrpDecisions.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
+     *
      * Filter by unique combinations of OrpDecisions.
      */
     distinct?: OrpDecisionScalarFieldEnum | OrpDecisionScalarFieldEnum[]
@@ -27591,25 +30494,25 @@ export namespace Prisma {
     where?: OrpDecisionWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of OrpDecisions to fetch.
      */
     orderBy?: OrpDecisionOrderByWithRelationInput | OrpDecisionOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for listing OrpDecisions.
      */
     cursor?: OrpDecisionWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` OrpDecisions from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` OrpDecisions.
      */
     skip?: number
@@ -27999,43 +30902,43 @@ export namespace Prisma {
     where?: ExecutionPlanWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of ExecutionPlans to fetch.
      */
     orderBy?: ExecutionPlanOrderByWithRelationInput | ExecutionPlanOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the start position
      */
     cursor?: ExecutionPlanWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` ExecutionPlans from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` ExecutionPlans.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Count returned ExecutionPlans
     **/
     _count?: true | ExecutionPlanCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to find the minimum value
     **/
     _min?: ExecutionPlanMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to find the maximum value
     **/
     _max?: ExecutionPlanMaxAggregateInputType
@@ -28320,13 +31223,13 @@ export namespace Prisma {
      * @example
      * // Get all ExecutionPlans
      * const executionPlans = await prisma.executionPlan.findMany()
-     * 
+     *
      * // Get first 10 ExecutionPlans
      * const executionPlans = await prisma.executionPlan.findMany({ take: 10 })
-     * 
+     *
      * // Only select the `id`
      * const executionPlanWithIdOnly = await prisma.executionPlan.findMany({ select: { id: true } })
-     * 
+     *
      */
     findMany<T extends ExecutionPlanFindManyArgs>(args?: SelectSubset<T, ExecutionPlanFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExecutionPlanPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
@@ -28340,7 +31243,7 @@ export namespace Prisma {
      *     // ... data to create a ExecutionPlan
      *   }
      * })
-     * 
+     *
      */
     create<T extends ExecutionPlanCreateArgs>(args: SelectSubset<T, ExecutionPlanCreateArgs<ExtArgs>>): Prisma__ExecutionPlanClient<$Result.GetResult<Prisma.$ExecutionPlanPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -28354,7 +31257,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *     
+     *
      */
     createMany<T extends ExecutionPlanCreateManyArgs>(args?: SelectSubset<T, ExecutionPlanCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -28368,7 +31271,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     * 
+     *
      * // Create many ExecutionPlans and only return the `id`
      * const executionPlanWithIdOnly = await prisma.executionPlan.createManyAndReturn({
      *   select: { id: true },
@@ -28378,7 +31281,7 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * 
+     *
      */
     createManyAndReturn<T extends ExecutionPlanCreateManyAndReturnArgs>(args?: SelectSubset<T, ExecutionPlanCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExecutionPlanPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
@@ -28392,7 +31295,7 @@ export namespace Prisma {
      *     // ... filter to delete one ExecutionPlan
      *   }
      * })
-     * 
+     *
      */
     delete<T extends ExecutionPlanDeleteArgs>(args: SelectSubset<T, ExecutionPlanDeleteArgs<ExtArgs>>): Prisma__ExecutionPlanClient<$Result.GetResult<Prisma.$ExecutionPlanPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -28409,7 +31312,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     * 
+     *
      */
     update<T extends ExecutionPlanUpdateArgs>(args: SelectSubset<T, ExecutionPlanUpdateArgs<ExtArgs>>): Prisma__ExecutionPlanClient<$Result.GetResult<Prisma.$ExecutionPlanPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -28423,7 +31326,7 @@ export namespace Prisma {
      *     // ... provide filter here
      *   }
      * })
-     * 
+     *
      */
     deleteMany<T extends ExecutionPlanDeleteManyArgs>(args?: SelectSubset<T, ExecutionPlanDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -28442,7 +31345,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     * 
+     *
      */
     updateMany<T extends ExecutionPlanUpdateManyArgs>(args: SelectSubset<T, ExecutionPlanUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -28459,7 +31362,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     * 
+     *
      * // Update zero or more ExecutionPlans and only return the `id`
      * const executionPlanWithIdOnly = await prisma.executionPlan.updateManyAndReturn({
      *   select: { id: true },
@@ -28472,7 +31375,7 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * 
+     *
      */
     updateManyAndReturn<T extends ExecutionPlanUpdateManyAndReturnArgs>(args: SelectSubset<T, ExecutionPlanUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExecutionPlanPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
@@ -28561,7 +31464,7 @@ export namespace Prisma {
      *     _all: true
      *   },
      * })
-     * 
+     *
     **/
     groupBy<
       T extends ExecutionPlanGroupByArgs,
@@ -28687,7 +31590,7 @@ export namespace Prisma {
     readonly executionContractVersion: FieldRef<"ExecutionPlan", 'String'>
     readonly governedProvenance: FieldRef<"ExecutionPlan", 'Json'>
   }
-    
+
 
   // Custom InputTypes
   /**
@@ -28756,31 +31659,31 @@ export namespace Prisma {
     where?: ExecutionPlanWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of ExecutionPlans to fetch.
      */
     orderBy?: ExecutionPlanOrderByWithRelationInput | ExecutionPlanOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for searching for ExecutionPlans.
      */
     cursor?: ExecutionPlanWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` ExecutionPlans from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` ExecutionPlans.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
+     *
      * Filter by unique combinations of ExecutionPlans.
      */
     distinct?: ExecutionPlanScalarFieldEnum | ExecutionPlanScalarFieldEnum[]
@@ -28808,31 +31711,31 @@ export namespace Prisma {
     where?: ExecutionPlanWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of ExecutionPlans to fetch.
      */
     orderBy?: ExecutionPlanOrderByWithRelationInput | ExecutionPlanOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for searching for ExecutionPlans.
      */
     cursor?: ExecutionPlanWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` ExecutionPlans from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` ExecutionPlans.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
+     *
      * Filter by unique combinations of ExecutionPlans.
      */
     distinct?: ExecutionPlanScalarFieldEnum | ExecutionPlanScalarFieldEnum[]
@@ -28860,25 +31763,25 @@ export namespace Prisma {
     where?: ExecutionPlanWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of ExecutionPlans to fetch.
      */
     orderBy?: ExecutionPlanOrderByWithRelationInput | ExecutionPlanOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for listing ExecutionPlans.
      */
     cursor?: ExecutionPlanWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` ExecutionPlans from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` ExecutionPlans.
      */
     skip?: number
@@ -29411,55 +32314,55 @@ export namespace Prisma {
     where?: ExecutionTaskWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of ExecutionTasks to fetch.
      */
     orderBy?: ExecutionTaskOrderByWithRelationInput | ExecutionTaskOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the start position
      */
     cursor?: ExecutionTaskWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` ExecutionTasks from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` ExecutionTasks.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Count returned ExecutionTasks
     **/
     _count?: true | ExecutionTaskCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to average
     **/
     _avg?: ExecutionTaskAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to sum
     **/
     _sum?: ExecutionTaskSumAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to find the minimum value
     **/
     _min?: ExecutionTaskMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to find the maximum value
     **/
     _max?: ExecutionTaskMaxAggregateInputType
@@ -29888,13 +32791,13 @@ export namespace Prisma {
      * @example
      * // Get all ExecutionTasks
      * const executionTasks = await prisma.executionTask.findMany()
-     * 
+     *
      * // Get first 10 ExecutionTasks
      * const executionTasks = await prisma.executionTask.findMany({ take: 10 })
-     * 
+     *
      * // Only select the `id`
      * const executionTaskWithIdOnly = await prisma.executionTask.findMany({ select: { id: true } })
-     * 
+     *
      */
     findMany<T extends ExecutionTaskFindManyArgs>(args?: SelectSubset<T, ExecutionTaskFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExecutionTaskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
@@ -29908,7 +32811,7 @@ export namespace Prisma {
      *     // ... data to create a ExecutionTask
      *   }
      * })
-     * 
+     *
      */
     create<T extends ExecutionTaskCreateArgs>(args: SelectSubset<T, ExecutionTaskCreateArgs<ExtArgs>>): Prisma__ExecutionTaskClient<$Result.GetResult<Prisma.$ExecutionTaskPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -29922,7 +32825,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *     
+     *
      */
     createMany<T extends ExecutionTaskCreateManyArgs>(args?: SelectSubset<T, ExecutionTaskCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -29936,7 +32839,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     * 
+     *
      * // Create many ExecutionTasks and only return the `id`
      * const executionTaskWithIdOnly = await prisma.executionTask.createManyAndReturn({
      *   select: { id: true },
@@ -29946,7 +32849,7 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * 
+     *
      */
     createManyAndReturn<T extends ExecutionTaskCreateManyAndReturnArgs>(args?: SelectSubset<T, ExecutionTaskCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExecutionTaskPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
@@ -29960,7 +32863,7 @@ export namespace Prisma {
      *     // ... filter to delete one ExecutionTask
      *   }
      * })
-     * 
+     *
      */
     delete<T extends ExecutionTaskDeleteArgs>(args: SelectSubset<T, ExecutionTaskDeleteArgs<ExtArgs>>): Prisma__ExecutionTaskClient<$Result.GetResult<Prisma.$ExecutionTaskPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -29977,7 +32880,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     * 
+     *
      */
     update<T extends ExecutionTaskUpdateArgs>(args: SelectSubset<T, ExecutionTaskUpdateArgs<ExtArgs>>): Prisma__ExecutionTaskClient<$Result.GetResult<Prisma.$ExecutionTaskPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -29991,7 +32894,7 @@ export namespace Prisma {
      *     // ... provide filter here
      *   }
      * })
-     * 
+     *
      */
     deleteMany<T extends ExecutionTaskDeleteManyArgs>(args?: SelectSubset<T, ExecutionTaskDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -30010,7 +32913,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     * 
+     *
      */
     updateMany<T extends ExecutionTaskUpdateManyArgs>(args: SelectSubset<T, ExecutionTaskUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -30027,7 +32930,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     * 
+     *
      * // Update zero or more ExecutionTasks and only return the `id`
      * const executionTaskWithIdOnly = await prisma.executionTask.updateManyAndReturn({
      *   select: { id: true },
@@ -30040,7 +32943,7 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * 
+     *
      */
     updateManyAndReturn<T extends ExecutionTaskUpdateManyAndReturnArgs>(args: SelectSubset<T, ExecutionTaskUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExecutionTaskPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
@@ -30129,7 +33032,7 @@ export namespace Prisma {
      *     _all: true
      *   },
      * })
-     * 
+     *
     **/
     groupBy<
       T extends ExecutionTaskGroupByArgs,
@@ -30277,7 +33180,7 @@ export namespace Prisma {
     readonly evidenceRequired: FieldRef<"ExecutionTask", 'Boolean'>
     readonly verificationRequired: FieldRef<"ExecutionTask", 'Boolean'>
   }
-    
+
 
   // Custom InputTypes
   /**
@@ -30346,31 +33249,31 @@ export namespace Prisma {
     where?: ExecutionTaskWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of ExecutionTasks to fetch.
      */
     orderBy?: ExecutionTaskOrderByWithRelationInput | ExecutionTaskOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for searching for ExecutionTasks.
      */
     cursor?: ExecutionTaskWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` ExecutionTasks from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` ExecutionTasks.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
+     *
      * Filter by unique combinations of ExecutionTasks.
      */
     distinct?: ExecutionTaskScalarFieldEnum | ExecutionTaskScalarFieldEnum[]
@@ -30398,31 +33301,31 @@ export namespace Prisma {
     where?: ExecutionTaskWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of ExecutionTasks to fetch.
      */
     orderBy?: ExecutionTaskOrderByWithRelationInput | ExecutionTaskOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for searching for ExecutionTasks.
      */
     cursor?: ExecutionTaskWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` ExecutionTasks from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` ExecutionTasks.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
+     *
      * Filter by unique combinations of ExecutionTasks.
      */
     distinct?: ExecutionTaskScalarFieldEnum | ExecutionTaskScalarFieldEnum[]
@@ -30450,25 +33353,25 @@ export namespace Prisma {
     where?: ExecutionTaskWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of ExecutionTasks to fetch.
      */
     orderBy?: ExecutionTaskOrderByWithRelationInput | ExecutionTaskOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for listing ExecutionTasks.
      */
     cursor?: ExecutionTaskWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` ExecutionTasks from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` ExecutionTasks.
      */
     skip?: number
@@ -30960,43 +33863,43 @@ export namespace Prisma {
     where?: ExecutionEvidenceWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of ExecutionEvidences to fetch.
      */
     orderBy?: ExecutionEvidenceOrderByWithRelationInput | ExecutionEvidenceOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the start position
      */
     cursor?: ExecutionEvidenceWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` ExecutionEvidences from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` ExecutionEvidences.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Count returned ExecutionEvidences
     **/
     _count?: true | ExecutionEvidenceCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to find the minimum value
     **/
     _min?: ExecutionEvidenceMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to find the maximum value
     **/
     _max?: ExecutionEvidenceMaxAggregateInputType
@@ -31223,13 +34126,13 @@ export namespace Prisma {
      * @example
      * // Get all ExecutionEvidences
      * const executionEvidences = await prisma.executionEvidence.findMany()
-     * 
+     *
      * // Get first 10 ExecutionEvidences
      * const executionEvidences = await prisma.executionEvidence.findMany({ take: 10 })
-     * 
+     *
      * // Only select the `id`
      * const executionEvidenceWithIdOnly = await prisma.executionEvidence.findMany({ select: { id: true } })
-     * 
+     *
      */
     findMany<T extends ExecutionEvidenceFindManyArgs>(args?: SelectSubset<T, ExecutionEvidenceFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExecutionEvidencePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
@@ -31243,7 +34146,7 @@ export namespace Prisma {
      *     // ... data to create a ExecutionEvidence
      *   }
      * })
-     * 
+     *
      */
     create<T extends ExecutionEvidenceCreateArgs>(args: SelectSubset<T, ExecutionEvidenceCreateArgs<ExtArgs>>): Prisma__ExecutionEvidenceClient<$Result.GetResult<Prisma.$ExecutionEvidencePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -31257,7 +34160,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *     
+     *
      */
     createMany<T extends ExecutionEvidenceCreateManyArgs>(args?: SelectSubset<T, ExecutionEvidenceCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -31271,7 +34174,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     * 
+     *
      * // Create many ExecutionEvidences and only return the `id`
      * const executionEvidenceWithIdOnly = await prisma.executionEvidence.createManyAndReturn({
      *   select: { id: true },
@@ -31281,7 +34184,7 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * 
+     *
      */
     createManyAndReturn<T extends ExecutionEvidenceCreateManyAndReturnArgs>(args?: SelectSubset<T, ExecutionEvidenceCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExecutionEvidencePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
@@ -31295,7 +34198,7 @@ export namespace Prisma {
      *     // ... filter to delete one ExecutionEvidence
      *   }
      * })
-     * 
+     *
      */
     delete<T extends ExecutionEvidenceDeleteArgs>(args: SelectSubset<T, ExecutionEvidenceDeleteArgs<ExtArgs>>): Prisma__ExecutionEvidenceClient<$Result.GetResult<Prisma.$ExecutionEvidencePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -31312,7 +34215,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     * 
+     *
      */
     update<T extends ExecutionEvidenceUpdateArgs>(args: SelectSubset<T, ExecutionEvidenceUpdateArgs<ExtArgs>>): Prisma__ExecutionEvidenceClient<$Result.GetResult<Prisma.$ExecutionEvidencePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -31326,7 +34229,7 @@ export namespace Prisma {
      *     // ... provide filter here
      *   }
      * })
-     * 
+     *
      */
     deleteMany<T extends ExecutionEvidenceDeleteManyArgs>(args?: SelectSubset<T, ExecutionEvidenceDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -31345,7 +34248,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     * 
+     *
      */
     updateMany<T extends ExecutionEvidenceUpdateManyArgs>(args: SelectSubset<T, ExecutionEvidenceUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -31362,7 +34265,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     * 
+     *
      * // Update zero or more ExecutionEvidences and only return the `id`
      * const executionEvidenceWithIdOnly = await prisma.executionEvidence.updateManyAndReturn({
      *   select: { id: true },
@@ -31375,7 +34278,7 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * 
+     *
      */
     updateManyAndReturn<T extends ExecutionEvidenceUpdateManyAndReturnArgs>(args: SelectSubset<T, ExecutionEvidenceUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExecutionEvidencePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
@@ -31464,7 +34367,7 @@ export namespace Prisma {
      *     _all: true
      *   },
      * })
-     * 
+     *
     **/
     groupBy<
       T extends ExecutionEvidenceGroupByArgs,
@@ -31580,7 +34483,7 @@ export namespace Prisma {
     readonly capturedAt: FieldRef<"ExecutionEvidence", 'DateTime'>
     readonly submittedAt: FieldRef<"ExecutionEvidence", 'DateTime'>
   }
-    
+
 
   // Custom InputTypes
   /**
@@ -31649,31 +34552,31 @@ export namespace Prisma {
     where?: ExecutionEvidenceWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of ExecutionEvidences to fetch.
      */
     orderBy?: ExecutionEvidenceOrderByWithRelationInput | ExecutionEvidenceOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for searching for ExecutionEvidences.
      */
     cursor?: ExecutionEvidenceWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` ExecutionEvidences from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` ExecutionEvidences.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
+     *
      * Filter by unique combinations of ExecutionEvidences.
      */
     distinct?: ExecutionEvidenceScalarFieldEnum | ExecutionEvidenceScalarFieldEnum[]
@@ -31701,31 +34604,31 @@ export namespace Prisma {
     where?: ExecutionEvidenceWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of ExecutionEvidences to fetch.
      */
     orderBy?: ExecutionEvidenceOrderByWithRelationInput | ExecutionEvidenceOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for searching for ExecutionEvidences.
      */
     cursor?: ExecutionEvidenceWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` ExecutionEvidences from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` ExecutionEvidences.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
+     *
      * Filter by unique combinations of ExecutionEvidences.
      */
     distinct?: ExecutionEvidenceScalarFieldEnum | ExecutionEvidenceScalarFieldEnum[]
@@ -31753,25 +34656,25 @@ export namespace Prisma {
     where?: ExecutionEvidenceWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of ExecutionEvidences to fetch.
      */
     orderBy?: ExecutionEvidenceOrderByWithRelationInput | ExecutionEvidenceOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for listing ExecutionEvidences.
      */
     cursor?: ExecutionEvidenceWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` ExecutionEvidences from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` ExecutionEvidences.
      */
     skip?: number
@@ -32079,43 +34982,43 @@ export namespace Prisma {
     where?: CaseClosureWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of CaseClosures to fetch.
      */
     orderBy?: CaseClosureOrderByWithRelationInput | CaseClosureOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the start position
      */
     cursor?: CaseClosureWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` CaseClosures from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` CaseClosures.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Count returned CaseClosures
     **/
     _count?: true | CaseClosureCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to find the minimum value
     **/
     _min?: CaseClosureMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to find the maximum value
     **/
     _max?: CaseClosureMaxAggregateInputType
@@ -32344,13 +35247,13 @@ export namespace Prisma {
      * @example
      * // Get all CaseClosures
      * const caseClosures = await prisma.caseClosure.findMany()
-     * 
+     *
      * // Get first 10 CaseClosures
      * const caseClosures = await prisma.caseClosure.findMany({ take: 10 })
-     * 
+     *
      * // Only select the `id`
      * const caseClosureWithIdOnly = await prisma.caseClosure.findMany({ select: { id: true } })
-     * 
+     *
      */
     findMany<T extends CaseClosureFindManyArgs>(args?: SelectSubset<T, CaseClosureFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CaseClosurePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
@@ -32364,7 +35267,7 @@ export namespace Prisma {
      *     // ... data to create a CaseClosure
      *   }
      * })
-     * 
+     *
      */
     create<T extends CaseClosureCreateArgs>(args: SelectSubset<T, CaseClosureCreateArgs<ExtArgs>>): Prisma__CaseClosureClient<$Result.GetResult<Prisma.$CaseClosurePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -32378,7 +35281,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *     
+     *
      */
     createMany<T extends CaseClosureCreateManyArgs>(args?: SelectSubset<T, CaseClosureCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -32392,7 +35295,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     * 
+     *
      * // Create many CaseClosures and only return the `id`
      * const caseClosureWithIdOnly = await prisma.caseClosure.createManyAndReturn({
      *   select: { id: true },
@@ -32402,7 +35305,7 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * 
+     *
      */
     createManyAndReturn<T extends CaseClosureCreateManyAndReturnArgs>(args?: SelectSubset<T, CaseClosureCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CaseClosurePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
@@ -32416,7 +35319,7 @@ export namespace Prisma {
      *     // ... filter to delete one CaseClosure
      *   }
      * })
-     * 
+     *
      */
     delete<T extends CaseClosureDeleteArgs>(args: SelectSubset<T, CaseClosureDeleteArgs<ExtArgs>>): Prisma__CaseClosureClient<$Result.GetResult<Prisma.$CaseClosurePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -32433,7 +35336,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     * 
+     *
      */
     update<T extends CaseClosureUpdateArgs>(args: SelectSubset<T, CaseClosureUpdateArgs<ExtArgs>>): Prisma__CaseClosureClient<$Result.GetResult<Prisma.$CaseClosurePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -32447,7 +35350,7 @@ export namespace Prisma {
      *     // ... provide filter here
      *   }
      * })
-     * 
+     *
      */
     deleteMany<T extends CaseClosureDeleteManyArgs>(args?: SelectSubset<T, CaseClosureDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -32466,7 +35369,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     * 
+     *
      */
     updateMany<T extends CaseClosureUpdateManyArgs>(args: SelectSubset<T, CaseClosureUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -32483,7 +35386,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     * 
+     *
      * // Update zero or more CaseClosures and only return the `id`
      * const caseClosureWithIdOnly = await prisma.caseClosure.updateManyAndReturn({
      *   select: { id: true },
@@ -32496,7 +35399,7 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * 
+     *
      */
     updateManyAndReturn<T extends CaseClosureUpdateManyAndReturnArgs>(args: SelectSubset<T, CaseClosureUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CaseClosurePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
@@ -32585,7 +35488,7 @@ export namespace Prisma {
      *     _all: true
      *   },
      * })
-     * 
+     *
     **/
     groupBy<
       T extends CaseClosureGroupByArgs,
@@ -32701,7 +35604,7 @@ export namespace Prisma {
     readonly closureSummary: FieldRef<"CaseClosure", 'String'>
     readonly createdAt: FieldRef<"CaseClosure", 'DateTime'>
   }
-    
+
 
   // Custom InputTypes
   /**
@@ -32770,31 +35673,31 @@ export namespace Prisma {
     where?: CaseClosureWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of CaseClosures to fetch.
      */
     orderBy?: CaseClosureOrderByWithRelationInput | CaseClosureOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for searching for CaseClosures.
      */
     cursor?: CaseClosureWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` CaseClosures from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` CaseClosures.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
+     *
      * Filter by unique combinations of CaseClosures.
      */
     distinct?: CaseClosureScalarFieldEnum | CaseClosureScalarFieldEnum[]
@@ -32822,31 +35725,31 @@ export namespace Prisma {
     where?: CaseClosureWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of CaseClosures to fetch.
      */
     orderBy?: CaseClosureOrderByWithRelationInput | CaseClosureOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for searching for CaseClosures.
      */
     cursor?: CaseClosureWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` CaseClosures from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` CaseClosures.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
+     *
      * Filter by unique combinations of CaseClosures.
      */
     distinct?: CaseClosureScalarFieldEnum | CaseClosureScalarFieldEnum[]
@@ -32874,25 +35777,25 @@ export namespace Prisma {
     where?: CaseClosureWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of CaseClosures to fetch.
      */
     orderBy?: CaseClosureOrderByWithRelationInput | CaseClosureOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for listing CaseClosures.
      */
     cursor?: CaseClosureWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` CaseClosures from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` CaseClosures.
      */
     skip?: number
@@ -33393,6 +36296,54 @@ export namespace Prisma {
   export type RiskAssessmentScalarFieldEnum = (typeof RiskAssessmentScalarFieldEnum)[keyof typeof RiskAssessmentScalarFieldEnum]
 
 
+  export const InfrastructureIntelligenceAssessmentScalarFieldEnum: {
+    id: 'id',
+    caseId: 'caseId',
+    inspectionId: 'inspectionId',
+    riskAssessmentId: 'riskAssessmentId',
+    status: 'status',
+    predictedRiskScore: 'predictedRiskScore',
+    predictedRiskLevel: 'predictedRiskLevel',
+    recommendedPriority: 'recommendedPriority',
+    confidence: 'confidence',
+    provider: 'provider',
+    providerType: 'providerType',
+    modelName: 'modelName',
+    modelVersion: 'modelVersion',
+    modelArtifactDigest: 'modelArtifactDigest',
+    featureSchemaVersion: 'featureSchemaVersion',
+    contractVersion: 'contractVersion',
+    sourceFingerprint: 'sourceFingerprint',
+    inferredAt: 'inferredAt',
+    expiresAt: 'expiresAt',
+    contributingFactors: 'contributingFactors',
+    explanation: 'explanation',
+    recommendedActions: 'recommendedActions',
+    abstentionReasons: 'abstentionReasons',
+    reconciliation: 'reconciliation',
+    createdAt: 'createdAt'
+  };
+
+  export type InfrastructureIntelligenceAssessmentScalarFieldEnum = (typeof InfrastructureIntelligenceAssessmentScalarFieldEnum)[keyof typeof InfrastructureIntelligenceAssessmentScalarFieldEnum]
+
+
+  export const InfrastructureIntelligenceReconciliationScalarFieldEnum: {
+    id: 'id',
+    intelligenceAssessmentId: 'intelligenceAssessmentId',
+    caseId: 'caseId',
+    contractVersion: 'contractVersion',
+    governanceFingerprint: 'governanceFingerprint',
+    policyResolutionStatus: 'policyResolutionStatus',
+    policySnapshot: 'policySnapshot',
+    reconciledActions: 'reconciledActions',
+    issues: 'issues',
+    reconciledAt: 'reconciledAt',
+    createdAt: 'createdAt'
+  };
+
+  export type InfrastructureIntelligenceReconciliationScalarFieldEnum = (typeof InfrastructureIntelligenceReconciliationScalarFieldEnum)[keyof typeof InfrastructureIntelligenceReconciliationScalarFieldEnum]
+
+
   export const OperationalResponsePlanScalarFieldEnum: {
     id: 'id',
     caseId: 'caseId',
@@ -33431,6 +36382,7 @@ export namespace Prisma {
     readinessSnapshot: 'readinessSnapshot',
     policySnapshot: 'policySnapshot',
     actionSnapshot: 'actionSnapshot',
+    intelligenceSnapshot: 'intelligenceSnapshot',
     preparedById: 'preparedById',
     preparedAt: 'preparedAt',
     createdAt: 'createdAt',
@@ -33628,371 +36580,385 @@ export namespace Prisma {
    * Reference to a field of type 'String'
    */
   export type StringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String'>
-    
+
 
 
   /**
    * Reference to a field of type 'String[]'
    */
   export type ListStringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String[]'>
-    
+
 
 
   /**
    * Reference to a field of type 'DateTime'
    */
   export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
-    
+
 
 
   /**
    * Reference to a field of type 'DateTime[]'
    */
   export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
-    
+
 
 
   /**
    * Reference to a field of type 'SystemRole'
    */
   export type EnumSystemRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SystemRole'>
-    
+
 
 
   /**
    * Reference to a field of type 'SystemRole[]'
    */
   export type ListEnumSystemRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SystemRole[]'>
-    
+
 
 
   /**
    * Reference to a field of type 'UserStatus'
    */
   export type EnumUserStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'UserStatus'>
-    
+
 
 
   /**
    * Reference to a field of type 'UserStatus[]'
    */
   export type ListEnumUserStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'UserStatus[]'>
-    
+
 
 
   /**
    * Reference to a field of type 'AssetType'
    */
   export type EnumAssetTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AssetType'>
-    
+
 
 
   /**
    * Reference to a field of type 'AssetType[]'
    */
   export type ListEnumAssetTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AssetType[]'>
-    
+
 
 
   /**
    * Reference to a field of type 'Decimal'
    */
   export type DecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal'>
-    
+
 
 
   /**
    * Reference to a field of type 'Decimal[]'
    */
   export type ListDecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal[]'>
-    
+
 
 
   /**
    * Reference to a field of type 'Int'
    */
   export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
-    
+
 
 
   /**
    * Reference to a field of type 'Int[]'
    */
   export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
-    
+
 
 
   /**
    * Reference to a field of type 'PublicReportCategory'
    */
   export type EnumPublicReportCategoryFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PublicReportCategory'>
-    
+
 
 
   /**
    * Reference to a field of type 'PublicReportCategory[]'
    */
   export type ListEnumPublicReportCategoryFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PublicReportCategory[]'>
-    
+
 
 
   /**
    * Reference to a field of type 'PublicReportStatus'
    */
   export type EnumPublicReportStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PublicReportStatus'>
-    
+
 
 
   /**
    * Reference to a field of type 'PublicReportStatus[]'
    */
   export type ListEnumPublicReportStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PublicReportStatus[]'>
-    
+
 
 
   /**
    * Reference to a field of type 'PublicReportTriageUrgency'
    */
   export type EnumPublicReportTriageUrgencyFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PublicReportTriageUrgency'>
-    
+
 
 
   /**
    * Reference to a field of type 'PublicReportTriageUrgency[]'
    */
   export type ListEnumPublicReportTriageUrgencyFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PublicReportTriageUrgency[]'>
-    
+
 
 
   /**
    * Reference to a field of type 'Json'
    */
   export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
-    
+
 
 
   /**
    * Reference to a field of type 'QueryMode'
    */
   export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
-    
+
 
 
   /**
    * Reference to a field of type 'RegistryLifecycleStatus'
    */
   export type EnumRegistryLifecycleStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'RegistryLifecycleStatus'>
-    
+
 
 
   /**
    * Reference to a field of type 'RegistryLifecycleStatus[]'
    */
   export type ListEnumRegistryLifecycleStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'RegistryLifecycleStatus[]'>
-    
+
 
 
   /**
    * Reference to a field of type 'PolicyValidationState'
    */
   export type EnumPolicyValidationStateFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PolicyValidationState'>
-    
+
 
 
   /**
    * Reference to a field of type 'PolicyValidationState[]'
    */
   export type ListEnumPolicyValidationStateFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PolicyValidationState[]'>
-    
+
 
 
   /**
    * Reference to a field of type 'EnforcementClassification'
    */
   export type EnumEnforcementClassificationFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'EnforcementClassification'>
-    
+
 
 
   /**
    * Reference to a field of type 'EnforcementClassification[]'
    */
   export type ListEnumEnforcementClassificationFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'EnforcementClassification[]'>
-    
+
 
 
   /**
    * Reference to a field of type 'Boolean'
    */
   export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
-    
+
 
 
   /**
    * Reference to a field of type 'CaseStatus'
    */
   export type EnumCaseStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CaseStatus'>
-    
+
 
 
   /**
    * Reference to a field of type 'CaseStatus[]'
    */
   export type ListEnumCaseStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CaseStatus[]'>
-    
+
 
 
   /**
    * Reference to a field of type 'RiskLevel'
    */
   export type EnumRiskLevelFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'RiskLevel'>
-    
+
 
 
   /**
    * Reference to a field of type 'RiskLevel[]'
    */
   export type ListEnumRiskLevelFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'RiskLevel[]'>
-    
+
 
 
   /**
    * Reference to a field of type 'PriorityLevel'
    */
   export type EnumPriorityLevelFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PriorityLevel'>
-    
+
 
 
   /**
    * Reference to a field of type 'PriorityLevel[]'
    */
   export type ListEnumPriorityLevelFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PriorityLevel[]'>
-    
 
-
-  /**
-   * Reference to a field of type 'ActionPlanGovernanceMode'
-   */
-  export type EnumActionPlanGovernanceModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ActionPlanGovernanceMode'>
-    
 
 
   /**
-   * Reference to a field of type 'ActionPlanGovernanceMode[]'
+   * Reference to a field of type 'IntelligenceAssessmentStatus'
    */
-  export type ListEnumActionPlanGovernanceModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ActionPlanGovernanceMode[]'>
-    
+  export type EnumIntelligenceAssessmentStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'IntelligenceAssessmentStatus'>
+
 
 
   /**
-   * Reference to a field of type 'DecisionPackageStatus'
+   * Reference to a field of type 'IntelligenceAssessmentStatus[]'
    */
-  export type EnumDecisionPackageStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DecisionPackageStatus'>
-    
+  export type ListEnumIntelligenceAssessmentStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'IntelligenceAssessmentStatus[]'>
 
-
-  /**
-   * Reference to a field of type 'DecisionPackageStatus[]'
-   */
-  export type ListEnumDecisionPackageStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DecisionPackageStatus[]'>
-    
-
-
-  /**
-   * Reference to a field of type 'OrpDecisionType'
-   */
-  export type EnumOrpDecisionTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'OrpDecisionType'>
-    
-
-
-  /**
-   * Reference to a field of type 'OrpDecisionType[]'
-   */
-  export type ListEnumOrpDecisionTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'OrpDecisionType[]'>
-    
-
-
-  /**
-   * Reference to a field of type 'ExecutionPlanStatus'
-   */
-  export type EnumExecutionPlanStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ExecutionPlanStatus'>
-    
-
-
-  /**
-   * Reference to a field of type 'ExecutionPlanStatus[]'
-   */
-  export type ListEnumExecutionPlanStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ExecutionPlanStatus[]'>
-    
-
-
-  /**
-   * Reference to a field of type 'ExecutionPlanGovernanceMode'
-   */
-  export type EnumExecutionPlanGovernanceModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ExecutionPlanGovernanceMode'>
-    
-
-
-  /**
-   * Reference to a field of type 'ExecutionPlanGovernanceMode[]'
-   */
-  export type ListEnumExecutionPlanGovernanceModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ExecutionPlanGovernanceMode[]'>
-    
-
-
-  /**
-   * Reference to a field of type 'ExecutionTaskStatus'
-   */
-  export type EnumExecutionTaskStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ExecutionTaskStatus'>
-    
-
-
-  /**
-   * Reference to a field of type 'ExecutionTaskStatus[]'
-   */
-  export type ListEnumExecutionTaskStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ExecutionTaskStatus[]'>
-    
-
-
-  /**
-   * Reference to a field of type 'ExecutionEvidenceType'
-   */
-  export type EnumExecutionEvidenceTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ExecutionEvidenceType'>
-    
-
-
-  /**
-   * Reference to a field of type 'ExecutionEvidenceType[]'
-   */
-  export type ListEnumExecutionEvidenceTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ExecutionEvidenceType[]'>
-    
-
-
-  /**
-   * Reference to a field of type 'CaseClosureReason'
-   */
-  export type EnumCaseClosureReasonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CaseClosureReason'>
-    
-
-
-  /**
-   * Reference to a field of type 'CaseClosureReason[]'
-   */
-  export type ListEnumCaseClosureReasonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CaseClosureReason[]'>
-    
 
 
   /**
    * Reference to a field of type 'Float'
    */
   export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
-    
+
 
 
   /**
    * Reference to a field of type 'Float[]'
    */
   export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
-    
+
+
+
+  /**
+   * Reference to a field of type 'ActionPlanGovernanceMode'
+   */
+  export type EnumActionPlanGovernanceModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ActionPlanGovernanceMode'>
+
+
+
+  /**
+   * Reference to a field of type 'ActionPlanGovernanceMode[]'
+   */
+  export type ListEnumActionPlanGovernanceModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ActionPlanGovernanceMode[]'>
+
+
+
+  /**
+   * Reference to a field of type 'DecisionPackageStatus'
+   */
+  export type EnumDecisionPackageStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DecisionPackageStatus'>
+
+
+
+  /**
+   * Reference to a field of type 'DecisionPackageStatus[]'
+   */
+  export type ListEnumDecisionPackageStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DecisionPackageStatus[]'>
+
+
+
+  /**
+   * Reference to a field of type 'OrpDecisionType'
+   */
+  export type EnumOrpDecisionTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'OrpDecisionType'>
+
+
+
+  /**
+   * Reference to a field of type 'OrpDecisionType[]'
+   */
+  export type ListEnumOrpDecisionTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'OrpDecisionType[]'>
+
+
+
+  /**
+   * Reference to a field of type 'ExecutionPlanStatus'
+   */
+  export type EnumExecutionPlanStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ExecutionPlanStatus'>
+
+
+
+  /**
+   * Reference to a field of type 'ExecutionPlanStatus[]'
+   */
+  export type ListEnumExecutionPlanStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ExecutionPlanStatus[]'>
+
+
+
+  /**
+   * Reference to a field of type 'ExecutionPlanGovernanceMode'
+   */
+  export type EnumExecutionPlanGovernanceModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ExecutionPlanGovernanceMode'>
+
+
+
+  /**
+   * Reference to a field of type 'ExecutionPlanGovernanceMode[]'
+   */
+  export type ListEnumExecutionPlanGovernanceModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ExecutionPlanGovernanceMode[]'>
+
+
+
+  /**
+   * Reference to a field of type 'ExecutionTaskStatus'
+   */
+  export type EnumExecutionTaskStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ExecutionTaskStatus'>
+
+
+
+  /**
+   * Reference to a field of type 'ExecutionTaskStatus[]'
+   */
+  export type ListEnumExecutionTaskStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ExecutionTaskStatus[]'>
+
+
+
+  /**
+   * Reference to a field of type 'ExecutionEvidenceType'
+   */
+  export type EnumExecutionEvidenceTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ExecutionEvidenceType'>
+
+
+
+  /**
+   * Reference to a field of type 'ExecutionEvidenceType[]'
+   */
+  export type ListEnumExecutionEvidenceTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ExecutionEvidenceType[]'>
+
+
+
+  /**
+   * Reference to a field of type 'CaseClosureReason'
+   */
+  export type EnumCaseClosureReasonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CaseClosureReason'>
+
+
+
+  /**
+   * Reference to a field of type 'CaseClosureReason[]'
+   */
+  export type ListEnumCaseClosureReasonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CaseClosureReason[]'>
+
   /**
    * Deep Input Types
    */
@@ -35301,6 +38267,8 @@ export namespace Prisma {
     closure?: XOR<CaseClosureNullableScalarRelationFilter, CaseClosureWhereInput> | null
     sourcePublicReport?: XOR<PublicReportNullableScalarRelationFilter, PublicReportWhereInput> | null
     decisionPackages?: DecisionPackageListRelationFilter
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentListRelationFilter
+    intelligenceReconciliations?: InfrastructureIntelligenceReconciliationListRelationFilter
   }
 
   export type CaseOrderByWithRelationInput = {
@@ -35325,6 +38293,8 @@ export namespace Prisma {
     closure?: CaseClosureOrderByWithRelationInput
     sourcePublicReport?: PublicReportOrderByWithRelationInput
     decisionPackages?: DecisionPackageOrderByRelationAggregateInput
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentOrderByRelationAggregateInput
+    intelligenceReconciliations?: InfrastructureIntelligenceReconciliationOrderByRelationAggregateInput
   }
 
   export type CaseWhereUniqueInput = Prisma.AtLeast<{
@@ -35352,6 +38322,8 @@ export namespace Prisma {
     closure?: XOR<CaseClosureNullableScalarRelationFilter, CaseClosureWhereInput> | null
     sourcePublicReport?: XOR<PublicReportNullableScalarRelationFilter, PublicReportWhereInput> | null
     decisionPackages?: DecisionPackageListRelationFilter
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentListRelationFilter
+    intelligenceReconciliations?: InfrastructureIntelligenceReconciliationListRelationFilter
   }, "id" | "caseNumber">
 
   export type CaseOrderByWithAggregationInput = {
@@ -35413,6 +38385,7 @@ export namespace Prisma {
     inspector?: XOR<UserScalarRelationFilter, UserWhereInput>
     riskAssessments?: RiskAssessmentListRelationFilter
     decisionPackages?: DecisionPackageListRelationFilter
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentListRelationFilter
   }
 
   export type InspectionOrderByWithRelationInput = {
@@ -35435,6 +38408,7 @@ export namespace Prisma {
     inspector?: UserOrderByWithRelationInput
     riskAssessments?: RiskAssessmentOrderByRelationAggregateInput
     decisionPackages?: DecisionPackageOrderByRelationAggregateInput
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentOrderByRelationAggregateInput
   }
 
   export type InspectionWhereUniqueInput = Prisma.AtLeast<{
@@ -35460,6 +38434,7 @@ export namespace Prisma {
     inspector?: XOR<UserScalarRelationFilter, UserWhereInput>
     riskAssessments?: RiskAssessmentListRelationFilter
     decisionPackages?: DecisionPackageListRelationFilter
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentListRelationFilter
   }, "id">
 
   export type InspectionOrderByWithAggregationInput = {
@@ -35524,6 +38499,7 @@ export namespace Prisma {
     inspection?: XOR<InspectionScalarRelationFilter, InspectionWhereInput>
     operationalResponsePlans?: OperationalResponsePlanListRelationFilter
     decisionPackages?: DecisionPackageListRelationFilter
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentListRelationFilter
   }
 
   export type RiskAssessmentOrderByWithRelationInput = {
@@ -35541,6 +38517,7 @@ export namespace Prisma {
     inspection?: InspectionOrderByWithRelationInput
     operationalResponsePlans?: OperationalResponsePlanOrderByRelationAggregateInput
     decisionPackages?: DecisionPackageOrderByRelationAggregateInput
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentOrderByRelationAggregateInput
   }
 
   export type RiskAssessmentWhereUniqueInput = Prisma.AtLeast<{
@@ -35561,6 +38538,7 @@ export namespace Prisma {
     inspection?: XOR<InspectionScalarRelationFilter, InspectionWhereInput>
     operationalResponsePlans?: OperationalResponsePlanListRelationFilter
     decisionPackages?: DecisionPackageListRelationFilter
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentListRelationFilter
   }, "id">
 
   export type RiskAssessmentOrderByWithAggregationInput = {
@@ -35595,6 +38573,260 @@ export namespace Prisma {
     reasons?: JsonWithAggregatesFilter<"RiskAssessment">
     assessmentVersion?: StringWithAggregatesFilter<"RiskAssessment"> | string
     createdAt?: DateTimeWithAggregatesFilter<"RiskAssessment"> | Date | string
+  }
+
+  export type InfrastructureIntelligenceAssessmentWhereInput = {
+    AND?: InfrastructureIntelligenceAssessmentWhereInput | InfrastructureIntelligenceAssessmentWhereInput[]
+    OR?: InfrastructureIntelligenceAssessmentWhereInput[]
+    NOT?: InfrastructureIntelligenceAssessmentWhereInput | InfrastructureIntelligenceAssessmentWhereInput[]
+    id?: StringFilter<"InfrastructureIntelligenceAssessment"> | string
+    caseId?: StringFilter<"InfrastructureIntelligenceAssessment"> | string
+    inspectionId?: StringFilter<"InfrastructureIntelligenceAssessment"> | string
+    riskAssessmentId?: StringFilter<"InfrastructureIntelligenceAssessment"> | string
+    status?: EnumIntelligenceAssessmentStatusFilter<"InfrastructureIntelligenceAssessment"> | $Enums.IntelligenceAssessmentStatus
+    predictedRiskScore?: IntNullableFilter<"InfrastructureIntelligenceAssessment"> | number | null
+    predictedRiskLevel?: EnumRiskLevelNullableFilter<"InfrastructureIntelligenceAssessment"> | $Enums.RiskLevel | null
+    recommendedPriority?: EnumPriorityLevelNullableFilter<"InfrastructureIntelligenceAssessment"> | $Enums.PriorityLevel | null
+    confidence?: FloatNullableFilter<"InfrastructureIntelligenceAssessment"> | number | null
+    provider?: StringFilter<"InfrastructureIntelligenceAssessment"> | string
+    providerType?: StringFilter<"InfrastructureIntelligenceAssessment"> | string
+    modelName?: StringFilter<"InfrastructureIntelligenceAssessment"> | string
+    modelVersion?: StringFilter<"InfrastructureIntelligenceAssessment"> | string
+    modelArtifactDigest?: StringNullableFilter<"InfrastructureIntelligenceAssessment"> | string | null
+    featureSchemaVersion?: StringFilter<"InfrastructureIntelligenceAssessment"> | string
+    contractVersion?: StringFilter<"InfrastructureIntelligenceAssessment"> | string
+    sourceFingerprint?: StringFilter<"InfrastructureIntelligenceAssessment"> | string
+    inferredAt?: DateTimeFilter<"InfrastructureIntelligenceAssessment"> | Date | string
+    expiresAt?: DateTimeNullableFilter<"InfrastructureIntelligenceAssessment"> | Date | string | null
+    contributingFactors?: JsonFilter<"InfrastructureIntelligenceAssessment">
+    explanation?: StringNullableFilter<"InfrastructureIntelligenceAssessment"> | string | null
+    recommendedActions?: JsonFilter<"InfrastructureIntelligenceAssessment">
+    abstentionReasons?: JsonFilter<"InfrastructureIntelligenceAssessment">
+    reconciliation?: JsonFilter<"InfrastructureIntelligenceAssessment">
+    createdAt?: DateTimeFilter<"InfrastructureIntelligenceAssessment"> | Date | string
+    governanceReconciliations?: InfrastructureIntelligenceReconciliationListRelationFilter
+    case?: XOR<CaseScalarRelationFilter, CaseWhereInput>
+    inspection?: XOR<InspectionScalarRelationFilter, InspectionWhereInput>
+    riskAssessment?: XOR<RiskAssessmentScalarRelationFilter, RiskAssessmentWhereInput>
+  }
+
+  export type InfrastructureIntelligenceAssessmentOrderByWithRelationInput = {
+    id?: SortOrder
+    caseId?: SortOrder
+    inspectionId?: SortOrder
+    riskAssessmentId?: SortOrder
+    status?: SortOrder
+    predictedRiskScore?: SortOrderInput | SortOrder
+    predictedRiskLevel?: SortOrderInput | SortOrder
+    recommendedPriority?: SortOrderInput | SortOrder
+    confidence?: SortOrderInput | SortOrder
+    provider?: SortOrder
+    providerType?: SortOrder
+    modelName?: SortOrder
+    modelVersion?: SortOrder
+    modelArtifactDigest?: SortOrderInput | SortOrder
+    featureSchemaVersion?: SortOrder
+    contractVersion?: SortOrder
+    sourceFingerprint?: SortOrder
+    inferredAt?: SortOrder
+    expiresAt?: SortOrderInput | SortOrder
+    contributingFactors?: SortOrder
+    explanation?: SortOrderInput | SortOrder
+    recommendedActions?: SortOrder
+    abstentionReasons?: SortOrder
+    reconciliation?: SortOrder
+    createdAt?: SortOrder
+    governanceReconciliations?: InfrastructureIntelligenceReconciliationOrderByRelationAggregateInput
+    case?: CaseOrderByWithRelationInput
+    inspection?: InspectionOrderByWithRelationInput
+    riskAssessment?: RiskAssessmentOrderByWithRelationInput
+  }
+
+  export type InfrastructureIntelligenceAssessmentWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    sourceFingerprint?: string
+    AND?: InfrastructureIntelligenceAssessmentWhereInput | InfrastructureIntelligenceAssessmentWhereInput[]
+    OR?: InfrastructureIntelligenceAssessmentWhereInput[]
+    NOT?: InfrastructureIntelligenceAssessmentWhereInput | InfrastructureIntelligenceAssessmentWhereInput[]
+    caseId?: StringFilter<"InfrastructureIntelligenceAssessment"> | string
+    inspectionId?: StringFilter<"InfrastructureIntelligenceAssessment"> | string
+    riskAssessmentId?: StringFilter<"InfrastructureIntelligenceAssessment"> | string
+    status?: EnumIntelligenceAssessmentStatusFilter<"InfrastructureIntelligenceAssessment"> | $Enums.IntelligenceAssessmentStatus
+    predictedRiskScore?: IntNullableFilter<"InfrastructureIntelligenceAssessment"> | number | null
+    predictedRiskLevel?: EnumRiskLevelNullableFilter<"InfrastructureIntelligenceAssessment"> | $Enums.RiskLevel | null
+    recommendedPriority?: EnumPriorityLevelNullableFilter<"InfrastructureIntelligenceAssessment"> | $Enums.PriorityLevel | null
+    confidence?: FloatNullableFilter<"InfrastructureIntelligenceAssessment"> | number | null
+    provider?: StringFilter<"InfrastructureIntelligenceAssessment"> | string
+    providerType?: StringFilter<"InfrastructureIntelligenceAssessment"> | string
+    modelName?: StringFilter<"InfrastructureIntelligenceAssessment"> | string
+    modelVersion?: StringFilter<"InfrastructureIntelligenceAssessment"> | string
+    modelArtifactDigest?: StringNullableFilter<"InfrastructureIntelligenceAssessment"> | string | null
+    featureSchemaVersion?: StringFilter<"InfrastructureIntelligenceAssessment"> | string
+    contractVersion?: StringFilter<"InfrastructureIntelligenceAssessment"> | string
+    inferredAt?: DateTimeFilter<"InfrastructureIntelligenceAssessment"> | Date | string
+    expiresAt?: DateTimeNullableFilter<"InfrastructureIntelligenceAssessment"> | Date | string | null
+    contributingFactors?: JsonFilter<"InfrastructureIntelligenceAssessment">
+    explanation?: StringNullableFilter<"InfrastructureIntelligenceAssessment"> | string | null
+    recommendedActions?: JsonFilter<"InfrastructureIntelligenceAssessment">
+    abstentionReasons?: JsonFilter<"InfrastructureIntelligenceAssessment">
+    reconciliation?: JsonFilter<"InfrastructureIntelligenceAssessment">
+    createdAt?: DateTimeFilter<"InfrastructureIntelligenceAssessment"> | Date | string
+    governanceReconciliations?: InfrastructureIntelligenceReconciliationListRelationFilter
+    case?: XOR<CaseScalarRelationFilter, CaseWhereInput>
+    inspection?: XOR<InspectionScalarRelationFilter, InspectionWhereInput>
+    riskAssessment?: XOR<RiskAssessmentScalarRelationFilter, RiskAssessmentWhereInput>
+  }, "id" | "sourceFingerprint">
+
+  export type InfrastructureIntelligenceAssessmentOrderByWithAggregationInput = {
+    id?: SortOrder
+    caseId?: SortOrder
+    inspectionId?: SortOrder
+    riskAssessmentId?: SortOrder
+    status?: SortOrder
+    predictedRiskScore?: SortOrderInput | SortOrder
+    predictedRiskLevel?: SortOrderInput | SortOrder
+    recommendedPriority?: SortOrderInput | SortOrder
+    confidence?: SortOrderInput | SortOrder
+    provider?: SortOrder
+    providerType?: SortOrder
+    modelName?: SortOrder
+    modelVersion?: SortOrder
+    modelArtifactDigest?: SortOrderInput | SortOrder
+    featureSchemaVersion?: SortOrder
+    contractVersion?: SortOrder
+    sourceFingerprint?: SortOrder
+    inferredAt?: SortOrder
+    expiresAt?: SortOrderInput | SortOrder
+    contributingFactors?: SortOrder
+    explanation?: SortOrderInput | SortOrder
+    recommendedActions?: SortOrder
+    abstentionReasons?: SortOrder
+    reconciliation?: SortOrder
+    createdAt?: SortOrder
+    _count?: InfrastructureIntelligenceAssessmentCountOrderByAggregateInput
+    _avg?: InfrastructureIntelligenceAssessmentAvgOrderByAggregateInput
+    _max?: InfrastructureIntelligenceAssessmentMaxOrderByAggregateInput
+    _min?: InfrastructureIntelligenceAssessmentMinOrderByAggregateInput
+    _sum?: InfrastructureIntelligenceAssessmentSumOrderByAggregateInput
+  }
+
+  export type InfrastructureIntelligenceAssessmentScalarWhereWithAggregatesInput = {
+    AND?: InfrastructureIntelligenceAssessmentScalarWhereWithAggregatesInput | InfrastructureIntelligenceAssessmentScalarWhereWithAggregatesInput[]
+    OR?: InfrastructureIntelligenceAssessmentScalarWhereWithAggregatesInput[]
+    NOT?: InfrastructureIntelligenceAssessmentScalarWhereWithAggregatesInput | InfrastructureIntelligenceAssessmentScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"InfrastructureIntelligenceAssessment"> | string
+    caseId?: StringWithAggregatesFilter<"InfrastructureIntelligenceAssessment"> | string
+    inspectionId?: StringWithAggregatesFilter<"InfrastructureIntelligenceAssessment"> | string
+    riskAssessmentId?: StringWithAggregatesFilter<"InfrastructureIntelligenceAssessment"> | string
+    status?: EnumIntelligenceAssessmentStatusWithAggregatesFilter<"InfrastructureIntelligenceAssessment"> | $Enums.IntelligenceAssessmentStatus
+    predictedRiskScore?: IntNullableWithAggregatesFilter<"InfrastructureIntelligenceAssessment"> | number | null
+    predictedRiskLevel?: EnumRiskLevelNullableWithAggregatesFilter<"InfrastructureIntelligenceAssessment"> | $Enums.RiskLevel | null
+    recommendedPriority?: EnumPriorityLevelNullableWithAggregatesFilter<"InfrastructureIntelligenceAssessment"> | $Enums.PriorityLevel | null
+    confidence?: FloatNullableWithAggregatesFilter<"InfrastructureIntelligenceAssessment"> | number | null
+    provider?: StringWithAggregatesFilter<"InfrastructureIntelligenceAssessment"> | string
+    providerType?: StringWithAggregatesFilter<"InfrastructureIntelligenceAssessment"> | string
+    modelName?: StringWithAggregatesFilter<"InfrastructureIntelligenceAssessment"> | string
+    modelVersion?: StringWithAggregatesFilter<"InfrastructureIntelligenceAssessment"> | string
+    modelArtifactDigest?: StringNullableWithAggregatesFilter<"InfrastructureIntelligenceAssessment"> | string | null
+    featureSchemaVersion?: StringWithAggregatesFilter<"InfrastructureIntelligenceAssessment"> | string
+    contractVersion?: StringWithAggregatesFilter<"InfrastructureIntelligenceAssessment"> | string
+    sourceFingerprint?: StringWithAggregatesFilter<"InfrastructureIntelligenceAssessment"> | string
+    inferredAt?: DateTimeWithAggregatesFilter<"InfrastructureIntelligenceAssessment"> | Date | string
+    expiresAt?: DateTimeNullableWithAggregatesFilter<"InfrastructureIntelligenceAssessment"> | Date | string | null
+    contributingFactors?: JsonWithAggregatesFilter<"InfrastructureIntelligenceAssessment">
+    explanation?: StringNullableWithAggregatesFilter<"InfrastructureIntelligenceAssessment"> | string | null
+    recommendedActions?: JsonWithAggregatesFilter<"InfrastructureIntelligenceAssessment">
+    abstentionReasons?: JsonWithAggregatesFilter<"InfrastructureIntelligenceAssessment">
+    reconciliation?: JsonWithAggregatesFilter<"InfrastructureIntelligenceAssessment">
+    createdAt?: DateTimeWithAggregatesFilter<"InfrastructureIntelligenceAssessment"> | Date | string
+  }
+
+  export type InfrastructureIntelligenceReconciliationWhereInput = {
+    AND?: InfrastructureIntelligenceReconciliationWhereInput | InfrastructureIntelligenceReconciliationWhereInput[]
+    OR?: InfrastructureIntelligenceReconciliationWhereInput[]
+    NOT?: InfrastructureIntelligenceReconciliationWhereInput | InfrastructureIntelligenceReconciliationWhereInput[]
+    id?: StringFilter<"InfrastructureIntelligenceReconciliation"> | string
+    intelligenceAssessmentId?: StringFilter<"InfrastructureIntelligenceReconciliation"> | string
+    caseId?: StringFilter<"InfrastructureIntelligenceReconciliation"> | string
+    contractVersion?: StringFilter<"InfrastructureIntelligenceReconciliation"> | string
+    governanceFingerprint?: StringFilter<"InfrastructureIntelligenceReconciliation"> | string
+    policyResolutionStatus?: StringFilter<"InfrastructureIntelligenceReconciliation"> | string
+    policySnapshot?: JsonFilter<"InfrastructureIntelligenceReconciliation">
+    reconciledActions?: JsonFilter<"InfrastructureIntelligenceReconciliation">
+    issues?: JsonFilter<"InfrastructureIntelligenceReconciliation">
+    reconciledAt?: DateTimeFilter<"InfrastructureIntelligenceReconciliation"> | Date | string
+    createdAt?: DateTimeFilter<"InfrastructureIntelligenceReconciliation"> | Date | string
+    intelligenceAssessment?: XOR<InfrastructureIntelligenceAssessmentScalarRelationFilter, InfrastructureIntelligenceAssessmentWhereInput>
+    case?: XOR<CaseScalarRelationFilter, CaseWhereInput>
+  }
+
+  export type InfrastructureIntelligenceReconciliationOrderByWithRelationInput = {
+    id?: SortOrder
+    intelligenceAssessmentId?: SortOrder
+    caseId?: SortOrder
+    contractVersion?: SortOrder
+    governanceFingerprint?: SortOrder
+    policyResolutionStatus?: SortOrder
+    policySnapshot?: SortOrder
+    reconciledActions?: SortOrder
+    issues?: SortOrder
+    reconciledAt?: SortOrder
+    createdAt?: SortOrder
+    intelligenceAssessment?: InfrastructureIntelligenceAssessmentOrderByWithRelationInput
+    case?: CaseOrderByWithRelationInput
+  }
+
+  export type InfrastructureIntelligenceReconciliationWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    governanceFingerprint?: string
+    AND?: InfrastructureIntelligenceReconciliationWhereInput | InfrastructureIntelligenceReconciliationWhereInput[]
+    OR?: InfrastructureIntelligenceReconciliationWhereInput[]
+    NOT?: InfrastructureIntelligenceReconciliationWhereInput | InfrastructureIntelligenceReconciliationWhereInput[]
+    intelligenceAssessmentId?: StringFilter<"InfrastructureIntelligenceReconciliation"> | string
+    caseId?: StringFilter<"InfrastructureIntelligenceReconciliation"> | string
+    contractVersion?: StringFilter<"InfrastructureIntelligenceReconciliation"> | string
+    policyResolutionStatus?: StringFilter<"InfrastructureIntelligenceReconciliation"> | string
+    policySnapshot?: JsonFilter<"InfrastructureIntelligenceReconciliation">
+    reconciledActions?: JsonFilter<"InfrastructureIntelligenceReconciliation">
+    issues?: JsonFilter<"InfrastructureIntelligenceReconciliation">
+    reconciledAt?: DateTimeFilter<"InfrastructureIntelligenceReconciliation"> | Date | string
+    createdAt?: DateTimeFilter<"InfrastructureIntelligenceReconciliation"> | Date | string
+    intelligenceAssessment?: XOR<InfrastructureIntelligenceAssessmentScalarRelationFilter, InfrastructureIntelligenceAssessmentWhereInput>
+    case?: XOR<CaseScalarRelationFilter, CaseWhereInput>
+  }, "id" | "governanceFingerprint">
+
+  export type InfrastructureIntelligenceReconciliationOrderByWithAggregationInput = {
+    id?: SortOrder
+    intelligenceAssessmentId?: SortOrder
+    caseId?: SortOrder
+    contractVersion?: SortOrder
+    governanceFingerprint?: SortOrder
+    policyResolutionStatus?: SortOrder
+    policySnapshot?: SortOrder
+    reconciledActions?: SortOrder
+    issues?: SortOrder
+    reconciledAt?: SortOrder
+    createdAt?: SortOrder
+    _count?: InfrastructureIntelligenceReconciliationCountOrderByAggregateInput
+    _max?: InfrastructureIntelligenceReconciliationMaxOrderByAggregateInput
+    _min?: InfrastructureIntelligenceReconciliationMinOrderByAggregateInput
+  }
+
+  export type InfrastructureIntelligenceReconciliationScalarWhereWithAggregatesInput = {
+    AND?: InfrastructureIntelligenceReconciliationScalarWhereWithAggregatesInput | InfrastructureIntelligenceReconciliationScalarWhereWithAggregatesInput[]
+    OR?: InfrastructureIntelligenceReconciliationScalarWhereWithAggregatesInput[]
+    NOT?: InfrastructureIntelligenceReconciliationScalarWhereWithAggregatesInput | InfrastructureIntelligenceReconciliationScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"InfrastructureIntelligenceReconciliation"> | string
+    intelligenceAssessmentId?: StringWithAggregatesFilter<"InfrastructureIntelligenceReconciliation"> | string
+    caseId?: StringWithAggregatesFilter<"InfrastructureIntelligenceReconciliation"> | string
+    contractVersion?: StringWithAggregatesFilter<"InfrastructureIntelligenceReconciliation"> | string
+    governanceFingerprint?: StringWithAggregatesFilter<"InfrastructureIntelligenceReconciliation"> | string
+    policyResolutionStatus?: StringWithAggregatesFilter<"InfrastructureIntelligenceReconciliation"> | string
+    policySnapshot?: JsonWithAggregatesFilter<"InfrastructureIntelligenceReconciliation">
+    reconciledActions?: JsonWithAggregatesFilter<"InfrastructureIntelligenceReconciliation">
+    issues?: JsonWithAggregatesFilter<"InfrastructureIntelligenceReconciliation">
+    reconciledAt?: DateTimeWithAggregatesFilter<"InfrastructureIntelligenceReconciliation"> | Date | string
+    createdAt?: DateTimeWithAggregatesFilter<"InfrastructureIntelligenceReconciliation"> | Date | string
   }
 
   export type OperationalResponsePlanWhereInput = {
@@ -35745,6 +38977,7 @@ export namespace Prisma {
     readinessSnapshot?: JsonFilter<"DecisionPackage">
     policySnapshot?: JsonFilter<"DecisionPackage">
     actionSnapshot?: JsonFilter<"DecisionPackage">
+    intelligenceSnapshot?: JsonNullableFilter<"DecisionPackage">
     preparedById?: StringFilter<"DecisionPackage"> | string
     preparedAt?: DateTimeFilter<"DecisionPackage"> | Date | string
     createdAt?: DateTimeFilter<"DecisionPackage"> | Date | string
@@ -35771,6 +39004,7 @@ export namespace Prisma {
     readinessSnapshot?: SortOrder
     policySnapshot?: SortOrder
     actionSnapshot?: SortOrder
+    intelligenceSnapshot?: SortOrderInput | SortOrder
     preparedById?: SortOrder
     preparedAt?: SortOrder
     createdAt?: SortOrder
@@ -35802,6 +39036,7 @@ export namespace Prisma {
     readinessSnapshot?: JsonFilter<"DecisionPackage">
     policySnapshot?: JsonFilter<"DecisionPackage">
     actionSnapshot?: JsonFilter<"DecisionPackage">
+    intelligenceSnapshot?: JsonNullableFilter<"DecisionPackage">
     preparedById?: StringFilter<"DecisionPackage"> | string
     preparedAt?: DateTimeFilter<"DecisionPackage"> | Date | string
     createdAt?: DateTimeFilter<"DecisionPackage"> | Date | string
@@ -35828,6 +39063,7 @@ export namespace Prisma {
     readinessSnapshot?: SortOrder
     policySnapshot?: SortOrder
     actionSnapshot?: SortOrder
+    intelligenceSnapshot?: SortOrderInput | SortOrder
     preparedById?: SortOrder
     preparedAt?: SortOrder
     createdAt?: SortOrder
@@ -35857,6 +39093,7 @@ export namespace Prisma {
     readinessSnapshot?: JsonWithAggregatesFilter<"DecisionPackage">
     policySnapshot?: JsonWithAggregatesFilter<"DecisionPackage">
     actionSnapshot?: JsonWithAggregatesFilter<"DecisionPackage">
+    intelligenceSnapshot?: JsonNullableWithAggregatesFilter<"DecisionPackage">
     preparedById?: StringWithAggregatesFilter<"DecisionPackage"> | string
     preparedAt?: DateTimeWithAggregatesFilter<"DecisionPackage"> | Date | string
     createdAt?: DateTimeWithAggregatesFilter<"DecisionPackage"> | Date | string
@@ -38028,6 +41265,8 @@ export namespace Prisma {
     closure?: CaseClosureCreateNestedOneWithoutCaseInput
     sourcePublicReport?: PublicReportCreateNestedOneWithoutCreatedCaseInput
     decisionPackages?: DecisionPackageCreateNestedManyWithoutCaseInput
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentCreateNestedManyWithoutCaseInput
+    intelligenceReconciliations?: InfrastructureIntelligenceReconciliationCreateNestedManyWithoutCaseInput
   }
 
   export type CaseUncheckedCreateInput = {
@@ -38051,6 +41290,8 @@ export namespace Prisma {
     closure?: CaseClosureUncheckedCreateNestedOneWithoutCaseInput
     sourcePublicReport?: PublicReportUncheckedCreateNestedOneWithoutCreatedCaseInput
     decisionPackages?: DecisionPackageUncheckedCreateNestedManyWithoutCaseInput
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentUncheckedCreateNestedManyWithoutCaseInput
+    intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUncheckedCreateNestedManyWithoutCaseInput
   }
 
   export type CaseUpdateInput = {
@@ -38074,6 +41315,8 @@ export namespace Prisma {
     closure?: CaseClosureUpdateOneWithoutCaseNestedInput
     sourcePublicReport?: PublicReportUpdateOneWithoutCreatedCaseNestedInput
     decisionPackages?: DecisionPackageUpdateManyWithoutCaseNestedInput
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentUpdateManyWithoutCaseNestedInput
+    intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUpdateManyWithoutCaseNestedInput
   }
 
   export type CaseUncheckedUpdateInput = {
@@ -38097,6 +41340,8 @@ export namespace Prisma {
     closure?: CaseClosureUncheckedUpdateOneWithoutCaseNestedInput
     sourcePublicReport?: PublicReportUncheckedUpdateOneWithoutCreatedCaseNestedInput
     decisionPackages?: DecisionPackageUncheckedUpdateManyWithoutCaseNestedInput
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentUncheckedUpdateManyWithoutCaseNestedInput
+    intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUncheckedUpdateManyWithoutCaseNestedInput
   }
 
   export type CaseCreateManyInput = {
@@ -38161,6 +41406,7 @@ export namespace Prisma {
     inspector: UserCreateNestedOneWithoutInspectionsInput
     riskAssessments?: RiskAssessmentCreateNestedManyWithoutInspectionInput
     decisionPackages?: DecisionPackageCreateNestedManyWithoutInspectionInput
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentCreateNestedManyWithoutInspectionInput
   }
 
   export type InspectionUncheckedCreateInput = {
@@ -38181,6 +41427,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     riskAssessments?: RiskAssessmentUncheckedCreateNestedManyWithoutInspectionInput
     decisionPackages?: DecisionPackageUncheckedCreateNestedManyWithoutInspectionInput
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentUncheckedCreateNestedManyWithoutInspectionInput
   }
 
   export type InspectionUpdateInput = {
@@ -38201,6 +41448,7 @@ export namespace Prisma {
     inspector?: UserUpdateOneRequiredWithoutInspectionsNestedInput
     riskAssessments?: RiskAssessmentUpdateManyWithoutInspectionNestedInput
     decisionPackages?: DecisionPackageUpdateManyWithoutInspectionNestedInput
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentUpdateManyWithoutInspectionNestedInput
   }
 
   export type InspectionUncheckedUpdateInput = {
@@ -38221,6 +41469,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     riskAssessments?: RiskAssessmentUncheckedUpdateManyWithoutInspectionNestedInput
     decisionPackages?: DecisionPackageUncheckedUpdateManyWithoutInspectionNestedInput
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentUncheckedUpdateManyWithoutInspectionNestedInput
   }
 
   export type InspectionCreateManyInput = {
@@ -38288,6 +41537,7 @@ export namespace Prisma {
     inspection: InspectionCreateNestedOneWithoutRiskAssessmentsInput
     operationalResponsePlans?: OperationalResponsePlanCreateNestedManyWithoutRiskAssessmentInput
     decisionPackages?: DecisionPackageCreateNestedManyWithoutRiskAssessmentInput
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentCreateNestedManyWithoutRiskAssessmentInput
   }
 
   export type RiskAssessmentUncheckedCreateInput = {
@@ -38303,6 +41553,7 @@ export namespace Prisma {
     createdAt?: Date | string
     operationalResponsePlans?: OperationalResponsePlanUncheckedCreateNestedManyWithoutRiskAssessmentInput
     decisionPackages?: DecisionPackageUncheckedCreateNestedManyWithoutRiskAssessmentInput
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentUncheckedCreateNestedManyWithoutRiskAssessmentInput
   }
 
   export type RiskAssessmentUpdateInput = {
@@ -38318,6 +41569,7 @@ export namespace Prisma {
     inspection?: InspectionUpdateOneRequiredWithoutRiskAssessmentsNestedInput
     operationalResponsePlans?: OperationalResponsePlanUpdateManyWithoutRiskAssessmentNestedInput
     decisionPackages?: DecisionPackageUpdateManyWithoutRiskAssessmentNestedInput
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentUpdateManyWithoutRiskAssessmentNestedInput
   }
 
   export type RiskAssessmentUncheckedUpdateInput = {
@@ -38333,6 +41585,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     operationalResponsePlans?: OperationalResponsePlanUncheckedUpdateManyWithoutRiskAssessmentNestedInput
     decisionPackages?: DecisionPackageUncheckedUpdateManyWithoutRiskAssessmentNestedInput
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentUncheckedUpdateManyWithoutRiskAssessmentNestedInput
   }
 
   export type RiskAssessmentCreateManyInput = {
@@ -38369,6 +41622,299 @@ export namespace Prisma {
     reasonCodes?: JsonNullValueInput | InputJsonValue
     reasons?: JsonNullValueInput | InputJsonValue
     assessmentVersion?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InfrastructureIntelligenceAssessmentCreateInput = {
+    id?: string
+    status: $Enums.IntelligenceAssessmentStatus
+    predictedRiskScore?: number | null
+    predictedRiskLevel?: $Enums.RiskLevel | null
+    recommendedPriority?: $Enums.PriorityLevel | null
+    confidence?: number | null
+    provider: string
+    providerType: string
+    modelName: string
+    modelVersion: string
+    modelArtifactDigest?: string | null
+    featureSchemaVersion: string
+    contractVersion: string
+    sourceFingerprint: string
+    inferredAt: Date | string
+    expiresAt?: Date | string | null
+    contributingFactors: JsonNullValueInput | InputJsonValue
+    explanation?: string | null
+    recommendedActions: JsonNullValueInput | InputJsonValue
+    abstentionReasons: JsonNullValueInput | InputJsonValue
+    reconciliation: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    governanceReconciliations?: InfrastructureIntelligenceReconciliationCreateNestedManyWithoutIntelligenceAssessmentInput
+    case: CaseCreateNestedOneWithoutIntelligenceAssessmentsInput
+    inspection: InspectionCreateNestedOneWithoutIntelligenceAssessmentsInput
+    riskAssessment: RiskAssessmentCreateNestedOneWithoutIntelligenceAssessmentsInput
+  }
+
+  export type InfrastructureIntelligenceAssessmentUncheckedCreateInput = {
+    id?: string
+    caseId: string
+    inspectionId: string
+    riskAssessmentId: string
+    status: $Enums.IntelligenceAssessmentStatus
+    predictedRiskScore?: number | null
+    predictedRiskLevel?: $Enums.RiskLevel | null
+    recommendedPriority?: $Enums.PriorityLevel | null
+    confidence?: number | null
+    provider: string
+    providerType: string
+    modelName: string
+    modelVersion: string
+    modelArtifactDigest?: string | null
+    featureSchemaVersion: string
+    contractVersion: string
+    sourceFingerprint: string
+    inferredAt: Date | string
+    expiresAt?: Date | string | null
+    contributingFactors: JsonNullValueInput | InputJsonValue
+    explanation?: string | null
+    recommendedActions: JsonNullValueInput | InputJsonValue
+    abstentionReasons: JsonNullValueInput | InputJsonValue
+    reconciliation: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    governanceReconciliations?: InfrastructureIntelligenceReconciliationUncheckedCreateNestedManyWithoutIntelligenceAssessmentInput
+  }
+
+  export type InfrastructureIntelligenceAssessmentUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: EnumIntelligenceAssessmentStatusFieldUpdateOperationsInput | $Enums.IntelligenceAssessmentStatus
+    predictedRiskScore?: NullableIntFieldUpdateOperationsInput | number | null
+    predictedRiskLevel?: NullableEnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel | null
+    recommendedPriority?: NullableEnumPriorityLevelFieldUpdateOperationsInput | $Enums.PriorityLevel | null
+    confidence?: NullableFloatFieldUpdateOperationsInput | number | null
+    provider?: StringFieldUpdateOperationsInput | string
+    providerType?: StringFieldUpdateOperationsInput | string
+    modelName?: StringFieldUpdateOperationsInput | string
+    modelVersion?: StringFieldUpdateOperationsInput | string
+    modelArtifactDigest?: NullableStringFieldUpdateOperationsInput | string | null
+    featureSchemaVersion?: StringFieldUpdateOperationsInput | string
+    contractVersion?: StringFieldUpdateOperationsInput | string
+    sourceFingerprint?: StringFieldUpdateOperationsInput | string
+    inferredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    contributingFactors?: JsonNullValueInput | InputJsonValue
+    explanation?: NullableStringFieldUpdateOperationsInput | string | null
+    recommendedActions?: JsonNullValueInput | InputJsonValue
+    abstentionReasons?: JsonNullValueInput | InputJsonValue
+    reconciliation?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    governanceReconciliations?: InfrastructureIntelligenceReconciliationUpdateManyWithoutIntelligenceAssessmentNestedInput
+    case?: CaseUpdateOneRequiredWithoutIntelligenceAssessmentsNestedInput
+    inspection?: InspectionUpdateOneRequiredWithoutIntelligenceAssessmentsNestedInput
+    riskAssessment?: RiskAssessmentUpdateOneRequiredWithoutIntelligenceAssessmentsNestedInput
+  }
+
+  export type InfrastructureIntelligenceAssessmentUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    caseId?: StringFieldUpdateOperationsInput | string
+    inspectionId?: StringFieldUpdateOperationsInput | string
+    riskAssessmentId?: StringFieldUpdateOperationsInput | string
+    status?: EnumIntelligenceAssessmentStatusFieldUpdateOperationsInput | $Enums.IntelligenceAssessmentStatus
+    predictedRiskScore?: NullableIntFieldUpdateOperationsInput | number | null
+    predictedRiskLevel?: NullableEnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel | null
+    recommendedPriority?: NullableEnumPriorityLevelFieldUpdateOperationsInput | $Enums.PriorityLevel | null
+    confidence?: NullableFloatFieldUpdateOperationsInput | number | null
+    provider?: StringFieldUpdateOperationsInput | string
+    providerType?: StringFieldUpdateOperationsInput | string
+    modelName?: StringFieldUpdateOperationsInput | string
+    modelVersion?: StringFieldUpdateOperationsInput | string
+    modelArtifactDigest?: NullableStringFieldUpdateOperationsInput | string | null
+    featureSchemaVersion?: StringFieldUpdateOperationsInput | string
+    contractVersion?: StringFieldUpdateOperationsInput | string
+    sourceFingerprint?: StringFieldUpdateOperationsInput | string
+    inferredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    contributingFactors?: JsonNullValueInput | InputJsonValue
+    explanation?: NullableStringFieldUpdateOperationsInput | string | null
+    recommendedActions?: JsonNullValueInput | InputJsonValue
+    abstentionReasons?: JsonNullValueInput | InputJsonValue
+    reconciliation?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    governanceReconciliations?: InfrastructureIntelligenceReconciliationUncheckedUpdateManyWithoutIntelligenceAssessmentNestedInput
+  }
+
+  export type InfrastructureIntelligenceAssessmentCreateManyInput = {
+    id?: string
+    caseId: string
+    inspectionId: string
+    riskAssessmentId: string
+    status: $Enums.IntelligenceAssessmentStatus
+    predictedRiskScore?: number | null
+    predictedRiskLevel?: $Enums.RiskLevel | null
+    recommendedPriority?: $Enums.PriorityLevel | null
+    confidence?: number | null
+    provider: string
+    providerType: string
+    modelName: string
+    modelVersion: string
+    modelArtifactDigest?: string | null
+    featureSchemaVersion: string
+    contractVersion: string
+    sourceFingerprint: string
+    inferredAt: Date | string
+    expiresAt?: Date | string | null
+    contributingFactors: JsonNullValueInput | InputJsonValue
+    explanation?: string | null
+    recommendedActions: JsonNullValueInput | InputJsonValue
+    abstentionReasons: JsonNullValueInput | InputJsonValue
+    reconciliation: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+  }
+
+  export type InfrastructureIntelligenceAssessmentUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: EnumIntelligenceAssessmentStatusFieldUpdateOperationsInput | $Enums.IntelligenceAssessmentStatus
+    predictedRiskScore?: NullableIntFieldUpdateOperationsInput | number | null
+    predictedRiskLevel?: NullableEnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel | null
+    recommendedPriority?: NullableEnumPriorityLevelFieldUpdateOperationsInput | $Enums.PriorityLevel | null
+    confidence?: NullableFloatFieldUpdateOperationsInput | number | null
+    provider?: StringFieldUpdateOperationsInput | string
+    providerType?: StringFieldUpdateOperationsInput | string
+    modelName?: StringFieldUpdateOperationsInput | string
+    modelVersion?: StringFieldUpdateOperationsInput | string
+    modelArtifactDigest?: NullableStringFieldUpdateOperationsInput | string | null
+    featureSchemaVersion?: StringFieldUpdateOperationsInput | string
+    contractVersion?: StringFieldUpdateOperationsInput | string
+    sourceFingerprint?: StringFieldUpdateOperationsInput | string
+    inferredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    contributingFactors?: JsonNullValueInput | InputJsonValue
+    explanation?: NullableStringFieldUpdateOperationsInput | string | null
+    recommendedActions?: JsonNullValueInput | InputJsonValue
+    abstentionReasons?: JsonNullValueInput | InputJsonValue
+    reconciliation?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InfrastructureIntelligenceAssessmentUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    caseId?: StringFieldUpdateOperationsInput | string
+    inspectionId?: StringFieldUpdateOperationsInput | string
+    riskAssessmentId?: StringFieldUpdateOperationsInput | string
+    status?: EnumIntelligenceAssessmentStatusFieldUpdateOperationsInput | $Enums.IntelligenceAssessmentStatus
+    predictedRiskScore?: NullableIntFieldUpdateOperationsInput | number | null
+    predictedRiskLevel?: NullableEnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel | null
+    recommendedPriority?: NullableEnumPriorityLevelFieldUpdateOperationsInput | $Enums.PriorityLevel | null
+    confidence?: NullableFloatFieldUpdateOperationsInput | number | null
+    provider?: StringFieldUpdateOperationsInput | string
+    providerType?: StringFieldUpdateOperationsInput | string
+    modelName?: StringFieldUpdateOperationsInput | string
+    modelVersion?: StringFieldUpdateOperationsInput | string
+    modelArtifactDigest?: NullableStringFieldUpdateOperationsInput | string | null
+    featureSchemaVersion?: StringFieldUpdateOperationsInput | string
+    contractVersion?: StringFieldUpdateOperationsInput | string
+    sourceFingerprint?: StringFieldUpdateOperationsInput | string
+    inferredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    contributingFactors?: JsonNullValueInput | InputJsonValue
+    explanation?: NullableStringFieldUpdateOperationsInput | string | null
+    recommendedActions?: JsonNullValueInput | InputJsonValue
+    abstentionReasons?: JsonNullValueInput | InputJsonValue
+    reconciliation?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InfrastructureIntelligenceReconciliationCreateInput = {
+    id?: string
+    contractVersion: string
+    governanceFingerprint: string
+    policyResolutionStatus: string
+    policySnapshot: JsonNullValueInput | InputJsonValue
+    reconciledActions: JsonNullValueInput | InputJsonValue
+    issues: JsonNullValueInput | InputJsonValue
+    reconciledAt: Date | string
+    createdAt?: Date | string
+    intelligenceAssessment: InfrastructureIntelligenceAssessmentCreateNestedOneWithoutGovernanceReconciliationsInput
+    case: CaseCreateNestedOneWithoutIntelligenceReconciliationsInput
+  }
+
+  export type InfrastructureIntelligenceReconciliationUncheckedCreateInput = {
+    id?: string
+    intelligenceAssessmentId: string
+    caseId: string
+    contractVersion: string
+    governanceFingerprint: string
+    policyResolutionStatus: string
+    policySnapshot: JsonNullValueInput | InputJsonValue
+    reconciledActions: JsonNullValueInput | InputJsonValue
+    issues: JsonNullValueInput | InputJsonValue
+    reconciledAt: Date | string
+    createdAt?: Date | string
+  }
+
+  export type InfrastructureIntelligenceReconciliationUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    contractVersion?: StringFieldUpdateOperationsInput | string
+    governanceFingerprint?: StringFieldUpdateOperationsInput | string
+    policyResolutionStatus?: StringFieldUpdateOperationsInput | string
+    policySnapshot?: JsonNullValueInput | InputJsonValue
+    reconciledActions?: JsonNullValueInput | InputJsonValue
+    issues?: JsonNullValueInput | InputJsonValue
+    reconciledAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    intelligenceAssessment?: InfrastructureIntelligenceAssessmentUpdateOneRequiredWithoutGovernanceReconciliationsNestedInput
+    case?: CaseUpdateOneRequiredWithoutIntelligenceReconciliationsNestedInput
+  }
+
+  export type InfrastructureIntelligenceReconciliationUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    intelligenceAssessmentId?: StringFieldUpdateOperationsInput | string
+    caseId?: StringFieldUpdateOperationsInput | string
+    contractVersion?: StringFieldUpdateOperationsInput | string
+    governanceFingerprint?: StringFieldUpdateOperationsInput | string
+    policyResolutionStatus?: StringFieldUpdateOperationsInput | string
+    policySnapshot?: JsonNullValueInput | InputJsonValue
+    reconciledActions?: JsonNullValueInput | InputJsonValue
+    issues?: JsonNullValueInput | InputJsonValue
+    reconciledAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InfrastructureIntelligenceReconciliationCreateManyInput = {
+    id?: string
+    intelligenceAssessmentId: string
+    caseId: string
+    contractVersion: string
+    governanceFingerprint: string
+    policyResolutionStatus: string
+    policySnapshot: JsonNullValueInput | InputJsonValue
+    reconciledActions: JsonNullValueInput | InputJsonValue
+    issues: JsonNullValueInput | InputJsonValue
+    reconciledAt: Date | string
+    createdAt?: Date | string
+  }
+
+  export type InfrastructureIntelligenceReconciliationUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    contractVersion?: StringFieldUpdateOperationsInput | string
+    governanceFingerprint?: StringFieldUpdateOperationsInput | string
+    policyResolutionStatus?: StringFieldUpdateOperationsInput | string
+    policySnapshot?: JsonNullValueInput | InputJsonValue
+    reconciledActions?: JsonNullValueInput | InputJsonValue
+    issues?: JsonNullValueInput | InputJsonValue
+    reconciledAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InfrastructureIntelligenceReconciliationUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    intelligenceAssessmentId?: StringFieldUpdateOperationsInput | string
+    caseId?: StringFieldUpdateOperationsInput | string
+    contractVersion?: StringFieldUpdateOperationsInput | string
+    governanceFingerprint?: StringFieldUpdateOperationsInput | string
+    policyResolutionStatus?: StringFieldUpdateOperationsInput | string
+    policySnapshot?: JsonNullValueInput | InputJsonValue
+    reconciledActions?: JsonNullValueInput | InputJsonValue
+    issues?: JsonNullValueInput | InputJsonValue
+    reconciledAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -38529,6 +42075,7 @@ export namespace Prisma {
     readinessSnapshot: JsonNullValueInput | InputJsonValue
     policySnapshot: JsonNullValueInput | InputJsonValue
     actionSnapshot: JsonNullValueInput | InputJsonValue
+    intelligenceSnapshot?: NullableJsonNullValueInput | InputJsonValue
     preparedAt?: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -38554,6 +42101,7 @@ export namespace Prisma {
     readinessSnapshot: JsonNullValueInput | InputJsonValue
     policySnapshot: JsonNullValueInput | InputJsonValue
     actionSnapshot: JsonNullValueInput | InputJsonValue
+    intelligenceSnapshot?: NullableJsonNullValueInput | InputJsonValue
     preparedById: string
     preparedAt?: Date | string
     createdAt?: Date | string
@@ -38573,6 +42121,7 @@ export namespace Prisma {
     readinessSnapshot?: JsonNullValueInput | InputJsonValue
     policySnapshot?: JsonNullValueInput | InputJsonValue
     actionSnapshot?: JsonNullValueInput | InputJsonValue
+    intelligenceSnapshot?: NullableJsonNullValueInput | InputJsonValue
     preparedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -38598,6 +42147,7 @@ export namespace Prisma {
     readinessSnapshot?: JsonNullValueInput | InputJsonValue
     policySnapshot?: JsonNullValueInput | InputJsonValue
     actionSnapshot?: JsonNullValueInput | InputJsonValue
+    intelligenceSnapshot?: NullableJsonNullValueInput | InputJsonValue
     preparedById?: StringFieldUpdateOperationsInput | string
     preparedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -38620,6 +42170,7 @@ export namespace Prisma {
     readinessSnapshot: JsonNullValueInput | InputJsonValue
     policySnapshot: JsonNullValueInput | InputJsonValue
     actionSnapshot: JsonNullValueInput | InputJsonValue
+    intelligenceSnapshot?: NullableJsonNullValueInput | InputJsonValue
     preparedById: string
     preparedAt?: Date | string
     createdAt?: Date | string
@@ -38638,6 +42189,7 @@ export namespace Prisma {
     readinessSnapshot?: JsonNullValueInput | InputJsonValue
     policySnapshot?: JsonNullValueInput | InputJsonValue
     actionSnapshot?: JsonNullValueInput | InputJsonValue
+    intelligenceSnapshot?: NullableJsonNullValueInput | InputJsonValue
     preparedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -38658,6 +42210,7 @@ export namespace Prisma {
     readinessSnapshot?: JsonNullValueInput | InputJsonValue
     policySnapshot?: JsonNullValueInput | InputJsonValue
     actionSnapshot?: JsonNullValueInput | InputJsonValue
+    intelligenceSnapshot?: NullableJsonNullValueInput | InputJsonValue
     preparedById?: StringFieldUpdateOperationsInput | string
     preparedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -40790,11 +44343,31 @@ export namespace Prisma {
     isNot?: PublicReportWhereInput | null
   }
 
+  export type InfrastructureIntelligenceAssessmentListRelationFilter = {
+    every?: InfrastructureIntelligenceAssessmentWhereInput
+    some?: InfrastructureIntelligenceAssessmentWhereInput
+    none?: InfrastructureIntelligenceAssessmentWhereInput
+  }
+
+  export type InfrastructureIntelligenceReconciliationListRelationFilter = {
+    every?: InfrastructureIntelligenceReconciliationWhereInput
+    some?: InfrastructureIntelligenceReconciliationWhereInput
+    none?: InfrastructureIntelligenceReconciliationWhereInput
+  }
+
   export type RiskAssessmentOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
   export type OperationalResponsePlanOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type InfrastructureIntelligenceAssessmentOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type InfrastructureIntelligenceReconciliationOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -41022,6 +44595,182 @@ export namespace Prisma {
     _max?: NestedEnumPriorityLevelFilter<$PrismaModel>
   }
 
+  export type EnumIntelligenceAssessmentStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.IntelligenceAssessmentStatus | EnumIntelligenceAssessmentStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.IntelligenceAssessmentStatus[] | ListEnumIntelligenceAssessmentStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.IntelligenceAssessmentStatus[] | ListEnumIntelligenceAssessmentStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumIntelligenceAssessmentStatusFilter<$PrismaModel> | $Enums.IntelligenceAssessmentStatus
+  }
+
+  export type FloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type RiskAssessmentScalarRelationFilter = {
+    is?: RiskAssessmentWhereInput
+    isNot?: RiskAssessmentWhereInput
+  }
+
+  export type InfrastructureIntelligenceAssessmentCountOrderByAggregateInput = {
+    id?: SortOrder
+    caseId?: SortOrder
+    inspectionId?: SortOrder
+    riskAssessmentId?: SortOrder
+    status?: SortOrder
+    predictedRiskScore?: SortOrder
+    predictedRiskLevel?: SortOrder
+    recommendedPriority?: SortOrder
+    confidence?: SortOrder
+    provider?: SortOrder
+    providerType?: SortOrder
+    modelName?: SortOrder
+    modelVersion?: SortOrder
+    modelArtifactDigest?: SortOrder
+    featureSchemaVersion?: SortOrder
+    contractVersion?: SortOrder
+    sourceFingerprint?: SortOrder
+    inferredAt?: SortOrder
+    expiresAt?: SortOrder
+    contributingFactors?: SortOrder
+    explanation?: SortOrder
+    recommendedActions?: SortOrder
+    abstentionReasons?: SortOrder
+    reconciliation?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type InfrastructureIntelligenceAssessmentAvgOrderByAggregateInput = {
+    predictedRiskScore?: SortOrder
+    confidence?: SortOrder
+  }
+
+  export type InfrastructureIntelligenceAssessmentMaxOrderByAggregateInput = {
+    id?: SortOrder
+    caseId?: SortOrder
+    inspectionId?: SortOrder
+    riskAssessmentId?: SortOrder
+    status?: SortOrder
+    predictedRiskScore?: SortOrder
+    predictedRiskLevel?: SortOrder
+    recommendedPriority?: SortOrder
+    confidence?: SortOrder
+    provider?: SortOrder
+    providerType?: SortOrder
+    modelName?: SortOrder
+    modelVersion?: SortOrder
+    modelArtifactDigest?: SortOrder
+    featureSchemaVersion?: SortOrder
+    contractVersion?: SortOrder
+    sourceFingerprint?: SortOrder
+    inferredAt?: SortOrder
+    expiresAt?: SortOrder
+    explanation?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type InfrastructureIntelligenceAssessmentMinOrderByAggregateInput = {
+    id?: SortOrder
+    caseId?: SortOrder
+    inspectionId?: SortOrder
+    riskAssessmentId?: SortOrder
+    status?: SortOrder
+    predictedRiskScore?: SortOrder
+    predictedRiskLevel?: SortOrder
+    recommendedPriority?: SortOrder
+    confidence?: SortOrder
+    provider?: SortOrder
+    providerType?: SortOrder
+    modelName?: SortOrder
+    modelVersion?: SortOrder
+    modelArtifactDigest?: SortOrder
+    featureSchemaVersion?: SortOrder
+    contractVersion?: SortOrder
+    sourceFingerprint?: SortOrder
+    inferredAt?: SortOrder
+    expiresAt?: SortOrder
+    explanation?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type InfrastructureIntelligenceAssessmentSumOrderByAggregateInput = {
+    predictedRiskScore?: SortOrder
+    confidence?: SortOrder
+  }
+
+  export type EnumIntelligenceAssessmentStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.IntelligenceAssessmentStatus | EnumIntelligenceAssessmentStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.IntelligenceAssessmentStatus[] | ListEnumIntelligenceAssessmentStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.IntelligenceAssessmentStatus[] | ListEnumIntelligenceAssessmentStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumIntelligenceAssessmentStatusWithAggregatesFilter<$PrismaModel> | $Enums.IntelligenceAssessmentStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumIntelligenceAssessmentStatusFilter<$PrismaModel>
+    _max?: NestedEnumIntelligenceAssessmentStatusFilter<$PrismaModel>
+  }
+
+  export type FloatNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedFloatNullableFilter<$PrismaModel>
+    _min?: NestedFloatNullableFilter<$PrismaModel>
+    _max?: NestedFloatNullableFilter<$PrismaModel>
+  }
+
+  export type InfrastructureIntelligenceAssessmentScalarRelationFilter = {
+    is?: InfrastructureIntelligenceAssessmentWhereInput
+    isNot?: InfrastructureIntelligenceAssessmentWhereInput
+  }
+
+  export type InfrastructureIntelligenceReconciliationCountOrderByAggregateInput = {
+    id?: SortOrder
+    intelligenceAssessmentId?: SortOrder
+    caseId?: SortOrder
+    contractVersion?: SortOrder
+    governanceFingerprint?: SortOrder
+    policyResolutionStatus?: SortOrder
+    policySnapshot?: SortOrder
+    reconciledActions?: SortOrder
+    issues?: SortOrder
+    reconciledAt?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type InfrastructureIntelligenceReconciliationMaxOrderByAggregateInput = {
+    id?: SortOrder
+    intelligenceAssessmentId?: SortOrder
+    caseId?: SortOrder
+    contractVersion?: SortOrder
+    governanceFingerprint?: SortOrder
+    policyResolutionStatus?: SortOrder
+    reconciledAt?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type InfrastructureIntelligenceReconciliationMinOrderByAggregateInput = {
+    id?: SortOrder
+    intelligenceAssessmentId?: SortOrder
+    caseId?: SortOrder
+    contractVersion?: SortOrder
+    governanceFingerprint?: SortOrder
+    policyResolutionStatus?: SortOrder
+    reconciledAt?: SortOrder
+    createdAt?: SortOrder
+  }
+
   export type EnumActionPlanGovernanceModeFilter<$PrismaModel = never> = {
     equals?: $Enums.ActionPlanGovernanceMode | EnumActionPlanGovernanceModeFieldRefInput<$PrismaModel>
     in?: $Enums.ActionPlanGovernanceMode[] | ListEnumActionPlanGovernanceModeFieldRefInput<$PrismaModel>
@@ -41050,11 +44799,6 @@ export namespace Prisma {
     gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
     gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
     not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
-  }
-
-  export type RiskAssessmentScalarRelationFilter = {
-    is?: RiskAssessmentWhereInput
-    isNot?: RiskAssessmentWhereInput
   }
 
   export type ExecutionPlanNullableScalarRelationFilter = {
@@ -41198,6 +44942,7 @@ export namespace Prisma {
     readinessSnapshot?: SortOrder
     policySnapshot?: SortOrder
     actionSnapshot?: SortOrder
+    intelligenceSnapshot?: SortOrder
     preparedById?: SortOrder
     preparedAt?: SortOrder
     createdAt?: SortOrder
@@ -44416,6 +48161,20 @@ export namespace Prisma {
     connect?: DecisionPackageWhereUniqueInput | DecisionPackageWhereUniqueInput[]
   }
 
+  export type InfrastructureIntelligenceAssessmentCreateNestedManyWithoutCaseInput = {
+    create?: XOR<InfrastructureIntelligenceAssessmentCreateWithoutCaseInput, InfrastructureIntelligenceAssessmentUncheckedCreateWithoutCaseInput> | InfrastructureIntelligenceAssessmentCreateWithoutCaseInput[] | InfrastructureIntelligenceAssessmentUncheckedCreateWithoutCaseInput[]
+    connectOrCreate?: InfrastructureIntelligenceAssessmentCreateOrConnectWithoutCaseInput | InfrastructureIntelligenceAssessmentCreateOrConnectWithoutCaseInput[]
+    createMany?: InfrastructureIntelligenceAssessmentCreateManyCaseInputEnvelope
+    connect?: InfrastructureIntelligenceAssessmentWhereUniqueInput | InfrastructureIntelligenceAssessmentWhereUniqueInput[]
+  }
+
+  export type InfrastructureIntelligenceReconciliationCreateNestedManyWithoutCaseInput = {
+    create?: XOR<InfrastructureIntelligenceReconciliationCreateWithoutCaseInput, InfrastructureIntelligenceReconciliationUncheckedCreateWithoutCaseInput> | InfrastructureIntelligenceReconciliationCreateWithoutCaseInput[] | InfrastructureIntelligenceReconciliationUncheckedCreateWithoutCaseInput[]
+    connectOrCreate?: InfrastructureIntelligenceReconciliationCreateOrConnectWithoutCaseInput | InfrastructureIntelligenceReconciliationCreateOrConnectWithoutCaseInput[]
+    createMany?: InfrastructureIntelligenceReconciliationCreateManyCaseInputEnvelope
+    connect?: InfrastructureIntelligenceReconciliationWhereUniqueInput | InfrastructureIntelligenceReconciliationWhereUniqueInput[]
+  }
+
   export type InspectionUncheckedCreateNestedManyWithoutCaseInput = {
     create?: XOR<InspectionCreateWithoutCaseInput, InspectionUncheckedCreateWithoutCaseInput> | InspectionCreateWithoutCaseInput[] | InspectionUncheckedCreateWithoutCaseInput[]
     connectOrCreate?: InspectionCreateOrConnectWithoutCaseInput | InspectionCreateOrConnectWithoutCaseInput[]
@@ -44468,6 +48227,20 @@ export namespace Prisma {
     connectOrCreate?: DecisionPackageCreateOrConnectWithoutCaseInput | DecisionPackageCreateOrConnectWithoutCaseInput[]
     createMany?: DecisionPackageCreateManyCaseInputEnvelope
     connect?: DecisionPackageWhereUniqueInput | DecisionPackageWhereUniqueInput[]
+  }
+
+  export type InfrastructureIntelligenceAssessmentUncheckedCreateNestedManyWithoutCaseInput = {
+    create?: XOR<InfrastructureIntelligenceAssessmentCreateWithoutCaseInput, InfrastructureIntelligenceAssessmentUncheckedCreateWithoutCaseInput> | InfrastructureIntelligenceAssessmentCreateWithoutCaseInput[] | InfrastructureIntelligenceAssessmentUncheckedCreateWithoutCaseInput[]
+    connectOrCreate?: InfrastructureIntelligenceAssessmentCreateOrConnectWithoutCaseInput | InfrastructureIntelligenceAssessmentCreateOrConnectWithoutCaseInput[]
+    createMany?: InfrastructureIntelligenceAssessmentCreateManyCaseInputEnvelope
+    connect?: InfrastructureIntelligenceAssessmentWhereUniqueInput | InfrastructureIntelligenceAssessmentWhereUniqueInput[]
+  }
+
+  export type InfrastructureIntelligenceReconciliationUncheckedCreateNestedManyWithoutCaseInput = {
+    create?: XOR<InfrastructureIntelligenceReconciliationCreateWithoutCaseInput, InfrastructureIntelligenceReconciliationUncheckedCreateWithoutCaseInput> | InfrastructureIntelligenceReconciliationCreateWithoutCaseInput[] | InfrastructureIntelligenceReconciliationUncheckedCreateWithoutCaseInput[]
+    connectOrCreate?: InfrastructureIntelligenceReconciliationCreateOrConnectWithoutCaseInput | InfrastructureIntelligenceReconciliationCreateOrConnectWithoutCaseInput[]
+    createMany?: InfrastructureIntelligenceReconciliationCreateManyCaseInputEnvelope
+    connect?: InfrastructureIntelligenceReconciliationWhereUniqueInput | InfrastructureIntelligenceReconciliationWhereUniqueInput[]
   }
 
   export type EnumCaseStatusFieldUpdateOperationsInput = {
@@ -44594,6 +48367,34 @@ export namespace Prisma {
     deleteMany?: DecisionPackageScalarWhereInput | DecisionPackageScalarWhereInput[]
   }
 
+  export type InfrastructureIntelligenceAssessmentUpdateManyWithoutCaseNestedInput = {
+    create?: XOR<InfrastructureIntelligenceAssessmentCreateWithoutCaseInput, InfrastructureIntelligenceAssessmentUncheckedCreateWithoutCaseInput> | InfrastructureIntelligenceAssessmentCreateWithoutCaseInput[] | InfrastructureIntelligenceAssessmentUncheckedCreateWithoutCaseInput[]
+    connectOrCreate?: InfrastructureIntelligenceAssessmentCreateOrConnectWithoutCaseInput | InfrastructureIntelligenceAssessmentCreateOrConnectWithoutCaseInput[]
+    upsert?: InfrastructureIntelligenceAssessmentUpsertWithWhereUniqueWithoutCaseInput | InfrastructureIntelligenceAssessmentUpsertWithWhereUniqueWithoutCaseInput[]
+    createMany?: InfrastructureIntelligenceAssessmentCreateManyCaseInputEnvelope
+    set?: InfrastructureIntelligenceAssessmentWhereUniqueInput | InfrastructureIntelligenceAssessmentWhereUniqueInput[]
+    disconnect?: InfrastructureIntelligenceAssessmentWhereUniqueInput | InfrastructureIntelligenceAssessmentWhereUniqueInput[]
+    delete?: InfrastructureIntelligenceAssessmentWhereUniqueInput | InfrastructureIntelligenceAssessmentWhereUniqueInput[]
+    connect?: InfrastructureIntelligenceAssessmentWhereUniqueInput | InfrastructureIntelligenceAssessmentWhereUniqueInput[]
+    update?: InfrastructureIntelligenceAssessmentUpdateWithWhereUniqueWithoutCaseInput | InfrastructureIntelligenceAssessmentUpdateWithWhereUniqueWithoutCaseInput[]
+    updateMany?: InfrastructureIntelligenceAssessmentUpdateManyWithWhereWithoutCaseInput | InfrastructureIntelligenceAssessmentUpdateManyWithWhereWithoutCaseInput[]
+    deleteMany?: InfrastructureIntelligenceAssessmentScalarWhereInput | InfrastructureIntelligenceAssessmentScalarWhereInput[]
+  }
+
+  export type InfrastructureIntelligenceReconciliationUpdateManyWithoutCaseNestedInput = {
+    create?: XOR<InfrastructureIntelligenceReconciliationCreateWithoutCaseInput, InfrastructureIntelligenceReconciliationUncheckedCreateWithoutCaseInput> | InfrastructureIntelligenceReconciliationCreateWithoutCaseInput[] | InfrastructureIntelligenceReconciliationUncheckedCreateWithoutCaseInput[]
+    connectOrCreate?: InfrastructureIntelligenceReconciliationCreateOrConnectWithoutCaseInput | InfrastructureIntelligenceReconciliationCreateOrConnectWithoutCaseInput[]
+    upsert?: InfrastructureIntelligenceReconciliationUpsertWithWhereUniqueWithoutCaseInput | InfrastructureIntelligenceReconciliationUpsertWithWhereUniqueWithoutCaseInput[]
+    createMany?: InfrastructureIntelligenceReconciliationCreateManyCaseInputEnvelope
+    set?: InfrastructureIntelligenceReconciliationWhereUniqueInput | InfrastructureIntelligenceReconciliationWhereUniqueInput[]
+    disconnect?: InfrastructureIntelligenceReconciliationWhereUniqueInput | InfrastructureIntelligenceReconciliationWhereUniqueInput[]
+    delete?: InfrastructureIntelligenceReconciliationWhereUniqueInput | InfrastructureIntelligenceReconciliationWhereUniqueInput[]
+    connect?: InfrastructureIntelligenceReconciliationWhereUniqueInput | InfrastructureIntelligenceReconciliationWhereUniqueInput[]
+    update?: InfrastructureIntelligenceReconciliationUpdateWithWhereUniqueWithoutCaseInput | InfrastructureIntelligenceReconciliationUpdateWithWhereUniqueWithoutCaseInput[]
+    updateMany?: InfrastructureIntelligenceReconciliationUpdateManyWithWhereWithoutCaseInput | InfrastructureIntelligenceReconciliationUpdateManyWithWhereWithoutCaseInput[]
+    deleteMany?: InfrastructureIntelligenceReconciliationScalarWhereInput | InfrastructureIntelligenceReconciliationScalarWhereInput[]
+  }
+
   export type InspectionUncheckedUpdateManyWithoutCaseNestedInput = {
     create?: XOR<InspectionCreateWithoutCaseInput, InspectionUncheckedCreateWithoutCaseInput> | InspectionCreateWithoutCaseInput[] | InspectionUncheckedCreateWithoutCaseInput[]
     connectOrCreate?: InspectionCreateOrConnectWithoutCaseInput | InspectionCreateOrConnectWithoutCaseInput[]
@@ -44698,6 +48499,34 @@ export namespace Prisma {
     deleteMany?: DecisionPackageScalarWhereInput | DecisionPackageScalarWhereInput[]
   }
 
+  export type InfrastructureIntelligenceAssessmentUncheckedUpdateManyWithoutCaseNestedInput = {
+    create?: XOR<InfrastructureIntelligenceAssessmentCreateWithoutCaseInput, InfrastructureIntelligenceAssessmentUncheckedCreateWithoutCaseInput> | InfrastructureIntelligenceAssessmentCreateWithoutCaseInput[] | InfrastructureIntelligenceAssessmentUncheckedCreateWithoutCaseInput[]
+    connectOrCreate?: InfrastructureIntelligenceAssessmentCreateOrConnectWithoutCaseInput | InfrastructureIntelligenceAssessmentCreateOrConnectWithoutCaseInput[]
+    upsert?: InfrastructureIntelligenceAssessmentUpsertWithWhereUniqueWithoutCaseInput | InfrastructureIntelligenceAssessmentUpsertWithWhereUniqueWithoutCaseInput[]
+    createMany?: InfrastructureIntelligenceAssessmentCreateManyCaseInputEnvelope
+    set?: InfrastructureIntelligenceAssessmentWhereUniqueInput | InfrastructureIntelligenceAssessmentWhereUniqueInput[]
+    disconnect?: InfrastructureIntelligenceAssessmentWhereUniqueInput | InfrastructureIntelligenceAssessmentWhereUniqueInput[]
+    delete?: InfrastructureIntelligenceAssessmentWhereUniqueInput | InfrastructureIntelligenceAssessmentWhereUniqueInput[]
+    connect?: InfrastructureIntelligenceAssessmentWhereUniqueInput | InfrastructureIntelligenceAssessmentWhereUniqueInput[]
+    update?: InfrastructureIntelligenceAssessmentUpdateWithWhereUniqueWithoutCaseInput | InfrastructureIntelligenceAssessmentUpdateWithWhereUniqueWithoutCaseInput[]
+    updateMany?: InfrastructureIntelligenceAssessmentUpdateManyWithWhereWithoutCaseInput | InfrastructureIntelligenceAssessmentUpdateManyWithWhereWithoutCaseInput[]
+    deleteMany?: InfrastructureIntelligenceAssessmentScalarWhereInput | InfrastructureIntelligenceAssessmentScalarWhereInput[]
+  }
+
+  export type InfrastructureIntelligenceReconciliationUncheckedUpdateManyWithoutCaseNestedInput = {
+    create?: XOR<InfrastructureIntelligenceReconciliationCreateWithoutCaseInput, InfrastructureIntelligenceReconciliationUncheckedCreateWithoutCaseInput> | InfrastructureIntelligenceReconciliationCreateWithoutCaseInput[] | InfrastructureIntelligenceReconciliationUncheckedCreateWithoutCaseInput[]
+    connectOrCreate?: InfrastructureIntelligenceReconciliationCreateOrConnectWithoutCaseInput | InfrastructureIntelligenceReconciliationCreateOrConnectWithoutCaseInput[]
+    upsert?: InfrastructureIntelligenceReconciliationUpsertWithWhereUniqueWithoutCaseInput | InfrastructureIntelligenceReconciliationUpsertWithWhereUniqueWithoutCaseInput[]
+    createMany?: InfrastructureIntelligenceReconciliationCreateManyCaseInputEnvelope
+    set?: InfrastructureIntelligenceReconciliationWhereUniqueInput | InfrastructureIntelligenceReconciliationWhereUniqueInput[]
+    disconnect?: InfrastructureIntelligenceReconciliationWhereUniqueInput | InfrastructureIntelligenceReconciliationWhereUniqueInput[]
+    delete?: InfrastructureIntelligenceReconciliationWhereUniqueInput | InfrastructureIntelligenceReconciliationWhereUniqueInput[]
+    connect?: InfrastructureIntelligenceReconciliationWhereUniqueInput | InfrastructureIntelligenceReconciliationWhereUniqueInput[]
+    update?: InfrastructureIntelligenceReconciliationUpdateWithWhereUniqueWithoutCaseInput | InfrastructureIntelligenceReconciliationUpdateWithWhereUniqueWithoutCaseInput[]
+    updateMany?: InfrastructureIntelligenceReconciliationUpdateManyWithWhereWithoutCaseInput | InfrastructureIntelligenceReconciliationUpdateManyWithWhereWithoutCaseInput[]
+    deleteMany?: InfrastructureIntelligenceReconciliationScalarWhereInput | InfrastructureIntelligenceReconciliationScalarWhereInput[]
+  }
+
   export type CaseCreateNestedOneWithoutInspectionsInput = {
     create?: XOR<CaseCreateWithoutInspectionsInput, CaseUncheckedCreateWithoutInspectionsInput>
     connectOrCreate?: CaseCreateOrConnectWithoutInspectionsInput
@@ -44724,6 +48553,13 @@ export namespace Prisma {
     connect?: DecisionPackageWhereUniqueInput | DecisionPackageWhereUniqueInput[]
   }
 
+  export type InfrastructureIntelligenceAssessmentCreateNestedManyWithoutInspectionInput = {
+    create?: XOR<InfrastructureIntelligenceAssessmentCreateWithoutInspectionInput, InfrastructureIntelligenceAssessmentUncheckedCreateWithoutInspectionInput> | InfrastructureIntelligenceAssessmentCreateWithoutInspectionInput[] | InfrastructureIntelligenceAssessmentUncheckedCreateWithoutInspectionInput[]
+    connectOrCreate?: InfrastructureIntelligenceAssessmentCreateOrConnectWithoutInspectionInput | InfrastructureIntelligenceAssessmentCreateOrConnectWithoutInspectionInput[]
+    createMany?: InfrastructureIntelligenceAssessmentCreateManyInspectionInputEnvelope
+    connect?: InfrastructureIntelligenceAssessmentWhereUniqueInput | InfrastructureIntelligenceAssessmentWhereUniqueInput[]
+  }
+
   export type RiskAssessmentUncheckedCreateNestedManyWithoutInspectionInput = {
     create?: XOR<RiskAssessmentCreateWithoutInspectionInput, RiskAssessmentUncheckedCreateWithoutInspectionInput> | RiskAssessmentCreateWithoutInspectionInput[] | RiskAssessmentUncheckedCreateWithoutInspectionInput[]
     connectOrCreate?: RiskAssessmentCreateOrConnectWithoutInspectionInput | RiskAssessmentCreateOrConnectWithoutInspectionInput[]
@@ -44736,6 +48572,13 @@ export namespace Prisma {
     connectOrCreate?: DecisionPackageCreateOrConnectWithoutInspectionInput | DecisionPackageCreateOrConnectWithoutInspectionInput[]
     createMany?: DecisionPackageCreateManyInspectionInputEnvelope
     connect?: DecisionPackageWhereUniqueInput | DecisionPackageWhereUniqueInput[]
+  }
+
+  export type InfrastructureIntelligenceAssessmentUncheckedCreateNestedManyWithoutInspectionInput = {
+    create?: XOR<InfrastructureIntelligenceAssessmentCreateWithoutInspectionInput, InfrastructureIntelligenceAssessmentUncheckedCreateWithoutInspectionInput> | InfrastructureIntelligenceAssessmentCreateWithoutInspectionInput[] | InfrastructureIntelligenceAssessmentUncheckedCreateWithoutInspectionInput[]
+    connectOrCreate?: InfrastructureIntelligenceAssessmentCreateOrConnectWithoutInspectionInput | InfrastructureIntelligenceAssessmentCreateOrConnectWithoutInspectionInput[]
+    createMany?: InfrastructureIntelligenceAssessmentCreateManyInspectionInputEnvelope
+    connect?: InfrastructureIntelligenceAssessmentWhereUniqueInput | InfrastructureIntelligenceAssessmentWhereUniqueInput[]
   }
 
   export type CaseUpdateOneRequiredWithoutInspectionsNestedInput = {
@@ -44782,6 +48625,20 @@ export namespace Prisma {
     deleteMany?: DecisionPackageScalarWhereInput | DecisionPackageScalarWhereInput[]
   }
 
+  export type InfrastructureIntelligenceAssessmentUpdateManyWithoutInspectionNestedInput = {
+    create?: XOR<InfrastructureIntelligenceAssessmentCreateWithoutInspectionInput, InfrastructureIntelligenceAssessmentUncheckedCreateWithoutInspectionInput> | InfrastructureIntelligenceAssessmentCreateWithoutInspectionInput[] | InfrastructureIntelligenceAssessmentUncheckedCreateWithoutInspectionInput[]
+    connectOrCreate?: InfrastructureIntelligenceAssessmentCreateOrConnectWithoutInspectionInput | InfrastructureIntelligenceAssessmentCreateOrConnectWithoutInspectionInput[]
+    upsert?: InfrastructureIntelligenceAssessmentUpsertWithWhereUniqueWithoutInspectionInput | InfrastructureIntelligenceAssessmentUpsertWithWhereUniqueWithoutInspectionInput[]
+    createMany?: InfrastructureIntelligenceAssessmentCreateManyInspectionInputEnvelope
+    set?: InfrastructureIntelligenceAssessmentWhereUniqueInput | InfrastructureIntelligenceAssessmentWhereUniqueInput[]
+    disconnect?: InfrastructureIntelligenceAssessmentWhereUniqueInput | InfrastructureIntelligenceAssessmentWhereUniqueInput[]
+    delete?: InfrastructureIntelligenceAssessmentWhereUniqueInput | InfrastructureIntelligenceAssessmentWhereUniqueInput[]
+    connect?: InfrastructureIntelligenceAssessmentWhereUniqueInput | InfrastructureIntelligenceAssessmentWhereUniqueInput[]
+    update?: InfrastructureIntelligenceAssessmentUpdateWithWhereUniqueWithoutInspectionInput | InfrastructureIntelligenceAssessmentUpdateWithWhereUniqueWithoutInspectionInput[]
+    updateMany?: InfrastructureIntelligenceAssessmentUpdateManyWithWhereWithoutInspectionInput | InfrastructureIntelligenceAssessmentUpdateManyWithWhereWithoutInspectionInput[]
+    deleteMany?: InfrastructureIntelligenceAssessmentScalarWhereInput | InfrastructureIntelligenceAssessmentScalarWhereInput[]
+  }
+
   export type RiskAssessmentUncheckedUpdateManyWithoutInspectionNestedInput = {
     create?: XOR<RiskAssessmentCreateWithoutInspectionInput, RiskAssessmentUncheckedCreateWithoutInspectionInput> | RiskAssessmentCreateWithoutInspectionInput[] | RiskAssessmentUncheckedCreateWithoutInspectionInput[]
     connectOrCreate?: RiskAssessmentCreateOrConnectWithoutInspectionInput | RiskAssessmentCreateOrConnectWithoutInspectionInput[]
@@ -44810,6 +48667,20 @@ export namespace Prisma {
     deleteMany?: DecisionPackageScalarWhereInput | DecisionPackageScalarWhereInput[]
   }
 
+  export type InfrastructureIntelligenceAssessmentUncheckedUpdateManyWithoutInspectionNestedInput = {
+    create?: XOR<InfrastructureIntelligenceAssessmentCreateWithoutInspectionInput, InfrastructureIntelligenceAssessmentUncheckedCreateWithoutInspectionInput> | InfrastructureIntelligenceAssessmentCreateWithoutInspectionInput[] | InfrastructureIntelligenceAssessmentUncheckedCreateWithoutInspectionInput[]
+    connectOrCreate?: InfrastructureIntelligenceAssessmentCreateOrConnectWithoutInspectionInput | InfrastructureIntelligenceAssessmentCreateOrConnectWithoutInspectionInput[]
+    upsert?: InfrastructureIntelligenceAssessmentUpsertWithWhereUniqueWithoutInspectionInput | InfrastructureIntelligenceAssessmentUpsertWithWhereUniqueWithoutInspectionInput[]
+    createMany?: InfrastructureIntelligenceAssessmentCreateManyInspectionInputEnvelope
+    set?: InfrastructureIntelligenceAssessmentWhereUniqueInput | InfrastructureIntelligenceAssessmentWhereUniqueInput[]
+    disconnect?: InfrastructureIntelligenceAssessmentWhereUniqueInput | InfrastructureIntelligenceAssessmentWhereUniqueInput[]
+    delete?: InfrastructureIntelligenceAssessmentWhereUniqueInput | InfrastructureIntelligenceAssessmentWhereUniqueInput[]
+    connect?: InfrastructureIntelligenceAssessmentWhereUniqueInput | InfrastructureIntelligenceAssessmentWhereUniqueInput[]
+    update?: InfrastructureIntelligenceAssessmentUpdateWithWhereUniqueWithoutInspectionInput | InfrastructureIntelligenceAssessmentUpdateWithWhereUniqueWithoutInspectionInput[]
+    updateMany?: InfrastructureIntelligenceAssessmentUpdateManyWithWhereWithoutInspectionInput | InfrastructureIntelligenceAssessmentUpdateManyWithWhereWithoutInspectionInput[]
+    deleteMany?: InfrastructureIntelligenceAssessmentScalarWhereInput | InfrastructureIntelligenceAssessmentScalarWhereInput[]
+  }
+
   export type CaseCreateNestedOneWithoutRiskAssessmentsInput = {
     create?: XOR<CaseCreateWithoutRiskAssessmentsInput, CaseUncheckedCreateWithoutRiskAssessmentsInput>
     connectOrCreate?: CaseCreateOrConnectWithoutRiskAssessmentsInput
@@ -44836,6 +48707,13 @@ export namespace Prisma {
     connect?: DecisionPackageWhereUniqueInput | DecisionPackageWhereUniqueInput[]
   }
 
+  export type InfrastructureIntelligenceAssessmentCreateNestedManyWithoutRiskAssessmentInput = {
+    create?: XOR<InfrastructureIntelligenceAssessmentCreateWithoutRiskAssessmentInput, InfrastructureIntelligenceAssessmentUncheckedCreateWithoutRiskAssessmentInput> | InfrastructureIntelligenceAssessmentCreateWithoutRiskAssessmentInput[] | InfrastructureIntelligenceAssessmentUncheckedCreateWithoutRiskAssessmentInput[]
+    connectOrCreate?: InfrastructureIntelligenceAssessmentCreateOrConnectWithoutRiskAssessmentInput | InfrastructureIntelligenceAssessmentCreateOrConnectWithoutRiskAssessmentInput[]
+    createMany?: InfrastructureIntelligenceAssessmentCreateManyRiskAssessmentInputEnvelope
+    connect?: InfrastructureIntelligenceAssessmentWhereUniqueInput | InfrastructureIntelligenceAssessmentWhereUniqueInput[]
+  }
+
   export type OperationalResponsePlanUncheckedCreateNestedManyWithoutRiskAssessmentInput = {
     create?: XOR<OperationalResponsePlanCreateWithoutRiskAssessmentInput, OperationalResponsePlanUncheckedCreateWithoutRiskAssessmentInput> | OperationalResponsePlanCreateWithoutRiskAssessmentInput[] | OperationalResponsePlanUncheckedCreateWithoutRiskAssessmentInput[]
     connectOrCreate?: OperationalResponsePlanCreateOrConnectWithoutRiskAssessmentInput | OperationalResponsePlanCreateOrConnectWithoutRiskAssessmentInput[]
@@ -44848,6 +48726,13 @@ export namespace Prisma {
     connectOrCreate?: DecisionPackageCreateOrConnectWithoutRiskAssessmentInput | DecisionPackageCreateOrConnectWithoutRiskAssessmentInput[]
     createMany?: DecisionPackageCreateManyRiskAssessmentInputEnvelope
     connect?: DecisionPackageWhereUniqueInput | DecisionPackageWhereUniqueInput[]
+  }
+
+  export type InfrastructureIntelligenceAssessmentUncheckedCreateNestedManyWithoutRiskAssessmentInput = {
+    create?: XOR<InfrastructureIntelligenceAssessmentCreateWithoutRiskAssessmentInput, InfrastructureIntelligenceAssessmentUncheckedCreateWithoutRiskAssessmentInput> | InfrastructureIntelligenceAssessmentCreateWithoutRiskAssessmentInput[] | InfrastructureIntelligenceAssessmentUncheckedCreateWithoutRiskAssessmentInput[]
+    connectOrCreate?: InfrastructureIntelligenceAssessmentCreateOrConnectWithoutRiskAssessmentInput | InfrastructureIntelligenceAssessmentCreateOrConnectWithoutRiskAssessmentInput[]
+    createMany?: InfrastructureIntelligenceAssessmentCreateManyRiskAssessmentInputEnvelope
+    connect?: InfrastructureIntelligenceAssessmentWhereUniqueInput | InfrastructureIntelligenceAssessmentWhereUniqueInput[]
   }
 
   export type EnumRiskLevelFieldUpdateOperationsInput = {
@@ -44902,6 +48787,20 @@ export namespace Prisma {
     deleteMany?: DecisionPackageScalarWhereInput | DecisionPackageScalarWhereInput[]
   }
 
+  export type InfrastructureIntelligenceAssessmentUpdateManyWithoutRiskAssessmentNestedInput = {
+    create?: XOR<InfrastructureIntelligenceAssessmentCreateWithoutRiskAssessmentInput, InfrastructureIntelligenceAssessmentUncheckedCreateWithoutRiskAssessmentInput> | InfrastructureIntelligenceAssessmentCreateWithoutRiskAssessmentInput[] | InfrastructureIntelligenceAssessmentUncheckedCreateWithoutRiskAssessmentInput[]
+    connectOrCreate?: InfrastructureIntelligenceAssessmentCreateOrConnectWithoutRiskAssessmentInput | InfrastructureIntelligenceAssessmentCreateOrConnectWithoutRiskAssessmentInput[]
+    upsert?: InfrastructureIntelligenceAssessmentUpsertWithWhereUniqueWithoutRiskAssessmentInput | InfrastructureIntelligenceAssessmentUpsertWithWhereUniqueWithoutRiskAssessmentInput[]
+    createMany?: InfrastructureIntelligenceAssessmentCreateManyRiskAssessmentInputEnvelope
+    set?: InfrastructureIntelligenceAssessmentWhereUniqueInput | InfrastructureIntelligenceAssessmentWhereUniqueInput[]
+    disconnect?: InfrastructureIntelligenceAssessmentWhereUniqueInput | InfrastructureIntelligenceAssessmentWhereUniqueInput[]
+    delete?: InfrastructureIntelligenceAssessmentWhereUniqueInput | InfrastructureIntelligenceAssessmentWhereUniqueInput[]
+    connect?: InfrastructureIntelligenceAssessmentWhereUniqueInput | InfrastructureIntelligenceAssessmentWhereUniqueInput[]
+    update?: InfrastructureIntelligenceAssessmentUpdateWithWhereUniqueWithoutRiskAssessmentInput | InfrastructureIntelligenceAssessmentUpdateWithWhereUniqueWithoutRiskAssessmentInput[]
+    updateMany?: InfrastructureIntelligenceAssessmentUpdateManyWithWhereWithoutRiskAssessmentInput | InfrastructureIntelligenceAssessmentUpdateManyWithWhereWithoutRiskAssessmentInput[]
+    deleteMany?: InfrastructureIntelligenceAssessmentScalarWhereInput | InfrastructureIntelligenceAssessmentScalarWhereInput[]
+  }
+
   export type OperationalResponsePlanUncheckedUpdateManyWithoutRiskAssessmentNestedInput = {
     create?: XOR<OperationalResponsePlanCreateWithoutRiskAssessmentInput, OperationalResponsePlanUncheckedCreateWithoutRiskAssessmentInput> | OperationalResponsePlanCreateWithoutRiskAssessmentInput[] | OperationalResponsePlanUncheckedCreateWithoutRiskAssessmentInput[]
     connectOrCreate?: OperationalResponsePlanCreateOrConnectWithoutRiskAssessmentInput | OperationalResponsePlanCreateOrConnectWithoutRiskAssessmentInput[]
@@ -44928,6 +48827,144 @@ export namespace Prisma {
     update?: DecisionPackageUpdateWithWhereUniqueWithoutRiskAssessmentInput | DecisionPackageUpdateWithWhereUniqueWithoutRiskAssessmentInput[]
     updateMany?: DecisionPackageUpdateManyWithWhereWithoutRiskAssessmentInput | DecisionPackageUpdateManyWithWhereWithoutRiskAssessmentInput[]
     deleteMany?: DecisionPackageScalarWhereInput | DecisionPackageScalarWhereInput[]
+  }
+
+  export type InfrastructureIntelligenceAssessmentUncheckedUpdateManyWithoutRiskAssessmentNestedInput = {
+    create?: XOR<InfrastructureIntelligenceAssessmentCreateWithoutRiskAssessmentInput, InfrastructureIntelligenceAssessmentUncheckedCreateWithoutRiskAssessmentInput> | InfrastructureIntelligenceAssessmentCreateWithoutRiskAssessmentInput[] | InfrastructureIntelligenceAssessmentUncheckedCreateWithoutRiskAssessmentInput[]
+    connectOrCreate?: InfrastructureIntelligenceAssessmentCreateOrConnectWithoutRiskAssessmentInput | InfrastructureIntelligenceAssessmentCreateOrConnectWithoutRiskAssessmentInput[]
+    upsert?: InfrastructureIntelligenceAssessmentUpsertWithWhereUniqueWithoutRiskAssessmentInput | InfrastructureIntelligenceAssessmentUpsertWithWhereUniqueWithoutRiskAssessmentInput[]
+    createMany?: InfrastructureIntelligenceAssessmentCreateManyRiskAssessmentInputEnvelope
+    set?: InfrastructureIntelligenceAssessmentWhereUniqueInput | InfrastructureIntelligenceAssessmentWhereUniqueInput[]
+    disconnect?: InfrastructureIntelligenceAssessmentWhereUniqueInput | InfrastructureIntelligenceAssessmentWhereUniqueInput[]
+    delete?: InfrastructureIntelligenceAssessmentWhereUniqueInput | InfrastructureIntelligenceAssessmentWhereUniqueInput[]
+    connect?: InfrastructureIntelligenceAssessmentWhereUniqueInput | InfrastructureIntelligenceAssessmentWhereUniqueInput[]
+    update?: InfrastructureIntelligenceAssessmentUpdateWithWhereUniqueWithoutRiskAssessmentInput | InfrastructureIntelligenceAssessmentUpdateWithWhereUniqueWithoutRiskAssessmentInput[]
+    updateMany?: InfrastructureIntelligenceAssessmentUpdateManyWithWhereWithoutRiskAssessmentInput | InfrastructureIntelligenceAssessmentUpdateManyWithWhereWithoutRiskAssessmentInput[]
+    deleteMany?: InfrastructureIntelligenceAssessmentScalarWhereInput | InfrastructureIntelligenceAssessmentScalarWhereInput[]
+  }
+
+  export type InfrastructureIntelligenceReconciliationCreateNestedManyWithoutIntelligenceAssessmentInput = {
+    create?: XOR<InfrastructureIntelligenceReconciliationCreateWithoutIntelligenceAssessmentInput, InfrastructureIntelligenceReconciliationUncheckedCreateWithoutIntelligenceAssessmentInput> | InfrastructureIntelligenceReconciliationCreateWithoutIntelligenceAssessmentInput[] | InfrastructureIntelligenceReconciliationUncheckedCreateWithoutIntelligenceAssessmentInput[]
+    connectOrCreate?: InfrastructureIntelligenceReconciliationCreateOrConnectWithoutIntelligenceAssessmentInput | InfrastructureIntelligenceReconciliationCreateOrConnectWithoutIntelligenceAssessmentInput[]
+    createMany?: InfrastructureIntelligenceReconciliationCreateManyIntelligenceAssessmentInputEnvelope
+    connect?: InfrastructureIntelligenceReconciliationWhereUniqueInput | InfrastructureIntelligenceReconciliationWhereUniqueInput[]
+  }
+
+  export type CaseCreateNestedOneWithoutIntelligenceAssessmentsInput = {
+    create?: XOR<CaseCreateWithoutIntelligenceAssessmentsInput, CaseUncheckedCreateWithoutIntelligenceAssessmentsInput>
+    connectOrCreate?: CaseCreateOrConnectWithoutIntelligenceAssessmentsInput
+    connect?: CaseWhereUniqueInput
+  }
+
+  export type InspectionCreateNestedOneWithoutIntelligenceAssessmentsInput = {
+    create?: XOR<InspectionCreateWithoutIntelligenceAssessmentsInput, InspectionUncheckedCreateWithoutIntelligenceAssessmentsInput>
+    connectOrCreate?: InspectionCreateOrConnectWithoutIntelligenceAssessmentsInput
+    connect?: InspectionWhereUniqueInput
+  }
+
+  export type RiskAssessmentCreateNestedOneWithoutIntelligenceAssessmentsInput = {
+    create?: XOR<RiskAssessmentCreateWithoutIntelligenceAssessmentsInput, RiskAssessmentUncheckedCreateWithoutIntelligenceAssessmentsInput>
+    connectOrCreate?: RiskAssessmentCreateOrConnectWithoutIntelligenceAssessmentsInput
+    connect?: RiskAssessmentWhereUniqueInput
+  }
+
+  export type InfrastructureIntelligenceReconciliationUncheckedCreateNestedManyWithoutIntelligenceAssessmentInput = {
+    create?: XOR<InfrastructureIntelligenceReconciliationCreateWithoutIntelligenceAssessmentInput, InfrastructureIntelligenceReconciliationUncheckedCreateWithoutIntelligenceAssessmentInput> | InfrastructureIntelligenceReconciliationCreateWithoutIntelligenceAssessmentInput[] | InfrastructureIntelligenceReconciliationUncheckedCreateWithoutIntelligenceAssessmentInput[]
+    connectOrCreate?: InfrastructureIntelligenceReconciliationCreateOrConnectWithoutIntelligenceAssessmentInput | InfrastructureIntelligenceReconciliationCreateOrConnectWithoutIntelligenceAssessmentInput[]
+    createMany?: InfrastructureIntelligenceReconciliationCreateManyIntelligenceAssessmentInputEnvelope
+    connect?: InfrastructureIntelligenceReconciliationWhereUniqueInput | InfrastructureIntelligenceReconciliationWhereUniqueInput[]
+  }
+
+  export type EnumIntelligenceAssessmentStatusFieldUpdateOperationsInput = {
+    set?: $Enums.IntelligenceAssessmentStatus
+  }
+
+  export type NullableFloatFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type InfrastructureIntelligenceReconciliationUpdateManyWithoutIntelligenceAssessmentNestedInput = {
+    create?: XOR<InfrastructureIntelligenceReconciliationCreateWithoutIntelligenceAssessmentInput, InfrastructureIntelligenceReconciliationUncheckedCreateWithoutIntelligenceAssessmentInput> | InfrastructureIntelligenceReconciliationCreateWithoutIntelligenceAssessmentInput[] | InfrastructureIntelligenceReconciliationUncheckedCreateWithoutIntelligenceAssessmentInput[]
+    connectOrCreate?: InfrastructureIntelligenceReconciliationCreateOrConnectWithoutIntelligenceAssessmentInput | InfrastructureIntelligenceReconciliationCreateOrConnectWithoutIntelligenceAssessmentInput[]
+    upsert?: InfrastructureIntelligenceReconciliationUpsertWithWhereUniqueWithoutIntelligenceAssessmentInput | InfrastructureIntelligenceReconciliationUpsertWithWhereUniqueWithoutIntelligenceAssessmentInput[]
+    createMany?: InfrastructureIntelligenceReconciliationCreateManyIntelligenceAssessmentInputEnvelope
+    set?: InfrastructureIntelligenceReconciliationWhereUniqueInput | InfrastructureIntelligenceReconciliationWhereUniqueInput[]
+    disconnect?: InfrastructureIntelligenceReconciliationWhereUniqueInput | InfrastructureIntelligenceReconciliationWhereUniqueInput[]
+    delete?: InfrastructureIntelligenceReconciliationWhereUniqueInput | InfrastructureIntelligenceReconciliationWhereUniqueInput[]
+    connect?: InfrastructureIntelligenceReconciliationWhereUniqueInput | InfrastructureIntelligenceReconciliationWhereUniqueInput[]
+    update?: InfrastructureIntelligenceReconciliationUpdateWithWhereUniqueWithoutIntelligenceAssessmentInput | InfrastructureIntelligenceReconciliationUpdateWithWhereUniqueWithoutIntelligenceAssessmentInput[]
+    updateMany?: InfrastructureIntelligenceReconciliationUpdateManyWithWhereWithoutIntelligenceAssessmentInput | InfrastructureIntelligenceReconciliationUpdateManyWithWhereWithoutIntelligenceAssessmentInput[]
+    deleteMany?: InfrastructureIntelligenceReconciliationScalarWhereInput | InfrastructureIntelligenceReconciliationScalarWhereInput[]
+  }
+
+  export type CaseUpdateOneRequiredWithoutIntelligenceAssessmentsNestedInput = {
+    create?: XOR<CaseCreateWithoutIntelligenceAssessmentsInput, CaseUncheckedCreateWithoutIntelligenceAssessmentsInput>
+    connectOrCreate?: CaseCreateOrConnectWithoutIntelligenceAssessmentsInput
+    upsert?: CaseUpsertWithoutIntelligenceAssessmentsInput
+    connect?: CaseWhereUniqueInput
+    update?: XOR<XOR<CaseUpdateToOneWithWhereWithoutIntelligenceAssessmentsInput, CaseUpdateWithoutIntelligenceAssessmentsInput>, CaseUncheckedUpdateWithoutIntelligenceAssessmentsInput>
+  }
+
+  export type InspectionUpdateOneRequiredWithoutIntelligenceAssessmentsNestedInput = {
+    create?: XOR<InspectionCreateWithoutIntelligenceAssessmentsInput, InspectionUncheckedCreateWithoutIntelligenceAssessmentsInput>
+    connectOrCreate?: InspectionCreateOrConnectWithoutIntelligenceAssessmentsInput
+    upsert?: InspectionUpsertWithoutIntelligenceAssessmentsInput
+    connect?: InspectionWhereUniqueInput
+    update?: XOR<XOR<InspectionUpdateToOneWithWhereWithoutIntelligenceAssessmentsInput, InspectionUpdateWithoutIntelligenceAssessmentsInput>, InspectionUncheckedUpdateWithoutIntelligenceAssessmentsInput>
+  }
+
+  export type RiskAssessmentUpdateOneRequiredWithoutIntelligenceAssessmentsNestedInput = {
+    create?: XOR<RiskAssessmentCreateWithoutIntelligenceAssessmentsInput, RiskAssessmentUncheckedCreateWithoutIntelligenceAssessmentsInput>
+    connectOrCreate?: RiskAssessmentCreateOrConnectWithoutIntelligenceAssessmentsInput
+    upsert?: RiskAssessmentUpsertWithoutIntelligenceAssessmentsInput
+    connect?: RiskAssessmentWhereUniqueInput
+    update?: XOR<XOR<RiskAssessmentUpdateToOneWithWhereWithoutIntelligenceAssessmentsInput, RiskAssessmentUpdateWithoutIntelligenceAssessmentsInput>, RiskAssessmentUncheckedUpdateWithoutIntelligenceAssessmentsInput>
+  }
+
+  export type InfrastructureIntelligenceReconciliationUncheckedUpdateManyWithoutIntelligenceAssessmentNestedInput = {
+    create?: XOR<InfrastructureIntelligenceReconciliationCreateWithoutIntelligenceAssessmentInput, InfrastructureIntelligenceReconciliationUncheckedCreateWithoutIntelligenceAssessmentInput> | InfrastructureIntelligenceReconciliationCreateWithoutIntelligenceAssessmentInput[] | InfrastructureIntelligenceReconciliationUncheckedCreateWithoutIntelligenceAssessmentInput[]
+    connectOrCreate?: InfrastructureIntelligenceReconciliationCreateOrConnectWithoutIntelligenceAssessmentInput | InfrastructureIntelligenceReconciliationCreateOrConnectWithoutIntelligenceAssessmentInput[]
+    upsert?: InfrastructureIntelligenceReconciliationUpsertWithWhereUniqueWithoutIntelligenceAssessmentInput | InfrastructureIntelligenceReconciliationUpsertWithWhereUniqueWithoutIntelligenceAssessmentInput[]
+    createMany?: InfrastructureIntelligenceReconciliationCreateManyIntelligenceAssessmentInputEnvelope
+    set?: InfrastructureIntelligenceReconciliationWhereUniqueInput | InfrastructureIntelligenceReconciliationWhereUniqueInput[]
+    disconnect?: InfrastructureIntelligenceReconciliationWhereUniqueInput | InfrastructureIntelligenceReconciliationWhereUniqueInput[]
+    delete?: InfrastructureIntelligenceReconciliationWhereUniqueInput | InfrastructureIntelligenceReconciliationWhereUniqueInput[]
+    connect?: InfrastructureIntelligenceReconciliationWhereUniqueInput | InfrastructureIntelligenceReconciliationWhereUniqueInput[]
+    update?: InfrastructureIntelligenceReconciliationUpdateWithWhereUniqueWithoutIntelligenceAssessmentInput | InfrastructureIntelligenceReconciliationUpdateWithWhereUniqueWithoutIntelligenceAssessmentInput[]
+    updateMany?: InfrastructureIntelligenceReconciliationUpdateManyWithWhereWithoutIntelligenceAssessmentInput | InfrastructureIntelligenceReconciliationUpdateManyWithWhereWithoutIntelligenceAssessmentInput[]
+    deleteMany?: InfrastructureIntelligenceReconciliationScalarWhereInput | InfrastructureIntelligenceReconciliationScalarWhereInput[]
+  }
+
+  export type InfrastructureIntelligenceAssessmentCreateNestedOneWithoutGovernanceReconciliationsInput = {
+    create?: XOR<InfrastructureIntelligenceAssessmentCreateWithoutGovernanceReconciliationsInput, InfrastructureIntelligenceAssessmentUncheckedCreateWithoutGovernanceReconciliationsInput>
+    connectOrCreate?: InfrastructureIntelligenceAssessmentCreateOrConnectWithoutGovernanceReconciliationsInput
+    connect?: InfrastructureIntelligenceAssessmentWhereUniqueInput
+  }
+
+  export type CaseCreateNestedOneWithoutIntelligenceReconciliationsInput = {
+    create?: XOR<CaseCreateWithoutIntelligenceReconciliationsInput, CaseUncheckedCreateWithoutIntelligenceReconciliationsInput>
+    connectOrCreate?: CaseCreateOrConnectWithoutIntelligenceReconciliationsInput
+    connect?: CaseWhereUniqueInput
+  }
+
+  export type InfrastructureIntelligenceAssessmentUpdateOneRequiredWithoutGovernanceReconciliationsNestedInput = {
+    create?: XOR<InfrastructureIntelligenceAssessmentCreateWithoutGovernanceReconciliationsInput, InfrastructureIntelligenceAssessmentUncheckedCreateWithoutGovernanceReconciliationsInput>
+    connectOrCreate?: InfrastructureIntelligenceAssessmentCreateOrConnectWithoutGovernanceReconciliationsInput
+    upsert?: InfrastructureIntelligenceAssessmentUpsertWithoutGovernanceReconciliationsInput
+    connect?: InfrastructureIntelligenceAssessmentWhereUniqueInput
+    update?: XOR<XOR<InfrastructureIntelligenceAssessmentUpdateToOneWithWhereWithoutGovernanceReconciliationsInput, InfrastructureIntelligenceAssessmentUpdateWithoutGovernanceReconciliationsInput>, InfrastructureIntelligenceAssessmentUncheckedUpdateWithoutGovernanceReconciliationsInput>
+  }
+
+  export type CaseUpdateOneRequiredWithoutIntelligenceReconciliationsNestedInput = {
+    create?: XOR<CaseCreateWithoutIntelligenceReconciliationsInput, CaseUncheckedCreateWithoutIntelligenceReconciliationsInput>
+    connectOrCreate?: CaseCreateOrConnectWithoutIntelligenceReconciliationsInput
+    upsert?: CaseUpsertWithoutIntelligenceReconciliationsInput
+    connect?: CaseWhereUniqueInput
+    update?: XOR<XOR<CaseUpdateToOneWithWhereWithoutIntelligenceReconciliationsInput, CaseUpdateWithoutIntelligenceReconciliationsInput>, CaseUncheckedUpdateWithoutIntelligenceReconciliationsInput>
   }
 
   export type CaseCreateNestedOneWithoutOperationalResponsePlansInput = {
@@ -46293,6 +50330,39 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumPriorityLevelFilter<$PrismaModel>
     _max?: NestedEnumPriorityLevelFilter<$PrismaModel>
+  }
+
+  export type NestedEnumIntelligenceAssessmentStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.IntelligenceAssessmentStatus | EnumIntelligenceAssessmentStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.IntelligenceAssessmentStatus[] | ListEnumIntelligenceAssessmentStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.IntelligenceAssessmentStatus[] | ListEnumIntelligenceAssessmentStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumIntelligenceAssessmentStatusFilter<$PrismaModel> | $Enums.IntelligenceAssessmentStatus
+  }
+
+  export type NestedEnumIntelligenceAssessmentStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.IntelligenceAssessmentStatus | EnumIntelligenceAssessmentStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.IntelligenceAssessmentStatus[] | ListEnumIntelligenceAssessmentStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.IntelligenceAssessmentStatus[] | ListEnumIntelligenceAssessmentStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumIntelligenceAssessmentStatusWithAggregatesFilter<$PrismaModel> | $Enums.IntelligenceAssessmentStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumIntelligenceAssessmentStatusFilter<$PrismaModel>
+    _max?: NestedEnumIntelligenceAssessmentStatusFilter<$PrismaModel>
+  }
+
+  export type NestedFloatNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedFloatNullableFilter<$PrismaModel>
+    _min?: NestedFloatNullableFilter<$PrismaModel>
+    _max?: NestedFloatNullableFilter<$PrismaModel>
   }
 
   export type NestedEnumActionPlanGovernanceModeFilter<$PrismaModel = never> = {
@@ -47861,6 +51931,7 @@ export namespace Prisma {
     case: CaseCreateNestedOneWithoutInspectionsInput
     riskAssessments?: RiskAssessmentCreateNestedManyWithoutInspectionInput
     decisionPackages?: DecisionPackageCreateNestedManyWithoutInspectionInput
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentCreateNestedManyWithoutInspectionInput
   }
 
   export type InspectionUncheckedCreateWithoutInspectorInput = {
@@ -47880,6 +51951,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     riskAssessments?: RiskAssessmentUncheckedCreateNestedManyWithoutInspectionInput
     decisionPackages?: DecisionPackageUncheckedCreateNestedManyWithoutInspectionInput
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentUncheckedCreateNestedManyWithoutInspectionInput
   }
 
   export type InspectionCreateOrConnectWithoutInspectorInput = {
@@ -48954,6 +53026,7 @@ export namespace Prisma {
     readinessSnapshot: JsonNullValueInput | InputJsonValue
     policySnapshot: JsonNullValueInput | InputJsonValue
     actionSnapshot: JsonNullValueInput | InputJsonValue
+    intelligenceSnapshot?: NullableJsonNullValueInput | InputJsonValue
     preparedAt?: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -48978,6 +53051,7 @@ export namespace Prisma {
     readinessSnapshot: JsonNullValueInput | InputJsonValue
     policySnapshot: JsonNullValueInput | InputJsonValue
     actionSnapshot: JsonNullValueInput | InputJsonValue
+    intelligenceSnapshot?: NullableJsonNullValueInput | InputJsonValue
     preparedAt?: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -49658,6 +53732,7 @@ export namespace Prisma {
     readinessSnapshot?: JsonFilter<"DecisionPackage">
     policySnapshot?: JsonFilter<"DecisionPackage">
     actionSnapshot?: JsonFilter<"DecisionPackage">
+    intelligenceSnapshot?: JsonNullableFilter<"DecisionPackage">
     preparedById?: StringFilter<"DecisionPackage"> | string
     preparedAt?: DateTimeFilter<"DecisionPackage"> | Date | string
     createdAt?: DateTimeFilter<"DecisionPackage"> | Date | string
@@ -49782,6 +53857,8 @@ export namespace Prisma {
     closure?: CaseClosureCreateNestedOneWithoutCaseInput
     sourcePublicReport?: PublicReportCreateNestedOneWithoutCreatedCaseInput
     decisionPackages?: DecisionPackageCreateNestedManyWithoutCaseInput
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentCreateNestedManyWithoutCaseInput
+    intelligenceReconciliations?: InfrastructureIntelligenceReconciliationCreateNestedManyWithoutCaseInput
   }
 
   export type CaseUncheckedCreateWithoutAssetInput = {
@@ -49804,6 +53881,8 @@ export namespace Prisma {
     closure?: CaseClosureUncheckedCreateNestedOneWithoutCaseInput
     sourcePublicReport?: PublicReportUncheckedCreateNestedOneWithoutCreatedCaseInput
     decisionPackages?: DecisionPackageUncheckedCreateNestedManyWithoutCaseInput
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentUncheckedCreateNestedManyWithoutCaseInput
+    intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUncheckedCreateNestedManyWithoutCaseInput
   }
 
   export type CaseCreateOrConnectWithoutAssetInput = {
@@ -50339,6 +54418,8 @@ export namespace Prisma {
     executionPlans?: ExecutionPlanCreateNestedManyWithoutCaseInput
     closure?: CaseClosureCreateNestedOneWithoutCaseInput
     decisionPackages?: DecisionPackageCreateNestedManyWithoutCaseInput
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentCreateNestedManyWithoutCaseInput
+    intelligenceReconciliations?: InfrastructureIntelligenceReconciliationCreateNestedManyWithoutCaseInput
   }
 
   export type CaseUncheckedCreateWithoutSourcePublicReportInput = {
@@ -50361,6 +54442,8 @@ export namespace Prisma {
     executionPlans?: ExecutionPlanUncheckedCreateNestedManyWithoutCaseInput
     closure?: CaseClosureUncheckedCreateNestedOneWithoutCaseInput
     decisionPackages?: DecisionPackageUncheckedCreateNestedManyWithoutCaseInput
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentUncheckedCreateNestedManyWithoutCaseInput
+    intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUncheckedCreateNestedManyWithoutCaseInput
   }
 
   export type CaseCreateOrConnectWithoutSourcePublicReportInput = {
@@ -50726,6 +54809,8 @@ export namespace Prisma {
     executionPlans?: ExecutionPlanUpdateManyWithoutCaseNestedInput
     closure?: CaseClosureUpdateOneWithoutCaseNestedInput
     decisionPackages?: DecisionPackageUpdateManyWithoutCaseNestedInput
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentUpdateManyWithoutCaseNestedInput
+    intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUpdateManyWithoutCaseNestedInput
   }
 
   export type CaseUncheckedUpdateWithoutSourcePublicReportInput = {
@@ -50748,6 +54833,8 @@ export namespace Prisma {
     executionPlans?: ExecutionPlanUncheckedUpdateManyWithoutCaseNestedInput
     closure?: CaseClosureUncheckedUpdateOneWithoutCaseNestedInput
     decisionPackages?: DecisionPackageUncheckedUpdateManyWithoutCaseNestedInput
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentUncheckedUpdateManyWithoutCaseNestedInput
+    intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUncheckedUpdateManyWithoutCaseNestedInput
   }
 
   export type PublicReportTriageAnalysisUpsertWithWhereUniqueWithoutPublicReportInput = {
@@ -53746,6 +57833,7 @@ export namespace Prisma {
     inspector: UserCreateNestedOneWithoutInspectionsInput
     riskAssessments?: RiskAssessmentCreateNestedManyWithoutInspectionInput
     decisionPackages?: DecisionPackageCreateNestedManyWithoutInspectionInput
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentCreateNestedManyWithoutInspectionInput
   }
 
   export type InspectionUncheckedCreateWithoutCaseInput = {
@@ -53765,6 +57853,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     riskAssessments?: RiskAssessmentUncheckedCreateNestedManyWithoutInspectionInput
     decisionPackages?: DecisionPackageUncheckedCreateNestedManyWithoutInspectionInput
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentUncheckedCreateNestedManyWithoutInspectionInput
   }
 
   export type InspectionCreateOrConnectWithoutCaseInput = {
@@ -53789,6 +57878,7 @@ export namespace Prisma {
     inspection: InspectionCreateNestedOneWithoutRiskAssessmentsInput
     operationalResponsePlans?: OperationalResponsePlanCreateNestedManyWithoutRiskAssessmentInput
     decisionPackages?: DecisionPackageCreateNestedManyWithoutRiskAssessmentInput
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentCreateNestedManyWithoutRiskAssessmentInput
   }
 
   export type RiskAssessmentUncheckedCreateWithoutCaseInput = {
@@ -53803,6 +57893,7 @@ export namespace Prisma {
     createdAt?: Date | string
     operationalResponsePlans?: OperationalResponsePlanUncheckedCreateNestedManyWithoutRiskAssessmentInput
     decisionPackages?: DecisionPackageUncheckedCreateNestedManyWithoutRiskAssessmentInput
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentUncheckedCreateNestedManyWithoutRiskAssessmentInput
   }
 
   export type RiskAssessmentCreateOrConnectWithoutCaseInput = {
@@ -54049,6 +58140,7 @@ export namespace Prisma {
     readinessSnapshot: JsonNullValueInput | InputJsonValue
     policySnapshot: JsonNullValueInput | InputJsonValue
     actionSnapshot: JsonNullValueInput | InputJsonValue
+    intelligenceSnapshot?: NullableJsonNullValueInput | InputJsonValue
     preparedAt?: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -54072,6 +58164,7 @@ export namespace Prisma {
     readinessSnapshot: JsonNullValueInput | InputJsonValue
     policySnapshot: JsonNullValueInput | InputJsonValue
     actionSnapshot: JsonNullValueInput | InputJsonValue
+    intelligenceSnapshot?: NullableJsonNullValueInput | InputJsonValue
     preparedById: string
     preparedAt?: Date | string
     createdAt?: Date | string
@@ -54086,6 +58179,108 @@ export namespace Prisma {
 
   export type DecisionPackageCreateManyCaseInputEnvelope = {
     data: DecisionPackageCreateManyCaseInput | DecisionPackageCreateManyCaseInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type InfrastructureIntelligenceAssessmentCreateWithoutCaseInput = {
+    id?: string
+    status: $Enums.IntelligenceAssessmentStatus
+    predictedRiskScore?: number | null
+    predictedRiskLevel?: $Enums.RiskLevel | null
+    recommendedPriority?: $Enums.PriorityLevel | null
+    confidence?: number | null
+    provider: string
+    providerType: string
+    modelName: string
+    modelVersion: string
+    modelArtifactDigest?: string | null
+    featureSchemaVersion: string
+    contractVersion: string
+    sourceFingerprint: string
+    inferredAt: Date | string
+    expiresAt?: Date | string | null
+    contributingFactors: JsonNullValueInput | InputJsonValue
+    explanation?: string | null
+    recommendedActions: JsonNullValueInput | InputJsonValue
+    abstentionReasons: JsonNullValueInput | InputJsonValue
+    reconciliation: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    governanceReconciliations?: InfrastructureIntelligenceReconciliationCreateNestedManyWithoutIntelligenceAssessmentInput
+    inspection: InspectionCreateNestedOneWithoutIntelligenceAssessmentsInput
+    riskAssessment: RiskAssessmentCreateNestedOneWithoutIntelligenceAssessmentsInput
+  }
+
+  export type InfrastructureIntelligenceAssessmentUncheckedCreateWithoutCaseInput = {
+    id?: string
+    inspectionId: string
+    riskAssessmentId: string
+    status: $Enums.IntelligenceAssessmentStatus
+    predictedRiskScore?: number | null
+    predictedRiskLevel?: $Enums.RiskLevel | null
+    recommendedPriority?: $Enums.PriorityLevel | null
+    confidence?: number | null
+    provider: string
+    providerType: string
+    modelName: string
+    modelVersion: string
+    modelArtifactDigest?: string | null
+    featureSchemaVersion: string
+    contractVersion: string
+    sourceFingerprint: string
+    inferredAt: Date | string
+    expiresAt?: Date | string | null
+    contributingFactors: JsonNullValueInput | InputJsonValue
+    explanation?: string | null
+    recommendedActions: JsonNullValueInput | InputJsonValue
+    abstentionReasons: JsonNullValueInput | InputJsonValue
+    reconciliation: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    governanceReconciliations?: InfrastructureIntelligenceReconciliationUncheckedCreateNestedManyWithoutIntelligenceAssessmentInput
+  }
+
+  export type InfrastructureIntelligenceAssessmentCreateOrConnectWithoutCaseInput = {
+    where: InfrastructureIntelligenceAssessmentWhereUniqueInput
+    create: XOR<InfrastructureIntelligenceAssessmentCreateWithoutCaseInput, InfrastructureIntelligenceAssessmentUncheckedCreateWithoutCaseInput>
+  }
+
+  export type InfrastructureIntelligenceAssessmentCreateManyCaseInputEnvelope = {
+    data: InfrastructureIntelligenceAssessmentCreateManyCaseInput | InfrastructureIntelligenceAssessmentCreateManyCaseInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type InfrastructureIntelligenceReconciliationCreateWithoutCaseInput = {
+    id?: string
+    contractVersion: string
+    governanceFingerprint: string
+    policyResolutionStatus: string
+    policySnapshot: JsonNullValueInput | InputJsonValue
+    reconciledActions: JsonNullValueInput | InputJsonValue
+    issues: JsonNullValueInput | InputJsonValue
+    reconciledAt: Date | string
+    createdAt?: Date | string
+    intelligenceAssessment: InfrastructureIntelligenceAssessmentCreateNestedOneWithoutGovernanceReconciliationsInput
+  }
+
+  export type InfrastructureIntelligenceReconciliationUncheckedCreateWithoutCaseInput = {
+    id?: string
+    intelligenceAssessmentId: string
+    contractVersion: string
+    governanceFingerprint: string
+    policyResolutionStatus: string
+    policySnapshot: JsonNullValueInput | InputJsonValue
+    reconciledActions: JsonNullValueInput | InputJsonValue
+    issues: JsonNullValueInput | InputJsonValue
+    reconciledAt: Date | string
+    createdAt?: Date | string
+  }
+
+  export type InfrastructureIntelligenceReconciliationCreateOrConnectWithoutCaseInput = {
+    where: InfrastructureIntelligenceReconciliationWhereUniqueInput
+    create: XOR<InfrastructureIntelligenceReconciliationCreateWithoutCaseInput, InfrastructureIntelligenceReconciliationUncheckedCreateWithoutCaseInput>
+  }
+
+  export type InfrastructureIntelligenceReconciliationCreateManyCaseInputEnvelope = {
+    data: InfrastructureIntelligenceReconciliationCreateManyCaseInput | InfrastructureIntelligenceReconciliationCreateManyCaseInput[]
     skipDuplicates?: boolean
   }
 
@@ -54363,6 +58558,86 @@ export namespace Prisma {
     data: XOR<DecisionPackageUpdateManyMutationInput, DecisionPackageUncheckedUpdateManyWithoutCaseInput>
   }
 
+  export type InfrastructureIntelligenceAssessmentUpsertWithWhereUniqueWithoutCaseInput = {
+    where: InfrastructureIntelligenceAssessmentWhereUniqueInput
+    update: XOR<InfrastructureIntelligenceAssessmentUpdateWithoutCaseInput, InfrastructureIntelligenceAssessmentUncheckedUpdateWithoutCaseInput>
+    create: XOR<InfrastructureIntelligenceAssessmentCreateWithoutCaseInput, InfrastructureIntelligenceAssessmentUncheckedCreateWithoutCaseInput>
+  }
+
+  export type InfrastructureIntelligenceAssessmentUpdateWithWhereUniqueWithoutCaseInput = {
+    where: InfrastructureIntelligenceAssessmentWhereUniqueInput
+    data: XOR<InfrastructureIntelligenceAssessmentUpdateWithoutCaseInput, InfrastructureIntelligenceAssessmentUncheckedUpdateWithoutCaseInput>
+  }
+
+  export type InfrastructureIntelligenceAssessmentUpdateManyWithWhereWithoutCaseInput = {
+    where: InfrastructureIntelligenceAssessmentScalarWhereInput
+    data: XOR<InfrastructureIntelligenceAssessmentUpdateManyMutationInput, InfrastructureIntelligenceAssessmentUncheckedUpdateManyWithoutCaseInput>
+  }
+
+  export type InfrastructureIntelligenceAssessmentScalarWhereInput = {
+    AND?: InfrastructureIntelligenceAssessmentScalarWhereInput | InfrastructureIntelligenceAssessmentScalarWhereInput[]
+    OR?: InfrastructureIntelligenceAssessmentScalarWhereInput[]
+    NOT?: InfrastructureIntelligenceAssessmentScalarWhereInput | InfrastructureIntelligenceAssessmentScalarWhereInput[]
+    id?: StringFilter<"InfrastructureIntelligenceAssessment"> | string
+    caseId?: StringFilter<"InfrastructureIntelligenceAssessment"> | string
+    inspectionId?: StringFilter<"InfrastructureIntelligenceAssessment"> | string
+    riskAssessmentId?: StringFilter<"InfrastructureIntelligenceAssessment"> | string
+    status?: EnumIntelligenceAssessmentStatusFilter<"InfrastructureIntelligenceAssessment"> | $Enums.IntelligenceAssessmentStatus
+    predictedRiskScore?: IntNullableFilter<"InfrastructureIntelligenceAssessment"> | number | null
+    predictedRiskLevel?: EnumRiskLevelNullableFilter<"InfrastructureIntelligenceAssessment"> | $Enums.RiskLevel | null
+    recommendedPriority?: EnumPriorityLevelNullableFilter<"InfrastructureIntelligenceAssessment"> | $Enums.PriorityLevel | null
+    confidence?: FloatNullableFilter<"InfrastructureIntelligenceAssessment"> | number | null
+    provider?: StringFilter<"InfrastructureIntelligenceAssessment"> | string
+    providerType?: StringFilter<"InfrastructureIntelligenceAssessment"> | string
+    modelName?: StringFilter<"InfrastructureIntelligenceAssessment"> | string
+    modelVersion?: StringFilter<"InfrastructureIntelligenceAssessment"> | string
+    modelArtifactDigest?: StringNullableFilter<"InfrastructureIntelligenceAssessment"> | string | null
+    featureSchemaVersion?: StringFilter<"InfrastructureIntelligenceAssessment"> | string
+    contractVersion?: StringFilter<"InfrastructureIntelligenceAssessment"> | string
+    sourceFingerprint?: StringFilter<"InfrastructureIntelligenceAssessment"> | string
+    inferredAt?: DateTimeFilter<"InfrastructureIntelligenceAssessment"> | Date | string
+    expiresAt?: DateTimeNullableFilter<"InfrastructureIntelligenceAssessment"> | Date | string | null
+    contributingFactors?: JsonFilter<"InfrastructureIntelligenceAssessment">
+    explanation?: StringNullableFilter<"InfrastructureIntelligenceAssessment"> | string | null
+    recommendedActions?: JsonFilter<"InfrastructureIntelligenceAssessment">
+    abstentionReasons?: JsonFilter<"InfrastructureIntelligenceAssessment">
+    reconciliation?: JsonFilter<"InfrastructureIntelligenceAssessment">
+    createdAt?: DateTimeFilter<"InfrastructureIntelligenceAssessment"> | Date | string
+  }
+
+  export type InfrastructureIntelligenceReconciliationUpsertWithWhereUniqueWithoutCaseInput = {
+    where: InfrastructureIntelligenceReconciliationWhereUniqueInput
+    update: XOR<InfrastructureIntelligenceReconciliationUpdateWithoutCaseInput, InfrastructureIntelligenceReconciliationUncheckedUpdateWithoutCaseInput>
+    create: XOR<InfrastructureIntelligenceReconciliationCreateWithoutCaseInput, InfrastructureIntelligenceReconciliationUncheckedCreateWithoutCaseInput>
+  }
+
+  export type InfrastructureIntelligenceReconciliationUpdateWithWhereUniqueWithoutCaseInput = {
+    where: InfrastructureIntelligenceReconciliationWhereUniqueInput
+    data: XOR<InfrastructureIntelligenceReconciliationUpdateWithoutCaseInput, InfrastructureIntelligenceReconciliationUncheckedUpdateWithoutCaseInput>
+  }
+
+  export type InfrastructureIntelligenceReconciliationUpdateManyWithWhereWithoutCaseInput = {
+    where: InfrastructureIntelligenceReconciliationScalarWhereInput
+    data: XOR<InfrastructureIntelligenceReconciliationUpdateManyMutationInput, InfrastructureIntelligenceReconciliationUncheckedUpdateManyWithoutCaseInput>
+  }
+
+  export type InfrastructureIntelligenceReconciliationScalarWhereInput = {
+    AND?: InfrastructureIntelligenceReconciliationScalarWhereInput | InfrastructureIntelligenceReconciliationScalarWhereInput[]
+    OR?: InfrastructureIntelligenceReconciliationScalarWhereInput[]
+    NOT?: InfrastructureIntelligenceReconciliationScalarWhereInput | InfrastructureIntelligenceReconciliationScalarWhereInput[]
+    id?: StringFilter<"InfrastructureIntelligenceReconciliation"> | string
+    intelligenceAssessmentId?: StringFilter<"InfrastructureIntelligenceReconciliation"> | string
+    caseId?: StringFilter<"InfrastructureIntelligenceReconciliation"> | string
+    contractVersion?: StringFilter<"InfrastructureIntelligenceReconciliation"> | string
+    governanceFingerprint?: StringFilter<"InfrastructureIntelligenceReconciliation"> | string
+    policyResolutionStatus?: StringFilter<"InfrastructureIntelligenceReconciliation"> | string
+    policySnapshot?: JsonFilter<"InfrastructureIntelligenceReconciliation">
+    reconciledActions?: JsonFilter<"InfrastructureIntelligenceReconciliation">
+    issues?: JsonFilter<"InfrastructureIntelligenceReconciliation">
+    reconciledAt?: DateTimeFilter<"InfrastructureIntelligenceReconciliation"> | Date | string
+    createdAt?: DateTimeFilter<"InfrastructureIntelligenceReconciliation"> | Date | string
+  }
+
   export type CaseCreateWithoutInspectionsInput = {
     id?: string
     caseNumber: string
@@ -54383,6 +58658,8 @@ export namespace Prisma {
     closure?: CaseClosureCreateNestedOneWithoutCaseInput
     sourcePublicReport?: PublicReportCreateNestedOneWithoutCreatedCaseInput
     decisionPackages?: DecisionPackageCreateNestedManyWithoutCaseInput
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentCreateNestedManyWithoutCaseInput
+    intelligenceReconciliations?: InfrastructureIntelligenceReconciliationCreateNestedManyWithoutCaseInput
   }
 
   export type CaseUncheckedCreateWithoutInspectionsInput = {
@@ -54405,6 +58682,8 @@ export namespace Prisma {
     closure?: CaseClosureUncheckedCreateNestedOneWithoutCaseInput
     sourcePublicReport?: PublicReportUncheckedCreateNestedOneWithoutCreatedCaseInput
     decisionPackages?: DecisionPackageUncheckedCreateNestedManyWithoutCaseInput
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentUncheckedCreateNestedManyWithoutCaseInput
+    intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUncheckedCreateNestedManyWithoutCaseInput
   }
 
   export type CaseCreateOrConnectWithoutInspectionsInput = {
@@ -54501,6 +58780,7 @@ export namespace Prisma {
     case: CaseCreateNestedOneWithoutRiskAssessmentsInput
     operationalResponsePlans?: OperationalResponsePlanCreateNestedManyWithoutRiskAssessmentInput
     decisionPackages?: DecisionPackageCreateNestedManyWithoutRiskAssessmentInput
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentCreateNestedManyWithoutRiskAssessmentInput
   }
 
   export type RiskAssessmentUncheckedCreateWithoutInspectionInput = {
@@ -54515,6 +58795,7 @@ export namespace Prisma {
     createdAt?: Date | string
     operationalResponsePlans?: OperationalResponsePlanUncheckedCreateNestedManyWithoutRiskAssessmentInput
     decisionPackages?: DecisionPackageUncheckedCreateNestedManyWithoutRiskAssessmentInput
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentUncheckedCreateNestedManyWithoutRiskAssessmentInput
   }
 
   export type RiskAssessmentCreateOrConnectWithoutInspectionInput = {
@@ -54539,6 +58820,7 @@ export namespace Prisma {
     readinessSnapshot: JsonNullValueInput | InputJsonValue
     policySnapshot: JsonNullValueInput | InputJsonValue
     actionSnapshot: JsonNullValueInput | InputJsonValue
+    intelligenceSnapshot?: NullableJsonNullValueInput | InputJsonValue
     preparedAt?: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -54562,6 +58844,7 @@ export namespace Prisma {
     readinessSnapshot: JsonNullValueInput | InputJsonValue
     policySnapshot: JsonNullValueInput | InputJsonValue
     actionSnapshot: JsonNullValueInput | InputJsonValue
+    intelligenceSnapshot?: NullableJsonNullValueInput | InputJsonValue
     preparedById: string
     preparedAt?: Date | string
     createdAt?: Date | string
@@ -54576,6 +58859,72 @@ export namespace Prisma {
 
   export type DecisionPackageCreateManyInspectionInputEnvelope = {
     data: DecisionPackageCreateManyInspectionInput | DecisionPackageCreateManyInspectionInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type InfrastructureIntelligenceAssessmentCreateWithoutInspectionInput = {
+    id?: string
+    status: $Enums.IntelligenceAssessmentStatus
+    predictedRiskScore?: number | null
+    predictedRiskLevel?: $Enums.RiskLevel | null
+    recommendedPriority?: $Enums.PriorityLevel | null
+    confidence?: number | null
+    provider: string
+    providerType: string
+    modelName: string
+    modelVersion: string
+    modelArtifactDigest?: string | null
+    featureSchemaVersion: string
+    contractVersion: string
+    sourceFingerprint: string
+    inferredAt: Date | string
+    expiresAt?: Date | string | null
+    contributingFactors: JsonNullValueInput | InputJsonValue
+    explanation?: string | null
+    recommendedActions: JsonNullValueInput | InputJsonValue
+    abstentionReasons: JsonNullValueInput | InputJsonValue
+    reconciliation: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    governanceReconciliations?: InfrastructureIntelligenceReconciliationCreateNestedManyWithoutIntelligenceAssessmentInput
+    case: CaseCreateNestedOneWithoutIntelligenceAssessmentsInput
+    riskAssessment: RiskAssessmentCreateNestedOneWithoutIntelligenceAssessmentsInput
+  }
+
+  export type InfrastructureIntelligenceAssessmentUncheckedCreateWithoutInspectionInput = {
+    id?: string
+    caseId: string
+    riskAssessmentId: string
+    status: $Enums.IntelligenceAssessmentStatus
+    predictedRiskScore?: number | null
+    predictedRiskLevel?: $Enums.RiskLevel | null
+    recommendedPriority?: $Enums.PriorityLevel | null
+    confidence?: number | null
+    provider: string
+    providerType: string
+    modelName: string
+    modelVersion: string
+    modelArtifactDigest?: string | null
+    featureSchemaVersion: string
+    contractVersion: string
+    sourceFingerprint: string
+    inferredAt: Date | string
+    expiresAt?: Date | string | null
+    contributingFactors: JsonNullValueInput | InputJsonValue
+    explanation?: string | null
+    recommendedActions: JsonNullValueInput | InputJsonValue
+    abstentionReasons: JsonNullValueInput | InputJsonValue
+    reconciliation: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    governanceReconciliations?: InfrastructureIntelligenceReconciliationUncheckedCreateNestedManyWithoutIntelligenceAssessmentInput
+  }
+
+  export type InfrastructureIntelligenceAssessmentCreateOrConnectWithoutInspectionInput = {
+    where: InfrastructureIntelligenceAssessmentWhereUniqueInput
+    create: XOR<InfrastructureIntelligenceAssessmentCreateWithoutInspectionInput, InfrastructureIntelligenceAssessmentUncheckedCreateWithoutInspectionInput>
+  }
+
+  export type InfrastructureIntelligenceAssessmentCreateManyInspectionInputEnvelope = {
+    data: InfrastructureIntelligenceAssessmentCreateManyInspectionInput | InfrastructureIntelligenceAssessmentCreateManyInspectionInput[]
     skipDuplicates?: boolean
   }
 
@@ -54610,6 +58959,8 @@ export namespace Prisma {
     closure?: CaseClosureUpdateOneWithoutCaseNestedInput
     sourcePublicReport?: PublicReportUpdateOneWithoutCreatedCaseNestedInput
     decisionPackages?: DecisionPackageUpdateManyWithoutCaseNestedInput
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentUpdateManyWithoutCaseNestedInput
+    intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUpdateManyWithoutCaseNestedInput
   }
 
   export type CaseUncheckedUpdateWithoutInspectionsInput = {
@@ -54632,6 +58983,8 @@ export namespace Prisma {
     closure?: CaseClosureUncheckedUpdateOneWithoutCaseNestedInput
     sourcePublicReport?: PublicReportUncheckedUpdateOneWithoutCreatedCaseNestedInput
     decisionPackages?: DecisionPackageUncheckedUpdateManyWithoutCaseNestedInput
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentUncheckedUpdateManyWithoutCaseNestedInput
+    intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUncheckedUpdateManyWithoutCaseNestedInput
   }
 
   export type UserUpsertWithoutInspectionsInput = {
@@ -54749,6 +59102,22 @@ export namespace Prisma {
     data: XOR<DecisionPackageUpdateManyMutationInput, DecisionPackageUncheckedUpdateManyWithoutInspectionInput>
   }
 
+  export type InfrastructureIntelligenceAssessmentUpsertWithWhereUniqueWithoutInspectionInput = {
+    where: InfrastructureIntelligenceAssessmentWhereUniqueInput
+    update: XOR<InfrastructureIntelligenceAssessmentUpdateWithoutInspectionInput, InfrastructureIntelligenceAssessmentUncheckedUpdateWithoutInspectionInput>
+    create: XOR<InfrastructureIntelligenceAssessmentCreateWithoutInspectionInput, InfrastructureIntelligenceAssessmentUncheckedCreateWithoutInspectionInput>
+  }
+
+  export type InfrastructureIntelligenceAssessmentUpdateWithWhereUniqueWithoutInspectionInput = {
+    where: InfrastructureIntelligenceAssessmentWhereUniqueInput
+    data: XOR<InfrastructureIntelligenceAssessmentUpdateWithoutInspectionInput, InfrastructureIntelligenceAssessmentUncheckedUpdateWithoutInspectionInput>
+  }
+
+  export type InfrastructureIntelligenceAssessmentUpdateManyWithWhereWithoutInspectionInput = {
+    where: InfrastructureIntelligenceAssessmentScalarWhereInput
+    data: XOR<InfrastructureIntelligenceAssessmentUpdateManyMutationInput, InfrastructureIntelligenceAssessmentUncheckedUpdateManyWithoutInspectionInput>
+  }
+
   export type CaseCreateWithoutRiskAssessmentsInput = {
     id?: string
     caseNumber: string
@@ -54769,6 +59138,8 @@ export namespace Prisma {
     closure?: CaseClosureCreateNestedOneWithoutCaseInput
     sourcePublicReport?: PublicReportCreateNestedOneWithoutCreatedCaseInput
     decisionPackages?: DecisionPackageCreateNestedManyWithoutCaseInput
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentCreateNestedManyWithoutCaseInput
+    intelligenceReconciliations?: InfrastructureIntelligenceReconciliationCreateNestedManyWithoutCaseInput
   }
 
   export type CaseUncheckedCreateWithoutRiskAssessmentsInput = {
@@ -54791,6 +59162,8 @@ export namespace Prisma {
     closure?: CaseClosureUncheckedCreateNestedOneWithoutCaseInput
     sourcePublicReport?: PublicReportUncheckedCreateNestedOneWithoutCreatedCaseInput
     decisionPackages?: DecisionPackageUncheckedCreateNestedManyWithoutCaseInput
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentUncheckedCreateNestedManyWithoutCaseInput
+    intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUncheckedCreateNestedManyWithoutCaseInput
   }
 
   export type CaseCreateOrConnectWithoutRiskAssessmentsInput = {
@@ -54815,6 +59188,7 @@ export namespace Prisma {
     case: CaseCreateNestedOneWithoutInspectionsInput
     inspector: UserCreateNestedOneWithoutInspectionsInput
     decisionPackages?: DecisionPackageCreateNestedManyWithoutInspectionInput
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentCreateNestedManyWithoutInspectionInput
   }
 
   export type InspectionUncheckedCreateWithoutRiskAssessmentsInput = {
@@ -54834,6 +59208,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     decisionPackages?: DecisionPackageUncheckedCreateNestedManyWithoutInspectionInput
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentUncheckedCreateNestedManyWithoutInspectionInput
   }
 
   export type InspectionCreateOrConnectWithoutRiskAssessmentsInput = {
@@ -54905,6 +59280,7 @@ export namespace Prisma {
     readinessSnapshot: JsonNullValueInput | InputJsonValue
     policySnapshot: JsonNullValueInput | InputJsonValue
     actionSnapshot: JsonNullValueInput | InputJsonValue
+    intelligenceSnapshot?: NullableJsonNullValueInput | InputJsonValue
     preparedAt?: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -54928,6 +59304,7 @@ export namespace Prisma {
     readinessSnapshot: JsonNullValueInput | InputJsonValue
     policySnapshot: JsonNullValueInput | InputJsonValue
     actionSnapshot: JsonNullValueInput | InputJsonValue
+    intelligenceSnapshot?: NullableJsonNullValueInput | InputJsonValue
     preparedById: string
     preparedAt?: Date | string
     createdAt?: Date | string
@@ -54942,6 +59319,72 @@ export namespace Prisma {
 
   export type DecisionPackageCreateManyRiskAssessmentInputEnvelope = {
     data: DecisionPackageCreateManyRiskAssessmentInput | DecisionPackageCreateManyRiskAssessmentInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type InfrastructureIntelligenceAssessmentCreateWithoutRiskAssessmentInput = {
+    id?: string
+    status: $Enums.IntelligenceAssessmentStatus
+    predictedRiskScore?: number | null
+    predictedRiskLevel?: $Enums.RiskLevel | null
+    recommendedPriority?: $Enums.PriorityLevel | null
+    confidence?: number | null
+    provider: string
+    providerType: string
+    modelName: string
+    modelVersion: string
+    modelArtifactDigest?: string | null
+    featureSchemaVersion: string
+    contractVersion: string
+    sourceFingerprint: string
+    inferredAt: Date | string
+    expiresAt?: Date | string | null
+    contributingFactors: JsonNullValueInput | InputJsonValue
+    explanation?: string | null
+    recommendedActions: JsonNullValueInput | InputJsonValue
+    abstentionReasons: JsonNullValueInput | InputJsonValue
+    reconciliation: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    governanceReconciliations?: InfrastructureIntelligenceReconciliationCreateNestedManyWithoutIntelligenceAssessmentInput
+    case: CaseCreateNestedOneWithoutIntelligenceAssessmentsInput
+    inspection: InspectionCreateNestedOneWithoutIntelligenceAssessmentsInput
+  }
+
+  export type InfrastructureIntelligenceAssessmentUncheckedCreateWithoutRiskAssessmentInput = {
+    id?: string
+    caseId: string
+    inspectionId: string
+    status: $Enums.IntelligenceAssessmentStatus
+    predictedRiskScore?: number | null
+    predictedRiskLevel?: $Enums.RiskLevel | null
+    recommendedPriority?: $Enums.PriorityLevel | null
+    confidence?: number | null
+    provider: string
+    providerType: string
+    modelName: string
+    modelVersion: string
+    modelArtifactDigest?: string | null
+    featureSchemaVersion: string
+    contractVersion: string
+    sourceFingerprint: string
+    inferredAt: Date | string
+    expiresAt?: Date | string | null
+    contributingFactors: JsonNullValueInput | InputJsonValue
+    explanation?: string | null
+    recommendedActions: JsonNullValueInput | InputJsonValue
+    abstentionReasons: JsonNullValueInput | InputJsonValue
+    reconciliation: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    governanceReconciliations?: InfrastructureIntelligenceReconciliationUncheckedCreateNestedManyWithoutIntelligenceAssessmentInput
+  }
+
+  export type InfrastructureIntelligenceAssessmentCreateOrConnectWithoutRiskAssessmentInput = {
+    where: InfrastructureIntelligenceAssessmentWhereUniqueInput
+    create: XOR<InfrastructureIntelligenceAssessmentCreateWithoutRiskAssessmentInput, InfrastructureIntelligenceAssessmentUncheckedCreateWithoutRiskAssessmentInput>
+  }
+
+  export type InfrastructureIntelligenceAssessmentCreateManyRiskAssessmentInputEnvelope = {
+    data: InfrastructureIntelligenceAssessmentCreateManyRiskAssessmentInput | InfrastructureIntelligenceAssessmentCreateManyRiskAssessmentInput[]
     skipDuplicates?: boolean
   }
 
@@ -54976,6 +59419,8 @@ export namespace Prisma {
     closure?: CaseClosureUpdateOneWithoutCaseNestedInput
     sourcePublicReport?: PublicReportUpdateOneWithoutCreatedCaseNestedInput
     decisionPackages?: DecisionPackageUpdateManyWithoutCaseNestedInput
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentUpdateManyWithoutCaseNestedInput
+    intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUpdateManyWithoutCaseNestedInput
   }
 
   export type CaseUncheckedUpdateWithoutRiskAssessmentsInput = {
@@ -54998,6 +59443,8 @@ export namespace Prisma {
     closure?: CaseClosureUncheckedUpdateOneWithoutCaseNestedInput
     sourcePublicReport?: PublicReportUncheckedUpdateOneWithoutCreatedCaseNestedInput
     decisionPackages?: DecisionPackageUncheckedUpdateManyWithoutCaseNestedInput
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentUncheckedUpdateManyWithoutCaseNestedInput
+    intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUncheckedUpdateManyWithoutCaseNestedInput
   }
 
   export type InspectionUpsertWithoutRiskAssessmentsInput = {
@@ -55028,6 +59475,7 @@ export namespace Prisma {
     case?: CaseUpdateOneRequiredWithoutInspectionsNestedInput
     inspector?: UserUpdateOneRequiredWithoutInspectionsNestedInput
     decisionPackages?: DecisionPackageUpdateManyWithoutInspectionNestedInput
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentUpdateManyWithoutInspectionNestedInput
   }
 
   export type InspectionUncheckedUpdateWithoutRiskAssessmentsInput = {
@@ -55047,6 +59495,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     decisionPackages?: DecisionPackageUncheckedUpdateManyWithoutInspectionNestedInput
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentUncheckedUpdateManyWithoutInspectionNestedInput
   }
 
   export type OperationalResponsePlanUpsertWithWhereUniqueWithoutRiskAssessmentInput = {
@@ -55081,6 +59530,598 @@ export namespace Prisma {
     data: XOR<DecisionPackageUpdateManyMutationInput, DecisionPackageUncheckedUpdateManyWithoutRiskAssessmentInput>
   }
 
+  export type InfrastructureIntelligenceAssessmentUpsertWithWhereUniqueWithoutRiskAssessmentInput = {
+    where: InfrastructureIntelligenceAssessmentWhereUniqueInput
+    update: XOR<InfrastructureIntelligenceAssessmentUpdateWithoutRiskAssessmentInput, InfrastructureIntelligenceAssessmentUncheckedUpdateWithoutRiskAssessmentInput>
+    create: XOR<InfrastructureIntelligenceAssessmentCreateWithoutRiskAssessmentInput, InfrastructureIntelligenceAssessmentUncheckedCreateWithoutRiskAssessmentInput>
+  }
+
+  export type InfrastructureIntelligenceAssessmentUpdateWithWhereUniqueWithoutRiskAssessmentInput = {
+    where: InfrastructureIntelligenceAssessmentWhereUniqueInput
+    data: XOR<InfrastructureIntelligenceAssessmentUpdateWithoutRiskAssessmentInput, InfrastructureIntelligenceAssessmentUncheckedUpdateWithoutRiskAssessmentInput>
+  }
+
+  export type InfrastructureIntelligenceAssessmentUpdateManyWithWhereWithoutRiskAssessmentInput = {
+    where: InfrastructureIntelligenceAssessmentScalarWhereInput
+    data: XOR<InfrastructureIntelligenceAssessmentUpdateManyMutationInput, InfrastructureIntelligenceAssessmentUncheckedUpdateManyWithoutRiskAssessmentInput>
+  }
+
+  export type InfrastructureIntelligenceReconciliationCreateWithoutIntelligenceAssessmentInput = {
+    id?: string
+    contractVersion: string
+    governanceFingerprint: string
+    policyResolutionStatus: string
+    policySnapshot: JsonNullValueInput | InputJsonValue
+    reconciledActions: JsonNullValueInput | InputJsonValue
+    issues: JsonNullValueInput | InputJsonValue
+    reconciledAt: Date | string
+    createdAt?: Date | string
+    case: CaseCreateNestedOneWithoutIntelligenceReconciliationsInput
+  }
+
+  export type InfrastructureIntelligenceReconciliationUncheckedCreateWithoutIntelligenceAssessmentInput = {
+    id?: string
+    caseId: string
+    contractVersion: string
+    governanceFingerprint: string
+    policyResolutionStatus: string
+    policySnapshot: JsonNullValueInput | InputJsonValue
+    reconciledActions: JsonNullValueInput | InputJsonValue
+    issues: JsonNullValueInput | InputJsonValue
+    reconciledAt: Date | string
+    createdAt?: Date | string
+  }
+
+  export type InfrastructureIntelligenceReconciliationCreateOrConnectWithoutIntelligenceAssessmentInput = {
+    where: InfrastructureIntelligenceReconciliationWhereUniqueInput
+    create: XOR<InfrastructureIntelligenceReconciliationCreateWithoutIntelligenceAssessmentInput, InfrastructureIntelligenceReconciliationUncheckedCreateWithoutIntelligenceAssessmentInput>
+  }
+
+  export type InfrastructureIntelligenceReconciliationCreateManyIntelligenceAssessmentInputEnvelope = {
+    data: InfrastructureIntelligenceReconciliationCreateManyIntelligenceAssessmentInput | InfrastructureIntelligenceReconciliationCreateManyIntelligenceAssessmentInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type CaseCreateWithoutIntelligenceAssessmentsInput = {
+    id?: string
+    caseNumber: string
+    title: string
+    description?: string | null
+    status?: $Enums.CaseStatus
+    riskLevel?: $Enums.RiskLevel | null
+    priorityLevel?: $Enums.PriorityLevel | null
+    emergencyFlag?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    closedAt?: Date | string | null
+    asset: AssetCreateNestedOneWithoutCasesInput
+    inspections?: InspectionCreateNestedManyWithoutCaseInput
+    riskAssessments?: RiskAssessmentCreateNestedManyWithoutCaseInput
+    operationalResponsePlans?: OperationalResponsePlanCreateNestedManyWithoutCaseInput
+    orpDecisions?: OrpDecisionCreateNestedManyWithoutCaseInput
+    executionPlans?: ExecutionPlanCreateNestedManyWithoutCaseInput
+    closure?: CaseClosureCreateNestedOneWithoutCaseInput
+    sourcePublicReport?: PublicReportCreateNestedOneWithoutCreatedCaseInput
+    decisionPackages?: DecisionPackageCreateNestedManyWithoutCaseInput
+    intelligenceReconciliations?: InfrastructureIntelligenceReconciliationCreateNestedManyWithoutCaseInput
+  }
+
+  export type CaseUncheckedCreateWithoutIntelligenceAssessmentsInput = {
+    id?: string
+    caseNumber: string
+    assetId: string
+    title: string
+    description?: string | null
+    status?: $Enums.CaseStatus
+    riskLevel?: $Enums.RiskLevel | null
+    priorityLevel?: $Enums.PriorityLevel | null
+    emergencyFlag?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    closedAt?: Date | string | null
+    inspections?: InspectionUncheckedCreateNestedManyWithoutCaseInput
+    riskAssessments?: RiskAssessmentUncheckedCreateNestedManyWithoutCaseInput
+    operationalResponsePlans?: OperationalResponsePlanUncheckedCreateNestedManyWithoutCaseInput
+    orpDecisions?: OrpDecisionUncheckedCreateNestedManyWithoutCaseInput
+    executionPlans?: ExecutionPlanUncheckedCreateNestedManyWithoutCaseInput
+    closure?: CaseClosureUncheckedCreateNestedOneWithoutCaseInput
+    sourcePublicReport?: PublicReportUncheckedCreateNestedOneWithoutCreatedCaseInput
+    decisionPackages?: DecisionPackageUncheckedCreateNestedManyWithoutCaseInput
+    intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUncheckedCreateNestedManyWithoutCaseInput
+  }
+
+  export type CaseCreateOrConnectWithoutIntelligenceAssessmentsInput = {
+    where: CaseWhereUniqueInput
+    create: XOR<CaseCreateWithoutIntelligenceAssessmentsInput, CaseUncheckedCreateWithoutIntelligenceAssessmentsInput>
+  }
+
+  export type InspectionCreateWithoutIntelligenceAssessmentsInput = {
+    id?: string
+    inspectionDate: Date | string
+    structuralCondition: string
+    crackSeverity: string
+    corrosionLevel: string
+    trafficImportance: string
+    hospitalRoute: boolean
+    weatherRisk: string
+    heavyRainExpected: boolean
+    estimatedDailyUsers?: number | null
+    inspectionNotes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    case: CaseCreateNestedOneWithoutInspectionsInput
+    inspector: UserCreateNestedOneWithoutInspectionsInput
+    riskAssessments?: RiskAssessmentCreateNestedManyWithoutInspectionInput
+    decisionPackages?: DecisionPackageCreateNestedManyWithoutInspectionInput
+  }
+
+  export type InspectionUncheckedCreateWithoutIntelligenceAssessmentsInput = {
+    id?: string
+    caseId: string
+    inspectorId: string
+    inspectionDate: Date | string
+    structuralCondition: string
+    crackSeverity: string
+    corrosionLevel: string
+    trafficImportance: string
+    hospitalRoute: boolean
+    weatherRisk: string
+    heavyRainExpected: boolean
+    estimatedDailyUsers?: number | null
+    inspectionNotes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    riskAssessments?: RiskAssessmentUncheckedCreateNestedManyWithoutInspectionInput
+    decisionPackages?: DecisionPackageUncheckedCreateNestedManyWithoutInspectionInput
+  }
+
+  export type InspectionCreateOrConnectWithoutIntelligenceAssessmentsInput = {
+    where: InspectionWhereUniqueInput
+    create: XOR<InspectionCreateWithoutIntelligenceAssessmentsInput, InspectionUncheckedCreateWithoutIntelligenceAssessmentsInput>
+  }
+
+  export type RiskAssessmentCreateWithoutIntelligenceAssessmentsInput = {
+    id?: string
+    riskScore: number
+    riskLevel: $Enums.RiskLevel
+    priorityLevel: $Enums.PriorityLevel
+    reasonCodes: JsonNullValueInput | InputJsonValue
+    reasons: JsonNullValueInput | InputJsonValue
+    assessmentVersion?: string
+    createdAt?: Date | string
+    case: CaseCreateNestedOneWithoutRiskAssessmentsInput
+    inspection: InspectionCreateNestedOneWithoutRiskAssessmentsInput
+    operationalResponsePlans?: OperationalResponsePlanCreateNestedManyWithoutRiskAssessmentInput
+    decisionPackages?: DecisionPackageCreateNestedManyWithoutRiskAssessmentInput
+  }
+
+  export type RiskAssessmentUncheckedCreateWithoutIntelligenceAssessmentsInput = {
+    id?: string
+    caseId: string
+    inspectionId: string
+    riskScore: number
+    riskLevel: $Enums.RiskLevel
+    priorityLevel: $Enums.PriorityLevel
+    reasonCodes: JsonNullValueInput | InputJsonValue
+    reasons: JsonNullValueInput | InputJsonValue
+    assessmentVersion?: string
+    createdAt?: Date | string
+    operationalResponsePlans?: OperationalResponsePlanUncheckedCreateNestedManyWithoutRiskAssessmentInput
+    decisionPackages?: DecisionPackageUncheckedCreateNestedManyWithoutRiskAssessmentInput
+  }
+
+  export type RiskAssessmentCreateOrConnectWithoutIntelligenceAssessmentsInput = {
+    where: RiskAssessmentWhereUniqueInput
+    create: XOR<RiskAssessmentCreateWithoutIntelligenceAssessmentsInput, RiskAssessmentUncheckedCreateWithoutIntelligenceAssessmentsInput>
+  }
+
+  export type InfrastructureIntelligenceReconciliationUpsertWithWhereUniqueWithoutIntelligenceAssessmentInput = {
+    where: InfrastructureIntelligenceReconciliationWhereUniqueInput
+    update: XOR<InfrastructureIntelligenceReconciliationUpdateWithoutIntelligenceAssessmentInput, InfrastructureIntelligenceReconciliationUncheckedUpdateWithoutIntelligenceAssessmentInput>
+    create: XOR<InfrastructureIntelligenceReconciliationCreateWithoutIntelligenceAssessmentInput, InfrastructureIntelligenceReconciliationUncheckedCreateWithoutIntelligenceAssessmentInput>
+  }
+
+  export type InfrastructureIntelligenceReconciliationUpdateWithWhereUniqueWithoutIntelligenceAssessmentInput = {
+    where: InfrastructureIntelligenceReconciliationWhereUniqueInput
+    data: XOR<InfrastructureIntelligenceReconciliationUpdateWithoutIntelligenceAssessmentInput, InfrastructureIntelligenceReconciliationUncheckedUpdateWithoutIntelligenceAssessmentInput>
+  }
+
+  export type InfrastructureIntelligenceReconciliationUpdateManyWithWhereWithoutIntelligenceAssessmentInput = {
+    where: InfrastructureIntelligenceReconciliationScalarWhereInput
+    data: XOR<InfrastructureIntelligenceReconciliationUpdateManyMutationInput, InfrastructureIntelligenceReconciliationUncheckedUpdateManyWithoutIntelligenceAssessmentInput>
+  }
+
+  export type CaseUpsertWithoutIntelligenceAssessmentsInput = {
+    update: XOR<CaseUpdateWithoutIntelligenceAssessmentsInput, CaseUncheckedUpdateWithoutIntelligenceAssessmentsInput>
+    create: XOR<CaseCreateWithoutIntelligenceAssessmentsInput, CaseUncheckedCreateWithoutIntelligenceAssessmentsInput>
+    where?: CaseWhereInput
+  }
+
+  export type CaseUpdateToOneWithWhereWithoutIntelligenceAssessmentsInput = {
+    where?: CaseWhereInput
+    data: XOR<CaseUpdateWithoutIntelligenceAssessmentsInput, CaseUncheckedUpdateWithoutIntelligenceAssessmentsInput>
+  }
+
+  export type CaseUpdateWithoutIntelligenceAssessmentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    caseNumber?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumCaseStatusFieldUpdateOperationsInput | $Enums.CaseStatus
+    riskLevel?: NullableEnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel | null
+    priorityLevel?: NullableEnumPriorityLevelFieldUpdateOperationsInput | $Enums.PriorityLevel | null
+    emergencyFlag?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    asset?: AssetUpdateOneRequiredWithoutCasesNestedInput
+    inspections?: InspectionUpdateManyWithoutCaseNestedInput
+    riskAssessments?: RiskAssessmentUpdateManyWithoutCaseNestedInput
+    operationalResponsePlans?: OperationalResponsePlanUpdateManyWithoutCaseNestedInput
+    orpDecisions?: OrpDecisionUpdateManyWithoutCaseNestedInput
+    executionPlans?: ExecutionPlanUpdateManyWithoutCaseNestedInput
+    closure?: CaseClosureUpdateOneWithoutCaseNestedInput
+    sourcePublicReport?: PublicReportUpdateOneWithoutCreatedCaseNestedInput
+    decisionPackages?: DecisionPackageUpdateManyWithoutCaseNestedInput
+    intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUpdateManyWithoutCaseNestedInput
+  }
+
+  export type CaseUncheckedUpdateWithoutIntelligenceAssessmentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    caseNumber?: StringFieldUpdateOperationsInput | string
+    assetId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumCaseStatusFieldUpdateOperationsInput | $Enums.CaseStatus
+    riskLevel?: NullableEnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel | null
+    priorityLevel?: NullableEnumPriorityLevelFieldUpdateOperationsInput | $Enums.PriorityLevel | null
+    emergencyFlag?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    inspections?: InspectionUncheckedUpdateManyWithoutCaseNestedInput
+    riskAssessments?: RiskAssessmentUncheckedUpdateManyWithoutCaseNestedInput
+    operationalResponsePlans?: OperationalResponsePlanUncheckedUpdateManyWithoutCaseNestedInput
+    orpDecisions?: OrpDecisionUncheckedUpdateManyWithoutCaseNestedInput
+    executionPlans?: ExecutionPlanUncheckedUpdateManyWithoutCaseNestedInput
+    closure?: CaseClosureUncheckedUpdateOneWithoutCaseNestedInput
+    sourcePublicReport?: PublicReportUncheckedUpdateOneWithoutCreatedCaseNestedInput
+    decisionPackages?: DecisionPackageUncheckedUpdateManyWithoutCaseNestedInput
+    intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUncheckedUpdateManyWithoutCaseNestedInput
+  }
+
+  export type InspectionUpsertWithoutIntelligenceAssessmentsInput = {
+    update: XOR<InspectionUpdateWithoutIntelligenceAssessmentsInput, InspectionUncheckedUpdateWithoutIntelligenceAssessmentsInput>
+    create: XOR<InspectionCreateWithoutIntelligenceAssessmentsInput, InspectionUncheckedCreateWithoutIntelligenceAssessmentsInput>
+    where?: InspectionWhereInput
+  }
+
+  export type InspectionUpdateToOneWithWhereWithoutIntelligenceAssessmentsInput = {
+    where?: InspectionWhereInput
+    data: XOR<InspectionUpdateWithoutIntelligenceAssessmentsInput, InspectionUncheckedUpdateWithoutIntelligenceAssessmentsInput>
+  }
+
+  export type InspectionUpdateWithoutIntelligenceAssessmentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    inspectionDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    structuralCondition?: StringFieldUpdateOperationsInput | string
+    crackSeverity?: StringFieldUpdateOperationsInput | string
+    corrosionLevel?: StringFieldUpdateOperationsInput | string
+    trafficImportance?: StringFieldUpdateOperationsInput | string
+    hospitalRoute?: BoolFieldUpdateOperationsInput | boolean
+    weatherRisk?: StringFieldUpdateOperationsInput | string
+    heavyRainExpected?: BoolFieldUpdateOperationsInput | boolean
+    estimatedDailyUsers?: NullableIntFieldUpdateOperationsInput | number | null
+    inspectionNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    case?: CaseUpdateOneRequiredWithoutInspectionsNestedInput
+    inspector?: UserUpdateOneRequiredWithoutInspectionsNestedInput
+    riskAssessments?: RiskAssessmentUpdateManyWithoutInspectionNestedInput
+    decisionPackages?: DecisionPackageUpdateManyWithoutInspectionNestedInput
+  }
+
+  export type InspectionUncheckedUpdateWithoutIntelligenceAssessmentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    caseId?: StringFieldUpdateOperationsInput | string
+    inspectorId?: StringFieldUpdateOperationsInput | string
+    inspectionDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    structuralCondition?: StringFieldUpdateOperationsInput | string
+    crackSeverity?: StringFieldUpdateOperationsInput | string
+    corrosionLevel?: StringFieldUpdateOperationsInput | string
+    trafficImportance?: StringFieldUpdateOperationsInput | string
+    hospitalRoute?: BoolFieldUpdateOperationsInput | boolean
+    weatherRisk?: StringFieldUpdateOperationsInput | string
+    heavyRainExpected?: BoolFieldUpdateOperationsInput | boolean
+    estimatedDailyUsers?: NullableIntFieldUpdateOperationsInput | number | null
+    inspectionNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    riskAssessments?: RiskAssessmentUncheckedUpdateManyWithoutInspectionNestedInput
+    decisionPackages?: DecisionPackageUncheckedUpdateManyWithoutInspectionNestedInput
+  }
+
+  export type RiskAssessmentUpsertWithoutIntelligenceAssessmentsInput = {
+    update: XOR<RiskAssessmentUpdateWithoutIntelligenceAssessmentsInput, RiskAssessmentUncheckedUpdateWithoutIntelligenceAssessmentsInput>
+    create: XOR<RiskAssessmentCreateWithoutIntelligenceAssessmentsInput, RiskAssessmentUncheckedCreateWithoutIntelligenceAssessmentsInput>
+    where?: RiskAssessmentWhereInput
+  }
+
+  export type RiskAssessmentUpdateToOneWithWhereWithoutIntelligenceAssessmentsInput = {
+    where?: RiskAssessmentWhereInput
+    data: XOR<RiskAssessmentUpdateWithoutIntelligenceAssessmentsInput, RiskAssessmentUncheckedUpdateWithoutIntelligenceAssessmentsInput>
+  }
+
+  export type RiskAssessmentUpdateWithoutIntelligenceAssessmentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    riskScore?: IntFieldUpdateOperationsInput | number
+    riskLevel?: EnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel
+    priorityLevel?: EnumPriorityLevelFieldUpdateOperationsInput | $Enums.PriorityLevel
+    reasonCodes?: JsonNullValueInput | InputJsonValue
+    reasons?: JsonNullValueInput | InputJsonValue
+    assessmentVersion?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    case?: CaseUpdateOneRequiredWithoutRiskAssessmentsNestedInput
+    inspection?: InspectionUpdateOneRequiredWithoutRiskAssessmentsNestedInput
+    operationalResponsePlans?: OperationalResponsePlanUpdateManyWithoutRiskAssessmentNestedInput
+    decisionPackages?: DecisionPackageUpdateManyWithoutRiskAssessmentNestedInput
+  }
+
+  export type RiskAssessmentUncheckedUpdateWithoutIntelligenceAssessmentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    caseId?: StringFieldUpdateOperationsInput | string
+    inspectionId?: StringFieldUpdateOperationsInput | string
+    riskScore?: IntFieldUpdateOperationsInput | number
+    riskLevel?: EnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel
+    priorityLevel?: EnumPriorityLevelFieldUpdateOperationsInput | $Enums.PriorityLevel
+    reasonCodes?: JsonNullValueInput | InputJsonValue
+    reasons?: JsonNullValueInput | InputJsonValue
+    assessmentVersion?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    operationalResponsePlans?: OperationalResponsePlanUncheckedUpdateManyWithoutRiskAssessmentNestedInput
+    decisionPackages?: DecisionPackageUncheckedUpdateManyWithoutRiskAssessmentNestedInput
+  }
+
+  export type InfrastructureIntelligenceAssessmentCreateWithoutGovernanceReconciliationsInput = {
+    id?: string
+    status: $Enums.IntelligenceAssessmentStatus
+    predictedRiskScore?: number | null
+    predictedRiskLevel?: $Enums.RiskLevel | null
+    recommendedPriority?: $Enums.PriorityLevel | null
+    confidence?: number | null
+    provider: string
+    providerType: string
+    modelName: string
+    modelVersion: string
+    modelArtifactDigest?: string | null
+    featureSchemaVersion: string
+    contractVersion: string
+    sourceFingerprint: string
+    inferredAt: Date | string
+    expiresAt?: Date | string | null
+    contributingFactors: JsonNullValueInput | InputJsonValue
+    explanation?: string | null
+    recommendedActions: JsonNullValueInput | InputJsonValue
+    abstentionReasons: JsonNullValueInput | InputJsonValue
+    reconciliation: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    case: CaseCreateNestedOneWithoutIntelligenceAssessmentsInput
+    inspection: InspectionCreateNestedOneWithoutIntelligenceAssessmentsInput
+    riskAssessment: RiskAssessmentCreateNestedOneWithoutIntelligenceAssessmentsInput
+  }
+
+  export type InfrastructureIntelligenceAssessmentUncheckedCreateWithoutGovernanceReconciliationsInput = {
+    id?: string
+    caseId: string
+    inspectionId: string
+    riskAssessmentId: string
+    status: $Enums.IntelligenceAssessmentStatus
+    predictedRiskScore?: number | null
+    predictedRiskLevel?: $Enums.RiskLevel | null
+    recommendedPriority?: $Enums.PriorityLevel | null
+    confidence?: number | null
+    provider: string
+    providerType: string
+    modelName: string
+    modelVersion: string
+    modelArtifactDigest?: string | null
+    featureSchemaVersion: string
+    contractVersion: string
+    sourceFingerprint: string
+    inferredAt: Date | string
+    expiresAt?: Date | string | null
+    contributingFactors: JsonNullValueInput | InputJsonValue
+    explanation?: string | null
+    recommendedActions: JsonNullValueInput | InputJsonValue
+    abstentionReasons: JsonNullValueInput | InputJsonValue
+    reconciliation: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+  }
+
+  export type InfrastructureIntelligenceAssessmentCreateOrConnectWithoutGovernanceReconciliationsInput = {
+    where: InfrastructureIntelligenceAssessmentWhereUniqueInput
+    create: XOR<InfrastructureIntelligenceAssessmentCreateWithoutGovernanceReconciliationsInput, InfrastructureIntelligenceAssessmentUncheckedCreateWithoutGovernanceReconciliationsInput>
+  }
+
+  export type CaseCreateWithoutIntelligenceReconciliationsInput = {
+    id?: string
+    caseNumber: string
+    title: string
+    description?: string | null
+    status?: $Enums.CaseStatus
+    riskLevel?: $Enums.RiskLevel | null
+    priorityLevel?: $Enums.PriorityLevel | null
+    emergencyFlag?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    closedAt?: Date | string | null
+    asset: AssetCreateNestedOneWithoutCasesInput
+    inspections?: InspectionCreateNestedManyWithoutCaseInput
+    riskAssessments?: RiskAssessmentCreateNestedManyWithoutCaseInput
+    operationalResponsePlans?: OperationalResponsePlanCreateNestedManyWithoutCaseInput
+    orpDecisions?: OrpDecisionCreateNestedManyWithoutCaseInput
+    executionPlans?: ExecutionPlanCreateNestedManyWithoutCaseInput
+    closure?: CaseClosureCreateNestedOneWithoutCaseInput
+    sourcePublicReport?: PublicReportCreateNestedOneWithoutCreatedCaseInput
+    decisionPackages?: DecisionPackageCreateNestedManyWithoutCaseInput
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentCreateNestedManyWithoutCaseInput
+  }
+
+  export type CaseUncheckedCreateWithoutIntelligenceReconciliationsInput = {
+    id?: string
+    caseNumber: string
+    assetId: string
+    title: string
+    description?: string | null
+    status?: $Enums.CaseStatus
+    riskLevel?: $Enums.RiskLevel | null
+    priorityLevel?: $Enums.PriorityLevel | null
+    emergencyFlag?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    closedAt?: Date | string | null
+    inspections?: InspectionUncheckedCreateNestedManyWithoutCaseInput
+    riskAssessments?: RiskAssessmentUncheckedCreateNestedManyWithoutCaseInput
+    operationalResponsePlans?: OperationalResponsePlanUncheckedCreateNestedManyWithoutCaseInput
+    orpDecisions?: OrpDecisionUncheckedCreateNestedManyWithoutCaseInput
+    executionPlans?: ExecutionPlanUncheckedCreateNestedManyWithoutCaseInput
+    closure?: CaseClosureUncheckedCreateNestedOneWithoutCaseInput
+    sourcePublicReport?: PublicReportUncheckedCreateNestedOneWithoutCreatedCaseInput
+    decisionPackages?: DecisionPackageUncheckedCreateNestedManyWithoutCaseInput
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentUncheckedCreateNestedManyWithoutCaseInput
+  }
+
+  export type CaseCreateOrConnectWithoutIntelligenceReconciliationsInput = {
+    where: CaseWhereUniqueInput
+    create: XOR<CaseCreateWithoutIntelligenceReconciliationsInput, CaseUncheckedCreateWithoutIntelligenceReconciliationsInput>
+  }
+
+  export type InfrastructureIntelligenceAssessmentUpsertWithoutGovernanceReconciliationsInput = {
+    update: XOR<InfrastructureIntelligenceAssessmentUpdateWithoutGovernanceReconciliationsInput, InfrastructureIntelligenceAssessmentUncheckedUpdateWithoutGovernanceReconciliationsInput>
+    create: XOR<InfrastructureIntelligenceAssessmentCreateWithoutGovernanceReconciliationsInput, InfrastructureIntelligenceAssessmentUncheckedCreateWithoutGovernanceReconciliationsInput>
+    where?: InfrastructureIntelligenceAssessmentWhereInput
+  }
+
+  export type InfrastructureIntelligenceAssessmentUpdateToOneWithWhereWithoutGovernanceReconciliationsInput = {
+    where?: InfrastructureIntelligenceAssessmentWhereInput
+    data: XOR<InfrastructureIntelligenceAssessmentUpdateWithoutGovernanceReconciliationsInput, InfrastructureIntelligenceAssessmentUncheckedUpdateWithoutGovernanceReconciliationsInput>
+  }
+
+  export type InfrastructureIntelligenceAssessmentUpdateWithoutGovernanceReconciliationsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: EnumIntelligenceAssessmentStatusFieldUpdateOperationsInput | $Enums.IntelligenceAssessmentStatus
+    predictedRiskScore?: NullableIntFieldUpdateOperationsInput | number | null
+    predictedRiskLevel?: NullableEnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel | null
+    recommendedPriority?: NullableEnumPriorityLevelFieldUpdateOperationsInput | $Enums.PriorityLevel | null
+    confidence?: NullableFloatFieldUpdateOperationsInput | number | null
+    provider?: StringFieldUpdateOperationsInput | string
+    providerType?: StringFieldUpdateOperationsInput | string
+    modelName?: StringFieldUpdateOperationsInput | string
+    modelVersion?: StringFieldUpdateOperationsInput | string
+    modelArtifactDigest?: NullableStringFieldUpdateOperationsInput | string | null
+    featureSchemaVersion?: StringFieldUpdateOperationsInput | string
+    contractVersion?: StringFieldUpdateOperationsInput | string
+    sourceFingerprint?: StringFieldUpdateOperationsInput | string
+    inferredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    contributingFactors?: JsonNullValueInput | InputJsonValue
+    explanation?: NullableStringFieldUpdateOperationsInput | string | null
+    recommendedActions?: JsonNullValueInput | InputJsonValue
+    abstentionReasons?: JsonNullValueInput | InputJsonValue
+    reconciliation?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    case?: CaseUpdateOneRequiredWithoutIntelligenceAssessmentsNestedInput
+    inspection?: InspectionUpdateOneRequiredWithoutIntelligenceAssessmentsNestedInput
+    riskAssessment?: RiskAssessmentUpdateOneRequiredWithoutIntelligenceAssessmentsNestedInput
+  }
+
+  export type InfrastructureIntelligenceAssessmentUncheckedUpdateWithoutGovernanceReconciliationsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    caseId?: StringFieldUpdateOperationsInput | string
+    inspectionId?: StringFieldUpdateOperationsInput | string
+    riskAssessmentId?: StringFieldUpdateOperationsInput | string
+    status?: EnumIntelligenceAssessmentStatusFieldUpdateOperationsInput | $Enums.IntelligenceAssessmentStatus
+    predictedRiskScore?: NullableIntFieldUpdateOperationsInput | number | null
+    predictedRiskLevel?: NullableEnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel | null
+    recommendedPriority?: NullableEnumPriorityLevelFieldUpdateOperationsInput | $Enums.PriorityLevel | null
+    confidence?: NullableFloatFieldUpdateOperationsInput | number | null
+    provider?: StringFieldUpdateOperationsInput | string
+    providerType?: StringFieldUpdateOperationsInput | string
+    modelName?: StringFieldUpdateOperationsInput | string
+    modelVersion?: StringFieldUpdateOperationsInput | string
+    modelArtifactDigest?: NullableStringFieldUpdateOperationsInput | string | null
+    featureSchemaVersion?: StringFieldUpdateOperationsInput | string
+    contractVersion?: StringFieldUpdateOperationsInput | string
+    sourceFingerprint?: StringFieldUpdateOperationsInput | string
+    inferredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    contributingFactors?: JsonNullValueInput | InputJsonValue
+    explanation?: NullableStringFieldUpdateOperationsInput | string | null
+    recommendedActions?: JsonNullValueInput | InputJsonValue
+    abstentionReasons?: JsonNullValueInput | InputJsonValue
+    reconciliation?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CaseUpsertWithoutIntelligenceReconciliationsInput = {
+    update: XOR<CaseUpdateWithoutIntelligenceReconciliationsInput, CaseUncheckedUpdateWithoutIntelligenceReconciliationsInput>
+    create: XOR<CaseCreateWithoutIntelligenceReconciliationsInput, CaseUncheckedCreateWithoutIntelligenceReconciliationsInput>
+    where?: CaseWhereInput
+  }
+
+  export type CaseUpdateToOneWithWhereWithoutIntelligenceReconciliationsInput = {
+    where?: CaseWhereInput
+    data: XOR<CaseUpdateWithoutIntelligenceReconciliationsInput, CaseUncheckedUpdateWithoutIntelligenceReconciliationsInput>
+  }
+
+  export type CaseUpdateWithoutIntelligenceReconciliationsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    caseNumber?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumCaseStatusFieldUpdateOperationsInput | $Enums.CaseStatus
+    riskLevel?: NullableEnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel | null
+    priorityLevel?: NullableEnumPriorityLevelFieldUpdateOperationsInput | $Enums.PriorityLevel | null
+    emergencyFlag?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    asset?: AssetUpdateOneRequiredWithoutCasesNestedInput
+    inspections?: InspectionUpdateManyWithoutCaseNestedInput
+    riskAssessments?: RiskAssessmentUpdateManyWithoutCaseNestedInput
+    operationalResponsePlans?: OperationalResponsePlanUpdateManyWithoutCaseNestedInput
+    orpDecisions?: OrpDecisionUpdateManyWithoutCaseNestedInput
+    executionPlans?: ExecutionPlanUpdateManyWithoutCaseNestedInput
+    closure?: CaseClosureUpdateOneWithoutCaseNestedInput
+    sourcePublicReport?: PublicReportUpdateOneWithoutCreatedCaseNestedInput
+    decisionPackages?: DecisionPackageUpdateManyWithoutCaseNestedInput
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentUpdateManyWithoutCaseNestedInput
+  }
+
+  export type CaseUncheckedUpdateWithoutIntelligenceReconciliationsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    caseNumber?: StringFieldUpdateOperationsInput | string
+    assetId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumCaseStatusFieldUpdateOperationsInput | $Enums.CaseStatus
+    riskLevel?: NullableEnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel | null
+    priorityLevel?: NullableEnumPriorityLevelFieldUpdateOperationsInput | $Enums.PriorityLevel | null
+    emergencyFlag?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    inspections?: InspectionUncheckedUpdateManyWithoutCaseNestedInput
+    riskAssessments?: RiskAssessmentUncheckedUpdateManyWithoutCaseNestedInput
+    operationalResponsePlans?: OperationalResponsePlanUncheckedUpdateManyWithoutCaseNestedInput
+    orpDecisions?: OrpDecisionUncheckedUpdateManyWithoutCaseNestedInput
+    executionPlans?: ExecutionPlanUncheckedUpdateManyWithoutCaseNestedInput
+    closure?: CaseClosureUncheckedUpdateOneWithoutCaseNestedInput
+    sourcePublicReport?: PublicReportUncheckedUpdateOneWithoutCreatedCaseNestedInput
+    decisionPackages?: DecisionPackageUncheckedUpdateManyWithoutCaseNestedInput
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentUncheckedUpdateManyWithoutCaseNestedInput
+  }
+
   export type CaseCreateWithoutOperationalResponsePlansInput = {
     id?: string
     caseNumber: string
@@ -55101,6 +60142,8 @@ export namespace Prisma {
     closure?: CaseClosureCreateNestedOneWithoutCaseInput
     sourcePublicReport?: PublicReportCreateNestedOneWithoutCreatedCaseInput
     decisionPackages?: DecisionPackageCreateNestedManyWithoutCaseInput
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentCreateNestedManyWithoutCaseInput
+    intelligenceReconciliations?: InfrastructureIntelligenceReconciliationCreateNestedManyWithoutCaseInput
   }
 
   export type CaseUncheckedCreateWithoutOperationalResponsePlansInput = {
@@ -55123,6 +60166,8 @@ export namespace Prisma {
     closure?: CaseClosureUncheckedCreateNestedOneWithoutCaseInput
     sourcePublicReport?: PublicReportUncheckedCreateNestedOneWithoutCreatedCaseInput
     decisionPackages?: DecisionPackageUncheckedCreateNestedManyWithoutCaseInput
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentUncheckedCreateNestedManyWithoutCaseInput
+    intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUncheckedCreateNestedManyWithoutCaseInput
   }
 
   export type CaseCreateOrConnectWithoutOperationalResponsePlansInput = {
@@ -55142,6 +60187,7 @@ export namespace Prisma {
     case: CaseCreateNestedOneWithoutRiskAssessmentsInput
     inspection: InspectionCreateNestedOneWithoutRiskAssessmentsInput
     decisionPackages?: DecisionPackageCreateNestedManyWithoutRiskAssessmentInput
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentCreateNestedManyWithoutRiskAssessmentInput
   }
 
   export type RiskAssessmentUncheckedCreateWithoutOperationalResponsePlansInput = {
@@ -55156,6 +60202,7 @@ export namespace Prisma {
     assessmentVersion?: string
     createdAt?: Date | string
     decisionPackages?: DecisionPackageUncheckedCreateNestedManyWithoutRiskAssessmentInput
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentUncheckedCreateNestedManyWithoutRiskAssessmentInput
   }
 
   export type RiskAssessmentCreateOrConnectWithoutOperationalResponsePlansInput = {
@@ -55258,6 +60305,7 @@ export namespace Prisma {
     readinessSnapshot: JsonNullValueInput | InputJsonValue
     policySnapshot: JsonNullValueInput | InputJsonValue
     actionSnapshot: JsonNullValueInput | InputJsonValue
+    intelligenceSnapshot?: NullableJsonNullValueInput | InputJsonValue
     preparedAt?: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -55282,6 +60330,7 @@ export namespace Prisma {
     readinessSnapshot: JsonNullValueInput | InputJsonValue
     policySnapshot: JsonNullValueInput | InputJsonValue
     actionSnapshot: JsonNullValueInput | InputJsonValue
+    intelligenceSnapshot?: NullableJsonNullValueInput | InputJsonValue
     preparedById: string
     preparedAt?: Date | string
     createdAt?: Date | string
@@ -55324,6 +60373,8 @@ export namespace Prisma {
     closure?: CaseClosureUpdateOneWithoutCaseNestedInput
     sourcePublicReport?: PublicReportUpdateOneWithoutCreatedCaseNestedInput
     decisionPackages?: DecisionPackageUpdateManyWithoutCaseNestedInput
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentUpdateManyWithoutCaseNestedInput
+    intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUpdateManyWithoutCaseNestedInput
   }
 
   export type CaseUncheckedUpdateWithoutOperationalResponsePlansInput = {
@@ -55346,6 +60397,8 @@ export namespace Prisma {
     closure?: CaseClosureUncheckedUpdateOneWithoutCaseNestedInput
     sourcePublicReport?: PublicReportUncheckedUpdateOneWithoutCreatedCaseNestedInput
     decisionPackages?: DecisionPackageUncheckedUpdateManyWithoutCaseNestedInput
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentUncheckedUpdateManyWithoutCaseNestedInput
+    intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUncheckedUpdateManyWithoutCaseNestedInput
   }
 
   export type RiskAssessmentUpsertWithoutOperationalResponsePlansInput = {
@@ -55371,6 +60424,7 @@ export namespace Prisma {
     case?: CaseUpdateOneRequiredWithoutRiskAssessmentsNestedInput
     inspection?: InspectionUpdateOneRequiredWithoutRiskAssessmentsNestedInput
     decisionPackages?: DecisionPackageUpdateManyWithoutRiskAssessmentNestedInput
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentUpdateManyWithoutRiskAssessmentNestedInput
   }
 
   export type RiskAssessmentUncheckedUpdateWithoutOperationalResponsePlansInput = {
@@ -55385,6 +60439,7 @@ export namespace Prisma {
     assessmentVersion?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     decisionPackages?: DecisionPackageUncheckedUpdateManyWithoutRiskAssessmentNestedInput
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentUncheckedUpdateManyWithoutRiskAssessmentNestedInput
   }
 
   export type OrpDecisionUpsertWithWhereUniqueWithoutOrpInput = {
@@ -55477,6 +60532,7 @@ export namespace Prisma {
     readinessSnapshot?: JsonNullValueInput | InputJsonValue
     policySnapshot?: JsonNullValueInput | InputJsonValue
     actionSnapshot?: JsonNullValueInput | InputJsonValue
+    intelligenceSnapshot?: NullableJsonNullValueInput | InputJsonValue
     preparedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -55501,6 +60557,7 @@ export namespace Prisma {
     readinessSnapshot?: JsonNullValueInput | InputJsonValue
     policySnapshot?: JsonNullValueInput | InputJsonValue
     actionSnapshot?: JsonNullValueInput | InputJsonValue
+    intelligenceSnapshot?: NullableJsonNullValueInput | InputJsonValue
     preparedById?: StringFieldUpdateOperationsInput | string
     preparedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -55527,6 +60584,8 @@ export namespace Prisma {
     executionPlans?: ExecutionPlanCreateNestedManyWithoutCaseInput
     closure?: CaseClosureCreateNestedOneWithoutCaseInput
     sourcePublicReport?: PublicReportCreateNestedOneWithoutCreatedCaseInput
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentCreateNestedManyWithoutCaseInput
+    intelligenceReconciliations?: InfrastructureIntelligenceReconciliationCreateNestedManyWithoutCaseInput
   }
 
   export type CaseUncheckedCreateWithoutDecisionPackagesInput = {
@@ -55549,6 +60608,8 @@ export namespace Prisma {
     executionPlans?: ExecutionPlanUncheckedCreateNestedManyWithoutCaseInput
     closure?: CaseClosureUncheckedCreateNestedOneWithoutCaseInput
     sourcePublicReport?: PublicReportUncheckedCreateNestedOneWithoutCreatedCaseInput
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentUncheckedCreateNestedManyWithoutCaseInput
+    intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUncheckedCreateNestedManyWithoutCaseInput
   }
 
   export type CaseCreateOrConnectWithoutDecisionPackagesInput = {
@@ -55573,6 +60634,7 @@ export namespace Prisma {
     case: CaseCreateNestedOneWithoutInspectionsInput
     inspector: UserCreateNestedOneWithoutInspectionsInput
     riskAssessments?: RiskAssessmentCreateNestedManyWithoutInspectionInput
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentCreateNestedManyWithoutInspectionInput
   }
 
   export type InspectionUncheckedCreateWithoutDecisionPackagesInput = {
@@ -55592,6 +60654,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     riskAssessments?: RiskAssessmentUncheckedCreateNestedManyWithoutInspectionInput
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentUncheckedCreateNestedManyWithoutInspectionInput
   }
 
   export type InspectionCreateOrConnectWithoutDecisionPackagesInput = {
@@ -55611,6 +60674,7 @@ export namespace Prisma {
     case: CaseCreateNestedOneWithoutRiskAssessmentsInput
     inspection: InspectionCreateNestedOneWithoutRiskAssessmentsInput
     operationalResponsePlans?: OperationalResponsePlanCreateNestedManyWithoutRiskAssessmentInput
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentCreateNestedManyWithoutRiskAssessmentInput
   }
 
   export type RiskAssessmentUncheckedCreateWithoutDecisionPackagesInput = {
@@ -55625,6 +60689,7 @@ export namespace Prisma {
     assessmentVersion?: string
     createdAt?: Date | string
     operationalResponsePlans?: OperationalResponsePlanUncheckedCreateNestedManyWithoutRiskAssessmentInput
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentUncheckedCreateNestedManyWithoutRiskAssessmentInput
   }
 
   export type RiskAssessmentCreateOrConnectWithoutDecisionPackagesInput = {
@@ -55792,6 +60857,8 @@ export namespace Prisma {
     executionPlans?: ExecutionPlanUpdateManyWithoutCaseNestedInput
     closure?: CaseClosureUpdateOneWithoutCaseNestedInput
     sourcePublicReport?: PublicReportUpdateOneWithoutCreatedCaseNestedInput
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentUpdateManyWithoutCaseNestedInput
+    intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUpdateManyWithoutCaseNestedInput
   }
 
   export type CaseUncheckedUpdateWithoutDecisionPackagesInput = {
@@ -55814,6 +60881,8 @@ export namespace Prisma {
     executionPlans?: ExecutionPlanUncheckedUpdateManyWithoutCaseNestedInput
     closure?: CaseClosureUncheckedUpdateOneWithoutCaseNestedInput
     sourcePublicReport?: PublicReportUncheckedUpdateOneWithoutCreatedCaseNestedInput
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentUncheckedUpdateManyWithoutCaseNestedInput
+    intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUncheckedUpdateManyWithoutCaseNestedInput
   }
 
   export type InspectionUpsertWithoutDecisionPackagesInput = {
@@ -55844,6 +60913,7 @@ export namespace Prisma {
     case?: CaseUpdateOneRequiredWithoutInspectionsNestedInput
     inspector?: UserUpdateOneRequiredWithoutInspectionsNestedInput
     riskAssessments?: RiskAssessmentUpdateManyWithoutInspectionNestedInput
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentUpdateManyWithoutInspectionNestedInput
   }
 
   export type InspectionUncheckedUpdateWithoutDecisionPackagesInput = {
@@ -55863,6 +60933,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     riskAssessments?: RiskAssessmentUncheckedUpdateManyWithoutInspectionNestedInput
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentUncheckedUpdateManyWithoutInspectionNestedInput
   }
 
   export type RiskAssessmentUpsertWithoutDecisionPackagesInput = {
@@ -55888,6 +60959,7 @@ export namespace Prisma {
     case?: CaseUpdateOneRequiredWithoutRiskAssessmentsNestedInput
     inspection?: InspectionUpdateOneRequiredWithoutRiskAssessmentsNestedInput
     operationalResponsePlans?: OperationalResponsePlanUpdateManyWithoutRiskAssessmentNestedInput
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentUpdateManyWithoutRiskAssessmentNestedInput
   }
 
   export type RiskAssessmentUncheckedUpdateWithoutDecisionPackagesInput = {
@@ -55902,6 +60974,7 @@ export namespace Prisma {
     assessmentVersion?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     operationalResponsePlans?: OperationalResponsePlanUncheckedUpdateManyWithoutRiskAssessmentNestedInput
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentUncheckedUpdateManyWithoutRiskAssessmentNestedInput
   }
 
   export type UserUpsertWithoutPreparedDecisionPackagesInput = {
@@ -56427,6 +61500,8 @@ export namespace Prisma {
     closure?: CaseClosureCreateNestedOneWithoutCaseInput
     sourcePublicReport?: PublicReportCreateNestedOneWithoutCreatedCaseInput
     decisionPackages?: DecisionPackageCreateNestedManyWithoutCaseInput
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentCreateNestedManyWithoutCaseInput
+    intelligenceReconciliations?: InfrastructureIntelligenceReconciliationCreateNestedManyWithoutCaseInput
   }
 
   export type CaseUncheckedCreateWithoutOrpDecisionsInput = {
@@ -56449,6 +61524,8 @@ export namespace Prisma {
     closure?: CaseClosureUncheckedCreateNestedOneWithoutCaseInput
     sourcePublicReport?: PublicReportUncheckedCreateNestedOneWithoutCreatedCaseInput
     decisionPackages?: DecisionPackageUncheckedCreateNestedManyWithoutCaseInput
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentUncheckedCreateNestedManyWithoutCaseInput
+    intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUncheckedCreateNestedManyWithoutCaseInput
   }
 
   export type CaseCreateOrConnectWithoutOrpDecisionsInput = {
@@ -56778,6 +61855,8 @@ export namespace Prisma {
     closure?: CaseClosureUpdateOneWithoutCaseNestedInput
     sourcePublicReport?: PublicReportUpdateOneWithoutCreatedCaseNestedInput
     decisionPackages?: DecisionPackageUpdateManyWithoutCaseNestedInput
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentUpdateManyWithoutCaseNestedInput
+    intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUpdateManyWithoutCaseNestedInput
   }
 
   export type CaseUncheckedUpdateWithoutOrpDecisionsInput = {
@@ -56800,6 +61879,8 @@ export namespace Prisma {
     closure?: CaseClosureUncheckedUpdateOneWithoutCaseNestedInput
     sourcePublicReport?: PublicReportUncheckedUpdateOneWithoutCreatedCaseNestedInput
     decisionPackages?: DecisionPackageUncheckedUpdateManyWithoutCaseNestedInput
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentUncheckedUpdateManyWithoutCaseNestedInput
+    intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUncheckedUpdateManyWithoutCaseNestedInput
   }
 
   export type OperationalResponsePlanUpsertWithoutDecisionsInput = {
@@ -57190,6 +62271,8 @@ export namespace Prisma {
     closure?: CaseClosureCreateNestedOneWithoutCaseInput
     sourcePublicReport?: PublicReportCreateNestedOneWithoutCreatedCaseInput
     decisionPackages?: DecisionPackageCreateNestedManyWithoutCaseInput
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentCreateNestedManyWithoutCaseInput
+    intelligenceReconciliations?: InfrastructureIntelligenceReconciliationCreateNestedManyWithoutCaseInput
   }
 
   export type CaseUncheckedCreateWithoutExecutionPlansInput = {
@@ -57212,6 +62295,8 @@ export namespace Prisma {
     closure?: CaseClosureUncheckedCreateNestedOneWithoutCaseInput
     sourcePublicReport?: PublicReportUncheckedCreateNestedOneWithoutCreatedCaseInput
     decisionPackages?: DecisionPackageUncheckedCreateNestedManyWithoutCaseInput
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentUncheckedCreateNestedManyWithoutCaseInput
+    intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUncheckedCreateNestedManyWithoutCaseInput
   }
 
   export type CaseCreateOrConnectWithoutExecutionPlansInput = {
@@ -57522,6 +62607,8 @@ export namespace Prisma {
     closure?: CaseClosureUpdateOneWithoutCaseNestedInput
     sourcePublicReport?: PublicReportUpdateOneWithoutCreatedCaseNestedInput
     decisionPackages?: DecisionPackageUpdateManyWithoutCaseNestedInput
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentUpdateManyWithoutCaseNestedInput
+    intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUpdateManyWithoutCaseNestedInput
   }
 
   export type CaseUncheckedUpdateWithoutExecutionPlansInput = {
@@ -57544,6 +62631,8 @@ export namespace Prisma {
     closure?: CaseClosureUncheckedUpdateOneWithoutCaseNestedInput
     sourcePublicReport?: PublicReportUncheckedUpdateOneWithoutCreatedCaseNestedInput
     decisionPackages?: DecisionPackageUncheckedUpdateManyWithoutCaseNestedInput
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentUncheckedUpdateManyWithoutCaseNestedInput
+    intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUncheckedUpdateManyWithoutCaseNestedInput
   }
 
   export type OrpDecisionUpsertWithoutExecutionPlanInput = {
@@ -59293,6 +64382,8 @@ export namespace Prisma {
     executionPlans?: ExecutionPlanCreateNestedManyWithoutCaseInput
     sourcePublicReport?: PublicReportCreateNestedOneWithoutCreatedCaseInput
     decisionPackages?: DecisionPackageCreateNestedManyWithoutCaseInput
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentCreateNestedManyWithoutCaseInput
+    intelligenceReconciliations?: InfrastructureIntelligenceReconciliationCreateNestedManyWithoutCaseInput
   }
 
   export type CaseUncheckedCreateWithoutClosureInput = {
@@ -59315,6 +64406,8 @@ export namespace Prisma {
     executionPlans?: ExecutionPlanUncheckedCreateNestedManyWithoutCaseInput
     sourcePublicReport?: PublicReportUncheckedCreateNestedOneWithoutCreatedCaseInput
     decisionPackages?: DecisionPackageUncheckedCreateNestedManyWithoutCaseInput
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentUncheckedCreateNestedManyWithoutCaseInput
+    intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUncheckedCreateNestedManyWithoutCaseInput
   }
 
   export type CaseCreateOrConnectWithoutClosureInput = {
@@ -59520,6 +64613,8 @@ export namespace Prisma {
     executionPlans?: ExecutionPlanUpdateManyWithoutCaseNestedInput
     sourcePublicReport?: PublicReportUpdateOneWithoutCreatedCaseNestedInput
     decisionPackages?: DecisionPackageUpdateManyWithoutCaseNestedInput
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentUpdateManyWithoutCaseNestedInput
+    intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUpdateManyWithoutCaseNestedInput
   }
 
   export type CaseUncheckedUpdateWithoutClosureInput = {
@@ -59542,6 +64637,8 @@ export namespace Prisma {
     executionPlans?: ExecutionPlanUncheckedUpdateManyWithoutCaseNestedInput
     sourcePublicReport?: PublicReportUncheckedUpdateOneWithoutCreatedCaseNestedInput
     decisionPackages?: DecisionPackageUncheckedUpdateManyWithoutCaseNestedInput
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentUncheckedUpdateManyWithoutCaseNestedInput
+    intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUncheckedUpdateManyWithoutCaseNestedInput
   }
 
   export type ExecutionPlanUpsertWithoutClosureInput = {
@@ -61403,6 +66500,7 @@ export namespace Prisma {
     readinessSnapshot: JsonNullValueInput | InputJsonValue
     policySnapshot: JsonNullValueInput | InputJsonValue
     actionSnapshot: JsonNullValueInput | InputJsonValue
+    intelligenceSnapshot?: NullableJsonNullValueInput | InputJsonValue
     preparedAt?: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -61461,6 +66559,7 @@ export namespace Prisma {
     case?: CaseUpdateOneRequiredWithoutInspectionsNestedInput
     riskAssessments?: RiskAssessmentUpdateManyWithoutInspectionNestedInput
     decisionPackages?: DecisionPackageUpdateManyWithoutInspectionNestedInput
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentUpdateManyWithoutInspectionNestedInput
   }
 
   export type InspectionUncheckedUpdateWithoutInspectorInput = {
@@ -61480,6 +66579,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     riskAssessments?: RiskAssessmentUncheckedUpdateManyWithoutInspectionNestedInput
     decisionPackages?: DecisionPackageUncheckedUpdateManyWithoutInspectionNestedInput
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentUncheckedUpdateManyWithoutInspectionNestedInput
   }
 
   export type InspectionUncheckedUpdateManyWithoutInspectorInput = {
@@ -62793,6 +67893,7 @@ export namespace Prisma {
     readinessSnapshot?: JsonNullValueInput | InputJsonValue
     policySnapshot?: JsonNullValueInput | InputJsonValue
     actionSnapshot?: JsonNullValueInput | InputJsonValue
+    intelligenceSnapshot?: NullableJsonNullValueInput | InputJsonValue
     preparedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -62817,6 +67918,7 @@ export namespace Prisma {
     readinessSnapshot?: JsonNullValueInput | InputJsonValue
     policySnapshot?: JsonNullValueInput | InputJsonValue
     actionSnapshot?: JsonNullValueInput | InputJsonValue
+    intelligenceSnapshot?: NullableJsonNullValueInput | InputJsonValue
     preparedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -62838,6 +67940,7 @@ export namespace Prisma {
     readinessSnapshot?: JsonNullValueInput | InputJsonValue
     policySnapshot?: JsonNullValueInput | InputJsonValue
     actionSnapshot?: JsonNullValueInput | InputJsonValue
+    intelligenceSnapshot?: NullableJsonNullValueInput | InputJsonValue
     preparedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -63032,6 +68135,8 @@ export namespace Prisma {
     closure?: CaseClosureUpdateOneWithoutCaseNestedInput
     sourcePublicReport?: PublicReportUpdateOneWithoutCreatedCaseNestedInput
     decisionPackages?: DecisionPackageUpdateManyWithoutCaseNestedInput
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentUpdateManyWithoutCaseNestedInput
+    intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUpdateManyWithoutCaseNestedInput
   }
 
   export type CaseUncheckedUpdateWithoutAssetInput = {
@@ -63054,6 +68159,8 @@ export namespace Prisma {
     closure?: CaseClosureUncheckedUpdateOneWithoutCaseNestedInput
     sourcePublicReport?: PublicReportUncheckedUpdateOneWithoutCreatedCaseNestedInput
     decisionPackages?: DecisionPackageUncheckedUpdateManyWithoutCaseNestedInput
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentUncheckedUpdateManyWithoutCaseNestedInput
+    intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUncheckedUpdateManyWithoutCaseNestedInput
   }
 
   export type CaseUncheckedUpdateManyWithoutAssetInput = {
@@ -64100,10 +69207,51 @@ export namespace Prisma {
     readinessSnapshot: JsonNullValueInput | InputJsonValue
     policySnapshot: JsonNullValueInput | InputJsonValue
     actionSnapshot: JsonNullValueInput | InputJsonValue
+    intelligenceSnapshot?: NullableJsonNullValueInput | InputJsonValue
     preparedById: string
     preparedAt?: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
+  }
+
+  export type InfrastructureIntelligenceAssessmentCreateManyCaseInput = {
+    id?: string
+    inspectionId: string
+    riskAssessmentId: string
+    status: $Enums.IntelligenceAssessmentStatus
+    predictedRiskScore?: number | null
+    predictedRiskLevel?: $Enums.RiskLevel | null
+    recommendedPriority?: $Enums.PriorityLevel | null
+    confidence?: number | null
+    provider: string
+    providerType: string
+    modelName: string
+    modelVersion: string
+    modelArtifactDigest?: string | null
+    featureSchemaVersion: string
+    contractVersion: string
+    sourceFingerprint: string
+    inferredAt: Date | string
+    expiresAt?: Date | string | null
+    contributingFactors: JsonNullValueInput | InputJsonValue
+    explanation?: string | null
+    recommendedActions: JsonNullValueInput | InputJsonValue
+    abstentionReasons: JsonNullValueInput | InputJsonValue
+    reconciliation: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+  }
+
+  export type InfrastructureIntelligenceReconciliationCreateManyCaseInput = {
+    id?: string
+    intelligenceAssessmentId: string
+    contractVersion: string
+    governanceFingerprint: string
+    policyResolutionStatus: string
+    policySnapshot: JsonNullValueInput | InputJsonValue
+    reconciledActions: JsonNullValueInput | InputJsonValue
+    issues: JsonNullValueInput | InputJsonValue
+    reconciledAt: Date | string
+    createdAt?: Date | string
   }
 
   export type InspectionUpdateWithoutCaseInput = {
@@ -64123,6 +69271,7 @@ export namespace Prisma {
     inspector?: UserUpdateOneRequiredWithoutInspectionsNestedInput
     riskAssessments?: RiskAssessmentUpdateManyWithoutInspectionNestedInput
     decisionPackages?: DecisionPackageUpdateManyWithoutInspectionNestedInput
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentUpdateManyWithoutInspectionNestedInput
   }
 
   export type InspectionUncheckedUpdateWithoutCaseInput = {
@@ -64142,6 +69291,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     riskAssessments?: RiskAssessmentUncheckedUpdateManyWithoutInspectionNestedInput
     decisionPackages?: DecisionPackageUncheckedUpdateManyWithoutInspectionNestedInput
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentUncheckedUpdateManyWithoutInspectionNestedInput
   }
 
   export type InspectionUncheckedUpdateManyWithoutCaseInput = {
@@ -64173,6 +69323,7 @@ export namespace Prisma {
     inspection?: InspectionUpdateOneRequiredWithoutRiskAssessmentsNestedInput
     operationalResponsePlans?: OperationalResponsePlanUpdateManyWithoutRiskAssessmentNestedInput
     decisionPackages?: DecisionPackageUpdateManyWithoutRiskAssessmentNestedInput
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentUpdateManyWithoutRiskAssessmentNestedInput
   }
 
   export type RiskAssessmentUncheckedUpdateWithoutCaseInput = {
@@ -64187,6 +69338,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     operationalResponsePlans?: OperationalResponsePlanUncheckedUpdateManyWithoutRiskAssessmentNestedInput
     decisionPackages?: DecisionPackageUncheckedUpdateManyWithoutRiskAssessmentNestedInput
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentUncheckedUpdateManyWithoutRiskAssessmentNestedInput
   }
 
   export type RiskAssessmentUncheckedUpdateManyWithoutCaseInput = {
@@ -64373,6 +69525,7 @@ export namespace Prisma {
     readinessSnapshot?: JsonNullValueInput | InputJsonValue
     policySnapshot?: JsonNullValueInput | InputJsonValue
     actionSnapshot?: JsonNullValueInput | InputJsonValue
+    intelligenceSnapshot?: NullableJsonNullValueInput | InputJsonValue
     preparedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -64396,6 +69549,7 @@ export namespace Prisma {
     readinessSnapshot?: JsonNullValueInput | InputJsonValue
     policySnapshot?: JsonNullValueInput | InputJsonValue
     actionSnapshot?: JsonNullValueInput | InputJsonValue
+    intelligenceSnapshot?: NullableJsonNullValueInput | InputJsonValue
     preparedById?: StringFieldUpdateOperationsInput | string
     preparedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -64417,10 +69571,133 @@ export namespace Prisma {
     readinessSnapshot?: JsonNullValueInput | InputJsonValue
     policySnapshot?: JsonNullValueInput | InputJsonValue
     actionSnapshot?: JsonNullValueInput | InputJsonValue
+    intelligenceSnapshot?: NullableJsonNullValueInput | InputJsonValue
     preparedById?: StringFieldUpdateOperationsInput | string
     preparedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InfrastructureIntelligenceAssessmentUpdateWithoutCaseInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: EnumIntelligenceAssessmentStatusFieldUpdateOperationsInput | $Enums.IntelligenceAssessmentStatus
+    predictedRiskScore?: NullableIntFieldUpdateOperationsInput | number | null
+    predictedRiskLevel?: NullableEnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel | null
+    recommendedPriority?: NullableEnumPriorityLevelFieldUpdateOperationsInput | $Enums.PriorityLevel | null
+    confidence?: NullableFloatFieldUpdateOperationsInput | number | null
+    provider?: StringFieldUpdateOperationsInput | string
+    providerType?: StringFieldUpdateOperationsInput | string
+    modelName?: StringFieldUpdateOperationsInput | string
+    modelVersion?: StringFieldUpdateOperationsInput | string
+    modelArtifactDigest?: NullableStringFieldUpdateOperationsInput | string | null
+    featureSchemaVersion?: StringFieldUpdateOperationsInput | string
+    contractVersion?: StringFieldUpdateOperationsInput | string
+    sourceFingerprint?: StringFieldUpdateOperationsInput | string
+    inferredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    contributingFactors?: JsonNullValueInput | InputJsonValue
+    explanation?: NullableStringFieldUpdateOperationsInput | string | null
+    recommendedActions?: JsonNullValueInput | InputJsonValue
+    abstentionReasons?: JsonNullValueInput | InputJsonValue
+    reconciliation?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    governanceReconciliations?: InfrastructureIntelligenceReconciliationUpdateManyWithoutIntelligenceAssessmentNestedInput
+    inspection?: InspectionUpdateOneRequiredWithoutIntelligenceAssessmentsNestedInput
+    riskAssessment?: RiskAssessmentUpdateOneRequiredWithoutIntelligenceAssessmentsNestedInput
+  }
+
+  export type InfrastructureIntelligenceAssessmentUncheckedUpdateWithoutCaseInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    inspectionId?: StringFieldUpdateOperationsInput | string
+    riskAssessmentId?: StringFieldUpdateOperationsInput | string
+    status?: EnumIntelligenceAssessmentStatusFieldUpdateOperationsInput | $Enums.IntelligenceAssessmentStatus
+    predictedRiskScore?: NullableIntFieldUpdateOperationsInput | number | null
+    predictedRiskLevel?: NullableEnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel | null
+    recommendedPriority?: NullableEnumPriorityLevelFieldUpdateOperationsInput | $Enums.PriorityLevel | null
+    confidence?: NullableFloatFieldUpdateOperationsInput | number | null
+    provider?: StringFieldUpdateOperationsInput | string
+    providerType?: StringFieldUpdateOperationsInput | string
+    modelName?: StringFieldUpdateOperationsInput | string
+    modelVersion?: StringFieldUpdateOperationsInput | string
+    modelArtifactDigest?: NullableStringFieldUpdateOperationsInput | string | null
+    featureSchemaVersion?: StringFieldUpdateOperationsInput | string
+    contractVersion?: StringFieldUpdateOperationsInput | string
+    sourceFingerprint?: StringFieldUpdateOperationsInput | string
+    inferredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    contributingFactors?: JsonNullValueInput | InputJsonValue
+    explanation?: NullableStringFieldUpdateOperationsInput | string | null
+    recommendedActions?: JsonNullValueInput | InputJsonValue
+    abstentionReasons?: JsonNullValueInput | InputJsonValue
+    reconciliation?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    governanceReconciliations?: InfrastructureIntelligenceReconciliationUncheckedUpdateManyWithoutIntelligenceAssessmentNestedInput
+  }
+
+  export type InfrastructureIntelligenceAssessmentUncheckedUpdateManyWithoutCaseInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    inspectionId?: StringFieldUpdateOperationsInput | string
+    riskAssessmentId?: StringFieldUpdateOperationsInput | string
+    status?: EnumIntelligenceAssessmentStatusFieldUpdateOperationsInput | $Enums.IntelligenceAssessmentStatus
+    predictedRiskScore?: NullableIntFieldUpdateOperationsInput | number | null
+    predictedRiskLevel?: NullableEnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel | null
+    recommendedPriority?: NullableEnumPriorityLevelFieldUpdateOperationsInput | $Enums.PriorityLevel | null
+    confidence?: NullableFloatFieldUpdateOperationsInput | number | null
+    provider?: StringFieldUpdateOperationsInput | string
+    providerType?: StringFieldUpdateOperationsInput | string
+    modelName?: StringFieldUpdateOperationsInput | string
+    modelVersion?: StringFieldUpdateOperationsInput | string
+    modelArtifactDigest?: NullableStringFieldUpdateOperationsInput | string | null
+    featureSchemaVersion?: StringFieldUpdateOperationsInput | string
+    contractVersion?: StringFieldUpdateOperationsInput | string
+    sourceFingerprint?: StringFieldUpdateOperationsInput | string
+    inferredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    contributingFactors?: JsonNullValueInput | InputJsonValue
+    explanation?: NullableStringFieldUpdateOperationsInput | string | null
+    recommendedActions?: JsonNullValueInput | InputJsonValue
+    abstentionReasons?: JsonNullValueInput | InputJsonValue
+    reconciliation?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InfrastructureIntelligenceReconciliationUpdateWithoutCaseInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    contractVersion?: StringFieldUpdateOperationsInput | string
+    governanceFingerprint?: StringFieldUpdateOperationsInput | string
+    policyResolutionStatus?: StringFieldUpdateOperationsInput | string
+    policySnapshot?: JsonNullValueInput | InputJsonValue
+    reconciledActions?: JsonNullValueInput | InputJsonValue
+    issues?: JsonNullValueInput | InputJsonValue
+    reconciledAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    intelligenceAssessment?: InfrastructureIntelligenceAssessmentUpdateOneRequiredWithoutGovernanceReconciliationsNestedInput
+  }
+
+  export type InfrastructureIntelligenceReconciliationUncheckedUpdateWithoutCaseInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    intelligenceAssessmentId?: StringFieldUpdateOperationsInput | string
+    contractVersion?: StringFieldUpdateOperationsInput | string
+    governanceFingerprint?: StringFieldUpdateOperationsInput | string
+    policyResolutionStatus?: StringFieldUpdateOperationsInput | string
+    policySnapshot?: JsonNullValueInput | InputJsonValue
+    reconciledActions?: JsonNullValueInput | InputJsonValue
+    issues?: JsonNullValueInput | InputJsonValue
+    reconciledAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InfrastructureIntelligenceReconciliationUncheckedUpdateManyWithoutCaseInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    intelligenceAssessmentId?: StringFieldUpdateOperationsInput | string
+    contractVersion?: StringFieldUpdateOperationsInput | string
+    governanceFingerprint?: StringFieldUpdateOperationsInput | string
+    policyResolutionStatus?: StringFieldUpdateOperationsInput | string
+    policySnapshot?: JsonNullValueInput | InputJsonValue
+    reconciledActions?: JsonNullValueInput | InputJsonValue
+    issues?: JsonNullValueInput | InputJsonValue
+    reconciledAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type RiskAssessmentCreateManyInspectionInput = {
@@ -64449,10 +69726,38 @@ export namespace Prisma {
     readinessSnapshot: JsonNullValueInput | InputJsonValue
     policySnapshot: JsonNullValueInput | InputJsonValue
     actionSnapshot: JsonNullValueInput | InputJsonValue
+    intelligenceSnapshot?: NullableJsonNullValueInput | InputJsonValue
     preparedById: string
     preparedAt?: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
+  }
+
+  export type InfrastructureIntelligenceAssessmentCreateManyInspectionInput = {
+    id?: string
+    caseId: string
+    riskAssessmentId: string
+    status: $Enums.IntelligenceAssessmentStatus
+    predictedRiskScore?: number | null
+    predictedRiskLevel?: $Enums.RiskLevel | null
+    recommendedPriority?: $Enums.PriorityLevel | null
+    confidence?: number | null
+    provider: string
+    providerType: string
+    modelName: string
+    modelVersion: string
+    modelArtifactDigest?: string | null
+    featureSchemaVersion: string
+    contractVersion: string
+    sourceFingerprint: string
+    inferredAt: Date | string
+    expiresAt?: Date | string | null
+    contributingFactors: JsonNullValueInput | InputJsonValue
+    explanation?: string | null
+    recommendedActions: JsonNullValueInput | InputJsonValue
+    abstentionReasons: JsonNullValueInput | InputJsonValue
+    reconciliation: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
   }
 
   export type RiskAssessmentUpdateWithoutInspectionInput = {
@@ -64467,6 +69772,7 @@ export namespace Prisma {
     case?: CaseUpdateOneRequiredWithoutRiskAssessmentsNestedInput
     operationalResponsePlans?: OperationalResponsePlanUpdateManyWithoutRiskAssessmentNestedInput
     decisionPackages?: DecisionPackageUpdateManyWithoutRiskAssessmentNestedInput
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentUpdateManyWithoutRiskAssessmentNestedInput
   }
 
   export type RiskAssessmentUncheckedUpdateWithoutInspectionInput = {
@@ -64481,6 +69787,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     operationalResponsePlans?: OperationalResponsePlanUncheckedUpdateManyWithoutRiskAssessmentNestedInput
     decisionPackages?: DecisionPackageUncheckedUpdateManyWithoutRiskAssessmentNestedInput
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentUncheckedUpdateManyWithoutRiskAssessmentNestedInput
   }
 
   export type RiskAssessmentUncheckedUpdateManyWithoutInspectionInput = {
@@ -64507,6 +69814,7 @@ export namespace Prisma {
     readinessSnapshot?: JsonNullValueInput | InputJsonValue
     policySnapshot?: JsonNullValueInput | InputJsonValue
     actionSnapshot?: JsonNullValueInput | InputJsonValue
+    intelligenceSnapshot?: NullableJsonNullValueInput | InputJsonValue
     preparedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -64530,6 +69838,7 @@ export namespace Prisma {
     readinessSnapshot?: JsonNullValueInput | InputJsonValue
     policySnapshot?: JsonNullValueInput | InputJsonValue
     actionSnapshot?: JsonNullValueInput | InputJsonValue
+    intelligenceSnapshot?: NullableJsonNullValueInput | InputJsonValue
     preparedById?: StringFieldUpdateOperationsInput | string
     preparedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -64551,10 +69860,94 @@ export namespace Prisma {
     readinessSnapshot?: JsonNullValueInput | InputJsonValue
     policySnapshot?: JsonNullValueInput | InputJsonValue
     actionSnapshot?: JsonNullValueInput | InputJsonValue
+    intelligenceSnapshot?: NullableJsonNullValueInput | InputJsonValue
     preparedById?: StringFieldUpdateOperationsInput | string
     preparedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InfrastructureIntelligenceAssessmentUpdateWithoutInspectionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: EnumIntelligenceAssessmentStatusFieldUpdateOperationsInput | $Enums.IntelligenceAssessmentStatus
+    predictedRiskScore?: NullableIntFieldUpdateOperationsInput | number | null
+    predictedRiskLevel?: NullableEnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel | null
+    recommendedPriority?: NullableEnumPriorityLevelFieldUpdateOperationsInput | $Enums.PriorityLevel | null
+    confidence?: NullableFloatFieldUpdateOperationsInput | number | null
+    provider?: StringFieldUpdateOperationsInput | string
+    providerType?: StringFieldUpdateOperationsInput | string
+    modelName?: StringFieldUpdateOperationsInput | string
+    modelVersion?: StringFieldUpdateOperationsInput | string
+    modelArtifactDigest?: NullableStringFieldUpdateOperationsInput | string | null
+    featureSchemaVersion?: StringFieldUpdateOperationsInput | string
+    contractVersion?: StringFieldUpdateOperationsInput | string
+    sourceFingerprint?: StringFieldUpdateOperationsInput | string
+    inferredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    contributingFactors?: JsonNullValueInput | InputJsonValue
+    explanation?: NullableStringFieldUpdateOperationsInput | string | null
+    recommendedActions?: JsonNullValueInput | InputJsonValue
+    abstentionReasons?: JsonNullValueInput | InputJsonValue
+    reconciliation?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    governanceReconciliations?: InfrastructureIntelligenceReconciliationUpdateManyWithoutIntelligenceAssessmentNestedInput
+    case?: CaseUpdateOneRequiredWithoutIntelligenceAssessmentsNestedInput
+    riskAssessment?: RiskAssessmentUpdateOneRequiredWithoutIntelligenceAssessmentsNestedInput
+  }
+
+  export type InfrastructureIntelligenceAssessmentUncheckedUpdateWithoutInspectionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    caseId?: StringFieldUpdateOperationsInput | string
+    riskAssessmentId?: StringFieldUpdateOperationsInput | string
+    status?: EnumIntelligenceAssessmentStatusFieldUpdateOperationsInput | $Enums.IntelligenceAssessmentStatus
+    predictedRiskScore?: NullableIntFieldUpdateOperationsInput | number | null
+    predictedRiskLevel?: NullableEnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel | null
+    recommendedPriority?: NullableEnumPriorityLevelFieldUpdateOperationsInput | $Enums.PriorityLevel | null
+    confidence?: NullableFloatFieldUpdateOperationsInput | number | null
+    provider?: StringFieldUpdateOperationsInput | string
+    providerType?: StringFieldUpdateOperationsInput | string
+    modelName?: StringFieldUpdateOperationsInput | string
+    modelVersion?: StringFieldUpdateOperationsInput | string
+    modelArtifactDigest?: NullableStringFieldUpdateOperationsInput | string | null
+    featureSchemaVersion?: StringFieldUpdateOperationsInput | string
+    contractVersion?: StringFieldUpdateOperationsInput | string
+    sourceFingerprint?: StringFieldUpdateOperationsInput | string
+    inferredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    contributingFactors?: JsonNullValueInput | InputJsonValue
+    explanation?: NullableStringFieldUpdateOperationsInput | string | null
+    recommendedActions?: JsonNullValueInput | InputJsonValue
+    abstentionReasons?: JsonNullValueInput | InputJsonValue
+    reconciliation?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    governanceReconciliations?: InfrastructureIntelligenceReconciliationUncheckedUpdateManyWithoutIntelligenceAssessmentNestedInput
+  }
+
+  export type InfrastructureIntelligenceAssessmentUncheckedUpdateManyWithoutInspectionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    caseId?: StringFieldUpdateOperationsInput | string
+    riskAssessmentId?: StringFieldUpdateOperationsInput | string
+    status?: EnumIntelligenceAssessmentStatusFieldUpdateOperationsInput | $Enums.IntelligenceAssessmentStatus
+    predictedRiskScore?: NullableIntFieldUpdateOperationsInput | number | null
+    predictedRiskLevel?: NullableEnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel | null
+    recommendedPriority?: NullableEnumPriorityLevelFieldUpdateOperationsInput | $Enums.PriorityLevel | null
+    confidence?: NullableFloatFieldUpdateOperationsInput | number | null
+    provider?: StringFieldUpdateOperationsInput | string
+    providerType?: StringFieldUpdateOperationsInput | string
+    modelName?: StringFieldUpdateOperationsInput | string
+    modelVersion?: StringFieldUpdateOperationsInput | string
+    modelArtifactDigest?: NullableStringFieldUpdateOperationsInput | string | null
+    featureSchemaVersion?: StringFieldUpdateOperationsInput | string
+    contractVersion?: StringFieldUpdateOperationsInput | string
+    sourceFingerprint?: StringFieldUpdateOperationsInput | string
+    inferredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    contributingFactors?: JsonNullValueInput | InputJsonValue
+    explanation?: NullableStringFieldUpdateOperationsInput | string | null
+    recommendedActions?: JsonNullValueInput | InputJsonValue
+    abstentionReasons?: JsonNullValueInput | InputJsonValue
+    reconciliation?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type OperationalResponsePlanCreateManyRiskAssessmentInput = {
@@ -64590,10 +69983,38 @@ export namespace Prisma {
     readinessSnapshot: JsonNullValueInput | InputJsonValue
     policySnapshot: JsonNullValueInput | InputJsonValue
     actionSnapshot: JsonNullValueInput | InputJsonValue
+    intelligenceSnapshot?: NullableJsonNullValueInput | InputJsonValue
     preparedById: string
     preparedAt?: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
+  }
+
+  export type InfrastructureIntelligenceAssessmentCreateManyRiskAssessmentInput = {
+    id?: string
+    caseId: string
+    inspectionId: string
+    status: $Enums.IntelligenceAssessmentStatus
+    predictedRiskScore?: number | null
+    predictedRiskLevel?: $Enums.RiskLevel | null
+    recommendedPriority?: $Enums.PriorityLevel | null
+    confidence?: number | null
+    provider: string
+    providerType: string
+    modelName: string
+    modelVersion: string
+    modelArtifactDigest?: string | null
+    featureSchemaVersion: string
+    contractVersion: string
+    sourceFingerprint: string
+    inferredAt: Date | string
+    expiresAt?: Date | string | null
+    contributingFactors: JsonNullValueInput | InputJsonValue
+    explanation?: string | null
+    recommendedActions: JsonNullValueInput | InputJsonValue
+    abstentionReasons: JsonNullValueInput | InputJsonValue
+    reconciliation: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
   }
 
   export type OperationalResponsePlanUpdateWithoutRiskAssessmentInput = {
@@ -64669,6 +70090,7 @@ export namespace Prisma {
     readinessSnapshot?: JsonNullValueInput | InputJsonValue
     policySnapshot?: JsonNullValueInput | InputJsonValue
     actionSnapshot?: JsonNullValueInput | InputJsonValue
+    intelligenceSnapshot?: NullableJsonNullValueInput | InputJsonValue
     preparedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -64692,6 +70114,7 @@ export namespace Prisma {
     readinessSnapshot?: JsonNullValueInput | InputJsonValue
     policySnapshot?: JsonNullValueInput | InputJsonValue
     actionSnapshot?: JsonNullValueInput | InputJsonValue
+    intelligenceSnapshot?: NullableJsonNullValueInput | InputJsonValue
     preparedById?: StringFieldUpdateOperationsInput | string
     preparedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -64713,10 +70136,146 @@ export namespace Prisma {
     readinessSnapshot?: JsonNullValueInput | InputJsonValue
     policySnapshot?: JsonNullValueInput | InputJsonValue
     actionSnapshot?: JsonNullValueInput | InputJsonValue
+    intelligenceSnapshot?: NullableJsonNullValueInput | InputJsonValue
     preparedById?: StringFieldUpdateOperationsInput | string
     preparedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InfrastructureIntelligenceAssessmentUpdateWithoutRiskAssessmentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: EnumIntelligenceAssessmentStatusFieldUpdateOperationsInput | $Enums.IntelligenceAssessmentStatus
+    predictedRiskScore?: NullableIntFieldUpdateOperationsInput | number | null
+    predictedRiskLevel?: NullableEnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel | null
+    recommendedPriority?: NullableEnumPriorityLevelFieldUpdateOperationsInput | $Enums.PriorityLevel | null
+    confidence?: NullableFloatFieldUpdateOperationsInput | number | null
+    provider?: StringFieldUpdateOperationsInput | string
+    providerType?: StringFieldUpdateOperationsInput | string
+    modelName?: StringFieldUpdateOperationsInput | string
+    modelVersion?: StringFieldUpdateOperationsInput | string
+    modelArtifactDigest?: NullableStringFieldUpdateOperationsInput | string | null
+    featureSchemaVersion?: StringFieldUpdateOperationsInput | string
+    contractVersion?: StringFieldUpdateOperationsInput | string
+    sourceFingerprint?: StringFieldUpdateOperationsInput | string
+    inferredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    contributingFactors?: JsonNullValueInput | InputJsonValue
+    explanation?: NullableStringFieldUpdateOperationsInput | string | null
+    recommendedActions?: JsonNullValueInput | InputJsonValue
+    abstentionReasons?: JsonNullValueInput | InputJsonValue
+    reconciliation?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    governanceReconciliations?: InfrastructureIntelligenceReconciliationUpdateManyWithoutIntelligenceAssessmentNestedInput
+    case?: CaseUpdateOneRequiredWithoutIntelligenceAssessmentsNestedInput
+    inspection?: InspectionUpdateOneRequiredWithoutIntelligenceAssessmentsNestedInput
+  }
+
+  export type InfrastructureIntelligenceAssessmentUncheckedUpdateWithoutRiskAssessmentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    caseId?: StringFieldUpdateOperationsInput | string
+    inspectionId?: StringFieldUpdateOperationsInput | string
+    status?: EnumIntelligenceAssessmentStatusFieldUpdateOperationsInput | $Enums.IntelligenceAssessmentStatus
+    predictedRiskScore?: NullableIntFieldUpdateOperationsInput | number | null
+    predictedRiskLevel?: NullableEnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel | null
+    recommendedPriority?: NullableEnumPriorityLevelFieldUpdateOperationsInput | $Enums.PriorityLevel | null
+    confidence?: NullableFloatFieldUpdateOperationsInput | number | null
+    provider?: StringFieldUpdateOperationsInput | string
+    providerType?: StringFieldUpdateOperationsInput | string
+    modelName?: StringFieldUpdateOperationsInput | string
+    modelVersion?: StringFieldUpdateOperationsInput | string
+    modelArtifactDigest?: NullableStringFieldUpdateOperationsInput | string | null
+    featureSchemaVersion?: StringFieldUpdateOperationsInput | string
+    contractVersion?: StringFieldUpdateOperationsInput | string
+    sourceFingerprint?: StringFieldUpdateOperationsInput | string
+    inferredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    contributingFactors?: JsonNullValueInput | InputJsonValue
+    explanation?: NullableStringFieldUpdateOperationsInput | string | null
+    recommendedActions?: JsonNullValueInput | InputJsonValue
+    abstentionReasons?: JsonNullValueInput | InputJsonValue
+    reconciliation?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    governanceReconciliations?: InfrastructureIntelligenceReconciliationUncheckedUpdateManyWithoutIntelligenceAssessmentNestedInput
+  }
+
+  export type InfrastructureIntelligenceAssessmentUncheckedUpdateManyWithoutRiskAssessmentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    caseId?: StringFieldUpdateOperationsInput | string
+    inspectionId?: StringFieldUpdateOperationsInput | string
+    status?: EnumIntelligenceAssessmentStatusFieldUpdateOperationsInput | $Enums.IntelligenceAssessmentStatus
+    predictedRiskScore?: NullableIntFieldUpdateOperationsInput | number | null
+    predictedRiskLevel?: NullableEnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel | null
+    recommendedPriority?: NullableEnumPriorityLevelFieldUpdateOperationsInput | $Enums.PriorityLevel | null
+    confidence?: NullableFloatFieldUpdateOperationsInput | number | null
+    provider?: StringFieldUpdateOperationsInput | string
+    providerType?: StringFieldUpdateOperationsInput | string
+    modelName?: StringFieldUpdateOperationsInput | string
+    modelVersion?: StringFieldUpdateOperationsInput | string
+    modelArtifactDigest?: NullableStringFieldUpdateOperationsInput | string | null
+    featureSchemaVersion?: StringFieldUpdateOperationsInput | string
+    contractVersion?: StringFieldUpdateOperationsInput | string
+    sourceFingerprint?: StringFieldUpdateOperationsInput | string
+    inferredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    contributingFactors?: JsonNullValueInput | InputJsonValue
+    explanation?: NullableStringFieldUpdateOperationsInput | string | null
+    recommendedActions?: JsonNullValueInput | InputJsonValue
+    abstentionReasons?: JsonNullValueInput | InputJsonValue
+    reconciliation?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InfrastructureIntelligenceReconciliationCreateManyIntelligenceAssessmentInput = {
+    id?: string
+    caseId: string
+    contractVersion: string
+    governanceFingerprint: string
+    policyResolutionStatus: string
+    policySnapshot: JsonNullValueInput | InputJsonValue
+    reconciledActions: JsonNullValueInput | InputJsonValue
+    issues: JsonNullValueInput | InputJsonValue
+    reconciledAt: Date | string
+    createdAt?: Date | string
+  }
+
+  export type InfrastructureIntelligenceReconciliationUpdateWithoutIntelligenceAssessmentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    contractVersion?: StringFieldUpdateOperationsInput | string
+    governanceFingerprint?: StringFieldUpdateOperationsInput | string
+    policyResolutionStatus?: StringFieldUpdateOperationsInput | string
+    policySnapshot?: JsonNullValueInput | InputJsonValue
+    reconciledActions?: JsonNullValueInput | InputJsonValue
+    issues?: JsonNullValueInput | InputJsonValue
+    reconciledAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    case?: CaseUpdateOneRequiredWithoutIntelligenceReconciliationsNestedInput
+  }
+
+  export type InfrastructureIntelligenceReconciliationUncheckedUpdateWithoutIntelligenceAssessmentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    caseId?: StringFieldUpdateOperationsInput | string
+    contractVersion?: StringFieldUpdateOperationsInput | string
+    governanceFingerprint?: StringFieldUpdateOperationsInput | string
+    policyResolutionStatus?: StringFieldUpdateOperationsInput | string
+    policySnapshot?: JsonNullValueInput | InputJsonValue
+    reconciledActions?: JsonNullValueInput | InputJsonValue
+    issues?: JsonNullValueInput | InputJsonValue
+    reconciledAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InfrastructureIntelligenceReconciliationUncheckedUpdateManyWithoutIntelligenceAssessmentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    caseId?: StringFieldUpdateOperationsInput | string
+    contractVersion?: StringFieldUpdateOperationsInput | string
+    governanceFingerprint?: StringFieldUpdateOperationsInput | string
+    policyResolutionStatus?: StringFieldUpdateOperationsInput | string
+    policySnapshot?: JsonNullValueInput | InputJsonValue
+    reconciledActions?: JsonNullValueInput | InputJsonValue
+    issues?: JsonNullValueInput | InputJsonValue
+    reconciledAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type OrpDecisionCreateManyOrpInput = {
