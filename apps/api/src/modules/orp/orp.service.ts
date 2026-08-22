@@ -5,6 +5,7 @@ import {
   OrganizationalPrincipal
 } from '../../security/organizational-scope';
 import { DecisionPackageError, requireCurrentDecisionPackage } from '../decision-packages/decision-package.service';
+import { RISK_ASSESSMENT_VERSION } from '../risk/risk.service';
 import { z } from 'zod';
 
 export const GOVERNED_ACTION_PLAN_VERSION = 'ODYSSEY_ORP_GOVERNED_V1';
@@ -374,7 +375,7 @@ export async function createORPForCase(caseId: string, principal: Organizational
 
   // 2. Find the latest RiskAssessment
   const latestAssessment = await prisma.riskAssessment.findFirst({
-    where: { caseId },
+    where: { caseId, assessmentVersion: RISK_ASSESSMENT_VERSION },
     orderBy: [
       { createdAt: 'desc' },
       { id: 'desc' }

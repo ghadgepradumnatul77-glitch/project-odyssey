@@ -15,6 +15,7 @@ export interface OrpDto { id: string; versionNumber: number; status: string; urg
 export interface DecisionDto { id: string; decisionType: string; reason: string | null; remarks: string | null; createdAt: string; reviewer?: SafeActor | null; orp?: { id: string; versionNumber: number }; }
 export interface EvidenceDto { evidenceType: string; }
 export interface ExecutionTaskDto { id: string; sequenceNumber: number; sourceActionCode: string; sourceActionVersion?: number|null; sourceTemplateCode?: string|null; sourceTemplateVersion?: number|null; templateTaskKey?:string; titleSnapshot: string; descriptionSnapshot: string; isMandatory: boolean; status: string; assignedTo?: SafeActor | null; completionSubmittedBy?: SafeActor | null; verifiedBy?: SafeActor | null; evidence?: EvidenceDto[]; }
+export interface EligibleAssigneeDto { id: string; name: string; designation: string; employeeCode: string; }
 export interface ExecutionPlanDto { id: string; status: string; templateVersion: string; governanceMode?:'LEGACY'|'GOVERNED'; executionContractVersion?:string|null; governedProvenance?:unknown; createdAt: string; startedAt: string | null; completedAt: string | null; tasks?: ExecutionTaskDto[]; }
 
 const get = <T>(path: string, accessToken: string, signal?: AbortSignal) => apiRequest<T>(path, { accessToken, signal });
@@ -26,6 +27,17 @@ export const listDecisions = (caseId: string, token: string, signal?: AbortSigna
 export const listExecutionPlans = (caseId: string, token: string, signal?: AbortSignal) => get<ExecutionPlanDto[]>(`/cases/${caseId}/execution-plans`, token, signal);
 export const getExecutionPlan = (planId: string, token: string, signal?: AbortSignal) => get<ExecutionPlanDto>(`/execution-plans/${planId}`, token, signal);
 export const listExecutionTasks = (planId: string, token: string, signal?: AbortSignal) => get<ExecutionTaskDto[]>(`/execution-plans/${planId}/tasks`, token, signal);
+function isEligibleAssignee(value: unknown): value is EligibleAssigneeDto {
+  if (!value || typeof value !== 'object' || Array.isArray(value)) return false;
+  const item = value as Record<string, unknown>;
+  return ['id', 'name', 'designation', 'employeeCode'].every((key) => typeof item[key] === 'string')
+    && Object.keys(item).every((key) => ['id', 'name', 'designation', 'employeeCode'].includes(key));
+}
+export const listEligibleExecutionAssignees = (taskId: string, token: string, signal?: AbortSignal) =>
+  get<unknown>(`/execution-tasks/${taskId}/eligible-assignees`, token, signal).then((value) => {
+    if (!Array.isArray(value) || !value.every(isEligibleAssignee)) throw new Error('Invalid eligible-assignee response.');
+    return value;
+  });
 
 export interface InspectionInput { caseId: string; inspectionDate: string; structuralCondition: string; crackSeverity: string; corrosionLevel: string; trafficImportance: string; hospitalRoute: boolean; weatherRisk: string; heavyRainExpected: boolean; estimatedDailyUsers?: number | null; inspectionNotes?: string; }
 export type DecisionType = 'APPROVED'|'REJECTED'|'MODIFICATION_REQUESTED'|'REINSPECTION_REQUESTED'|'ESCALATED';

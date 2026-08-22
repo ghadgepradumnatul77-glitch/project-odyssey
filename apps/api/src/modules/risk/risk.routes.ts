@@ -60,8 +60,12 @@ router.post('/:caseId/assess-risk', authenticate, requireRole(SystemRole.OFFICER
     if (error.message === 'INVALID_CASE_STATE') {
       return res.status(409).json({
         success: false,
-        error: { code: 'INVALID_CASE_STATE', message: 'A closed Case cannot be reassessed.' }
+        error: { code: 'INVALID_CASE_STATE', message: 'The Case is not in the inspection-analysis state required for risk assessment.' }
       });
+    }
+
+    if (error.message === 'RISK_CASE_PROJECTION_INCONSISTENT') {
+      return res.status(409).json({ success: false, error: { code: 'RISK_CASE_PROJECTION_INCONSISTENT', message: 'The canonical Risk Assessment does not match the current Case projection.' } });
     }
 
     console.error('Failed to assess risk:', error);

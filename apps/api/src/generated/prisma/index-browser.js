@@ -341,6 +341,7 @@ exports.Prisma.RiskAssessmentScalarFieldEnum = {
   reasonCodes: 'reasonCodes',
   reasons: 'reasons',
   assessmentVersion: 'assessmentVersion',
+  sourceFingerprint: 'sourceFingerprint',
   createdAt: 'createdAt'
 };
 

@@ -1,9 +1,11 @@
 import prisma from '../../lib/prisma';
-import { RiskLevel, PriorityLevel, CaseStatus, Inspection } from '../../generated/prisma';
+import { createHash } from 'node:crypto';
+import { RiskLevel, PriorityLevel, CaseStatus, Inspection, Prisma } from '../../generated/prisma';
 import {
   assertOperationalCaseScope,
   OrganizationalPrincipal
 } from '../../security/organizational-scope';
+import { riskAssessedTransition } from '../../workflow/case-state-machine';
 
 // Type definitions for output
 export interface RiskCalculationResult {
@@ -12,6 +14,51 @@ export interface RiskCalculationResult {
   priorityLevel: PriorityLevel;
   reasonCodes: string[];
   reasons: Array<{ reasonCode: string; message: string }>;
+}
+
+export const RISK_ASSESSMENT_VERSION = 'ODYSSEY_RISK_V1';
+
+type RiskSourceInspection = Pick<Inspection,
+  'id' | 'structuralCondition' | 'crackSeverity' | 'corrosionLevel' | 'trafficImportance' |
+  'hospitalRoute' | 'weatherRisk' | 'heavyRainExpected' | 'estimatedDailyUsers'>;
+
+export function riskSourceFingerprint(
+  caseId: string,
+  inspection: RiskSourceInspection,
+  assessmentVersion = RISK_ASSESSMENT_VERSION
+): string {
+  const material = [
+    caseId,
+    inspection.id,
+    assessmentVersion,
+    inspection.structuralCondition,
+    inspection.crackSeverity,
+    inspection.corrosionLevel,
+    inspection.trafficImportance,
+    String(inspection.hospitalRoute),
+    inspection.weatherRisk,
+    String(inspection.heavyRainExpected),
+    inspection.estimatedDailyUsers === null ? 'null' : String(inspection.estimatedDailyUsers)
+  ].join('\x1f');
+  return `sha256:${createHash('sha256').update(material).digest('hex')}`;
+}
+
+function result(assessment: {
+  id: string; caseId: string; inspectionId: string; riskScore: number; riskLevel: RiskLevel; priorityLevel: PriorityLevel;
+  assessmentVersion: string; reasonCodes: unknown; reasons: unknown;
+}, reused: boolean) {
+  return {
+    id: assessment.id, caseId: assessment.caseId, inspectionId: assessment.inspectionId,
+    riskScore: assessment.riskScore, riskLevel: assessment.riskLevel, priorityLevel: assessment.priorityLevel,
+    assessmentVersion: assessment.assessmentVersion, reasonCodes: assessment.reasonCodes, reasons: assessment.reasons, reused
+  };
+}
+
+async function assertCanonicalProjection(caseId: string, assessment: { riskLevel: RiskLevel; priorityLevel: PriorityLevel }) {
+  const projection = await prisma.case.findUnique({ where: { id: caseId }, select: { status: true, riskLevel: true, priorityLevel: true } });
+  if (!projection || projection.status !== CaseStatus.ORP_READY || projection.riskLevel !== assessment.riskLevel || projection.priorityLevel !== assessment.priorityLevel) {
+    throw new Error('RISK_CASE_PROJECTION_INCONSISTENT');
+  }
 }
 
 const RISK_LEVELS: RiskLevel[] = [
@@ -299,30 +346,35 @@ export function calculateRiskAndPriority(inspection: Inspection): RiskCalculatio
 export async function runAssessmentForCase(caseId: string, principal: OrganizationalPrincipal) {
   // Find case
   const existingCase = await assertOperationalCaseScope(caseId, principal);
-  if (existingCase.status === CaseStatus.CLOSED) {
+  if (existingCase.status !== CaseStatus.INSPECTION_IN_PROGRESS && existingCase.status !== CaseStatus.ORP_READY) {
     throw new Error('INVALID_CASE_STATE');
   }
-
   // Find latest inspection
   const latestInspection = await prisma.inspection.findFirst({
     where: { caseId },
-    orderBy: { createdAt: 'desc' }
+    orderBy: [{ createdAt: 'desc' }, { id: 'desc' }]
   });
   if (!latestInspection) {
     throw new Error('NO_INSPECTION_FOUND');
   }
 
+  const sourceFingerprint = riskSourceFingerprint(caseId, latestInspection);
+  const canonical = await prisma.riskAssessment.findUnique({ where: { sourceFingerprint } });
+  if (canonical) {
+    await assertCanonicalProjection(caseId, canonical);
+    return result(canonical, true);
+  }
+
+  const updatedStatus = riskAssessedTransition(existingCase.status);
+  if (!updatedStatus) throw new Error('INVALID_CASE_STATE');
+
   // Run calculation
   const calc = calculateRiskAndPriority(latestInspection);
 
   // Prisma atomic transaction to create assessment and update case
-  const assessment = await prisma.$transaction(async (tx) => {
-    // Determine new status if current is INSPECTION_IN_PROGRESS
-    let updatedStatus = existingCase.status;
-    if (existingCase.status === CaseStatus.INSPECTION_IN_PROGRESS) {
-      updatedStatus = CaseStatus.ORP_READY;
-    }
-
+  let assessment;
+  try {
+    assessment = await prisma.$transaction(async (tx) => {
     // 1. Create RiskAssessment
     const createdAssessment = await tx.riskAssessment.create({
       data: {
@@ -333,7 +385,8 @@ export async function runAssessmentForCase(caseId: string, principal: Organizati
         priorityLevel: calc.priorityLevel,
         reasonCodes: calc.reasonCodes,
         reasons: calc.reasons,
-        assessmentVersion: 'ODYSSEY_RISK_V1'
+        assessmentVersion: RISK_ASSESSMENT_VERSION,
+        sourceFingerprint
       }
     });
 
@@ -348,16 +401,14 @@ export async function runAssessmentForCase(caseId: string, principal: Organizati
     });
 
     return createdAssessment;
-  });
+    });
+  } catch (error) {
+    if (!(error instanceof Prisma.PrismaClientKnownRequestError) || error.code !== 'P2002') throw error;
+    const winner = await prisma.riskAssessment.findUnique({ where: { sourceFingerprint } });
+    if (!winner) throw error;
+    await assertCanonicalProjection(caseId, winner);
+    return result(winner, true);
+  }
 
-  return {
-    caseId: assessment.caseId,
-    inspectionId: assessment.inspectionId,
-    riskScore: assessment.riskScore,
-    riskLevel: assessment.riskLevel,
-    priorityLevel: assessment.priorityLevel,
-    assessmentVersion: assessment.assessmentVersion,
-    reasonCodes: assessment.reasonCodes,
-    reasons: assessment.reasons
-  };
+  return result(assessment, false);
 }

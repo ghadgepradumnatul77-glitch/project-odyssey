@@ -1,7 +1,7 @@
-import { useState, type FormEvent } from 'react';
+import { useEffect, useState, type FormEvent } from 'react';
 import {
-  changeExecutionTaskStatus, recordExecutionEvidence, submitTaskCompletion,
-  verifyTaskCompletion, type EvidenceType, type ExecutionTaskDto,
+  assignExecutionTask, changeExecutionTaskStatus, listEligibleExecutionAssignees, recordExecutionEvidence, submitTaskCompletion,
+  verifyTaskCompletion, type EligibleAssigneeDto, type EvidenceType, type ExecutionTaskDto,
 } from '../../api/workflow.api';
 import { useAuth } from '../../auth/useAuth';
 import { MutationFeedback } from './MutationFeedback';
@@ -16,8 +16,30 @@ export default function TaskActions({ task, onRecorded }: {
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<unknown>(null);
   const [success, setSuccess] = useState<string | null>(null);
+  const [candidates, setCandidates] = useState<EligibleAssigneeDto[]>([]);
+  const [candidateId, setCandidateId] = useState('');
+  const [candidateLoading, setCandidateLoading] = useState(task.status === 'PENDING');
+  const [candidateError, setCandidateError] = useState<unknown>(null);
   const canVerify = task.status === 'COMPLETION_SUBMITTED'
     && task.completionSubmittedBy?.id !== user?.id;
+
+  useEffect(() => {
+    if (!token || task.status !== 'PENDING') return;
+    const controller = new AbortController();
+    setCandidateLoading(true); setCandidateError(null);
+    listEligibleExecutionAssignees(task.id, token, controller.signal)
+      .then((items) => { setCandidates(items); setCandidateId(items[0]?.id ?? ''); })
+      .catch((failure) => { if (!controller.signal.aborted) setCandidateError(failure); })
+      .finally(() => { if (!controller.signal.aborted) setCandidateLoading(false); });
+    return () => controller.abort();
+  }, [task.id, task.status, token]);
+
+  async function assign() {
+    if (!token || !candidateId || submitting) return;
+    setSubmitting(true); setError(null); setSuccess(null);
+    try { await assignExecutionTask(task.id, candidateId, token); setSuccess('Task assigned to the selected officer.'); await onRecorded(); }
+    catch (failure) { setError(failure); } finally { setSubmitting(false); }
+  }
 
   async function status(nextStatus: 'IN_PROGRESS' | 'BLOCKED' | 'CANCELLED', reason?: string) {
     if (!token || submitting) return;
@@ -69,7 +91,16 @@ export default function TaskActions({ task, onRecorded }: {
   }
 
   return <div className="task-actions">
-    <p className="assignment-limitation">Assignment controls are unavailable because no scoped OFFICER candidate endpoint exists.</p>
+    {task.status === 'PENDING' && <section className="task-assignment" aria-label="Task assignment">
+      <label>Assignee<select value={candidateId} onChange={(event) => setCandidateId(event.target.value)} disabled={candidateLoading || submitting || candidates.length === 0}>
+        <option value="">{candidateLoading ? 'Loading eligible officers…' : 'Select eligible officer'}</option>
+        {candidates.map((candidate) => <option key={candidate.id} value={candidate.id}>{candidate.name} — {candidate.designation} · {candidate.employeeCode}</option>)}
+      </select></label>
+      {candidateLoading && <p role="status">Loading eligible officers…</p>}
+      {!candidateLoading && !candidateError && candidates.length === 0 && <p>No active officers are available within this Case scope.</p>}
+      {candidateError !== null && <MutationFeedback error={candidateError} success={null} />}
+      <button type="button" className="primary-action" onClick={assign} disabled={candidateLoading || submitting || !candidateId}>{submitting ? 'Assigning…' : 'Assign'}</button>
+    </section>}
     <div className="action-row">
       {task.status === 'ASSIGNED' && <button onClick={() => status('IN_PROGRESS')} disabled={submitting}>Mark work started</button>}
       {task.status === 'BLOCKED' && <button onClick={() => status('IN_PROGRESS')} disabled={submitting}>Resume recorded work</button>}

@@ -21942,6 +21942,7 @@ export namespace Prisma {
     riskLevel: $Enums.RiskLevel | null
     priorityLevel: $Enums.PriorityLevel | null
     assessmentVersion: string | null
+    sourceFingerprint: string | null
     createdAt: Date | null
   }
 
@@ -21953,6 +21954,7 @@ export namespace Prisma {
     riskLevel: $Enums.RiskLevel | null
     priorityLevel: $Enums.PriorityLevel | null
     assessmentVersion: string | null
+    sourceFingerprint: string | null
     createdAt: Date | null
   }
 
@@ -21966,6 +21968,7 @@ export namespace Prisma {
     reasonCodes: number
     reasons: number
     assessmentVersion: number
+    sourceFingerprint: number
     createdAt: number
     _all: number
   }
@@ -21987,6 +21990,7 @@ export namespace Prisma {
     riskLevel?: true
     priorityLevel?: true
     assessmentVersion?: true
+    sourceFingerprint?: true
     createdAt?: true
   }
 
@@ -21998,6 +22002,7 @@ export namespace Prisma {
     riskLevel?: true
     priorityLevel?: true
     assessmentVersion?: true
+    sourceFingerprint?: true
     createdAt?: true
   }
 
@@ -22011,6 +22016,7 @@ export namespace Prisma {
     reasonCodes?: true
     reasons?: true
     assessmentVersion?: true
+    sourceFingerprint?: true
     createdAt?: true
     _all?: true
   }
@@ -22111,6 +22117,7 @@ export namespace Prisma {
     reasonCodes: JsonValue
     reasons: JsonValue
     assessmentVersion: string
+    sourceFingerprint: string
     createdAt: Date
     _count: RiskAssessmentCountAggregateOutputType | null
     _avg: RiskAssessmentAvgAggregateOutputType | null
@@ -22143,6 +22150,7 @@ export namespace Prisma {
     reasonCodes?: boolean
     reasons?: boolean
     assessmentVersion?: boolean
+    sourceFingerprint?: boolean
     createdAt?: boolean
     case?: boolean | CaseDefaultArgs<ExtArgs>
     inspection?: boolean | InspectionDefaultArgs<ExtArgs>
@@ -22162,6 +22170,7 @@ export namespace Prisma {
     reasonCodes?: boolean
     reasons?: boolean
     assessmentVersion?: boolean
+    sourceFingerprint?: boolean
     createdAt?: boolean
     case?: boolean | CaseDefaultArgs<ExtArgs>
     inspection?: boolean | InspectionDefaultArgs<ExtArgs>
@@ -22177,6 +22186,7 @@ export namespace Prisma {
     reasonCodes?: boolean
     reasons?: boolean
     assessmentVersion?: boolean
+    sourceFingerprint?: boolean
     createdAt?: boolean
     case?: boolean | CaseDefaultArgs<ExtArgs>
     inspection?: boolean | InspectionDefaultArgs<ExtArgs>
@@ -22192,10 +22202,11 @@ export namespace Prisma {
     reasonCodes?: boolean
     reasons?: boolean
     assessmentVersion?: boolean
+    sourceFingerprint?: boolean
     createdAt?: boolean
   }
 
-  export type RiskAssessmentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "caseId" | "inspectionId" | "riskScore" | "riskLevel" | "priorityLevel" | "reasonCodes" | "reasons" | "assessmentVersion" | "createdAt", ExtArgs["result"]["riskAssessment"]>
+  export type RiskAssessmentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "caseId" | "inspectionId" | "riskScore" | "riskLevel" | "priorityLevel" | "reasonCodes" | "reasons" | "assessmentVersion" | "sourceFingerprint" | "createdAt", ExtArgs["result"]["riskAssessment"]>
   export type RiskAssessmentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     case?: boolean | CaseDefaultArgs<ExtArgs>
     inspection?: boolean | InspectionDefaultArgs<ExtArgs>
@@ -22232,6 +22243,7 @@ export namespace Prisma {
       reasonCodes: Prisma.JsonValue
       reasons: Prisma.JsonValue
       assessmentVersion: string
+      sourceFingerprint: string
       createdAt: Date
     }, ExtArgs["result"]["riskAssessment"]>
     composites: {}
@@ -22670,6 +22682,7 @@ export namespace Prisma {
     readonly reasonCodes: FieldRef<"RiskAssessment", 'Json'>
     readonly reasons: FieldRef<"RiskAssessment", 'Json'>
     readonly assessmentVersion: FieldRef<"RiskAssessment", 'String'>
+    readonly sourceFingerprint: FieldRef<"RiskAssessment", 'String'>
     readonly createdAt: FieldRef<"RiskAssessment", 'DateTime'>
   }
 
@@ -36290,6 +36303,7 @@ export namespace Prisma {
     reasonCodes: 'reasonCodes',
     reasons: 'reasons',
     assessmentVersion: 'assessmentVersion',
+    sourceFingerprint: 'sourceFingerprint',
     createdAt: 'createdAt'
   };
 
@@ -38494,6 +38508,7 @@ export namespace Prisma {
     reasonCodes?: JsonFilter<"RiskAssessment">
     reasons?: JsonFilter<"RiskAssessment">
     assessmentVersion?: StringFilter<"RiskAssessment"> | string
+    sourceFingerprint?: StringFilter<"RiskAssessment"> | string
     createdAt?: DateTimeFilter<"RiskAssessment"> | Date | string
     case?: XOR<CaseScalarRelationFilter, CaseWhereInput>
     inspection?: XOR<InspectionScalarRelationFilter, InspectionWhereInput>
@@ -38512,6 +38527,7 @@ export namespace Prisma {
     reasonCodes?: SortOrder
     reasons?: SortOrder
     assessmentVersion?: SortOrder
+    sourceFingerprint?: SortOrder
     createdAt?: SortOrder
     case?: CaseOrderByWithRelationInput
     inspection?: InspectionOrderByWithRelationInput
@@ -38522,6 +38538,7 @@ export namespace Prisma {
 
   export type RiskAssessmentWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    sourceFingerprint?: string
     AND?: RiskAssessmentWhereInput | RiskAssessmentWhereInput[]
     OR?: RiskAssessmentWhereInput[]
     NOT?: RiskAssessmentWhereInput | RiskAssessmentWhereInput[]
@@ -38539,7 +38556,7 @@ export namespace Prisma {
     operationalResponsePlans?: OperationalResponsePlanListRelationFilter
     decisionPackages?: DecisionPackageListRelationFilter
     intelligenceAssessments?: InfrastructureIntelligenceAssessmentListRelationFilter
-  }, "id">
+  }, "id" | "sourceFingerprint">
 
   export type RiskAssessmentOrderByWithAggregationInput = {
     id?: SortOrder
@@ -38551,6 +38568,7 @@ export namespace Prisma {
     reasonCodes?: SortOrder
     reasons?: SortOrder
     assessmentVersion?: SortOrder
+    sourceFingerprint?: SortOrder
     createdAt?: SortOrder
     _count?: RiskAssessmentCountOrderByAggregateInput
     _avg?: RiskAssessmentAvgOrderByAggregateInput
@@ -38572,6 +38590,7 @@ export namespace Prisma {
     reasonCodes?: JsonWithAggregatesFilter<"RiskAssessment">
     reasons?: JsonWithAggregatesFilter<"RiskAssessment">
     assessmentVersion?: StringWithAggregatesFilter<"RiskAssessment"> | string
+    sourceFingerprint?: StringWithAggregatesFilter<"RiskAssessment"> | string
     createdAt?: DateTimeWithAggregatesFilter<"RiskAssessment"> | Date | string
   }
 
@@ -41532,6 +41551,7 @@ export namespace Prisma {
     reasonCodes: JsonNullValueInput | InputJsonValue
     reasons: JsonNullValueInput | InputJsonValue
     assessmentVersion?: string
+    sourceFingerprint: string
     createdAt?: Date | string
     case: CaseCreateNestedOneWithoutRiskAssessmentsInput
     inspection: InspectionCreateNestedOneWithoutRiskAssessmentsInput
@@ -41550,6 +41570,7 @@ export namespace Prisma {
     reasonCodes: JsonNullValueInput | InputJsonValue
     reasons: JsonNullValueInput | InputJsonValue
     assessmentVersion?: string
+    sourceFingerprint: string
     createdAt?: Date | string
     operationalResponsePlans?: OperationalResponsePlanUncheckedCreateNestedManyWithoutRiskAssessmentInput
     decisionPackages?: DecisionPackageUncheckedCreateNestedManyWithoutRiskAssessmentInput
@@ -41564,6 +41585,7 @@ export namespace Prisma {
     reasonCodes?: JsonNullValueInput | InputJsonValue
     reasons?: JsonNullValueInput | InputJsonValue
     assessmentVersion?: StringFieldUpdateOperationsInput | string
+    sourceFingerprint?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     case?: CaseUpdateOneRequiredWithoutRiskAssessmentsNestedInput
     inspection?: InspectionUpdateOneRequiredWithoutRiskAssessmentsNestedInput
@@ -41582,6 +41604,7 @@ export namespace Prisma {
     reasonCodes?: JsonNullValueInput | InputJsonValue
     reasons?: JsonNullValueInput | InputJsonValue
     assessmentVersion?: StringFieldUpdateOperationsInput | string
+    sourceFingerprint?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     operationalResponsePlans?: OperationalResponsePlanUncheckedUpdateManyWithoutRiskAssessmentNestedInput
     decisionPackages?: DecisionPackageUncheckedUpdateManyWithoutRiskAssessmentNestedInput
@@ -41598,6 +41621,7 @@ export namespace Prisma {
     reasonCodes: JsonNullValueInput | InputJsonValue
     reasons: JsonNullValueInput | InputJsonValue
     assessmentVersion?: string
+    sourceFingerprint: string
     createdAt?: Date | string
   }
 
@@ -41609,6 +41633,7 @@ export namespace Prisma {
     reasonCodes?: JsonNullValueInput | InputJsonValue
     reasons?: JsonNullValueInput | InputJsonValue
     assessmentVersion?: StringFieldUpdateOperationsInput | string
+    sourceFingerprint?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -41622,6 +41647,7 @@ export namespace Prisma {
     reasonCodes?: JsonNullValueInput | InputJsonValue
     reasons?: JsonNullValueInput | InputJsonValue
     assessmentVersion?: StringFieldUpdateOperationsInput | string
+    sourceFingerprint?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -44542,6 +44568,7 @@ export namespace Prisma {
     reasonCodes?: SortOrder
     reasons?: SortOrder
     assessmentVersion?: SortOrder
+    sourceFingerprint?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -44557,6 +44584,7 @@ export namespace Prisma {
     riskLevel?: SortOrder
     priorityLevel?: SortOrder
     assessmentVersion?: SortOrder
+    sourceFingerprint?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -44568,6 +44596,7 @@ export namespace Prisma {
     riskLevel?: SortOrder
     priorityLevel?: SortOrder
     assessmentVersion?: SortOrder
+    sourceFingerprint?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -57874,6 +57903,7 @@ export namespace Prisma {
     reasonCodes: JsonNullValueInput | InputJsonValue
     reasons: JsonNullValueInput | InputJsonValue
     assessmentVersion?: string
+    sourceFingerprint: string
     createdAt?: Date | string
     inspection: InspectionCreateNestedOneWithoutRiskAssessmentsInput
     operationalResponsePlans?: OperationalResponsePlanCreateNestedManyWithoutRiskAssessmentInput
@@ -57890,6 +57920,7 @@ export namespace Prisma {
     reasonCodes: JsonNullValueInput | InputJsonValue
     reasons: JsonNullValueInput | InputJsonValue
     assessmentVersion?: string
+    sourceFingerprint: string
     createdAt?: Date | string
     operationalResponsePlans?: OperationalResponsePlanUncheckedCreateNestedManyWithoutRiskAssessmentInput
     decisionPackages?: DecisionPackageUncheckedCreateNestedManyWithoutRiskAssessmentInput
@@ -58374,6 +58405,7 @@ export namespace Prisma {
     reasonCodes?: JsonFilter<"RiskAssessment">
     reasons?: JsonFilter<"RiskAssessment">
     assessmentVersion?: StringFilter<"RiskAssessment"> | string
+    sourceFingerprint?: StringFilter<"RiskAssessment"> | string
     createdAt?: DateTimeFilter<"RiskAssessment"> | Date | string
   }
 
@@ -58776,6 +58808,7 @@ export namespace Prisma {
     reasonCodes: JsonNullValueInput | InputJsonValue
     reasons: JsonNullValueInput | InputJsonValue
     assessmentVersion?: string
+    sourceFingerprint: string
     createdAt?: Date | string
     case: CaseCreateNestedOneWithoutRiskAssessmentsInput
     operationalResponsePlans?: OperationalResponsePlanCreateNestedManyWithoutRiskAssessmentInput
@@ -58792,6 +58825,7 @@ export namespace Prisma {
     reasonCodes: JsonNullValueInput | InputJsonValue
     reasons: JsonNullValueInput | InputJsonValue
     assessmentVersion?: string
+    sourceFingerprint: string
     createdAt?: Date | string
     operationalResponsePlans?: OperationalResponsePlanUncheckedCreateNestedManyWithoutRiskAssessmentInput
     decisionPackages?: DecisionPackageUncheckedCreateNestedManyWithoutRiskAssessmentInput
@@ -59688,6 +59722,7 @@ export namespace Prisma {
     reasonCodes: JsonNullValueInput | InputJsonValue
     reasons: JsonNullValueInput | InputJsonValue
     assessmentVersion?: string
+    sourceFingerprint: string
     createdAt?: Date | string
     case: CaseCreateNestedOneWithoutRiskAssessmentsInput
     inspection: InspectionCreateNestedOneWithoutRiskAssessmentsInput
@@ -59705,6 +59740,7 @@ export namespace Prisma {
     reasonCodes: JsonNullValueInput | InputJsonValue
     reasons: JsonNullValueInput | InputJsonValue
     assessmentVersion?: string
+    sourceFingerprint: string
     createdAt?: Date | string
     operationalResponsePlans?: OperationalResponsePlanUncheckedCreateNestedManyWithoutRiskAssessmentInput
     decisionPackages?: DecisionPackageUncheckedCreateNestedManyWithoutRiskAssessmentInput
@@ -59860,6 +59896,7 @@ export namespace Prisma {
     reasonCodes?: JsonNullValueInput | InputJsonValue
     reasons?: JsonNullValueInput | InputJsonValue
     assessmentVersion?: StringFieldUpdateOperationsInput | string
+    sourceFingerprint?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     case?: CaseUpdateOneRequiredWithoutRiskAssessmentsNestedInput
     inspection?: InspectionUpdateOneRequiredWithoutRiskAssessmentsNestedInput
@@ -59877,6 +59914,7 @@ export namespace Prisma {
     reasonCodes?: JsonNullValueInput | InputJsonValue
     reasons?: JsonNullValueInput | InputJsonValue
     assessmentVersion?: StringFieldUpdateOperationsInput | string
+    sourceFingerprint?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     operationalResponsePlans?: OperationalResponsePlanUncheckedUpdateManyWithoutRiskAssessmentNestedInput
     decisionPackages?: DecisionPackageUncheckedUpdateManyWithoutRiskAssessmentNestedInput
@@ -60183,6 +60221,7 @@ export namespace Prisma {
     reasonCodes: JsonNullValueInput | InputJsonValue
     reasons: JsonNullValueInput | InputJsonValue
     assessmentVersion?: string
+    sourceFingerprint: string
     createdAt?: Date | string
     case: CaseCreateNestedOneWithoutRiskAssessmentsInput
     inspection: InspectionCreateNestedOneWithoutRiskAssessmentsInput
@@ -60200,6 +60239,7 @@ export namespace Prisma {
     reasonCodes: JsonNullValueInput | InputJsonValue
     reasons: JsonNullValueInput | InputJsonValue
     assessmentVersion?: string
+    sourceFingerprint: string
     createdAt?: Date | string
     decisionPackages?: DecisionPackageUncheckedCreateNestedManyWithoutRiskAssessmentInput
     intelligenceAssessments?: InfrastructureIntelligenceAssessmentUncheckedCreateNestedManyWithoutRiskAssessmentInput
@@ -60420,6 +60460,7 @@ export namespace Prisma {
     reasonCodes?: JsonNullValueInput | InputJsonValue
     reasons?: JsonNullValueInput | InputJsonValue
     assessmentVersion?: StringFieldUpdateOperationsInput | string
+    sourceFingerprint?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     case?: CaseUpdateOneRequiredWithoutRiskAssessmentsNestedInput
     inspection?: InspectionUpdateOneRequiredWithoutRiskAssessmentsNestedInput
@@ -60437,6 +60478,7 @@ export namespace Prisma {
     reasonCodes?: JsonNullValueInput | InputJsonValue
     reasons?: JsonNullValueInput | InputJsonValue
     assessmentVersion?: StringFieldUpdateOperationsInput | string
+    sourceFingerprint?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     decisionPackages?: DecisionPackageUncheckedUpdateManyWithoutRiskAssessmentNestedInput
     intelligenceAssessments?: InfrastructureIntelligenceAssessmentUncheckedUpdateManyWithoutRiskAssessmentNestedInput
@@ -60670,6 +60712,7 @@ export namespace Prisma {
     reasonCodes: JsonNullValueInput | InputJsonValue
     reasons: JsonNullValueInput | InputJsonValue
     assessmentVersion?: string
+    sourceFingerprint: string
     createdAt?: Date | string
     case: CaseCreateNestedOneWithoutRiskAssessmentsInput
     inspection: InspectionCreateNestedOneWithoutRiskAssessmentsInput
@@ -60687,6 +60730,7 @@ export namespace Prisma {
     reasonCodes: JsonNullValueInput | InputJsonValue
     reasons: JsonNullValueInput | InputJsonValue
     assessmentVersion?: string
+    sourceFingerprint: string
     createdAt?: Date | string
     operationalResponsePlans?: OperationalResponsePlanUncheckedCreateNestedManyWithoutRiskAssessmentInput
     intelligenceAssessments?: InfrastructureIntelligenceAssessmentUncheckedCreateNestedManyWithoutRiskAssessmentInput
@@ -60955,6 +60999,7 @@ export namespace Prisma {
     reasonCodes?: JsonNullValueInput | InputJsonValue
     reasons?: JsonNullValueInput | InputJsonValue
     assessmentVersion?: StringFieldUpdateOperationsInput | string
+    sourceFingerprint?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     case?: CaseUpdateOneRequiredWithoutRiskAssessmentsNestedInput
     inspection?: InspectionUpdateOneRequiredWithoutRiskAssessmentsNestedInput
@@ -60972,6 +61017,7 @@ export namespace Prisma {
     reasonCodes?: JsonNullValueInput | InputJsonValue
     reasons?: JsonNullValueInput | InputJsonValue
     assessmentVersion?: StringFieldUpdateOperationsInput | string
+    sourceFingerprint?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     operationalResponsePlans?: OperationalResponsePlanUncheckedUpdateManyWithoutRiskAssessmentNestedInput
     intelligenceAssessments?: InfrastructureIntelligenceAssessmentUncheckedUpdateManyWithoutRiskAssessmentNestedInput
@@ -69140,6 +69186,7 @@ export namespace Prisma {
     reasonCodes: JsonNullValueInput | InputJsonValue
     reasons: JsonNullValueInput | InputJsonValue
     assessmentVersion?: string
+    sourceFingerprint: string
     createdAt?: Date | string
   }
 
@@ -69319,6 +69366,7 @@ export namespace Prisma {
     reasonCodes?: JsonNullValueInput | InputJsonValue
     reasons?: JsonNullValueInput | InputJsonValue
     assessmentVersion?: StringFieldUpdateOperationsInput | string
+    sourceFingerprint?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     inspection?: InspectionUpdateOneRequiredWithoutRiskAssessmentsNestedInput
     operationalResponsePlans?: OperationalResponsePlanUpdateManyWithoutRiskAssessmentNestedInput
@@ -69335,6 +69383,7 @@ export namespace Prisma {
     reasonCodes?: JsonNullValueInput | InputJsonValue
     reasons?: JsonNullValueInput | InputJsonValue
     assessmentVersion?: StringFieldUpdateOperationsInput | string
+    sourceFingerprint?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     operationalResponsePlans?: OperationalResponsePlanUncheckedUpdateManyWithoutRiskAssessmentNestedInput
     decisionPackages?: DecisionPackageUncheckedUpdateManyWithoutRiskAssessmentNestedInput
@@ -69350,6 +69399,7 @@ export namespace Prisma {
     reasonCodes?: JsonNullValueInput | InputJsonValue
     reasons?: JsonNullValueInput | InputJsonValue
     assessmentVersion?: StringFieldUpdateOperationsInput | string
+    sourceFingerprint?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -69709,6 +69759,7 @@ export namespace Prisma {
     reasonCodes: JsonNullValueInput | InputJsonValue
     reasons: JsonNullValueInput | InputJsonValue
     assessmentVersion?: string
+    sourceFingerprint: string
     createdAt?: Date | string
   }
 
@@ -69768,6 +69819,7 @@ export namespace Prisma {
     reasonCodes?: JsonNullValueInput | InputJsonValue
     reasons?: JsonNullValueInput | InputJsonValue
     assessmentVersion?: StringFieldUpdateOperationsInput | string
+    sourceFingerprint?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     case?: CaseUpdateOneRequiredWithoutRiskAssessmentsNestedInput
     operationalResponsePlans?: OperationalResponsePlanUpdateManyWithoutRiskAssessmentNestedInput
@@ -69784,6 +69836,7 @@ export namespace Prisma {
     reasonCodes?: JsonNullValueInput | InputJsonValue
     reasons?: JsonNullValueInput | InputJsonValue
     assessmentVersion?: StringFieldUpdateOperationsInput | string
+    sourceFingerprint?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     operationalResponsePlans?: OperationalResponsePlanUncheckedUpdateManyWithoutRiskAssessmentNestedInput
     decisionPackages?: DecisionPackageUncheckedUpdateManyWithoutRiskAssessmentNestedInput
@@ -69799,6 +69852,7 @@ export namespace Prisma {
     reasonCodes?: JsonNullValueInput | InputJsonValue
     reasons?: JsonNullValueInput | InputJsonValue
     assessmentVersion?: StringFieldUpdateOperationsInput | string
+    sourceFingerprint?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 

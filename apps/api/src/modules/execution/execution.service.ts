@@ -12,6 +12,7 @@ const governedProjection=z.object({packageId:z.string().min(1),packageVersion:z.
 export function governedExecutableActions(value:unknown,recommendedActionCodes:unknown){const projection=governedProjection.safeParse(value),selected=actionCodes(recommendedActionCodes);if(!projection.success||!selected)throw new ExecutionError('GOVERNED_ORP_INTEGRITY_ERROR',409,'Governed executable action selection is inconsistent.');const executable=[...projection.data.MANDATORY,...projection.data.RECOMMENDED];if(selected.length!==executable.length||selected.some((code,index)=>code!==executable[index].actionCode)||projection.data.PROHIBITED.some(item=>selected.includes(item.actionCode)))throw new ExecutionError('GOVERNED_ORP_INTEGRITY_ERROR',409,'Governed executable action selection is inconsistent.');return{projection:projection.data,executable};}
 
 const safeUser = { id: true, employeeCode: true, name: true, designation: true, role: true, status: true } as const;
+const safeAssigneeCandidate = { id: true, employeeCode: true, name: true, designation: true } as const;
 const taskInclude = { assignedTo: { select: safeUser }, assignedBy: { select: safeUser }, completionSubmittedBy: { select: safeUser }, verifiedBy: { select: safeUser }, cancelledBy: { select: safeUser }, evidence: { include: { submittedBy: { select: safeUser } }, orderBy: { submittedAt: 'asc' as const } } };
 
 function notFound(resource: 'Execution plan' | 'Execution task'): never { throw new ExecutionError(resource === 'Execution plan' ? 'EXECUTION_PLAN_NOT_FOUND' : 'EXECUTION_TASK_NOT_FOUND', 404, `${resource} not found.`); }
@@ -128,6 +129,35 @@ async function scopedTask(taskId: string, principal: OrganizationalPrincipal) {
   return task;
 }
 
+async function assignmentContext(taskId: string, principal: OrganizationalPrincipal) {
+  const task = await scopedTask(taskId, principal);
+  if (task.status !== ExecutionTaskStatus.PENDING) {
+    throw new ExecutionError('INVALID_EXECUTION_TASK_STATE', 409, 'Task is not pending.');
+  }
+  return {
+    task,
+    eligibility: {
+      status: UserStatus.ACTIVE,
+      role: SystemRole.OFFICER,
+      departmentId: task.executionPlan.case.asset.departmentId,
+      jurisdictionId: task.executionPlan.case.asset.jurisdictionId
+    }
+  };
+}
+
+export async function resolveEligibleExecutionAssignees(taskId: string, principal: OrganizationalPrincipal) {
+  const { eligibility } = await assignmentContext(taskId, principal);
+  return prisma.user.findMany({ where: eligibility, select: safeAssigneeCandidate,
+    orderBy: [{ name: 'asc' }, { employeeCode: 'asc' }, { id: 'asc' }] });
+}
+
+export async function assertEligibleExecutionAssignee(taskId: string, assigneeId: string, principal: OrganizationalPrincipal) {
+  const context = await assignmentContext(taskId, principal);
+  const assignee = await prisma.user.findFirst({ where: { id: assigneeId, ...context.eligibility }, select: safeAssigneeCandidate });
+  if (!assignee) throw new ExecutionError('ASSIGNEE_NOT_ELIGIBLE', 404, 'Eligible assignee not found.');
+  return { ...context, assignee };
+}
+
 async function assertTaskMutable(tx: Prisma.TransactionClient, taskId: string) {
   const current = await tx.executionTask.findUnique({
     where: { id: taskId },
@@ -139,10 +169,7 @@ async function assertTaskMutable(tx: Prisma.TransactionClient, taskId: string) {
 }
 
 export async function assignTask(taskId: string, assigneeId: string, principal: OrganizationalPrincipal) {
-  const task = await scopedTask(taskId, principal);
-  const assignee = await prisma.user.findUnique({ where: { id: assigneeId, departmentId: task.executionPlan.case.asset.departmentId, jurisdictionId: task.executionPlan.case.asset.jurisdictionId } });
-  if (!assignee) throw new ExecutionError('ASSIGNEE_NOT_FOUND', 404, 'Assignee not found.');
-  if (assignee.status !== UserStatus.ACTIVE || assignee.role !== SystemRole.OFFICER) throw new ExecutionError('ASSIGNEE_NOT_ELIGIBLE', 403, 'Assignee must be an active OFFICER.');
+  const { task, assignee } = await assertEligibleExecutionAssignee(taskId, assigneeId, principal);
   return prisma.$transaction(async (tx) => {
     await assertTaskMutable(tx, taskId);
     const changed = await tx.executionTask.updateMany({ where: { id: taskId, status: ExecutionTaskStatus.PENDING }, data: { assignedToId: assignee.id, assignedById: principal.id, assignedAt: new Date(), status: ExecutionTaskStatus.ASSIGNED } });

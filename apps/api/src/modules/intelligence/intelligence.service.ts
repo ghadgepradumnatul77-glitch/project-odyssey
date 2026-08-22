@@ -5,6 +5,7 @@ import { invokeIntelligenceProvider, REFERENCE_CONFIDENCE_SEMANTICS, REFERENCE_M
 import { buildIntelligenceFeatures, createIntelligenceSourceFingerprint, INTELLIGENCE_CONTRACT_VERSION, INTELLIGENCE_FEATURE_SCHEMA_VERSION, isIntelligenceAssessmentStale, reconcileSafetyFloor } from './intelligence.contracts';
 import { appendIntelligenceAssessment, listIntelligenceAssessments } from './intelligence.repository';
 import { reconcileIntelligenceAssessment } from './intelligence-governance.service';
+import { RISK_ASSESSMENT_VERSION } from '../risk/risk.service';
 
 const noAdvisory=(risk:RiskLevel,priority:PriorityLevel)=>reconcileSafetyFloor({deterministicRisk:risk,deterministicPriority:priority});
 
@@ -14,7 +15,7 @@ async function authoritative(caseId:string,principal:OrganizationalPrincipal,mut
   if(!target)throw new Error('CASE_NOT_FOUND');
   if(mutation&&target.status===CaseStatus.CLOSED)throw new Error('INVALID_CASE_STATE');
   const inspection=await prisma.inspection.findFirst({where:{caseId},orderBy:[{createdAt:'desc'},{id:'desc'}]});
-  const assessment=await prisma.riskAssessment.findFirst({where:{caseId},orderBy:[{createdAt:'desc'},{id:'desc'}]});
+  const assessment=await prisma.riskAssessment.findFirst({where:{caseId,assessmentVersion:RISK_ASSESSMENT_VERSION},orderBy:[{createdAt:'desc'},{id:'desc'}]});
   if(!inspection)throw new Error('NO_INSPECTION_FOUND'); if(!assessment)throw new Error('NO_RISK_ASSESSMENT_FOUND');
   if(assessment.inspectionId!==inspection.id)throw new Error('STALE_RISK_ASSESSMENT');
   return {target,inspection,assessment};

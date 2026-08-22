@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import prisma from '../../lib/prisma';
-import { SystemRole } from '../../generated/prisma';
+import { CaseStatus, OrpDecisionType, SystemRole } from '../../generated/prisma';
 import { authenticate } from '../../middleware/authenticate';
 import { requireRole } from '../../middleware/require-role';
 import {
@@ -8,6 +8,7 @@ import {
   buildInspectionReadWhere,
   ScopedResourceNotFoundError
 } from '../../security/organizational-scope';
+import { inspectionCreatedTransition } from '../../workflow/case-state-machine';
 
 const router = Router();
 
@@ -185,10 +186,18 @@ router.post('/', authenticate, requireRole(SystemRole.OFFICER), async (req, res)
 
     const targetCase = await assertOperationalCaseScope(caseId.trim(), req.user!);
 
-    if (targetCase.status === 'CLOSED') {
+    const latestDecision = targetCase.status === CaseStatus.UNDER_REVIEW
+      ? await prisma.orpDecision.findFirst({
+          where: { caseId: targetCase.id },
+          orderBy: [{ createdAt: 'desc' }, { id: 'desc' }],
+          select: { decisionType: true }
+        })
+      : null;
+    const nextStatus = inspectionCreatedTransition(targetCase.status, latestDecision?.decisionType as OrpDecisionType | undefined);
+    if (!nextStatus) {
       return res.status(409).json({
         success: false,
-        error: { code: 'INVALID_CASE_STATE', message: 'A closed Case cannot receive new inspections.' }
+        error: { code: 'INVALID_CASE_STATE', message: 'The Case is not in a state that permits a new inspection.' }
       });
     }
 
@@ -290,10 +299,10 @@ router.post('/', authenticate, requireRole(SystemRole.OFFICER), async (req, res)
         }
       });
 
-      if (targetCase.status === 'NEW') {
+      if (targetCase.status !== nextStatus) {
         await tx.case.update({
           where: { id: targetCase.id },
-          data: { status: 'INSPECTION_IN_PROGRESS' }
+          data: { status: nextStatus }
         });
       }
 

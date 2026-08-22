@@ -2,6 +2,7 @@ import type { OrganizationalPrincipal } from '../../security/organizational-scop
 import { assertVisibleCase } from '../../security/organizational-scope';
 import prisma from '../../lib/prisma';
 import { resolveCasePolicy } from '../policy-registry/policy-registry.service';
+import { RISK_ASSESSMENT_VERSION } from '../risk/risk.service';
 
 export const READINESS_ASSESSMENT_VERSION = 'ODYSSEY_READINESS_V1';
 
@@ -71,7 +72,7 @@ export async function evaluateCaseReadiness(caseId: string, principal: Organizat
         }
       },
       inspections: { orderBy: [{ createdAt: 'desc' }, { id: 'desc' }], take: 1, select: { id: true, createdAt: true } },
-      riskAssessments: { orderBy: [{ createdAt: 'desc' }, { id: 'desc' }], take: 1, select: { id: true, inspectionId: true, riskLevel: true, priorityLevel: true, assessmentVersion: true, createdAt: true } }
+      riskAssessments: { where: { assessmentVersion: RISK_ASSESSMENT_VERSION }, orderBy: [{ createdAt: 'desc' }, { id: 'desc' }], take: 1, select: { id: true, inspectionId: true, riskLevel: true, priorityLevel: true, assessmentVersion: true, createdAt: true } }
     }
   });
   if (!target) throw new Error('CASE_NOT_FOUND');

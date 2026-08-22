@@ -11,6 +11,7 @@ const mocks = vi.hoisted(() => ({
   inspectionFindMany: vi.fn(),
   caseFindUnique: vi.fn(),
   inspectionCreate: vi.fn(),
+  orpDecisionFindFirst: vi.fn(),
   caseUpdate: vi.fn(),
   departmentCount: vi.fn(), jurisdictionCount: vi.fn(), userCount: vi.fn(), assetCount: vi.fn()
 }));
@@ -22,6 +23,7 @@ vi.mock('../src/lib/prisma', () => ({
     jurisdiction: { count: mocks.jurisdictionCount },
     asset: { count: mocks.assetCount },
     inspection: { findMany: mocks.inspectionFindMany },
+    orpDecision: { findFirst: mocks.orpDecisionFindFirst },
     case: { findUnique: mocks.caseFindUnique },
     $transaction: (callback: (tx: unknown) => unknown) => callback({
       inspection: { create: mocks.inspectionCreate }, case: { update: mocks.caseUpdate }
@@ -89,7 +91,7 @@ describe('authorization surface', () => {
   });
 
   it('uses authenticated officer identity and preserves inspection scope validation', async () => {
-    mocks.caseFindUnique.mockResolvedValue({ id: 'case-1', status: 'UNDER_ANALYSIS', asset: { departmentId: 'dep-1', jurisdictionId: 'jur-1' } });
+    mocks.caseFindUnique.mockResolvedValue({ id: 'case-1', status: 'NEW', asset: { departmentId: 'dep-1', jurisdictionId: 'jur-1' } });
     mocks.inspectionCreate.mockResolvedValue({ id: 'inspection-1', inspectorId: 'authenticated-inspector' });
     const body = {
       caseId: 'case-1', inspectionDate: '2026-08-13T00:00:00Z', structuralCondition: 'POOR',
@@ -103,6 +105,26 @@ describe('authorization surface', () => {
       data: expect.objectContaining({ inspectorId: 'authenticated-inspector' })
     }));
   });
+
+  it.each(['MODIFICATION_REQUESTED', 'REJECTED', 'ESCALATED'])(
+    'allows explicit UNDER_REVIEW recovery after %s only by creating a new inspection', async (decisionType) => {
+      mocks.caseFindUnique.mockResolvedValue({ id: 'case-1', status: 'UNDER_REVIEW', asset: { departmentId: 'dep-1', jurisdictionId: 'jur-1' } });
+      mocks.orpDecisionFindFirst.mockResolvedValue({ decisionType });
+      mocks.inspectionCreate.mockResolvedValue({ id: `inspection-${decisionType}`, inspectorId: 'authenticated-inspector' });
+      const body = { caseId: 'case-1', inspectionDate: '2026-08-22T00:00:00Z', structuralCondition: 'POOR', crackSeverity: 'SEVERE', corrosionLevel: 'MODERATE', trafficImportance: 'HIGH', hospitalRoute: true, weatherRisk: 'HIGH', heavyRainExpected: true };
+      await request(app).post('/api/v1/inspections').set('Authorization', await authorization('OFFICER', 'authenticated-inspector')).send(body).expect(201);
+      expect(mocks.caseUpdate).toHaveBeenCalledWith({ where: { id: 'case-1' }, data: { status: 'INSPECTION_IN_PROGRESS' } });
+    }
+  );
+
+  it.each(['ORP_READY', 'APPROVED', 'EXECUTION', 'VERIFICATION', 'CLOSED', 'CANCELLED'])(
+    'does not reopen %s through the inspection endpoint', async (status) => {
+      mocks.caseFindUnique.mockResolvedValue({ id: 'case-1', status, asset: { departmentId: 'dep-1', jurisdictionId: 'jur-1' } });
+      const body = { caseId: 'case-1', inspectionDate: '2026-08-22T00:00:00Z', structuralCondition: 'POOR', crackSeverity: 'SEVERE', corrosionLevel: 'MODERATE', trafficImportance: 'HIGH', hospitalRoute: true, weatherRisk: 'HIGH', heavyRainExpected: true };
+      await request(app).post('/api/v1/inspections').set('Authorization', await authorization('OFFICER')).send(body).expect(409);
+      expect(mocks.inspectionCreate).not.toHaveBeenCalled();
+    }
+  );
 
   it('hides a cross-scope inspection target from the authenticated inspector', async () => {
     mocks.caseFindUnique.mockResolvedValue({ id: 'case-1', asset: { departmentId: 'dep-2', jurisdictionId: 'jur-1' } });

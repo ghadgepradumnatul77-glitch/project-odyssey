@@ -47,6 +47,13 @@ describe('Governed Decision Package', () => {
     expect(mocks.packageCreate.mock.calls[0][0].data.packageVersion).toBe(5); expect(mocks.packageUpdateMany).toHaveBeenCalledWith(expect.objectContaining({ data: { status: 'SUPERSEDED' } }));
     expect(mocks.packageUpdateMany.mock.calls[0][0].data).not.toHaveProperty('caseSnapshot');
   });
+  it('creates a new package version from recovered inspection and risk lineage', async () => {
+    const recovered = { ...target, inspections: [{ ...target.inspections[0], id: 'inspection-recovery' }], riskAssessments: [{ ...target.riskAssessments[0], id: 'risk-recovery', inspectionId: 'inspection-recovery' }] };
+    mocks.caseFind.mockResolvedValue(recovered); mocks.packageFindFirst.mockResolvedValue({ packageVersion: 1 });
+    await prepareDecisionPackage('case', principal, at);
+    expect(mocks.packageCreate.mock.calls[0][0].data).toMatchObject({ packageVersion: 2, inspectionId: 'inspection-recovery', riskAssessmentId: 'risk-recovery' });
+    expect(mocks.packageUpdateMany).toHaveBeenCalledWith(expect.objectContaining({ data: { status: 'SUPERSEDED' } }));
+  });
   it('recovers concurrent identical creation through the fingerprint uniqueness constraint', async () => {
     const collision = new Prisma.PrismaClientKnownRequestError('unique', { code: 'P2002', clientVersion: 'test' });
     mocks.transaction.mockRejectedValueOnce(collision); mocks.packageFindUnique.mockResolvedValueOnce(null).mockResolvedValueOnce(record);

@@ -567,6 +567,7 @@ model RiskAssessment {
   reasonCodes       Json
   reasons           Json
   assessmentVersion String        @default("ODYSSEY_RISK_V1")
+  sourceFingerprint String        @unique
   createdAt         DateTime      @default(now())
 
   case                     Case                      @relation(fields: [caseId], references: [id], onDelete: Cascade)

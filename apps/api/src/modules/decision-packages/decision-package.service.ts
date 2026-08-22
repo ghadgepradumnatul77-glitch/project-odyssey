@@ -5,6 +5,7 @@ import type { OrganizationalPrincipal } from '../../security/organizational-scop
 import { assertVisibleCase, buildCaseReadWhere } from '../../security/organizational-scope';
 import { resolveCasePolicy } from '../policy-registry/policy-registry.service';
 import { evaluateCaseReadiness } from '../readiness/readiness.service';
+import { RISK_ASSESSMENT_VERSION } from '../risk/risk.service';
 
 export const DECISION_PACKAGE_CONTRACT_VERSION = 'ODYSSEY_DECISION_PACKAGE_V1';
 
@@ -34,7 +35,7 @@ async function authoritativeSource(caseId: string, principal: OrganizationalPrin
       id: true, caseNumber: true, title: true, status: true, emergencyFlag: true,
       asset: { select: { id: true, assetCode: true, name: true, assetType: true, department: { select: { id: true, code: true, name: true } }, jurisdiction: { select: { id: true, name: true, type: true } } } },
       inspections: { orderBy: [{ createdAt: 'desc' }, { id: 'desc' }], take: 1, select: { id: true, inspectionDate: true, structuralCondition: true, crackSeverity: true, corrosionLevel: true, trafficImportance: true, hospitalRoute: true, weatherRisk: true, heavyRainExpected: true, estimatedDailyUsers: true } },
-      riskAssessments: { orderBy: [{ createdAt: 'desc' }, { id: 'desc' }], take: 1, select: { id: true, inspectionId: true, riskScore: true, riskLevel: true, priorityLevel: true, reasonCodes: true, reasons: true, assessmentVersion: true, createdAt: true } }
+      riskAssessments: { where: { assessmentVersion: RISK_ASSESSMENT_VERSION }, orderBy: [{ createdAt: 'desc' }, { id: 'desc' }], take: 1, select: { id: true, inspectionId: true, riskScore: true, riskLevel: true, priorityLevel: true, reasonCodes: true, reasons: true, assessmentVersion: true, createdAt: true } }
     }
   });
   if (!target) throw new DecisionPackageError('CASE_NOT_FOUND', 404, 'Case not found.');

@@ -14,6 +14,23 @@ export interface OrganizationalScope {
   jurisdictionId: string;
 }
 
+export interface GovernanceRegistryScope {
+  departmentId: string | null;
+  jurisdictionId: string | null;
+}
+
+export function defaultGovernanceCreateScope<T extends { departmentId?: string | null; jurisdictionId?: string | null }>(input: T, principal: OrganizationalPrincipal): T {
+  if (principal.role !== SystemRole.POLICY_ADMIN || input.departmentId !== undefined || input.jurisdictionId !== undefined) return input;
+  return { ...input, departmentId: principal.departmentId, jurisdictionId: principal.jurisdictionId };
+}
+
+export class GovernanceResourceNotFoundError extends Error {
+  constructor() {
+    super('GOVERNANCE_RESOURCE_NOT_FOUND');
+    this.name = 'GovernanceResourceNotFoundError';
+  }
+}
+
 export class ScopedResourceNotFoundError extends Error {
   constructor(public readonly code: 'ASSET_NOT_FOUND' | 'CASE_NOT_FOUND' | 'ORP_NOT_FOUND') {
     super(code);
@@ -31,6 +48,63 @@ export function isSameOrganizationalScope(
 
 export function hasGlobalReadVisibility(principal: OrganizationalPrincipal): boolean {
   return principal.role === SystemRole.SYSTEM_ADMIN;
+}
+
+/** Global governance records are readable by scoped policy administrators because they apply to every scope. */
+export function buildGovernanceRegistryReadWhere(principal: OrganizationalPrincipal) {
+  if (principal.role === SystemRole.SYSTEM_ADMIN) return {};
+  return {
+    OR: [
+      { departmentId: null, jurisdictionId: null },
+      { departmentId: principal.departmentId, jurisdictionId: null },
+      { departmentId: principal.departmentId, jurisdictionId: principal.jurisdictionId }
+    ]
+  };
+}
+
+export function canMutateGovernanceScope(
+  principal: OrganizationalPrincipal,
+  target: GovernanceRegistryScope
+): boolean {
+  if (principal.role === SystemRole.SYSTEM_ADMIN) return true;
+  if (principal.role !== SystemRole.POLICY_ADMIN || target.departmentId !== principal.departmentId) return false;
+  return target.jurisdictionId === null || target.jurisdictionId === principal.jurisdictionId;
+}
+
+/** A global source applies everywhere; department-wide applies below that department; jurisdiction scope is exact. */
+export function governanceScopeAppliesToTarget(
+  source: GovernanceRegistryScope,
+  target: GovernanceRegistryScope
+): boolean {
+  if (source.departmentId === null) return source.jurisdictionId === null;
+  if (source.departmentId !== target.departmentId) return false;
+  return source.jurisdictionId === null || source.jurisdictionId === target.jurisdictionId;
+}
+
+export function assertGovernanceEntityMutationScope(
+  principal: OrganizationalPrincipal,
+  target: GovernanceRegistryScope | null | undefined
+) {
+  if (!target || !canMutateGovernanceScope(principal, target)) throw new GovernanceResourceNotFoundError();
+  return target;
+}
+
+export async function assertGovernanceCreateScope(
+  principal: OrganizationalPrincipal,
+  departmentId?: string | null,
+  jurisdictionId?: string | null
+): Promise<GovernanceRegistryScope> {
+  const target = { departmentId: departmentId ?? null, jurisdictionId: jurisdictionId ?? null };
+  if (!canMutateGovernanceScope(principal, target) || (target.jurisdictionId !== null && target.departmentId === null)) {
+    throw new GovernanceResourceNotFoundError();
+  }
+  const exists = target.jurisdictionId !== null
+    ? await prisma.jurisdiction.count({ where: { id: target.jurisdictionId, departmentId: target.departmentId! } })
+    : target.departmentId !== null
+      ? await prisma.department.count({ where: { id: target.departmentId } })
+      : 1;
+  if (!exists) throw new GovernanceResourceNotFoundError();
+  return target;
 }
 
 function assetScope(principal: OrganizationalPrincipal): Prisma.AssetWhereInput {
