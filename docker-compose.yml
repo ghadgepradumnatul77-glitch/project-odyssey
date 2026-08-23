@@ -1,15 +1,96 @@
 services:
   db:
     image: postgres:16
-    container_name: odyssey-postgres
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: odyssey
-    ports:
-      - "5432:5432"
+      POSTGRES_USER: ${ODYSSEY_DB_USER:-odyssey}
+      POSTGRES_DB: ${ODYSSEY_DB_NAME:-odyssey}
+      POSTGRES_PASSWORD: ${ODYSSEY_DB_PASSWORD:?set ODYSSEY_DB_PASSWORD in .env.pilot}
     volumes:
       - odyssey_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${ODYSSEY_DB_USER:-odyssey} -d ${ODYSSEY_DB_NAME:-odyssey}"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+    restart: unless-stopped
+    networks: [odyssey-internal]
+
+  migrate:
+    build:
+      context: .
+      dockerfile: apps/api/Dockerfile
+      target: migration
+    environment:
+      DATABASE_URL: ${ODYSSEY_DATABASE_URL:?set ODYSSEY_DATABASE_URL with host db}
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: "no"
+    networks: [odyssey-internal]
+
+  api:
+    build:
+      context: .
+      dockerfile: apps/api/Dockerfile
+      target: api-runtime
+    environment:
+      NODE_ENV: production
+      API_PORT: 4000
+      WEB_ORIGIN: ${ODYSSEY_WEB_ORIGIN:-http://localhost:8080}
+      DATABASE_URL: ${ODYSSEY_DATABASE_URL:?set ODYSSEY_DATABASE_URL with host db}
+      JWT_SECRET: ${JWT_SECRET:?set JWT_SECRET in .env.pilot}
+      JWT_ISSUER: ${JWT_ISSUER:-project-odyssey-api}
+      JWT_AUDIENCE: ${JWT_AUDIENCE:-project-odyssey-clients}
+      JWT_ACCESS_TTL_SECONDS: ${JWT_ACCESS_TTL_SECONDS:-900}
+      ODYSSEY_INTELLIGENCE_SERVICE_URL: http://ai:8000
+      ODYSSEY_INTELLIGENCE_TIMEOUT_MS: ${ODYSSEY_INTELLIGENCE_TIMEOUT_MS:-2000}
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+    ports:
+      - "${ODYSSEY_API_PORT:-4000}:4000"
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:4000/api/v1/health').then(r=>{if(!r.ok)process.exit(1)}).catch(()=>process.exit(1))"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 10s
+    restart: unless-stopped
+    networks: [odyssey-internal]
+
+  web:
+    build:
+      context: .
+      dockerfile: apps/web/Dockerfile
+    depends_on:
+      api:
+        condition: service_healthy
+    ports:
+      - "${ODYSSEY_WEB_PORT:-8080}:8080"
+    healthcheck:
+      test: ["CMD", "wget", "-q", "--spider", "http://127.0.0.1:8080/"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+    restart: unless-stopped
+    networks: [odyssey-internal]
+
+  ai:
+    profiles: ["ai"]
+    build:
+      context: .
+      dockerfile: apps/ai/Dockerfile
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health', timeout=3)"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+    restart: unless-stopped
+    networks: [odyssey-internal]
 
 volumes:
   odyssey_pgdata:
+
+networks:
+  odyssey-internal:
+    driver: bridge

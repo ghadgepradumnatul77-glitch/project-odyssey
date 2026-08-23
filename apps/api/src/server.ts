@@ -292,12 +292,25 @@ app.use((_req, res) => {
 // START SERVER
 // ======================================================
 
-if (process.env.NODE_ENV !== 'test') app.listen(port, () => {
+if (process.env.NODE_ENV !== 'test') {
+const server = app.listen(port, () => {
 
   console.log(
     `ODYSSEY API running on http://localhost:${port}`
   );
 
 });
+server.on('error', (error: NodeJS.ErrnoException) => {
+  if (error.code === 'EADDRINUSE') {
+    console.error(
+      `ODYSSEY_API_PORT_IN_USE: port ${port} is already occupied. Identify the owning process; Odyssey will not stop it or choose another port.`
+    );
+    process.exitCode = 1;
+    return;
+  }
+  console.error('ODYSSEY_API_START_FAILED:', error.message);
+  process.exitCode = 1;
+});
+}
 
 export { app };

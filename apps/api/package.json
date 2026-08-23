@@ -2,9 +2,9 @@
   "name": "odyssey-api",
   "private": true,
   "scripts": {
-    "dev": "npm run build && node dist/server.js",
-    "build": "tsc && node scripts/copy-generated-prisma.cjs",
-    "start": "node dist/server.js",
+    "dev": "npm run build && node scripts/start-runtime.cjs",
+    "build": "node scripts/build-runtime.cjs",
+    "start": "node scripts/start-runtime.cjs",
     "test": "vitest run",
     "demo": "node --experimental-strip-types scripts/bootstrap-demo.ts --public-reports-only",
     "demo:bootstrap": "node --experimental-transform-types scripts/governed-demo.ts",

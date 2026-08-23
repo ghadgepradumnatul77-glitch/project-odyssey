@@ -21,6 +21,8 @@ npm run dev
 
 Root `npm run dev` supervises API :4000 and web :5173, stopping the peer when one fails. It does not start PostgreSQL or Python.
 
+The API build publishes an immutable, versioned runtime under the ignored `apps/api/.runtime-builds` directory. `npm start` resolves the atomically published current-build pointer. A later `npm run build` therefore does not overwrite files used by an already-running API and is supported while that API remains active.
+
 - API health: http://localhost:4000/api/v1/health
 - Web: http://localhost:5173
 - Optional intelligence health: http://localhost:8000/health
@@ -96,7 +98,7 @@ Migration `20260822210000_add_intelligence_provider_type` was safe on the curren
 
 Optional `npx prisma studio --schema database/prisma/schema.prisma` exposes operational data and must remain trusted/local.
 
-Start with `npm run dev`; stop foreground services with Ctrl+C. Stop only the database using `docker compose stop db`. Do not add `-v` unless volume deletion is explicitly authorized. Identify ownership before stopping any process holding ports 4000, 5173, 8000, 4100 or 5174.
+Start with `npm run dev`; stop foreground services with Ctrl+C. The root supervisor targets only the API/frontend process trees it started and waits up to five seconds for their PIDs to disappear. Stop only the database using `docker compose stop db`. Do not add `-v` unless volume deletion is explicitly authorized. Identify ownership before stopping any process holding ports 4000, 5173, 8000, 4100 or 5174.
 
 ## Optional intelligence service
 
@@ -109,6 +111,56 @@ python -m uvicorn app.main:app --reload --port 8000
 ```
 
 POSIX activation is `source .venv/bin/activate`. The provider accepts structured non-PII features, has no database and may abstain. It cannot approve, execute, verify or close.
+
+## Pilot Compose deployment
+
+This is a single-host pilot package, not production high availability. It requires Docker with the Compose plugin. Local development continues to use `npm run dev`; the commands below use production builds and isolated container networking.
+
+1. Copy `.env.pilot.example` to the ignored file `.env.pilot`.
+2. Replace every `replace-*` value. Use a long random JWT secret and a URL-safe database password; keep `ODYSSEY_DATABASE_URL` consistent with the database settings and container host `db`.
+3. Review the populated-database migration caveats above.
+4. Start the deterministic stack:
+
+```powershell
+node scripts/pilot-compose.mjs --env-file .env.pilot up --build -d
+docker compose --env-file .env.pilot ps
+```
+
+The pilot launcher rejects occupied API or Web host ports explicitly and never selects an alternate port, including on Docker Desktop/WSL hosts whose forwarding layer may otherwise accept an ambiguous duplicate publication. It then delegates the unchanged arguments to Compose. Compose starts PostgreSQL, waits for its health check, runs the one-shot `prisma migrate deploy` service, then starts the API and waits for API health before starting the web server. No reset, development migration, seed, or G6 bootstrap runs automatically.
+
+Pilot endpoints:
+
+- Web and same-origin API proxy: `http://localhost:8080`
+- Direct API diagnostics: `http://localhost:4000/api/v1/health`
+- PostgreSQL and AI are internal by default.
+
+Enable the optional advisory provider with:
+
+```powershell
+node scripts/pilot-compose.mjs --env-file .env.pilot --profile ai up --build -d
+```
+
+The API does not depend on AI container health. Without the profile—or while AI is unavailable—core deterministic workflow remains available and intelligence invocation fails safely. The provider remains `REFERENCE_NON_ML`, stateless, non-authoritative and untrained.
+
+Useful operations:
+
+```powershell
+docker compose --env-file .env.pilot logs -f api web migrate
+docker compose --env-file .env.pilot restart api web
+docker compose --env-file .env.pilot down
+```
+
+`down` preserves the named PostgreSQL volume. A later `up` reuses it. Only an explicitly authorized isolated pilot cleanup should use `docker compose --project-name <verified-isolated-name> down --volumes`; never use volume deletion against an unverified or canonical project.
+
+To verify or populate the governed synthetic demo, wait for stack health and run the existing API commands from a separately configured operator environment. Set `ODYSSEY_API_BASE_URL=http://localhost:4000/api/v1` and the six private demo passwords, then run the documented dry-run/bootstrap/idempotency/verification sequence. Demo bootstrap remains explicit.
+
+Deployment troubleshooting:
+
+- If `migrate` fails, inspect its logs and the external `ODYSSEY_DATABASE_URL`; do not reset the database.
+- If API startup rejects `JWT_SECRET`, supply a non-placeholder value of at least 32 characters.
+- If web loads but API calls fail, verify API health, `ODYSSEY_WEB_ORIGIN`, and the nginx `/api/` proxy.
+- Host-port collisions are reported by Docker/API; identify ownership and never kill an unknown process.
+- Container logs use stdout/stderr. No Docker socket, privileged mode, host source mount, or application log volume is required.
 
 ## Roles and scope
 
@@ -205,7 +257,7 @@ Repository checks: `npx prisma validate --schema database/prisma/schema.prisma`,
 
 The C6 Playwright suite uses API :4100, web :5174 and a guarded temporary PostgreSQL schema with prefix `odyssey_e2e_c6`. It migrates/seeds only that schema and teardown drops it; it refuses canonical/default schema and does not run G6 bootstrap. Set optional `C6_E2E_PASSWORD` only locally. Verify the DB server and ports first. After interruption, rerun for cleanup, then inspect for `odyssey_e2e_c6%` before any manual action; never blindly drop a schema.
 
-On Windows an active API may lock `dist` during final build replacement. Identify and stop it only if owned, then retry; the lock is not a TypeScript failure.
+The legacy mutable `apps/api/dist` layout is no longer the build/runtime boundary. Each API build compiles and packages Prisma into a private staging directory, validates required runtime files, and only then publishes a new immutable version. Partial staging output is never selected by `npm start`.
 
 ## Troubleshooting
 
@@ -213,7 +265,9 @@ On Windows an active API may lock `dist` during final build replacement. Identif
 - **CORS:** make `WEB_ORIGIN` exactly match the browser origin and restart API; set `VITE_API_BASE_URL` before Vite starts.
 - **Prisma connection:** verify Postgres, database, URL and credentials; run validate/status, not reset.
 - **Fingerprint migration:** preserve failure output and remediate duplicates under reviewed backup/governance.
-- **Port/build lock:** identify listener and working directory; never kill an unknown process.
+- **Port 4000/5173 collision:** Odyssey does not kill the listener or silently select a new port. Identify its PID and ownership. Stop it only when it is a confirmed process you own.
+- **Prisma runtime lock:** normal builds no longer modify the live runtime. The standalone copy helper reports `PRISMA_RUNTIME_IN_USE` if explicitly asked to replace an occupied destination; it never retries forever or kills a process.
+- **Old immutable builds:** versioned API runtimes are ignored local artifacts. After all Odyssey API processes are confirmed stopped, old directories under `apps/api/.runtime-builds` may be removed; retain `current.json` and its referenced directory when the current package is needed.
 - **Prisma Studio `ECONNRESET`:** retry the local connection and inspect network/process state; it is not evidence of database corruption.
 - **Demo `AUTH_RATE_LIMITED`:** do not weaken the limiter; allow its window to reset. Bootstrap already authenticates lazily.
 - **Demo `INVALID_CREDENTIALS`:** verify private synthetic credential configuration; never hard-code or bypass authentication.

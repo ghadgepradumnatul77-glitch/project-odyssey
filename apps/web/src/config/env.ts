@@ -3,12 +3,13 @@ const DEVELOPMENT_API_BASE_URL = 'http://localhost:4000/api/v1';
 export function normalizeApiBaseUrl(value: string): string {
   const normalized = value.trim().replace(/\/+$/, '');
   if (!normalized) throw new Error('VITE_API_BASE_URL must not be empty.');
+  if (normalized.startsWith('/') && !normalized.startsWith('//')) return normalized;
 
   let parsed: URL;
   try {
     parsed = new URL(normalized);
   } catch {
-    throw new Error('VITE_API_BASE_URL must be a valid absolute URL.');
+    throw new Error('VITE_API_BASE_URL must be an absolute HTTP(S) URL or a root-relative path.');
   }
   if (parsed.protocol !== 'http:' && parsed.protocol !== 'https:') {
     throw new Error('VITE_API_BASE_URL must use HTTP or HTTPS.');
