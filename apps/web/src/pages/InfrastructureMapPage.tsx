@@ -7,9 +7,10 @@ import { listMapCases, type CaseStatus, type CaseSummary, type PriorityLevel } f
 import { listMapAssets, type AssetDto } from '../api/admin.api';
 import { useAuth } from '../auth/useAuth';
 import { Empty, ErrorState, Loading } from '../components/AsyncState';
+import { getHotspotAnalysis, type Hotspot, type HotspotAnalysis } from '../api/geospatial.api';
 
-type Layer = 'reports' | 'cases' | 'assets';
-type Selected = { kind: 'report'; item: PublicReportSummary } | { kind: 'case'; item: CaseSummary } | { kind: 'asset'; item: AssetDto };
+type Layer = 'reports' | 'cases' | 'assets' | 'hotspots';
+type Selected = { kind: 'report'; item: PublicReportSummary } | { kind: 'case'; item: CaseSummary } | { kind: 'asset'; item: AssetDto } | {kind:'hotspot';item:Hotspot};
 const reportStatuses: PublicReportStatus[] = ['SUBMITTED', 'UNDER_REVIEW', 'ACCEPTED', 'REJECTED'];
 const priorities: PriorityLevel[] = ['CRITICAL', 'VERY_HIGH', 'HIGH', 'MEDIUM', 'LOW'];
 const caseStatuses: CaseStatus[] = ['NEW', 'INSPECTION_REQUIRED', 'INSPECTION_IN_PROGRESS', 'UNDER_ANALYSIS', 'ORP_READY', 'UNDER_REVIEW', 'APPROVED', 'EXECUTION', 'VERIFICATION', 'CLOSED'];
@@ -28,8 +29,9 @@ export default function InfrastructureMapPage({ onOpenReport, onOpenCase }: { on
   const [reports, setReports] = useState<PublicReportSummary[]>([]);
   const [cases, setCases] = useState<CaseSummary[]>([]);
   const [assets, setAssets] = useState<AssetDto[]>([]);
+  const [hotspotAnalysis,setHotspotAnalysis]=useState<HotspotAnalysis|null>(null);
   const [truncatedLayers, setTruncatedLayers] = useState<Layer[]>([]);
-  const [layers, setLayers] = useState<Record<Layer, boolean>>({ reports: true, cases: true, assets: true });
+  const [layers, setLayers] = useState<Record<Layer, boolean>>({ reports: true, cases: true, assets: true, hotspots:true });
   const [reportStatus, setReportStatus] = useState('');
   const [priority, setPriority] = useState('');
   const [caseStatus, setCaseStatus] = useState('');
@@ -43,9 +45,11 @@ export default function InfrastructureMapPage({ onOpenReport, onOpenCase }: { on
     if (!token) return;
     const controller = new AbortController();
     setLoading(true); setError(null);
-    Promise.all([listMapPublicReports(token, controller.signal), listMapCases(token, controller.signal), listMapAssets(token, controller.signal)])
-      .then(([reportPage, casePage, assetPage]) => {
+    const hotspotQuery=new URLSearchParams();if(jurisdiction)hotspotQuery.set('jurisdictionId',jurisdiction);if(priority)hotspotQuery.set('minimumPriority',priority);
+    Promise.all([listMapPublicReports(token, controller.signal), listMapCases(token, controller.signal), listMapAssets(token, controller.signal),getHotspotAnalysis(token,hotspotQuery.toString(),controller.signal)])
+      .then(([reportPage, casePage, assetPage,hotspots]) => {
         setReports(reportPage.items); setCases(casePage.items); setAssets(assetPage.items);
+        setHotspotAnalysis(hotspots);
         setTruncatedLayers([
           ...(reportPage.truncated ? ['reports' as const] : []),
           ...(casePage.truncated ? ['cases' as const] : []),
@@ -55,13 +59,14 @@ export default function InfrastructureMapPage({ onOpenReport, onOpenCase }: { on
       .catch((reason) => { if (!controller.signal.aborted) setError(reason); })
       .finally(() => { if (!controller.signal.aborted) setLoading(false); });
     return () => controller.abort();
-  }, [reload, token]);
+  }, [jurisdiction,priority,reload, token]);
 
   const visibleReports = useMemo(() => reports.filter((item) => layers.reports && hasCoordinates(item) && (!reportStatus || item.status === reportStatus) && (!jurisdiction || item.jurisdiction?.id === jurisdiction)), [jurisdiction, layers.reports, reportStatus, reports]);
   const visibleCases = useMemo(() => cases.filter((item) => layers.cases && hasCoordinates(item.asset) && (!priority || item.priorityLevel === priority) && (!caseStatus || item.status === caseStatus) && (!jurisdiction || item.asset.jurisdiction.id === jurisdiction)), [caseStatus, cases, jurisdiction, layers.cases, priority]);
   const visibleAssets = useMemo(() => assets.filter((item) => layers.assets && hasCoordinates(item) && (!jurisdiction || item.jurisdiction.id === jurisdiction)), [assets, jurisdiction, layers.assets]);
+  const visibleHotspots=useMemo(()=>layers.hotspots?(hotspotAnalysis?.hotspots??[]):[],[hotspotAnalysis,layers.hotspots]);
   const jurisdictions = useMemo(() => [...new Map([...assets.map((item) => item.jurisdiction), ...cases.map((item) => item.asset.jurisdiction)].map((item) => [item.id, item])).values()], [assets, cases]);
-  const positions = [...visibleReports.map((item) => positionOf(item)! as LatLngExpression), ...visibleCases.map((item) => positionOf(item.asset)! as LatLngExpression), ...visibleAssets.map((item) => positionOf(item)! as LatLngExpression)];
+  const positions = [...visibleReports.map((item) => positionOf(item)! as LatLngExpression), ...visibleCases.map((item) => positionOf(item.asset)! as LatLngExpression), ...visibleAssets.map((item) => positionOf(item)! as LatLngExpression),...visibleHotspots.map(item=>[item.center.latitude,item.center.longitude] as LatLngExpression)];
   const center = positions[0] ?? [18.5204, 73.8567];
   const mappedCount = reports.filter(hasCoordinates).length + cases.filter((item) => hasCoordinates(item.asset)).length + assets.filter(hasCoordinates).length;
   const unmappedCount = reports.length + cases.length + assets.length - mappedCount;
@@ -76,14 +81,15 @@ export default function InfrastructureMapPage({ onOpenReport, onOpenCase }: { on
     <div className="demo-map-note">Demo environment — locations shown are representative test coordinates.</div>
     {truncatedLayers.length > 0 && <div className="map-data-notice" role="status"><strong>Bounded map view</strong><p>Showing the first 250 authorized records for: {truncatedLayers.map(categoryLabel).join(', ')}. This map is not a complete count for those layers.</p></div>}
     {unmappedCount > 0 && <div className="map-data-notice" role="status"><strong>Map-ready location coverage</strong><p>Some records are not shown because map coordinates are unavailable.</p><span>{mappedCount} mapped · {unmappedCount} unmapped</span></div>}
+    {hotspotAnalysis&&<div className="hotspot-summary" role="status"><strong>Observed hotspot analysis</strong><p>Geographic analysis covers {hotspotAnalysis.coverage.overall.mappedRecords} of {hotspotAnalysis.coverage.overall.eligibleRecords} eligible records ({hotspotAnalysis.coverage.overall.coveragePercentage}%). {hotspotAnalysis.coverage.overall.unmappedRecords} records without valid coordinates are not represented spatially.</p><span>{hotspotAnalysis.summary.totalHotspots} hotspot{hotspotAnalysis.summary.totalHotspots===1?'':'s'} · {hotspotAnalysis.truncation.truncated?`top ${hotspotAnalysis.truncation.hotspotsReturned} shown`:'complete list shown'}</span><small>Hotspots reflect concentrations of current recorded infrastructure risk. They are descriptive, not predictions of future failure.</small></div>}
     <div className="intelligence-controls" aria-label="Infrastructure map filters">
-      <fieldset><legend>Layers</legend>{(['reports','cases','assets'] as Layer[]).map((layer) => <label key={layer}><input type="checkbox" checked={layers[layer]} onChange={() => setLayers((value) => ({ ...value, [layer]: !value[layer] }))}/>{layer === 'reports' ? 'Public Reports' : categoryLabel(layer)}</label>)}</fieldset>
+      <fieldset><legend>Layers</legend>{(['reports','cases','assets','hotspots'] as Layer[]).map((layer) => <label key={layer}><input type="checkbox" checked={layers[layer]} onChange={() => setLayers((value) => ({ ...value, [layer]: !value[layer] }))}/>{layer === 'reports' ? 'Public Reports' : categoryLabel(layer)}</label>)}</fieldset>
       <Filter label="Public Report status" value={reportStatus} onChange={setReportStatus} values={reportStatuses}/>
       <Filter label="Case priority" value={priority} onChange={setPriority} values={priorities}/>
       <Filter label="Case status" value={caseStatus} onChange={setCaseStatus} values={caseStatuses}/>
       {jurisdictions.length > 1 && <Filter label="Jurisdiction" value={jurisdiction} onChange={setJurisdiction} values={jurisdictions.map((item) => item.id)} labels={jurisdictions.map((item) => item.name)}/>} 
     </div>
-    <div className="map-legend" aria-label="Map legend"><span className="legend-report">Public Report · unverified signal</span><span className="legend-case">Governed Case · authoritative assessment</span><span className="legend-asset">Infrastructure Asset</span></div>
+    <div className="map-legend" aria-label="Map legend"><span className="legend-report">Public Report · unverified signal</span><span className="legend-case">Governed Case · authoritative assessment</span><span className="legend-asset">Infrastructure Asset</span><span className="legend-hotspot">Observed Hotspot · descriptive concentration</span></div>
     <div className="intelligence-layout">
       <div className="map-frame" aria-label="Infrastructure intelligence map">
         {!positions.length ? <Empty>No map-ready records match the selected layers and filters.</Empty> : <MapContainer key={`${center}`} center={center} zoom={13} scrollWheelZoom className="leaflet-intelligence-map">
@@ -91,6 +97,7 @@ export default function InfrastructureMapPage({ onOpenReport, onOpenCase }: { on
           {visibleReports.map((item) => <CircleMarker key={`report-${item.id}`} center={positionOf(item)!} radius={10} pathOptions={{ ...reportMarkerColors[item.status], fillOpacity: .95, weight: 3 }} eventHandlers={{ click: () => setSelected({kind:'report',item}) }}><Tooltip>{item.reportNumber} · Public Report · {categoryLabel(item.status)}</Tooltip></CircleMarker>)}
           {visibleAssets.map((item) => <Marker key={`asset-${item.id}`} position={positionOf(item)!} icon={markerIcon('asset')} eventHandlers={{ click: () => setSelected({kind:'asset',item}) }}><Tooltip>{item.assetCode} · Infrastructure Asset</Tooltip></Marker>)}
           {visibleCases.map((item) => <Marker key={`case-${item.id}`} position={positionOf(item.asset)!} icon={markerIcon('case',item.riskLevel ?? 'not-assessed')} eventHandlers={{ click: () => setSelected({kind:'case',item}) }}><Tooltip>{item.caseNumber} · Governed Case · {item.riskLevel ? `Authoritative risk ${categoryLabel(item.riskLevel)}` : 'Risk not assessed'}</Tooltip></Marker>)}
+          {visibleHotspots.map(item=><CircleMarker key={item.cellId} center={[item.center.latitude,item.center.longitude]} radius={Math.min(22,10+item.activeCaseCount)} pathOptions={{color:'#6f3f82',fillColor:'#d9bee3',fillOpacity:.72,weight:3}} eventHandlers={{click:()=>setSelected({kind:'hotspot',item})}}><Tooltip>Observed hotspot · {item.activeCaseCount} active cases · severity {item.severityIndex}</Tooltip></CircleMarker>)}
         </MapContainer>}
       </div>
       <aside className="intelligence-detail" aria-live="polite">{selected ? <RecordDetail selected={selected} caseCount={selected.kind === 'asset' ? assetCaseCounts.get(selected.item.id) ?? 0 : 0} onOpenReport={onOpenReport} onOpenCase={onOpenCase}/> : <><p className="eyebrow">RECORD DETAILS</p><h2>Select a mapped record</h2><p>Choose a marker or use the accessible record list below.</p></>}</aside>
@@ -100,12 +107,14 @@ export default function InfrastructureMapPage({ onOpenReport, onOpenCase }: { on
         {visibleReports.map((item) => <RecordButton key={`list-report-${item.id}`} label="Public Report" title={item.reportNumber} detail={item.title} onClick={() => setSelected({kind:'report',item})}/>) }
         {visibleCases.map((item) => <RecordButton key={`list-case-${item.id}`} label="Governed Case" title={item.caseNumber} detail={item.title} onClick={() => setSelected({kind:'case',item})}/>) }
         {visibleAssets.map((item) => <RecordButton key={`list-asset-${item.id}`} label="Infrastructure Asset" title={item.assetCode} detail={item.name} onClick={() => setSelected({kind:'asset',item})}/>) }
+        {visibleHotspots.map(item=><RecordButton key={`list-${item.cellId}`} label="Observed Hotspot" title={item.jurisdiction?.name??'Unassigned area'} detail={`${item.activeCaseCount} active cases · severity ${item.severityIndex}`} onClick={()=>setSelected({kind:'hotspot',item})}/>)}
       </div>}
     </section>
   </section>;
 }
 
 function RecordDetail({ selected, caseCount, onOpenReport, onOpenCase }: { selected: Selected; caseCount: number; onOpenReport(id:string):void; onOpenCase(id:string):void }) {
+  if(selected.kind==='hotspot'){const item=selected.item;return <><p className="eyebrow">OBSERVED HOTSPOT · DESCRIPTIVE</p><h2>{item.jurisdiction?.name??'Unassigned geographic concentration'}</h2><p>Visual center of a deterministic 0.01° grid cell; not a precise incident location.</p><Facts values={[["Infrastructure assets",String(item.assetCount)],["Active governed cases",String(item.activeCaseCount)],["Critical / very high risk",`${item.riskCounts.CRITICAL??0} / ${item.riskCounts.VERY_HIGH??0}`],["Public Reports (unverified)",String(item.publicReportCount)],["Observed severity index",String(item.severityIndex)],["Highest current priority",item.highestPriority?categoryLabel(item.highestPriority):'Not assessed']]}/><p className="condition-disclosure">Public Reports are counted separately and do not increase the authoritative severity index.</p></>}
   if (selected.kind === 'report') { const item = selected.item; return <><p className="eyebrow">PUBLIC REPORT · UNVERIFIED SIGNAL</p><h2>{item.reportNumber}</h2><p>{item.title}</p><Facts values={[['Category',categoryLabel(item.category)],['Location',item.locationText],['Status',categoryLabel(item.status)],['Submitted',new Date(item.submittedAt).toLocaleString('en-IN')],['Department',item.department?.name ?? 'Not assigned'],['Jurisdiction',item.jurisdiction?.name ?? 'Not assigned'],['Linked asset',item.asset ? `${item.asset.name} · ${item.asset.assetCode}` : 'Not linked']]}/>{item.triageAnalysis && <div className="advisory-map-result"><strong>Advisory urgency · {categoryLabel(item.triageAnalysis.urgencyLevel)}</strong><span>Suggested category: {categoryLabel(item.triageAnalysis.suggestedCategory)} · Confidence {item.triageAnalysis.confidence}%</span><small>{item.triageAnalysis.reasons[0]?.message}</small></div>}{item.createdCase && <div className="map-provenance"><strong>Governed Case Created</strong><span>{item.createdCase.caseNumber}</span><button className="secondary-button" onClick={() => onOpenCase(item.createdCase!.id)}>Open governed case</button></div>}<button className="primary-button" onClick={() => onOpenReport(item.id)}>Open Public Report</button></>; }
   if (selected.kind === 'case') { const item = selected.item; return <><p className="eyebrow">GOVERNED CASE · AUTHORITATIVE RECORD</p><h2>{item.caseNumber}</h2><p>{item.title}</p><Facts values={[['Asset',`${item.asset.name} · ${item.asset.assetCode}`],['Status',categoryLabel(item.status)],['Authoritative risk',item.riskLevel ? categoryLabel(item.riskLevel) : 'Not assessed'],['Authoritative priority',item.priorityLevel ? categoryLabel(item.priorityLevel) : 'Not assessed'],['Emergency',item.emergencyFlag ? 'Yes' : 'No'],['Department',item.asset.department.name],['Jurisdiction',item.asset.jurisdiction.name]]}/><button className="primary-button" onClick={() => onOpenCase(item.id)}>Open governed case</button></>; }
   const item = selected.item; return <><p className="eyebrow">INFRASTRUCTURE ASSET</p><h2>{item.assetCode}</h2><p>{item.name}</p><Facts values={[['Type',categoryLabel(item.assetType)],['Department',item.department.name],['Jurisdiction',item.jurisdiction.name],['Governed Cases',String(caseCount)]]}/></>;
