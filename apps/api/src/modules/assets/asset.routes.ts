@@ -5,8 +5,21 @@ import { authenticate } from '../../middleware/authenticate';
 import { requireRole } from '../../middleware/require-role';
 import { buildAssetReadWhere } from '../../security/organizational-scope';
 import { MAP_MAX_ITEMS, pageFromRows, parseCursor, parseLimit, parseSearch, parseUuidQuery, queryError } from '../../lib/pagination';
+import { getAssetConditionHistory } from './condition-history.service';
+import { ScopedResourceNotFoundError } from '../../security/organizational-scope';
 
 const router = Router();
+
+router.get('/:assetId/condition-history', authenticate, async (req, res) => {
+  try {
+    const data = await getAssetConditionHistory(String(req.params.assetId), req.user!);
+    return res.status(200).json({ success: true, data });
+  } catch (error) {
+    if (error instanceof ScopedResourceNotFoundError) return res.status(404).json({ success: false, error: { code: 'ASSET_NOT_FOUND', message: 'Asset not found.' } });
+    console.error('Failed to fetch asset condition history:', error);
+    return res.status(500).json({ success: false, error: { code: 'CONDITION_HISTORY_FETCH_FAILED', message: 'Could not fetch asset condition history.' } });
+  }
+});
 
 // ======================================================
 // GET ALL ASSETS
