@@ -14,6 +14,7 @@ export interface RuntimeConfig {
   apiPublicBaseUrl: string;
   webPublicBaseUrl: string;
   intelligence: { enabled: boolean; serviceUrl: string | null; timeoutMs: number };
+  weatherProvider: { enabled: boolean; provider: 'OPEN_METEO'; deploymentClass: 'DISABLED' | 'EVALUATION_ONLY'; baseUrl: string; sourceCode: string; timeoutMs: number; maxRetries: number };
 }
 
 export class ConfigurationError extends Error {
@@ -93,6 +94,16 @@ export function parseRuntimeConfig(env: NodeJS.ProcessEnv): RuntimeConfig {
   if (intelligenceEnabled && deployed && !configuredIntelligenceUrl) throw new ConfigurationError('ODYSSEY_INTELLIGENCE_SERVICE_URL', 'is required when advisory intelligence is enabled.');
   const serviceUrl = intelligenceEnabled ? httpUrl('ODYSSEY_INTELLIGENCE_SERVICE_URL', configuredIntelligenceUrl || 'http://localhost:8000', { forbidCredentials: true }) : null;
   if (deployed && serviceUrl && /localhost|127\.0\.0\.1/.test(new URL(serviceUrl).hostname)) throw new ConfigurationError('ODYSSEY_INTELLIGENCE_SERVICE_URL', 'must not silently use a local deployment address.');
+  const weatherEnabled = boolean(env, 'ODYSSEY_WEATHER_PROVIDER_ENABLED', false);
+  const weatherProvider = (env.ODYSSEY_WEATHER_PROVIDER?.trim() || 'OPEN_METEO').toUpperCase();
+  if (weatherProvider !== 'OPEN_METEO') throw new ConfigurationError('ODYSSEY_WEATHER_PROVIDER', 'must be OPEN_METEO.');
+  const deploymentClass = (env.ODYSSEY_WEATHER_PROVIDER_DEPLOYMENT_CLASS?.trim() || (weatherEnabled ? 'EVALUATION_ONLY' : 'DISABLED')).toUpperCase();
+  if (!['DISABLED', 'EVALUATION_ONLY'].includes(deploymentClass)) throw new ConfigurationError('ODYSSEY_WEATHER_PROVIDER_DEPLOYMENT_CLASS', 'must be DISABLED or EVALUATION_ONLY.');
+  if (weatherEnabled !== (deploymentClass === 'EVALUATION_ONLY')) throw new ConfigurationError('ODYSSEY_WEATHER_PROVIDER_DEPLOYMENT_CLASS', 'must match the explicit enabled state.');
+  if (deployed && weatherEnabled) throw new ConfigurationError('ODYSSEY_WEATHER_PROVIDER_ENABLED', 'evaluation-only weather integration cannot be enabled in staging or production.');
+  const weatherBaseUrl = httpUrl('ODYSSEY_WEATHER_PROVIDER_BASE_URL', env.ODYSSEY_WEATHER_PROVIDER_BASE_URL?.trim() || 'https://api.open-meteo.com', { forbidCredentials: true });
+  const weatherUrl = new URL(weatherBaseUrl);
+  if (weatherUrl.protocol !== 'https:' || weatherUrl.origin !== 'https://api.open-meteo.com' || weatherUrl.pathname !== '/') throw new ConfigurationError('ODYSSEY_WEATHER_PROVIDER_BASE_URL', 'must be exactly https://api.open-meteo.com.');
   return {
     environment,
     port: integer(env, 'API_PORT', 4000, 1, 65535),
@@ -107,7 +118,8 @@ export function parseRuntimeConfig(env: NodeJS.ProcessEnv): RuntimeConfig {
     trustProxy: trustProxy(env, deployed),
     apiPublicBaseUrl: httpUrl('API_PUBLIC_BASE_URL', apiPublicBaseUrl, { forbidCredentials: true }),
     webPublicBaseUrl: httpUrl('WEB_PUBLIC_BASE_URL', webPublicBaseUrl, { forbidCredentials: true }),
-    intelligence: { enabled: intelligenceEnabled, serviceUrl, timeoutMs: integer(env, 'ODYSSEY_INTELLIGENCE_TIMEOUT_MS', 2000, 100, 10000) }
+    intelligence: { enabled: intelligenceEnabled, serviceUrl, timeoutMs: integer(env, 'ODYSSEY_INTELLIGENCE_TIMEOUT_MS', 2000, 100, 10000) },
+    weatherProvider: { enabled: weatherEnabled, provider: 'OPEN_METEO', deploymentClass: deploymentClass as 'DISABLED'|'EVALUATION_ONLY', baseUrl: weatherUrl.origin, sourceCode: (env.ODYSSEY_WEATHER_PROVIDER_SOURCE_CODE?.trim() || 'OPEN_METEO_CURRENT').toUpperCase(), timeoutMs: integer(env, 'ODYSSEY_WEATHER_PROVIDER_TIMEOUT_MS', 3000, 250, 10000), maxRetries: integer(env, 'ODYSSEY_WEATHER_PROVIDER_MAX_RETRIES', 1, 0, 2) }
   };
 }
 
@@ -115,6 +127,6 @@ let cached: RuntimeConfig | undefined;
 export function getRuntimeConfig(): RuntimeConfig { return cached ??= parseRuntimeConfig(process.env); }
 export function resetRuntimeConfigForTests(): void { cached = undefined; }
 export function redactedRuntimeSummary(config: RuntimeConfig) {
-  return { environment: config.environment, port: config.port, allowedOrigins: config.allowedOrigins, trustProxy: config.trustProxy, apiPublicBaseUrl: config.apiPublicBaseUrl, webPublicBaseUrl: config.webPublicBaseUrl, databaseConfigured: Boolean(config.databaseUrl), jwtConfigured: Boolean(config.auth.secret), intelligenceEnabled: config.intelligence.enabled, intelligenceServiceOrigin: config.intelligence.serviceUrl ? new URL(config.intelligence.serviceUrl).origin : null };
+  return { environment: config.environment, port: config.port, allowedOrigins: config.allowedOrigins, trustProxy: config.trustProxy, apiPublicBaseUrl: config.apiPublicBaseUrl, webPublicBaseUrl: config.webPublicBaseUrl, databaseConfigured: Boolean(config.databaseUrl), jwtConfigured: Boolean(config.auth.secret), intelligenceEnabled: config.intelligence.enabled, intelligenceServiceOrigin: config.intelligence.serviceUrl ? new URL(config.intelligence.serviceUrl).origin : null, weatherProviderEnabled: config.weatherProvider.enabled, weatherProvider: config.weatherProvider.provider, weatherProviderDeploymentClass: config.weatherProvider.deploymentClass };
 }
 export function isCorsOriginAllowed(config: RuntimeConfig, origin: string | undefined): boolean { return !origin || config.allowedOrigins.includes(origin); }

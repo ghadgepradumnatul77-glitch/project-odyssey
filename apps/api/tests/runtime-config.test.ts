@@ -86,4 +86,8 @@ describe('central runtime configuration', () => {
     expect(result.status).not.toBe(0);
     expect(result.stderr).toContain('TEST_HELPER_FORBIDDEN_IN_PRODUCTION');
   });
+
+  it('keeps weather disabled by default and permits only explicit local evaluation',()=>{expect(parseRuntimeConfig({NODE_ENV:'test'}).weatherProvider).toMatchObject({enabled:false,provider:'OPEN_METEO',deploymentClass:'DISABLED',baseUrl:'https://api.open-meteo.com'});expect(parseRuntimeConfig({NODE_ENV:'test',ODYSSEY_WEATHER_PROVIDER_ENABLED:'true',ODYSSEY_WEATHER_PROVIDER_DEPLOYMENT_CLASS:'EVALUATION_ONLY'}).weatherProvider.enabled).toBe(true)});
+
+  it('fails closed for arbitrary provider endpoints, mismatched classification, and deployed evaluation',()=>{expect(()=>parseRuntimeConfig({NODE_ENV:'test',ODYSSEY_WEATHER_PROVIDER_BASE_URL:'http://localhost:9000'})).toThrow(/ODYSSEY_WEATHER_PROVIDER_BASE_URL/);expect(()=>parseRuntimeConfig({NODE_ENV:'test',ODYSSEY_WEATHER_PROVIDER_ENABLED:'true',ODYSSEY_WEATHER_PROVIDER_DEPLOYMENT_CLASS:'DISABLED'})).toThrow(/ODYSSEY_WEATHER_PROVIDER_DEPLOYMENT_CLASS/);expect(()=>parseRuntimeConfig(deployed({ODYSSEY_WEATHER_PROVIDER_ENABLED:'true',ODYSSEY_WEATHER_PROVIDER_DEPLOYMENT_CLASS:'EVALUATION_ONLY'}))).toThrow(/ODYSSEY_WEATHER_PROVIDER_ENABLED/)});
 });
