@@ -3,7 +3,8 @@ import prisma from '../../lib/prisma';
 
 export class PublicTrackingNotFoundError extends Error {}
 
-export const PUBLIC_REPORT_REFERENCE_PATTERN = /^JNV-PUB-\d{8}-[A-F0-9]{6}$/;
+// New references carry 96 random bits; the six-hex branch preserves existing pilot references.
+export const PUBLIC_REPORT_REFERENCE_PATTERN = /^JNV-PUB-\d{8}-(?:[A-F0-9]{24}|[A-F0-9]{6})$/;
 
 export type PublicProgressStage =
   | 'REPORT_RECEIVED'

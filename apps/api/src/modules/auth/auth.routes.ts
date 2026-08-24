@@ -5,25 +5,31 @@ import { authenticate } from '../../middleware/authenticate';
 import { authenticateCredentials, INVALID_CREDENTIALS } from './auth.service';
 import { safeUserSelect } from '../users/user.select';
 import { getRuntimeConfig } from '../../config/runtime';
+import { z } from 'zod';
 
 const router = Router();
-const loginLimiter = rateLimit({
+export function createLoginLimiter(environment: string) { return rateLimit({
   windowMs: 15 * 60 * 1000,
-  limit: getRuntimeConfig().environment === 'test' ? 1000 : 10,
+  limit: environment === 'test' ? 1000 : 10,
   standardHeaders: true,
   legacyHeaders: false,
   handler: (_req, res) => res.status(429).json({
     success: false,
     error: { code: 'AUTH_RATE_LIMITED', message: 'Too many authentication attempts. Please try again later.' }
   })
-});
+}); }
+const loginLimiter = createLoginLimiter(getRuntimeConfig().environment);
+const loginSchema = z.object({
+  email: z.string().trim().email().max(254).transform((value) => value.toLowerCase()),
+  password: z.string().min(1).max(128)
+}).strict();
 
 router.post('/auth/login', loginLimiter, async (req, res) => {
-  const email = typeof req.body.email === 'string' ? req.body.email.trim().toLowerCase() : '';
-  const password = typeof req.body.password === 'string' ? req.body.password : '';
-  if (!email || !password) {
+  const parsed = loginSchema.safeParse(req.body);
+  if (!parsed.success) {
     return res.status(400).json({ success: false, error: { code: 'INVALID_INPUT', message: 'email and password are required.' } });
   }
+  const { email, password } = parsed.data;
 
   try {
     const result = await authenticateCredentials(email, password);

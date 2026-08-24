@@ -52,4 +52,16 @@ describe('role and user endpoint security', () => {
     const response = await request(app).post('/api/v1/users').set('Authorization', await authorization('SYSTEM_ADMIN')).send({}).expect(400);
     expect(response.body.error.code).toBe('INVALID_INPUT');
   });
+
+  it('rejects user mass assignment and excessive passwords before persistence', async () => {
+    const token = await authorization('SYSTEM_ADMIN');
+    const body = {
+      employeeCode: 'PWD-SEC-1', name: 'Security Test', email: 'security@example.test',
+      password: 'a-secure-test-password', designation: 'Officer', role: 'OFFICER',
+      departmentId: '10000000-0000-4000-8000-000000000001',
+      jurisdictionId: '20000000-0000-4000-8000-000000000001'
+    };
+    expect((await request(app).post('/api/v1/users').set('Authorization', token).send({ ...body, status: 'ACTIVE' }).expect(400)).body.error.code).toBe('INVALID_INPUT');
+    expect((await request(app).post('/api/v1/users').set('Authorization', token).send({ ...body, password: 'x'.repeat(129) }).expect(400)).body.error.code).toBe('WEAK_PASSWORD');
+  });
 });

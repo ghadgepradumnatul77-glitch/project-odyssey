@@ -73,7 +73,7 @@ export interface CitizenReportInput { title:string;description:string;category:P
 export async function createCitizenPublicReport(input:CitizenReportInput){
   for(let attempt=0;attempt<3;attempt++){
     const date=new Date().toISOString().slice(0,10).replaceAll('-','');
-    const reportNumber=`JNV-PUB-${date}-${randomBytes(3).toString('hex').toUpperCase()}`;
+    const reportNumber=`JNV-PUB-${date}-${randomBytes(12).toString('hex').toUpperCase()}`;
     try{const created=await prisma.publicReport.create({data:{reportNumber,title:input.title,description:input.description,category:input.category,locationText:input.locationText,latitude:input.latitude,longitude:input.longitude,reporterName:input.reporterName,reporterContact:input.reporterContact,status:'SUBMITTED'},select:{reportNumber:true,status:true,submittedAt:true}});return created;}catch(error){if(!(error instanceof Prisma.PrismaClientKnownRequestError)||error.code!=='P2002'||attempt===2)throw error;}
   }
   throw new Error('REPORT_NUMBER_GENERATION_FAILED');

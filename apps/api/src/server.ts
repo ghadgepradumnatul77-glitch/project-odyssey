@@ -3,6 +3,7 @@ import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
+import rateLimit from 'express-rate-limit';
 
 import prisma from './lib/prisma';
 
@@ -70,6 +71,7 @@ import { requireRole }
   from './middleware/require-role';
 import { SystemRole }
   from './generated/prisma';
+import { helmetOptions } from './security/http-security';
 
 
 const app = express();
@@ -84,7 +86,7 @@ app.set('trust proxy', runtimeConfig.trustProxy);
 // MIDDLEWARE
 // ======================================================
 
-app.use(helmet());
+app.use(helmet(helmetOptions(runtimeConfig.environment)));
 
 app.use(
   cors({
@@ -99,9 +101,20 @@ app.use(
 
 app.use(
   express.json({
-    limit: '1mb'
+    limit: '256kb'
   })
 );
+
+app.use(rateLimit({
+  windowMs: 15 * 60 * 1000,
+  limit: runtimeConfig.environment === 'test' ? 10_000 : 600,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: {
+    success: false,
+    error: { code: 'API_RATE_LIMITED', message: 'Too many requests. Please try again later.' }
+  }
+}));
 
 
 // ======================================================
@@ -294,6 +307,27 @@ app.use((_req, res) => {
     }
   });
 
+});
+
+app.use((error: unknown, _req: express.Request, res: express.Response, _next: express.NextFunction) => {
+  const bodyError = error as { type?: string; status?: number };
+  if (bodyError?.type === 'entity.too.large' || bodyError?.status === 413) {
+    return res.status(413).json({
+      success: false,
+      error: { code: 'REQUEST_TOO_LARGE', message: 'The request body exceeds the permitted size.' }
+    });
+  }
+  if (error instanceof SyntaxError && bodyError?.status === 400) {
+    return res.status(400).json({
+      success: false,
+      error: { code: 'MALFORMED_JSON', message: 'The request body must contain valid JSON.' }
+    });
+  }
+  console.error('Unhandled request processing error.');
+  return res.status(500).json({
+    success: false,
+    error: { code: 'INTERNAL_ERROR', message: 'The request could not be completed.' }
+  });
 });
 
 

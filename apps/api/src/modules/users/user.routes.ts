@@ -6,9 +6,20 @@ import { authenticate } from '../../middleware/authenticate';
 import { requireRole } from '../../middleware/require-role';
 import { pageFromRows, parseCursor, parseEnum, parseLimit, parseSearch, parseUuidQuery, queryError } from '../../lib/pagination';
 import { UserStatus } from '../../generated/prisma';
+import { z } from 'zod';
 
 const router = Router();
 router.use(authenticate, requireRole(SystemRole.SYSTEM_ADMIN));
+const createUserSchema = z.object({
+  employeeCode: z.string().trim().min(1).max(64),
+  name: z.string().trim().min(1).max(160),
+  email: z.string().trim().email().max(254),
+  password: z.string().min(8).max(128).refine((value) => value.trim().length > 0),
+  designation: z.string().trim().min(1).max(160),
+  role: z.enum(['OFFICER', 'POLICY_ADMIN', 'AUDITOR', 'SYSTEM_ADMIN']).default('OFFICER'),
+  departmentId: z.string().uuid(),
+  jurisdictionId: z.string().uuid()
+}).strict();
 
 // ======================================================
 // GET ALL USERS
@@ -78,53 +89,25 @@ router.get('/', async (req, res) => {
 
 router.post('/', async (req, res) => {
   try {
-    const {
-      employeeCode,
-      name,
-      email,
-      password,
-      designation,
-      role,
-      departmentId,
-      jurisdictionId
-    } = req.body;
+    const parsed = createUserSchema.safeParse(req.body);
+    if (!parsed.success) {
+      const weakPassword = typeof req.body?.password === 'string' &&
+        (req.body.password.length < 8 || req.body.password.length > 128 || !req.body.password.trim());
+      return res.status(400).json({
+        success: false,
+        error: {
+          code: weakPassword ? 'WEAK_PASSWORD' : 'INVALID_INPUT',
+          message: weakPassword
+            ? 'Password must contain between 8 and 128 non-blank characters.'
+            : 'Valid employeeCode, name, email, password, designation, role, departmentId and jurisdictionId are required.'
+        }
+      });
+    }
+    const { employeeCode, name, email, password, designation, role, departmentId, jurisdictionId } = parsed.data;
 
     // --------------------------------------------------
     // Required field validation
     // --------------------------------------------------
-
-    if (
-      !employeeCode ||
-      !name ||
-      !email ||
-      !password ||
-      !designation ||
-      !departmentId ||
-      !jurisdictionId
-    ) {
-      return res.status(400).json({
-        success: false,
-        error: {
-          code: 'INVALID_INPUT',
-          message:
-            'employeeCode, name, email, password, designation, departmentId and jurisdictionId are required.'
-        }
-      });
-    }
-
-    // --------------------------------------------------
-    // Password validation
-    // --------------------------------------------------
-
-    if (password.length < 8) {
-      return res.status(400).json({
-        success: false,
-        error: {
-          code: 'WEAK_PASSWORD',
-          message: 'Password must contain at least 8 characters.'
-        }
-      });
-    }
 
     // --------------------------------------------------
     // Verify Department
@@ -226,27 +209,7 @@ router.post('/', async (req, res) => {
     // Validate system role
     // --------------------------------------------------
 
-    const allowedRoles = [
-      'OFFICER',
-      'POLICY_ADMIN',
-      'AUDITOR',
-      'SYSTEM_ADMIN'
-    ];
-
-    const normalizedRole = role
-      ? role.trim().toUpperCase()
-      : 'OFFICER';
-
-    if (!allowedRoles.includes(normalizedRole)) {
-      return res.status(400).json({
-        success: false,
-        error: {
-          code: 'INVALID_ROLE',
-          message:
-            'Role must be OFFICER, POLICY_ADMIN, AUDITOR or SYSTEM_ADMIN.'
-        }
-      });
-    }
+    const normalizedRole = role;
 
     // --------------------------------------------------
     // Hash password

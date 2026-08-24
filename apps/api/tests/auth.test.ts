@@ -11,7 +11,7 @@ vi.mock('../src/lib/prisma', () => ({
 
 import { getAuthConfig, resetAuthConfigForTests } from '../src/config/auth';
 import { authenticate } from '../src/middleware/authenticate';
-import authRoutes from '../src/modules/auth/auth.routes';
+import authRoutes, { createLoginLimiter } from '../src/modules/auth/auth.routes';
 import { authenticateCredentials, verifyAccessToken } from '../src/modules/auth/auth.service';
 
 const safeUser = {
@@ -57,6 +57,22 @@ describe('authentication service and endpoints', () => {
     expect(response.body.data.expiresIn).toBe(900);
     expect(response.body.data.user).toEqual(safeUser);
     expect(response.body.data.user).not.toHaveProperty('passwordHash');
+  });
+
+  it('rejects unknown login fields and unbounded passwords before credential lookup', async () => {
+    await request(app).post('/api/v1/auth/login').send({ email: 'officer@example.test', password: 'password', role: 'SYSTEM_ADMIN' }).expect(400);
+    await request(app).post('/api/v1/auth/login').send({ email: 'officer@example.test', password: 'x'.repeat(129) }).expect(400);
+    expect(mocks.findUnique).not.toHaveBeenCalled();
+  });
+
+  it('rate limits production login attempts without account-enumeration details', async () => {
+    const limited = express();
+    limited.use(express.json());
+    limited.post('/login', createLoginLimiter('production'), (_req, res) => res.status(401).json({ success: false }));
+    let response;
+    for (let attempt = 0; attempt < 11; attempt += 1) response = await request(limited).post('/login').send({});
+    expect(response?.status).toBe(429);
+    expect(response?.body.error.code).toBe('AUTH_RATE_LIMITED');
   });
 
   it.each([
