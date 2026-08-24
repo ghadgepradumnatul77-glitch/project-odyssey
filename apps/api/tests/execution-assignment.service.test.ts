@@ -17,7 +17,7 @@ describe('scoped execution assignment eligibility', () => {
 
   it('lists only active same-scope officers with a minimal DTO and deterministic order', async () => {
     await resolveEligibleExecutionAssignees('task', principal);
-    expect(mocks.users).toHaveBeenCalledWith({ where: { status: 'ACTIVE', role: 'OFFICER', departmentId: 'dep', jurisdictionId: 'jur' }, select: { id: true, employeeCode: true, name: true, designation: true }, orderBy: [{ name: 'asc' }, { employeeCode: 'asc' }, { id: 'asc' }] });
+    expect(mocks.users).toHaveBeenCalledWith({ where: { status: 'ACTIVE', role: 'OFFICER', departmentId: 'dep', jurisdictionId: 'jur' }, select: { id: true, employeeCode: true, name: true, designation: true }, orderBy: [{ name: 'asc' }, { employeeCode: 'asc' }, { id: 'asc' }], take: 101 });
     expect(JSON.stringify(mocks.users.mock.calls[0][0])).not.toMatch(/passwordHash|email|token/i);
   });
 

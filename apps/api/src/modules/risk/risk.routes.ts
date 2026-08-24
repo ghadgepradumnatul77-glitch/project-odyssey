@@ -8,6 +8,7 @@ import {
   assertVisibleCase,
   ScopedResourceNotFoundError
 } from '../../security/organizational-scope';
+import { pageFromRows, parseCursor, parseLimit, queryError } from '../../lib/pagination';
 
 const router = Router();
 
@@ -99,17 +100,19 @@ router.get('/:caseId/risk-assessments', authenticate, async (req, res) => {
 
     await assertVisibleCase(caseId.trim(), req.user!);
 
+    const limit=parseLimit(req.query.limit),cursor=parseCursor(req.query.cursor);
     const assessments = await prisma.riskAssessment.findMany({
-      where: { caseId: caseId.trim() },
-      orderBy: { createdAt: 'desc' }
+      where: { caseId: caseId.trim(),...(cursor?{OR:[{createdAt:{lt:new Date(cursor.at)}},{createdAt:new Date(cursor.at),id:{lt:cursor.id}}]}:{}) },
+      orderBy: [{createdAt:'desc'},{id:'desc'}],take:limit+1
     });
 
     return res.status(200).json({
       success: true,
-      data: assessments
+      data: pageFromRows(assessments,limit,item=>item.createdAt.toISOString())
     });
 
   } catch (error) {
+    const invalid=queryError(res,error);if(invalid)return invalid;
     if (error instanceof ScopedResourceNotFoundError) {
       return res.status(404).json({ success: false, error: { code: 'CASE_NOT_FOUND', message: 'Case not found.' } });
     }

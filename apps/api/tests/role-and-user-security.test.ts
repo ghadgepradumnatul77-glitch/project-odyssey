@@ -44,7 +44,8 @@ describe('role and user endpoint security', () => {
   it('allows SYSTEM_ADMIN to reach existing user listing logic without passwordHash', async () => {
     mocks.findMany.mockResolvedValue([{ id: 'officer-1', email: 'officer@example.test', role: 'OFFICER' }]);
     const response = await request(app).get('/api/v1/users').set('Authorization', await authorization('SYSTEM_ADMIN')).expect(200);
-    expect(response.body.data[0]).not.toHaveProperty('passwordHash');
+    expect(response.body.data.items[0]).not.toHaveProperty('passwordHash');
+    expect(response.body.data.limit).toBe(25);
   });
 
   it('allows SYSTEM_ADMIN to reach existing create validation', async () => {

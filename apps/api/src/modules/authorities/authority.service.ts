@@ -1,6 +1,7 @@
 import prisma from '../../lib/prisma';
 import { PriorityLevel } from '../../generated/prisma';
 import { WorkflowError } from '../decisions/workflow-error';
+import { pageFromRows, type StableCursor } from '../../lib/pagination';
 
 export interface CreateAuthorityInput {
   userId: string;
@@ -70,13 +71,15 @@ export async function createApprovalAuthority(input: CreateAuthorityInput) {
   });
 }
 
-export function listApprovalAuthorities() {
-  return prisma.approvalAuthority.findMany({
+export async function listApprovalAuthorities(options: { limit: number; cursor?: StableCursor; active?: boolean; search?: string; departmentId?: string; jurisdictionId?: string }) {
+  const rows=await prisma.approvalAuthority.findMany({
+    where:{...(options.active===undefined?{}:{isActive:options.active}),...(options.departmentId?{departmentId:options.departmentId}:{}),...(options.jurisdictionId?{jurisdictionId:options.jurisdictionId}:{}),AND:[options.cursor?{OR:[{createdAt:{lt:new Date(options.cursor.at)}},{createdAt:new Date(options.cursor.at),id:{lt:options.cursor.id}}]}:{},options.search?{OR:[{user:{is:{OR:[{name:{contains:options.search,mode:'insensitive'}},{employeeCode:{contains:options.search,mode:'insensitive'}},{designation:{contains:options.search,mode:'insensitive'}}]}}},{department:{is:{name:{contains:options.search,mode:'insensitive'}}}},{jurisdiction:{is:{name:{contains:options.search,mode:'insensitive'}}}}]}:{}]},
     include: {
       user: { select: { id: true, name: true, employeeCode: true, designation: true, role: true, status: true } },
       department: { select: { id: true, name: true, code: true } },
       jurisdiction: { select: { id: true, name: true, type: true } }
     },
-    orderBy: [{ createdAt: 'asc' }, { id: 'asc' }]
+    orderBy: [{ createdAt: 'desc' }, { id: 'desc' }],take:options.limit+1
   });
+  return pageFromRows(rows,options.limit,(item)=>item.createdAt.toISOString());
 }

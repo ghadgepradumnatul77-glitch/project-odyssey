@@ -1,5 +1,6 @@
 import { IntelligenceAssessmentStatus, Prisma } from '../../generated/prisma';
 import prisma from '../../lib/prisma';
+import { pageFromRows, type StableCursor } from '../../lib/pagination';
 
 export class IntelligencePersistenceError extends Error {
   constructor(public code: 'INTELLIGENCE_SOURCE_MISMATCH') {
@@ -49,9 +50,11 @@ export async function appendIntelligenceAssessment(input: AppendIntelligenceAsse
   });
 }
 
-export async function listIntelligenceAssessments(caseId: string) {
-  return prisma.infrastructureIntelligenceAssessment.findMany({
-    where: { caseId },
-    orderBy: [{ inferredAt: 'desc' }, { id: 'desc' }]
+export async function listIntelligenceAssessments(caseId: string, options: { limit: number; cursor?: StableCursor } = { limit: 25 }) {
+  const rows = await prisma.infrastructureIntelligenceAssessment.findMany({
+    where: { caseId, ...(options.cursor ? { OR: [{ inferredAt: { lt: new Date(options.cursor.at) } }, { inferredAt: new Date(options.cursor.at), id: { lt: options.cursor.id } }] } : {}) },
+    orderBy: [{ inferredAt: 'desc' }, { id: 'desc' }],
+    take: options.limit + 1
   });
+  return pageFromRows(rows, options.limit, (item) => item.inferredAt.toISOString());
 }

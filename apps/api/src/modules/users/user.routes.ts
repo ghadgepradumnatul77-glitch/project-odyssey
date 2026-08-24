@@ -4,6 +4,8 @@ import prisma from '../../lib/prisma';
 import { SystemRole } from '../../generated/prisma';
 import { authenticate } from '../../middleware/authenticate';
 import { requireRole } from '../../middleware/require-role';
+import { pageFromRows, parseCursor, parseEnum, parseLimit, parseSearch, parseUuidQuery, queryError } from '../../lib/pagination';
+import { UserStatus } from '../../generated/prisma';
 
 const router = Router();
 router.use(authenticate, requireRole(SystemRole.SYSTEM_ADMIN));
@@ -13,9 +15,12 @@ router.use(authenticate, requireRole(SystemRole.SYSTEM_ADMIN));
 // GET /api/v1/users
 // ======================================================
 
-router.get('/', async (_req, res) => {
+router.get('/', async (req, res) => {
   try {
+    const limit=parseLimit(req.query.limit),cursor=parseCursor(req.query.cursor),search=parseSearch(req.query.search);
+    const role=parseEnum(req.query.role,Object.values(SystemRole),'role'),status=parseEnum(req.query.status,Object.values(UserStatus),'status'),departmentId=parseUuidQuery(req.query.departmentId,'departmentId'),jurisdictionId=parseUuidQuery(req.query.jurisdictionId,'jurisdictionId');
     const users = await prisma.user.findMany({
+      where:{...(role?{role}:{}),...(status?{status}:{}),...(departmentId?{departmentId}:{}),...(jurisdictionId?{jurisdictionId}:{}),AND:[search?{OR:[{name:{contains:search,mode:'insensitive'}},{employeeCode:{contains:search,mode:'insensitive'}},{email:{contains:search,mode:'insensitive'}}]}:{},cursor?{OR:[{createdAt:{lt:new Date(cursor.at)}},{createdAt:new Date(cursor.at),id:{lt:cursor.id}}]}:{}]},
       select: {
         id: true,
         employeeCode: true,
@@ -43,17 +48,16 @@ router.get('/', async (_req, res) => {
           }
         }
       },
-      orderBy: {
-        createdAt: 'asc'
-      }
+      orderBy: [{ createdAt: 'desc' }, { id: 'desc' }], take: limit + 1
     });
 
     return res.status(200).json({
       success: true,
-      data: users
+      data: pageFromRows(users,limit,(item)=>item.createdAt.toISOString())
     });
 
   } catch (error) {
+    const invalid=queryError(res,error);if(invalid)return invalid;
     console.error('Failed to fetch users:', error);
 
     return res.status(500).json({

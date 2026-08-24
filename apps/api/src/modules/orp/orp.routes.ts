@@ -10,6 +10,7 @@ import {
   ScopedResourceNotFoundError
 } from '../../security/organizational-scope';
 import { DecisionPackageError } from '../decision-packages/decision-package.service';
+import { pageFromRows, parseCursor, parseLimit, queryError } from '../../lib/pagination';
 
 const router = Router();
 
@@ -140,21 +141,23 @@ router.get('/cases/:caseId/orps', authenticate, async (req, res) => {
 
     await assertVisibleCase(caseId, req.user!);
 
+    const limit=parseLimit(req.query.limit),cursor=parseCursor(req.query.cursor);
     const orps = await prisma.operationalResponsePlan.findMany({
-      where: { caseId },
+      where: { caseId,...(cursor?{OR:[{createdAt:{lt:new Date(cursor.at)}},{createdAt:new Date(cursor.at),id:{lt:cursor.id}}]}:{}) },
       include: { decisionPackage: { select: { id: true, packageVersion: true, packageContractVersion: true, preparedAt: true } } },
       orderBy: [
         { createdAt: 'desc' },
-        { versionNumber: 'desc' }
-      ]
+        { id: 'desc' }
+      ],take:limit+1
     });
 
     return res.status(200).json({
       success: true,
-      data: orps
+      data: pageFromRows(orps,limit,item=>item.createdAt.toISOString())
     });
 
   } catch (error) {
+    const invalid=queryError(res,error);if(invalid)return invalid;
     if (error instanceof ScopedResourceNotFoundError) {
       return res.status(404).json({ success: false, error: { code: 'CASE_NOT_FOUND', message: 'Case not found.' } });
     }

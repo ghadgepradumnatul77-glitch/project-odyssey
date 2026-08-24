@@ -4,6 +4,7 @@ import { SystemRole } from '../../generated/prisma';
 import { authenticate } from '../../middleware/authenticate';
 import { requireRole } from '../../middleware/require-role';
 import { hasGlobalReadVisibility } from '../../security/organizational-scope';
+import { SMALL_REGISTRY_MAX } from '../../lib/pagination';
 
 const router = Router();
 
@@ -12,10 +13,9 @@ router.get('/', authenticate, async (req, res) => {
   try {
     const departments = await prisma.department.findMany({
       where: hasGlobalReadVisibility(req.user!) ? {} : { id: req.user!.departmentId },
-      orderBy: {
-        createdAt: 'asc'
-      }
+      orderBy: [{ name: 'asc' }, { id: 'asc' }],take:SMALL_REGISTRY_MAX+1
     });
+    if(departments.length>SMALL_REGISTRY_MAX)return res.status(409).json({success:false,error:{code:'REGISTRY_LIMIT_EXCEEDED',message:'The department registry exceeds the pilot-safe limit.'}});
 
     res.json({
       success: true,

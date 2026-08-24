@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { ArrowRight, SlidersHorizontal, X } from 'lucide-react';
-import { listCases, type CaseSummary } from '../api/cases.api';
+import { getCasesPage, listCases, type CaseSummary } from '../api/cases.api';
 import { useAuth } from '../auth/useAuth';
 import StatusBadge from '../components/StatusBadge';
 import { Empty, ErrorState, Loading } from '../components/AsyncState';
@@ -18,17 +18,30 @@ export default function CasesPage({ initialCaseId = null, initialFilter = null }
   const [error, setError] = useState<unknown>(null);
   const [reload, setReload] = useState(0);
   const [search, setSearch] = useState(''); const [status, setStatus] = useState(''); const [risk, setRisk] = useState('');
-  const [priority, setPriority] = useState(''); const [emergency, setEmergency] = useState(''); const [department, setDepartment] = useState(''); const [jurisdiction, setJurisdiction] = useState('');
-  const [priorityPreset, setPriorityPreset] = useState<string[]>([]);
+  const [priority, setPriority] = useState(''); const [emergency, setEmergency] = useState(initialFilter === 'emergency' ? 'true' : ''); const [department, setDepartment] = useState(''); const [jurisdiction, setJurisdiction] = useState('');
+  const [priorityPreset, setPriorityPreset] = useState<string[]>(initialFilter === 'priority-attention' ? ['CRITICAL', 'VERY_HIGH'] : []);
   const [sort, setSort] = useState<SortKey>('priority');
   const [filtersOpen, setFiltersOpen] = useState(false);
+  const [nextCursor, setNextCursor] = useState<string | null>(null);
+  const [loadingMore, setLoadingMore] = useState(false);
 
   useEffect(() => {
     if (!token) return;
-    const controller = new AbortController(); setLoading(true); setError(null);
-    listCases(token, controller.signal).then((items) => { setCases(items); if (initialCaseId) setSelected(items.find((item) => item.id === initialCaseId) ?? null); }).catch((reason) => { if (!controller.signal.aborted) setError(reason); }).finally(() => { if (!controller.signal.aborted) setLoading(false); });
-    return () => controller.abort();
-  }, [initialCaseId, reload, token]);
+    const controller = new AbortController(); if (!cases.length) setLoading(true); setError(null);
+    const query = new URLSearchParams();
+    if (search.trim()) query.set('search', search.trim()); if (status) query.set('status', status); if (risk) query.set('risk', risk); if (priority) query.set('priority', priority); if (emergency) query.set('emergency', emergency); if (department) query.set('department', department); if (jurisdiction) query.set('jurisdiction', jurisdiction);
+    const timer = window.setTimeout(() => getCasesPage(token, query.toString(), controller.signal).then((page) => { setCases(page.items); setNextCursor(page.nextCursor); if (initialCaseId) setSelected(page.items.find((item) => item.id === initialCaseId) ?? null); }).catch((reason) => { if (!controller.signal.aborted) setError(reason); }).finally(() => { if (!controller.signal.aborted) setLoading(false); }), 250);
+    return () => { window.clearTimeout(timer); controller.abort(); };
+  }, [department, emergency, initialCaseId, jurisdiction, priority, reload, risk, search, status, token]);
+
+  async function loadMore() {
+    if (!token || !nextCursor || loadingMore) return;
+    const query = new URLSearchParams({ limit: '25', cursor: nextCursor });
+    if (search.trim()) query.set('search', search.trim()); if (status) query.set('status', status); if (risk) query.set('risk', risk); if (priority) query.set('priority', priority); if (emergency) query.set('emergency', emergency); if (department) query.set('department', department); if (jurisdiction) query.set('jurisdiction', jurisdiction);
+    setLoadingMore(true); setError(null);
+    try { const page = await getCasesPage(token, query.toString()); setCases((current) => [...new Map([...current, ...page.items].map((item) => [item.id, item])).values()]); setNextCursor(page.nextCursor); }
+    catch (reason) { setError(reason); } finally { setLoadingMore(false); }
+  }
 
   useEffect(() => {
     setEmergency(initialFilter === 'emergency' ? 'true' : '');
@@ -78,7 +91,7 @@ export default function CasesPage({ initialCaseId = null, initialFilter = null }
       </div>
       {activeFilters.length > 0 && <div className="filter-chips" aria-label="Active filters">{activeFilters.map((label) => <span key={label}>{label}</span>)}<button type="button" onClick={clear}><X aria-hidden="true" size={15} /> Clear all</button></div>}
       <p className="result-count" role="status">{filtered.length} {filtered.length === 1 ? 'case' : 'cases'} shown</p>
-      {!filtered.length ? <Empty>No cases match the current presentation filters.</Empty> : <div className="operational-case-list">{filtered.map((item) => <article key={item.id} className={`operational-case priority-${(item.priorityLevel ?? 'unrated').toLowerCase().replace('_','-')}`}><button className="operational-case-body" onClick={() => setSelected(item)} aria-label={`Open ${item.caseNumber}: ${item.title}`}><span className="case-identity"><span className="case-reference"><strong>{item.caseNumber}</strong>{item.emergencyFlag && <span className="emergency-marker">Emergency</span>}</span><b>{item.title}</b><small>{item.asset.name} · {item.asset.assetCode}</small></span><span className="case-indicators"><span><small>Status</small><StatusBadge value={item.status} /></span><span><small>Risk</small><StatusBadge value={item.riskLevel} kind="risk" emptyLabel="Not assessed" /></span><span><small>Priority</small><StatusBadge value={item.priorityLevel} kind="priority" emptyLabel="Not assessed" /></span></span><span className="case-dates"><small>Created {formatDate(item.createdAt)}</small><small>Updated {formatDate(item.updatedAt)}</small></span><span className="open-affordance">Open workspace <ArrowRight aria-hidden="true" size={17} /></span></button></article>)}</div>}
+      {!filtered.length ? <Empty>No cases match the current presentation filters.</Empty> : <><div className="operational-case-list">{filtered.map((item) => <article key={item.id} className={`operational-case priority-${(item.priorityLevel ?? 'unrated').toLowerCase().replace('_','-')}`}><button className="operational-case-body" onClick={() => setSelected(item)} aria-label={`Open ${item.caseNumber}: ${item.title}`}><span className="case-identity"><span className="case-reference"><strong>{item.caseNumber}</strong>{item.emergencyFlag && <span className="emergency-marker">Emergency</span>}</span><b>{item.title}</b><small>{item.asset.name} · {item.asset.assetCode}</small></span><span className="case-indicators"><span><small>Status</small><StatusBadge value={item.status} /></span><span><small>Risk</small><StatusBadge value={item.riskLevel} kind="risk" emptyLabel="Not assessed" /></span><span><small>Priority</small><StatusBadge value={item.priorityLevel} kind="priority" emptyLabel="Not assessed" /></span></span><span className="case-dates"><small>Created {formatDate(item.createdAt)}</small><small>Updated {formatDate(item.updatedAt)}</small></span><span className="open-affordance">Open workspace <ArrowRight aria-hidden="true" size={17} /></span></button></article>)}</div>{nextCursor && <button type="button" className="secondary-button" onClick={loadMore} disabled={loadingMore} aria-label="Load more cases">{loadingMore ? 'Loading more…' : 'Load more cases'}</button>}</>}
     </>}
   </section>;
 }

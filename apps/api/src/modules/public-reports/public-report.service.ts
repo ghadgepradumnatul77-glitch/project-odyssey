@@ -2,6 +2,7 @@ import { Prisma, SystemRole } from '../../generated/prisma';
 import prisma from '../../lib/prisma';
 import { randomBytes } from 'node:crypto';
 import type { OrganizationalPrincipal } from '../../security/organizational-scope';
+import { pageFromRows, type StableCursor } from '../../lib/pagination';
 
 export class PublicReportNotFoundError extends Error {}
 export class PublicReportConflictError extends Error {}
@@ -36,17 +37,23 @@ export function buildPublicReportReadWhere(principal: OrganizationalPrincipal): 
   };
 }
 
-export async function listPublicReports(principal: OrganizationalPrincipal) {
+export async function listPublicReports(principal: OrganizationalPrincipal, options: { limit: number; cursor?: StableCursor; search?: string; status?: Prisma.PublicReportWhereInput['status']; category?: Prisma.PublicReportWhereInput['category']; jurisdictionId?: string; map?: boolean } = {limit:25}) {
   const reports = await prisma.publicReport.findMany({
-    where: buildPublicReportReadWhere(principal), select: publicReportListSelect,
-    orderBy: [{ submittedAt: 'desc' }, { reportNumber: 'asc' }]
+    where: { AND: [buildPublicReportReadWhere(principal), options.cursor ? { OR: [{ submittedAt: { lt: new Date(options.cursor.at) } }, { submittedAt: new Date(options.cursor.at), id: { lt: options.cursor.id } }] } : {}],
+      ...(options.status ? { status: options.status } : {}),
+      ...(options.category ? { category: options.category } : {}),
+      ...(options.jurisdictionId ? { jurisdictionId: options.jurisdictionId } : {}),
+      ...(options.search ? { OR: [{ reportNumber: { contains: options.search, mode: 'insensitive' } }, { title: { contains: options.search, mode: 'insensitive' } }, { locationText: { contains: options.search, mode: 'insensitive' } }] } : {}) },
+    select: publicReportListSelect,
+    orderBy: [{ submittedAt: 'desc' }, { id: 'desc' }], take: options.limit + 1
   });
-  return reports.map(({ triageAnalyses, ...report }) => ({
+  const rows = reports.map(({ triageAnalyses, ...report }) => ({
     ...report,
     latitude: report.latitude === null ? null : Number(report.latitude),
     longitude: report.longitude === null ? null : Number(report.longitude),
     triageAnalysis: triageAnalyses[0] ?? null
   }));
+  return pageFromRows(rows, options.limit, (item) => item.submittedAt.toISOString(), options.map ? { truncated: rows.length > options.limit } : {});
 }
 
 export async function getPublicReport(reportId: string, principal: OrganizationalPrincipal) {

@@ -17,7 +17,11 @@ export interface PublicReportDetail extends PublicReportSummary {
   reviewStartedAt: string | null; decisionAt: string | null; rejectionReason: string | null;
   createdCase: { id: string; caseNumber: string; status: string } | null;
 }
-export function listPublicReports(accessToken: string, signal?: AbortSignal) { return apiRequest<PublicReportSummary[]>('/public-reports', { accessToken, signal }); }
+export interface PublicReportPage { items: PublicReportSummary[]; nextCursor: string | null; limit: number; truncated?: boolean }
+const normalizePage = (value: PublicReportPage | PublicReportSummary[]): PublicReportPage => Array.isArray(value) ? { items: value, nextCursor: null, limit: value.length } : value;
+export function getPublicReportsPage(accessToken: string, query = '', signal?: AbortSignal) { return apiRequest<PublicReportPage|PublicReportSummary[]>(`/public-reports${query ? `?${query}` : ''}`, { accessToken, signal }).then(normalizePage); }
+export function listPublicReports(accessToken: string, signal?: AbortSignal) { return getPublicReportsPage(accessToken, '', signal).then((page) => page.items); }
+export const listMapPublicReports = (accessToken: string, signal?: AbortSignal) => getPublicReportsPage(accessToken, 'map=true', signal);
 export function getPublicReport(reportId: string, accessToken: string, signal?: AbortSignal) { return apiRequest<PublicReportDetail>(`/public-reports/${encodeURIComponent(reportId)}`, { accessToken, signal }); }
 export interface CitizenReportInput {title:string;description:string;category:PublicReportCategory;locationText:string;latitude?:number;longitude?:number;reporterName?:string;reporterContact?:string;}
 export interface CitizenReportReceipt {reportNumber:string;status:'SUBMITTED';submittedAt:string;}

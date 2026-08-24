@@ -20,6 +20,7 @@ export default function TaskActions({ task, onRecorded }: {
   const [candidateId, setCandidateId] = useState('');
   const [candidateLoading, setCandidateLoading] = useState(task.status === 'PENDING');
   const [candidateError, setCandidateError] = useState<unknown>(null);
+  const [candidatesTruncated,setCandidatesTruncated]=useState(false);
   const canVerify = task.status === 'COMPLETION_SUBMITTED'
     && task.completionSubmittedBy?.id !== user?.id;
 
@@ -28,7 +29,7 @@ export default function TaskActions({ task, onRecorded }: {
     const controller = new AbortController();
     setCandidateLoading(true); setCandidateError(null);
     listEligibleExecutionAssignees(task.id, token, controller.signal)
-      .then((items) => { setCandidates(items); setCandidateId(items[0]?.id ?? ''); })
+      .then((page) => { setCandidates(page.items);setCandidatesTruncated(page.truncated); setCandidateId(page.items[0]?.id ?? ''); })
       .catch((failure) => { if (!controller.signal.aborted) setCandidateError(failure); })
       .finally(() => { if (!controller.signal.aborted) setCandidateLoading(false); });
     return () => controller.abort();
@@ -98,6 +99,7 @@ export default function TaskActions({ task, onRecorded }: {
       </select></label>
       {candidateLoading && <p role="status">Loading eligible officers…</p>}
       {!candidateLoading && !candidateError && candidates.length === 0 && <p>No active officers are available within this Case scope.</p>}
+      {candidatesTruncated&&<p role="status">Additional eligible officers exist. Refine the governed assignment search before treating this list as exhaustive.</p>}
       {candidateError !== null && <MutationFeedback error={candidateError} success={null} />}
       <button type="button" className="primary-action" onClick={assign} disabled={candidateLoading || submitting || !candidateId}>{submitting ? 'Assigning…' : 'Assign'}</button>
     </section>}

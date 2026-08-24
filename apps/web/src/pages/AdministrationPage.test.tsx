@@ -25,10 +25,11 @@ const authValue: AuthContextValue = {
 
 function show() {
   const fetchMock = vi.fn(async (url: string, init?: RequestInit) => {
+    const path = new URL(url, 'http://local').pathname;
     if (init?.method === 'POST') return ok({ id: 'new' });
-    if (url.endsWith('/departments')) return ok([department, roadsDepartment]);
-    if (url.endsWith('/jurisdictions')) return ok([jurisdiction, roadsJurisdiction]);
-    if (url.endsWith('/users')) return ok([user]);
+    if (path.endsWith('/departments')) return ok([department, roadsDepartment]);
+    if (path.endsWith('/jurisdictions')) return ok([jurisdiction, roadsJurisdiction]);
+    if (path.endsWith('/users')) return ok([user]);
     return ok([]);
   });
   vi.stubGlobal('fetch', fetchMock);
@@ -47,7 +48,7 @@ describe('Administration', () => {
     fireEvent.click(screen.getByRole('button', { name: 'Create record' }));
     expect(await screen.findByText('Departments record created.')).toBeInTheDocument();
     await waitFor(() => expect(fetchMock.mock.calls.filter(
-      (call) => String(call[0]).endsWith('/departments'),
+      (call) => new URL(String(call[0]), 'http://local').pathname.endsWith('/departments'),
     ).length).toBeGreaterThan(1));
     const postCall = fetchMock.mock.calls.find((call) => call[1]?.method === 'POST');
     expect(JSON.parse(String(postCall?.[1]?.body))).toEqual({ name: 'Roads', code: 'RD' });

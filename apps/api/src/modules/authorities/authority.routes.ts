@@ -4,6 +4,7 @@ import { createApprovalAuthority, listApprovalAuthorities } from './authority.se
 import { requiredText, WorkflowError } from '../decisions/workflow-error';
 import { authenticate } from '../../middleware/authenticate';
 import { requireRole } from '../../middleware/require-role';
+import { parseCursor, parseLimit, parseSearch, parseUuidQuery, queryError } from '../../lib/pagination';
 
 const router = Router();
 router.use('/approval-authorities', authenticate, requireRole(SystemRole.SYSTEM_ADMIN));
@@ -66,8 +67,12 @@ router.post('/approval-authorities', async (req, res) => {
 router.get('/approval-authorities', async (req, res) => {
   console.info('Security: authority-management list attempted.', { userId: req.user!.id });
   try {
-    return res.status(200).json({ success: true, data: await listApprovalAuthorities() });
+    const limit=parseLimit(req.query.limit),cursor=parseCursor(req.query.cursor),search=parseSearch(req.query.search);
+    const active=req.query.active===undefined?undefined:req.query.active==='true'?true:req.query.active==='false'?false:(()=>{throw new Error('INVALID_ACTIVE')})();
+    return res.status(200).json({ success: true, data: await listApprovalAuthorities({limit,cursor,active,search,departmentId:parseUuidQuery(req.query.departmentId,'departmentId'),jurisdictionId:parseUuidQuery(req.query.jurisdictionId,'jurisdictionId')}) });
   } catch (error) {
+    const invalid=queryError(res,error);if(invalid)return invalid;
+    if(error instanceof Error&&error.message==='INVALID_ACTIVE')return res.status(400).json({success:false,error:{code:'INVALID_QUERY',message:'active must be true or false.'}});
     console.error('Failed to fetch approval authorities:', error);
     return res.status(500).json({ success: false, error: { code: 'AUTHORITY_FETCH_FAILED', message: 'Could not fetch approval authorities.' } });
   }

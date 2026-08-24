@@ -90,9 +90,9 @@ describe('ORP routes', () => {
     mocks.caseFindUnique.mockResolvedValue({ id: 'case-1' });
     mocks.orpFindMany.mockResolvedValue([storedOrp]);
     const response = await request(app).get('/api/v1/cases/case-1/orps').set('Authorization', await authorization()).expect(200);
-    expect(response.body.data[0].versionNumber).toBe(1);
+    expect(response.body.data.items[0].versionNumber).toBe(1);
     expect(mocks.orpFindMany).toHaveBeenCalledWith(expect.objectContaining({
-      orderBy: [{ createdAt: 'desc' }, { versionNumber: 'desc' }]
+      orderBy: [{ createdAt: 'desc' }, { id: 'desc' }], take: 26
     }));
   });
 

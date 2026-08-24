@@ -5,11 +5,13 @@ import { requiredText, WorkflowError } from './workflow-error';
 import { authenticate } from '../../middleware/authenticate';
 import { requireRole } from '../../middleware/require-role';
 import { SystemRole } from '../../generated/prisma';
+import { parseCursor, parseLimit, queryError } from '../../lib/pagination';
 
 const router = Router();
 const decisionTypes = new Set(Object.values(OrpDecisionType));
 
 function sendError(res: Parameters<Parameters<typeof router.post>[1]>[1], error: unknown) {
+  const invalid = queryError(res, error); if (invalid) return invalid;
   if (error instanceof WorkflowError) {
     return res.status(error.status).json({ success: false, error: { code: error.code, message: error.message } });
   }
@@ -44,7 +46,7 @@ router.get('/orps/:orpId/decisions', authenticate, async (req, res) => {
   try {
     const orpId = requiredText(req.params.orpId);
     if (!orpId) return res.status(400).json({ success: false, error: { code: 'INVALID_INPUT', message: 'orpId is required.' } });
-    return res.status(200).json({ success: true, data: await getOrpDecisionHistory(orpId, req.user!), ordering: 'createdAt ASC, id ASC' });
+    return res.status(200).json({ success: true, data: await getOrpDecisionHistory(orpId, req.user!, { limit: parseLimit(req.query.limit), cursor: parseCursor(req.query.cursor) }), ordering: 'createdAt DESC, id DESC' });
   } catch (error) {
     return sendError(res, error);
   }
@@ -54,7 +56,7 @@ router.get('/cases/:caseId/decisions', authenticate, async (req, res) => {
   try {
     const caseId = requiredText(req.params.caseId);
     if (!caseId) return res.status(400).json({ success: false, error: { code: 'INVALID_INPUT', message: 'caseId is required.' } });
-    return res.status(200).json({ success: true, data: await getCaseDecisionHistory(caseId, req.user!), ordering: 'createdAt ASC, id ASC' });
+    return res.status(200).json({ success: true, data: await getCaseDecisionHistory(caseId, req.user!, { limit: parseLimit(req.query.limit), cursor: parseCursor(req.query.cursor) }), ordering: 'createdAt DESC, id DESC' });
   } catch (error) {
     return sendError(res, error);
   }

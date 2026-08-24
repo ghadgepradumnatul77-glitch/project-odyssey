@@ -4,6 +4,7 @@ import { SystemRole } from '../../generated/prisma';
 import { authenticate } from '../../middleware/authenticate';
 import { requireRole } from '../../middleware/require-role';
 import { hasGlobalReadVisibility } from '../../security/organizational-scope';
+import { SMALL_REGISTRY_MAX } from '../../lib/pagination';
 
 const router = Router();
 
@@ -21,10 +22,9 @@ router.get('/', authenticate, async (req, res) => {
           }
         }
       },
-      orderBy: {
-        createdAt: 'asc'
-      }
+      orderBy: [{ name: 'asc' }, { id: 'asc' }],take:SMALL_REGISTRY_MAX+1
     });
+    if(jurisdictions.length>SMALL_REGISTRY_MAX)return res.status(409).json({success:false,error:{code:'REGISTRY_LIMIT_EXCEEDED',message:'The jurisdiction registry exceeds the pilot-safe limit.'}});
 
     return res.status(200).json({
       success: true,

@@ -5,6 +5,7 @@ import { requireRole } from '../../middleware/require-role';
 import { ExecutionError } from './execution-error';
 import { addEvidence, assignTask, changeTaskStatus, generateExecutionPlan, getExecutionPlan, hasClientActorFields, listCaseExecutionPlans, listExecutionTasks, resolveEligibleExecutionAssignees, submitCompletion, verifyTask } from './execution.service';
 import { z } from 'zod';
+import { parseCursor, parseLimit, queryError } from '../../lib/pagination';
 
 const router = Router();
 const evidenceTypes = new Set(Object.values(ExecutionEvidenceType));
@@ -13,6 +14,7 @@ function id(value: unknown) { return typeof value === 'string' && value.trim() ?
 const uuid = z.string().uuid();
 function uuidParam(value: unknown) { const parsed = uuid.safeParse(value); return parsed.success ? parsed.data : null; }
 function fail(res: any, error: unknown) {
+  const invalid = queryError(res, error); if (invalid) return invalid;
   if (error instanceof ExecutionError) return res.status(error.status).json({ success: false, error: { code: error.code, message: error.message } });
   console.error('Execution workflow failed:', error);
   return res.status(500).json({ success: false, error: { code: 'EXECUTION_WORKFLOW_FAILED', message: 'Could not process execution workflow.' } });
@@ -25,9 +27,9 @@ function rejectActors(req: any, res: any) {
 router.post('/orps/:orpId/execution-plan', authenticate, requireRole(SystemRole.OFFICER), async (req, res) => {
   try { if (rejectActors(req, res)) return; const orpId = id(req.params.orpId); if (!orpId) throw new ExecutionError('INVALID_INPUT', 400, 'orpId is required.'); const result = await generateExecutionPlan(orpId, req.user!); return res.status(result.created ? 201 : 200).json({ success: true, data: result.plan, idempotent: !result.created }); } catch (error) { return fail(res, error); }
 });
-router.get('/cases/:caseId/execution-plans', authenticate, async (req, res) => { try { const caseId = id(req.params.caseId); if (!caseId) throw new ExecutionError('INVALID_INPUT', 400, 'caseId is required.'); return res.json({ success: true, data: await listCaseExecutionPlans(caseId, req.user!) }); } catch (error) { return fail(res, error); } });
+router.get('/cases/:caseId/execution-plans', authenticate, async (req, res) => { try { const caseId = id(req.params.caseId); if (!caseId) throw new ExecutionError('INVALID_INPUT', 400, 'caseId is required.'); return res.json({ success: true, data: await listCaseExecutionPlans(caseId, req.user!, { limit: parseLimit(req.query.limit), cursor: parseCursor(req.query.cursor) }) }); } catch (error) { return fail(res, error); } });
 router.get('/execution-plans/:planId', authenticate, async (req, res) => { try { const planId = id(req.params.planId); if (!planId) throw new ExecutionError('INVALID_INPUT', 400, 'planId is required.'); return res.json({ success: true, data: await getExecutionPlan(planId, req.user!) }); } catch (error) { return fail(res, error); } });
-router.get('/execution-plans/:planId/tasks', authenticate, async (req, res) => { try { const planId = id(req.params.planId); if (!planId) throw new ExecutionError('INVALID_INPUT', 400, 'planId is required.'); return res.json({ success: true, data: await listExecutionTasks(planId, req.user!) }); } catch (error) { return fail(res, error); } });
+router.get('/execution-plans/:planId/tasks', authenticate, async (req, res) => { try { const planId = id(req.params.planId); if (!planId) throw new ExecutionError('INVALID_INPUT', 400, 'planId is required.'); return res.json({ success: true, data: await listExecutionTasks(planId, req.user!, { limit: parseLimit(req.query.limit), cursor: parseCursor(req.query.cursor) }) }); } catch (error) { return fail(res, error); } });
 
 router.get('/execution-tasks/:taskId/eligible-assignees', authenticate, requireRole(SystemRole.OFFICER), async (req, res) => { try { const taskId = uuidParam(req.params.taskId); if (!taskId) throw new ExecutionError('INVALID_INPUT', 400, 'A valid taskId is required.'); return res.json({ success: true, data: await resolveEligibleExecutionAssignees(taskId, req.user!) }); } catch (error) { return fail(res, error); } });
 router.patch('/execution-tasks/:taskId/assignment', authenticate, requireRole(SystemRole.OFFICER), async (req, res) => { try { if (rejectActors(req, res)) return; const taskId = uuidParam(req.params.taskId), assigneeId = uuidParam(req.body.assigneeId); if (!taskId || !assigneeId || Object.prototype.hasOwnProperty.call(req.body, 'status')) throw new ExecutionError('INVALID_INPUT', 400, 'Valid taskId and assigneeId values are required; status is server controlled.'); return res.json({ success: true, data: await assignTask(taskId, assigneeId, req.user!) }); } catch (error) { return fail(res, error); } });

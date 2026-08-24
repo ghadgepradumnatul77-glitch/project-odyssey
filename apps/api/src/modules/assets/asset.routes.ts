@@ -4,6 +4,7 @@ import { SystemRole } from '../../generated/prisma';
 import { authenticate } from '../../middleware/authenticate';
 import { requireRole } from '../../middleware/require-role';
 import { buildAssetReadWhere } from '../../security/organizational-scope';
+import { MAP_MAX_ITEMS, pageFromRows, parseCursor, parseLimit, parseSearch, parseUuidQuery, queryError } from '../../lib/pagination';
 
 const router = Router();
 
@@ -14,8 +15,10 @@ const router = Router();
 
 router.get('/', authenticate, async (req, res) => {
   try {
+    const map=req.query.map===undefined?false:req.query.map==='true'?true:req.query.map==='false'?false:(()=>{throw new Error('INVALID_MAP')})();
+    const limit=map?MAP_MAX_ITEMS:parseLimit(req.query.limit),cursor=map?undefined:parseCursor(req.query.cursor),search=parseSearch(req.query.search),departmentId=parseUuidQuery(req.query.departmentId,'departmentId'),jurisdictionId=parseUuidQuery(req.query.jurisdictionId,'jurisdictionId');
     const assets = await prisma.asset.findMany({
-      where: buildAssetReadWhere(req.user!),
+      where: {...buildAssetReadWhere(req.user!),...(cursor||search?{AND:[cursor?{OR:[{createdAt:{lt:new Date(cursor.at)}},{createdAt:new Date(cursor.at),id:{lt:cursor.id}}]}:{},search?{OR:[{assetCode:{contains:search,mode:'insensitive'}},{name:{contains:search,mode:'insensitive'}}]}:{}]}:{}),...(departmentId?{departmentId}:{}),...(jurisdictionId?{jurisdictionId}:{})},
       include: {
         department: {
           select: {
@@ -34,17 +37,17 @@ router.get('/', authenticate, async (req, res) => {
         }
       },
 
-      orderBy: {
-        createdAt: 'asc'
-      }
+      orderBy: [{ createdAt: 'desc' }, { id: 'desc' }], take: limit + 1
     });
 
     return res.status(200).json({
       success: true,
-      data: assets
+      data: pageFromRows(assets,limit,(item)=>item.createdAt.toISOString(),map?{truncated:assets.length>limit}:{})
     });
 
   } catch (error) {
+    const invalid=queryError(res,error);if(invalid)return invalid;
+    if(error instanceof Error&&error.message==='INVALID_MAP')return res.status(400).json({success:false,error:{code:'INVALID_QUERY',message:'map must be true or false.'}});
     console.error('Failed to fetch assets:', error);
 
     return res.status(500).json({

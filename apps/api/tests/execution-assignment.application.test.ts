@@ -36,7 +36,7 @@ describe('assembled application scoped task assignment', () => {
   it('returns only scoped officers, assigns one, and rejects a forged cross-scope candidate', async () => {
     const token = await authorization();
     const candidates = await request(app).get(`/api/v1/execution-tasks/${ids.task}/eligible-assignees`).set('Authorization', token).expect(200);
-    expect(candidates.body.data).toEqual([{ id: ids.eligible, name: 'Asha Officer', designation: 'Executive Engineer', employeeCode: 'ODY-EE-001' }]);
+    expect(candidates.body.data).toEqual({ items: [{ id: ids.eligible, name: 'Asha Officer', designation: 'Executive Engineer', employeeCode: 'ODY-EE-001' }], limit: 100, truncated: false });
     expect(JSON.stringify(candidates.body.data)).not.toMatch(/email|password|token/i);
     const assigned = await request(app).patch(`/api/v1/execution-tasks/${ids.task}/assignment`).set('Authorization', token).send({ assigneeId: ids.eligible }).expect(200);
     expect(assigned.body.data).toMatchObject({ status: 'ASSIGNED', assignedTo: { id: ids.eligible } });

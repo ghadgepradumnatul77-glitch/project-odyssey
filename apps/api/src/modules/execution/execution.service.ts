@@ -5,6 +5,7 @@ import { ExecutionError } from './execution-error';
 import { EXECUTION_TEMPLATE_VERSION, translateActionsToTasks } from './execution-templates';
 import { z } from 'zod';
 import { GovernedTemplateError, resolveGovernedTemplate } from '../execution-templates/governed-execution-template.service';
+import { pageFromRows, type StableCursor } from '../../lib/pagination';
 
 export const GOVERNED_EXECUTION_CONTRACT_VERSION='ODYSSEY_GOVERNED_EXECUTION_V1';
 const governedAction=z.object({actionId:z.string().uuid(),actionCode:z.string().min(1),actionVersion:z.number().int().positive(),classification:z.enum(['MANDATORY','RECOMMENDED','OPTIONAL','PROHIBITED'])}).passthrough();
@@ -13,7 +14,8 @@ export function governedExecutableActions(value:unknown,recommendedActionCodes:u
 
 const safeUser = { id: true, employeeCode: true, name: true, designation: true, role: true, status: true } as const;
 const safeAssigneeCandidate = { id: true, employeeCode: true, name: true, designation: true } as const;
-const taskInclude = { assignedTo: { select: safeUser }, assignedBy: { select: safeUser }, completionSubmittedBy: { select: safeUser }, verifiedBy: { select: safeUser }, cancelledBy: { select: safeUser }, evidence: { include: { submittedBy: { select: safeUser } }, orderBy: { submittedAt: 'asc' as const } } };
+const taskInclude = { assignedTo: { select: safeUser }, assignedBy: { select: safeUser }, completionSubmittedBy: { select: safeUser }, verifiedBy: { select: safeUser }, cancelledBy: { select: safeUser }, evidence: { include: { submittedBy: { select: safeUser } }, orderBy: { submittedAt: 'asc' as const }, take: 101 } };
+const presentTask = <T extends { evidence: unknown[] }>(task: T) => ({ ...task, evidence: task.evidence.slice(0, 100), evidenceTruncated: task.evidence.length > 100 });
 
 function notFound(resource: 'Execution plan' | 'Execution task'): never { throw new ExecutionError(resource === 'Execution plan' ? 'EXECUTION_PLAN_NOT_FOUND' : 'EXECUTION_TASK_NOT_FOUND', 404, `${resource} not found.`); }
 function actorFields(body: Record<string, unknown>) {
@@ -105,19 +107,23 @@ export async function generateExecutionPlan(orpId: string, principal: Organizati
   }
 }
 
-export async function listCaseExecutionPlans(caseId: string, principal: OrganizationalPrincipal) {
+export async function listCaseExecutionPlans(caseId: string, principal: OrganizationalPrincipal, query: { limit: number; cursor?: StableCursor } = { limit: 25 }) {
   const target = await prisma.case.findUnique({ where: { id: caseId, AND: [buildCaseReadWhere(principal)] }, select: { id: true } });
   if (!target) throw new ExecutionError('CASE_NOT_FOUND', 404, 'Case not found.');
-  return prisma.executionPlan.findMany({ where: { caseId, ...buildExecutionPlanReadWhere(principal) }, orderBy: { createdAt: 'asc' } });
+  const rows = await prisma.executionPlan.findMany({ where: { caseId, ...buildExecutionPlanReadWhere(principal), ...(query.cursor ? { OR: [{ createdAt: { lt: new Date(query.cursor.at) } }, { createdAt: new Date(query.cursor.at), id: { lt: query.cursor.id } }] } : {}) }, orderBy: [{ createdAt: 'desc' }, { id: 'desc' }], take: query.limit + 1 });
+  return pageFromRows(rows, query.limit, (item) => item.createdAt.toISOString());
 }
 export async function getExecutionPlan(planId: string, principal: OrganizationalPrincipal) {
-  const plan = await prisma.executionPlan.findUnique({ where: { id: planId, AND: [buildExecutionPlanReadWhere(principal)] }, include: { createdBy: { select: safeUser }, tasks: { include: taskInclude, orderBy: { sequenceNumber: 'asc' } } } });
-  if (!plan) notFound('Execution plan'); return plan;
+  const plan = await prisma.executionPlan.findUnique({ where: { id: planId, AND: [buildExecutionPlanReadWhere(principal)] }, include: { createdBy: { select: safeUser }, tasks: { include: taskInclude, orderBy: { sequenceNumber: 'asc' }, take: 101 } } });
+  if (!plan) notFound('Execution plan');
+  return { ...plan, tasks: plan.tasks.slice(0, 100).map(presentTask), tasksTruncated: plan.tasks.length > 100 };
 }
-export async function listExecutionTasks(planId: string, principal: OrganizationalPrincipal) {
+export async function listExecutionTasks(planId: string, principal: OrganizationalPrincipal, query: { limit: number; cursor?: StableCursor } = { limit: 25 }) {
   const plan = await prisma.executionPlan.findUnique({ where: { id: planId, AND: [buildExecutionPlanReadWhere(principal)] }, select: { id: true } });
   if (!plan) notFound('Execution plan');
-  return prisma.executionTask.findMany({ where: { executionPlanId: planId, ...buildExecutionTaskReadWhere(principal) }, include: taskInclude, orderBy: { sequenceNumber: 'asc' } });
+  const rows = await prisma.executionTask.findMany({ where: { executionPlanId: planId, ...buildExecutionTaskReadWhere(principal), ...(query.cursor ? { OR: [{ createdAt: { lt: new Date(query.cursor.at) } }, { createdAt: new Date(query.cursor.at), id: { lt: query.cursor.id } }] } : {}) }, include: taskInclude, orderBy: [{ createdAt: 'desc' }, { id: 'desc' }], take: query.limit + 1 });
+  const page = pageFromRows(rows, query.limit, (item) => item.createdAt.toISOString());
+  return { ...page, items: page.items.map(presentTask) };
 }
 
 async function scopedTask(taskId: string, principal: OrganizationalPrincipal) {
@@ -147,8 +153,9 @@ async function assignmentContext(taskId: string, principal: OrganizationalPrinci
 
 export async function resolveEligibleExecutionAssignees(taskId: string, principal: OrganizationalPrincipal) {
   const { eligibility } = await assignmentContext(taskId, principal);
-  return prisma.user.findMany({ where: eligibility, select: safeAssigneeCandidate,
-    orderBy: [{ name: 'asc' }, { employeeCode: 'asc' }, { id: 'asc' }] });
+  const rows=await prisma.user.findMany({ where: eligibility, select: safeAssigneeCandidate,
+    orderBy: [{ name: 'asc' }, { employeeCode: 'asc' }, { id: 'asc' }],take:101 });
+  return {items:rows.slice(0,100),limit:100,truncated:rows.length>100};
 }
 
 export async function assertEligibleExecutionAssignee(taskId: string, assigneeId: string, principal: OrganizationalPrincipal) {

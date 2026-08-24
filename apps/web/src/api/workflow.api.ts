@@ -19,14 +19,23 @@ export interface EligibleAssigneeDto { id: string; name: string; designation: st
 export interface ExecutionPlanDto { id: string; status: string; templateVersion: string; governanceMode?:'LEGACY'|'GOVERNED'; executionContractVersion?:string|null; governedProvenance?:unknown; createdAt: string; startedAt: string | null; completedAt: string | null; tasks?: ExecutionTaskDto[]; }
 
 const get = <T>(path: string, accessToken: string, signal?: AbortSignal) => apiRequest<T>(path, { accessToken, signal });
-export const listInspections = (caseId: string, token: string, signal?: AbortSignal) => get<InspectionDto[]>(`/cases/${caseId}/inspections`, token, signal);
-export const listRiskAssessments = (caseId: string, token: string, signal?: AbortSignal) => get<RiskAssessmentDto[]>(`/cases/${caseId}/risk-assessments`, token, signal);
-export const listOrps = (caseId: string, token: string, signal?: AbortSignal) => get<OrpDto[]>(`/cases/${caseId}/orps`, token, signal).then((items)=>items.map((item)=>({...item,governanceMode:item.governanceMode??'LEGACY'})));
+export type Page<T>={items:T[];nextCursor:string|null;limit:number;truncated?:boolean};
+const asPage=<T>(value:Page<T>|T[]):Page<T>=>Array.isArray(value)?{items:value,nextCursor:null,limit:value.length}:value;
+const withQuery=(path:string,query='')=>query?`${path}?${query}`:path;
+export const getInspectionsPage = (caseId: string, token: string, query='', signal?: AbortSignal) => get<Page<InspectionDto>|InspectionDto[]>(withQuery(`/cases/${caseId}/inspections`,query), token, signal).then(asPage);
+export const listInspections = (caseId: string, token: string, signal?: AbortSignal) => getInspectionsPage(caseId,token,'',signal).then(page=>page.items);
+export const getRiskAssessmentsPage = (caseId: string, token: string, query='', signal?: AbortSignal) => get<Page<RiskAssessmentDto>|RiskAssessmentDto[]>(withQuery(`/cases/${caseId}/risk-assessments`,query), token, signal).then(asPage);
+export const listRiskAssessments = (caseId: string, token: string, signal?: AbortSignal) => getRiskAssessmentsPage(caseId,token,'',signal).then(page=>page.items);
+export const getOrpsPage = (caseId: string, token: string, query='', signal?: AbortSignal) => get<Page<OrpDto>|OrpDto[]>(withQuery(`/cases/${caseId}/orps`,query), token, signal).then(asPage).then(page=>({...page,items:page.items.map(item=>({...item,governanceMode:item.governanceMode??'LEGACY' as const}))}));
+export const listOrps = (caseId: string, token: string, signal?: AbortSignal) => getOrpsPage(caseId,token,'',signal).then(page=>page.items);
 export const getOrp = (orpId: string, token: string, signal?: AbortSignal) => get<OrpDto>(`/orps/${orpId}`, token, signal);
-export const listDecisions = (caseId: string, token: string, signal?: AbortSignal) => get<DecisionDto[]>(`/cases/${caseId}/decisions`, token, signal);
-export const listExecutionPlans = (caseId: string, token: string, signal?: AbortSignal) => get<ExecutionPlanDto[]>(`/cases/${caseId}/execution-plans`, token, signal);
+export const getDecisionsPage = (caseId: string, token: string, query='', signal?: AbortSignal) => get<Page<DecisionDto>|DecisionDto[]>(withQuery(`/cases/${caseId}/decisions`,query), token, signal).then(asPage);
+export const listDecisions = (caseId: string, token: string, signal?: AbortSignal) => getDecisionsPage(caseId,token,'',signal).then(page=>page.items);
+export const getExecutionPlansPage = (caseId: string, token: string, query='', signal?: AbortSignal) => get<Page<ExecutionPlanDto>|ExecutionPlanDto[]>(withQuery(`/cases/${caseId}/execution-plans`,query), token, signal).then(asPage);
+export const listExecutionPlans = (caseId: string, token: string, signal?: AbortSignal) => getExecutionPlansPage(caseId,token,'',signal).then(page=>page.items);
 export const getExecutionPlan = (planId: string, token: string, signal?: AbortSignal) => get<ExecutionPlanDto>(`/execution-plans/${planId}`, token, signal);
-export const listExecutionTasks = (planId: string, token: string, signal?: AbortSignal) => get<ExecutionTaskDto[]>(`/execution-plans/${planId}/tasks`, token, signal);
+export const getExecutionTasksPage = (planId: string, token: string, query='', signal?: AbortSignal) => get<Page<ExecutionTaskDto>|ExecutionTaskDto[]>(withQuery(`/execution-plans/${planId}/tasks`,query), token, signal).then(asPage);
+export const listExecutionTasks = (planId: string, token: string, signal?: AbortSignal) => getExecutionTasksPage(planId,token,'',signal).then(page=>page.items);
 function isEligibleAssignee(value: unknown): value is EligibleAssigneeDto {
   if (!value || typeof value !== 'object' || Array.isArray(value)) return false;
   const item = value as Record<string, unknown>;
@@ -35,8 +44,9 @@ function isEligibleAssignee(value: unknown): value is EligibleAssigneeDto {
 }
 export const listEligibleExecutionAssignees = (taskId: string, token: string, signal?: AbortSignal) =>
   get<unknown>(`/execution-tasks/${taskId}/eligible-assignees`, token, signal).then((value) => {
-    if (!Array.isArray(value) || !value.every(isEligibleAssignee)) throw new Error('Invalid eligible-assignee response.');
-    return value;
+    const candidates=Array.isArray(value)?value:(value&&typeof value==='object'&&Array.isArray((value as any).items)?(value as any).items:null);
+    if (!candidates || !candidates.every(isEligibleAssignee)) throw new Error('Invalid eligible-assignee response.');
+    return {items:candidates as EligibleAssigneeDto[],truncated:!Array.isArray(value)&&Boolean((value as any).truncated)};
   });
 
 export interface InspectionInput { caseId: string; inspectionDate: string; structuralCondition: string; crackSeverity: string; corrosionLevel: string; trafficImportance: string; hospitalRoute: boolean; weatherRisk: string; heavyRainExpected: boolean; estimatedDailyUsers?: number | null; inspectionNotes?: string; }

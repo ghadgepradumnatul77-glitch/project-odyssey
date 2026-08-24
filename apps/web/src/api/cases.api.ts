@@ -12,7 +12,18 @@ export interface CaseSummary {
   createdAt: string; updatedAt: string; closedAt: string | null; asset: AssetSummary;
   sourcePublicReport?: { id: string; reportNumber: string } | null;
 }
+export interface Page<T>{items:T[];nextCursor:string|null;limit:number;truncated?:boolean}
+
+const normalizePage = <T>(value: Page<T> | T[]): Page<T> => Array.isArray(value)
+  ? { items: value, nextCursor: null, limit: value.length }
+  : value;
+
+export function getCasesPage(accessToken: string, query = '', signal?: AbortSignal) {
+  return apiRequest<Page<CaseSummary>|CaseSummary[]>(`/cases${query ? `?${query}` : ''}`, { accessToken, signal }).then(normalizePage);
+}
 
 export function listCases(accessToken: string, signal?: AbortSignal) {
-  return apiRequest<CaseSummary[]>('/cases', { accessToken, signal });
+  return getCasesPage(accessToken, '', signal).then((page) => page.items);
 }
+
+export const listMapCases = (accessToken: string, signal?: AbortSignal) => getCasesPage(accessToken, 'map=true', signal);

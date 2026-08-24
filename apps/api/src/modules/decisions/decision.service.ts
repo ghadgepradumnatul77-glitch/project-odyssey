@@ -1,4 +1,5 @@
 import prisma from '../../lib/prisma';
+import { pageFromRows, type StableCursor } from '../../lib/pagination';
 import {
   ApprovalAuthority,
   CaseStatus,
@@ -205,14 +206,16 @@ const decisionInclude = {
   orp: { select: { id: true, versionNumber: true } }
 } satisfies Prisma.OrpDecisionInclude;
 
-export async function getOrpDecisionHistory(orpId: string, principal: OrganizationalPrincipal) {
+export async function getOrpDecisionHistory(orpId: string, principal: OrganizationalPrincipal, options: { limit: number; cursor?: StableCursor }) {
   const orp = await prisma.operationalResponsePlan.findUnique({ where: { id: orpId, AND: [buildOrpReadWhere(principal)] }, select: { id: true } });
   if (!orp) throw new WorkflowError('ORP_NOT_FOUND', 404, 'Operational response plan not found.');
-  return prisma.orpDecision.findMany({ where: { orpId, ...buildDecisionReadWhere(principal) }, include: decisionInclude, orderBy: [{ createdAt: 'asc' }, { id: 'asc' }] });
+  const rows = await prisma.orpDecision.findMany({ where: { orpId, ...buildDecisionReadWhere(principal), ...(options.cursor ? { OR: [{ createdAt: { lt: new Date(options.cursor.at) } }, { createdAt: new Date(options.cursor.at), id: { lt: options.cursor.id } }] } : {}) }, include: decisionInclude, orderBy: [{ createdAt: 'desc' }, { id: 'desc' }], take: options.limit + 1 });
+  return pageFromRows(rows, options.limit, (item) => item.createdAt.toISOString());
 }
 
-export async function getCaseDecisionHistory(caseId: string, principal: OrganizationalPrincipal) {
+export async function getCaseDecisionHistory(caseId: string, principal: OrganizationalPrincipal, options: { limit: number; cursor?: StableCursor }) {
   const existingCase = await prisma.case.findUnique({ where: { id: caseId, AND: [buildCaseReadWhere(principal)] }, select: { id: true } });
   if (!existingCase) throw new WorkflowError('CASE_NOT_FOUND', 404, 'Case not found.');
-  return prisma.orpDecision.findMany({ where: { caseId, ...buildDecisionReadWhere(principal) }, include: decisionInclude, orderBy: [{ createdAt: 'asc' }, { id: 'asc' }] });
+  const rows = await prisma.orpDecision.findMany({ where: { caseId, ...buildDecisionReadWhere(principal), ...(options.cursor ? { OR: [{ createdAt: { lt: new Date(options.cursor.at) } }, { createdAt: new Date(options.cursor.at), id: { lt: options.cursor.id } }] } : {}) }, include: decisionInclude, orderBy: [{ createdAt: 'desc' }, { id: 'desc' }], take: options.limit + 1 });
+  return pageFromRows(rows, options.limit, (item) => item.createdAt.toISOString());
 }

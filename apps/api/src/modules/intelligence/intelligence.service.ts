@@ -6,6 +6,7 @@ import { buildIntelligenceFeatures, createIntelligenceSourceFingerprint, INTELLI
 import { appendIntelligenceAssessment, listIntelligenceAssessments } from './intelligence.repository';
 import { reconcileIntelligenceAssessment } from './intelligence-governance.service';
 import { RISK_ASSESSMENT_VERSION } from '../risk/risk.service';
+import type { StableCursor } from '../../lib/pagination';
 
 const noAdvisory=(risk:RiskLevel,priority:PriorityLevel)=>reconcileSafetyFloor({deterministicRisk:risk,deterministicPriority:priority});
 
@@ -35,11 +36,12 @@ export async function requestCaseIntelligence(caseId:string,principal:Organizati
   return {...saved,persisted:true,currentlyStale:false,confidenceSemantics:completed?REFERENCE_CONFIDENCE_SEMANTICS:null,productionTrained:false,governanceReconciliation};
 }
 
-export async function getCaseIntelligenceHistory(caseId:string,principal:OrganizationalPrincipal){
-  const {inspection,assessment}=await authoritative(caseId,principal,false); const rows=await listIntelligenceAssessments(caseId); const now=new Date();
-  const reconciliations=await prisma.infrastructureIntelligenceReconciliation.findMany({where:{intelligenceAssessmentId:{in:rows.map(r=>r.id)}},orderBy:[{reconciledAt:'desc'},{id:'desc'}]});
-  return rows.map(row=>{
+export async function getCaseIntelligenceHistory(caseId:string,principal:OrganizationalPrincipal,options:{limit:number;cursor?:StableCursor}={limit:25}){
+  const {inspection,assessment}=await authoritative(caseId,principal,false); const page=await listIntelligenceAssessments(caseId,options); const now=new Date();
+  const reconciliations=await prisma.infrastructureIntelligenceReconciliation.findMany({where:{intelligenceAssessmentId:{in:page.items.map(r=>r.id)}},orderBy:[{reconciledAt:'desc'},{id:'desc'}],take:100});
+  const items=page.items.map(row=>{
     const currentlyStale=isIntelligenceAssessmentStale({sourceInspectionId:row.inspectionId,sourceRiskAssessmentId:row.riskAssessmentId,currentInspectionId:inspection.id,currentRiskAssessmentId:assessment.id,expiresAt:row.expiresAt,now});
     return {...row,currentlyStale,confidenceSemantics:row.status===IntelligenceAssessmentStatus.COMPLETED?REFERENCE_CONFIDENCE_SEMANTICS:null,productionTrained:false,governanceReconciliations:reconciliations.filter(r=>r.intelligenceAssessmentId===row.id).map((r,index)=>({...r,governanceFingerprint:undefined,currentlyStale:currentlyStale||index>0}))};
   });
+  return {...page,items};
 }

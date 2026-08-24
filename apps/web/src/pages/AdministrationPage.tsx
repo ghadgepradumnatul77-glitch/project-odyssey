@@ -1,7 +1,7 @@
 import { useEffect, useState, type FormEvent, type ReactNode } from 'react';
 import {
   createAsset, createAuthority, createDepartment, createJurisdiction, createUser,
-  listAssets, listAuthorities, listDepartments, listJurisdictions, listUsers,
+  getAssetsPage, getAuthoritiesPage, getUsersPage, listDepartments, listJurisdictions,
   type AdminUserDto, type AssetDto, type AssetInput, type AuthorityDto, type AuthorityInput,
   type DepartmentDto, type JurisdictionDto, type UserInput,
 } from '../api/admin.api';
@@ -29,28 +29,52 @@ export default function AdministrationPage({ initialTab = 'Departments' }: { ini
   const [success, setSuccess] = useState<string | null>(null);
   const [sending, setSending] = useState(false);
   const [reload, setReload] = useState(0);
+  const [nextCursor, setNextCursor] = useState<string | null>(null);
+  const [loadingMore, setLoadingMore] = useState(false);
+  const [pageError, setPageError] = useState<unknown>(null);
 
   useEffect(() => { setTab(initialTab); setSearch(''); }, [initialTab]);
 
   useEffect(() => {
     if (!token) return;
     const controller = new AbortController();
-    setLoading(true);
+    if (!departments.length) setLoading(true);
     setError(null);
+    const query = new URLSearchParams({ limit: '25' });
+    if (search.trim()) query.set('search', search.trim());
     Promise.all([
       listDepartments(token, controller.signal), listJurisdictions(token, controller.signal),
-      listAssets(token, controller.signal), listUsers(token, controller.signal),
-      listAuthorities(token, controller.signal),
+      getAssetsPage(token, query.toString(), controller.signal), getUsersPage(token, query.toString(), controller.signal),
+      getAuthoritiesPage(token, query.toString(), controller.signal),
     ]).then(([nextDepartments, nextJurisdictions, nextAssets, nextUsers, nextAuthorities]) => {
-      setDepartments(nextDepartments); setJurisdictions(nextJurisdictions); setAssets(nextAssets);
-      setUsers(nextUsers); setAuthorities(nextAuthorities);
+      setDepartments(nextDepartments); setJurisdictions(nextJurisdictions); setAssets(nextAssets.items);
+      setUsers(nextUsers.items); setAuthorities(nextAuthorities.items);
+      setNextCursor(tab === 'Assets' ? nextAssets.nextCursor : tab === 'Users' ? nextUsers.nextCursor
+        : tab === 'Approval Authorities' ? nextAuthorities.nextCursor : null);
+      setPageError(null);
     }).catch((reason) => {
       if (!controller.signal.aborted) setError(reason);
     }).finally(() => {
       if (!controller.signal.aborted) setLoading(false);
     });
     return () => controller.abort();
-  }, [reload, token]);
+  }, [reload, search, tab, token]);
+
+  async function loadMore() {
+    if (!token || !nextCursor || loadingMore) return;
+    setLoadingMore(true); setPageError(null);
+    const query = new URLSearchParams({ limit: '25', cursor: nextCursor });
+    if (search.trim()) query.set('search', search.trim());
+    try {
+      const page = tab === 'Assets' ? await getAssetsPage(token, query.toString())
+        : tab === 'Users' ? await getUsersPage(token, query.toString())
+          : await getAuthoritiesPage(token, query.toString());
+      if (tab === 'Assets') setAssets((current) => appendUnique(current, page.items as AssetDto[]));
+      else if (tab === 'Users') setUsers((current) => appendUnique(current, page.items as AdminUserDto[]));
+      else setAuthorities((current) => appendUnique(current, page.items as AuthorityDto[]));
+      setNextCursor(page.nextCursor);
+    } catch (reason) { setPageError(reason); } finally { setLoadingMore(false); }
+  }
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -107,7 +131,8 @@ export default function AdministrationPage({ initialTab = 'Departments' }: { ini
   const rows = tab === 'Departments' ? departments : tab === 'Jurisdictions' ? jurisdictions
     : tab === 'Assets' ? assets : tab === 'Users' ? users : authorities;
   const needle = search.trim().toLowerCase();
-  const filteredRows = rows.filter((row) => !needle || recordSearchText(tab, row).includes(needle));
+  const serverPaged = tab === 'Assets' || tab === 'Users' || tab === 'Approval Authorities';
+  const filteredRows = serverPaged ? rows : rows.filter((row) => !needle || recordSearchText(tab, row).includes(needle));
 
   return <section aria-labelledby="administration-heading">
     <p className="eyebrow">SYSTEM ADMINISTRATION</p>
@@ -122,16 +147,27 @@ export default function AdministrationPage({ initialTab = 'Departments' }: { ini
     <div className="admin-workbench"><section className="admin-registry" aria-labelledby="registry-heading">
       <div className="admin-register-heading"><div><p className="section-label">PERSISTED REGISTRY</p><h2 id="registry-heading">{tab}</h2></div></div>
       <label className="admin-search">Search {tab.toLowerCase()}<input type="search" value={search}
-        onChange={(event) => setSearch(event.target.value)} placeholder="Filter current records" /></label>
+        onChange={(event) => setSearch(event.target.value)} placeholder="Search persisted records" /></label>
       {filteredRows.length ? <div className="admin-list">{filteredRows.map((row) =>
         <AdminRecord key={row.id} tab={tab} row={row} />)}</div> :
         <Empty>{rows.length ? `No ${tab.toLowerCase()} match this search.` : `No ${tab.toLowerCase()} records are available.`}</Empty>}
+      {serverPaged && <div className="pagination-controls" aria-live="polite">
+        {pageError ? <MutationFeedback error={pageError} success={null} /> : null}
+        {nextCursor ? <button type="button" className="secondary-button" disabled={loadingMore} onClick={loadMore}>
+          {loadingMore ? 'Loading more…' : 'Load more'}
+        </button> : rows.length > 0 && <p>All matching records loaded.</p>}
+      </div>}
     </section><aside className="admin-create-panel"><p className="section-label">ADMINISTRATIVE ACTION</p>
       <form className="workflow-form admin-form" onSubmit={submit} aria-busy={sending}>
         <h2>Create {tab}</h2><Fields tab={tab} departments={departments} jurisdictions={jurisdictions} users={users} />
         <button className="primary-button" disabled={sending}>{sending ? 'Creating…' : 'Create record'}</button>
       </form></aside></div>
   </section>;
+}
+
+function appendUnique<T extends { id: string }>(current: T[], incoming: T[]) {
+  const ids = new Set(current.map((item) => item.id));
+  return [...current, ...incoming.filter((item) => !ids.has(item.id))];
 }
 
 function Fields({ tab, departments, jurisdictions, users }: {

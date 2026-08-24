@@ -1,6 +1,7 @@
 import { createHash } from 'node:crypto';
 import { CaseStatus, DecisionPackageStatus, Prisma } from '../../generated/prisma';
 import prisma from '../../lib/prisma';
+import { pageFromRows, type StableCursor } from '../../lib/pagination';
 import type { OrganizationalPrincipal } from '../../security/organizational-scope';
 import { assertVisibleCase, buildCaseReadWhere } from '../../security/organizational-scope';
 import { resolveCasePolicy } from '../policy-registry/policy-registry.service';
@@ -121,9 +122,11 @@ export async function prepareDecisionPackage(caseId: string, principal: Organiza
   throw new DecisionPackageError('DECISION_PACKAGE_VERSION_CONFLICT', 409, 'Decision Package preparation conflicted with another request.');
 }
 
-export async function listDecisionPackages(caseId: string, principal: OrganizationalPrincipal) {
+export async function listDecisionPackages(caseId: string, principal: OrganizationalPrincipal, options: { limit: number; cursor?: StableCursor }) {
   await assertVisibleCase(caseId, principal);
-  return (await prisma.decisionPackage.findMany({ where: { caseId, case: buildCaseReadWhere(principal) }, include: packageInclude, orderBy: [{ packageVersion: 'desc' }, { id: 'desc' }] })).map((item) => dto(item));
+  const rows = await prisma.decisionPackage.findMany({ where: { caseId, case: buildCaseReadWhere(principal), ...(options.cursor ? { OR: [{ preparedAt: { lt: new Date(options.cursor.at) } }, { preparedAt: new Date(options.cursor.at), id: { lt: options.cursor.id } }] } : {}) }, include: packageInclude, orderBy: [{ preparedAt: 'desc' }, { id: 'desc' }], take: options.limit + 1 });
+  const page = pageFromRows(rows, options.limit, (item) => item.preparedAt.toISOString());
+  return { ...page, items: page.items.map((item) => dto(item)) };
 }
 
 export async function getDecisionPackage(caseId: string, packageId: string, principal: OrganizationalPrincipal) {

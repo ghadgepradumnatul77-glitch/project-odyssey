@@ -8,6 +8,8 @@ import { acceptPublicReportAsCase, beginPublicReportReview, rejectPublicReport, 
 import { z } from 'zod';
 import rateLimit from 'express-rate-limit';
 import { analyzePublicReport, getPublicReportAnalysis, PublicReportAnalysisNotFoundError } from './public-report-triage.service';
+import { MAP_MAX_ITEMS, parseCursor, parseEnum, parseLimit, parseSearch, parseUuidQuery, queryError } from '../../lib/pagination';
+import { PublicReportCategory, PublicReportStatus } from '../../generated/prisma';
 
 const router = Router();
 const allowed = requireRole(SystemRole.OFFICER, SystemRole.SYSTEM_ADMIN);
@@ -29,8 +31,12 @@ router.get('/:reportId/analysis',authenticate,allowed,async(req,res)=>{const rep
 
 router.get('/', authenticate, allowed, async (req, res) => {
   try {
-    return res.status(200).json({ success: true, data: await listPublicReports(req.user!) });
+    const map=req.query.map===undefined?false:req.query.map==='true'?true:req.query.map==='false'?false:(()=>{throw new Error('INVALID_MAP')})();
+    const limit=map?MAP_MAX_ITEMS:parseLimit(req.query.limit),cursor=map?undefined:parseCursor(req.query.cursor),search=parseSearch(req.query.search),status=parseEnum(req.query.status,Object.values(PublicReportStatus),'status'),category=parseEnum(req.query.category,Object.values(PublicReportCategory),'category');
+    return res.status(200).json({ success: true, data: await listPublicReports(req.user!,{limit,cursor,search,status,category,jurisdictionId:parseUuidQuery(req.query.jurisdictionId??req.query.jurisdiction,'jurisdictionId'),map}) });
   } catch (error) {
+    const invalid=queryError(res,error);if(invalid)return invalid;
+    if(error instanceof Error&&error.message==='INVALID_MAP')return res.status(400).json({success:false,error:{code:'INVALID_QUERY',message:'map must be true or false.'}});
     console.error('Failed to fetch public reports:', error);
     return res.status(500).json({ success: false, error: { code: 'PUBLIC_REPORT_FETCH_FAILED', message: 'Could not fetch public reports.' } });
   }

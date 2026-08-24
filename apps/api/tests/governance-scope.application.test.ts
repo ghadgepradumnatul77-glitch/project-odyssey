@@ -45,12 +45,51 @@ describe('assembled application governance authorization', () => {
 
   it('mounts the real application and scopes POLICY_ADMIN registry reads', async () => {
     const response = await request(app).get('/api/v1/policies').set('Authorization', await authorization('POLICY_ADMIN')).expect(200);
-    expect(response.body.data).toHaveLength(1);
-    expect(mocks.policyFindMany).toHaveBeenCalledWith(expect.objectContaining({ where: { OR: [
+    expect(response.body.data.items).toHaveLength(1);
+    expect(mocks.policyFindMany).toHaveBeenCalledWith(expect.objectContaining({ where: { AND: expect.arrayContaining([{ OR: [
       { departmentId: null, jurisdictionId: null },
       { departmentId: ids.department, jurisdictionId: null },
       { departmentId: ids.department, jurisdictionId: ids.jurisdiction }
-    ] } }));
+    ] }]) }, take: 26 }));
+  });
+
+  it('rejects malformed registry traversal through the real application before querying Prisma', async () => {
+    const response=await request(app).get('/api/v1/policies?cursor=not-an-opaque-cursor')
+      .set('Authorization',await authorization('POLICY_ADMIN')).expect(400);
+    expect(response.body.error.code).toBe('INVALID_QUERY');
+    expect(mocks.policyFindMany).not.toHaveBeenCalled();
+  });
+
+  it('composes governance search with scope before the bounded take',async()=>{
+    await request(app).get('/api/v1/policies?limit=2&search=bridge')
+      .set('Authorization',await authorization('POLICY_ADMIN')).expect(200);
+    expect(mocks.policyFindMany).toHaveBeenCalledWith(expect.objectContaining({
+      where:{AND:expect.arrayContaining([
+        {OR:[{departmentId:null,jurisdictionId:null},{departmentId:ids.department,jurisdictionId:null},{departmentId:ids.department,jurisdictionId:ids.jurisdiction}]},
+        {OR:[{policyCode:{contains:'bridge',mode:'insensitive'}},{title:{contains:'bridge',mode:'insensitive'}}]}
+      ])},orderBy:[{createdAt:'desc'},{id:'desc'}],take:3
+    }));
+  });
+
+  it('traverses a stable mounted registry boundary and exhausts on a final partial page',async()=>{
+    const at='2026-08-20T00:00:00.000Z';
+    mocks.policyFindMany
+      .mockResolvedValueOnce([
+        {id:'p-3',createdAt:new Date(at)},{id:'p-2',createdAt:new Date(at)},{id:'p-1',createdAt:new Date(at)}
+      ])
+      .mockResolvedValueOnce([{id:'p-1',createdAt:new Date(at)}])
+      .mockResolvedValueOnce([]);
+    const token=await authorization('POLICY_ADMIN');
+    const first=await request(app).get('/api/v1/policies?limit=2').set('Authorization',token).expect(200);
+    expect(first.body.data.items.map((item:any)=>item.id)).toEqual(['p-3','p-2']);
+    expect(first.body.data.nextCursor).toEqual(expect.any(String));
+    const second=await request(app).get(`/api/v1/policies?limit=2&cursor=${encodeURIComponent(first.body.data.nextCursor)}`).set('Authorization',token).expect(200);
+    expect(second.body.data).toMatchObject({items:[{id:'p-1'}],nextCursor:null,limit:2});
+    expect(mocks.policyFindMany.mock.calls[1][0]).toEqual(expect.objectContaining({where:{AND:expect.arrayContaining([
+      expect.objectContaining({OR:expect.any(Array)})
+    ])},take:3}));
+    const exhausted=await request(app).get(`/api/v1/policies?limit=2&cursor=${encodeURIComponent(first.body.data.nextCursor)}`).set('Authorization',token).expect(200);
+    expect(exhausted.body.data).toEqual({items:[],nextCursor:null,limit:2});
   });
 
   it('returns a non-disclosing 404 before cross-scope lifecycle mutation', async () => {

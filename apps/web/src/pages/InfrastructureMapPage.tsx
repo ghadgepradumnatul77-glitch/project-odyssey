@@ -2,9 +2,9 @@ import { useEffect, useMemo, useState } from 'react';
 import { CircleMarker, MapContainer, Marker, TileLayer, Tooltip } from 'react-leaflet';
 import { divIcon, type LatLngExpression } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import { listPublicReports, type PublicReportSummary, type PublicReportStatus } from '../api/public-reports.api';
-import { listCases, type CaseStatus, type CaseSummary, type PriorityLevel } from '../api/cases.api';
-import { listAssets, type AssetDto } from '../api/admin.api';
+import { listMapPublicReports, type PublicReportSummary, type PublicReportStatus } from '../api/public-reports.api';
+import { listMapCases, type CaseStatus, type CaseSummary, type PriorityLevel } from '../api/cases.api';
+import { listMapAssets, type AssetDto } from '../api/admin.api';
 import { useAuth } from '../auth/useAuth';
 import { Empty, ErrorState, Loading } from '../components/AsyncState';
 
@@ -28,6 +28,7 @@ export default function InfrastructureMapPage({ onOpenReport, onOpenCase }: { on
   const [reports, setReports] = useState<PublicReportSummary[]>([]);
   const [cases, setCases] = useState<CaseSummary[]>([]);
   const [assets, setAssets] = useState<AssetDto[]>([]);
+  const [truncatedLayers, setTruncatedLayers] = useState<Layer[]>([]);
   const [layers, setLayers] = useState<Record<Layer, boolean>>({ reports: true, cases: true, assets: true });
   const [reportStatus, setReportStatus] = useState('');
   const [priority, setPriority] = useState('');
@@ -42,8 +43,15 @@ export default function InfrastructureMapPage({ onOpenReport, onOpenCase }: { on
     if (!token) return;
     const controller = new AbortController();
     setLoading(true); setError(null);
-    Promise.all([listPublicReports(token, controller.signal), listCases(token, controller.signal), listAssets(token, controller.signal)])
-      .then(([nextReports, nextCases, nextAssets]) => { setReports(nextReports); setCases(nextCases); setAssets(nextAssets); })
+    Promise.all([listMapPublicReports(token, controller.signal), listMapCases(token, controller.signal), listMapAssets(token, controller.signal)])
+      .then(([reportPage, casePage, assetPage]) => {
+        setReports(reportPage.items); setCases(casePage.items); setAssets(assetPage.items);
+        setTruncatedLayers([
+          ...(reportPage.truncated ? ['reports' as const] : []),
+          ...(casePage.truncated ? ['cases' as const] : []),
+          ...(assetPage.truncated ? ['assets' as const] : [])
+        ]);
+      })
       .catch((reason) => { if (!controller.signal.aborted) setError(reason); })
       .finally(() => { if (!controller.signal.aborted) setLoading(false); });
     return () => controller.abort();
@@ -66,6 +74,7 @@ export default function InfrastructureMapPage({ onOpenReport, onOpenCase }: { on
       <dl className="intelligence-summary"><Metric label="Public Reports" value={reports.length}/><Metric label="Governed Cases" value={cases.length}/><Metric label="Critical Cases" value={cases.filter((item) => item.priorityLevel === 'CRITICAL').length}/><Metric label="Emergency Cases" value={cases.filter((item) => item.emergencyFlag).length}/></dl>
     </header>
     <div className="demo-map-note">Demo environment — locations shown are representative test coordinates.</div>
+    {truncatedLayers.length > 0 && <div className="map-data-notice" role="status"><strong>Bounded map view</strong><p>Showing the first 250 authorized records for: {truncatedLayers.map(categoryLabel).join(', ')}. This map is not a complete count for those layers.</p></div>}
     {unmappedCount > 0 && <div className="map-data-notice" role="status"><strong>Map-ready location coverage</strong><p>Some records are not shown because map coordinates are unavailable.</p><span>{mappedCount} mapped · {unmappedCount} unmapped</span></div>}
     <div className="intelligence-controls" aria-label="Infrastructure map filters">
       <fieldset><legend>Layers</legend>{(['reports','cases','assets'] as Layer[]).map((layer) => <label key={layer}><input type="checkbox" checked={layers[layer]} onChange={() => setLayers((value) => ({ ...value, [layer]: !value[layer] }))}/>{layer === 'reports' ? 'Public Reports' : categoryLabel(layer)}</label>)}</fieldset>

@@ -12,5 +12,7 @@ export interface DecisionPackageDto {
   intelligence?: IntelligenceSnapshot | null;
 }
 
-export function listDecisionPackages(caseId: string, token: string, signal?: AbortSignal) { return apiRequest<DecisionPackageDto[]>(`cases/${encodeURIComponent(caseId)}/decision-packages`, { accessToken: token, signal }); }
+export interface DecisionPackagePage { items:DecisionPackageDto[]; nextCursor:string|null; limit:number }
+export function getDecisionPackagesPage(caseId:string,token:string,query='',signal?:AbortSignal){const suffix=query?`?${query}`:'';return apiRequest<DecisionPackagePage|DecisionPackageDto[]>(`cases/${encodeURIComponent(caseId)}/decision-packages${suffix}`,{accessToken:token,signal}).then(value=>Array.isArray(value)?{items:value,nextCursor:null,limit:value.length}:value)}
+export function listDecisionPackages(caseId: string, token: string, signal?: AbortSignal) { return getDecisionPackagesPage(caseId,token,'',signal).then(value=>value.items); }
 export function prepareDecisionPackage(caseId: string, token: string) { return apiRequest<DecisionPackageDto>(`cases/${encodeURIComponent(caseId)}/decision-packages`, { accessToken: token, method: 'POST', body: {} }); }
