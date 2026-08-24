@@ -520,7 +520,9 @@ exports.Prisma.ExecutionPlanScalarFieldEnum = {
   cancellationReason: 'cancellationReason',
   governanceMode: 'governanceMode',
   executionContractVersion: 'executionContractVersion',
-  governedProvenance: 'governedProvenance'
+  governedProvenance: 'governedProvenance',
+  plannedStartAt: 'plannedStartAt',
+  plannedEndAt: 'plannedEndAt'
 };
 
 exports.Prisma.ExecutionTaskScalarFieldEnum = {
@@ -557,7 +559,43 @@ exports.Prisma.ExecutionTaskScalarFieldEnum = {
   sourceTemplateCode: 'sourceTemplateCode',
   sourceTemplateVersion: 'sourceTemplateVersion',
   evidenceRequired: 'evidenceRequired',
-  verificationRequired: 'verificationRequired'
+  verificationRequired: 'verificationRequired',
+  plannedStartAt: 'plannedStartAt',
+  plannedEndAt: 'plannedEndAt'
+};
+
+exports.Prisma.ExecutionTaskDependencyScalarFieldEnum = {
+  id: 'id',
+  executionPlanId: 'executionPlanId',
+  dependentTaskId: 'dependentTaskId',
+  predecessorTaskId: 'predecessorTaskId',
+  createdById: 'createdById',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.ExecutionTaskBlockerEventScalarFieldEnum = {
+  id: 'id',
+  executionTaskId: 'executionTaskId',
+  category: 'category',
+  reason: 'reason',
+  blockedById: 'blockedById',
+  blockedAt: 'blockedAt',
+  resolvedById: 'resolvedById',
+  resolvedAt: 'resolvedAt',
+  resolutionReason: 'resolutionReason'
+};
+
+exports.Prisma.ExecutionScheduleRevisionScalarFieldEnum = {
+  id: 'id',
+  executionPlanId: 'executionPlanId',
+  executionTaskId: 'executionTaskId',
+  previousStartAt: 'previousStartAt',
+  previousEndAt: 'previousEndAt',
+  newStartAt: 'newStartAt',
+  newEndAt: 'newEndAt',
+  changedById: 'changedById',
+  changeReason: 'changeReason',
+  changedAt: 'changedAt'
 };
 
 exports.Prisma.ExecutionEvidenceScalarFieldEnum = {
@@ -789,6 +827,17 @@ exports.ExecutionTaskStatus = exports.$Enums.ExecutionTaskStatus = {
   CANCELLED: 'CANCELLED'
 };
 
+exports.ExecutionBlockerCategory = exports.$Enums.ExecutionBlockerCategory = {
+  RESOURCE_UNAVAILABLE: 'RESOURCE_UNAVAILABLE',
+  ACCESS_RESTRICTED: 'ACCESS_RESTRICTED',
+  MATERIAL_UNAVAILABLE: 'MATERIAL_UNAVAILABLE',
+  WEATHER: 'WEATHER',
+  DEPENDENCY: 'DEPENDENCY',
+  SAFETY_CONDITION: 'SAFETY_CONDITION',
+  EXTERNAL_APPROVAL: 'EXTERNAL_APPROVAL',
+  OTHER: 'OTHER'
+};
+
 exports.ExecutionEvidenceType = exports.$Enums.ExecutionEvidenceType = {
   PHOTO_REFERENCE: 'PHOTO_REFERENCE',
   DOCUMENT_REFERENCE: 'DOCUMENT_REFERENCE',
@@ -827,6 +876,9 @@ exports.Prisma.ModelName = {
   OrpDecision: 'OrpDecision',
   ExecutionPlan: 'ExecutionPlan',
   ExecutionTask: 'ExecutionTask',
+  ExecutionTaskDependency: 'ExecutionTaskDependency',
+  ExecutionTaskBlockerEvent: 'ExecutionTaskBlockerEvent',
+  ExecutionScheduleRevision: 'ExecutionScheduleRevision',
   ExecutionEvidence: 'ExecutionEvidence',
   CaseClosure: 'CaseClosure'
 };

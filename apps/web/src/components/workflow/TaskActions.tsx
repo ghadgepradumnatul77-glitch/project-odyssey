@@ -6,7 +6,7 @@ import {
 import { useAuth } from '../../auth/useAuth';
 import { MutationFeedback } from './MutationFeedback';
 
-type Mode = 'block' | 'cancel' | 'evidence' | 'complete' | 'verify';
+type Mode = 'block' | 'resume' | 'cancel' | 'evidence' | 'complete' | 'verify';
 
 export default function TaskActions({ task, onRecorded }: {
   task: ExecutionTaskDto; onRecorded(): Promise<void> | void;
@@ -60,10 +60,11 @@ export default function TaskActions({ task, onRecorded }: {
     const data = new FormData(event.currentTarget);
     setSubmitting(true); setError(null); setSuccess(null);
     try {
-      if (selectedMode === 'block' || selectedMode === 'cancel') {
+      if (selectedMode === 'block' || selectedMode === 'cancel' || selectedMode === 'resume') {
         await changeExecutionTaskStatus(task.id, {
-          status: selectedMode === 'block' ? 'BLOCKED' : 'CANCELLED',
+          status: selectedMode === 'block' ? 'BLOCKED' : selectedMode==='resume'?'IN_PROGRESS':'CANCELLED',
           reason: String(data.get('reason')).trim(),
+          blockerCategory:selectedMode==='block'?String(data.get('blockerCategory')):undefined,
         }, token);
       } else if (selectedMode === 'complete') {
         await submitTaskCompletion(task.id, String(data.get('note')).trim(), token);
@@ -105,7 +106,7 @@ export default function TaskActions({ task, onRecorded }: {
     </section>}
     <div className="action-row">
       {task.status === 'ASSIGNED' && <button onClick={() => status('IN_PROGRESS')} disabled={submitting}>Mark work started</button>}
-      {task.status === 'BLOCKED' && <button onClick={() => status('IN_PROGRESS')} disabled={submitting}>Resume recorded work</button>}
+      {task.status === 'BLOCKED' && <button onClick={() => setMode('resume')} disabled={submitting}>Resume recorded work</button>}
       {['ASSIGNED', 'IN_PROGRESS'].includes(task.status) && <button disabled={submitting} onClick={() => setMode('block')}>Record blocked state</button>}
       {!task.isMandatory && ['PENDING', 'ASSIGNED'].includes(task.status) && <button disabled={submitting} className="danger-action" onClick={() => setMode('cancel')}>Cancel optional task</button>}
       {['IN_PROGRESS', 'BLOCKED'].includes(task.status) && <button disabled={submitting} onClick={() => setMode('evidence')}>Record evidence</button>}
@@ -119,11 +120,12 @@ export default function TaskActions({ task, onRecorded }: {
       role={mode === 'cancel' ? 'dialog' : undefined} aria-modal={mode === 'cancel' ? true : undefined}
       aria-label={mode === 'cancel' ? 'Confirm optional task cancellation' : undefined}>
       {mode === 'evidence' ? <EvidenceFields /> : <>
-        <h4>{mode === 'block' ? 'Record blocked state' : mode === 'cancel' ? 'Confirm optional task cancellation'
+        <h4>{mode === 'block' ? 'Record blocked state' : mode === 'resume'?'Resolve recorded blocker':mode === 'cancel' ? 'Confirm optional task cancellation'
           : mode === 'complete' ? 'Submit recorded completion' : 'Verify recorded completion'}</h4>
         {mode === 'verify' && <p>Verification must be performed independently from the officer who executed/submitted the work.</p>}
-        <label>{mode === 'block' || mode === 'cancel' ? 'Reason' : 'Note'}
-          <textarea autoFocus name={mode === 'block' || mode === 'cancel' ? 'reason' : 'note'} required rows={3} />
+        {mode==='block'&&<label>Blocker category<select name="blockerCategory" required>{['RESOURCE_UNAVAILABLE','ACCESS_RESTRICTED','MATERIAL_UNAVAILABLE','WEATHER','DEPENDENCY','SAFETY_CONDITION','EXTERNAL_APPROVAL','OTHER'].map(value=><option key={value}>{value}</option>)}</select></label>}
+        <label>{mode === 'block' || mode === 'cancel'||mode==='resume' ? 'Reason' : 'Note'}
+          <textarea autoFocus name={mode === 'block' || mode === 'cancel'||mode==='resume' ? 'reason' : 'note'} required rows={3} />
         </label>
         {mode === 'cancel' && <label className="check-label"><input type="checkbox" required />
           I confirm this records cancellation of this optional workflow task.</label>}

@@ -1,5 +1,5 @@
 import prisma from '../../lib/prisma';
-import { ExecutionEvidenceType, ExecutionPlanStatus, ExecutionTaskStatus, OrpDecisionType, Prisma, SystemRole, UserStatus } from '../../generated/prisma';
+import { ExecutionBlockerCategory, ExecutionEvidenceType, ExecutionPlanStatus, ExecutionTaskStatus, OrpDecisionType, Prisma, SystemRole, UserStatus } from '../../generated/prisma';
 import { buildCaseReadWhere, buildExecutionPlanMutationWhere, buildExecutionPlanReadWhere, buildExecutionTaskMutationWhere, buildExecutionTaskReadWhere, buildOrpMutationWhere, isSameOrganizationalScope, OrganizationalPrincipal } from '../../security/organizational-scope';
 import { ExecutionError } from './execution-error';
 import { EXECUTION_TEMPLATE_VERSION, translateActionsToTasks } from './execution-templates';
@@ -14,7 +14,7 @@ export function governedExecutableActions(value:unknown,recommendedActionCodes:u
 
 const safeUser = { id: true, employeeCode: true, name: true, designation: true, role: true, status: true } as const;
 const safeAssigneeCandidate = { id: true, employeeCode: true, name: true, designation: true } as const;
-const taskInclude = { assignedTo: { select: safeUser }, assignedBy: { select: safeUser }, completionSubmittedBy: { select: safeUser }, verifiedBy: { select: safeUser }, cancelledBy: { select: safeUser }, evidence: { include: { submittedBy: { select: safeUser } }, orderBy: { submittedAt: 'asc' as const }, take: 101 } };
+const taskInclude = { assignedTo: { select: safeUser }, assignedBy: { select: safeUser }, completionSubmittedBy: { select: safeUser }, verifiedBy: { select: safeUser }, cancelledBy: { select: safeUser }, evidence: { include: { submittedBy: { select: safeUser } }, orderBy: { submittedAt: 'asc' as const }, take: 101 }, dependencies:{include:{predecessorTask:{select:{id:true,sequenceNumber:true,titleSnapshot:true,status:true}}}}, blockerEvents:{include:{blockedBy:{select:safeUser},resolvedBy:{select:safeUser}},orderBy:{blockedAt:'desc' as const},take:50}, scheduleRevisions:{orderBy:{changedAt:'desc' as const},take:20} };
 const presentTask = <T extends { evidence: unknown[] }>(task: T) => ({ ...task, evidence: task.evidence.slice(0, 100), evidenceTruncated: task.evidence.length > 100 });
 
 function notFound(resource: 'Execution plan' | 'Execution task'): never { throw new ExecutionError(resource === 'Execution plan' ? 'EXECUTION_PLAN_NOT_FOUND' : 'EXECUTION_TASK_NOT_FOUND', 404, `${resource} not found.`); }
@@ -22,6 +22,7 @@ function actorFields(body: Record<string, unknown>) {
   return ['createdById', 'assignedById', 'assignedAt', 'submittedById', 'submittedAt', 'completionSubmittedById', 'verifiedById', 'cancelledById', 'startedAt'].some((key) => Object.prototype.hasOwnProperty.call(body, key));
 }
 export function hasClientActorFields(body: Record<string, unknown>) { return actorFields(body); }
+export function unmetDependencyMessage(rows:Array<{predecessorTask:{id:string;status:ExecutionTaskStatus}}>){return rows.length?`Task cannot start until predecessors are verified: ${rows.map(item=>`${item.predecessorTask.id} (${item.predecessorTask.status})`).join(', ')}.`:null;}
 
 function actionCodes(value: unknown): string[] | null {
   return Array.isArray(value) && value.every((item) => typeof item === 'string') ? value : null;
@@ -186,7 +187,7 @@ export async function assignTask(taskId: string, assigneeId: string, principal: 
   }, { isolationLevel: Prisma.TransactionIsolationLevel.Serializable });
 }
 
-export async function changeTaskStatus(taskId: string, requested: 'IN_PROGRESS' | 'BLOCKED' | 'CANCELLED', reason: string | undefined, principal: OrganizationalPrincipal) {
+export async function changeTaskStatus(taskId: string, requested: 'IN_PROGRESS' | 'BLOCKED' | 'CANCELLED', reason: string | undefined, principal: OrganizationalPrincipal, blockerCategory?: ExecutionBlockerCategory) {
   const task = await scopedTask(taskId, principal);
   if (requested === 'CANCELLED') {
     if (task.executionPlan.createdById !== principal.id) throw new ExecutionError('FORBIDDEN', 403, 'Only the plan creator may cancel this task.');
@@ -197,12 +198,20 @@ export async function changeTaskStatus(taskId: string, requested: 'IN_PROGRESS' 
     const valid = requested === 'BLOCKED' ? (task.status === ExecutionTaskStatus.ASSIGNED || task.status === ExecutionTaskStatus.IN_PROGRESS) : (task.status === ExecutionTaskStatus.ASSIGNED || task.status === ExecutionTaskStatus.BLOCKED);
     if (!valid) throw new ExecutionError('INVALID_EXECUTION_TASK_STATE', 409, 'Invalid task status transition.');
     if (requested === 'BLOCKED' && !reason?.trim()) throw new ExecutionError('INVALID_INPUT', 400, 'Blocked reason is required.');
+    if (requested === 'BLOCKED' && !blockerCategory) throw new ExecutionError('INVALID_INPUT', 400, 'Blocker category is required.');
+    if (requested === 'IN_PROGRESS' && task.status === ExecutionTaskStatus.BLOCKED && !reason?.trim()) throw new ExecutionError('INVALID_INPUT', 400, 'Resolution reason is required.');
   }
   return prisma.$transaction(async (tx) => {
     await assertTaskMutable(tx, taskId);
+    if(requested==='IN_PROGRESS'){
+      const unmet=await tx.executionTaskDependency.findMany({where:{dependentTaskId:taskId,predecessorTask:{status:{not:ExecutionTaskStatus.VERIFIED}}},select:{predecessorTask:{select:{id:true,status:true}}}});
+      const message=unmetDependencyMessage(unmet);if(message)throw new ExecutionError('UNMET_TASK_DEPENDENCIES',409,message);
+    }
     const data = requested === 'CANCELLED' ? { status: ExecutionTaskStatus.CANCELLED, cancelledById: principal.id, cancelledAt: new Date(), cancellationReason: reason!.trim() } : requested === 'BLOCKED' ? { status: ExecutionTaskStatus.BLOCKED, blockedReason: reason!.trim() } : { status: ExecutionTaskStatus.IN_PROGRESS, startedAt: task.startedAt ?? new Date() };
     const changed = await tx.executionTask.updateMany({ where: { id: taskId, status: task.status }, data });
     if (changed.count !== 1) throw new ExecutionError('INVALID_EXECUTION_TASK_STATE', 409, 'Task state changed concurrently.');
+    if(requested==='BLOCKED')await tx.executionTaskBlockerEvent.create({data:{executionTaskId:taskId,category:blockerCategory!,reason:reason!.trim(),blockedById:principal.id}});
+    if(requested==='IN_PROGRESS'&&task.status===ExecutionTaskStatus.BLOCKED){const open=await tx.executionTaskBlockerEvent.findFirst({where:{executionTaskId:taskId,resolvedAt:null},orderBy:{blockedAt:'desc'}});if(open)await tx.executionTaskBlockerEvent.update({where:{id:open.id},data:{resolvedAt:new Date(),resolvedById:principal.id,resolutionReason:reason!.trim()}});}
     await refreshPlan(tx, task.executionPlanId);
     return tx.executionTask.findUniqueOrThrow({ where: { id: taskId }, include: taskInclude });
   }, { isolationLevel: Prisma.TransactionIsolationLevel.Serializable });

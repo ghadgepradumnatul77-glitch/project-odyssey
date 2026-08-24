@@ -114,6 +114,17 @@ enum ExecutionTaskStatus {
   CANCELLED
 }
 
+enum ExecutionBlockerCategory {
+  RESOURCE_UNAVAILABLE
+  ACCESS_RESTRICTED
+  MATERIAL_UNAVAILABLE
+  WEATHER
+  DEPENDENCY
+  SAFETY_CONDITION
+  EXTERNAL_APPROVAL
+  OTHER
+}
+
 enum ExecutionEvidenceType {
   PHOTO_REFERENCE
   DOCUMENT_REFERENCE
@@ -260,6 +271,10 @@ model User {
   completedExecutionTasks            ExecutionTask[]              @relation("ExecutionTaskCompleter")
   verifiedExecutionTasks             ExecutionTask[]              @relation("ExecutionTaskVerifier")
   cancelledExecutionTasks            ExecutionTask[]              @relation("ExecutionTaskCanceller")
+  executionScheduleRevisions         ExecutionScheduleRevision[]  @relation("ExecutionScheduleRevisionActor")
+  blockedExecutionTaskEvents         ExecutionTaskBlockerEvent[]  @relation("ExecutionTaskBlocker")
+  resolvedExecutionTaskEvents        ExecutionTaskBlockerEvent[]  @relation("ExecutionTaskBlockerResolver")
+  createdExecutionTaskDependencies   ExecutionTaskDependency[]
   submittedExecutionEvidence         ExecutionEvidence[]
   closedCases                        CaseClosure[]                @relation("CaseClosureCloser")
   reviewedPublicReports              PublicReport[]               @relation("PublicReportReviewer")
@@ -893,13 +908,17 @@ model ExecutionPlan {
   governanceMode           ExecutionPlanGovernanceMode @default(LEGACY)
   executionContractVersion String?
   governedProvenance       Json?
+  plannedStartAt           DateTime?
+  plannedEndAt             DateTime?
 
-  orp              OperationalResponsePlan @relation(fields: [orpId], references: [id], onDelete: Restrict)
-  case             Case                    @relation(fields: [caseId], references: [id], onDelete: Restrict)
-  approvalDecision OrpDecision             @relation(fields: [approvalDecisionId], references: [id], onDelete: Restrict)
-  createdBy        User                    @relation("ExecutionPlanCreator", fields: [createdById], references: [id], onDelete: Restrict)
-  tasks            ExecutionTask[]
-  closure          CaseClosure?
+  orp               OperationalResponsePlan     @relation(fields: [orpId], references: [id], onDelete: Restrict)
+  case              Case                        @relation(fields: [caseId], references: [id], onDelete: Restrict)
+  approvalDecision  OrpDecision                 @relation(fields: [approvalDecisionId], references: [id], onDelete: Restrict)
+  createdBy         User                        @relation("ExecutionPlanCreator", fields: [createdById], references: [id], onDelete: Restrict)
+  tasks             ExecutionTask[]
+  closure           CaseClosure?
+  scheduleRevisions ExecutionScheduleRevision[]
+  taskDependencies  ExecutionTaskDependency[]
 
   @@index([caseId])
   @@index([status])
@@ -941,6 +960,8 @@ model ExecutionTask {
   sourceTemplateVersion       Int?
   evidenceRequired            Boolean             @default(true)
   verificationRequired        Boolean             @default(true)
+  plannedStartAt              DateTime?
+  plannedEndAt                DateTime?
 
   executionPlan             ExecutionPlan                  @relation(fields: [executionPlanId], references: [id], onDelete: Restrict)
   assignedTo                User?                          @relation("ExecutionTaskAssignee", fields: [assignedToId], references: [id], onDelete: Restrict)
@@ -952,6 +973,10 @@ model ExecutionTask {
   approvedActionVersion     ApprovedActionVersion?         @relation(fields: [approvedActionVersionId], references: [id], onDelete: Restrict)
   governedExecutionTemplate GovernedExecutionTemplate?     @relation(fields: [governedExecutionTemplateId], references: [id], onDelete: Restrict)
   governedTaskTemplate      GovernedExecutionTaskTemplate? @relation(fields: [governedTaskTemplateId], references: [id], onDelete: Restrict)
+  scheduleRevisions         ExecutionScheduleRevision[]
+  dependencies              ExecutionTaskDependency[]      @relation("DependentTask")
+  requiredBy                ExecutionTaskDependency[]      @relation("PredecessorTask")
+  blockerEvents             ExecutionTaskBlockerEvent[]
 
   @@unique([executionPlanId, sequenceNumber])
   @@unique([executionPlanId, sourceActionCode, templateTaskKey])
@@ -962,6 +987,65 @@ model ExecutionTask {
   @@index([approvedActionVersionId])
   @@index([governedExecutionTemplateId])
   @@index([governedTaskTemplateId])
+  @@index([executionPlanId, plannedStartAt])
+  @@index([executionPlanId, plannedEndAt])
+}
+
+model ExecutionTaskDependency {
+  id                String   @id @default(uuid())
+  executionPlanId   String
+  dependentTaskId   String
+  predecessorTaskId String
+  createdById       String
+  createdAt         DateTime @default(now())
+
+  executionPlan   ExecutionPlan @relation(fields: [executionPlanId], references: [id], onDelete: Restrict)
+  dependentTask   ExecutionTask @relation("DependentTask", fields: [dependentTaskId], references: [id], onDelete: Restrict)
+  predecessorTask ExecutionTask @relation("PredecessorTask", fields: [predecessorTaskId], references: [id], onDelete: Restrict)
+  createdBy       User          @relation(fields: [createdById], references: [id], onDelete: Restrict)
+
+  @@unique([dependentTaskId, predecessorTaskId])
+  @@index([executionPlanId])
+  @@index([predecessorTaskId])
+}
+
+model ExecutionTaskBlockerEvent {
+  id               String                   @id @default(uuid())
+  executionTaskId  String
+  category         ExecutionBlockerCategory
+  reason           String
+  blockedById      String
+  blockedAt        DateTime                 @default(now())
+  resolvedById     String?
+  resolvedAt       DateTime?
+  resolutionReason String?
+
+  executionTask ExecutionTask @relation(fields: [executionTaskId], references: [id], onDelete: Restrict)
+  blockedBy     User          @relation("ExecutionTaskBlocker", fields: [blockedById], references: [id], onDelete: Restrict)
+  resolvedBy    User?         @relation("ExecutionTaskBlockerResolver", fields: [resolvedById], references: [id], onDelete: Restrict)
+
+  @@index([executionTaskId, resolvedAt])
+  @@index([blockedAt])
+}
+
+model ExecutionScheduleRevision {
+  id              String    @id @default(uuid())
+  executionPlanId String
+  executionTaskId String?
+  previousStartAt DateTime?
+  previousEndAt   DateTime?
+  newStartAt      DateTime
+  newEndAt        DateTime
+  changedById     String
+  changeReason    String
+  changedAt       DateTime  @default(now())
+
+  executionPlan ExecutionPlan  @relation(fields: [executionPlanId], references: [id], onDelete: Restrict)
+  executionTask ExecutionTask? @relation(fields: [executionTaskId], references: [id], onDelete: Restrict)
+  changedBy     User           @relation("ExecutionScheduleRevisionActor", fields: [changedById], references: [id], onDelete: Restrict)
+
+  @@index([executionPlanId, changedAt])
+  @@index([executionTaskId, changedAt])
 }
 
 model ExecutionEvidence {

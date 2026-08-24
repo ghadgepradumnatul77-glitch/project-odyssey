@@ -134,6 +134,21 @@ export type ExecutionPlan = $Result.DefaultSelection<Prisma.$ExecutionPlanPayloa
  */
 export type ExecutionTask = $Result.DefaultSelection<Prisma.$ExecutionTaskPayload>
 /**
+ * Model ExecutionTaskDependency
+ * 
+ */
+export type ExecutionTaskDependency = $Result.DefaultSelection<Prisma.$ExecutionTaskDependencyPayload>
+/**
+ * Model ExecutionTaskBlockerEvent
+ * 
+ */
+export type ExecutionTaskBlockerEvent = $Result.DefaultSelection<Prisma.$ExecutionTaskBlockerEventPayload>
+/**
+ * Model ExecutionScheduleRevision
+ * 
+ */
+export type ExecutionScheduleRevision = $Result.DefaultSelection<Prisma.$ExecutionScheduleRevisionPayload>
+/**
  * Model ExecutionEvidence
  * 
  */
@@ -291,6 +306,20 @@ export const ExecutionTaskStatus: {
 };
 
 export type ExecutionTaskStatus = (typeof ExecutionTaskStatus)[keyof typeof ExecutionTaskStatus]
+
+
+export const ExecutionBlockerCategory: {
+  RESOURCE_UNAVAILABLE: 'RESOURCE_UNAVAILABLE',
+  ACCESS_RESTRICTED: 'ACCESS_RESTRICTED',
+  MATERIAL_UNAVAILABLE: 'MATERIAL_UNAVAILABLE',
+  WEATHER: 'WEATHER',
+  DEPENDENCY: 'DEPENDENCY',
+  SAFETY_CONDITION: 'SAFETY_CONDITION',
+  EXTERNAL_APPROVAL: 'EXTERNAL_APPROVAL',
+  OTHER: 'OTHER'
+};
+
+export type ExecutionBlockerCategory = (typeof ExecutionBlockerCategory)[keyof typeof ExecutionBlockerCategory]
 
 
 export const ExecutionEvidenceType: {
@@ -464,6 +493,10 @@ export const ExecutionPlanStatus: typeof $Enums.ExecutionPlanStatus
 export type ExecutionTaskStatus = $Enums.ExecutionTaskStatus
 
 export const ExecutionTaskStatus: typeof $Enums.ExecutionTaskStatus
+
+export type ExecutionBlockerCategory = $Enums.ExecutionBlockerCategory
+
+export const ExecutionBlockerCategory: typeof $Enums.ExecutionBlockerCategory
 
 export type ExecutionEvidenceType = $Enums.ExecutionEvidenceType
 
@@ -870,6 +903,36 @@ export class PrismaClient<
     * ```
     */
   get executionTask(): Prisma.ExecutionTaskDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.executionTaskDependency`: Exposes CRUD operations for the **ExecutionTaskDependency** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ExecutionTaskDependencies
+    * const executionTaskDependencies = await prisma.executionTaskDependency.findMany()
+    * ```
+    */
+  get executionTaskDependency(): Prisma.ExecutionTaskDependencyDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.executionTaskBlockerEvent`: Exposes CRUD operations for the **ExecutionTaskBlockerEvent** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ExecutionTaskBlockerEvents
+    * const executionTaskBlockerEvents = await prisma.executionTaskBlockerEvent.findMany()
+    * ```
+    */
+  get executionTaskBlockerEvent(): Prisma.ExecutionTaskBlockerEventDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.executionScheduleRevision`: Exposes CRUD operations for the **ExecutionScheduleRevision** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ExecutionScheduleRevisions
+    * const executionScheduleRevisions = await prisma.executionScheduleRevision.findMany()
+    * ```
+    */
+  get executionScheduleRevision(): Prisma.ExecutionScheduleRevisionDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.executionEvidence`: Exposes CRUD operations for the **ExecutionEvidence** model.
@@ -1355,6 +1418,9 @@ export namespace Prisma {
     OrpDecision: 'OrpDecision',
     ExecutionPlan: 'ExecutionPlan',
     ExecutionTask: 'ExecutionTask',
+    ExecutionTaskDependency: 'ExecutionTaskDependency',
+    ExecutionTaskBlockerEvent: 'ExecutionTaskBlockerEvent',
+    ExecutionScheduleRevision: 'ExecutionScheduleRevision',
     ExecutionEvidence: 'ExecutionEvidence',
     CaseClosure: 'CaseClosure'
   };
@@ -1375,7 +1441,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "department" | "jurisdiction" | "user" | "asset" | "publicReport" | "publicReportTriageAnalysis" | "policyDocument" | "approvedActionVersion" | "governedExecutionTemplate" | "governedExecutionTaskTemplate" | "policyRule" | "case" | "observationSource" | "externalObservation" | "inspection" | "riskAssessment" | "infrastructureIntelligenceAssessment" | "infrastructureIntelligenceReconciliation" | "operationalResponsePlan" | "decisionPackage" | "approvalAuthority" | "orpDecision" | "executionPlan" | "executionTask" | "executionEvidence" | "caseClosure"
+      modelProps: "department" | "jurisdiction" | "user" | "asset" | "publicReport" | "publicReportTriageAnalysis" | "policyDocument" | "approvedActionVersion" | "governedExecutionTemplate" | "governedExecutionTaskTemplate" | "policyRule" | "case" | "observationSource" | "externalObservation" | "inspection" | "riskAssessment" | "infrastructureIntelligenceAssessment" | "infrastructureIntelligenceReconciliation" | "operationalResponsePlan" | "decisionPackage" | "approvalAuthority" | "orpDecision" | "executionPlan" | "executionTask" | "executionTaskDependency" | "executionTaskBlockerEvent" | "executionScheduleRevision" | "executionEvidence" | "caseClosure"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -3155,6 +3221,228 @@ export namespace Prisma {
           }
         }
       }
+      ExecutionTaskDependency: {
+        payload: Prisma.$ExecutionTaskDependencyPayload<ExtArgs>
+        fields: Prisma.ExecutionTaskDependencyFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ExecutionTaskDependencyFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExecutionTaskDependencyPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ExecutionTaskDependencyFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExecutionTaskDependencyPayload>
+          }
+          findFirst: {
+            args: Prisma.ExecutionTaskDependencyFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExecutionTaskDependencyPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ExecutionTaskDependencyFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExecutionTaskDependencyPayload>
+          }
+          findMany: {
+            args: Prisma.ExecutionTaskDependencyFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExecutionTaskDependencyPayload>[]
+          }
+          create: {
+            args: Prisma.ExecutionTaskDependencyCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExecutionTaskDependencyPayload>
+          }
+          createMany: {
+            args: Prisma.ExecutionTaskDependencyCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ExecutionTaskDependencyCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExecutionTaskDependencyPayload>[]
+          }
+          delete: {
+            args: Prisma.ExecutionTaskDependencyDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExecutionTaskDependencyPayload>
+          }
+          update: {
+            args: Prisma.ExecutionTaskDependencyUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExecutionTaskDependencyPayload>
+          }
+          deleteMany: {
+            args: Prisma.ExecutionTaskDependencyDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ExecutionTaskDependencyUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ExecutionTaskDependencyUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExecutionTaskDependencyPayload>[]
+          }
+          upsert: {
+            args: Prisma.ExecutionTaskDependencyUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExecutionTaskDependencyPayload>
+          }
+          aggregate: {
+            args: Prisma.ExecutionTaskDependencyAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateExecutionTaskDependency>
+          }
+          groupBy: {
+            args: Prisma.ExecutionTaskDependencyGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ExecutionTaskDependencyGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ExecutionTaskDependencyCountArgs<ExtArgs>
+            result: $Utils.Optional<ExecutionTaskDependencyCountAggregateOutputType> | number
+          }
+        }
+      }
+      ExecutionTaskBlockerEvent: {
+        payload: Prisma.$ExecutionTaskBlockerEventPayload<ExtArgs>
+        fields: Prisma.ExecutionTaskBlockerEventFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ExecutionTaskBlockerEventFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExecutionTaskBlockerEventPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ExecutionTaskBlockerEventFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExecutionTaskBlockerEventPayload>
+          }
+          findFirst: {
+            args: Prisma.ExecutionTaskBlockerEventFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExecutionTaskBlockerEventPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ExecutionTaskBlockerEventFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExecutionTaskBlockerEventPayload>
+          }
+          findMany: {
+            args: Prisma.ExecutionTaskBlockerEventFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExecutionTaskBlockerEventPayload>[]
+          }
+          create: {
+            args: Prisma.ExecutionTaskBlockerEventCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExecutionTaskBlockerEventPayload>
+          }
+          createMany: {
+            args: Prisma.ExecutionTaskBlockerEventCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ExecutionTaskBlockerEventCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExecutionTaskBlockerEventPayload>[]
+          }
+          delete: {
+            args: Prisma.ExecutionTaskBlockerEventDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExecutionTaskBlockerEventPayload>
+          }
+          update: {
+            args: Prisma.ExecutionTaskBlockerEventUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExecutionTaskBlockerEventPayload>
+          }
+          deleteMany: {
+            args: Prisma.ExecutionTaskBlockerEventDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ExecutionTaskBlockerEventUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ExecutionTaskBlockerEventUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExecutionTaskBlockerEventPayload>[]
+          }
+          upsert: {
+            args: Prisma.ExecutionTaskBlockerEventUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExecutionTaskBlockerEventPayload>
+          }
+          aggregate: {
+            args: Prisma.ExecutionTaskBlockerEventAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateExecutionTaskBlockerEvent>
+          }
+          groupBy: {
+            args: Prisma.ExecutionTaskBlockerEventGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ExecutionTaskBlockerEventGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ExecutionTaskBlockerEventCountArgs<ExtArgs>
+            result: $Utils.Optional<ExecutionTaskBlockerEventCountAggregateOutputType> | number
+          }
+        }
+      }
+      ExecutionScheduleRevision: {
+        payload: Prisma.$ExecutionScheduleRevisionPayload<ExtArgs>
+        fields: Prisma.ExecutionScheduleRevisionFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ExecutionScheduleRevisionFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExecutionScheduleRevisionPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ExecutionScheduleRevisionFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExecutionScheduleRevisionPayload>
+          }
+          findFirst: {
+            args: Prisma.ExecutionScheduleRevisionFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExecutionScheduleRevisionPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ExecutionScheduleRevisionFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExecutionScheduleRevisionPayload>
+          }
+          findMany: {
+            args: Prisma.ExecutionScheduleRevisionFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExecutionScheduleRevisionPayload>[]
+          }
+          create: {
+            args: Prisma.ExecutionScheduleRevisionCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExecutionScheduleRevisionPayload>
+          }
+          createMany: {
+            args: Prisma.ExecutionScheduleRevisionCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ExecutionScheduleRevisionCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExecutionScheduleRevisionPayload>[]
+          }
+          delete: {
+            args: Prisma.ExecutionScheduleRevisionDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExecutionScheduleRevisionPayload>
+          }
+          update: {
+            args: Prisma.ExecutionScheduleRevisionUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExecutionScheduleRevisionPayload>
+          }
+          deleteMany: {
+            args: Prisma.ExecutionScheduleRevisionDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ExecutionScheduleRevisionUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ExecutionScheduleRevisionUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExecutionScheduleRevisionPayload>[]
+          }
+          upsert: {
+            args: Prisma.ExecutionScheduleRevisionUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExecutionScheduleRevisionPayload>
+          }
+          aggregate: {
+            args: Prisma.ExecutionScheduleRevisionAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateExecutionScheduleRevision>
+          }
+          groupBy: {
+            args: Prisma.ExecutionScheduleRevisionGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ExecutionScheduleRevisionGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ExecutionScheduleRevisionCountArgs<ExtArgs>
+            result: $Utils.Optional<ExecutionScheduleRevisionCountAggregateOutputType> | number
+          }
+        }
+      }
       ExecutionEvidence: {
         payload: Prisma.$ExecutionEvidencePayload<ExtArgs>
         fields: Prisma.ExecutionEvidenceFieldRefs
@@ -3423,6 +3711,9 @@ export namespace Prisma {
     orpDecision?: OrpDecisionOmit
     executionPlan?: ExecutionPlanOmit
     executionTask?: ExecutionTaskOmit
+    executionTaskDependency?: ExecutionTaskDependencyOmit
+    executionTaskBlockerEvent?: ExecutionTaskBlockerEventOmit
+    executionScheduleRevision?: ExecutionScheduleRevisionOmit
     executionEvidence?: ExecutionEvidenceOmit
     caseClosure?: CaseClosureOmit
   }
@@ -3730,6 +4021,10 @@ export namespace Prisma {
     completedExecutionTasks: number
     verifiedExecutionTasks: number
     cancelledExecutionTasks: number
+    executionScheduleRevisions: number
+    blockedExecutionTaskEvents: number
+    resolvedExecutionTaskEvents: number
+    createdExecutionTaskDependencies: number
     submittedExecutionEvidence: number
     closedCases: number
     reviewedPublicReports: number
@@ -3758,6 +4053,10 @@ export namespace Prisma {
     completedExecutionTasks?: boolean | UserCountOutputTypeCountCompletedExecutionTasksArgs
     verifiedExecutionTasks?: boolean | UserCountOutputTypeCountVerifiedExecutionTasksArgs
     cancelledExecutionTasks?: boolean | UserCountOutputTypeCountCancelledExecutionTasksArgs
+    executionScheduleRevisions?: boolean | UserCountOutputTypeCountExecutionScheduleRevisionsArgs
+    blockedExecutionTaskEvents?: boolean | UserCountOutputTypeCountBlockedExecutionTaskEventsArgs
+    resolvedExecutionTaskEvents?: boolean | UserCountOutputTypeCountResolvedExecutionTaskEventsArgs
+    createdExecutionTaskDependencies?: boolean | UserCountOutputTypeCountCreatedExecutionTaskDependenciesArgs
     submittedExecutionEvidence?: boolean | UserCountOutputTypeCountSubmittedExecutionEvidenceArgs
     closedCases?: boolean | UserCountOutputTypeCountClosedCasesArgs
     reviewedPublicReports?: boolean | UserCountOutputTypeCountReviewedPublicReportsArgs
@@ -3854,6 +4153,34 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountCancelledExecutionTasksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ExecutionTaskWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountExecutionScheduleRevisionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ExecutionScheduleRevisionWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountBlockedExecutionTaskEventsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ExecutionTaskBlockerEventWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountResolvedExecutionTaskEventsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ExecutionTaskBlockerEventWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountCreatedExecutionTaskDependenciesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ExecutionTaskDependencyWhereInput
   }
 
   /**
@@ -4582,10 +4909,14 @@ export namespace Prisma {
 
   export type ExecutionPlanCountOutputType = {
     tasks: number
+    scheduleRevisions: number
+    taskDependencies: number
   }
 
   export type ExecutionPlanCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     tasks?: boolean | ExecutionPlanCountOutputTypeCountTasksArgs
+    scheduleRevisions?: boolean | ExecutionPlanCountOutputTypeCountScheduleRevisionsArgs
+    taskDependencies?: boolean | ExecutionPlanCountOutputTypeCountTaskDependenciesArgs
   }
 
   // Custom InputTypes
@@ -4606,6 +4937,20 @@ export namespace Prisma {
     where?: ExecutionTaskWhereInput
   }
 
+  /**
+   * ExecutionPlanCountOutputType without action
+   */
+  export type ExecutionPlanCountOutputTypeCountScheduleRevisionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ExecutionScheduleRevisionWhereInput
+  }
+
+  /**
+   * ExecutionPlanCountOutputType without action
+   */
+  export type ExecutionPlanCountOutputTypeCountTaskDependenciesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ExecutionTaskDependencyWhereInput
+  }
+
 
   /**
    * Count Type ExecutionTaskCountOutputType
@@ -4613,10 +4958,18 @@ export namespace Prisma {
 
   export type ExecutionTaskCountOutputType = {
     evidence: number
+    scheduleRevisions: number
+    dependencies: number
+    requiredBy: number
+    blockerEvents: number
   }
 
   export type ExecutionTaskCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     evidence?: boolean | ExecutionTaskCountOutputTypeCountEvidenceArgs
+    scheduleRevisions?: boolean | ExecutionTaskCountOutputTypeCountScheduleRevisionsArgs
+    dependencies?: boolean | ExecutionTaskCountOutputTypeCountDependenciesArgs
+    requiredBy?: boolean | ExecutionTaskCountOutputTypeCountRequiredByArgs
+    blockerEvents?: boolean | ExecutionTaskCountOutputTypeCountBlockerEventsArgs
   }
 
   // Custom InputTypes
@@ -4635,6 +4988,34 @@ export namespace Prisma {
    */
   export type ExecutionTaskCountOutputTypeCountEvidenceArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ExecutionEvidenceWhereInput
+  }
+
+  /**
+   * ExecutionTaskCountOutputType without action
+   */
+  export type ExecutionTaskCountOutputTypeCountScheduleRevisionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ExecutionScheduleRevisionWhereInput
+  }
+
+  /**
+   * ExecutionTaskCountOutputType without action
+   */
+  export type ExecutionTaskCountOutputTypeCountDependenciesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ExecutionTaskDependencyWhereInput
+  }
+
+  /**
+   * ExecutionTaskCountOutputType without action
+   */
+  export type ExecutionTaskCountOutputTypeCountRequiredByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ExecutionTaskDependencyWhereInput
+  }
+
+  /**
+   * ExecutionTaskCountOutputType without action
+   */
+  export type ExecutionTaskCountOutputTypeCountBlockerEventsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ExecutionTaskBlockerEventWhereInput
   }
 
 
@@ -7495,6 +7876,10 @@ export namespace Prisma {
     completedExecutionTasks?: boolean | User$completedExecutionTasksArgs<ExtArgs>
     verifiedExecutionTasks?: boolean | User$verifiedExecutionTasksArgs<ExtArgs>
     cancelledExecutionTasks?: boolean | User$cancelledExecutionTasksArgs<ExtArgs>
+    executionScheduleRevisions?: boolean | User$executionScheduleRevisionsArgs<ExtArgs>
+    blockedExecutionTaskEvents?: boolean | User$blockedExecutionTaskEventsArgs<ExtArgs>
+    resolvedExecutionTaskEvents?: boolean | User$resolvedExecutionTaskEventsArgs<ExtArgs>
+    createdExecutionTaskDependencies?: boolean | User$createdExecutionTaskDependenciesArgs<ExtArgs>
     submittedExecutionEvidence?: boolean | User$submittedExecutionEvidenceArgs<ExtArgs>
     closedCases?: boolean | User$closedCasesArgs<ExtArgs>
     reviewedPublicReports?: boolean | User$reviewedPublicReportsArgs<ExtArgs>
@@ -7576,6 +7961,10 @@ export namespace Prisma {
     completedExecutionTasks?: boolean | User$completedExecutionTasksArgs<ExtArgs>
     verifiedExecutionTasks?: boolean | User$verifiedExecutionTasksArgs<ExtArgs>
     cancelledExecutionTasks?: boolean | User$cancelledExecutionTasksArgs<ExtArgs>
+    executionScheduleRevisions?: boolean | User$executionScheduleRevisionsArgs<ExtArgs>
+    blockedExecutionTaskEvents?: boolean | User$blockedExecutionTaskEventsArgs<ExtArgs>
+    resolvedExecutionTaskEvents?: boolean | User$resolvedExecutionTaskEventsArgs<ExtArgs>
+    createdExecutionTaskDependencies?: boolean | User$createdExecutionTaskDependenciesArgs<ExtArgs>
     submittedExecutionEvidence?: boolean | User$submittedExecutionEvidenceArgs<ExtArgs>
     closedCases?: boolean | User$closedCasesArgs<ExtArgs>
     reviewedPublicReports?: boolean | User$reviewedPublicReportsArgs<ExtArgs>
@@ -7617,6 +8006,10 @@ export namespace Prisma {
       completedExecutionTasks: Prisma.$ExecutionTaskPayload<ExtArgs>[]
       verifiedExecutionTasks: Prisma.$ExecutionTaskPayload<ExtArgs>[]
       cancelledExecutionTasks: Prisma.$ExecutionTaskPayload<ExtArgs>[]
+      executionScheduleRevisions: Prisma.$ExecutionScheduleRevisionPayload<ExtArgs>[]
+      blockedExecutionTaskEvents: Prisma.$ExecutionTaskBlockerEventPayload<ExtArgs>[]
+      resolvedExecutionTaskEvents: Prisma.$ExecutionTaskBlockerEventPayload<ExtArgs>[]
+      createdExecutionTaskDependencies: Prisma.$ExecutionTaskDependencyPayload<ExtArgs>[]
       submittedExecutionEvidence: Prisma.$ExecutionEvidencePayload<ExtArgs>[]
       closedCases: Prisma.$CaseClosurePayload<ExtArgs>[]
       reviewedPublicReports: Prisma.$PublicReportPayload<ExtArgs>[]
@@ -8052,6 +8445,10 @@ export namespace Prisma {
     completedExecutionTasks<T extends User$completedExecutionTasksArgs<ExtArgs> = {}>(args?: Subset<T, User$completedExecutionTasksArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExecutionTaskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     verifiedExecutionTasks<T extends User$verifiedExecutionTasksArgs<ExtArgs> = {}>(args?: Subset<T, User$verifiedExecutionTasksArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExecutionTaskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     cancelledExecutionTasks<T extends User$cancelledExecutionTasksArgs<ExtArgs> = {}>(args?: Subset<T, User$cancelledExecutionTasksArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExecutionTaskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    executionScheduleRevisions<T extends User$executionScheduleRevisionsArgs<ExtArgs> = {}>(args?: Subset<T, User$executionScheduleRevisionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExecutionScheduleRevisionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    blockedExecutionTaskEvents<T extends User$blockedExecutionTaskEventsArgs<ExtArgs> = {}>(args?: Subset<T, User$blockedExecutionTaskEventsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExecutionTaskBlockerEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    resolvedExecutionTaskEvents<T extends User$resolvedExecutionTaskEventsArgs<ExtArgs> = {}>(args?: Subset<T, User$resolvedExecutionTaskEventsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExecutionTaskBlockerEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    createdExecutionTaskDependencies<T extends User$createdExecutionTaskDependenciesArgs<ExtArgs> = {}>(args?: Subset<T, User$createdExecutionTaskDependenciesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExecutionTaskDependencyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     submittedExecutionEvidence<T extends User$submittedExecutionEvidenceArgs<ExtArgs> = {}>(args?: Subset<T, User$submittedExecutionEvidenceArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExecutionEvidencePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     closedCases<T extends User$closedCasesArgs<ExtArgs> = {}>(args?: Subset<T, User$closedCasesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CaseClosurePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     reviewedPublicReports<T extends User$reviewedPublicReportsArgs<ExtArgs> = {}>(args?: Subset<T, User$reviewedPublicReportsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PublicReportPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -8741,6 +9138,102 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ExecutionTaskScalarFieldEnum | ExecutionTaskScalarFieldEnum[]
+  }
+
+  /**
+   * User.executionScheduleRevisions
+   */
+  export type User$executionScheduleRevisionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExecutionScheduleRevision
+     */
+    select?: ExecutionScheduleRevisionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExecutionScheduleRevision
+     */
+    omit?: ExecutionScheduleRevisionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExecutionScheduleRevisionInclude<ExtArgs> | null
+    where?: ExecutionScheduleRevisionWhereInput
+    orderBy?: ExecutionScheduleRevisionOrderByWithRelationInput | ExecutionScheduleRevisionOrderByWithRelationInput[]
+    cursor?: ExecutionScheduleRevisionWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ExecutionScheduleRevisionScalarFieldEnum | ExecutionScheduleRevisionScalarFieldEnum[]
+  }
+
+  /**
+   * User.blockedExecutionTaskEvents
+   */
+  export type User$blockedExecutionTaskEventsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExecutionTaskBlockerEvent
+     */
+    select?: ExecutionTaskBlockerEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExecutionTaskBlockerEvent
+     */
+    omit?: ExecutionTaskBlockerEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExecutionTaskBlockerEventInclude<ExtArgs> | null
+    where?: ExecutionTaskBlockerEventWhereInput
+    orderBy?: ExecutionTaskBlockerEventOrderByWithRelationInput | ExecutionTaskBlockerEventOrderByWithRelationInput[]
+    cursor?: ExecutionTaskBlockerEventWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ExecutionTaskBlockerEventScalarFieldEnum | ExecutionTaskBlockerEventScalarFieldEnum[]
+  }
+
+  /**
+   * User.resolvedExecutionTaskEvents
+   */
+  export type User$resolvedExecutionTaskEventsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExecutionTaskBlockerEvent
+     */
+    select?: ExecutionTaskBlockerEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExecutionTaskBlockerEvent
+     */
+    omit?: ExecutionTaskBlockerEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExecutionTaskBlockerEventInclude<ExtArgs> | null
+    where?: ExecutionTaskBlockerEventWhereInput
+    orderBy?: ExecutionTaskBlockerEventOrderByWithRelationInput | ExecutionTaskBlockerEventOrderByWithRelationInput[]
+    cursor?: ExecutionTaskBlockerEventWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ExecutionTaskBlockerEventScalarFieldEnum | ExecutionTaskBlockerEventScalarFieldEnum[]
+  }
+
+  /**
+   * User.createdExecutionTaskDependencies
+   */
+  export type User$createdExecutionTaskDependenciesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExecutionTaskDependency
+     */
+    select?: ExecutionTaskDependencySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExecutionTaskDependency
+     */
+    omit?: ExecutionTaskDependencyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExecutionTaskDependencyInclude<ExtArgs> | null
+    where?: ExecutionTaskDependencyWhereInput
+    orderBy?: ExecutionTaskDependencyOrderByWithRelationInput | ExecutionTaskDependencyOrderByWithRelationInput[]
+    cursor?: ExecutionTaskDependencyWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ExecutionTaskDependencyScalarFieldEnum | ExecutionTaskDependencyScalarFieldEnum[]
   }
 
   /**
@@ -34081,6 +34574,8 @@ export namespace Prisma {
     cancellationReason: string | null
     governanceMode: $Enums.ExecutionPlanGovernanceMode | null
     executionContractVersion: string | null
+    plannedStartAt: Date | null
+    plannedEndAt: Date | null
   }
 
   export type ExecutionPlanMaxAggregateOutputType = {
@@ -34099,6 +34594,8 @@ export namespace Prisma {
     cancellationReason: string | null
     governanceMode: $Enums.ExecutionPlanGovernanceMode | null
     executionContractVersion: string | null
+    plannedStartAt: Date | null
+    plannedEndAt: Date | null
   }
 
   export type ExecutionPlanCountAggregateOutputType = {
@@ -34118,6 +34615,8 @@ export namespace Prisma {
     governanceMode: number
     executionContractVersion: number
     governedProvenance: number
+    plannedStartAt: number
+    plannedEndAt: number
     _all: number
   }
 
@@ -34138,6 +34637,8 @@ export namespace Prisma {
     cancellationReason?: true
     governanceMode?: true
     executionContractVersion?: true
+    plannedStartAt?: true
+    plannedEndAt?: true
   }
 
   export type ExecutionPlanMaxAggregateInputType = {
@@ -34156,6 +34657,8 @@ export namespace Prisma {
     cancellationReason?: true
     governanceMode?: true
     executionContractVersion?: true
+    plannedStartAt?: true
+    plannedEndAt?: true
   }
 
   export type ExecutionPlanCountAggregateInputType = {
@@ -34175,6 +34678,8 @@ export namespace Prisma {
     governanceMode?: true
     executionContractVersion?: true
     governedProvenance?: true
+    plannedStartAt?: true
+    plannedEndAt?: true
     _all?: true
   }
 
@@ -34267,6 +34772,8 @@ export namespace Prisma {
     governanceMode: $Enums.ExecutionPlanGovernanceMode
     executionContractVersion: string | null
     governedProvenance: JsonValue | null
+    plannedStartAt: Date | null
+    plannedEndAt: Date | null
     _count: ExecutionPlanCountAggregateOutputType | null
     _min: ExecutionPlanMinAggregateOutputType | null
     _max: ExecutionPlanMaxAggregateOutputType | null
@@ -34303,12 +34810,16 @@ export namespace Prisma {
     governanceMode?: boolean
     executionContractVersion?: boolean
     governedProvenance?: boolean
+    plannedStartAt?: boolean
+    plannedEndAt?: boolean
     orp?: boolean | OperationalResponsePlanDefaultArgs<ExtArgs>
     case?: boolean | CaseDefaultArgs<ExtArgs>
     approvalDecision?: boolean | OrpDecisionDefaultArgs<ExtArgs>
     createdBy?: boolean | UserDefaultArgs<ExtArgs>
     tasks?: boolean | ExecutionPlan$tasksArgs<ExtArgs>
     closure?: boolean | ExecutionPlan$closureArgs<ExtArgs>
+    scheduleRevisions?: boolean | ExecutionPlan$scheduleRevisionsArgs<ExtArgs>
+    taskDependencies?: boolean | ExecutionPlan$taskDependenciesArgs<ExtArgs>
     _count?: boolean | ExecutionPlanCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["executionPlan"]>
 
@@ -34329,6 +34840,8 @@ export namespace Prisma {
     governanceMode?: boolean
     executionContractVersion?: boolean
     governedProvenance?: boolean
+    plannedStartAt?: boolean
+    plannedEndAt?: boolean
     orp?: boolean | OperationalResponsePlanDefaultArgs<ExtArgs>
     case?: boolean | CaseDefaultArgs<ExtArgs>
     approvalDecision?: boolean | OrpDecisionDefaultArgs<ExtArgs>
@@ -34352,6 +34865,8 @@ export namespace Prisma {
     governanceMode?: boolean
     executionContractVersion?: boolean
     governedProvenance?: boolean
+    plannedStartAt?: boolean
+    plannedEndAt?: boolean
     orp?: boolean | OperationalResponsePlanDefaultArgs<ExtArgs>
     case?: boolean | CaseDefaultArgs<ExtArgs>
     approvalDecision?: boolean | OrpDecisionDefaultArgs<ExtArgs>
@@ -34375,9 +34890,11 @@ export namespace Prisma {
     governanceMode?: boolean
     executionContractVersion?: boolean
     governedProvenance?: boolean
+    plannedStartAt?: boolean
+    plannedEndAt?: boolean
   }
 
-  export type ExecutionPlanOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "orpId" | "caseId" | "approvalDecisionId" | "status" | "createdById" | "templateVersion" | "createdAt" | "updatedAt" | "startedAt" | "completedAt" | "cancelledAt" | "cancellationReason" | "governanceMode" | "executionContractVersion" | "governedProvenance", ExtArgs["result"]["executionPlan"]>
+  export type ExecutionPlanOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "orpId" | "caseId" | "approvalDecisionId" | "status" | "createdById" | "templateVersion" | "createdAt" | "updatedAt" | "startedAt" | "completedAt" | "cancelledAt" | "cancellationReason" | "governanceMode" | "executionContractVersion" | "governedProvenance" | "plannedStartAt" | "plannedEndAt", ExtArgs["result"]["executionPlan"]>
   export type ExecutionPlanInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     orp?: boolean | OperationalResponsePlanDefaultArgs<ExtArgs>
     case?: boolean | CaseDefaultArgs<ExtArgs>
@@ -34385,6 +34902,8 @@ export namespace Prisma {
     createdBy?: boolean | UserDefaultArgs<ExtArgs>
     tasks?: boolean | ExecutionPlan$tasksArgs<ExtArgs>
     closure?: boolean | ExecutionPlan$closureArgs<ExtArgs>
+    scheduleRevisions?: boolean | ExecutionPlan$scheduleRevisionsArgs<ExtArgs>
+    taskDependencies?: boolean | ExecutionPlan$taskDependenciesArgs<ExtArgs>
     _count?: boolean | ExecutionPlanCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ExecutionPlanIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -34409,6 +34928,8 @@ export namespace Prisma {
       createdBy: Prisma.$UserPayload<ExtArgs>
       tasks: Prisma.$ExecutionTaskPayload<ExtArgs>[]
       closure: Prisma.$CaseClosurePayload<ExtArgs> | null
+      scheduleRevisions: Prisma.$ExecutionScheduleRevisionPayload<ExtArgs>[]
+      taskDependencies: Prisma.$ExecutionTaskDependencyPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -34427,6 +34948,8 @@ export namespace Prisma {
       governanceMode: $Enums.ExecutionPlanGovernanceMode
       executionContractVersion: string | null
       governedProvenance: Prisma.JsonValue | null
+      plannedStartAt: Date | null
+      plannedEndAt: Date | null
     }, ExtArgs["result"]["executionPlan"]>
     composites: {}
   }
@@ -34827,6 +35350,8 @@ export namespace Prisma {
     createdBy<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     tasks<T extends ExecutionPlan$tasksArgs<ExtArgs> = {}>(args?: Subset<T, ExecutionPlan$tasksArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExecutionTaskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     closure<T extends ExecutionPlan$closureArgs<ExtArgs> = {}>(args?: Subset<T, ExecutionPlan$closureArgs<ExtArgs>>): Prisma__CaseClosureClient<$Result.GetResult<Prisma.$CaseClosurePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    scheduleRevisions<T extends ExecutionPlan$scheduleRevisionsArgs<ExtArgs> = {}>(args?: Subset<T, ExecutionPlan$scheduleRevisionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExecutionScheduleRevisionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    taskDependencies<T extends ExecutionPlan$taskDependenciesArgs<ExtArgs> = {}>(args?: Subset<T, ExecutionPlan$taskDependenciesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExecutionTaskDependencyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -34872,6 +35397,8 @@ export namespace Prisma {
     readonly governanceMode: FieldRef<"ExecutionPlan", 'ExecutionPlanGovernanceMode'>
     readonly executionContractVersion: FieldRef<"ExecutionPlan", 'String'>
     readonly governedProvenance: FieldRef<"ExecutionPlan", 'Json'>
+    readonly plannedStartAt: FieldRef<"ExecutionPlan", 'DateTime'>
+    readonly plannedEndAt: FieldRef<"ExecutionPlan", 'DateTime'>
   }
     
 
@@ -35311,6 +35838,54 @@ export namespace Prisma {
   }
 
   /**
+   * ExecutionPlan.scheduleRevisions
+   */
+  export type ExecutionPlan$scheduleRevisionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExecutionScheduleRevision
+     */
+    select?: ExecutionScheduleRevisionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExecutionScheduleRevision
+     */
+    omit?: ExecutionScheduleRevisionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExecutionScheduleRevisionInclude<ExtArgs> | null
+    where?: ExecutionScheduleRevisionWhereInput
+    orderBy?: ExecutionScheduleRevisionOrderByWithRelationInput | ExecutionScheduleRevisionOrderByWithRelationInput[]
+    cursor?: ExecutionScheduleRevisionWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ExecutionScheduleRevisionScalarFieldEnum | ExecutionScheduleRevisionScalarFieldEnum[]
+  }
+
+  /**
+   * ExecutionPlan.taskDependencies
+   */
+  export type ExecutionPlan$taskDependenciesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExecutionTaskDependency
+     */
+    select?: ExecutionTaskDependencySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExecutionTaskDependency
+     */
+    omit?: ExecutionTaskDependencyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExecutionTaskDependencyInclude<ExtArgs> | null
+    where?: ExecutionTaskDependencyWhereInput
+    orderBy?: ExecutionTaskDependencyOrderByWithRelationInput | ExecutionTaskDependencyOrderByWithRelationInput[]
+    cursor?: ExecutionTaskDependencyWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ExecutionTaskDependencyScalarFieldEnum | ExecutionTaskDependencyScalarFieldEnum[]
+  }
+
+  /**
    * ExecutionPlan without action
    */
   export type ExecutionPlanDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -35388,6 +35963,8 @@ export namespace Prisma {
     sourceTemplateVersion: number | null
     evidenceRequired: boolean | null
     verificationRequired: boolean | null
+    plannedStartAt: Date | null
+    plannedEndAt: Date | null
   }
 
   export type ExecutionTaskMaxAggregateOutputType = {
@@ -35425,6 +36002,8 @@ export namespace Prisma {
     sourceTemplateVersion: number | null
     evidenceRequired: boolean | null
     verificationRequired: boolean | null
+    plannedStartAt: Date | null
+    plannedEndAt: Date | null
   }
 
   export type ExecutionTaskCountAggregateOutputType = {
@@ -35462,6 +36041,8 @@ export namespace Prisma {
     sourceTemplateVersion: number
     evidenceRequired: number
     verificationRequired: number
+    plannedStartAt: number
+    plannedEndAt: number
     _all: number
   }
 
@@ -35513,6 +36094,8 @@ export namespace Prisma {
     sourceTemplateVersion?: true
     evidenceRequired?: true
     verificationRequired?: true
+    plannedStartAt?: true
+    plannedEndAt?: true
   }
 
   export type ExecutionTaskMaxAggregateInputType = {
@@ -35550,6 +36133,8 @@ export namespace Prisma {
     sourceTemplateVersion?: true
     evidenceRequired?: true
     verificationRequired?: true
+    plannedStartAt?: true
+    plannedEndAt?: true
   }
 
   export type ExecutionTaskCountAggregateInputType = {
@@ -35587,6 +36172,8 @@ export namespace Prisma {
     sourceTemplateVersion?: true
     evidenceRequired?: true
     verificationRequired?: true
+    plannedStartAt?: true
+    plannedEndAt?: true
     _all?: true
   }
 
@@ -35711,6 +36298,8 @@ export namespace Prisma {
     sourceTemplateVersion: number | null
     evidenceRequired: boolean
     verificationRequired: boolean
+    plannedStartAt: Date | null
+    plannedEndAt: Date | null
     _count: ExecutionTaskCountAggregateOutputType | null
     _avg: ExecutionTaskAvgAggregateOutputType | null
     _sum: ExecutionTaskSumAggregateOutputType | null
@@ -35767,6 +36356,8 @@ export namespace Prisma {
     sourceTemplateVersion?: boolean
     evidenceRequired?: boolean
     verificationRequired?: boolean
+    plannedStartAt?: boolean
+    plannedEndAt?: boolean
     executionPlan?: boolean | ExecutionPlanDefaultArgs<ExtArgs>
     assignedTo?: boolean | ExecutionTask$assignedToArgs<ExtArgs>
     assignedBy?: boolean | ExecutionTask$assignedByArgs<ExtArgs>
@@ -35777,6 +36368,10 @@ export namespace Prisma {
     approvedActionVersion?: boolean | ExecutionTask$approvedActionVersionArgs<ExtArgs>
     governedExecutionTemplate?: boolean | ExecutionTask$governedExecutionTemplateArgs<ExtArgs>
     governedTaskTemplate?: boolean | ExecutionTask$governedTaskTemplateArgs<ExtArgs>
+    scheduleRevisions?: boolean | ExecutionTask$scheduleRevisionsArgs<ExtArgs>
+    dependencies?: boolean | ExecutionTask$dependenciesArgs<ExtArgs>
+    requiredBy?: boolean | ExecutionTask$requiredByArgs<ExtArgs>
+    blockerEvents?: boolean | ExecutionTask$blockerEventsArgs<ExtArgs>
     _count?: boolean | ExecutionTaskCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["executionTask"]>
 
@@ -35815,6 +36410,8 @@ export namespace Prisma {
     sourceTemplateVersion?: boolean
     evidenceRequired?: boolean
     verificationRequired?: boolean
+    plannedStartAt?: boolean
+    plannedEndAt?: boolean
     executionPlan?: boolean | ExecutionPlanDefaultArgs<ExtArgs>
     assignedTo?: boolean | ExecutionTask$assignedToArgs<ExtArgs>
     assignedBy?: boolean | ExecutionTask$assignedByArgs<ExtArgs>
@@ -35861,6 +36458,8 @@ export namespace Prisma {
     sourceTemplateVersion?: boolean
     evidenceRequired?: boolean
     verificationRequired?: boolean
+    plannedStartAt?: boolean
+    plannedEndAt?: boolean
     executionPlan?: boolean | ExecutionPlanDefaultArgs<ExtArgs>
     assignedTo?: boolean | ExecutionTask$assignedToArgs<ExtArgs>
     assignedBy?: boolean | ExecutionTask$assignedByArgs<ExtArgs>
@@ -35907,9 +36506,11 @@ export namespace Prisma {
     sourceTemplateVersion?: boolean
     evidenceRequired?: boolean
     verificationRequired?: boolean
+    plannedStartAt?: boolean
+    plannedEndAt?: boolean
   }
 
-  export type ExecutionTaskOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "executionPlanId" | "sequenceNumber" | "sourceActionCode" | "templateTaskKey" | "titleSnapshot" | "descriptionSnapshot" | "categorySnapshot" | "isMandatory" | "status" | "assignedToId" | "assignedById" | "assignedAt" | "startedAt" | "completionSubmittedById" | "completionSubmittedAt" | "completionNote" | "verifiedById" | "verifiedAt" | "verificationNote" | "blockedReason" | "cancelledById" | "cancelledAt" | "cancellationReason" | "createdAt" | "updatedAt" | "approvedActionVersionId" | "governedExecutionTemplateId" | "governedTaskTemplateId" | "sourceActionVersion" | "sourceTemplateCode" | "sourceTemplateVersion" | "evidenceRequired" | "verificationRequired", ExtArgs["result"]["executionTask"]>
+  export type ExecutionTaskOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "executionPlanId" | "sequenceNumber" | "sourceActionCode" | "templateTaskKey" | "titleSnapshot" | "descriptionSnapshot" | "categorySnapshot" | "isMandatory" | "status" | "assignedToId" | "assignedById" | "assignedAt" | "startedAt" | "completionSubmittedById" | "completionSubmittedAt" | "completionNote" | "verifiedById" | "verifiedAt" | "verificationNote" | "blockedReason" | "cancelledById" | "cancelledAt" | "cancellationReason" | "createdAt" | "updatedAt" | "approvedActionVersionId" | "governedExecutionTemplateId" | "governedTaskTemplateId" | "sourceActionVersion" | "sourceTemplateCode" | "sourceTemplateVersion" | "evidenceRequired" | "verificationRequired" | "plannedStartAt" | "plannedEndAt", ExtArgs["result"]["executionTask"]>
   export type ExecutionTaskInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     executionPlan?: boolean | ExecutionPlanDefaultArgs<ExtArgs>
     assignedTo?: boolean | ExecutionTask$assignedToArgs<ExtArgs>
@@ -35921,6 +36522,10 @@ export namespace Prisma {
     approvedActionVersion?: boolean | ExecutionTask$approvedActionVersionArgs<ExtArgs>
     governedExecutionTemplate?: boolean | ExecutionTask$governedExecutionTemplateArgs<ExtArgs>
     governedTaskTemplate?: boolean | ExecutionTask$governedTaskTemplateArgs<ExtArgs>
+    scheduleRevisions?: boolean | ExecutionTask$scheduleRevisionsArgs<ExtArgs>
+    dependencies?: boolean | ExecutionTask$dependenciesArgs<ExtArgs>
+    requiredBy?: boolean | ExecutionTask$requiredByArgs<ExtArgs>
+    blockerEvents?: boolean | ExecutionTask$blockerEventsArgs<ExtArgs>
     _count?: boolean | ExecutionTaskCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ExecutionTaskIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -35959,6 +36564,10 @@ export namespace Prisma {
       approvedActionVersion: Prisma.$ApprovedActionVersionPayload<ExtArgs> | null
       governedExecutionTemplate: Prisma.$GovernedExecutionTemplatePayload<ExtArgs> | null
       governedTaskTemplate: Prisma.$GovernedExecutionTaskTemplatePayload<ExtArgs> | null
+      scheduleRevisions: Prisma.$ExecutionScheduleRevisionPayload<ExtArgs>[]
+      dependencies: Prisma.$ExecutionTaskDependencyPayload<ExtArgs>[]
+      requiredBy: Prisma.$ExecutionTaskDependencyPayload<ExtArgs>[]
+      blockerEvents: Prisma.$ExecutionTaskBlockerEventPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -35995,6 +36604,8 @@ export namespace Prisma {
       sourceTemplateVersion: number | null
       evidenceRequired: boolean
       verificationRequired: boolean
+      plannedStartAt: Date | null
+      plannedEndAt: Date | null
     }, ExtArgs["result"]["executionTask"]>
     composites: {}
   }
@@ -36399,6 +37010,10 @@ export namespace Prisma {
     approvedActionVersion<T extends ExecutionTask$approvedActionVersionArgs<ExtArgs> = {}>(args?: Subset<T, ExecutionTask$approvedActionVersionArgs<ExtArgs>>): Prisma__ApprovedActionVersionClient<$Result.GetResult<Prisma.$ApprovedActionVersionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     governedExecutionTemplate<T extends ExecutionTask$governedExecutionTemplateArgs<ExtArgs> = {}>(args?: Subset<T, ExecutionTask$governedExecutionTemplateArgs<ExtArgs>>): Prisma__GovernedExecutionTemplateClient<$Result.GetResult<Prisma.$GovernedExecutionTemplatePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     governedTaskTemplate<T extends ExecutionTask$governedTaskTemplateArgs<ExtArgs> = {}>(args?: Subset<T, ExecutionTask$governedTaskTemplateArgs<ExtArgs>>): Prisma__GovernedExecutionTaskTemplateClient<$Result.GetResult<Prisma.$GovernedExecutionTaskTemplatePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    scheduleRevisions<T extends ExecutionTask$scheduleRevisionsArgs<ExtArgs> = {}>(args?: Subset<T, ExecutionTask$scheduleRevisionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExecutionScheduleRevisionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    dependencies<T extends ExecutionTask$dependenciesArgs<ExtArgs> = {}>(args?: Subset<T, ExecutionTask$dependenciesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExecutionTaskDependencyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    requiredBy<T extends ExecutionTask$requiredByArgs<ExtArgs> = {}>(args?: Subset<T, ExecutionTask$requiredByArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExecutionTaskDependencyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    blockerEvents<T extends ExecutionTask$blockerEventsArgs<ExtArgs> = {}>(args?: Subset<T, ExecutionTask$blockerEventsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExecutionTaskBlockerEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -36462,6 +37077,8 @@ export namespace Prisma {
     readonly sourceTemplateVersion: FieldRef<"ExecutionTask", 'Int'>
     readonly evidenceRequired: FieldRef<"ExecutionTask", 'Boolean'>
     readonly verificationRequired: FieldRef<"ExecutionTask", 'Boolean'>
+    readonly plannedStartAt: FieldRef<"ExecutionTask", 'DateTime'>
+    readonly plannedEndAt: FieldRef<"ExecutionTask", 'DateTime'>
   }
     
 
@@ -37034,6 +37651,102 @@ export namespace Prisma {
   }
 
   /**
+   * ExecutionTask.scheduleRevisions
+   */
+  export type ExecutionTask$scheduleRevisionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExecutionScheduleRevision
+     */
+    select?: ExecutionScheduleRevisionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExecutionScheduleRevision
+     */
+    omit?: ExecutionScheduleRevisionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExecutionScheduleRevisionInclude<ExtArgs> | null
+    where?: ExecutionScheduleRevisionWhereInput
+    orderBy?: ExecutionScheduleRevisionOrderByWithRelationInput | ExecutionScheduleRevisionOrderByWithRelationInput[]
+    cursor?: ExecutionScheduleRevisionWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ExecutionScheduleRevisionScalarFieldEnum | ExecutionScheduleRevisionScalarFieldEnum[]
+  }
+
+  /**
+   * ExecutionTask.dependencies
+   */
+  export type ExecutionTask$dependenciesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExecutionTaskDependency
+     */
+    select?: ExecutionTaskDependencySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExecutionTaskDependency
+     */
+    omit?: ExecutionTaskDependencyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExecutionTaskDependencyInclude<ExtArgs> | null
+    where?: ExecutionTaskDependencyWhereInput
+    orderBy?: ExecutionTaskDependencyOrderByWithRelationInput | ExecutionTaskDependencyOrderByWithRelationInput[]
+    cursor?: ExecutionTaskDependencyWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ExecutionTaskDependencyScalarFieldEnum | ExecutionTaskDependencyScalarFieldEnum[]
+  }
+
+  /**
+   * ExecutionTask.requiredBy
+   */
+  export type ExecutionTask$requiredByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExecutionTaskDependency
+     */
+    select?: ExecutionTaskDependencySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExecutionTaskDependency
+     */
+    omit?: ExecutionTaskDependencyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExecutionTaskDependencyInclude<ExtArgs> | null
+    where?: ExecutionTaskDependencyWhereInput
+    orderBy?: ExecutionTaskDependencyOrderByWithRelationInput | ExecutionTaskDependencyOrderByWithRelationInput[]
+    cursor?: ExecutionTaskDependencyWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ExecutionTaskDependencyScalarFieldEnum | ExecutionTaskDependencyScalarFieldEnum[]
+  }
+
+  /**
+   * ExecutionTask.blockerEvents
+   */
+  export type ExecutionTask$blockerEventsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExecutionTaskBlockerEvent
+     */
+    select?: ExecutionTaskBlockerEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExecutionTaskBlockerEvent
+     */
+    omit?: ExecutionTaskBlockerEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExecutionTaskBlockerEventInclude<ExtArgs> | null
+    where?: ExecutionTaskBlockerEventWhereInput
+    orderBy?: ExecutionTaskBlockerEventOrderByWithRelationInput | ExecutionTaskBlockerEventOrderByWithRelationInput[]
+    cursor?: ExecutionTaskBlockerEventWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ExecutionTaskBlockerEventScalarFieldEnum | ExecutionTaskBlockerEventScalarFieldEnum[]
+  }
+
+  /**
    * ExecutionTask without action
    */
   export type ExecutionTaskDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -37049,6 +37762,3404 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: ExecutionTaskInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model ExecutionTaskDependency
+   */
+
+  export type AggregateExecutionTaskDependency = {
+    _count: ExecutionTaskDependencyCountAggregateOutputType | null
+    _min: ExecutionTaskDependencyMinAggregateOutputType | null
+    _max: ExecutionTaskDependencyMaxAggregateOutputType | null
+  }
+
+  export type ExecutionTaskDependencyMinAggregateOutputType = {
+    id: string | null
+    executionPlanId: string | null
+    dependentTaskId: string | null
+    predecessorTaskId: string | null
+    createdById: string | null
+    createdAt: Date | null
+  }
+
+  export type ExecutionTaskDependencyMaxAggregateOutputType = {
+    id: string | null
+    executionPlanId: string | null
+    dependentTaskId: string | null
+    predecessorTaskId: string | null
+    createdById: string | null
+    createdAt: Date | null
+  }
+
+  export type ExecutionTaskDependencyCountAggregateOutputType = {
+    id: number
+    executionPlanId: number
+    dependentTaskId: number
+    predecessorTaskId: number
+    createdById: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type ExecutionTaskDependencyMinAggregateInputType = {
+    id?: true
+    executionPlanId?: true
+    dependentTaskId?: true
+    predecessorTaskId?: true
+    createdById?: true
+    createdAt?: true
+  }
+
+  export type ExecutionTaskDependencyMaxAggregateInputType = {
+    id?: true
+    executionPlanId?: true
+    dependentTaskId?: true
+    predecessorTaskId?: true
+    createdById?: true
+    createdAt?: true
+  }
+
+  export type ExecutionTaskDependencyCountAggregateInputType = {
+    id?: true
+    executionPlanId?: true
+    dependentTaskId?: true
+    predecessorTaskId?: true
+    createdById?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type ExecutionTaskDependencyAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ExecutionTaskDependency to aggregate.
+     */
+    where?: ExecutionTaskDependencyWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ExecutionTaskDependencies to fetch.
+     */
+    orderBy?: ExecutionTaskDependencyOrderByWithRelationInput | ExecutionTaskDependencyOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ExecutionTaskDependencyWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ExecutionTaskDependencies from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ExecutionTaskDependencies.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ExecutionTaskDependencies
+    **/
+    _count?: true | ExecutionTaskDependencyCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ExecutionTaskDependencyMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ExecutionTaskDependencyMaxAggregateInputType
+  }
+
+  export type GetExecutionTaskDependencyAggregateType<T extends ExecutionTaskDependencyAggregateArgs> = {
+        [P in keyof T & keyof AggregateExecutionTaskDependency]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateExecutionTaskDependency[P]>
+      : GetScalarType<T[P], AggregateExecutionTaskDependency[P]>
+  }
+
+
+
+
+  export type ExecutionTaskDependencyGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ExecutionTaskDependencyWhereInput
+    orderBy?: ExecutionTaskDependencyOrderByWithAggregationInput | ExecutionTaskDependencyOrderByWithAggregationInput[]
+    by: ExecutionTaskDependencyScalarFieldEnum[] | ExecutionTaskDependencyScalarFieldEnum
+    having?: ExecutionTaskDependencyScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ExecutionTaskDependencyCountAggregateInputType | true
+    _min?: ExecutionTaskDependencyMinAggregateInputType
+    _max?: ExecutionTaskDependencyMaxAggregateInputType
+  }
+
+  export type ExecutionTaskDependencyGroupByOutputType = {
+    id: string
+    executionPlanId: string
+    dependentTaskId: string
+    predecessorTaskId: string
+    createdById: string
+    createdAt: Date
+    _count: ExecutionTaskDependencyCountAggregateOutputType | null
+    _min: ExecutionTaskDependencyMinAggregateOutputType | null
+    _max: ExecutionTaskDependencyMaxAggregateOutputType | null
+  }
+
+  type GetExecutionTaskDependencyGroupByPayload<T extends ExecutionTaskDependencyGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ExecutionTaskDependencyGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ExecutionTaskDependencyGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ExecutionTaskDependencyGroupByOutputType[P]>
+            : GetScalarType<T[P], ExecutionTaskDependencyGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ExecutionTaskDependencySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    executionPlanId?: boolean
+    dependentTaskId?: boolean
+    predecessorTaskId?: boolean
+    createdById?: boolean
+    createdAt?: boolean
+    executionPlan?: boolean | ExecutionPlanDefaultArgs<ExtArgs>
+    dependentTask?: boolean | ExecutionTaskDefaultArgs<ExtArgs>
+    predecessorTask?: boolean | ExecutionTaskDefaultArgs<ExtArgs>
+    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["executionTaskDependency"]>
+
+  export type ExecutionTaskDependencySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    executionPlanId?: boolean
+    dependentTaskId?: boolean
+    predecessorTaskId?: boolean
+    createdById?: boolean
+    createdAt?: boolean
+    executionPlan?: boolean | ExecutionPlanDefaultArgs<ExtArgs>
+    dependentTask?: boolean | ExecutionTaskDefaultArgs<ExtArgs>
+    predecessorTask?: boolean | ExecutionTaskDefaultArgs<ExtArgs>
+    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["executionTaskDependency"]>
+
+  export type ExecutionTaskDependencySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    executionPlanId?: boolean
+    dependentTaskId?: boolean
+    predecessorTaskId?: boolean
+    createdById?: boolean
+    createdAt?: boolean
+    executionPlan?: boolean | ExecutionPlanDefaultArgs<ExtArgs>
+    dependentTask?: boolean | ExecutionTaskDefaultArgs<ExtArgs>
+    predecessorTask?: boolean | ExecutionTaskDefaultArgs<ExtArgs>
+    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["executionTaskDependency"]>
+
+  export type ExecutionTaskDependencySelectScalar = {
+    id?: boolean
+    executionPlanId?: boolean
+    dependentTaskId?: boolean
+    predecessorTaskId?: boolean
+    createdById?: boolean
+    createdAt?: boolean
+  }
+
+  export type ExecutionTaskDependencyOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "executionPlanId" | "dependentTaskId" | "predecessorTaskId" | "createdById" | "createdAt", ExtArgs["result"]["executionTaskDependency"]>
+  export type ExecutionTaskDependencyInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    executionPlan?: boolean | ExecutionPlanDefaultArgs<ExtArgs>
+    dependentTask?: boolean | ExecutionTaskDefaultArgs<ExtArgs>
+    predecessorTask?: boolean | ExecutionTaskDefaultArgs<ExtArgs>
+    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type ExecutionTaskDependencyIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    executionPlan?: boolean | ExecutionPlanDefaultArgs<ExtArgs>
+    dependentTask?: boolean | ExecutionTaskDefaultArgs<ExtArgs>
+    predecessorTask?: boolean | ExecutionTaskDefaultArgs<ExtArgs>
+    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type ExecutionTaskDependencyIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    executionPlan?: boolean | ExecutionPlanDefaultArgs<ExtArgs>
+    dependentTask?: boolean | ExecutionTaskDefaultArgs<ExtArgs>
+    predecessorTask?: boolean | ExecutionTaskDefaultArgs<ExtArgs>
+    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $ExecutionTaskDependencyPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ExecutionTaskDependency"
+    objects: {
+      executionPlan: Prisma.$ExecutionPlanPayload<ExtArgs>
+      dependentTask: Prisma.$ExecutionTaskPayload<ExtArgs>
+      predecessorTask: Prisma.$ExecutionTaskPayload<ExtArgs>
+      createdBy: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      executionPlanId: string
+      dependentTaskId: string
+      predecessorTaskId: string
+      createdById: string
+      createdAt: Date
+    }, ExtArgs["result"]["executionTaskDependency"]>
+    composites: {}
+  }
+
+  type ExecutionTaskDependencyGetPayload<S extends boolean | null | undefined | ExecutionTaskDependencyDefaultArgs> = $Result.GetResult<Prisma.$ExecutionTaskDependencyPayload, S>
+
+  type ExecutionTaskDependencyCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ExecutionTaskDependencyFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ExecutionTaskDependencyCountAggregateInputType | true
+    }
+
+  export interface ExecutionTaskDependencyDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ExecutionTaskDependency'], meta: { name: 'ExecutionTaskDependency' } }
+    /**
+     * Find zero or one ExecutionTaskDependency that matches the filter.
+     * @param {ExecutionTaskDependencyFindUniqueArgs} args - Arguments to find a ExecutionTaskDependency
+     * @example
+     * // Get one ExecutionTaskDependency
+     * const executionTaskDependency = await prisma.executionTaskDependency.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ExecutionTaskDependencyFindUniqueArgs>(args: SelectSubset<T, ExecutionTaskDependencyFindUniqueArgs<ExtArgs>>): Prisma__ExecutionTaskDependencyClient<$Result.GetResult<Prisma.$ExecutionTaskDependencyPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one ExecutionTaskDependency that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ExecutionTaskDependencyFindUniqueOrThrowArgs} args - Arguments to find a ExecutionTaskDependency
+     * @example
+     * // Get one ExecutionTaskDependency
+     * const executionTaskDependency = await prisma.executionTaskDependency.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ExecutionTaskDependencyFindUniqueOrThrowArgs>(args: SelectSubset<T, ExecutionTaskDependencyFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ExecutionTaskDependencyClient<$Result.GetResult<Prisma.$ExecutionTaskDependencyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ExecutionTaskDependency that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ExecutionTaskDependencyFindFirstArgs} args - Arguments to find a ExecutionTaskDependency
+     * @example
+     * // Get one ExecutionTaskDependency
+     * const executionTaskDependency = await prisma.executionTaskDependency.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ExecutionTaskDependencyFindFirstArgs>(args?: SelectSubset<T, ExecutionTaskDependencyFindFirstArgs<ExtArgs>>): Prisma__ExecutionTaskDependencyClient<$Result.GetResult<Prisma.$ExecutionTaskDependencyPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ExecutionTaskDependency that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ExecutionTaskDependencyFindFirstOrThrowArgs} args - Arguments to find a ExecutionTaskDependency
+     * @example
+     * // Get one ExecutionTaskDependency
+     * const executionTaskDependency = await prisma.executionTaskDependency.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ExecutionTaskDependencyFindFirstOrThrowArgs>(args?: SelectSubset<T, ExecutionTaskDependencyFindFirstOrThrowArgs<ExtArgs>>): Prisma__ExecutionTaskDependencyClient<$Result.GetResult<Prisma.$ExecutionTaskDependencyPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more ExecutionTaskDependencies that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ExecutionTaskDependencyFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ExecutionTaskDependencies
+     * const executionTaskDependencies = await prisma.executionTaskDependency.findMany()
+     * 
+     * // Get first 10 ExecutionTaskDependencies
+     * const executionTaskDependencies = await prisma.executionTaskDependency.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const executionTaskDependencyWithIdOnly = await prisma.executionTaskDependency.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ExecutionTaskDependencyFindManyArgs>(args?: SelectSubset<T, ExecutionTaskDependencyFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExecutionTaskDependencyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a ExecutionTaskDependency.
+     * @param {ExecutionTaskDependencyCreateArgs} args - Arguments to create a ExecutionTaskDependency.
+     * @example
+     * // Create one ExecutionTaskDependency
+     * const ExecutionTaskDependency = await prisma.executionTaskDependency.create({
+     *   data: {
+     *     // ... data to create a ExecutionTaskDependency
+     *   }
+     * })
+     * 
+     */
+    create<T extends ExecutionTaskDependencyCreateArgs>(args: SelectSubset<T, ExecutionTaskDependencyCreateArgs<ExtArgs>>): Prisma__ExecutionTaskDependencyClient<$Result.GetResult<Prisma.$ExecutionTaskDependencyPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many ExecutionTaskDependencies.
+     * @param {ExecutionTaskDependencyCreateManyArgs} args - Arguments to create many ExecutionTaskDependencies.
+     * @example
+     * // Create many ExecutionTaskDependencies
+     * const executionTaskDependency = await prisma.executionTaskDependency.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ExecutionTaskDependencyCreateManyArgs>(args?: SelectSubset<T, ExecutionTaskDependencyCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many ExecutionTaskDependencies and returns the data saved in the database.
+     * @param {ExecutionTaskDependencyCreateManyAndReturnArgs} args - Arguments to create many ExecutionTaskDependencies.
+     * @example
+     * // Create many ExecutionTaskDependencies
+     * const executionTaskDependency = await prisma.executionTaskDependency.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many ExecutionTaskDependencies and only return the `id`
+     * const executionTaskDependencyWithIdOnly = await prisma.executionTaskDependency.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ExecutionTaskDependencyCreateManyAndReturnArgs>(args?: SelectSubset<T, ExecutionTaskDependencyCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExecutionTaskDependencyPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a ExecutionTaskDependency.
+     * @param {ExecutionTaskDependencyDeleteArgs} args - Arguments to delete one ExecutionTaskDependency.
+     * @example
+     * // Delete one ExecutionTaskDependency
+     * const ExecutionTaskDependency = await prisma.executionTaskDependency.delete({
+     *   where: {
+     *     // ... filter to delete one ExecutionTaskDependency
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ExecutionTaskDependencyDeleteArgs>(args: SelectSubset<T, ExecutionTaskDependencyDeleteArgs<ExtArgs>>): Prisma__ExecutionTaskDependencyClient<$Result.GetResult<Prisma.$ExecutionTaskDependencyPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one ExecutionTaskDependency.
+     * @param {ExecutionTaskDependencyUpdateArgs} args - Arguments to update one ExecutionTaskDependency.
+     * @example
+     * // Update one ExecutionTaskDependency
+     * const executionTaskDependency = await prisma.executionTaskDependency.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ExecutionTaskDependencyUpdateArgs>(args: SelectSubset<T, ExecutionTaskDependencyUpdateArgs<ExtArgs>>): Prisma__ExecutionTaskDependencyClient<$Result.GetResult<Prisma.$ExecutionTaskDependencyPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more ExecutionTaskDependencies.
+     * @param {ExecutionTaskDependencyDeleteManyArgs} args - Arguments to filter ExecutionTaskDependencies to delete.
+     * @example
+     * // Delete a few ExecutionTaskDependencies
+     * const { count } = await prisma.executionTaskDependency.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ExecutionTaskDependencyDeleteManyArgs>(args?: SelectSubset<T, ExecutionTaskDependencyDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ExecutionTaskDependencies.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ExecutionTaskDependencyUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ExecutionTaskDependencies
+     * const executionTaskDependency = await prisma.executionTaskDependency.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ExecutionTaskDependencyUpdateManyArgs>(args: SelectSubset<T, ExecutionTaskDependencyUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ExecutionTaskDependencies and returns the data updated in the database.
+     * @param {ExecutionTaskDependencyUpdateManyAndReturnArgs} args - Arguments to update many ExecutionTaskDependencies.
+     * @example
+     * // Update many ExecutionTaskDependencies
+     * const executionTaskDependency = await prisma.executionTaskDependency.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more ExecutionTaskDependencies and only return the `id`
+     * const executionTaskDependencyWithIdOnly = await prisma.executionTaskDependency.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ExecutionTaskDependencyUpdateManyAndReturnArgs>(args: SelectSubset<T, ExecutionTaskDependencyUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExecutionTaskDependencyPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one ExecutionTaskDependency.
+     * @param {ExecutionTaskDependencyUpsertArgs} args - Arguments to update or create a ExecutionTaskDependency.
+     * @example
+     * // Update or create a ExecutionTaskDependency
+     * const executionTaskDependency = await prisma.executionTaskDependency.upsert({
+     *   create: {
+     *     // ... data to create a ExecutionTaskDependency
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ExecutionTaskDependency we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ExecutionTaskDependencyUpsertArgs>(args: SelectSubset<T, ExecutionTaskDependencyUpsertArgs<ExtArgs>>): Prisma__ExecutionTaskDependencyClient<$Result.GetResult<Prisma.$ExecutionTaskDependencyPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of ExecutionTaskDependencies.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ExecutionTaskDependencyCountArgs} args - Arguments to filter ExecutionTaskDependencies to count.
+     * @example
+     * // Count the number of ExecutionTaskDependencies
+     * const count = await prisma.executionTaskDependency.count({
+     *   where: {
+     *     // ... the filter for the ExecutionTaskDependencies we want to count
+     *   }
+     * })
+    **/
+    count<T extends ExecutionTaskDependencyCountArgs>(
+      args?: Subset<T, ExecutionTaskDependencyCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ExecutionTaskDependencyCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ExecutionTaskDependency.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ExecutionTaskDependencyAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ExecutionTaskDependencyAggregateArgs>(args: Subset<T, ExecutionTaskDependencyAggregateArgs>): Prisma.PrismaPromise<GetExecutionTaskDependencyAggregateType<T>>
+
+    /**
+     * Group by ExecutionTaskDependency.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ExecutionTaskDependencyGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ExecutionTaskDependencyGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ExecutionTaskDependencyGroupByArgs['orderBy'] }
+        : { orderBy?: ExecutionTaskDependencyGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ExecutionTaskDependencyGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetExecutionTaskDependencyGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ExecutionTaskDependency model
+   */
+  readonly fields: ExecutionTaskDependencyFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ExecutionTaskDependency.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ExecutionTaskDependencyClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    executionPlan<T extends ExecutionPlanDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ExecutionPlanDefaultArgs<ExtArgs>>): Prisma__ExecutionPlanClient<$Result.GetResult<Prisma.$ExecutionPlanPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    dependentTask<T extends ExecutionTaskDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ExecutionTaskDefaultArgs<ExtArgs>>): Prisma__ExecutionTaskClient<$Result.GetResult<Prisma.$ExecutionTaskPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    predecessorTask<T extends ExecutionTaskDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ExecutionTaskDefaultArgs<ExtArgs>>): Prisma__ExecutionTaskClient<$Result.GetResult<Prisma.$ExecutionTaskPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    createdBy<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ExecutionTaskDependency model
+   */
+  interface ExecutionTaskDependencyFieldRefs {
+    readonly id: FieldRef<"ExecutionTaskDependency", 'String'>
+    readonly executionPlanId: FieldRef<"ExecutionTaskDependency", 'String'>
+    readonly dependentTaskId: FieldRef<"ExecutionTaskDependency", 'String'>
+    readonly predecessorTaskId: FieldRef<"ExecutionTaskDependency", 'String'>
+    readonly createdById: FieldRef<"ExecutionTaskDependency", 'String'>
+    readonly createdAt: FieldRef<"ExecutionTaskDependency", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ExecutionTaskDependency findUnique
+   */
+  export type ExecutionTaskDependencyFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExecutionTaskDependency
+     */
+    select?: ExecutionTaskDependencySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExecutionTaskDependency
+     */
+    omit?: ExecutionTaskDependencyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExecutionTaskDependencyInclude<ExtArgs> | null
+    /**
+     * Filter, which ExecutionTaskDependency to fetch.
+     */
+    where: ExecutionTaskDependencyWhereUniqueInput
+  }
+
+  /**
+   * ExecutionTaskDependency findUniqueOrThrow
+   */
+  export type ExecutionTaskDependencyFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExecutionTaskDependency
+     */
+    select?: ExecutionTaskDependencySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExecutionTaskDependency
+     */
+    omit?: ExecutionTaskDependencyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExecutionTaskDependencyInclude<ExtArgs> | null
+    /**
+     * Filter, which ExecutionTaskDependency to fetch.
+     */
+    where: ExecutionTaskDependencyWhereUniqueInput
+  }
+
+  /**
+   * ExecutionTaskDependency findFirst
+   */
+  export type ExecutionTaskDependencyFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExecutionTaskDependency
+     */
+    select?: ExecutionTaskDependencySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExecutionTaskDependency
+     */
+    omit?: ExecutionTaskDependencyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExecutionTaskDependencyInclude<ExtArgs> | null
+    /**
+     * Filter, which ExecutionTaskDependency to fetch.
+     */
+    where?: ExecutionTaskDependencyWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ExecutionTaskDependencies to fetch.
+     */
+    orderBy?: ExecutionTaskDependencyOrderByWithRelationInput | ExecutionTaskDependencyOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ExecutionTaskDependencies.
+     */
+    cursor?: ExecutionTaskDependencyWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ExecutionTaskDependencies from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ExecutionTaskDependencies.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ExecutionTaskDependencies.
+     */
+    distinct?: ExecutionTaskDependencyScalarFieldEnum | ExecutionTaskDependencyScalarFieldEnum[]
+  }
+
+  /**
+   * ExecutionTaskDependency findFirstOrThrow
+   */
+  export type ExecutionTaskDependencyFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExecutionTaskDependency
+     */
+    select?: ExecutionTaskDependencySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExecutionTaskDependency
+     */
+    omit?: ExecutionTaskDependencyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExecutionTaskDependencyInclude<ExtArgs> | null
+    /**
+     * Filter, which ExecutionTaskDependency to fetch.
+     */
+    where?: ExecutionTaskDependencyWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ExecutionTaskDependencies to fetch.
+     */
+    orderBy?: ExecutionTaskDependencyOrderByWithRelationInput | ExecutionTaskDependencyOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ExecutionTaskDependencies.
+     */
+    cursor?: ExecutionTaskDependencyWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ExecutionTaskDependencies from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ExecutionTaskDependencies.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ExecutionTaskDependencies.
+     */
+    distinct?: ExecutionTaskDependencyScalarFieldEnum | ExecutionTaskDependencyScalarFieldEnum[]
+  }
+
+  /**
+   * ExecutionTaskDependency findMany
+   */
+  export type ExecutionTaskDependencyFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExecutionTaskDependency
+     */
+    select?: ExecutionTaskDependencySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExecutionTaskDependency
+     */
+    omit?: ExecutionTaskDependencyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExecutionTaskDependencyInclude<ExtArgs> | null
+    /**
+     * Filter, which ExecutionTaskDependencies to fetch.
+     */
+    where?: ExecutionTaskDependencyWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ExecutionTaskDependencies to fetch.
+     */
+    orderBy?: ExecutionTaskDependencyOrderByWithRelationInput | ExecutionTaskDependencyOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ExecutionTaskDependencies.
+     */
+    cursor?: ExecutionTaskDependencyWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ExecutionTaskDependencies from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ExecutionTaskDependencies.
+     */
+    skip?: number
+    distinct?: ExecutionTaskDependencyScalarFieldEnum | ExecutionTaskDependencyScalarFieldEnum[]
+  }
+
+  /**
+   * ExecutionTaskDependency create
+   */
+  export type ExecutionTaskDependencyCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExecutionTaskDependency
+     */
+    select?: ExecutionTaskDependencySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExecutionTaskDependency
+     */
+    omit?: ExecutionTaskDependencyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExecutionTaskDependencyInclude<ExtArgs> | null
+    /**
+     * The data needed to create a ExecutionTaskDependency.
+     */
+    data: XOR<ExecutionTaskDependencyCreateInput, ExecutionTaskDependencyUncheckedCreateInput>
+  }
+
+  /**
+   * ExecutionTaskDependency createMany
+   */
+  export type ExecutionTaskDependencyCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ExecutionTaskDependencies.
+     */
+    data: ExecutionTaskDependencyCreateManyInput | ExecutionTaskDependencyCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ExecutionTaskDependency createManyAndReturn
+   */
+  export type ExecutionTaskDependencyCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExecutionTaskDependency
+     */
+    select?: ExecutionTaskDependencySelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExecutionTaskDependency
+     */
+    omit?: ExecutionTaskDependencyOmit<ExtArgs> | null
+    /**
+     * The data used to create many ExecutionTaskDependencies.
+     */
+    data: ExecutionTaskDependencyCreateManyInput | ExecutionTaskDependencyCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExecutionTaskDependencyIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ExecutionTaskDependency update
+   */
+  export type ExecutionTaskDependencyUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExecutionTaskDependency
+     */
+    select?: ExecutionTaskDependencySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExecutionTaskDependency
+     */
+    omit?: ExecutionTaskDependencyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExecutionTaskDependencyInclude<ExtArgs> | null
+    /**
+     * The data needed to update a ExecutionTaskDependency.
+     */
+    data: XOR<ExecutionTaskDependencyUpdateInput, ExecutionTaskDependencyUncheckedUpdateInput>
+    /**
+     * Choose, which ExecutionTaskDependency to update.
+     */
+    where: ExecutionTaskDependencyWhereUniqueInput
+  }
+
+  /**
+   * ExecutionTaskDependency updateMany
+   */
+  export type ExecutionTaskDependencyUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ExecutionTaskDependencies.
+     */
+    data: XOR<ExecutionTaskDependencyUpdateManyMutationInput, ExecutionTaskDependencyUncheckedUpdateManyInput>
+    /**
+     * Filter which ExecutionTaskDependencies to update
+     */
+    where?: ExecutionTaskDependencyWhereInput
+    /**
+     * Limit how many ExecutionTaskDependencies to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ExecutionTaskDependency updateManyAndReturn
+   */
+  export type ExecutionTaskDependencyUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExecutionTaskDependency
+     */
+    select?: ExecutionTaskDependencySelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExecutionTaskDependency
+     */
+    omit?: ExecutionTaskDependencyOmit<ExtArgs> | null
+    /**
+     * The data used to update ExecutionTaskDependencies.
+     */
+    data: XOR<ExecutionTaskDependencyUpdateManyMutationInput, ExecutionTaskDependencyUncheckedUpdateManyInput>
+    /**
+     * Filter which ExecutionTaskDependencies to update
+     */
+    where?: ExecutionTaskDependencyWhereInput
+    /**
+     * Limit how many ExecutionTaskDependencies to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExecutionTaskDependencyIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ExecutionTaskDependency upsert
+   */
+  export type ExecutionTaskDependencyUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExecutionTaskDependency
+     */
+    select?: ExecutionTaskDependencySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExecutionTaskDependency
+     */
+    omit?: ExecutionTaskDependencyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExecutionTaskDependencyInclude<ExtArgs> | null
+    /**
+     * The filter to search for the ExecutionTaskDependency to update in case it exists.
+     */
+    where: ExecutionTaskDependencyWhereUniqueInput
+    /**
+     * In case the ExecutionTaskDependency found by the `where` argument doesn't exist, create a new ExecutionTaskDependency with this data.
+     */
+    create: XOR<ExecutionTaskDependencyCreateInput, ExecutionTaskDependencyUncheckedCreateInput>
+    /**
+     * In case the ExecutionTaskDependency was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ExecutionTaskDependencyUpdateInput, ExecutionTaskDependencyUncheckedUpdateInput>
+  }
+
+  /**
+   * ExecutionTaskDependency delete
+   */
+  export type ExecutionTaskDependencyDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExecutionTaskDependency
+     */
+    select?: ExecutionTaskDependencySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExecutionTaskDependency
+     */
+    omit?: ExecutionTaskDependencyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExecutionTaskDependencyInclude<ExtArgs> | null
+    /**
+     * Filter which ExecutionTaskDependency to delete.
+     */
+    where: ExecutionTaskDependencyWhereUniqueInput
+  }
+
+  /**
+   * ExecutionTaskDependency deleteMany
+   */
+  export type ExecutionTaskDependencyDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ExecutionTaskDependencies to delete
+     */
+    where?: ExecutionTaskDependencyWhereInput
+    /**
+     * Limit how many ExecutionTaskDependencies to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * ExecutionTaskDependency without action
+   */
+  export type ExecutionTaskDependencyDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExecutionTaskDependency
+     */
+    select?: ExecutionTaskDependencySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExecutionTaskDependency
+     */
+    omit?: ExecutionTaskDependencyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExecutionTaskDependencyInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model ExecutionTaskBlockerEvent
+   */
+
+  export type AggregateExecutionTaskBlockerEvent = {
+    _count: ExecutionTaskBlockerEventCountAggregateOutputType | null
+    _min: ExecutionTaskBlockerEventMinAggregateOutputType | null
+    _max: ExecutionTaskBlockerEventMaxAggregateOutputType | null
+  }
+
+  export type ExecutionTaskBlockerEventMinAggregateOutputType = {
+    id: string | null
+    executionTaskId: string | null
+    category: $Enums.ExecutionBlockerCategory | null
+    reason: string | null
+    blockedById: string | null
+    blockedAt: Date | null
+    resolvedById: string | null
+    resolvedAt: Date | null
+    resolutionReason: string | null
+  }
+
+  export type ExecutionTaskBlockerEventMaxAggregateOutputType = {
+    id: string | null
+    executionTaskId: string | null
+    category: $Enums.ExecutionBlockerCategory | null
+    reason: string | null
+    blockedById: string | null
+    blockedAt: Date | null
+    resolvedById: string | null
+    resolvedAt: Date | null
+    resolutionReason: string | null
+  }
+
+  export type ExecutionTaskBlockerEventCountAggregateOutputType = {
+    id: number
+    executionTaskId: number
+    category: number
+    reason: number
+    blockedById: number
+    blockedAt: number
+    resolvedById: number
+    resolvedAt: number
+    resolutionReason: number
+    _all: number
+  }
+
+
+  export type ExecutionTaskBlockerEventMinAggregateInputType = {
+    id?: true
+    executionTaskId?: true
+    category?: true
+    reason?: true
+    blockedById?: true
+    blockedAt?: true
+    resolvedById?: true
+    resolvedAt?: true
+    resolutionReason?: true
+  }
+
+  export type ExecutionTaskBlockerEventMaxAggregateInputType = {
+    id?: true
+    executionTaskId?: true
+    category?: true
+    reason?: true
+    blockedById?: true
+    blockedAt?: true
+    resolvedById?: true
+    resolvedAt?: true
+    resolutionReason?: true
+  }
+
+  export type ExecutionTaskBlockerEventCountAggregateInputType = {
+    id?: true
+    executionTaskId?: true
+    category?: true
+    reason?: true
+    blockedById?: true
+    blockedAt?: true
+    resolvedById?: true
+    resolvedAt?: true
+    resolutionReason?: true
+    _all?: true
+  }
+
+  export type ExecutionTaskBlockerEventAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ExecutionTaskBlockerEvent to aggregate.
+     */
+    where?: ExecutionTaskBlockerEventWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ExecutionTaskBlockerEvents to fetch.
+     */
+    orderBy?: ExecutionTaskBlockerEventOrderByWithRelationInput | ExecutionTaskBlockerEventOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ExecutionTaskBlockerEventWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ExecutionTaskBlockerEvents from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ExecutionTaskBlockerEvents.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ExecutionTaskBlockerEvents
+    **/
+    _count?: true | ExecutionTaskBlockerEventCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ExecutionTaskBlockerEventMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ExecutionTaskBlockerEventMaxAggregateInputType
+  }
+
+  export type GetExecutionTaskBlockerEventAggregateType<T extends ExecutionTaskBlockerEventAggregateArgs> = {
+        [P in keyof T & keyof AggregateExecutionTaskBlockerEvent]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateExecutionTaskBlockerEvent[P]>
+      : GetScalarType<T[P], AggregateExecutionTaskBlockerEvent[P]>
+  }
+
+
+
+
+  export type ExecutionTaskBlockerEventGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ExecutionTaskBlockerEventWhereInput
+    orderBy?: ExecutionTaskBlockerEventOrderByWithAggregationInput | ExecutionTaskBlockerEventOrderByWithAggregationInput[]
+    by: ExecutionTaskBlockerEventScalarFieldEnum[] | ExecutionTaskBlockerEventScalarFieldEnum
+    having?: ExecutionTaskBlockerEventScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ExecutionTaskBlockerEventCountAggregateInputType | true
+    _min?: ExecutionTaskBlockerEventMinAggregateInputType
+    _max?: ExecutionTaskBlockerEventMaxAggregateInputType
+  }
+
+  export type ExecutionTaskBlockerEventGroupByOutputType = {
+    id: string
+    executionTaskId: string
+    category: $Enums.ExecutionBlockerCategory
+    reason: string
+    blockedById: string
+    blockedAt: Date
+    resolvedById: string | null
+    resolvedAt: Date | null
+    resolutionReason: string | null
+    _count: ExecutionTaskBlockerEventCountAggregateOutputType | null
+    _min: ExecutionTaskBlockerEventMinAggregateOutputType | null
+    _max: ExecutionTaskBlockerEventMaxAggregateOutputType | null
+  }
+
+  type GetExecutionTaskBlockerEventGroupByPayload<T extends ExecutionTaskBlockerEventGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ExecutionTaskBlockerEventGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ExecutionTaskBlockerEventGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ExecutionTaskBlockerEventGroupByOutputType[P]>
+            : GetScalarType<T[P], ExecutionTaskBlockerEventGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ExecutionTaskBlockerEventSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    executionTaskId?: boolean
+    category?: boolean
+    reason?: boolean
+    blockedById?: boolean
+    blockedAt?: boolean
+    resolvedById?: boolean
+    resolvedAt?: boolean
+    resolutionReason?: boolean
+    executionTask?: boolean | ExecutionTaskDefaultArgs<ExtArgs>
+    blockedBy?: boolean | UserDefaultArgs<ExtArgs>
+    resolvedBy?: boolean | ExecutionTaskBlockerEvent$resolvedByArgs<ExtArgs>
+  }, ExtArgs["result"]["executionTaskBlockerEvent"]>
+
+  export type ExecutionTaskBlockerEventSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    executionTaskId?: boolean
+    category?: boolean
+    reason?: boolean
+    blockedById?: boolean
+    blockedAt?: boolean
+    resolvedById?: boolean
+    resolvedAt?: boolean
+    resolutionReason?: boolean
+    executionTask?: boolean | ExecutionTaskDefaultArgs<ExtArgs>
+    blockedBy?: boolean | UserDefaultArgs<ExtArgs>
+    resolvedBy?: boolean | ExecutionTaskBlockerEvent$resolvedByArgs<ExtArgs>
+  }, ExtArgs["result"]["executionTaskBlockerEvent"]>
+
+  export type ExecutionTaskBlockerEventSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    executionTaskId?: boolean
+    category?: boolean
+    reason?: boolean
+    blockedById?: boolean
+    blockedAt?: boolean
+    resolvedById?: boolean
+    resolvedAt?: boolean
+    resolutionReason?: boolean
+    executionTask?: boolean | ExecutionTaskDefaultArgs<ExtArgs>
+    blockedBy?: boolean | UserDefaultArgs<ExtArgs>
+    resolvedBy?: boolean | ExecutionTaskBlockerEvent$resolvedByArgs<ExtArgs>
+  }, ExtArgs["result"]["executionTaskBlockerEvent"]>
+
+  export type ExecutionTaskBlockerEventSelectScalar = {
+    id?: boolean
+    executionTaskId?: boolean
+    category?: boolean
+    reason?: boolean
+    blockedById?: boolean
+    blockedAt?: boolean
+    resolvedById?: boolean
+    resolvedAt?: boolean
+    resolutionReason?: boolean
+  }
+
+  export type ExecutionTaskBlockerEventOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "executionTaskId" | "category" | "reason" | "blockedById" | "blockedAt" | "resolvedById" | "resolvedAt" | "resolutionReason", ExtArgs["result"]["executionTaskBlockerEvent"]>
+  export type ExecutionTaskBlockerEventInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    executionTask?: boolean | ExecutionTaskDefaultArgs<ExtArgs>
+    blockedBy?: boolean | UserDefaultArgs<ExtArgs>
+    resolvedBy?: boolean | ExecutionTaskBlockerEvent$resolvedByArgs<ExtArgs>
+  }
+  export type ExecutionTaskBlockerEventIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    executionTask?: boolean | ExecutionTaskDefaultArgs<ExtArgs>
+    blockedBy?: boolean | UserDefaultArgs<ExtArgs>
+    resolvedBy?: boolean | ExecutionTaskBlockerEvent$resolvedByArgs<ExtArgs>
+  }
+  export type ExecutionTaskBlockerEventIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    executionTask?: boolean | ExecutionTaskDefaultArgs<ExtArgs>
+    blockedBy?: boolean | UserDefaultArgs<ExtArgs>
+    resolvedBy?: boolean | ExecutionTaskBlockerEvent$resolvedByArgs<ExtArgs>
+  }
+
+  export type $ExecutionTaskBlockerEventPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ExecutionTaskBlockerEvent"
+    objects: {
+      executionTask: Prisma.$ExecutionTaskPayload<ExtArgs>
+      blockedBy: Prisma.$UserPayload<ExtArgs>
+      resolvedBy: Prisma.$UserPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      executionTaskId: string
+      category: $Enums.ExecutionBlockerCategory
+      reason: string
+      blockedById: string
+      blockedAt: Date
+      resolvedById: string | null
+      resolvedAt: Date | null
+      resolutionReason: string | null
+    }, ExtArgs["result"]["executionTaskBlockerEvent"]>
+    composites: {}
+  }
+
+  type ExecutionTaskBlockerEventGetPayload<S extends boolean | null | undefined | ExecutionTaskBlockerEventDefaultArgs> = $Result.GetResult<Prisma.$ExecutionTaskBlockerEventPayload, S>
+
+  type ExecutionTaskBlockerEventCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ExecutionTaskBlockerEventFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ExecutionTaskBlockerEventCountAggregateInputType | true
+    }
+
+  export interface ExecutionTaskBlockerEventDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ExecutionTaskBlockerEvent'], meta: { name: 'ExecutionTaskBlockerEvent' } }
+    /**
+     * Find zero or one ExecutionTaskBlockerEvent that matches the filter.
+     * @param {ExecutionTaskBlockerEventFindUniqueArgs} args - Arguments to find a ExecutionTaskBlockerEvent
+     * @example
+     * // Get one ExecutionTaskBlockerEvent
+     * const executionTaskBlockerEvent = await prisma.executionTaskBlockerEvent.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ExecutionTaskBlockerEventFindUniqueArgs>(args: SelectSubset<T, ExecutionTaskBlockerEventFindUniqueArgs<ExtArgs>>): Prisma__ExecutionTaskBlockerEventClient<$Result.GetResult<Prisma.$ExecutionTaskBlockerEventPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one ExecutionTaskBlockerEvent that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ExecutionTaskBlockerEventFindUniqueOrThrowArgs} args - Arguments to find a ExecutionTaskBlockerEvent
+     * @example
+     * // Get one ExecutionTaskBlockerEvent
+     * const executionTaskBlockerEvent = await prisma.executionTaskBlockerEvent.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ExecutionTaskBlockerEventFindUniqueOrThrowArgs>(args: SelectSubset<T, ExecutionTaskBlockerEventFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ExecutionTaskBlockerEventClient<$Result.GetResult<Prisma.$ExecutionTaskBlockerEventPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ExecutionTaskBlockerEvent that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ExecutionTaskBlockerEventFindFirstArgs} args - Arguments to find a ExecutionTaskBlockerEvent
+     * @example
+     * // Get one ExecutionTaskBlockerEvent
+     * const executionTaskBlockerEvent = await prisma.executionTaskBlockerEvent.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ExecutionTaskBlockerEventFindFirstArgs>(args?: SelectSubset<T, ExecutionTaskBlockerEventFindFirstArgs<ExtArgs>>): Prisma__ExecutionTaskBlockerEventClient<$Result.GetResult<Prisma.$ExecutionTaskBlockerEventPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ExecutionTaskBlockerEvent that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ExecutionTaskBlockerEventFindFirstOrThrowArgs} args - Arguments to find a ExecutionTaskBlockerEvent
+     * @example
+     * // Get one ExecutionTaskBlockerEvent
+     * const executionTaskBlockerEvent = await prisma.executionTaskBlockerEvent.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ExecutionTaskBlockerEventFindFirstOrThrowArgs>(args?: SelectSubset<T, ExecutionTaskBlockerEventFindFirstOrThrowArgs<ExtArgs>>): Prisma__ExecutionTaskBlockerEventClient<$Result.GetResult<Prisma.$ExecutionTaskBlockerEventPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more ExecutionTaskBlockerEvents that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ExecutionTaskBlockerEventFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ExecutionTaskBlockerEvents
+     * const executionTaskBlockerEvents = await prisma.executionTaskBlockerEvent.findMany()
+     * 
+     * // Get first 10 ExecutionTaskBlockerEvents
+     * const executionTaskBlockerEvents = await prisma.executionTaskBlockerEvent.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const executionTaskBlockerEventWithIdOnly = await prisma.executionTaskBlockerEvent.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ExecutionTaskBlockerEventFindManyArgs>(args?: SelectSubset<T, ExecutionTaskBlockerEventFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExecutionTaskBlockerEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a ExecutionTaskBlockerEvent.
+     * @param {ExecutionTaskBlockerEventCreateArgs} args - Arguments to create a ExecutionTaskBlockerEvent.
+     * @example
+     * // Create one ExecutionTaskBlockerEvent
+     * const ExecutionTaskBlockerEvent = await prisma.executionTaskBlockerEvent.create({
+     *   data: {
+     *     // ... data to create a ExecutionTaskBlockerEvent
+     *   }
+     * })
+     * 
+     */
+    create<T extends ExecutionTaskBlockerEventCreateArgs>(args: SelectSubset<T, ExecutionTaskBlockerEventCreateArgs<ExtArgs>>): Prisma__ExecutionTaskBlockerEventClient<$Result.GetResult<Prisma.$ExecutionTaskBlockerEventPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many ExecutionTaskBlockerEvents.
+     * @param {ExecutionTaskBlockerEventCreateManyArgs} args - Arguments to create many ExecutionTaskBlockerEvents.
+     * @example
+     * // Create many ExecutionTaskBlockerEvents
+     * const executionTaskBlockerEvent = await prisma.executionTaskBlockerEvent.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ExecutionTaskBlockerEventCreateManyArgs>(args?: SelectSubset<T, ExecutionTaskBlockerEventCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many ExecutionTaskBlockerEvents and returns the data saved in the database.
+     * @param {ExecutionTaskBlockerEventCreateManyAndReturnArgs} args - Arguments to create many ExecutionTaskBlockerEvents.
+     * @example
+     * // Create many ExecutionTaskBlockerEvents
+     * const executionTaskBlockerEvent = await prisma.executionTaskBlockerEvent.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many ExecutionTaskBlockerEvents and only return the `id`
+     * const executionTaskBlockerEventWithIdOnly = await prisma.executionTaskBlockerEvent.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ExecutionTaskBlockerEventCreateManyAndReturnArgs>(args?: SelectSubset<T, ExecutionTaskBlockerEventCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExecutionTaskBlockerEventPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a ExecutionTaskBlockerEvent.
+     * @param {ExecutionTaskBlockerEventDeleteArgs} args - Arguments to delete one ExecutionTaskBlockerEvent.
+     * @example
+     * // Delete one ExecutionTaskBlockerEvent
+     * const ExecutionTaskBlockerEvent = await prisma.executionTaskBlockerEvent.delete({
+     *   where: {
+     *     // ... filter to delete one ExecutionTaskBlockerEvent
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ExecutionTaskBlockerEventDeleteArgs>(args: SelectSubset<T, ExecutionTaskBlockerEventDeleteArgs<ExtArgs>>): Prisma__ExecutionTaskBlockerEventClient<$Result.GetResult<Prisma.$ExecutionTaskBlockerEventPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one ExecutionTaskBlockerEvent.
+     * @param {ExecutionTaskBlockerEventUpdateArgs} args - Arguments to update one ExecutionTaskBlockerEvent.
+     * @example
+     * // Update one ExecutionTaskBlockerEvent
+     * const executionTaskBlockerEvent = await prisma.executionTaskBlockerEvent.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ExecutionTaskBlockerEventUpdateArgs>(args: SelectSubset<T, ExecutionTaskBlockerEventUpdateArgs<ExtArgs>>): Prisma__ExecutionTaskBlockerEventClient<$Result.GetResult<Prisma.$ExecutionTaskBlockerEventPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more ExecutionTaskBlockerEvents.
+     * @param {ExecutionTaskBlockerEventDeleteManyArgs} args - Arguments to filter ExecutionTaskBlockerEvents to delete.
+     * @example
+     * // Delete a few ExecutionTaskBlockerEvents
+     * const { count } = await prisma.executionTaskBlockerEvent.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ExecutionTaskBlockerEventDeleteManyArgs>(args?: SelectSubset<T, ExecutionTaskBlockerEventDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ExecutionTaskBlockerEvents.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ExecutionTaskBlockerEventUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ExecutionTaskBlockerEvents
+     * const executionTaskBlockerEvent = await prisma.executionTaskBlockerEvent.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ExecutionTaskBlockerEventUpdateManyArgs>(args: SelectSubset<T, ExecutionTaskBlockerEventUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ExecutionTaskBlockerEvents and returns the data updated in the database.
+     * @param {ExecutionTaskBlockerEventUpdateManyAndReturnArgs} args - Arguments to update many ExecutionTaskBlockerEvents.
+     * @example
+     * // Update many ExecutionTaskBlockerEvents
+     * const executionTaskBlockerEvent = await prisma.executionTaskBlockerEvent.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more ExecutionTaskBlockerEvents and only return the `id`
+     * const executionTaskBlockerEventWithIdOnly = await prisma.executionTaskBlockerEvent.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ExecutionTaskBlockerEventUpdateManyAndReturnArgs>(args: SelectSubset<T, ExecutionTaskBlockerEventUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExecutionTaskBlockerEventPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one ExecutionTaskBlockerEvent.
+     * @param {ExecutionTaskBlockerEventUpsertArgs} args - Arguments to update or create a ExecutionTaskBlockerEvent.
+     * @example
+     * // Update or create a ExecutionTaskBlockerEvent
+     * const executionTaskBlockerEvent = await prisma.executionTaskBlockerEvent.upsert({
+     *   create: {
+     *     // ... data to create a ExecutionTaskBlockerEvent
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ExecutionTaskBlockerEvent we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ExecutionTaskBlockerEventUpsertArgs>(args: SelectSubset<T, ExecutionTaskBlockerEventUpsertArgs<ExtArgs>>): Prisma__ExecutionTaskBlockerEventClient<$Result.GetResult<Prisma.$ExecutionTaskBlockerEventPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of ExecutionTaskBlockerEvents.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ExecutionTaskBlockerEventCountArgs} args - Arguments to filter ExecutionTaskBlockerEvents to count.
+     * @example
+     * // Count the number of ExecutionTaskBlockerEvents
+     * const count = await prisma.executionTaskBlockerEvent.count({
+     *   where: {
+     *     // ... the filter for the ExecutionTaskBlockerEvents we want to count
+     *   }
+     * })
+    **/
+    count<T extends ExecutionTaskBlockerEventCountArgs>(
+      args?: Subset<T, ExecutionTaskBlockerEventCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ExecutionTaskBlockerEventCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ExecutionTaskBlockerEvent.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ExecutionTaskBlockerEventAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ExecutionTaskBlockerEventAggregateArgs>(args: Subset<T, ExecutionTaskBlockerEventAggregateArgs>): Prisma.PrismaPromise<GetExecutionTaskBlockerEventAggregateType<T>>
+
+    /**
+     * Group by ExecutionTaskBlockerEvent.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ExecutionTaskBlockerEventGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ExecutionTaskBlockerEventGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ExecutionTaskBlockerEventGroupByArgs['orderBy'] }
+        : { orderBy?: ExecutionTaskBlockerEventGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ExecutionTaskBlockerEventGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetExecutionTaskBlockerEventGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ExecutionTaskBlockerEvent model
+   */
+  readonly fields: ExecutionTaskBlockerEventFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ExecutionTaskBlockerEvent.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ExecutionTaskBlockerEventClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    executionTask<T extends ExecutionTaskDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ExecutionTaskDefaultArgs<ExtArgs>>): Prisma__ExecutionTaskClient<$Result.GetResult<Prisma.$ExecutionTaskPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    blockedBy<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    resolvedBy<T extends ExecutionTaskBlockerEvent$resolvedByArgs<ExtArgs> = {}>(args?: Subset<T, ExecutionTaskBlockerEvent$resolvedByArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ExecutionTaskBlockerEvent model
+   */
+  interface ExecutionTaskBlockerEventFieldRefs {
+    readonly id: FieldRef<"ExecutionTaskBlockerEvent", 'String'>
+    readonly executionTaskId: FieldRef<"ExecutionTaskBlockerEvent", 'String'>
+    readonly category: FieldRef<"ExecutionTaskBlockerEvent", 'ExecutionBlockerCategory'>
+    readonly reason: FieldRef<"ExecutionTaskBlockerEvent", 'String'>
+    readonly blockedById: FieldRef<"ExecutionTaskBlockerEvent", 'String'>
+    readonly blockedAt: FieldRef<"ExecutionTaskBlockerEvent", 'DateTime'>
+    readonly resolvedById: FieldRef<"ExecutionTaskBlockerEvent", 'String'>
+    readonly resolvedAt: FieldRef<"ExecutionTaskBlockerEvent", 'DateTime'>
+    readonly resolutionReason: FieldRef<"ExecutionTaskBlockerEvent", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ExecutionTaskBlockerEvent findUnique
+   */
+  export type ExecutionTaskBlockerEventFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExecutionTaskBlockerEvent
+     */
+    select?: ExecutionTaskBlockerEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExecutionTaskBlockerEvent
+     */
+    omit?: ExecutionTaskBlockerEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExecutionTaskBlockerEventInclude<ExtArgs> | null
+    /**
+     * Filter, which ExecutionTaskBlockerEvent to fetch.
+     */
+    where: ExecutionTaskBlockerEventWhereUniqueInput
+  }
+
+  /**
+   * ExecutionTaskBlockerEvent findUniqueOrThrow
+   */
+  export type ExecutionTaskBlockerEventFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExecutionTaskBlockerEvent
+     */
+    select?: ExecutionTaskBlockerEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExecutionTaskBlockerEvent
+     */
+    omit?: ExecutionTaskBlockerEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExecutionTaskBlockerEventInclude<ExtArgs> | null
+    /**
+     * Filter, which ExecutionTaskBlockerEvent to fetch.
+     */
+    where: ExecutionTaskBlockerEventWhereUniqueInput
+  }
+
+  /**
+   * ExecutionTaskBlockerEvent findFirst
+   */
+  export type ExecutionTaskBlockerEventFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExecutionTaskBlockerEvent
+     */
+    select?: ExecutionTaskBlockerEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExecutionTaskBlockerEvent
+     */
+    omit?: ExecutionTaskBlockerEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExecutionTaskBlockerEventInclude<ExtArgs> | null
+    /**
+     * Filter, which ExecutionTaskBlockerEvent to fetch.
+     */
+    where?: ExecutionTaskBlockerEventWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ExecutionTaskBlockerEvents to fetch.
+     */
+    orderBy?: ExecutionTaskBlockerEventOrderByWithRelationInput | ExecutionTaskBlockerEventOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ExecutionTaskBlockerEvents.
+     */
+    cursor?: ExecutionTaskBlockerEventWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ExecutionTaskBlockerEvents from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ExecutionTaskBlockerEvents.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ExecutionTaskBlockerEvents.
+     */
+    distinct?: ExecutionTaskBlockerEventScalarFieldEnum | ExecutionTaskBlockerEventScalarFieldEnum[]
+  }
+
+  /**
+   * ExecutionTaskBlockerEvent findFirstOrThrow
+   */
+  export type ExecutionTaskBlockerEventFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExecutionTaskBlockerEvent
+     */
+    select?: ExecutionTaskBlockerEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExecutionTaskBlockerEvent
+     */
+    omit?: ExecutionTaskBlockerEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExecutionTaskBlockerEventInclude<ExtArgs> | null
+    /**
+     * Filter, which ExecutionTaskBlockerEvent to fetch.
+     */
+    where?: ExecutionTaskBlockerEventWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ExecutionTaskBlockerEvents to fetch.
+     */
+    orderBy?: ExecutionTaskBlockerEventOrderByWithRelationInput | ExecutionTaskBlockerEventOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ExecutionTaskBlockerEvents.
+     */
+    cursor?: ExecutionTaskBlockerEventWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ExecutionTaskBlockerEvents from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ExecutionTaskBlockerEvents.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ExecutionTaskBlockerEvents.
+     */
+    distinct?: ExecutionTaskBlockerEventScalarFieldEnum | ExecutionTaskBlockerEventScalarFieldEnum[]
+  }
+
+  /**
+   * ExecutionTaskBlockerEvent findMany
+   */
+  export type ExecutionTaskBlockerEventFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExecutionTaskBlockerEvent
+     */
+    select?: ExecutionTaskBlockerEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExecutionTaskBlockerEvent
+     */
+    omit?: ExecutionTaskBlockerEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExecutionTaskBlockerEventInclude<ExtArgs> | null
+    /**
+     * Filter, which ExecutionTaskBlockerEvents to fetch.
+     */
+    where?: ExecutionTaskBlockerEventWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ExecutionTaskBlockerEvents to fetch.
+     */
+    orderBy?: ExecutionTaskBlockerEventOrderByWithRelationInput | ExecutionTaskBlockerEventOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ExecutionTaskBlockerEvents.
+     */
+    cursor?: ExecutionTaskBlockerEventWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ExecutionTaskBlockerEvents from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ExecutionTaskBlockerEvents.
+     */
+    skip?: number
+    distinct?: ExecutionTaskBlockerEventScalarFieldEnum | ExecutionTaskBlockerEventScalarFieldEnum[]
+  }
+
+  /**
+   * ExecutionTaskBlockerEvent create
+   */
+  export type ExecutionTaskBlockerEventCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExecutionTaskBlockerEvent
+     */
+    select?: ExecutionTaskBlockerEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExecutionTaskBlockerEvent
+     */
+    omit?: ExecutionTaskBlockerEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExecutionTaskBlockerEventInclude<ExtArgs> | null
+    /**
+     * The data needed to create a ExecutionTaskBlockerEvent.
+     */
+    data: XOR<ExecutionTaskBlockerEventCreateInput, ExecutionTaskBlockerEventUncheckedCreateInput>
+  }
+
+  /**
+   * ExecutionTaskBlockerEvent createMany
+   */
+  export type ExecutionTaskBlockerEventCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ExecutionTaskBlockerEvents.
+     */
+    data: ExecutionTaskBlockerEventCreateManyInput | ExecutionTaskBlockerEventCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ExecutionTaskBlockerEvent createManyAndReturn
+   */
+  export type ExecutionTaskBlockerEventCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExecutionTaskBlockerEvent
+     */
+    select?: ExecutionTaskBlockerEventSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExecutionTaskBlockerEvent
+     */
+    omit?: ExecutionTaskBlockerEventOmit<ExtArgs> | null
+    /**
+     * The data used to create many ExecutionTaskBlockerEvents.
+     */
+    data: ExecutionTaskBlockerEventCreateManyInput | ExecutionTaskBlockerEventCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExecutionTaskBlockerEventIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ExecutionTaskBlockerEvent update
+   */
+  export type ExecutionTaskBlockerEventUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExecutionTaskBlockerEvent
+     */
+    select?: ExecutionTaskBlockerEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExecutionTaskBlockerEvent
+     */
+    omit?: ExecutionTaskBlockerEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExecutionTaskBlockerEventInclude<ExtArgs> | null
+    /**
+     * The data needed to update a ExecutionTaskBlockerEvent.
+     */
+    data: XOR<ExecutionTaskBlockerEventUpdateInput, ExecutionTaskBlockerEventUncheckedUpdateInput>
+    /**
+     * Choose, which ExecutionTaskBlockerEvent to update.
+     */
+    where: ExecutionTaskBlockerEventWhereUniqueInput
+  }
+
+  /**
+   * ExecutionTaskBlockerEvent updateMany
+   */
+  export type ExecutionTaskBlockerEventUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ExecutionTaskBlockerEvents.
+     */
+    data: XOR<ExecutionTaskBlockerEventUpdateManyMutationInput, ExecutionTaskBlockerEventUncheckedUpdateManyInput>
+    /**
+     * Filter which ExecutionTaskBlockerEvents to update
+     */
+    where?: ExecutionTaskBlockerEventWhereInput
+    /**
+     * Limit how many ExecutionTaskBlockerEvents to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ExecutionTaskBlockerEvent updateManyAndReturn
+   */
+  export type ExecutionTaskBlockerEventUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExecutionTaskBlockerEvent
+     */
+    select?: ExecutionTaskBlockerEventSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExecutionTaskBlockerEvent
+     */
+    omit?: ExecutionTaskBlockerEventOmit<ExtArgs> | null
+    /**
+     * The data used to update ExecutionTaskBlockerEvents.
+     */
+    data: XOR<ExecutionTaskBlockerEventUpdateManyMutationInput, ExecutionTaskBlockerEventUncheckedUpdateManyInput>
+    /**
+     * Filter which ExecutionTaskBlockerEvents to update
+     */
+    where?: ExecutionTaskBlockerEventWhereInput
+    /**
+     * Limit how many ExecutionTaskBlockerEvents to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExecutionTaskBlockerEventIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ExecutionTaskBlockerEvent upsert
+   */
+  export type ExecutionTaskBlockerEventUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExecutionTaskBlockerEvent
+     */
+    select?: ExecutionTaskBlockerEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExecutionTaskBlockerEvent
+     */
+    omit?: ExecutionTaskBlockerEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExecutionTaskBlockerEventInclude<ExtArgs> | null
+    /**
+     * The filter to search for the ExecutionTaskBlockerEvent to update in case it exists.
+     */
+    where: ExecutionTaskBlockerEventWhereUniqueInput
+    /**
+     * In case the ExecutionTaskBlockerEvent found by the `where` argument doesn't exist, create a new ExecutionTaskBlockerEvent with this data.
+     */
+    create: XOR<ExecutionTaskBlockerEventCreateInput, ExecutionTaskBlockerEventUncheckedCreateInput>
+    /**
+     * In case the ExecutionTaskBlockerEvent was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ExecutionTaskBlockerEventUpdateInput, ExecutionTaskBlockerEventUncheckedUpdateInput>
+  }
+
+  /**
+   * ExecutionTaskBlockerEvent delete
+   */
+  export type ExecutionTaskBlockerEventDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExecutionTaskBlockerEvent
+     */
+    select?: ExecutionTaskBlockerEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExecutionTaskBlockerEvent
+     */
+    omit?: ExecutionTaskBlockerEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExecutionTaskBlockerEventInclude<ExtArgs> | null
+    /**
+     * Filter which ExecutionTaskBlockerEvent to delete.
+     */
+    where: ExecutionTaskBlockerEventWhereUniqueInput
+  }
+
+  /**
+   * ExecutionTaskBlockerEvent deleteMany
+   */
+  export type ExecutionTaskBlockerEventDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ExecutionTaskBlockerEvents to delete
+     */
+    where?: ExecutionTaskBlockerEventWhereInput
+    /**
+     * Limit how many ExecutionTaskBlockerEvents to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * ExecutionTaskBlockerEvent.resolvedBy
+   */
+  export type ExecutionTaskBlockerEvent$resolvedByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+  }
+
+  /**
+   * ExecutionTaskBlockerEvent without action
+   */
+  export type ExecutionTaskBlockerEventDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExecutionTaskBlockerEvent
+     */
+    select?: ExecutionTaskBlockerEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExecutionTaskBlockerEvent
+     */
+    omit?: ExecutionTaskBlockerEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExecutionTaskBlockerEventInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model ExecutionScheduleRevision
+   */
+
+  export type AggregateExecutionScheduleRevision = {
+    _count: ExecutionScheduleRevisionCountAggregateOutputType | null
+    _min: ExecutionScheduleRevisionMinAggregateOutputType | null
+    _max: ExecutionScheduleRevisionMaxAggregateOutputType | null
+  }
+
+  export type ExecutionScheduleRevisionMinAggregateOutputType = {
+    id: string | null
+    executionPlanId: string | null
+    executionTaskId: string | null
+    previousStartAt: Date | null
+    previousEndAt: Date | null
+    newStartAt: Date | null
+    newEndAt: Date | null
+    changedById: string | null
+    changeReason: string | null
+    changedAt: Date | null
+  }
+
+  export type ExecutionScheduleRevisionMaxAggregateOutputType = {
+    id: string | null
+    executionPlanId: string | null
+    executionTaskId: string | null
+    previousStartAt: Date | null
+    previousEndAt: Date | null
+    newStartAt: Date | null
+    newEndAt: Date | null
+    changedById: string | null
+    changeReason: string | null
+    changedAt: Date | null
+  }
+
+  export type ExecutionScheduleRevisionCountAggregateOutputType = {
+    id: number
+    executionPlanId: number
+    executionTaskId: number
+    previousStartAt: number
+    previousEndAt: number
+    newStartAt: number
+    newEndAt: number
+    changedById: number
+    changeReason: number
+    changedAt: number
+    _all: number
+  }
+
+
+  export type ExecutionScheduleRevisionMinAggregateInputType = {
+    id?: true
+    executionPlanId?: true
+    executionTaskId?: true
+    previousStartAt?: true
+    previousEndAt?: true
+    newStartAt?: true
+    newEndAt?: true
+    changedById?: true
+    changeReason?: true
+    changedAt?: true
+  }
+
+  export type ExecutionScheduleRevisionMaxAggregateInputType = {
+    id?: true
+    executionPlanId?: true
+    executionTaskId?: true
+    previousStartAt?: true
+    previousEndAt?: true
+    newStartAt?: true
+    newEndAt?: true
+    changedById?: true
+    changeReason?: true
+    changedAt?: true
+  }
+
+  export type ExecutionScheduleRevisionCountAggregateInputType = {
+    id?: true
+    executionPlanId?: true
+    executionTaskId?: true
+    previousStartAt?: true
+    previousEndAt?: true
+    newStartAt?: true
+    newEndAt?: true
+    changedById?: true
+    changeReason?: true
+    changedAt?: true
+    _all?: true
+  }
+
+  export type ExecutionScheduleRevisionAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ExecutionScheduleRevision to aggregate.
+     */
+    where?: ExecutionScheduleRevisionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ExecutionScheduleRevisions to fetch.
+     */
+    orderBy?: ExecutionScheduleRevisionOrderByWithRelationInput | ExecutionScheduleRevisionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ExecutionScheduleRevisionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ExecutionScheduleRevisions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ExecutionScheduleRevisions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ExecutionScheduleRevisions
+    **/
+    _count?: true | ExecutionScheduleRevisionCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ExecutionScheduleRevisionMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ExecutionScheduleRevisionMaxAggregateInputType
+  }
+
+  export type GetExecutionScheduleRevisionAggregateType<T extends ExecutionScheduleRevisionAggregateArgs> = {
+        [P in keyof T & keyof AggregateExecutionScheduleRevision]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateExecutionScheduleRevision[P]>
+      : GetScalarType<T[P], AggregateExecutionScheduleRevision[P]>
+  }
+
+
+
+
+  export type ExecutionScheduleRevisionGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ExecutionScheduleRevisionWhereInput
+    orderBy?: ExecutionScheduleRevisionOrderByWithAggregationInput | ExecutionScheduleRevisionOrderByWithAggregationInput[]
+    by: ExecutionScheduleRevisionScalarFieldEnum[] | ExecutionScheduleRevisionScalarFieldEnum
+    having?: ExecutionScheduleRevisionScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ExecutionScheduleRevisionCountAggregateInputType | true
+    _min?: ExecutionScheduleRevisionMinAggregateInputType
+    _max?: ExecutionScheduleRevisionMaxAggregateInputType
+  }
+
+  export type ExecutionScheduleRevisionGroupByOutputType = {
+    id: string
+    executionPlanId: string
+    executionTaskId: string | null
+    previousStartAt: Date | null
+    previousEndAt: Date | null
+    newStartAt: Date
+    newEndAt: Date
+    changedById: string
+    changeReason: string
+    changedAt: Date
+    _count: ExecutionScheduleRevisionCountAggregateOutputType | null
+    _min: ExecutionScheduleRevisionMinAggregateOutputType | null
+    _max: ExecutionScheduleRevisionMaxAggregateOutputType | null
+  }
+
+  type GetExecutionScheduleRevisionGroupByPayload<T extends ExecutionScheduleRevisionGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ExecutionScheduleRevisionGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ExecutionScheduleRevisionGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ExecutionScheduleRevisionGroupByOutputType[P]>
+            : GetScalarType<T[P], ExecutionScheduleRevisionGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ExecutionScheduleRevisionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    executionPlanId?: boolean
+    executionTaskId?: boolean
+    previousStartAt?: boolean
+    previousEndAt?: boolean
+    newStartAt?: boolean
+    newEndAt?: boolean
+    changedById?: boolean
+    changeReason?: boolean
+    changedAt?: boolean
+    executionPlan?: boolean | ExecutionPlanDefaultArgs<ExtArgs>
+    executionTask?: boolean | ExecutionScheduleRevision$executionTaskArgs<ExtArgs>
+    changedBy?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["executionScheduleRevision"]>
+
+  export type ExecutionScheduleRevisionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    executionPlanId?: boolean
+    executionTaskId?: boolean
+    previousStartAt?: boolean
+    previousEndAt?: boolean
+    newStartAt?: boolean
+    newEndAt?: boolean
+    changedById?: boolean
+    changeReason?: boolean
+    changedAt?: boolean
+    executionPlan?: boolean | ExecutionPlanDefaultArgs<ExtArgs>
+    executionTask?: boolean | ExecutionScheduleRevision$executionTaskArgs<ExtArgs>
+    changedBy?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["executionScheduleRevision"]>
+
+  export type ExecutionScheduleRevisionSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    executionPlanId?: boolean
+    executionTaskId?: boolean
+    previousStartAt?: boolean
+    previousEndAt?: boolean
+    newStartAt?: boolean
+    newEndAt?: boolean
+    changedById?: boolean
+    changeReason?: boolean
+    changedAt?: boolean
+    executionPlan?: boolean | ExecutionPlanDefaultArgs<ExtArgs>
+    executionTask?: boolean | ExecutionScheduleRevision$executionTaskArgs<ExtArgs>
+    changedBy?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["executionScheduleRevision"]>
+
+  export type ExecutionScheduleRevisionSelectScalar = {
+    id?: boolean
+    executionPlanId?: boolean
+    executionTaskId?: boolean
+    previousStartAt?: boolean
+    previousEndAt?: boolean
+    newStartAt?: boolean
+    newEndAt?: boolean
+    changedById?: boolean
+    changeReason?: boolean
+    changedAt?: boolean
+  }
+
+  export type ExecutionScheduleRevisionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "executionPlanId" | "executionTaskId" | "previousStartAt" | "previousEndAt" | "newStartAt" | "newEndAt" | "changedById" | "changeReason" | "changedAt", ExtArgs["result"]["executionScheduleRevision"]>
+  export type ExecutionScheduleRevisionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    executionPlan?: boolean | ExecutionPlanDefaultArgs<ExtArgs>
+    executionTask?: boolean | ExecutionScheduleRevision$executionTaskArgs<ExtArgs>
+    changedBy?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type ExecutionScheduleRevisionIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    executionPlan?: boolean | ExecutionPlanDefaultArgs<ExtArgs>
+    executionTask?: boolean | ExecutionScheduleRevision$executionTaskArgs<ExtArgs>
+    changedBy?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type ExecutionScheduleRevisionIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    executionPlan?: boolean | ExecutionPlanDefaultArgs<ExtArgs>
+    executionTask?: boolean | ExecutionScheduleRevision$executionTaskArgs<ExtArgs>
+    changedBy?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $ExecutionScheduleRevisionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ExecutionScheduleRevision"
+    objects: {
+      executionPlan: Prisma.$ExecutionPlanPayload<ExtArgs>
+      executionTask: Prisma.$ExecutionTaskPayload<ExtArgs> | null
+      changedBy: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      executionPlanId: string
+      executionTaskId: string | null
+      previousStartAt: Date | null
+      previousEndAt: Date | null
+      newStartAt: Date
+      newEndAt: Date
+      changedById: string
+      changeReason: string
+      changedAt: Date
+    }, ExtArgs["result"]["executionScheduleRevision"]>
+    composites: {}
+  }
+
+  type ExecutionScheduleRevisionGetPayload<S extends boolean | null | undefined | ExecutionScheduleRevisionDefaultArgs> = $Result.GetResult<Prisma.$ExecutionScheduleRevisionPayload, S>
+
+  type ExecutionScheduleRevisionCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ExecutionScheduleRevisionFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ExecutionScheduleRevisionCountAggregateInputType | true
+    }
+
+  export interface ExecutionScheduleRevisionDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ExecutionScheduleRevision'], meta: { name: 'ExecutionScheduleRevision' } }
+    /**
+     * Find zero or one ExecutionScheduleRevision that matches the filter.
+     * @param {ExecutionScheduleRevisionFindUniqueArgs} args - Arguments to find a ExecutionScheduleRevision
+     * @example
+     * // Get one ExecutionScheduleRevision
+     * const executionScheduleRevision = await prisma.executionScheduleRevision.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ExecutionScheduleRevisionFindUniqueArgs>(args: SelectSubset<T, ExecutionScheduleRevisionFindUniqueArgs<ExtArgs>>): Prisma__ExecutionScheduleRevisionClient<$Result.GetResult<Prisma.$ExecutionScheduleRevisionPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one ExecutionScheduleRevision that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ExecutionScheduleRevisionFindUniqueOrThrowArgs} args - Arguments to find a ExecutionScheduleRevision
+     * @example
+     * // Get one ExecutionScheduleRevision
+     * const executionScheduleRevision = await prisma.executionScheduleRevision.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ExecutionScheduleRevisionFindUniqueOrThrowArgs>(args: SelectSubset<T, ExecutionScheduleRevisionFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ExecutionScheduleRevisionClient<$Result.GetResult<Prisma.$ExecutionScheduleRevisionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ExecutionScheduleRevision that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ExecutionScheduleRevisionFindFirstArgs} args - Arguments to find a ExecutionScheduleRevision
+     * @example
+     * // Get one ExecutionScheduleRevision
+     * const executionScheduleRevision = await prisma.executionScheduleRevision.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ExecutionScheduleRevisionFindFirstArgs>(args?: SelectSubset<T, ExecutionScheduleRevisionFindFirstArgs<ExtArgs>>): Prisma__ExecutionScheduleRevisionClient<$Result.GetResult<Prisma.$ExecutionScheduleRevisionPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ExecutionScheduleRevision that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ExecutionScheduleRevisionFindFirstOrThrowArgs} args - Arguments to find a ExecutionScheduleRevision
+     * @example
+     * // Get one ExecutionScheduleRevision
+     * const executionScheduleRevision = await prisma.executionScheduleRevision.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ExecutionScheduleRevisionFindFirstOrThrowArgs>(args?: SelectSubset<T, ExecutionScheduleRevisionFindFirstOrThrowArgs<ExtArgs>>): Prisma__ExecutionScheduleRevisionClient<$Result.GetResult<Prisma.$ExecutionScheduleRevisionPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more ExecutionScheduleRevisions that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ExecutionScheduleRevisionFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ExecutionScheduleRevisions
+     * const executionScheduleRevisions = await prisma.executionScheduleRevision.findMany()
+     * 
+     * // Get first 10 ExecutionScheduleRevisions
+     * const executionScheduleRevisions = await prisma.executionScheduleRevision.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const executionScheduleRevisionWithIdOnly = await prisma.executionScheduleRevision.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ExecutionScheduleRevisionFindManyArgs>(args?: SelectSubset<T, ExecutionScheduleRevisionFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExecutionScheduleRevisionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a ExecutionScheduleRevision.
+     * @param {ExecutionScheduleRevisionCreateArgs} args - Arguments to create a ExecutionScheduleRevision.
+     * @example
+     * // Create one ExecutionScheduleRevision
+     * const ExecutionScheduleRevision = await prisma.executionScheduleRevision.create({
+     *   data: {
+     *     // ... data to create a ExecutionScheduleRevision
+     *   }
+     * })
+     * 
+     */
+    create<T extends ExecutionScheduleRevisionCreateArgs>(args: SelectSubset<T, ExecutionScheduleRevisionCreateArgs<ExtArgs>>): Prisma__ExecutionScheduleRevisionClient<$Result.GetResult<Prisma.$ExecutionScheduleRevisionPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many ExecutionScheduleRevisions.
+     * @param {ExecutionScheduleRevisionCreateManyArgs} args - Arguments to create many ExecutionScheduleRevisions.
+     * @example
+     * // Create many ExecutionScheduleRevisions
+     * const executionScheduleRevision = await prisma.executionScheduleRevision.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ExecutionScheduleRevisionCreateManyArgs>(args?: SelectSubset<T, ExecutionScheduleRevisionCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many ExecutionScheduleRevisions and returns the data saved in the database.
+     * @param {ExecutionScheduleRevisionCreateManyAndReturnArgs} args - Arguments to create many ExecutionScheduleRevisions.
+     * @example
+     * // Create many ExecutionScheduleRevisions
+     * const executionScheduleRevision = await prisma.executionScheduleRevision.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many ExecutionScheduleRevisions and only return the `id`
+     * const executionScheduleRevisionWithIdOnly = await prisma.executionScheduleRevision.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ExecutionScheduleRevisionCreateManyAndReturnArgs>(args?: SelectSubset<T, ExecutionScheduleRevisionCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExecutionScheduleRevisionPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a ExecutionScheduleRevision.
+     * @param {ExecutionScheduleRevisionDeleteArgs} args - Arguments to delete one ExecutionScheduleRevision.
+     * @example
+     * // Delete one ExecutionScheduleRevision
+     * const ExecutionScheduleRevision = await prisma.executionScheduleRevision.delete({
+     *   where: {
+     *     // ... filter to delete one ExecutionScheduleRevision
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ExecutionScheduleRevisionDeleteArgs>(args: SelectSubset<T, ExecutionScheduleRevisionDeleteArgs<ExtArgs>>): Prisma__ExecutionScheduleRevisionClient<$Result.GetResult<Prisma.$ExecutionScheduleRevisionPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one ExecutionScheduleRevision.
+     * @param {ExecutionScheduleRevisionUpdateArgs} args - Arguments to update one ExecutionScheduleRevision.
+     * @example
+     * // Update one ExecutionScheduleRevision
+     * const executionScheduleRevision = await prisma.executionScheduleRevision.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ExecutionScheduleRevisionUpdateArgs>(args: SelectSubset<T, ExecutionScheduleRevisionUpdateArgs<ExtArgs>>): Prisma__ExecutionScheduleRevisionClient<$Result.GetResult<Prisma.$ExecutionScheduleRevisionPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more ExecutionScheduleRevisions.
+     * @param {ExecutionScheduleRevisionDeleteManyArgs} args - Arguments to filter ExecutionScheduleRevisions to delete.
+     * @example
+     * // Delete a few ExecutionScheduleRevisions
+     * const { count } = await prisma.executionScheduleRevision.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ExecutionScheduleRevisionDeleteManyArgs>(args?: SelectSubset<T, ExecutionScheduleRevisionDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ExecutionScheduleRevisions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ExecutionScheduleRevisionUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ExecutionScheduleRevisions
+     * const executionScheduleRevision = await prisma.executionScheduleRevision.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ExecutionScheduleRevisionUpdateManyArgs>(args: SelectSubset<T, ExecutionScheduleRevisionUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ExecutionScheduleRevisions and returns the data updated in the database.
+     * @param {ExecutionScheduleRevisionUpdateManyAndReturnArgs} args - Arguments to update many ExecutionScheduleRevisions.
+     * @example
+     * // Update many ExecutionScheduleRevisions
+     * const executionScheduleRevision = await prisma.executionScheduleRevision.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more ExecutionScheduleRevisions and only return the `id`
+     * const executionScheduleRevisionWithIdOnly = await prisma.executionScheduleRevision.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ExecutionScheduleRevisionUpdateManyAndReturnArgs>(args: SelectSubset<T, ExecutionScheduleRevisionUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExecutionScheduleRevisionPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one ExecutionScheduleRevision.
+     * @param {ExecutionScheduleRevisionUpsertArgs} args - Arguments to update or create a ExecutionScheduleRevision.
+     * @example
+     * // Update or create a ExecutionScheduleRevision
+     * const executionScheduleRevision = await prisma.executionScheduleRevision.upsert({
+     *   create: {
+     *     // ... data to create a ExecutionScheduleRevision
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ExecutionScheduleRevision we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ExecutionScheduleRevisionUpsertArgs>(args: SelectSubset<T, ExecutionScheduleRevisionUpsertArgs<ExtArgs>>): Prisma__ExecutionScheduleRevisionClient<$Result.GetResult<Prisma.$ExecutionScheduleRevisionPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of ExecutionScheduleRevisions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ExecutionScheduleRevisionCountArgs} args - Arguments to filter ExecutionScheduleRevisions to count.
+     * @example
+     * // Count the number of ExecutionScheduleRevisions
+     * const count = await prisma.executionScheduleRevision.count({
+     *   where: {
+     *     // ... the filter for the ExecutionScheduleRevisions we want to count
+     *   }
+     * })
+    **/
+    count<T extends ExecutionScheduleRevisionCountArgs>(
+      args?: Subset<T, ExecutionScheduleRevisionCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ExecutionScheduleRevisionCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ExecutionScheduleRevision.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ExecutionScheduleRevisionAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ExecutionScheduleRevisionAggregateArgs>(args: Subset<T, ExecutionScheduleRevisionAggregateArgs>): Prisma.PrismaPromise<GetExecutionScheduleRevisionAggregateType<T>>
+
+    /**
+     * Group by ExecutionScheduleRevision.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ExecutionScheduleRevisionGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ExecutionScheduleRevisionGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ExecutionScheduleRevisionGroupByArgs['orderBy'] }
+        : { orderBy?: ExecutionScheduleRevisionGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ExecutionScheduleRevisionGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetExecutionScheduleRevisionGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ExecutionScheduleRevision model
+   */
+  readonly fields: ExecutionScheduleRevisionFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ExecutionScheduleRevision.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ExecutionScheduleRevisionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    executionPlan<T extends ExecutionPlanDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ExecutionPlanDefaultArgs<ExtArgs>>): Prisma__ExecutionPlanClient<$Result.GetResult<Prisma.$ExecutionPlanPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    executionTask<T extends ExecutionScheduleRevision$executionTaskArgs<ExtArgs> = {}>(args?: Subset<T, ExecutionScheduleRevision$executionTaskArgs<ExtArgs>>): Prisma__ExecutionTaskClient<$Result.GetResult<Prisma.$ExecutionTaskPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    changedBy<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ExecutionScheduleRevision model
+   */
+  interface ExecutionScheduleRevisionFieldRefs {
+    readonly id: FieldRef<"ExecutionScheduleRevision", 'String'>
+    readonly executionPlanId: FieldRef<"ExecutionScheduleRevision", 'String'>
+    readonly executionTaskId: FieldRef<"ExecutionScheduleRevision", 'String'>
+    readonly previousStartAt: FieldRef<"ExecutionScheduleRevision", 'DateTime'>
+    readonly previousEndAt: FieldRef<"ExecutionScheduleRevision", 'DateTime'>
+    readonly newStartAt: FieldRef<"ExecutionScheduleRevision", 'DateTime'>
+    readonly newEndAt: FieldRef<"ExecutionScheduleRevision", 'DateTime'>
+    readonly changedById: FieldRef<"ExecutionScheduleRevision", 'String'>
+    readonly changeReason: FieldRef<"ExecutionScheduleRevision", 'String'>
+    readonly changedAt: FieldRef<"ExecutionScheduleRevision", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ExecutionScheduleRevision findUnique
+   */
+  export type ExecutionScheduleRevisionFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExecutionScheduleRevision
+     */
+    select?: ExecutionScheduleRevisionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExecutionScheduleRevision
+     */
+    omit?: ExecutionScheduleRevisionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExecutionScheduleRevisionInclude<ExtArgs> | null
+    /**
+     * Filter, which ExecutionScheduleRevision to fetch.
+     */
+    where: ExecutionScheduleRevisionWhereUniqueInput
+  }
+
+  /**
+   * ExecutionScheduleRevision findUniqueOrThrow
+   */
+  export type ExecutionScheduleRevisionFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExecutionScheduleRevision
+     */
+    select?: ExecutionScheduleRevisionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExecutionScheduleRevision
+     */
+    omit?: ExecutionScheduleRevisionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExecutionScheduleRevisionInclude<ExtArgs> | null
+    /**
+     * Filter, which ExecutionScheduleRevision to fetch.
+     */
+    where: ExecutionScheduleRevisionWhereUniqueInput
+  }
+
+  /**
+   * ExecutionScheduleRevision findFirst
+   */
+  export type ExecutionScheduleRevisionFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExecutionScheduleRevision
+     */
+    select?: ExecutionScheduleRevisionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExecutionScheduleRevision
+     */
+    omit?: ExecutionScheduleRevisionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExecutionScheduleRevisionInclude<ExtArgs> | null
+    /**
+     * Filter, which ExecutionScheduleRevision to fetch.
+     */
+    where?: ExecutionScheduleRevisionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ExecutionScheduleRevisions to fetch.
+     */
+    orderBy?: ExecutionScheduleRevisionOrderByWithRelationInput | ExecutionScheduleRevisionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ExecutionScheduleRevisions.
+     */
+    cursor?: ExecutionScheduleRevisionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ExecutionScheduleRevisions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ExecutionScheduleRevisions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ExecutionScheduleRevisions.
+     */
+    distinct?: ExecutionScheduleRevisionScalarFieldEnum | ExecutionScheduleRevisionScalarFieldEnum[]
+  }
+
+  /**
+   * ExecutionScheduleRevision findFirstOrThrow
+   */
+  export type ExecutionScheduleRevisionFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExecutionScheduleRevision
+     */
+    select?: ExecutionScheduleRevisionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExecutionScheduleRevision
+     */
+    omit?: ExecutionScheduleRevisionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExecutionScheduleRevisionInclude<ExtArgs> | null
+    /**
+     * Filter, which ExecutionScheduleRevision to fetch.
+     */
+    where?: ExecutionScheduleRevisionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ExecutionScheduleRevisions to fetch.
+     */
+    orderBy?: ExecutionScheduleRevisionOrderByWithRelationInput | ExecutionScheduleRevisionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ExecutionScheduleRevisions.
+     */
+    cursor?: ExecutionScheduleRevisionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ExecutionScheduleRevisions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ExecutionScheduleRevisions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ExecutionScheduleRevisions.
+     */
+    distinct?: ExecutionScheduleRevisionScalarFieldEnum | ExecutionScheduleRevisionScalarFieldEnum[]
+  }
+
+  /**
+   * ExecutionScheduleRevision findMany
+   */
+  export type ExecutionScheduleRevisionFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExecutionScheduleRevision
+     */
+    select?: ExecutionScheduleRevisionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExecutionScheduleRevision
+     */
+    omit?: ExecutionScheduleRevisionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExecutionScheduleRevisionInclude<ExtArgs> | null
+    /**
+     * Filter, which ExecutionScheduleRevisions to fetch.
+     */
+    where?: ExecutionScheduleRevisionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ExecutionScheduleRevisions to fetch.
+     */
+    orderBy?: ExecutionScheduleRevisionOrderByWithRelationInput | ExecutionScheduleRevisionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ExecutionScheduleRevisions.
+     */
+    cursor?: ExecutionScheduleRevisionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ExecutionScheduleRevisions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ExecutionScheduleRevisions.
+     */
+    skip?: number
+    distinct?: ExecutionScheduleRevisionScalarFieldEnum | ExecutionScheduleRevisionScalarFieldEnum[]
+  }
+
+  /**
+   * ExecutionScheduleRevision create
+   */
+  export type ExecutionScheduleRevisionCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExecutionScheduleRevision
+     */
+    select?: ExecutionScheduleRevisionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExecutionScheduleRevision
+     */
+    omit?: ExecutionScheduleRevisionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExecutionScheduleRevisionInclude<ExtArgs> | null
+    /**
+     * The data needed to create a ExecutionScheduleRevision.
+     */
+    data: XOR<ExecutionScheduleRevisionCreateInput, ExecutionScheduleRevisionUncheckedCreateInput>
+  }
+
+  /**
+   * ExecutionScheduleRevision createMany
+   */
+  export type ExecutionScheduleRevisionCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ExecutionScheduleRevisions.
+     */
+    data: ExecutionScheduleRevisionCreateManyInput | ExecutionScheduleRevisionCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ExecutionScheduleRevision createManyAndReturn
+   */
+  export type ExecutionScheduleRevisionCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExecutionScheduleRevision
+     */
+    select?: ExecutionScheduleRevisionSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExecutionScheduleRevision
+     */
+    omit?: ExecutionScheduleRevisionOmit<ExtArgs> | null
+    /**
+     * The data used to create many ExecutionScheduleRevisions.
+     */
+    data: ExecutionScheduleRevisionCreateManyInput | ExecutionScheduleRevisionCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExecutionScheduleRevisionIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ExecutionScheduleRevision update
+   */
+  export type ExecutionScheduleRevisionUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExecutionScheduleRevision
+     */
+    select?: ExecutionScheduleRevisionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExecutionScheduleRevision
+     */
+    omit?: ExecutionScheduleRevisionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExecutionScheduleRevisionInclude<ExtArgs> | null
+    /**
+     * The data needed to update a ExecutionScheduleRevision.
+     */
+    data: XOR<ExecutionScheduleRevisionUpdateInput, ExecutionScheduleRevisionUncheckedUpdateInput>
+    /**
+     * Choose, which ExecutionScheduleRevision to update.
+     */
+    where: ExecutionScheduleRevisionWhereUniqueInput
+  }
+
+  /**
+   * ExecutionScheduleRevision updateMany
+   */
+  export type ExecutionScheduleRevisionUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ExecutionScheduleRevisions.
+     */
+    data: XOR<ExecutionScheduleRevisionUpdateManyMutationInput, ExecutionScheduleRevisionUncheckedUpdateManyInput>
+    /**
+     * Filter which ExecutionScheduleRevisions to update
+     */
+    where?: ExecutionScheduleRevisionWhereInput
+    /**
+     * Limit how many ExecutionScheduleRevisions to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ExecutionScheduleRevision updateManyAndReturn
+   */
+  export type ExecutionScheduleRevisionUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExecutionScheduleRevision
+     */
+    select?: ExecutionScheduleRevisionSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExecutionScheduleRevision
+     */
+    omit?: ExecutionScheduleRevisionOmit<ExtArgs> | null
+    /**
+     * The data used to update ExecutionScheduleRevisions.
+     */
+    data: XOR<ExecutionScheduleRevisionUpdateManyMutationInput, ExecutionScheduleRevisionUncheckedUpdateManyInput>
+    /**
+     * Filter which ExecutionScheduleRevisions to update
+     */
+    where?: ExecutionScheduleRevisionWhereInput
+    /**
+     * Limit how many ExecutionScheduleRevisions to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExecutionScheduleRevisionIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ExecutionScheduleRevision upsert
+   */
+  export type ExecutionScheduleRevisionUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExecutionScheduleRevision
+     */
+    select?: ExecutionScheduleRevisionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExecutionScheduleRevision
+     */
+    omit?: ExecutionScheduleRevisionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExecutionScheduleRevisionInclude<ExtArgs> | null
+    /**
+     * The filter to search for the ExecutionScheduleRevision to update in case it exists.
+     */
+    where: ExecutionScheduleRevisionWhereUniqueInput
+    /**
+     * In case the ExecutionScheduleRevision found by the `where` argument doesn't exist, create a new ExecutionScheduleRevision with this data.
+     */
+    create: XOR<ExecutionScheduleRevisionCreateInput, ExecutionScheduleRevisionUncheckedCreateInput>
+    /**
+     * In case the ExecutionScheduleRevision was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ExecutionScheduleRevisionUpdateInput, ExecutionScheduleRevisionUncheckedUpdateInput>
+  }
+
+  /**
+   * ExecutionScheduleRevision delete
+   */
+  export type ExecutionScheduleRevisionDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExecutionScheduleRevision
+     */
+    select?: ExecutionScheduleRevisionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExecutionScheduleRevision
+     */
+    omit?: ExecutionScheduleRevisionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExecutionScheduleRevisionInclude<ExtArgs> | null
+    /**
+     * Filter which ExecutionScheduleRevision to delete.
+     */
+    where: ExecutionScheduleRevisionWhereUniqueInput
+  }
+
+  /**
+   * ExecutionScheduleRevision deleteMany
+   */
+  export type ExecutionScheduleRevisionDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ExecutionScheduleRevisions to delete
+     */
+    where?: ExecutionScheduleRevisionWhereInput
+    /**
+     * Limit how many ExecutionScheduleRevisions to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * ExecutionScheduleRevision.executionTask
+   */
+  export type ExecutionScheduleRevision$executionTaskArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExecutionTask
+     */
+    select?: ExecutionTaskSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExecutionTask
+     */
+    omit?: ExecutionTaskOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExecutionTaskInclude<ExtArgs> | null
+    where?: ExecutionTaskWhereInput
+  }
+
+  /**
+   * ExecutionScheduleRevision without action
+   */
+  export type ExecutionScheduleRevisionDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExecutionScheduleRevision
+     */
+    select?: ExecutionScheduleRevisionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExecutionScheduleRevision
+     */
+    omit?: ExecutionScheduleRevisionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExecutionScheduleRevisionInclude<ExtArgs> | null
   }
 
 
@@ -39779,7 +43890,9 @@ export namespace Prisma {
     cancellationReason: 'cancellationReason',
     governanceMode: 'governanceMode',
     executionContractVersion: 'executionContractVersion',
-    governedProvenance: 'governedProvenance'
+    governedProvenance: 'governedProvenance',
+    plannedStartAt: 'plannedStartAt',
+    plannedEndAt: 'plannedEndAt'
   };
 
   export type ExecutionPlanScalarFieldEnum = (typeof ExecutionPlanScalarFieldEnum)[keyof typeof ExecutionPlanScalarFieldEnum]
@@ -39819,10 +43932,55 @@ export namespace Prisma {
     sourceTemplateCode: 'sourceTemplateCode',
     sourceTemplateVersion: 'sourceTemplateVersion',
     evidenceRequired: 'evidenceRequired',
-    verificationRequired: 'verificationRequired'
+    verificationRequired: 'verificationRequired',
+    plannedStartAt: 'plannedStartAt',
+    plannedEndAt: 'plannedEndAt'
   };
 
   export type ExecutionTaskScalarFieldEnum = (typeof ExecutionTaskScalarFieldEnum)[keyof typeof ExecutionTaskScalarFieldEnum]
+
+
+  export const ExecutionTaskDependencyScalarFieldEnum: {
+    id: 'id',
+    executionPlanId: 'executionPlanId',
+    dependentTaskId: 'dependentTaskId',
+    predecessorTaskId: 'predecessorTaskId',
+    createdById: 'createdById',
+    createdAt: 'createdAt'
+  };
+
+  export type ExecutionTaskDependencyScalarFieldEnum = (typeof ExecutionTaskDependencyScalarFieldEnum)[keyof typeof ExecutionTaskDependencyScalarFieldEnum]
+
+
+  export const ExecutionTaskBlockerEventScalarFieldEnum: {
+    id: 'id',
+    executionTaskId: 'executionTaskId',
+    category: 'category',
+    reason: 'reason',
+    blockedById: 'blockedById',
+    blockedAt: 'blockedAt',
+    resolvedById: 'resolvedById',
+    resolvedAt: 'resolvedAt',
+    resolutionReason: 'resolutionReason'
+  };
+
+  export type ExecutionTaskBlockerEventScalarFieldEnum = (typeof ExecutionTaskBlockerEventScalarFieldEnum)[keyof typeof ExecutionTaskBlockerEventScalarFieldEnum]
+
+
+  export const ExecutionScheduleRevisionScalarFieldEnum: {
+    id: 'id',
+    executionPlanId: 'executionPlanId',
+    executionTaskId: 'executionTaskId',
+    previousStartAt: 'previousStartAt',
+    previousEndAt: 'previousEndAt',
+    newStartAt: 'newStartAt',
+    newEndAt: 'newEndAt',
+    changedById: 'changedById',
+    changeReason: 'changeReason',
+    changedAt: 'changedAt'
+  };
+
+  export type ExecutionScheduleRevisionScalarFieldEnum = (typeof ExecutionScheduleRevisionScalarFieldEnum)[keyof typeof ExecutionScheduleRevisionScalarFieldEnum]
 
 
   export const ExecutionEvidenceScalarFieldEnum: {
@@ -40322,6 +44480,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'ExecutionBlockerCategory'
+   */
+  export type EnumExecutionBlockerCategoryFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ExecutionBlockerCategory'>
+    
+
+
+  /**
+   * Reference to a field of type 'ExecutionBlockerCategory[]'
+   */
+  export type ListEnumExecutionBlockerCategoryFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ExecutionBlockerCategory[]'>
+    
+
+
+  /**
    * Reference to a field of type 'ExecutionEvidenceType'
    */
   export type EnumExecutionEvidenceTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ExecutionEvidenceType'>
@@ -40539,6 +44711,10 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskListRelationFilter
     verifiedExecutionTasks?: ExecutionTaskListRelationFilter
     cancelledExecutionTasks?: ExecutionTaskListRelationFilter
+    executionScheduleRevisions?: ExecutionScheduleRevisionListRelationFilter
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventListRelationFilter
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventListRelationFilter
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyListRelationFilter
     submittedExecutionEvidence?: ExecutionEvidenceListRelationFilter
     closedCases?: CaseClosureListRelationFilter
     reviewedPublicReports?: PublicReportListRelationFilter
@@ -40581,6 +44757,10 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskOrderByRelationAggregateInput
     verifiedExecutionTasks?: ExecutionTaskOrderByRelationAggregateInput
     cancelledExecutionTasks?: ExecutionTaskOrderByRelationAggregateInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionOrderByRelationAggregateInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventOrderByRelationAggregateInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventOrderByRelationAggregateInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyOrderByRelationAggregateInput
     submittedExecutionEvidence?: ExecutionEvidenceOrderByRelationAggregateInput
     closedCases?: CaseClosureOrderByRelationAggregateInput
     reviewedPublicReports?: PublicReportOrderByRelationAggregateInput
@@ -40626,6 +44806,10 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskListRelationFilter
     verifiedExecutionTasks?: ExecutionTaskListRelationFilter
     cancelledExecutionTasks?: ExecutionTaskListRelationFilter
+    executionScheduleRevisions?: ExecutionScheduleRevisionListRelationFilter
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventListRelationFilter
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventListRelationFilter
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyListRelationFilter
     submittedExecutionEvidence?: ExecutionEvidenceListRelationFilter
     closedCases?: CaseClosureListRelationFilter
     reviewedPublicReports?: PublicReportListRelationFilter
@@ -43033,12 +47217,16 @@ export namespace Prisma {
     governanceMode?: EnumExecutionPlanGovernanceModeFilter<"ExecutionPlan"> | $Enums.ExecutionPlanGovernanceMode
     executionContractVersion?: StringNullableFilter<"ExecutionPlan"> | string | null
     governedProvenance?: JsonNullableFilter<"ExecutionPlan">
+    plannedStartAt?: DateTimeNullableFilter<"ExecutionPlan"> | Date | string | null
+    plannedEndAt?: DateTimeNullableFilter<"ExecutionPlan"> | Date | string | null
     orp?: XOR<OperationalResponsePlanScalarRelationFilter, OperationalResponsePlanWhereInput>
     case?: XOR<CaseScalarRelationFilter, CaseWhereInput>
     approvalDecision?: XOR<OrpDecisionScalarRelationFilter, OrpDecisionWhereInput>
     createdBy?: XOR<UserScalarRelationFilter, UserWhereInput>
     tasks?: ExecutionTaskListRelationFilter
     closure?: XOR<CaseClosureNullableScalarRelationFilter, CaseClosureWhereInput> | null
+    scheduleRevisions?: ExecutionScheduleRevisionListRelationFilter
+    taskDependencies?: ExecutionTaskDependencyListRelationFilter
   }
 
   export type ExecutionPlanOrderByWithRelationInput = {
@@ -43058,12 +47246,16 @@ export namespace Prisma {
     governanceMode?: SortOrder
     executionContractVersion?: SortOrderInput | SortOrder
     governedProvenance?: SortOrderInput | SortOrder
+    plannedStartAt?: SortOrderInput | SortOrder
+    plannedEndAt?: SortOrderInput | SortOrder
     orp?: OperationalResponsePlanOrderByWithRelationInput
     case?: CaseOrderByWithRelationInput
     approvalDecision?: OrpDecisionOrderByWithRelationInput
     createdBy?: UserOrderByWithRelationInput
     tasks?: ExecutionTaskOrderByRelationAggregateInput
     closure?: CaseClosureOrderByWithRelationInput
+    scheduleRevisions?: ExecutionScheduleRevisionOrderByRelationAggregateInput
+    taskDependencies?: ExecutionTaskDependencyOrderByRelationAggregateInput
   }
 
   export type ExecutionPlanWhereUniqueInput = Prisma.AtLeast<{
@@ -43086,12 +47278,16 @@ export namespace Prisma {
     governanceMode?: EnumExecutionPlanGovernanceModeFilter<"ExecutionPlan"> | $Enums.ExecutionPlanGovernanceMode
     executionContractVersion?: StringNullableFilter<"ExecutionPlan"> | string | null
     governedProvenance?: JsonNullableFilter<"ExecutionPlan">
+    plannedStartAt?: DateTimeNullableFilter<"ExecutionPlan"> | Date | string | null
+    plannedEndAt?: DateTimeNullableFilter<"ExecutionPlan"> | Date | string | null
     orp?: XOR<OperationalResponsePlanScalarRelationFilter, OperationalResponsePlanWhereInput>
     case?: XOR<CaseScalarRelationFilter, CaseWhereInput>
     approvalDecision?: XOR<OrpDecisionScalarRelationFilter, OrpDecisionWhereInput>
     createdBy?: XOR<UserScalarRelationFilter, UserWhereInput>
     tasks?: ExecutionTaskListRelationFilter
     closure?: XOR<CaseClosureNullableScalarRelationFilter, CaseClosureWhereInput> | null
+    scheduleRevisions?: ExecutionScheduleRevisionListRelationFilter
+    taskDependencies?: ExecutionTaskDependencyListRelationFilter
   }, "id" | "orpId" | "approvalDecisionId">
 
   export type ExecutionPlanOrderByWithAggregationInput = {
@@ -43111,6 +47307,8 @@ export namespace Prisma {
     governanceMode?: SortOrder
     executionContractVersion?: SortOrderInput | SortOrder
     governedProvenance?: SortOrderInput | SortOrder
+    plannedStartAt?: SortOrderInput | SortOrder
+    plannedEndAt?: SortOrderInput | SortOrder
     _count?: ExecutionPlanCountOrderByAggregateInput
     _max?: ExecutionPlanMaxOrderByAggregateInput
     _min?: ExecutionPlanMinOrderByAggregateInput
@@ -43136,6 +47334,8 @@ export namespace Prisma {
     governanceMode?: EnumExecutionPlanGovernanceModeWithAggregatesFilter<"ExecutionPlan"> | $Enums.ExecutionPlanGovernanceMode
     executionContractVersion?: StringNullableWithAggregatesFilter<"ExecutionPlan"> | string | null
     governedProvenance?: JsonNullableWithAggregatesFilter<"ExecutionPlan">
+    plannedStartAt?: DateTimeNullableWithAggregatesFilter<"ExecutionPlan"> | Date | string | null
+    plannedEndAt?: DateTimeNullableWithAggregatesFilter<"ExecutionPlan"> | Date | string | null
   }
 
   export type ExecutionTaskWhereInput = {
@@ -43176,6 +47376,8 @@ export namespace Prisma {
     sourceTemplateVersion?: IntNullableFilter<"ExecutionTask"> | number | null
     evidenceRequired?: BoolFilter<"ExecutionTask"> | boolean
     verificationRequired?: BoolFilter<"ExecutionTask"> | boolean
+    plannedStartAt?: DateTimeNullableFilter<"ExecutionTask"> | Date | string | null
+    plannedEndAt?: DateTimeNullableFilter<"ExecutionTask"> | Date | string | null
     executionPlan?: XOR<ExecutionPlanScalarRelationFilter, ExecutionPlanWhereInput>
     assignedTo?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     assignedBy?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
@@ -43186,6 +47388,10 @@ export namespace Prisma {
     approvedActionVersion?: XOR<ApprovedActionVersionNullableScalarRelationFilter, ApprovedActionVersionWhereInput> | null
     governedExecutionTemplate?: XOR<GovernedExecutionTemplateNullableScalarRelationFilter, GovernedExecutionTemplateWhereInput> | null
     governedTaskTemplate?: XOR<GovernedExecutionTaskTemplateNullableScalarRelationFilter, GovernedExecutionTaskTemplateWhereInput> | null
+    scheduleRevisions?: ExecutionScheduleRevisionListRelationFilter
+    dependencies?: ExecutionTaskDependencyListRelationFilter
+    requiredBy?: ExecutionTaskDependencyListRelationFilter
+    blockerEvents?: ExecutionTaskBlockerEventListRelationFilter
   }
 
   export type ExecutionTaskOrderByWithRelationInput = {
@@ -43223,6 +47429,8 @@ export namespace Prisma {
     sourceTemplateVersion?: SortOrderInput | SortOrder
     evidenceRequired?: SortOrder
     verificationRequired?: SortOrder
+    plannedStartAt?: SortOrderInput | SortOrder
+    plannedEndAt?: SortOrderInput | SortOrder
     executionPlan?: ExecutionPlanOrderByWithRelationInput
     assignedTo?: UserOrderByWithRelationInput
     assignedBy?: UserOrderByWithRelationInput
@@ -43233,6 +47441,10 @@ export namespace Prisma {
     approvedActionVersion?: ApprovedActionVersionOrderByWithRelationInput
     governedExecutionTemplate?: GovernedExecutionTemplateOrderByWithRelationInput
     governedTaskTemplate?: GovernedExecutionTaskTemplateOrderByWithRelationInput
+    scheduleRevisions?: ExecutionScheduleRevisionOrderByRelationAggregateInput
+    dependencies?: ExecutionTaskDependencyOrderByRelationAggregateInput
+    requiredBy?: ExecutionTaskDependencyOrderByRelationAggregateInput
+    blockerEvents?: ExecutionTaskBlockerEventOrderByRelationAggregateInput
   }
 
   export type ExecutionTaskWhereUniqueInput = Prisma.AtLeast<{
@@ -43275,6 +47487,8 @@ export namespace Prisma {
     sourceTemplateVersion?: IntNullableFilter<"ExecutionTask"> | number | null
     evidenceRequired?: BoolFilter<"ExecutionTask"> | boolean
     verificationRequired?: BoolFilter<"ExecutionTask"> | boolean
+    plannedStartAt?: DateTimeNullableFilter<"ExecutionTask"> | Date | string | null
+    plannedEndAt?: DateTimeNullableFilter<"ExecutionTask"> | Date | string | null
     executionPlan?: XOR<ExecutionPlanScalarRelationFilter, ExecutionPlanWhereInput>
     assignedTo?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     assignedBy?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
@@ -43285,6 +47499,10 @@ export namespace Prisma {
     approvedActionVersion?: XOR<ApprovedActionVersionNullableScalarRelationFilter, ApprovedActionVersionWhereInput> | null
     governedExecutionTemplate?: XOR<GovernedExecutionTemplateNullableScalarRelationFilter, GovernedExecutionTemplateWhereInput> | null
     governedTaskTemplate?: XOR<GovernedExecutionTaskTemplateNullableScalarRelationFilter, GovernedExecutionTaskTemplateWhereInput> | null
+    scheduleRevisions?: ExecutionScheduleRevisionListRelationFilter
+    dependencies?: ExecutionTaskDependencyListRelationFilter
+    requiredBy?: ExecutionTaskDependencyListRelationFilter
+    blockerEvents?: ExecutionTaskBlockerEventListRelationFilter
   }, "id" | "executionPlanId_sequenceNumber" | "executionPlanId_sourceActionCode_templateTaskKey">
 
   export type ExecutionTaskOrderByWithAggregationInput = {
@@ -43322,6 +47540,8 @@ export namespace Prisma {
     sourceTemplateVersion?: SortOrderInput | SortOrder
     evidenceRequired?: SortOrder
     verificationRequired?: SortOrder
+    plannedStartAt?: SortOrderInput | SortOrder
+    plannedEndAt?: SortOrderInput | SortOrder
     _count?: ExecutionTaskCountOrderByAggregateInput
     _avg?: ExecutionTaskAvgOrderByAggregateInput
     _max?: ExecutionTaskMaxOrderByAggregateInput
@@ -43367,6 +47587,245 @@ export namespace Prisma {
     sourceTemplateVersion?: IntNullableWithAggregatesFilter<"ExecutionTask"> | number | null
     evidenceRequired?: BoolWithAggregatesFilter<"ExecutionTask"> | boolean
     verificationRequired?: BoolWithAggregatesFilter<"ExecutionTask"> | boolean
+    plannedStartAt?: DateTimeNullableWithAggregatesFilter<"ExecutionTask"> | Date | string | null
+    plannedEndAt?: DateTimeNullableWithAggregatesFilter<"ExecutionTask"> | Date | string | null
+  }
+
+  export type ExecutionTaskDependencyWhereInput = {
+    AND?: ExecutionTaskDependencyWhereInput | ExecutionTaskDependencyWhereInput[]
+    OR?: ExecutionTaskDependencyWhereInput[]
+    NOT?: ExecutionTaskDependencyWhereInput | ExecutionTaskDependencyWhereInput[]
+    id?: StringFilter<"ExecutionTaskDependency"> | string
+    executionPlanId?: StringFilter<"ExecutionTaskDependency"> | string
+    dependentTaskId?: StringFilter<"ExecutionTaskDependency"> | string
+    predecessorTaskId?: StringFilter<"ExecutionTaskDependency"> | string
+    createdById?: StringFilter<"ExecutionTaskDependency"> | string
+    createdAt?: DateTimeFilter<"ExecutionTaskDependency"> | Date | string
+    executionPlan?: XOR<ExecutionPlanScalarRelationFilter, ExecutionPlanWhereInput>
+    dependentTask?: XOR<ExecutionTaskScalarRelationFilter, ExecutionTaskWhereInput>
+    predecessorTask?: XOR<ExecutionTaskScalarRelationFilter, ExecutionTaskWhereInput>
+    createdBy?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type ExecutionTaskDependencyOrderByWithRelationInput = {
+    id?: SortOrder
+    executionPlanId?: SortOrder
+    dependentTaskId?: SortOrder
+    predecessorTaskId?: SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+    executionPlan?: ExecutionPlanOrderByWithRelationInput
+    dependentTask?: ExecutionTaskOrderByWithRelationInput
+    predecessorTask?: ExecutionTaskOrderByWithRelationInput
+    createdBy?: UserOrderByWithRelationInput
+  }
+
+  export type ExecutionTaskDependencyWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    dependentTaskId_predecessorTaskId?: ExecutionTaskDependencyDependentTaskIdPredecessorTaskIdCompoundUniqueInput
+    AND?: ExecutionTaskDependencyWhereInput | ExecutionTaskDependencyWhereInput[]
+    OR?: ExecutionTaskDependencyWhereInput[]
+    NOT?: ExecutionTaskDependencyWhereInput | ExecutionTaskDependencyWhereInput[]
+    executionPlanId?: StringFilter<"ExecutionTaskDependency"> | string
+    dependentTaskId?: StringFilter<"ExecutionTaskDependency"> | string
+    predecessorTaskId?: StringFilter<"ExecutionTaskDependency"> | string
+    createdById?: StringFilter<"ExecutionTaskDependency"> | string
+    createdAt?: DateTimeFilter<"ExecutionTaskDependency"> | Date | string
+    executionPlan?: XOR<ExecutionPlanScalarRelationFilter, ExecutionPlanWhereInput>
+    dependentTask?: XOR<ExecutionTaskScalarRelationFilter, ExecutionTaskWhereInput>
+    predecessorTask?: XOR<ExecutionTaskScalarRelationFilter, ExecutionTaskWhereInput>
+    createdBy?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id" | "dependentTaskId_predecessorTaskId">
+
+  export type ExecutionTaskDependencyOrderByWithAggregationInput = {
+    id?: SortOrder
+    executionPlanId?: SortOrder
+    dependentTaskId?: SortOrder
+    predecessorTaskId?: SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+    _count?: ExecutionTaskDependencyCountOrderByAggregateInput
+    _max?: ExecutionTaskDependencyMaxOrderByAggregateInput
+    _min?: ExecutionTaskDependencyMinOrderByAggregateInput
+  }
+
+  export type ExecutionTaskDependencyScalarWhereWithAggregatesInput = {
+    AND?: ExecutionTaskDependencyScalarWhereWithAggregatesInput | ExecutionTaskDependencyScalarWhereWithAggregatesInput[]
+    OR?: ExecutionTaskDependencyScalarWhereWithAggregatesInput[]
+    NOT?: ExecutionTaskDependencyScalarWhereWithAggregatesInput | ExecutionTaskDependencyScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"ExecutionTaskDependency"> | string
+    executionPlanId?: StringWithAggregatesFilter<"ExecutionTaskDependency"> | string
+    dependentTaskId?: StringWithAggregatesFilter<"ExecutionTaskDependency"> | string
+    predecessorTaskId?: StringWithAggregatesFilter<"ExecutionTaskDependency"> | string
+    createdById?: StringWithAggregatesFilter<"ExecutionTaskDependency"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"ExecutionTaskDependency"> | Date | string
+  }
+
+  export type ExecutionTaskBlockerEventWhereInput = {
+    AND?: ExecutionTaskBlockerEventWhereInput | ExecutionTaskBlockerEventWhereInput[]
+    OR?: ExecutionTaskBlockerEventWhereInput[]
+    NOT?: ExecutionTaskBlockerEventWhereInput | ExecutionTaskBlockerEventWhereInput[]
+    id?: StringFilter<"ExecutionTaskBlockerEvent"> | string
+    executionTaskId?: StringFilter<"ExecutionTaskBlockerEvent"> | string
+    category?: EnumExecutionBlockerCategoryFilter<"ExecutionTaskBlockerEvent"> | $Enums.ExecutionBlockerCategory
+    reason?: StringFilter<"ExecutionTaskBlockerEvent"> | string
+    blockedById?: StringFilter<"ExecutionTaskBlockerEvent"> | string
+    blockedAt?: DateTimeFilter<"ExecutionTaskBlockerEvent"> | Date | string
+    resolvedById?: StringNullableFilter<"ExecutionTaskBlockerEvent"> | string | null
+    resolvedAt?: DateTimeNullableFilter<"ExecutionTaskBlockerEvent"> | Date | string | null
+    resolutionReason?: StringNullableFilter<"ExecutionTaskBlockerEvent"> | string | null
+    executionTask?: XOR<ExecutionTaskScalarRelationFilter, ExecutionTaskWhereInput>
+    blockedBy?: XOR<UserScalarRelationFilter, UserWhereInput>
+    resolvedBy?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+  }
+
+  export type ExecutionTaskBlockerEventOrderByWithRelationInput = {
+    id?: SortOrder
+    executionTaskId?: SortOrder
+    category?: SortOrder
+    reason?: SortOrder
+    blockedById?: SortOrder
+    blockedAt?: SortOrder
+    resolvedById?: SortOrderInput | SortOrder
+    resolvedAt?: SortOrderInput | SortOrder
+    resolutionReason?: SortOrderInput | SortOrder
+    executionTask?: ExecutionTaskOrderByWithRelationInput
+    blockedBy?: UserOrderByWithRelationInput
+    resolvedBy?: UserOrderByWithRelationInput
+  }
+
+  export type ExecutionTaskBlockerEventWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: ExecutionTaskBlockerEventWhereInput | ExecutionTaskBlockerEventWhereInput[]
+    OR?: ExecutionTaskBlockerEventWhereInput[]
+    NOT?: ExecutionTaskBlockerEventWhereInput | ExecutionTaskBlockerEventWhereInput[]
+    executionTaskId?: StringFilter<"ExecutionTaskBlockerEvent"> | string
+    category?: EnumExecutionBlockerCategoryFilter<"ExecutionTaskBlockerEvent"> | $Enums.ExecutionBlockerCategory
+    reason?: StringFilter<"ExecutionTaskBlockerEvent"> | string
+    blockedById?: StringFilter<"ExecutionTaskBlockerEvent"> | string
+    blockedAt?: DateTimeFilter<"ExecutionTaskBlockerEvent"> | Date | string
+    resolvedById?: StringNullableFilter<"ExecutionTaskBlockerEvent"> | string | null
+    resolvedAt?: DateTimeNullableFilter<"ExecutionTaskBlockerEvent"> | Date | string | null
+    resolutionReason?: StringNullableFilter<"ExecutionTaskBlockerEvent"> | string | null
+    executionTask?: XOR<ExecutionTaskScalarRelationFilter, ExecutionTaskWhereInput>
+    blockedBy?: XOR<UserScalarRelationFilter, UserWhereInput>
+    resolvedBy?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+  }, "id">
+
+  export type ExecutionTaskBlockerEventOrderByWithAggregationInput = {
+    id?: SortOrder
+    executionTaskId?: SortOrder
+    category?: SortOrder
+    reason?: SortOrder
+    blockedById?: SortOrder
+    blockedAt?: SortOrder
+    resolvedById?: SortOrderInput | SortOrder
+    resolvedAt?: SortOrderInput | SortOrder
+    resolutionReason?: SortOrderInput | SortOrder
+    _count?: ExecutionTaskBlockerEventCountOrderByAggregateInput
+    _max?: ExecutionTaskBlockerEventMaxOrderByAggregateInput
+    _min?: ExecutionTaskBlockerEventMinOrderByAggregateInput
+  }
+
+  export type ExecutionTaskBlockerEventScalarWhereWithAggregatesInput = {
+    AND?: ExecutionTaskBlockerEventScalarWhereWithAggregatesInput | ExecutionTaskBlockerEventScalarWhereWithAggregatesInput[]
+    OR?: ExecutionTaskBlockerEventScalarWhereWithAggregatesInput[]
+    NOT?: ExecutionTaskBlockerEventScalarWhereWithAggregatesInput | ExecutionTaskBlockerEventScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"ExecutionTaskBlockerEvent"> | string
+    executionTaskId?: StringWithAggregatesFilter<"ExecutionTaskBlockerEvent"> | string
+    category?: EnumExecutionBlockerCategoryWithAggregatesFilter<"ExecutionTaskBlockerEvent"> | $Enums.ExecutionBlockerCategory
+    reason?: StringWithAggregatesFilter<"ExecutionTaskBlockerEvent"> | string
+    blockedById?: StringWithAggregatesFilter<"ExecutionTaskBlockerEvent"> | string
+    blockedAt?: DateTimeWithAggregatesFilter<"ExecutionTaskBlockerEvent"> | Date | string
+    resolvedById?: StringNullableWithAggregatesFilter<"ExecutionTaskBlockerEvent"> | string | null
+    resolvedAt?: DateTimeNullableWithAggregatesFilter<"ExecutionTaskBlockerEvent"> | Date | string | null
+    resolutionReason?: StringNullableWithAggregatesFilter<"ExecutionTaskBlockerEvent"> | string | null
+  }
+
+  export type ExecutionScheduleRevisionWhereInput = {
+    AND?: ExecutionScheduleRevisionWhereInput | ExecutionScheduleRevisionWhereInput[]
+    OR?: ExecutionScheduleRevisionWhereInput[]
+    NOT?: ExecutionScheduleRevisionWhereInput | ExecutionScheduleRevisionWhereInput[]
+    id?: StringFilter<"ExecutionScheduleRevision"> | string
+    executionPlanId?: StringFilter<"ExecutionScheduleRevision"> | string
+    executionTaskId?: StringNullableFilter<"ExecutionScheduleRevision"> | string | null
+    previousStartAt?: DateTimeNullableFilter<"ExecutionScheduleRevision"> | Date | string | null
+    previousEndAt?: DateTimeNullableFilter<"ExecutionScheduleRevision"> | Date | string | null
+    newStartAt?: DateTimeFilter<"ExecutionScheduleRevision"> | Date | string
+    newEndAt?: DateTimeFilter<"ExecutionScheduleRevision"> | Date | string
+    changedById?: StringFilter<"ExecutionScheduleRevision"> | string
+    changeReason?: StringFilter<"ExecutionScheduleRevision"> | string
+    changedAt?: DateTimeFilter<"ExecutionScheduleRevision"> | Date | string
+    executionPlan?: XOR<ExecutionPlanScalarRelationFilter, ExecutionPlanWhereInput>
+    executionTask?: XOR<ExecutionTaskNullableScalarRelationFilter, ExecutionTaskWhereInput> | null
+    changedBy?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type ExecutionScheduleRevisionOrderByWithRelationInput = {
+    id?: SortOrder
+    executionPlanId?: SortOrder
+    executionTaskId?: SortOrderInput | SortOrder
+    previousStartAt?: SortOrderInput | SortOrder
+    previousEndAt?: SortOrderInput | SortOrder
+    newStartAt?: SortOrder
+    newEndAt?: SortOrder
+    changedById?: SortOrder
+    changeReason?: SortOrder
+    changedAt?: SortOrder
+    executionPlan?: ExecutionPlanOrderByWithRelationInput
+    executionTask?: ExecutionTaskOrderByWithRelationInput
+    changedBy?: UserOrderByWithRelationInput
+  }
+
+  export type ExecutionScheduleRevisionWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: ExecutionScheduleRevisionWhereInput | ExecutionScheduleRevisionWhereInput[]
+    OR?: ExecutionScheduleRevisionWhereInput[]
+    NOT?: ExecutionScheduleRevisionWhereInput | ExecutionScheduleRevisionWhereInput[]
+    executionPlanId?: StringFilter<"ExecutionScheduleRevision"> | string
+    executionTaskId?: StringNullableFilter<"ExecutionScheduleRevision"> | string | null
+    previousStartAt?: DateTimeNullableFilter<"ExecutionScheduleRevision"> | Date | string | null
+    previousEndAt?: DateTimeNullableFilter<"ExecutionScheduleRevision"> | Date | string | null
+    newStartAt?: DateTimeFilter<"ExecutionScheduleRevision"> | Date | string
+    newEndAt?: DateTimeFilter<"ExecutionScheduleRevision"> | Date | string
+    changedById?: StringFilter<"ExecutionScheduleRevision"> | string
+    changeReason?: StringFilter<"ExecutionScheduleRevision"> | string
+    changedAt?: DateTimeFilter<"ExecutionScheduleRevision"> | Date | string
+    executionPlan?: XOR<ExecutionPlanScalarRelationFilter, ExecutionPlanWhereInput>
+    executionTask?: XOR<ExecutionTaskNullableScalarRelationFilter, ExecutionTaskWhereInput> | null
+    changedBy?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id">
+
+  export type ExecutionScheduleRevisionOrderByWithAggregationInput = {
+    id?: SortOrder
+    executionPlanId?: SortOrder
+    executionTaskId?: SortOrderInput | SortOrder
+    previousStartAt?: SortOrderInput | SortOrder
+    previousEndAt?: SortOrderInput | SortOrder
+    newStartAt?: SortOrder
+    newEndAt?: SortOrder
+    changedById?: SortOrder
+    changeReason?: SortOrder
+    changedAt?: SortOrder
+    _count?: ExecutionScheduleRevisionCountOrderByAggregateInput
+    _max?: ExecutionScheduleRevisionMaxOrderByAggregateInput
+    _min?: ExecutionScheduleRevisionMinOrderByAggregateInput
+  }
+
+  export type ExecutionScheduleRevisionScalarWhereWithAggregatesInput = {
+    AND?: ExecutionScheduleRevisionScalarWhereWithAggregatesInput | ExecutionScheduleRevisionScalarWhereWithAggregatesInput[]
+    OR?: ExecutionScheduleRevisionScalarWhereWithAggregatesInput[]
+    NOT?: ExecutionScheduleRevisionScalarWhereWithAggregatesInput | ExecutionScheduleRevisionScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"ExecutionScheduleRevision"> | string
+    executionPlanId?: StringWithAggregatesFilter<"ExecutionScheduleRevision"> | string
+    executionTaskId?: StringNullableWithAggregatesFilter<"ExecutionScheduleRevision"> | string | null
+    previousStartAt?: DateTimeNullableWithAggregatesFilter<"ExecutionScheduleRevision"> | Date | string | null
+    previousEndAt?: DateTimeNullableWithAggregatesFilter<"ExecutionScheduleRevision"> | Date | string | null
+    newStartAt?: DateTimeWithAggregatesFilter<"ExecutionScheduleRevision"> | Date | string
+    newEndAt?: DateTimeWithAggregatesFilter<"ExecutionScheduleRevision"> | Date | string
+    changedById?: StringWithAggregatesFilter<"ExecutionScheduleRevision"> | string
+    changeReason?: StringWithAggregatesFilter<"ExecutionScheduleRevision"> | string
+    changedAt?: DateTimeWithAggregatesFilter<"ExecutionScheduleRevision"> | Date | string
   }
 
   export type ExecutionEvidenceWhereInput = {
@@ -43734,6 +48193,10 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCompletionSubmittedByInput
     verifiedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutVerifiedByInput
     cancelledExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCancelledByInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionCreateNestedManyWithoutChangedByInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutBlockedByInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutResolvedByInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyCreateNestedManyWithoutCreatedByInput
     submittedExecutionEvidence?: ExecutionEvidenceCreateNestedManyWithoutSubmittedByInput
     closedCases?: CaseClosureCreateNestedManyWithoutClosedByInput
     reviewedPublicReports?: PublicReportCreateNestedManyWithoutReviewedByInput
@@ -43774,6 +48237,10 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCompletionSubmittedByInput
     verifiedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutVerifiedByInput
     cancelledExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCancelledByInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUncheckedCreateNestedManyWithoutChangedByInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutBlockedByInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutResolvedByInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutCreatedByInput
     submittedExecutionEvidence?: ExecutionEvidenceUncheckedCreateNestedManyWithoutSubmittedByInput
     closedCases?: CaseClosureUncheckedCreateNestedManyWithoutClosedByInput
     reviewedPublicReports?: PublicReportUncheckedCreateNestedManyWithoutReviewedByInput
@@ -43814,6 +48281,10 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskUpdateManyWithoutCompletionSubmittedByNestedInput
     verifiedExecutionTasks?: ExecutionTaskUpdateManyWithoutVerifiedByNestedInput
     cancelledExecutionTasks?: ExecutionTaskUpdateManyWithoutCancelledByNestedInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUpdateManyWithoutChangedByNestedInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUpdateManyWithoutBlockedByNestedInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUpdateManyWithoutResolvedByNestedInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUpdateManyWithoutCreatedByNestedInput
     submittedExecutionEvidence?: ExecutionEvidenceUpdateManyWithoutSubmittedByNestedInput
     closedCases?: CaseClosureUpdateManyWithoutClosedByNestedInput
     reviewedPublicReports?: PublicReportUpdateManyWithoutReviewedByNestedInput
@@ -43854,6 +48325,10 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCompletionSubmittedByNestedInput
     verifiedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutVerifiedByNestedInput
     cancelledExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCancelledByNestedInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUncheckedUpdateManyWithoutChangedByNestedInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutBlockedByNestedInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutResolvedByNestedInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUncheckedUpdateManyWithoutCreatedByNestedInput
     submittedExecutionEvidence?: ExecutionEvidenceUncheckedUpdateManyWithoutSubmittedByNestedInput
     closedCases?: CaseClosureUncheckedUpdateManyWithoutClosedByNestedInput
     reviewedPublicReports?: PublicReportUncheckedUpdateManyWithoutReviewedByNestedInput
@@ -46487,12 +50962,16 @@ export namespace Prisma {
     governanceMode?: $Enums.ExecutionPlanGovernanceMode
     executionContractVersion?: string | null
     governedProvenance?: NullableJsonNullValueInput | InputJsonValue
+    plannedStartAt?: Date | string | null
+    plannedEndAt?: Date | string | null
     orp: OperationalResponsePlanCreateNestedOneWithoutExecutionPlanInput
     case: CaseCreateNestedOneWithoutExecutionPlansInput
     approvalDecision: OrpDecisionCreateNestedOneWithoutExecutionPlanInput
     createdBy: UserCreateNestedOneWithoutCreatedExecutionPlansInput
     tasks?: ExecutionTaskCreateNestedManyWithoutExecutionPlanInput
     closure?: CaseClosureCreateNestedOneWithoutExecutionPlanInput
+    scheduleRevisions?: ExecutionScheduleRevisionCreateNestedManyWithoutExecutionPlanInput
+    taskDependencies?: ExecutionTaskDependencyCreateNestedManyWithoutExecutionPlanInput
   }
 
   export type ExecutionPlanUncheckedCreateInput = {
@@ -46512,8 +50991,12 @@ export namespace Prisma {
     governanceMode?: $Enums.ExecutionPlanGovernanceMode
     executionContractVersion?: string | null
     governedProvenance?: NullableJsonNullValueInput | InputJsonValue
+    plannedStartAt?: Date | string | null
+    plannedEndAt?: Date | string | null
     tasks?: ExecutionTaskUncheckedCreateNestedManyWithoutExecutionPlanInput
     closure?: CaseClosureUncheckedCreateNestedOneWithoutExecutionPlanInput
+    scheduleRevisions?: ExecutionScheduleRevisionUncheckedCreateNestedManyWithoutExecutionPlanInput
+    taskDependencies?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutExecutionPlanInput
   }
 
   export type ExecutionPlanUpdateInput = {
@@ -46529,12 +51012,16 @@ export namespace Prisma {
     governanceMode?: EnumExecutionPlanGovernanceModeFieldUpdateOperationsInput | $Enums.ExecutionPlanGovernanceMode
     executionContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
     governedProvenance?: NullableJsonNullValueInput | InputJsonValue
+    plannedStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    plannedEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     orp?: OperationalResponsePlanUpdateOneRequiredWithoutExecutionPlanNestedInput
     case?: CaseUpdateOneRequiredWithoutExecutionPlansNestedInput
     approvalDecision?: OrpDecisionUpdateOneRequiredWithoutExecutionPlanNestedInput
     createdBy?: UserUpdateOneRequiredWithoutCreatedExecutionPlansNestedInput
     tasks?: ExecutionTaskUpdateManyWithoutExecutionPlanNestedInput
     closure?: CaseClosureUpdateOneWithoutExecutionPlanNestedInput
+    scheduleRevisions?: ExecutionScheduleRevisionUpdateManyWithoutExecutionPlanNestedInput
+    taskDependencies?: ExecutionTaskDependencyUpdateManyWithoutExecutionPlanNestedInput
   }
 
   export type ExecutionPlanUncheckedUpdateInput = {
@@ -46554,8 +51041,12 @@ export namespace Prisma {
     governanceMode?: EnumExecutionPlanGovernanceModeFieldUpdateOperationsInput | $Enums.ExecutionPlanGovernanceMode
     executionContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
     governedProvenance?: NullableJsonNullValueInput | InputJsonValue
+    plannedStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    plannedEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tasks?: ExecutionTaskUncheckedUpdateManyWithoutExecutionPlanNestedInput
     closure?: CaseClosureUncheckedUpdateOneWithoutExecutionPlanNestedInput
+    scheduleRevisions?: ExecutionScheduleRevisionUncheckedUpdateManyWithoutExecutionPlanNestedInput
+    taskDependencies?: ExecutionTaskDependencyUncheckedUpdateManyWithoutExecutionPlanNestedInput
   }
 
   export type ExecutionPlanCreateManyInput = {
@@ -46575,6 +51066,8 @@ export namespace Prisma {
     governanceMode?: $Enums.ExecutionPlanGovernanceMode
     executionContractVersion?: string | null
     governedProvenance?: NullableJsonNullValueInput | InputJsonValue
+    plannedStartAt?: Date | string | null
+    plannedEndAt?: Date | string | null
   }
 
   export type ExecutionPlanUpdateManyMutationInput = {
@@ -46590,6 +51083,8 @@ export namespace Prisma {
     governanceMode?: EnumExecutionPlanGovernanceModeFieldUpdateOperationsInput | $Enums.ExecutionPlanGovernanceMode
     executionContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
     governedProvenance?: NullableJsonNullValueInput | InputJsonValue
+    plannedStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    plannedEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type ExecutionPlanUncheckedUpdateManyInput = {
@@ -46609,6 +51104,8 @@ export namespace Prisma {
     governanceMode?: EnumExecutionPlanGovernanceModeFieldUpdateOperationsInput | $Enums.ExecutionPlanGovernanceMode
     executionContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
     governedProvenance?: NullableJsonNullValueInput | InputJsonValue
+    plannedStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    plannedEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type ExecutionTaskCreateInput = {
@@ -46637,6 +51134,8 @@ export namespace Prisma {
     sourceTemplateVersion?: number | null
     evidenceRequired?: boolean
     verificationRequired?: boolean
+    plannedStartAt?: Date | string | null
+    plannedEndAt?: Date | string | null
     executionPlan: ExecutionPlanCreateNestedOneWithoutTasksInput
     assignedTo?: UserCreateNestedOneWithoutAssignedExecutionTasksInput
     assignedBy?: UserCreateNestedOneWithoutAssignedByExecutionTasksInput
@@ -46647,6 +51146,10 @@ export namespace Prisma {
     approvedActionVersion?: ApprovedActionVersionCreateNestedOneWithoutExecutionTasksInput
     governedExecutionTemplate?: GovernedExecutionTemplateCreateNestedOneWithoutExecutionTasksInput
     governedTaskTemplate?: GovernedExecutionTaskTemplateCreateNestedOneWithoutExecutionTasksInput
+    scheduleRevisions?: ExecutionScheduleRevisionCreateNestedManyWithoutExecutionTaskInput
+    dependencies?: ExecutionTaskDependencyCreateNestedManyWithoutDependentTaskInput
+    requiredBy?: ExecutionTaskDependencyCreateNestedManyWithoutPredecessorTaskInput
+    blockerEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutExecutionTaskInput
   }
 
   export type ExecutionTaskUncheckedCreateInput = {
@@ -46684,7 +51187,13 @@ export namespace Prisma {
     sourceTemplateVersion?: number | null
     evidenceRequired?: boolean
     verificationRequired?: boolean
+    plannedStartAt?: Date | string | null
+    plannedEndAt?: Date | string | null
     evidence?: ExecutionEvidenceUncheckedCreateNestedManyWithoutExecutionTaskInput
+    scheduleRevisions?: ExecutionScheduleRevisionUncheckedCreateNestedManyWithoutExecutionTaskInput
+    dependencies?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutDependentTaskInput
+    requiredBy?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutPredecessorTaskInput
+    blockerEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutExecutionTaskInput
   }
 
   export type ExecutionTaskUpdateInput = {
@@ -46713,6 +51222,8 @@ export namespace Prisma {
     sourceTemplateVersion?: NullableIntFieldUpdateOperationsInput | number | null
     evidenceRequired?: BoolFieldUpdateOperationsInput | boolean
     verificationRequired?: BoolFieldUpdateOperationsInput | boolean
+    plannedStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    plannedEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     executionPlan?: ExecutionPlanUpdateOneRequiredWithoutTasksNestedInput
     assignedTo?: UserUpdateOneWithoutAssignedExecutionTasksNestedInput
     assignedBy?: UserUpdateOneWithoutAssignedByExecutionTasksNestedInput
@@ -46723,6 +51234,10 @@ export namespace Prisma {
     approvedActionVersion?: ApprovedActionVersionUpdateOneWithoutExecutionTasksNestedInput
     governedExecutionTemplate?: GovernedExecutionTemplateUpdateOneWithoutExecutionTasksNestedInput
     governedTaskTemplate?: GovernedExecutionTaskTemplateUpdateOneWithoutExecutionTasksNestedInput
+    scheduleRevisions?: ExecutionScheduleRevisionUpdateManyWithoutExecutionTaskNestedInput
+    dependencies?: ExecutionTaskDependencyUpdateManyWithoutDependentTaskNestedInput
+    requiredBy?: ExecutionTaskDependencyUpdateManyWithoutPredecessorTaskNestedInput
+    blockerEvents?: ExecutionTaskBlockerEventUpdateManyWithoutExecutionTaskNestedInput
   }
 
   export type ExecutionTaskUncheckedUpdateInput = {
@@ -46760,7 +51275,13 @@ export namespace Prisma {
     sourceTemplateVersion?: NullableIntFieldUpdateOperationsInput | number | null
     evidenceRequired?: BoolFieldUpdateOperationsInput | boolean
     verificationRequired?: BoolFieldUpdateOperationsInput | boolean
+    plannedStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    plannedEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     evidence?: ExecutionEvidenceUncheckedUpdateManyWithoutExecutionTaskNestedInput
+    scheduleRevisions?: ExecutionScheduleRevisionUncheckedUpdateManyWithoutExecutionTaskNestedInput
+    dependencies?: ExecutionTaskDependencyUncheckedUpdateManyWithoutDependentTaskNestedInput
+    requiredBy?: ExecutionTaskDependencyUncheckedUpdateManyWithoutPredecessorTaskNestedInput
+    blockerEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutExecutionTaskNestedInput
   }
 
   export type ExecutionTaskCreateManyInput = {
@@ -46798,6 +51319,8 @@ export namespace Prisma {
     sourceTemplateVersion?: number | null
     evidenceRequired?: boolean
     verificationRequired?: boolean
+    plannedStartAt?: Date | string | null
+    plannedEndAt?: Date | string | null
   }
 
   export type ExecutionTaskUpdateManyMutationInput = {
@@ -46826,6 +51349,8 @@ export namespace Prisma {
     sourceTemplateVersion?: NullableIntFieldUpdateOperationsInput | number | null
     evidenceRequired?: BoolFieldUpdateOperationsInput | boolean
     verificationRequired?: BoolFieldUpdateOperationsInput | boolean
+    plannedStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    plannedEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type ExecutionTaskUncheckedUpdateManyInput = {
@@ -46863,6 +51388,236 @@ export namespace Prisma {
     sourceTemplateVersion?: NullableIntFieldUpdateOperationsInput | number | null
     evidenceRequired?: BoolFieldUpdateOperationsInput | boolean
     verificationRequired?: BoolFieldUpdateOperationsInput | boolean
+    plannedStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    plannedEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type ExecutionTaskDependencyCreateInput = {
+    id?: string
+    createdAt?: Date | string
+    executionPlan: ExecutionPlanCreateNestedOneWithoutTaskDependenciesInput
+    dependentTask: ExecutionTaskCreateNestedOneWithoutDependenciesInput
+    predecessorTask: ExecutionTaskCreateNestedOneWithoutRequiredByInput
+    createdBy: UserCreateNestedOneWithoutCreatedExecutionTaskDependenciesInput
+  }
+
+  export type ExecutionTaskDependencyUncheckedCreateInput = {
+    id?: string
+    executionPlanId: string
+    dependentTaskId: string
+    predecessorTaskId: string
+    createdById: string
+    createdAt?: Date | string
+  }
+
+  export type ExecutionTaskDependencyUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    executionPlan?: ExecutionPlanUpdateOneRequiredWithoutTaskDependenciesNestedInput
+    dependentTask?: ExecutionTaskUpdateOneRequiredWithoutDependenciesNestedInput
+    predecessorTask?: ExecutionTaskUpdateOneRequiredWithoutRequiredByNestedInput
+    createdBy?: UserUpdateOneRequiredWithoutCreatedExecutionTaskDependenciesNestedInput
+  }
+
+  export type ExecutionTaskDependencyUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    executionPlanId?: StringFieldUpdateOperationsInput | string
+    dependentTaskId?: StringFieldUpdateOperationsInput | string
+    predecessorTaskId?: StringFieldUpdateOperationsInput | string
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ExecutionTaskDependencyCreateManyInput = {
+    id?: string
+    executionPlanId: string
+    dependentTaskId: string
+    predecessorTaskId: string
+    createdById: string
+    createdAt?: Date | string
+  }
+
+  export type ExecutionTaskDependencyUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ExecutionTaskDependencyUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    executionPlanId?: StringFieldUpdateOperationsInput | string
+    dependentTaskId?: StringFieldUpdateOperationsInput | string
+    predecessorTaskId?: StringFieldUpdateOperationsInput | string
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ExecutionTaskBlockerEventCreateInput = {
+    id?: string
+    category: $Enums.ExecutionBlockerCategory
+    reason: string
+    blockedAt?: Date | string
+    resolvedAt?: Date | string | null
+    resolutionReason?: string | null
+    executionTask: ExecutionTaskCreateNestedOneWithoutBlockerEventsInput
+    blockedBy: UserCreateNestedOneWithoutBlockedExecutionTaskEventsInput
+    resolvedBy?: UserCreateNestedOneWithoutResolvedExecutionTaskEventsInput
+  }
+
+  export type ExecutionTaskBlockerEventUncheckedCreateInput = {
+    id?: string
+    executionTaskId: string
+    category: $Enums.ExecutionBlockerCategory
+    reason: string
+    blockedById: string
+    blockedAt?: Date | string
+    resolvedById?: string | null
+    resolvedAt?: Date | string | null
+    resolutionReason?: string | null
+  }
+
+  export type ExecutionTaskBlockerEventUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    category?: EnumExecutionBlockerCategoryFieldUpdateOperationsInput | $Enums.ExecutionBlockerCategory
+    reason?: StringFieldUpdateOperationsInput | string
+    blockedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    resolvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    resolutionReason?: NullableStringFieldUpdateOperationsInput | string | null
+    executionTask?: ExecutionTaskUpdateOneRequiredWithoutBlockerEventsNestedInput
+    blockedBy?: UserUpdateOneRequiredWithoutBlockedExecutionTaskEventsNestedInput
+    resolvedBy?: UserUpdateOneWithoutResolvedExecutionTaskEventsNestedInput
+  }
+
+  export type ExecutionTaskBlockerEventUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    executionTaskId?: StringFieldUpdateOperationsInput | string
+    category?: EnumExecutionBlockerCategoryFieldUpdateOperationsInput | $Enums.ExecutionBlockerCategory
+    reason?: StringFieldUpdateOperationsInput | string
+    blockedById?: StringFieldUpdateOperationsInput | string
+    blockedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    resolvedById?: NullableStringFieldUpdateOperationsInput | string | null
+    resolvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    resolutionReason?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type ExecutionTaskBlockerEventCreateManyInput = {
+    id?: string
+    executionTaskId: string
+    category: $Enums.ExecutionBlockerCategory
+    reason: string
+    blockedById: string
+    blockedAt?: Date | string
+    resolvedById?: string | null
+    resolvedAt?: Date | string | null
+    resolutionReason?: string | null
+  }
+
+  export type ExecutionTaskBlockerEventUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    category?: EnumExecutionBlockerCategoryFieldUpdateOperationsInput | $Enums.ExecutionBlockerCategory
+    reason?: StringFieldUpdateOperationsInput | string
+    blockedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    resolvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    resolutionReason?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type ExecutionTaskBlockerEventUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    executionTaskId?: StringFieldUpdateOperationsInput | string
+    category?: EnumExecutionBlockerCategoryFieldUpdateOperationsInput | $Enums.ExecutionBlockerCategory
+    reason?: StringFieldUpdateOperationsInput | string
+    blockedById?: StringFieldUpdateOperationsInput | string
+    blockedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    resolvedById?: NullableStringFieldUpdateOperationsInput | string | null
+    resolvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    resolutionReason?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type ExecutionScheduleRevisionCreateInput = {
+    id?: string
+    previousStartAt?: Date | string | null
+    previousEndAt?: Date | string | null
+    newStartAt: Date | string
+    newEndAt: Date | string
+    changeReason: string
+    changedAt?: Date | string
+    executionPlan: ExecutionPlanCreateNestedOneWithoutScheduleRevisionsInput
+    executionTask?: ExecutionTaskCreateNestedOneWithoutScheduleRevisionsInput
+    changedBy: UserCreateNestedOneWithoutExecutionScheduleRevisionsInput
+  }
+
+  export type ExecutionScheduleRevisionUncheckedCreateInput = {
+    id?: string
+    executionPlanId: string
+    executionTaskId?: string | null
+    previousStartAt?: Date | string | null
+    previousEndAt?: Date | string | null
+    newStartAt: Date | string
+    newEndAt: Date | string
+    changedById: string
+    changeReason: string
+    changedAt?: Date | string
+  }
+
+  export type ExecutionScheduleRevisionUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    previousStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    previousEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    newStartAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    newEndAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    changeReason?: StringFieldUpdateOperationsInput | string
+    changedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    executionPlan?: ExecutionPlanUpdateOneRequiredWithoutScheduleRevisionsNestedInput
+    executionTask?: ExecutionTaskUpdateOneWithoutScheduleRevisionsNestedInput
+    changedBy?: UserUpdateOneRequiredWithoutExecutionScheduleRevisionsNestedInput
+  }
+
+  export type ExecutionScheduleRevisionUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    executionPlanId?: StringFieldUpdateOperationsInput | string
+    executionTaskId?: NullableStringFieldUpdateOperationsInput | string | null
+    previousStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    previousEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    newStartAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    newEndAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    changedById?: StringFieldUpdateOperationsInput | string
+    changeReason?: StringFieldUpdateOperationsInput | string
+    changedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ExecutionScheduleRevisionCreateManyInput = {
+    id?: string
+    executionPlanId: string
+    executionTaskId?: string | null
+    previousStartAt?: Date | string | null
+    previousEndAt?: Date | string | null
+    newStartAt: Date | string
+    newEndAt: Date | string
+    changedById: string
+    changeReason: string
+    changedAt?: Date | string
+  }
+
+  export type ExecutionScheduleRevisionUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    previousStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    previousEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    newStartAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    newEndAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    changeReason?: StringFieldUpdateOperationsInput | string
+    changedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ExecutionScheduleRevisionUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    executionPlanId?: StringFieldUpdateOperationsInput | string
+    executionTaskId?: NullableStringFieldUpdateOperationsInput | string | null
+    previousStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    previousEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    newStartAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    newEndAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    changedById?: StringFieldUpdateOperationsInput | string
+    changeReason?: StringFieldUpdateOperationsInput | string
+    changedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ExecutionEvidenceCreateInput = {
@@ -47278,6 +52033,24 @@ export namespace Prisma {
     none?: ExecutionTaskWhereInput
   }
 
+  export type ExecutionScheduleRevisionListRelationFilter = {
+    every?: ExecutionScheduleRevisionWhereInput
+    some?: ExecutionScheduleRevisionWhereInput
+    none?: ExecutionScheduleRevisionWhereInput
+  }
+
+  export type ExecutionTaskBlockerEventListRelationFilter = {
+    every?: ExecutionTaskBlockerEventWhereInput
+    some?: ExecutionTaskBlockerEventWhereInput
+    none?: ExecutionTaskBlockerEventWhereInput
+  }
+
+  export type ExecutionTaskDependencyListRelationFilter = {
+    every?: ExecutionTaskDependencyWhereInput
+    some?: ExecutionTaskDependencyWhereInput
+    none?: ExecutionTaskDependencyWhereInput
+  }
+
   export type ExecutionEvidenceListRelationFilter = {
     every?: ExecutionEvidenceWhereInput
     some?: ExecutionEvidenceWhereInput
@@ -47315,6 +52088,18 @@ export namespace Prisma {
   }
 
   export type ExecutionTaskOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ExecutionScheduleRevisionOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ExecutionTaskBlockerEventOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ExecutionTaskDependencyOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -49413,6 +54198,8 @@ export namespace Prisma {
     governanceMode?: SortOrder
     executionContractVersion?: SortOrder
     governedProvenance?: SortOrder
+    plannedStartAt?: SortOrder
+    plannedEndAt?: SortOrder
   }
 
   export type ExecutionPlanMaxOrderByAggregateInput = {
@@ -49431,6 +54218,8 @@ export namespace Prisma {
     cancellationReason?: SortOrder
     governanceMode?: SortOrder
     executionContractVersion?: SortOrder
+    plannedStartAt?: SortOrder
+    plannedEndAt?: SortOrder
   }
 
   export type ExecutionPlanMinOrderByAggregateInput = {
@@ -49449,6 +54238,8 @@ export namespace Prisma {
     cancellationReason?: SortOrder
     governanceMode?: SortOrder
     executionContractVersion?: SortOrder
+    plannedStartAt?: SortOrder
+    plannedEndAt?: SortOrder
   }
 
   export type EnumExecutionPlanStatusWithAggregatesFilter<$PrismaModel = never> = {
@@ -49544,6 +54335,8 @@ export namespace Prisma {
     sourceTemplateVersion?: SortOrder
     evidenceRequired?: SortOrder
     verificationRequired?: SortOrder
+    plannedStartAt?: SortOrder
+    plannedEndAt?: SortOrder
   }
 
   export type ExecutionTaskAvgOrderByAggregateInput = {
@@ -49587,6 +54380,8 @@ export namespace Prisma {
     sourceTemplateVersion?: SortOrder
     evidenceRequired?: SortOrder
     verificationRequired?: SortOrder
+    plannedStartAt?: SortOrder
+    plannedEndAt?: SortOrder
   }
 
   export type ExecutionTaskMinOrderByAggregateInput = {
@@ -49624,6 +54419,8 @@ export namespace Prisma {
     sourceTemplateVersion?: SortOrder
     evidenceRequired?: SortOrder
     verificationRequired?: SortOrder
+    plannedStartAt?: SortOrder
+    plannedEndAt?: SortOrder
   }
 
   export type ExecutionTaskSumOrderByAggregateInput = {
@@ -49642,16 +54439,145 @@ export namespace Prisma {
     _max?: NestedEnumExecutionTaskStatusFilter<$PrismaModel>
   }
 
+  export type ExecutionTaskScalarRelationFilter = {
+    is?: ExecutionTaskWhereInput
+    isNot?: ExecutionTaskWhereInput
+  }
+
+  export type ExecutionTaskDependencyDependentTaskIdPredecessorTaskIdCompoundUniqueInput = {
+    dependentTaskId: string
+    predecessorTaskId: string
+  }
+
+  export type ExecutionTaskDependencyCountOrderByAggregateInput = {
+    id?: SortOrder
+    executionPlanId?: SortOrder
+    dependentTaskId?: SortOrder
+    predecessorTaskId?: SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type ExecutionTaskDependencyMaxOrderByAggregateInput = {
+    id?: SortOrder
+    executionPlanId?: SortOrder
+    dependentTaskId?: SortOrder
+    predecessorTaskId?: SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type ExecutionTaskDependencyMinOrderByAggregateInput = {
+    id?: SortOrder
+    executionPlanId?: SortOrder
+    dependentTaskId?: SortOrder
+    predecessorTaskId?: SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type EnumExecutionBlockerCategoryFilter<$PrismaModel = never> = {
+    equals?: $Enums.ExecutionBlockerCategory | EnumExecutionBlockerCategoryFieldRefInput<$PrismaModel>
+    in?: $Enums.ExecutionBlockerCategory[] | ListEnumExecutionBlockerCategoryFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ExecutionBlockerCategory[] | ListEnumExecutionBlockerCategoryFieldRefInput<$PrismaModel>
+    not?: NestedEnumExecutionBlockerCategoryFilter<$PrismaModel> | $Enums.ExecutionBlockerCategory
+  }
+
+  export type ExecutionTaskBlockerEventCountOrderByAggregateInput = {
+    id?: SortOrder
+    executionTaskId?: SortOrder
+    category?: SortOrder
+    reason?: SortOrder
+    blockedById?: SortOrder
+    blockedAt?: SortOrder
+    resolvedById?: SortOrder
+    resolvedAt?: SortOrder
+    resolutionReason?: SortOrder
+  }
+
+  export type ExecutionTaskBlockerEventMaxOrderByAggregateInput = {
+    id?: SortOrder
+    executionTaskId?: SortOrder
+    category?: SortOrder
+    reason?: SortOrder
+    blockedById?: SortOrder
+    blockedAt?: SortOrder
+    resolvedById?: SortOrder
+    resolvedAt?: SortOrder
+    resolutionReason?: SortOrder
+  }
+
+  export type ExecutionTaskBlockerEventMinOrderByAggregateInput = {
+    id?: SortOrder
+    executionTaskId?: SortOrder
+    category?: SortOrder
+    reason?: SortOrder
+    blockedById?: SortOrder
+    blockedAt?: SortOrder
+    resolvedById?: SortOrder
+    resolvedAt?: SortOrder
+    resolutionReason?: SortOrder
+  }
+
+  export type EnumExecutionBlockerCategoryWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ExecutionBlockerCategory | EnumExecutionBlockerCategoryFieldRefInput<$PrismaModel>
+    in?: $Enums.ExecutionBlockerCategory[] | ListEnumExecutionBlockerCategoryFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ExecutionBlockerCategory[] | ListEnumExecutionBlockerCategoryFieldRefInput<$PrismaModel>
+    not?: NestedEnumExecutionBlockerCategoryWithAggregatesFilter<$PrismaModel> | $Enums.ExecutionBlockerCategory
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumExecutionBlockerCategoryFilter<$PrismaModel>
+    _max?: NestedEnumExecutionBlockerCategoryFilter<$PrismaModel>
+  }
+
+  export type ExecutionTaskNullableScalarRelationFilter = {
+    is?: ExecutionTaskWhereInput | null
+    isNot?: ExecutionTaskWhereInput | null
+  }
+
+  export type ExecutionScheduleRevisionCountOrderByAggregateInput = {
+    id?: SortOrder
+    executionPlanId?: SortOrder
+    executionTaskId?: SortOrder
+    previousStartAt?: SortOrder
+    previousEndAt?: SortOrder
+    newStartAt?: SortOrder
+    newEndAt?: SortOrder
+    changedById?: SortOrder
+    changeReason?: SortOrder
+    changedAt?: SortOrder
+  }
+
+  export type ExecutionScheduleRevisionMaxOrderByAggregateInput = {
+    id?: SortOrder
+    executionPlanId?: SortOrder
+    executionTaskId?: SortOrder
+    previousStartAt?: SortOrder
+    previousEndAt?: SortOrder
+    newStartAt?: SortOrder
+    newEndAt?: SortOrder
+    changedById?: SortOrder
+    changeReason?: SortOrder
+    changedAt?: SortOrder
+  }
+
+  export type ExecutionScheduleRevisionMinOrderByAggregateInput = {
+    id?: SortOrder
+    executionPlanId?: SortOrder
+    executionTaskId?: SortOrder
+    previousStartAt?: SortOrder
+    previousEndAt?: SortOrder
+    newStartAt?: SortOrder
+    newEndAt?: SortOrder
+    changedById?: SortOrder
+    changeReason?: SortOrder
+    changedAt?: SortOrder
+  }
+
   export type EnumExecutionEvidenceTypeFilter<$PrismaModel = never> = {
     equals?: $Enums.ExecutionEvidenceType | EnumExecutionEvidenceTypeFieldRefInput<$PrismaModel>
     in?: $Enums.ExecutionEvidenceType[] | ListEnumExecutionEvidenceTypeFieldRefInput<$PrismaModel>
     notIn?: $Enums.ExecutionEvidenceType[] | ListEnumExecutionEvidenceTypeFieldRefInput<$PrismaModel>
     not?: NestedEnumExecutionEvidenceTypeFilter<$PrismaModel> | $Enums.ExecutionEvidenceType
-  }
-
-  export type ExecutionTaskScalarRelationFilter = {
-    is?: ExecutionTaskWhereInput
-    isNot?: ExecutionTaskWhereInput
   }
 
   export type ExecutionEvidenceCountOrderByAggregateInput = {
@@ -50653,6 +55579,34 @@ export namespace Prisma {
     connect?: ExecutionTaskWhereUniqueInput | ExecutionTaskWhereUniqueInput[]
   }
 
+  export type ExecutionScheduleRevisionCreateNestedManyWithoutChangedByInput = {
+    create?: XOR<ExecutionScheduleRevisionCreateWithoutChangedByInput, ExecutionScheduleRevisionUncheckedCreateWithoutChangedByInput> | ExecutionScheduleRevisionCreateWithoutChangedByInput[] | ExecutionScheduleRevisionUncheckedCreateWithoutChangedByInput[]
+    connectOrCreate?: ExecutionScheduleRevisionCreateOrConnectWithoutChangedByInput | ExecutionScheduleRevisionCreateOrConnectWithoutChangedByInput[]
+    createMany?: ExecutionScheduleRevisionCreateManyChangedByInputEnvelope
+    connect?: ExecutionScheduleRevisionWhereUniqueInput | ExecutionScheduleRevisionWhereUniqueInput[]
+  }
+
+  export type ExecutionTaskBlockerEventCreateNestedManyWithoutBlockedByInput = {
+    create?: XOR<ExecutionTaskBlockerEventCreateWithoutBlockedByInput, ExecutionTaskBlockerEventUncheckedCreateWithoutBlockedByInput> | ExecutionTaskBlockerEventCreateWithoutBlockedByInput[] | ExecutionTaskBlockerEventUncheckedCreateWithoutBlockedByInput[]
+    connectOrCreate?: ExecutionTaskBlockerEventCreateOrConnectWithoutBlockedByInput | ExecutionTaskBlockerEventCreateOrConnectWithoutBlockedByInput[]
+    createMany?: ExecutionTaskBlockerEventCreateManyBlockedByInputEnvelope
+    connect?: ExecutionTaskBlockerEventWhereUniqueInput | ExecutionTaskBlockerEventWhereUniqueInput[]
+  }
+
+  export type ExecutionTaskBlockerEventCreateNestedManyWithoutResolvedByInput = {
+    create?: XOR<ExecutionTaskBlockerEventCreateWithoutResolvedByInput, ExecutionTaskBlockerEventUncheckedCreateWithoutResolvedByInput> | ExecutionTaskBlockerEventCreateWithoutResolvedByInput[] | ExecutionTaskBlockerEventUncheckedCreateWithoutResolvedByInput[]
+    connectOrCreate?: ExecutionTaskBlockerEventCreateOrConnectWithoutResolvedByInput | ExecutionTaskBlockerEventCreateOrConnectWithoutResolvedByInput[]
+    createMany?: ExecutionTaskBlockerEventCreateManyResolvedByInputEnvelope
+    connect?: ExecutionTaskBlockerEventWhereUniqueInput | ExecutionTaskBlockerEventWhereUniqueInput[]
+  }
+
+  export type ExecutionTaskDependencyCreateNestedManyWithoutCreatedByInput = {
+    create?: XOR<ExecutionTaskDependencyCreateWithoutCreatedByInput, ExecutionTaskDependencyUncheckedCreateWithoutCreatedByInput> | ExecutionTaskDependencyCreateWithoutCreatedByInput[] | ExecutionTaskDependencyUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: ExecutionTaskDependencyCreateOrConnectWithoutCreatedByInput | ExecutionTaskDependencyCreateOrConnectWithoutCreatedByInput[]
+    createMany?: ExecutionTaskDependencyCreateManyCreatedByInputEnvelope
+    connect?: ExecutionTaskDependencyWhereUniqueInput | ExecutionTaskDependencyWhereUniqueInput[]
+  }
+
   export type ExecutionEvidenceCreateNestedManyWithoutSubmittedByInput = {
     create?: XOR<ExecutionEvidenceCreateWithoutSubmittedByInput, ExecutionEvidenceUncheckedCreateWithoutSubmittedByInput> | ExecutionEvidenceCreateWithoutSubmittedByInput[] | ExecutionEvidenceUncheckedCreateWithoutSubmittedByInput[]
     connectOrCreate?: ExecutionEvidenceCreateOrConnectWithoutSubmittedByInput | ExecutionEvidenceCreateOrConnectWithoutSubmittedByInput[]
@@ -50826,6 +55780,34 @@ export namespace Prisma {
     connectOrCreate?: ExecutionTaskCreateOrConnectWithoutCancelledByInput | ExecutionTaskCreateOrConnectWithoutCancelledByInput[]
     createMany?: ExecutionTaskCreateManyCancelledByInputEnvelope
     connect?: ExecutionTaskWhereUniqueInput | ExecutionTaskWhereUniqueInput[]
+  }
+
+  export type ExecutionScheduleRevisionUncheckedCreateNestedManyWithoutChangedByInput = {
+    create?: XOR<ExecutionScheduleRevisionCreateWithoutChangedByInput, ExecutionScheduleRevisionUncheckedCreateWithoutChangedByInput> | ExecutionScheduleRevisionCreateWithoutChangedByInput[] | ExecutionScheduleRevisionUncheckedCreateWithoutChangedByInput[]
+    connectOrCreate?: ExecutionScheduleRevisionCreateOrConnectWithoutChangedByInput | ExecutionScheduleRevisionCreateOrConnectWithoutChangedByInput[]
+    createMany?: ExecutionScheduleRevisionCreateManyChangedByInputEnvelope
+    connect?: ExecutionScheduleRevisionWhereUniqueInput | ExecutionScheduleRevisionWhereUniqueInput[]
+  }
+
+  export type ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutBlockedByInput = {
+    create?: XOR<ExecutionTaskBlockerEventCreateWithoutBlockedByInput, ExecutionTaskBlockerEventUncheckedCreateWithoutBlockedByInput> | ExecutionTaskBlockerEventCreateWithoutBlockedByInput[] | ExecutionTaskBlockerEventUncheckedCreateWithoutBlockedByInput[]
+    connectOrCreate?: ExecutionTaskBlockerEventCreateOrConnectWithoutBlockedByInput | ExecutionTaskBlockerEventCreateOrConnectWithoutBlockedByInput[]
+    createMany?: ExecutionTaskBlockerEventCreateManyBlockedByInputEnvelope
+    connect?: ExecutionTaskBlockerEventWhereUniqueInput | ExecutionTaskBlockerEventWhereUniqueInput[]
+  }
+
+  export type ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutResolvedByInput = {
+    create?: XOR<ExecutionTaskBlockerEventCreateWithoutResolvedByInput, ExecutionTaskBlockerEventUncheckedCreateWithoutResolvedByInput> | ExecutionTaskBlockerEventCreateWithoutResolvedByInput[] | ExecutionTaskBlockerEventUncheckedCreateWithoutResolvedByInput[]
+    connectOrCreate?: ExecutionTaskBlockerEventCreateOrConnectWithoutResolvedByInput | ExecutionTaskBlockerEventCreateOrConnectWithoutResolvedByInput[]
+    createMany?: ExecutionTaskBlockerEventCreateManyResolvedByInputEnvelope
+    connect?: ExecutionTaskBlockerEventWhereUniqueInput | ExecutionTaskBlockerEventWhereUniqueInput[]
+  }
+
+  export type ExecutionTaskDependencyUncheckedCreateNestedManyWithoutCreatedByInput = {
+    create?: XOR<ExecutionTaskDependencyCreateWithoutCreatedByInput, ExecutionTaskDependencyUncheckedCreateWithoutCreatedByInput> | ExecutionTaskDependencyCreateWithoutCreatedByInput[] | ExecutionTaskDependencyUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: ExecutionTaskDependencyCreateOrConnectWithoutCreatedByInput | ExecutionTaskDependencyCreateOrConnectWithoutCreatedByInput[]
+    createMany?: ExecutionTaskDependencyCreateManyCreatedByInputEnvelope
+    connect?: ExecutionTaskDependencyWhereUniqueInput | ExecutionTaskDependencyWhereUniqueInput[]
   }
 
   export type ExecutionEvidenceUncheckedCreateNestedManyWithoutSubmittedByInput = {
@@ -51095,6 +56077,62 @@ export namespace Prisma {
     update?: ExecutionTaskUpdateWithWhereUniqueWithoutCancelledByInput | ExecutionTaskUpdateWithWhereUniqueWithoutCancelledByInput[]
     updateMany?: ExecutionTaskUpdateManyWithWhereWithoutCancelledByInput | ExecutionTaskUpdateManyWithWhereWithoutCancelledByInput[]
     deleteMany?: ExecutionTaskScalarWhereInput | ExecutionTaskScalarWhereInput[]
+  }
+
+  export type ExecutionScheduleRevisionUpdateManyWithoutChangedByNestedInput = {
+    create?: XOR<ExecutionScheduleRevisionCreateWithoutChangedByInput, ExecutionScheduleRevisionUncheckedCreateWithoutChangedByInput> | ExecutionScheduleRevisionCreateWithoutChangedByInput[] | ExecutionScheduleRevisionUncheckedCreateWithoutChangedByInput[]
+    connectOrCreate?: ExecutionScheduleRevisionCreateOrConnectWithoutChangedByInput | ExecutionScheduleRevisionCreateOrConnectWithoutChangedByInput[]
+    upsert?: ExecutionScheduleRevisionUpsertWithWhereUniqueWithoutChangedByInput | ExecutionScheduleRevisionUpsertWithWhereUniqueWithoutChangedByInput[]
+    createMany?: ExecutionScheduleRevisionCreateManyChangedByInputEnvelope
+    set?: ExecutionScheduleRevisionWhereUniqueInput | ExecutionScheduleRevisionWhereUniqueInput[]
+    disconnect?: ExecutionScheduleRevisionWhereUniqueInput | ExecutionScheduleRevisionWhereUniqueInput[]
+    delete?: ExecutionScheduleRevisionWhereUniqueInput | ExecutionScheduleRevisionWhereUniqueInput[]
+    connect?: ExecutionScheduleRevisionWhereUniqueInput | ExecutionScheduleRevisionWhereUniqueInput[]
+    update?: ExecutionScheduleRevisionUpdateWithWhereUniqueWithoutChangedByInput | ExecutionScheduleRevisionUpdateWithWhereUniqueWithoutChangedByInput[]
+    updateMany?: ExecutionScheduleRevisionUpdateManyWithWhereWithoutChangedByInput | ExecutionScheduleRevisionUpdateManyWithWhereWithoutChangedByInput[]
+    deleteMany?: ExecutionScheduleRevisionScalarWhereInput | ExecutionScheduleRevisionScalarWhereInput[]
+  }
+
+  export type ExecutionTaskBlockerEventUpdateManyWithoutBlockedByNestedInput = {
+    create?: XOR<ExecutionTaskBlockerEventCreateWithoutBlockedByInput, ExecutionTaskBlockerEventUncheckedCreateWithoutBlockedByInput> | ExecutionTaskBlockerEventCreateWithoutBlockedByInput[] | ExecutionTaskBlockerEventUncheckedCreateWithoutBlockedByInput[]
+    connectOrCreate?: ExecutionTaskBlockerEventCreateOrConnectWithoutBlockedByInput | ExecutionTaskBlockerEventCreateOrConnectWithoutBlockedByInput[]
+    upsert?: ExecutionTaskBlockerEventUpsertWithWhereUniqueWithoutBlockedByInput | ExecutionTaskBlockerEventUpsertWithWhereUniqueWithoutBlockedByInput[]
+    createMany?: ExecutionTaskBlockerEventCreateManyBlockedByInputEnvelope
+    set?: ExecutionTaskBlockerEventWhereUniqueInput | ExecutionTaskBlockerEventWhereUniqueInput[]
+    disconnect?: ExecutionTaskBlockerEventWhereUniqueInput | ExecutionTaskBlockerEventWhereUniqueInput[]
+    delete?: ExecutionTaskBlockerEventWhereUniqueInput | ExecutionTaskBlockerEventWhereUniqueInput[]
+    connect?: ExecutionTaskBlockerEventWhereUniqueInput | ExecutionTaskBlockerEventWhereUniqueInput[]
+    update?: ExecutionTaskBlockerEventUpdateWithWhereUniqueWithoutBlockedByInput | ExecutionTaskBlockerEventUpdateWithWhereUniqueWithoutBlockedByInput[]
+    updateMany?: ExecutionTaskBlockerEventUpdateManyWithWhereWithoutBlockedByInput | ExecutionTaskBlockerEventUpdateManyWithWhereWithoutBlockedByInput[]
+    deleteMany?: ExecutionTaskBlockerEventScalarWhereInput | ExecutionTaskBlockerEventScalarWhereInput[]
+  }
+
+  export type ExecutionTaskBlockerEventUpdateManyWithoutResolvedByNestedInput = {
+    create?: XOR<ExecutionTaskBlockerEventCreateWithoutResolvedByInput, ExecutionTaskBlockerEventUncheckedCreateWithoutResolvedByInput> | ExecutionTaskBlockerEventCreateWithoutResolvedByInput[] | ExecutionTaskBlockerEventUncheckedCreateWithoutResolvedByInput[]
+    connectOrCreate?: ExecutionTaskBlockerEventCreateOrConnectWithoutResolvedByInput | ExecutionTaskBlockerEventCreateOrConnectWithoutResolvedByInput[]
+    upsert?: ExecutionTaskBlockerEventUpsertWithWhereUniqueWithoutResolvedByInput | ExecutionTaskBlockerEventUpsertWithWhereUniqueWithoutResolvedByInput[]
+    createMany?: ExecutionTaskBlockerEventCreateManyResolvedByInputEnvelope
+    set?: ExecutionTaskBlockerEventWhereUniqueInput | ExecutionTaskBlockerEventWhereUniqueInput[]
+    disconnect?: ExecutionTaskBlockerEventWhereUniqueInput | ExecutionTaskBlockerEventWhereUniqueInput[]
+    delete?: ExecutionTaskBlockerEventWhereUniqueInput | ExecutionTaskBlockerEventWhereUniqueInput[]
+    connect?: ExecutionTaskBlockerEventWhereUniqueInput | ExecutionTaskBlockerEventWhereUniqueInput[]
+    update?: ExecutionTaskBlockerEventUpdateWithWhereUniqueWithoutResolvedByInput | ExecutionTaskBlockerEventUpdateWithWhereUniqueWithoutResolvedByInput[]
+    updateMany?: ExecutionTaskBlockerEventUpdateManyWithWhereWithoutResolvedByInput | ExecutionTaskBlockerEventUpdateManyWithWhereWithoutResolvedByInput[]
+    deleteMany?: ExecutionTaskBlockerEventScalarWhereInput | ExecutionTaskBlockerEventScalarWhereInput[]
+  }
+
+  export type ExecutionTaskDependencyUpdateManyWithoutCreatedByNestedInput = {
+    create?: XOR<ExecutionTaskDependencyCreateWithoutCreatedByInput, ExecutionTaskDependencyUncheckedCreateWithoutCreatedByInput> | ExecutionTaskDependencyCreateWithoutCreatedByInput[] | ExecutionTaskDependencyUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: ExecutionTaskDependencyCreateOrConnectWithoutCreatedByInput | ExecutionTaskDependencyCreateOrConnectWithoutCreatedByInput[]
+    upsert?: ExecutionTaskDependencyUpsertWithWhereUniqueWithoutCreatedByInput | ExecutionTaskDependencyUpsertWithWhereUniqueWithoutCreatedByInput[]
+    createMany?: ExecutionTaskDependencyCreateManyCreatedByInputEnvelope
+    set?: ExecutionTaskDependencyWhereUniqueInput | ExecutionTaskDependencyWhereUniqueInput[]
+    disconnect?: ExecutionTaskDependencyWhereUniqueInput | ExecutionTaskDependencyWhereUniqueInput[]
+    delete?: ExecutionTaskDependencyWhereUniqueInput | ExecutionTaskDependencyWhereUniqueInput[]
+    connect?: ExecutionTaskDependencyWhereUniqueInput | ExecutionTaskDependencyWhereUniqueInput[]
+    update?: ExecutionTaskDependencyUpdateWithWhereUniqueWithoutCreatedByInput | ExecutionTaskDependencyUpdateWithWhereUniqueWithoutCreatedByInput[]
+    updateMany?: ExecutionTaskDependencyUpdateManyWithWhereWithoutCreatedByInput | ExecutionTaskDependencyUpdateManyWithWhereWithoutCreatedByInput[]
+    deleteMany?: ExecutionTaskDependencyScalarWhereInput | ExecutionTaskDependencyScalarWhereInput[]
   }
 
   export type ExecutionEvidenceUpdateManyWithoutSubmittedByNestedInput = {
@@ -51445,6 +56483,62 @@ export namespace Prisma {
     update?: ExecutionTaskUpdateWithWhereUniqueWithoutCancelledByInput | ExecutionTaskUpdateWithWhereUniqueWithoutCancelledByInput[]
     updateMany?: ExecutionTaskUpdateManyWithWhereWithoutCancelledByInput | ExecutionTaskUpdateManyWithWhereWithoutCancelledByInput[]
     deleteMany?: ExecutionTaskScalarWhereInput | ExecutionTaskScalarWhereInput[]
+  }
+
+  export type ExecutionScheduleRevisionUncheckedUpdateManyWithoutChangedByNestedInput = {
+    create?: XOR<ExecutionScheduleRevisionCreateWithoutChangedByInput, ExecutionScheduleRevisionUncheckedCreateWithoutChangedByInput> | ExecutionScheduleRevisionCreateWithoutChangedByInput[] | ExecutionScheduleRevisionUncheckedCreateWithoutChangedByInput[]
+    connectOrCreate?: ExecutionScheduleRevisionCreateOrConnectWithoutChangedByInput | ExecutionScheduleRevisionCreateOrConnectWithoutChangedByInput[]
+    upsert?: ExecutionScheduleRevisionUpsertWithWhereUniqueWithoutChangedByInput | ExecutionScheduleRevisionUpsertWithWhereUniqueWithoutChangedByInput[]
+    createMany?: ExecutionScheduleRevisionCreateManyChangedByInputEnvelope
+    set?: ExecutionScheduleRevisionWhereUniqueInput | ExecutionScheduleRevisionWhereUniqueInput[]
+    disconnect?: ExecutionScheduleRevisionWhereUniqueInput | ExecutionScheduleRevisionWhereUniqueInput[]
+    delete?: ExecutionScheduleRevisionWhereUniqueInput | ExecutionScheduleRevisionWhereUniqueInput[]
+    connect?: ExecutionScheduleRevisionWhereUniqueInput | ExecutionScheduleRevisionWhereUniqueInput[]
+    update?: ExecutionScheduleRevisionUpdateWithWhereUniqueWithoutChangedByInput | ExecutionScheduleRevisionUpdateWithWhereUniqueWithoutChangedByInput[]
+    updateMany?: ExecutionScheduleRevisionUpdateManyWithWhereWithoutChangedByInput | ExecutionScheduleRevisionUpdateManyWithWhereWithoutChangedByInput[]
+    deleteMany?: ExecutionScheduleRevisionScalarWhereInput | ExecutionScheduleRevisionScalarWhereInput[]
+  }
+
+  export type ExecutionTaskBlockerEventUncheckedUpdateManyWithoutBlockedByNestedInput = {
+    create?: XOR<ExecutionTaskBlockerEventCreateWithoutBlockedByInput, ExecutionTaskBlockerEventUncheckedCreateWithoutBlockedByInput> | ExecutionTaskBlockerEventCreateWithoutBlockedByInput[] | ExecutionTaskBlockerEventUncheckedCreateWithoutBlockedByInput[]
+    connectOrCreate?: ExecutionTaskBlockerEventCreateOrConnectWithoutBlockedByInput | ExecutionTaskBlockerEventCreateOrConnectWithoutBlockedByInput[]
+    upsert?: ExecutionTaskBlockerEventUpsertWithWhereUniqueWithoutBlockedByInput | ExecutionTaskBlockerEventUpsertWithWhereUniqueWithoutBlockedByInput[]
+    createMany?: ExecutionTaskBlockerEventCreateManyBlockedByInputEnvelope
+    set?: ExecutionTaskBlockerEventWhereUniqueInput | ExecutionTaskBlockerEventWhereUniqueInput[]
+    disconnect?: ExecutionTaskBlockerEventWhereUniqueInput | ExecutionTaskBlockerEventWhereUniqueInput[]
+    delete?: ExecutionTaskBlockerEventWhereUniqueInput | ExecutionTaskBlockerEventWhereUniqueInput[]
+    connect?: ExecutionTaskBlockerEventWhereUniqueInput | ExecutionTaskBlockerEventWhereUniqueInput[]
+    update?: ExecutionTaskBlockerEventUpdateWithWhereUniqueWithoutBlockedByInput | ExecutionTaskBlockerEventUpdateWithWhereUniqueWithoutBlockedByInput[]
+    updateMany?: ExecutionTaskBlockerEventUpdateManyWithWhereWithoutBlockedByInput | ExecutionTaskBlockerEventUpdateManyWithWhereWithoutBlockedByInput[]
+    deleteMany?: ExecutionTaskBlockerEventScalarWhereInput | ExecutionTaskBlockerEventScalarWhereInput[]
+  }
+
+  export type ExecutionTaskBlockerEventUncheckedUpdateManyWithoutResolvedByNestedInput = {
+    create?: XOR<ExecutionTaskBlockerEventCreateWithoutResolvedByInput, ExecutionTaskBlockerEventUncheckedCreateWithoutResolvedByInput> | ExecutionTaskBlockerEventCreateWithoutResolvedByInput[] | ExecutionTaskBlockerEventUncheckedCreateWithoutResolvedByInput[]
+    connectOrCreate?: ExecutionTaskBlockerEventCreateOrConnectWithoutResolvedByInput | ExecutionTaskBlockerEventCreateOrConnectWithoutResolvedByInput[]
+    upsert?: ExecutionTaskBlockerEventUpsertWithWhereUniqueWithoutResolvedByInput | ExecutionTaskBlockerEventUpsertWithWhereUniqueWithoutResolvedByInput[]
+    createMany?: ExecutionTaskBlockerEventCreateManyResolvedByInputEnvelope
+    set?: ExecutionTaskBlockerEventWhereUniqueInput | ExecutionTaskBlockerEventWhereUniqueInput[]
+    disconnect?: ExecutionTaskBlockerEventWhereUniqueInput | ExecutionTaskBlockerEventWhereUniqueInput[]
+    delete?: ExecutionTaskBlockerEventWhereUniqueInput | ExecutionTaskBlockerEventWhereUniqueInput[]
+    connect?: ExecutionTaskBlockerEventWhereUniqueInput | ExecutionTaskBlockerEventWhereUniqueInput[]
+    update?: ExecutionTaskBlockerEventUpdateWithWhereUniqueWithoutResolvedByInput | ExecutionTaskBlockerEventUpdateWithWhereUniqueWithoutResolvedByInput[]
+    updateMany?: ExecutionTaskBlockerEventUpdateManyWithWhereWithoutResolvedByInput | ExecutionTaskBlockerEventUpdateManyWithWhereWithoutResolvedByInput[]
+    deleteMany?: ExecutionTaskBlockerEventScalarWhereInput | ExecutionTaskBlockerEventScalarWhereInput[]
+  }
+
+  export type ExecutionTaskDependencyUncheckedUpdateManyWithoutCreatedByNestedInput = {
+    create?: XOR<ExecutionTaskDependencyCreateWithoutCreatedByInput, ExecutionTaskDependencyUncheckedCreateWithoutCreatedByInput> | ExecutionTaskDependencyCreateWithoutCreatedByInput[] | ExecutionTaskDependencyUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: ExecutionTaskDependencyCreateOrConnectWithoutCreatedByInput | ExecutionTaskDependencyCreateOrConnectWithoutCreatedByInput[]
+    upsert?: ExecutionTaskDependencyUpsertWithWhereUniqueWithoutCreatedByInput | ExecutionTaskDependencyUpsertWithWhereUniqueWithoutCreatedByInput[]
+    createMany?: ExecutionTaskDependencyCreateManyCreatedByInputEnvelope
+    set?: ExecutionTaskDependencyWhereUniqueInput | ExecutionTaskDependencyWhereUniqueInput[]
+    disconnect?: ExecutionTaskDependencyWhereUniqueInput | ExecutionTaskDependencyWhereUniqueInput[]
+    delete?: ExecutionTaskDependencyWhereUniqueInput | ExecutionTaskDependencyWhereUniqueInput[]
+    connect?: ExecutionTaskDependencyWhereUniqueInput | ExecutionTaskDependencyWhereUniqueInput[]
+    update?: ExecutionTaskDependencyUpdateWithWhereUniqueWithoutCreatedByInput | ExecutionTaskDependencyUpdateWithWhereUniqueWithoutCreatedByInput[]
+    updateMany?: ExecutionTaskDependencyUpdateManyWithWhereWithoutCreatedByInput | ExecutionTaskDependencyUpdateManyWithWhereWithoutCreatedByInput[]
+    deleteMany?: ExecutionTaskDependencyScalarWhereInput | ExecutionTaskDependencyScalarWhereInput[]
   }
 
   export type ExecutionEvidenceUncheckedUpdateManyWithoutSubmittedByNestedInput = {
@@ -54304,6 +59398,20 @@ export namespace Prisma {
     connect?: CaseClosureWhereUniqueInput
   }
 
+  export type ExecutionScheduleRevisionCreateNestedManyWithoutExecutionPlanInput = {
+    create?: XOR<ExecutionScheduleRevisionCreateWithoutExecutionPlanInput, ExecutionScheduleRevisionUncheckedCreateWithoutExecutionPlanInput> | ExecutionScheduleRevisionCreateWithoutExecutionPlanInput[] | ExecutionScheduleRevisionUncheckedCreateWithoutExecutionPlanInput[]
+    connectOrCreate?: ExecutionScheduleRevisionCreateOrConnectWithoutExecutionPlanInput | ExecutionScheduleRevisionCreateOrConnectWithoutExecutionPlanInput[]
+    createMany?: ExecutionScheduleRevisionCreateManyExecutionPlanInputEnvelope
+    connect?: ExecutionScheduleRevisionWhereUniqueInput | ExecutionScheduleRevisionWhereUniqueInput[]
+  }
+
+  export type ExecutionTaskDependencyCreateNestedManyWithoutExecutionPlanInput = {
+    create?: XOR<ExecutionTaskDependencyCreateWithoutExecutionPlanInput, ExecutionTaskDependencyUncheckedCreateWithoutExecutionPlanInput> | ExecutionTaskDependencyCreateWithoutExecutionPlanInput[] | ExecutionTaskDependencyUncheckedCreateWithoutExecutionPlanInput[]
+    connectOrCreate?: ExecutionTaskDependencyCreateOrConnectWithoutExecutionPlanInput | ExecutionTaskDependencyCreateOrConnectWithoutExecutionPlanInput[]
+    createMany?: ExecutionTaskDependencyCreateManyExecutionPlanInputEnvelope
+    connect?: ExecutionTaskDependencyWhereUniqueInput | ExecutionTaskDependencyWhereUniqueInput[]
+  }
+
   export type ExecutionTaskUncheckedCreateNestedManyWithoutExecutionPlanInput = {
     create?: XOR<ExecutionTaskCreateWithoutExecutionPlanInput, ExecutionTaskUncheckedCreateWithoutExecutionPlanInput> | ExecutionTaskCreateWithoutExecutionPlanInput[] | ExecutionTaskUncheckedCreateWithoutExecutionPlanInput[]
     connectOrCreate?: ExecutionTaskCreateOrConnectWithoutExecutionPlanInput | ExecutionTaskCreateOrConnectWithoutExecutionPlanInput[]
@@ -54315,6 +59423,20 @@ export namespace Prisma {
     create?: XOR<CaseClosureCreateWithoutExecutionPlanInput, CaseClosureUncheckedCreateWithoutExecutionPlanInput>
     connectOrCreate?: CaseClosureCreateOrConnectWithoutExecutionPlanInput
     connect?: CaseClosureWhereUniqueInput
+  }
+
+  export type ExecutionScheduleRevisionUncheckedCreateNestedManyWithoutExecutionPlanInput = {
+    create?: XOR<ExecutionScheduleRevisionCreateWithoutExecutionPlanInput, ExecutionScheduleRevisionUncheckedCreateWithoutExecutionPlanInput> | ExecutionScheduleRevisionCreateWithoutExecutionPlanInput[] | ExecutionScheduleRevisionUncheckedCreateWithoutExecutionPlanInput[]
+    connectOrCreate?: ExecutionScheduleRevisionCreateOrConnectWithoutExecutionPlanInput | ExecutionScheduleRevisionCreateOrConnectWithoutExecutionPlanInput[]
+    createMany?: ExecutionScheduleRevisionCreateManyExecutionPlanInputEnvelope
+    connect?: ExecutionScheduleRevisionWhereUniqueInput | ExecutionScheduleRevisionWhereUniqueInput[]
+  }
+
+  export type ExecutionTaskDependencyUncheckedCreateNestedManyWithoutExecutionPlanInput = {
+    create?: XOR<ExecutionTaskDependencyCreateWithoutExecutionPlanInput, ExecutionTaskDependencyUncheckedCreateWithoutExecutionPlanInput> | ExecutionTaskDependencyCreateWithoutExecutionPlanInput[] | ExecutionTaskDependencyUncheckedCreateWithoutExecutionPlanInput[]
+    connectOrCreate?: ExecutionTaskDependencyCreateOrConnectWithoutExecutionPlanInput | ExecutionTaskDependencyCreateOrConnectWithoutExecutionPlanInput[]
+    createMany?: ExecutionTaskDependencyCreateManyExecutionPlanInputEnvelope
+    connect?: ExecutionTaskDependencyWhereUniqueInput | ExecutionTaskDependencyWhereUniqueInput[]
   }
 
   export type EnumExecutionPlanStatusFieldUpdateOperationsInput = {
@@ -54381,6 +59503,34 @@ export namespace Prisma {
     update?: XOR<XOR<CaseClosureUpdateToOneWithWhereWithoutExecutionPlanInput, CaseClosureUpdateWithoutExecutionPlanInput>, CaseClosureUncheckedUpdateWithoutExecutionPlanInput>
   }
 
+  export type ExecutionScheduleRevisionUpdateManyWithoutExecutionPlanNestedInput = {
+    create?: XOR<ExecutionScheduleRevisionCreateWithoutExecutionPlanInput, ExecutionScheduleRevisionUncheckedCreateWithoutExecutionPlanInput> | ExecutionScheduleRevisionCreateWithoutExecutionPlanInput[] | ExecutionScheduleRevisionUncheckedCreateWithoutExecutionPlanInput[]
+    connectOrCreate?: ExecutionScheduleRevisionCreateOrConnectWithoutExecutionPlanInput | ExecutionScheduleRevisionCreateOrConnectWithoutExecutionPlanInput[]
+    upsert?: ExecutionScheduleRevisionUpsertWithWhereUniqueWithoutExecutionPlanInput | ExecutionScheduleRevisionUpsertWithWhereUniqueWithoutExecutionPlanInput[]
+    createMany?: ExecutionScheduleRevisionCreateManyExecutionPlanInputEnvelope
+    set?: ExecutionScheduleRevisionWhereUniqueInput | ExecutionScheduleRevisionWhereUniqueInput[]
+    disconnect?: ExecutionScheduleRevisionWhereUniqueInput | ExecutionScheduleRevisionWhereUniqueInput[]
+    delete?: ExecutionScheduleRevisionWhereUniqueInput | ExecutionScheduleRevisionWhereUniqueInput[]
+    connect?: ExecutionScheduleRevisionWhereUniqueInput | ExecutionScheduleRevisionWhereUniqueInput[]
+    update?: ExecutionScheduleRevisionUpdateWithWhereUniqueWithoutExecutionPlanInput | ExecutionScheduleRevisionUpdateWithWhereUniqueWithoutExecutionPlanInput[]
+    updateMany?: ExecutionScheduleRevisionUpdateManyWithWhereWithoutExecutionPlanInput | ExecutionScheduleRevisionUpdateManyWithWhereWithoutExecutionPlanInput[]
+    deleteMany?: ExecutionScheduleRevisionScalarWhereInput | ExecutionScheduleRevisionScalarWhereInput[]
+  }
+
+  export type ExecutionTaskDependencyUpdateManyWithoutExecutionPlanNestedInput = {
+    create?: XOR<ExecutionTaskDependencyCreateWithoutExecutionPlanInput, ExecutionTaskDependencyUncheckedCreateWithoutExecutionPlanInput> | ExecutionTaskDependencyCreateWithoutExecutionPlanInput[] | ExecutionTaskDependencyUncheckedCreateWithoutExecutionPlanInput[]
+    connectOrCreate?: ExecutionTaskDependencyCreateOrConnectWithoutExecutionPlanInput | ExecutionTaskDependencyCreateOrConnectWithoutExecutionPlanInput[]
+    upsert?: ExecutionTaskDependencyUpsertWithWhereUniqueWithoutExecutionPlanInput | ExecutionTaskDependencyUpsertWithWhereUniqueWithoutExecutionPlanInput[]
+    createMany?: ExecutionTaskDependencyCreateManyExecutionPlanInputEnvelope
+    set?: ExecutionTaskDependencyWhereUniqueInput | ExecutionTaskDependencyWhereUniqueInput[]
+    disconnect?: ExecutionTaskDependencyWhereUniqueInput | ExecutionTaskDependencyWhereUniqueInput[]
+    delete?: ExecutionTaskDependencyWhereUniqueInput | ExecutionTaskDependencyWhereUniqueInput[]
+    connect?: ExecutionTaskDependencyWhereUniqueInput | ExecutionTaskDependencyWhereUniqueInput[]
+    update?: ExecutionTaskDependencyUpdateWithWhereUniqueWithoutExecutionPlanInput | ExecutionTaskDependencyUpdateWithWhereUniqueWithoutExecutionPlanInput[]
+    updateMany?: ExecutionTaskDependencyUpdateManyWithWhereWithoutExecutionPlanInput | ExecutionTaskDependencyUpdateManyWithWhereWithoutExecutionPlanInput[]
+    deleteMany?: ExecutionTaskDependencyScalarWhereInput | ExecutionTaskDependencyScalarWhereInput[]
+  }
+
   export type ExecutionTaskUncheckedUpdateManyWithoutExecutionPlanNestedInput = {
     create?: XOR<ExecutionTaskCreateWithoutExecutionPlanInput, ExecutionTaskUncheckedCreateWithoutExecutionPlanInput> | ExecutionTaskCreateWithoutExecutionPlanInput[] | ExecutionTaskUncheckedCreateWithoutExecutionPlanInput[]
     connectOrCreate?: ExecutionTaskCreateOrConnectWithoutExecutionPlanInput | ExecutionTaskCreateOrConnectWithoutExecutionPlanInput[]
@@ -54403,6 +59553,34 @@ export namespace Prisma {
     delete?: CaseClosureWhereInput | boolean
     connect?: CaseClosureWhereUniqueInput
     update?: XOR<XOR<CaseClosureUpdateToOneWithWhereWithoutExecutionPlanInput, CaseClosureUpdateWithoutExecutionPlanInput>, CaseClosureUncheckedUpdateWithoutExecutionPlanInput>
+  }
+
+  export type ExecutionScheduleRevisionUncheckedUpdateManyWithoutExecutionPlanNestedInput = {
+    create?: XOR<ExecutionScheduleRevisionCreateWithoutExecutionPlanInput, ExecutionScheduleRevisionUncheckedCreateWithoutExecutionPlanInput> | ExecutionScheduleRevisionCreateWithoutExecutionPlanInput[] | ExecutionScheduleRevisionUncheckedCreateWithoutExecutionPlanInput[]
+    connectOrCreate?: ExecutionScheduleRevisionCreateOrConnectWithoutExecutionPlanInput | ExecutionScheduleRevisionCreateOrConnectWithoutExecutionPlanInput[]
+    upsert?: ExecutionScheduleRevisionUpsertWithWhereUniqueWithoutExecutionPlanInput | ExecutionScheduleRevisionUpsertWithWhereUniqueWithoutExecutionPlanInput[]
+    createMany?: ExecutionScheduleRevisionCreateManyExecutionPlanInputEnvelope
+    set?: ExecutionScheduleRevisionWhereUniqueInput | ExecutionScheduleRevisionWhereUniqueInput[]
+    disconnect?: ExecutionScheduleRevisionWhereUniqueInput | ExecutionScheduleRevisionWhereUniqueInput[]
+    delete?: ExecutionScheduleRevisionWhereUniqueInput | ExecutionScheduleRevisionWhereUniqueInput[]
+    connect?: ExecutionScheduleRevisionWhereUniqueInput | ExecutionScheduleRevisionWhereUniqueInput[]
+    update?: ExecutionScheduleRevisionUpdateWithWhereUniqueWithoutExecutionPlanInput | ExecutionScheduleRevisionUpdateWithWhereUniqueWithoutExecutionPlanInput[]
+    updateMany?: ExecutionScheduleRevisionUpdateManyWithWhereWithoutExecutionPlanInput | ExecutionScheduleRevisionUpdateManyWithWhereWithoutExecutionPlanInput[]
+    deleteMany?: ExecutionScheduleRevisionScalarWhereInput | ExecutionScheduleRevisionScalarWhereInput[]
+  }
+
+  export type ExecutionTaskDependencyUncheckedUpdateManyWithoutExecutionPlanNestedInput = {
+    create?: XOR<ExecutionTaskDependencyCreateWithoutExecutionPlanInput, ExecutionTaskDependencyUncheckedCreateWithoutExecutionPlanInput> | ExecutionTaskDependencyCreateWithoutExecutionPlanInput[] | ExecutionTaskDependencyUncheckedCreateWithoutExecutionPlanInput[]
+    connectOrCreate?: ExecutionTaskDependencyCreateOrConnectWithoutExecutionPlanInput | ExecutionTaskDependencyCreateOrConnectWithoutExecutionPlanInput[]
+    upsert?: ExecutionTaskDependencyUpsertWithWhereUniqueWithoutExecutionPlanInput | ExecutionTaskDependencyUpsertWithWhereUniqueWithoutExecutionPlanInput[]
+    createMany?: ExecutionTaskDependencyCreateManyExecutionPlanInputEnvelope
+    set?: ExecutionTaskDependencyWhereUniqueInput | ExecutionTaskDependencyWhereUniqueInput[]
+    disconnect?: ExecutionTaskDependencyWhereUniqueInput | ExecutionTaskDependencyWhereUniqueInput[]
+    delete?: ExecutionTaskDependencyWhereUniqueInput | ExecutionTaskDependencyWhereUniqueInput[]
+    connect?: ExecutionTaskDependencyWhereUniqueInput | ExecutionTaskDependencyWhereUniqueInput[]
+    update?: ExecutionTaskDependencyUpdateWithWhereUniqueWithoutExecutionPlanInput | ExecutionTaskDependencyUpdateWithWhereUniqueWithoutExecutionPlanInput[]
+    updateMany?: ExecutionTaskDependencyUpdateManyWithWhereWithoutExecutionPlanInput | ExecutionTaskDependencyUpdateManyWithWhereWithoutExecutionPlanInput[]
+    deleteMany?: ExecutionTaskDependencyScalarWhereInput | ExecutionTaskDependencyScalarWhereInput[]
   }
 
   export type ExecutionPlanCreateNestedOneWithoutTasksInput = {
@@ -54466,11 +59644,67 @@ export namespace Prisma {
     connect?: GovernedExecutionTaskTemplateWhereUniqueInput
   }
 
+  export type ExecutionScheduleRevisionCreateNestedManyWithoutExecutionTaskInput = {
+    create?: XOR<ExecutionScheduleRevisionCreateWithoutExecutionTaskInput, ExecutionScheduleRevisionUncheckedCreateWithoutExecutionTaskInput> | ExecutionScheduleRevisionCreateWithoutExecutionTaskInput[] | ExecutionScheduleRevisionUncheckedCreateWithoutExecutionTaskInput[]
+    connectOrCreate?: ExecutionScheduleRevisionCreateOrConnectWithoutExecutionTaskInput | ExecutionScheduleRevisionCreateOrConnectWithoutExecutionTaskInput[]
+    createMany?: ExecutionScheduleRevisionCreateManyExecutionTaskInputEnvelope
+    connect?: ExecutionScheduleRevisionWhereUniqueInput | ExecutionScheduleRevisionWhereUniqueInput[]
+  }
+
+  export type ExecutionTaskDependencyCreateNestedManyWithoutDependentTaskInput = {
+    create?: XOR<ExecutionTaskDependencyCreateWithoutDependentTaskInput, ExecutionTaskDependencyUncheckedCreateWithoutDependentTaskInput> | ExecutionTaskDependencyCreateWithoutDependentTaskInput[] | ExecutionTaskDependencyUncheckedCreateWithoutDependentTaskInput[]
+    connectOrCreate?: ExecutionTaskDependencyCreateOrConnectWithoutDependentTaskInput | ExecutionTaskDependencyCreateOrConnectWithoutDependentTaskInput[]
+    createMany?: ExecutionTaskDependencyCreateManyDependentTaskInputEnvelope
+    connect?: ExecutionTaskDependencyWhereUniqueInput | ExecutionTaskDependencyWhereUniqueInput[]
+  }
+
+  export type ExecutionTaskDependencyCreateNestedManyWithoutPredecessorTaskInput = {
+    create?: XOR<ExecutionTaskDependencyCreateWithoutPredecessorTaskInput, ExecutionTaskDependencyUncheckedCreateWithoutPredecessorTaskInput> | ExecutionTaskDependencyCreateWithoutPredecessorTaskInput[] | ExecutionTaskDependencyUncheckedCreateWithoutPredecessorTaskInput[]
+    connectOrCreate?: ExecutionTaskDependencyCreateOrConnectWithoutPredecessorTaskInput | ExecutionTaskDependencyCreateOrConnectWithoutPredecessorTaskInput[]
+    createMany?: ExecutionTaskDependencyCreateManyPredecessorTaskInputEnvelope
+    connect?: ExecutionTaskDependencyWhereUniqueInput | ExecutionTaskDependencyWhereUniqueInput[]
+  }
+
+  export type ExecutionTaskBlockerEventCreateNestedManyWithoutExecutionTaskInput = {
+    create?: XOR<ExecutionTaskBlockerEventCreateWithoutExecutionTaskInput, ExecutionTaskBlockerEventUncheckedCreateWithoutExecutionTaskInput> | ExecutionTaskBlockerEventCreateWithoutExecutionTaskInput[] | ExecutionTaskBlockerEventUncheckedCreateWithoutExecutionTaskInput[]
+    connectOrCreate?: ExecutionTaskBlockerEventCreateOrConnectWithoutExecutionTaskInput | ExecutionTaskBlockerEventCreateOrConnectWithoutExecutionTaskInput[]
+    createMany?: ExecutionTaskBlockerEventCreateManyExecutionTaskInputEnvelope
+    connect?: ExecutionTaskBlockerEventWhereUniqueInput | ExecutionTaskBlockerEventWhereUniqueInput[]
+  }
+
   export type ExecutionEvidenceUncheckedCreateNestedManyWithoutExecutionTaskInput = {
     create?: XOR<ExecutionEvidenceCreateWithoutExecutionTaskInput, ExecutionEvidenceUncheckedCreateWithoutExecutionTaskInput> | ExecutionEvidenceCreateWithoutExecutionTaskInput[] | ExecutionEvidenceUncheckedCreateWithoutExecutionTaskInput[]
     connectOrCreate?: ExecutionEvidenceCreateOrConnectWithoutExecutionTaskInput | ExecutionEvidenceCreateOrConnectWithoutExecutionTaskInput[]
     createMany?: ExecutionEvidenceCreateManyExecutionTaskInputEnvelope
     connect?: ExecutionEvidenceWhereUniqueInput | ExecutionEvidenceWhereUniqueInput[]
+  }
+
+  export type ExecutionScheduleRevisionUncheckedCreateNestedManyWithoutExecutionTaskInput = {
+    create?: XOR<ExecutionScheduleRevisionCreateWithoutExecutionTaskInput, ExecutionScheduleRevisionUncheckedCreateWithoutExecutionTaskInput> | ExecutionScheduleRevisionCreateWithoutExecutionTaskInput[] | ExecutionScheduleRevisionUncheckedCreateWithoutExecutionTaskInput[]
+    connectOrCreate?: ExecutionScheduleRevisionCreateOrConnectWithoutExecutionTaskInput | ExecutionScheduleRevisionCreateOrConnectWithoutExecutionTaskInput[]
+    createMany?: ExecutionScheduleRevisionCreateManyExecutionTaskInputEnvelope
+    connect?: ExecutionScheduleRevisionWhereUniqueInput | ExecutionScheduleRevisionWhereUniqueInput[]
+  }
+
+  export type ExecutionTaskDependencyUncheckedCreateNestedManyWithoutDependentTaskInput = {
+    create?: XOR<ExecutionTaskDependencyCreateWithoutDependentTaskInput, ExecutionTaskDependencyUncheckedCreateWithoutDependentTaskInput> | ExecutionTaskDependencyCreateWithoutDependentTaskInput[] | ExecutionTaskDependencyUncheckedCreateWithoutDependentTaskInput[]
+    connectOrCreate?: ExecutionTaskDependencyCreateOrConnectWithoutDependentTaskInput | ExecutionTaskDependencyCreateOrConnectWithoutDependentTaskInput[]
+    createMany?: ExecutionTaskDependencyCreateManyDependentTaskInputEnvelope
+    connect?: ExecutionTaskDependencyWhereUniqueInput | ExecutionTaskDependencyWhereUniqueInput[]
+  }
+
+  export type ExecutionTaskDependencyUncheckedCreateNestedManyWithoutPredecessorTaskInput = {
+    create?: XOR<ExecutionTaskDependencyCreateWithoutPredecessorTaskInput, ExecutionTaskDependencyUncheckedCreateWithoutPredecessorTaskInput> | ExecutionTaskDependencyCreateWithoutPredecessorTaskInput[] | ExecutionTaskDependencyUncheckedCreateWithoutPredecessorTaskInput[]
+    connectOrCreate?: ExecutionTaskDependencyCreateOrConnectWithoutPredecessorTaskInput | ExecutionTaskDependencyCreateOrConnectWithoutPredecessorTaskInput[]
+    createMany?: ExecutionTaskDependencyCreateManyPredecessorTaskInputEnvelope
+    connect?: ExecutionTaskDependencyWhereUniqueInput | ExecutionTaskDependencyWhereUniqueInput[]
+  }
+
+  export type ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutExecutionTaskInput = {
+    create?: XOR<ExecutionTaskBlockerEventCreateWithoutExecutionTaskInput, ExecutionTaskBlockerEventUncheckedCreateWithoutExecutionTaskInput> | ExecutionTaskBlockerEventCreateWithoutExecutionTaskInput[] | ExecutionTaskBlockerEventUncheckedCreateWithoutExecutionTaskInput[]
+    connectOrCreate?: ExecutionTaskBlockerEventCreateOrConnectWithoutExecutionTaskInput | ExecutionTaskBlockerEventCreateOrConnectWithoutExecutionTaskInput[]
+    createMany?: ExecutionTaskBlockerEventCreateManyExecutionTaskInputEnvelope
+    connect?: ExecutionTaskBlockerEventWhereUniqueInput | ExecutionTaskBlockerEventWhereUniqueInput[]
   }
 
   export type EnumExecutionTaskStatusFieldUpdateOperationsInput = {
@@ -54579,6 +59813,62 @@ export namespace Prisma {
     update?: XOR<XOR<GovernedExecutionTaskTemplateUpdateToOneWithWhereWithoutExecutionTasksInput, GovernedExecutionTaskTemplateUpdateWithoutExecutionTasksInput>, GovernedExecutionTaskTemplateUncheckedUpdateWithoutExecutionTasksInput>
   }
 
+  export type ExecutionScheduleRevisionUpdateManyWithoutExecutionTaskNestedInput = {
+    create?: XOR<ExecutionScheduleRevisionCreateWithoutExecutionTaskInput, ExecutionScheduleRevisionUncheckedCreateWithoutExecutionTaskInput> | ExecutionScheduleRevisionCreateWithoutExecutionTaskInput[] | ExecutionScheduleRevisionUncheckedCreateWithoutExecutionTaskInput[]
+    connectOrCreate?: ExecutionScheduleRevisionCreateOrConnectWithoutExecutionTaskInput | ExecutionScheduleRevisionCreateOrConnectWithoutExecutionTaskInput[]
+    upsert?: ExecutionScheduleRevisionUpsertWithWhereUniqueWithoutExecutionTaskInput | ExecutionScheduleRevisionUpsertWithWhereUniqueWithoutExecutionTaskInput[]
+    createMany?: ExecutionScheduleRevisionCreateManyExecutionTaskInputEnvelope
+    set?: ExecutionScheduleRevisionWhereUniqueInput | ExecutionScheduleRevisionWhereUniqueInput[]
+    disconnect?: ExecutionScheduleRevisionWhereUniqueInput | ExecutionScheduleRevisionWhereUniqueInput[]
+    delete?: ExecutionScheduleRevisionWhereUniqueInput | ExecutionScheduleRevisionWhereUniqueInput[]
+    connect?: ExecutionScheduleRevisionWhereUniqueInput | ExecutionScheduleRevisionWhereUniqueInput[]
+    update?: ExecutionScheduleRevisionUpdateWithWhereUniqueWithoutExecutionTaskInput | ExecutionScheduleRevisionUpdateWithWhereUniqueWithoutExecutionTaskInput[]
+    updateMany?: ExecutionScheduleRevisionUpdateManyWithWhereWithoutExecutionTaskInput | ExecutionScheduleRevisionUpdateManyWithWhereWithoutExecutionTaskInput[]
+    deleteMany?: ExecutionScheduleRevisionScalarWhereInput | ExecutionScheduleRevisionScalarWhereInput[]
+  }
+
+  export type ExecutionTaskDependencyUpdateManyWithoutDependentTaskNestedInput = {
+    create?: XOR<ExecutionTaskDependencyCreateWithoutDependentTaskInput, ExecutionTaskDependencyUncheckedCreateWithoutDependentTaskInput> | ExecutionTaskDependencyCreateWithoutDependentTaskInput[] | ExecutionTaskDependencyUncheckedCreateWithoutDependentTaskInput[]
+    connectOrCreate?: ExecutionTaskDependencyCreateOrConnectWithoutDependentTaskInput | ExecutionTaskDependencyCreateOrConnectWithoutDependentTaskInput[]
+    upsert?: ExecutionTaskDependencyUpsertWithWhereUniqueWithoutDependentTaskInput | ExecutionTaskDependencyUpsertWithWhereUniqueWithoutDependentTaskInput[]
+    createMany?: ExecutionTaskDependencyCreateManyDependentTaskInputEnvelope
+    set?: ExecutionTaskDependencyWhereUniqueInput | ExecutionTaskDependencyWhereUniqueInput[]
+    disconnect?: ExecutionTaskDependencyWhereUniqueInput | ExecutionTaskDependencyWhereUniqueInput[]
+    delete?: ExecutionTaskDependencyWhereUniqueInput | ExecutionTaskDependencyWhereUniqueInput[]
+    connect?: ExecutionTaskDependencyWhereUniqueInput | ExecutionTaskDependencyWhereUniqueInput[]
+    update?: ExecutionTaskDependencyUpdateWithWhereUniqueWithoutDependentTaskInput | ExecutionTaskDependencyUpdateWithWhereUniqueWithoutDependentTaskInput[]
+    updateMany?: ExecutionTaskDependencyUpdateManyWithWhereWithoutDependentTaskInput | ExecutionTaskDependencyUpdateManyWithWhereWithoutDependentTaskInput[]
+    deleteMany?: ExecutionTaskDependencyScalarWhereInput | ExecutionTaskDependencyScalarWhereInput[]
+  }
+
+  export type ExecutionTaskDependencyUpdateManyWithoutPredecessorTaskNestedInput = {
+    create?: XOR<ExecutionTaskDependencyCreateWithoutPredecessorTaskInput, ExecutionTaskDependencyUncheckedCreateWithoutPredecessorTaskInput> | ExecutionTaskDependencyCreateWithoutPredecessorTaskInput[] | ExecutionTaskDependencyUncheckedCreateWithoutPredecessorTaskInput[]
+    connectOrCreate?: ExecutionTaskDependencyCreateOrConnectWithoutPredecessorTaskInput | ExecutionTaskDependencyCreateOrConnectWithoutPredecessorTaskInput[]
+    upsert?: ExecutionTaskDependencyUpsertWithWhereUniqueWithoutPredecessorTaskInput | ExecutionTaskDependencyUpsertWithWhereUniqueWithoutPredecessorTaskInput[]
+    createMany?: ExecutionTaskDependencyCreateManyPredecessorTaskInputEnvelope
+    set?: ExecutionTaskDependencyWhereUniqueInput | ExecutionTaskDependencyWhereUniqueInput[]
+    disconnect?: ExecutionTaskDependencyWhereUniqueInput | ExecutionTaskDependencyWhereUniqueInput[]
+    delete?: ExecutionTaskDependencyWhereUniqueInput | ExecutionTaskDependencyWhereUniqueInput[]
+    connect?: ExecutionTaskDependencyWhereUniqueInput | ExecutionTaskDependencyWhereUniqueInput[]
+    update?: ExecutionTaskDependencyUpdateWithWhereUniqueWithoutPredecessorTaskInput | ExecutionTaskDependencyUpdateWithWhereUniqueWithoutPredecessorTaskInput[]
+    updateMany?: ExecutionTaskDependencyUpdateManyWithWhereWithoutPredecessorTaskInput | ExecutionTaskDependencyUpdateManyWithWhereWithoutPredecessorTaskInput[]
+    deleteMany?: ExecutionTaskDependencyScalarWhereInput | ExecutionTaskDependencyScalarWhereInput[]
+  }
+
+  export type ExecutionTaskBlockerEventUpdateManyWithoutExecutionTaskNestedInput = {
+    create?: XOR<ExecutionTaskBlockerEventCreateWithoutExecutionTaskInput, ExecutionTaskBlockerEventUncheckedCreateWithoutExecutionTaskInput> | ExecutionTaskBlockerEventCreateWithoutExecutionTaskInput[] | ExecutionTaskBlockerEventUncheckedCreateWithoutExecutionTaskInput[]
+    connectOrCreate?: ExecutionTaskBlockerEventCreateOrConnectWithoutExecutionTaskInput | ExecutionTaskBlockerEventCreateOrConnectWithoutExecutionTaskInput[]
+    upsert?: ExecutionTaskBlockerEventUpsertWithWhereUniqueWithoutExecutionTaskInput | ExecutionTaskBlockerEventUpsertWithWhereUniqueWithoutExecutionTaskInput[]
+    createMany?: ExecutionTaskBlockerEventCreateManyExecutionTaskInputEnvelope
+    set?: ExecutionTaskBlockerEventWhereUniqueInput | ExecutionTaskBlockerEventWhereUniqueInput[]
+    disconnect?: ExecutionTaskBlockerEventWhereUniqueInput | ExecutionTaskBlockerEventWhereUniqueInput[]
+    delete?: ExecutionTaskBlockerEventWhereUniqueInput | ExecutionTaskBlockerEventWhereUniqueInput[]
+    connect?: ExecutionTaskBlockerEventWhereUniqueInput | ExecutionTaskBlockerEventWhereUniqueInput[]
+    update?: ExecutionTaskBlockerEventUpdateWithWhereUniqueWithoutExecutionTaskInput | ExecutionTaskBlockerEventUpdateWithWhereUniqueWithoutExecutionTaskInput[]
+    updateMany?: ExecutionTaskBlockerEventUpdateManyWithWhereWithoutExecutionTaskInput | ExecutionTaskBlockerEventUpdateManyWithWhereWithoutExecutionTaskInput[]
+    deleteMany?: ExecutionTaskBlockerEventScalarWhereInput | ExecutionTaskBlockerEventScalarWhereInput[]
+  }
+
   export type ExecutionEvidenceUncheckedUpdateManyWithoutExecutionTaskNestedInput = {
     create?: XOR<ExecutionEvidenceCreateWithoutExecutionTaskInput, ExecutionEvidenceUncheckedCreateWithoutExecutionTaskInput> | ExecutionEvidenceCreateWithoutExecutionTaskInput[] | ExecutionEvidenceUncheckedCreateWithoutExecutionTaskInput[]
     connectOrCreate?: ExecutionEvidenceCreateOrConnectWithoutExecutionTaskInput | ExecutionEvidenceCreateOrConnectWithoutExecutionTaskInput[]
@@ -54591,6 +59881,210 @@ export namespace Prisma {
     update?: ExecutionEvidenceUpdateWithWhereUniqueWithoutExecutionTaskInput | ExecutionEvidenceUpdateWithWhereUniqueWithoutExecutionTaskInput[]
     updateMany?: ExecutionEvidenceUpdateManyWithWhereWithoutExecutionTaskInput | ExecutionEvidenceUpdateManyWithWhereWithoutExecutionTaskInput[]
     deleteMany?: ExecutionEvidenceScalarWhereInput | ExecutionEvidenceScalarWhereInput[]
+  }
+
+  export type ExecutionScheduleRevisionUncheckedUpdateManyWithoutExecutionTaskNestedInput = {
+    create?: XOR<ExecutionScheduleRevisionCreateWithoutExecutionTaskInput, ExecutionScheduleRevisionUncheckedCreateWithoutExecutionTaskInput> | ExecutionScheduleRevisionCreateWithoutExecutionTaskInput[] | ExecutionScheduleRevisionUncheckedCreateWithoutExecutionTaskInput[]
+    connectOrCreate?: ExecutionScheduleRevisionCreateOrConnectWithoutExecutionTaskInput | ExecutionScheduleRevisionCreateOrConnectWithoutExecutionTaskInput[]
+    upsert?: ExecutionScheduleRevisionUpsertWithWhereUniqueWithoutExecutionTaskInput | ExecutionScheduleRevisionUpsertWithWhereUniqueWithoutExecutionTaskInput[]
+    createMany?: ExecutionScheduleRevisionCreateManyExecutionTaskInputEnvelope
+    set?: ExecutionScheduleRevisionWhereUniqueInput | ExecutionScheduleRevisionWhereUniqueInput[]
+    disconnect?: ExecutionScheduleRevisionWhereUniqueInput | ExecutionScheduleRevisionWhereUniqueInput[]
+    delete?: ExecutionScheduleRevisionWhereUniqueInput | ExecutionScheduleRevisionWhereUniqueInput[]
+    connect?: ExecutionScheduleRevisionWhereUniqueInput | ExecutionScheduleRevisionWhereUniqueInput[]
+    update?: ExecutionScheduleRevisionUpdateWithWhereUniqueWithoutExecutionTaskInput | ExecutionScheduleRevisionUpdateWithWhereUniqueWithoutExecutionTaskInput[]
+    updateMany?: ExecutionScheduleRevisionUpdateManyWithWhereWithoutExecutionTaskInput | ExecutionScheduleRevisionUpdateManyWithWhereWithoutExecutionTaskInput[]
+    deleteMany?: ExecutionScheduleRevisionScalarWhereInput | ExecutionScheduleRevisionScalarWhereInput[]
+  }
+
+  export type ExecutionTaskDependencyUncheckedUpdateManyWithoutDependentTaskNestedInput = {
+    create?: XOR<ExecutionTaskDependencyCreateWithoutDependentTaskInput, ExecutionTaskDependencyUncheckedCreateWithoutDependentTaskInput> | ExecutionTaskDependencyCreateWithoutDependentTaskInput[] | ExecutionTaskDependencyUncheckedCreateWithoutDependentTaskInput[]
+    connectOrCreate?: ExecutionTaskDependencyCreateOrConnectWithoutDependentTaskInput | ExecutionTaskDependencyCreateOrConnectWithoutDependentTaskInput[]
+    upsert?: ExecutionTaskDependencyUpsertWithWhereUniqueWithoutDependentTaskInput | ExecutionTaskDependencyUpsertWithWhereUniqueWithoutDependentTaskInput[]
+    createMany?: ExecutionTaskDependencyCreateManyDependentTaskInputEnvelope
+    set?: ExecutionTaskDependencyWhereUniqueInput | ExecutionTaskDependencyWhereUniqueInput[]
+    disconnect?: ExecutionTaskDependencyWhereUniqueInput | ExecutionTaskDependencyWhereUniqueInput[]
+    delete?: ExecutionTaskDependencyWhereUniqueInput | ExecutionTaskDependencyWhereUniqueInput[]
+    connect?: ExecutionTaskDependencyWhereUniqueInput | ExecutionTaskDependencyWhereUniqueInput[]
+    update?: ExecutionTaskDependencyUpdateWithWhereUniqueWithoutDependentTaskInput | ExecutionTaskDependencyUpdateWithWhereUniqueWithoutDependentTaskInput[]
+    updateMany?: ExecutionTaskDependencyUpdateManyWithWhereWithoutDependentTaskInput | ExecutionTaskDependencyUpdateManyWithWhereWithoutDependentTaskInput[]
+    deleteMany?: ExecutionTaskDependencyScalarWhereInput | ExecutionTaskDependencyScalarWhereInput[]
+  }
+
+  export type ExecutionTaskDependencyUncheckedUpdateManyWithoutPredecessorTaskNestedInput = {
+    create?: XOR<ExecutionTaskDependencyCreateWithoutPredecessorTaskInput, ExecutionTaskDependencyUncheckedCreateWithoutPredecessorTaskInput> | ExecutionTaskDependencyCreateWithoutPredecessorTaskInput[] | ExecutionTaskDependencyUncheckedCreateWithoutPredecessorTaskInput[]
+    connectOrCreate?: ExecutionTaskDependencyCreateOrConnectWithoutPredecessorTaskInput | ExecutionTaskDependencyCreateOrConnectWithoutPredecessorTaskInput[]
+    upsert?: ExecutionTaskDependencyUpsertWithWhereUniqueWithoutPredecessorTaskInput | ExecutionTaskDependencyUpsertWithWhereUniqueWithoutPredecessorTaskInput[]
+    createMany?: ExecutionTaskDependencyCreateManyPredecessorTaskInputEnvelope
+    set?: ExecutionTaskDependencyWhereUniqueInput | ExecutionTaskDependencyWhereUniqueInput[]
+    disconnect?: ExecutionTaskDependencyWhereUniqueInput | ExecutionTaskDependencyWhereUniqueInput[]
+    delete?: ExecutionTaskDependencyWhereUniqueInput | ExecutionTaskDependencyWhereUniqueInput[]
+    connect?: ExecutionTaskDependencyWhereUniqueInput | ExecutionTaskDependencyWhereUniqueInput[]
+    update?: ExecutionTaskDependencyUpdateWithWhereUniqueWithoutPredecessorTaskInput | ExecutionTaskDependencyUpdateWithWhereUniqueWithoutPredecessorTaskInput[]
+    updateMany?: ExecutionTaskDependencyUpdateManyWithWhereWithoutPredecessorTaskInput | ExecutionTaskDependencyUpdateManyWithWhereWithoutPredecessorTaskInput[]
+    deleteMany?: ExecutionTaskDependencyScalarWhereInput | ExecutionTaskDependencyScalarWhereInput[]
+  }
+
+  export type ExecutionTaskBlockerEventUncheckedUpdateManyWithoutExecutionTaskNestedInput = {
+    create?: XOR<ExecutionTaskBlockerEventCreateWithoutExecutionTaskInput, ExecutionTaskBlockerEventUncheckedCreateWithoutExecutionTaskInput> | ExecutionTaskBlockerEventCreateWithoutExecutionTaskInput[] | ExecutionTaskBlockerEventUncheckedCreateWithoutExecutionTaskInput[]
+    connectOrCreate?: ExecutionTaskBlockerEventCreateOrConnectWithoutExecutionTaskInput | ExecutionTaskBlockerEventCreateOrConnectWithoutExecutionTaskInput[]
+    upsert?: ExecutionTaskBlockerEventUpsertWithWhereUniqueWithoutExecutionTaskInput | ExecutionTaskBlockerEventUpsertWithWhereUniqueWithoutExecutionTaskInput[]
+    createMany?: ExecutionTaskBlockerEventCreateManyExecutionTaskInputEnvelope
+    set?: ExecutionTaskBlockerEventWhereUniqueInput | ExecutionTaskBlockerEventWhereUniqueInput[]
+    disconnect?: ExecutionTaskBlockerEventWhereUniqueInput | ExecutionTaskBlockerEventWhereUniqueInput[]
+    delete?: ExecutionTaskBlockerEventWhereUniqueInput | ExecutionTaskBlockerEventWhereUniqueInput[]
+    connect?: ExecutionTaskBlockerEventWhereUniqueInput | ExecutionTaskBlockerEventWhereUniqueInput[]
+    update?: ExecutionTaskBlockerEventUpdateWithWhereUniqueWithoutExecutionTaskInput | ExecutionTaskBlockerEventUpdateWithWhereUniqueWithoutExecutionTaskInput[]
+    updateMany?: ExecutionTaskBlockerEventUpdateManyWithWhereWithoutExecutionTaskInput | ExecutionTaskBlockerEventUpdateManyWithWhereWithoutExecutionTaskInput[]
+    deleteMany?: ExecutionTaskBlockerEventScalarWhereInput | ExecutionTaskBlockerEventScalarWhereInput[]
+  }
+
+  export type ExecutionPlanCreateNestedOneWithoutTaskDependenciesInput = {
+    create?: XOR<ExecutionPlanCreateWithoutTaskDependenciesInput, ExecutionPlanUncheckedCreateWithoutTaskDependenciesInput>
+    connectOrCreate?: ExecutionPlanCreateOrConnectWithoutTaskDependenciesInput
+    connect?: ExecutionPlanWhereUniqueInput
+  }
+
+  export type ExecutionTaskCreateNestedOneWithoutDependenciesInput = {
+    create?: XOR<ExecutionTaskCreateWithoutDependenciesInput, ExecutionTaskUncheckedCreateWithoutDependenciesInput>
+    connectOrCreate?: ExecutionTaskCreateOrConnectWithoutDependenciesInput
+    connect?: ExecutionTaskWhereUniqueInput
+  }
+
+  export type ExecutionTaskCreateNestedOneWithoutRequiredByInput = {
+    create?: XOR<ExecutionTaskCreateWithoutRequiredByInput, ExecutionTaskUncheckedCreateWithoutRequiredByInput>
+    connectOrCreate?: ExecutionTaskCreateOrConnectWithoutRequiredByInput
+    connect?: ExecutionTaskWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutCreatedExecutionTaskDependenciesInput = {
+    create?: XOR<UserCreateWithoutCreatedExecutionTaskDependenciesInput, UserUncheckedCreateWithoutCreatedExecutionTaskDependenciesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCreatedExecutionTaskDependenciesInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type ExecutionPlanUpdateOneRequiredWithoutTaskDependenciesNestedInput = {
+    create?: XOR<ExecutionPlanCreateWithoutTaskDependenciesInput, ExecutionPlanUncheckedCreateWithoutTaskDependenciesInput>
+    connectOrCreate?: ExecutionPlanCreateOrConnectWithoutTaskDependenciesInput
+    upsert?: ExecutionPlanUpsertWithoutTaskDependenciesInput
+    connect?: ExecutionPlanWhereUniqueInput
+    update?: XOR<XOR<ExecutionPlanUpdateToOneWithWhereWithoutTaskDependenciesInput, ExecutionPlanUpdateWithoutTaskDependenciesInput>, ExecutionPlanUncheckedUpdateWithoutTaskDependenciesInput>
+  }
+
+  export type ExecutionTaskUpdateOneRequiredWithoutDependenciesNestedInput = {
+    create?: XOR<ExecutionTaskCreateWithoutDependenciesInput, ExecutionTaskUncheckedCreateWithoutDependenciesInput>
+    connectOrCreate?: ExecutionTaskCreateOrConnectWithoutDependenciesInput
+    upsert?: ExecutionTaskUpsertWithoutDependenciesInput
+    connect?: ExecutionTaskWhereUniqueInput
+    update?: XOR<XOR<ExecutionTaskUpdateToOneWithWhereWithoutDependenciesInput, ExecutionTaskUpdateWithoutDependenciesInput>, ExecutionTaskUncheckedUpdateWithoutDependenciesInput>
+  }
+
+  export type ExecutionTaskUpdateOneRequiredWithoutRequiredByNestedInput = {
+    create?: XOR<ExecutionTaskCreateWithoutRequiredByInput, ExecutionTaskUncheckedCreateWithoutRequiredByInput>
+    connectOrCreate?: ExecutionTaskCreateOrConnectWithoutRequiredByInput
+    upsert?: ExecutionTaskUpsertWithoutRequiredByInput
+    connect?: ExecutionTaskWhereUniqueInput
+    update?: XOR<XOR<ExecutionTaskUpdateToOneWithWhereWithoutRequiredByInput, ExecutionTaskUpdateWithoutRequiredByInput>, ExecutionTaskUncheckedUpdateWithoutRequiredByInput>
+  }
+
+  export type UserUpdateOneRequiredWithoutCreatedExecutionTaskDependenciesNestedInput = {
+    create?: XOR<UserCreateWithoutCreatedExecutionTaskDependenciesInput, UserUncheckedCreateWithoutCreatedExecutionTaskDependenciesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCreatedExecutionTaskDependenciesInput
+    upsert?: UserUpsertWithoutCreatedExecutionTaskDependenciesInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutCreatedExecutionTaskDependenciesInput, UserUpdateWithoutCreatedExecutionTaskDependenciesInput>, UserUncheckedUpdateWithoutCreatedExecutionTaskDependenciesInput>
+  }
+
+  export type ExecutionTaskCreateNestedOneWithoutBlockerEventsInput = {
+    create?: XOR<ExecutionTaskCreateWithoutBlockerEventsInput, ExecutionTaskUncheckedCreateWithoutBlockerEventsInput>
+    connectOrCreate?: ExecutionTaskCreateOrConnectWithoutBlockerEventsInput
+    connect?: ExecutionTaskWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutBlockedExecutionTaskEventsInput = {
+    create?: XOR<UserCreateWithoutBlockedExecutionTaskEventsInput, UserUncheckedCreateWithoutBlockedExecutionTaskEventsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutBlockedExecutionTaskEventsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutResolvedExecutionTaskEventsInput = {
+    create?: XOR<UserCreateWithoutResolvedExecutionTaskEventsInput, UserUncheckedCreateWithoutResolvedExecutionTaskEventsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutResolvedExecutionTaskEventsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type EnumExecutionBlockerCategoryFieldUpdateOperationsInput = {
+    set?: $Enums.ExecutionBlockerCategory
+  }
+
+  export type ExecutionTaskUpdateOneRequiredWithoutBlockerEventsNestedInput = {
+    create?: XOR<ExecutionTaskCreateWithoutBlockerEventsInput, ExecutionTaskUncheckedCreateWithoutBlockerEventsInput>
+    connectOrCreate?: ExecutionTaskCreateOrConnectWithoutBlockerEventsInput
+    upsert?: ExecutionTaskUpsertWithoutBlockerEventsInput
+    connect?: ExecutionTaskWhereUniqueInput
+    update?: XOR<XOR<ExecutionTaskUpdateToOneWithWhereWithoutBlockerEventsInput, ExecutionTaskUpdateWithoutBlockerEventsInput>, ExecutionTaskUncheckedUpdateWithoutBlockerEventsInput>
+  }
+
+  export type UserUpdateOneRequiredWithoutBlockedExecutionTaskEventsNestedInput = {
+    create?: XOR<UserCreateWithoutBlockedExecutionTaskEventsInput, UserUncheckedCreateWithoutBlockedExecutionTaskEventsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutBlockedExecutionTaskEventsInput
+    upsert?: UserUpsertWithoutBlockedExecutionTaskEventsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutBlockedExecutionTaskEventsInput, UserUpdateWithoutBlockedExecutionTaskEventsInput>, UserUncheckedUpdateWithoutBlockedExecutionTaskEventsInput>
+  }
+
+  export type UserUpdateOneWithoutResolvedExecutionTaskEventsNestedInput = {
+    create?: XOR<UserCreateWithoutResolvedExecutionTaskEventsInput, UserUncheckedCreateWithoutResolvedExecutionTaskEventsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutResolvedExecutionTaskEventsInput
+    upsert?: UserUpsertWithoutResolvedExecutionTaskEventsInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutResolvedExecutionTaskEventsInput, UserUpdateWithoutResolvedExecutionTaskEventsInput>, UserUncheckedUpdateWithoutResolvedExecutionTaskEventsInput>
+  }
+
+  export type ExecutionPlanCreateNestedOneWithoutScheduleRevisionsInput = {
+    create?: XOR<ExecutionPlanCreateWithoutScheduleRevisionsInput, ExecutionPlanUncheckedCreateWithoutScheduleRevisionsInput>
+    connectOrCreate?: ExecutionPlanCreateOrConnectWithoutScheduleRevisionsInput
+    connect?: ExecutionPlanWhereUniqueInput
+  }
+
+  export type ExecutionTaskCreateNestedOneWithoutScheduleRevisionsInput = {
+    create?: XOR<ExecutionTaskCreateWithoutScheduleRevisionsInput, ExecutionTaskUncheckedCreateWithoutScheduleRevisionsInput>
+    connectOrCreate?: ExecutionTaskCreateOrConnectWithoutScheduleRevisionsInput
+    connect?: ExecutionTaskWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutExecutionScheduleRevisionsInput = {
+    create?: XOR<UserCreateWithoutExecutionScheduleRevisionsInput, UserUncheckedCreateWithoutExecutionScheduleRevisionsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutExecutionScheduleRevisionsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type ExecutionPlanUpdateOneRequiredWithoutScheduleRevisionsNestedInput = {
+    create?: XOR<ExecutionPlanCreateWithoutScheduleRevisionsInput, ExecutionPlanUncheckedCreateWithoutScheduleRevisionsInput>
+    connectOrCreate?: ExecutionPlanCreateOrConnectWithoutScheduleRevisionsInput
+    upsert?: ExecutionPlanUpsertWithoutScheduleRevisionsInput
+    connect?: ExecutionPlanWhereUniqueInput
+    update?: XOR<XOR<ExecutionPlanUpdateToOneWithWhereWithoutScheduleRevisionsInput, ExecutionPlanUpdateWithoutScheduleRevisionsInput>, ExecutionPlanUncheckedUpdateWithoutScheduleRevisionsInput>
+  }
+
+  export type ExecutionTaskUpdateOneWithoutScheduleRevisionsNestedInput = {
+    create?: XOR<ExecutionTaskCreateWithoutScheduleRevisionsInput, ExecutionTaskUncheckedCreateWithoutScheduleRevisionsInput>
+    connectOrCreate?: ExecutionTaskCreateOrConnectWithoutScheduleRevisionsInput
+    upsert?: ExecutionTaskUpsertWithoutScheduleRevisionsInput
+    disconnect?: ExecutionTaskWhereInput | boolean
+    delete?: ExecutionTaskWhereInput | boolean
+    connect?: ExecutionTaskWhereUniqueInput
+    update?: XOR<XOR<ExecutionTaskUpdateToOneWithWhereWithoutScheduleRevisionsInput, ExecutionTaskUpdateWithoutScheduleRevisionsInput>, ExecutionTaskUncheckedUpdateWithoutScheduleRevisionsInput>
+  }
+
+  export type UserUpdateOneRequiredWithoutExecutionScheduleRevisionsNestedInput = {
+    create?: XOR<UserCreateWithoutExecutionScheduleRevisionsInput, UserUncheckedCreateWithoutExecutionScheduleRevisionsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutExecutionScheduleRevisionsInput
+    upsert?: UserUpsertWithoutExecutionScheduleRevisionsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutExecutionScheduleRevisionsInput, UserUpdateWithoutExecutionScheduleRevisionsInput>, UserUncheckedUpdateWithoutExecutionScheduleRevisionsInput>
   }
 
   export type ExecutionTaskCreateNestedOneWithoutEvidenceInput = {
@@ -55400,6 +60894,23 @@ export namespace Prisma {
     _max?: NestedEnumExecutionTaskStatusFilter<$PrismaModel>
   }
 
+  export type NestedEnumExecutionBlockerCategoryFilter<$PrismaModel = never> = {
+    equals?: $Enums.ExecutionBlockerCategory | EnumExecutionBlockerCategoryFieldRefInput<$PrismaModel>
+    in?: $Enums.ExecutionBlockerCategory[] | ListEnumExecutionBlockerCategoryFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ExecutionBlockerCategory[] | ListEnumExecutionBlockerCategoryFieldRefInput<$PrismaModel>
+    not?: NestedEnumExecutionBlockerCategoryFilter<$PrismaModel> | $Enums.ExecutionBlockerCategory
+  }
+
+  export type NestedEnumExecutionBlockerCategoryWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ExecutionBlockerCategory | EnumExecutionBlockerCategoryFieldRefInput<$PrismaModel>
+    in?: $Enums.ExecutionBlockerCategory[] | ListEnumExecutionBlockerCategoryFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ExecutionBlockerCategory[] | ListEnumExecutionBlockerCategoryFieldRefInput<$PrismaModel>
+    not?: NestedEnumExecutionBlockerCategoryWithAggregatesFilter<$PrismaModel> | $Enums.ExecutionBlockerCategory
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumExecutionBlockerCategoryFilter<$PrismaModel>
+    _max?: NestedEnumExecutionBlockerCategoryFilter<$PrismaModel>
+  }
+
   export type NestedEnumExecutionEvidenceTypeFilter<$PrismaModel = never> = {
     equals?: $Enums.ExecutionEvidenceType | EnumExecutionEvidenceTypeFieldRefInput<$PrismaModel>
     in?: $Enums.ExecutionEvidenceType[] | ListEnumExecutionEvidenceTypeFieldRefInput<$PrismaModel>
@@ -55456,6 +60967,10 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCompletionSubmittedByInput
     verifiedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutVerifiedByInput
     cancelledExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCancelledByInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionCreateNestedManyWithoutChangedByInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutBlockedByInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutResolvedByInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyCreateNestedManyWithoutCreatedByInput
     submittedExecutionEvidence?: ExecutionEvidenceCreateNestedManyWithoutSubmittedByInput
     closedCases?: CaseClosureCreateNestedManyWithoutClosedByInput
     reviewedPublicReports?: PublicReportCreateNestedManyWithoutReviewedByInput
@@ -55495,6 +61010,10 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCompletionSubmittedByInput
     verifiedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutVerifiedByInput
     cancelledExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCancelledByInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUncheckedCreateNestedManyWithoutChangedByInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutBlockedByInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutResolvedByInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutCreatedByInput
     submittedExecutionEvidence?: ExecutionEvidenceUncheckedCreateNestedManyWithoutSubmittedByInput
     closedCases?: CaseClosureUncheckedCreateNestedManyWithoutClosedByInput
     reviewedPublicReports?: PublicReportUncheckedCreateNestedManyWithoutReviewedByInput
@@ -56425,6 +61944,10 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCompletionSubmittedByInput
     verifiedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutVerifiedByInput
     cancelledExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCancelledByInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionCreateNestedManyWithoutChangedByInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutBlockedByInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutResolvedByInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyCreateNestedManyWithoutCreatedByInput
     submittedExecutionEvidence?: ExecutionEvidenceCreateNestedManyWithoutSubmittedByInput
     closedCases?: CaseClosureCreateNestedManyWithoutClosedByInput
     reviewedPublicReports?: PublicReportCreateNestedManyWithoutReviewedByInput
@@ -56464,6 +61987,10 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCompletionSubmittedByInput
     verifiedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutVerifiedByInput
     cancelledExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCancelledByInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUncheckedCreateNestedManyWithoutChangedByInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutBlockedByInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutResolvedByInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutCreatedByInput
     submittedExecutionEvidence?: ExecutionEvidenceUncheckedCreateNestedManyWithoutSubmittedByInput
     closedCases?: CaseClosureUncheckedCreateNestedManyWithoutClosedByInput
     reviewedPublicReports?: PublicReportUncheckedCreateNestedManyWithoutReviewedByInput
@@ -57365,11 +62892,15 @@ export namespace Prisma {
     governanceMode?: $Enums.ExecutionPlanGovernanceMode
     executionContractVersion?: string | null
     governedProvenance?: NullableJsonNullValueInput | InputJsonValue
+    plannedStartAt?: Date | string | null
+    plannedEndAt?: Date | string | null
     orp: OperationalResponsePlanCreateNestedOneWithoutExecutionPlanInput
     case: CaseCreateNestedOneWithoutExecutionPlansInput
     approvalDecision: OrpDecisionCreateNestedOneWithoutExecutionPlanInput
     tasks?: ExecutionTaskCreateNestedManyWithoutExecutionPlanInput
     closure?: CaseClosureCreateNestedOneWithoutExecutionPlanInput
+    scheduleRevisions?: ExecutionScheduleRevisionCreateNestedManyWithoutExecutionPlanInput
+    taskDependencies?: ExecutionTaskDependencyCreateNestedManyWithoutExecutionPlanInput
   }
 
   export type ExecutionPlanUncheckedCreateWithoutCreatedByInput = {
@@ -57388,8 +62919,12 @@ export namespace Prisma {
     governanceMode?: $Enums.ExecutionPlanGovernanceMode
     executionContractVersion?: string | null
     governedProvenance?: NullableJsonNullValueInput | InputJsonValue
+    plannedStartAt?: Date | string | null
+    plannedEndAt?: Date | string | null
     tasks?: ExecutionTaskUncheckedCreateNestedManyWithoutExecutionPlanInput
     closure?: CaseClosureUncheckedCreateNestedOneWithoutExecutionPlanInput
+    scheduleRevisions?: ExecutionScheduleRevisionUncheckedCreateNestedManyWithoutExecutionPlanInput
+    taskDependencies?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutExecutionPlanInput
   }
 
   export type ExecutionPlanCreateOrConnectWithoutCreatedByInput = {
@@ -57428,6 +62963,8 @@ export namespace Prisma {
     sourceTemplateVersion?: number | null
     evidenceRequired?: boolean
     verificationRequired?: boolean
+    plannedStartAt?: Date | string | null
+    plannedEndAt?: Date | string | null
     executionPlan: ExecutionPlanCreateNestedOneWithoutTasksInput
     assignedBy?: UserCreateNestedOneWithoutAssignedByExecutionTasksInput
     completionSubmittedBy?: UserCreateNestedOneWithoutCompletedExecutionTasksInput
@@ -57437,6 +62974,10 @@ export namespace Prisma {
     approvedActionVersion?: ApprovedActionVersionCreateNestedOneWithoutExecutionTasksInput
     governedExecutionTemplate?: GovernedExecutionTemplateCreateNestedOneWithoutExecutionTasksInput
     governedTaskTemplate?: GovernedExecutionTaskTemplateCreateNestedOneWithoutExecutionTasksInput
+    scheduleRevisions?: ExecutionScheduleRevisionCreateNestedManyWithoutExecutionTaskInput
+    dependencies?: ExecutionTaskDependencyCreateNestedManyWithoutDependentTaskInput
+    requiredBy?: ExecutionTaskDependencyCreateNestedManyWithoutPredecessorTaskInput
+    blockerEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutExecutionTaskInput
   }
 
   export type ExecutionTaskUncheckedCreateWithoutAssignedToInput = {
@@ -57473,7 +63014,13 @@ export namespace Prisma {
     sourceTemplateVersion?: number | null
     evidenceRequired?: boolean
     verificationRequired?: boolean
+    plannedStartAt?: Date | string | null
+    plannedEndAt?: Date | string | null
     evidence?: ExecutionEvidenceUncheckedCreateNestedManyWithoutExecutionTaskInput
+    scheduleRevisions?: ExecutionScheduleRevisionUncheckedCreateNestedManyWithoutExecutionTaskInput
+    dependencies?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutDependentTaskInput
+    requiredBy?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutPredecessorTaskInput
+    blockerEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutExecutionTaskInput
   }
 
   export type ExecutionTaskCreateOrConnectWithoutAssignedToInput = {
@@ -57512,6 +63059,8 @@ export namespace Prisma {
     sourceTemplateVersion?: number | null
     evidenceRequired?: boolean
     verificationRequired?: boolean
+    plannedStartAt?: Date | string | null
+    plannedEndAt?: Date | string | null
     executionPlan: ExecutionPlanCreateNestedOneWithoutTasksInput
     assignedTo?: UserCreateNestedOneWithoutAssignedExecutionTasksInput
     completionSubmittedBy?: UserCreateNestedOneWithoutCompletedExecutionTasksInput
@@ -57521,6 +63070,10 @@ export namespace Prisma {
     approvedActionVersion?: ApprovedActionVersionCreateNestedOneWithoutExecutionTasksInput
     governedExecutionTemplate?: GovernedExecutionTemplateCreateNestedOneWithoutExecutionTasksInput
     governedTaskTemplate?: GovernedExecutionTaskTemplateCreateNestedOneWithoutExecutionTasksInput
+    scheduleRevisions?: ExecutionScheduleRevisionCreateNestedManyWithoutExecutionTaskInput
+    dependencies?: ExecutionTaskDependencyCreateNestedManyWithoutDependentTaskInput
+    requiredBy?: ExecutionTaskDependencyCreateNestedManyWithoutPredecessorTaskInput
+    blockerEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutExecutionTaskInput
   }
 
   export type ExecutionTaskUncheckedCreateWithoutAssignedByInput = {
@@ -57557,7 +63110,13 @@ export namespace Prisma {
     sourceTemplateVersion?: number | null
     evidenceRequired?: boolean
     verificationRequired?: boolean
+    plannedStartAt?: Date | string | null
+    plannedEndAt?: Date | string | null
     evidence?: ExecutionEvidenceUncheckedCreateNestedManyWithoutExecutionTaskInput
+    scheduleRevisions?: ExecutionScheduleRevisionUncheckedCreateNestedManyWithoutExecutionTaskInput
+    dependencies?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutDependentTaskInput
+    requiredBy?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutPredecessorTaskInput
+    blockerEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutExecutionTaskInput
   }
 
   export type ExecutionTaskCreateOrConnectWithoutAssignedByInput = {
@@ -57596,6 +63155,8 @@ export namespace Prisma {
     sourceTemplateVersion?: number | null
     evidenceRequired?: boolean
     verificationRequired?: boolean
+    plannedStartAt?: Date | string | null
+    plannedEndAt?: Date | string | null
     executionPlan: ExecutionPlanCreateNestedOneWithoutTasksInput
     assignedTo?: UserCreateNestedOneWithoutAssignedExecutionTasksInput
     assignedBy?: UserCreateNestedOneWithoutAssignedByExecutionTasksInput
@@ -57605,6 +63166,10 @@ export namespace Prisma {
     approvedActionVersion?: ApprovedActionVersionCreateNestedOneWithoutExecutionTasksInput
     governedExecutionTemplate?: GovernedExecutionTemplateCreateNestedOneWithoutExecutionTasksInput
     governedTaskTemplate?: GovernedExecutionTaskTemplateCreateNestedOneWithoutExecutionTasksInput
+    scheduleRevisions?: ExecutionScheduleRevisionCreateNestedManyWithoutExecutionTaskInput
+    dependencies?: ExecutionTaskDependencyCreateNestedManyWithoutDependentTaskInput
+    requiredBy?: ExecutionTaskDependencyCreateNestedManyWithoutPredecessorTaskInput
+    blockerEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutExecutionTaskInput
   }
 
   export type ExecutionTaskUncheckedCreateWithoutCompletionSubmittedByInput = {
@@ -57641,7 +63206,13 @@ export namespace Prisma {
     sourceTemplateVersion?: number | null
     evidenceRequired?: boolean
     verificationRequired?: boolean
+    plannedStartAt?: Date | string | null
+    plannedEndAt?: Date | string | null
     evidence?: ExecutionEvidenceUncheckedCreateNestedManyWithoutExecutionTaskInput
+    scheduleRevisions?: ExecutionScheduleRevisionUncheckedCreateNestedManyWithoutExecutionTaskInput
+    dependencies?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutDependentTaskInput
+    requiredBy?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutPredecessorTaskInput
+    blockerEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutExecutionTaskInput
   }
 
   export type ExecutionTaskCreateOrConnectWithoutCompletionSubmittedByInput = {
@@ -57680,6 +63251,8 @@ export namespace Prisma {
     sourceTemplateVersion?: number | null
     evidenceRequired?: boolean
     verificationRequired?: boolean
+    plannedStartAt?: Date | string | null
+    plannedEndAt?: Date | string | null
     executionPlan: ExecutionPlanCreateNestedOneWithoutTasksInput
     assignedTo?: UserCreateNestedOneWithoutAssignedExecutionTasksInput
     assignedBy?: UserCreateNestedOneWithoutAssignedByExecutionTasksInput
@@ -57689,6 +63262,10 @@ export namespace Prisma {
     approvedActionVersion?: ApprovedActionVersionCreateNestedOneWithoutExecutionTasksInput
     governedExecutionTemplate?: GovernedExecutionTemplateCreateNestedOneWithoutExecutionTasksInput
     governedTaskTemplate?: GovernedExecutionTaskTemplateCreateNestedOneWithoutExecutionTasksInput
+    scheduleRevisions?: ExecutionScheduleRevisionCreateNestedManyWithoutExecutionTaskInput
+    dependencies?: ExecutionTaskDependencyCreateNestedManyWithoutDependentTaskInput
+    requiredBy?: ExecutionTaskDependencyCreateNestedManyWithoutPredecessorTaskInput
+    blockerEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutExecutionTaskInput
   }
 
   export type ExecutionTaskUncheckedCreateWithoutVerifiedByInput = {
@@ -57725,7 +63302,13 @@ export namespace Prisma {
     sourceTemplateVersion?: number | null
     evidenceRequired?: boolean
     verificationRequired?: boolean
+    plannedStartAt?: Date | string | null
+    plannedEndAt?: Date | string | null
     evidence?: ExecutionEvidenceUncheckedCreateNestedManyWithoutExecutionTaskInput
+    scheduleRevisions?: ExecutionScheduleRevisionUncheckedCreateNestedManyWithoutExecutionTaskInput
+    dependencies?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutDependentTaskInput
+    requiredBy?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutPredecessorTaskInput
+    blockerEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutExecutionTaskInput
   }
 
   export type ExecutionTaskCreateOrConnectWithoutVerifiedByInput = {
@@ -57764,6 +63347,8 @@ export namespace Prisma {
     sourceTemplateVersion?: number | null
     evidenceRequired?: boolean
     verificationRequired?: boolean
+    plannedStartAt?: Date | string | null
+    plannedEndAt?: Date | string | null
     executionPlan: ExecutionPlanCreateNestedOneWithoutTasksInput
     assignedTo?: UserCreateNestedOneWithoutAssignedExecutionTasksInput
     assignedBy?: UserCreateNestedOneWithoutAssignedByExecutionTasksInput
@@ -57773,6 +63358,10 @@ export namespace Prisma {
     approvedActionVersion?: ApprovedActionVersionCreateNestedOneWithoutExecutionTasksInput
     governedExecutionTemplate?: GovernedExecutionTemplateCreateNestedOneWithoutExecutionTasksInput
     governedTaskTemplate?: GovernedExecutionTaskTemplateCreateNestedOneWithoutExecutionTasksInput
+    scheduleRevisions?: ExecutionScheduleRevisionCreateNestedManyWithoutExecutionTaskInput
+    dependencies?: ExecutionTaskDependencyCreateNestedManyWithoutDependentTaskInput
+    requiredBy?: ExecutionTaskDependencyCreateNestedManyWithoutPredecessorTaskInput
+    blockerEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutExecutionTaskInput
   }
 
   export type ExecutionTaskUncheckedCreateWithoutCancelledByInput = {
@@ -57809,7 +63398,13 @@ export namespace Prisma {
     sourceTemplateVersion?: number | null
     evidenceRequired?: boolean
     verificationRequired?: boolean
+    plannedStartAt?: Date | string | null
+    plannedEndAt?: Date | string | null
     evidence?: ExecutionEvidenceUncheckedCreateNestedManyWithoutExecutionTaskInput
+    scheduleRevisions?: ExecutionScheduleRevisionUncheckedCreateNestedManyWithoutExecutionTaskInput
+    dependencies?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutDependentTaskInput
+    requiredBy?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutPredecessorTaskInput
+    blockerEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutExecutionTaskInput
   }
 
   export type ExecutionTaskCreateOrConnectWithoutCancelledByInput = {
@@ -57819,6 +63414,130 @@ export namespace Prisma {
 
   export type ExecutionTaskCreateManyCancelledByInputEnvelope = {
     data: ExecutionTaskCreateManyCancelledByInput | ExecutionTaskCreateManyCancelledByInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ExecutionScheduleRevisionCreateWithoutChangedByInput = {
+    id?: string
+    previousStartAt?: Date | string | null
+    previousEndAt?: Date | string | null
+    newStartAt: Date | string
+    newEndAt: Date | string
+    changeReason: string
+    changedAt?: Date | string
+    executionPlan: ExecutionPlanCreateNestedOneWithoutScheduleRevisionsInput
+    executionTask?: ExecutionTaskCreateNestedOneWithoutScheduleRevisionsInput
+  }
+
+  export type ExecutionScheduleRevisionUncheckedCreateWithoutChangedByInput = {
+    id?: string
+    executionPlanId: string
+    executionTaskId?: string | null
+    previousStartAt?: Date | string | null
+    previousEndAt?: Date | string | null
+    newStartAt: Date | string
+    newEndAt: Date | string
+    changeReason: string
+    changedAt?: Date | string
+  }
+
+  export type ExecutionScheduleRevisionCreateOrConnectWithoutChangedByInput = {
+    where: ExecutionScheduleRevisionWhereUniqueInput
+    create: XOR<ExecutionScheduleRevisionCreateWithoutChangedByInput, ExecutionScheduleRevisionUncheckedCreateWithoutChangedByInput>
+  }
+
+  export type ExecutionScheduleRevisionCreateManyChangedByInputEnvelope = {
+    data: ExecutionScheduleRevisionCreateManyChangedByInput | ExecutionScheduleRevisionCreateManyChangedByInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ExecutionTaskBlockerEventCreateWithoutBlockedByInput = {
+    id?: string
+    category: $Enums.ExecutionBlockerCategory
+    reason: string
+    blockedAt?: Date | string
+    resolvedAt?: Date | string | null
+    resolutionReason?: string | null
+    executionTask: ExecutionTaskCreateNestedOneWithoutBlockerEventsInput
+    resolvedBy?: UserCreateNestedOneWithoutResolvedExecutionTaskEventsInput
+  }
+
+  export type ExecutionTaskBlockerEventUncheckedCreateWithoutBlockedByInput = {
+    id?: string
+    executionTaskId: string
+    category: $Enums.ExecutionBlockerCategory
+    reason: string
+    blockedAt?: Date | string
+    resolvedById?: string | null
+    resolvedAt?: Date | string | null
+    resolutionReason?: string | null
+  }
+
+  export type ExecutionTaskBlockerEventCreateOrConnectWithoutBlockedByInput = {
+    where: ExecutionTaskBlockerEventWhereUniqueInput
+    create: XOR<ExecutionTaskBlockerEventCreateWithoutBlockedByInput, ExecutionTaskBlockerEventUncheckedCreateWithoutBlockedByInput>
+  }
+
+  export type ExecutionTaskBlockerEventCreateManyBlockedByInputEnvelope = {
+    data: ExecutionTaskBlockerEventCreateManyBlockedByInput | ExecutionTaskBlockerEventCreateManyBlockedByInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ExecutionTaskBlockerEventCreateWithoutResolvedByInput = {
+    id?: string
+    category: $Enums.ExecutionBlockerCategory
+    reason: string
+    blockedAt?: Date | string
+    resolvedAt?: Date | string | null
+    resolutionReason?: string | null
+    executionTask: ExecutionTaskCreateNestedOneWithoutBlockerEventsInput
+    blockedBy: UserCreateNestedOneWithoutBlockedExecutionTaskEventsInput
+  }
+
+  export type ExecutionTaskBlockerEventUncheckedCreateWithoutResolvedByInput = {
+    id?: string
+    executionTaskId: string
+    category: $Enums.ExecutionBlockerCategory
+    reason: string
+    blockedById: string
+    blockedAt?: Date | string
+    resolvedAt?: Date | string | null
+    resolutionReason?: string | null
+  }
+
+  export type ExecutionTaskBlockerEventCreateOrConnectWithoutResolvedByInput = {
+    where: ExecutionTaskBlockerEventWhereUniqueInput
+    create: XOR<ExecutionTaskBlockerEventCreateWithoutResolvedByInput, ExecutionTaskBlockerEventUncheckedCreateWithoutResolvedByInput>
+  }
+
+  export type ExecutionTaskBlockerEventCreateManyResolvedByInputEnvelope = {
+    data: ExecutionTaskBlockerEventCreateManyResolvedByInput | ExecutionTaskBlockerEventCreateManyResolvedByInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ExecutionTaskDependencyCreateWithoutCreatedByInput = {
+    id?: string
+    createdAt?: Date | string
+    executionPlan: ExecutionPlanCreateNestedOneWithoutTaskDependenciesInput
+    dependentTask: ExecutionTaskCreateNestedOneWithoutDependenciesInput
+    predecessorTask: ExecutionTaskCreateNestedOneWithoutRequiredByInput
+  }
+
+  export type ExecutionTaskDependencyUncheckedCreateWithoutCreatedByInput = {
+    id?: string
+    executionPlanId: string
+    dependentTaskId: string
+    predecessorTaskId: string
+    createdAt?: Date | string
+  }
+
+  export type ExecutionTaskDependencyCreateOrConnectWithoutCreatedByInput = {
+    where: ExecutionTaskDependencyWhereUniqueInput
+    create: XOR<ExecutionTaskDependencyCreateWithoutCreatedByInput, ExecutionTaskDependencyUncheckedCreateWithoutCreatedByInput>
+  }
+
+  export type ExecutionTaskDependencyCreateManyCreatedByInputEnvelope = {
+    data: ExecutionTaskDependencyCreateManyCreatedByInput | ExecutionTaskDependencyCreateManyCreatedByInput[]
     skipDuplicates?: boolean
   }
 
@@ -58808,6 +64527,8 @@ export namespace Prisma {
     governanceMode?: EnumExecutionPlanGovernanceModeFilter<"ExecutionPlan"> | $Enums.ExecutionPlanGovernanceMode
     executionContractVersion?: StringNullableFilter<"ExecutionPlan"> | string | null
     governedProvenance?: JsonNullableFilter<"ExecutionPlan">
+    plannedStartAt?: DateTimeNullableFilter<"ExecutionPlan"> | Date | string | null
+    plannedEndAt?: DateTimeNullableFilter<"ExecutionPlan"> | Date | string | null
   }
 
   export type ExecutionTaskUpsertWithWhereUniqueWithoutAssignedToInput = {
@@ -58864,6 +64585,8 @@ export namespace Prisma {
     sourceTemplateVersion?: IntNullableFilter<"ExecutionTask"> | number | null
     evidenceRequired?: BoolFilter<"ExecutionTask"> | boolean
     verificationRequired?: BoolFilter<"ExecutionTask"> | boolean
+    plannedStartAt?: DateTimeNullableFilter<"ExecutionTask"> | Date | string | null
+    plannedEndAt?: DateTimeNullableFilter<"ExecutionTask"> | Date | string | null
   }
 
   export type ExecutionTaskUpsertWithWhereUniqueWithoutAssignedByInput = {
@@ -58928,6 +64651,113 @@ export namespace Prisma {
   export type ExecutionTaskUpdateManyWithWhereWithoutCancelledByInput = {
     where: ExecutionTaskScalarWhereInput
     data: XOR<ExecutionTaskUpdateManyMutationInput, ExecutionTaskUncheckedUpdateManyWithoutCancelledByInput>
+  }
+
+  export type ExecutionScheduleRevisionUpsertWithWhereUniqueWithoutChangedByInput = {
+    where: ExecutionScheduleRevisionWhereUniqueInput
+    update: XOR<ExecutionScheduleRevisionUpdateWithoutChangedByInput, ExecutionScheduleRevisionUncheckedUpdateWithoutChangedByInput>
+    create: XOR<ExecutionScheduleRevisionCreateWithoutChangedByInput, ExecutionScheduleRevisionUncheckedCreateWithoutChangedByInput>
+  }
+
+  export type ExecutionScheduleRevisionUpdateWithWhereUniqueWithoutChangedByInput = {
+    where: ExecutionScheduleRevisionWhereUniqueInput
+    data: XOR<ExecutionScheduleRevisionUpdateWithoutChangedByInput, ExecutionScheduleRevisionUncheckedUpdateWithoutChangedByInput>
+  }
+
+  export type ExecutionScheduleRevisionUpdateManyWithWhereWithoutChangedByInput = {
+    where: ExecutionScheduleRevisionScalarWhereInput
+    data: XOR<ExecutionScheduleRevisionUpdateManyMutationInput, ExecutionScheduleRevisionUncheckedUpdateManyWithoutChangedByInput>
+  }
+
+  export type ExecutionScheduleRevisionScalarWhereInput = {
+    AND?: ExecutionScheduleRevisionScalarWhereInput | ExecutionScheduleRevisionScalarWhereInput[]
+    OR?: ExecutionScheduleRevisionScalarWhereInput[]
+    NOT?: ExecutionScheduleRevisionScalarWhereInput | ExecutionScheduleRevisionScalarWhereInput[]
+    id?: StringFilter<"ExecutionScheduleRevision"> | string
+    executionPlanId?: StringFilter<"ExecutionScheduleRevision"> | string
+    executionTaskId?: StringNullableFilter<"ExecutionScheduleRevision"> | string | null
+    previousStartAt?: DateTimeNullableFilter<"ExecutionScheduleRevision"> | Date | string | null
+    previousEndAt?: DateTimeNullableFilter<"ExecutionScheduleRevision"> | Date | string | null
+    newStartAt?: DateTimeFilter<"ExecutionScheduleRevision"> | Date | string
+    newEndAt?: DateTimeFilter<"ExecutionScheduleRevision"> | Date | string
+    changedById?: StringFilter<"ExecutionScheduleRevision"> | string
+    changeReason?: StringFilter<"ExecutionScheduleRevision"> | string
+    changedAt?: DateTimeFilter<"ExecutionScheduleRevision"> | Date | string
+  }
+
+  export type ExecutionTaskBlockerEventUpsertWithWhereUniqueWithoutBlockedByInput = {
+    where: ExecutionTaskBlockerEventWhereUniqueInput
+    update: XOR<ExecutionTaskBlockerEventUpdateWithoutBlockedByInput, ExecutionTaskBlockerEventUncheckedUpdateWithoutBlockedByInput>
+    create: XOR<ExecutionTaskBlockerEventCreateWithoutBlockedByInput, ExecutionTaskBlockerEventUncheckedCreateWithoutBlockedByInput>
+  }
+
+  export type ExecutionTaskBlockerEventUpdateWithWhereUniqueWithoutBlockedByInput = {
+    where: ExecutionTaskBlockerEventWhereUniqueInput
+    data: XOR<ExecutionTaskBlockerEventUpdateWithoutBlockedByInput, ExecutionTaskBlockerEventUncheckedUpdateWithoutBlockedByInput>
+  }
+
+  export type ExecutionTaskBlockerEventUpdateManyWithWhereWithoutBlockedByInput = {
+    where: ExecutionTaskBlockerEventScalarWhereInput
+    data: XOR<ExecutionTaskBlockerEventUpdateManyMutationInput, ExecutionTaskBlockerEventUncheckedUpdateManyWithoutBlockedByInput>
+  }
+
+  export type ExecutionTaskBlockerEventScalarWhereInput = {
+    AND?: ExecutionTaskBlockerEventScalarWhereInput | ExecutionTaskBlockerEventScalarWhereInput[]
+    OR?: ExecutionTaskBlockerEventScalarWhereInput[]
+    NOT?: ExecutionTaskBlockerEventScalarWhereInput | ExecutionTaskBlockerEventScalarWhereInput[]
+    id?: StringFilter<"ExecutionTaskBlockerEvent"> | string
+    executionTaskId?: StringFilter<"ExecutionTaskBlockerEvent"> | string
+    category?: EnumExecutionBlockerCategoryFilter<"ExecutionTaskBlockerEvent"> | $Enums.ExecutionBlockerCategory
+    reason?: StringFilter<"ExecutionTaskBlockerEvent"> | string
+    blockedById?: StringFilter<"ExecutionTaskBlockerEvent"> | string
+    blockedAt?: DateTimeFilter<"ExecutionTaskBlockerEvent"> | Date | string
+    resolvedById?: StringNullableFilter<"ExecutionTaskBlockerEvent"> | string | null
+    resolvedAt?: DateTimeNullableFilter<"ExecutionTaskBlockerEvent"> | Date | string | null
+    resolutionReason?: StringNullableFilter<"ExecutionTaskBlockerEvent"> | string | null
+  }
+
+  export type ExecutionTaskBlockerEventUpsertWithWhereUniqueWithoutResolvedByInput = {
+    where: ExecutionTaskBlockerEventWhereUniqueInput
+    update: XOR<ExecutionTaskBlockerEventUpdateWithoutResolvedByInput, ExecutionTaskBlockerEventUncheckedUpdateWithoutResolvedByInput>
+    create: XOR<ExecutionTaskBlockerEventCreateWithoutResolvedByInput, ExecutionTaskBlockerEventUncheckedCreateWithoutResolvedByInput>
+  }
+
+  export type ExecutionTaskBlockerEventUpdateWithWhereUniqueWithoutResolvedByInput = {
+    where: ExecutionTaskBlockerEventWhereUniqueInput
+    data: XOR<ExecutionTaskBlockerEventUpdateWithoutResolvedByInput, ExecutionTaskBlockerEventUncheckedUpdateWithoutResolvedByInput>
+  }
+
+  export type ExecutionTaskBlockerEventUpdateManyWithWhereWithoutResolvedByInput = {
+    where: ExecutionTaskBlockerEventScalarWhereInput
+    data: XOR<ExecutionTaskBlockerEventUpdateManyMutationInput, ExecutionTaskBlockerEventUncheckedUpdateManyWithoutResolvedByInput>
+  }
+
+  export type ExecutionTaskDependencyUpsertWithWhereUniqueWithoutCreatedByInput = {
+    where: ExecutionTaskDependencyWhereUniqueInput
+    update: XOR<ExecutionTaskDependencyUpdateWithoutCreatedByInput, ExecutionTaskDependencyUncheckedUpdateWithoutCreatedByInput>
+    create: XOR<ExecutionTaskDependencyCreateWithoutCreatedByInput, ExecutionTaskDependencyUncheckedCreateWithoutCreatedByInput>
+  }
+
+  export type ExecutionTaskDependencyUpdateWithWhereUniqueWithoutCreatedByInput = {
+    where: ExecutionTaskDependencyWhereUniqueInput
+    data: XOR<ExecutionTaskDependencyUpdateWithoutCreatedByInput, ExecutionTaskDependencyUncheckedUpdateWithoutCreatedByInput>
+  }
+
+  export type ExecutionTaskDependencyUpdateManyWithWhereWithoutCreatedByInput = {
+    where: ExecutionTaskDependencyScalarWhereInput
+    data: XOR<ExecutionTaskDependencyUpdateManyMutationInput, ExecutionTaskDependencyUncheckedUpdateManyWithoutCreatedByInput>
+  }
+
+  export type ExecutionTaskDependencyScalarWhereInput = {
+    AND?: ExecutionTaskDependencyScalarWhereInput | ExecutionTaskDependencyScalarWhereInput[]
+    OR?: ExecutionTaskDependencyScalarWhereInput[]
+    NOT?: ExecutionTaskDependencyScalarWhereInput | ExecutionTaskDependencyScalarWhereInput[]
+    id?: StringFilter<"ExecutionTaskDependency"> | string
+    executionPlanId?: StringFilter<"ExecutionTaskDependency"> | string
+    dependentTaskId?: StringFilter<"ExecutionTaskDependency"> | string
+    predecessorTaskId?: StringFilter<"ExecutionTaskDependency"> | string
+    createdById?: StringFilter<"ExecutionTaskDependency"> | string
+    createdAt?: DateTimeFilter<"ExecutionTaskDependency"> | Date | string
   }
 
   export type ExecutionEvidenceUpsertWithWhereUniqueWithoutSubmittedByInput = {
@@ -59833,6 +65663,10 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCompletionSubmittedByInput
     verifiedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutVerifiedByInput
     cancelledExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCancelledByInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionCreateNestedManyWithoutChangedByInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutBlockedByInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutResolvedByInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyCreateNestedManyWithoutCreatedByInput
     submittedExecutionEvidence?: ExecutionEvidenceCreateNestedManyWithoutSubmittedByInput
     closedCases?: CaseClosureCreateNestedManyWithoutClosedByInput
     decidedPublicReports?: PublicReportCreateNestedManyWithoutDecisionByInput
@@ -59872,6 +65706,10 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCompletionSubmittedByInput
     verifiedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutVerifiedByInput
     cancelledExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCancelledByInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUncheckedCreateNestedManyWithoutChangedByInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutBlockedByInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutResolvedByInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutCreatedByInput
     submittedExecutionEvidence?: ExecutionEvidenceUncheckedCreateNestedManyWithoutSubmittedByInput
     closedCases?: CaseClosureUncheckedCreateNestedManyWithoutClosedByInput
     decidedPublicReports?: PublicReportUncheckedCreateNestedManyWithoutDecisionByInput
@@ -59916,6 +65754,10 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCompletionSubmittedByInput
     verifiedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutVerifiedByInput
     cancelledExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCancelledByInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionCreateNestedManyWithoutChangedByInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutBlockedByInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutResolvedByInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyCreateNestedManyWithoutCreatedByInput
     submittedExecutionEvidence?: ExecutionEvidenceCreateNestedManyWithoutSubmittedByInput
     closedCases?: CaseClosureCreateNestedManyWithoutClosedByInput
     reviewedPublicReports?: PublicReportCreateNestedManyWithoutReviewedByInput
@@ -59955,6 +65797,10 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCompletionSubmittedByInput
     verifiedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutVerifiedByInput
     cancelledExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCancelledByInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUncheckedCreateNestedManyWithoutChangedByInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutBlockedByInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutResolvedByInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutCreatedByInput
     submittedExecutionEvidence?: ExecutionEvidenceUncheckedCreateNestedManyWithoutSubmittedByInput
     closedCases?: CaseClosureUncheckedCreateNestedManyWithoutClosedByInput
     reviewedPublicReports?: PublicReportUncheckedCreateNestedManyWithoutReviewedByInput
@@ -60236,6 +66082,10 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskUpdateManyWithoutCompletionSubmittedByNestedInput
     verifiedExecutionTasks?: ExecutionTaskUpdateManyWithoutVerifiedByNestedInput
     cancelledExecutionTasks?: ExecutionTaskUpdateManyWithoutCancelledByNestedInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUpdateManyWithoutChangedByNestedInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUpdateManyWithoutBlockedByNestedInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUpdateManyWithoutResolvedByNestedInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUpdateManyWithoutCreatedByNestedInput
     submittedExecutionEvidence?: ExecutionEvidenceUpdateManyWithoutSubmittedByNestedInput
     closedCases?: CaseClosureUpdateManyWithoutClosedByNestedInput
     decidedPublicReports?: PublicReportUpdateManyWithoutDecisionByNestedInput
@@ -60275,6 +66125,10 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCompletionSubmittedByNestedInput
     verifiedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutVerifiedByNestedInput
     cancelledExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCancelledByNestedInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUncheckedUpdateManyWithoutChangedByNestedInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutBlockedByNestedInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutResolvedByNestedInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUncheckedUpdateManyWithoutCreatedByNestedInput
     submittedExecutionEvidence?: ExecutionEvidenceUncheckedUpdateManyWithoutSubmittedByNestedInput
     closedCases?: CaseClosureUncheckedUpdateManyWithoutClosedByNestedInput
     decidedPublicReports?: PublicReportUncheckedUpdateManyWithoutDecisionByNestedInput
@@ -60325,6 +66179,10 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskUpdateManyWithoutCompletionSubmittedByNestedInput
     verifiedExecutionTasks?: ExecutionTaskUpdateManyWithoutVerifiedByNestedInput
     cancelledExecutionTasks?: ExecutionTaskUpdateManyWithoutCancelledByNestedInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUpdateManyWithoutChangedByNestedInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUpdateManyWithoutBlockedByNestedInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUpdateManyWithoutResolvedByNestedInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUpdateManyWithoutCreatedByNestedInput
     submittedExecutionEvidence?: ExecutionEvidenceUpdateManyWithoutSubmittedByNestedInput
     closedCases?: CaseClosureUpdateManyWithoutClosedByNestedInput
     reviewedPublicReports?: PublicReportUpdateManyWithoutReviewedByNestedInput
@@ -60364,6 +66222,10 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCompletionSubmittedByNestedInput
     verifiedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutVerifiedByNestedInput
     cancelledExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCancelledByNestedInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUncheckedUpdateManyWithoutChangedByNestedInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutBlockedByNestedInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutResolvedByNestedInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUncheckedUpdateManyWithoutCreatedByNestedInput
     submittedExecutionEvidence?: ExecutionEvidenceUncheckedUpdateManyWithoutSubmittedByNestedInput
     closedCases?: CaseClosureUncheckedUpdateManyWithoutClosedByNestedInput
     reviewedPublicReports?: PublicReportUncheckedUpdateManyWithoutReviewedByNestedInput
@@ -60578,6 +66440,10 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCompletionSubmittedByInput
     verifiedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutVerifiedByInput
     cancelledExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCancelledByInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionCreateNestedManyWithoutChangedByInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutBlockedByInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutResolvedByInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyCreateNestedManyWithoutCreatedByInput
     submittedExecutionEvidence?: ExecutionEvidenceCreateNestedManyWithoutSubmittedByInput
     closedCases?: CaseClosureCreateNestedManyWithoutClosedByInput
     reviewedPublicReports?: PublicReportCreateNestedManyWithoutReviewedByInput
@@ -60617,6 +66483,10 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCompletionSubmittedByInput
     verifiedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutVerifiedByInput
     cancelledExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCancelledByInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUncheckedCreateNestedManyWithoutChangedByInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutBlockedByInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutResolvedByInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutCreatedByInput
     submittedExecutionEvidence?: ExecutionEvidenceUncheckedCreateNestedManyWithoutSubmittedByInput
     closedCases?: CaseClosureUncheckedCreateNestedManyWithoutClosedByInput
     reviewedPublicReports?: PublicReportUncheckedCreateNestedManyWithoutReviewedByInput
@@ -60782,6 +66652,10 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskUpdateManyWithoutCompletionSubmittedByNestedInput
     verifiedExecutionTasks?: ExecutionTaskUpdateManyWithoutVerifiedByNestedInput
     cancelledExecutionTasks?: ExecutionTaskUpdateManyWithoutCancelledByNestedInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUpdateManyWithoutChangedByNestedInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUpdateManyWithoutBlockedByNestedInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUpdateManyWithoutResolvedByNestedInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUpdateManyWithoutCreatedByNestedInput
     submittedExecutionEvidence?: ExecutionEvidenceUpdateManyWithoutSubmittedByNestedInput
     closedCases?: CaseClosureUpdateManyWithoutClosedByNestedInput
     reviewedPublicReports?: PublicReportUpdateManyWithoutReviewedByNestedInput
@@ -60821,6 +66695,10 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCompletionSubmittedByNestedInput
     verifiedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutVerifiedByNestedInput
     cancelledExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCancelledByNestedInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUncheckedUpdateManyWithoutChangedByNestedInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutBlockedByNestedInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutResolvedByNestedInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUncheckedUpdateManyWithoutCreatedByNestedInput
     submittedExecutionEvidence?: ExecutionEvidenceUncheckedUpdateManyWithoutSubmittedByNestedInput
     closedCases?: CaseClosureUncheckedUpdateManyWithoutClosedByNestedInput
     reviewedPublicReports?: PublicReportUncheckedUpdateManyWithoutReviewedByNestedInput
@@ -60934,6 +66812,10 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCompletionSubmittedByInput
     verifiedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutVerifiedByInput
     cancelledExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCancelledByInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionCreateNestedManyWithoutChangedByInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutBlockedByInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutResolvedByInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyCreateNestedManyWithoutCreatedByInput
     submittedExecutionEvidence?: ExecutionEvidenceCreateNestedManyWithoutSubmittedByInput
     closedCases?: CaseClosureCreateNestedManyWithoutClosedByInput
     reviewedPublicReports?: PublicReportCreateNestedManyWithoutReviewedByInput
@@ -60973,6 +66855,10 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCompletionSubmittedByInput
     verifiedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutVerifiedByInput
     cancelledExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCancelledByInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUncheckedCreateNestedManyWithoutChangedByInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutBlockedByInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutResolvedByInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutCreatedByInput
     submittedExecutionEvidence?: ExecutionEvidenceUncheckedCreateNestedManyWithoutSubmittedByInput
     closedCases?: CaseClosureUncheckedCreateNestedManyWithoutClosedByInput
     reviewedPublicReports?: PublicReportUncheckedCreateNestedManyWithoutReviewedByInput
@@ -61017,6 +66903,10 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCompletionSubmittedByInput
     verifiedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutVerifiedByInput
     cancelledExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCancelledByInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionCreateNestedManyWithoutChangedByInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutBlockedByInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutResolvedByInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyCreateNestedManyWithoutCreatedByInput
     submittedExecutionEvidence?: ExecutionEvidenceCreateNestedManyWithoutSubmittedByInput
     closedCases?: CaseClosureCreateNestedManyWithoutClosedByInput
     reviewedPublicReports?: PublicReportCreateNestedManyWithoutReviewedByInput
@@ -61056,6 +66946,10 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCompletionSubmittedByInput
     verifiedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutVerifiedByInput
     cancelledExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCancelledByInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUncheckedCreateNestedManyWithoutChangedByInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutBlockedByInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutResolvedByInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutCreatedByInput
     submittedExecutionEvidence?: ExecutionEvidenceUncheckedCreateNestedManyWithoutSubmittedByInput
     closedCases?: CaseClosureUncheckedCreateNestedManyWithoutClosedByInput
     reviewedPublicReports?: PublicReportUncheckedCreateNestedManyWithoutReviewedByInput
@@ -61291,6 +67185,10 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskUpdateManyWithoutCompletionSubmittedByNestedInput
     verifiedExecutionTasks?: ExecutionTaskUpdateManyWithoutVerifiedByNestedInput
     cancelledExecutionTasks?: ExecutionTaskUpdateManyWithoutCancelledByNestedInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUpdateManyWithoutChangedByNestedInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUpdateManyWithoutBlockedByNestedInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUpdateManyWithoutResolvedByNestedInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUpdateManyWithoutCreatedByNestedInput
     submittedExecutionEvidence?: ExecutionEvidenceUpdateManyWithoutSubmittedByNestedInput
     closedCases?: CaseClosureUpdateManyWithoutClosedByNestedInput
     reviewedPublicReports?: PublicReportUpdateManyWithoutReviewedByNestedInput
@@ -61330,6 +67228,10 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCompletionSubmittedByNestedInput
     verifiedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutVerifiedByNestedInput
     cancelledExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCancelledByNestedInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUncheckedUpdateManyWithoutChangedByNestedInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutBlockedByNestedInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutResolvedByNestedInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUncheckedUpdateManyWithoutCreatedByNestedInput
     submittedExecutionEvidence?: ExecutionEvidenceUncheckedUpdateManyWithoutSubmittedByNestedInput
     closedCases?: CaseClosureUncheckedUpdateManyWithoutClosedByNestedInput
     reviewedPublicReports?: PublicReportUncheckedUpdateManyWithoutReviewedByNestedInput
@@ -61380,6 +67282,10 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskUpdateManyWithoutCompletionSubmittedByNestedInput
     verifiedExecutionTasks?: ExecutionTaskUpdateManyWithoutVerifiedByNestedInput
     cancelledExecutionTasks?: ExecutionTaskUpdateManyWithoutCancelledByNestedInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUpdateManyWithoutChangedByNestedInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUpdateManyWithoutBlockedByNestedInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUpdateManyWithoutResolvedByNestedInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUpdateManyWithoutCreatedByNestedInput
     submittedExecutionEvidence?: ExecutionEvidenceUpdateManyWithoutSubmittedByNestedInput
     closedCases?: CaseClosureUpdateManyWithoutClosedByNestedInput
     reviewedPublicReports?: PublicReportUpdateManyWithoutReviewedByNestedInput
@@ -61419,6 +67325,10 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCompletionSubmittedByNestedInput
     verifiedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutVerifiedByNestedInput
     cancelledExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCancelledByNestedInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUncheckedUpdateManyWithoutChangedByNestedInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutBlockedByNestedInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutResolvedByNestedInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUncheckedUpdateManyWithoutCreatedByNestedInput
     submittedExecutionEvidence?: ExecutionEvidenceUncheckedUpdateManyWithoutSubmittedByNestedInput
     closedCases?: CaseClosureUncheckedUpdateManyWithoutClosedByNestedInput
     reviewedPublicReports?: PublicReportUncheckedUpdateManyWithoutReviewedByNestedInput
@@ -61629,6 +67539,10 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCompletionSubmittedByInput
     verifiedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutVerifiedByInput
     cancelledExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCancelledByInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionCreateNestedManyWithoutChangedByInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutBlockedByInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutResolvedByInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyCreateNestedManyWithoutCreatedByInput
     submittedExecutionEvidence?: ExecutionEvidenceCreateNestedManyWithoutSubmittedByInput
     closedCases?: CaseClosureCreateNestedManyWithoutClosedByInput
     reviewedPublicReports?: PublicReportCreateNestedManyWithoutReviewedByInput
@@ -61668,6 +67582,10 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCompletionSubmittedByInput
     verifiedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutVerifiedByInput
     cancelledExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCancelledByInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUncheckedCreateNestedManyWithoutChangedByInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutBlockedByInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutResolvedByInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutCreatedByInput
     submittedExecutionEvidence?: ExecutionEvidenceUncheckedCreateNestedManyWithoutSubmittedByInput
     closedCases?: CaseClosureUncheckedCreateNestedManyWithoutClosedByInput
     reviewedPublicReports?: PublicReportUncheckedCreateNestedManyWithoutReviewedByInput
@@ -61712,6 +67630,10 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCompletionSubmittedByInput
     verifiedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutVerifiedByInput
     cancelledExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCancelledByInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionCreateNestedManyWithoutChangedByInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutBlockedByInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutResolvedByInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyCreateNestedManyWithoutCreatedByInput
     submittedExecutionEvidence?: ExecutionEvidenceCreateNestedManyWithoutSubmittedByInput
     closedCases?: CaseClosureCreateNestedManyWithoutClosedByInput
     reviewedPublicReports?: PublicReportCreateNestedManyWithoutReviewedByInput
@@ -61751,6 +67673,10 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCompletionSubmittedByInput
     verifiedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutVerifiedByInput
     cancelledExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCancelledByInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUncheckedCreateNestedManyWithoutChangedByInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutBlockedByInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutResolvedByInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutCreatedByInput
     submittedExecutionEvidence?: ExecutionEvidenceUncheckedCreateNestedManyWithoutSubmittedByInput
     closedCases?: CaseClosureUncheckedCreateNestedManyWithoutClosedByInput
     reviewedPublicReports?: PublicReportUncheckedCreateNestedManyWithoutReviewedByInput
@@ -61882,6 +67808,8 @@ export namespace Prisma {
     sourceTemplateVersion?: number | null
     evidenceRequired?: boolean
     verificationRequired?: boolean
+    plannedStartAt?: Date | string | null
+    plannedEndAt?: Date | string | null
     executionPlan: ExecutionPlanCreateNestedOneWithoutTasksInput
     assignedTo?: UserCreateNestedOneWithoutAssignedExecutionTasksInput
     assignedBy?: UserCreateNestedOneWithoutAssignedByExecutionTasksInput
@@ -61891,6 +67819,10 @@ export namespace Prisma {
     evidence?: ExecutionEvidenceCreateNestedManyWithoutExecutionTaskInput
     governedExecutionTemplate?: GovernedExecutionTemplateCreateNestedOneWithoutExecutionTasksInput
     governedTaskTemplate?: GovernedExecutionTaskTemplateCreateNestedOneWithoutExecutionTasksInput
+    scheduleRevisions?: ExecutionScheduleRevisionCreateNestedManyWithoutExecutionTaskInput
+    dependencies?: ExecutionTaskDependencyCreateNestedManyWithoutDependentTaskInput
+    requiredBy?: ExecutionTaskDependencyCreateNestedManyWithoutPredecessorTaskInput
+    blockerEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutExecutionTaskInput
   }
 
   export type ExecutionTaskUncheckedCreateWithoutApprovedActionVersionInput = {
@@ -61927,7 +67859,13 @@ export namespace Prisma {
     sourceTemplateVersion?: number | null
     evidenceRequired?: boolean
     verificationRequired?: boolean
+    plannedStartAt?: Date | string | null
+    plannedEndAt?: Date | string | null
     evidence?: ExecutionEvidenceUncheckedCreateNestedManyWithoutExecutionTaskInput
+    scheduleRevisions?: ExecutionScheduleRevisionUncheckedCreateNestedManyWithoutExecutionTaskInput
+    dependencies?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutDependentTaskInput
+    requiredBy?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutPredecessorTaskInput
+    blockerEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutExecutionTaskInput
   }
 
   export type ExecutionTaskCreateOrConnectWithoutApprovedActionVersionInput = {
@@ -62115,6 +68053,10 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskUpdateManyWithoutCompletionSubmittedByNestedInput
     verifiedExecutionTasks?: ExecutionTaskUpdateManyWithoutVerifiedByNestedInput
     cancelledExecutionTasks?: ExecutionTaskUpdateManyWithoutCancelledByNestedInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUpdateManyWithoutChangedByNestedInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUpdateManyWithoutBlockedByNestedInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUpdateManyWithoutResolvedByNestedInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUpdateManyWithoutCreatedByNestedInput
     submittedExecutionEvidence?: ExecutionEvidenceUpdateManyWithoutSubmittedByNestedInput
     closedCases?: CaseClosureUpdateManyWithoutClosedByNestedInput
     reviewedPublicReports?: PublicReportUpdateManyWithoutReviewedByNestedInput
@@ -62154,6 +68096,10 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCompletionSubmittedByNestedInput
     verifiedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutVerifiedByNestedInput
     cancelledExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCancelledByNestedInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUncheckedUpdateManyWithoutChangedByNestedInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutBlockedByNestedInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutResolvedByNestedInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUncheckedUpdateManyWithoutCreatedByNestedInput
     submittedExecutionEvidence?: ExecutionEvidenceUncheckedUpdateManyWithoutSubmittedByNestedInput
     closedCases?: CaseClosureUncheckedUpdateManyWithoutClosedByNestedInput
     reviewedPublicReports?: PublicReportUncheckedUpdateManyWithoutReviewedByNestedInput
@@ -62204,6 +68150,10 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskUpdateManyWithoutCompletionSubmittedByNestedInput
     verifiedExecutionTasks?: ExecutionTaskUpdateManyWithoutVerifiedByNestedInput
     cancelledExecutionTasks?: ExecutionTaskUpdateManyWithoutCancelledByNestedInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUpdateManyWithoutChangedByNestedInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUpdateManyWithoutBlockedByNestedInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUpdateManyWithoutResolvedByNestedInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUpdateManyWithoutCreatedByNestedInput
     submittedExecutionEvidence?: ExecutionEvidenceUpdateManyWithoutSubmittedByNestedInput
     closedCases?: CaseClosureUpdateManyWithoutClosedByNestedInput
     reviewedPublicReports?: PublicReportUpdateManyWithoutReviewedByNestedInput
@@ -62243,6 +68193,10 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCompletionSubmittedByNestedInput
     verifiedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutVerifiedByNestedInput
     cancelledExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCancelledByNestedInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUncheckedUpdateManyWithoutChangedByNestedInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutBlockedByNestedInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutResolvedByNestedInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUncheckedUpdateManyWithoutCreatedByNestedInput
     submittedExecutionEvidence?: ExecutionEvidenceUncheckedUpdateManyWithoutSubmittedByNestedInput
     closedCases?: CaseClosureUncheckedUpdateManyWithoutClosedByNestedInput
     reviewedPublicReports?: PublicReportUncheckedUpdateManyWithoutReviewedByNestedInput
@@ -62459,6 +68413,10 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCompletionSubmittedByInput
     verifiedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutVerifiedByInput
     cancelledExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCancelledByInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionCreateNestedManyWithoutChangedByInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutBlockedByInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutResolvedByInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyCreateNestedManyWithoutCreatedByInput
     submittedExecutionEvidence?: ExecutionEvidenceCreateNestedManyWithoutSubmittedByInput
     closedCases?: CaseClosureCreateNestedManyWithoutClosedByInput
     reviewedPublicReports?: PublicReportCreateNestedManyWithoutReviewedByInput
@@ -62498,6 +68456,10 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCompletionSubmittedByInput
     verifiedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutVerifiedByInput
     cancelledExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCancelledByInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUncheckedCreateNestedManyWithoutChangedByInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutBlockedByInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutResolvedByInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutCreatedByInput
     submittedExecutionEvidence?: ExecutionEvidenceUncheckedCreateNestedManyWithoutSubmittedByInput
     closedCases?: CaseClosureUncheckedCreateNestedManyWithoutClosedByInput
     reviewedPublicReports?: PublicReportUncheckedCreateNestedManyWithoutReviewedByInput
@@ -62542,6 +68504,10 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCompletionSubmittedByInput
     verifiedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutVerifiedByInput
     cancelledExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCancelledByInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionCreateNestedManyWithoutChangedByInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutBlockedByInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutResolvedByInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyCreateNestedManyWithoutCreatedByInput
     submittedExecutionEvidence?: ExecutionEvidenceCreateNestedManyWithoutSubmittedByInput
     closedCases?: CaseClosureCreateNestedManyWithoutClosedByInput
     reviewedPublicReports?: PublicReportCreateNestedManyWithoutReviewedByInput
@@ -62581,6 +68547,10 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCompletionSubmittedByInput
     verifiedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutVerifiedByInput
     cancelledExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCancelledByInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUncheckedCreateNestedManyWithoutChangedByInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutBlockedByInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutResolvedByInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutCreatedByInput
     submittedExecutionEvidence?: ExecutionEvidenceUncheckedCreateNestedManyWithoutSubmittedByInput
     closedCases?: CaseClosureUncheckedCreateNestedManyWithoutClosedByInput
     reviewedPublicReports?: PublicReportUncheckedCreateNestedManyWithoutReviewedByInput
@@ -62668,6 +68638,8 @@ export namespace Prisma {
     sourceTemplateVersion?: number | null
     evidenceRequired?: boolean
     verificationRequired?: boolean
+    plannedStartAt?: Date | string | null
+    plannedEndAt?: Date | string | null
     executionPlan: ExecutionPlanCreateNestedOneWithoutTasksInput
     assignedTo?: UserCreateNestedOneWithoutAssignedExecutionTasksInput
     assignedBy?: UserCreateNestedOneWithoutAssignedByExecutionTasksInput
@@ -62677,6 +68649,10 @@ export namespace Prisma {
     evidence?: ExecutionEvidenceCreateNestedManyWithoutExecutionTaskInput
     approvedActionVersion?: ApprovedActionVersionCreateNestedOneWithoutExecutionTasksInput
     governedTaskTemplate?: GovernedExecutionTaskTemplateCreateNestedOneWithoutExecutionTasksInput
+    scheduleRevisions?: ExecutionScheduleRevisionCreateNestedManyWithoutExecutionTaskInput
+    dependencies?: ExecutionTaskDependencyCreateNestedManyWithoutDependentTaskInput
+    requiredBy?: ExecutionTaskDependencyCreateNestedManyWithoutPredecessorTaskInput
+    blockerEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutExecutionTaskInput
   }
 
   export type ExecutionTaskUncheckedCreateWithoutGovernedExecutionTemplateInput = {
@@ -62713,7 +68689,13 @@ export namespace Prisma {
     sourceTemplateVersion?: number | null
     evidenceRequired?: boolean
     verificationRequired?: boolean
+    plannedStartAt?: Date | string | null
+    plannedEndAt?: Date | string | null
     evidence?: ExecutionEvidenceUncheckedCreateNestedManyWithoutExecutionTaskInput
+    scheduleRevisions?: ExecutionScheduleRevisionUncheckedCreateNestedManyWithoutExecutionTaskInput
+    dependencies?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutDependentTaskInput
+    requiredBy?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutPredecessorTaskInput
+    blockerEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutExecutionTaskInput
   }
 
   export type ExecutionTaskCreateOrConnectWithoutGovernedExecutionTemplateInput = {
@@ -62907,6 +68889,10 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskUpdateManyWithoutCompletionSubmittedByNestedInput
     verifiedExecutionTasks?: ExecutionTaskUpdateManyWithoutVerifiedByNestedInput
     cancelledExecutionTasks?: ExecutionTaskUpdateManyWithoutCancelledByNestedInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUpdateManyWithoutChangedByNestedInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUpdateManyWithoutBlockedByNestedInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUpdateManyWithoutResolvedByNestedInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUpdateManyWithoutCreatedByNestedInput
     submittedExecutionEvidence?: ExecutionEvidenceUpdateManyWithoutSubmittedByNestedInput
     closedCases?: CaseClosureUpdateManyWithoutClosedByNestedInput
     reviewedPublicReports?: PublicReportUpdateManyWithoutReviewedByNestedInput
@@ -62946,6 +68932,10 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCompletionSubmittedByNestedInput
     verifiedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutVerifiedByNestedInput
     cancelledExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCancelledByNestedInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUncheckedUpdateManyWithoutChangedByNestedInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutBlockedByNestedInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutResolvedByNestedInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUncheckedUpdateManyWithoutCreatedByNestedInput
     submittedExecutionEvidence?: ExecutionEvidenceUncheckedUpdateManyWithoutSubmittedByNestedInput
     closedCases?: CaseClosureUncheckedUpdateManyWithoutClosedByNestedInput
     reviewedPublicReports?: PublicReportUncheckedUpdateManyWithoutReviewedByNestedInput
@@ -62996,6 +68986,10 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskUpdateManyWithoutCompletionSubmittedByNestedInput
     verifiedExecutionTasks?: ExecutionTaskUpdateManyWithoutVerifiedByNestedInput
     cancelledExecutionTasks?: ExecutionTaskUpdateManyWithoutCancelledByNestedInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUpdateManyWithoutChangedByNestedInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUpdateManyWithoutBlockedByNestedInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUpdateManyWithoutResolvedByNestedInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUpdateManyWithoutCreatedByNestedInput
     submittedExecutionEvidence?: ExecutionEvidenceUpdateManyWithoutSubmittedByNestedInput
     closedCases?: CaseClosureUpdateManyWithoutClosedByNestedInput
     reviewedPublicReports?: PublicReportUpdateManyWithoutReviewedByNestedInput
@@ -63035,6 +69029,10 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCompletionSubmittedByNestedInput
     verifiedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutVerifiedByNestedInput
     cancelledExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCancelledByNestedInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUncheckedUpdateManyWithoutChangedByNestedInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutBlockedByNestedInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutResolvedByNestedInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUncheckedUpdateManyWithoutCreatedByNestedInput
     submittedExecutionEvidence?: ExecutionEvidenceUncheckedUpdateManyWithoutSubmittedByNestedInput
     closedCases?: CaseClosureUncheckedUpdateManyWithoutClosedByNestedInput
     reviewedPublicReports?: PublicReportUncheckedUpdateManyWithoutReviewedByNestedInput
@@ -63172,6 +69170,8 @@ export namespace Prisma {
     sourceTemplateVersion?: number | null
     evidenceRequired?: boolean
     verificationRequired?: boolean
+    plannedStartAt?: Date | string | null
+    plannedEndAt?: Date | string | null
     executionPlan: ExecutionPlanCreateNestedOneWithoutTasksInput
     assignedTo?: UserCreateNestedOneWithoutAssignedExecutionTasksInput
     assignedBy?: UserCreateNestedOneWithoutAssignedByExecutionTasksInput
@@ -63181,6 +69181,10 @@ export namespace Prisma {
     evidence?: ExecutionEvidenceCreateNestedManyWithoutExecutionTaskInput
     approvedActionVersion?: ApprovedActionVersionCreateNestedOneWithoutExecutionTasksInput
     governedExecutionTemplate?: GovernedExecutionTemplateCreateNestedOneWithoutExecutionTasksInput
+    scheduleRevisions?: ExecutionScheduleRevisionCreateNestedManyWithoutExecutionTaskInput
+    dependencies?: ExecutionTaskDependencyCreateNestedManyWithoutDependentTaskInput
+    requiredBy?: ExecutionTaskDependencyCreateNestedManyWithoutPredecessorTaskInput
+    blockerEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutExecutionTaskInput
   }
 
   export type ExecutionTaskUncheckedCreateWithoutGovernedTaskTemplateInput = {
@@ -63217,7 +69221,13 @@ export namespace Prisma {
     sourceTemplateVersion?: number | null
     evidenceRequired?: boolean
     verificationRequired?: boolean
+    plannedStartAt?: Date | string | null
+    plannedEndAt?: Date | string | null
     evidence?: ExecutionEvidenceUncheckedCreateNestedManyWithoutExecutionTaskInput
+    scheduleRevisions?: ExecutionScheduleRevisionUncheckedCreateNestedManyWithoutExecutionTaskInput
+    dependencies?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutDependentTaskInput
+    requiredBy?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutPredecessorTaskInput
+    blockerEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutExecutionTaskInput
   }
 
   export type ExecutionTaskCreateOrConnectWithoutGovernedTaskTemplateInput = {
@@ -63753,11 +69763,15 @@ export namespace Prisma {
     governanceMode?: $Enums.ExecutionPlanGovernanceMode
     executionContractVersion?: string | null
     governedProvenance?: NullableJsonNullValueInput | InputJsonValue
+    plannedStartAt?: Date | string | null
+    plannedEndAt?: Date | string | null
     orp: OperationalResponsePlanCreateNestedOneWithoutExecutionPlanInput
     approvalDecision: OrpDecisionCreateNestedOneWithoutExecutionPlanInput
     createdBy: UserCreateNestedOneWithoutCreatedExecutionPlansInput
     tasks?: ExecutionTaskCreateNestedManyWithoutExecutionPlanInput
     closure?: CaseClosureCreateNestedOneWithoutExecutionPlanInput
+    scheduleRevisions?: ExecutionScheduleRevisionCreateNestedManyWithoutExecutionPlanInput
+    taskDependencies?: ExecutionTaskDependencyCreateNestedManyWithoutExecutionPlanInput
   }
 
   export type ExecutionPlanUncheckedCreateWithoutCaseInput = {
@@ -63776,8 +69790,12 @@ export namespace Prisma {
     governanceMode?: $Enums.ExecutionPlanGovernanceMode
     executionContractVersion?: string | null
     governedProvenance?: NullableJsonNullValueInput | InputJsonValue
+    plannedStartAt?: Date | string | null
+    plannedEndAt?: Date | string | null
     tasks?: ExecutionTaskUncheckedCreateNestedManyWithoutExecutionPlanInput
     closure?: CaseClosureUncheckedCreateNestedOneWithoutExecutionPlanInput
+    scheduleRevisions?: ExecutionScheduleRevisionUncheckedCreateNestedManyWithoutExecutionPlanInput
+    taskDependencies?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutExecutionPlanInput
   }
 
   export type ExecutionPlanCreateOrConnectWithoutCaseInput = {
@@ -64548,6 +70566,10 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCompletionSubmittedByInput
     verifiedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutVerifiedByInput
     cancelledExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCancelledByInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionCreateNestedManyWithoutChangedByInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutBlockedByInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutResolvedByInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyCreateNestedManyWithoutCreatedByInput
     submittedExecutionEvidence?: ExecutionEvidenceCreateNestedManyWithoutSubmittedByInput
     closedCases?: CaseClosureCreateNestedManyWithoutClosedByInput
     reviewedPublicReports?: PublicReportCreateNestedManyWithoutReviewedByInput
@@ -64587,6 +70609,10 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCompletionSubmittedByInput
     verifiedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutVerifiedByInput
     cancelledExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCancelledByInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUncheckedCreateNestedManyWithoutChangedByInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutBlockedByInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutResolvedByInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutCreatedByInput
     submittedExecutionEvidence?: ExecutionEvidenceUncheckedCreateNestedManyWithoutSubmittedByInput
     closedCases?: CaseClosureUncheckedCreateNestedManyWithoutClosedByInput
     reviewedPublicReports?: PublicReportUncheckedCreateNestedManyWithoutReviewedByInput
@@ -64631,6 +70657,10 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCompletionSubmittedByInput
     verifiedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutVerifiedByInput
     cancelledExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCancelledByInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionCreateNestedManyWithoutChangedByInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutBlockedByInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutResolvedByInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyCreateNestedManyWithoutCreatedByInput
     submittedExecutionEvidence?: ExecutionEvidenceCreateNestedManyWithoutSubmittedByInput
     closedCases?: CaseClosureCreateNestedManyWithoutClosedByInput
     reviewedPublicReports?: PublicReportCreateNestedManyWithoutReviewedByInput
@@ -64670,6 +70700,10 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCompletionSubmittedByInput
     verifiedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutVerifiedByInput
     cancelledExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCancelledByInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUncheckedCreateNestedManyWithoutChangedByInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutBlockedByInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutResolvedByInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutCreatedByInput
     submittedExecutionEvidence?: ExecutionEvidenceUncheckedCreateNestedManyWithoutSubmittedByInput
     closedCases?: CaseClosureUncheckedCreateNestedManyWithoutClosedByInput
     reviewedPublicReports?: PublicReportUncheckedCreateNestedManyWithoutReviewedByInput
@@ -64861,6 +70895,10 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskUpdateManyWithoutCompletionSubmittedByNestedInput
     verifiedExecutionTasks?: ExecutionTaskUpdateManyWithoutVerifiedByNestedInput
     cancelledExecutionTasks?: ExecutionTaskUpdateManyWithoutCancelledByNestedInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUpdateManyWithoutChangedByNestedInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUpdateManyWithoutBlockedByNestedInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUpdateManyWithoutResolvedByNestedInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUpdateManyWithoutCreatedByNestedInput
     submittedExecutionEvidence?: ExecutionEvidenceUpdateManyWithoutSubmittedByNestedInput
     closedCases?: CaseClosureUpdateManyWithoutClosedByNestedInput
     reviewedPublicReports?: PublicReportUpdateManyWithoutReviewedByNestedInput
@@ -64900,6 +70938,10 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCompletionSubmittedByNestedInput
     verifiedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutVerifiedByNestedInput
     cancelledExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCancelledByNestedInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUncheckedUpdateManyWithoutChangedByNestedInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutBlockedByNestedInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutResolvedByNestedInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUncheckedUpdateManyWithoutCreatedByNestedInput
     submittedExecutionEvidence?: ExecutionEvidenceUncheckedUpdateManyWithoutSubmittedByNestedInput
     closedCases?: CaseClosureUncheckedUpdateManyWithoutClosedByNestedInput
     reviewedPublicReports?: PublicReportUncheckedUpdateManyWithoutReviewedByNestedInput
@@ -64950,6 +70992,10 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskUpdateManyWithoutCompletionSubmittedByNestedInput
     verifiedExecutionTasks?: ExecutionTaskUpdateManyWithoutVerifiedByNestedInput
     cancelledExecutionTasks?: ExecutionTaskUpdateManyWithoutCancelledByNestedInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUpdateManyWithoutChangedByNestedInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUpdateManyWithoutBlockedByNestedInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUpdateManyWithoutResolvedByNestedInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUpdateManyWithoutCreatedByNestedInput
     submittedExecutionEvidence?: ExecutionEvidenceUpdateManyWithoutSubmittedByNestedInput
     closedCases?: CaseClosureUpdateManyWithoutClosedByNestedInput
     reviewedPublicReports?: PublicReportUpdateManyWithoutReviewedByNestedInput
@@ -64989,6 +71035,10 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCompletionSubmittedByNestedInput
     verifiedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutVerifiedByNestedInput
     cancelledExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCancelledByNestedInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUncheckedUpdateManyWithoutChangedByNestedInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutBlockedByNestedInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutResolvedByNestedInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUncheckedUpdateManyWithoutCreatedByNestedInput
     submittedExecutionEvidence?: ExecutionEvidenceUncheckedUpdateManyWithoutSubmittedByNestedInput
     closedCases?: CaseClosureUncheckedUpdateManyWithoutClosedByNestedInput
     reviewedPublicReports?: PublicReportUncheckedUpdateManyWithoutReviewedByNestedInput
@@ -65261,6 +71311,10 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCompletionSubmittedByInput
     verifiedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutVerifiedByInput
     cancelledExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCancelledByInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionCreateNestedManyWithoutChangedByInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutBlockedByInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutResolvedByInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyCreateNestedManyWithoutCreatedByInput
     submittedExecutionEvidence?: ExecutionEvidenceCreateNestedManyWithoutSubmittedByInput
     closedCases?: CaseClosureCreateNestedManyWithoutClosedByInput
     reviewedPublicReports?: PublicReportCreateNestedManyWithoutReviewedByInput
@@ -65300,6 +71354,10 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCompletionSubmittedByInput
     verifiedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutVerifiedByInput
     cancelledExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCancelledByInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUncheckedCreateNestedManyWithoutChangedByInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutBlockedByInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutResolvedByInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutCreatedByInput
     submittedExecutionEvidence?: ExecutionEvidenceUncheckedCreateNestedManyWithoutSubmittedByInput
     closedCases?: CaseClosureUncheckedCreateNestedManyWithoutClosedByInput
     reviewedPublicReports?: PublicReportUncheckedCreateNestedManyWithoutReviewedByInput
@@ -65602,6 +71660,10 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskUpdateManyWithoutCompletionSubmittedByNestedInput
     verifiedExecutionTasks?: ExecutionTaskUpdateManyWithoutVerifiedByNestedInput
     cancelledExecutionTasks?: ExecutionTaskUpdateManyWithoutCancelledByNestedInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUpdateManyWithoutChangedByNestedInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUpdateManyWithoutBlockedByNestedInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUpdateManyWithoutResolvedByNestedInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUpdateManyWithoutCreatedByNestedInput
     submittedExecutionEvidence?: ExecutionEvidenceUpdateManyWithoutSubmittedByNestedInput
     closedCases?: CaseClosureUpdateManyWithoutClosedByNestedInput
     reviewedPublicReports?: PublicReportUpdateManyWithoutReviewedByNestedInput
@@ -65641,6 +71703,10 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCompletionSubmittedByNestedInput
     verifiedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutVerifiedByNestedInput
     cancelledExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCancelledByNestedInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUncheckedUpdateManyWithoutChangedByNestedInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutBlockedByNestedInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutResolvedByNestedInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUncheckedUpdateManyWithoutCreatedByNestedInput
     submittedExecutionEvidence?: ExecutionEvidenceUncheckedUpdateManyWithoutSubmittedByNestedInput
     closedCases?: CaseClosureUncheckedUpdateManyWithoutClosedByNestedInput
     reviewedPublicReports?: PublicReportUncheckedUpdateManyWithoutReviewedByNestedInput
@@ -65734,6 +71800,10 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCompletionSubmittedByInput
     verifiedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutVerifiedByInput
     cancelledExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCancelledByInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionCreateNestedManyWithoutChangedByInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutBlockedByInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutResolvedByInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyCreateNestedManyWithoutCreatedByInput
     submittedExecutionEvidence?: ExecutionEvidenceCreateNestedManyWithoutSubmittedByInput
     closedCases?: CaseClosureCreateNestedManyWithoutClosedByInput
     reviewedPublicReports?: PublicReportCreateNestedManyWithoutReviewedByInput
@@ -65773,6 +71843,10 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCompletionSubmittedByInput
     verifiedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutVerifiedByInput
     cancelledExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCancelledByInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUncheckedCreateNestedManyWithoutChangedByInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutBlockedByInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutResolvedByInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutCreatedByInput
     submittedExecutionEvidence?: ExecutionEvidenceUncheckedCreateNestedManyWithoutSubmittedByInput
     closedCases?: CaseClosureUncheckedCreateNestedManyWithoutClosedByInput
     reviewedPublicReports?: PublicReportUncheckedCreateNestedManyWithoutReviewedByInput
@@ -66051,6 +72125,10 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskUpdateManyWithoutCompletionSubmittedByNestedInput
     verifiedExecutionTasks?: ExecutionTaskUpdateManyWithoutVerifiedByNestedInput
     cancelledExecutionTasks?: ExecutionTaskUpdateManyWithoutCancelledByNestedInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUpdateManyWithoutChangedByNestedInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUpdateManyWithoutBlockedByNestedInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUpdateManyWithoutResolvedByNestedInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUpdateManyWithoutCreatedByNestedInput
     submittedExecutionEvidence?: ExecutionEvidenceUpdateManyWithoutSubmittedByNestedInput
     closedCases?: CaseClosureUpdateManyWithoutClosedByNestedInput
     reviewedPublicReports?: PublicReportUpdateManyWithoutReviewedByNestedInput
@@ -66090,6 +72168,10 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCompletionSubmittedByNestedInput
     verifiedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutVerifiedByNestedInput
     cancelledExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCancelledByNestedInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUncheckedUpdateManyWithoutChangedByNestedInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutBlockedByNestedInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutResolvedByNestedInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUncheckedUpdateManyWithoutCreatedByNestedInput
     submittedExecutionEvidence?: ExecutionEvidenceUncheckedUpdateManyWithoutSubmittedByNestedInput
     closedCases?: CaseClosureUncheckedUpdateManyWithoutClosedByNestedInput
     reviewedPublicReports?: PublicReportUncheckedUpdateManyWithoutReviewedByNestedInput
@@ -67318,11 +73400,15 @@ export namespace Prisma {
     governanceMode?: $Enums.ExecutionPlanGovernanceMode
     executionContractVersion?: string | null
     governedProvenance?: NullableJsonNullValueInput | InputJsonValue
+    plannedStartAt?: Date | string | null
+    plannedEndAt?: Date | string | null
     case: CaseCreateNestedOneWithoutExecutionPlansInput
     approvalDecision: OrpDecisionCreateNestedOneWithoutExecutionPlanInput
     createdBy: UserCreateNestedOneWithoutCreatedExecutionPlansInput
     tasks?: ExecutionTaskCreateNestedManyWithoutExecutionPlanInput
     closure?: CaseClosureCreateNestedOneWithoutExecutionPlanInput
+    scheduleRevisions?: ExecutionScheduleRevisionCreateNestedManyWithoutExecutionPlanInput
+    taskDependencies?: ExecutionTaskDependencyCreateNestedManyWithoutExecutionPlanInput
   }
 
   export type ExecutionPlanUncheckedCreateWithoutOrpInput = {
@@ -67341,8 +73427,12 @@ export namespace Prisma {
     governanceMode?: $Enums.ExecutionPlanGovernanceMode
     executionContractVersion?: string | null
     governedProvenance?: NullableJsonNullValueInput | InputJsonValue
+    plannedStartAt?: Date | string | null
+    plannedEndAt?: Date | string | null
     tasks?: ExecutionTaskUncheckedCreateNestedManyWithoutExecutionPlanInput
     closure?: CaseClosureUncheckedCreateNestedOneWithoutExecutionPlanInput
+    scheduleRevisions?: ExecutionScheduleRevisionUncheckedCreateNestedManyWithoutExecutionPlanInput
+    taskDependencies?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutExecutionPlanInput
   }
 
   export type ExecutionPlanCreateOrConnectWithoutOrpInput = {
@@ -67543,11 +73633,15 @@ export namespace Prisma {
     governanceMode?: EnumExecutionPlanGovernanceModeFieldUpdateOperationsInput | $Enums.ExecutionPlanGovernanceMode
     executionContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
     governedProvenance?: NullableJsonNullValueInput | InputJsonValue
+    plannedStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    plannedEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     case?: CaseUpdateOneRequiredWithoutExecutionPlansNestedInput
     approvalDecision?: OrpDecisionUpdateOneRequiredWithoutExecutionPlanNestedInput
     createdBy?: UserUpdateOneRequiredWithoutCreatedExecutionPlansNestedInput
     tasks?: ExecutionTaskUpdateManyWithoutExecutionPlanNestedInput
     closure?: CaseClosureUpdateOneWithoutExecutionPlanNestedInput
+    scheduleRevisions?: ExecutionScheduleRevisionUpdateManyWithoutExecutionPlanNestedInput
+    taskDependencies?: ExecutionTaskDependencyUpdateManyWithoutExecutionPlanNestedInput
   }
 
   export type ExecutionPlanUncheckedUpdateWithoutOrpInput = {
@@ -67566,8 +73660,12 @@ export namespace Prisma {
     governanceMode?: EnumExecutionPlanGovernanceModeFieldUpdateOperationsInput | $Enums.ExecutionPlanGovernanceMode
     executionContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
     governedProvenance?: NullableJsonNullValueInput | InputJsonValue
+    plannedStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    plannedEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tasks?: ExecutionTaskUncheckedUpdateManyWithoutExecutionPlanNestedInput
     closure?: CaseClosureUncheckedUpdateOneWithoutExecutionPlanNestedInput
+    scheduleRevisions?: ExecutionScheduleRevisionUncheckedUpdateManyWithoutExecutionPlanNestedInput
+    taskDependencies?: ExecutionTaskDependencyUncheckedUpdateManyWithoutExecutionPlanNestedInput
   }
 
   export type DecisionPackageUpsertWithoutResponsePlansInput = {
@@ -67785,6 +73883,10 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCompletionSubmittedByInput
     verifiedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutVerifiedByInput
     cancelledExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCancelledByInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionCreateNestedManyWithoutChangedByInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutBlockedByInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutResolvedByInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyCreateNestedManyWithoutCreatedByInput
     submittedExecutionEvidence?: ExecutionEvidenceCreateNestedManyWithoutSubmittedByInput
     closedCases?: CaseClosureCreateNestedManyWithoutClosedByInput
     reviewedPublicReports?: PublicReportCreateNestedManyWithoutReviewedByInput
@@ -67824,6 +73926,10 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCompletionSubmittedByInput
     verifiedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutVerifiedByInput
     cancelledExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCancelledByInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUncheckedCreateNestedManyWithoutChangedByInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutBlockedByInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutResolvedByInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutCreatedByInput
     submittedExecutionEvidence?: ExecutionEvidenceUncheckedCreateNestedManyWithoutSubmittedByInput
     closedCases?: CaseClosureUncheckedCreateNestedManyWithoutClosedByInput
     reviewedPublicReports?: PublicReportUncheckedCreateNestedManyWithoutReviewedByInput
@@ -68086,6 +74192,10 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskUpdateManyWithoutCompletionSubmittedByNestedInput
     verifiedExecutionTasks?: ExecutionTaskUpdateManyWithoutVerifiedByNestedInput
     cancelledExecutionTasks?: ExecutionTaskUpdateManyWithoutCancelledByNestedInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUpdateManyWithoutChangedByNestedInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUpdateManyWithoutBlockedByNestedInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUpdateManyWithoutResolvedByNestedInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUpdateManyWithoutCreatedByNestedInput
     submittedExecutionEvidence?: ExecutionEvidenceUpdateManyWithoutSubmittedByNestedInput
     closedCases?: CaseClosureUpdateManyWithoutClosedByNestedInput
     reviewedPublicReports?: PublicReportUpdateManyWithoutReviewedByNestedInput
@@ -68125,6 +74235,10 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCompletionSubmittedByNestedInput
     verifiedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutVerifiedByNestedInput
     cancelledExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCancelledByNestedInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUncheckedUpdateManyWithoutChangedByNestedInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutBlockedByNestedInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutResolvedByNestedInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUncheckedUpdateManyWithoutCreatedByNestedInput
     submittedExecutionEvidence?: ExecutionEvidenceUncheckedUpdateManyWithoutSubmittedByNestedInput
     closedCases?: CaseClosureUncheckedUpdateManyWithoutClosedByNestedInput
     reviewedPublicReports?: PublicReportUncheckedUpdateManyWithoutReviewedByNestedInput
@@ -68179,6 +74293,10 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCompletionSubmittedByInput
     verifiedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutVerifiedByInput
     cancelledExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCancelledByInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionCreateNestedManyWithoutChangedByInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutBlockedByInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutResolvedByInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyCreateNestedManyWithoutCreatedByInput
     submittedExecutionEvidence?: ExecutionEvidenceCreateNestedManyWithoutSubmittedByInput
     closedCases?: CaseClosureCreateNestedManyWithoutClosedByInput
     reviewedPublicReports?: PublicReportCreateNestedManyWithoutReviewedByInput
@@ -68218,6 +74336,10 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCompletionSubmittedByInput
     verifiedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutVerifiedByInput
     cancelledExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCancelledByInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUncheckedCreateNestedManyWithoutChangedByInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutBlockedByInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutResolvedByInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutCreatedByInput
     submittedExecutionEvidence?: ExecutionEvidenceUncheckedCreateNestedManyWithoutSubmittedByInput
     closedCases?: CaseClosureUncheckedCreateNestedManyWithoutClosedByInput
     reviewedPublicReports?: PublicReportUncheckedCreateNestedManyWithoutReviewedByInput
@@ -68415,6 +74537,10 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskUpdateManyWithoutCompletionSubmittedByNestedInput
     verifiedExecutionTasks?: ExecutionTaskUpdateManyWithoutVerifiedByNestedInput
     cancelledExecutionTasks?: ExecutionTaskUpdateManyWithoutCancelledByNestedInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUpdateManyWithoutChangedByNestedInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUpdateManyWithoutBlockedByNestedInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUpdateManyWithoutResolvedByNestedInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUpdateManyWithoutCreatedByNestedInput
     submittedExecutionEvidence?: ExecutionEvidenceUpdateManyWithoutSubmittedByNestedInput
     closedCases?: CaseClosureUpdateManyWithoutClosedByNestedInput
     reviewedPublicReports?: PublicReportUpdateManyWithoutReviewedByNestedInput
@@ -68454,6 +74580,10 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCompletionSubmittedByNestedInput
     verifiedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutVerifiedByNestedInput
     cancelledExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCancelledByNestedInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUncheckedUpdateManyWithoutChangedByNestedInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutBlockedByNestedInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutResolvedByNestedInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUncheckedUpdateManyWithoutCreatedByNestedInput
     submittedExecutionEvidence?: ExecutionEvidenceUncheckedUpdateManyWithoutSubmittedByNestedInput
     closedCases?: CaseClosureUncheckedUpdateManyWithoutClosedByNestedInput
     reviewedPublicReports?: PublicReportUncheckedUpdateManyWithoutReviewedByNestedInput
@@ -68713,6 +74843,10 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCompletionSubmittedByInput
     verifiedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutVerifiedByInput
     cancelledExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCancelledByInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionCreateNestedManyWithoutChangedByInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutBlockedByInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutResolvedByInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyCreateNestedManyWithoutCreatedByInput
     submittedExecutionEvidence?: ExecutionEvidenceCreateNestedManyWithoutSubmittedByInput
     closedCases?: CaseClosureCreateNestedManyWithoutClosedByInput
     reviewedPublicReports?: PublicReportCreateNestedManyWithoutReviewedByInput
@@ -68752,6 +74886,10 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCompletionSubmittedByInput
     verifiedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutVerifiedByInput
     cancelledExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCancelledByInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUncheckedCreateNestedManyWithoutChangedByInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutBlockedByInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutResolvedByInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutCreatedByInput
     submittedExecutionEvidence?: ExecutionEvidenceUncheckedCreateNestedManyWithoutSubmittedByInput
     closedCases?: CaseClosureUncheckedCreateNestedManyWithoutClosedByInput
     reviewedPublicReports?: PublicReportUncheckedCreateNestedManyWithoutReviewedByInput
@@ -68841,6 +74979,10 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCompletionSubmittedByInput
     verifiedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutVerifiedByInput
     cancelledExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCancelledByInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionCreateNestedManyWithoutChangedByInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutBlockedByInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutResolvedByInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyCreateNestedManyWithoutCreatedByInput
     submittedExecutionEvidence?: ExecutionEvidenceCreateNestedManyWithoutSubmittedByInput
     closedCases?: CaseClosureCreateNestedManyWithoutClosedByInput
     reviewedPublicReports?: PublicReportCreateNestedManyWithoutReviewedByInput
@@ -68880,6 +75022,10 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCompletionSubmittedByInput
     verifiedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutVerifiedByInput
     cancelledExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCancelledByInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUncheckedCreateNestedManyWithoutChangedByInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutBlockedByInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutResolvedByInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutCreatedByInput
     submittedExecutionEvidence?: ExecutionEvidenceUncheckedCreateNestedManyWithoutSubmittedByInput
     closedCases?: CaseClosureUncheckedCreateNestedManyWithoutClosedByInput
     reviewedPublicReports?: PublicReportUncheckedCreateNestedManyWithoutReviewedByInput
@@ -68915,11 +75061,15 @@ export namespace Prisma {
     governanceMode?: $Enums.ExecutionPlanGovernanceMode
     executionContractVersion?: string | null
     governedProvenance?: NullableJsonNullValueInput | InputJsonValue
+    plannedStartAt?: Date | string | null
+    plannedEndAt?: Date | string | null
     orp: OperationalResponsePlanCreateNestedOneWithoutExecutionPlanInput
     case: CaseCreateNestedOneWithoutExecutionPlansInput
     createdBy: UserCreateNestedOneWithoutCreatedExecutionPlansInput
     tasks?: ExecutionTaskCreateNestedManyWithoutExecutionPlanInput
     closure?: CaseClosureCreateNestedOneWithoutExecutionPlanInput
+    scheduleRevisions?: ExecutionScheduleRevisionCreateNestedManyWithoutExecutionPlanInput
+    taskDependencies?: ExecutionTaskDependencyCreateNestedManyWithoutExecutionPlanInput
   }
 
   export type ExecutionPlanUncheckedCreateWithoutApprovalDecisionInput = {
@@ -68938,8 +75088,12 @@ export namespace Prisma {
     governanceMode?: $Enums.ExecutionPlanGovernanceMode
     executionContractVersion?: string | null
     governedProvenance?: NullableJsonNullValueInput | InputJsonValue
+    plannedStartAt?: Date | string | null
+    plannedEndAt?: Date | string | null
     tasks?: ExecutionTaskUncheckedCreateNestedManyWithoutExecutionPlanInput
     closure?: CaseClosureUncheckedCreateNestedOneWithoutExecutionPlanInput
+    scheduleRevisions?: ExecutionScheduleRevisionUncheckedCreateNestedManyWithoutExecutionPlanInput
+    taskDependencies?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutExecutionPlanInput
   }
 
   export type ExecutionPlanCreateOrConnectWithoutApprovalDecisionInput = {
@@ -69094,6 +75248,10 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskUpdateManyWithoutCompletionSubmittedByNestedInput
     verifiedExecutionTasks?: ExecutionTaskUpdateManyWithoutVerifiedByNestedInput
     cancelledExecutionTasks?: ExecutionTaskUpdateManyWithoutCancelledByNestedInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUpdateManyWithoutChangedByNestedInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUpdateManyWithoutBlockedByNestedInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUpdateManyWithoutResolvedByNestedInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUpdateManyWithoutCreatedByNestedInput
     submittedExecutionEvidence?: ExecutionEvidenceUpdateManyWithoutSubmittedByNestedInput
     closedCases?: CaseClosureUpdateManyWithoutClosedByNestedInput
     reviewedPublicReports?: PublicReportUpdateManyWithoutReviewedByNestedInput
@@ -69133,6 +75291,10 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCompletionSubmittedByNestedInput
     verifiedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutVerifiedByNestedInput
     cancelledExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCancelledByNestedInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUncheckedUpdateManyWithoutChangedByNestedInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutBlockedByNestedInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutResolvedByNestedInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUncheckedUpdateManyWithoutCreatedByNestedInput
     submittedExecutionEvidence?: ExecutionEvidenceUncheckedUpdateManyWithoutSubmittedByNestedInput
     closedCases?: CaseClosureUncheckedUpdateManyWithoutClosedByNestedInput
     reviewedPublicReports?: PublicReportUncheckedUpdateManyWithoutReviewedByNestedInput
@@ -69234,6 +75396,10 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskUpdateManyWithoutCompletionSubmittedByNestedInput
     verifiedExecutionTasks?: ExecutionTaskUpdateManyWithoutVerifiedByNestedInput
     cancelledExecutionTasks?: ExecutionTaskUpdateManyWithoutCancelledByNestedInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUpdateManyWithoutChangedByNestedInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUpdateManyWithoutBlockedByNestedInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUpdateManyWithoutResolvedByNestedInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUpdateManyWithoutCreatedByNestedInput
     submittedExecutionEvidence?: ExecutionEvidenceUpdateManyWithoutSubmittedByNestedInput
     closedCases?: CaseClosureUpdateManyWithoutClosedByNestedInput
     reviewedPublicReports?: PublicReportUpdateManyWithoutReviewedByNestedInput
@@ -69273,6 +75439,10 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCompletionSubmittedByNestedInput
     verifiedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutVerifiedByNestedInput
     cancelledExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCancelledByNestedInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUncheckedUpdateManyWithoutChangedByNestedInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutBlockedByNestedInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutResolvedByNestedInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUncheckedUpdateManyWithoutCreatedByNestedInput
     submittedExecutionEvidence?: ExecutionEvidenceUncheckedUpdateManyWithoutSubmittedByNestedInput
     closedCases?: CaseClosureUncheckedUpdateManyWithoutClosedByNestedInput
     reviewedPublicReports?: PublicReportUncheckedUpdateManyWithoutReviewedByNestedInput
@@ -69314,11 +75484,15 @@ export namespace Prisma {
     governanceMode?: EnumExecutionPlanGovernanceModeFieldUpdateOperationsInput | $Enums.ExecutionPlanGovernanceMode
     executionContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
     governedProvenance?: NullableJsonNullValueInput | InputJsonValue
+    plannedStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    plannedEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     orp?: OperationalResponsePlanUpdateOneRequiredWithoutExecutionPlanNestedInput
     case?: CaseUpdateOneRequiredWithoutExecutionPlansNestedInput
     createdBy?: UserUpdateOneRequiredWithoutCreatedExecutionPlansNestedInput
     tasks?: ExecutionTaskUpdateManyWithoutExecutionPlanNestedInput
     closure?: CaseClosureUpdateOneWithoutExecutionPlanNestedInput
+    scheduleRevisions?: ExecutionScheduleRevisionUpdateManyWithoutExecutionPlanNestedInput
+    taskDependencies?: ExecutionTaskDependencyUpdateManyWithoutExecutionPlanNestedInput
   }
 
   export type ExecutionPlanUncheckedUpdateWithoutApprovalDecisionInput = {
@@ -69337,8 +75511,12 @@ export namespace Prisma {
     governanceMode?: EnumExecutionPlanGovernanceModeFieldUpdateOperationsInput | $Enums.ExecutionPlanGovernanceMode
     executionContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
     governedProvenance?: NullableJsonNullValueInput | InputJsonValue
+    plannedStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    plannedEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tasks?: ExecutionTaskUncheckedUpdateManyWithoutExecutionPlanNestedInput
     closure?: CaseClosureUncheckedUpdateOneWithoutExecutionPlanNestedInput
+    scheduleRevisions?: ExecutionScheduleRevisionUncheckedUpdateManyWithoutExecutionPlanNestedInput
+    taskDependencies?: ExecutionTaskDependencyUncheckedUpdateManyWithoutExecutionPlanNestedInput
   }
 
   export type OperationalResponsePlanCreateWithoutExecutionPlanInput = {
@@ -69498,6 +75676,10 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCompletionSubmittedByInput
     verifiedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutVerifiedByInput
     cancelledExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCancelledByInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionCreateNestedManyWithoutChangedByInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutBlockedByInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutResolvedByInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyCreateNestedManyWithoutCreatedByInput
     submittedExecutionEvidence?: ExecutionEvidenceCreateNestedManyWithoutSubmittedByInput
     closedCases?: CaseClosureCreateNestedManyWithoutClosedByInput
     reviewedPublicReports?: PublicReportCreateNestedManyWithoutReviewedByInput
@@ -69537,6 +75719,10 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCompletionSubmittedByInput
     verifiedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutVerifiedByInput
     cancelledExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCancelledByInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUncheckedCreateNestedManyWithoutChangedByInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutBlockedByInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutResolvedByInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutCreatedByInput
     submittedExecutionEvidence?: ExecutionEvidenceUncheckedCreateNestedManyWithoutSubmittedByInput
     closedCases?: CaseClosureUncheckedCreateNestedManyWithoutClosedByInput
     reviewedPublicReports?: PublicReportUncheckedCreateNestedManyWithoutReviewedByInput
@@ -69585,6 +75771,8 @@ export namespace Prisma {
     sourceTemplateVersion?: number | null
     evidenceRequired?: boolean
     verificationRequired?: boolean
+    plannedStartAt?: Date | string | null
+    plannedEndAt?: Date | string | null
     assignedTo?: UserCreateNestedOneWithoutAssignedExecutionTasksInput
     assignedBy?: UserCreateNestedOneWithoutAssignedByExecutionTasksInput
     completionSubmittedBy?: UserCreateNestedOneWithoutCompletedExecutionTasksInput
@@ -69594,6 +75782,10 @@ export namespace Prisma {
     approvedActionVersion?: ApprovedActionVersionCreateNestedOneWithoutExecutionTasksInput
     governedExecutionTemplate?: GovernedExecutionTemplateCreateNestedOneWithoutExecutionTasksInput
     governedTaskTemplate?: GovernedExecutionTaskTemplateCreateNestedOneWithoutExecutionTasksInput
+    scheduleRevisions?: ExecutionScheduleRevisionCreateNestedManyWithoutExecutionTaskInput
+    dependencies?: ExecutionTaskDependencyCreateNestedManyWithoutDependentTaskInput
+    requiredBy?: ExecutionTaskDependencyCreateNestedManyWithoutPredecessorTaskInput
+    blockerEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutExecutionTaskInput
   }
 
   export type ExecutionTaskUncheckedCreateWithoutExecutionPlanInput = {
@@ -69630,7 +75822,13 @@ export namespace Prisma {
     sourceTemplateVersion?: number | null
     evidenceRequired?: boolean
     verificationRequired?: boolean
+    plannedStartAt?: Date | string | null
+    plannedEndAt?: Date | string | null
     evidence?: ExecutionEvidenceUncheckedCreateNestedManyWithoutExecutionTaskInput
+    scheduleRevisions?: ExecutionScheduleRevisionUncheckedCreateNestedManyWithoutExecutionTaskInput
+    dependencies?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutDependentTaskInput
+    requiredBy?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutPredecessorTaskInput
+    blockerEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutExecutionTaskInput
   }
 
   export type ExecutionTaskCreateOrConnectWithoutExecutionPlanInput = {
@@ -69666,6 +75864,66 @@ export namespace Prisma {
   export type CaseClosureCreateOrConnectWithoutExecutionPlanInput = {
     where: CaseClosureWhereUniqueInput
     create: XOR<CaseClosureCreateWithoutExecutionPlanInput, CaseClosureUncheckedCreateWithoutExecutionPlanInput>
+  }
+
+  export type ExecutionScheduleRevisionCreateWithoutExecutionPlanInput = {
+    id?: string
+    previousStartAt?: Date | string | null
+    previousEndAt?: Date | string | null
+    newStartAt: Date | string
+    newEndAt: Date | string
+    changeReason: string
+    changedAt?: Date | string
+    executionTask?: ExecutionTaskCreateNestedOneWithoutScheduleRevisionsInput
+    changedBy: UserCreateNestedOneWithoutExecutionScheduleRevisionsInput
+  }
+
+  export type ExecutionScheduleRevisionUncheckedCreateWithoutExecutionPlanInput = {
+    id?: string
+    executionTaskId?: string | null
+    previousStartAt?: Date | string | null
+    previousEndAt?: Date | string | null
+    newStartAt: Date | string
+    newEndAt: Date | string
+    changedById: string
+    changeReason: string
+    changedAt?: Date | string
+  }
+
+  export type ExecutionScheduleRevisionCreateOrConnectWithoutExecutionPlanInput = {
+    where: ExecutionScheduleRevisionWhereUniqueInput
+    create: XOR<ExecutionScheduleRevisionCreateWithoutExecutionPlanInput, ExecutionScheduleRevisionUncheckedCreateWithoutExecutionPlanInput>
+  }
+
+  export type ExecutionScheduleRevisionCreateManyExecutionPlanInputEnvelope = {
+    data: ExecutionScheduleRevisionCreateManyExecutionPlanInput | ExecutionScheduleRevisionCreateManyExecutionPlanInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ExecutionTaskDependencyCreateWithoutExecutionPlanInput = {
+    id?: string
+    createdAt?: Date | string
+    dependentTask: ExecutionTaskCreateNestedOneWithoutDependenciesInput
+    predecessorTask: ExecutionTaskCreateNestedOneWithoutRequiredByInput
+    createdBy: UserCreateNestedOneWithoutCreatedExecutionTaskDependenciesInput
+  }
+
+  export type ExecutionTaskDependencyUncheckedCreateWithoutExecutionPlanInput = {
+    id?: string
+    dependentTaskId: string
+    predecessorTaskId: string
+    createdById: string
+    createdAt?: Date | string
+  }
+
+  export type ExecutionTaskDependencyCreateOrConnectWithoutExecutionPlanInput = {
+    where: ExecutionTaskDependencyWhereUniqueInput
+    create: XOR<ExecutionTaskDependencyCreateWithoutExecutionPlanInput, ExecutionTaskDependencyUncheckedCreateWithoutExecutionPlanInput>
+  }
+
+  export type ExecutionTaskDependencyCreateManyExecutionPlanInputEnvelope = {
+    data: ExecutionTaskDependencyCreateManyExecutionPlanInput | ExecutionTaskDependencyCreateManyExecutionPlanInput[]
+    skipDuplicates?: boolean
   }
 
   export type OperationalResponsePlanUpsertWithoutExecutionPlanInput = {
@@ -69854,6 +76112,10 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskUpdateManyWithoutCompletionSubmittedByNestedInput
     verifiedExecutionTasks?: ExecutionTaskUpdateManyWithoutVerifiedByNestedInput
     cancelledExecutionTasks?: ExecutionTaskUpdateManyWithoutCancelledByNestedInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUpdateManyWithoutChangedByNestedInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUpdateManyWithoutBlockedByNestedInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUpdateManyWithoutResolvedByNestedInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUpdateManyWithoutCreatedByNestedInput
     submittedExecutionEvidence?: ExecutionEvidenceUpdateManyWithoutSubmittedByNestedInput
     closedCases?: CaseClosureUpdateManyWithoutClosedByNestedInput
     reviewedPublicReports?: PublicReportUpdateManyWithoutReviewedByNestedInput
@@ -69893,6 +76155,10 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCompletionSubmittedByNestedInput
     verifiedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutVerifiedByNestedInput
     cancelledExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCancelledByNestedInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUncheckedUpdateManyWithoutChangedByNestedInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutBlockedByNestedInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutResolvedByNestedInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUncheckedUpdateManyWithoutCreatedByNestedInput
     submittedExecutionEvidence?: ExecutionEvidenceUncheckedUpdateManyWithoutSubmittedByNestedInput
     closedCases?: CaseClosureUncheckedUpdateManyWithoutClosedByNestedInput
     reviewedPublicReports?: PublicReportUncheckedUpdateManyWithoutReviewedByNestedInput
@@ -69957,6 +76223,38 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type ExecutionScheduleRevisionUpsertWithWhereUniqueWithoutExecutionPlanInput = {
+    where: ExecutionScheduleRevisionWhereUniqueInput
+    update: XOR<ExecutionScheduleRevisionUpdateWithoutExecutionPlanInput, ExecutionScheduleRevisionUncheckedUpdateWithoutExecutionPlanInput>
+    create: XOR<ExecutionScheduleRevisionCreateWithoutExecutionPlanInput, ExecutionScheduleRevisionUncheckedCreateWithoutExecutionPlanInput>
+  }
+
+  export type ExecutionScheduleRevisionUpdateWithWhereUniqueWithoutExecutionPlanInput = {
+    where: ExecutionScheduleRevisionWhereUniqueInput
+    data: XOR<ExecutionScheduleRevisionUpdateWithoutExecutionPlanInput, ExecutionScheduleRevisionUncheckedUpdateWithoutExecutionPlanInput>
+  }
+
+  export type ExecutionScheduleRevisionUpdateManyWithWhereWithoutExecutionPlanInput = {
+    where: ExecutionScheduleRevisionScalarWhereInput
+    data: XOR<ExecutionScheduleRevisionUpdateManyMutationInput, ExecutionScheduleRevisionUncheckedUpdateManyWithoutExecutionPlanInput>
+  }
+
+  export type ExecutionTaskDependencyUpsertWithWhereUniqueWithoutExecutionPlanInput = {
+    where: ExecutionTaskDependencyWhereUniqueInput
+    update: XOR<ExecutionTaskDependencyUpdateWithoutExecutionPlanInput, ExecutionTaskDependencyUncheckedUpdateWithoutExecutionPlanInput>
+    create: XOR<ExecutionTaskDependencyCreateWithoutExecutionPlanInput, ExecutionTaskDependencyUncheckedCreateWithoutExecutionPlanInput>
+  }
+
+  export type ExecutionTaskDependencyUpdateWithWhereUniqueWithoutExecutionPlanInput = {
+    where: ExecutionTaskDependencyWhereUniqueInput
+    data: XOR<ExecutionTaskDependencyUpdateWithoutExecutionPlanInput, ExecutionTaskDependencyUncheckedUpdateWithoutExecutionPlanInput>
+  }
+
+  export type ExecutionTaskDependencyUpdateManyWithWhereWithoutExecutionPlanInput = {
+    where: ExecutionTaskDependencyScalarWhereInput
+    data: XOR<ExecutionTaskDependencyUpdateManyMutationInput, ExecutionTaskDependencyUncheckedUpdateManyWithoutExecutionPlanInput>
+  }
+
   export type ExecutionPlanCreateWithoutTasksInput = {
     id?: string
     status?: $Enums.ExecutionPlanStatus
@@ -69970,11 +76268,15 @@ export namespace Prisma {
     governanceMode?: $Enums.ExecutionPlanGovernanceMode
     executionContractVersion?: string | null
     governedProvenance?: NullableJsonNullValueInput | InputJsonValue
+    plannedStartAt?: Date | string | null
+    plannedEndAt?: Date | string | null
     orp: OperationalResponsePlanCreateNestedOneWithoutExecutionPlanInput
     case: CaseCreateNestedOneWithoutExecutionPlansInput
     approvalDecision: OrpDecisionCreateNestedOneWithoutExecutionPlanInput
     createdBy: UserCreateNestedOneWithoutCreatedExecutionPlansInput
     closure?: CaseClosureCreateNestedOneWithoutExecutionPlanInput
+    scheduleRevisions?: ExecutionScheduleRevisionCreateNestedManyWithoutExecutionPlanInput
+    taskDependencies?: ExecutionTaskDependencyCreateNestedManyWithoutExecutionPlanInput
   }
 
   export type ExecutionPlanUncheckedCreateWithoutTasksInput = {
@@ -69994,7 +76296,11 @@ export namespace Prisma {
     governanceMode?: $Enums.ExecutionPlanGovernanceMode
     executionContractVersion?: string | null
     governedProvenance?: NullableJsonNullValueInput | InputJsonValue
+    plannedStartAt?: Date | string | null
+    plannedEndAt?: Date | string | null
     closure?: CaseClosureUncheckedCreateNestedOneWithoutExecutionPlanInput
+    scheduleRevisions?: ExecutionScheduleRevisionUncheckedCreateNestedManyWithoutExecutionPlanInput
+    taskDependencies?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutExecutionPlanInput
   }
 
   export type ExecutionPlanCreateOrConnectWithoutTasksInput = {
@@ -70024,6 +76330,10 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCompletionSubmittedByInput
     verifiedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutVerifiedByInput
     cancelledExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCancelledByInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionCreateNestedManyWithoutChangedByInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutBlockedByInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutResolvedByInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyCreateNestedManyWithoutCreatedByInput
     submittedExecutionEvidence?: ExecutionEvidenceCreateNestedManyWithoutSubmittedByInput
     closedCases?: CaseClosureCreateNestedManyWithoutClosedByInput
     reviewedPublicReports?: PublicReportCreateNestedManyWithoutReviewedByInput
@@ -70063,6 +76373,10 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCompletionSubmittedByInput
     verifiedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutVerifiedByInput
     cancelledExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCancelledByInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUncheckedCreateNestedManyWithoutChangedByInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutBlockedByInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutResolvedByInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutCreatedByInput
     submittedExecutionEvidence?: ExecutionEvidenceUncheckedCreateNestedManyWithoutSubmittedByInput
     closedCases?: CaseClosureUncheckedCreateNestedManyWithoutClosedByInput
     reviewedPublicReports?: PublicReportUncheckedCreateNestedManyWithoutReviewedByInput
@@ -70107,6 +76421,10 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCompletionSubmittedByInput
     verifiedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutVerifiedByInput
     cancelledExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCancelledByInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionCreateNestedManyWithoutChangedByInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutBlockedByInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutResolvedByInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyCreateNestedManyWithoutCreatedByInput
     submittedExecutionEvidence?: ExecutionEvidenceCreateNestedManyWithoutSubmittedByInput
     closedCases?: CaseClosureCreateNestedManyWithoutClosedByInput
     reviewedPublicReports?: PublicReportCreateNestedManyWithoutReviewedByInput
@@ -70146,6 +76464,10 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCompletionSubmittedByInput
     verifiedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutVerifiedByInput
     cancelledExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCancelledByInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUncheckedCreateNestedManyWithoutChangedByInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutBlockedByInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutResolvedByInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutCreatedByInput
     submittedExecutionEvidence?: ExecutionEvidenceUncheckedCreateNestedManyWithoutSubmittedByInput
     closedCases?: CaseClosureUncheckedCreateNestedManyWithoutClosedByInput
     reviewedPublicReports?: PublicReportUncheckedCreateNestedManyWithoutReviewedByInput
@@ -70190,6 +76512,10 @@ export namespace Prisma {
     assignedByExecutionTasks?: ExecutionTaskCreateNestedManyWithoutAssignedByInput
     verifiedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutVerifiedByInput
     cancelledExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCancelledByInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionCreateNestedManyWithoutChangedByInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutBlockedByInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutResolvedByInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyCreateNestedManyWithoutCreatedByInput
     submittedExecutionEvidence?: ExecutionEvidenceCreateNestedManyWithoutSubmittedByInput
     closedCases?: CaseClosureCreateNestedManyWithoutClosedByInput
     reviewedPublicReports?: PublicReportCreateNestedManyWithoutReviewedByInput
@@ -70229,6 +76555,10 @@ export namespace Prisma {
     assignedByExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutAssignedByInput
     verifiedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutVerifiedByInput
     cancelledExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCancelledByInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUncheckedCreateNestedManyWithoutChangedByInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutBlockedByInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutResolvedByInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutCreatedByInput
     submittedExecutionEvidence?: ExecutionEvidenceUncheckedCreateNestedManyWithoutSubmittedByInput
     closedCases?: CaseClosureUncheckedCreateNestedManyWithoutClosedByInput
     reviewedPublicReports?: PublicReportUncheckedCreateNestedManyWithoutReviewedByInput
@@ -70273,6 +76603,10 @@ export namespace Prisma {
     assignedByExecutionTasks?: ExecutionTaskCreateNestedManyWithoutAssignedByInput
     completedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCompletionSubmittedByInput
     cancelledExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCancelledByInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionCreateNestedManyWithoutChangedByInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutBlockedByInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutResolvedByInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyCreateNestedManyWithoutCreatedByInput
     submittedExecutionEvidence?: ExecutionEvidenceCreateNestedManyWithoutSubmittedByInput
     closedCases?: CaseClosureCreateNestedManyWithoutClosedByInput
     reviewedPublicReports?: PublicReportCreateNestedManyWithoutReviewedByInput
@@ -70312,6 +76646,10 @@ export namespace Prisma {
     assignedByExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutAssignedByInput
     completedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCompletionSubmittedByInput
     cancelledExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCancelledByInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUncheckedCreateNestedManyWithoutChangedByInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutBlockedByInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutResolvedByInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutCreatedByInput
     submittedExecutionEvidence?: ExecutionEvidenceUncheckedCreateNestedManyWithoutSubmittedByInput
     closedCases?: CaseClosureUncheckedCreateNestedManyWithoutClosedByInput
     reviewedPublicReports?: PublicReportUncheckedCreateNestedManyWithoutReviewedByInput
@@ -70356,6 +76694,10 @@ export namespace Prisma {
     assignedByExecutionTasks?: ExecutionTaskCreateNestedManyWithoutAssignedByInput
     completedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCompletionSubmittedByInput
     verifiedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutVerifiedByInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionCreateNestedManyWithoutChangedByInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutBlockedByInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutResolvedByInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyCreateNestedManyWithoutCreatedByInput
     submittedExecutionEvidence?: ExecutionEvidenceCreateNestedManyWithoutSubmittedByInput
     closedCases?: CaseClosureCreateNestedManyWithoutClosedByInput
     reviewedPublicReports?: PublicReportCreateNestedManyWithoutReviewedByInput
@@ -70395,6 +76737,10 @@ export namespace Prisma {
     assignedByExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutAssignedByInput
     completedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCompletionSubmittedByInput
     verifiedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutVerifiedByInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUncheckedCreateNestedManyWithoutChangedByInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutBlockedByInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutResolvedByInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutCreatedByInput
     submittedExecutionEvidence?: ExecutionEvidenceUncheckedCreateNestedManyWithoutSubmittedByInput
     closedCases?: CaseClosureUncheckedCreateNestedManyWithoutClosedByInput
     reviewedPublicReports?: PublicReportUncheckedCreateNestedManyWithoutReviewedByInput
@@ -70586,6 +76932,124 @@ export namespace Prisma {
     create: XOR<GovernedExecutionTaskTemplateCreateWithoutExecutionTasksInput, GovernedExecutionTaskTemplateUncheckedCreateWithoutExecutionTasksInput>
   }
 
+  export type ExecutionScheduleRevisionCreateWithoutExecutionTaskInput = {
+    id?: string
+    previousStartAt?: Date | string | null
+    previousEndAt?: Date | string | null
+    newStartAt: Date | string
+    newEndAt: Date | string
+    changeReason: string
+    changedAt?: Date | string
+    executionPlan: ExecutionPlanCreateNestedOneWithoutScheduleRevisionsInput
+    changedBy: UserCreateNestedOneWithoutExecutionScheduleRevisionsInput
+  }
+
+  export type ExecutionScheduleRevisionUncheckedCreateWithoutExecutionTaskInput = {
+    id?: string
+    executionPlanId: string
+    previousStartAt?: Date | string | null
+    previousEndAt?: Date | string | null
+    newStartAt: Date | string
+    newEndAt: Date | string
+    changedById: string
+    changeReason: string
+    changedAt?: Date | string
+  }
+
+  export type ExecutionScheduleRevisionCreateOrConnectWithoutExecutionTaskInput = {
+    where: ExecutionScheduleRevisionWhereUniqueInput
+    create: XOR<ExecutionScheduleRevisionCreateWithoutExecutionTaskInput, ExecutionScheduleRevisionUncheckedCreateWithoutExecutionTaskInput>
+  }
+
+  export type ExecutionScheduleRevisionCreateManyExecutionTaskInputEnvelope = {
+    data: ExecutionScheduleRevisionCreateManyExecutionTaskInput | ExecutionScheduleRevisionCreateManyExecutionTaskInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ExecutionTaskDependencyCreateWithoutDependentTaskInput = {
+    id?: string
+    createdAt?: Date | string
+    executionPlan: ExecutionPlanCreateNestedOneWithoutTaskDependenciesInput
+    predecessorTask: ExecutionTaskCreateNestedOneWithoutRequiredByInput
+    createdBy: UserCreateNestedOneWithoutCreatedExecutionTaskDependenciesInput
+  }
+
+  export type ExecutionTaskDependencyUncheckedCreateWithoutDependentTaskInput = {
+    id?: string
+    executionPlanId: string
+    predecessorTaskId: string
+    createdById: string
+    createdAt?: Date | string
+  }
+
+  export type ExecutionTaskDependencyCreateOrConnectWithoutDependentTaskInput = {
+    where: ExecutionTaskDependencyWhereUniqueInput
+    create: XOR<ExecutionTaskDependencyCreateWithoutDependentTaskInput, ExecutionTaskDependencyUncheckedCreateWithoutDependentTaskInput>
+  }
+
+  export type ExecutionTaskDependencyCreateManyDependentTaskInputEnvelope = {
+    data: ExecutionTaskDependencyCreateManyDependentTaskInput | ExecutionTaskDependencyCreateManyDependentTaskInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ExecutionTaskDependencyCreateWithoutPredecessorTaskInput = {
+    id?: string
+    createdAt?: Date | string
+    executionPlan: ExecutionPlanCreateNestedOneWithoutTaskDependenciesInput
+    dependentTask: ExecutionTaskCreateNestedOneWithoutDependenciesInput
+    createdBy: UserCreateNestedOneWithoutCreatedExecutionTaskDependenciesInput
+  }
+
+  export type ExecutionTaskDependencyUncheckedCreateWithoutPredecessorTaskInput = {
+    id?: string
+    executionPlanId: string
+    dependentTaskId: string
+    createdById: string
+    createdAt?: Date | string
+  }
+
+  export type ExecutionTaskDependencyCreateOrConnectWithoutPredecessorTaskInput = {
+    where: ExecutionTaskDependencyWhereUniqueInput
+    create: XOR<ExecutionTaskDependencyCreateWithoutPredecessorTaskInput, ExecutionTaskDependencyUncheckedCreateWithoutPredecessorTaskInput>
+  }
+
+  export type ExecutionTaskDependencyCreateManyPredecessorTaskInputEnvelope = {
+    data: ExecutionTaskDependencyCreateManyPredecessorTaskInput | ExecutionTaskDependencyCreateManyPredecessorTaskInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ExecutionTaskBlockerEventCreateWithoutExecutionTaskInput = {
+    id?: string
+    category: $Enums.ExecutionBlockerCategory
+    reason: string
+    blockedAt?: Date | string
+    resolvedAt?: Date | string | null
+    resolutionReason?: string | null
+    blockedBy: UserCreateNestedOneWithoutBlockedExecutionTaskEventsInput
+    resolvedBy?: UserCreateNestedOneWithoutResolvedExecutionTaskEventsInput
+  }
+
+  export type ExecutionTaskBlockerEventUncheckedCreateWithoutExecutionTaskInput = {
+    id?: string
+    category: $Enums.ExecutionBlockerCategory
+    reason: string
+    blockedById: string
+    blockedAt?: Date | string
+    resolvedById?: string | null
+    resolvedAt?: Date | string | null
+    resolutionReason?: string | null
+  }
+
+  export type ExecutionTaskBlockerEventCreateOrConnectWithoutExecutionTaskInput = {
+    where: ExecutionTaskBlockerEventWhereUniqueInput
+    create: XOR<ExecutionTaskBlockerEventCreateWithoutExecutionTaskInput, ExecutionTaskBlockerEventUncheckedCreateWithoutExecutionTaskInput>
+  }
+
+  export type ExecutionTaskBlockerEventCreateManyExecutionTaskInputEnvelope = {
+    data: ExecutionTaskBlockerEventCreateManyExecutionTaskInput | ExecutionTaskBlockerEventCreateManyExecutionTaskInput[]
+    skipDuplicates?: boolean
+  }
+
   export type ExecutionPlanUpsertWithoutTasksInput = {
     update: XOR<ExecutionPlanUpdateWithoutTasksInput, ExecutionPlanUncheckedUpdateWithoutTasksInput>
     create: XOR<ExecutionPlanCreateWithoutTasksInput, ExecutionPlanUncheckedCreateWithoutTasksInput>
@@ -70610,11 +77074,15 @@ export namespace Prisma {
     governanceMode?: EnumExecutionPlanGovernanceModeFieldUpdateOperationsInput | $Enums.ExecutionPlanGovernanceMode
     executionContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
     governedProvenance?: NullableJsonNullValueInput | InputJsonValue
+    plannedStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    plannedEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     orp?: OperationalResponsePlanUpdateOneRequiredWithoutExecutionPlanNestedInput
     case?: CaseUpdateOneRequiredWithoutExecutionPlansNestedInput
     approvalDecision?: OrpDecisionUpdateOneRequiredWithoutExecutionPlanNestedInput
     createdBy?: UserUpdateOneRequiredWithoutCreatedExecutionPlansNestedInput
     closure?: CaseClosureUpdateOneWithoutExecutionPlanNestedInput
+    scheduleRevisions?: ExecutionScheduleRevisionUpdateManyWithoutExecutionPlanNestedInput
+    taskDependencies?: ExecutionTaskDependencyUpdateManyWithoutExecutionPlanNestedInput
   }
 
   export type ExecutionPlanUncheckedUpdateWithoutTasksInput = {
@@ -70634,7 +77102,11 @@ export namespace Prisma {
     governanceMode?: EnumExecutionPlanGovernanceModeFieldUpdateOperationsInput | $Enums.ExecutionPlanGovernanceMode
     executionContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
     governedProvenance?: NullableJsonNullValueInput | InputJsonValue
+    plannedStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    plannedEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     closure?: CaseClosureUncheckedUpdateOneWithoutExecutionPlanNestedInput
+    scheduleRevisions?: ExecutionScheduleRevisionUncheckedUpdateManyWithoutExecutionPlanNestedInput
+    taskDependencies?: ExecutionTaskDependencyUncheckedUpdateManyWithoutExecutionPlanNestedInput
   }
 
   export type UserUpsertWithoutAssignedExecutionTasksInput = {
@@ -70670,6 +77142,10 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskUpdateManyWithoutCompletionSubmittedByNestedInput
     verifiedExecutionTasks?: ExecutionTaskUpdateManyWithoutVerifiedByNestedInput
     cancelledExecutionTasks?: ExecutionTaskUpdateManyWithoutCancelledByNestedInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUpdateManyWithoutChangedByNestedInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUpdateManyWithoutBlockedByNestedInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUpdateManyWithoutResolvedByNestedInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUpdateManyWithoutCreatedByNestedInput
     submittedExecutionEvidence?: ExecutionEvidenceUpdateManyWithoutSubmittedByNestedInput
     closedCases?: CaseClosureUpdateManyWithoutClosedByNestedInput
     reviewedPublicReports?: PublicReportUpdateManyWithoutReviewedByNestedInput
@@ -70709,6 +77185,10 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCompletionSubmittedByNestedInput
     verifiedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutVerifiedByNestedInput
     cancelledExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCancelledByNestedInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUncheckedUpdateManyWithoutChangedByNestedInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutBlockedByNestedInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutResolvedByNestedInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUncheckedUpdateManyWithoutCreatedByNestedInput
     submittedExecutionEvidence?: ExecutionEvidenceUncheckedUpdateManyWithoutSubmittedByNestedInput
     closedCases?: CaseClosureUncheckedUpdateManyWithoutClosedByNestedInput
     reviewedPublicReports?: PublicReportUncheckedUpdateManyWithoutReviewedByNestedInput
@@ -70759,6 +77239,10 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskUpdateManyWithoutCompletionSubmittedByNestedInput
     verifiedExecutionTasks?: ExecutionTaskUpdateManyWithoutVerifiedByNestedInput
     cancelledExecutionTasks?: ExecutionTaskUpdateManyWithoutCancelledByNestedInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUpdateManyWithoutChangedByNestedInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUpdateManyWithoutBlockedByNestedInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUpdateManyWithoutResolvedByNestedInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUpdateManyWithoutCreatedByNestedInput
     submittedExecutionEvidence?: ExecutionEvidenceUpdateManyWithoutSubmittedByNestedInput
     closedCases?: CaseClosureUpdateManyWithoutClosedByNestedInput
     reviewedPublicReports?: PublicReportUpdateManyWithoutReviewedByNestedInput
@@ -70798,6 +77282,10 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCompletionSubmittedByNestedInput
     verifiedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutVerifiedByNestedInput
     cancelledExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCancelledByNestedInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUncheckedUpdateManyWithoutChangedByNestedInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutBlockedByNestedInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutResolvedByNestedInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUncheckedUpdateManyWithoutCreatedByNestedInput
     submittedExecutionEvidence?: ExecutionEvidenceUncheckedUpdateManyWithoutSubmittedByNestedInput
     closedCases?: CaseClosureUncheckedUpdateManyWithoutClosedByNestedInput
     reviewedPublicReports?: PublicReportUncheckedUpdateManyWithoutReviewedByNestedInput
@@ -70848,6 +77336,10 @@ export namespace Prisma {
     assignedByExecutionTasks?: ExecutionTaskUpdateManyWithoutAssignedByNestedInput
     verifiedExecutionTasks?: ExecutionTaskUpdateManyWithoutVerifiedByNestedInput
     cancelledExecutionTasks?: ExecutionTaskUpdateManyWithoutCancelledByNestedInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUpdateManyWithoutChangedByNestedInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUpdateManyWithoutBlockedByNestedInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUpdateManyWithoutResolvedByNestedInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUpdateManyWithoutCreatedByNestedInput
     submittedExecutionEvidence?: ExecutionEvidenceUpdateManyWithoutSubmittedByNestedInput
     closedCases?: CaseClosureUpdateManyWithoutClosedByNestedInput
     reviewedPublicReports?: PublicReportUpdateManyWithoutReviewedByNestedInput
@@ -70887,6 +77379,10 @@ export namespace Prisma {
     assignedByExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutAssignedByNestedInput
     verifiedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutVerifiedByNestedInput
     cancelledExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCancelledByNestedInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUncheckedUpdateManyWithoutChangedByNestedInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutBlockedByNestedInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutResolvedByNestedInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUncheckedUpdateManyWithoutCreatedByNestedInput
     submittedExecutionEvidence?: ExecutionEvidenceUncheckedUpdateManyWithoutSubmittedByNestedInput
     closedCases?: CaseClosureUncheckedUpdateManyWithoutClosedByNestedInput
     reviewedPublicReports?: PublicReportUncheckedUpdateManyWithoutReviewedByNestedInput
@@ -70937,6 +77433,10 @@ export namespace Prisma {
     assignedByExecutionTasks?: ExecutionTaskUpdateManyWithoutAssignedByNestedInput
     completedExecutionTasks?: ExecutionTaskUpdateManyWithoutCompletionSubmittedByNestedInput
     cancelledExecutionTasks?: ExecutionTaskUpdateManyWithoutCancelledByNestedInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUpdateManyWithoutChangedByNestedInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUpdateManyWithoutBlockedByNestedInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUpdateManyWithoutResolvedByNestedInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUpdateManyWithoutCreatedByNestedInput
     submittedExecutionEvidence?: ExecutionEvidenceUpdateManyWithoutSubmittedByNestedInput
     closedCases?: CaseClosureUpdateManyWithoutClosedByNestedInput
     reviewedPublicReports?: PublicReportUpdateManyWithoutReviewedByNestedInput
@@ -70976,6 +77476,10 @@ export namespace Prisma {
     assignedByExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutAssignedByNestedInput
     completedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCompletionSubmittedByNestedInput
     cancelledExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCancelledByNestedInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUncheckedUpdateManyWithoutChangedByNestedInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutBlockedByNestedInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutResolvedByNestedInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUncheckedUpdateManyWithoutCreatedByNestedInput
     submittedExecutionEvidence?: ExecutionEvidenceUncheckedUpdateManyWithoutSubmittedByNestedInput
     closedCases?: CaseClosureUncheckedUpdateManyWithoutClosedByNestedInput
     reviewedPublicReports?: PublicReportUncheckedUpdateManyWithoutReviewedByNestedInput
@@ -71026,6 +77530,10 @@ export namespace Prisma {
     assignedByExecutionTasks?: ExecutionTaskUpdateManyWithoutAssignedByNestedInput
     completedExecutionTasks?: ExecutionTaskUpdateManyWithoutCompletionSubmittedByNestedInput
     verifiedExecutionTasks?: ExecutionTaskUpdateManyWithoutVerifiedByNestedInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUpdateManyWithoutChangedByNestedInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUpdateManyWithoutBlockedByNestedInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUpdateManyWithoutResolvedByNestedInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUpdateManyWithoutCreatedByNestedInput
     submittedExecutionEvidence?: ExecutionEvidenceUpdateManyWithoutSubmittedByNestedInput
     closedCases?: CaseClosureUpdateManyWithoutClosedByNestedInput
     reviewedPublicReports?: PublicReportUpdateManyWithoutReviewedByNestedInput
@@ -71065,6 +77573,10 @@ export namespace Prisma {
     assignedByExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutAssignedByNestedInput
     completedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCompletionSubmittedByNestedInput
     verifiedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutVerifiedByNestedInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUncheckedUpdateManyWithoutChangedByNestedInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutBlockedByNestedInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutResolvedByNestedInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUncheckedUpdateManyWithoutCreatedByNestedInput
     submittedExecutionEvidence?: ExecutionEvidenceUncheckedUpdateManyWithoutSubmittedByNestedInput
     closedCases?: CaseClosureUncheckedUpdateManyWithoutClosedByNestedInput
     reviewedPublicReports?: PublicReportUncheckedUpdateManyWithoutReviewedByNestedInput
@@ -71251,6 +77763,1798 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type ExecutionScheduleRevisionUpsertWithWhereUniqueWithoutExecutionTaskInput = {
+    where: ExecutionScheduleRevisionWhereUniqueInput
+    update: XOR<ExecutionScheduleRevisionUpdateWithoutExecutionTaskInput, ExecutionScheduleRevisionUncheckedUpdateWithoutExecutionTaskInput>
+    create: XOR<ExecutionScheduleRevisionCreateWithoutExecutionTaskInput, ExecutionScheduleRevisionUncheckedCreateWithoutExecutionTaskInput>
+  }
+
+  export type ExecutionScheduleRevisionUpdateWithWhereUniqueWithoutExecutionTaskInput = {
+    where: ExecutionScheduleRevisionWhereUniqueInput
+    data: XOR<ExecutionScheduleRevisionUpdateWithoutExecutionTaskInput, ExecutionScheduleRevisionUncheckedUpdateWithoutExecutionTaskInput>
+  }
+
+  export type ExecutionScheduleRevisionUpdateManyWithWhereWithoutExecutionTaskInput = {
+    where: ExecutionScheduleRevisionScalarWhereInput
+    data: XOR<ExecutionScheduleRevisionUpdateManyMutationInput, ExecutionScheduleRevisionUncheckedUpdateManyWithoutExecutionTaskInput>
+  }
+
+  export type ExecutionTaskDependencyUpsertWithWhereUniqueWithoutDependentTaskInput = {
+    where: ExecutionTaskDependencyWhereUniqueInput
+    update: XOR<ExecutionTaskDependencyUpdateWithoutDependentTaskInput, ExecutionTaskDependencyUncheckedUpdateWithoutDependentTaskInput>
+    create: XOR<ExecutionTaskDependencyCreateWithoutDependentTaskInput, ExecutionTaskDependencyUncheckedCreateWithoutDependentTaskInput>
+  }
+
+  export type ExecutionTaskDependencyUpdateWithWhereUniqueWithoutDependentTaskInput = {
+    where: ExecutionTaskDependencyWhereUniqueInput
+    data: XOR<ExecutionTaskDependencyUpdateWithoutDependentTaskInput, ExecutionTaskDependencyUncheckedUpdateWithoutDependentTaskInput>
+  }
+
+  export type ExecutionTaskDependencyUpdateManyWithWhereWithoutDependentTaskInput = {
+    where: ExecutionTaskDependencyScalarWhereInput
+    data: XOR<ExecutionTaskDependencyUpdateManyMutationInput, ExecutionTaskDependencyUncheckedUpdateManyWithoutDependentTaskInput>
+  }
+
+  export type ExecutionTaskDependencyUpsertWithWhereUniqueWithoutPredecessorTaskInput = {
+    where: ExecutionTaskDependencyWhereUniqueInput
+    update: XOR<ExecutionTaskDependencyUpdateWithoutPredecessorTaskInput, ExecutionTaskDependencyUncheckedUpdateWithoutPredecessorTaskInput>
+    create: XOR<ExecutionTaskDependencyCreateWithoutPredecessorTaskInput, ExecutionTaskDependencyUncheckedCreateWithoutPredecessorTaskInput>
+  }
+
+  export type ExecutionTaskDependencyUpdateWithWhereUniqueWithoutPredecessorTaskInput = {
+    where: ExecutionTaskDependencyWhereUniqueInput
+    data: XOR<ExecutionTaskDependencyUpdateWithoutPredecessorTaskInput, ExecutionTaskDependencyUncheckedUpdateWithoutPredecessorTaskInput>
+  }
+
+  export type ExecutionTaskDependencyUpdateManyWithWhereWithoutPredecessorTaskInput = {
+    where: ExecutionTaskDependencyScalarWhereInput
+    data: XOR<ExecutionTaskDependencyUpdateManyMutationInput, ExecutionTaskDependencyUncheckedUpdateManyWithoutPredecessorTaskInput>
+  }
+
+  export type ExecutionTaskBlockerEventUpsertWithWhereUniqueWithoutExecutionTaskInput = {
+    where: ExecutionTaskBlockerEventWhereUniqueInput
+    update: XOR<ExecutionTaskBlockerEventUpdateWithoutExecutionTaskInput, ExecutionTaskBlockerEventUncheckedUpdateWithoutExecutionTaskInput>
+    create: XOR<ExecutionTaskBlockerEventCreateWithoutExecutionTaskInput, ExecutionTaskBlockerEventUncheckedCreateWithoutExecutionTaskInput>
+  }
+
+  export type ExecutionTaskBlockerEventUpdateWithWhereUniqueWithoutExecutionTaskInput = {
+    where: ExecutionTaskBlockerEventWhereUniqueInput
+    data: XOR<ExecutionTaskBlockerEventUpdateWithoutExecutionTaskInput, ExecutionTaskBlockerEventUncheckedUpdateWithoutExecutionTaskInput>
+  }
+
+  export type ExecutionTaskBlockerEventUpdateManyWithWhereWithoutExecutionTaskInput = {
+    where: ExecutionTaskBlockerEventScalarWhereInput
+    data: XOR<ExecutionTaskBlockerEventUpdateManyMutationInput, ExecutionTaskBlockerEventUncheckedUpdateManyWithoutExecutionTaskInput>
+  }
+
+  export type ExecutionPlanCreateWithoutTaskDependenciesInput = {
+    id?: string
+    status?: $Enums.ExecutionPlanStatus
+    templateVersion?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    startedAt?: Date | string | null
+    completedAt?: Date | string | null
+    cancelledAt?: Date | string | null
+    cancellationReason?: string | null
+    governanceMode?: $Enums.ExecutionPlanGovernanceMode
+    executionContractVersion?: string | null
+    governedProvenance?: NullableJsonNullValueInput | InputJsonValue
+    plannedStartAt?: Date | string | null
+    plannedEndAt?: Date | string | null
+    orp: OperationalResponsePlanCreateNestedOneWithoutExecutionPlanInput
+    case: CaseCreateNestedOneWithoutExecutionPlansInput
+    approvalDecision: OrpDecisionCreateNestedOneWithoutExecutionPlanInput
+    createdBy: UserCreateNestedOneWithoutCreatedExecutionPlansInput
+    tasks?: ExecutionTaskCreateNestedManyWithoutExecutionPlanInput
+    closure?: CaseClosureCreateNestedOneWithoutExecutionPlanInput
+    scheduleRevisions?: ExecutionScheduleRevisionCreateNestedManyWithoutExecutionPlanInput
+  }
+
+  export type ExecutionPlanUncheckedCreateWithoutTaskDependenciesInput = {
+    id?: string
+    orpId: string
+    caseId: string
+    approvalDecisionId: string
+    status?: $Enums.ExecutionPlanStatus
+    createdById: string
+    templateVersion?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    startedAt?: Date | string | null
+    completedAt?: Date | string | null
+    cancelledAt?: Date | string | null
+    cancellationReason?: string | null
+    governanceMode?: $Enums.ExecutionPlanGovernanceMode
+    executionContractVersion?: string | null
+    governedProvenance?: NullableJsonNullValueInput | InputJsonValue
+    plannedStartAt?: Date | string | null
+    plannedEndAt?: Date | string | null
+    tasks?: ExecutionTaskUncheckedCreateNestedManyWithoutExecutionPlanInput
+    closure?: CaseClosureUncheckedCreateNestedOneWithoutExecutionPlanInput
+    scheduleRevisions?: ExecutionScheduleRevisionUncheckedCreateNestedManyWithoutExecutionPlanInput
+  }
+
+  export type ExecutionPlanCreateOrConnectWithoutTaskDependenciesInput = {
+    where: ExecutionPlanWhereUniqueInput
+    create: XOR<ExecutionPlanCreateWithoutTaskDependenciesInput, ExecutionPlanUncheckedCreateWithoutTaskDependenciesInput>
+  }
+
+  export type ExecutionTaskCreateWithoutDependenciesInput = {
+    id?: string
+    sequenceNumber: number
+    sourceActionCode: string
+    templateTaskKey: string
+    titleSnapshot: string
+    descriptionSnapshot: string
+    categorySnapshot: string
+    isMandatory?: boolean
+    status?: $Enums.ExecutionTaskStatus
+    assignedAt?: Date | string | null
+    startedAt?: Date | string | null
+    completionSubmittedAt?: Date | string | null
+    completionNote?: string | null
+    verifiedAt?: Date | string | null
+    verificationNote?: string | null
+    blockedReason?: string | null
+    cancelledAt?: Date | string | null
+    cancellationReason?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    sourceActionVersion?: number | null
+    sourceTemplateCode?: string | null
+    sourceTemplateVersion?: number | null
+    evidenceRequired?: boolean
+    verificationRequired?: boolean
+    plannedStartAt?: Date | string | null
+    plannedEndAt?: Date | string | null
+    executionPlan: ExecutionPlanCreateNestedOneWithoutTasksInput
+    assignedTo?: UserCreateNestedOneWithoutAssignedExecutionTasksInput
+    assignedBy?: UserCreateNestedOneWithoutAssignedByExecutionTasksInput
+    completionSubmittedBy?: UserCreateNestedOneWithoutCompletedExecutionTasksInput
+    verifiedBy?: UserCreateNestedOneWithoutVerifiedExecutionTasksInput
+    cancelledBy?: UserCreateNestedOneWithoutCancelledExecutionTasksInput
+    evidence?: ExecutionEvidenceCreateNestedManyWithoutExecutionTaskInput
+    approvedActionVersion?: ApprovedActionVersionCreateNestedOneWithoutExecutionTasksInput
+    governedExecutionTemplate?: GovernedExecutionTemplateCreateNestedOneWithoutExecutionTasksInput
+    governedTaskTemplate?: GovernedExecutionTaskTemplateCreateNestedOneWithoutExecutionTasksInput
+    scheduleRevisions?: ExecutionScheduleRevisionCreateNestedManyWithoutExecutionTaskInput
+    requiredBy?: ExecutionTaskDependencyCreateNestedManyWithoutPredecessorTaskInput
+    blockerEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutExecutionTaskInput
+  }
+
+  export type ExecutionTaskUncheckedCreateWithoutDependenciesInput = {
+    id?: string
+    executionPlanId: string
+    sequenceNumber: number
+    sourceActionCode: string
+    templateTaskKey: string
+    titleSnapshot: string
+    descriptionSnapshot: string
+    categorySnapshot: string
+    isMandatory?: boolean
+    status?: $Enums.ExecutionTaskStatus
+    assignedToId?: string | null
+    assignedById?: string | null
+    assignedAt?: Date | string | null
+    startedAt?: Date | string | null
+    completionSubmittedById?: string | null
+    completionSubmittedAt?: Date | string | null
+    completionNote?: string | null
+    verifiedById?: string | null
+    verifiedAt?: Date | string | null
+    verificationNote?: string | null
+    blockedReason?: string | null
+    cancelledById?: string | null
+    cancelledAt?: Date | string | null
+    cancellationReason?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    approvedActionVersionId?: string | null
+    governedExecutionTemplateId?: string | null
+    governedTaskTemplateId?: string | null
+    sourceActionVersion?: number | null
+    sourceTemplateCode?: string | null
+    sourceTemplateVersion?: number | null
+    evidenceRequired?: boolean
+    verificationRequired?: boolean
+    plannedStartAt?: Date | string | null
+    plannedEndAt?: Date | string | null
+    evidence?: ExecutionEvidenceUncheckedCreateNestedManyWithoutExecutionTaskInput
+    scheduleRevisions?: ExecutionScheduleRevisionUncheckedCreateNestedManyWithoutExecutionTaskInput
+    requiredBy?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutPredecessorTaskInput
+    blockerEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutExecutionTaskInput
+  }
+
+  export type ExecutionTaskCreateOrConnectWithoutDependenciesInput = {
+    where: ExecutionTaskWhereUniqueInput
+    create: XOR<ExecutionTaskCreateWithoutDependenciesInput, ExecutionTaskUncheckedCreateWithoutDependenciesInput>
+  }
+
+  export type ExecutionTaskCreateWithoutRequiredByInput = {
+    id?: string
+    sequenceNumber: number
+    sourceActionCode: string
+    templateTaskKey: string
+    titleSnapshot: string
+    descriptionSnapshot: string
+    categorySnapshot: string
+    isMandatory?: boolean
+    status?: $Enums.ExecutionTaskStatus
+    assignedAt?: Date | string | null
+    startedAt?: Date | string | null
+    completionSubmittedAt?: Date | string | null
+    completionNote?: string | null
+    verifiedAt?: Date | string | null
+    verificationNote?: string | null
+    blockedReason?: string | null
+    cancelledAt?: Date | string | null
+    cancellationReason?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    sourceActionVersion?: number | null
+    sourceTemplateCode?: string | null
+    sourceTemplateVersion?: number | null
+    evidenceRequired?: boolean
+    verificationRequired?: boolean
+    plannedStartAt?: Date | string | null
+    plannedEndAt?: Date | string | null
+    executionPlan: ExecutionPlanCreateNestedOneWithoutTasksInput
+    assignedTo?: UserCreateNestedOneWithoutAssignedExecutionTasksInput
+    assignedBy?: UserCreateNestedOneWithoutAssignedByExecutionTasksInput
+    completionSubmittedBy?: UserCreateNestedOneWithoutCompletedExecutionTasksInput
+    verifiedBy?: UserCreateNestedOneWithoutVerifiedExecutionTasksInput
+    cancelledBy?: UserCreateNestedOneWithoutCancelledExecutionTasksInput
+    evidence?: ExecutionEvidenceCreateNestedManyWithoutExecutionTaskInput
+    approvedActionVersion?: ApprovedActionVersionCreateNestedOneWithoutExecutionTasksInput
+    governedExecutionTemplate?: GovernedExecutionTemplateCreateNestedOneWithoutExecutionTasksInput
+    governedTaskTemplate?: GovernedExecutionTaskTemplateCreateNestedOneWithoutExecutionTasksInput
+    scheduleRevisions?: ExecutionScheduleRevisionCreateNestedManyWithoutExecutionTaskInput
+    dependencies?: ExecutionTaskDependencyCreateNestedManyWithoutDependentTaskInput
+    blockerEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutExecutionTaskInput
+  }
+
+  export type ExecutionTaskUncheckedCreateWithoutRequiredByInput = {
+    id?: string
+    executionPlanId: string
+    sequenceNumber: number
+    sourceActionCode: string
+    templateTaskKey: string
+    titleSnapshot: string
+    descriptionSnapshot: string
+    categorySnapshot: string
+    isMandatory?: boolean
+    status?: $Enums.ExecutionTaskStatus
+    assignedToId?: string | null
+    assignedById?: string | null
+    assignedAt?: Date | string | null
+    startedAt?: Date | string | null
+    completionSubmittedById?: string | null
+    completionSubmittedAt?: Date | string | null
+    completionNote?: string | null
+    verifiedById?: string | null
+    verifiedAt?: Date | string | null
+    verificationNote?: string | null
+    blockedReason?: string | null
+    cancelledById?: string | null
+    cancelledAt?: Date | string | null
+    cancellationReason?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    approvedActionVersionId?: string | null
+    governedExecutionTemplateId?: string | null
+    governedTaskTemplateId?: string | null
+    sourceActionVersion?: number | null
+    sourceTemplateCode?: string | null
+    sourceTemplateVersion?: number | null
+    evidenceRequired?: boolean
+    verificationRequired?: boolean
+    plannedStartAt?: Date | string | null
+    plannedEndAt?: Date | string | null
+    evidence?: ExecutionEvidenceUncheckedCreateNestedManyWithoutExecutionTaskInput
+    scheduleRevisions?: ExecutionScheduleRevisionUncheckedCreateNestedManyWithoutExecutionTaskInput
+    dependencies?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutDependentTaskInput
+    blockerEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutExecutionTaskInput
+  }
+
+  export type ExecutionTaskCreateOrConnectWithoutRequiredByInput = {
+    where: ExecutionTaskWhereUniqueInput
+    create: XOR<ExecutionTaskCreateWithoutRequiredByInput, ExecutionTaskUncheckedCreateWithoutRequiredByInput>
+  }
+
+  export type UserCreateWithoutCreatedExecutionTaskDependenciesInput = {
+    id?: string
+    employeeCode: string
+    name: string
+    email: string
+    passwordHash: string
+    designation: string
+    role?: $Enums.SystemRole
+    status?: $Enums.UserStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    department: DepartmentCreateNestedOneWithoutUsersInput
+    jurisdiction: JurisdictionCreateNestedOneWithoutUsersInput
+    inspections?: InspectionCreateNestedManyWithoutInspectorInput
+    approvalAuthorities?: ApprovalAuthorityCreateNestedManyWithoutUserInput
+    reviewedOrpDecisions?: OrpDecisionCreateNestedManyWithoutReviewerInput
+    forwardedOrpDecisions?: OrpDecisionCreateNestedManyWithoutForwardedUserInput
+    createdExecutionPlans?: ExecutionPlanCreateNestedManyWithoutCreatedByInput
+    assignedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutAssignedToInput
+    assignedByExecutionTasks?: ExecutionTaskCreateNestedManyWithoutAssignedByInput
+    completedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCompletionSubmittedByInput
+    verifiedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutVerifiedByInput
+    cancelledExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCancelledByInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionCreateNestedManyWithoutChangedByInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutBlockedByInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutResolvedByInput
+    submittedExecutionEvidence?: ExecutionEvidenceCreateNestedManyWithoutSubmittedByInput
+    closedCases?: CaseClosureCreateNestedManyWithoutClosedByInput
+    reviewedPublicReports?: PublicReportCreateNestedManyWithoutReviewedByInput
+    decidedPublicReports?: PublicReportCreateNestedManyWithoutDecisionByInput
+    createdTriageAnalyses?: PublicReportTriageAnalysisCreateNestedManyWithoutCreatedByInput
+    createdPolicyDocuments?: PolicyDocumentCreateNestedManyWithoutCreatedByInput
+    approvedPolicyDocuments?: PolicyDocumentCreateNestedManyWithoutApprovedByInput
+    createdApprovedActions?: ApprovedActionVersionCreateNestedManyWithoutCreatedByInput
+    approvedApprovedActions?: ApprovedActionVersionCreateNestedManyWithoutApprovedByInput
+    preparedDecisionPackages?: DecisionPackageCreateNestedManyWithoutPreparedByInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutCreatedByInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutApprovedByInput
+    createdObservationSources?: ObservationSourceCreateNestedManyWithoutCreatedByInput
+    deactivatedObservationSources?: ObservationSourceCreateNestedManyWithoutDeactivatedByInput
+    ingestedExternalObservations?: ExternalObservationCreateNestedManyWithoutIngestedByInput
+  }
+
+  export type UserUncheckedCreateWithoutCreatedExecutionTaskDependenciesInput = {
+    id?: string
+    employeeCode: string
+    name: string
+    email: string
+    passwordHash: string
+    designation: string
+    role?: $Enums.SystemRole
+    status?: $Enums.UserStatus
+    departmentId: string
+    jurisdictionId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    inspections?: InspectionUncheckedCreateNestedManyWithoutInspectorInput
+    approvalAuthorities?: ApprovalAuthorityUncheckedCreateNestedManyWithoutUserInput
+    reviewedOrpDecisions?: OrpDecisionUncheckedCreateNestedManyWithoutReviewerInput
+    forwardedOrpDecisions?: OrpDecisionUncheckedCreateNestedManyWithoutForwardedUserInput
+    createdExecutionPlans?: ExecutionPlanUncheckedCreateNestedManyWithoutCreatedByInput
+    assignedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutAssignedToInput
+    assignedByExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutAssignedByInput
+    completedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCompletionSubmittedByInput
+    verifiedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutVerifiedByInput
+    cancelledExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCancelledByInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUncheckedCreateNestedManyWithoutChangedByInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutBlockedByInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutResolvedByInput
+    submittedExecutionEvidence?: ExecutionEvidenceUncheckedCreateNestedManyWithoutSubmittedByInput
+    closedCases?: CaseClosureUncheckedCreateNestedManyWithoutClosedByInput
+    reviewedPublicReports?: PublicReportUncheckedCreateNestedManyWithoutReviewedByInput
+    decidedPublicReports?: PublicReportUncheckedCreateNestedManyWithoutDecisionByInput
+    createdTriageAnalyses?: PublicReportTriageAnalysisUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPolicyDocuments?: PolicyDocumentUncheckedCreateNestedManyWithoutCreatedByInput
+    approvedPolicyDocuments?: PolicyDocumentUncheckedCreateNestedManyWithoutApprovedByInput
+    createdApprovedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutCreatedByInput
+    approvedApprovedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutApprovedByInput
+    preparedDecisionPackages?: DecisionPackageUncheckedCreateNestedManyWithoutPreparedByInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutCreatedByInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutApprovedByInput
+    createdObservationSources?: ObservationSourceUncheckedCreateNestedManyWithoutCreatedByInput
+    deactivatedObservationSources?: ObservationSourceUncheckedCreateNestedManyWithoutDeactivatedByInput
+    ingestedExternalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutIngestedByInput
+  }
+
+  export type UserCreateOrConnectWithoutCreatedExecutionTaskDependenciesInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutCreatedExecutionTaskDependenciesInput, UserUncheckedCreateWithoutCreatedExecutionTaskDependenciesInput>
+  }
+
+  export type ExecutionPlanUpsertWithoutTaskDependenciesInput = {
+    update: XOR<ExecutionPlanUpdateWithoutTaskDependenciesInput, ExecutionPlanUncheckedUpdateWithoutTaskDependenciesInput>
+    create: XOR<ExecutionPlanCreateWithoutTaskDependenciesInput, ExecutionPlanUncheckedCreateWithoutTaskDependenciesInput>
+    where?: ExecutionPlanWhereInput
+  }
+
+  export type ExecutionPlanUpdateToOneWithWhereWithoutTaskDependenciesInput = {
+    where?: ExecutionPlanWhereInput
+    data: XOR<ExecutionPlanUpdateWithoutTaskDependenciesInput, ExecutionPlanUncheckedUpdateWithoutTaskDependenciesInput>
+  }
+
+  export type ExecutionPlanUpdateWithoutTaskDependenciesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: EnumExecutionPlanStatusFieldUpdateOperationsInput | $Enums.ExecutionPlanStatus
+    templateVersion?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    startedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    governanceMode?: EnumExecutionPlanGovernanceModeFieldUpdateOperationsInput | $Enums.ExecutionPlanGovernanceMode
+    executionContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
+    governedProvenance?: NullableJsonNullValueInput | InputJsonValue
+    plannedStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    plannedEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    orp?: OperationalResponsePlanUpdateOneRequiredWithoutExecutionPlanNestedInput
+    case?: CaseUpdateOneRequiredWithoutExecutionPlansNestedInput
+    approvalDecision?: OrpDecisionUpdateOneRequiredWithoutExecutionPlanNestedInput
+    createdBy?: UserUpdateOneRequiredWithoutCreatedExecutionPlansNestedInput
+    tasks?: ExecutionTaskUpdateManyWithoutExecutionPlanNestedInput
+    closure?: CaseClosureUpdateOneWithoutExecutionPlanNestedInput
+    scheduleRevisions?: ExecutionScheduleRevisionUpdateManyWithoutExecutionPlanNestedInput
+  }
+
+  export type ExecutionPlanUncheckedUpdateWithoutTaskDependenciesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    orpId?: StringFieldUpdateOperationsInput | string
+    caseId?: StringFieldUpdateOperationsInput | string
+    approvalDecisionId?: StringFieldUpdateOperationsInput | string
+    status?: EnumExecutionPlanStatusFieldUpdateOperationsInput | $Enums.ExecutionPlanStatus
+    createdById?: StringFieldUpdateOperationsInput | string
+    templateVersion?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    startedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    governanceMode?: EnumExecutionPlanGovernanceModeFieldUpdateOperationsInput | $Enums.ExecutionPlanGovernanceMode
+    executionContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
+    governedProvenance?: NullableJsonNullValueInput | InputJsonValue
+    plannedStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    plannedEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    tasks?: ExecutionTaskUncheckedUpdateManyWithoutExecutionPlanNestedInput
+    closure?: CaseClosureUncheckedUpdateOneWithoutExecutionPlanNestedInput
+    scheduleRevisions?: ExecutionScheduleRevisionUncheckedUpdateManyWithoutExecutionPlanNestedInput
+  }
+
+  export type ExecutionTaskUpsertWithoutDependenciesInput = {
+    update: XOR<ExecutionTaskUpdateWithoutDependenciesInput, ExecutionTaskUncheckedUpdateWithoutDependenciesInput>
+    create: XOR<ExecutionTaskCreateWithoutDependenciesInput, ExecutionTaskUncheckedCreateWithoutDependenciesInput>
+    where?: ExecutionTaskWhereInput
+  }
+
+  export type ExecutionTaskUpdateToOneWithWhereWithoutDependenciesInput = {
+    where?: ExecutionTaskWhereInput
+    data: XOR<ExecutionTaskUpdateWithoutDependenciesInput, ExecutionTaskUncheckedUpdateWithoutDependenciesInput>
+  }
+
+  export type ExecutionTaskUpdateWithoutDependenciesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sequenceNumber?: IntFieldUpdateOperationsInput | number
+    sourceActionCode?: StringFieldUpdateOperationsInput | string
+    templateTaskKey?: StringFieldUpdateOperationsInput | string
+    titleSnapshot?: StringFieldUpdateOperationsInput | string
+    descriptionSnapshot?: StringFieldUpdateOperationsInput | string
+    categorySnapshot?: StringFieldUpdateOperationsInput | string
+    isMandatory?: BoolFieldUpdateOperationsInput | boolean
+    status?: EnumExecutionTaskStatusFieldUpdateOperationsInput | $Enums.ExecutionTaskStatus
+    assignedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    startedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completionSubmittedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completionNote?: NullableStringFieldUpdateOperationsInput | string | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verificationNote?: NullableStringFieldUpdateOperationsInput | string | null
+    blockedReason?: NullableStringFieldUpdateOperationsInput | string | null
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sourceActionVersion?: NullableIntFieldUpdateOperationsInput | number | null
+    sourceTemplateCode?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceTemplateVersion?: NullableIntFieldUpdateOperationsInput | number | null
+    evidenceRequired?: BoolFieldUpdateOperationsInput | boolean
+    verificationRequired?: BoolFieldUpdateOperationsInput | boolean
+    plannedStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    plannedEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    executionPlan?: ExecutionPlanUpdateOneRequiredWithoutTasksNestedInput
+    assignedTo?: UserUpdateOneWithoutAssignedExecutionTasksNestedInput
+    assignedBy?: UserUpdateOneWithoutAssignedByExecutionTasksNestedInput
+    completionSubmittedBy?: UserUpdateOneWithoutCompletedExecutionTasksNestedInput
+    verifiedBy?: UserUpdateOneWithoutVerifiedExecutionTasksNestedInput
+    cancelledBy?: UserUpdateOneWithoutCancelledExecutionTasksNestedInput
+    evidence?: ExecutionEvidenceUpdateManyWithoutExecutionTaskNestedInput
+    approvedActionVersion?: ApprovedActionVersionUpdateOneWithoutExecutionTasksNestedInput
+    governedExecutionTemplate?: GovernedExecutionTemplateUpdateOneWithoutExecutionTasksNestedInput
+    governedTaskTemplate?: GovernedExecutionTaskTemplateUpdateOneWithoutExecutionTasksNestedInput
+    scheduleRevisions?: ExecutionScheduleRevisionUpdateManyWithoutExecutionTaskNestedInput
+    requiredBy?: ExecutionTaskDependencyUpdateManyWithoutPredecessorTaskNestedInput
+    blockerEvents?: ExecutionTaskBlockerEventUpdateManyWithoutExecutionTaskNestedInput
+  }
+
+  export type ExecutionTaskUncheckedUpdateWithoutDependenciesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    executionPlanId?: StringFieldUpdateOperationsInput | string
+    sequenceNumber?: IntFieldUpdateOperationsInput | number
+    sourceActionCode?: StringFieldUpdateOperationsInput | string
+    templateTaskKey?: StringFieldUpdateOperationsInput | string
+    titleSnapshot?: StringFieldUpdateOperationsInput | string
+    descriptionSnapshot?: StringFieldUpdateOperationsInput | string
+    categorySnapshot?: StringFieldUpdateOperationsInput | string
+    isMandatory?: BoolFieldUpdateOperationsInput | boolean
+    status?: EnumExecutionTaskStatusFieldUpdateOperationsInput | $Enums.ExecutionTaskStatus
+    assignedToId?: NullableStringFieldUpdateOperationsInput | string | null
+    assignedById?: NullableStringFieldUpdateOperationsInput | string | null
+    assignedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    startedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completionSubmittedById?: NullableStringFieldUpdateOperationsInput | string | null
+    completionSubmittedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completionNote?: NullableStringFieldUpdateOperationsInput | string | null
+    verifiedById?: NullableStringFieldUpdateOperationsInput | string | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verificationNote?: NullableStringFieldUpdateOperationsInput | string | null
+    blockedReason?: NullableStringFieldUpdateOperationsInput | string | null
+    cancelledById?: NullableStringFieldUpdateOperationsInput | string | null
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    approvedActionVersionId?: NullableStringFieldUpdateOperationsInput | string | null
+    governedExecutionTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
+    governedTaskTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceActionVersion?: NullableIntFieldUpdateOperationsInput | number | null
+    sourceTemplateCode?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceTemplateVersion?: NullableIntFieldUpdateOperationsInput | number | null
+    evidenceRequired?: BoolFieldUpdateOperationsInput | boolean
+    verificationRequired?: BoolFieldUpdateOperationsInput | boolean
+    plannedStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    plannedEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    evidence?: ExecutionEvidenceUncheckedUpdateManyWithoutExecutionTaskNestedInput
+    scheduleRevisions?: ExecutionScheduleRevisionUncheckedUpdateManyWithoutExecutionTaskNestedInput
+    requiredBy?: ExecutionTaskDependencyUncheckedUpdateManyWithoutPredecessorTaskNestedInput
+    blockerEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutExecutionTaskNestedInput
+  }
+
+  export type ExecutionTaskUpsertWithoutRequiredByInput = {
+    update: XOR<ExecutionTaskUpdateWithoutRequiredByInput, ExecutionTaskUncheckedUpdateWithoutRequiredByInput>
+    create: XOR<ExecutionTaskCreateWithoutRequiredByInput, ExecutionTaskUncheckedCreateWithoutRequiredByInput>
+    where?: ExecutionTaskWhereInput
+  }
+
+  export type ExecutionTaskUpdateToOneWithWhereWithoutRequiredByInput = {
+    where?: ExecutionTaskWhereInput
+    data: XOR<ExecutionTaskUpdateWithoutRequiredByInput, ExecutionTaskUncheckedUpdateWithoutRequiredByInput>
+  }
+
+  export type ExecutionTaskUpdateWithoutRequiredByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sequenceNumber?: IntFieldUpdateOperationsInput | number
+    sourceActionCode?: StringFieldUpdateOperationsInput | string
+    templateTaskKey?: StringFieldUpdateOperationsInput | string
+    titleSnapshot?: StringFieldUpdateOperationsInput | string
+    descriptionSnapshot?: StringFieldUpdateOperationsInput | string
+    categorySnapshot?: StringFieldUpdateOperationsInput | string
+    isMandatory?: BoolFieldUpdateOperationsInput | boolean
+    status?: EnumExecutionTaskStatusFieldUpdateOperationsInput | $Enums.ExecutionTaskStatus
+    assignedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    startedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completionSubmittedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completionNote?: NullableStringFieldUpdateOperationsInput | string | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verificationNote?: NullableStringFieldUpdateOperationsInput | string | null
+    blockedReason?: NullableStringFieldUpdateOperationsInput | string | null
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sourceActionVersion?: NullableIntFieldUpdateOperationsInput | number | null
+    sourceTemplateCode?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceTemplateVersion?: NullableIntFieldUpdateOperationsInput | number | null
+    evidenceRequired?: BoolFieldUpdateOperationsInput | boolean
+    verificationRequired?: BoolFieldUpdateOperationsInput | boolean
+    plannedStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    plannedEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    executionPlan?: ExecutionPlanUpdateOneRequiredWithoutTasksNestedInput
+    assignedTo?: UserUpdateOneWithoutAssignedExecutionTasksNestedInput
+    assignedBy?: UserUpdateOneWithoutAssignedByExecutionTasksNestedInput
+    completionSubmittedBy?: UserUpdateOneWithoutCompletedExecutionTasksNestedInput
+    verifiedBy?: UserUpdateOneWithoutVerifiedExecutionTasksNestedInput
+    cancelledBy?: UserUpdateOneWithoutCancelledExecutionTasksNestedInput
+    evidence?: ExecutionEvidenceUpdateManyWithoutExecutionTaskNestedInput
+    approvedActionVersion?: ApprovedActionVersionUpdateOneWithoutExecutionTasksNestedInput
+    governedExecutionTemplate?: GovernedExecutionTemplateUpdateOneWithoutExecutionTasksNestedInput
+    governedTaskTemplate?: GovernedExecutionTaskTemplateUpdateOneWithoutExecutionTasksNestedInput
+    scheduleRevisions?: ExecutionScheduleRevisionUpdateManyWithoutExecutionTaskNestedInput
+    dependencies?: ExecutionTaskDependencyUpdateManyWithoutDependentTaskNestedInput
+    blockerEvents?: ExecutionTaskBlockerEventUpdateManyWithoutExecutionTaskNestedInput
+  }
+
+  export type ExecutionTaskUncheckedUpdateWithoutRequiredByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    executionPlanId?: StringFieldUpdateOperationsInput | string
+    sequenceNumber?: IntFieldUpdateOperationsInput | number
+    sourceActionCode?: StringFieldUpdateOperationsInput | string
+    templateTaskKey?: StringFieldUpdateOperationsInput | string
+    titleSnapshot?: StringFieldUpdateOperationsInput | string
+    descriptionSnapshot?: StringFieldUpdateOperationsInput | string
+    categorySnapshot?: StringFieldUpdateOperationsInput | string
+    isMandatory?: BoolFieldUpdateOperationsInput | boolean
+    status?: EnumExecutionTaskStatusFieldUpdateOperationsInput | $Enums.ExecutionTaskStatus
+    assignedToId?: NullableStringFieldUpdateOperationsInput | string | null
+    assignedById?: NullableStringFieldUpdateOperationsInput | string | null
+    assignedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    startedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completionSubmittedById?: NullableStringFieldUpdateOperationsInput | string | null
+    completionSubmittedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completionNote?: NullableStringFieldUpdateOperationsInput | string | null
+    verifiedById?: NullableStringFieldUpdateOperationsInput | string | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verificationNote?: NullableStringFieldUpdateOperationsInput | string | null
+    blockedReason?: NullableStringFieldUpdateOperationsInput | string | null
+    cancelledById?: NullableStringFieldUpdateOperationsInput | string | null
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    approvedActionVersionId?: NullableStringFieldUpdateOperationsInput | string | null
+    governedExecutionTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
+    governedTaskTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceActionVersion?: NullableIntFieldUpdateOperationsInput | number | null
+    sourceTemplateCode?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceTemplateVersion?: NullableIntFieldUpdateOperationsInput | number | null
+    evidenceRequired?: BoolFieldUpdateOperationsInput | boolean
+    verificationRequired?: BoolFieldUpdateOperationsInput | boolean
+    plannedStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    plannedEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    evidence?: ExecutionEvidenceUncheckedUpdateManyWithoutExecutionTaskNestedInput
+    scheduleRevisions?: ExecutionScheduleRevisionUncheckedUpdateManyWithoutExecutionTaskNestedInput
+    dependencies?: ExecutionTaskDependencyUncheckedUpdateManyWithoutDependentTaskNestedInput
+    blockerEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutExecutionTaskNestedInput
+  }
+
+  export type UserUpsertWithoutCreatedExecutionTaskDependenciesInput = {
+    update: XOR<UserUpdateWithoutCreatedExecutionTaskDependenciesInput, UserUncheckedUpdateWithoutCreatedExecutionTaskDependenciesInput>
+    create: XOR<UserCreateWithoutCreatedExecutionTaskDependenciesInput, UserUncheckedCreateWithoutCreatedExecutionTaskDependenciesInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutCreatedExecutionTaskDependenciesInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutCreatedExecutionTaskDependenciesInput, UserUncheckedUpdateWithoutCreatedExecutionTaskDependenciesInput>
+  }
+
+  export type UserUpdateWithoutCreatedExecutionTaskDependenciesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    employeeCode?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    designation?: StringFieldUpdateOperationsInput | string
+    role?: EnumSystemRoleFieldUpdateOperationsInput | $Enums.SystemRole
+    status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    department?: DepartmentUpdateOneRequiredWithoutUsersNestedInput
+    jurisdiction?: JurisdictionUpdateOneRequiredWithoutUsersNestedInput
+    inspections?: InspectionUpdateManyWithoutInspectorNestedInput
+    approvalAuthorities?: ApprovalAuthorityUpdateManyWithoutUserNestedInput
+    reviewedOrpDecisions?: OrpDecisionUpdateManyWithoutReviewerNestedInput
+    forwardedOrpDecisions?: OrpDecisionUpdateManyWithoutForwardedUserNestedInput
+    createdExecutionPlans?: ExecutionPlanUpdateManyWithoutCreatedByNestedInput
+    assignedExecutionTasks?: ExecutionTaskUpdateManyWithoutAssignedToNestedInput
+    assignedByExecutionTasks?: ExecutionTaskUpdateManyWithoutAssignedByNestedInput
+    completedExecutionTasks?: ExecutionTaskUpdateManyWithoutCompletionSubmittedByNestedInput
+    verifiedExecutionTasks?: ExecutionTaskUpdateManyWithoutVerifiedByNestedInput
+    cancelledExecutionTasks?: ExecutionTaskUpdateManyWithoutCancelledByNestedInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUpdateManyWithoutChangedByNestedInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUpdateManyWithoutBlockedByNestedInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUpdateManyWithoutResolvedByNestedInput
+    submittedExecutionEvidence?: ExecutionEvidenceUpdateManyWithoutSubmittedByNestedInput
+    closedCases?: CaseClosureUpdateManyWithoutClosedByNestedInput
+    reviewedPublicReports?: PublicReportUpdateManyWithoutReviewedByNestedInput
+    decidedPublicReports?: PublicReportUpdateManyWithoutDecisionByNestedInput
+    createdTriageAnalyses?: PublicReportTriageAnalysisUpdateManyWithoutCreatedByNestedInput
+    createdPolicyDocuments?: PolicyDocumentUpdateManyWithoutCreatedByNestedInput
+    approvedPolicyDocuments?: PolicyDocumentUpdateManyWithoutApprovedByNestedInput
+    createdApprovedActions?: ApprovedActionVersionUpdateManyWithoutCreatedByNestedInput
+    approvedApprovedActions?: ApprovedActionVersionUpdateManyWithoutApprovedByNestedInput
+    preparedDecisionPackages?: DecisionPackageUpdateManyWithoutPreparedByNestedInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutCreatedByNestedInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutApprovedByNestedInput
+    createdObservationSources?: ObservationSourceUpdateManyWithoutCreatedByNestedInput
+    deactivatedObservationSources?: ObservationSourceUpdateManyWithoutDeactivatedByNestedInput
+    ingestedExternalObservations?: ExternalObservationUpdateManyWithoutIngestedByNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutCreatedExecutionTaskDependenciesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    employeeCode?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    designation?: StringFieldUpdateOperationsInput | string
+    role?: EnumSystemRoleFieldUpdateOperationsInput | $Enums.SystemRole
+    status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+    departmentId?: StringFieldUpdateOperationsInput | string
+    jurisdictionId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    inspections?: InspectionUncheckedUpdateManyWithoutInspectorNestedInput
+    approvalAuthorities?: ApprovalAuthorityUncheckedUpdateManyWithoutUserNestedInput
+    reviewedOrpDecisions?: OrpDecisionUncheckedUpdateManyWithoutReviewerNestedInput
+    forwardedOrpDecisions?: OrpDecisionUncheckedUpdateManyWithoutForwardedUserNestedInput
+    createdExecutionPlans?: ExecutionPlanUncheckedUpdateManyWithoutCreatedByNestedInput
+    assignedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutAssignedToNestedInput
+    assignedByExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutAssignedByNestedInput
+    completedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCompletionSubmittedByNestedInput
+    verifiedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutVerifiedByNestedInput
+    cancelledExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCancelledByNestedInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUncheckedUpdateManyWithoutChangedByNestedInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutBlockedByNestedInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutResolvedByNestedInput
+    submittedExecutionEvidence?: ExecutionEvidenceUncheckedUpdateManyWithoutSubmittedByNestedInput
+    closedCases?: CaseClosureUncheckedUpdateManyWithoutClosedByNestedInput
+    reviewedPublicReports?: PublicReportUncheckedUpdateManyWithoutReviewedByNestedInput
+    decidedPublicReports?: PublicReportUncheckedUpdateManyWithoutDecisionByNestedInput
+    createdTriageAnalyses?: PublicReportTriageAnalysisUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPolicyDocuments?: PolicyDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
+    approvedPolicyDocuments?: PolicyDocumentUncheckedUpdateManyWithoutApprovedByNestedInput
+    createdApprovedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutCreatedByNestedInput
+    approvedApprovedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutApprovedByNestedInput
+    preparedDecisionPackages?: DecisionPackageUncheckedUpdateManyWithoutPreparedByNestedInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutCreatedByNestedInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutApprovedByNestedInput
+    createdObservationSources?: ObservationSourceUncheckedUpdateManyWithoutCreatedByNestedInput
+    deactivatedObservationSources?: ObservationSourceUncheckedUpdateManyWithoutDeactivatedByNestedInput
+    ingestedExternalObservations?: ExternalObservationUncheckedUpdateManyWithoutIngestedByNestedInput
+  }
+
+  export type ExecutionTaskCreateWithoutBlockerEventsInput = {
+    id?: string
+    sequenceNumber: number
+    sourceActionCode: string
+    templateTaskKey: string
+    titleSnapshot: string
+    descriptionSnapshot: string
+    categorySnapshot: string
+    isMandatory?: boolean
+    status?: $Enums.ExecutionTaskStatus
+    assignedAt?: Date | string | null
+    startedAt?: Date | string | null
+    completionSubmittedAt?: Date | string | null
+    completionNote?: string | null
+    verifiedAt?: Date | string | null
+    verificationNote?: string | null
+    blockedReason?: string | null
+    cancelledAt?: Date | string | null
+    cancellationReason?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    sourceActionVersion?: number | null
+    sourceTemplateCode?: string | null
+    sourceTemplateVersion?: number | null
+    evidenceRequired?: boolean
+    verificationRequired?: boolean
+    plannedStartAt?: Date | string | null
+    plannedEndAt?: Date | string | null
+    executionPlan: ExecutionPlanCreateNestedOneWithoutTasksInput
+    assignedTo?: UserCreateNestedOneWithoutAssignedExecutionTasksInput
+    assignedBy?: UserCreateNestedOneWithoutAssignedByExecutionTasksInput
+    completionSubmittedBy?: UserCreateNestedOneWithoutCompletedExecutionTasksInput
+    verifiedBy?: UserCreateNestedOneWithoutVerifiedExecutionTasksInput
+    cancelledBy?: UserCreateNestedOneWithoutCancelledExecutionTasksInput
+    evidence?: ExecutionEvidenceCreateNestedManyWithoutExecutionTaskInput
+    approvedActionVersion?: ApprovedActionVersionCreateNestedOneWithoutExecutionTasksInput
+    governedExecutionTemplate?: GovernedExecutionTemplateCreateNestedOneWithoutExecutionTasksInput
+    governedTaskTemplate?: GovernedExecutionTaskTemplateCreateNestedOneWithoutExecutionTasksInput
+    scheduleRevisions?: ExecutionScheduleRevisionCreateNestedManyWithoutExecutionTaskInput
+    dependencies?: ExecutionTaskDependencyCreateNestedManyWithoutDependentTaskInput
+    requiredBy?: ExecutionTaskDependencyCreateNestedManyWithoutPredecessorTaskInput
+  }
+
+  export type ExecutionTaskUncheckedCreateWithoutBlockerEventsInput = {
+    id?: string
+    executionPlanId: string
+    sequenceNumber: number
+    sourceActionCode: string
+    templateTaskKey: string
+    titleSnapshot: string
+    descriptionSnapshot: string
+    categorySnapshot: string
+    isMandatory?: boolean
+    status?: $Enums.ExecutionTaskStatus
+    assignedToId?: string | null
+    assignedById?: string | null
+    assignedAt?: Date | string | null
+    startedAt?: Date | string | null
+    completionSubmittedById?: string | null
+    completionSubmittedAt?: Date | string | null
+    completionNote?: string | null
+    verifiedById?: string | null
+    verifiedAt?: Date | string | null
+    verificationNote?: string | null
+    blockedReason?: string | null
+    cancelledById?: string | null
+    cancelledAt?: Date | string | null
+    cancellationReason?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    approvedActionVersionId?: string | null
+    governedExecutionTemplateId?: string | null
+    governedTaskTemplateId?: string | null
+    sourceActionVersion?: number | null
+    sourceTemplateCode?: string | null
+    sourceTemplateVersion?: number | null
+    evidenceRequired?: boolean
+    verificationRequired?: boolean
+    plannedStartAt?: Date | string | null
+    plannedEndAt?: Date | string | null
+    evidence?: ExecutionEvidenceUncheckedCreateNestedManyWithoutExecutionTaskInput
+    scheduleRevisions?: ExecutionScheduleRevisionUncheckedCreateNestedManyWithoutExecutionTaskInput
+    dependencies?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutDependentTaskInput
+    requiredBy?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutPredecessorTaskInput
+  }
+
+  export type ExecutionTaskCreateOrConnectWithoutBlockerEventsInput = {
+    where: ExecutionTaskWhereUniqueInput
+    create: XOR<ExecutionTaskCreateWithoutBlockerEventsInput, ExecutionTaskUncheckedCreateWithoutBlockerEventsInput>
+  }
+
+  export type UserCreateWithoutBlockedExecutionTaskEventsInput = {
+    id?: string
+    employeeCode: string
+    name: string
+    email: string
+    passwordHash: string
+    designation: string
+    role?: $Enums.SystemRole
+    status?: $Enums.UserStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    department: DepartmentCreateNestedOneWithoutUsersInput
+    jurisdiction: JurisdictionCreateNestedOneWithoutUsersInput
+    inspections?: InspectionCreateNestedManyWithoutInspectorInput
+    approvalAuthorities?: ApprovalAuthorityCreateNestedManyWithoutUserInput
+    reviewedOrpDecisions?: OrpDecisionCreateNestedManyWithoutReviewerInput
+    forwardedOrpDecisions?: OrpDecisionCreateNestedManyWithoutForwardedUserInput
+    createdExecutionPlans?: ExecutionPlanCreateNestedManyWithoutCreatedByInput
+    assignedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutAssignedToInput
+    assignedByExecutionTasks?: ExecutionTaskCreateNestedManyWithoutAssignedByInput
+    completedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCompletionSubmittedByInput
+    verifiedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutVerifiedByInput
+    cancelledExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCancelledByInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionCreateNestedManyWithoutChangedByInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutResolvedByInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyCreateNestedManyWithoutCreatedByInput
+    submittedExecutionEvidence?: ExecutionEvidenceCreateNestedManyWithoutSubmittedByInput
+    closedCases?: CaseClosureCreateNestedManyWithoutClosedByInput
+    reviewedPublicReports?: PublicReportCreateNestedManyWithoutReviewedByInput
+    decidedPublicReports?: PublicReportCreateNestedManyWithoutDecisionByInput
+    createdTriageAnalyses?: PublicReportTriageAnalysisCreateNestedManyWithoutCreatedByInput
+    createdPolicyDocuments?: PolicyDocumentCreateNestedManyWithoutCreatedByInput
+    approvedPolicyDocuments?: PolicyDocumentCreateNestedManyWithoutApprovedByInput
+    createdApprovedActions?: ApprovedActionVersionCreateNestedManyWithoutCreatedByInput
+    approvedApprovedActions?: ApprovedActionVersionCreateNestedManyWithoutApprovedByInput
+    preparedDecisionPackages?: DecisionPackageCreateNestedManyWithoutPreparedByInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutCreatedByInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutApprovedByInput
+    createdObservationSources?: ObservationSourceCreateNestedManyWithoutCreatedByInput
+    deactivatedObservationSources?: ObservationSourceCreateNestedManyWithoutDeactivatedByInput
+    ingestedExternalObservations?: ExternalObservationCreateNestedManyWithoutIngestedByInput
+  }
+
+  export type UserUncheckedCreateWithoutBlockedExecutionTaskEventsInput = {
+    id?: string
+    employeeCode: string
+    name: string
+    email: string
+    passwordHash: string
+    designation: string
+    role?: $Enums.SystemRole
+    status?: $Enums.UserStatus
+    departmentId: string
+    jurisdictionId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    inspections?: InspectionUncheckedCreateNestedManyWithoutInspectorInput
+    approvalAuthorities?: ApprovalAuthorityUncheckedCreateNestedManyWithoutUserInput
+    reviewedOrpDecisions?: OrpDecisionUncheckedCreateNestedManyWithoutReviewerInput
+    forwardedOrpDecisions?: OrpDecisionUncheckedCreateNestedManyWithoutForwardedUserInput
+    createdExecutionPlans?: ExecutionPlanUncheckedCreateNestedManyWithoutCreatedByInput
+    assignedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutAssignedToInput
+    assignedByExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutAssignedByInput
+    completedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCompletionSubmittedByInput
+    verifiedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutVerifiedByInput
+    cancelledExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCancelledByInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUncheckedCreateNestedManyWithoutChangedByInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutResolvedByInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutCreatedByInput
+    submittedExecutionEvidence?: ExecutionEvidenceUncheckedCreateNestedManyWithoutSubmittedByInput
+    closedCases?: CaseClosureUncheckedCreateNestedManyWithoutClosedByInput
+    reviewedPublicReports?: PublicReportUncheckedCreateNestedManyWithoutReviewedByInput
+    decidedPublicReports?: PublicReportUncheckedCreateNestedManyWithoutDecisionByInput
+    createdTriageAnalyses?: PublicReportTriageAnalysisUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPolicyDocuments?: PolicyDocumentUncheckedCreateNestedManyWithoutCreatedByInput
+    approvedPolicyDocuments?: PolicyDocumentUncheckedCreateNestedManyWithoutApprovedByInput
+    createdApprovedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutCreatedByInput
+    approvedApprovedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutApprovedByInput
+    preparedDecisionPackages?: DecisionPackageUncheckedCreateNestedManyWithoutPreparedByInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutCreatedByInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutApprovedByInput
+    createdObservationSources?: ObservationSourceUncheckedCreateNestedManyWithoutCreatedByInput
+    deactivatedObservationSources?: ObservationSourceUncheckedCreateNestedManyWithoutDeactivatedByInput
+    ingestedExternalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutIngestedByInput
+  }
+
+  export type UserCreateOrConnectWithoutBlockedExecutionTaskEventsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutBlockedExecutionTaskEventsInput, UserUncheckedCreateWithoutBlockedExecutionTaskEventsInput>
+  }
+
+  export type UserCreateWithoutResolvedExecutionTaskEventsInput = {
+    id?: string
+    employeeCode: string
+    name: string
+    email: string
+    passwordHash: string
+    designation: string
+    role?: $Enums.SystemRole
+    status?: $Enums.UserStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    department: DepartmentCreateNestedOneWithoutUsersInput
+    jurisdiction: JurisdictionCreateNestedOneWithoutUsersInput
+    inspections?: InspectionCreateNestedManyWithoutInspectorInput
+    approvalAuthorities?: ApprovalAuthorityCreateNestedManyWithoutUserInput
+    reviewedOrpDecisions?: OrpDecisionCreateNestedManyWithoutReviewerInput
+    forwardedOrpDecisions?: OrpDecisionCreateNestedManyWithoutForwardedUserInput
+    createdExecutionPlans?: ExecutionPlanCreateNestedManyWithoutCreatedByInput
+    assignedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutAssignedToInput
+    assignedByExecutionTasks?: ExecutionTaskCreateNestedManyWithoutAssignedByInput
+    completedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCompletionSubmittedByInput
+    verifiedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutVerifiedByInput
+    cancelledExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCancelledByInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionCreateNestedManyWithoutChangedByInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutBlockedByInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyCreateNestedManyWithoutCreatedByInput
+    submittedExecutionEvidence?: ExecutionEvidenceCreateNestedManyWithoutSubmittedByInput
+    closedCases?: CaseClosureCreateNestedManyWithoutClosedByInput
+    reviewedPublicReports?: PublicReportCreateNestedManyWithoutReviewedByInput
+    decidedPublicReports?: PublicReportCreateNestedManyWithoutDecisionByInput
+    createdTriageAnalyses?: PublicReportTriageAnalysisCreateNestedManyWithoutCreatedByInput
+    createdPolicyDocuments?: PolicyDocumentCreateNestedManyWithoutCreatedByInput
+    approvedPolicyDocuments?: PolicyDocumentCreateNestedManyWithoutApprovedByInput
+    createdApprovedActions?: ApprovedActionVersionCreateNestedManyWithoutCreatedByInput
+    approvedApprovedActions?: ApprovedActionVersionCreateNestedManyWithoutApprovedByInput
+    preparedDecisionPackages?: DecisionPackageCreateNestedManyWithoutPreparedByInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutCreatedByInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutApprovedByInput
+    createdObservationSources?: ObservationSourceCreateNestedManyWithoutCreatedByInput
+    deactivatedObservationSources?: ObservationSourceCreateNestedManyWithoutDeactivatedByInput
+    ingestedExternalObservations?: ExternalObservationCreateNestedManyWithoutIngestedByInput
+  }
+
+  export type UserUncheckedCreateWithoutResolvedExecutionTaskEventsInput = {
+    id?: string
+    employeeCode: string
+    name: string
+    email: string
+    passwordHash: string
+    designation: string
+    role?: $Enums.SystemRole
+    status?: $Enums.UserStatus
+    departmentId: string
+    jurisdictionId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    inspections?: InspectionUncheckedCreateNestedManyWithoutInspectorInput
+    approvalAuthorities?: ApprovalAuthorityUncheckedCreateNestedManyWithoutUserInput
+    reviewedOrpDecisions?: OrpDecisionUncheckedCreateNestedManyWithoutReviewerInput
+    forwardedOrpDecisions?: OrpDecisionUncheckedCreateNestedManyWithoutForwardedUserInput
+    createdExecutionPlans?: ExecutionPlanUncheckedCreateNestedManyWithoutCreatedByInput
+    assignedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutAssignedToInput
+    assignedByExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutAssignedByInput
+    completedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCompletionSubmittedByInput
+    verifiedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutVerifiedByInput
+    cancelledExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCancelledByInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUncheckedCreateNestedManyWithoutChangedByInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutBlockedByInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutCreatedByInput
+    submittedExecutionEvidence?: ExecutionEvidenceUncheckedCreateNestedManyWithoutSubmittedByInput
+    closedCases?: CaseClosureUncheckedCreateNestedManyWithoutClosedByInput
+    reviewedPublicReports?: PublicReportUncheckedCreateNestedManyWithoutReviewedByInput
+    decidedPublicReports?: PublicReportUncheckedCreateNestedManyWithoutDecisionByInput
+    createdTriageAnalyses?: PublicReportTriageAnalysisUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPolicyDocuments?: PolicyDocumentUncheckedCreateNestedManyWithoutCreatedByInput
+    approvedPolicyDocuments?: PolicyDocumentUncheckedCreateNestedManyWithoutApprovedByInput
+    createdApprovedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutCreatedByInput
+    approvedApprovedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutApprovedByInput
+    preparedDecisionPackages?: DecisionPackageUncheckedCreateNestedManyWithoutPreparedByInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutCreatedByInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutApprovedByInput
+    createdObservationSources?: ObservationSourceUncheckedCreateNestedManyWithoutCreatedByInput
+    deactivatedObservationSources?: ObservationSourceUncheckedCreateNestedManyWithoutDeactivatedByInput
+    ingestedExternalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutIngestedByInput
+  }
+
+  export type UserCreateOrConnectWithoutResolvedExecutionTaskEventsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutResolvedExecutionTaskEventsInput, UserUncheckedCreateWithoutResolvedExecutionTaskEventsInput>
+  }
+
+  export type ExecutionTaskUpsertWithoutBlockerEventsInput = {
+    update: XOR<ExecutionTaskUpdateWithoutBlockerEventsInput, ExecutionTaskUncheckedUpdateWithoutBlockerEventsInput>
+    create: XOR<ExecutionTaskCreateWithoutBlockerEventsInput, ExecutionTaskUncheckedCreateWithoutBlockerEventsInput>
+    where?: ExecutionTaskWhereInput
+  }
+
+  export type ExecutionTaskUpdateToOneWithWhereWithoutBlockerEventsInput = {
+    where?: ExecutionTaskWhereInput
+    data: XOR<ExecutionTaskUpdateWithoutBlockerEventsInput, ExecutionTaskUncheckedUpdateWithoutBlockerEventsInput>
+  }
+
+  export type ExecutionTaskUpdateWithoutBlockerEventsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sequenceNumber?: IntFieldUpdateOperationsInput | number
+    sourceActionCode?: StringFieldUpdateOperationsInput | string
+    templateTaskKey?: StringFieldUpdateOperationsInput | string
+    titleSnapshot?: StringFieldUpdateOperationsInput | string
+    descriptionSnapshot?: StringFieldUpdateOperationsInput | string
+    categorySnapshot?: StringFieldUpdateOperationsInput | string
+    isMandatory?: BoolFieldUpdateOperationsInput | boolean
+    status?: EnumExecutionTaskStatusFieldUpdateOperationsInput | $Enums.ExecutionTaskStatus
+    assignedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    startedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completionSubmittedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completionNote?: NullableStringFieldUpdateOperationsInput | string | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verificationNote?: NullableStringFieldUpdateOperationsInput | string | null
+    blockedReason?: NullableStringFieldUpdateOperationsInput | string | null
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sourceActionVersion?: NullableIntFieldUpdateOperationsInput | number | null
+    sourceTemplateCode?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceTemplateVersion?: NullableIntFieldUpdateOperationsInput | number | null
+    evidenceRequired?: BoolFieldUpdateOperationsInput | boolean
+    verificationRequired?: BoolFieldUpdateOperationsInput | boolean
+    plannedStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    plannedEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    executionPlan?: ExecutionPlanUpdateOneRequiredWithoutTasksNestedInput
+    assignedTo?: UserUpdateOneWithoutAssignedExecutionTasksNestedInput
+    assignedBy?: UserUpdateOneWithoutAssignedByExecutionTasksNestedInput
+    completionSubmittedBy?: UserUpdateOneWithoutCompletedExecutionTasksNestedInput
+    verifiedBy?: UserUpdateOneWithoutVerifiedExecutionTasksNestedInput
+    cancelledBy?: UserUpdateOneWithoutCancelledExecutionTasksNestedInput
+    evidence?: ExecutionEvidenceUpdateManyWithoutExecutionTaskNestedInput
+    approvedActionVersion?: ApprovedActionVersionUpdateOneWithoutExecutionTasksNestedInput
+    governedExecutionTemplate?: GovernedExecutionTemplateUpdateOneWithoutExecutionTasksNestedInput
+    governedTaskTemplate?: GovernedExecutionTaskTemplateUpdateOneWithoutExecutionTasksNestedInput
+    scheduleRevisions?: ExecutionScheduleRevisionUpdateManyWithoutExecutionTaskNestedInput
+    dependencies?: ExecutionTaskDependencyUpdateManyWithoutDependentTaskNestedInput
+    requiredBy?: ExecutionTaskDependencyUpdateManyWithoutPredecessorTaskNestedInput
+  }
+
+  export type ExecutionTaskUncheckedUpdateWithoutBlockerEventsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    executionPlanId?: StringFieldUpdateOperationsInput | string
+    sequenceNumber?: IntFieldUpdateOperationsInput | number
+    sourceActionCode?: StringFieldUpdateOperationsInput | string
+    templateTaskKey?: StringFieldUpdateOperationsInput | string
+    titleSnapshot?: StringFieldUpdateOperationsInput | string
+    descriptionSnapshot?: StringFieldUpdateOperationsInput | string
+    categorySnapshot?: StringFieldUpdateOperationsInput | string
+    isMandatory?: BoolFieldUpdateOperationsInput | boolean
+    status?: EnumExecutionTaskStatusFieldUpdateOperationsInput | $Enums.ExecutionTaskStatus
+    assignedToId?: NullableStringFieldUpdateOperationsInput | string | null
+    assignedById?: NullableStringFieldUpdateOperationsInput | string | null
+    assignedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    startedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completionSubmittedById?: NullableStringFieldUpdateOperationsInput | string | null
+    completionSubmittedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completionNote?: NullableStringFieldUpdateOperationsInput | string | null
+    verifiedById?: NullableStringFieldUpdateOperationsInput | string | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verificationNote?: NullableStringFieldUpdateOperationsInput | string | null
+    blockedReason?: NullableStringFieldUpdateOperationsInput | string | null
+    cancelledById?: NullableStringFieldUpdateOperationsInput | string | null
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    approvedActionVersionId?: NullableStringFieldUpdateOperationsInput | string | null
+    governedExecutionTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
+    governedTaskTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceActionVersion?: NullableIntFieldUpdateOperationsInput | number | null
+    sourceTemplateCode?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceTemplateVersion?: NullableIntFieldUpdateOperationsInput | number | null
+    evidenceRequired?: BoolFieldUpdateOperationsInput | boolean
+    verificationRequired?: BoolFieldUpdateOperationsInput | boolean
+    plannedStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    plannedEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    evidence?: ExecutionEvidenceUncheckedUpdateManyWithoutExecutionTaskNestedInput
+    scheduleRevisions?: ExecutionScheduleRevisionUncheckedUpdateManyWithoutExecutionTaskNestedInput
+    dependencies?: ExecutionTaskDependencyUncheckedUpdateManyWithoutDependentTaskNestedInput
+    requiredBy?: ExecutionTaskDependencyUncheckedUpdateManyWithoutPredecessorTaskNestedInput
+  }
+
+  export type UserUpsertWithoutBlockedExecutionTaskEventsInput = {
+    update: XOR<UserUpdateWithoutBlockedExecutionTaskEventsInput, UserUncheckedUpdateWithoutBlockedExecutionTaskEventsInput>
+    create: XOR<UserCreateWithoutBlockedExecutionTaskEventsInput, UserUncheckedCreateWithoutBlockedExecutionTaskEventsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutBlockedExecutionTaskEventsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutBlockedExecutionTaskEventsInput, UserUncheckedUpdateWithoutBlockedExecutionTaskEventsInput>
+  }
+
+  export type UserUpdateWithoutBlockedExecutionTaskEventsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    employeeCode?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    designation?: StringFieldUpdateOperationsInput | string
+    role?: EnumSystemRoleFieldUpdateOperationsInput | $Enums.SystemRole
+    status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    department?: DepartmentUpdateOneRequiredWithoutUsersNestedInput
+    jurisdiction?: JurisdictionUpdateOneRequiredWithoutUsersNestedInput
+    inspections?: InspectionUpdateManyWithoutInspectorNestedInput
+    approvalAuthorities?: ApprovalAuthorityUpdateManyWithoutUserNestedInput
+    reviewedOrpDecisions?: OrpDecisionUpdateManyWithoutReviewerNestedInput
+    forwardedOrpDecisions?: OrpDecisionUpdateManyWithoutForwardedUserNestedInput
+    createdExecutionPlans?: ExecutionPlanUpdateManyWithoutCreatedByNestedInput
+    assignedExecutionTasks?: ExecutionTaskUpdateManyWithoutAssignedToNestedInput
+    assignedByExecutionTasks?: ExecutionTaskUpdateManyWithoutAssignedByNestedInput
+    completedExecutionTasks?: ExecutionTaskUpdateManyWithoutCompletionSubmittedByNestedInput
+    verifiedExecutionTasks?: ExecutionTaskUpdateManyWithoutVerifiedByNestedInput
+    cancelledExecutionTasks?: ExecutionTaskUpdateManyWithoutCancelledByNestedInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUpdateManyWithoutChangedByNestedInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUpdateManyWithoutResolvedByNestedInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUpdateManyWithoutCreatedByNestedInput
+    submittedExecutionEvidence?: ExecutionEvidenceUpdateManyWithoutSubmittedByNestedInput
+    closedCases?: CaseClosureUpdateManyWithoutClosedByNestedInput
+    reviewedPublicReports?: PublicReportUpdateManyWithoutReviewedByNestedInput
+    decidedPublicReports?: PublicReportUpdateManyWithoutDecisionByNestedInput
+    createdTriageAnalyses?: PublicReportTriageAnalysisUpdateManyWithoutCreatedByNestedInput
+    createdPolicyDocuments?: PolicyDocumentUpdateManyWithoutCreatedByNestedInput
+    approvedPolicyDocuments?: PolicyDocumentUpdateManyWithoutApprovedByNestedInput
+    createdApprovedActions?: ApprovedActionVersionUpdateManyWithoutCreatedByNestedInput
+    approvedApprovedActions?: ApprovedActionVersionUpdateManyWithoutApprovedByNestedInput
+    preparedDecisionPackages?: DecisionPackageUpdateManyWithoutPreparedByNestedInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutCreatedByNestedInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutApprovedByNestedInput
+    createdObservationSources?: ObservationSourceUpdateManyWithoutCreatedByNestedInput
+    deactivatedObservationSources?: ObservationSourceUpdateManyWithoutDeactivatedByNestedInput
+    ingestedExternalObservations?: ExternalObservationUpdateManyWithoutIngestedByNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutBlockedExecutionTaskEventsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    employeeCode?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    designation?: StringFieldUpdateOperationsInput | string
+    role?: EnumSystemRoleFieldUpdateOperationsInput | $Enums.SystemRole
+    status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+    departmentId?: StringFieldUpdateOperationsInput | string
+    jurisdictionId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    inspections?: InspectionUncheckedUpdateManyWithoutInspectorNestedInput
+    approvalAuthorities?: ApprovalAuthorityUncheckedUpdateManyWithoutUserNestedInput
+    reviewedOrpDecisions?: OrpDecisionUncheckedUpdateManyWithoutReviewerNestedInput
+    forwardedOrpDecisions?: OrpDecisionUncheckedUpdateManyWithoutForwardedUserNestedInput
+    createdExecutionPlans?: ExecutionPlanUncheckedUpdateManyWithoutCreatedByNestedInput
+    assignedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutAssignedToNestedInput
+    assignedByExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutAssignedByNestedInput
+    completedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCompletionSubmittedByNestedInput
+    verifiedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutVerifiedByNestedInput
+    cancelledExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCancelledByNestedInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUncheckedUpdateManyWithoutChangedByNestedInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutResolvedByNestedInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUncheckedUpdateManyWithoutCreatedByNestedInput
+    submittedExecutionEvidence?: ExecutionEvidenceUncheckedUpdateManyWithoutSubmittedByNestedInput
+    closedCases?: CaseClosureUncheckedUpdateManyWithoutClosedByNestedInput
+    reviewedPublicReports?: PublicReportUncheckedUpdateManyWithoutReviewedByNestedInput
+    decidedPublicReports?: PublicReportUncheckedUpdateManyWithoutDecisionByNestedInput
+    createdTriageAnalyses?: PublicReportTriageAnalysisUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPolicyDocuments?: PolicyDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
+    approvedPolicyDocuments?: PolicyDocumentUncheckedUpdateManyWithoutApprovedByNestedInput
+    createdApprovedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutCreatedByNestedInput
+    approvedApprovedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutApprovedByNestedInput
+    preparedDecisionPackages?: DecisionPackageUncheckedUpdateManyWithoutPreparedByNestedInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutCreatedByNestedInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutApprovedByNestedInput
+    createdObservationSources?: ObservationSourceUncheckedUpdateManyWithoutCreatedByNestedInput
+    deactivatedObservationSources?: ObservationSourceUncheckedUpdateManyWithoutDeactivatedByNestedInput
+    ingestedExternalObservations?: ExternalObservationUncheckedUpdateManyWithoutIngestedByNestedInput
+  }
+
+  export type UserUpsertWithoutResolvedExecutionTaskEventsInput = {
+    update: XOR<UserUpdateWithoutResolvedExecutionTaskEventsInput, UserUncheckedUpdateWithoutResolvedExecutionTaskEventsInput>
+    create: XOR<UserCreateWithoutResolvedExecutionTaskEventsInput, UserUncheckedCreateWithoutResolvedExecutionTaskEventsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutResolvedExecutionTaskEventsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutResolvedExecutionTaskEventsInput, UserUncheckedUpdateWithoutResolvedExecutionTaskEventsInput>
+  }
+
+  export type UserUpdateWithoutResolvedExecutionTaskEventsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    employeeCode?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    designation?: StringFieldUpdateOperationsInput | string
+    role?: EnumSystemRoleFieldUpdateOperationsInput | $Enums.SystemRole
+    status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    department?: DepartmentUpdateOneRequiredWithoutUsersNestedInput
+    jurisdiction?: JurisdictionUpdateOneRequiredWithoutUsersNestedInput
+    inspections?: InspectionUpdateManyWithoutInspectorNestedInput
+    approvalAuthorities?: ApprovalAuthorityUpdateManyWithoutUserNestedInput
+    reviewedOrpDecisions?: OrpDecisionUpdateManyWithoutReviewerNestedInput
+    forwardedOrpDecisions?: OrpDecisionUpdateManyWithoutForwardedUserNestedInput
+    createdExecutionPlans?: ExecutionPlanUpdateManyWithoutCreatedByNestedInput
+    assignedExecutionTasks?: ExecutionTaskUpdateManyWithoutAssignedToNestedInput
+    assignedByExecutionTasks?: ExecutionTaskUpdateManyWithoutAssignedByNestedInput
+    completedExecutionTasks?: ExecutionTaskUpdateManyWithoutCompletionSubmittedByNestedInput
+    verifiedExecutionTasks?: ExecutionTaskUpdateManyWithoutVerifiedByNestedInput
+    cancelledExecutionTasks?: ExecutionTaskUpdateManyWithoutCancelledByNestedInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUpdateManyWithoutChangedByNestedInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUpdateManyWithoutBlockedByNestedInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUpdateManyWithoutCreatedByNestedInput
+    submittedExecutionEvidence?: ExecutionEvidenceUpdateManyWithoutSubmittedByNestedInput
+    closedCases?: CaseClosureUpdateManyWithoutClosedByNestedInput
+    reviewedPublicReports?: PublicReportUpdateManyWithoutReviewedByNestedInput
+    decidedPublicReports?: PublicReportUpdateManyWithoutDecisionByNestedInput
+    createdTriageAnalyses?: PublicReportTriageAnalysisUpdateManyWithoutCreatedByNestedInput
+    createdPolicyDocuments?: PolicyDocumentUpdateManyWithoutCreatedByNestedInput
+    approvedPolicyDocuments?: PolicyDocumentUpdateManyWithoutApprovedByNestedInput
+    createdApprovedActions?: ApprovedActionVersionUpdateManyWithoutCreatedByNestedInput
+    approvedApprovedActions?: ApprovedActionVersionUpdateManyWithoutApprovedByNestedInput
+    preparedDecisionPackages?: DecisionPackageUpdateManyWithoutPreparedByNestedInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutCreatedByNestedInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutApprovedByNestedInput
+    createdObservationSources?: ObservationSourceUpdateManyWithoutCreatedByNestedInput
+    deactivatedObservationSources?: ObservationSourceUpdateManyWithoutDeactivatedByNestedInput
+    ingestedExternalObservations?: ExternalObservationUpdateManyWithoutIngestedByNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutResolvedExecutionTaskEventsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    employeeCode?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    designation?: StringFieldUpdateOperationsInput | string
+    role?: EnumSystemRoleFieldUpdateOperationsInput | $Enums.SystemRole
+    status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+    departmentId?: StringFieldUpdateOperationsInput | string
+    jurisdictionId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    inspections?: InspectionUncheckedUpdateManyWithoutInspectorNestedInput
+    approvalAuthorities?: ApprovalAuthorityUncheckedUpdateManyWithoutUserNestedInput
+    reviewedOrpDecisions?: OrpDecisionUncheckedUpdateManyWithoutReviewerNestedInput
+    forwardedOrpDecisions?: OrpDecisionUncheckedUpdateManyWithoutForwardedUserNestedInput
+    createdExecutionPlans?: ExecutionPlanUncheckedUpdateManyWithoutCreatedByNestedInput
+    assignedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutAssignedToNestedInput
+    assignedByExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutAssignedByNestedInput
+    completedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCompletionSubmittedByNestedInput
+    verifiedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutVerifiedByNestedInput
+    cancelledExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCancelledByNestedInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUncheckedUpdateManyWithoutChangedByNestedInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutBlockedByNestedInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUncheckedUpdateManyWithoutCreatedByNestedInput
+    submittedExecutionEvidence?: ExecutionEvidenceUncheckedUpdateManyWithoutSubmittedByNestedInput
+    closedCases?: CaseClosureUncheckedUpdateManyWithoutClosedByNestedInput
+    reviewedPublicReports?: PublicReportUncheckedUpdateManyWithoutReviewedByNestedInput
+    decidedPublicReports?: PublicReportUncheckedUpdateManyWithoutDecisionByNestedInput
+    createdTriageAnalyses?: PublicReportTriageAnalysisUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPolicyDocuments?: PolicyDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
+    approvedPolicyDocuments?: PolicyDocumentUncheckedUpdateManyWithoutApprovedByNestedInput
+    createdApprovedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutCreatedByNestedInput
+    approvedApprovedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutApprovedByNestedInput
+    preparedDecisionPackages?: DecisionPackageUncheckedUpdateManyWithoutPreparedByNestedInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutCreatedByNestedInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutApprovedByNestedInput
+    createdObservationSources?: ObservationSourceUncheckedUpdateManyWithoutCreatedByNestedInput
+    deactivatedObservationSources?: ObservationSourceUncheckedUpdateManyWithoutDeactivatedByNestedInput
+    ingestedExternalObservations?: ExternalObservationUncheckedUpdateManyWithoutIngestedByNestedInput
+  }
+
+  export type ExecutionPlanCreateWithoutScheduleRevisionsInput = {
+    id?: string
+    status?: $Enums.ExecutionPlanStatus
+    templateVersion?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    startedAt?: Date | string | null
+    completedAt?: Date | string | null
+    cancelledAt?: Date | string | null
+    cancellationReason?: string | null
+    governanceMode?: $Enums.ExecutionPlanGovernanceMode
+    executionContractVersion?: string | null
+    governedProvenance?: NullableJsonNullValueInput | InputJsonValue
+    plannedStartAt?: Date | string | null
+    plannedEndAt?: Date | string | null
+    orp: OperationalResponsePlanCreateNestedOneWithoutExecutionPlanInput
+    case: CaseCreateNestedOneWithoutExecutionPlansInput
+    approvalDecision: OrpDecisionCreateNestedOneWithoutExecutionPlanInput
+    createdBy: UserCreateNestedOneWithoutCreatedExecutionPlansInput
+    tasks?: ExecutionTaskCreateNestedManyWithoutExecutionPlanInput
+    closure?: CaseClosureCreateNestedOneWithoutExecutionPlanInput
+    taskDependencies?: ExecutionTaskDependencyCreateNestedManyWithoutExecutionPlanInput
+  }
+
+  export type ExecutionPlanUncheckedCreateWithoutScheduleRevisionsInput = {
+    id?: string
+    orpId: string
+    caseId: string
+    approvalDecisionId: string
+    status?: $Enums.ExecutionPlanStatus
+    createdById: string
+    templateVersion?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    startedAt?: Date | string | null
+    completedAt?: Date | string | null
+    cancelledAt?: Date | string | null
+    cancellationReason?: string | null
+    governanceMode?: $Enums.ExecutionPlanGovernanceMode
+    executionContractVersion?: string | null
+    governedProvenance?: NullableJsonNullValueInput | InputJsonValue
+    plannedStartAt?: Date | string | null
+    plannedEndAt?: Date | string | null
+    tasks?: ExecutionTaskUncheckedCreateNestedManyWithoutExecutionPlanInput
+    closure?: CaseClosureUncheckedCreateNestedOneWithoutExecutionPlanInput
+    taskDependencies?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutExecutionPlanInput
+  }
+
+  export type ExecutionPlanCreateOrConnectWithoutScheduleRevisionsInput = {
+    where: ExecutionPlanWhereUniqueInput
+    create: XOR<ExecutionPlanCreateWithoutScheduleRevisionsInput, ExecutionPlanUncheckedCreateWithoutScheduleRevisionsInput>
+  }
+
+  export type ExecutionTaskCreateWithoutScheduleRevisionsInput = {
+    id?: string
+    sequenceNumber: number
+    sourceActionCode: string
+    templateTaskKey: string
+    titleSnapshot: string
+    descriptionSnapshot: string
+    categorySnapshot: string
+    isMandatory?: boolean
+    status?: $Enums.ExecutionTaskStatus
+    assignedAt?: Date | string | null
+    startedAt?: Date | string | null
+    completionSubmittedAt?: Date | string | null
+    completionNote?: string | null
+    verifiedAt?: Date | string | null
+    verificationNote?: string | null
+    blockedReason?: string | null
+    cancelledAt?: Date | string | null
+    cancellationReason?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    sourceActionVersion?: number | null
+    sourceTemplateCode?: string | null
+    sourceTemplateVersion?: number | null
+    evidenceRequired?: boolean
+    verificationRequired?: boolean
+    plannedStartAt?: Date | string | null
+    plannedEndAt?: Date | string | null
+    executionPlan: ExecutionPlanCreateNestedOneWithoutTasksInput
+    assignedTo?: UserCreateNestedOneWithoutAssignedExecutionTasksInput
+    assignedBy?: UserCreateNestedOneWithoutAssignedByExecutionTasksInput
+    completionSubmittedBy?: UserCreateNestedOneWithoutCompletedExecutionTasksInput
+    verifiedBy?: UserCreateNestedOneWithoutVerifiedExecutionTasksInput
+    cancelledBy?: UserCreateNestedOneWithoutCancelledExecutionTasksInput
+    evidence?: ExecutionEvidenceCreateNestedManyWithoutExecutionTaskInput
+    approvedActionVersion?: ApprovedActionVersionCreateNestedOneWithoutExecutionTasksInput
+    governedExecutionTemplate?: GovernedExecutionTemplateCreateNestedOneWithoutExecutionTasksInput
+    governedTaskTemplate?: GovernedExecutionTaskTemplateCreateNestedOneWithoutExecutionTasksInput
+    dependencies?: ExecutionTaskDependencyCreateNestedManyWithoutDependentTaskInput
+    requiredBy?: ExecutionTaskDependencyCreateNestedManyWithoutPredecessorTaskInput
+    blockerEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutExecutionTaskInput
+  }
+
+  export type ExecutionTaskUncheckedCreateWithoutScheduleRevisionsInput = {
+    id?: string
+    executionPlanId: string
+    sequenceNumber: number
+    sourceActionCode: string
+    templateTaskKey: string
+    titleSnapshot: string
+    descriptionSnapshot: string
+    categorySnapshot: string
+    isMandatory?: boolean
+    status?: $Enums.ExecutionTaskStatus
+    assignedToId?: string | null
+    assignedById?: string | null
+    assignedAt?: Date | string | null
+    startedAt?: Date | string | null
+    completionSubmittedById?: string | null
+    completionSubmittedAt?: Date | string | null
+    completionNote?: string | null
+    verifiedById?: string | null
+    verifiedAt?: Date | string | null
+    verificationNote?: string | null
+    blockedReason?: string | null
+    cancelledById?: string | null
+    cancelledAt?: Date | string | null
+    cancellationReason?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    approvedActionVersionId?: string | null
+    governedExecutionTemplateId?: string | null
+    governedTaskTemplateId?: string | null
+    sourceActionVersion?: number | null
+    sourceTemplateCode?: string | null
+    sourceTemplateVersion?: number | null
+    evidenceRequired?: boolean
+    verificationRequired?: boolean
+    plannedStartAt?: Date | string | null
+    plannedEndAt?: Date | string | null
+    evidence?: ExecutionEvidenceUncheckedCreateNestedManyWithoutExecutionTaskInput
+    dependencies?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutDependentTaskInput
+    requiredBy?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutPredecessorTaskInput
+    blockerEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutExecutionTaskInput
+  }
+
+  export type ExecutionTaskCreateOrConnectWithoutScheduleRevisionsInput = {
+    where: ExecutionTaskWhereUniqueInput
+    create: XOR<ExecutionTaskCreateWithoutScheduleRevisionsInput, ExecutionTaskUncheckedCreateWithoutScheduleRevisionsInput>
+  }
+
+  export type UserCreateWithoutExecutionScheduleRevisionsInput = {
+    id?: string
+    employeeCode: string
+    name: string
+    email: string
+    passwordHash: string
+    designation: string
+    role?: $Enums.SystemRole
+    status?: $Enums.UserStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    department: DepartmentCreateNestedOneWithoutUsersInput
+    jurisdiction: JurisdictionCreateNestedOneWithoutUsersInput
+    inspections?: InspectionCreateNestedManyWithoutInspectorInput
+    approvalAuthorities?: ApprovalAuthorityCreateNestedManyWithoutUserInput
+    reviewedOrpDecisions?: OrpDecisionCreateNestedManyWithoutReviewerInput
+    forwardedOrpDecisions?: OrpDecisionCreateNestedManyWithoutForwardedUserInput
+    createdExecutionPlans?: ExecutionPlanCreateNestedManyWithoutCreatedByInput
+    assignedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutAssignedToInput
+    assignedByExecutionTasks?: ExecutionTaskCreateNestedManyWithoutAssignedByInput
+    completedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCompletionSubmittedByInput
+    verifiedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutVerifiedByInput
+    cancelledExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCancelledByInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutBlockedByInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutResolvedByInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyCreateNestedManyWithoutCreatedByInput
+    submittedExecutionEvidence?: ExecutionEvidenceCreateNestedManyWithoutSubmittedByInput
+    closedCases?: CaseClosureCreateNestedManyWithoutClosedByInput
+    reviewedPublicReports?: PublicReportCreateNestedManyWithoutReviewedByInput
+    decidedPublicReports?: PublicReportCreateNestedManyWithoutDecisionByInput
+    createdTriageAnalyses?: PublicReportTriageAnalysisCreateNestedManyWithoutCreatedByInput
+    createdPolicyDocuments?: PolicyDocumentCreateNestedManyWithoutCreatedByInput
+    approvedPolicyDocuments?: PolicyDocumentCreateNestedManyWithoutApprovedByInput
+    createdApprovedActions?: ApprovedActionVersionCreateNestedManyWithoutCreatedByInput
+    approvedApprovedActions?: ApprovedActionVersionCreateNestedManyWithoutApprovedByInput
+    preparedDecisionPackages?: DecisionPackageCreateNestedManyWithoutPreparedByInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutCreatedByInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutApprovedByInput
+    createdObservationSources?: ObservationSourceCreateNestedManyWithoutCreatedByInput
+    deactivatedObservationSources?: ObservationSourceCreateNestedManyWithoutDeactivatedByInput
+    ingestedExternalObservations?: ExternalObservationCreateNestedManyWithoutIngestedByInput
+  }
+
+  export type UserUncheckedCreateWithoutExecutionScheduleRevisionsInput = {
+    id?: string
+    employeeCode: string
+    name: string
+    email: string
+    passwordHash: string
+    designation: string
+    role?: $Enums.SystemRole
+    status?: $Enums.UserStatus
+    departmentId: string
+    jurisdictionId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    inspections?: InspectionUncheckedCreateNestedManyWithoutInspectorInput
+    approvalAuthorities?: ApprovalAuthorityUncheckedCreateNestedManyWithoutUserInput
+    reviewedOrpDecisions?: OrpDecisionUncheckedCreateNestedManyWithoutReviewerInput
+    forwardedOrpDecisions?: OrpDecisionUncheckedCreateNestedManyWithoutForwardedUserInput
+    createdExecutionPlans?: ExecutionPlanUncheckedCreateNestedManyWithoutCreatedByInput
+    assignedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutAssignedToInput
+    assignedByExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutAssignedByInput
+    completedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCompletionSubmittedByInput
+    verifiedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutVerifiedByInput
+    cancelledExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCancelledByInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutBlockedByInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutResolvedByInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutCreatedByInput
+    submittedExecutionEvidence?: ExecutionEvidenceUncheckedCreateNestedManyWithoutSubmittedByInput
+    closedCases?: CaseClosureUncheckedCreateNestedManyWithoutClosedByInput
+    reviewedPublicReports?: PublicReportUncheckedCreateNestedManyWithoutReviewedByInput
+    decidedPublicReports?: PublicReportUncheckedCreateNestedManyWithoutDecisionByInput
+    createdTriageAnalyses?: PublicReportTriageAnalysisUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPolicyDocuments?: PolicyDocumentUncheckedCreateNestedManyWithoutCreatedByInput
+    approvedPolicyDocuments?: PolicyDocumentUncheckedCreateNestedManyWithoutApprovedByInput
+    createdApprovedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutCreatedByInput
+    approvedApprovedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutApprovedByInput
+    preparedDecisionPackages?: DecisionPackageUncheckedCreateNestedManyWithoutPreparedByInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutCreatedByInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutApprovedByInput
+    createdObservationSources?: ObservationSourceUncheckedCreateNestedManyWithoutCreatedByInput
+    deactivatedObservationSources?: ObservationSourceUncheckedCreateNestedManyWithoutDeactivatedByInput
+    ingestedExternalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutIngestedByInput
+  }
+
+  export type UserCreateOrConnectWithoutExecutionScheduleRevisionsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutExecutionScheduleRevisionsInput, UserUncheckedCreateWithoutExecutionScheduleRevisionsInput>
+  }
+
+  export type ExecutionPlanUpsertWithoutScheduleRevisionsInput = {
+    update: XOR<ExecutionPlanUpdateWithoutScheduleRevisionsInput, ExecutionPlanUncheckedUpdateWithoutScheduleRevisionsInput>
+    create: XOR<ExecutionPlanCreateWithoutScheduleRevisionsInput, ExecutionPlanUncheckedCreateWithoutScheduleRevisionsInput>
+    where?: ExecutionPlanWhereInput
+  }
+
+  export type ExecutionPlanUpdateToOneWithWhereWithoutScheduleRevisionsInput = {
+    where?: ExecutionPlanWhereInput
+    data: XOR<ExecutionPlanUpdateWithoutScheduleRevisionsInput, ExecutionPlanUncheckedUpdateWithoutScheduleRevisionsInput>
+  }
+
+  export type ExecutionPlanUpdateWithoutScheduleRevisionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: EnumExecutionPlanStatusFieldUpdateOperationsInput | $Enums.ExecutionPlanStatus
+    templateVersion?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    startedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    governanceMode?: EnumExecutionPlanGovernanceModeFieldUpdateOperationsInput | $Enums.ExecutionPlanGovernanceMode
+    executionContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
+    governedProvenance?: NullableJsonNullValueInput | InputJsonValue
+    plannedStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    plannedEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    orp?: OperationalResponsePlanUpdateOneRequiredWithoutExecutionPlanNestedInput
+    case?: CaseUpdateOneRequiredWithoutExecutionPlansNestedInput
+    approvalDecision?: OrpDecisionUpdateOneRequiredWithoutExecutionPlanNestedInput
+    createdBy?: UserUpdateOneRequiredWithoutCreatedExecutionPlansNestedInput
+    tasks?: ExecutionTaskUpdateManyWithoutExecutionPlanNestedInput
+    closure?: CaseClosureUpdateOneWithoutExecutionPlanNestedInput
+    taskDependencies?: ExecutionTaskDependencyUpdateManyWithoutExecutionPlanNestedInput
+  }
+
+  export type ExecutionPlanUncheckedUpdateWithoutScheduleRevisionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    orpId?: StringFieldUpdateOperationsInput | string
+    caseId?: StringFieldUpdateOperationsInput | string
+    approvalDecisionId?: StringFieldUpdateOperationsInput | string
+    status?: EnumExecutionPlanStatusFieldUpdateOperationsInput | $Enums.ExecutionPlanStatus
+    createdById?: StringFieldUpdateOperationsInput | string
+    templateVersion?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    startedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    governanceMode?: EnumExecutionPlanGovernanceModeFieldUpdateOperationsInput | $Enums.ExecutionPlanGovernanceMode
+    executionContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
+    governedProvenance?: NullableJsonNullValueInput | InputJsonValue
+    plannedStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    plannedEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    tasks?: ExecutionTaskUncheckedUpdateManyWithoutExecutionPlanNestedInput
+    closure?: CaseClosureUncheckedUpdateOneWithoutExecutionPlanNestedInput
+    taskDependencies?: ExecutionTaskDependencyUncheckedUpdateManyWithoutExecutionPlanNestedInput
+  }
+
+  export type ExecutionTaskUpsertWithoutScheduleRevisionsInput = {
+    update: XOR<ExecutionTaskUpdateWithoutScheduleRevisionsInput, ExecutionTaskUncheckedUpdateWithoutScheduleRevisionsInput>
+    create: XOR<ExecutionTaskCreateWithoutScheduleRevisionsInput, ExecutionTaskUncheckedCreateWithoutScheduleRevisionsInput>
+    where?: ExecutionTaskWhereInput
+  }
+
+  export type ExecutionTaskUpdateToOneWithWhereWithoutScheduleRevisionsInput = {
+    where?: ExecutionTaskWhereInput
+    data: XOR<ExecutionTaskUpdateWithoutScheduleRevisionsInput, ExecutionTaskUncheckedUpdateWithoutScheduleRevisionsInput>
+  }
+
+  export type ExecutionTaskUpdateWithoutScheduleRevisionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sequenceNumber?: IntFieldUpdateOperationsInput | number
+    sourceActionCode?: StringFieldUpdateOperationsInput | string
+    templateTaskKey?: StringFieldUpdateOperationsInput | string
+    titleSnapshot?: StringFieldUpdateOperationsInput | string
+    descriptionSnapshot?: StringFieldUpdateOperationsInput | string
+    categorySnapshot?: StringFieldUpdateOperationsInput | string
+    isMandatory?: BoolFieldUpdateOperationsInput | boolean
+    status?: EnumExecutionTaskStatusFieldUpdateOperationsInput | $Enums.ExecutionTaskStatus
+    assignedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    startedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completionSubmittedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completionNote?: NullableStringFieldUpdateOperationsInput | string | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verificationNote?: NullableStringFieldUpdateOperationsInput | string | null
+    blockedReason?: NullableStringFieldUpdateOperationsInput | string | null
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sourceActionVersion?: NullableIntFieldUpdateOperationsInput | number | null
+    sourceTemplateCode?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceTemplateVersion?: NullableIntFieldUpdateOperationsInput | number | null
+    evidenceRequired?: BoolFieldUpdateOperationsInput | boolean
+    verificationRequired?: BoolFieldUpdateOperationsInput | boolean
+    plannedStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    plannedEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    executionPlan?: ExecutionPlanUpdateOneRequiredWithoutTasksNestedInput
+    assignedTo?: UserUpdateOneWithoutAssignedExecutionTasksNestedInput
+    assignedBy?: UserUpdateOneWithoutAssignedByExecutionTasksNestedInput
+    completionSubmittedBy?: UserUpdateOneWithoutCompletedExecutionTasksNestedInput
+    verifiedBy?: UserUpdateOneWithoutVerifiedExecutionTasksNestedInput
+    cancelledBy?: UserUpdateOneWithoutCancelledExecutionTasksNestedInput
+    evidence?: ExecutionEvidenceUpdateManyWithoutExecutionTaskNestedInput
+    approvedActionVersion?: ApprovedActionVersionUpdateOneWithoutExecutionTasksNestedInput
+    governedExecutionTemplate?: GovernedExecutionTemplateUpdateOneWithoutExecutionTasksNestedInput
+    governedTaskTemplate?: GovernedExecutionTaskTemplateUpdateOneWithoutExecutionTasksNestedInput
+    dependencies?: ExecutionTaskDependencyUpdateManyWithoutDependentTaskNestedInput
+    requiredBy?: ExecutionTaskDependencyUpdateManyWithoutPredecessorTaskNestedInput
+    blockerEvents?: ExecutionTaskBlockerEventUpdateManyWithoutExecutionTaskNestedInput
+  }
+
+  export type ExecutionTaskUncheckedUpdateWithoutScheduleRevisionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    executionPlanId?: StringFieldUpdateOperationsInput | string
+    sequenceNumber?: IntFieldUpdateOperationsInput | number
+    sourceActionCode?: StringFieldUpdateOperationsInput | string
+    templateTaskKey?: StringFieldUpdateOperationsInput | string
+    titleSnapshot?: StringFieldUpdateOperationsInput | string
+    descriptionSnapshot?: StringFieldUpdateOperationsInput | string
+    categorySnapshot?: StringFieldUpdateOperationsInput | string
+    isMandatory?: BoolFieldUpdateOperationsInput | boolean
+    status?: EnumExecutionTaskStatusFieldUpdateOperationsInput | $Enums.ExecutionTaskStatus
+    assignedToId?: NullableStringFieldUpdateOperationsInput | string | null
+    assignedById?: NullableStringFieldUpdateOperationsInput | string | null
+    assignedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    startedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completionSubmittedById?: NullableStringFieldUpdateOperationsInput | string | null
+    completionSubmittedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completionNote?: NullableStringFieldUpdateOperationsInput | string | null
+    verifiedById?: NullableStringFieldUpdateOperationsInput | string | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verificationNote?: NullableStringFieldUpdateOperationsInput | string | null
+    blockedReason?: NullableStringFieldUpdateOperationsInput | string | null
+    cancelledById?: NullableStringFieldUpdateOperationsInput | string | null
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    approvedActionVersionId?: NullableStringFieldUpdateOperationsInput | string | null
+    governedExecutionTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
+    governedTaskTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceActionVersion?: NullableIntFieldUpdateOperationsInput | number | null
+    sourceTemplateCode?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceTemplateVersion?: NullableIntFieldUpdateOperationsInput | number | null
+    evidenceRequired?: BoolFieldUpdateOperationsInput | boolean
+    verificationRequired?: BoolFieldUpdateOperationsInput | boolean
+    plannedStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    plannedEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    evidence?: ExecutionEvidenceUncheckedUpdateManyWithoutExecutionTaskNestedInput
+    dependencies?: ExecutionTaskDependencyUncheckedUpdateManyWithoutDependentTaskNestedInput
+    requiredBy?: ExecutionTaskDependencyUncheckedUpdateManyWithoutPredecessorTaskNestedInput
+    blockerEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutExecutionTaskNestedInput
+  }
+
+  export type UserUpsertWithoutExecutionScheduleRevisionsInput = {
+    update: XOR<UserUpdateWithoutExecutionScheduleRevisionsInput, UserUncheckedUpdateWithoutExecutionScheduleRevisionsInput>
+    create: XOR<UserCreateWithoutExecutionScheduleRevisionsInput, UserUncheckedCreateWithoutExecutionScheduleRevisionsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutExecutionScheduleRevisionsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutExecutionScheduleRevisionsInput, UserUncheckedUpdateWithoutExecutionScheduleRevisionsInput>
+  }
+
+  export type UserUpdateWithoutExecutionScheduleRevisionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    employeeCode?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    designation?: StringFieldUpdateOperationsInput | string
+    role?: EnumSystemRoleFieldUpdateOperationsInput | $Enums.SystemRole
+    status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    department?: DepartmentUpdateOneRequiredWithoutUsersNestedInput
+    jurisdiction?: JurisdictionUpdateOneRequiredWithoutUsersNestedInput
+    inspections?: InspectionUpdateManyWithoutInspectorNestedInput
+    approvalAuthorities?: ApprovalAuthorityUpdateManyWithoutUserNestedInput
+    reviewedOrpDecisions?: OrpDecisionUpdateManyWithoutReviewerNestedInput
+    forwardedOrpDecisions?: OrpDecisionUpdateManyWithoutForwardedUserNestedInput
+    createdExecutionPlans?: ExecutionPlanUpdateManyWithoutCreatedByNestedInput
+    assignedExecutionTasks?: ExecutionTaskUpdateManyWithoutAssignedToNestedInput
+    assignedByExecutionTasks?: ExecutionTaskUpdateManyWithoutAssignedByNestedInput
+    completedExecutionTasks?: ExecutionTaskUpdateManyWithoutCompletionSubmittedByNestedInput
+    verifiedExecutionTasks?: ExecutionTaskUpdateManyWithoutVerifiedByNestedInput
+    cancelledExecutionTasks?: ExecutionTaskUpdateManyWithoutCancelledByNestedInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUpdateManyWithoutBlockedByNestedInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUpdateManyWithoutResolvedByNestedInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUpdateManyWithoutCreatedByNestedInput
+    submittedExecutionEvidence?: ExecutionEvidenceUpdateManyWithoutSubmittedByNestedInput
+    closedCases?: CaseClosureUpdateManyWithoutClosedByNestedInput
+    reviewedPublicReports?: PublicReportUpdateManyWithoutReviewedByNestedInput
+    decidedPublicReports?: PublicReportUpdateManyWithoutDecisionByNestedInput
+    createdTriageAnalyses?: PublicReportTriageAnalysisUpdateManyWithoutCreatedByNestedInput
+    createdPolicyDocuments?: PolicyDocumentUpdateManyWithoutCreatedByNestedInput
+    approvedPolicyDocuments?: PolicyDocumentUpdateManyWithoutApprovedByNestedInput
+    createdApprovedActions?: ApprovedActionVersionUpdateManyWithoutCreatedByNestedInput
+    approvedApprovedActions?: ApprovedActionVersionUpdateManyWithoutApprovedByNestedInput
+    preparedDecisionPackages?: DecisionPackageUpdateManyWithoutPreparedByNestedInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutCreatedByNestedInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutApprovedByNestedInput
+    createdObservationSources?: ObservationSourceUpdateManyWithoutCreatedByNestedInput
+    deactivatedObservationSources?: ObservationSourceUpdateManyWithoutDeactivatedByNestedInput
+    ingestedExternalObservations?: ExternalObservationUpdateManyWithoutIngestedByNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutExecutionScheduleRevisionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    employeeCode?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    designation?: StringFieldUpdateOperationsInput | string
+    role?: EnumSystemRoleFieldUpdateOperationsInput | $Enums.SystemRole
+    status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+    departmentId?: StringFieldUpdateOperationsInput | string
+    jurisdictionId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    inspections?: InspectionUncheckedUpdateManyWithoutInspectorNestedInput
+    approvalAuthorities?: ApprovalAuthorityUncheckedUpdateManyWithoutUserNestedInput
+    reviewedOrpDecisions?: OrpDecisionUncheckedUpdateManyWithoutReviewerNestedInput
+    forwardedOrpDecisions?: OrpDecisionUncheckedUpdateManyWithoutForwardedUserNestedInput
+    createdExecutionPlans?: ExecutionPlanUncheckedUpdateManyWithoutCreatedByNestedInput
+    assignedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutAssignedToNestedInput
+    assignedByExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutAssignedByNestedInput
+    completedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCompletionSubmittedByNestedInput
+    verifiedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutVerifiedByNestedInput
+    cancelledExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCancelledByNestedInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutBlockedByNestedInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutResolvedByNestedInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUncheckedUpdateManyWithoutCreatedByNestedInput
+    submittedExecutionEvidence?: ExecutionEvidenceUncheckedUpdateManyWithoutSubmittedByNestedInput
+    closedCases?: CaseClosureUncheckedUpdateManyWithoutClosedByNestedInput
+    reviewedPublicReports?: PublicReportUncheckedUpdateManyWithoutReviewedByNestedInput
+    decidedPublicReports?: PublicReportUncheckedUpdateManyWithoutDecisionByNestedInput
+    createdTriageAnalyses?: PublicReportTriageAnalysisUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPolicyDocuments?: PolicyDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
+    approvedPolicyDocuments?: PolicyDocumentUncheckedUpdateManyWithoutApprovedByNestedInput
+    createdApprovedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutCreatedByNestedInput
+    approvedApprovedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutApprovedByNestedInput
+    preparedDecisionPackages?: DecisionPackageUncheckedUpdateManyWithoutPreparedByNestedInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutCreatedByNestedInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutApprovedByNestedInput
+    createdObservationSources?: ObservationSourceUncheckedUpdateManyWithoutCreatedByNestedInput
+    deactivatedObservationSources?: ObservationSourceUncheckedUpdateManyWithoutDeactivatedByNestedInput
+    ingestedExternalObservations?: ExternalObservationUncheckedUpdateManyWithoutIngestedByNestedInput
+  }
+
   export type ExecutionTaskCreateWithoutEvidenceInput = {
     id?: string
     sequenceNumber: number
@@ -71277,6 +79581,8 @@ export namespace Prisma {
     sourceTemplateVersion?: number | null
     evidenceRequired?: boolean
     verificationRequired?: boolean
+    plannedStartAt?: Date | string | null
+    plannedEndAt?: Date | string | null
     executionPlan: ExecutionPlanCreateNestedOneWithoutTasksInput
     assignedTo?: UserCreateNestedOneWithoutAssignedExecutionTasksInput
     assignedBy?: UserCreateNestedOneWithoutAssignedByExecutionTasksInput
@@ -71286,6 +79592,10 @@ export namespace Prisma {
     approvedActionVersion?: ApprovedActionVersionCreateNestedOneWithoutExecutionTasksInput
     governedExecutionTemplate?: GovernedExecutionTemplateCreateNestedOneWithoutExecutionTasksInput
     governedTaskTemplate?: GovernedExecutionTaskTemplateCreateNestedOneWithoutExecutionTasksInput
+    scheduleRevisions?: ExecutionScheduleRevisionCreateNestedManyWithoutExecutionTaskInput
+    dependencies?: ExecutionTaskDependencyCreateNestedManyWithoutDependentTaskInput
+    requiredBy?: ExecutionTaskDependencyCreateNestedManyWithoutPredecessorTaskInput
+    blockerEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutExecutionTaskInput
   }
 
   export type ExecutionTaskUncheckedCreateWithoutEvidenceInput = {
@@ -71323,6 +79633,12 @@ export namespace Prisma {
     sourceTemplateVersion?: number | null
     evidenceRequired?: boolean
     verificationRequired?: boolean
+    plannedStartAt?: Date | string | null
+    plannedEndAt?: Date | string | null
+    scheduleRevisions?: ExecutionScheduleRevisionUncheckedCreateNestedManyWithoutExecutionTaskInput
+    dependencies?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutDependentTaskInput
+    requiredBy?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutPredecessorTaskInput
+    blockerEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutExecutionTaskInput
   }
 
   export type ExecutionTaskCreateOrConnectWithoutEvidenceInput = {
@@ -71353,6 +79669,10 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCompletionSubmittedByInput
     verifiedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutVerifiedByInput
     cancelledExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCancelledByInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionCreateNestedManyWithoutChangedByInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutBlockedByInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutResolvedByInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyCreateNestedManyWithoutCreatedByInput
     closedCases?: CaseClosureCreateNestedManyWithoutClosedByInput
     reviewedPublicReports?: PublicReportCreateNestedManyWithoutReviewedByInput
     decidedPublicReports?: PublicReportCreateNestedManyWithoutDecisionByInput
@@ -71392,6 +79712,10 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCompletionSubmittedByInput
     verifiedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutVerifiedByInput
     cancelledExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCancelledByInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUncheckedCreateNestedManyWithoutChangedByInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutBlockedByInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutResolvedByInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutCreatedByInput
     closedCases?: CaseClosureUncheckedCreateNestedManyWithoutClosedByInput
     reviewedPublicReports?: PublicReportUncheckedCreateNestedManyWithoutReviewedByInput
     decidedPublicReports?: PublicReportUncheckedCreateNestedManyWithoutDecisionByInput
@@ -71450,6 +79774,8 @@ export namespace Prisma {
     sourceTemplateVersion?: NullableIntFieldUpdateOperationsInput | number | null
     evidenceRequired?: BoolFieldUpdateOperationsInput | boolean
     verificationRequired?: BoolFieldUpdateOperationsInput | boolean
+    plannedStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    plannedEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     executionPlan?: ExecutionPlanUpdateOneRequiredWithoutTasksNestedInput
     assignedTo?: UserUpdateOneWithoutAssignedExecutionTasksNestedInput
     assignedBy?: UserUpdateOneWithoutAssignedByExecutionTasksNestedInput
@@ -71459,6 +79785,10 @@ export namespace Prisma {
     approvedActionVersion?: ApprovedActionVersionUpdateOneWithoutExecutionTasksNestedInput
     governedExecutionTemplate?: GovernedExecutionTemplateUpdateOneWithoutExecutionTasksNestedInput
     governedTaskTemplate?: GovernedExecutionTaskTemplateUpdateOneWithoutExecutionTasksNestedInput
+    scheduleRevisions?: ExecutionScheduleRevisionUpdateManyWithoutExecutionTaskNestedInput
+    dependencies?: ExecutionTaskDependencyUpdateManyWithoutDependentTaskNestedInput
+    requiredBy?: ExecutionTaskDependencyUpdateManyWithoutPredecessorTaskNestedInput
+    blockerEvents?: ExecutionTaskBlockerEventUpdateManyWithoutExecutionTaskNestedInput
   }
 
   export type ExecutionTaskUncheckedUpdateWithoutEvidenceInput = {
@@ -71496,6 +79826,12 @@ export namespace Prisma {
     sourceTemplateVersion?: NullableIntFieldUpdateOperationsInput | number | null
     evidenceRequired?: BoolFieldUpdateOperationsInput | boolean
     verificationRequired?: BoolFieldUpdateOperationsInput | boolean
+    plannedStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    plannedEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    scheduleRevisions?: ExecutionScheduleRevisionUncheckedUpdateManyWithoutExecutionTaskNestedInput
+    dependencies?: ExecutionTaskDependencyUncheckedUpdateManyWithoutDependentTaskNestedInput
+    requiredBy?: ExecutionTaskDependencyUncheckedUpdateManyWithoutPredecessorTaskNestedInput
+    blockerEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutExecutionTaskNestedInput
   }
 
   export type UserUpsertWithoutSubmittedExecutionEvidenceInput = {
@@ -71532,6 +79868,10 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskUpdateManyWithoutCompletionSubmittedByNestedInput
     verifiedExecutionTasks?: ExecutionTaskUpdateManyWithoutVerifiedByNestedInput
     cancelledExecutionTasks?: ExecutionTaskUpdateManyWithoutCancelledByNestedInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUpdateManyWithoutChangedByNestedInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUpdateManyWithoutBlockedByNestedInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUpdateManyWithoutResolvedByNestedInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUpdateManyWithoutCreatedByNestedInput
     closedCases?: CaseClosureUpdateManyWithoutClosedByNestedInput
     reviewedPublicReports?: PublicReportUpdateManyWithoutReviewedByNestedInput
     decidedPublicReports?: PublicReportUpdateManyWithoutDecisionByNestedInput
@@ -71571,6 +79911,10 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCompletionSubmittedByNestedInput
     verifiedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutVerifiedByNestedInput
     cancelledExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCancelledByNestedInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUncheckedUpdateManyWithoutChangedByNestedInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutBlockedByNestedInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutResolvedByNestedInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUncheckedUpdateManyWithoutCreatedByNestedInput
     closedCases?: CaseClosureUncheckedUpdateManyWithoutClosedByNestedInput
     reviewedPublicReports?: PublicReportUncheckedUpdateManyWithoutReviewedByNestedInput
     decidedPublicReports?: PublicReportUncheckedUpdateManyWithoutDecisionByNestedInput
@@ -71655,11 +79999,15 @@ export namespace Prisma {
     governanceMode?: $Enums.ExecutionPlanGovernanceMode
     executionContractVersion?: string | null
     governedProvenance?: NullableJsonNullValueInput | InputJsonValue
+    plannedStartAt?: Date | string | null
+    plannedEndAt?: Date | string | null
     orp: OperationalResponsePlanCreateNestedOneWithoutExecutionPlanInput
     case: CaseCreateNestedOneWithoutExecutionPlansInput
     approvalDecision: OrpDecisionCreateNestedOneWithoutExecutionPlanInput
     createdBy: UserCreateNestedOneWithoutCreatedExecutionPlansInput
     tasks?: ExecutionTaskCreateNestedManyWithoutExecutionPlanInput
+    scheduleRevisions?: ExecutionScheduleRevisionCreateNestedManyWithoutExecutionPlanInput
+    taskDependencies?: ExecutionTaskDependencyCreateNestedManyWithoutExecutionPlanInput
   }
 
   export type ExecutionPlanUncheckedCreateWithoutClosureInput = {
@@ -71679,7 +80027,11 @@ export namespace Prisma {
     governanceMode?: $Enums.ExecutionPlanGovernanceMode
     executionContractVersion?: string | null
     governedProvenance?: NullableJsonNullValueInput | InputJsonValue
+    plannedStartAt?: Date | string | null
+    plannedEndAt?: Date | string | null
     tasks?: ExecutionTaskUncheckedCreateNestedManyWithoutExecutionPlanInput
+    scheduleRevisions?: ExecutionScheduleRevisionUncheckedCreateNestedManyWithoutExecutionPlanInput
+    taskDependencies?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutExecutionPlanInput
   }
 
   export type ExecutionPlanCreateOrConnectWithoutClosureInput = {
@@ -71710,6 +80062,10 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCompletionSubmittedByInput
     verifiedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutVerifiedByInput
     cancelledExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCancelledByInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionCreateNestedManyWithoutChangedByInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutBlockedByInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutResolvedByInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyCreateNestedManyWithoutCreatedByInput
     submittedExecutionEvidence?: ExecutionEvidenceCreateNestedManyWithoutSubmittedByInput
     reviewedPublicReports?: PublicReportCreateNestedManyWithoutReviewedByInput
     decidedPublicReports?: PublicReportCreateNestedManyWithoutDecisionByInput
@@ -71749,6 +80105,10 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCompletionSubmittedByInput
     verifiedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutVerifiedByInput
     cancelledExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCancelledByInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUncheckedCreateNestedManyWithoutChangedByInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutBlockedByInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutResolvedByInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutCreatedByInput
     submittedExecutionEvidence?: ExecutionEvidenceUncheckedCreateNestedManyWithoutSubmittedByInput
     reviewedPublicReports?: PublicReportUncheckedCreateNestedManyWithoutReviewedByInput
     decidedPublicReports?: PublicReportUncheckedCreateNestedManyWithoutDecisionByInput
@@ -71900,11 +80260,15 @@ export namespace Prisma {
     governanceMode?: EnumExecutionPlanGovernanceModeFieldUpdateOperationsInput | $Enums.ExecutionPlanGovernanceMode
     executionContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
     governedProvenance?: NullableJsonNullValueInput | InputJsonValue
+    plannedStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    plannedEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     orp?: OperationalResponsePlanUpdateOneRequiredWithoutExecutionPlanNestedInput
     case?: CaseUpdateOneRequiredWithoutExecutionPlansNestedInput
     approvalDecision?: OrpDecisionUpdateOneRequiredWithoutExecutionPlanNestedInput
     createdBy?: UserUpdateOneRequiredWithoutCreatedExecutionPlansNestedInput
     tasks?: ExecutionTaskUpdateManyWithoutExecutionPlanNestedInput
+    scheduleRevisions?: ExecutionScheduleRevisionUpdateManyWithoutExecutionPlanNestedInput
+    taskDependencies?: ExecutionTaskDependencyUpdateManyWithoutExecutionPlanNestedInput
   }
 
   export type ExecutionPlanUncheckedUpdateWithoutClosureInput = {
@@ -71924,7 +80288,11 @@ export namespace Prisma {
     governanceMode?: EnumExecutionPlanGovernanceModeFieldUpdateOperationsInput | $Enums.ExecutionPlanGovernanceMode
     executionContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
     governedProvenance?: NullableJsonNullValueInput | InputJsonValue
+    plannedStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    plannedEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tasks?: ExecutionTaskUncheckedUpdateManyWithoutExecutionPlanNestedInput
+    scheduleRevisions?: ExecutionScheduleRevisionUncheckedUpdateManyWithoutExecutionPlanNestedInput
+    taskDependencies?: ExecutionTaskDependencyUncheckedUpdateManyWithoutExecutionPlanNestedInput
   }
 
   export type UserUpsertWithoutClosedCasesInput = {
@@ -71961,6 +80329,10 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskUpdateManyWithoutCompletionSubmittedByNestedInput
     verifiedExecutionTasks?: ExecutionTaskUpdateManyWithoutVerifiedByNestedInput
     cancelledExecutionTasks?: ExecutionTaskUpdateManyWithoutCancelledByNestedInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUpdateManyWithoutChangedByNestedInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUpdateManyWithoutBlockedByNestedInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUpdateManyWithoutResolvedByNestedInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUpdateManyWithoutCreatedByNestedInput
     submittedExecutionEvidence?: ExecutionEvidenceUpdateManyWithoutSubmittedByNestedInput
     reviewedPublicReports?: PublicReportUpdateManyWithoutReviewedByNestedInput
     decidedPublicReports?: PublicReportUpdateManyWithoutDecisionByNestedInput
@@ -72000,6 +80372,10 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCompletionSubmittedByNestedInput
     verifiedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutVerifiedByNestedInput
     cancelledExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCancelledByNestedInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUncheckedUpdateManyWithoutChangedByNestedInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutBlockedByNestedInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutResolvedByNestedInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUncheckedUpdateManyWithoutCreatedByNestedInput
     submittedExecutionEvidence?: ExecutionEvidenceUncheckedUpdateManyWithoutSubmittedByNestedInput
     reviewedPublicReports?: PublicReportUncheckedUpdateManyWithoutReviewedByNestedInput
     decidedPublicReports?: PublicReportUncheckedUpdateManyWithoutDecisionByNestedInput
@@ -72267,6 +80643,10 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskUpdateManyWithoutCompletionSubmittedByNestedInput
     verifiedExecutionTasks?: ExecutionTaskUpdateManyWithoutVerifiedByNestedInput
     cancelledExecutionTasks?: ExecutionTaskUpdateManyWithoutCancelledByNestedInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUpdateManyWithoutChangedByNestedInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUpdateManyWithoutBlockedByNestedInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUpdateManyWithoutResolvedByNestedInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUpdateManyWithoutCreatedByNestedInput
     submittedExecutionEvidence?: ExecutionEvidenceUpdateManyWithoutSubmittedByNestedInput
     closedCases?: CaseClosureUpdateManyWithoutClosedByNestedInput
     reviewedPublicReports?: PublicReportUpdateManyWithoutReviewedByNestedInput
@@ -72306,6 +80686,10 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCompletionSubmittedByNestedInput
     verifiedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutVerifiedByNestedInput
     cancelledExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCancelledByNestedInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUncheckedUpdateManyWithoutChangedByNestedInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutBlockedByNestedInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutResolvedByNestedInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUncheckedUpdateManyWithoutCreatedByNestedInput
     submittedExecutionEvidence?: ExecutionEvidenceUncheckedUpdateManyWithoutSubmittedByNestedInput
     closedCases?: CaseClosureUncheckedUpdateManyWithoutClosedByNestedInput
     reviewedPublicReports?: PublicReportUncheckedUpdateManyWithoutReviewedByNestedInput
@@ -73070,6 +81454,10 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskUpdateManyWithoutCompletionSubmittedByNestedInput
     verifiedExecutionTasks?: ExecutionTaskUpdateManyWithoutVerifiedByNestedInput
     cancelledExecutionTasks?: ExecutionTaskUpdateManyWithoutCancelledByNestedInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUpdateManyWithoutChangedByNestedInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUpdateManyWithoutBlockedByNestedInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUpdateManyWithoutResolvedByNestedInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUpdateManyWithoutCreatedByNestedInput
     submittedExecutionEvidence?: ExecutionEvidenceUpdateManyWithoutSubmittedByNestedInput
     closedCases?: CaseClosureUpdateManyWithoutClosedByNestedInput
     reviewedPublicReports?: PublicReportUpdateManyWithoutReviewedByNestedInput
@@ -73109,6 +81497,10 @@ export namespace Prisma {
     completedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCompletionSubmittedByNestedInput
     verifiedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutVerifiedByNestedInput
     cancelledExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCancelledByNestedInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUncheckedUpdateManyWithoutChangedByNestedInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutBlockedByNestedInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutResolvedByNestedInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUncheckedUpdateManyWithoutCreatedByNestedInput
     submittedExecutionEvidence?: ExecutionEvidenceUncheckedUpdateManyWithoutSubmittedByNestedInput
     closedCases?: CaseClosureUncheckedUpdateManyWithoutClosedByNestedInput
     reviewedPublicReports?: PublicReportUncheckedUpdateManyWithoutReviewedByNestedInput
@@ -73718,6 +82110,8 @@ export namespace Prisma {
     governanceMode?: $Enums.ExecutionPlanGovernanceMode
     executionContractVersion?: string | null
     governedProvenance?: NullableJsonNullValueInput | InputJsonValue
+    plannedStartAt?: Date | string | null
+    plannedEndAt?: Date | string | null
   }
 
   export type ExecutionTaskCreateManyAssignedToInput = {
@@ -73754,6 +82148,8 @@ export namespace Prisma {
     sourceTemplateVersion?: number | null
     evidenceRequired?: boolean
     verificationRequired?: boolean
+    plannedStartAt?: Date | string | null
+    plannedEndAt?: Date | string | null
   }
 
   export type ExecutionTaskCreateManyAssignedByInput = {
@@ -73790,6 +82186,8 @@ export namespace Prisma {
     sourceTemplateVersion?: number | null
     evidenceRequired?: boolean
     verificationRequired?: boolean
+    plannedStartAt?: Date | string | null
+    plannedEndAt?: Date | string | null
   }
 
   export type ExecutionTaskCreateManyCompletionSubmittedByInput = {
@@ -73826,6 +82224,8 @@ export namespace Prisma {
     sourceTemplateVersion?: number | null
     evidenceRequired?: boolean
     verificationRequired?: boolean
+    plannedStartAt?: Date | string | null
+    plannedEndAt?: Date | string | null
   }
 
   export type ExecutionTaskCreateManyVerifiedByInput = {
@@ -73862,6 +82262,8 @@ export namespace Prisma {
     sourceTemplateVersion?: number | null
     evidenceRequired?: boolean
     verificationRequired?: boolean
+    plannedStartAt?: Date | string | null
+    plannedEndAt?: Date | string | null
   }
 
   export type ExecutionTaskCreateManyCancelledByInput = {
@@ -73898,6 +82300,50 @@ export namespace Prisma {
     sourceTemplateVersion?: number | null
     evidenceRequired?: boolean
     verificationRequired?: boolean
+    plannedStartAt?: Date | string | null
+    plannedEndAt?: Date | string | null
+  }
+
+  export type ExecutionScheduleRevisionCreateManyChangedByInput = {
+    id?: string
+    executionPlanId: string
+    executionTaskId?: string | null
+    previousStartAt?: Date | string | null
+    previousEndAt?: Date | string | null
+    newStartAt: Date | string
+    newEndAt: Date | string
+    changeReason: string
+    changedAt?: Date | string
+  }
+
+  export type ExecutionTaskBlockerEventCreateManyBlockedByInput = {
+    id?: string
+    executionTaskId: string
+    category: $Enums.ExecutionBlockerCategory
+    reason: string
+    blockedAt?: Date | string
+    resolvedById?: string | null
+    resolvedAt?: Date | string | null
+    resolutionReason?: string | null
+  }
+
+  export type ExecutionTaskBlockerEventCreateManyResolvedByInput = {
+    id?: string
+    executionTaskId: string
+    category: $Enums.ExecutionBlockerCategory
+    reason: string
+    blockedById: string
+    blockedAt?: Date | string
+    resolvedAt?: Date | string | null
+    resolutionReason?: string | null
+  }
+
+  export type ExecutionTaskDependencyCreateManyCreatedByInput = {
+    id?: string
+    executionPlanId: string
+    dependentTaskId: string
+    predecessorTaskId: string
+    createdAt?: Date | string
   }
 
   export type ExecutionEvidenceCreateManySubmittedByInput = {
@@ -74397,11 +82843,15 @@ export namespace Prisma {
     governanceMode?: EnumExecutionPlanGovernanceModeFieldUpdateOperationsInput | $Enums.ExecutionPlanGovernanceMode
     executionContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
     governedProvenance?: NullableJsonNullValueInput | InputJsonValue
+    plannedStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    plannedEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     orp?: OperationalResponsePlanUpdateOneRequiredWithoutExecutionPlanNestedInput
     case?: CaseUpdateOneRequiredWithoutExecutionPlansNestedInput
     approvalDecision?: OrpDecisionUpdateOneRequiredWithoutExecutionPlanNestedInput
     tasks?: ExecutionTaskUpdateManyWithoutExecutionPlanNestedInput
     closure?: CaseClosureUpdateOneWithoutExecutionPlanNestedInput
+    scheduleRevisions?: ExecutionScheduleRevisionUpdateManyWithoutExecutionPlanNestedInput
+    taskDependencies?: ExecutionTaskDependencyUpdateManyWithoutExecutionPlanNestedInput
   }
 
   export type ExecutionPlanUncheckedUpdateWithoutCreatedByInput = {
@@ -74420,8 +82870,12 @@ export namespace Prisma {
     governanceMode?: EnumExecutionPlanGovernanceModeFieldUpdateOperationsInput | $Enums.ExecutionPlanGovernanceMode
     executionContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
     governedProvenance?: NullableJsonNullValueInput | InputJsonValue
+    plannedStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    plannedEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tasks?: ExecutionTaskUncheckedUpdateManyWithoutExecutionPlanNestedInput
     closure?: CaseClosureUncheckedUpdateOneWithoutExecutionPlanNestedInput
+    scheduleRevisions?: ExecutionScheduleRevisionUncheckedUpdateManyWithoutExecutionPlanNestedInput
+    taskDependencies?: ExecutionTaskDependencyUncheckedUpdateManyWithoutExecutionPlanNestedInput
   }
 
   export type ExecutionPlanUncheckedUpdateManyWithoutCreatedByInput = {
@@ -74440,6 +82894,8 @@ export namespace Prisma {
     governanceMode?: EnumExecutionPlanGovernanceModeFieldUpdateOperationsInput | $Enums.ExecutionPlanGovernanceMode
     executionContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
     governedProvenance?: NullableJsonNullValueInput | InputJsonValue
+    plannedStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    plannedEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type ExecutionTaskUpdateWithoutAssignedToInput = {
@@ -74468,6 +82924,8 @@ export namespace Prisma {
     sourceTemplateVersion?: NullableIntFieldUpdateOperationsInput | number | null
     evidenceRequired?: BoolFieldUpdateOperationsInput | boolean
     verificationRequired?: BoolFieldUpdateOperationsInput | boolean
+    plannedStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    plannedEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     executionPlan?: ExecutionPlanUpdateOneRequiredWithoutTasksNestedInput
     assignedBy?: UserUpdateOneWithoutAssignedByExecutionTasksNestedInput
     completionSubmittedBy?: UserUpdateOneWithoutCompletedExecutionTasksNestedInput
@@ -74477,6 +82935,10 @@ export namespace Prisma {
     approvedActionVersion?: ApprovedActionVersionUpdateOneWithoutExecutionTasksNestedInput
     governedExecutionTemplate?: GovernedExecutionTemplateUpdateOneWithoutExecutionTasksNestedInput
     governedTaskTemplate?: GovernedExecutionTaskTemplateUpdateOneWithoutExecutionTasksNestedInput
+    scheduleRevisions?: ExecutionScheduleRevisionUpdateManyWithoutExecutionTaskNestedInput
+    dependencies?: ExecutionTaskDependencyUpdateManyWithoutDependentTaskNestedInput
+    requiredBy?: ExecutionTaskDependencyUpdateManyWithoutPredecessorTaskNestedInput
+    blockerEvents?: ExecutionTaskBlockerEventUpdateManyWithoutExecutionTaskNestedInput
   }
 
   export type ExecutionTaskUncheckedUpdateWithoutAssignedToInput = {
@@ -74513,7 +82975,13 @@ export namespace Prisma {
     sourceTemplateVersion?: NullableIntFieldUpdateOperationsInput | number | null
     evidenceRequired?: BoolFieldUpdateOperationsInput | boolean
     verificationRequired?: BoolFieldUpdateOperationsInput | boolean
+    plannedStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    plannedEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     evidence?: ExecutionEvidenceUncheckedUpdateManyWithoutExecutionTaskNestedInput
+    scheduleRevisions?: ExecutionScheduleRevisionUncheckedUpdateManyWithoutExecutionTaskNestedInput
+    dependencies?: ExecutionTaskDependencyUncheckedUpdateManyWithoutDependentTaskNestedInput
+    requiredBy?: ExecutionTaskDependencyUncheckedUpdateManyWithoutPredecessorTaskNestedInput
+    blockerEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutExecutionTaskNestedInput
   }
 
   export type ExecutionTaskUncheckedUpdateManyWithoutAssignedToInput = {
@@ -74550,6 +83018,8 @@ export namespace Prisma {
     sourceTemplateVersion?: NullableIntFieldUpdateOperationsInput | number | null
     evidenceRequired?: BoolFieldUpdateOperationsInput | boolean
     verificationRequired?: BoolFieldUpdateOperationsInput | boolean
+    plannedStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    plannedEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type ExecutionTaskUpdateWithoutAssignedByInput = {
@@ -74578,6 +83048,8 @@ export namespace Prisma {
     sourceTemplateVersion?: NullableIntFieldUpdateOperationsInput | number | null
     evidenceRequired?: BoolFieldUpdateOperationsInput | boolean
     verificationRequired?: BoolFieldUpdateOperationsInput | boolean
+    plannedStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    plannedEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     executionPlan?: ExecutionPlanUpdateOneRequiredWithoutTasksNestedInput
     assignedTo?: UserUpdateOneWithoutAssignedExecutionTasksNestedInput
     completionSubmittedBy?: UserUpdateOneWithoutCompletedExecutionTasksNestedInput
@@ -74587,6 +83059,10 @@ export namespace Prisma {
     approvedActionVersion?: ApprovedActionVersionUpdateOneWithoutExecutionTasksNestedInput
     governedExecutionTemplate?: GovernedExecutionTemplateUpdateOneWithoutExecutionTasksNestedInput
     governedTaskTemplate?: GovernedExecutionTaskTemplateUpdateOneWithoutExecutionTasksNestedInput
+    scheduleRevisions?: ExecutionScheduleRevisionUpdateManyWithoutExecutionTaskNestedInput
+    dependencies?: ExecutionTaskDependencyUpdateManyWithoutDependentTaskNestedInput
+    requiredBy?: ExecutionTaskDependencyUpdateManyWithoutPredecessorTaskNestedInput
+    blockerEvents?: ExecutionTaskBlockerEventUpdateManyWithoutExecutionTaskNestedInput
   }
 
   export type ExecutionTaskUncheckedUpdateWithoutAssignedByInput = {
@@ -74623,7 +83099,13 @@ export namespace Prisma {
     sourceTemplateVersion?: NullableIntFieldUpdateOperationsInput | number | null
     evidenceRequired?: BoolFieldUpdateOperationsInput | boolean
     verificationRequired?: BoolFieldUpdateOperationsInput | boolean
+    plannedStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    plannedEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     evidence?: ExecutionEvidenceUncheckedUpdateManyWithoutExecutionTaskNestedInput
+    scheduleRevisions?: ExecutionScheduleRevisionUncheckedUpdateManyWithoutExecutionTaskNestedInput
+    dependencies?: ExecutionTaskDependencyUncheckedUpdateManyWithoutDependentTaskNestedInput
+    requiredBy?: ExecutionTaskDependencyUncheckedUpdateManyWithoutPredecessorTaskNestedInput
+    blockerEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutExecutionTaskNestedInput
   }
 
   export type ExecutionTaskUncheckedUpdateManyWithoutAssignedByInput = {
@@ -74660,6 +83142,8 @@ export namespace Prisma {
     sourceTemplateVersion?: NullableIntFieldUpdateOperationsInput | number | null
     evidenceRequired?: BoolFieldUpdateOperationsInput | boolean
     verificationRequired?: BoolFieldUpdateOperationsInput | boolean
+    plannedStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    plannedEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type ExecutionTaskUpdateWithoutCompletionSubmittedByInput = {
@@ -74688,6 +83172,8 @@ export namespace Prisma {
     sourceTemplateVersion?: NullableIntFieldUpdateOperationsInput | number | null
     evidenceRequired?: BoolFieldUpdateOperationsInput | boolean
     verificationRequired?: BoolFieldUpdateOperationsInput | boolean
+    plannedStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    plannedEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     executionPlan?: ExecutionPlanUpdateOneRequiredWithoutTasksNestedInput
     assignedTo?: UserUpdateOneWithoutAssignedExecutionTasksNestedInput
     assignedBy?: UserUpdateOneWithoutAssignedByExecutionTasksNestedInput
@@ -74697,6 +83183,10 @@ export namespace Prisma {
     approvedActionVersion?: ApprovedActionVersionUpdateOneWithoutExecutionTasksNestedInput
     governedExecutionTemplate?: GovernedExecutionTemplateUpdateOneWithoutExecutionTasksNestedInput
     governedTaskTemplate?: GovernedExecutionTaskTemplateUpdateOneWithoutExecutionTasksNestedInput
+    scheduleRevisions?: ExecutionScheduleRevisionUpdateManyWithoutExecutionTaskNestedInput
+    dependencies?: ExecutionTaskDependencyUpdateManyWithoutDependentTaskNestedInput
+    requiredBy?: ExecutionTaskDependencyUpdateManyWithoutPredecessorTaskNestedInput
+    blockerEvents?: ExecutionTaskBlockerEventUpdateManyWithoutExecutionTaskNestedInput
   }
 
   export type ExecutionTaskUncheckedUpdateWithoutCompletionSubmittedByInput = {
@@ -74733,7 +83223,13 @@ export namespace Prisma {
     sourceTemplateVersion?: NullableIntFieldUpdateOperationsInput | number | null
     evidenceRequired?: BoolFieldUpdateOperationsInput | boolean
     verificationRequired?: BoolFieldUpdateOperationsInput | boolean
+    plannedStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    plannedEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     evidence?: ExecutionEvidenceUncheckedUpdateManyWithoutExecutionTaskNestedInput
+    scheduleRevisions?: ExecutionScheduleRevisionUncheckedUpdateManyWithoutExecutionTaskNestedInput
+    dependencies?: ExecutionTaskDependencyUncheckedUpdateManyWithoutDependentTaskNestedInput
+    requiredBy?: ExecutionTaskDependencyUncheckedUpdateManyWithoutPredecessorTaskNestedInput
+    blockerEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutExecutionTaskNestedInput
   }
 
   export type ExecutionTaskUncheckedUpdateManyWithoutCompletionSubmittedByInput = {
@@ -74770,6 +83266,8 @@ export namespace Prisma {
     sourceTemplateVersion?: NullableIntFieldUpdateOperationsInput | number | null
     evidenceRequired?: BoolFieldUpdateOperationsInput | boolean
     verificationRequired?: BoolFieldUpdateOperationsInput | boolean
+    plannedStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    plannedEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type ExecutionTaskUpdateWithoutVerifiedByInput = {
@@ -74798,6 +83296,8 @@ export namespace Prisma {
     sourceTemplateVersion?: NullableIntFieldUpdateOperationsInput | number | null
     evidenceRequired?: BoolFieldUpdateOperationsInput | boolean
     verificationRequired?: BoolFieldUpdateOperationsInput | boolean
+    plannedStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    plannedEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     executionPlan?: ExecutionPlanUpdateOneRequiredWithoutTasksNestedInput
     assignedTo?: UserUpdateOneWithoutAssignedExecutionTasksNestedInput
     assignedBy?: UserUpdateOneWithoutAssignedByExecutionTasksNestedInput
@@ -74807,6 +83307,10 @@ export namespace Prisma {
     approvedActionVersion?: ApprovedActionVersionUpdateOneWithoutExecutionTasksNestedInput
     governedExecutionTemplate?: GovernedExecutionTemplateUpdateOneWithoutExecutionTasksNestedInput
     governedTaskTemplate?: GovernedExecutionTaskTemplateUpdateOneWithoutExecutionTasksNestedInput
+    scheduleRevisions?: ExecutionScheduleRevisionUpdateManyWithoutExecutionTaskNestedInput
+    dependencies?: ExecutionTaskDependencyUpdateManyWithoutDependentTaskNestedInput
+    requiredBy?: ExecutionTaskDependencyUpdateManyWithoutPredecessorTaskNestedInput
+    blockerEvents?: ExecutionTaskBlockerEventUpdateManyWithoutExecutionTaskNestedInput
   }
 
   export type ExecutionTaskUncheckedUpdateWithoutVerifiedByInput = {
@@ -74843,7 +83347,13 @@ export namespace Prisma {
     sourceTemplateVersion?: NullableIntFieldUpdateOperationsInput | number | null
     evidenceRequired?: BoolFieldUpdateOperationsInput | boolean
     verificationRequired?: BoolFieldUpdateOperationsInput | boolean
+    plannedStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    plannedEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     evidence?: ExecutionEvidenceUncheckedUpdateManyWithoutExecutionTaskNestedInput
+    scheduleRevisions?: ExecutionScheduleRevisionUncheckedUpdateManyWithoutExecutionTaskNestedInput
+    dependencies?: ExecutionTaskDependencyUncheckedUpdateManyWithoutDependentTaskNestedInput
+    requiredBy?: ExecutionTaskDependencyUncheckedUpdateManyWithoutPredecessorTaskNestedInput
+    blockerEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutExecutionTaskNestedInput
   }
 
   export type ExecutionTaskUncheckedUpdateManyWithoutVerifiedByInput = {
@@ -74880,6 +83390,8 @@ export namespace Prisma {
     sourceTemplateVersion?: NullableIntFieldUpdateOperationsInput | number | null
     evidenceRequired?: BoolFieldUpdateOperationsInput | boolean
     verificationRequired?: BoolFieldUpdateOperationsInput | boolean
+    plannedStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    plannedEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type ExecutionTaskUpdateWithoutCancelledByInput = {
@@ -74908,6 +83420,8 @@ export namespace Prisma {
     sourceTemplateVersion?: NullableIntFieldUpdateOperationsInput | number | null
     evidenceRequired?: BoolFieldUpdateOperationsInput | boolean
     verificationRequired?: BoolFieldUpdateOperationsInput | boolean
+    plannedStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    plannedEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     executionPlan?: ExecutionPlanUpdateOneRequiredWithoutTasksNestedInput
     assignedTo?: UserUpdateOneWithoutAssignedExecutionTasksNestedInput
     assignedBy?: UserUpdateOneWithoutAssignedByExecutionTasksNestedInput
@@ -74917,6 +83431,10 @@ export namespace Prisma {
     approvedActionVersion?: ApprovedActionVersionUpdateOneWithoutExecutionTasksNestedInput
     governedExecutionTemplate?: GovernedExecutionTemplateUpdateOneWithoutExecutionTasksNestedInput
     governedTaskTemplate?: GovernedExecutionTaskTemplateUpdateOneWithoutExecutionTasksNestedInput
+    scheduleRevisions?: ExecutionScheduleRevisionUpdateManyWithoutExecutionTaskNestedInput
+    dependencies?: ExecutionTaskDependencyUpdateManyWithoutDependentTaskNestedInput
+    requiredBy?: ExecutionTaskDependencyUpdateManyWithoutPredecessorTaskNestedInput
+    blockerEvents?: ExecutionTaskBlockerEventUpdateManyWithoutExecutionTaskNestedInput
   }
 
   export type ExecutionTaskUncheckedUpdateWithoutCancelledByInput = {
@@ -74953,7 +83471,13 @@ export namespace Prisma {
     sourceTemplateVersion?: NullableIntFieldUpdateOperationsInput | number | null
     evidenceRequired?: BoolFieldUpdateOperationsInput | boolean
     verificationRequired?: BoolFieldUpdateOperationsInput | boolean
+    plannedStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    plannedEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     evidence?: ExecutionEvidenceUncheckedUpdateManyWithoutExecutionTaskNestedInput
+    scheduleRevisions?: ExecutionScheduleRevisionUncheckedUpdateManyWithoutExecutionTaskNestedInput
+    dependencies?: ExecutionTaskDependencyUncheckedUpdateManyWithoutDependentTaskNestedInput
+    requiredBy?: ExecutionTaskDependencyUncheckedUpdateManyWithoutPredecessorTaskNestedInput
+    blockerEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutExecutionTaskNestedInput
   }
 
   export type ExecutionTaskUncheckedUpdateManyWithoutCancelledByInput = {
@@ -74990,6 +83514,134 @@ export namespace Prisma {
     sourceTemplateVersion?: NullableIntFieldUpdateOperationsInput | number | null
     evidenceRequired?: BoolFieldUpdateOperationsInput | boolean
     verificationRequired?: BoolFieldUpdateOperationsInput | boolean
+    plannedStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    plannedEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type ExecutionScheduleRevisionUpdateWithoutChangedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    previousStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    previousEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    newStartAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    newEndAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    changeReason?: StringFieldUpdateOperationsInput | string
+    changedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    executionPlan?: ExecutionPlanUpdateOneRequiredWithoutScheduleRevisionsNestedInput
+    executionTask?: ExecutionTaskUpdateOneWithoutScheduleRevisionsNestedInput
+  }
+
+  export type ExecutionScheduleRevisionUncheckedUpdateWithoutChangedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    executionPlanId?: StringFieldUpdateOperationsInput | string
+    executionTaskId?: NullableStringFieldUpdateOperationsInput | string | null
+    previousStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    previousEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    newStartAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    newEndAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    changeReason?: StringFieldUpdateOperationsInput | string
+    changedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ExecutionScheduleRevisionUncheckedUpdateManyWithoutChangedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    executionPlanId?: StringFieldUpdateOperationsInput | string
+    executionTaskId?: NullableStringFieldUpdateOperationsInput | string | null
+    previousStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    previousEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    newStartAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    newEndAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    changeReason?: StringFieldUpdateOperationsInput | string
+    changedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ExecutionTaskBlockerEventUpdateWithoutBlockedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    category?: EnumExecutionBlockerCategoryFieldUpdateOperationsInput | $Enums.ExecutionBlockerCategory
+    reason?: StringFieldUpdateOperationsInput | string
+    blockedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    resolvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    resolutionReason?: NullableStringFieldUpdateOperationsInput | string | null
+    executionTask?: ExecutionTaskUpdateOneRequiredWithoutBlockerEventsNestedInput
+    resolvedBy?: UserUpdateOneWithoutResolvedExecutionTaskEventsNestedInput
+  }
+
+  export type ExecutionTaskBlockerEventUncheckedUpdateWithoutBlockedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    executionTaskId?: StringFieldUpdateOperationsInput | string
+    category?: EnumExecutionBlockerCategoryFieldUpdateOperationsInput | $Enums.ExecutionBlockerCategory
+    reason?: StringFieldUpdateOperationsInput | string
+    blockedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    resolvedById?: NullableStringFieldUpdateOperationsInput | string | null
+    resolvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    resolutionReason?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type ExecutionTaskBlockerEventUncheckedUpdateManyWithoutBlockedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    executionTaskId?: StringFieldUpdateOperationsInput | string
+    category?: EnumExecutionBlockerCategoryFieldUpdateOperationsInput | $Enums.ExecutionBlockerCategory
+    reason?: StringFieldUpdateOperationsInput | string
+    blockedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    resolvedById?: NullableStringFieldUpdateOperationsInput | string | null
+    resolvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    resolutionReason?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type ExecutionTaskBlockerEventUpdateWithoutResolvedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    category?: EnumExecutionBlockerCategoryFieldUpdateOperationsInput | $Enums.ExecutionBlockerCategory
+    reason?: StringFieldUpdateOperationsInput | string
+    blockedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    resolvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    resolutionReason?: NullableStringFieldUpdateOperationsInput | string | null
+    executionTask?: ExecutionTaskUpdateOneRequiredWithoutBlockerEventsNestedInput
+    blockedBy?: UserUpdateOneRequiredWithoutBlockedExecutionTaskEventsNestedInput
+  }
+
+  export type ExecutionTaskBlockerEventUncheckedUpdateWithoutResolvedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    executionTaskId?: StringFieldUpdateOperationsInput | string
+    category?: EnumExecutionBlockerCategoryFieldUpdateOperationsInput | $Enums.ExecutionBlockerCategory
+    reason?: StringFieldUpdateOperationsInput | string
+    blockedById?: StringFieldUpdateOperationsInput | string
+    blockedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    resolvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    resolutionReason?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type ExecutionTaskBlockerEventUncheckedUpdateManyWithoutResolvedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    executionTaskId?: StringFieldUpdateOperationsInput | string
+    category?: EnumExecutionBlockerCategoryFieldUpdateOperationsInput | $Enums.ExecutionBlockerCategory
+    reason?: StringFieldUpdateOperationsInput | string
+    blockedById?: StringFieldUpdateOperationsInput | string
+    blockedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    resolvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    resolutionReason?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type ExecutionTaskDependencyUpdateWithoutCreatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    executionPlan?: ExecutionPlanUpdateOneRequiredWithoutTaskDependenciesNestedInput
+    dependentTask?: ExecutionTaskUpdateOneRequiredWithoutDependenciesNestedInput
+    predecessorTask?: ExecutionTaskUpdateOneRequiredWithoutRequiredByNestedInput
+  }
+
+  export type ExecutionTaskDependencyUncheckedUpdateWithoutCreatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    executionPlanId?: StringFieldUpdateOperationsInput | string
+    dependentTaskId?: StringFieldUpdateOperationsInput | string
+    predecessorTaskId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ExecutionTaskDependencyUncheckedUpdateManyWithoutCreatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    executionPlanId?: StringFieldUpdateOperationsInput | string
+    dependentTaskId?: StringFieldUpdateOperationsInput | string
+    predecessorTaskId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ExecutionEvidenceUpdateWithoutSubmittedByInput = {
@@ -76469,6 +85121,8 @@ export namespace Prisma {
     sourceTemplateVersion?: number | null
     evidenceRequired?: boolean
     verificationRequired?: boolean
+    plannedStartAt?: Date | string | null
+    plannedEndAt?: Date | string | null
   }
 
   export type PolicyRuleUpdateWithoutActionInput = {
@@ -76591,6 +85245,8 @@ export namespace Prisma {
     sourceTemplateVersion?: NullableIntFieldUpdateOperationsInput | number | null
     evidenceRequired?: BoolFieldUpdateOperationsInput | boolean
     verificationRequired?: BoolFieldUpdateOperationsInput | boolean
+    plannedStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    plannedEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     executionPlan?: ExecutionPlanUpdateOneRequiredWithoutTasksNestedInput
     assignedTo?: UserUpdateOneWithoutAssignedExecutionTasksNestedInput
     assignedBy?: UserUpdateOneWithoutAssignedByExecutionTasksNestedInput
@@ -76600,6 +85256,10 @@ export namespace Prisma {
     evidence?: ExecutionEvidenceUpdateManyWithoutExecutionTaskNestedInput
     governedExecutionTemplate?: GovernedExecutionTemplateUpdateOneWithoutExecutionTasksNestedInput
     governedTaskTemplate?: GovernedExecutionTaskTemplateUpdateOneWithoutExecutionTasksNestedInput
+    scheduleRevisions?: ExecutionScheduleRevisionUpdateManyWithoutExecutionTaskNestedInput
+    dependencies?: ExecutionTaskDependencyUpdateManyWithoutDependentTaskNestedInput
+    requiredBy?: ExecutionTaskDependencyUpdateManyWithoutPredecessorTaskNestedInput
+    blockerEvents?: ExecutionTaskBlockerEventUpdateManyWithoutExecutionTaskNestedInput
   }
 
   export type ExecutionTaskUncheckedUpdateWithoutApprovedActionVersionInput = {
@@ -76636,7 +85296,13 @@ export namespace Prisma {
     sourceTemplateVersion?: NullableIntFieldUpdateOperationsInput | number | null
     evidenceRequired?: BoolFieldUpdateOperationsInput | boolean
     verificationRequired?: BoolFieldUpdateOperationsInput | boolean
+    plannedStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    plannedEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     evidence?: ExecutionEvidenceUncheckedUpdateManyWithoutExecutionTaskNestedInput
+    scheduleRevisions?: ExecutionScheduleRevisionUncheckedUpdateManyWithoutExecutionTaskNestedInput
+    dependencies?: ExecutionTaskDependencyUncheckedUpdateManyWithoutDependentTaskNestedInput
+    requiredBy?: ExecutionTaskDependencyUncheckedUpdateManyWithoutPredecessorTaskNestedInput
+    blockerEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutExecutionTaskNestedInput
   }
 
   export type ExecutionTaskUncheckedUpdateManyWithoutApprovedActionVersionInput = {
@@ -76673,6 +85339,8 @@ export namespace Prisma {
     sourceTemplateVersion?: NullableIntFieldUpdateOperationsInput | number | null
     evidenceRequired?: BoolFieldUpdateOperationsInput | boolean
     verificationRequired?: BoolFieldUpdateOperationsInput | boolean
+    plannedStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    plannedEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type GovernedExecutionTaskTemplateCreateManyExecutionTemplateInput = {
@@ -76723,6 +85391,8 @@ export namespace Prisma {
     sourceTemplateVersion?: number | null
     evidenceRequired?: boolean
     verificationRequired?: boolean
+    plannedStartAt?: Date | string | null
+    plannedEndAt?: Date | string | null
   }
 
   export type GovernedExecutionTaskTemplateUpdateWithoutExecutionTemplateInput = {
@@ -76795,6 +85465,8 @@ export namespace Prisma {
     sourceTemplateVersion?: NullableIntFieldUpdateOperationsInput | number | null
     evidenceRequired?: BoolFieldUpdateOperationsInput | boolean
     verificationRequired?: BoolFieldUpdateOperationsInput | boolean
+    plannedStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    plannedEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     executionPlan?: ExecutionPlanUpdateOneRequiredWithoutTasksNestedInput
     assignedTo?: UserUpdateOneWithoutAssignedExecutionTasksNestedInput
     assignedBy?: UserUpdateOneWithoutAssignedByExecutionTasksNestedInput
@@ -76804,6 +85476,10 @@ export namespace Prisma {
     evidence?: ExecutionEvidenceUpdateManyWithoutExecutionTaskNestedInput
     approvedActionVersion?: ApprovedActionVersionUpdateOneWithoutExecutionTasksNestedInput
     governedTaskTemplate?: GovernedExecutionTaskTemplateUpdateOneWithoutExecutionTasksNestedInput
+    scheduleRevisions?: ExecutionScheduleRevisionUpdateManyWithoutExecutionTaskNestedInput
+    dependencies?: ExecutionTaskDependencyUpdateManyWithoutDependentTaskNestedInput
+    requiredBy?: ExecutionTaskDependencyUpdateManyWithoutPredecessorTaskNestedInput
+    blockerEvents?: ExecutionTaskBlockerEventUpdateManyWithoutExecutionTaskNestedInput
   }
 
   export type ExecutionTaskUncheckedUpdateWithoutGovernedExecutionTemplateInput = {
@@ -76840,7 +85516,13 @@ export namespace Prisma {
     sourceTemplateVersion?: NullableIntFieldUpdateOperationsInput | number | null
     evidenceRequired?: BoolFieldUpdateOperationsInput | boolean
     verificationRequired?: BoolFieldUpdateOperationsInput | boolean
+    plannedStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    plannedEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     evidence?: ExecutionEvidenceUncheckedUpdateManyWithoutExecutionTaskNestedInput
+    scheduleRevisions?: ExecutionScheduleRevisionUncheckedUpdateManyWithoutExecutionTaskNestedInput
+    dependencies?: ExecutionTaskDependencyUncheckedUpdateManyWithoutDependentTaskNestedInput
+    requiredBy?: ExecutionTaskDependencyUncheckedUpdateManyWithoutPredecessorTaskNestedInput
+    blockerEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutExecutionTaskNestedInput
   }
 
   export type ExecutionTaskUncheckedUpdateManyWithoutGovernedExecutionTemplateInput = {
@@ -76877,6 +85559,8 @@ export namespace Prisma {
     sourceTemplateVersion?: NullableIntFieldUpdateOperationsInput | number | null
     evidenceRequired?: BoolFieldUpdateOperationsInput | boolean
     verificationRequired?: BoolFieldUpdateOperationsInput | boolean
+    plannedStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    plannedEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type ExecutionTaskCreateManyGovernedTaskTemplateInput = {
@@ -76913,6 +85597,8 @@ export namespace Prisma {
     sourceTemplateVersion?: number | null
     evidenceRequired?: boolean
     verificationRequired?: boolean
+    plannedStartAt?: Date | string | null
+    plannedEndAt?: Date | string | null
   }
 
   export type ExecutionTaskUpdateWithoutGovernedTaskTemplateInput = {
@@ -76941,6 +85627,8 @@ export namespace Prisma {
     sourceTemplateVersion?: NullableIntFieldUpdateOperationsInput | number | null
     evidenceRequired?: BoolFieldUpdateOperationsInput | boolean
     verificationRequired?: BoolFieldUpdateOperationsInput | boolean
+    plannedStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    plannedEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     executionPlan?: ExecutionPlanUpdateOneRequiredWithoutTasksNestedInput
     assignedTo?: UserUpdateOneWithoutAssignedExecutionTasksNestedInput
     assignedBy?: UserUpdateOneWithoutAssignedByExecutionTasksNestedInput
@@ -76950,6 +85638,10 @@ export namespace Prisma {
     evidence?: ExecutionEvidenceUpdateManyWithoutExecutionTaskNestedInput
     approvedActionVersion?: ApprovedActionVersionUpdateOneWithoutExecutionTasksNestedInput
     governedExecutionTemplate?: GovernedExecutionTemplateUpdateOneWithoutExecutionTasksNestedInput
+    scheduleRevisions?: ExecutionScheduleRevisionUpdateManyWithoutExecutionTaskNestedInput
+    dependencies?: ExecutionTaskDependencyUpdateManyWithoutDependentTaskNestedInput
+    requiredBy?: ExecutionTaskDependencyUpdateManyWithoutPredecessorTaskNestedInput
+    blockerEvents?: ExecutionTaskBlockerEventUpdateManyWithoutExecutionTaskNestedInput
   }
 
   export type ExecutionTaskUncheckedUpdateWithoutGovernedTaskTemplateInput = {
@@ -76986,7 +85678,13 @@ export namespace Prisma {
     sourceTemplateVersion?: NullableIntFieldUpdateOperationsInput | number | null
     evidenceRequired?: BoolFieldUpdateOperationsInput | boolean
     verificationRequired?: BoolFieldUpdateOperationsInput | boolean
+    plannedStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    plannedEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     evidence?: ExecutionEvidenceUncheckedUpdateManyWithoutExecutionTaskNestedInput
+    scheduleRevisions?: ExecutionScheduleRevisionUncheckedUpdateManyWithoutExecutionTaskNestedInput
+    dependencies?: ExecutionTaskDependencyUncheckedUpdateManyWithoutDependentTaskNestedInput
+    requiredBy?: ExecutionTaskDependencyUncheckedUpdateManyWithoutPredecessorTaskNestedInput
+    blockerEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutExecutionTaskNestedInput
   }
 
   export type ExecutionTaskUncheckedUpdateManyWithoutGovernedTaskTemplateInput = {
@@ -77023,6 +85721,8 @@ export namespace Prisma {
     sourceTemplateVersion?: NullableIntFieldUpdateOperationsInput | number | null
     evidenceRequired?: BoolFieldUpdateOperationsInput | boolean
     verificationRequired?: BoolFieldUpdateOperationsInput | boolean
+    plannedStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    plannedEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type InspectionCreateManyCaseInput = {
@@ -77103,6 +85803,8 @@ export namespace Prisma {
     governanceMode?: $Enums.ExecutionPlanGovernanceMode
     executionContractVersion?: string | null
     governedProvenance?: NullableJsonNullValueInput | InputJsonValue
+    plannedStartAt?: Date | string | null
+    plannedEndAt?: Date | string | null
   }
 
   export type DecisionPackageCreateManyCaseInput = {
@@ -77403,11 +86105,15 @@ export namespace Prisma {
     governanceMode?: EnumExecutionPlanGovernanceModeFieldUpdateOperationsInput | $Enums.ExecutionPlanGovernanceMode
     executionContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
     governedProvenance?: NullableJsonNullValueInput | InputJsonValue
+    plannedStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    plannedEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     orp?: OperationalResponsePlanUpdateOneRequiredWithoutExecutionPlanNestedInput
     approvalDecision?: OrpDecisionUpdateOneRequiredWithoutExecutionPlanNestedInput
     createdBy?: UserUpdateOneRequiredWithoutCreatedExecutionPlansNestedInput
     tasks?: ExecutionTaskUpdateManyWithoutExecutionPlanNestedInput
     closure?: CaseClosureUpdateOneWithoutExecutionPlanNestedInput
+    scheduleRevisions?: ExecutionScheduleRevisionUpdateManyWithoutExecutionPlanNestedInput
+    taskDependencies?: ExecutionTaskDependencyUpdateManyWithoutExecutionPlanNestedInput
   }
 
   export type ExecutionPlanUncheckedUpdateWithoutCaseInput = {
@@ -77426,8 +86132,12 @@ export namespace Prisma {
     governanceMode?: EnumExecutionPlanGovernanceModeFieldUpdateOperationsInput | $Enums.ExecutionPlanGovernanceMode
     executionContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
     governedProvenance?: NullableJsonNullValueInput | InputJsonValue
+    plannedStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    plannedEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tasks?: ExecutionTaskUncheckedUpdateManyWithoutExecutionPlanNestedInput
     closure?: CaseClosureUncheckedUpdateOneWithoutExecutionPlanNestedInput
+    scheduleRevisions?: ExecutionScheduleRevisionUncheckedUpdateManyWithoutExecutionPlanNestedInput
+    taskDependencies?: ExecutionTaskDependencyUncheckedUpdateManyWithoutExecutionPlanNestedInput
   }
 
   export type ExecutionPlanUncheckedUpdateManyWithoutCaseInput = {
@@ -77446,6 +86156,8 @@ export namespace Prisma {
     governanceMode?: EnumExecutionPlanGovernanceModeFieldUpdateOperationsInput | $Enums.ExecutionPlanGovernanceMode
     executionContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
     governedProvenance?: NullableJsonNullValueInput | InputJsonValue
+    plannedStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    plannedEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type DecisionPackageUpdateWithoutCaseInput = {
@@ -78619,6 +87331,28 @@ export namespace Prisma {
     sourceTemplateVersion?: number | null
     evidenceRequired?: boolean
     verificationRequired?: boolean
+    plannedStartAt?: Date | string | null
+    plannedEndAt?: Date | string | null
+  }
+
+  export type ExecutionScheduleRevisionCreateManyExecutionPlanInput = {
+    id?: string
+    executionTaskId?: string | null
+    previousStartAt?: Date | string | null
+    previousEndAt?: Date | string | null
+    newStartAt: Date | string
+    newEndAt: Date | string
+    changedById: string
+    changeReason: string
+    changedAt?: Date | string
+  }
+
+  export type ExecutionTaskDependencyCreateManyExecutionPlanInput = {
+    id?: string
+    dependentTaskId: string
+    predecessorTaskId: string
+    createdById: string
+    createdAt?: Date | string
   }
 
   export type ExecutionTaskUpdateWithoutExecutionPlanInput = {
@@ -78647,6 +87381,8 @@ export namespace Prisma {
     sourceTemplateVersion?: NullableIntFieldUpdateOperationsInput | number | null
     evidenceRequired?: BoolFieldUpdateOperationsInput | boolean
     verificationRequired?: BoolFieldUpdateOperationsInput | boolean
+    plannedStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    plannedEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     assignedTo?: UserUpdateOneWithoutAssignedExecutionTasksNestedInput
     assignedBy?: UserUpdateOneWithoutAssignedByExecutionTasksNestedInput
     completionSubmittedBy?: UserUpdateOneWithoutCompletedExecutionTasksNestedInput
@@ -78656,6 +87392,10 @@ export namespace Prisma {
     approvedActionVersion?: ApprovedActionVersionUpdateOneWithoutExecutionTasksNestedInput
     governedExecutionTemplate?: GovernedExecutionTemplateUpdateOneWithoutExecutionTasksNestedInput
     governedTaskTemplate?: GovernedExecutionTaskTemplateUpdateOneWithoutExecutionTasksNestedInput
+    scheduleRevisions?: ExecutionScheduleRevisionUpdateManyWithoutExecutionTaskNestedInput
+    dependencies?: ExecutionTaskDependencyUpdateManyWithoutDependentTaskNestedInput
+    requiredBy?: ExecutionTaskDependencyUpdateManyWithoutPredecessorTaskNestedInput
+    blockerEvents?: ExecutionTaskBlockerEventUpdateManyWithoutExecutionTaskNestedInput
   }
 
   export type ExecutionTaskUncheckedUpdateWithoutExecutionPlanInput = {
@@ -78692,7 +87432,13 @@ export namespace Prisma {
     sourceTemplateVersion?: NullableIntFieldUpdateOperationsInput | number | null
     evidenceRequired?: BoolFieldUpdateOperationsInput | boolean
     verificationRequired?: BoolFieldUpdateOperationsInput | boolean
+    plannedStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    plannedEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     evidence?: ExecutionEvidenceUncheckedUpdateManyWithoutExecutionTaskNestedInput
+    scheduleRevisions?: ExecutionScheduleRevisionUncheckedUpdateManyWithoutExecutionTaskNestedInput
+    dependencies?: ExecutionTaskDependencyUncheckedUpdateManyWithoutDependentTaskNestedInput
+    requiredBy?: ExecutionTaskDependencyUncheckedUpdateManyWithoutPredecessorTaskNestedInput
+    blockerEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutExecutionTaskNestedInput
   }
 
   export type ExecutionTaskUncheckedUpdateManyWithoutExecutionPlanInput = {
@@ -78729,6 +87475,68 @@ export namespace Prisma {
     sourceTemplateVersion?: NullableIntFieldUpdateOperationsInput | number | null
     evidenceRequired?: BoolFieldUpdateOperationsInput | boolean
     verificationRequired?: BoolFieldUpdateOperationsInput | boolean
+    plannedStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    plannedEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type ExecutionScheduleRevisionUpdateWithoutExecutionPlanInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    previousStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    previousEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    newStartAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    newEndAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    changeReason?: StringFieldUpdateOperationsInput | string
+    changedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    executionTask?: ExecutionTaskUpdateOneWithoutScheduleRevisionsNestedInput
+    changedBy?: UserUpdateOneRequiredWithoutExecutionScheduleRevisionsNestedInput
+  }
+
+  export type ExecutionScheduleRevisionUncheckedUpdateWithoutExecutionPlanInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    executionTaskId?: NullableStringFieldUpdateOperationsInput | string | null
+    previousStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    previousEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    newStartAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    newEndAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    changedById?: StringFieldUpdateOperationsInput | string
+    changeReason?: StringFieldUpdateOperationsInput | string
+    changedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ExecutionScheduleRevisionUncheckedUpdateManyWithoutExecutionPlanInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    executionTaskId?: NullableStringFieldUpdateOperationsInput | string | null
+    previousStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    previousEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    newStartAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    newEndAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    changedById?: StringFieldUpdateOperationsInput | string
+    changeReason?: StringFieldUpdateOperationsInput | string
+    changedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ExecutionTaskDependencyUpdateWithoutExecutionPlanInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    dependentTask?: ExecutionTaskUpdateOneRequiredWithoutDependenciesNestedInput
+    predecessorTask?: ExecutionTaskUpdateOneRequiredWithoutRequiredByNestedInput
+    createdBy?: UserUpdateOneRequiredWithoutCreatedExecutionTaskDependenciesNestedInput
+  }
+
+  export type ExecutionTaskDependencyUncheckedUpdateWithoutExecutionPlanInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    dependentTaskId?: StringFieldUpdateOperationsInput | string
+    predecessorTaskId?: StringFieldUpdateOperationsInput | string
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ExecutionTaskDependencyUncheckedUpdateManyWithoutExecutionPlanInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    dependentTaskId?: StringFieldUpdateOperationsInput | string
+    predecessorTaskId?: StringFieldUpdateOperationsInput | string
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ExecutionEvidenceCreateManyExecutionTaskInput = {
@@ -78741,6 +87549,45 @@ export namespace Prisma {
     measurementData?: NullableJsonNullValueInput | InputJsonValue
     capturedAt?: Date | string | null
     submittedAt?: Date | string
+  }
+
+  export type ExecutionScheduleRevisionCreateManyExecutionTaskInput = {
+    id?: string
+    executionPlanId: string
+    previousStartAt?: Date | string | null
+    previousEndAt?: Date | string | null
+    newStartAt: Date | string
+    newEndAt: Date | string
+    changedById: string
+    changeReason: string
+    changedAt?: Date | string
+  }
+
+  export type ExecutionTaskDependencyCreateManyDependentTaskInput = {
+    id?: string
+    executionPlanId: string
+    predecessorTaskId: string
+    createdById: string
+    createdAt?: Date | string
+  }
+
+  export type ExecutionTaskDependencyCreateManyPredecessorTaskInput = {
+    id?: string
+    executionPlanId: string
+    dependentTaskId: string
+    createdById: string
+    createdAt?: Date | string
+  }
+
+  export type ExecutionTaskBlockerEventCreateManyExecutionTaskInput = {
+    id?: string
+    category: $Enums.ExecutionBlockerCategory
+    reason: string
+    blockedById: string
+    blockedAt?: Date | string
+    resolvedById?: string | null
+    resolvedAt?: Date | string | null
+    resolutionReason?: string | null
   }
 
   export type ExecutionEvidenceUpdateWithoutExecutionTaskInput = {
@@ -78777,6 +87624,123 @@ export namespace Prisma {
     measurementData?: NullableJsonNullValueInput | InputJsonValue
     capturedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     submittedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ExecutionScheduleRevisionUpdateWithoutExecutionTaskInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    previousStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    previousEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    newStartAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    newEndAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    changeReason?: StringFieldUpdateOperationsInput | string
+    changedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    executionPlan?: ExecutionPlanUpdateOneRequiredWithoutScheduleRevisionsNestedInput
+    changedBy?: UserUpdateOneRequiredWithoutExecutionScheduleRevisionsNestedInput
+  }
+
+  export type ExecutionScheduleRevisionUncheckedUpdateWithoutExecutionTaskInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    executionPlanId?: StringFieldUpdateOperationsInput | string
+    previousStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    previousEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    newStartAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    newEndAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    changedById?: StringFieldUpdateOperationsInput | string
+    changeReason?: StringFieldUpdateOperationsInput | string
+    changedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ExecutionScheduleRevisionUncheckedUpdateManyWithoutExecutionTaskInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    executionPlanId?: StringFieldUpdateOperationsInput | string
+    previousStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    previousEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    newStartAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    newEndAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    changedById?: StringFieldUpdateOperationsInput | string
+    changeReason?: StringFieldUpdateOperationsInput | string
+    changedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ExecutionTaskDependencyUpdateWithoutDependentTaskInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    executionPlan?: ExecutionPlanUpdateOneRequiredWithoutTaskDependenciesNestedInput
+    predecessorTask?: ExecutionTaskUpdateOneRequiredWithoutRequiredByNestedInput
+    createdBy?: UserUpdateOneRequiredWithoutCreatedExecutionTaskDependenciesNestedInput
+  }
+
+  export type ExecutionTaskDependencyUncheckedUpdateWithoutDependentTaskInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    executionPlanId?: StringFieldUpdateOperationsInput | string
+    predecessorTaskId?: StringFieldUpdateOperationsInput | string
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ExecutionTaskDependencyUncheckedUpdateManyWithoutDependentTaskInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    executionPlanId?: StringFieldUpdateOperationsInput | string
+    predecessorTaskId?: StringFieldUpdateOperationsInput | string
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ExecutionTaskDependencyUpdateWithoutPredecessorTaskInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    executionPlan?: ExecutionPlanUpdateOneRequiredWithoutTaskDependenciesNestedInput
+    dependentTask?: ExecutionTaskUpdateOneRequiredWithoutDependenciesNestedInput
+    createdBy?: UserUpdateOneRequiredWithoutCreatedExecutionTaskDependenciesNestedInput
+  }
+
+  export type ExecutionTaskDependencyUncheckedUpdateWithoutPredecessorTaskInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    executionPlanId?: StringFieldUpdateOperationsInput | string
+    dependentTaskId?: StringFieldUpdateOperationsInput | string
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ExecutionTaskDependencyUncheckedUpdateManyWithoutPredecessorTaskInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    executionPlanId?: StringFieldUpdateOperationsInput | string
+    dependentTaskId?: StringFieldUpdateOperationsInput | string
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ExecutionTaskBlockerEventUpdateWithoutExecutionTaskInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    category?: EnumExecutionBlockerCategoryFieldUpdateOperationsInput | $Enums.ExecutionBlockerCategory
+    reason?: StringFieldUpdateOperationsInput | string
+    blockedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    resolvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    resolutionReason?: NullableStringFieldUpdateOperationsInput | string | null
+    blockedBy?: UserUpdateOneRequiredWithoutBlockedExecutionTaskEventsNestedInput
+    resolvedBy?: UserUpdateOneWithoutResolvedExecutionTaskEventsNestedInput
+  }
+
+  export type ExecutionTaskBlockerEventUncheckedUpdateWithoutExecutionTaskInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    category?: EnumExecutionBlockerCategoryFieldUpdateOperationsInput | $Enums.ExecutionBlockerCategory
+    reason?: StringFieldUpdateOperationsInput | string
+    blockedById?: StringFieldUpdateOperationsInput | string
+    blockedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    resolvedById?: NullableStringFieldUpdateOperationsInput | string | null
+    resolvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    resolutionReason?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type ExecutionTaskBlockerEventUncheckedUpdateManyWithoutExecutionTaskInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    category?: EnumExecutionBlockerCategoryFieldUpdateOperationsInput | $Enums.ExecutionBlockerCategory
+    reason?: StringFieldUpdateOperationsInput | string
+    blockedById?: StringFieldUpdateOperationsInput | string
+    blockedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    resolvedById?: NullableStringFieldUpdateOperationsInput | string | null
+    resolvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    resolutionReason?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
 
