@@ -109,6 +109,16 @@ export type RiskAssessment = $Result.DefaultSelection<Prisma.$RiskAssessmentPayl
  */
 export type TrustedComputationReceipt = $Result.DefaultSelection<Prisma.$TrustedComputationReceiptPayload>
 /**
+ * Model IntegrityChainHead
+ * 
+ */
+export type IntegrityChainHead = $Result.DefaultSelection<Prisma.$IntegrityChainHeadPayload>
+/**
+ * Model IntegrityAuditEvent
+ * 
+ */
+export type IntegrityAuditEvent = $Result.DefaultSelection<Prisma.$IntegrityAuditEventPayload>
+/**
  * Model InfrastructureIntelligenceAssessment
  * 
  */
@@ -1017,6 +1027,26 @@ export class PrismaClient<
   get trustedComputationReceipt(): Prisma.TrustedComputationReceiptDelegate<ExtArgs, ClientOptions>;
 
   /**
+   * `prisma.integrityChainHead`: Exposes CRUD operations for the **IntegrityChainHead** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more IntegrityChainHeads
+    * const integrityChainHeads = await prisma.integrityChainHead.findMany()
+    * ```
+    */
+  get integrityChainHead(): Prisma.IntegrityChainHeadDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.integrityAuditEvent`: Exposes CRUD operations for the **IntegrityAuditEvent** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more IntegrityAuditEvents
+    * const integrityAuditEvents = await prisma.integrityAuditEvent.findMany()
+    * ```
+    */
+  get integrityAuditEvent(): Prisma.IntegrityAuditEventDelegate<ExtArgs, ClientOptions>;
+
+  /**
    * `prisma.infrastructureIntelligenceAssessment`: Exposes CRUD operations for the **InfrastructureIntelligenceAssessment** model.
     * Example usage:
     * ```ts
@@ -1675,6 +1705,8 @@ export namespace Prisma {
     Inspection: 'Inspection',
     RiskAssessment: 'RiskAssessment',
     TrustedComputationReceipt: 'TrustedComputationReceipt',
+    IntegrityChainHead: 'IntegrityChainHead',
+    IntegrityAuditEvent: 'IntegrityAuditEvent',
     InfrastructureIntelligenceAssessment: 'InfrastructureIntelligenceAssessment',
     InfrastructureIntelligenceReconciliation: 'InfrastructureIntelligenceReconciliation',
     OperationalResponsePlan: 'OperationalResponsePlan',
@@ -1713,7 +1745,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "department" | "jurisdiction" | "user" | "asset" | "publicReport" | "publicReportTriageAnalysis" | "policyDocument" | "approvedActionVersion" | "governedExecutionTemplate" | "governedExecutionTaskTemplate" | "policyRule" | "case" | "caseResourceEstimate" | "portfolioScenario" | "observationSource" | "externalObservation" | "inspection" | "riskAssessment" | "trustedComputationReceipt" | "infrastructureIntelligenceAssessment" | "infrastructureIntelligenceReconciliation" | "operationalResponsePlan" | "decisionPackage" | "approvalAuthority" | "orpDecision" | "executionPlan" | "executionTask" | "predictiveFeatureSnapshot" | "predictiveOutcome" | "predictiveDatasetSnapshot" | "predictiveModelVersion" | "predictiveModelEvaluation" | "predictiveModelApproval" | "predictiveModelLifecycleEvent" | "executionTaskDependency" | "executionTaskBlockerEvent" | "executionScheduleRevision" | "executionEvidence" | "caseClosure"
+      modelProps: "department" | "jurisdiction" | "user" | "asset" | "publicReport" | "publicReportTriageAnalysis" | "policyDocument" | "approvedActionVersion" | "governedExecutionTemplate" | "governedExecutionTaskTemplate" | "policyRule" | "case" | "caseResourceEstimate" | "portfolioScenario" | "observationSource" | "externalObservation" | "inspection" | "riskAssessment" | "trustedComputationReceipt" | "integrityChainHead" | "integrityAuditEvent" | "infrastructureIntelligenceAssessment" | "infrastructureIntelligenceReconciliation" | "operationalResponsePlan" | "decisionPackage" | "approvalAuthority" | "orpDecision" | "executionPlan" | "executionTask" | "predictiveFeatureSnapshot" | "predictiveOutcome" | "predictiveDatasetSnapshot" | "predictiveModelVersion" | "predictiveModelEvaluation" | "predictiveModelApproval" | "predictiveModelLifecycleEvent" | "executionTaskDependency" | "executionTaskBlockerEvent" | "executionScheduleRevision" | "executionEvidence" | "caseClosure"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -3120,6 +3152,154 @@ export namespace Prisma {
           count: {
             args: Prisma.TrustedComputationReceiptCountArgs<ExtArgs>
             result: $Utils.Optional<TrustedComputationReceiptCountAggregateOutputType> | number
+          }
+        }
+      }
+      IntegrityChainHead: {
+        payload: Prisma.$IntegrityChainHeadPayload<ExtArgs>
+        fields: Prisma.IntegrityChainHeadFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.IntegrityChainHeadFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IntegrityChainHeadPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.IntegrityChainHeadFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IntegrityChainHeadPayload>
+          }
+          findFirst: {
+            args: Prisma.IntegrityChainHeadFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IntegrityChainHeadPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.IntegrityChainHeadFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IntegrityChainHeadPayload>
+          }
+          findMany: {
+            args: Prisma.IntegrityChainHeadFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IntegrityChainHeadPayload>[]
+          }
+          create: {
+            args: Prisma.IntegrityChainHeadCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IntegrityChainHeadPayload>
+          }
+          createMany: {
+            args: Prisma.IntegrityChainHeadCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.IntegrityChainHeadCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IntegrityChainHeadPayload>[]
+          }
+          delete: {
+            args: Prisma.IntegrityChainHeadDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IntegrityChainHeadPayload>
+          }
+          update: {
+            args: Prisma.IntegrityChainHeadUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IntegrityChainHeadPayload>
+          }
+          deleteMany: {
+            args: Prisma.IntegrityChainHeadDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.IntegrityChainHeadUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.IntegrityChainHeadUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IntegrityChainHeadPayload>[]
+          }
+          upsert: {
+            args: Prisma.IntegrityChainHeadUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IntegrityChainHeadPayload>
+          }
+          aggregate: {
+            args: Prisma.IntegrityChainHeadAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateIntegrityChainHead>
+          }
+          groupBy: {
+            args: Prisma.IntegrityChainHeadGroupByArgs<ExtArgs>
+            result: $Utils.Optional<IntegrityChainHeadGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.IntegrityChainHeadCountArgs<ExtArgs>
+            result: $Utils.Optional<IntegrityChainHeadCountAggregateOutputType> | number
+          }
+        }
+      }
+      IntegrityAuditEvent: {
+        payload: Prisma.$IntegrityAuditEventPayload<ExtArgs>
+        fields: Prisma.IntegrityAuditEventFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.IntegrityAuditEventFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IntegrityAuditEventPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.IntegrityAuditEventFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IntegrityAuditEventPayload>
+          }
+          findFirst: {
+            args: Prisma.IntegrityAuditEventFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IntegrityAuditEventPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.IntegrityAuditEventFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IntegrityAuditEventPayload>
+          }
+          findMany: {
+            args: Prisma.IntegrityAuditEventFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IntegrityAuditEventPayload>[]
+          }
+          create: {
+            args: Prisma.IntegrityAuditEventCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IntegrityAuditEventPayload>
+          }
+          createMany: {
+            args: Prisma.IntegrityAuditEventCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.IntegrityAuditEventCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IntegrityAuditEventPayload>[]
+          }
+          delete: {
+            args: Prisma.IntegrityAuditEventDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IntegrityAuditEventPayload>
+          }
+          update: {
+            args: Prisma.IntegrityAuditEventUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IntegrityAuditEventPayload>
+          }
+          deleteMany: {
+            args: Prisma.IntegrityAuditEventDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.IntegrityAuditEventUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.IntegrityAuditEventUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IntegrityAuditEventPayload>[]
+          }
+          upsert: {
+            args: Prisma.IntegrityAuditEventUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IntegrityAuditEventPayload>
+          }
+          aggregate: {
+            args: Prisma.IntegrityAuditEventAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateIntegrityAuditEvent>
+          }
+          groupBy: {
+            args: Prisma.IntegrityAuditEventGroupByArgs<ExtArgs>
+            result: $Utils.Optional<IntegrityAuditEventGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.IntegrityAuditEventCountArgs<ExtArgs>
+            result: $Utils.Optional<IntegrityAuditEventCountAggregateOutputType> | number
           }
         }
       }
@@ -4718,6 +4898,8 @@ export namespace Prisma {
     inspection?: InspectionOmit
     riskAssessment?: RiskAssessmentOmit
     trustedComputationReceipt?: TrustedComputationReceiptOmit
+    integrityChainHead?: IntegrityChainHeadOmit
+    integrityAuditEvent?: IntegrityAuditEventOmit
     infrastructureIntelligenceAssessment?: InfrastructureIntelligenceAssessmentOmit
     infrastructureIntelligenceReconciliation?: InfrastructureIntelligenceReconciliationOmit
     operationalResponsePlan?: OperationalResponsePlanOmit
@@ -5924,6 +6106,37 @@ export namespace Prisma {
    */
   export type RiskAssessmentCountOutputTypeCountIntelligenceAssessmentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: InfrastructureIntelligenceAssessmentWhereInput
+  }
+
+
+  /**
+   * Count Type IntegrityChainHeadCountOutputType
+   */
+
+  export type IntegrityChainHeadCountOutputType = {
+    events: number
+  }
+
+  export type IntegrityChainHeadCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    events?: boolean | IntegrityChainHeadCountOutputTypeCountEventsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * IntegrityChainHeadCountOutputType without action
+   */
+  export type IntegrityChainHeadCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IntegrityChainHeadCountOutputType
+     */
+    select?: IntegrityChainHeadCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * IntegrityChainHeadCountOutputType without action
+   */
+  export type IntegrityChainHeadCountOutputTypeCountEventsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: IntegrityAuditEventWhereInput
   }
 
 
@@ -32250,6 +32463,2445 @@ export namespace Prisma {
 
 
   /**
+   * Model IntegrityChainHead
+   */
+
+  export type AggregateIntegrityChainHead = {
+    _count: IntegrityChainHeadCountAggregateOutputType | null
+    _avg: IntegrityChainHeadAvgAggregateOutputType | null
+    _sum: IntegrityChainHeadSumAggregateOutputType | null
+    _min: IntegrityChainHeadMinAggregateOutputType | null
+    _max: IntegrityChainHeadMaxAggregateOutputType | null
+  }
+
+  export type IntegrityChainHeadAvgAggregateOutputType = {
+    latestSequence: number | null
+  }
+
+  export type IntegrityChainHeadSumAggregateOutputType = {
+    latestSequence: number | null
+  }
+
+  export type IntegrityChainHeadMinAggregateOutputType = {
+    chainKey: string | null
+    chainVersion: string | null
+    departmentId: string | null
+    jurisdictionId: string | null
+    latestSequence: number | null
+    latestEventId: string | null
+    latestEventHash: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type IntegrityChainHeadMaxAggregateOutputType = {
+    chainKey: string | null
+    chainVersion: string | null
+    departmentId: string | null
+    jurisdictionId: string | null
+    latestSequence: number | null
+    latestEventId: string | null
+    latestEventHash: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type IntegrityChainHeadCountAggregateOutputType = {
+    chainKey: number
+    chainVersion: number
+    departmentId: number
+    jurisdictionId: number
+    latestSequence: number
+    latestEventId: number
+    latestEventHash: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type IntegrityChainHeadAvgAggregateInputType = {
+    latestSequence?: true
+  }
+
+  export type IntegrityChainHeadSumAggregateInputType = {
+    latestSequence?: true
+  }
+
+  export type IntegrityChainHeadMinAggregateInputType = {
+    chainKey?: true
+    chainVersion?: true
+    departmentId?: true
+    jurisdictionId?: true
+    latestSequence?: true
+    latestEventId?: true
+    latestEventHash?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type IntegrityChainHeadMaxAggregateInputType = {
+    chainKey?: true
+    chainVersion?: true
+    departmentId?: true
+    jurisdictionId?: true
+    latestSequence?: true
+    latestEventId?: true
+    latestEventHash?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type IntegrityChainHeadCountAggregateInputType = {
+    chainKey?: true
+    chainVersion?: true
+    departmentId?: true
+    jurisdictionId?: true
+    latestSequence?: true
+    latestEventId?: true
+    latestEventHash?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type IntegrityChainHeadAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which IntegrityChainHead to aggregate.
+     */
+    where?: IntegrityChainHeadWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of IntegrityChainHeads to fetch.
+     */
+    orderBy?: IntegrityChainHeadOrderByWithRelationInput | IntegrityChainHeadOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: IntegrityChainHeadWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` IntegrityChainHeads from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` IntegrityChainHeads.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned IntegrityChainHeads
+    **/
+    _count?: true | IntegrityChainHeadCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: IntegrityChainHeadAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: IntegrityChainHeadSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: IntegrityChainHeadMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: IntegrityChainHeadMaxAggregateInputType
+  }
+
+  export type GetIntegrityChainHeadAggregateType<T extends IntegrityChainHeadAggregateArgs> = {
+        [P in keyof T & keyof AggregateIntegrityChainHead]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateIntegrityChainHead[P]>
+      : GetScalarType<T[P], AggregateIntegrityChainHead[P]>
+  }
+
+
+
+
+  export type IntegrityChainHeadGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: IntegrityChainHeadWhereInput
+    orderBy?: IntegrityChainHeadOrderByWithAggregationInput | IntegrityChainHeadOrderByWithAggregationInput[]
+    by: IntegrityChainHeadScalarFieldEnum[] | IntegrityChainHeadScalarFieldEnum
+    having?: IntegrityChainHeadScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: IntegrityChainHeadCountAggregateInputType | true
+    _avg?: IntegrityChainHeadAvgAggregateInputType
+    _sum?: IntegrityChainHeadSumAggregateInputType
+    _min?: IntegrityChainHeadMinAggregateInputType
+    _max?: IntegrityChainHeadMaxAggregateInputType
+  }
+
+  export type IntegrityChainHeadGroupByOutputType = {
+    chainKey: string
+    chainVersion: string
+    departmentId: string | null
+    jurisdictionId: string | null
+    latestSequence: number
+    latestEventId: string | null
+    latestEventHash: string | null
+    createdAt: Date
+    updatedAt: Date
+    _count: IntegrityChainHeadCountAggregateOutputType | null
+    _avg: IntegrityChainHeadAvgAggregateOutputType | null
+    _sum: IntegrityChainHeadSumAggregateOutputType | null
+    _min: IntegrityChainHeadMinAggregateOutputType | null
+    _max: IntegrityChainHeadMaxAggregateOutputType | null
+  }
+
+  type GetIntegrityChainHeadGroupByPayload<T extends IntegrityChainHeadGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<IntegrityChainHeadGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof IntegrityChainHeadGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], IntegrityChainHeadGroupByOutputType[P]>
+            : GetScalarType<T[P], IntegrityChainHeadGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type IntegrityChainHeadSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    chainKey?: boolean
+    chainVersion?: boolean
+    departmentId?: boolean
+    jurisdictionId?: boolean
+    latestSequence?: boolean
+    latestEventId?: boolean
+    latestEventHash?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    events?: boolean | IntegrityChainHead$eventsArgs<ExtArgs>
+    _count?: boolean | IntegrityChainHeadCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["integrityChainHead"]>
+
+  export type IntegrityChainHeadSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    chainKey?: boolean
+    chainVersion?: boolean
+    departmentId?: boolean
+    jurisdictionId?: boolean
+    latestSequence?: boolean
+    latestEventId?: boolean
+    latestEventHash?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["integrityChainHead"]>
+
+  export type IntegrityChainHeadSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    chainKey?: boolean
+    chainVersion?: boolean
+    departmentId?: boolean
+    jurisdictionId?: boolean
+    latestSequence?: boolean
+    latestEventId?: boolean
+    latestEventHash?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["integrityChainHead"]>
+
+  export type IntegrityChainHeadSelectScalar = {
+    chainKey?: boolean
+    chainVersion?: boolean
+    departmentId?: boolean
+    jurisdictionId?: boolean
+    latestSequence?: boolean
+    latestEventId?: boolean
+    latestEventHash?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type IntegrityChainHeadOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"chainKey" | "chainVersion" | "departmentId" | "jurisdictionId" | "latestSequence" | "latestEventId" | "latestEventHash" | "createdAt" | "updatedAt", ExtArgs["result"]["integrityChainHead"]>
+  export type IntegrityChainHeadInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    events?: boolean | IntegrityChainHead$eventsArgs<ExtArgs>
+    _count?: boolean | IntegrityChainHeadCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type IntegrityChainHeadIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type IntegrityChainHeadIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $IntegrityChainHeadPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "IntegrityChainHead"
+    objects: {
+      events: Prisma.$IntegrityAuditEventPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      chainKey: string
+      chainVersion: string
+      departmentId: string | null
+      jurisdictionId: string | null
+      latestSequence: number
+      latestEventId: string | null
+      latestEventHash: string | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["integrityChainHead"]>
+    composites: {}
+  }
+
+  type IntegrityChainHeadGetPayload<S extends boolean | null | undefined | IntegrityChainHeadDefaultArgs> = $Result.GetResult<Prisma.$IntegrityChainHeadPayload, S>
+
+  type IntegrityChainHeadCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<IntegrityChainHeadFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: IntegrityChainHeadCountAggregateInputType | true
+    }
+
+  export interface IntegrityChainHeadDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['IntegrityChainHead'], meta: { name: 'IntegrityChainHead' } }
+    /**
+     * Find zero or one IntegrityChainHead that matches the filter.
+     * @param {IntegrityChainHeadFindUniqueArgs} args - Arguments to find a IntegrityChainHead
+     * @example
+     * // Get one IntegrityChainHead
+     * const integrityChainHead = await prisma.integrityChainHead.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends IntegrityChainHeadFindUniqueArgs>(args: SelectSubset<T, IntegrityChainHeadFindUniqueArgs<ExtArgs>>): Prisma__IntegrityChainHeadClient<$Result.GetResult<Prisma.$IntegrityChainHeadPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one IntegrityChainHead that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {IntegrityChainHeadFindUniqueOrThrowArgs} args - Arguments to find a IntegrityChainHead
+     * @example
+     * // Get one IntegrityChainHead
+     * const integrityChainHead = await prisma.integrityChainHead.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends IntegrityChainHeadFindUniqueOrThrowArgs>(args: SelectSubset<T, IntegrityChainHeadFindUniqueOrThrowArgs<ExtArgs>>): Prisma__IntegrityChainHeadClient<$Result.GetResult<Prisma.$IntegrityChainHeadPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first IntegrityChainHead that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IntegrityChainHeadFindFirstArgs} args - Arguments to find a IntegrityChainHead
+     * @example
+     * // Get one IntegrityChainHead
+     * const integrityChainHead = await prisma.integrityChainHead.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends IntegrityChainHeadFindFirstArgs>(args?: SelectSubset<T, IntegrityChainHeadFindFirstArgs<ExtArgs>>): Prisma__IntegrityChainHeadClient<$Result.GetResult<Prisma.$IntegrityChainHeadPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first IntegrityChainHead that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IntegrityChainHeadFindFirstOrThrowArgs} args - Arguments to find a IntegrityChainHead
+     * @example
+     * // Get one IntegrityChainHead
+     * const integrityChainHead = await prisma.integrityChainHead.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends IntegrityChainHeadFindFirstOrThrowArgs>(args?: SelectSubset<T, IntegrityChainHeadFindFirstOrThrowArgs<ExtArgs>>): Prisma__IntegrityChainHeadClient<$Result.GetResult<Prisma.$IntegrityChainHeadPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more IntegrityChainHeads that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IntegrityChainHeadFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all IntegrityChainHeads
+     * const integrityChainHeads = await prisma.integrityChainHead.findMany()
+     * 
+     * // Get first 10 IntegrityChainHeads
+     * const integrityChainHeads = await prisma.integrityChainHead.findMany({ take: 10 })
+     * 
+     * // Only select the `chainKey`
+     * const integrityChainHeadWithChainKeyOnly = await prisma.integrityChainHead.findMany({ select: { chainKey: true } })
+     * 
+     */
+    findMany<T extends IntegrityChainHeadFindManyArgs>(args?: SelectSubset<T, IntegrityChainHeadFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$IntegrityChainHeadPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a IntegrityChainHead.
+     * @param {IntegrityChainHeadCreateArgs} args - Arguments to create a IntegrityChainHead.
+     * @example
+     * // Create one IntegrityChainHead
+     * const IntegrityChainHead = await prisma.integrityChainHead.create({
+     *   data: {
+     *     // ... data to create a IntegrityChainHead
+     *   }
+     * })
+     * 
+     */
+    create<T extends IntegrityChainHeadCreateArgs>(args: SelectSubset<T, IntegrityChainHeadCreateArgs<ExtArgs>>): Prisma__IntegrityChainHeadClient<$Result.GetResult<Prisma.$IntegrityChainHeadPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many IntegrityChainHeads.
+     * @param {IntegrityChainHeadCreateManyArgs} args - Arguments to create many IntegrityChainHeads.
+     * @example
+     * // Create many IntegrityChainHeads
+     * const integrityChainHead = await prisma.integrityChainHead.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends IntegrityChainHeadCreateManyArgs>(args?: SelectSubset<T, IntegrityChainHeadCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many IntegrityChainHeads and returns the data saved in the database.
+     * @param {IntegrityChainHeadCreateManyAndReturnArgs} args - Arguments to create many IntegrityChainHeads.
+     * @example
+     * // Create many IntegrityChainHeads
+     * const integrityChainHead = await prisma.integrityChainHead.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many IntegrityChainHeads and only return the `chainKey`
+     * const integrityChainHeadWithChainKeyOnly = await prisma.integrityChainHead.createManyAndReturn({
+     *   select: { chainKey: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends IntegrityChainHeadCreateManyAndReturnArgs>(args?: SelectSubset<T, IntegrityChainHeadCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$IntegrityChainHeadPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a IntegrityChainHead.
+     * @param {IntegrityChainHeadDeleteArgs} args - Arguments to delete one IntegrityChainHead.
+     * @example
+     * // Delete one IntegrityChainHead
+     * const IntegrityChainHead = await prisma.integrityChainHead.delete({
+     *   where: {
+     *     // ... filter to delete one IntegrityChainHead
+     *   }
+     * })
+     * 
+     */
+    delete<T extends IntegrityChainHeadDeleteArgs>(args: SelectSubset<T, IntegrityChainHeadDeleteArgs<ExtArgs>>): Prisma__IntegrityChainHeadClient<$Result.GetResult<Prisma.$IntegrityChainHeadPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one IntegrityChainHead.
+     * @param {IntegrityChainHeadUpdateArgs} args - Arguments to update one IntegrityChainHead.
+     * @example
+     * // Update one IntegrityChainHead
+     * const integrityChainHead = await prisma.integrityChainHead.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends IntegrityChainHeadUpdateArgs>(args: SelectSubset<T, IntegrityChainHeadUpdateArgs<ExtArgs>>): Prisma__IntegrityChainHeadClient<$Result.GetResult<Prisma.$IntegrityChainHeadPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more IntegrityChainHeads.
+     * @param {IntegrityChainHeadDeleteManyArgs} args - Arguments to filter IntegrityChainHeads to delete.
+     * @example
+     * // Delete a few IntegrityChainHeads
+     * const { count } = await prisma.integrityChainHead.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends IntegrityChainHeadDeleteManyArgs>(args?: SelectSubset<T, IntegrityChainHeadDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more IntegrityChainHeads.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IntegrityChainHeadUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many IntegrityChainHeads
+     * const integrityChainHead = await prisma.integrityChainHead.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends IntegrityChainHeadUpdateManyArgs>(args: SelectSubset<T, IntegrityChainHeadUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more IntegrityChainHeads and returns the data updated in the database.
+     * @param {IntegrityChainHeadUpdateManyAndReturnArgs} args - Arguments to update many IntegrityChainHeads.
+     * @example
+     * // Update many IntegrityChainHeads
+     * const integrityChainHead = await prisma.integrityChainHead.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more IntegrityChainHeads and only return the `chainKey`
+     * const integrityChainHeadWithChainKeyOnly = await prisma.integrityChainHead.updateManyAndReturn({
+     *   select: { chainKey: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends IntegrityChainHeadUpdateManyAndReturnArgs>(args: SelectSubset<T, IntegrityChainHeadUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$IntegrityChainHeadPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one IntegrityChainHead.
+     * @param {IntegrityChainHeadUpsertArgs} args - Arguments to update or create a IntegrityChainHead.
+     * @example
+     * // Update or create a IntegrityChainHead
+     * const integrityChainHead = await prisma.integrityChainHead.upsert({
+     *   create: {
+     *     // ... data to create a IntegrityChainHead
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the IntegrityChainHead we want to update
+     *   }
+     * })
+     */
+    upsert<T extends IntegrityChainHeadUpsertArgs>(args: SelectSubset<T, IntegrityChainHeadUpsertArgs<ExtArgs>>): Prisma__IntegrityChainHeadClient<$Result.GetResult<Prisma.$IntegrityChainHeadPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of IntegrityChainHeads.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IntegrityChainHeadCountArgs} args - Arguments to filter IntegrityChainHeads to count.
+     * @example
+     * // Count the number of IntegrityChainHeads
+     * const count = await prisma.integrityChainHead.count({
+     *   where: {
+     *     // ... the filter for the IntegrityChainHeads we want to count
+     *   }
+     * })
+    **/
+    count<T extends IntegrityChainHeadCountArgs>(
+      args?: Subset<T, IntegrityChainHeadCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], IntegrityChainHeadCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a IntegrityChainHead.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IntegrityChainHeadAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends IntegrityChainHeadAggregateArgs>(args: Subset<T, IntegrityChainHeadAggregateArgs>): Prisma.PrismaPromise<GetIntegrityChainHeadAggregateType<T>>
+
+    /**
+     * Group by IntegrityChainHead.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IntegrityChainHeadGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends IntegrityChainHeadGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: IntegrityChainHeadGroupByArgs['orderBy'] }
+        : { orderBy?: IntegrityChainHeadGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, IntegrityChainHeadGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetIntegrityChainHeadGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the IntegrityChainHead model
+   */
+  readonly fields: IntegrityChainHeadFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for IntegrityChainHead.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__IntegrityChainHeadClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    events<T extends IntegrityChainHead$eventsArgs<ExtArgs> = {}>(args?: Subset<T, IntegrityChainHead$eventsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$IntegrityAuditEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the IntegrityChainHead model
+   */
+  interface IntegrityChainHeadFieldRefs {
+    readonly chainKey: FieldRef<"IntegrityChainHead", 'String'>
+    readonly chainVersion: FieldRef<"IntegrityChainHead", 'String'>
+    readonly departmentId: FieldRef<"IntegrityChainHead", 'String'>
+    readonly jurisdictionId: FieldRef<"IntegrityChainHead", 'String'>
+    readonly latestSequence: FieldRef<"IntegrityChainHead", 'Int'>
+    readonly latestEventId: FieldRef<"IntegrityChainHead", 'String'>
+    readonly latestEventHash: FieldRef<"IntegrityChainHead", 'String'>
+    readonly createdAt: FieldRef<"IntegrityChainHead", 'DateTime'>
+    readonly updatedAt: FieldRef<"IntegrityChainHead", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * IntegrityChainHead findUnique
+   */
+  export type IntegrityChainHeadFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IntegrityChainHead
+     */
+    select?: IntegrityChainHeadSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IntegrityChainHead
+     */
+    omit?: IntegrityChainHeadOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IntegrityChainHeadInclude<ExtArgs> | null
+    /**
+     * Filter, which IntegrityChainHead to fetch.
+     */
+    where: IntegrityChainHeadWhereUniqueInput
+  }
+
+  /**
+   * IntegrityChainHead findUniqueOrThrow
+   */
+  export type IntegrityChainHeadFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IntegrityChainHead
+     */
+    select?: IntegrityChainHeadSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IntegrityChainHead
+     */
+    omit?: IntegrityChainHeadOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IntegrityChainHeadInclude<ExtArgs> | null
+    /**
+     * Filter, which IntegrityChainHead to fetch.
+     */
+    where: IntegrityChainHeadWhereUniqueInput
+  }
+
+  /**
+   * IntegrityChainHead findFirst
+   */
+  export type IntegrityChainHeadFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IntegrityChainHead
+     */
+    select?: IntegrityChainHeadSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IntegrityChainHead
+     */
+    omit?: IntegrityChainHeadOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IntegrityChainHeadInclude<ExtArgs> | null
+    /**
+     * Filter, which IntegrityChainHead to fetch.
+     */
+    where?: IntegrityChainHeadWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of IntegrityChainHeads to fetch.
+     */
+    orderBy?: IntegrityChainHeadOrderByWithRelationInput | IntegrityChainHeadOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for IntegrityChainHeads.
+     */
+    cursor?: IntegrityChainHeadWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` IntegrityChainHeads from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` IntegrityChainHeads.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of IntegrityChainHeads.
+     */
+    distinct?: IntegrityChainHeadScalarFieldEnum | IntegrityChainHeadScalarFieldEnum[]
+  }
+
+  /**
+   * IntegrityChainHead findFirstOrThrow
+   */
+  export type IntegrityChainHeadFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IntegrityChainHead
+     */
+    select?: IntegrityChainHeadSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IntegrityChainHead
+     */
+    omit?: IntegrityChainHeadOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IntegrityChainHeadInclude<ExtArgs> | null
+    /**
+     * Filter, which IntegrityChainHead to fetch.
+     */
+    where?: IntegrityChainHeadWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of IntegrityChainHeads to fetch.
+     */
+    orderBy?: IntegrityChainHeadOrderByWithRelationInput | IntegrityChainHeadOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for IntegrityChainHeads.
+     */
+    cursor?: IntegrityChainHeadWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` IntegrityChainHeads from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` IntegrityChainHeads.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of IntegrityChainHeads.
+     */
+    distinct?: IntegrityChainHeadScalarFieldEnum | IntegrityChainHeadScalarFieldEnum[]
+  }
+
+  /**
+   * IntegrityChainHead findMany
+   */
+  export type IntegrityChainHeadFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IntegrityChainHead
+     */
+    select?: IntegrityChainHeadSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IntegrityChainHead
+     */
+    omit?: IntegrityChainHeadOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IntegrityChainHeadInclude<ExtArgs> | null
+    /**
+     * Filter, which IntegrityChainHeads to fetch.
+     */
+    where?: IntegrityChainHeadWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of IntegrityChainHeads to fetch.
+     */
+    orderBy?: IntegrityChainHeadOrderByWithRelationInput | IntegrityChainHeadOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing IntegrityChainHeads.
+     */
+    cursor?: IntegrityChainHeadWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` IntegrityChainHeads from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` IntegrityChainHeads.
+     */
+    skip?: number
+    distinct?: IntegrityChainHeadScalarFieldEnum | IntegrityChainHeadScalarFieldEnum[]
+  }
+
+  /**
+   * IntegrityChainHead create
+   */
+  export type IntegrityChainHeadCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IntegrityChainHead
+     */
+    select?: IntegrityChainHeadSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IntegrityChainHead
+     */
+    omit?: IntegrityChainHeadOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IntegrityChainHeadInclude<ExtArgs> | null
+    /**
+     * The data needed to create a IntegrityChainHead.
+     */
+    data: XOR<IntegrityChainHeadCreateInput, IntegrityChainHeadUncheckedCreateInput>
+  }
+
+  /**
+   * IntegrityChainHead createMany
+   */
+  export type IntegrityChainHeadCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many IntegrityChainHeads.
+     */
+    data: IntegrityChainHeadCreateManyInput | IntegrityChainHeadCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * IntegrityChainHead createManyAndReturn
+   */
+  export type IntegrityChainHeadCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IntegrityChainHead
+     */
+    select?: IntegrityChainHeadSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the IntegrityChainHead
+     */
+    omit?: IntegrityChainHeadOmit<ExtArgs> | null
+    /**
+     * The data used to create many IntegrityChainHeads.
+     */
+    data: IntegrityChainHeadCreateManyInput | IntegrityChainHeadCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * IntegrityChainHead update
+   */
+  export type IntegrityChainHeadUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IntegrityChainHead
+     */
+    select?: IntegrityChainHeadSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IntegrityChainHead
+     */
+    omit?: IntegrityChainHeadOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IntegrityChainHeadInclude<ExtArgs> | null
+    /**
+     * The data needed to update a IntegrityChainHead.
+     */
+    data: XOR<IntegrityChainHeadUpdateInput, IntegrityChainHeadUncheckedUpdateInput>
+    /**
+     * Choose, which IntegrityChainHead to update.
+     */
+    where: IntegrityChainHeadWhereUniqueInput
+  }
+
+  /**
+   * IntegrityChainHead updateMany
+   */
+  export type IntegrityChainHeadUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update IntegrityChainHeads.
+     */
+    data: XOR<IntegrityChainHeadUpdateManyMutationInput, IntegrityChainHeadUncheckedUpdateManyInput>
+    /**
+     * Filter which IntegrityChainHeads to update
+     */
+    where?: IntegrityChainHeadWhereInput
+    /**
+     * Limit how many IntegrityChainHeads to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * IntegrityChainHead updateManyAndReturn
+   */
+  export type IntegrityChainHeadUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IntegrityChainHead
+     */
+    select?: IntegrityChainHeadSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the IntegrityChainHead
+     */
+    omit?: IntegrityChainHeadOmit<ExtArgs> | null
+    /**
+     * The data used to update IntegrityChainHeads.
+     */
+    data: XOR<IntegrityChainHeadUpdateManyMutationInput, IntegrityChainHeadUncheckedUpdateManyInput>
+    /**
+     * Filter which IntegrityChainHeads to update
+     */
+    where?: IntegrityChainHeadWhereInput
+    /**
+     * Limit how many IntegrityChainHeads to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * IntegrityChainHead upsert
+   */
+  export type IntegrityChainHeadUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IntegrityChainHead
+     */
+    select?: IntegrityChainHeadSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IntegrityChainHead
+     */
+    omit?: IntegrityChainHeadOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IntegrityChainHeadInclude<ExtArgs> | null
+    /**
+     * The filter to search for the IntegrityChainHead to update in case it exists.
+     */
+    where: IntegrityChainHeadWhereUniqueInput
+    /**
+     * In case the IntegrityChainHead found by the `where` argument doesn't exist, create a new IntegrityChainHead with this data.
+     */
+    create: XOR<IntegrityChainHeadCreateInput, IntegrityChainHeadUncheckedCreateInput>
+    /**
+     * In case the IntegrityChainHead was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<IntegrityChainHeadUpdateInput, IntegrityChainHeadUncheckedUpdateInput>
+  }
+
+  /**
+   * IntegrityChainHead delete
+   */
+  export type IntegrityChainHeadDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IntegrityChainHead
+     */
+    select?: IntegrityChainHeadSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IntegrityChainHead
+     */
+    omit?: IntegrityChainHeadOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IntegrityChainHeadInclude<ExtArgs> | null
+    /**
+     * Filter which IntegrityChainHead to delete.
+     */
+    where: IntegrityChainHeadWhereUniqueInput
+  }
+
+  /**
+   * IntegrityChainHead deleteMany
+   */
+  export type IntegrityChainHeadDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which IntegrityChainHeads to delete
+     */
+    where?: IntegrityChainHeadWhereInput
+    /**
+     * Limit how many IntegrityChainHeads to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * IntegrityChainHead.events
+   */
+  export type IntegrityChainHead$eventsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IntegrityAuditEvent
+     */
+    select?: IntegrityAuditEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IntegrityAuditEvent
+     */
+    omit?: IntegrityAuditEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IntegrityAuditEventInclude<ExtArgs> | null
+    where?: IntegrityAuditEventWhereInput
+    orderBy?: IntegrityAuditEventOrderByWithRelationInput | IntegrityAuditEventOrderByWithRelationInput[]
+    cursor?: IntegrityAuditEventWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: IntegrityAuditEventScalarFieldEnum | IntegrityAuditEventScalarFieldEnum[]
+  }
+
+  /**
+   * IntegrityChainHead without action
+   */
+  export type IntegrityChainHeadDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IntegrityChainHead
+     */
+    select?: IntegrityChainHeadSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IntegrityChainHead
+     */
+    omit?: IntegrityChainHeadOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IntegrityChainHeadInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model IntegrityAuditEvent
+   */
+
+  export type AggregateIntegrityAuditEvent = {
+    _count: IntegrityAuditEventCountAggregateOutputType | null
+    _avg: IntegrityAuditEventAvgAggregateOutputType | null
+    _sum: IntegrityAuditEventSumAggregateOutputType | null
+    _min: IntegrityAuditEventMinAggregateOutputType | null
+    _max: IntegrityAuditEventMaxAggregateOutputType | null
+  }
+
+  export type IntegrityAuditEventAvgAggregateOutputType = {
+    sequenceNumber: number | null
+  }
+
+  export type IntegrityAuditEventSumAggregateOutputType = {
+    sequenceNumber: number | null
+  }
+
+  export type IntegrityAuditEventMinAggregateOutputType = {
+    id: string | null
+    chainKey: string | null
+    chainVersion: string | null
+    sequenceNumber: number | null
+    previousEventId: string | null
+    previousEventHash: string | null
+    eventHash: string | null
+    payloadHash: string | null
+    payloadContractVersion: string | null
+    eventType: string | null
+    actorUserId: string | null
+    actorRoleSnapshot: string | null
+    departmentId: string | null
+    jurisdictionId: string | null
+    resourceType: string | null
+    resourceId: string | null
+    sourceEventKey: string | null
+    occurredAt: Date | null
+    recordedAt: Date | null
+  }
+
+  export type IntegrityAuditEventMaxAggregateOutputType = {
+    id: string | null
+    chainKey: string | null
+    chainVersion: string | null
+    sequenceNumber: number | null
+    previousEventId: string | null
+    previousEventHash: string | null
+    eventHash: string | null
+    payloadHash: string | null
+    payloadContractVersion: string | null
+    eventType: string | null
+    actorUserId: string | null
+    actorRoleSnapshot: string | null
+    departmentId: string | null
+    jurisdictionId: string | null
+    resourceType: string | null
+    resourceId: string | null
+    sourceEventKey: string | null
+    occurredAt: Date | null
+    recordedAt: Date | null
+  }
+
+  export type IntegrityAuditEventCountAggregateOutputType = {
+    id: number
+    chainKey: number
+    chainVersion: number
+    sequenceNumber: number
+    previousEventId: number
+    previousEventHash: number
+    eventHash: number
+    payloadHash: number
+    payloadContractVersion: number
+    payload: number
+    eventType: number
+    actorUserId: number
+    actorRoleSnapshot: number
+    departmentId: number
+    jurisdictionId: number
+    resourceType: number
+    resourceId: number
+    sourceEventKey: number
+    occurredAt: number
+    recordedAt: number
+    _all: number
+  }
+
+
+  export type IntegrityAuditEventAvgAggregateInputType = {
+    sequenceNumber?: true
+  }
+
+  export type IntegrityAuditEventSumAggregateInputType = {
+    sequenceNumber?: true
+  }
+
+  export type IntegrityAuditEventMinAggregateInputType = {
+    id?: true
+    chainKey?: true
+    chainVersion?: true
+    sequenceNumber?: true
+    previousEventId?: true
+    previousEventHash?: true
+    eventHash?: true
+    payloadHash?: true
+    payloadContractVersion?: true
+    eventType?: true
+    actorUserId?: true
+    actorRoleSnapshot?: true
+    departmentId?: true
+    jurisdictionId?: true
+    resourceType?: true
+    resourceId?: true
+    sourceEventKey?: true
+    occurredAt?: true
+    recordedAt?: true
+  }
+
+  export type IntegrityAuditEventMaxAggregateInputType = {
+    id?: true
+    chainKey?: true
+    chainVersion?: true
+    sequenceNumber?: true
+    previousEventId?: true
+    previousEventHash?: true
+    eventHash?: true
+    payloadHash?: true
+    payloadContractVersion?: true
+    eventType?: true
+    actorUserId?: true
+    actorRoleSnapshot?: true
+    departmentId?: true
+    jurisdictionId?: true
+    resourceType?: true
+    resourceId?: true
+    sourceEventKey?: true
+    occurredAt?: true
+    recordedAt?: true
+  }
+
+  export type IntegrityAuditEventCountAggregateInputType = {
+    id?: true
+    chainKey?: true
+    chainVersion?: true
+    sequenceNumber?: true
+    previousEventId?: true
+    previousEventHash?: true
+    eventHash?: true
+    payloadHash?: true
+    payloadContractVersion?: true
+    payload?: true
+    eventType?: true
+    actorUserId?: true
+    actorRoleSnapshot?: true
+    departmentId?: true
+    jurisdictionId?: true
+    resourceType?: true
+    resourceId?: true
+    sourceEventKey?: true
+    occurredAt?: true
+    recordedAt?: true
+    _all?: true
+  }
+
+  export type IntegrityAuditEventAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which IntegrityAuditEvent to aggregate.
+     */
+    where?: IntegrityAuditEventWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of IntegrityAuditEvents to fetch.
+     */
+    orderBy?: IntegrityAuditEventOrderByWithRelationInput | IntegrityAuditEventOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: IntegrityAuditEventWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` IntegrityAuditEvents from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` IntegrityAuditEvents.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned IntegrityAuditEvents
+    **/
+    _count?: true | IntegrityAuditEventCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: IntegrityAuditEventAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: IntegrityAuditEventSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: IntegrityAuditEventMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: IntegrityAuditEventMaxAggregateInputType
+  }
+
+  export type GetIntegrityAuditEventAggregateType<T extends IntegrityAuditEventAggregateArgs> = {
+        [P in keyof T & keyof AggregateIntegrityAuditEvent]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateIntegrityAuditEvent[P]>
+      : GetScalarType<T[P], AggregateIntegrityAuditEvent[P]>
+  }
+
+
+
+
+  export type IntegrityAuditEventGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: IntegrityAuditEventWhereInput
+    orderBy?: IntegrityAuditEventOrderByWithAggregationInput | IntegrityAuditEventOrderByWithAggregationInput[]
+    by: IntegrityAuditEventScalarFieldEnum[] | IntegrityAuditEventScalarFieldEnum
+    having?: IntegrityAuditEventScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: IntegrityAuditEventCountAggregateInputType | true
+    _avg?: IntegrityAuditEventAvgAggregateInputType
+    _sum?: IntegrityAuditEventSumAggregateInputType
+    _min?: IntegrityAuditEventMinAggregateInputType
+    _max?: IntegrityAuditEventMaxAggregateInputType
+  }
+
+  export type IntegrityAuditEventGroupByOutputType = {
+    id: string
+    chainKey: string
+    chainVersion: string
+    sequenceNumber: number
+    previousEventId: string | null
+    previousEventHash: string | null
+    eventHash: string
+    payloadHash: string
+    payloadContractVersion: string
+    payload: JsonValue
+    eventType: string
+    actorUserId: string | null
+    actorRoleSnapshot: string | null
+    departmentId: string | null
+    jurisdictionId: string | null
+    resourceType: string
+    resourceId: string
+    sourceEventKey: string
+    occurredAt: Date
+    recordedAt: Date
+    _count: IntegrityAuditEventCountAggregateOutputType | null
+    _avg: IntegrityAuditEventAvgAggregateOutputType | null
+    _sum: IntegrityAuditEventSumAggregateOutputType | null
+    _min: IntegrityAuditEventMinAggregateOutputType | null
+    _max: IntegrityAuditEventMaxAggregateOutputType | null
+  }
+
+  type GetIntegrityAuditEventGroupByPayload<T extends IntegrityAuditEventGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<IntegrityAuditEventGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof IntegrityAuditEventGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], IntegrityAuditEventGroupByOutputType[P]>
+            : GetScalarType<T[P], IntegrityAuditEventGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type IntegrityAuditEventSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    chainKey?: boolean
+    chainVersion?: boolean
+    sequenceNumber?: boolean
+    previousEventId?: boolean
+    previousEventHash?: boolean
+    eventHash?: boolean
+    payloadHash?: boolean
+    payloadContractVersion?: boolean
+    payload?: boolean
+    eventType?: boolean
+    actorUserId?: boolean
+    actorRoleSnapshot?: boolean
+    departmentId?: boolean
+    jurisdictionId?: boolean
+    resourceType?: boolean
+    resourceId?: boolean
+    sourceEventKey?: boolean
+    occurredAt?: boolean
+    recordedAt?: boolean
+    chain?: boolean | IntegrityChainHeadDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["integrityAuditEvent"]>
+
+  export type IntegrityAuditEventSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    chainKey?: boolean
+    chainVersion?: boolean
+    sequenceNumber?: boolean
+    previousEventId?: boolean
+    previousEventHash?: boolean
+    eventHash?: boolean
+    payloadHash?: boolean
+    payloadContractVersion?: boolean
+    payload?: boolean
+    eventType?: boolean
+    actorUserId?: boolean
+    actorRoleSnapshot?: boolean
+    departmentId?: boolean
+    jurisdictionId?: boolean
+    resourceType?: boolean
+    resourceId?: boolean
+    sourceEventKey?: boolean
+    occurredAt?: boolean
+    recordedAt?: boolean
+    chain?: boolean | IntegrityChainHeadDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["integrityAuditEvent"]>
+
+  export type IntegrityAuditEventSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    chainKey?: boolean
+    chainVersion?: boolean
+    sequenceNumber?: boolean
+    previousEventId?: boolean
+    previousEventHash?: boolean
+    eventHash?: boolean
+    payloadHash?: boolean
+    payloadContractVersion?: boolean
+    payload?: boolean
+    eventType?: boolean
+    actorUserId?: boolean
+    actorRoleSnapshot?: boolean
+    departmentId?: boolean
+    jurisdictionId?: boolean
+    resourceType?: boolean
+    resourceId?: boolean
+    sourceEventKey?: boolean
+    occurredAt?: boolean
+    recordedAt?: boolean
+    chain?: boolean | IntegrityChainHeadDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["integrityAuditEvent"]>
+
+  export type IntegrityAuditEventSelectScalar = {
+    id?: boolean
+    chainKey?: boolean
+    chainVersion?: boolean
+    sequenceNumber?: boolean
+    previousEventId?: boolean
+    previousEventHash?: boolean
+    eventHash?: boolean
+    payloadHash?: boolean
+    payloadContractVersion?: boolean
+    payload?: boolean
+    eventType?: boolean
+    actorUserId?: boolean
+    actorRoleSnapshot?: boolean
+    departmentId?: boolean
+    jurisdictionId?: boolean
+    resourceType?: boolean
+    resourceId?: boolean
+    sourceEventKey?: boolean
+    occurredAt?: boolean
+    recordedAt?: boolean
+  }
+
+  export type IntegrityAuditEventOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "chainKey" | "chainVersion" | "sequenceNumber" | "previousEventId" | "previousEventHash" | "eventHash" | "payloadHash" | "payloadContractVersion" | "payload" | "eventType" | "actorUserId" | "actorRoleSnapshot" | "departmentId" | "jurisdictionId" | "resourceType" | "resourceId" | "sourceEventKey" | "occurredAt" | "recordedAt", ExtArgs["result"]["integrityAuditEvent"]>
+  export type IntegrityAuditEventInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    chain?: boolean | IntegrityChainHeadDefaultArgs<ExtArgs>
+  }
+  export type IntegrityAuditEventIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    chain?: boolean | IntegrityChainHeadDefaultArgs<ExtArgs>
+  }
+  export type IntegrityAuditEventIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    chain?: boolean | IntegrityChainHeadDefaultArgs<ExtArgs>
+  }
+
+  export type $IntegrityAuditEventPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "IntegrityAuditEvent"
+    objects: {
+      chain: Prisma.$IntegrityChainHeadPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      chainKey: string
+      chainVersion: string
+      sequenceNumber: number
+      previousEventId: string | null
+      previousEventHash: string | null
+      eventHash: string
+      payloadHash: string
+      payloadContractVersion: string
+      payload: Prisma.JsonValue
+      eventType: string
+      actorUserId: string | null
+      actorRoleSnapshot: string | null
+      departmentId: string | null
+      jurisdictionId: string | null
+      resourceType: string
+      resourceId: string
+      sourceEventKey: string
+      occurredAt: Date
+      recordedAt: Date
+    }, ExtArgs["result"]["integrityAuditEvent"]>
+    composites: {}
+  }
+
+  type IntegrityAuditEventGetPayload<S extends boolean | null | undefined | IntegrityAuditEventDefaultArgs> = $Result.GetResult<Prisma.$IntegrityAuditEventPayload, S>
+
+  type IntegrityAuditEventCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<IntegrityAuditEventFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: IntegrityAuditEventCountAggregateInputType | true
+    }
+
+  export interface IntegrityAuditEventDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['IntegrityAuditEvent'], meta: { name: 'IntegrityAuditEvent' } }
+    /**
+     * Find zero or one IntegrityAuditEvent that matches the filter.
+     * @param {IntegrityAuditEventFindUniqueArgs} args - Arguments to find a IntegrityAuditEvent
+     * @example
+     * // Get one IntegrityAuditEvent
+     * const integrityAuditEvent = await prisma.integrityAuditEvent.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends IntegrityAuditEventFindUniqueArgs>(args: SelectSubset<T, IntegrityAuditEventFindUniqueArgs<ExtArgs>>): Prisma__IntegrityAuditEventClient<$Result.GetResult<Prisma.$IntegrityAuditEventPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one IntegrityAuditEvent that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {IntegrityAuditEventFindUniqueOrThrowArgs} args - Arguments to find a IntegrityAuditEvent
+     * @example
+     * // Get one IntegrityAuditEvent
+     * const integrityAuditEvent = await prisma.integrityAuditEvent.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends IntegrityAuditEventFindUniqueOrThrowArgs>(args: SelectSubset<T, IntegrityAuditEventFindUniqueOrThrowArgs<ExtArgs>>): Prisma__IntegrityAuditEventClient<$Result.GetResult<Prisma.$IntegrityAuditEventPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first IntegrityAuditEvent that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IntegrityAuditEventFindFirstArgs} args - Arguments to find a IntegrityAuditEvent
+     * @example
+     * // Get one IntegrityAuditEvent
+     * const integrityAuditEvent = await prisma.integrityAuditEvent.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends IntegrityAuditEventFindFirstArgs>(args?: SelectSubset<T, IntegrityAuditEventFindFirstArgs<ExtArgs>>): Prisma__IntegrityAuditEventClient<$Result.GetResult<Prisma.$IntegrityAuditEventPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first IntegrityAuditEvent that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IntegrityAuditEventFindFirstOrThrowArgs} args - Arguments to find a IntegrityAuditEvent
+     * @example
+     * // Get one IntegrityAuditEvent
+     * const integrityAuditEvent = await prisma.integrityAuditEvent.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends IntegrityAuditEventFindFirstOrThrowArgs>(args?: SelectSubset<T, IntegrityAuditEventFindFirstOrThrowArgs<ExtArgs>>): Prisma__IntegrityAuditEventClient<$Result.GetResult<Prisma.$IntegrityAuditEventPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more IntegrityAuditEvents that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IntegrityAuditEventFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all IntegrityAuditEvents
+     * const integrityAuditEvents = await prisma.integrityAuditEvent.findMany()
+     * 
+     * // Get first 10 IntegrityAuditEvents
+     * const integrityAuditEvents = await prisma.integrityAuditEvent.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const integrityAuditEventWithIdOnly = await prisma.integrityAuditEvent.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends IntegrityAuditEventFindManyArgs>(args?: SelectSubset<T, IntegrityAuditEventFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$IntegrityAuditEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a IntegrityAuditEvent.
+     * @param {IntegrityAuditEventCreateArgs} args - Arguments to create a IntegrityAuditEvent.
+     * @example
+     * // Create one IntegrityAuditEvent
+     * const IntegrityAuditEvent = await prisma.integrityAuditEvent.create({
+     *   data: {
+     *     // ... data to create a IntegrityAuditEvent
+     *   }
+     * })
+     * 
+     */
+    create<T extends IntegrityAuditEventCreateArgs>(args: SelectSubset<T, IntegrityAuditEventCreateArgs<ExtArgs>>): Prisma__IntegrityAuditEventClient<$Result.GetResult<Prisma.$IntegrityAuditEventPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many IntegrityAuditEvents.
+     * @param {IntegrityAuditEventCreateManyArgs} args - Arguments to create many IntegrityAuditEvents.
+     * @example
+     * // Create many IntegrityAuditEvents
+     * const integrityAuditEvent = await prisma.integrityAuditEvent.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends IntegrityAuditEventCreateManyArgs>(args?: SelectSubset<T, IntegrityAuditEventCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many IntegrityAuditEvents and returns the data saved in the database.
+     * @param {IntegrityAuditEventCreateManyAndReturnArgs} args - Arguments to create many IntegrityAuditEvents.
+     * @example
+     * // Create many IntegrityAuditEvents
+     * const integrityAuditEvent = await prisma.integrityAuditEvent.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many IntegrityAuditEvents and only return the `id`
+     * const integrityAuditEventWithIdOnly = await prisma.integrityAuditEvent.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends IntegrityAuditEventCreateManyAndReturnArgs>(args?: SelectSubset<T, IntegrityAuditEventCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$IntegrityAuditEventPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a IntegrityAuditEvent.
+     * @param {IntegrityAuditEventDeleteArgs} args - Arguments to delete one IntegrityAuditEvent.
+     * @example
+     * // Delete one IntegrityAuditEvent
+     * const IntegrityAuditEvent = await prisma.integrityAuditEvent.delete({
+     *   where: {
+     *     // ... filter to delete one IntegrityAuditEvent
+     *   }
+     * })
+     * 
+     */
+    delete<T extends IntegrityAuditEventDeleteArgs>(args: SelectSubset<T, IntegrityAuditEventDeleteArgs<ExtArgs>>): Prisma__IntegrityAuditEventClient<$Result.GetResult<Prisma.$IntegrityAuditEventPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one IntegrityAuditEvent.
+     * @param {IntegrityAuditEventUpdateArgs} args - Arguments to update one IntegrityAuditEvent.
+     * @example
+     * // Update one IntegrityAuditEvent
+     * const integrityAuditEvent = await prisma.integrityAuditEvent.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends IntegrityAuditEventUpdateArgs>(args: SelectSubset<T, IntegrityAuditEventUpdateArgs<ExtArgs>>): Prisma__IntegrityAuditEventClient<$Result.GetResult<Prisma.$IntegrityAuditEventPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more IntegrityAuditEvents.
+     * @param {IntegrityAuditEventDeleteManyArgs} args - Arguments to filter IntegrityAuditEvents to delete.
+     * @example
+     * // Delete a few IntegrityAuditEvents
+     * const { count } = await prisma.integrityAuditEvent.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends IntegrityAuditEventDeleteManyArgs>(args?: SelectSubset<T, IntegrityAuditEventDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more IntegrityAuditEvents.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IntegrityAuditEventUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many IntegrityAuditEvents
+     * const integrityAuditEvent = await prisma.integrityAuditEvent.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends IntegrityAuditEventUpdateManyArgs>(args: SelectSubset<T, IntegrityAuditEventUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more IntegrityAuditEvents and returns the data updated in the database.
+     * @param {IntegrityAuditEventUpdateManyAndReturnArgs} args - Arguments to update many IntegrityAuditEvents.
+     * @example
+     * // Update many IntegrityAuditEvents
+     * const integrityAuditEvent = await prisma.integrityAuditEvent.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more IntegrityAuditEvents and only return the `id`
+     * const integrityAuditEventWithIdOnly = await prisma.integrityAuditEvent.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends IntegrityAuditEventUpdateManyAndReturnArgs>(args: SelectSubset<T, IntegrityAuditEventUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$IntegrityAuditEventPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one IntegrityAuditEvent.
+     * @param {IntegrityAuditEventUpsertArgs} args - Arguments to update or create a IntegrityAuditEvent.
+     * @example
+     * // Update or create a IntegrityAuditEvent
+     * const integrityAuditEvent = await prisma.integrityAuditEvent.upsert({
+     *   create: {
+     *     // ... data to create a IntegrityAuditEvent
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the IntegrityAuditEvent we want to update
+     *   }
+     * })
+     */
+    upsert<T extends IntegrityAuditEventUpsertArgs>(args: SelectSubset<T, IntegrityAuditEventUpsertArgs<ExtArgs>>): Prisma__IntegrityAuditEventClient<$Result.GetResult<Prisma.$IntegrityAuditEventPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of IntegrityAuditEvents.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IntegrityAuditEventCountArgs} args - Arguments to filter IntegrityAuditEvents to count.
+     * @example
+     * // Count the number of IntegrityAuditEvents
+     * const count = await prisma.integrityAuditEvent.count({
+     *   where: {
+     *     // ... the filter for the IntegrityAuditEvents we want to count
+     *   }
+     * })
+    **/
+    count<T extends IntegrityAuditEventCountArgs>(
+      args?: Subset<T, IntegrityAuditEventCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], IntegrityAuditEventCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a IntegrityAuditEvent.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IntegrityAuditEventAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends IntegrityAuditEventAggregateArgs>(args: Subset<T, IntegrityAuditEventAggregateArgs>): Prisma.PrismaPromise<GetIntegrityAuditEventAggregateType<T>>
+
+    /**
+     * Group by IntegrityAuditEvent.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IntegrityAuditEventGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends IntegrityAuditEventGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: IntegrityAuditEventGroupByArgs['orderBy'] }
+        : { orderBy?: IntegrityAuditEventGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, IntegrityAuditEventGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetIntegrityAuditEventGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the IntegrityAuditEvent model
+   */
+  readonly fields: IntegrityAuditEventFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for IntegrityAuditEvent.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__IntegrityAuditEventClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    chain<T extends IntegrityChainHeadDefaultArgs<ExtArgs> = {}>(args?: Subset<T, IntegrityChainHeadDefaultArgs<ExtArgs>>): Prisma__IntegrityChainHeadClient<$Result.GetResult<Prisma.$IntegrityChainHeadPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the IntegrityAuditEvent model
+   */
+  interface IntegrityAuditEventFieldRefs {
+    readonly id: FieldRef<"IntegrityAuditEvent", 'String'>
+    readonly chainKey: FieldRef<"IntegrityAuditEvent", 'String'>
+    readonly chainVersion: FieldRef<"IntegrityAuditEvent", 'String'>
+    readonly sequenceNumber: FieldRef<"IntegrityAuditEvent", 'Int'>
+    readonly previousEventId: FieldRef<"IntegrityAuditEvent", 'String'>
+    readonly previousEventHash: FieldRef<"IntegrityAuditEvent", 'String'>
+    readonly eventHash: FieldRef<"IntegrityAuditEvent", 'String'>
+    readonly payloadHash: FieldRef<"IntegrityAuditEvent", 'String'>
+    readonly payloadContractVersion: FieldRef<"IntegrityAuditEvent", 'String'>
+    readonly payload: FieldRef<"IntegrityAuditEvent", 'Json'>
+    readonly eventType: FieldRef<"IntegrityAuditEvent", 'String'>
+    readonly actorUserId: FieldRef<"IntegrityAuditEvent", 'String'>
+    readonly actorRoleSnapshot: FieldRef<"IntegrityAuditEvent", 'String'>
+    readonly departmentId: FieldRef<"IntegrityAuditEvent", 'String'>
+    readonly jurisdictionId: FieldRef<"IntegrityAuditEvent", 'String'>
+    readonly resourceType: FieldRef<"IntegrityAuditEvent", 'String'>
+    readonly resourceId: FieldRef<"IntegrityAuditEvent", 'String'>
+    readonly sourceEventKey: FieldRef<"IntegrityAuditEvent", 'String'>
+    readonly occurredAt: FieldRef<"IntegrityAuditEvent", 'DateTime'>
+    readonly recordedAt: FieldRef<"IntegrityAuditEvent", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * IntegrityAuditEvent findUnique
+   */
+  export type IntegrityAuditEventFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IntegrityAuditEvent
+     */
+    select?: IntegrityAuditEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IntegrityAuditEvent
+     */
+    omit?: IntegrityAuditEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IntegrityAuditEventInclude<ExtArgs> | null
+    /**
+     * Filter, which IntegrityAuditEvent to fetch.
+     */
+    where: IntegrityAuditEventWhereUniqueInput
+  }
+
+  /**
+   * IntegrityAuditEvent findUniqueOrThrow
+   */
+  export type IntegrityAuditEventFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IntegrityAuditEvent
+     */
+    select?: IntegrityAuditEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IntegrityAuditEvent
+     */
+    omit?: IntegrityAuditEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IntegrityAuditEventInclude<ExtArgs> | null
+    /**
+     * Filter, which IntegrityAuditEvent to fetch.
+     */
+    where: IntegrityAuditEventWhereUniqueInput
+  }
+
+  /**
+   * IntegrityAuditEvent findFirst
+   */
+  export type IntegrityAuditEventFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IntegrityAuditEvent
+     */
+    select?: IntegrityAuditEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IntegrityAuditEvent
+     */
+    omit?: IntegrityAuditEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IntegrityAuditEventInclude<ExtArgs> | null
+    /**
+     * Filter, which IntegrityAuditEvent to fetch.
+     */
+    where?: IntegrityAuditEventWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of IntegrityAuditEvents to fetch.
+     */
+    orderBy?: IntegrityAuditEventOrderByWithRelationInput | IntegrityAuditEventOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for IntegrityAuditEvents.
+     */
+    cursor?: IntegrityAuditEventWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` IntegrityAuditEvents from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` IntegrityAuditEvents.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of IntegrityAuditEvents.
+     */
+    distinct?: IntegrityAuditEventScalarFieldEnum | IntegrityAuditEventScalarFieldEnum[]
+  }
+
+  /**
+   * IntegrityAuditEvent findFirstOrThrow
+   */
+  export type IntegrityAuditEventFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IntegrityAuditEvent
+     */
+    select?: IntegrityAuditEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IntegrityAuditEvent
+     */
+    omit?: IntegrityAuditEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IntegrityAuditEventInclude<ExtArgs> | null
+    /**
+     * Filter, which IntegrityAuditEvent to fetch.
+     */
+    where?: IntegrityAuditEventWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of IntegrityAuditEvents to fetch.
+     */
+    orderBy?: IntegrityAuditEventOrderByWithRelationInput | IntegrityAuditEventOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for IntegrityAuditEvents.
+     */
+    cursor?: IntegrityAuditEventWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` IntegrityAuditEvents from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` IntegrityAuditEvents.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of IntegrityAuditEvents.
+     */
+    distinct?: IntegrityAuditEventScalarFieldEnum | IntegrityAuditEventScalarFieldEnum[]
+  }
+
+  /**
+   * IntegrityAuditEvent findMany
+   */
+  export type IntegrityAuditEventFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IntegrityAuditEvent
+     */
+    select?: IntegrityAuditEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IntegrityAuditEvent
+     */
+    omit?: IntegrityAuditEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IntegrityAuditEventInclude<ExtArgs> | null
+    /**
+     * Filter, which IntegrityAuditEvents to fetch.
+     */
+    where?: IntegrityAuditEventWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of IntegrityAuditEvents to fetch.
+     */
+    orderBy?: IntegrityAuditEventOrderByWithRelationInput | IntegrityAuditEventOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing IntegrityAuditEvents.
+     */
+    cursor?: IntegrityAuditEventWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` IntegrityAuditEvents from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` IntegrityAuditEvents.
+     */
+    skip?: number
+    distinct?: IntegrityAuditEventScalarFieldEnum | IntegrityAuditEventScalarFieldEnum[]
+  }
+
+  /**
+   * IntegrityAuditEvent create
+   */
+  export type IntegrityAuditEventCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IntegrityAuditEvent
+     */
+    select?: IntegrityAuditEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IntegrityAuditEvent
+     */
+    omit?: IntegrityAuditEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IntegrityAuditEventInclude<ExtArgs> | null
+    /**
+     * The data needed to create a IntegrityAuditEvent.
+     */
+    data: XOR<IntegrityAuditEventCreateInput, IntegrityAuditEventUncheckedCreateInput>
+  }
+
+  /**
+   * IntegrityAuditEvent createMany
+   */
+  export type IntegrityAuditEventCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many IntegrityAuditEvents.
+     */
+    data: IntegrityAuditEventCreateManyInput | IntegrityAuditEventCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * IntegrityAuditEvent createManyAndReturn
+   */
+  export type IntegrityAuditEventCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IntegrityAuditEvent
+     */
+    select?: IntegrityAuditEventSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the IntegrityAuditEvent
+     */
+    omit?: IntegrityAuditEventOmit<ExtArgs> | null
+    /**
+     * The data used to create many IntegrityAuditEvents.
+     */
+    data: IntegrityAuditEventCreateManyInput | IntegrityAuditEventCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IntegrityAuditEventIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * IntegrityAuditEvent update
+   */
+  export type IntegrityAuditEventUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IntegrityAuditEvent
+     */
+    select?: IntegrityAuditEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IntegrityAuditEvent
+     */
+    omit?: IntegrityAuditEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IntegrityAuditEventInclude<ExtArgs> | null
+    /**
+     * The data needed to update a IntegrityAuditEvent.
+     */
+    data: XOR<IntegrityAuditEventUpdateInput, IntegrityAuditEventUncheckedUpdateInput>
+    /**
+     * Choose, which IntegrityAuditEvent to update.
+     */
+    where: IntegrityAuditEventWhereUniqueInput
+  }
+
+  /**
+   * IntegrityAuditEvent updateMany
+   */
+  export type IntegrityAuditEventUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update IntegrityAuditEvents.
+     */
+    data: XOR<IntegrityAuditEventUpdateManyMutationInput, IntegrityAuditEventUncheckedUpdateManyInput>
+    /**
+     * Filter which IntegrityAuditEvents to update
+     */
+    where?: IntegrityAuditEventWhereInput
+    /**
+     * Limit how many IntegrityAuditEvents to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * IntegrityAuditEvent updateManyAndReturn
+   */
+  export type IntegrityAuditEventUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IntegrityAuditEvent
+     */
+    select?: IntegrityAuditEventSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the IntegrityAuditEvent
+     */
+    omit?: IntegrityAuditEventOmit<ExtArgs> | null
+    /**
+     * The data used to update IntegrityAuditEvents.
+     */
+    data: XOR<IntegrityAuditEventUpdateManyMutationInput, IntegrityAuditEventUncheckedUpdateManyInput>
+    /**
+     * Filter which IntegrityAuditEvents to update
+     */
+    where?: IntegrityAuditEventWhereInput
+    /**
+     * Limit how many IntegrityAuditEvents to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IntegrityAuditEventIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * IntegrityAuditEvent upsert
+   */
+  export type IntegrityAuditEventUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IntegrityAuditEvent
+     */
+    select?: IntegrityAuditEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IntegrityAuditEvent
+     */
+    omit?: IntegrityAuditEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IntegrityAuditEventInclude<ExtArgs> | null
+    /**
+     * The filter to search for the IntegrityAuditEvent to update in case it exists.
+     */
+    where: IntegrityAuditEventWhereUniqueInput
+    /**
+     * In case the IntegrityAuditEvent found by the `where` argument doesn't exist, create a new IntegrityAuditEvent with this data.
+     */
+    create: XOR<IntegrityAuditEventCreateInput, IntegrityAuditEventUncheckedCreateInput>
+    /**
+     * In case the IntegrityAuditEvent was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<IntegrityAuditEventUpdateInput, IntegrityAuditEventUncheckedUpdateInput>
+  }
+
+  /**
+   * IntegrityAuditEvent delete
+   */
+  export type IntegrityAuditEventDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IntegrityAuditEvent
+     */
+    select?: IntegrityAuditEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IntegrityAuditEvent
+     */
+    omit?: IntegrityAuditEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IntegrityAuditEventInclude<ExtArgs> | null
+    /**
+     * Filter which IntegrityAuditEvent to delete.
+     */
+    where: IntegrityAuditEventWhereUniqueInput
+  }
+
+  /**
+   * IntegrityAuditEvent deleteMany
+   */
+  export type IntegrityAuditEventDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which IntegrityAuditEvents to delete
+     */
+    where?: IntegrityAuditEventWhereInput
+    /**
+     * Limit how many IntegrityAuditEvents to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * IntegrityAuditEvent without action
+   */
+  export type IntegrityAuditEventDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IntegrityAuditEvent
+     */
+    select?: IntegrityAuditEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IntegrityAuditEvent
+     */
+    omit?: IntegrityAuditEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IntegrityAuditEventInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Model InfrastructureIntelligenceAssessment
    */
 
@@ -58143,6 +60795,47 @@ export namespace Prisma {
   export type TrustedComputationReceiptScalarFieldEnum = (typeof TrustedComputationReceiptScalarFieldEnum)[keyof typeof TrustedComputationReceiptScalarFieldEnum]
 
 
+  export const IntegrityChainHeadScalarFieldEnum: {
+    chainKey: 'chainKey',
+    chainVersion: 'chainVersion',
+    departmentId: 'departmentId',
+    jurisdictionId: 'jurisdictionId',
+    latestSequence: 'latestSequence',
+    latestEventId: 'latestEventId',
+    latestEventHash: 'latestEventHash',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type IntegrityChainHeadScalarFieldEnum = (typeof IntegrityChainHeadScalarFieldEnum)[keyof typeof IntegrityChainHeadScalarFieldEnum]
+
+
+  export const IntegrityAuditEventScalarFieldEnum: {
+    id: 'id',
+    chainKey: 'chainKey',
+    chainVersion: 'chainVersion',
+    sequenceNumber: 'sequenceNumber',
+    previousEventId: 'previousEventId',
+    previousEventHash: 'previousEventHash',
+    eventHash: 'eventHash',
+    payloadHash: 'payloadHash',
+    payloadContractVersion: 'payloadContractVersion',
+    payload: 'payload',
+    eventType: 'eventType',
+    actorUserId: 'actorUserId',
+    actorRoleSnapshot: 'actorRoleSnapshot',
+    departmentId: 'departmentId',
+    jurisdictionId: 'jurisdictionId',
+    resourceType: 'resourceType',
+    resourceId: 'resourceId',
+    sourceEventKey: 'sourceEventKey',
+    occurredAt: 'occurredAt',
+    recordedAt: 'recordedAt'
+  };
+
+  export type IntegrityAuditEventScalarFieldEnum = (typeof IntegrityAuditEventScalarFieldEnum)[keyof typeof IntegrityAuditEventScalarFieldEnum]
+
+
   export const InfrastructureIntelligenceAssessmentScalarFieldEnum: {
     id: 'id',
     caseId: 'caseId',
@@ -61490,6 +64183,216 @@ export namespace Prisma {
     attestationState?: StringWithAggregatesFilter<"TrustedComputationReceipt"> | string
     attestationReference?: StringNullableWithAggregatesFilter<"TrustedComputationReceipt"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"TrustedComputationReceipt"> | Date | string
+  }
+
+  export type IntegrityChainHeadWhereInput = {
+    AND?: IntegrityChainHeadWhereInput | IntegrityChainHeadWhereInput[]
+    OR?: IntegrityChainHeadWhereInput[]
+    NOT?: IntegrityChainHeadWhereInput | IntegrityChainHeadWhereInput[]
+    chainKey?: StringFilter<"IntegrityChainHead"> | string
+    chainVersion?: StringFilter<"IntegrityChainHead"> | string
+    departmentId?: StringNullableFilter<"IntegrityChainHead"> | string | null
+    jurisdictionId?: StringNullableFilter<"IntegrityChainHead"> | string | null
+    latestSequence?: IntFilter<"IntegrityChainHead"> | number
+    latestEventId?: StringNullableFilter<"IntegrityChainHead"> | string | null
+    latestEventHash?: StringNullableFilter<"IntegrityChainHead"> | string | null
+    createdAt?: DateTimeFilter<"IntegrityChainHead"> | Date | string
+    updatedAt?: DateTimeFilter<"IntegrityChainHead"> | Date | string
+    events?: IntegrityAuditEventListRelationFilter
+  }
+
+  export type IntegrityChainHeadOrderByWithRelationInput = {
+    chainKey?: SortOrder
+    chainVersion?: SortOrder
+    departmentId?: SortOrderInput | SortOrder
+    jurisdictionId?: SortOrderInput | SortOrder
+    latestSequence?: SortOrder
+    latestEventId?: SortOrderInput | SortOrder
+    latestEventHash?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    events?: IntegrityAuditEventOrderByRelationAggregateInput
+  }
+
+  export type IntegrityChainHeadWhereUniqueInput = Prisma.AtLeast<{
+    chainKey?: string
+    AND?: IntegrityChainHeadWhereInput | IntegrityChainHeadWhereInput[]
+    OR?: IntegrityChainHeadWhereInput[]
+    NOT?: IntegrityChainHeadWhereInput | IntegrityChainHeadWhereInput[]
+    chainVersion?: StringFilter<"IntegrityChainHead"> | string
+    departmentId?: StringNullableFilter<"IntegrityChainHead"> | string | null
+    jurisdictionId?: StringNullableFilter<"IntegrityChainHead"> | string | null
+    latestSequence?: IntFilter<"IntegrityChainHead"> | number
+    latestEventId?: StringNullableFilter<"IntegrityChainHead"> | string | null
+    latestEventHash?: StringNullableFilter<"IntegrityChainHead"> | string | null
+    createdAt?: DateTimeFilter<"IntegrityChainHead"> | Date | string
+    updatedAt?: DateTimeFilter<"IntegrityChainHead"> | Date | string
+    events?: IntegrityAuditEventListRelationFilter
+  }, "chainKey">
+
+  export type IntegrityChainHeadOrderByWithAggregationInput = {
+    chainKey?: SortOrder
+    chainVersion?: SortOrder
+    departmentId?: SortOrderInput | SortOrder
+    jurisdictionId?: SortOrderInput | SortOrder
+    latestSequence?: SortOrder
+    latestEventId?: SortOrderInput | SortOrder
+    latestEventHash?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: IntegrityChainHeadCountOrderByAggregateInput
+    _avg?: IntegrityChainHeadAvgOrderByAggregateInput
+    _max?: IntegrityChainHeadMaxOrderByAggregateInput
+    _min?: IntegrityChainHeadMinOrderByAggregateInput
+    _sum?: IntegrityChainHeadSumOrderByAggregateInput
+  }
+
+  export type IntegrityChainHeadScalarWhereWithAggregatesInput = {
+    AND?: IntegrityChainHeadScalarWhereWithAggregatesInput | IntegrityChainHeadScalarWhereWithAggregatesInput[]
+    OR?: IntegrityChainHeadScalarWhereWithAggregatesInput[]
+    NOT?: IntegrityChainHeadScalarWhereWithAggregatesInput | IntegrityChainHeadScalarWhereWithAggregatesInput[]
+    chainKey?: StringWithAggregatesFilter<"IntegrityChainHead"> | string
+    chainVersion?: StringWithAggregatesFilter<"IntegrityChainHead"> | string
+    departmentId?: StringNullableWithAggregatesFilter<"IntegrityChainHead"> | string | null
+    jurisdictionId?: StringNullableWithAggregatesFilter<"IntegrityChainHead"> | string | null
+    latestSequence?: IntWithAggregatesFilter<"IntegrityChainHead"> | number
+    latestEventId?: StringNullableWithAggregatesFilter<"IntegrityChainHead"> | string | null
+    latestEventHash?: StringNullableWithAggregatesFilter<"IntegrityChainHead"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"IntegrityChainHead"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"IntegrityChainHead"> | Date | string
+  }
+
+  export type IntegrityAuditEventWhereInput = {
+    AND?: IntegrityAuditEventWhereInput | IntegrityAuditEventWhereInput[]
+    OR?: IntegrityAuditEventWhereInput[]
+    NOT?: IntegrityAuditEventWhereInput | IntegrityAuditEventWhereInput[]
+    id?: StringFilter<"IntegrityAuditEvent"> | string
+    chainKey?: StringFilter<"IntegrityAuditEvent"> | string
+    chainVersion?: StringFilter<"IntegrityAuditEvent"> | string
+    sequenceNumber?: IntFilter<"IntegrityAuditEvent"> | number
+    previousEventId?: StringNullableFilter<"IntegrityAuditEvent"> | string | null
+    previousEventHash?: StringNullableFilter<"IntegrityAuditEvent"> | string | null
+    eventHash?: StringFilter<"IntegrityAuditEvent"> | string
+    payloadHash?: StringFilter<"IntegrityAuditEvent"> | string
+    payloadContractVersion?: StringFilter<"IntegrityAuditEvent"> | string
+    payload?: JsonFilter<"IntegrityAuditEvent">
+    eventType?: StringFilter<"IntegrityAuditEvent"> | string
+    actorUserId?: StringNullableFilter<"IntegrityAuditEvent"> | string | null
+    actorRoleSnapshot?: StringNullableFilter<"IntegrityAuditEvent"> | string | null
+    departmentId?: StringNullableFilter<"IntegrityAuditEvent"> | string | null
+    jurisdictionId?: StringNullableFilter<"IntegrityAuditEvent"> | string | null
+    resourceType?: StringFilter<"IntegrityAuditEvent"> | string
+    resourceId?: StringFilter<"IntegrityAuditEvent"> | string
+    sourceEventKey?: StringFilter<"IntegrityAuditEvent"> | string
+    occurredAt?: DateTimeFilter<"IntegrityAuditEvent"> | Date | string
+    recordedAt?: DateTimeFilter<"IntegrityAuditEvent"> | Date | string
+    chain?: XOR<IntegrityChainHeadScalarRelationFilter, IntegrityChainHeadWhereInput>
+  }
+
+  export type IntegrityAuditEventOrderByWithRelationInput = {
+    id?: SortOrder
+    chainKey?: SortOrder
+    chainVersion?: SortOrder
+    sequenceNumber?: SortOrder
+    previousEventId?: SortOrderInput | SortOrder
+    previousEventHash?: SortOrderInput | SortOrder
+    eventHash?: SortOrder
+    payloadHash?: SortOrder
+    payloadContractVersion?: SortOrder
+    payload?: SortOrder
+    eventType?: SortOrder
+    actorUserId?: SortOrderInput | SortOrder
+    actorRoleSnapshot?: SortOrderInput | SortOrder
+    departmentId?: SortOrderInput | SortOrder
+    jurisdictionId?: SortOrderInput | SortOrder
+    resourceType?: SortOrder
+    resourceId?: SortOrder
+    sourceEventKey?: SortOrder
+    occurredAt?: SortOrder
+    recordedAt?: SortOrder
+    chain?: IntegrityChainHeadOrderByWithRelationInput
+  }
+
+  export type IntegrityAuditEventWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    sourceEventKey?: string
+    chainKey_sequenceNumber?: IntegrityAuditEventChainKeySequenceNumberCompoundUniqueInput
+    AND?: IntegrityAuditEventWhereInput | IntegrityAuditEventWhereInput[]
+    OR?: IntegrityAuditEventWhereInput[]
+    NOT?: IntegrityAuditEventWhereInput | IntegrityAuditEventWhereInput[]
+    chainKey?: StringFilter<"IntegrityAuditEvent"> | string
+    chainVersion?: StringFilter<"IntegrityAuditEvent"> | string
+    sequenceNumber?: IntFilter<"IntegrityAuditEvent"> | number
+    previousEventId?: StringNullableFilter<"IntegrityAuditEvent"> | string | null
+    previousEventHash?: StringNullableFilter<"IntegrityAuditEvent"> | string | null
+    eventHash?: StringFilter<"IntegrityAuditEvent"> | string
+    payloadHash?: StringFilter<"IntegrityAuditEvent"> | string
+    payloadContractVersion?: StringFilter<"IntegrityAuditEvent"> | string
+    payload?: JsonFilter<"IntegrityAuditEvent">
+    eventType?: StringFilter<"IntegrityAuditEvent"> | string
+    actorUserId?: StringNullableFilter<"IntegrityAuditEvent"> | string | null
+    actorRoleSnapshot?: StringNullableFilter<"IntegrityAuditEvent"> | string | null
+    departmentId?: StringNullableFilter<"IntegrityAuditEvent"> | string | null
+    jurisdictionId?: StringNullableFilter<"IntegrityAuditEvent"> | string | null
+    resourceType?: StringFilter<"IntegrityAuditEvent"> | string
+    resourceId?: StringFilter<"IntegrityAuditEvent"> | string
+    occurredAt?: DateTimeFilter<"IntegrityAuditEvent"> | Date | string
+    recordedAt?: DateTimeFilter<"IntegrityAuditEvent"> | Date | string
+    chain?: XOR<IntegrityChainHeadScalarRelationFilter, IntegrityChainHeadWhereInput>
+  }, "id" | "sourceEventKey" | "chainKey_sequenceNumber">
+
+  export type IntegrityAuditEventOrderByWithAggregationInput = {
+    id?: SortOrder
+    chainKey?: SortOrder
+    chainVersion?: SortOrder
+    sequenceNumber?: SortOrder
+    previousEventId?: SortOrderInput | SortOrder
+    previousEventHash?: SortOrderInput | SortOrder
+    eventHash?: SortOrder
+    payloadHash?: SortOrder
+    payloadContractVersion?: SortOrder
+    payload?: SortOrder
+    eventType?: SortOrder
+    actorUserId?: SortOrderInput | SortOrder
+    actorRoleSnapshot?: SortOrderInput | SortOrder
+    departmentId?: SortOrderInput | SortOrder
+    jurisdictionId?: SortOrderInput | SortOrder
+    resourceType?: SortOrder
+    resourceId?: SortOrder
+    sourceEventKey?: SortOrder
+    occurredAt?: SortOrder
+    recordedAt?: SortOrder
+    _count?: IntegrityAuditEventCountOrderByAggregateInput
+    _avg?: IntegrityAuditEventAvgOrderByAggregateInput
+    _max?: IntegrityAuditEventMaxOrderByAggregateInput
+    _min?: IntegrityAuditEventMinOrderByAggregateInput
+    _sum?: IntegrityAuditEventSumOrderByAggregateInput
+  }
+
+  export type IntegrityAuditEventScalarWhereWithAggregatesInput = {
+    AND?: IntegrityAuditEventScalarWhereWithAggregatesInput | IntegrityAuditEventScalarWhereWithAggregatesInput[]
+    OR?: IntegrityAuditEventScalarWhereWithAggregatesInput[]
+    NOT?: IntegrityAuditEventScalarWhereWithAggregatesInput | IntegrityAuditEventScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"IntegrityAuditEvent"> | string
+    chainKey?: StringWithAggregatesFilter<"IntegrityAuditEvent"> | string
+    chainVersion?: StringWithAggregatesFilter<"IntegrityAuditEvent"> | string
+    sequenceNumber?: IntWithAggregatesFilter<"IntegrityAuditEvent"> | number
+    previousEventId?: StringNullableWithAggregatesFilter<"IntegrityAuditEvent"> | string | null
+    previousEventHash?: StringNullableWithAggregatesFilter<"IntegrityAuditEvent"> | string | null
+    eventHash?: StringWithAggregatesFilter<"IntegrityAuditEvent"> | string
+    payloadHash?: StringWithAggregatesFilter<"IntegrityAuditEvent"> | string
+    payloadContractVersion?: StringWithAggregatesFilter<"IntegrityAuditEvent"> | string
+    payload?: JsonWithAggregatesFilter<"IntegrityAuditEvent">
+    eventType?: StringWithAggregatesFilter<"IntegrityAuditEvent"> | string
+    actorUserId?: StringNullableWithAggregatesFilter<"IntegrityAuditEvent"> | string | null
+    actorRoleSnapshot?: StringNullableWithAggregatesFilter<"IntegrityAuditEvent"> | string | null
+    departmentId?: StringNullableWithAggregatesFilter<"IntegrityAuditEvent"> | string | null
+    jurisdictionId?: StringNullableWithAggregatesFilter<"IntegrityAuditEvent"> | string | null
+    resourceType?: StringWithAggregatesFilter<"IntegrityAuditEvent"> | string
+    resourceId?: StringWithAggregatesFilter<"IntegrityAuditEvent"> | string
+    sourceEventKey?: StringWithAggregatesFilter<"IntegrityAuditEvent"> | string
+    occurredAt?: DateTimeWithAggregatesFilter<"IntegrityAuditEvent"> | Date | string
+    recordedAt?: DateTimeWithAggregatesFilter<"IntegrityAuditEvent"> | Date | string
   }
 
   export type InfrastructureIntelligenceAssessmentWhereInput = {
@@ -66438,6 +69341,254 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type IntegrityChainHeadCreateInput = {
+    chainKey: string
+    chainVersion: string
+    departmentId?: string | null
+    jurisdictionId?: string | null
+    latestSequence?: number
+    latestEventId?: string | null
+    latestEventHash?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    events?: IntegrityAuditEventCreateNestedManyWithoutChainInput
+  }
+
+  export type IntegrityChainHeadUncheckedCreateInput = {
+    chainKey: string
+    chainVersion: string
+    departmentId?: string | null
+    jurisdictionId?: string | null
+    latestSequence?: number
+    latestEventId?: string | null
+    latestEventHash?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    events?: IntegrityAuditEventUncheckedCreateNestedManyWithoutChainInput
+  }
+
+  export type IntegrityChainHeadUpdateInput = {
+    chainKey?: StringFieldUpdateOperationsInput | string
+    chainVersion?: StringFieldUpdateOperationsInput | string
+    departmentId?: NullableStringFieldUpdateOperationsInput | string | null
+    jurisdictionId?: NullableStringFieldUpdateOperationsInput | string | null
+    latestSequence?: IntFieldUpdateOperationsInput | number
+    latestEventId?: NullableStringFieldUpdateOperationsInput | string | null
+    latestEventHash?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    events?: IntegrityAuditEventUpdateManyWithoutChainNestedInput
+  }
+
+  export type IntegrityChainHeadUncheckedUpdateInput = {
+    chainKey?: StringFieldUpdateOperationsInput | string
+    chainVersion?: StringFieldUpdateOperationsInput | string
+    departmentId?: NullableStringFieldUpdateOperationsInput | string | null
+    jurisdictionId?: NullableStringFieldUpdateOperationsInput | string | null
+    latestSequence?: IntFieldUpdateOperationsInput | number
+    latestEventId?: NullableStringFieldUpdateOperationsInput | string | null
+    latestEventHash?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    events?: IntegrityAuditEventUncheckedUpdateManyWithoutChainNestedInput
+  }
+
+  export type IntegrityChainHeadCreateManyInput = {
+    chainKey: string
+    chainVersion: string
+    departmentId?: string | null
+    jurisdictionId?: string | null
+    latestSequence?: number
+    latestEventId?: string | null
+    latestEventHash?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type IntegrityChainHeadUpdateManyMutationInput = {
+    chainKey?: StringFieldUpdateOperationsInput | string
+    chainVersion?: StringFieldUpdateOperationsInput | string
+    departmentId?: NullableStringFieldUpdateOperationsInput | string | null
+    jurisdictionId?: NullableStringFieldUpdateOperationsInput | string | null
+    latestSequence?: IntFieldUpdateOperationsInput | number
+    latestEventId?: NullableStringFieldUpdateOperationsInput | string | null
+    latestEventHash?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type IntegrityChainHeadUncheckedUpdateManyInput = {
+    chainKey?: StringFieldUpdateOperationsInput | string
+    chainVersion?: StringFieldUpdateOperationsInput | string
+    departmentId?: NullableStringFieldUpdateOperationsInput | string | null
+    jurisdictionId?: NullableStringFieldUpdateOperationsInput | string | null
+    latestSequence?: IntFieldUpdateOperationsInput | number
+    latestEventId?: NullableStringFieldUpdateOperationsInput | string | null
+    latestEventHash?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type IntegrityAuditEventCreateInput = {
+    id?: string
+    chainVersion: string
+    sequenceNumber: number
+    previousEventId?: string | null
+    previousEventHash?: string | null
+    eventHash: string
+    payloadHash: string
+    payloadContractVersion: string
+    payload: JsonNullValueInput | InputJsonValue
+    eventType: string
+    actorUserId?: string | null
+    actorRoleSnapshot?: string | null
+    departmentId?: string | null
+    jurisdictionId?: string | null
+    resourceType: string
+    resourceId: string
+    sourceEventKey: string
+    occurredAt: Date | string
+    recordedAt?: Date | string
+    chain: IntegrityChainHeadCreateNestedOneWithoutEventsInput
+  }
+
+  export type IntegrityAuditEventUncheckedCreateInput = {
+    id?: string
+    chainKey: string
+    chainVersion: string
+    sequenceNumber: number
+    previousEventId?: string | null
+    previousEventHash?: string | null
+    eventHash: string
+    payloadHash: string
+    payloadContractVersion: string
+    payload: JsonNullValueInput | InputJsonValue
+    eventType: string
+    actorUserId?: string | null
+    actorRoleSnapshot?: string | null
+    departmentId?: string | null
+    jurisdictionId?: string | null
+    resourceType: string
+    resourceId: string
+    sourceEventKey: string
+    occurredAt: Date | string
+    recordedAt?: Date | string
+  }
+
+  export type IntegrityAuditEventUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    chainVersion?: StringFieldUpdateOperationsInput | string
+    sequenceNumber?: IntFieldUpdateOperationsInput | number
+    previousEventId?: NullableStringFieldUpdateOperationsInput | string | null
+    previousEventHash?: NullableStringFieldUpdateOperationsInput | string | null
+    eventHash?: StringFieldUpdateOperationsInput | string
+    payloadHash?: StringFieldUpdateOperationsInput | string
+    payloadContractVersion?: StringFieldUpdateOperationsInput | string
+    payload?: JsonNullValueInput | InputJsonValue
+    eventType?: StringFieldUpdateOperationsInput | string
+    actorUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    actorRoleSnapshot?: NullableStringFieldUpdateOperationsInput | string | null
+    departmentId?: NullableStringFieldUpdateOperationsInput | string | null
+    jurisdictionId?: NullableStringFieldUpdateOperationsInput | string | null
+    resourceType?: StringFieldUpdateOperationsInput | string
+    resourceId?: StringFieldUpdateOperationsInput | string
+    sourceEventKey?: StringFieldUpdateOperationsInput | string
+    occurredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    recordedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    chain?: IntegrityChainHeadUpdateOneRequiredWithoutEventsNestedInput
+  }
+
+  export type IntegrityAuditEventUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    chainKey?: StringFieldUpdateOperationsInput | string
+    chainVersion?: StringFieldUpdateOperationsInput | string
+    sequenceNumber?: IntFieldUpdateOperationsInput | number
+    previousEventId?: NullableStringFieldUpdateOperationsInput | string | null
+    previousEventHash?: NullableStringFieldUpdateOperationsInput | string | null
+    eventHash?: StringFieldUpdateOperationsInput | string
+    payloadHash?: StringFieldUpdateOperationsInput | string
+    payloadContractVersion?: StringFieldUpdateOperationsInput | string
+    payload?: JsonNullValueInput | InputJsonValue
+    eventType?: StringFieldUpdateOperationsInput | string
+    actorUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    actorRoleSnapshot?: NullableStringFieldUpdateOperationsInput | string | null
+    departmentId?: NullableStringFieldUpdateOperationsInput | string | null
+    jurisdictionId?: NullableStringFieldUpdateOperationsInput | string | null
+    resourceType?: StringFieldUpdateOperationsInput | string
+    resourceId?: StringFieldUpdateOperationsInput | string
+    sourceEventKey?: StringFieldUpdateOperationsInput | string
+    occurredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    recordedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type IntegrityAuditEventCreateManyInput = {
+    id?: string
+    chainKey: string
+    chainVersion: string
+    sequenceNumber: number
+    previousEventId?: string | null
+    previousEventHash?: string | null
+    eventHash: string
+    payloadHash: string
+    payloadContractVersion: string
+    payload: JsonNullValueInput | InputJsonValue
+    eventType: string
+    actorUserId?: string | null
+    actorRoleSnapshot?: string | null
+    departmentId?: string | null
+    jurisdictionId?: string | null
+    resourceType: string
+    resourceId: string
+    sourceEventKey: string
+    occurredAt: Date | string
+    recordedAt?: Date | string
+  }
+
+  export type IntegrityAuditEventUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    chainVersion?: StringFieldUpdateOperationsInput | string
+    sequenceNumber?: IntFieldUpdateOperationsInput | number
+    previousEventId?: NullableStringFieldUpdateOperationsInput | string | null
+    previousEventHash?: NullableStringFieldUpdateOperationsInput | string | null
+    eventHash?: StringFieldUpdateOperationsInput | string
+    payloadHash?: StringFieldUpdateOperationsInput | string
+    payloadContractVersion?: StringFieldUpdateOperationsInput | string
+    payload?: JsonNullValueInput | InputJsonValue
+    eventType?: StringFieldUpdateOperationsInput | string
+    actorUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    actorRoleSnapshot?: NullableStringFieldUpdateOperationsInput | string | null
+    departmentId?: NullableStringFieldUpdateOperationsInput | string | null
+    jurisdictionId?: NullableStringFieldUpdateOperationsInput | string | null
+    resourceType?: StringFieldUpdateOperationsInput | string
+    resourceId?: StringFieldUpdateOperationsInput | string
+    sourceEventKey?: StringFieldUpdateOperationsInput | string
+    occurredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    recordedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type IntegrityAuditEventUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    chainKey?: StringFieldUpdateOperationsInput | string
+    chainVersion?: StringFieldUpdateOperationsInput | string
+    sequenceNumber?: IntFieldUpdateOperationsInput | number
+    previousEventId?: NullableStringFieldUpdateOperationsInput | string | null
+    previousEventHash?: NullableStringFieldUpdateOperationsInput | string | null
+    eventHash?: StringFieldUpdateOperationsInput | string
+    payloadHash?: StringFieldUpdateOperationsInput | string
+    payloadContractVersion?: StringFieldUpdateOperationsInput | string
+    payload?: JsonNullValueInput | InputJsonValue
+    eventType?: StringFieldUpdateOperationsInput | string
+    actorUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    actorRoleSnapshot?: NullableStringFieldUpdateOperationsInput | string | null
+    departmentId?: NullableStringFieldUpdateOperationsInput | string | null
+    jurisdictionId?: NullableStringFieldUpdateOperationsInput | string | null
+    resourceType?: StringFieldUpdateOperationsInput | string
+    resourceId?: StringFieldUpdateOperationsInput | string
+    sourceEventKey?: StringFieldUpdateOperationsInput | string
+    occurredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    recordedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type InfrastructureIntelligenceAssessmentCreateInput = {
     id?: string
     status: $Enums.IntelligenceAssessmentStatus
@@ -71250,6 +74401,145 @@ export namespace Prisma {
     attestationState?: SortOrder
     attestationReference?: SortOrder
     createdAt?: SortOrder
+  }
+
+  export type IntegrityAuditEventListRelationFilter = {
+    every?: IntegrityAuditEventWhereInput
+    some?: IntegrityAuditEventWhereInput
+    none?: IntegrityAuditEventWhereInput
+  }
+
+  export type IntegrityAuditEventOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type IntegrityChainHeadCountOrderByAggregateInput = {
+    chainKey?: SortOrder
+    chainVersion?: SortOrder
+    departmentId?: SortOrder
+    jurisdictionId?: SortOrder
+    latestSequence?: SortOrder
+    latestEventId?: SortOrder
+    latestEventHash?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type IntegrityChainHeadAvgOrderByAggregateInput = {
+    latestSequence?: SortOrder
+  }
+
+  export type IntegrityChainHeadMaxOrderByAggregateInput = {
+    chainKey?: SortOrder
+    chainVersion?: SortOrder
+    departmentId?: SortOrder
+    jurisdictionId?: SortOrder
+    latestSequence?: SortOrder
+    latestEventId?: SortOrder
+    latestEventHash?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type IntegrityChainHeadMinOrderByAggregateInput = {
+    chainKey?: SortOrder
+    chainVersion?: SortOrder
+    departmentId?: SortOrder
+    jurisdictionId?: SortOrder
+    latestSequence?: SortOrder
+    latestEventId?: SortOrder
+    latestEventHash?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type IntegrityChainHeadSumOrderByAggregateInput = {
+    latestSequence?: SortOrder
+  }
+
+  export type IntegrityChainHeadScalarRelationFilter = {
+    is?: IntegrityChainHeadWhereInput
+    isNot?: IntegrityChainHeadWhereInput
+  }
+
+  export type IntegrityAuditEventChainKeySequenceNumberCompoundUniqueInput = {
+    chainKey: string
+    sequenceNumber: number
+  }
+
+  export type IntegrityAuditEventCountOrderByAggregateInput = {
+    id?: SortOrder
+    chainKey?: SortOrder
+    chainVersion?: SortOrder
+    sequenceNumber?: SortOrder
+    previousEventId?: SortOrder
+    previousEventHash?: SortOrder
+    eventHash?: SortOrder
+    payloadHash?: SortOrder
+    payloadContractVersion?: SortOrder
+    payload?: SortOrder
+    eventType?: SortOrder
+    actorUserId?: SortOrder
+    actorRoleSnapshot?: SortOrder
+    departmentId?: SortOrder
+    jurisdictionId?: SortOrder
+    resourceType?: SortOrder
+    resourceId?: SortOrder
+    sourceEventKey?: SortOrder
+    occurredAt?: SortOrder
+    recordedAt?: SortOrder
+  }
+
+  export type IntegrityAuditEventAvgOrderByAggregateInput = {
+    sequenceNumber?: SortOrder
+  }
+
+  export type IntegrityAuditEventMaxOrderByAggregateInput = {
+    id?: SortOrder
+    chainKey?: SortOrder
+    chainVersion?: SortOrder
+    sequenceNumber?: SortOrder
+    previousEventId?: SortOrder
+    previousEventHash?: SortOrder
+    eventHash?: SortOrder
+    payloadHash?: SortOrder
+    payloadContractVersion?: SortOrder
+    eventType?: SortOrder
+    actorUserId?: SortOrder
+    actorRoleSnapshot?: SortOrder
+    departmentId?: SortOrder
+    jurisdictionId?: SortOrder
+    resourceType?: SortOrder
+    resourceId?: SortOrder
+    sourceEventKey?: SortOrder
+    occurredAt?: SortOrder
+    recordedAt?: SortOrder
+  }
+
+  export type IntegrityAuditEventMinOrderByAggregateInput = {
+    id?: SortOrder
+    chainKey?: SortOrder
+    chainVersion?: SortOrder
+    sequenceNumber?: SortOrder
+    previousEventId?: SortOrder
+    previousEventHash?: SortOrder
+    eventHash?: SortOrder
+    payloadHash?: SortOrder
+    payloadContractVersion?: SortOrder
+    eventType?: SortOrder
+    actorUserId?: SortOrder
+    actorRoleSnapshot?: SortOrder
+    departmentId?: SortOrder
+    jurisdictionId?: SortOrder
+    resourceType?: SortOrder
+    resourceId?: SortOrder
+    sourceEventKey?: SortOrder
+    occurredAt?: SortOrder
+    recordedAt?: SortOrder
+  }
+
+  export type IntegrityAuditEventSumOrderByAggregateInput = {
+    sequenceNumber?: SortOrder
   }
 
   export type EnumIntelligenceAssessmentStatusFilter<$PrismaModel = never> = {
@@ -77827,6 +81117,62 @@ export namespace Prisma {
     upsert?: RiskAssessmentUpsertWithoutTrustedComputationReceiptInput
     connect?: RiskAssessmentWhereUniqueInput
     update?: XOR<XOR<RiskAssessmentUpdateToOneWithWhereWithoutTrustedComputationReceiptInput, RiskAssessmentUpdateWithoutTrustedComputationReceiptInput>, RiskAssessmentUncheckedUpdateWithoutTrustedComputationReceiptInput>
+  }
+
+  export type IntegrityAuditEventCreateNestedManyWithoutChainInput = {
+    create?: XOR<IntegrityAuditEventCreateWithoutChainInput, IntegrityAuditEventUncheckedCreateWithoutChainInput> | IntegrityAuditEventCreateWithoutChainInput[] | IntegrityAuditEventUncheckedCreateWithoutChainInput[]
+    connectOrCreate?: IntegrityAuditEventCreateOrConnectWithoutChainInput | IntegrityAuditEventCreateOrConnectWithoutChainInput[]
+    createMany?: IntegrityAuditEventCreateManyChainInputEnvelope
+    connect?: IntegrityAuditEventWhereUniqueInput | IntegrityAuditEventWhereUniqueInput[]
+  }
+
+  export type IntegrityAuditEventUncheckedCreateNestedManyWithoutChainInput = {
+    create?: XOR<IntegrityAuditEventCreateWithoutChainInput, IntegrityAuditEventUncheckedCreateWithoutChainInput> | IntegrityAuditEventCreateWithoutChainInput[] | IntegrityAuditEventUncheckedCreateWithoutChainInput[]
+    connectOrCreate?: IntegrityAuditEventCreateOrConnectWithoutChainInput | IntegrityAuditEventCreateOrConnectWithoutChainInput[]
+    createMany?: IntegrityAuditEventCreateManyChainInputEnvelope
+    connect?: IntegrityAuditEventWhereUniqueInput | IntegrityAuditEventWhereUniqueInput[]
+  }
+
+  export type IntegrityAuditEventUpdateManyWithoutChainNestedInput = {
+    create?: XOR<IntegrityAuditEventCreateWithoutChainInput, IntegrityAuditEventUncheckedCreateWithoutChainInput> | IntegrityAuditEventCreateWithoutChainInput[] | IntegrityAuditEventUncheckedCreateWithoutChainInput[]
+    connectOrCreate?: IntegrityAuditEventCreateOrConnectWithoutChainInput | IntegrityAuditEventCreateOrConnectWithoutChainInput[]
+    upsert?: IntegrityAuditEventUpsertWithWhereUniqueWithoutChainInput | IntegrityAuditEventUpsertWithWhereUniqueWithoutChainInput[]
+    createMany?: IntegrityAuditEventCreateManyChainInputEnvelope
+    set?: IntegrityAuditEventWhereUniqueInput | IntegrityAuditEventWhereUniqueInput[]
+    disconnect?: IntegrityAuditEventWhereUniqueInput | IntegrityAuditEventWhereUniqueInput[]
+    delete?: IntegrityAuditEventWhereUniqueInput | IntegrityAuditEventWhereUniqueInput[]
+    connect?: IntegrityAuditEventWhereUniqueInput | IntegrityAuditEventWhereUniqueInput[]
+    update?: IntegrityAuditEventUpdateWithWhereUniqueWithoutChainInput | IntegrityAuditEventUpdateWithWhereUniqueWithoutChainInput[]
+    updateMany?: IntegrityAuditEventUpdateManyWithWhereWithoutChainInput | IntegrityAuditEventUpdateManyWithWhereWithoutChainInput[]
+    deleteMany?: IntegrityAuditEventScalarWhereInput | IntegrityAuditEventScalarWhereInput[]
+  }
+
+  export type IntegrityAuditEventUncheckedUpdateManyWithoutChainNestedInput = {
+    create?: XOR<IntegrityAuditEventCreateWithoutChainInput, IntegrityAuditEventUncheckedCreateWithoutChainInput> | IntegrityAuditEventCreateWithoutChainInput[] | IntegrityAuditEventUncheckedCreateWithoutChainInput[]
+    connectOrCreate?: IntegrityAuditEventCreateOrConnectWithoutChainInput | IntegrityAuditEventCreateOrConnectWithoutChainInput[]
+    upsert?: IntegrityAuditEventUpsertWithWhereUniqueWithoutChainInput | IntegrityAuditEventUpsertWithWhereUniqueWithoutChainInput[]
+    createMany?: IntegrityAuditEventCreateManyChainInputEnvelope
+    set?: IntegrityAuditEventWhereUniqueInput | IntegrityAuditEventWhereUniqueInput[]
+    disconnect?: IntegrityAuditEventWhereUniqueInput | IntegrityAuditEventWhereUniqueInput[]
+    delete?: IntegrityAuditEventWhereUniqueInput | IntegrityAuditEventWhereUniqueInput[]
+    connect?: IntegrityAuditEventWhereUniqueInput | IntegrityAuditEventWhereUniqueInput[]
+    update?: IntegrityAuditEventUpdateWithWhereUniqueWithoutChainInput | IntegrityAuditEventUpdateWithWhereUniqueWithoutChainInput[]
+    updateMany?: IntegrityAuditEventUpdateManyWithWhereWithoutChainInput | IntegrityAuditEventUpdateManyWithWhereWithoutChainInput[]
+    deleteMany?: IntegrityAuditEventScalarWhereInput | IntegrityAuditEventScalarWhereInput[]
+  }
+
+  export type IntegrityChainHeadCreateNestedOneWithoutEventsInput = {
+    create?: XOR<IntegrityChainHeadCreateWithoutEventsInput, IntegrityChainHeadUncheckedCreateWithoutEventsInput>
+    connectOrCreate?: IntegrityChainHeadCreateOrConnectWithoutEventsInput
+    connect?: IntegrityChainHeadWhereUniqueInput
+  }
+
+  export type IntegrityChainHeadUpdateOneRequiredWithoutEventsNestedInput = {
+    create?: XOR<IntegrityChainHeadCreateWithoutEventsInput, IntegrityChainHeadUncheckedCreateWithoutEventsInput>
+    connectOrCreate?: IntegrityChainHeadCreateOrConnectWithoutEventsInput
+    upsert?: IntegrityChainHeadUpsertWithoutEventsInput
+    connect?: IntegrityChainHeadWhereUniqueInput
+    update?: XOR<XOR<IntegrityChainHeadUpdateToOneWithWhereWithoutEventsInput, IntegrityChainHeadUpdateWithoutEventsInput>, IntegrityChainHeadUncheckedUpdateWithoutEventsInput>
   }
 
   export type InfrastructureIntelligenceReconciliationCreateNestedManyWithoutIntelligenceAssessmentInput = {
@@ -95480,6 +98826,166 @@ export namespace Prisma {
     operationalResponsePlans?: OperationalResponsePlanUncheckedUpdateManyWithoutRiskAssessmentNestedInput
     decisionPackages?: DecisionPackageUncheckedUpdateManyWithoutRiskAssessmentNestedInput
     intelligenceAssessments?: InfrastructureIntelligenceAssessmentUncheckedUpdateManyWithoutRiskAssessmentNestedInput
+  }
+
+  export type IntegrityAuditEventCreateWithoutChainInput = {
+    id?: string
+    chainVersion: string
+    sequenceNumber: number
+    previousEventId?: string | null
+    previousEventHash?: string | null
+    eventHash: string
+    payloadHash: string
+    payloadContractVersion: string
+    payload: JsonNullValueInput | InputJsonValue
+    eventType: string
+    actorUserId?: string | null
+    actorRoleSnapshot?: string | null
+    departmentId?: string | null
+    jurisdictionId?: string | null
+    resourceType: string
+    resourceId: string
+    sourceEventKey: string
+    occurredAt: Date | string
+    recordedAt?: Date | string
+  }
+
+  export type IntegrityAuditEventUncheckedCreateWithoutChainInput = {
+    id?: string
+    chainVersion: string
+    sequenceNumber: number
+    previousEventId?: string | null
+    previousEventHash?: string | null
+    eventHash: string
+    payloadHash: string
+    payloadContractVersion: string
+    payload: JsonNullValueInput | InputJsonValue
+    eventType: string
+    actorUserId?: string | null
+    actorRoleSnapshot?: string | null
+    departmentId?: string | null
+    jurisdictionId?: string | null
+    resourceType: string
+    resourceId: string
+    sourceEventKey: string
+    occurredAt: Date | string
+    recordedAt?: Date | string
+  }
+
+  export type IntegrityAuditEventCreateOrConnectWithoutChainInput = {
+    where: IntegrityAuditEventWhereUniqueInput
+    create: XOR<IntegrityAuditEventCreateWithoutChainInput, IntegrityAuditEventUncheckedCreateWithoutChainInput>
+  }
+
+  export type IntegrityAuditEventCreateManyChainInputEnvelope = {
+    data: IntegrityAuditEventCreateManyChainInput | IntegrityAuditEventCreateManyChainInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type IntegrityAuditEventUpsertWithWhereUniqueWithoutChainInput = {
+    where: IntegrityAuditEventWhereUniqueInput
+    update: XOR<IntegrityAuditEventUpdateWithoutChainInput, IntegrityAuditEventUncheckedUpdateWithoutChainInput>
+    create: XOR<IntegrityAuditEventCreateWithoutChainInput, IntegrityAuditEventUncheckedCreateWithoutChainInput>
+  }
+
+  export type IntegrityAuditEventUpdateWithWhereUniqueWithoutChainInput = {
+    where: IntegrityAuditEventWhereUniqueInput
+    data: XOR<IntegrityAuditEventUpdateWithoutChainInput, IntegrityAuditEventUncheckedUpdateWithoutChainInput>
+  }
+
+  export type IntegrityAuditEventUpdateManyWithWhereWithoutChainInput = {
+    where: IntegrityAuditEventScalarWhereInput
+    data: XOR<IntegrityAuditEventUpdateManyMutationInput, IntegrityAuditEventUncheckedUpdateManyWithoutChainInput>
+  }
+
+  export type IntegrityAuditEventScalarWhereInput = {
+    AND?: IntegrityAuditEventScalarWhereInput | IntegrityAuditEventScalarWhereInput[]
+    OR?: IntegrityAuditEventScalarWhereInput[]
+    NOT?: IntegrityAuditEventScalarWhereInput | IntegrityAuditEventScalarWhereInput[]
+    id?: StringFilter<"IntegrityAuditEvent"> | string
+    chainKey?: StringFilter<"IntegrityAuditEvent"> | string
+    chainVersion?: StringFilter<"IntegrityAuditEvent"> | string
+    sequenceNumber?: IntFilter<"IntegrityAuditEvent"> | number
+    previousEventId?: StringNullableFilter<"IntegrityAuditEvent"> | string | null
+    previousEventHash?: StringNullableFilter<"IntegrityAuditEvent"> | string | null
+    eventHash?: StringFilter<"IntegrityAuditEvent"> | string
+    payloadHash?: StringFilter<"IntegrityAuditEvent"> | string
+    payloadContractVersion?: StringFilter<"IntegrityAuditEvent"> | string
+    payload?: JsonFilter<"IntegrityAuditEvent">
+    eventType?: StringFilter<"IntegrityAuditEvent"> | string
+    actorUserId?: StringNullableFilter<"IntegrityAuditEvent"> | string | null
+    actorRoleSnapshot?: StringNullableFilter<"IntegrityAuditEvent"> | string | null
+    departmentId?: StringNullableFilter<"IntegrityAuditEvent"> | string | null
+    jurisdictionId?: StringNullableFilter<"IntegrityAuditEvent"> | string | null
+    resourceType?: StringFilter<"IntegrityAuditEvent"> | string
+    resourceId?: StringFilter<"IntegrityAuditEvent"> | string
+    sourceEventKey?: StringFilter<"IntegrityAuditEvent"> | string
+    occurredAt?: DateTimeFilter<"IntegrityAuditEvent"> | Date | string
+    recordedAt?: DateTimeFilter<"IntegrityAuditEvent"> | Date | string
+  }
+
+  export type IntegrityChainHeadCreateWithoutEventsInput = {
+    chainKey: string
+    chainVersion: string
+    departmentId?: string | null
+    jurisdictionId?: string | null
+    latestSequence?: number
+    latestEventId?: string | null
+    latestEventHash?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type IntegrityChainHeadUncheckedCreateWithoutEventsInput = {
+    chainKey: string
+    chainVersion: string
+    departmentId?: string | null
+    jurisdictionId?: string | null
+    latestSequence?: number
+    latestEventId?: string | null
+    latestEventHash?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type IntegrityChainHeadCreateOrConnectWithoutEventsInput = {
+    where: IntegrityChainHeadWhereUniqueInput
+    create: XOR<IntegrityChainHeadCreateWithoutEventsInput, IntegrityChainHeadUncheckedCreateWithoutEventsInput>
+  }
+
+  export type IntegrityChainHeadUpsertWithoutEventsInput = {
+    update: XOR<IntegrityChainHeadUpdateWithoutEventsInput, IntegrityChainHeadUncheckedUpdateWithoutEventsInput>
+    create: XOR<IntegrityChainHeadCreateWithoutEventsInput, IntegrityChainHeadUncheckedCreateWithoutEventsInput>
+    where?: IntegrityChainHeadWhereInput
+  }
+
+  export type IntegrityChainHeadUpdateToOneWithWhereWithoutEventsInput = {
+    where?: IntegrityChainHeadWhereInput
+    data: XOR<IntegrityChainHeadUpdateWithoutEventsInput, IntegrityChainHeadUncheckedUpdateWithoutEventsInput>
+  }
+
+  export type IntegrityChainHeadUpdateWithoutEventsInput = {
+    chainKey?: StringFieldUpdateOperationsInput | string
+    chainVersion?: StringFieldUpdateOperationsInput | string
+    departmentId?: NullableStringFieldUpdateOperationsInput | string | null
+    jurisdictionId?: NullableStringFieldUpdateOperationsInput | string | null
+    latestSequence?: IntFieldUpdateOperationsInput | number
+    latestEventId?: NullableStringFieldUpdateOperationsInput | string | null
+    latestEventHash?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type IntegrityChainHeadUncheckedUpdateWithoutEventsInput = {
+    chainKey?: StringFieldUpdateOperationsInput | string
+    chainVersion?: StringFieldUpdateOperationsInput | string
+    departmentId?: NullableStringFieldUpdateOperationsInput | string | null
+    jurisdictionId?: NullableStringFieldUpdateOperationsInput | string | null
+    latestSequence?: IntFieldUpdateOperationsInput | number
+    latestEventId?: NullableStringFieldUpdateOperationsInput | string | null
+    latestEventHash?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type InfrastructureIntelligenceReconciliationCreateWithoutIntelligenceAssessmentInput = {
@@ -115940,6 +119446,94 @@ export namespace Prisma {
     abstentionReasons?: JsonNullValueInput | InputJsonValue
     reconciliation?: JsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type IntegrityAuditEventCreateManyChainInput = {
+    id?: string
+    chainVersion: string
+    sequenceNumber: number
+    previousEventId?: string | null
+    previousEventHash?: string | null
+    eventHash: string
+    payloadHash: string
+    payloadContractVersion: string
+    payload: JsonNullValueInput | InputJsonValue
+    eventType: string
+    actorUserId?: string | null
+    actorRoleSnapshot?: string | null
+    departmentId?: string | null
+    jurisdictionId?: string | null
+    resourceType: string
+    resourceId: string
+    sourceEventKey: string
+    occurredAt: Date | string
+    recordedAt?: Date | string
+  }
+
+  export type IntegrityAuditEventUpdateWithoutChainInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    chainVersion?: StringFieldUpdateOperationsInput | string
+    sequenceNumber?: IntFieldUpdateOperationsInput | number
+    previousEventId?: NullableStringFieldUpdateOperationsInput | string | null
+    previousEventHash?: NullableStringFieldUpdateOperationsInput | string | null
+    eventHash?: StringFieldUpdateOperationsInput | string
+    payloadHash?: StringFieldUpdateOperationsInput | string
+    payloadContractVersion?: StringFieldUpdateOperationsInput | string
+    payload?: JsonNullValueInput | InputJsonValue
+    eventType?: StringFieldUpdateOperationsInput | string
+    actorUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    actorRoleSnapshot?: NullableStringFieldUpdateOperationsInput | string | null
+    departmentId?: NullableStringFieldUpdateOperationsInput | string | null
+    jurisdictionId?: NullableStringFieldUpdateOperationsInput | string | null
+    resourceType?: StringFieldUpdateOperationsInput | string
+    resourceId?: StringFieldUpdateOperationsInput | string
+    sourceEventKey?: StringFieldUpdateOperationsInput | string
+    occurredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    recordedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type IntegrityAuditEventUncheckedUpdateWithoutChainInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    chainVersion?: StringFieldUpdateOperationsInput | string
+    sequenceNumber?: IntFieldUpdateOperationsInput | number
+    previousEventId?: NullableStringFieldUpdateOperationsInput | string | null
+    previousEventHash?: NullableStringFieldUpdateOperationsInput | string | null
+    eventHash?: StringFieldUpdateOperationsInput | string
+    payloadHash?: StringFieldUpdateOperationsInput | string
+    payloadContractVersion?: StringFieldUpdateOperationsInput | string
+    payload?: JsonNullValueInput | InputJsonValue
+    eventType?: StringFieldUpdateOperationsInput | string
+    actorUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    actorRoleSnapshot?: NullableStringFieldUpdateOperationsInput | string | null
+    departmentId?: NullableStringFieldUpdateOperationsInput | string | null
+    jurisdictionId?: NullableStringFieldUpdateOperationsInput | string | null
+    resourceType?: StringFieldUpdateOperationsInput | string
+    resourceId?: StringFieldUpdateOperationsInput | string
+    sourceEventKey?: StringFieldUpdateOperationsInput | string
+    occurredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    recordedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type IntegrityAuditEventUncheckedUpdateManyWithoutChainInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    chainVersion?: StringFieldUpdateOperationsInput | string
+    sequenceNumber?: IntFieldUpdateOperationsInput | number
+    previousEventId?: NullableStringFieldUpdateOperationsInput | string | null
+    previousEventHash?: NullableStringFieldUpdateOperationsInput | string | null
+    eventHash?: StringFieldUpdateOperationsInput | string
+    payloadHash?: StringFieldUpdateOperationsInput | string
+    payloadContractVersion?: StringFieldUpdateOperationsInput | string
+    payload?: JsonNullValueInput | InputJsonValue
+    eventType?: StringFieldUpdateOperationsInput | string
+    actorUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    actorRoleSnapshot?: NullableStringFieldUpdateOperationsInput | string | null
+    departmentId?: NullableStringFieldUpdateOperationsInput | string | null
+    jurisdictionId?: NullableStringFieldUpdateOperationsInput | string | null
+    resourceType?: StringFieldUpdateOperationsInput | string
+    resourceId?: StringFieldUpdateOperationsInput | string
+    sourceEventKey?: StringFieldUpdateOperationsInput | string
+    occurredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    recordedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type InfrastructureIntelligenceReconciliationCreateManyIntelligenceAssessmentInput = {

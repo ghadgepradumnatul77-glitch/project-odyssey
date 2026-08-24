@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { CaseStatus, Prisma } from '../src/generated/prisma';
 
-const mocks = vi.hoisted(() => ({ scope: vi.fn(), inspectionFind: vi.fn(), riskFind: vi.fn(), caseFind: vi.fn(), riskCreate: vi.fn(), receiptCreate: vi.fn(), caseUpdate: vi.fn(), transaction: vi.fn() }));
+const mocks = vi.hoisted(() => ({ scope: vi.fn(), inspectionFind: vi.fn(), riskFind: vi.fn(), caseFind: vi.fn(), riskCreate: vi.fn(), receiptCreate: vi.fn(), append: vi.fn(), caseUpdate: vi.fn(), transaction: vi.fn() }));
 vi.mock('../src/security/organizational-scope', async (original) => ({ ...await original<typeof import('../src/security/organizational-scope')>(), assertOperationalCaseScope: mocks.scope }));
 vi.mock('../src/lib/prisma', () => ({ default: {
   inspection: { findFirst: mocks.inspectionFind },
@@ -9,6 +9,7 @@ vi.mock('../src/lib/prisma', () => ({ default: {
   case: { findUnique: mocks.caseFind },
   $transaction: mocks.transaction
 } }));
+vi.mock('../src/modules/integrity/integrity.service',()=>({appendIntegrityEvent:mocks.append,riskIntegrityFacts:vi.fn(()=>({protected:true}))}));
 
 import { riskSourceFingerprint, runAssessmentForCase } from '../src/modules/risk/risk.service';
 const principal = { id: 'officer', role: 'OFFICER', status: 'ACTIVE', departmentId: 'dep', jurisdictionId: 'jur' } as any;
@@ -17,12 +18,13 @@ const inspection = { id: 'inspection-new', caseId: 'case', inspectorId: 'officer
 describe('deterministic risk recovery state boundary', () => {
   beforeEach(() => {
     vi.clearAllMocks();
-    mocks.scope.mockResolvedValue({ id: 'case', status: CaseStatus.INSPECTION_IN_PROGRESS });
+    mocks.scope.mockResolvedValue({ id: 'case', status: CaseStatus.INSPECTION_IN_PROGRESS, asset: { departmentId: 'dep', jurisdictionId: 'jur' } });
     mocks.inspectionFind.mockResolvedValue(inspection);
     mocks.riskFind.mockResolvedValue(null);
     mocks.caseFind.mockResolvedValue({ status: CaseStatus.ORP_READY, riskLevel: 'VERY_HIGH', priorityLevel: 'CRITICAL' });
     mocks.riskCreate.mockImplementation(({ data }: any) => Promise.resolve({ id: 'risk-new', ...data }));
     mocks.receiptCreate.mockImplementation(({ data }: any) => Promise.resolve({ id: 'receipt-new', ...data }));
+    mocks.append.mockResolvedValue({id:'event'});
     mocks.caseUpdate.mockResolvedValue({});
     mocks.transaction.mockImplementation((callback: any) => callback({ riskAssessment: { create: mocks.riskCreate }, trustedComputationReceipt: { create: mocks.receiptCreate }, case: { update: mocks.caseUpdate } }));
   });
@@ -33,7 +35,14 @@ describe('deterministic risk recovery state boundary', () => {
     expect(result.inspectionId).toBe('inspection-new');
     expect(mocks.riskCreate).toHaveBeenCalledWith(expect.objectContaining({ data: expect.objectContaining({ inspectionId: 'inspection-new' }) }));
     expect(mocks.receiptCreate).toHaveBeenCalledWith(expect.objectContaining({ data: expect.objectContaining({ riskAssessmentId: 'risk-new', runtimeTrustLevel: 'LOCAL_VERIFIED', attestationState: 'NOT_AVAILABLE', attestationReference: null }) }));
+    expect(mocks.append).toHaveBeenCalledWith(expect.anything(),expect.objectContaining({eventType:'RISK_ASSESSMENT_RECORDED',resourceId:'risk-new'}));
     expect(mocks.caseUpdate).toHaveBeenCalledWith(expect.objectContaining({ data: expect.objectContaining({ status: CaseStatus.ORP_READY }) }));
+  });
+
+  it('fails the authoritative transaction before Case projection when integrity append fails',async()=>{
+    mocks.append.mockRejectedValueOnce(new Error('INTEGRITY_APPEND_FAILED'));
+    await expect(runAssessmentForCase('case',principal)).rejects.toThrow('INTEGRITY_APPEND_FAILED');
+    expect(mocks.caseUpdate).not.toHaveBeenCalled();
   });
 
   it('reuses the canonical assessment without Case churn or exposing its fingerprint', async () => {

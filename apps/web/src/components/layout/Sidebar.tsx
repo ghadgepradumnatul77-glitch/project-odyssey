@@ -1,4 +1,4 @@
-import { BookOpenCheck, BriefcaseBusiness, ClipboardList, DatabaseZap, LayoutDashboard, Map, Settings, WalletCards } from 'lucide-react';
+import { BookOpenCheck, BriefcaseBusiness, ClipboardList, DatabaseZap, LayoutDashboard, Map, Settings, ShieldCheck, WalletCards } from 'lucide-react';
 import type { SystemRole } from '../../types/api';
 
 export interface NavigationItem { id: string; label: string; description: string; }
@@ -12,11 +12,12 @@ export function navigationForRole(role: SystemRole): NavigationItem[] {
   ];
   if (role === 'POLICY_ADMIN' || role === 'SYSTEM_ADMIN') items.push({id:'policy-actions',label:'Policy & Actions',description:'Governed planning inputs'});
   if (role === 'AUDITOR' || role === 'SYSTEM_ADMIN') items.push({id:'predictive-governance',label:'Predictive Governance',description:'Model lifecycle and data readiness'});
+  if (role === 'AUDITOR' || role === 'SYSTEM_ADMIN') items.push({id:'integrity-audit',label:'Integrity Audit',description:'Tamper-evident chain verification'});
   if (role === 'SYSTEM_ADMIN') items.push({ id: 'administration', label: 'Administration', description: 'Registry and authority management' });
   return items;
 }
 
-const icons = { dashboard: LayoutDashboard, 'public-reports': ClipboardList, 'infrastructure-map': Map, cases: BriefcaseBusiness, 'portfolio-planning': WalletCards, 'policy-actions': BookOpenCheck, 'predictive-governance': DatabaseZap, administration: Settings };
+const icons = { dashboard: LayoutDashboard, 'public-reports': ClipboardList, 'infrastructure-map': Map, cases: BriefcaseBusiness, 'portfolio-planning': WalletCards, 'policy-actions': BookOpenCheck, 'predictive-governance': DatabaseZap, 'integrity-audit': ShieldCheck, administration: Settings };
 export default function Sidebar({ role, activeItem, onSelect }: { role: SystemRole; activeItem: string; onSelect(id: string): void }) {
   return (
     <aside className="sidebar">

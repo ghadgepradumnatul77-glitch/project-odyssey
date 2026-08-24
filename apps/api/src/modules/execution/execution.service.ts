@@ -7,6 +7,7 @@ import { z } from 'zod';
 import { GovernedTemplateError, resolveGovernedTemplate } from '../execution-templates/governed-execution-template.service';
 import { pageFromRows, type StableCursor } from '../../lib/pagination';
 import { collectAssignmentBestEffort, collectOutcomeBestEffort } from '../predictive-data/predictive-data.service';
+import { appendIntegrityEvent, evidenceIntegrityFacts } from '../integrity/integrity.service';
 
 export const GOVERNED_EXECUTION_CONTRACT_VERSION='ODYSSEY_GOVERNED_EXECUTION_V1';
 const governedAction=z.object({actionId:z.string().uuid(),actionCode:z.string().min(1),actionVersion:z.number().int().positive(),classification:z.enum(['MANDATORY','RECOMMENDED','OPTIONAL','PROHIBITED'])}).passthrough();
@@ -229,8 +230,10 @@ export async function addEvidence(taskId: string, input: { evidenceType: Executi
   if (task.status !== ExecutionTaskStatus.IN_PROGRESS && task.status !== ExecutionTaskStatus.BLOCKED) throw new ExecutionError('INVALID_EXECUTION_TASK_STATE', 409, 'Evidence is not allowed in the current state.');
   return prisma.$transaction(async (tx) => {
     await assertTaskMutable(tx, taskId);
-    return tx.executionEvidence.create({ data: { executionTaskId: task.id, submittedById: principal.id, evidenceType: input.evidenceType, description: input.description.trim(), referenceUrl: input.referenceUrl, documentReference: input.documentReference, measurementData: input.measurementData as Prisma.InputJsonValue | undefined, capturedAt: input.capturedAt }, include: { submittedBy: { select: safeUser } } });
-  }, { isolationLevel: Prisma.TransactionIsolationLevel.Serializable });
+    const evidence=await tx.executionEvidence.create({ data: { executionTaskId: task.id, submittedById: principal.id, evidenceType: input.evidenceType, description: input.description.trim(), referenceUrl: input.referenceUrl, documentReference: input.documentReference, measurementData: input.measurementData as Prisma.InputJsonValue | undefined, capturedAt: input.capturedAt }, include: { submittedBy: { select: safeUser } } });
+    await appendIntegrityEvent(tx,{eventType:'EXECUTION_EVIDENCE_RECORDED',sourceEventKey:`EXECUTION_EVIDENCE:${evidence.id}`,resourceType:'ExecutionEvidence',resourceId:evidence.id,actor:principal,departmentId:task.executionPlan.case.asset.departmentId,jurisdictionId:task.executionPlan.case.asset.jurisdictionId,occurredAt:evidence.submittedAt,facts:evidenceIntegrityFacts(evidence)});
+    return evidence;
+  });
 }
 
 export async function submitCompletion(taskId: string, note: string, principal: OrganizationalPrincipal) {

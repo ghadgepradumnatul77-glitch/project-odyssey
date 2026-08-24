@@ -45,6 +45,7 @@ vi.mock('../src/lib/prisma', () => {
     $transaction: vi.fn(async (callback: any) => callback(tx))
   } };
 });
+vi.mock('../src/modules/integrity/integrity.service',()=>({appendIntegrityEvent:vi.fn(async()=>({id:'event'})),riskIntegrityFacts:vi.fn(()=>({protected:true}))}));
 
 import { app } from '../src/server';
 

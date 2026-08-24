@@ -838,6 +838,53 @@ model TrustedComputationReceipt {
   @@index([providerId, runtimeTrustLevel])
 }
 
+model IntegrityChainHead {
+  chainKey        String   @id
+  chainVersion    String
+  departmentId    String?
+  jurisdictionId  String?
+  latestSequence  Int      @default(0)
+  latestEventId   String?
+  latestEventHash String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  events IntegrityAuditEvent[]
+
+  @@index([departmentId, jurisdictionId])
+}
+
+model IntegrityAuditEvent {
+  id                     String   @id @default(uuid())
+  chainKey               String
+  chainVersion           String
+  sequenceNumber         Int
+  previousEventId        String?
+  previousEventHash      String?
+  eventHash              String
+  payloadHash            String
+  payloadContractVersion String
+  payload                Json
+  eventType              String
+  actorUserId            String?
+  actorRoleSnapshot      String?
+  departmentId           String?
+  jurisdictionId         String?
+  resourceType           String
+  resourceId             String
+  sourceEventKey         String   @unique
+  occurredAt             DateTime
+  recordedAt             DateTime @default(now())
+
+  chain IntegrityChainHead @relation(fields: [chainKey], references: [chainKey], onDelete: Restrict)
+
+  @@unique([chainKey, sequenceNumber])
+  @@index([chainKey, recordedAt, id])
+  @@index([resourceType, resourceId])
+  @@index([eventType, occurredAt])
+  @@index([departmentId, jurisdictionId])
+}
+
 model InfrastructureIntelligenceAssessment {
   id               String                       @id @default(uuid())
   caseId           String

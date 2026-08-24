@@ -436,6 +436,41 @@ exports.Prisma.TrustedComputationReceiptScalarFieldEnum = {
   createdAt: 'createdAt'
 };
 
+exports.Prisma.IntegrityChainHeadScalarFieldEnum = {
+  chainKey: 'chainKey',
+  chainVersion: 'chainVersion',
+  departmentId: 'departmentId',
+  jurisdictionId: 'jurisdictionId',
+  latestSequence: 'latestSequence',
+  latestEventId: 'latestEventId',
+  latestEventHash: 'latestEventHash',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.IntegrityAuditEventScalarFieldEnum = {
+  id: 'id',
+  chainKey: 'chainKey',
+  chainVersion: 'chainVersion',
+  sequenceNumber: 'sequenceNumber',
+  previousEventId: 'previousEventId',
+  previousEventHash: 'previousEventHash',
+  eventHash: 'eventHash',
+  payloadHash: 'payloadHash',
+  payloadContractVersion: 'payloadContractVersion',
+  payload: 'payload',
+  eventType: 'eventType',
+  actorUserId: 'actorUserId',
+  actorRoleSnapshot: 'actorRoleSnapshot',
+  departmentId: 'departmentId',
+  jurisdictionId: 'jurisdictionId',
+  resourceType: 'resourceType',
+  resourceId: 'resourceId',
+  sourceEventKey: 'sourceEventKey',
+  occurredAt: 'occurredAt',
+  recordedAt: 'recordedAt'
+};
+
 exports.Prisma.InfrastructureIntelligenceAssessmentScalarFieldEnum = {
   id: 'id',
   caseId: 'caseId',
@@ -1115,6 +1150,8 @@ exports.Prisma.ModelName = {
   Inspection: 'Inspection',
   RiskAssessment: 'RiskAssessment',
   TrustedComputationReceipt: 'TrustedComputationReceipt',
+  IntegrityChainHead: 'IntegrityChainHead',
+  IntegrityAuditEvent: 'IntegrityAuditEvent',
   InfrastructureIntelligenceAssessment: 'InfrastructureIntelligenceAssessment',
   InfrastructureIntelligenceReconciliation: 'InfrastructureIntelligenceReconciliation',
   OperationalResponsePlan: 'OperationalResponsePlan',

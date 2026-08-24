@@ -7,6 +7,7 @@ import {
 } from '../../security/organizational-scope';
 import { riskAssessedTransition } from '../../workflow/case-state-machine';
 import { localVerifiedRiskProvider } from '../trusted-computation/trusted-computation.provider';
+import { appendIntegrityEvent, riskIntegrityFacts } from '../integrity/integrity.service';
 
 // Type definitions for output
 export interface RiskCalculationResult {
@@ -398,11 +399,19 @@ export async function runAssessmentForCase(caseId: string, principal: Organizati
     });
 
     // 2. Persist immutable computation lineage in the same transaction.
-    await tx.trustedComputationReceipt.create({
+    const receipt = await tx.trustedComputationReceipt.create({
       data: { riskAssessmentId: createdAssessment.id, ...execution.receipt }
     });
 
-    // 3. Update Case risk level, priority level, and status
+    // 3. Commit a tamper-evident governance event atomically with the authoritative records.
+    await appendIntegrityEvent(tx, {
+      eventType: 'RISK_ASSESSMENT_RECORDED', sourceEventKey: `RISK_ASSESSMENT:${createdAssessment.id}`,
+      resourceType: 'RiskAssessment', resourceId: createdAssessment.id, actor: principal,
+      departmentId: existingCase.asset.departmentId, jurisdictionId: existingCase.asset.jurisdictionId,
+      occurredAt: createdAssessment.createdAt, facts: riskIntegrityFacts(createdAssessment, receipt)
+    });
+
+    // 4. Update Case risk level, priority level, and status
     await tx.case.update({
       where: { id: caseId },
       data: {
