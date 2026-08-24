@@ -214,6 +214,29 @@ enum PlanningEstimateStatus {
   WITHDRAWN
 }
 
+enum PredictiveProvenanceClass {
+  PRODUCTION
+  PILOT
+  DEMO
+  SYNTHETIC
+  TEST
+}
+
+enum PredictiveTargetType {
+  TASK_LATENESS
+}
+
+enum PredictiveRecordStatus {
+  ACTIVE
+  VOID
+}
+
+enum PredictiveOutcomeValue {
+  LATE
+  ON_TIME
+  CANCELLED
+}
+
 model Department {
   id                         String                      @id @default(uuid())
   name                       String
@@ -300,6 +323,10 @@ model User {
   ingestedExternalObservations       ExternalObservation[]
   preparedCaseResourceEstimates      CaseResourceEstimate[]       @relation("CaseResourceEstimatePreparer")
   createdPortfolioScenarios          PortfolioScenario[]          @relation("PortfolioScenarioCreator")
+  createdPredictiveSnapshots         PredictiveFeatureSnapshot[]  @relation("PredictiveSnapshotCreator")
+  voidedPredictiveSnapshots          PredictiveFeatureSnapshot[]  @relation("PredictiveSnapshotVoider")
+  recordedPredictiveOutcomes         PredictiveOutcome[]          @relation("PredictiveOutcomeRecorder")
+  voidedPredictiveOutcomes           PredictiveOutcome[]          @relation("PredictiveOutcomeVoider")
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -1032,6 +1059,7 @@ model ExecutionTask {
   dependencies              ExecutionTaskDependency[]      @relation("DependentTask")
   requiredBy                ExecutionTaskDependency[]      @relation("PredecessorTask")
   blockerEvents             ExecutionTaskBlockerEvent[]
+  predictiveSnapshots       PredictiveFeatureSnapshot[]
 
   @@unique([executionPlanId, sequenceNumber])
   @@unique([executionPlanId, sourceActionCode, templateTaskKey])
@@ -1044,6 +1072,72 @@ model ExecutionTask {
   @@index([governedTaskTemplateId])
   @@index([executionPlanId, plannedStartAt])
   @@index([executionPlanId, plannedEndAt])
+}
+
+model PredictiveFeatureSnapshot {
+  id                     String                    @id @default(uuid())
+  targetType             PredictiveTargetType
+  executionTaskId        String
+  caseId                 String
+  assetId                String
+  departmentId           String
+  jurisdictionId         String
+  predictionTimestamp    DateTime
+  featureContractVersion String
+  featurePayload         Json
+  provenanceClass        PredictiveProvenanceClass
+  sourceReferences       Json
+  sourceFingerprint      String                    @unique
+  status                 PredictiveRecordStatus    @default(ACTIVE)
+  createdById            String
+  createdAt              DateTime                  @default(now())
+  voidedAt               DateTime?
+  voidedById             String?
+  voidReason             String?
+  replacementSnapshotId  String?                   @unique
+
+  executionTask       ExecutionTask              @relation(fields: [executionTaskId], references: [id], onDelete: Restrict)
+  createdBy           User                       @relation("PredictiveSnapshotCreator", fields: [createdById], references: [id], onDelete: Restrict)
+  voidedBy            User?                      @relation("PredictiveSnapshotVoider", fields: [voidedById], references: [id], onDelete: Restrict)
+  replacementSnapshot PredictiveFeatureSnapshot? @relation("PredictiveSnapshotReplacement", fields: [replacementSnapshotId], references: [id], onDelete: Restrict)
+  replaces            PredictiveFeatureSnapshot? @relation("PredictiveSnapshotReplacement")
+  outcomes            PredictiveOutcome[]
+
+  @@unique([executionTaskId, targetType, featureContractVersion])
+  @@index([departmentId, jurisdictionId, targetType, predictionTimestamp, id])
+  @@index([provenanceClass, status])
+  @@index([caseId])
+  @@index([assetId])
+  @@index([createdById])
+}
+
+model PredictiveOutcome {
+  id                     String                    @id @default(uuid())
+  snapshotId             String
+  outcomeContractVersion String
+  outcomeTimestamp       DateTime
+  outcomeValue           PredictiveOutcomeValue
+  provenanceClass        PredictiveProvenanceClass
+  sourceReferences       Json
+  sourceFingerprint      String                    @unique
+  status                 PredictiveRecordStatus    @default(ACTIVE)
+  recordedById           String
+  recordedAt             DateTime                  @default(now())
+  voidedAt               DateTime?
+  voidedById             String?
+  voidReason             String?
+  replacementOutcomeId   String?                   @unique
+
+  snapshot           PredictiveFeatureSnapshot @relation(fields: [snapshotId], references: [id], onDelete: Restrict)
+  recordedBy         User                      @relation("PredictiveOutcomeRecorder", fields: [recordedById], references: [id], onDelete: Restrict)
+  voidedBy           User?                     @relation("PredictiveOutcomeVoider", fields: [voidedById], references: [id], onDelete: Restrict)
+  replacementOutcome PredictiveOutcome?        @relation("PredictiveOutcomeReplacement", fields: [replacementOutcomeId], references: [id], onDelete: Restrict)
+  replaces           PredictiveOutcome?        @relation("PredictiveOutcomeReplacement")
+
+  @@unique([snapshotId, outcomeContractVersion])
+  @@index([outcomeValue, outcomeTimestamp])
+  @@index([provenanceClass, status])
+  @@index([recordedById])
 }
 
 model ExecutionTaskDependency {

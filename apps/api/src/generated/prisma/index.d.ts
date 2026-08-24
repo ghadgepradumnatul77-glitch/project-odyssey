@@ -144,6 +144,16 @@ export type ExecutionPlan = $Result.DefaultSelection<Prisma.$ExecutionPlanPayloa
  */
 export type ExecutionTask = $Result.DefaultSelection<Prisma.$ExecutionTaskPayload>
 /**
+ * Model PredictiveFeatureSnapshot
+ * 
+ */
+export type PredictiveFeatureSnapshot = $Result.DefaultSelection<Prisma.$PredictiveFeatureSnapshotPayload>
+/**
+ * Model PredictiveOutcome
+ * 
+ */
+export type PredictiveOutcome = $Result.DefaultSelection<Prisma.$PredictiveOutcomePayload>
+/**
  * Model ExecutionTaskDependency
  * 
  */
@@ -459,6 +469,41 @@ export const PlanningEstimateStatus: {
 
 export type PlanningEstimateStatus = (typeof PlanningEstimateStatus)[keyof typeof PlanningEstimateStatus]
 
+
+export const PredictiveProvenanceClass: {
+  PRODUCTION: 'PRODUCTION',
+  PILOT: 'PILOT',
+  DEMO: 'DEMO',
+  SYNTHETIC: 'SYNTHETIC',
+  TEST: 'TEST'
+};
+
+export type PredictiveProvenanceClass = (typeof PredictiveProvenanceClass)[keyof typeof PredictiveProvenanceClass]
+
+
+export const PredictiveTargetType: {
+  TASK_LATENESS: 'TASK_LATENESS'
+};
+
+export type PredictiveTargetType = (typeof PredictiveTargetType)[keyof typeof PredictiveTargetType]
+
+
+export const PredictiveRecordStatus: {
+  ACTIVE: 'ACTIVE',
+  VOID: 'VOID'
+};
+
+export type PredictiveRecordStatus = (typeof PredictiveRecordStatus)[keyof typeof PredictiveRecordStatus]
+
+
+export const PredictiveOutcomeValue: {
+  LATE: 'LATE',
+  ON_TIME: 'ON_TIME',
+  CANCELLED: 'CANCELLED'
+};
+
+export type PredictiveOutcomeValue = (typeof PredictiveOutcomeValue)[keyof typeof PredictiveOutcomeValue]
+
 }
 
 export type UserStatus = $Enums.UserStatus
@@ -568,6 +613,22 @@ export const IntelligenceAssessmentStatus: typeof $Enums.IntelligenceAssessmentS
 export type PlanningEstimateStatus = $Enums.PlanningEstimateStatus
 
 export const PlanningEstimateStatus: typeof $Enums.PlanningEstimateStatus
+
+export type PredictiveProvenanceClass = $Enums.PredictiveProvenanceClass
+
+export const PredictiveProvenanceClass: typeof $Enums.PredictiveProvenanceClass
+
+export type PredictiveTargetType = $Enums.PredictiveTargetType
+
+export const PredictiveTargetType: typeof $Enums.PredictiveTargetType
+
+export type PredictiveRecordStatus = $Enums.PredictiveRecordStatus
+
+export const PredictiveRecordStatus: typeof $Enums.PredictiveRecordStatus
+
+export type PredictiveOutcomeValue = $Enums.PredictiveOutcomeValue
+
+export const PredictiveOutcomeValue: typeof $Enums.PredictiveOutcomeValue
 
 /**
  * ##  Prisma Client ʲˢ
@@ -946,6 +1007,26 @@ export class PrismaClient<
     * ```
     */
   get executionTask(): Prisma.ExecutionTaskDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.predictiveFeatureSnapshot`: Exposes CRUD operations for the **PredictiveFeatureSnapshot** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more PredictiveFeatureSnapshots
+    * const predictiveFeatureSnapshots = await prisma.predictiveFeatureSnapshot.findMany()
+    * ```
+    */
+  get predictiveFeatureSnapshot(): Prisma.PredictiveFeatureSnapshotDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.predictiveOutcome`: Exposes CRUD operations for the **PredictiveOutcome** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more PredictiveOutcomes
+    * const predictiveOutcomes = await prisma.predictiveOutcome.findMany()
+    * ```
+    */
+  get predictiveOutcome(): Prisma.PredictiveOutcomeDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.executionTaskDependency`: Exposes CRUD operations for the **ExecutionTaskDependency** model.
@@ -1463,6 +1544,8 @@ export namespace Prisma {
     OrpDecision: 'OrpDecision',
     ExecutionPlan: 'ExecutionPlan',
     ExecutionTask: 'ExecutionTask',
+    PredictiveFeatureSnapshot: 'PredictiveFeatureSnapshot',
+    PredictiveOutcome: 'PredictiveOutcome',
     ExecutionTaskDependency: 'ExecutionTaskDependency',
     ExecutionTaskBlockerEvent: 'ExecutionTaskBlockerEvent',
     ExecutionScheduleRevision: 'ExecutionScheduleRevision',
@@ -1486,7 +1569,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "department" | "jurisdiction" | "user" | "asset" | "publicReport" | "publicReportTriageAnalysis" | "policyDocument" | "approvedActionVersion" | "governedExecutionTemplate" | "governedExecutionTaskTemplate" | "policyRule" | "case" | "caseResourceEstimate" | "portfolioScenario" | "observationSource" | "externalObservation" | "inspection" | "riskAssessment" | "infrastructureIntelligenceAssessment" | "infrastructureIntelligenceReconciliation" | "operationalResponsePlan" | "decisionPackage" | "approvalAuthority" | "orpDecision" | "executionPlan" | "executionTask" | "executionTaskDependency" | "executionTaskBlockerEvent" | "executionScheduleRevision" | "executionEvidence" | "caseClosure"
+      modelProps: "department" | "jurisdiction" | "user" | "asset" | "publicReport" | "publicReportTriageAnalysis" | "policyDocument" | "approvedActionVersion" | "governedExecutionTemplate" | "governedExecutionTaskTemplate" | "policyRule" | "case" | "caseResourceEstimate" | "portfolioScenario" | "observationSource" | "externalObservation" | "inspection" | "riskAssessment" | "infrastructureIntelligenceAssessment" | "infrastructureIntelligenceReconciliation" | "operationalResponsePlan" | "decisionPackage" | "approvalAuthority" | "orpDecision" | "executionPlan" | "executionTask" | "predictiveFeatureSnapshot" | "predictiveOutcome" | "executionTaskDependency" | "executionTaskBlockerEvent" | "executionScheduleRevision" | "executionEvidence" | "caseClosure"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -3414,6 +3497,154 @@ export namespace Prisma {
           }
         }
       }
+      PredictiveFeatureSnapshot: {
+        payload: Prisma.$PredictiveFeatureSnapshotPayload<ExtArgs>
+        fields: Prisma.PredictiveFeatureSnapshotFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.PredictiveFeatureSnapshotFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PredictiveFeatureSnapshotPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.PredictiveFeatureSnapshotFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PredictiveFeatureSnapshotPayload>
+          }
+          findFirst: {
+            args: Prisma.PredictiveFeatureSnapshotFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PredictiveFeatureSnapshotPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.PredictiveFeatureSnapshotFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PredictiveFeatureSnapshotPayload>
+          }
+          findMany: {
+            args: Prisma.PredictiveFeatureSnapshotFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PredictiveFeatureSnapshotPayload>[]
+          }
+          create: {
+            args: Prisma.PredictiveFeatureSnapshotCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PredictiveFeatureSnapshotPayload>
+          }
+          createMany: {
+            args: Prisma.PredictiveFeatureSnapshotCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.PredictiveFeatureSnapshotCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PredictiveFeatureSnapshotPayload>[]
+          }
+          delete: {
+            args: Prisma.PredictiveFeatureSnapshotDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PredictiveFeatureSnapshotPayload>
+          }
+          update: {
+            args: Prisma.PredictiveFeatureSnapshotUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PredictiveFeatureSnapshotPayload>
+          }
+          deleteMany: {
+            args: Prisma.PredictiveFeatureSnapshotDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.PredictiveFeatureSnapshotUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.PredictiveFeatureSnapshotUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PredictiveFeatureSnapshotPayload>[]
+          }
+          upsert: {
+            args: Prisma.PredictiveFeatureSnapshotUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PredictiveFeatureSnapshotPayload>
+          }
+          aggregate: {
+            args: Prisma.PredictiveFeatureSnapshotAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregatePredictiveFeatureSnapshot>
+          }
+          groupBy: {
+            args: Prisma.PredictiveFeatureSnapshotGroupByArgs<ExtArgs>
+            result: $Utils.Optional<PredictiveFeatureSnapshotGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.PredictiveFeatureSnapshotCountArgs<ExtArgs>
+            result: $Utils.Optional<PredictiveFeatureSnapshotCountAggregateOutputType> | number
+          }
+        }
+      }
+      PredictiveOutcome: {
+        payload: Prisma.$PredictiveOutcomePayload<ExtArgs>
+        fields: Prisma.PredictiveOutcomeFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.PredictiveOutcomeFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PredictiveOutcomePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.PredictiveOutcomeFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PredictiveOutcomePayload>
+          }
+          findFirst: {
+            args: Prisma.PredictiveOutcomeFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PredictiveOutcomePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.PredictiveOutcomeFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PredictiveOutcomePayload>
+          }
+          findMany: {
+            args: Prisma.PredictiveOutcomeFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PredictiveOutcomePayload>[]
+          }
+          create: {
+            args: Prisma.PredictiveOutcomeCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PredictiveOutcomePayload>
+          }
+          createMany: {
+            args: Prisma.PredictiveOutcomeCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.PredictiveOutcomeCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PredictiveOutcomePayload>[]
+          }
+          delete: {
+            args: Prisma.PredictiveOutcomeDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PredictiveOutcomePayload>
+          }
+          update: {
+            args: Prisma.PredictiveOutcomeUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PredictiveOutcomePayload>
+          }
+          deleteMany: {
+            args: Prisma.PredictiveOutcomeDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.PredictiveOutcomeUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.PredictiveOutcomeUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PredictiveOutcomePayload>[]
+          }
+          upsert: {
+            args: Prisma.PredictiveOutcomeUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PredictiveOutcomePayload>
+          }
+          aggregate: {
+            args: Prisma.PredictiveOutcomeAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregatePredictiveOutcome>
+          }
+          groupBy: {
+            args: Prisma.PredictiveOutcomeGroupByArgs<ExtArgs>
+            result: $Utils.Optional<PredictiveOutcomeGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.PredictiveOutcomeCountArgs<ExtArgs>
+            result: $Utils.Optional<PredictiveOutcomeCountAggregateOutputType> | number
+          }
+        }
+      }
       ExecutionTaskDependency: {
         payload: Prisma.$ExecutionTaskDependencyPayload<ExtArgs>
         fields: Prisma.ExecutionTaskDependencyFieldRefs
@@ -3906,6 +4137,8 @@ export namespace Prisma {
     orpDecision?: OrpDecisionOmit
     executionPlan?: ExecutionPlanOmit
     executionTask?: ExecutionTaskOmit
+    predictiveFeatureSnapshot?: PredictiveFeatureSnapshotOmit
+    predictiveOutcome?: PredictiveOutcomeOmit
     executionTaskDependency?: ExecutionTaskDependencyOmit
     executionTaskBlockerEvent?: ExecutionTaskBlockerEventOmit
     executionScheduleRevision?: ExecutionScheduleRevisionOmit
@@ -4255,6 +4488,10 @@ export namespace Prisma {
     ingestedExternalObservations: number
     preparedCaseResourceEstimates: number
     createdPortfolioScenarios: number
+    createdPredictiveSnapshots: number
+    voidedPredictiveSnapshots: number
+    recordedPredictiveOutcomes: number
+    voidedPredictiveOutcomes: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4289,6 +4526,10 @@ export namespace Prisma {
     ingestedExternalObservations?: boolean | UserCountOutputTypeCountIngestedExternalObservationsArgs
     preparedCaseResourceEstimates?: boolean | UserCountOutputTypeCountPreparedCaseResourceEstimatesArgs
     createdPortfolioScenarios?: boolean | UserCountOutputTypeCountCreatedPortfolioScenariosArgs
+    createdPredictiveSnapshots?: boolean | UserCountOutputTypeCountCreatedPredictiveSnapshotsArgs
+    voidedPredictiveSnapshots?: boolean | UserCountOutputTypeCountVoidedPredictiveSnapshotsArgs
+    recordedPredictiveOutcomes?: boolean | UserCountOutputTypeCountRecordedPredictiveOutcomesArgs
+    voidedPredictiveOutcomes?: boolean | UserCountOutputTypeCountVoidedPredictiveOutcomesArgs
   }
 
   // Custom InputTypes
@@ -4517,6 +4758,34 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountCreatedPortfolioScenariosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: PortfolioScenarioWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountCreatedPredictiveSnapshotsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PredictiveFeatureSnapshotWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountVoidedPredictiveSnapshotsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PredictiveFeatureSnapshotWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountRecordedPredictiveOutcomesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PredictiveOutcomeWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountVoidedPredictiveOutcomesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PredictiveOutcomeWhereInput
   }
 
 
@@ -5202,6 +5471,7 @@ export namespace Prisma {
     dependencies: number
     requiredBy: number
     blockerEvents: number
+    predictiveSnapshots: number
   }
 
   export type ExecutionTaskCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5210,6 +5480,7 @@ export namespace Prisma {
     dependencies?: boolean | ExecutionTaskCountOutputTypeCountDependenciesArgs
     requiredBy?: boolean | ExecutionTaskCountOutputTypeCountRequiredByArgs
     blockerEvents?: boolean | ExecutionTaskCountOutputTypeCountBlockerEventsArgs
+    predictiveSnapshots?: boolean | ExecutionTaskCountOutputTypeCountPredictiveSnapshotsArgs
   }
 
   // Custom InputTypes
@@ -5256,6 +5527,44 @@ export namespace Prisma {
    */
   export type ExecutionTaskCountOutputTypeCountBlockerEventsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ExecutionTaskBlockerEventWhereInput
+  }
+
+  /**
+   * ExecutionTaskCountOutputType without action
+   */
+  export type ExecutionTaskCountOutputTypeCountPredictiveSnapshotsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PredictiveFeatureSnapshotWhereInput
+  }
+
+
+  /**
+   * Count Type PredictiveFeatureSnapshotCountOutputType
+   */
+
+  export type PredictiveFeatureSnapshotCountOutputType = {
+    outcomes: number
+  }
+
+  export type PredictiveFeatureSnapshotCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    outcomes?: boolean | PredictiveFeatureSnapshotCountOutputTypeCountOutcomesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * PredictiveFeatureSnapshotCountOutputType without action
+   */
+  export type PredictiveFeatureSnapshotCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveFeatureSnapshotCountOutputType
+     */
+    select?: PredictiveFeatureSnapshotCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * PredictiveFeatureSnapshotCountOutputType without action
+   */
+  export type PredictiveFeatureSnapshotCountOutputTypeCountOutcomesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PredictiveOutcomeWhereInput
   }
 
 
@@ -8193,6 +8502,10 @@ export namespace Prisma {
     ingestedExternalObservations?: boolean | User$ingestedExternalObservationsArgs<ExtArgs>
     preparedCaseResourceEstimates?: boolean | User$preparedCaseResourceEstimatesArgs<ExtArgs>
     createdPortfolioScenarios?: boolean | User$createdPortfolioScenariosArgs<ExtArgs>
+    createdPredictiveSnapshots?: boolean | User$createdPredictiveSnapshotsArgs<ExtArgs>
+    voidedPredictiveSnapshots?: boolean | User$voidedPredictiveSnapshotsArgs<ExtArgs>
+    recordedPredictiveOutcomes?: boolean | User$recordedPredictiveOutcomesArgs<ExtArgs>
+    voidedPredictiveOutcomes?: boolean | User$voidedPredictiveOutcomesArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -8280,6 +8593,10 @@ export namespace Prisma {
     ingestedExternalObservations?: boolean | User$ingestedExternalObservationsArgs<ExtArgs>
     preparedCaseResourceEstimates?: boolean | User$preparedCaseResourceEstimatesArgs<ExtArgs>
     createdPortfolioScenarios?: boolean | User$createdPortfolioScenariosArgs<ExtArgs>
+    createdPredictiveSnapshots?: boolean | User$createdPredictiveSnapshotsArgs<ExtArgs>
+    voidedPredictiveSnapshots?: boolean | User$voidedPredictiveSnapshotsArgs<ExtArgs>
+    recordedPredictiveOutcomes?: boolean | User$recordedPredictiveOutcomesArgs<ExtArgs>
+    voidedPredictiveOutcomes?: boolean | User$voidedPredictiveOutcomesArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -8327,6 +8644,10 @@ export namespace Prisma {
       ingestedExternalObservations: Prisma.$ExternalObservationPayload<ExtArgs>[]
       preparedCaseResourceEstimates: Prisma.$CaseResourceEstimatePayload<ExtArgs>[]
       createdPortfolioScenarios: Prisma.$PortfolioScenarioPayload<ExtArgs>[]
+      createdPredictiveSnapshots: Prisma.$PredictiveFeatureSnapshotPayload<ExtArgs>[]
+      voidedPredictiveSnapshots: Prisma.$PredictiveFeatureSnapshotPayload<ExtArgs>[]
+      recordedPredictiveOutcomes: Prisma.$PredictiveOutcomePayload<ExtArgs>[]
+      voidedPredictiveOutcomes: Prisma.$PredictiveOutcomePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -8768,6 +9089,10 @@ export namespace Prisma {
     ingestedExternalObservations<T extends User$ingestedExternalObservationsArgs<ExtArgs> = {}>(args?: Subset<T, User$ingestedExternalObservationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExternalObservationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     preparedCaseResourceEstimates<T extends User$preparedCaseResourceEstimatesArgs<ExtArgs> = {}>(args?: Subset<T, User$preparedCaseResourceEstimatesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CaseResourceEstimatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     createdPortfolioScenarios<T extends User$createdPortfolioScenariosArgs<ExtArgs> = {}>(args?: Subset<T, User$createdPortfolioScenariosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PortfolioScenarioPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    createdPredictiveSnapshots<T extends User$createdPredictiveSnapshotsArgs<ExtArgs> = {}>(args?: Subset<T, User$createdPredictiveSnapshotsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PredictiveFeatureSnapshotPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    voidedPredictiveSnapshots<T extends User$voidedPredictiveSnapshotsArgs<ExtArgs> = {}>(args?: Subset<T, User$voidedPredictiveSnapshotsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PredictiveFeatureSnapshotPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    recordedPredictiveOutcomes<T extends User$recordedPredictiveOutcomesArgs<ExtArgs> = {}>(args?: Subset<T, User$recordedPredictiveOutcomesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PredictiveOutcomePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    voidedPredictiveOutcomes<T extends User$voidedPredictiveOutcomesArgs<ExtArgs> = {}>(args?: Subset<T, User$voidedPredictiveOutcomesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PredictiveOutcomePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -9946,6 +10271,102 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: PortfolioScenarioScalarFieldEnum | PortfolioScenarioScalarFieldEnum[]
+  }
+
+  /**
+   * User.createdPredictiveSnapshots
+   */
+  export type User$createdPredictiveSnapshotsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveFeatureSnapshot
+     */
+    select?: PredictiveFeatureSnapshotSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveFeatureSnapshot
+     */
+    omit?: PredictiveFeatureSnapshotOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveFeatureSnapshotInclude<ExtArgs> | null
+    where?: PredictiveFeatureSnapshotWhereInput
+    orderBy?: PredictiveFeatureSnapshotOrderByWithRelationInput | PredictiveFeatureSnapshotOrderByWithRelationInput[]
+    cursor?: PredictiveFeatureSnapshotWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PredictiveFeatureSnapshotScalarFieldEnum | PredictiveFeatureSnapshotScalarFieldEnum[]
+  }
+
+  /**
+   * User.voidedPredictiveSnapshots
+   */
+  export type User$voidedPredictiveSnapshotsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveFeatureSnapshot
+     */
+    select?: PredictiveFeatureSnapshotSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveFeatureSnapshot
+     */
+    omit?: PredictiveFeatureSnapshotOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveFeatureSnapshotInclude<ExtArgs> | null
+    where?: PredictiveFeatureSnapshotWhereInput
+    orderBy?: PredictiveFeatureSnapshotOrderByWithRelationInput | PredictiveFeatureSnapshotOrderByWithRelationInput[]
+    cursor?: PredictiveFeatureSnapshotWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PredictiveFeatureSnapshotScalarFieldEnum | PredictiveFeatureSnapshotScalarFieldEnum[]
+  }
+
+  /**
+   * User.recordedPredictiveOutcomes
+   */
+  export type User$recordedPredictiveOutcomesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveOutcome
+     */
+    select?: PredictiveOutcomeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveOutcome
+     */
+    omit?: PredictiveOutcomeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveOutcomeInclude<ExtArgs> | null
+    where?: PredictiveOutcomeWhereInput
+    orderBy?: PredictiveOutcomeOrderByWithRelationInput | PredictiveOutcomeOrderByWithRelationInput[]
+    cursor?: PredictiveOutcomeWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PredictiveOutcomeScalarFieldEnum | PredictiveOutcomeScalarFieldEnum[]
+  }
+
+  /**
+   * User.voidedPredictiveOutcomes
+   */
+  export type User$voidedPredictiveOutcomesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveOutcome
+     */
+    select?: PredictiveOutcomeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveOutcome
+     */
+    omit?: PredictiveOutcomeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveOutcomeInclude<ExtArgs> | null
+    where?: PredictiveOutcomeWhereInput
+    orderBy?: PredictiveOutcomeOrderByWithRelationInput | PredictiveOutcomeOrderByWithRelationInput[]
+    cursor?: PredictiveOutcomeWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PredictiveOutcomeScalarFieldEnum | PredictiveOutcomeScalarFieldEnum[]
   }
 
   /**
@@ -39164,6 +39585,7 @@ export namespace Prisma {
     dependencies?: boolean | ExecutionTask$dependenciesArgs<ExtArgs>
     requiredBy?: boolean | ExecutionTask$requiredByArgs<ExtArgs>
     blockerEvents?: boolean | ExecutionTask$blockerEventsArgs<ExtArgs>
+    predictiveSnapshots?: boolean | ExecutionTask$predictiveSnapshotsArgs<ExtArgs>
     _count?: boolean | ExecutionTaskCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["executionTask"]>
 
@@ -39318,6 +39740,7 @@ export namespace Prisma {
     dependencies?: boolean | ExecutionTask$dependenciesArgs<ExtArgs>
     requiredBy?: boolean | ExecutionTask$requiredByArgs<ExtArgs>
     blockerEvents?: boolean | ExecutionTask$blockerEventsArgs<ExtArgs>
+    predictiveSnapshots?: boolean | ExecutionTask$predictiveSnapshotsArgs<ExtArgs>
     _count?: boolean | ExecutionTaskCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ExecutionTaskIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -39360,6 +39783,7 @@ export namespace Prisma {
       dependencies: Prisma.$ExecutionTaskDependencyPayload<ExtArgs>[]
       requiredBy: Prisma.$ExecutionTaskDependencyPayload<ExtArgs>[]
       blockerEvents: Prisma.$ExecutionTaskBlockerEventPayload<ExtArgs>[]
+      predictiveSnapshots: Prisma.$PredictiveFeatureSnapshotPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -39806,6 +40230,7 @@ export namespace Prisma {
     dependencies<T extends ExecutionTask$dependenciesArgs<ExtArgs> = {}>(args?: Subset<T, ExecutionTask$dependenciesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExecutionTaskDependencyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     requiredBy<T extends ExecutionTask$requiredByArgs<ExtArgs> = {}>(args?: Subset<T, ExecutionTask$requiredByArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExecutionTaskDependencyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     blockerEvents<T extends ExecutionTask$blockerEventsArgs<ExtArgs> = {}>(args?: Subset<T, ExecutionTask$blockerEventsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExecutionTaskBlockerEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    predictiveSnapshots<T extends ExecutionTask$predictiveSnapshotsArgs<ExtArgs> = {}>(args?: Subset<T, ExecutionTask$predictiveSnapshotsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PredictiveFeatureSnapshotPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -40539,6 +40964,30 @@ export namespace Prisma {
   }
 
   /**
+   * ExecutionTask.predictiveSnapshots
+   */
+  export type ExecutionTask$predictiveSnapshotsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveFeatureSnapshot
+     */
+    select?: PredictiveFeatureSnapshotSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveFeatureSnapshot
+     */
+    omit?: PredictiveFeatureSnapshotOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveFeatureSnapshotInclude<ExtArgs> | null
+    where?: PredictiveFeatureSnapshotWhereInput
+    orderBy?: PredictiveFeatureSnapshotOrderByWithRelationInput | PredictiveFeatureSnapshotOrderByWithRelationInput[]
+    cursor?: PredictiveFeatureSnapshotWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PredictiveFeatureSnapshotScalarFieldEnum | PredictiveFeatureSnapshotScalarFieldEnum[]
+  }
+
+  /**
    * ExecutionTask without action
    */
   export type ExecutionTaskDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -40554,6 +41003,2635 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: ExecutionTaskInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model PredictiveFeatureSnapshot
+   */
+
+  export type AggregatePredictiveFeatureSnapshot = {
+    _count: PredictiveFeatureSnapshotCountAggregateOutputType | null
+    _min: PredictiveFeatureSnapshotMinAggregateOutputType | null
+    _max: PredictiveFeatureSnapshotMaxAggregateOutputType | null
+  }
+
+  export type PredictiveFeatureSnapshotMinAggregateOutputType = {
+    id: string | null
+    targetType: $Enums.PredictiveTargetType | null
+    executionTaskId: string | null
+    caseId: string | null
+    assetId: string | null
+    departmentId: string | null
+    jurisdictionId: string | null
+    predictionTimestamp: Date | null
+    featureContractVersion: string | null
+    provenanceClass: $Enums.PredictiveProvenanceClass | null
+    sourceFingerprint: string | null
+    status: $Enums.PredictiveRecordStatus | null
+    createdById: string | null
+    createdAt: Date | null
+    voidedAt: Date | null
+    voidedById: string | null
+    voidReason: string | null
+    replacementSnapshotId: string | null
+  }
+
+  export type PredictiveFeatureSnapshotMaxAggregateOutputType = {
+    id: string | null
+    targetType: $Enums.PredictiveTargetType | null
+    executionTaskId: string | null
+    caseId: string | null
+    assetId: string | null
+    departmentId: string | null
+    jurisdictionId: string | null
+    predictionTimestamp: Date | null
+    featureContractVersion: string | null
+    provenanceClass: $Enums.PredictiveProvenanceClass | null
+    sourceFingerprint: string | null
+    status: $Enums.PredictiveRecordStatus | null
+    createdById: string | null
+    createdAt: Date | null
+    voidedAt: Date | null
+    voidedById: string | null
+    voidReason: string | null
+    replacementSnapshotId: string | null
+  }
+
+  export type PredictiveFeatureSnapshotCountAggregateOutputType = {
+    id: number
+    targetType: number
+    executionTaskId: number
+    caseId: number
+    assetId: number
+    departmentId: number
+    jurisdictionId: number
+    predictionTimestamp: number
+    featureContractVersion: number
+    featurePayload: number
+    provenanceClass: number
+    sourceReferences: number
+    sourceFingerprint: number
+    status: number
+    createdById: number
+    createdAt: number
+    voidedAt: number
+    voidedById: number
+    voidReason: number
+    replacementSnapshotId: number
+    _all: number
+  }
+
+
+  export type PredictiveFeatureSnapshotMinAggregateInputType = {
+    id?: true
+    targetType?: true
+    executionTaskId?: true
+    caseId?: true
+    assetId?: true
+    departmentId?: true
+    jurisdictionId?: true
+    predictionTimestamp?: true
+    featureContractVersion?: true
+    provenanceClass?: true
+    sourceFingerprint?: true
+    status?: true
+    createdById?: true
+    createdAt?: true
+    voidedAt?: true
+    voidedById?: true
+    voidReason?: true
+    replacementSnapshotId?: true
+  }
+
+  export type PredictiveFeatureSnapshotMaxAggregateInputType = {
+    id?: true
+    targetType?: true
+    executionTaskId?: true
+    caseId?: true
+    assetId?: true
+    departmentId?: true
+    jurisdictionId?: true
+    predictionTimestamp?: true
+    featureContractVersion?: true
+    provenanceClass?: true
+    sourceFingerprint?: true
+    status?: true
+    createdById?: true
+    createdAt?: true
+    voidedAt?: true
+    voidedById?: true
+    voidReason?: true
+    replacementSnapshotId?: true
+  }
+
+  export type PredictiveFeatureSnapshotCountAggregateInputType = {
+    id?: true
+    targetType?: true
+    executionTaskId?: true
+    caseId?: true
+    assetId?: true
+    departmentId?: true
+    jurisdictionId?: true
+    predictionTimestamp?: true
+    featureContractVersion?: true
+    featurePayload?: true
+    provenanceClass?: true
+    sourceReferences?: true
+    sourceFingerprint?: true
+    status?: true
+    createdById?: true
+    createdAt?: true
+    voidedAt?: true
+    voidedById?: true
+    voidReason?: true
+    replacementSnapshotId?: true
+    _all?: true
+  }
+
+  export type PredictiveFeatureSnapshotAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PredictiveFeatureSnapshot to aggregate.
+     */
+    where?: PredictiveFeatureSnapshotWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PredictiveFeatureSnapshots to fetch.
+     */
+    orderBy?: PredictiveFeatureSnapshotOrderByWithRelationInput | PredictiveFeatureSnapshotOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: PredictiveFeatureSnapshotWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PredictiveFeatureSnapshots from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PredictiveFeatureSnapshots.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned PredictiveFeatureSnapshots
+    **/
+    _count?: true | PredictiveFeatureSnapshotCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: PredictiveFeatureSnapshotMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: PredictiveFeatureSnapshotMaxAggregateInputType
+  }
+
+  export type GetPredictiveFeatureSnapshotAggregateType<T extends PredictiveFeatureSnapshotAggregateArgs> = {
+        [P in keyof T & keyof AggregatePredictiveFeatureSnapshot]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePredictiveFeatureSnapshot[P]>
+      : GetScalarType<T[P], AggregatePredictiveFeatureSnapshot[P]>
+  }
+
+
+
+
+  export type PredictiveFeatureSnapshotGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PredictiveFeatureSnapshotWhereInput
+    orderBy?: PredictiveFeatureSnapshotOrderByWithAggregationInput | PredictiveFeatureSnapshotOrderByWithAggregationInput[]
+    by: PredictiveFeatureSnapshotScalarFieldEnum[] | PredictiveFeatureSnapshotScalarFieldEnum
+    having?: PredictiveFeatureSnapshotScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: PredictiveFeatureSnapshotCountAggregateInputType | true
+    _min?: PredictiveFeatureSnapshotMinAggregateInputType
+    _max?: PredictiveFeatureSnapshotMaxAggregateInputType
+  }
+
+  export type PredictiveFeatureSnapshotGroupByOutputType = {
+    id: string
+    targetType: $Enums.PredictiveTargetType
+    executionTaskId: string
+    caseId: string
+    assetId: string
+    departmentId: string
+    jurisdictionId: string
+    predictionTimestamp: Date
+    featureContractVersion: string
+    featurePayload: JsonValue
+    provenanceClass: $Enums.PredictiveProvenanceClass
+    sourceReferences: JsonValue
+    sourceFingerprint: string
+    status: $Enums.PredictiveRecordStatus
+    createdById: string
+    createdAt: Date
+    voidedAt: Date | null
+    voidedById: string | null
+    voidReason: string | null
+    replacementSnapshotId: string | null
+    _count: PredictiveFeatureSnapshotCountAggregateOutputType | null
+    _min: PredictiveFeatureSnapshotMinAggregateOutputType | null
+    _max: PredictiveFeatureSnapshotMaxAggregateOutputType | null
+  }
+
+  type GetPredictiveFeatureSnapshotGroupByPayload<T extends PredictiveFeatureSnapshotGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<PredictiveFeatureSnapshotGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof PredictiveFeatureSnapshotGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], PredictiveFeatureSnapshotGroupByOutputType[P]>
+            : GetScalarType<T[P], PredictiveFeatureSnapshotGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type PredictiveFeatureSnapshotSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    targetType?: boolean
+    executionTaskId?: boolean
+    caseId?: boolean
+    assetId?: boolean
+    departmentId?: boolean
+    jurisdictionId?: boolean
+    predictionTimestamp?: boolean
+    featureContractVersion?: boolean
+    featurePayload?: boolean
+    provenanceClass?: boolean
+    sourceReferences?: boolean
+    sourceFingerprint?: boolean
+    status?: boolean
+    createdById?: boolean
+    createdAt?: boolean
+    voidedAt?: boolean
+    voidedById?: boolean
+    voidReason?: boolean
+    replacementSnapshotId?: boolean
+    executionTask?: boolean | ExecutionTaskDefaultArgs<ExtArgs>
+    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+    voidedBy?: boolean | PredictiveFeatureSnapshot$voidedByArgs<ExtArgs>
+    replacementSnapshot?: boolean | PredictiveFeatureSnapshot$replacementSnapshotArgs<ExtArgs>
+    replaces?: boolean | PredictiveFeatureSnapshot$replacesArgs<ExtArgs>
+    outcomes?: boolean | PredictiveFeatureSnapshot$outcomesArgs<ExtArgs>
+    _count?: boolean | PredictiveFeatureSnapshotCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["predictiveFeatureSnapshot"]>
+
+  export type PredictiveFeatureSnapshotSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    targetType?: boolean
+    executionTaskId?: boolean
+    caseId?: boolean
+    assetId?: boolean
+    departmentId?: boolean
+    jurisdictionId?: boolean
+    predictionTimestamp?: boolean
+    featureContractVersion?: boolean
+    featurePayload?: boolean
+    provenanceClass?: boolean
+    sourceReferences?: boolean
+    sourceFingerprint?: boolean
+    status?: boolean
+    createdById?: boolean
+    createdAt?: boolean
+    voidedAt?: boolean
+    voidedById?: boolean
+    voidReason?: boolean
+    replacementSnapshotId?: boolean
+    executionTask?: boolean | ExecutionTaskDefaultArgs<ExtArgs>
+    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+    voidedBy?: boolean | PredictiveFeatureSnapshot$voidedByArgs<ExtArgs>
+    replacementSnapshot?: boolean | PredictiveFeatureSnapshot$replacementSnapshotArgs<ExtArgs>
+  }, ExtArgs["result"]["predictiveFeatureSnapshot"]>
+
+  export type PredictiveFeatureSnapshotSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    targetType?: boolean
+    executionTaskId?: boolean
+    caseId?: boolean
+    assetId?: boolean
+    departmentId?: boolean
+    jurisdictionId?: boolean
+    predictionTimestamp?: boolean
+    featureContractVersion?: boolean
+    featurePayload?: boolean
+    provenanceClass?: boolean
+    sourceReferences?: boolean
+    sourceFingerprint?: boolean
+    status?: boolean
+    createdById?: boolean
+    createdAt?: boolean
+    voidedAt?: boolean
+    voidedById?: boolean
+    voidReason?: boolean
+    replacementSnapshotId?: boolean
+    executionTask?: boolean | ExecutionTaskDefaultArgs<ExtArgs>
+    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+    voidedBy?: boolean | PredictiveFeatureSnapshot$voidedByArgs<ExtArgs>
+    replacementSnapshot?: boolean | PredictiveFeatureSnapshot$replacementSnapshotArgs<ExtArgs>
+  }, ExtArgs["result"]["predictiveFeatureSnapshot"]>
+
+  export type PredictiveFeatureSnapshotSelectScalar = {
+    id?: boolean
+    targetType?: boolean
+    executionTaskId?: boolean
+    caseId?: boolean
+    assetId?: boolean
+    departmentId?: boolean
+    jurisdictionId?: boolean
+    predictionTimestamp?: boolean
+    featureContractVersion?: boolean
+    featurePayload?: boolean
+    provenanceClass?: boolean
+    sourceReferences?: boolean
+    sourceFingerprint?: boolean
+    status?: boolean
+    createdById?: boolean
+    createdAt?: boolean
+    voidedAt?: boolean
+    voidedById?: boolean
+    voidReason?: boolean
+    replacementSnapshotId?: boolean
+  }
+
+  export type PredictiveFeatureSnapshotOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "targetType" | "executionTaskId" | "caseId" | "assetId" | "departmentId" | "jurisdictionId" | "predictionTimestamp" | "featureContractVersion" | "featurePayload" | "provenanceClass" | "sourceReferences" | "sourceFingerprint" | "status" | "createdById" | "createdAt" | "voidedAt" | "voidedById" | "voidReason" | "replacementSnapshotId", ExtArgs["result"]["predictiveFeatureSnapshot"]>
+  export type PredictiveFeatureSnapshotInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    executionTask?: boolean | ExecutionTaskDefaultArgs<ExtArgs>
+    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+    voidedBy?: boolean | PredictiveFeatureSnapshot$voidedByArgs<ExtArgs>
+    replacementSnapshot?: boolean | PredictiveFeatureSnapshot$replacementSnapshotArgs<ExtArgs>
+    replaces?: boolean | PredictiveFeatureSnapshot$replacesArgs<ExtArgs>
+    outcomes?: boolean | PredictiveFeatureSnapshot$outcomesArgs<ExtArgs>
+    _count?: boolean | PredictiveFeatureSnapshotCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type PredictiveFeatureSnapshotIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    executionTask?: boolean | ExecutionTaskDefaultArgs<ExtArgs>
+    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+    voidedBy?: boolean | PredictiveFeatureSnapshot$voidedByArgs<ExtArgs>
+    replacementSnapshot?: boolean | PredictiveFeatureSnapshot$replacementSnapshotArgs<ExtArgs>
+  }
+  export type PredictiveFeatureSnapshotIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    executionTask?: boolean | ExecutionTaskDefaultArgs<ExtArgs>
+    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+    voidedBy?: boolean | PredictiveFeatureSnapshot$voidedByArgs<ExtArgs>
+    replacementSnapshot?: boolean | PredictiveFeatureSnapshot$replacementSnapshotArgs<ExtArgs>
+  }
+
+  export type $PredictiveFeatureSnapshotPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "PredictiveFeatureSnapshot"
+    objects: {
+      executionTask: Prisma.$ExecutionTaskPayload<ExtArgs>
+      createdBy: Prisma.$UserPayload<ExtArgs>
+      voidedBy: Prisma.$UserPayload<ExtArgs> | null
+      replacementSnapshot: Prisma.$PredictiveFeatureSnapshotPayload<ExtArgs> | null
+      replaces: Prisma.$PredictiveFeatureSnapshotPayload<ExtArgs> | null
+      outcomes: Prisma.$PredictiveOutcomePayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      targetType: $Enums.PredictiveTargetType
+      executionTaskId: string
+      caseId: string
+      assetId: string
+      departmentId: string
+      jurisdictionId: string
+      predictionTimestamp: Date
+      featureContractVersion: string
+      featurePayload: Prisma.JsonValue
+      provenanceClass: $Enums.PredictiveProvenanceClass
+      sourceReferences: Prisma.JsonValue
+      sourceFingerprint: string
+      status: $Enums.PredictiveRecordStatus
+      createdById: string
+      createdAt: Date
+      voidedAt: Date | null
+      voidedById: string | null
+      voidReason: string | null
+      replacementSnapshotId: string | null
+    }, ExtArgs["result"]["predictiveFeatureSnapshot"]>
+    composites: {}
+  }
+
+  type PredictiveFeatureSnapshotGetPayload<S extends boolean | null | undefined | PredictiveFeatureSnapshotDefaultArgs> = $Result.GetResult<Prisma.$PredictiveFeatureSnapshotPayload, S>
+
+  type PredictiveFeatureSnapshotCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<PredictiveFeatureSnapshotFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: PredictiveFeatureSnapshotCountAggregateInputType | true
+    }
+
+  export interface PredictiveFeatureSnapshotDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['PredictiveFeatureSnapshot'], meta: { name: 'PredictiveFeatureSnapshot' } }
+    /**
+     * Find zero or one PredictiveFeatureSnapshot that matches the filter.
+     * @param {PredictiveFeatureSnapshotFindUniqueArgs} args - Arguments to find a PredictiveFeatureSnapshot
+     * @example
+     * // Get one PredictiveFeatureSnapshot
+     * const predictiveFeatureSnapshot = await prisma.predictiveFeatureSnapshot.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends PredictiveFeatureSnapshotFindUniqueArgs>(args: SelectSubset<T, PredictiveFeatureSnapshotFindUniqueArgs<ExtArgs>>): Prisma__PredictiveFeatureSnapshotClient<$Result.GetResult<Prisma.$PredictiveFeatureSnapshotPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one PredictiveFeatureSnapshot that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {PredictiveFeatureSnapshotFindUniqueOrThrowArgs} args - Arguments to find a PredictiveFeatureSnapshot
+     * @example
+     * // Get one PredictiveFeatureSnapshot
+     * const predictiveFeatureSnapshot = await prisma.predictiveFeatureSnapshot.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends PredictiveFeatureSnapshotFindUniqueOrThrowArgs>(args: SelectSubset<T, PredictiveFeatureSnapshotFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PredictiveFeatureSnapshotClient<$Result.GetResult<Prisma.$PredictiveFeatureSnapshotPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PredictiveFeatureSnapshot that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PredictiveFeatureSnapshotFindFirstArgs} args - Arguments to find a PredictiveFeatureSnapshot
+     * @example
+     * // Get one PredictiveFeatureSnapshot
+     * const predictiveFeatureSnapshot = await prisma.predictiveFeatureSnapshot.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends PredictiveFeatureSnapshotFindFirstArgs>(args?: SelectSubset<T, PredictiveFeatureSnapshotFindFirstArgs<ExtArgs>>): Prisma__PredictiveFeatureSnapshotClient<$Result.GetResult<Prisma.$PredictiveFeatureSnapshotPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PredictiveFeatureSnapshot that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PredictiveFeatureSnapshotFindFirstOrThrowArgs} args - Arguments to find a PredictiveFeatureSnapshot
+     * @example
+     * // Get one PredictiveFeatureSnapshot
+     * const predictiveFeatureSnapshot = await prisma.predictiveFeatureSnapshot.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends PredictiveFeatureSnapshotFindFirstOrThrowArgs>(args?: SelectSubset<T, PredictiveFeatureSnapshotFindFirstOrThrowArgs<ExtArgs>>): Prisma__PredictiveFeatureSnapshotClient<$Result.GetResult<Prisma.$PredictiveFeatureSnapshotPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more PredictiveFeatureSnapshots that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PredictiveFeatureSnapshotFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all PredictiveFeatureSnapshots
+     * const predictiveFeatureSnapshots = await prisma.predictiveFeatureSnapshot.findMany()
+     * 
+     * // Get first 10 PredictiveFeatureSnapshots
+     * const predictiveFeatureSnapshots = await prisma.predictiveFeatureSnapshot.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const predictiveFeatureSnapshotWithIdOnly = await prisma.predictiveFeatureSnapshot.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends PredictiveFeatureSnapshotFindManyArgs>(args?: SelectSubset<T, PredictiveFeatureSnapshotFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PredictiveFeatureSnapshotPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a PredictiveFeatureSnapshot.
+     * @param {PredictiveFeatureSnapshotCreateArgs} args - Arguments to create a PredictiveFeatureSnapshot.
+     * @example
+     * // Create one PredictiveFeatureSnapshot
+     * const PredictiveFeatureSnapshot = await prisma.predictiveFeatureSnapshot.create({
+     *   data: {
+     *     // ... data to create a PredictiveFeatureSnapshot
+     *   }
+     * })
+     * 
+     */
+    create<T extends PredictiveFeatureSnapshotCreateArgs>(args: SelectSubset<T, PredictiveFeatureSnapshotCreateArgs<ExtArgs>>): Prisma__PredictiveFeatureSnapshotClient<$Result.GetResult<Prisma.$PredictiveFeatureSnapshotPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many PredictiveFeatureSnapshots.
+     * @param {PredictiveFeatureSnapshotCreateManyArgs} args - Arguments to create many PredictiveFeatureSnapshots.
+     * @example
+     * // Create many PredictiveFeatureSnapshots
+     * const predictiveFeatureSnapshot = await prisma.predictiveFeatureSnapshot.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends PredictiveFeatureSnapshotCreateManyArgs>(args?: SelectSubset<T, PredictiveFeatureSnapshotCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many PredictiveFeatureSnapshots and returns the data saved in the database.
+     * @param {PredictiveFeatureSnapshotCreateManyAndReturnArgs} args - Arguments to create many PredictiveFeatureSnapshots.
+     * @example
+     * // Create many PredictiveFeatureSnapshots
+     * const predictiveFeatureSnapshot = await prisma.predictiveFeatureSnapshot.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many PredictiveFeatureSnapshots and only return the `id`
+     * const predictiveFeatureSnapshotWithIdOnly = await prisma.predictiveFeatureSnapshot.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends PredictiveFeatureSnapshotCreateManyAndReturnArgs>(args?: SelectSubset<T, PredictiveFeatureSnapshotCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PredictiveFeatureSnapshotPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a PredictiveFeatureSnapshot.
+     * @param {PredictiveFeatureSnapshotDeleteArgs} args - Arguments to delete one PredictiveFeatureSnapshot.
+     * @example
+     * // Delete one PredictiveFeatureSnapshot
+     * const PredictiveFeatureSnapshot = await prisma.predictiveFeatureSnapshot.delete({
+     *   where: {
+     *     // ... filter to delete one PredictiveFeatureSnapshot
+     *   }
+     * })
+     * 
+     */
+    delete<T extends PredictiveFeatureSnapshotDeleteArgs>(args: SelectSubset<T, PredictiveFeatureSnapshotDeleteArgs<ExtArgs>>): Prisma__PredictiveFeatureSnapshotClient<$Result.GetResult<Prisma.$PredictiveFeatureSnapshotPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one PredictiveFeatureSnapshot.
+     * @param {PredictiveFeatureSnapshotUpdateArgs} args - Arguments to update one PredictiveFeatureSnapshot.
+     * @example
+     * // Update one PredictiveFeatureSnapshot
+     * const predictiveFeatureSnapshot = await prisma.predictiveFeatureSnapshot.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends PredictiveFeatureSnapshotUpdateArgs>(args: SelectSubset<T, PredictiveFeatureSnapshotUpdateArgs<ExtArgs>>): Prisma__PredictiveFeatureSnapshotClient<$Result.GetResult<Prisma.$PredictiveFeatureSnapshotPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more PredictiveFeatureSnapshots.
+     * @param {PredictiveFeatureSnapshotDeleteManyArgs} args - Arguments to filter PredictiveFeatureSnapshots to delete.
+     * @example
+     * // Delete a few PredictiveFeatureSnapshots
+     * const { count } = await prisma.predictiveFeatureSnapshot.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends PredictiveFeatureSnapshotDeleteManyArgs>(args?: SelectSubset<T, PredictiveFeatureSnapshotDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PredictiveFeatureSnapshots.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PredictiveFeatureSnapshotUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many PredictiveFeatureSnapshots
+     * const predictiveFeatureSnapshot = await prisma.predictiveFeatureSnapshot.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends PredictiveFeatureSnapshotUpdateManyArgs>(args: SelectSubset<T, PredictiveFeatureSnapshotUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PredictiveFeatureSnapshots and returns the data updated in the database.
+     * @param {PredictiveFeatureSnapshotUpdateManyAndReturnArgs} args - Arguments to update many PredictiveFeatureSnapshots.
+     * @example
+     * // Update many PredictiveFeatureSnapshots
+     * const predictiveFeatureSnapshot = await prisma.predictiveFeatureSnapshot.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more PredictiveFeatureSnapshots and only return the `id`
+     * const predictiveFeatureSnapshotWithIdOnly = await prisma.predictiveFeatureSnapshot.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends PredictiveFeatureSnapshotUpdateManyAndReturnArgs>(args: SelectSubset<T, PredictiveFeatureSnapshotUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PredictiveFeatureSnapshotPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one PredictiveFeatureSnapshot.
+     * @param {PredictiveFeatureSnapshotUpsertArgs} args - Arguments to update or create a PredictiveFeatureSnapshot.
+     * @example
+     * // Update or create a PredictiveFeatureSnapshot
+     * const predictiveFeatureSnapshot = await prisma.predictiveFeatureSnapshot.upsert({
+     *   create: {
+     *     // ... data to create a PredictiveFeatureSnapshot
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the PredictiveFeatureSnapshot we want to update
+     *   }
+     * })
+     */
+    upsert<T extends PredictiveFeatureSnapshotUpsertArgs>(args: SelectSubset<T, PredictiveFeatureSnapshotUpsertArgs<ExtArgs>>): Prisma__PredictiveFeatureSnapshotClient<$Result.GetResult<Prisma.$PredictiveFeatureSnapshotPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of PredictiveFeatureSnapshots.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PredictiveFeatureSnapshotCountArgs} args - Arguments to filter PredictiveFeatureSnapshots to count.
+     * @example
+     * // Count the number of PredictiveFeatureSnapshots
+     * const count = await prisma.predictiveFeatureSnapshot.count({
+     *   where: {
+     *     // ... the filter for the PredictiveFeatureSnapshots we want to count
+     *   }
+     * })
+    **/
+    count<T extends PredictiveFeatureSnapshotCountArgs>(
+      args?: Subset<T, PredictiveFeatureSnapshotCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], PredictiveFeatureSnapshotCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a PredictiveFeatureSnapshot.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PredictiveFeatureSnapshotAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends PredictiveFeatureSnapshotAggregateArgs>(args: Subset<T, PredictiveFeatureSnapshotAggregateArgs>): Prisma.PrismaPromise<GetPredictiveFeatureSnapshotAggregateType<T>>
+
+    /**
+     * Group by PredictiveFeatureSnapshot.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PredictiveFeatureSnapshotGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends PredictiveFeatureSnapshotGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: PredictiveFeatureSnapshotGroupByArgs['orderBy'] }
+        : { orderBy?: PredictiveFeatureSnapshotGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, PredictiveFeatureSnapshotGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPredictiveFeatureSnapshotGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the PredictiveFeatureSnapshot model
+   */
+  readonly fields: PredictiveFeatureSnapshotFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for PredictiveFeatureSnapshot.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__PredictiveFeatureSnapshotClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    executionTask<T extends ExecutionTaskDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ExecutionTaskDefaultArgs<ExtArgs>>): Prisma__ExecutionTaskClient<$Result.GetResult<Prisma.$ExecutionTaskPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    createdBy<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    voidedBy<T extends PredictiveFeatureSnapshot$voidedByArgs<ExtArgs> = {}>(args?: Subset<T, PredictiveFeatureSnapshot$voidedByArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    replacementSnapshot<T extends PredictiveFeatureSnapshot$replacementSnapshotArgs<ExtArgs> = {}>(args?: Subset<T, PredictiveFeatureSnapshot$replacementSnapshotArgs<ExtArgs>>): Prisma__PredictiveFeatureSnapshotClient<$Result.GetResult<Prisma.$PredictiveFeatureSnapshotPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    replaces<T extends PredictiveFeatureSnapshot$replacesArgs<ExtArgs> = {}>(args?: Subset<T, PredictiveFeatureSnapshot$replacesArgs<ExtArgs>>): Prisma__PredictiveFeatureSnapshotClient<$Result.GetResult<Prisma.$PredictiveFeatureSnapshotPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    outcomes<T extends PredictiveFeatureSnapshot$outcomesArgs<ExtArgs> = {}>(args?: Subset<T, PredictiveFeatureSnapshot$outcomesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PredictiveOutcomePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the PredictiveFeatureSnapshot model
+   */
+  interface PredictiveFeatureSnapshotFieldRefs {
+    readonly id: FieldRef<"PredictiveFeatureSnapshot", 'String'>
+    readonly targetType: FieldRef<"PredictiveFeatureSnapshot", 'PredictiveTargetType'>
+    readonly executionTaskId: FieldRef<"PredictiveFeatureSnapshot", 'String'>
+    readonly caseId: FieldRef<"PredictiveFeatureSnapshot", 'String'>
+    readonly assetId: FieldRef<"PredictiveFeatureSnapshot", 'String'>
+    readonly departmentId: FieldRef<"PredictiveFeatureSnapshot", 'String'>
+    readonly jurisdictionId: FieldRef<"PredictiveFeatureSnapshot", 'String'>
+    readonly predictionTimestamp: FieldRef<"PredictiveFeatureSnapshot", 'DateTime'>
+    readonly featureContractVersion: FieldRef<"PredictiveFeatureSnapshot", 'String'>
+    readonly featurePayload: FieldRef<"PredictiveFeatureSnapshot", 'Json'>
+    readonly provenanceClass: FieldRef<"PredictiveFeatureSnapshot", 'PredictiveProvenanceClass'>
+    readonly sourceReferences: FieldRef<"PredictiveFeatureSnapshot", 'Json'>
+    readonly sourceFingerprint: FieldRef<"PredictiveFeatureSnapshot", 'String'>
+    readonly status: FieldRef<"PredictiveFeatureSnapshot", 'PredictiveRecordStatus'>
+    readonly createdById: FieldRef<"PredictiveFeatureSnapshot", 'String'>
+    readonly createdAt: FieldRef<"PredictiveFeatureSnapshot", 'DateTime'>
+    readonly voidedAt: FieldRef<"PredictiveFeatureSnapshot", 'DateTime'>
+    readonly voidedById: FieldRef<"PredictiveFeatureSnapshot", 'String'>
+    readonly voidReason: FieldRef<"PredictiveFeatureSnapshot", 'String'>
+    readonly replacementSnapshotId: FieldRef<"PredictiveFeatureSnapshot", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * PredictiveFeatureSnapshot findUnique
+   */
+  export type PredictiveFeatureSnapshotFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveFeatureSnapshot
+     */
+    select?: PredictiveFeatureSnapshotSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveFeatureSnapshot
+     */
+    omit?: PredictiveFeatureSnapshotOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveFeatureSnapshotInclude<ExtArgs> | null
+    /**
+     * Filter, which PredictiveFeatureSnapshot to fetch.
+     */
+    where: PredictiveFeatureSnapshotWhereUniqueInput
+  }
+
+  /**
+   * PredictiveFeatureSnapshot findUniqueOrThrow
+   */
+  export type PredictiveFeatureSnapshotFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveFeatureSnapshot
+     */
+    select?: PredictiveFeatureSnapshotSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveFeatureSnapshot
+     */
+    omit?: PredictiveFeatureSnapshotOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveFeatureSnapshotInclude<ExtArgs> | null
+    /**
+     * Filter, which PredictiveFeatureSnapshot to fetch.
+     */
+    where: PredictiveFeatureSnapshotWhereUniqueInput
+  }
+
+  /**
+   * PredictiveFeatureSnapshot findFirst
+   */
+  export type PredictiveFeatureSnapshotFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveFeatureSnapshot
+     */
+    select?: PredictiveFeatureSnapshotSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveFeatureSnapshot
+     */
+    omit?: PredictiveFeatureSnapshotOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveFeatureSnapshotInclude<ExtArgs> | null
+    /**
+     * Filter, which PredictiveFeatureSnapshot to fetch.
+     */
+    where?: PredictiveFeatureSnapshotWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PredictiveFeatureSnapshots to fetch.
+     */
+    orderBy?: PredictiveFeatureSnapshotOrderByWithRelationInput | PredictiveFeatureSnapshotOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PredictiveFeatureSnapshots.
+     */
+    cursor?: PredictiveFeatureSnapshotWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PredictiveFeatureSnapshots from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PredictiveFeatureSnapshots.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PredictiveFeatureSnapshots.
+     */
+    distinct?: PredictiveFeatureSnapshotScalarFieldEnum | PredictiveFeatureSnapshotScalarFieldEnum[]
+  }
+
+  /**
+   * PredictiveFeatureSnapshot findFirstOrThrow
+   */
+  export type PredictiveFeatureSnapshotFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveFeatureSnapshot
+     */
+    select?: PredictiveFeatureSnapshotSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveFeatureSnapshot
+     */
+    omit?: PredictiveFeatureSnapshotOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveFeatureSnapshotInclude<ExtArgs> | null
+    /**
+     * Filter, which PredictiveFeatureSnapshot to fetch.
+     */
+    where?: PredictiveFeatureSnapshotWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PredictiveFeatureSnapshots to fetch.
+     */
+    orderBy?: PredictiveFeatureSnapshotOrderByWithRelationInput | PredictiveFeatureSnapshotOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PredictiveFeatureSnapshots.
+     */
+    cursor?: PredictiveFeatureSnapshotWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PredictiveFeatureSnapshots from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PredictiveFeatureSnapshots.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PredictiveFeatureSnapshots.
+     */
+    distinct?: PredictiveFeatureSnapshotScalarFieldEnum | PredictiveFeatureSnapshotScalarFieldEnum[]
+  }
+
+  /**
+   * PredictiveFeatureSnapshot findMany
+   */
+  export type PredictiveFeatureSnapshotFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveFeatureSnapshot
+     */
+    select?: PredictiveFeatureSnapshotSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveFeatureSnapshot
+     */
+    omit?: PredictiveFeatureSnapshotOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveFeatureSnapshotInclude<ExtArgs> | null
+    /**
+     * Filter, which PredictiveFeatureSnapshots to fetch.
+     */
+    where?: PredictiveFeatureSnapshotWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PredictiveFeatureSnapshots to fetch.
+     */
+    orderBy?: PredictiveFeatureSnapshotOrderByWithRelationInput | PredictiveFeatureSnapshotOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing PredictiveFeatureSnapshots.
+     */
+    cursor?: PredictiveFeatureSnapshotWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PredictiveFeatureSnapshots from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PredictiveFeatureSnapshots.
+     */
+    skip?: number
+    distinct?: PredictiveFeatureSnapshotScalarFieldEnum | PredictiveFeatureSnapshotScalarFieldEnum[]
+  }
+
+  /**
+   * PredictiveFeatureSnapshot create
+   */
+  export type PredictiveFeatureSnapshotCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveFeatureSnapshot
+     */
+    select?: PredictiveFeatureSnapshotSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveFeatureSnapshot
+     */
+    omit?: PredictiveFeatureSnapshotOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveFeatureSnapshotInclude<ExtArgs> | null
+    /**
+     * The data needed to create a PredictiveFeatureSnapshot.
+     */
+    data: XOR<PredictiveFeatureSnapshotCreateInput, PredictiveFeatureSnapshotUncheckedCreateInput>
+  }
+
+  /**
+   * PredictiveFeatureSnapshot createMany
+   */
+  export type PredictiveFeatureSnapshotCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many PredictiveFeatureSnapshots.
+     */
+    data: PredictiveFeatureSnapshotCreateManyInput | PredictiveFeatureSnapshotCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * PredictiveFeatureSnapshot createManyAndReturn
+   */
+  export type PredictiveFeatureSnapshotCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveFeatureSnapshot
+     */
+    select?: PredictiveFeatureSnapshotSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveFeatureSnapshot
+     */
+    omit?: PredictiveFeatureSnapshotOmit<ExtArgs> | null
+    /**
+     * The data used to create many PredictiveFeatureSnapshots.
+     */
+    data: PredictiveFeatureSnapshotCreateManyInput | PredictiveFeatureSnapshotCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveFeatureSnapshotIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * PredictiveFeatureSnapshot update
+   */
+  export type PredictiveFeatureSnapshotUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveFeatureSnapshot
+     */
+    select?: PredictiveFeatureSnapshotSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveFeatureSnapshot
+     */
+    omit?: PredictiveFeatureSnapshotOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveFeatureSnapshotInclude<ExtArgs> | null
+    /**
+     * The data needed to update a PredictiveFeatureSnapshot.
+     */
+    data: XOR<PredictiveFeatureSnapshotUpdateInput, PredictiveFeatureSnapshotUncheckedUpdateInput>
+    /**
+     * Choose, which PredictiveFeatureSnapshot to update.
+     */
+    where: PredictiveFeatureSnapshotWhereUniqueInput
+  }
+
+  /**
+   * PredictiveFeatureSnapshot updateMany
+   */
+  export type PredictiveFeatureSnapshotUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update PredictiveFeatureSnapshots.
+     */
+    data: XOR<PredictiveFeatureSnapshotUpdateManyMutationInput, PredictiveFeatureSnapshotUncheckedUpdateManyInput>
+    /**
+     * Filter which PredictiveFeatureSnapshots to update
+     */
+    where?: PredictiveFeatureSnapshotWhereInput
+    /**
+     * Limit how many PredictiveFeatureSnapshots to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * PredictiveFeatureSnapshot updateManyAndReturn
+   */
+  export type PredictiveFeatureSnapshotUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveFeatureSnapshot
+     */
+    select?: PredictiveFeatureSnapshotSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveFeatureSnapshot
+     */
+    omit?: PredictiveFeatureSnapshotOmit<ExtArgs> | null
+    /**
+     * The data used to update PredictiveFeatureSnapshots.
+     */
+    data: XOR<PredictiveFeatureSnapshotUpdateManyMutationInput, PredictiveFeatureSnapshotUncheckedUpdateManyInput>
+    /**
+     * Filter which PredictiveFeatureSnapshots to update
+     */
+    where?: PredictiveFeatureSnapshotWhereInput
+    /**
+     * Limit how many PredictiveFeatureSnapshots to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveFeatureSnapshotIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * PredictiveFeatureSnapshot upsert
+   */
+  export type PredictiveFeatureSnapshotUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveFeatureSnapshot
+     */
+    select?: PredictiveFeatureSnapshotSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveFeatureSnapshot
+     */
+    omit?: PredictiveFeatureSnapshotOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveFeatureSnapshotInclude<ExtArgs> | null
+    /**
+     * The filter to search for the PredictiveFeatureSnapshot to update in case it exists.
+     */
+    where: PredictiveFeatureSnapshotWhereUniqueInput
+    /**
+     * In case the PredictiveFeatureSnapshot found by the `where` argument doesn't exist, create a new PredictiveFeatureSnapshot with this data.
+     */
+    create: XOR<PredictiveFeatureSnapshotCreateInput, PredictiveFeatureSnapshotUncheckedCreateInput>
+    /**
+     * In case the PredictiveFeatureSnapshot was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<PredictiveFeatureSnapshotUpdateInput, PredictiveFeatureSnapshotUncheckedUpdateInput>
+  }
+
+  /**
+   * PredictiveFeatureSnapshot delete
+   */
+  export type PredictiveFeatureSnapshotDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveFeatureSnapshot
+     */
+    select?: PredictiveFeatureSnapshotSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveFeatureSnapshot
+     */
+    omit?: PredictiveFeatureSnapshotOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveFeatureSnapshotInclude<ExtArgs> | null
+    /**
+     * Filter which PredictiveFeatureSnapshot to delete.
+     */
+    where: PredictiveFeatureSnapshotWhereUniqueInput
+  }
+
+  /**
+   * PredictiveFeatureSnapshot deleteMany
+   */
+  export type PredictiveFeatureSnapshotDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PredictiveFeatureSnapshots to delete
+     */
+    where?: PredictiveFeatureSnapshotWhereInput
+    /**
+     * Limit how many PredictiveFeatureSnapshots to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * PredictiveFeatureSnapshot.voidedBy
+   */
+  export type PredictiveFeatureSnapshot$voidedByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+  }
+
+  /**
+   * PredictiveFeatureSnapshot.replacementSnapshot
+   */
+  export type PredictiveFeatureSnapshot$replacementSnapshotArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveFeatureSnapshot
+     */
+    select?: PredictiveFeatureSnapshotSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveFeatureSnapshot
+     */
+    omit?: PredictiveFeatureSnapshotOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveFeatureSnapshotInclude<ExtArgs> | null
+    where?: PredictiveFeatureSnapshotWhereInput
+  }
+
+  /**
+   * PredictiveFeatureSnapshot.replaces
+   */
+  export type PredictiveFeatureSnapshot$replacesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveFeatureSnapshot
+     */
+    select?: PredictiveFeatureSnapshotSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveFeatureSnapshot
+     */
+    omit?: PredictiveFeatureSnapshotOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveFeatureSnapshotInclude<ExtArgs> | null
+    where?: PredictiveFeatureSnapshotWhereInput
+  }
+
+  /**
+   * PredictiveFeatureSnapshot.outcomes
+   */
+  export type PredictiveFeatureSnapshot$outcomesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveOutcome
+     */
+    select?: PredictiveOutcomeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveOutcome
+     */
+    omit?: PredictiveOutcomeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveOutcomeInclude<ExtArgs> | null
+    where?: PredictiveOutcomeWhereInput
+    orderBy?: PredictiveOutcomeOrderByWithRelationInput | PredictiveOutcomeOrderByWithRelationInput[]
+    cursor?: PredictiveOutcomeWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PredictiveOutcomeScalarFieldEnum | PredictiveOutcomeScalarFieldEnum[]
+  }
+
+  /**
+   * PredictiveFeatureSnapshot without action
+   */
+  export type PredictiveFeatureSnapshotDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveFeatureSnapshot
+     */
+    select?: PredictiveFeatureSnapshotSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveFeatureSnapshot
+     */
+    omit?: PredictiveFeatureSnapshotOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveFeatureSnapshotInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model PredictiveOutcome
+   */
+
+  export type AggregatePredictiveOutcome = {
+    _count: PredictiveOutcomeCountAggregateOutputType | null
+    _min: PredictiveOutcomeMinAggregateOutputType | null
+    _max: PredictiveOutcomeMaxAggregateOutputType | null
+  }
+
+  export type PredictiveOutcomeMinAggregateOutputType = {
+    id: string | null
+    snapshotId: string | null
+    outcomeContractVersion: string | null
+    outcomeTimestamp: Date | null
+    outcomeValue: $Enums.PredictiveOutcomeValue | null
+    provenanceClass: $Enums.PredictiveProvenanceClass | null
+    sourceFingerprint: string | null
+    status: $Enums.PredictiveRecordStatus | null
+    recordedById: string | null
+    recordedAt: Date | null
+    voidedAt: Date | null
+    voidedById: string | null
+    voidReason: string | null
+    replacementOutcomeId: string | null
+  }
+
+  export type PredictiveOutcomeMaxAggregateOutputType = {
+    id: string | null
+    snapshotId: string | null
+    outcomeContractVersion: string | null
+    outcomeTimestamp: Date | null
+    outcomeValue: $Enums.PredictiveOutcomeValue | null
+    provenanceClass: $Enums.PredictiveProvenanceClass | null
+    sourceFingerprint: string | null
+    status: $Enums.PredictiveRecordStatus | null
+    recordedById: string | null
+    recordedAt: Date | null
+    voidedAt: Date | null
+    voidedById: string | null
+    voidReason: string | null
+    replacementOutcomeId: string | null
+  }
+
+  export type PredictiveOutcomeCountAggregateOutputType = {
+    id: number
+    snapshotId: number
+    outcomeContractVersion: number
+    outcomeTimestamp: number
+    outcomeValue: number
+    provenanceClass: number
+    sourceReferences: number
+    sourceFingerprint: number
+    status: number
+    recordedById: number
+    recordedAt: number
+    voidedAt: number
+    voidedById: number
+    voidReason: number
+    replacementOutcomeId: number
+    _all: number
+  }
+
+
+  export type PredictiveOutcomeMinAggregateInputType = {
+    id?: true
+    snapshotId?: true
+    outcomeContractVersion?: true
+    outcomeTimestamp?: true
+    outcomeValue?: true
+    provenanceClass?: true
+    sourceFingerprint?: true
+    status?: true
+    recordedById?: true
+    recordedAt?: true
+    voidedAt?: true
+    voidedById?: true
+    voidReason?: true
+    replacementOutcomeId?: true
+  }
+
+  export type PredictiveOutcomeMaxAggregateInputType = {
+    id?: true
+    snapshotId?: true
+    outcomeContractVersion?: true
+    outcomeTimestamp?: true
+    outcomeValue?: true
+    provenanceClass?: true
+    sourceFingerprint?: true
+    status?: true
+    recordedById?: true
+    recordedAt?: true
+    voidedAt?: true
+    voidedById?: true
+    voidReason?: true
+    replacementOutcomeId?: true
+  }
+
+  export type PredictiveOutcomeCountAggregateInputType = {
+    id?: true
+    snapshotId?: true
+    outcomeContractVersion?: true
+    outcomeTimestamp?: true
+    outcomeValue?: true
+    provenanceClass?: true
+    sourceReferences?: true
+    sourceFingerprint?: true
+    status?: true
+    recordedById?: true
+    recordedAt?: true
+    voidedAt?: true
+    voidedById?: true
+    voidReason?: true
+    replacementOutcomeId?: true
+    _all?: true
+  }
+
+  export type PredictiveOutcomeAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PredictiveOutcome to aggregate.
+     */
+    where?: PredictiveOutcomeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PredictiveOutcomes to fetch.
+     */
+    orderBy?: PredictiveOutcomeOrderByWithRelationInput | PredictiveOutcomeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: PredictiveOutcomeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PredictiveOutcomes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PredictiveOutcomes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned PredictiveOutcomes
+    **/
+    _count?: true | PredictiveOutcomeCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: PredictiveOutcomeMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: PredictiveOutcomeMaxAggregateInputType
+  }
+
+  export type GetPredictiveOutcomeAggregateType<T extends PredictiveOutcomeAggregateArgs> = {
+        [P in keyof T & keyof AggregatePredictiveOutcome]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePredictiveOutcome[P]>
+      : GetScalarType<T[P], AggregatePredictiveOutcome[P]>
+  }
+
+
+
+
+  export type PredictiveOutcomeGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PredictiveOutcomeWhereInput
+    orderBy?: PredictiveOutcomeOrderByWithAggregationInput | PredictiveOutcomeOrderByWithAggregationInput[]
+    by: PredictiveOutcomeScalarFieldEnum[] | PredictiveOutcomeScalarFieldEnum
+    having?: PredictiveOutcomeScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: PredictiveOutcomeCountAggregateInputType | true
+    _min?: PredictiveOutcomeMinAggregateInputType
+    _max?: PredictiveOutcomeMaxAggregateInputType
+  }
+
+  export type PredictiveOutcomeGroupByOutputType = {
+    id: string
+    snapshotId: string
+    outcomeContractVersion: string
+    outcomeTimestamp: Date
+    outcomeValue: $Enums.PredictiveOutcomeValue
+    provenanceClass: $Enums.PredictiveProvenanceClass
+    sourceReferences: JsonValue
+    sourceFingerprint: string
+    status: $Enums.PredictiveRecordStatus
+    recordedById: string
+    recordedAt: Date
+    voidedAt: Date | null
+    voidedById: string | null
+    voidReason: string | null
+    replacementOutcomeId: string | null
+    _count: PredictiveOutcomeCountAggregateOutputType | null
+    _min: PredictiveOutcomeMinAggregateOutputType | null
+    _max: PredictiveOutcomeMaxAggregateOutputType | null
+  }
+
+  type GetPredictiveOutcomeGroupByPayload<T extends PredictiveOutcomeGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<PredictiveOutcomeGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof PredictiveOutcomeGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], PredictiveOutcomeGroupByOutputType[P]>
+            : GetScalarType<T[P], PredictiveOutcomeGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type PredictiveOutcomeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    snapshotId?: boolean
+    outcomeContractVersion?: boolean
+    outcomeTimestamp?: boolean
+    outcomeValue?: boolean
+    provenanceClass?: boolean
+    sourceReferences?: boolean
+    sourceFingerprint?: boolean
+    status?: boolean
+    recordedById?: boolean
+    recordedAt?: boolean
+    voidedAt?: boolean
+    voidedById?: boolean
+    voidReason?: boolean
+    replacementOutcomeId?: boolean
+    snapshot?: boolean | PredictiveFeatureSnapshotDefaultArgs<ExtArgs>
+    recordedBy?: boolean | UserDefaultArgs<ExtArgs>
+    voidedBy?: boolean | PredictiveOutcome$voidedByArgs<ExtArgs>
+    replacementOutcome?: boolean | PredictiveOutcome$replacementOutcomeArgs<ExtArgs>
+    replaces?: boolean | PredictiveOutcome$replacesArgs<ExtArgs>
+  }, ExtArgs["result"]["predictiveOutcome"]>
+
+  export type PredictiveOutcomeSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    snapshotId?: boolean
+    outcomeContractVersion?: boolean
+    outcomeTimestamp?: boolean
+    outcomeValue?: boolean
+    provenanceClass?: boolean
+    sourceReferences?: boolean
+    sourceFingerprint?: boolean
+    status?: boolean
+    recordedById?: boolean
+    recordedAt?: boolean
+    voidedAt?: boolean
+    voidedById?: boolean
+    voidReason?: boolean
+    replacementOutcomeId?: boolean
+    snapshot?: boolean | PredictiveFeatureSnapshotDefaultArgs<ExtArgs>
+    recordedBy?: boolean | UserDefaultArgs<ExtArgs>
+    voidedBy?: boolean | PredictiveOutcome$voidedByArgs<ExtArgs>
+    replacementOutcome?: boolean | PredictiveOutcome$replacementOutcomeArgs<ExtArgs>
+  }, ExtArgs["result"]["predictiveOutcome"]>
+
+  export type PredictiveOutcomeSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    snapshotId?: boolean
+    outcomeContractVersion?: boolean
+    outcomeTimestamp?: boolean
+    outcomeValue?: boolean
+    provenanceClass?: boolean
+    sourceReferences?: boolean
+    sourceFingerprint?: boolean
+    status?: boolean
+    recordedById?: boolean
+    recordedAt?: boolean
+    voidedAt?: boolean
+    voidedById?: boolean
+    voidReason?: boolean
+    replacementOutcomeId?: boolean
+    snapshot?: boolean | PredictiveFeatureSnapshotDefaultArgs<ExtArgs>
+    recordedBy?: boolean | UserDefaultArgs<ExtArgs>
+    voidedBy?: boolean | PredictiveOutcome$voidedByArgs<ExtArgs>
+    replacementOutcome?: boolean | PredictiveOutcome$replacementOutcomeArgs<ExtArgs>
+  }, ExtArgs["result"]["predictiveOutcome"]>
+
+  export type PredictiveOutcomeSelectScalar = {
+    id?: boolean
+    snapshotId?: boolean
+    outcomeContractVersion?: boolean
+    outcomeTimestamp?: boolean
+    outcomeValue?: boolean
+    provenanceClass?: boolean
+    sourceReferences?: boolean
+    sourceFingerprint?: boolean
+    status?: boolean
+    recordedById?: boolean
+    recordedAt?: boolean
+    voidedAt?: boolean
+    voidedById?: boolean
+    voidReason?: boolean
+    replacementOutcomeId?: boolean
+  }
+
+  export type PredictiveOutcomeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "snapshotId" | "outcomeContractVersion" | "outcomeTimestamp" | "outcomeValue" | "provenanceClass" | "sourceReferences" | "sourceFingerprint" | "status" | "recordedById" | "recordedAt" | "voidedAt" | "voidedById" | "voidReason" | "replacementOutcomeId", ExtArgs["result"]["predictiveOutcome"]>
+  export type PredictiveOutcomeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    snapshot?: boolean | PredictiveFeatureSnapshotDefaultArgs<ExtArgs>
+    recordedBy?: boolean | UserDefaultArgs<ExtArgs>
+    voidedBy?: boolean | PredictiveOutcome$voidedByArgs<ExtArgs>
+    replacementOutcome?: boolean | PredictiveOutcome$replacementOutcomeArgs<ExtArgs>
+    replaces?: boolean | PredictiveOutcome$replacesArgs<ExtArgs>
+  }
+  export type PredictiveOutcomeIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    snapshot?: boolean | PredictiveFeatureSnapshotDefaultArgs<ExtArgs>
+    recordedBy?: boolean | UserDefaultArgs<ExtArgs>
+    voidedBy?: boolean | PredictiveOutcome$voidedByArgs<ExtArgs>
+    replacementOutcome?: boolean | PredictiveOutcome$replacementOutcomeArgs<ExtArgs>
+  }
+  export type PredictiveOutcomeIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    snapshot?: boolean | PredictiveFeatureSnapshotDefaultArgs<ExtArgs>
+    recordedBy?: boolean | UserDefaultArgs<ExtArgs>
+    voidedBy?: boolean | PredictiveOutcome$voidedByArgs<ExtArgs>
+    replacementOutcome?: boolean | PredictiveOutcome$replacementOutcomeArgs<ExtArgs>
+  }
+
+  export type $PredictiveOutcomePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "PredictiveOutcome"
+    objects: {
+      snapshot: Prisma.$PredictiveFeatureSnapshotPayload<ExtArgs>
+      recordedBy: Prisma.$UserPayload<ExtArgs>
+      voidedBy: Prisma.$UserPayload<ExtArgs> | null
+      replacementOutcome: Prisma.$PredictiveOutcomePayload<ExtArgs> | null
+      replaces: Prisma.$PredictiveOutcomePayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      snapshotId: string
+      outcomeContractVersion: string
+      outcomeTimestamp: Date
+      outcomeValue: $Enums.PredictiveOutcomeValue
+      provenanceClass: $Enums.PredictiveProvenanceClass
+      sourceReferences: Prisma.JsonValue
+      sourceFingerprint: string
+      status: $Enums.PredictiveRecordStatus
+      recordedById: string
+      recordedAt: Date
+      voidedAt: Date | null
+      voidedById: string | null
+      voidReason: string | null
+      replacementOutcomeId: string | null
+    }, ExtArgs["result"]["predictiveOutcome"]>
+    composites: {}
+  }
+
+  type PredictiveOutcomeGetPayload<S extends boolean | null | undefined | PredictiveOutcomeDefaultArgs> = $Result.GetResult<Prisma.$PredictiveOutcomePayload, S>
+
+  type PredictiveOutcomeCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<PredictiveOutcomeFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: PredictiveOutcomeCountAggregateInputType | true
+    }
+
+  export interface PredictiveOutcomeDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['PredictiveOutcome'], meta: { name: 'PredictiveOutcome' } }
+    /**
+     * Find zero or one PredictiveOutcome that matches the filter.
+     * @param {PredictiveOutcomeFindUniqueArgs} args - Arguments to find a PredictiveOutcome
+     * @example
+     * // Get one PredictiveOutcome
+     * const predictiveOutcome = await prisma.predictiveOutcome.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends PredictiveOutcomeFindUniqueArgs>(args: SelectSubset<T, PredictiveOutcomeFindUniqueArgs<ExtArgs>>): Prisma__PredictiveOutcomeClient<$Result.GetResult<Prisma.$PredictiveOutcomePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one PredictiveOutcome that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {PredictiveOutcomeFindUniqueOrThrowArgs} args - Arguments to find a PredictiveOutcome
+     * @example
+     * // Get one PredictiveOutcome
+     * const predictiveOutcome = await prisma.predictiveOutcome.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends PredictiveOutcomeFindUniqueOrThrowArgs>(args: SelectSubset<T, PredictiveOutcomeFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PredictiveOutcomeClient<$Result.GetResult<Prisma.$PredictiveOutcomePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PredictiveOutcome that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PredictiveOutcomeFindFirstArgs} args - Arguments to find a PredictiveOutcome
+     * @example
+     * // Get one PredictiveOutcome
+     * const predictiveOutcome = await prisma.predictiveOutcome.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends PredictiveOutcomeFindFirstArgs>(args?: SelectSubset<T, PredictiveOutcomeFindFirstArgs<ExtArgs>>): Prisma__PredictiveOutcomeClient<$Result.GetResult<Prisma.$PredictiveOutcomePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PredictiveOutcome that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PredictiveOutcomeFindFirstOrThrowArgs} args - Arguments to find a PredictiveOutcome
+     * @example
+     * // Get one PredictiveOutcome
+     * const predictiveOutcome = await prisma.predictiveOutcome.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends PredictiveOutcomeFindFirstOrThrowArgs>(args?: SelectSubset<T, PredictiveOutcomeFindFirstOrThrowArgs<ExtArgs>>): Prisma__PredictiveOutcomeClient<$Result.GetResult<Prisma.$PredictiveOutcomePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more PredictiveOutcomes that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PredictiveOutcomeFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all PredictiveOutcomes
+     * const predictiveOutcomes = await prisma.predictiveOutcome.findMany()
+     * 
+     * // Get first 10 PredictiveOutcomes
+     * const predictiveOutcomes = await prisma.predictiveOutcome.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const predictiveOutcomeWithIdOnly = await prisma.predictiveOutcome.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends PredictiveOutcomeFindManyArgs>(args?: SelectSubset<T, PredictiveOutcomeFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PredictiveOutcomePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a PredictiveOutcome.
+     * @param {PredictiveOutcomeCreateArgs} args - Arguments to create a PredictiveOutcome.
+     * @example
+     * // Create one PredictiveOutcome
+     * const PredictiveOutcome = await prisma.predictiveOutcome.create({
+     *   data: {
+     *     // ... data to create a PredictiveOutcome
+     *   }
+     * })
+     * 
+     */
+    create<T extends PredictiveOutcomeCreateArgs>(args: SelectSubset<T, PredictiveOutcomeCreateArgs<ExtArgs>>): Prisma__PredictiveOutcomeClient<$Result.GetResult<Prisma.$PredictiveOutcomePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many PredictiveOutcomes.
+     * @param {PredictiveOutcomeCreateManyArgs} args - Arguments to create many PredictiveOutcomes.
+     * @example
+     * // Create many PredictiveOutcomes
+     * const predictiveOutcome = await prisma.predictiveOutcome.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends PredictiveOutcomeCreateManyArgs>(args?: SelectSubset<T, PredictiveOutcomeCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many PredictiveOutcomes and returns the data saved in the database.
+     * @param {PredictiveOutcomeCreateManyAndReturnArgs} args - Arguments to create many PredictiveOutcomes.
+     * @example
+     * // Create many PredictiveOutcomes
+     * const predictiveOutcome = await prisma.predictiveOutcome.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many PredictiveOutcomes and only return the `id`
+     * const predictiveOutcomeWithIdOnly = await prisma.predictiveOutcome.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends PredictiveOutcomeCreateManyAndReturnArgs>(args?: SelectSubset<T, PredictiveOutcomeCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PredictiveOutcomePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a PredictiveOutcome.
+     * @param {PredictiveOutcomeDeleteArgs} args - Arguments to delete one PredictiveOutcome.
+     * @example
+     * // Delete one PredictiveOutcome
+     * const PredictiveOutcome = await prisma.predictiveOutcome.delete({
+     *   where: {
+     *     // ... filter to delete one PredictiveOutcome
+     *   }
+     * })
+     * 
+     */
+    delete<T extends PredictiveOutcomeDeleteArgs>(args: SelectSubset<T, PredictiveOutcomeDeleteArgs<ExtArgs>>): Prisma__PredictiveOutcomeClient<$Result.GetResult<Prisma.$PredictiveOutcomePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one PredictiveOutcome.
+     * @param {PredictiveOutcomeUpdateArgs} args - Arguments to update one PredictiveOutcome.
+     * @example
+     * // Update one PredictiveOutcome
+     * const predictiveOutcome = await prisma.predictiveOutcome.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends PredictiveOutcomeUpdateArgs>(args: SelectSubset<T, PredictiveOutcomeUpdateArgs<ExtArgs>>): Prisma__PredictiveOutcomeClient<$Result.GetResult<Prisma.$PredictiveOutcomePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more PredictiveOutcomes.
+     * @param {PredictiveOutcomeDeleteManyArgs} args - Arguments to filter PredictiveOutcomes to delete.
+     * @example
+     * // Delete a few PredictiveOutcomes
+     * const { count } = await prisma.predictiveOutcome.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends PredictiveOutcomeDeleteManyArgs>(args?: SelectSubset<T, PredictiveOutcomeDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PredictiveOutcomes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PredictiveOutcomeUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many PredictiveOutcomes
+     * const predictiveOutcome = await prisma.predictiveOutcome.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends PredictiveOutcomeUpdateManyArgs>(args: SelectSubset<T, PredictiveOutcomeUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PredictiveOutcomes and returns the data updated in the database.
+     * @param {PredictiveOutcomeUpdateManyAndReturnArgs} args - Arguments to update many PredictiveOutcomes.
+     * @example
+     * // Update many PredictiveOutcomes
+     * const predictiveOutcome = await prisma.predictiveOutcome.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more PredictiveOutcomes and only return the `id`
+     * const predictiveOutcomeWithIdOnly = await prisma.predictiveOutcome.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends PredictiveOutcomeUpdateManyAndReturnArgs>(args: SelectSubset<T, PredictiveOutcomeUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PredictiveOutcomePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one PredictiveOutcome.
+     * @param {PredictiveOutcomeUpsertArgs} args - Arguments to update or create a PredictiveOutcome.
+     * @example
+     * // Update or create a PredictiveOutcome
+     * const predictiveOutcome = await prisma.predictiveOutcome.upsert({
+     *   create: {
+     *     // ... data to create a PredictiveOutcome
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the PredictiveOutcome we want to update
+     *   }
+     * })
+     */
+    upsert<T extends PredictiveOutcomeUpsertArgs>(args: SelectSubset<T, PredictiveOutcomeUpsertArgs<ExtArgs>>): Prisma__PredictiveOutcomeClient<$Result.GetResult<Prisma.$PredictiveOutcomePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of PredictiveOutcomes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PredictiveOutcomeCountArgs} args - Arguments to filter PredictiveOutcomes to count.
+     * @example
+     * // Count the number of PredictiveOutcomes
+     * const count = await prisma.predictiveOutcome.count({
+     *   where: {
+     *     // ... the filter for the PredictiveOutcomes we want to count
+     *   }
+     * })
+    **/
+    count<T extends PredictiveOutcomeCountArgs>(
+      args?: Subset<T, PredictiveOutcomeCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], PredictiveOutcomeCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a PredictiveOutcome.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PredictiveOutcomeAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends PredictiveOutcomeAggregateArgs>(args: Subset<T, PredictiveOutcomeAggregateArgs>): Prisma.PrismaPromise<GetPredictiveOutcomeAggregateType<T>>
+
+    /**
+     * Group by PredictiveOutcome.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PredictiveOutcomeGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends PredictiveOutcomeGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: PredictiveOutcomeGroupByArgs['orderBy'] }
+        : { orderBy?: PredictiveOutcomeGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, PredictiveOutcomeGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPredictiveOutcomeGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the PredictiveOutcome model
+   */
+  readonly fields: PredictiveOutcomeFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for PredictiveOutcome.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__PredictiveOutcomeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    snapshot<T extends PredictiveFeatureSnapshotDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PredictiveFeatureSnapshotDefaultArgs<ExtArgs>>): Prisma__PredictiveFeatureSnapshotClient<$Result.GetResult<Prisma.$PredictiveFeatureSnapshotPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    recordedBy<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    voidedBy<T extends PredictiveOutcome$voidedByArgs<ExtArgs> = {}>(args?: Subset<T, PredictiveOutcome$voidedByArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    replacementOutcome<T extends PredictiveOutcome$replacementOutcomeArgs<ExtArgs> = {}>(args?: Subset<T, PredictiveOutcome$replacementOutcomeArgs<ExtArgs>>): Prisma__PredictiveOutcomeClient<$Result.GetResult<Prisma.$PredictiveOutcomePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    replaces<T extends PredictiveOutcome$replacesArgs<ExtArgs> = {}>(args?: Subset<T, PredictiveOutcome$replacesArgs<ExtArgs>>): Prisma__PredictiveOutcomeClient<$Result.GetResult<Prisma.$PredictiveOutcomePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the PredictiveOutcome model
+   */
+  interface PredictiveOutcomeFieldRefs {
+    readonly id: FieldRef<"PredictiveOutcome", 'String'>
+    readonly snapshotId: FieldRef<"PredictiveOutcome", 'String'>
+    readonly outcomeContractVersion: FieldRef<"PredictiveOutcome", 'String'>
+    readonly outcomeTimestamp: FieldRef<"PredictiveOutcome", 'DateTime'>
+    readonly outcomeValue: FieldRef<"PredictiveOutcome", 'PredictiveOutcomeValue'>
+    readonly provenanceClass: FieldRef<"PredictiveOutcome", 'PredictiveProvenanceClass'>
+    readonly sourceReferences: FieldRef<"PredictiveOutcome", 'Json'>
+    readonly sourceFingerprint: FieldRef<"PredictiveOutcome", 'String'>
+    readonly status: FieldRef<"PredictiveOutcome", 'PredictiveRecordStatus'>
+    readonly recordedById: FieldRef<"PredictiveOutcome", 'String'>
+    readonly recordedAt: FieldRef<"PredictiveOutcome", 'DateTime'>
+    readonly voidedAt: FieldRef<"PredictiveOutcome", 'DateTime'>
+    readonly voidedById: FieldRef<"PredictiveOutcome", 'String'>
+    readonly voidReason: FieldRef<"PredictiveOutcome", 'String'>
+    readonly replacementOutcomeId: FieldRef<"PredictiveOutcome", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * PredictiveOutcome findUnique
+   */
+  export type PredictiveOutcomeFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveOutcome
+     */
+    select?: PredictiveOutcomeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveOutcome
+     */
+    omit?: PredictiveOutcomeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveOutcomeInclude<ExtArgs> | null
+    /**
+     * Filter, which PredictiveOutcome to fetch.
+     */
+    where: PredictiveOutcomeWhereUniqueInput
+  }
+
+  /**
+   * PredictiveOutcome findUniqueOrThrow
+   */
+  export type PredictiveOutcomeFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveOutcome
+     */
+    select?: PredictiveOutcomeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveOutcome
+     */
+    omit?: PredictiveOutcomeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveOutcomeInclude<ExtArgs> | null
+    /**
+     * Filter, which PredictiveOutcome to fetch.
+     */
+    where: PredictiveOutcomeWhereUniqueInput
+  }
+
+  /**
+   * PredictiveOutcome findFirst
+   */
+  export type PredictiveOutcomeFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveOutcome
+     */
+    select?: PredictiveOutcomeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveOutcome
+     */
+    omit?: PredictiveOutcomeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveOutcomeInclude<ExtArgs> | null
+    /**
+     * Filter, which PredictiveOutcome to fetch.
+     */
+    where?: PredictiveOutcomeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PredictiveOutcomes to fetch.
+     */
+    orderBy?: PredictiveOutcomeOrderByWithRelationInput | PredictiveOutcomeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PredictiveOutcomes.
+     */
+    cursor?: PredictiveOutcomeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PredictiveOutcomes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PredictiveOutcomes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PredictiveOutcomes.
+     */
+    distinct?: PredictiveOutcomeScalarFieldEnum | PredictiveOutcomeScalarFieldEnum[]
+  }
+
+  /**
+   * PredictiveOutcome findFirstOrThrow
+   */
+  export type PredictiveOutcomeFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveOutcome
+     */
+    select?: PredictiveOutcomeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveOutcome
+     */
+    omit?: PredictiveOutcomeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveOutcomeInclude<ExtArgs> | null
+    /**
+     * Filter, which PredictiveOutcome to fetch.
+     */
+    where?: PredictiveOutcomeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PredictiveOutcomes to fetch.
+     */
+    orderBy?: PredictiveOutcomeOrderByWithRelationInput | PredictiveOutcomeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PredictiveOutcomes.
+     */
+    cursor?: PredictiveOutcomeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PredictiveOutcomes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PredictiveOutcomes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PredictiveOutcomes.
+     */
+    distinct?: PredictiveOutcomeScalarFieldEnum | PredictiveOutcomeScalarFieldEnum[]
+  }
+
+  /**
+   * PredictiveOutcome findMany
+   */
+  export type PredictiveOutcomeFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveOutcome
+     */
+    select?: PredictiveOutcomeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveOutcome
+     */
+    omit?: PredictiveOutcomeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveOutcomeInclude<ExtArgs> | null
+    /**
+     * Filter, which PredictiveOutcomes to fetch.
+     */
+    where?: PredictiveOutcomeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PredictiveOutcomes to fetch.
+     */
+    orderBy?: PredictiveOutcomeOrderByWithRelationInput | PredictiveOutcomeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing PredictiveOutcomes.
+     */
+    cursor?: PredictiveOutcomeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PredictiveOutcomes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PredictiveOutcomes.
+     */
+    skip?: number
+    distinct?: PredictiveOutcomeScalarFieldEnum | PredictiveOutcomeScalarFieldEnum[]
+  }
+
+  /**
+   * PredictiveOutcome create
+   */
+  export type PredictiveOutcomeCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveOutcome
+     */
+    select?: PredictiveOutcomeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveOutcome
+     */
+    omit?: PredictiveOutcomeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveOutcomeInclude<ExtArgs> | null
+    /**
+     * The data needed to create a PredictiveOutcome.
+     */
+    data: XOR<PredictiveOutcomeCreateInput, PredictiveOutcomeUncheckedCreateInput>
+  }
+
+  /**
+   * PredictiveOutcome createMany
+   */
+  export type PredictiveOutcomeCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many PredictiveOutcomes.
+     */
+    data: PredictiveOutcomeCreateManyInput | PredictiveOutcomeCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * PredictiveOutcome createManyAndReturn
+   */
+  export type PredictiveOutcomeCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveOutcome
+     */
+    select?: PredictiveOutcomeSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveOutcome
+     */
+    omit?: PredictiveOutcomeOmit<ExtArgs> | null
+    /**
+     * The data used to create many PredictiveOutcomes.
+     */
+    data: PredictiveOutcomeCreateManyInput | PredictiveOutcomeCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveOutcomeIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * PredictiveOutcome update
+   */
+  export type PredictiveOutcomeUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveOutcome
+     */
+    select?: PredictiveOutcomeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveOutcome
+     */
+    omit?: PredictiveOutcomeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveOutcomeInclude<ExtArgs> | null
+    /**
+     * The data needed to update a PredictiveOutcome.
+     */
+    data: XOR<PredictiveOutcomeUpdateInput, PredictiveOutcomeUncheckedUpdateInput>
+    /**
+     * Choose, which PredictiveOutcome to update.
+     */
+    where: PredictiveOutcomeWhereUniqueInput
+  }
+
+  /**
+   * PredictiveOutcome updateMany
+   */
+  export type PredictiveOutcomeUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update PredictiveOutcomes.
+     */
+    data: XOR<PredictiveOutcomeUpdateManyMutationInput, PredictiveOutcomeUncheckedUpdateManyInput>
+    /**
+     * Filter which PredictiveOutcomes to update
+     */
+    where?: PredictiveOutcomeWhereInput
+    /**
+     * Limit how many PredictiveOutcomes to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * PredictiveOutcome updateManyAndReturn
+   */
+  export type PredictiveOutcomeUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveOutcome
+     */
+    select?: PredictiveOutcomeSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveOutcome
+     */
+    omit?: PredictiveOutcomeOmit<ExtArgs> | null
+    /**
+     * The data used to update PredictiveOutcomes.
+     */
+    data: XOR<PredictiveOutcomeUpdateManyMutationInput, PredictiveOutcomeUncheckedUpdateManyInput>
+    /**
+     * Filter which PredictiveOutcomes to update
+     */
+    where?: PredictiveOutcomeWhereInput
+    /**
+     * Limit how many PredictiveOutcomes to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveOutcomeIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * PredictiveOutcome upsert
+   */
+  export type PredictiveOutcomeUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveOutcome
+     */
+    select?: PredictiveOutcomeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveOutcome
+     */
+    omit?: PredictiveOutcomeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveOutcomeInclude<ExtArgs> | null
+    /**
+     * The filter to search for the PredictiveOutcome to update in case it exists.
+     */
+    where: PredictiveOutcomeWhereUniqueInput
+    /**
+     * In case the PredictiveOutcome found by the `where` argument doesn't exist, create a new PredictiveOutcome with this data.
+     */
+    create: XOR<PredictiveOutcomeCreateInput, PredictiveOutcomeUncheckedCreateInput>
+    /**
+     * In case the PredictiveOutcome was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<PredictiveOutcomeUpdateInput, PredictiveOutcomeUncheckedUpdateInput>
+  }
+
+  /**
+   * PredictiveOutcome delete
+   */
+  export type PredictiveOutcomeDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveOutcome
+     */
+    select?: PredictiveOutcomeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveOutcome
+     */
+    omit?: PredictiveOutcomeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveOutcomeInclude<ExtArgs> | null
+    /**
+     * Filter which PredictiveOutcome to delete.
+     */
+    where: PredictiveOutcomeWhereUniqueInput
+  }
+
+  /**
+   * PredictiveOutcome deleteMany
+   */
+  export type PredictiveOutcomeDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PredictiveOutcomes to delete
+     */
+    where?: PredictiveOutcomeWhereInput
+    /**
+     * Limit how many PredictiveOutcomes to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * PredictiveOutcome.voidedBy
+   */
+  export type PredictiveOutcome$voidedByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+  }
+
+  /**
+   * PredictiveOutcome.replacementOutcome
+   */
+  export type PredictiveOutcome$replacementOutcomeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveOutcome
+     */
+    select?: PredictiveOutcomeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveOutcome
+     */
+    omit?: PredictiveOutcomeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveOutcomeInclude<ExtArgs> | null
+    where?: PredictiveOutcomeWhereInput
+  }
+
+  /**
+   * PredictiveOutcome.replaces
+   */
+  export type PredictiveOutcome$replacesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveOutcome
+     */
+    select?: PredictiveOutcomeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveOutcome
+     */
+    omit?: PredictiveOutcomeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveOutcomeInclude<ExtArgs> | null
+    where?: PredictiveOutcomeWhereInput
+  }
+
+  /**
+   * PredictiveOutcome without action
+   */
+  export type PredictiveOutcomeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveOutcome
+     */
+    select?: PredictiveOutcomeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveOutcome
+     */
+    omit?: PredictiveOutcomeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveOutcomeInclude<ExtArgs> | null
   }
 
 
@@ -46770,6 +49848,53 @@ export namespace Prisma {
   export type ExecutionTaskScalarFieldEnum = (typeof ExecutionTaskScalarFieldEnum)[keyof typeof ExecutionTaskScalarFieldEnum]
 
 
+  export const PredictiveFeatureSnapshotScalarFieldEnum: {
+    id: 'id',
+    targetType: 'targetType',
+    executionTaskId: 'executionTaskId',
+    caseId: 'caseId',
+    assetId: 'assetId',
+    departmentId: 'departmentId',
+    jurisdictionId: 'jurisdictionId',
+    predictionTimestamp: 'predictionTimestamp',
+    featureContractVersion: 'featureContractVersion',
+    featurePayload: 'featurePayload',
+    provenanceClass: 'provenanceClass',
+    sourceReferences: 'sourceReferences',
+    sourceFingerprint: 'sourceFingerprint',
+    status: 'status',
+    createdById: 'createdById',
+    createdAt: 'createdAt',
+    voidedAt: 'voidedAt',
+    voidedById: 'voidedById',
+    voidReason: 'voidReason',
+    replacementSnapshotId: 'replacementSnapshotId'
+  };
+
+  export type PredictiveFeatureSnapshotScalarFieldEnum = (typeof PredictiveFeatureSnapshotScalarFieldEnum)[keyof typeof PredictiveFeatureSnapshotScalarFieldEnum]
+
+
+  export const PredictiveOutcomeScalarFieldEnum: {
+    id: 'id',
+    snapshotId: 'snapshotId',
+    outcomeContractVersion: 'outcomeContractVersion',
+    outcomeTimestamp: 'outcomeTimestamp',
+    outcomeValue: 'outcomeValue',
+    provenanceClass: 'provenanceClass',
+    sourceReferences: 'sourceReferences',
+    sourceFingerprint: 'sourceFingerprint',
+    status: 'status',
+    recordedById: 'recordedById',
+    recordedAt: 'recordedAt',
+    voidedAt: 'voidedAt',
+    voidedById: 'voidedById',
+    voidReason: 'voidReason',
+    replacementOutcomeId: 'replacementOutcomeId'
+  };
+
+  export type PredictiveOutcomeScalarFieldEnum = (typeof PredictiveOutcomeScalarFieldEnum)[keyof typeof PredictiveOutcomeScalarFieldEnum]
+
+
   export const ExecutionTaskDependencyScalarFieldEnum: {
     id: 'id',
     executionPlanId: 'executionPlanId',
@@ -47338,6 +50463,62 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'PredictiveTargetType'
+   */
+  export type EnumPredictiveTargetTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PredictiveTargetType'>
+    
+
+
+  /**
+   * Reference to a field of type 'PredictiveTargetType[]'
+   */
+  export type ListEnumPredictiveTargetTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PredictiveTargetType[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'PredictiveProvenanceClass'
+   */
+  export type EnumPredictiveProvenanceClassFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PredictiveProvenanceClass'>
+    
+
+
+  /**
+   * Reference to a field of type 'PredictiveProvenanceClass[]'
+   */
+  export type ListEnumPredictiveProvenanceClassFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PredictiveProvenanceClass[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'PredictiveRecordStatus'
+   */
+  export type EnumPredictiveRecordStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PredictiveRecordStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'PredictiveRecordStatus[]'
+   */
+  export type ListEnumPredictiveRecordStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PredictiveRecordStatus[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'PredictiveOutcomeValue'
+   */
+  export type EnumPredictiveOutcomeValueFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PredictiveOutcomeValue'>
+    
+
+
+  /**
+   * Reference to a field of type 'PredictiveOutcomeValue[]'
+   */
+  export type ListEnumPredictiveOutcomeValueFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PredictiveOutcomeValue[]'>
+    
+
+
+  /**
    * Reference to a field of type 'ExecutionBlockerCategory'
    */
   export type EnumExecutionBlockerCategoryFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ExecutionBlockerCategory'>
@@ -47596,6 +50777,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationListRelationFilter
     preparedCaseResourceEstimates?: CaseResourceEstimateListRelationFilter
     createdPortfolioScenarios?: PortfolioScenarioListRelationFilter
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotListRelationFilter
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotListRelationFilter
+    recordedPredictiveOutcomes?: PredictiveOutcomeListRelationFilter
+    voidedPredictiveOutcomes?: PredictiveOutcomeListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -47644,6 +50829,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationOrderByRelationAggregateInput
     preparedCaseResourceEstimates?: CaseResourceEstimateOrderByRelationAggregateInput
     createdPortfolioScenarios?: PortfolioScenarioOrderByRelationAggregateInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotOrderByRelationAggregateInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotOrderByRelationAggregateInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeOrderByRelationAggregateInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -47695,6 +50884,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationListRelationFilter
     preparedCaseResourceEstimates?: CaseResourceEstimateListRelationFilter
     createdPortfolioScenarios?: PortfolioScenarioListRelationFilter
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotListRelationFilter
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotListRelationFilter
+    recordedPredictiveOutcomes?: PredictiveOutcomeListRelationFilter
+    voidedPredictiveOutcomes?: PredictiveOutcomeListRelationFilter
   }, "id" | "employeeCode" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -50469,6 +53662,7 @@ export namespace Prisma {
     dependencies?: ExecutionTaskDependencyListRelationFilter
     requiredBy?: ExecutionTaskDependencyListRelationFilter
     blockerEvents?: ExecutionTaskBlockerEventListRelationFilter
+    predictiveSnapshots?: PredictiveFeatureSnapshotListRelationFilter
   }
 
   export type ExecutionTaskOrderByWithRelationInput = {
@@ -50522,6 +53716,7 @@ export namespace Prisma {
     dependencies?: ExecutionTaskDependencyOrderByRelationAggregateInput
     requiredBy?: ExecutionTaskDependencyOrderByRelationAggregateInput
     blockerEvents?: ExecutionTaskBlockerEventOrderByRelationAggregateInput
+    predictiveSnapshots?: PredictiveFeatureSnapshotOrderByRelationAggregateInput
   }
 
   export type ExecutionTaskWhereUniqueInput = Prisma.AtLeast<{
@@ -50580,6 +53775,7 @@ export namespace Prisma {
     dependencies?: ExecutionTaskDependencyListRelationFilter
     requiredBy?: ExecutionTaskDependencyListRelationFilter
     blockerEvents?: ExecutionTaskBlockerEventListRelationFilter
+    predictiveSnapshots?: PredictiveFeatureSnapshotListRelationFilter
   }, "id" | "executionPlanId_sequenceNumber" | "executionPlanId_sourceActionCode_templateTaskKey">
 
   export type ExecutionTaskOrderByWithAggregationInput = {
@@ -50666,6 +53862,270 @@ export namespace Prisma {
     verificationRequired?: BoolWithAggregatesFilter<"ExecutionTask"> | boolean
     plannedStartAt?: DateTimeNullableWithAggregatesFilter<"ExecutionTask"> | Date | string | null
     plannedEndAt?: DateTimeNullableWithAggregatesFilter<"ExecutionTask"> | Date | string | null
+  }
+
+  export type PredictiveFeatureSnapshotWhereInput = {
+    AND?: PredictiveFeatureSnapshotWhereInput | PredictiveFeatureSnapshotWhereInput[]
+    OR?: PredictiveFeatureSnapshotWhereInput[]
+    NOT?: PredictiveFeatureSnapshotWhereInput | PredictiveFeatureSnapshotWhereInput[]
+    id?: StringFilter<"PredictiveFeatureSnapshot"> | string
+    targetType?: EnumPredictiveTargetTypeFilter<"PredictiveFeatureSnapshot"> | $Enums.PredictiveTargetType
+    executionTaskId?: StringFilter<"PredictiveFeatureSnapshot"> | string
+    caseId?: StringFilter<"PredictiveFeatureSnapshot"> | string
+    assetId?: StringFilter<"PredictiveFeatureSnapshot"> | string
+    departmentId?: StringFilter<"PredictiveFeatureSnapshot"> | string
+    jurisdictionId?: StringFilter<"PredictiveFeatureSnapshot"> | string
+    predictionTimestamp?: DateTimeFilter<"PredictiveFeatureSnapshot"> | Date | string
+    featureContractVersion?: StringFilter<"PredictiveFeatureSnapshot"> | string
+    featurePayload?: JsonFilter<"PredictiveFeatureSnapshot">
+    provenanceClass?: EnumPredictiveProvenanceClassFilter<"PredictiveFeatureSnapshot"> | $Enums.PredictiveProvenanceClass
+    sourceReferences?: JsonFilter<"PredictiveFeatureSnapshot">
+    sourceFingerprint?: StringFilter<"PredictiveFeatureSnapshot"> | string
+    status?: EnumPredictiveRecordStatusFilter<"PredictiveFeatureSnapshot"> | $Enums.PredictiveRecordStatus
+    createdById?: StringFilter<"PredictiveFeatureSnapshot"> | string
+    createdAt?: DateTimeFilter<"PredictiveFeatureSnapshot"> | Date | string
+    voidedAt?: DateTimeNullableFilter<"PredictiveFeatureSnapshot"> | Date | string | null
+    voidedById?: StringNullableFilter<"PredictiveFeatureSnapshot"> | string | null
+    voidReason?: StringNullableFilter<"PredictiveFeatureSnapshot"> | string | null
+    replacementSnapshotId?: StringNullableFilter<"PredictiveFeatureSnapshot"> | string | null
+    executionTask?: XOR<ExecutionTaskScalarRelationFilter, ExecutionTaskWhereInput>
+    createdBy?: XOR<UserScalarRelationFilter, UserWhereInput>
+    voidedBy?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+    replacementSnapshot?: XOR<PredictiveFeatureSnapshotNullableScalarRelationFilter, PredictiveFeatureSnapshotWhereInput> | null
+    replaces?: XOR<PredictiveFeatureSnapshotNullableScalarRelationFilter, PredictiveFeatureSnapshotWhereInput> | null
+    outcomes?: PredictiveOutcomeListRelationFilter
+  }
+
+  export type PredictiveFeatureSnapshotOrderByWithRelationInput = {
+    id?: SortOrder
+    targetType?: SortOrder
+    executionTaskId?: SortOrder
+    caseId?: SortOrder
+    assetId?: SortOrder
+    departmentId?: SortOrder
+    jurisdictionId?: SortOrder
+    predictionTimestamp?: SortOrder
+    featureContractVersion?: SortOrder
+    featurePayload?: SortOrder
+    provenanceClass?: SortOrder
+    sourceReferences?: SortOrder
+    sourceFingerprint?: SortOrder
+    status?: SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+    voidedAt?: SortOrderInput | SortOrder
+    voidedById?: SortOrderInput | SortOrder
+    voidReason?: SortOrderInput | SortOrder
+    replacementSnapshotId?: SortOrderInput | SortOrder
+    executionTask?: ExecutionTaskOrderByWithRelationInput
+    createdBy?: UserOrderByWithRelationInput
+    voidedBy?: UserOrderByWithRelationInput
+    replacementSnapshot?: PredictiveFeatureSnapshotOrderByWithRelationInput
+    replaces?: PredictiveFeatureSnapshotOrderByWithRelationInput
+    outcomes?: PredictiveOutcomeOrderByRelationAggregateInput
+  }
+
+  export type PredictiveFeatureSnapshotWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    sourceFingerprint?: string
+    replacementSnapshotId?: string
+    executionTaskId_targetType_featureContractVersion?: PredictiveFeatureSnapshotExecutionTaskIdTargetTypeFeatureContractVersionCompoundUniqueInput
+    AND?: PredictiveFeatureSnapshotWhereInput | PredictiveFeatureSnapshotWhereInput[]
+    OR?: PredictiveFeatureSnapshotWhereInput[]
+    NOT?: PredictiveFeatureSnapshotWhereInput | PredictiveFeatureSnapshotWhereInput[]
+    targetType?: EnumPredictiveTargetTypeFilter<"PredictiveFeatureSnapshot"> | $Enums.PredictiveTargetType
+    executionTaskId?: StringFilter<"PredictiveFeatureSnapshot"> | string
+    caseId?: StringFilter<"PredictiveFeatureSnapshot"> | string
+    assetId?: StringFilter<"PredictiveFeatureSnapshot"> | string
+    departmentId?: StringFilter<"PredictiveFeatureSnapshot"> | string
+    jurisdictionId?: StringFilter<"PredictiveFeatureSnapshot"> | string
+    predictionTimestamp?: DateTimeFilter<"PredictiveFeatureSnapshot"> | Date | string
+    featureContractVersion?: StringFilter<"PredictiveFeatureSnapshot"> | string
+    featurePayload?: JsonFilter<"PredictiveFeatureSnapshot">
+    provenanceClass?: EnumPredictiveProvenanceClassFilter<"PredictiveFeatureSnapshot"> | $Enums.PredictiveProvenanceClass
+    sourceReferences?: JsonFilter<"PredictiveFeatureSnapshot">
+    status?: EnumPredictiveRecordStatusFilter<"PredictiveFeatureSnapshot"> | $Enums.PredictiveRecordStatus
+    createdById?: StringFilter<"PredictiveFeatureSnapshot"> | string
+    createdAt?: DateTimeFilter<"PredictiveFeatureSnapshot"> | Date | string
+    voidedAt?: DateTimeNullableFilter<"PredictiveFeatureSnapshot"> | Date | string | null
+    voidedById?: StringNullableFilter<"PredictiveFeatureSnapshot"> | string | null
+    voidReason?: StringNullableFilter<"PredictiveFeatureSnapshot"> | string | null
+    executionTask?: XOR<ExecutionTaskScalarRelationFilter, ExecutionTaskWhereInput>
+    createdBy?: XOR<UserScalarRelationFilter, UserWhereInput>
+    voidedBy?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+    replacementSnapshot?: XOR<PredictiveFeatureSnapshotNullableScalarRelationFilter, PredictiveFeatureSnapshotWhereInput> | null
+    replaces?: XOR<PredictiveFeatureSnapshotNullableScalarRelationFilter, PredictiveFeatureSnapshotWhereInput> | null
+    outcomes?: PredictiveOutcomeListRelationFilter
+  }, "id" | "sourceFingerprint" | "replacementSnapshotId" | "executionTaskId_targetType_featureContractVersion">
+
+  export type PredictiveFeatureSnapshotOrderByWithAggregationInput = {
+    id?: SortOrder
+    targetType?: SortOrder
+    executionTaskId?: SortOrder
+    caseId?: SortOrder
+    assetId?: SortOrder
+    departmentId?: SortOrder
+    jurisdictionId?: SortOrder
+    predictionTimestamp?: SortOrder
+    featureContractVersion?: SortOrder
+    featurePayload?: SortOrder
+    provenanceClass?: SortOrder
+    sourceReferences?: SortOrder
+    sourceFingerprint?: SortOrder
+    status?: SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+    voidedAt?: SortOrderInput | SortOrder
+    voidedById?: SortOrderInput | SortOrder
+    voidReason?: SortOrderInput | SortOrder
+    replacementSnapshotId?: SortOrderInput | SortOrder
+    _count?: PredictiveFeatureSnapshotCountOrderByAggregateInput
+    _max?: PredictiveFeatureSnapshotMaxOrderByAggregateInput
+    _min?: PredictiveFeatureSnapshotMinOrderByAggregateInput
+  }
+
+  export type PredictiveFeatureSnapshotScalarWhereWithAggregatesInput = {
+    AND?: PredictiveFeatureSnapshotScalarWhereWithAggregatesInput | PredictiveFeatureSnapshotScalarWhereWithAggregatesInput[]
+    OR?: PredictiveFeatureSnapshotScalarWhereWithAggregatesInput[]
+    NOT?: PredictiveFeatureSnapshotScalarWhereWithAggregatesInput | PredictiveFeatureSnapshotScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"PredictiveFeatureSnapshot"> | string
+    targetType?: EnumPredictiveTargetTypeWithAggregatesFilter<"PredictiveFeatureSnapshot"> | $Enums.PredictiveTargetType
+    executionTaskId?: StringWithAggregatesFilter<"PredictiveFeatureSnapshot"> | string
+    caseId?: StringWithAggregatesFilter<"PredictiveFeatureSnapshot"> | string
+    assetId?: StringWithAggregatesFilter<"PredictiveFeatureSnapshot"> | string
+    departmentId?: StringWithAggregatesFilter<"PredictiveFeatureSnapshot"> | string
+    jurisdictionId?: StringWithAggregatesFilter<"PredictiveFeatureSnapshot"> | string
+    predictionTimestamp?: DateTimeWithAggregatesFilter<"PredictiveFeatureSnapshot"> | Date | string
+    featureContractVersion?: StringWithAggregatesFilter<"PredictiveFeatureSnapshot"> | string
+    featurePayload?: JsonWithAggregatesFilter<"PredictiveFeatureSnapshot">
+    provenanceClass?: EnumPredictiveProvenanceClassWithAggregatesFilter<"PredictiveFeatureSnapshot"> | $Enums.PredictiveProvenanceClass
+    sourceReferences?: JsonWithAggregatesFilter<"PredictiveFeatureSnapshot">
+    sourceFingerprint?: StringWithAggregatesFilter<"PredictiveFeatureSnapshot"> | string
+    status?: EnumPredictiveRecordStatusWithAggregatesFilter<"PredictiveFeatureSnapshot"> | $Enums.PredictiveRecordStatus
+    createdById?: StringWithAggregatesFilter<"PredictiveFeatureSnapshot"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"PredictiveFeatureSnapshot"> | Date | string
+    voidedAt?: DateTimeNullableWithAggregatesFilter<"PredictiveFeatureSnapshot"> | Date | string | null
+    voidedById?: StringNullableWithAggregatesFilter<"PredictiveFeatureSnapshot"> | string | null
+    voidReason?: StringNullableWithAggregatesFilter<"PredictiveFeatureSnapshot"> | string | null
+    replacementSnapshotId?: StringNullableWithAggregatesFilter<"PredictiveFeatureSnapshot"> | string | null
+  }
+
+  export type PredictiveOutcomeWhereInput = {
+    AND?: PredictiveOutcomeWhereInput | PredictiveOutcomeWhereInput[]
+    OR?: PredictiveOutcomeWhereInput[]
+    NOT?: PredictiveOutcomeWhereInput | PredictiveOutcomeWhereInput[]
+    id?: StringFilter<"PredictiveOutcome"> | string
+    snapshotId?: StringFilter<"PredictiveOutcome"> | string
+    outcomeContractVersion?: StringFilter<"PredictiveOutcome"> | string
+    outcomeTimestamp?: DateTimeFilter<"PredictiveOutcome"> | Date | string
+    outcomeValue?: EnumPredictiveOutcomeValueFilter<"PredictiveOutcome"> | $Enums.PredictiveOutcomeValue
+    provenanceClass?: EnumPredictiveProvenanceClassFilter<"PredictiveOutcome"> | $Enums.PredictiveProvenanceClass
+    sourceReferences?: JsonFilter<"PredictiveOutcome">
+    sourceFingerprint?: StringFilter<"PredictiveOutcome"> | string
+    status?: EnumPredictiveRecordStatusFilter<"PredictiveOutcome"> | $Enums.PredictiveRecordStatus
+    recordedById?: StringFilter<"PredictiveOutcome"> | string
+    recordedAt?: DateTimeFilter<"PredictiveOutcome"> | Date | string
+    voidedAt?: DateTimeNullableFilter<"PredictiveOutcome"> | Date | string | null
+    voidedById?: StringNullableFilter<"PredictiveOutcome"> | string | null
+    voidReason?: StringNullableFilter<"PredictiveOutcome"> | string | null
+    replacementOutcomeId?: StringNullableFilter<"PredictiveOutcome"> | string | null
+    snapshot?: XOR<PredictiveFeatureSnapshotScalarRelationFilter, PredictiveFeatureSnapshotWhereInput>
+    recordedBy?: XOR<UserScalarRelationFilter, UserWhereInput>
+    voidedBy?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+    replacementOutcome?: XOR<PredictiveOutcomeNullableScalarRelationFilter, PredictiveOutcomeWhereInput> | null
+    replaces?: XOR<PredictiveOutcomeNullableScalarRelationFilter, PredictiveOutcomeWhereInput> | null
+  }
+
+  export type PredictiveOutcomeOrderByWithRelationInput = {
+    id?: SortOrder
+    snapshotId?: SortOrder
+    outcomeContractVersion?: SortOrder
+    outcomeTimestamp?: SortOrder
+    outcomeValue?: SortOrder
+    provenanceClass?: SortOrder
+    sourceReferences?: SortOrder
+    sourceFingerprint?: SortOrder
+    status?: SortOrder
+    recordedById?: SortOrder
+    recordedAt?: SortOrder
+    voidedAt?: SortOrderInput | SortOrder
+    voidedById?: SortOrderInput | SortOrder
+    voidReason?: SortOrderInput | SortOrder
+    replacementOutcomeId?: SortOrderInput | SortOrder
+    snapshot?: PredictiveFeatureSnapshotOrderByWithRelationInput
+    recordedBy?: UserOrderByWithRelationInput
+    voidedBy?: UserOrderByWithRelationInput
+    replacementOutcome?: PredictiveOutcomeOrderByWithRelationInput
+    replaces?: PredictiveOutcomeOrderByWithRelationInput
+  }
+
+  export type PredictiveOutcomeWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    sourceFingerprint?: string
+    replacementOutcomeId?: string
+    snapshotId_outcomeContractVersion?: PredictiveOutcomeSnapshotIdOutcomeContractVersionCompoundUniqueInput
+    AND?: PredictiveOutcomeWhereInput | PredictiveOutcomeWhereInput[]
+    OR?: PredictiveOutcomeWhereInput[]
+    NOT?: PredictiveOutcomeWhereInput | PredictiveOutcomeWhereInput[]
+    snapshotId?: StringFilter<"PredictiveOutcome"> | string
+    outcomeContractVersion?: StringFilter<"PredictiveOutcome"> | string
+    outcomeTimestamp?: DateTimeFilter<"PredictiveOutcome"> | Date | string
+    outcomeValue?: EnumPredictiveOutcomeValueFilter<"PredictiveOutcome"> | $Enums.PredictiveOutcomeValue
+    provenanceClass?: EnumPredictiveProvenanceClassFilter<"PredictiveOutcome"> | $Enums.PredictiveProvenanceClass
+    sourceReferences?: JsonFilter<"PredictiveOutcome">
+    status?: EnumPredictiveRecordStatusFilter<"PredictiveOutcome"> | $Enums.PredictiveRecordStatus
+    recordedById?: StringFilter<"PredictiveOutcome"> | string
+    recordedAt?: DateTimeFilter<"PredictiveOutcome"> | Date | string
+    voidedAt?: DateTimeNullableFilter<"PredictiveOutcome"> | Date | string | null
+    voidedById?: StringNullableFilter<"PredictiveOutcome"> | string | null
+    voidReason?: StringNullableFilter<"PredictiveOutcome"> | string | null
+    snapshot?: XOR<PredictiveFeatureSnapshotScalarRelationFilter, PredictiveFeatureSnapshotWhereInput>
+    recordedBy?: XOR<UserScalarRelationFilter, UserWhereInput>
+    voidedBy?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+    replacementOutcome?: XOR<PredictiveOutcomeNullableScalarRelationFilter, PredictiveOutcomeWhereInput> | null
+    replaces?: XOR<PredictiveOutcomeNullableScalarRelationFilter, PredictiveOutcomeWhereInput> | null
+  }, "id" | "sourceFingerprint" | "replacementOutcomeId" | "snapshotId_outcomeContractVersion">
+
+  export type PredictiveOutcomeOrderByWithAggregationInput = {
+    id?: SortOrder
+    snapshotId?: SortOrder
+    outcomeContractVersion?: SortOrder
+    outcomeTimestamp?: SortOrder
+    outcomeValue?: SortOrder
+    provenanceClass?: SortOrder
+    sourceReferences?: SortOrder
+    sourceFingerprint?: SortOrder
+    status?: SortOrder
+    recordedById?: SortOrder
+    recordedAt?: SortOrder
+    voidedAt?: SortOrderInput | SortOrder
+    voidedById?: SortOrderInput | SortOrder
+    voidReason?: SortOrderInput | SortOrder
+    replacementOutcomeId?: SortOrderInput | SortOrder
+    _count?: PredictiveOutcomeCountOrderByAggregateInput
+    _max?: PredictiveOutcomeMaxOrderByAggregateInput
+    _min?: PredictiveOutcomeMinOrderByAggregateInput
+  }
+
+  export type PredictiveOutcomeScalarWhereWithAggregatesInput = {
+    AND?: PredictiveOutcomeScalarWhereWithAggregatesInput | PredictiveOutcomeScalarWhereWithAggregatesInput[]
+    OR?: PredictiveOutcomeScalarWhereWithAggregatesInput[]
+    NOT?: PredictiveOutcomeScalarWhereWithAggregatesInput | PredictiveOutcomeScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"PredictiveOutcome"> | string
+    snapshotId?: StringWithAggregatesFilter<"PredictiveOutcome"> | string
+    outcomeContractVersion?: StringWithAggregatesFilter<"PredictiveOutcome"> | string
+    outcomeTimestamp?: DateTimeWithAggregatesFilter<"PredictiveOutcome"> | Date | string
+    outcomeValue?: EnumPredictiveOutcomeValueWithAggregatesFilter<"PredictiveOutcome"> | $Enums.PredictiveOutcomeValue
+    provenanceClass?: EnumPredictiveProvenanceClassWithAggregatesFilter<"PredictiveOutcome"> | $Enums.PredictiveProvenanceClass
+    sourceReferences?: JsonWithAggregatesFilter<"PredictiveOutcome">
+    sourceFingerprint?: StringWithAggregatesFilter<"PredictiveOutcome"> | string
+    status?: EnumPredictiveRecordStatusWithAggregatesFilter<"PredictiveOutcome"> | $Enums.PredictiveRecordStatus
+    recordedById?: StringWithAggregatesFilter<"PredictiveOutcome"> | string
+    recordedAt?: DateTimeWithAggregatesFilter<"PredictiveOutcome"> | Date | string
+    voidedAt?: DateTimeNullableWithAggregatesFilter<"PredictiveOutcome"> | Date | string | null
+    voidedById?: StringNullableWithAggregatesFilter<"PredictiveOutcome"> | string | null
+    voidReason?: StringNullableWithAggregatesFilter<"PredictiveOutcome"> | string | null
+    replacementOutcomeId?: StringNullableWithAggregatesFilter<"PredictiveOutcome"> | string | null
   }
 
   export type ExecutionTaskDependencyWhereInput = {
@@ -51299,6 +54759,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationCreateNestedManyWithoutIngestedByInput
     preparedCaseResourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutPreparedByInput
     createdPortfolioScenarios?: PortfolioScenarioCreateNestedManyWithoutCreatedByInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutCreatedByInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutVoidedByInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutRecordedByInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutVoidedByInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -51345,6 +54809,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutIngestedByInput
     preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutPreparedByInput
     createdPortfolioScenarios?: PortfolioScenarioUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutCreatedByInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutVoidedByInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutRecordedByInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutVoidedByInput
   }
 
   export type UserUpdateInput = {
@@ -51391,6 +54859,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationUpdateManyWithoutIngestedByNestedInput
     preparedCaseResourceEstimates?: CaseResourceEstimateUpdateManyWithoutPreparedByNestedInput
     createdPortfolioScenarios?: PortfolioScenarioUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutCreatedByNestedInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutVoidedByNestedInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutRecordedByNestedInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutVoidedByNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -51437,6 +54909,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationUncheckedUpdateManyWithoutIngestedByNestedInput
     preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutPreparedByNestedInput
     createdPortfolioScenarios?: PortfolioScenarioUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutCreatedByNestedInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutVoidedByNestedInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutRecordedByNestedInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutVoidedByNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -54466,6 +57942,7 @@ export namespace Prisma {
     dependencies?: ExecutionTaskDependencyCreateNestedManyWithoutDependentTaskInput
     requiredBy?: ExecutionTaskDependencyCreateNestedManyWithoutPredecessorTaskInput
     blockerEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutExecutionTaskInput
+    predictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutExecutionTaskInput
   }
 
   export type ExecutionTaskUncheckedCreateInput = {
@@ -54510,6 +57987,7 @@ export namespace Prisma {
     dependencies?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutDependentTaskInput
     requiredBy?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutPredecessorTaskInput
     blockerEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutExecutionTaskInput
+    predictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutExecutionTaskInput
   }
 
   export type ExecutionTaskUpdateInput = {
@@ -54554,6 +58032,7 @@ export namespace Prisma {
     dependencies?: ExecutionTaskDependencyUpdateManyWithoutDependentTaskNestedInput
     requiredBy?: ExecutionTaskDependencyUpdateManyWithoutPredecessorTaskNestedInput
     blockerEvents?: ExecutionTaskBlockerEventUpdateManyWithoutExecutionTaskNestedInput
+    predictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutExecutionTaskNestedInput
   }
 
   export type ExecutionTaskUncheckedUpdateInput = {
@@ -54598,6 +58077,7 @@ export namespace Prisma {
     dependencies?: ExecutionTaskDependencyUncheckedUpdateManyWithoutDependentTaskNestedInput
     requiredBy?: ExecutionTaskDependencyUncheckedUpdateManyWithoutPredecessorTaskNestedInput
     blockerEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutExecutionTaskNestedInput
+    predictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutExecutionTaskNestedInput
   }
 
   export type ExecutionTaskCreateManyInput = {
@@ -54706,6 +58186,297 @@ export namespace Prisma {
     verificationRequired?: BoolFieldUpdateOperationsInput | boolean
     plannedStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     plannedEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type PredictiveFeatureSnapshotCreateInput = {
+    id?: string
+    targetType: $Enums.PredictiveTargetType
+    caseId: string
+    assetId: string
+    departmentId: string
+    jurisdictionId: string
+    predictionTimestamp: Date | string
+    featureContractVersion: string
+    featurePayload: JsonNullValueInput | InputJsonValue
+    provenanceClass: $Enums.PredictiveProvenanceClass
+    sourceReferences: JsonNullValueInput | InputJsonValue
+    sourceFingerprint: string
+    status?: $Enums.PredictiveRecordStatus
+    createdAt?: Date | string
+    voidedAt?: Date | string | null
+    voidReason?: string | null
+    executionTask: ExecutionTaskCreateNestedOneWithoutPredictiveSnapshotsInput
+    createdBy: UserCreateNestedOneWithoutCreatedPredictiveSnapshotsInput
+    voidedBy?: UserCreateNestedOneWithoutVoidedPredictiveSnapshotsInput
+    replacementSnapshot?: PredictiveFeatureSnapshotCreateNestedOneWithoutReplacesInput
+    replaces?: PredictiveFeatureSnapshotCreateNestedOneWithoutReplacementSnapshotInput
+    outcomes?: PredictiveOutcomeCreateNestedManyWithoutSnapshotInput
+  }
+
+  export type PredictiveFeatureSnapshotUncheckedCreateInput = {
+    id?: string
+    targetType: $Enums.PredictiveTargetType
+    executionTaskId: string
+    caseId: string
+    assetId: string
+    departmentId: string
+    jurisdictionId: string
+    predictionTimestamp: Date | string
+    featureContractVersion: string
+    featurePayload: JsonNullValueInput | InputJsonValue
+    provenanceClass: $Enums.PredictiveProvenanceClass
+    sourceReferences: JsonNullValueInput | InputJsonValue
+    sourceFingerprint: string
+    status?: $Enums.PredictiveRecordStatus
+    createdById: string
+    createdAt?: Date | string
+    voidedAt?: Date | string | null
+    voidedById?: string | null
+    voidReason?: string | null
+    replacementSnapshotId?: string | null
+    replaces?: PredictiveFeatureSnapshotUncheckedCreateNestedOneWithoutReplacementSnapshotInput
+    outcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutSnapshotInput
+  }
+
+  export type PredictiveFeatureSnapshotUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    targetType?: EnumPredictiveTargetTypeFieldUpdateOperationsInput | $Enums.PredictiveTargetType
+    caseId?: StringFieldUpdateOperationsInput | string
+    assetId?: StringFieldUpdateOperationsInput | string
+    departmentId?: StringFieldUpdateOperationsInput | string
+    jurisdictionId?: StringFieldUpdateOperationsInput | string
+    predictionTimestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    featureContractVersion?: StringFieldUpdateOperationsInput | string
+    featurePayload?: JsonNullValueInput | InputJsonValue
+    provenanceClass?: EnumPredictiveProvenanceClassFieldUpdateOperationsInput | $Enums.PredictiveProvenanceClass
+    sourceReferences?: JsonNullValueInput | InputJsonValue
+    sourceFingerprint?: StringFieldUpdateOperationsInput | string
+    status?: EnumPredictiveRecordStatusFieldUpdateOperationsInput | $Enums.PredictiveRecordStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    voidedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    voidReason?: NullableStringFieldUpdateOperationsInput | string | null
+    executionTask?: ExecutionTaskUpdateOneRequiredWithoutPredictiveSnapshotsNestedInput
+    createdBy?: UserUpdateOneRequiredWithoutCreatedPredictiveSnapshotsNestedInput
+    voidedBy?: UserUpdateOneWithoutVoidedPredictiveSnapshotsNestedInput
+    replacementSnapshot?: PredictiveFeatureSnapshotUpdateOneWithoutReplacesNestedInput
+    replaces?: PredictiveFeatureSnapshotUpdateOneWithoutReplacementSnapshotNestedInput
+    outcomes?: PredictiveOutcomeUpdateManyWithoutSnapshotNestedInput
+  }
+
+  export type PredictiveFeatureSnapshotUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    targetType?: EnumPredictiveTargetTypeFieldUpdateOperationsInput | $Enums.PredictiveTargetType
+    executionTaskId?: StringFieldUpdateOperationsInput | string
+    caseId?: StringFieldUpdateOperationsInput | string
+    assetId?: StringFieldUpdateOperationsInput | string
+    departmentId?: StringFieldUpdateOperationsInput | string
+    jurisdictionId?: StringFieldUpdateOperationsInput | string
+    predictionTimestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    featureContractVersion?: StringFieldUpdateOperationsInput | string
+    featurePayload?: JsonNullValueInput | InputJsonValue
+    provenanceClass?: EnumPredictiveProvenanceClassFieldUpdateOperationsInput | $Enums.PredictiveProvenanceClass
+    sourceReferences?: JsonNullValueInput | InputJsonValue
+    sourceFingerprint?: StringFieldUpdateOperationsInput | string
+    status?: EnumPredictiveRecordStatusFieldUpdateOperationsInput | $Enums.PredictiveRecordStatus
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    voidedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    voidedById?: NullableStringFieldUpdateOperationsInput | string | null
+    voidReason?: NullableStringFieldUpdateOperationsInput | string | null
+    replacementSnapshotId?: NullableStringFieldUpdateOperationsInput | string | null
+    replaces?: PredictiveFeatureSnapshotUncheckedUpdateOneWithoutReplacementSnapshotNestedInput
+    outcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutSnapshotNestedInput
+  }
+
+  export type PredictiveFeatureSnapshotCreateManyInput = {
+    id?: string
+    targetType: $Enums.PredictiveTargetType
+    executionTaskId: string
+    caseId: string
+    assetId: string
+    departmentId: string
+    jurisdictionId: string
+    predictionTimestamp: Date | string
+    featureContractVersion: string
+    featurePayload: JsonNullValueInput | InputJsonValue
+    provenanceClass: $Enums.PredictiveProvenanceClass
+    sourceReferences: JsonNullValueInput | InputJsonValue
+    sourceFingerprint: string
+    status?: $Enums.PredictiveRecordStatus
+    createdById: string
+    createdAt?: Date | string
+    voidedAt?: Date | string | null
+    voidedById?: string | null
+    voidReason?: string | null
+    replacementSnapshotId?: string | null
+  }
+
+  export type PredictiveFeatureSnapshotUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    targetType?: EnumPredictiveTargetTypeFieldUpdateOperationsInput | $Enums.PredictiveTargetType
+    caseId?: StringFieldUpdateOperationsInput | string
+    assetId?: StringFieldUpdateOperationsInput | string
+    departmentId?: StringFieldUpdateOperationsInput | string
+    jurisdictionId?: StringFieldUpdateOperationsInput | string
+    predictionTimestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    featureContractVersion?: StringFieldUpdateOperationsInput | string
+    featurePayload?: JsonNullValueInput | InputJsonValue
+    provenanceClass?: EnumPredictiveProvenanceClassFieldUpdateOperationsInput | $Enums.PredictiveProvenanceClass
+    sourceReferences?: JsonNullValueInput | InputJsonValue
+    sourceFingerprint?: StringFieldUpdateOperationsInput | string
+    status?: EnumPredictiveRecordStatusFieldUpdateOperationsInput | $Enums.PredictiveRecordStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    voidedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    voidReason?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type PredictiveFeatureSnapshotUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    targetType?: EnumPredictiveTargetTypeFieldUpdateOperationsInput | $Enums.PredictiveTargetType
+    executionTaskId?: StringFieldUpdateOperationsInput | string
+    caseId?: StringFieldUpdateOperationsInput | string
+    assetId?: StringFieldUpdateOperationsInput | string
+    departmentId?: StringFieldUpdateOperationsInput | string
+    jurisdictionId?: StringFieldUpdateOperationsInput | string
+    predictionTimestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    featureContractVersion?: StringFieldUpdateOperationsInput | string
+    featurePayload?: JsonNullValueInput | InputJsonValue
+    provenanceClass?: EnumPredictiveProvenanceClassFieldUpdateOperationsInput | $Enums.PredictiveProvenanceClass
+    sourceReferences?: JsonNullValueInput | InputJsonValue
+    sourceFingerprint?: StringFieldUpdateOperationsInput | string
+    status?: EnumPredictiveRecordStatusFieldUpdateOperationsInput | $Enums.PredictiveRecordStatus
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    voidedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    voidedById?: NullableStringFieldUpdateOperationsInput | string | null
+    voidReason?: NullableStringFieldUpdateOperationsInput | string | null
+    replacementSnapshotId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type PredictiveOutcomeCreateInput = {
+    id?: string
+    outcomeContractVersion: string
+    outcomeTimestamp: Date | string
+    outcomeValue: $Enums.PredictiveOutcomeValue
+    provenanceClass: $Enums.PredictiveProvenanceClass
+    sourceReferences: JsonNullValueInput | InputJsonValue
+    sourceFingerprint: string
+    status?: $Enums.PredictiveRecordStatus
+    recordedAt?: Date | string
+    voidedAt?: Date | string | null
+    voidReason?: string | null
+    snapshot: PredictiveFeatureSnapshotCreateNestedOneWithoutOutcomesInput
+    recordedBy: UserCreateNestedOneWithoutRecordedPredictiveOutcomesInput
+    voidedBy?: UserCreateNestedOneWithoutVoidedPredictiveOutcomesInput
+    replacementOutcome?: PredictiveOutcomeCreateNestedOneWithoutReplacesInput
+    replaces?: PredictiveOutcomeCreateNestedOneWithoutReplacementOutcomeInput
+  }
+
+  export type PredictiveOutcomeUncheckedCreateInput = {
+    id?: string
+    snapshotId: string
+    outcomeContractVersion: string
+    outcomeTimestamp: Date | string
+    outcomeValue: $Enums.PredictiveOutcomeValue
+    provenanceClass: $Enums.PredictiveProvenanceClass
+    sourceReferences: JsonNullValueInput | InputJsonValue
+    sourceFingerprint: string
+    status?: $Enums.PredictiveRecordStatus
+    recordedById: string
+    recordedAt?: Date | string
+    voidedAt?: Date | string | null
+    voidedById?: string | null
+    voidReason?: string | null
+    replacementOutcomeId?: string | null
+    replaces?: PredictiveOutcomeUncheckedCreateNestedOneWithoutReplacementOutcomeInput
+  }
+
+  export type PredictiveOutcomeUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    outcomeContractVersion?: StringFieldUpdateOperationsInput | string
+    outcomeTimestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    outcomeValue?: EnumPredictiveOutcomeValueFieldUpdateOperationsInput | $Enums.PredictiveOutcomeValue
+    provenanceClass?: EnumPredictiveProvenanceClassFieldUpdateOperationsInput | $Enums.PredictiveProvenanceClass
+    sourceReferences?: JsonNullValueInput | InputJsonValue
+    sourceFingerprint?: StringFieldUpdateOperationsInput | string
+    status?: EnumPredictiveRecordStatusFieldUpdateOperationsInput | $Enums.PredictiveRecordStatus
+    recordedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    voidedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    voidReason?: NullableStringFieldUpdateOperationsInput | string | null
+    snapshot?: PredictiveFeatureSnapshotUpdateOneRequiredWithoutOutcomesNestedInput
+    recordedBy?: UserUpdateOneRequiredWithoutRecordedPredictiveOutcomesNestedInput
+    voidedBy?: UserUpdateOneWithoutVoidedPredictiveOutcomesNestedInput
+    replacementOutcome?: PredictiveOutcomeUpdateOneWithoutReplacesNestedInput
+    replaces?: PredictiveOutcomeUpdateOneWithoutReplacementOutcomeNestedInput
+  }
+
+  export type PredictiveOutcomeUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    snapshotId?: StringFieldUpdateOperationsInput | string
+    outcomeContractVersion?: StringFieldUpdateOperationsInput | string
+    outcomeTimestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    outcomeValue?: EnumPredictiveOutcomeValueFieldUpdateOperationsInput | $Enums.PredictiveOutcomeValue
+    provenanceClass?: EnumPredictiveProvenanceClassFieldUpdateOperationsInput | $Enums.PredictiveProvenanceClass
+    sourceReferences?: JsonNullValueInput | InputJsonValue
+    sourceFingerprint?: StringFieldUpdateOperationsInput | string
+    status?: EnumPredictiveRecordStatusFieldUpdateOperationsInput | $Enums.PredictiveRecordStatus
+    recordedById?: StringFieldUpdateOperationsInput | string
+    recordedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    voidedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    voidedById?: NullableStringFieldUpdateOperationsInput | string | null
+    voidReason?: NullableStringFieldUpdateOperationsInput | string | null
+    replacementOutcomeId?: NullableStringFieldUpdateOperationsInput | string | null
+    replaces?: PredictiveOutcomeUncheckedUpdateOneWithoutReplacementOutcomeNestedInput
+  }
+
+  export type PredictiveOutcomeCreateManyInput = {
+    id?: string
+    snapshotId: string
+    outcomeContractVersion: string
+    outcomeTimestamp: Date | string
+    outcomeValue: $Enums.PredictiveOutcomeValue
+    provenanceClass: $Enums.PredictiveProvenanceClass
+    sourceReferences: JsonNullValueInput | InputJsonValue
+    sourceFingerprint: string
+    status?: $Enums.PredictiveRecordStatus
+    recordedById: string
+    recordedAt?: Date | string
+    voidedAt?: Date | string | null
+    voidedById?: string | null
+    voidReason?: string | null
+    replacementOutcomeId?: string | null
+  }
+
+  export type PredictiveOutcomeUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    outcomeContractVersion?: StringFieldUpdateOperationsInput | string
+    outcomeTimestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    outcomeValue?: EnumPredictiveOutcomeValueFieldUpdateOperationsInput | $Enums.PredictiveOutcomeValue
+    provenanceClass?: EnumPredictiveProvenanceClassFieldUpdateOperationsInput | $Enums.PredictiveProvenanceClass
+    sourceReferences?: JsonNullValueInput | InputJsonValue
+    sourceFingerprint?: StringFieldUpdateOperationsInput | string
+    status?: EnumPredictiveRecordStatusFieldUpdateOperationsInput | $Enums.PredictiveRecordStatus
+    recordedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    voidedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    voidReason?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type PredictiveOutcomeUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    snapshotId?: StringFieldUpdateOperationsInput | string
+    outcomeContractVersion?: StringFieldUpdateOperationsInput | string
+    outcomeTimestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    outcomeValue?: EnumPredictiveOutcomeValueFieldUpdateOperationsInput | $Enums.PredictiveOutcomeValue
+    provenanceClass?: EnumPredictiveProvenanceClassFieldUpdateOperationsInput | $Enums.PredictiveProvenanceClass
+    sourceReferences?: JsonNullValueInput | InputJsonValue
+    sourceFingerprint?: StringFieldUpdateOperationsInput | string
+    status?: EnumPredictiveRecordStatusFieldUpdateOperationsInput | $Enums.PredictiveRecordStatus
+    recordedById?: StringFieldUpdateOperationsInput | string
+    recordedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    voidedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    voidedById?: NullableStringFieldUpdateOperationsInput | string | null
+    voidReason?: NullableStringFieldUpdateOperationsInput | string | null
+    replacementOutcomeId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ExecutionTaskDependencyCreateInput = {
@@ -55407,6 +59178,18 @@ export namespace Prisma {
     none?: CaseResourceEstimateWhereInput
   }
 
+  export type PredictiveFeatureSnapshotListRelationFilter = {
+    every?: PredictiveFeatureSnapshotWhereInput
+    some?: PredictiveFeatureSnapshotWhereInput
+    none?: PredictiveFeatureSnapshotWhereInput
+  }
+
+  export type PredictiveOutcomeListRelationFilter = {
+    every?: PredictiveOutcomeWhereInput
+    some?: PredictiveOutcomeWhereInput
+    none?: PredictiveOutcomeWhereInput
+  }
+
   export type InspectionOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -55452,6 +59235,14 @@ export namespace Prisma {
   }
 
   export type CaseResourceEstimateOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type PredictiveFeatureSnapshotOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type PredictiveOutcomeOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -57934,9 +61725,220 @@ export namespace Prisma {
     _max?: NestedEnumExecutionTaskStatusFilter<$PrismaModel>
   }
 
+  export type EnumPredictiveTargetTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.PredictiveTargetType | EnumPredictiveTargetTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.PredictiveTargetType[] | ListEnumPredictiveTargetTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PredictiveTargetType[] | ListEnumPredictiveTargetTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumPredictiveTargetTypeFilter<$PrismaModel> | $Enums.PredictiveTargetType
+  }
+
+  export type EnumPredictiveProvenanceClassFilter<$PrismaModel = never> = {
+    equals?: $Enums.PredictiveProvenanceClass | EnumPredictiveProvenanceClassFieldRefInput<$PrismaModel>
+    in?: $Enums.PredictiveProvenanceClass[] | ListEnumPredictiveProvenanceClassFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PredictiveProvenanceClass[] | ListEnumPredictiveProvenanceClassFieldRefInput<$PrismaModel>
+    not?: NestedEnumPredictiveProvenanceClassFilter<$PrismaModel> | $Enums.PredictiveProvenanceClass
+  }
+
+  export type EnumPredictiveRecordStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.PredictiveRecordStatus | EnumPredictiveRecordStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.PredictiveRecordStatus[] | ListEnumPredictiveRecordStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PredictiveRecordStatus[] | ListEnumPredictiveRecordStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumPredictiveRecordStatusFilter<$PrismaModel> | $Enums.PredictiveRecordStatus
+  }
+
   export type ExecutionTaskScalarRelationFilter = {
     is?: ExecutionTaskWhereInput
     isNot?: ExecutionTaskWhereInput
+  }
+
+  export type PredictiveFeatureSnapshotNullableScalarRelationFilter = {
+    is?: PredictiveFeatureSnapshotWhereInput | null
+    isNot?: PredictiveFeatureSnapshotWhereInput | null
+  }
+
+  export type PredictiveFeatureSnapshotExecutionTaskIdTargetTypeFeatureContractVersionCompoundUniqueInput = {
+    executionTaskId: string
+    targetType: $Enums.PredictiveTargetType
+    featureContractVersion: string
+  }
+
+  export type PredictiveFeatureSnapshotCountOrderByAggregateInput = {
+    id?: SortOrder
+    targetType?: SortOrder
+    executionTaskId?: SortOrder
+    caseId?: SortOrder
+    assetId?: SortOrder
+    departmentId?: SortOrder
+    jurisdictionId?: SortOrder
+    predictionTimestamp?: SortOrder
+    featureContractVersion?: SortOrder
+    featurePayload?: SortOrder
+    provenanceClass?: SortOrder
+    sourceReferences?: SortOrder
+    sourceFingerprint?: SortOrder
+    status?: SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+    voidedAt?: SortOrder
+    voidedById?: SortOrder
+    voidReason?: SortOrder
+    replacementSnapshotId?: SortOrder
+  }
+
+  export type PredictiveFeatureSnapshotMaxOrderByAggregateInput = {
+    id?: SortOrder
+    targetType?: SortOrder
+    executionTaskId?: SortOrder
+    caseId?: SortOrder
+    assetId?: SortOrder
+    departmentId?: SortOrder
+    jurisdictionId?: SortOrder
+    predictionTimestamp?: SortOrder
+    featureContractVersion?: SortOrder
+    provenanceClass?: SortOrder
+    sourceFingerprint?: SortOrder
+    status?: SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+    voidedAt?: SortOrder
+    voidedById?: SortOrder
+    voidReason?: SortOrder
+    replacementSnapshotId?: SortOrder
+  }
+
+  export type PredictiveFeatureSnapshotMinOrderByAggregateInput = {
+    id?: SortOrder
+    targetType?: SortOrder
+    executionTaskId?: SortOrder
+    caseId?: SortOrder
+    assetId?: SortOrder
+    departmentId?: SortOrder
+    jurisdictionId?: SortOrder
+    predictionTimestamp?: SortOrder
+    featureContractVersion?: SortOrder
+    provenanceClass?: SortOrder
+    sourceFingerprint?: SortOrder
+    status?: SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+    voidedAt?: SortOrder
+    voidedById?: SortOrder
+    voidReason?: SortOrder
+    replacementSnapshotId?: SortOrder
+  }
+
+  export type EnumPredictiveTargetTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.PredictiveTargetType | EnumPredictiveTargetTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.PredictiveTargetType[] | ListEnumPredictiveTargetTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PredictiveTargetType[] | ListEnumPredictiveTargetTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumPredictiveTargetTypeWithAggregatesFilter<$PrismaModel> | $Enums.PredictiveTargetType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumPredictiveTargetTypeFilter<$PrismaModel>
+    _max?: NestedEnumPredictiveTargetTypeFilter<$PrismaModel>
+  }
+
+  export type EnumPredictiveProvenanceClassWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.PredictiveProvenanceClass | EnumPredictiveProvenanceClassFieldRefInput<$PrismaModel>
+    in?: $Enums.PredictiveProvenanceClass[] | ListEnumPredictiveProvenanceClassFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PredictiveProvenanceClass[] | ListEnumPredictiveProvenanceClassFieldRefInput<$PrismaModel>
+    not?: NestedEnumPredictiveProvenanceClassWithAggregatesFilter<$PrismaModel> | $Enums.PredictiveProvenanceClass
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumPredictiveProvenanceClassFilter<$PrismaModel>
+    _max?: NestedEnumPredictiveProvenanceClassFilter<$PrismaModel>
+  }
+
+  export type EnumPredictiveRecordStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.PredictiveRecordStatus | EnumPredictiveRecordStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.PredictiveRecordStatus[] | ListEnumPredictiveRecordStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PredictiveRecordStatus[] | ListEnumPredictiveRecordStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumPredictiveRecordStatusWithAggregatesFilter<$PrismaModel> | $Enums.PredictiveRecordStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumPredictiveRecordStatusFilter<$PrismaModel>
+    _max?: NestedEnumPredictiveRecordStatusFilter<$PrismaModel>
+  }
+
+  export type EnumPredictiveOutcomeValueFilter<$PrismaModel = never> = {
+    equals?: $Enums.PredictiveOutcomeValue | EnumPredictiveOutcomeValueFieldRefInput<$PrismaModel>
+    in?: $Enums.PredictiveOutcomeValue[] | ListEnumPredictiveOutcomeValueFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PredictiveOutcomeValue[] | ListEnumPredictiveOutcomeValueFieldRefInput<$PrismaModel>
+    not?: NestedEnumPredictiveOutcomeValueFilter<$PrismaModel> | $Enums.PredictiveOutcomeValue
+  }
+
+  export type PredictiveFeatureSnapshotScalarRelationFilter = {
+    is?: PredictiveFeatureSnapshotWhereInput
+    isNot?: PredictiveFeatureSnapshotWhereInput
+  }
+
+  export type PredictiveOutcomeNullableScalarRelationFilter = {
+    is?: PredictiveOutcomeWhereInput | null
+    isNot?: PredictiveOutcomeWhereInput | null
+  }
+
+  export type PredictiveOutcomeSnapshotIdOutcomeContractVersionCompoundUniqueInput = {
+    snapshotId: string
+    outcomeContractVersion: string
+  }
+
+  export type PredictiveOutcomeCountOrderByAggregateInput = {
+    id?: SortOrder
+    snapshotId?: SortOrder
+    outcomeContractVersion?: SortOrder
+    outcomeTimestamp?: SortOrder
+    outcomeValue?: SortOrder
+    provenanceClass?: SortOrder
+    sourceReferences?: SortOrder
+    sourceFingerprint?: SortOrder
+    status?: SortOrder
+    recordedById?: SortOrder
+    recordedAt?: SortOrder
+    voidedAt?: SortOrder
+    voidedById?: SortOrder
+    voidReason?: SortOrder
+    replacementOutcomeId?: SortOrder
+  }
+
+  export type PredictiveOutcomeMaxOrderByAggregateInput = {
+    id?: SortOrder
+    snapshotId?: SortOrder
+    outcomeContractVersion?: SortOrder
+    outcomeTimestamp?: SortOrder
+    outcomeValue?: SortOrder
+    provenanceClass?: SortOrder
+    sourceFingerprint?: SortOrder
+    status?: SortOrder
+    recordedById?: SortOrder
+    recordedAt?: SortOrder
+    voidedAt?: SortOrder
+    voidedById?: SortOrder
+    voidReason?: SortOrder
+    replacementOutcomeId?: SortOrder
+  }
+
+  export type PredictiveOutcomeMinOrderByAggregateInput = {
+    id?: SortOrder
+    snapshotId?: SortOrder
+    outcomeContractVersion?: SortOrder
+    outcomeTimestamp?: SortOrder
+    outcomeValue?: SortOrder
+    provenanceClass?: SortOrder
+    sourceFingerprint?: SortOrder
+    status?: SortOrder
+    recordedById?: SortOrder
+    recordedAt?: SortOrder
+    voidedAt?: SortOrder
+    voidedById?: SortOrder
+    voidReason?: SortOrder
+    replacementOutcomeId?: SortOrder
+  }
+
+  export type EnumPredictiveOutcomeValueWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.PredictiveOutcomeValue | EnumPredictiveOutcomeValueFieldRefInput<$PrismaModel>
+    in?: $Enums.PredictiveOutcomeValue[] | ListEnumPredictiveOutcomeValueFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PredictiveOutcomeValue[] | ListEnumPredictiveOutcomeValueFieldRefInput<$PrismaModel>
+    not?: NestedEnumPredictiveOutcomeValueWithAggregatesFilter<$PrismaModel> | $Enums.PredictiveOutcomeValue
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumPredictiveOutcomeValueFilter<$PrismaModel>
+    _max?: NestedEnumPredictiveOutcomeValueFilter<$PrismaModel>
   }
 
   export type ExecutionTaskDependencyDependentTaskIdPredecessorTaskIdCompoundUniqueInput = {
@@ -59305,6 +63307,34 @@ export namespace Prisma {
     connect?: PortfolioScenarioWhereUniqueInput | PortfolioScenarioWhereUniqueInput[]
   }
 
+  export type PredictiveFeatureSnapshotCreateNestedManyWithoutCreatedByInput = {
+    create?: XOR<PredictiveFeatureSnapshotCreateWithoutCreatedByInput, PredictiveFeatureSnapshotUncheckedCreateWithoutCreatedByInput> | PredictiveFeatureSnapshotCreateWithoutCreatedByInput[] | PredictiveFeatureSnapshotUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: PredictiveFeatureSnapshotCreateOrConnectWithoutCreatedByInput | PredictiveFeatureSnapshotCreateOrConnectWithoutCreatedByInput[]
+    createMany?: PredictiveFeatureSnapshotCreateManyCreatedByInputEnvelope
+    connect?: PredictiveFeatureSnapshotWhereUniqueInput | PredictiveFeatureSnapshotWhereUniqueInput[]
+  }
+
+  export type PredictiveFeatureSnapshotCreateNestedManyWithoutVoidedByInput = {
+    create?: XOR<PredictiveFeatureSnapshotCreateWithoutVoidedByInput, PredictiveFeatureSnapshotUncheckedCreateWithoutVoidedByInput> | PredictiveFeatureSnapshotCreateWithoutVoidedByInput[] | PredictiveFeatureSnapshotUncheckedCreateWithoutVoidedByInput[]
+    connectOrCreate?: PredictiveFeatureSnapshotCreateOrConnectWithoutVoidedByInput | PredictiveFeatureSnapshotCreateOrConnectWithoutVoidedByInput[]
+    createMany?: PredictiveFeatureSnapshotCreateManyVoidedByInputEnvelope
+    connect?: PredictiveFeatureSnapshotWhereUniqueInput | PredictiveFeatureSnapshotWhereUniqueInput[]
+  }
+
+  export type PredictiveOutcomeCreateNestedManyWithoutRecordedByInput = {
+    create?: XOR<PredictiveOutcomeCreateWithoutRecordedByInput, PredictiveOutcomeUncheckedCreateWithoutRecordedByInput> | PredictiveOutcomeCreateWithoutRecordedByInput[] | PredictiveOutcomeUncheckedCreateWithoutRecordedByInput[]
+    connectOrCreate?: PredictiveOutcomeCreateOrConnectWithoutRecordedByInput | PredictiveOutcomeCreateOrConnectWithoutRecordedByInput[]
+    createMany?: PredictiveOutcomeCreateManyRecordedByInputEnvelope
+    connect?: PredictiveOutcomeWhereUniqueInput | PredictiveOutcomeWhereUniqueInput[]
+  }
+
+  export type PredictiveOutcomeCreateNestedManyWithoutVoidedByInput = {
+    create?: XOR<PredictiveOutcomeCreateWithoutVoidedByInput, PredictiveOutcomeUncheckedCreateWithoutVoidedByInput> | PredictiveOutcomeCreateWithoutVoidedByInput[] | PredictiveOutcomeUncheckedCreateWithoutVoidedByInput[]
+    connectOrCreate?: PredictiveOutcomeCreateOrConnectWithoutVoidedByInput | PredictiveOutcomeCreateOrConnectWithoutVoidedByInput[]
+    createMany?: PredictiveOutcomeCreateManyVoidedByInputEnvelope
+    connect?: PredictiveOutcomeWhereUniqueInput | PredictiveOutcomeWhereUniqueInput[]
+  }
+
   export type InspectionUncheckedCreateNestedManyWithoutInspectorInput = {
     create?: XOR<InspectionCreateWithoutInspectorInput, InspectionUncheckedCreateWithoutInspectorInput> | InspectionCreateWithoutInspectorInput[] | InspectionUncheckedCreateWithoutInspectorInput[]
     connectOrCreate?: InspectionCreateOrConnectWithoutInspectorInput | InspectionCreateOrConnectWithoutInspectorInput[]
@@ -59520,6 +63550,34 @@ export namespace Prisma {
     connectOrCreate?: PortfolioScenarioCreateOrConnectWithoutCreatedByInput | PortfolioScenarioCreateOrConnectWithoutCreatedByInput[]
     createMany?: PortfolioScenarioCreateManyCreatedByInputEnvelope
     connect?: PortfolioScenarioWhereUniqueInput | PortfolioScenarioWhereUniqueInput[]
+  }
+
+  export type PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutCreatedByInput = {
+    create?: XOR<PredictiveFeatureSnapshotCreateWithoutCreatedByInput, PredictiveFeatureSnapshotUncheckedCreateWithoutCreatedByInput> | PredictiveFeatureSnapshotCreateWithoutCreatedByInput[] | PredictiveFeatureSnapshotUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: PredictiveFeatureSnapshotCreateOrConnectWithoutCreatedByInput | PredictiveFeatureSnapshotCreateOrConnectWithoutCreatedByInput[]
+    createMany?: PredictiveFeatureSnapshotCreateManyCreatedByInputEnvelope
+    connect?: PredictiveFeatureSnapshotWhereUniqueInput | PredictiveFeatureSnapshotWhereUniqueInput[]
+  }
+
+  export type PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutVoidedByInput = {
+    create?: XOR<PredictiveFeatureSnapshotCreateWithoutVoidedByInput, PredictiveFeatureSnapshotUncheckedCreateWithoutVoidedByInput> | PredictiveFeatureSnapshotCreateWithoutVoidedByInput[] | PredictiveFeatureSnapshotUncheckedCreateWithoutVoidedByInput[]
+    connectOrCreate?: PredictiveFeatureSnapshotCreateOrConnectWithoutVoidedByInput | PredictiveFeatureSnapshotCreateOrConnectWithoutVoidedByInput[]
+    createMany?: PredictiveFeatureSnapshotCreateManyVoidedByInputEnvelope
+    connect?: PredictiveFeatureSnapshotWhereUniqueInput | PredictiveFeatureSnapshotWhereUniqueInput[]
+  }
+
+  export type PredictiveOutcomeUncheckedCreateNestedManyWithoutRecordedByInput = {
+    create?: XOR<PredictiveOutcomeCreateWithoutRecordedByInput, PredictiveOutcomeUncheckedCreateWithoutRecordedByInput> | PredictiveOutcomeCreateWithoutRecordedByInput[] | PredictiveOutcomeUncheckedCreateWithoutRecordedByInput[]
+    connectOrCreate?: PredictiveOutcomeCreateOrConnectWithoutRecordedByInput | PredictiveOutcomeCreateOrConnectWithoutRecordedByInput[]
+    createMany?: PredictiveOutcomeCreateManyRecordedByInputEnvelope
+    connect?: PredictiveOutcomeWhereUniqueInput | PredictiveOutcomeWhereUniqueInput[]
+  }
+
+  export type PredictiveOutcomeUncheckedCreateNestedManyWithoutVoidedByInput = {
+    create?: XOR<PredictiveOutcomeCreateWithoutVoidedByInput, PredictiveOutcomeUncheckedCreateWithoutVoidedByInput> | PredictiveOutcomeCreateWithoutVoidedByInput[] | PredictiveOutcomeUncheckedCreateWithoutVoidedByInput[]
+    connectOrCreate?: PredictiveOutcomeCreateOrConnectWithoutVoidedByInput | PredictiveOutcomeCreateOrConnectWithoutVoidedByInput[]
+    createMany?: PredictiveOutcomeCreateManyVoidedByInputEnvelope
+    connect?: PredictiveOutcomeWhereUniqueInput | PredictiveOutcomeWhereUniqueInput[]
   }
 
   export type EnumSystemRoleFieldUpdateOperationsInput = {
@@ -59980,6 +64038,62 @@ export namespace Prisma {
     deleteMany?: PortfolioScenarioScalarWhereInput | PortfolioScenarioScalarWhereInput[]
   }
 
+  export type PredictiveFeatureSnapshotUpdateManyWithoutCreatedByNestedInput = {
+    create?: XOR<PredictiveFeatureSnapshotCreateWithoutCreatedByInput, PredictiveFeatureSnapshotUncheckedCreateWithoutCreatedByInput> | PredictiveFeatureSnapshotCreateWithoutCreatedByInput[] | PredictiveFeatureSnapshotUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: PredictiveFeatureSnapshotCreateOrConnectWithoutCreatedByInput | PredictiveFeatureSnapshotCreateOrConnectWithoutCreatedByInput[]
+    upsert?: PredictiveFeatureSnapshotUpsertWithWhereUniqueWithoutCreatedByInput | PredictiveFeatureSnapshotUpsertWithWhereUniqueWithoutCreatedByInput[]
+    createMany?: PredictiveFeatureSnapshotCreateManyCreatedByInputEnvelope
+    set?: PredictiveFeatureSnapshotWhereUniqueInput | PredictiveFeatureSnapshotWhereUniqueInput[]
+    disconnect?: PredictiveFeatureSnapshotWhereUniqueInput | PredictiveFeatureSnapshotWhereUniqueInput[]
+    delete?: PredictiveFeatureSnapshotWhereUniqueInput | PredictiveFeatureSnapshotWhereUniqueInput[]
+    connect?: PredictiveFeatureSnapshotWhereUniqueInput | PredictiveFeatureSnapshotWhereUniqueInput[]
+    update?: PredictiveFeatureSnapshotUpdateWithWhereUniqueWithoutCreatedByInput | PredictiveFeatureSnapshotUpdateWithWhereUniqueWithoutCreatedByInput[]
+    updateMany?: PredictiveFeatureSnapshotUpdateManyWithWhereWithoutCreatedByInput | PredictiveFeatureSnapshotUpdateManyWithWhereWithoutCreatedByInput[]
+    deleteMany?: PredictiveFeatureSnapshotScalarWhereInput | PredictiveFeatureSnapshotScalarWhereInput[]
+  }
+
+  export type PredictiveFeatureSnapshotUpdateManyWithoutVoidedByNestedInput = {
+    create?: XOR<PredictiveFeatureSnapshotCreateWithoutVoidedByInput, PredictiveFeatureSnapshotUncheckedCreateWithoutVoidedByInput> | PredictiveFeatureSnapshotCreateWithoutVoidedByInput[] | PredictiveFeatureSnapshotUncheckedCreateWithoutVoidedByInput[]
+    connectOrCreate?: PredictiveFeatureSnapshotCreateOrConnectWithoutVoidedByInput | PredictiveFeatureSnapshotCreateOrConnectWithoutVoidedByInput[]
+    upsert?: PredictiveFeatureSnapshotUpsertWithWhereUniqueWithoutVoidedByInput | PredictiveFeatureSnapshotUpsertWithWhereUniqueWithoutVoidedByInput[]
+    createMany?: PredictiveFeatureSnapshotCreateManyVoidedByInputEnvelope
+    set?: PredictiveFeatureSnapshotWhereUniqueInput | PredictiveFeatureSnapshotWhereUniqueInput[]
+    disconnect?: PredictiveFeatureSnapshotWhereUniqueInput | PredictiveFeatureSnapshotWhereUniqueInput[]
+    delete?: PredictiveFeatureSnapshotWhereUniqueInput | PredictiveFeatureSnapshotWhereUniqueInput[]
+    connect?: PredictiveFeatureSnapshotWhereUniqueInput | PredictiveFeatureSnapshotWhereUniqueInput[]
+    update?: PredictiveFeatureSnapshotUpdateWithWhereUniqueWithoutVoidedByInput | PredictiveFeatureSnapshotUpdateWithWhereUniqueWithoutVoidedByInput[]
+    updateMany?: PredictiveFeatureSnapshotUpdateManyWithWhereWithoutVoidedByInput | PredictiveFeatureSnapshotUpdateManyWithWhereWithoutVoidedByInput[]
+    deleteMany?: PredictiveFeatureSnapshotScalarWhereInput | PredictiveFeatureSnapshotScalarWhereInput[]
+  }
+
+  export type PredictiveOutcomeUpdateManyWithoutRecordedByNestedInput = {
+    create?: XOR<PredictiveOutcomeCreateWithoutRecordedByInput, PredictiveOutcomeUncheckedCreateWithoutRecordedByInput> | PredictiveOutcomeCreateWithoutRecordedByInput[] | PredictiveOutcomeUncheckedCreateWithoutRecordedByInput[]
+    connectOrCreate?: PredictiveOutcomeCreateOrConnectWithoutRecordedByInput | PredictiveOutcomeCreateOrConnectWithoutRecordedByInput[]
+    upsert?: PredictiveOutcomeUpsertWithWhereUniqueWithoutRecordedByInput | PredictiveOutcomeUpsertWithWhereUniqueWithoutRecordedByInput[]
+    createMany?: PredictiveOutcomeCreateManyRecordedByInputEnvelope
+    set?: PredictiveOutcomeWhereUniqueInput | PredictiveOutcomeWhereUniqueInput[]
+    disconnect?: PredictiveOutcomeWhereUniqueInput | PredictiveOutcomeWhereUniqueInput[]
+    delete?: PredictiveOutcomeWhereUniqueInput | PredictiveOutcomeWhereUniqueInput[]
+    connect?: PredictiveOutcomeWhereUniqueInput | PredictiveOutcomeWhereUniqueInput[]
+    update?: PredictiveOutcomeUpdateWithWhereUniqueWithoutRecordedByInput | PredictiveOutcomeUpdateWithWhereUniqueWithoutRecordedByInput[]
+    updateMany?: PredictiveOutcomeUpdateManyWithWhereWithoutRecordedByInput | PredictiveOutcomeUpdateManyWithWhereWithoutRecordedByInput[]
+    deleteMany?: PredictiveOutcomeScalarWhereInput | PredictiveOutcomeScalarWhereInput[]
+  }
+
+  export type PredictiveOutcomeUpdateManyWithoutVoidedByNestedInput = {
+    create?: XOR<PredictiveOutcomeCreateWithoutVoidedByInput, PredictiveOutcomeUncheckedCreateWithoutVoidedByInput> | PredictiveOutcomeCreateWithoutVoidedByInput[] | PredictiveOutcomeUncheckedCreateWithoutVoidedByInput[]
+    connectOrCreate?: PredictiveOutcomeCreateOrConnectWithoutVoidedByInput | PredictiveOutcomeCreateOrConnectWithoutVoidedByInput[]
+    upsert?: PredictiveOutcomeUpsertWithWhereUniqueWithoutVoidedByInput | PredictiveOutcomeUpsertWithWhereUniqueWithoutVoidedByInput[]
+    createMany?: PredictiveOutcomeCreateManyVoidedByInputEnvelope
+    set?: PredictiveOutcomeWhereUniqueInput | PredictiveOutcomeWhereUniqueInput[]
+    disconnect?: PredictiveOutcomeWhereUniqueInput | PredictiveOutcomeWhereUniqueInput[]
+    delete?: PredictiveOutcomeWhereUniqueInput | PredictiveOutcomeWhereUniqueInput[]
+    connect?: PredictiveOutcomeWhereUniqueInput | PredictiveOutcomeWhereUniqueInput[]
+    update?: PredictiveOutcomeUpdateWithWhereUniqueWithoutVoidedByInput | PredictiveOutcomeUpdateWithWhereUniqueWithoutVoidedByInput[]
+    updateMany?: PredictiveOutcomeUpdateManyWithWhereWithoutVoidedByInput | PredictiveOutcomeUpdateManyWithWhereWithoutVoidedByInput[]
+    deleteMany?: PredictiveOutcomeScalarWhereInput | PredictiveOutcomeScalarWhereInput[]
+  }
+
   export type InspectionUncheckedUpdateManyWithoutInspectorNestedInput = {
     create?: XOR<InspectionCreateWithoutInspectorInput, InspectionUncheckedCreateWithoutInspectorInput> | InspectionCreateWithoutInspectorInput[] | InspectionUncheckedCreateWithoutInspectorInput[]
     connectOrCreate?: InspectionCreateOrConnectWithoutInspectorInput | InspectionCreateOrConnectWithoutInspectorInput[]
@@ -60412,6 +64526,62 @@ export namespace Prisma {
     update?: PortfolioScenarioUpdateWithWhereUniqueWithoutCreatedByInput | PortfolioScenarioUpdateWithWhereUniqueWithoutCreatedByInput[]
     updateMany?: PortfolioScenarioUpdateManyWithWhereWithoutCreatedByInput | PortfolioScenarioUpdateManyWithWhereWithoutCreatedByInput[]
     deleteMany?: PortfolioScenarioScalarWhereInput | PortfolioScenarioScalarWhereInput[]
+  }
+
+  export type PredictiveFeatureSnapshotUncheckedUpdateManyWithoutCreatedByNestedInput = {
+    create?: XOR<PredictiveFeatureSnapshotCreateWithoutCreatedByInput, PredictiveFeatureSnapshotUncheckedCreateWithoutCreatedByInput> | PredictiveFeatureSnapshotCreateWithoutCreatedByInput[] | PredictiveFeatureSnapshotUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: PredictiveFeatureSnapshotCreateOrConnectWithoutCreatedByInput | PredictiveFeatureSnapshotCreateOrConnectWithoutCreatedByInput[]
+    upsert?: PredictiveFeatureSnapshotUpsertWithWhereUniqueWithoutCreatedByInput | PredictiveFeatureSnapshotUpsertWithWhereUniqueWithoutCreatedByInput[]
+    createMany?: PredictiveFeatureSnapshotCreateManyCreatedByInputEnvelope
+    set?: PredictiveFeatureSnapshotWhereUniqueInput | PredictiveFeatureSnapshotWhereUniqueInput[]
+    disconnect?: PredictiveFeatureSnapshotWhereUniqueInput | PredictiveFeatureSnapshotWhereUniqueInput[]
+    delete?: PredictiveFeatureSnapshotWhereUniqueInput | PredictiveFeatureSnapshotWhereUniqueInput[]
+    connect?: PredictiveFeatureSnapshotWhereUniqueInput | PredictiveFeatureSnapshotWhereUniqueInput[]
+    update?: PredictiveFeatureSnapshotUpdateWithWhereUniqueWithoutCreatedByInput | PredictiveFeatureSnapshotUpdateWithWhereUniqueWithoutCreatedByInput[]
+    updateMany?: PredictiveFeatureSnapshotUpdateManyWithWhereWithoutCreatedByInput | PredictiveFeatureSnapshotUpdateManyWithWhereWithoutCreatedByInput[]
+    deleteMany?: PredictiveFeatureSnapshotScalarWhereInput | PredictiveFeatureSnapshotScalarWhereInput[]
+  }
+
+  export type PredictiveFeatureSnapshotUncheckedUpdateManyWithoutVoidedByNestedInput = {
+    create?: XOR<PredictiveFeatureSnapshotCreateWithoutVoidedByInput, PredictiveFeatureSnapshotUncheckedCreateWithoutVoidedByInput> | PredictiveFeatureSnapshotCreateWithoutVoidedByInput[] | PredictiveFeatureSnapshotUncheckedCreateWithoutVoidedByInput[]
+    connectOrCreate?: PredictiveFeatureSnapshotCreateOrConnectWithoutVoidedByInput | PredictiveFeatureSnapshotCreateOrConnectWithoutVoidedByInput[]
+    upsert?: PredictiveFeatureSnapshotUpsertWithWhereUniqueWithoutVoidedByInput | PredictiveFeatureSnapshotUpsertWithWhereUniqueWithoutVoidedByInput[]
+    createMany?: PredictiveFeatureSnapshotCreateManyVoidedByInputEnvelope
+    set?: PredictiveFeatureSnapshotWhereUniqueInput | PredictiveFeatureSnapshotWhereUniqueInput[]
+    disconnect?: PredictiveFeatureSnapshotWhereUniqueInput | PredictiveFeatureSnapshotWhereUniqueInput[]
+    delete?: PredictiveFeatureSnapshotWhereUniqueInput | PredictiveFeatureSnapshotWhereUniqueInput[]
+    connect?: PredictiveFeatureSnapshotWhereUniqueInput | PredictiveFeatureSnapshotWhereUniqueInput[]
+    update?: PredictiveFeatureSnapshotUpdateWithWhereUniqueWithoutVoidedByInput | PredictiveFeatureSnapshotUpdateWithWhereUniqueWithoutVoidedByInput[]
+    updateMany?: PredictiveFeatureSnapshotUpdateManyWithWhereWithoutVoidedByInput | PredictiveFeatureSnapshotUpdateManyWithWhereWithoutVoidedByInput[]
+    deleteMany?: PredictiveFeatureSnapshotScalarWhereInput | PredictiveFeatureSnapshotScalarWhereInput[]
+  }
+
+  export type PredictiveOutcomeUncheckedUpdateManyWithoutRecordedByNestedInput = {
+    create?: XOR<PredictiveOutcomeCreateWithoutRecordedByInput, PredictiveOutcomeUncheckedCreateWithoutRecordedByInput> | PredictiveOutcomeCreateWithoutRecordedByInput[] | PredictiveOutcomeUncheckedCreateWithoutRecordedByInput[]
+    connectOrCreate?: PredictiveOutcomeCreateOrConnectWithoutRecordedByInput | PredictiveOutcomeCreateOrConnectWithoutRecordedByInput[]
+    upsert?: PredictiveOutcomeUpsertWithWhereUniqueWithoutRecordedByInput | PredictiveOutcomeUpsertWithWhereUniqueWithoutRecordedByInput[]
+    createMany?: PredictiveOutcomeCreateManyRecordedByInputEnvelope
+    set?: PredictiveOutcomeWhereUniqueInput | PredictiveOutcomeWhereUniqueInput[]
+    disconnect?: PredictiveOutcomeWhereUniqueInput | PredictiveOutcomeWhereUniqueInput[]
+    delete?: PredictiveOutcomeWhereUniqueInput | PredictiveOutcomeWhereUniqueInput[]
+    connect?: PredictiveOutcomeWhereUniqueInput | PredictiveOutcomeWhereUniqueInput[]
+    update?: PredictiveOutcomeUpdateWithWhereUniqueWithoutRecordedByInput | PredictiveOutcomeUpdateWithWhereUniqueWithoutRecordedByInput[]
+    updateMany?: PredictiveOutcomeUpdateManyWithWhereWithoutRecordedByInput | PredictiveOutcomeUpdateManyWithWhereWithoutRecordedByInput[]
+    deleteMany?: PredictiveOutcomeScalarWhereInput | PredictiveOutcomeScalarWhereInput[]
+  }
+
+  export type PredictiveOutcomeUncheckedUpdateManyWithoutVoidedByNestedInput = {
+    create?: XOR<PredictiveOutcomeCreateWithoutVoidedByInput, PredictiveOutcomeUncheckedCreateWithoutVoidedByInput> | PredictiveOutcomeCreateWithoutVoidedByInput[] | PredictiveOutcomeUncheckedCreateWithoutVoidedByInput[]
+    connectOrCreate?: PredictiveOutcomeCreateOrConnectWithoutVoidedByInput | PredictiveOutcomeCreateOrConnectWithoutVoidedByInput[]
+    upsert?: PredictiveOutcomeUpsertWithWhereUniqueWithoutVoidedByInput | PredictiveOutcomeUpsertWithWhereUniqueWithoutVoidedByInput[]
+    createMany?: PredictiveOutcomeCreateManyVoidedByInputEnvelope
+    set?: PredictiveOutcomeWhereUniqueInput | PredictiveOutcomeWhereUniqueInput[]
+    disconnect?: PredictiveOutcomeWhereUniqueInput | PredictiveOutcomeWhereUniqueInput[]
+    delete?: PredictiveOutcomeWhereUniqueInput | PredictiveOutcomeWhereUniqueInput[]
+    connect?: PredictiveOutcomeWhereUniqueInput | PredictiveOutcomeWhereUniqueInput[]
+    update?: PredictiveOutcomeUpdateWithWhereUniqueWithoutVoidedByInput | PredictiveOutcomeUpdateWithWhereUniqueWithoutVoidedByInput[]
+    updateMany?: PredictiveOutcomeUpdateManyWithWhereWithoutVoidedByInput | PredictiveOutcomeUpdateManyWithWhereWithoutVoidedByInput[]
+    deleteMany?: PredictiveOutcomeScalarWhereInput | PredictiveOutcomeScalarWhereInput[]
   }
 
   export type DepartmentCreateNestedOneWithoutAssetsInput = {
@@ -63459,6 +67629,13 @@ export namespace Prisma {
     connect?: ExecutionTaskBlockerEventWhereUniqueInput | ExecutionTaskBlockerEventWhereUniqueInput[]
   }
 
+  export type PredictiveFeatureSnapshotCreateNestedManyWithoutExecutionTaskInput = {
+    create?: XOR<PredictiveFeatureSnapshotCreateWithoutExecutionTaskInput, PredictiveFeatureSnapshotUncheckedCreateWithoutExecutionTaskInput> | PredictiveFeatureSnapshotCreateWithoutExecutionTaskInput[] | PredictiveFeatureSnapshotUncheckedCreateWithoutExecutionTaskInput[]
+    connectOrCreate?: PredictiveFeatureSnapshotCreateOrConnectWithoutExecutionTaskInput | PredictiveFeatureSnapshotCreateOrConnectWithoutExecutionTaskInput[]
+    createMany?: PredictiveFeatureSnapshotCreateManyExecutionTaskInputEnvelope
+    connect?: PredictiveFeatureSnapshotWhereUniqueInput | PredictiveFeatureSnapshotWhereUniqueInput[]
+  }
+
   export type ExecutionEvidenceUncheckedCreateNestedManyWithoutExecutionTaskInput = {
     create?: XOR<ExecutionEvidenceCreateWithoutExecutionTaskInput, ExecutionEvidenceUncheckedCreateWithoutExecutionTaskInput> | ExecutionEvidenceCreateWithoutExecutionTaskInput[] | ExecutionEvidenceUncheckedCreateWithoutExecutionTaskInput[]
     connectOrCreate?: ExecutionEvidenceCreateOrConnectWithoutExecutionTaskInput | ExecutionEvidenceCreateOrConnectWithoutExecutionTaskInput[]
@@ -63492,6 +67669,13 @@ export namespace Prisma {
     connectOrCreate?: ExecutionTaskBlockerEventCreateOrConnectWithoutExecutionTaskInput | ExecutionTaskBlockerEventCreateOrConnectWithoutExecutionTaskInput[]
     createMany?: ExecutionTaskBlockerEventCreateManyExecutionTaskInputEnvelope
     connect?: ExecutionTaskBlockerEventWhereUniqueInput | ExecutionTaskBlockerEventWhereUniqueInput[]
+  }
+
+  export type PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutExecutionTaskInput = {
+    create?: XOR<PredictiveFeatureSnapshotCreateWithoutExecutionTaskInput, PredictiveFeatureSnapshotUncheckedCreateWithoutExecutionTaskInput> | PredictiveFeatureSnapshotCreateWithoutExecutionTaskInput[] | PredictiveFeatureSnapshotUncheckedCreateWithoutExecutionTaskInput[]
+    connectOrCreate?: PredictiveFeatureSnapshotCreateOrConnectWithoutExecutionTaskInput | PredictiveFeatureSnapshotCreateOrConnectWithoutExecutionTaskInput[]
+    createMany?: PredictiveFeatureSnapshotCreateManyExecutionTaskInputEnvelope
+    connect?: PredictiveFeatureSnapshotWhereUniqueInput | PredictiveFeatureSnapshotWhereUniqueInput[]
   }
 
   export type EnumExecutionTaskStatusFieldUpdateOperationsInput = {
@@ -63656,6 +67840,20 @@ export namespace Prisma {
     deleteMany?: ExecutionTaskBlockerEventScalarWhereInput | ExecutionTaskBlockerEventScalarWhereInput[]
   }
 
+  export type PredictiveFeatureSnapshotUpdateManyWithoutExecutionTaskNestedInput = {
+    create?: XOR<PredictiveFeatureSnapshotCreateWithoutExecutionTaskInput, PredictiveFeatureSnapshotUncheckedCreateWithoutExecutionTaskInput> | PredictiveFeatureSnapshotCreateWithoutExecutionTaskInput[] | PredictiveFeatureSnapshotUncheckedCreateWithoutExecutionTaskInput[]
+    connectOrCreate?: PredictiveFeatureSnapshotCreateOrConnectWithoutExecutionTaskInput | PredictiveFeatureSnapshotCreateOrConnectWithoutExecutionTaskInput[]
+    upsert?: PredictiveFeatureSnapshotUpsertWithWhereUniqueWithoutExecutionTaskInput | PredictiveFeatureSnapshotUpsertWithWhereUniqueWithoutExecutionTaskInput[]
+    createMany?: PredictiveFeatureSnapshotCreateManyExecutionTaskInputEnvelope
+    set?: PredictiveFeatureSnapshotWhereUniqueInput | PredictiveFeatureSnapshotWhereUniqueInput[]
+    disconnect?: PredictiveFeatureSnapshotWhereUniqueInput | PredictiveFeatureSnapshotWhereUniqueInput[]
+    delete?: PredictiveFeatureSnapshotWhereUniqueInput | PredictiveFeatureSnapshotWhereUniqueInput[]
+    connect?: PredictiveFeatureSnapshotWhereUniqueInput | PredictiveFeatureSnapshotWhereUniqueInput[]
+    update?: PredictiveFeatureSnapshotUpdateWithWhereUniqueWithoutExecutionTaskInput | PredictiveFeatureSnapshotUpdateWithWhereUniqueWithoutExecutionTaskInput[]
+    updateMany?: PredictiveFeatureSnapshotUpdateManyWithWhereWithoutExecutionTaskInput | PredictiveFeatureSnapshotUpdateManyWithWhereWithoutExecutionTaskInput[]
+    deleteMany?: PredictiveFeatureSnapshotScalarWhereInput | PredictiveFeatureSnapshotScalarWhereInput[]
+  }
+
   export type ExecutionEvidenceUncheckedUpdateManyWithoutExecutionTaskNestedInput = {
     create?: XOR<ExecutionEvidenceCreateWithoutExecutionTaskInput, ExecutionEvidenceUncheckedCreateWithoutExecutionTaskInput> | ExecutionEvidenceCreateWithoutExecutionTaskInput[] | ExecutionEvidenceUncheckedCreateWithoutExecutionTaskInput[]
     connectOrCreate?: ExecutionEvidenceCreateOrConnectWithoutExecutionTaskInput | ExecutionEvidenceCreateOrConnectWithoutExecutionTaskInput[]
@@ -63724,6 +67922,262 @@ export namespace Prisma {
     update?: ExecutionTaskBlockerEventUpdateWithWhereUniqueWithoutExecutionTaskInput | ExecutionTaskBlockerEventUpdateWithWhereUniqueWithoutExecutionTaskInput[]
     updateMany?: ExecutionTaskBlockerEventUpdateManyWithWhereWithoutExecutionTaskInput | ExecutionTaskBlockerEventUpdateManyWithWhereWithoutExecutionTaskInput[]
     deleteMany?: ExecutionTaskBlockerEventScalarWhereInput | ExecutionTaskBlockerEventScalarWhereInput[]
+  }
+
+  export type PredictiveFeatureSnapshotUncheckedUpdateManyWithoutExecutionTaskNestedInput = {
+    create?: XOR<PredictiveFeatureSnapshotCreateWithoutExecutionTaskInput, PredictiveFeatureSnapshotUncheckedCreateWithoutExecutionTaskInput> | PredictiveFeatureSnapshotCreateWithoutExecutionTaskInput[] | PredictiveFeatureSnapshotUncheckedCreateWithoutExecutionTaskInput[]
+    connectOrCreate?: PredictiveFeatureSnapshotCreateOrConnectWithoutExecutionTaskInput | PredictiveFeatureSnapshotCreateOrConnectWithoutExecutionTaskInput[]
+    upsert?: PredictiveFeatureSnapshotUpsertWithWhereUniqueWithoutExecutionTaskInput | PredictiveFeatureSnapshotUpsertWithWhereUniqueWithoutExecutionTaskInput[]
+    createMany?: PredictiveFeatureSnapshotCreateManyExecutionTaskInputEnvelope
+    set?: PredictiveFeatureSnapshotWhereUniqueInput | PredictiveFeatureSnapshotWhereUniqueInput[]
+    disconnect?: PredictiveFeatureSnapshotWhereUniqueInput | PredictiveFeatureSnapshotWhereUniqueInput[]
+    delete?: PredictiveFeatureSnapshotWhereUniqueInput | PredictiveFeatureSnapshotWhereUniqueInput[]
+    connect?: PredictiveFeatureSnapshotWhereUniqueInput | PredictiveFeatureSnapshotWhereUniqueInput[]
+    update?: PredictiveFeatureSnapshotUpdateWithWhereUniqueWithoutExecutionTaskInput | PredictiveFeatureSnapshotUpdateWithWhereUniqueWithoutExecutionTaskInput[]
+    updateMany?: PredictiveFeatureSnapshotUpdateManyWithWhereWithoutExecutionTaskInput | PredictiveFeatureSnapshotUpdateManyWithWhereWithoutExecutionTaskInput[]
+    deleteMany?: PredictiveFeatureSnapshotScalarWhereInput | PredictiveFeatureSnapshotScalarWhereInput[]
+  }
+
+  export type ExecutionTaskCreateNestedOneWithoutPredictiveSnapshotsInput = {
+    create?: XOR<ExecutionTaskCreateWithoutPredictiveSnapshotsInput, ExecutionTaskUncheckedCreateWithoutPredictiveSnapshotsInput>
+    connectOrCreate?: ExecutionTaskCreateOrConnectWithoutPredictiveSnapshotsInput
+    connect?: ExecutionTaskWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutCreatedPredictiveSnapshotsInput = {
+    create?: XOR<UserCreateWithoutCreatedPredictiveSnapshotsInput, UserUncheckedCreateWithoutCreatedPredictiveSnapshotsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCreatedPredictiveSnapshotsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutVoidedPredictiveSnapshotsInput = {
+    create?: XOR<UserCreateWithoutVoidedPredictiveSnapshotsInput, UserUncheckedCreateWithoutVoidedPredictiveSnapshotsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutVoidedPredictiveSnapshotsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type PredictiveFeatureSnapshotCreateNestedOneWithoutReplacesInput = {
+    create?: XOR<PredictiveFeatureSnapshotCreateWithoutReplacesInput, PredictiveFeatureSnapshotUncheckedCreateWithoutReplacesInput>
+    connectOrCreate?: PredictiveFeatureSnapshotCreateOrConnectWithoutReplacesInput
+    connect?: PredictiveFeatureSnapshotWhereUniqueInput
+  }
+
+  export type PredictiveFeatureSnapshotCreateNestedOneWithoutReplacementSnapshotInput = {
+    create?: XOR<PredictiveFeatureSnapshotCreateWithoutReplacementSnapshotInput, PredictiveFeatureSnapshotUncheckedCreateWithoutReplacementSnapshotInput>
+    connectOrCreate?: PredictiveFeatureSnapshotCreateOrConnectWithoutReplacementSnapshotInput
+    connect?: PredictiveFeatureSnapshotWhereUniqueInput
+  }
+
+  export type PredictiveOutcomeCreateNestedManyWithoutSnapshotInput = {
+    create?: XOR<PredictiveOutcomeCreateWithoutSnapshotInput, PredictiveOutcomeUncheckedCreateWithoutSnapshotInput> | PredictiveOutcomeCreateWithoutSnapshotInput[] | PredictiveOutcomeUncheckedCreateWithoutSnapshotInput[]
+    connectOrCreate?: PredictiveOutcomeCreateOrConnectWithoutSnapshotInput | PredictiveOutcomeCreateOrConnectWithoutSnapshotInput[]
+    createMany?: PredictiveOutcomeCreateManySnapshotInputEnvelope
+    connect?: PredictiveOutcomeWhereUniqueInput | PredictiveOutcomeWhereUniqueInput[]
+  }
+
+  export type PredictiveFeatureSnapshotUncheckedCreateNestedOneWithoutReplacementSnapshotInput = {
+    create?: XOR<PredictiveFeatureSnapshotCreateWithoutReplacementSnapshotInput, PredictiveFeatureSnapshotUncheckedCreateWithoutReplacementSnapshotInput>
+    connectOrCreate?: PredictiveFeatureSnapshotCreateOrConnectWithoutReplacementSnapshotInput
+    connect?: PredictiveFeatureSnapshotWhereUniqueInput
+  }
+
+  export type PredictiveOutcomeUncheckedCreateNestedManyWithoutSnapshotInput = {
+    create?: XOR<PredictiveOutcomeCreateWithoutSnapshotInput, PredictiveOutcomeUncheckedCreateWithoutSnapshotInput> | PredictiveOutcomeCreateWithoutSnapshotInput[] | PredictiveOutcomeUncheckedCreateWithoutSnapshotInput[]
+    connectOrCreate?: PredictiveOutcomeCreateOrConnectWithoutSnapshotInput | PredictiveOutcomeCreateOrConnectWithoutSnapshotInput[]
+    createMany?: PredictiveOutcomeCreateManySnapshotInputEnvelope
+    connect?: PredictiveOutcomeWhereUniqueInput | PredictiveOutcomeWhereUniqueInput[]
+  }
+
+  export type EnumPredictiveTargetTypeFieldUpdateOperationsInput = {
+    set?: $Enums.PredictiveTargetType
+  }
+
+  export type EnumPredictiveProvenanceClassFieldUpdateOperationsInput = {
+    set?: $Enums.PredictiveProvenanceClass
+  }
+
+  export type EnumPredictiveRecordStatusFieldUpdateOperationsInput = {
+    set?: $Enums.PredictiveRecordStatus
+  }
+
+  export type ExecutionTaskUpdateOneRequiredWithoutPredictiveSnapshotsNestedInput = {
+    create?: XOR<ExecutionTaskCreateWithoutPredictiveSnapshotsInput, ExecutionTaskUncheckedCreateWithoutPredictiveSnapshotsInput>
+    connectOrCreate?: ExecutionTaskCreateOrConnectWithoutPredictiveSnapshotsInput
+    upsert?: ExecutionTaskUpsertWithoutPredictiveSnapshotsInput
+    connect?: ExecutionTaskWhereUniqueInput
+    update?: XOR<XOR<ExecutionTaskUpdateToOneWithWhereWithoutPredictiveSnapshotsInput, ExecutionTaskUpdateWithoutPredictiveSnapshotsInput>, ExecutionTaskUncheckedUpdateWithoutPredictiveSnapshotsInput>
+  }
+
+  export type UserUpdateOneRequiredWithoutCreatedPredictiveSnapshotsNestedInput = {
+    create?: XOR<UserCreateWithoutCreatedPredictiveSnapshotsInput, UserUncheckedCreateWithoutCreatedPredictiveSnapshotsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCreatedPredictiveSnapshotsInput
+    upsert?: UserUpsertWithoutCreatedPredictiveSnapshotsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutCreatedPredictiveSnapshotsInput, UserUpdateWithoutCreatedPredictiveSnapshotsInput>, UserUncheckedUpdateWithoutCreatedPredictiveSnapshotsInput>
+  }
+
+  export type UserUpdateOneWithoutVoidedPredictiveSnapshotsNestedInput = {
+    create?: XOR<UserCreateWithoutVoidedPredictiveSnapshotsInput, UserUncheckedCreateWithoutVoidedPredictiveSnapshotsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutVoidedPredictiveSnapshotsInput
+    upsert?: UserUpsertWithoutVoidedPredictiveSnapshotsInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutVoidedPredictiveSnapshotsInput, UserUpdateWithoutVoidedPredictiveSnapshotsInput>, UserUncheckedUpdateWithoutVoidedPredictiveSnapshotsInput>
+  }
+
+  export type PredictiveFeatureSnapshotUpdateOneWithoutReplacesNestedInput = {
+    create?: XOR<PredictiveFeatureSnapshotCreateWithoutReplacesInput, PredictiveFeatureSnapshotUncheckedCreateWithoutReplacesInput>
+    connectOrCreate?: PredictiveFeatureSnapshotCreateOrConnectWithoutReplacesInput
+    upsert?: PredictiveFeatureSnapshotUpsertWithoutReplacesInput
+    disconnect?: PredictiveFeatureSnapshotWhereInput | boolean
+    delete?: PredictiveFeatureSnapshotWhereInput | boolean
+    connect?: PredictiveFeatureSnapshotWhereUniqueInput
+    update?: XOR<XOR<PredictiveFeatureSnapshotUpdateToOneWithWhereWithoutReplacesInput, PredictiveFeatureSnapshotUpdateWithoutReplacesInput>, PredictiveFeatureSnapshotUncheckedUpdateWithoutReplacesInput>
+  }
+
+  export type PredictiveFeatureSnapshotUpdateOneWithoutReplacementSnapshotNestedInput = {
+    create?: XOR<PredictiveFeatureSnapshotCreateWithoutReplacementSnapshotInput, PredictiveFeatureSnapshotUncheckedCreateWithoutReplacementSnapshotInput>
+    connectOrCreate?: PredictiveFeatureSnapshotCreateOrConnectWithoutReplacementSnapshotInput
+    upsert?: PredictiveFeatureSnapshotUpsertWithoutReplacementSnapshotInput
+    disconnect?: PredictiveFeatureSnapshotWhereInput | boolean
+    delete?: PredictiveFeatureSnapshotWhereInput | boolean
+    connect?: PredictiveFeatureSnapshotWhereUniqueInput
+    update?: XOR<XOR<PredictiveFeatureSnapshotUpdateToOneWithWhereWithoutReplacementSnapshotInput, PredictiveFeatureSnapshotUpdateWithoutReplacementSnapshotInput>, PredictiveFeatureSnapshotUncheckedUpdateWithoutReplacementSnapshotInput>
+  }
+
+  export type PredictiveOutcomeUpdateManyWithoutSnapshotNestedInput = {
+    create?: XOR<PredictiveOutcomeCreateWithoutSnapshotInput, PredictiveOutcomeUncheckedCreateWithoutSnapshotInput> | PredictiveOutcomeCreateWithoutSnapshotInput[] | PredictiveOutcomeUncheckedCreateWithoutSnapshotInput[]
+    connectOrCreate?: PredictiveOutcomeCreateOrConnectWithoutSnapshotInput | PredictiveOutcomeCreateOrConnectWithoutSnapshotInput[]
+    upsert?: PredictiveOutcomeUpsertWithWhereUniqueWithoutSnapshotInput | PredictiveOutcomeUpsertWithWhereUniqueWithoutSnapshotInput[]
+    createMany?: PredictiveOutcomeCreateManySnapshotInputEnvelope
+    set?: PredictiveOutcomeWhereUniqueInput | PredictiveOutcomeWhereUniqueInput[]
+    disconnect?: PredictiveOutcomeWhereUniqueInput | PredictiveOutcomeWhereUniqueInput[]
+    delete?: PredictiveOutcomeWhereUniqueInput | PredictiveOutcomeWhereUniqueInput[]
+    connect?: PredictiveOutcomeWhereUniqueInput | PredictiveOutcomeWhereUniqueInput[]
+    update?: PredictiveOutcomeUpdateWithWhereUniqueWithoutSnapshotInput | PredictiveOutcomeUpdateWithWhereUniqueWithoutSnapshotInput[]
+    updateMany?: PredictiveOutcomeUpdateManyWithWhereWithoutSnapshotInput | PredictiveOutcomeUpdateManyWithWhereWithoutSnapshotInput[]
+    deleteMany?: PredictiveOutcomeScalarWhereInput | PredictiveOutcomeScalarWhereInput[]
+  }
+
+  export type PredictiveFeatureSnapshotUncheckedUpdateOneWithoutReplacementSnapshotNestedInput = {
+    create?: XOR<PredictiveFeatureSnapshotCreateWithoutReplacementSnapshotInput, PredictiveFeatureSnapshotUncheckedCreateWithoutReplacementSnapshotInput>
+    connectOrCreate?: PredictiveFeatureSnapshotCreateOrConnectWithoutReplacementSnapshotInput
+    upsert?: PredictiveFeatureSnapshotUpsertWithoutReplacementSnapshotInput
+    disconnect?: PredictiveFeatureSnapshotWhereInput | boolean
+    delete?: PredictiveFeatureSnapshotWhereInput | boolean
+    connect?: PredictiveFeatureSnapshotWhereUniqueInput
+    update?: XOR<XOR<PredictiveFeatureSnapshotUpdateToOneWithWhereWithoutReplacementSnapshotInput, PredictiveFeatureSnapshotUpdateWithoutReplacementSnapshotInput>, PredictiveFeatureSnapshotUncheckedUpdateWithoutReplacementSnapshotInput>
+  }
+
+  export type PredictiveOutcomeUncheckedUpdateManyWithoutSnapshotNestedInput = {
+    create?: XOR<PredictiveOutcomeCreateWithoutSnapshotInput, PredictiveOutcomeUncheckedCreateWithoutSnapshotInput> | PredictiveOutcomeCreateWithoutSnapshotInput[] | PredictiveOutcomeUncheckedCreateWithoutSnapshotInput[]
+    connectOrCreate?: PredictiveOutcomeCreateOrConnectWithoutSnapshotInput | PredictiveOutcomeCreateOrConnectWithoutSnapshotInput[]
+    upsert?: PredictiveOutcomeUpsertWithWhereUniqueWithoutSnapshotInput | PredictiveOutcomeUpsertWithWhereUniqueWithoutSnapshotInput[]
+    createMany?: PredictiveOutcomeCreateManySnapshotInputEnvelope
+    set?: PredictiveOutcomeWhereUniqueInput | PredictiveOutcomeWhereUniqueInput[]
+    disconnect?: PredictiveOutcomeWhereUniqueInput | PredictiveOutcomeWhereUniqueInput[]
+    delete?: PredictiveOutcomeWhereUniqueInput | PredictiveOutcomeWhereUniqueInput[]
+    connect?: PredictiveOutcomeWhereUniqueInput | PredictiveOutcomeWhereUniqueInput[]
+    update?: PredictiveOutcomeUpdateWithWhereUniqueWithoutSnapshotInput | PredictiveOutcomeUpdateWithWhereUniqueWithoutSnapshotInput[]
+    updateMany?: PredictiveOutcomeUpdateManyWithWhereWithoutSnapshotInput | PredictiveOutcomeUpdateManyWithWhereWithoutSnapshotInput[]
+    deleteMany?: PredictiveOutcomeScalarWhereInput | PredictiveOutcomeScalarWhereInput[]
+  }
+
+  export type PredictiveFeatureSnapshotCreateNestedOneWithoutOutcomesInput = {
+    create?: XOR<PredictiveFeatureSnapshotCreateWithoutOutcomesInput, PredictiveFeatureSnapshotUncheckedCreateWithoutOutcomesInput>
+    connectOrCreate?: PredictiveFeatureSnapshotCreateOrConnectWithoutOutcomesInput
+    connect?: PredictiveFeatureSnapshotWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutRecordedPredictiveOutcomesInput = {
+    create?: XOR<UserCreateWithoutRecordedPredictiveOutcomesInput, UserUncheckedCreateWithoutRecordedPredictiveOutcomesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutRecordedPredictiveOutcomesInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutVoidedPredictiveOutcomesInput = {
+    create?: XOR<UserCreateWithoutVoidedPredictiveOutcomesInput, UserUncheckedCreateWithoutVoidedPredictiveOutcomesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutVoidedPredictiveOutcomesInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type PredictiveOutcomeCreateNestedOneWithoutReplacesInput = {
+    create?: XOR<PredictiveOutcomeCreateWithoutReplacesInput, PredictiveOutcomeUncheckedCreateWithoutReplacesInput>
+    connectOrCreate?: PredictiveOutcomeCreateOrConnectWithoutReplacesInput
+    connect?: PredictiveOutcomeWhereUniqueInput
+  }
+
+  export type PredictiveOutcomeCreateNestedOneWithoutReplacementOutcomeInput = {
+    create?: XOR<PredictiveOutcomeCreateWithoutReplacementOutcomeInput, PredictiveOutcomeUncheckedCreateWithoutReplacementOutcomeInput>
+    connectOrCreate?: PredictiveOutcomeCreateOrConnectWithoutReplacementOutcomeInput
+    connect?: PredictiveOutcomeWhereUniqueInput
+  }
+
+  export type PredictiveOutcomeUncheckedCreateNestedOneWithoutReplacementOutcomeInput = {
+    create?: XOR<PredictiveOutcomeCreateWithoutReplacementOutcomeInput, PredictiveOutcomeUncheckedCreateWithoutReplacementOutcomeInput>
+    connectOrCreate?: PredictiveOutcomeCreateOrConnectWithoutReplacementOutcomeInput
+    connect?: PredictiveOutcomeWhereUniqueInput
+  }
+
+  export type EnumPredictiveOutcomeValueFieldUpdateOperationsInput = {
+    set?: $Enums.PredictiveOutcomeValue
+  }
+
+  export type PredictiveFeatureSnapshotUpdateOneRequiredWithoutOutcomesNestedInput = {
+    create?: XOR<PredictiveFeatureSnapshotCreateWithoutOutcomesInput, PredictiveFeatureSnapshotUncheckedCreateWithoutOutcomesInput>
+    connectOrCreate?: PredictiveFeatureSnapshotCreateOrConnectWithoutOutcomesInput
+    upsert?: PredictiveFeatureSnapshotUpsertWithoutOutcomesInput
+    connect?: PredictiveFeatureSnapshotWhereUniqueInput
+    update?: XOR<XOR<PredictiveFeatureSnapshotUpdateToOneWithWhereWithoutOutcomesInput, PredictiveFeatureSnapshotUpdateWithoutOutcomesInput>, PredictiveFeatureSnapshotUncheckedUpdateWithoutOutcomesInput>
+  }
+
+  export type UserUpdateOneRequiredWithoutRecordedPredictiveOutcomesNestedInput = {
+    create?: XOR<UserCreateWithoutRecordedPredictiveOutcomesInput, UserUncheckedCreateWithoutRecordedPredictiveOutcomesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutRecordedPredictiveOutcomesInput
+    upsert?: UserUpsertWithoutRecordedPredictiveOutcomesInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutRecordedPredictiveOutcomesInput, UserUpdateWithoutRecordedPredictiveOutcomesInput>, UserUncheckedUpdateWithoutRecordedPredictiveOutcomesInput>
+  }
+
+  export type UserUpdateOneWithoutVoidedPredictiveOutcomesNestedInput = {
+    create?: XOR<UserCreateWithoutVoidedPredictiveOutcomesInput, UserUncheckedCreateWithoutVoidedPredictiveOutcomesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutVoidedPredictiveOutcomesInput
+    upsert?: UserUpsertWithoutVoidedPredictiveOutcomesInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutVoidedPredictiveOutcomesInput, UserUpdateWithoutVoidedPredictiveOutcomesInput>, UserUncheckedUpdateWithoutVoidedPredictiveOutcomesInput>
+  }
+
+  export type PredictiveOutcomeUpdateOneWithoutReplacesNestedInput = {
+    create?: XOR<PredictiveOutcomeCreateWithoutReplacesInput, PredictiveOutcomeUncheckedCreateWithoutReplacesInput>
+    connectOrCreate?: PredictiveOutcomeCreateOrConnectWithoutReplacesInput
+    upsert?: PredictiveOutcomeUpsertWithoutReplacesInput
+    disconnect?: PredictiveOutcomeWhereInput | boolean
+    delete?: PredictiveOutcomeWhereInput | boolean
+    connect?: PredictiveOutcomeWhereUniqueInput
+    update?: XOR<XOR<PredictiveOutcomeUpdateToOneWithWhereWithoutReplacesInput, PredictiveOutcomeUpdateWithoutReplacesInput>, PredictiveOutcomeUncheckedUpdateWithoutReplacesInput>
+  }
+
+  export type PredictiveOutcomeUpdateOneWithoutReplacementOutcomeNestedInput = {
+    create?: XOR<PredictiveOutcomeCreateWithoutReplacementOutcomeInput, PredictiveOutcomeUncheckedCreateWithoutReplacementOutcomeInput>
+    connectOrCreate?: PredictiveOutcomeCreateOrConnectWithoutReplacementOutcomeInput
+    upsert?: PredictiveOutcomeUpsertWithoutReplacementOutcomeInput
+    disconnect?: PredictiveOutcomeWhereInput | boolean
+    delete?: PredictiveOutcomeWhereInput | boolean
+    connect?: PredictiveOutcomeWhereUniqueInput
+    update?: XOR<XOR<PredictiveOutcomeUpdateToOneWithWhereWithoutReplacementOutcomeInput, PredictiveOutcomeUpdateWithoutReplacementOutcomeInput>, PredictiveOutcomeUncheckedUpdateWithoutReplacementOutcomeInput>
+  }
+
+  export type PredictiveOutcomeUncheckedUpdateOneWithoutReplacementOutcomeNestedInput = {
+    create?: XOR<PredictiveOutcomeCreateWithoutReplacementOutcomeInput, PredictiveOutcomeUncheckedCreateWithoutReplacementOutcomeInput>
+    connectOrCreate?: PredictiveOutcomeCreateOrConnectWithoutReplacementOutcomeInput
+    upsert?: PredictiveOutcomeUpsertWithoutReplacementOutcomeInput
+    disconnect?: PredictiveOutcomeWhereInput | boolean
+    delete?: PredictiveOutcomeWhereInput | boolean
+    connect?: PredictiveOutcomeWhereUniqueInput
+    update?: XOR<XOR<PredictiveOutcomeUpdateToOneWithWhereWithoutReplacementOutcomeInput, PredictiveOutcomeUpdateWithoutReplacementOutcomeInput>, PredictiveOutcomeUncheckedUpdateWithoutReplacementOutcomeInput>
   }
 
   export type ExecutionPlanCreateNestedOneWithoutTaskDependenciesInput = {
@@ -64725,6 +69179,74 @@ export namespace Prisma {
     _max?: NestedEnumExecutionTaskStatusFilter<$PrismaModel>
   }
 
+  export type NestedEnumPredictiveTargetTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.PredictiveTargetType | EnumPredictiveTargetTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.PredictiveTargetType[] | ListEnumPredictiveTargetTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PredictiveTargetType[] | ListEnumPredictiveTargetTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumPredictiveTargetTypeFilter<$PrismaModel> | $Enums.PredictiveTargetType
+  }
+
+  export type NestedEnumPredictiveProvenanceClassFilter<$PrismaModel = never> = {
+    equals?: $Enums.PredictiveProvenanceClass | EnumPredictiveProvenanceClassFieldRefInput<$PrismaModel>
+    in?: $Enums.PredictiveProvenanceClass[] | ListEnumPredictiveProvenanceClassFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PredictiveProvenanceClass[] | ListEnumPredictiveProvenanceClassFieldRefInput<$PrismaModel>
+    not?: NestedEnumPredictiveProvenanceClassFilter<$PrismaModel> | $Enums.PredictiveProvenanceClass
+  }
+
+  export type NestedEnumPredictiveRecordStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.PredictiveRecordStatus | EnumPredictiveRecordStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.PredictiveRecordStatus[] | ListEnumPredictiveRecordStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PredictiveRecordStatus[] | ListEnumPredictiveRecordStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumPredictiveRecordStatusFilter<$PrismaModel> | $Enums.PredictiveRecordStatus
+  }
+
+  export type NestedEnumPredictiveTargetTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.PredictiveTargetType | EnumPredictiveTargetTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.PredictiveTargetType[] | ListEnumPredictiveTargetTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PredictiveTargetType[] | ListEnumPredictiveTargetTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumPredictiveTargetTypeWithAggregatesFilter<$PrismaModel> | $Enums.PredictiveTargetType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumPredictiveTargetTypeFilter<$PrismaModel>
+    _max?: NestedEnumPredictiveTargetTypeFilter<$PrismaModel>
+  }
+
+  export type NestedEnumPredictiveProvenanceClassWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.PredictiveProvenanceClass | EnumPredictiveProvenanceClassFieldRefInput<$PrismaModel>
+    in?: $Enums.PredictiveProvenanceClass[] | ListEnumPredictiveProvenanceClassFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PredictiveProvenanceClass[] | ListEnumPredictiveProvenanceClassFieldRefInput<$PrismaModel>
+    not?: NestedEnumPredictiveProvenanceClassWithAggregatesFilter<$PrismaModel> | $Enums.PredictiveProvenanceClass
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumPredictiveProvenanceClassFilter<$PrismaModel>
+    _max?: NestedEnumPredictiveProvenanceClassFilter<$PrismaModel>
+  }
+
+  export type NestedEnumPredictiveRecordStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.PredictiveRecordStatus | EnumPredictiveRecordStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.PredictiveRecordStatus[] | ListEnumPredictiveRecordStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PredictiveRecordStatus[] | ListEnumPredictiveRecordStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumPredictiveRecordStatusWithAggregatesFilter<$PrismaModel> | $Enums.PredictiveRecordStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumPredictiveRecordStatusFilter<$PrismaModel>
+    _max?: NestedEnumPredictiveRecordStatusFilter<$PrismaModel>
+  }
+
+  export type NestedEnumPredictiveOutcomeValueFilter<$PrismaModel = never> = {
+    equals?: $Enums.PredictiveOutcomeValue | EnumPredictiveOutcomeValueFieldRefInput<$PrismaModel>
+    in?: $Enums.PredictiveOutcomeValue[] | ListEnumPredictiveOutcomeValueFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PredictiveOutcomeValue[] | ListEnumPredictiveOutcomeValueFieldRefInput<$PrismaModel>
+    not?: NestedEnumPredictiveOutcomeValueFilter<$PrismaModel> | $Enums.PredictiveOutcomeValue
+  }
+
+  export type NestedEnumPredictiveOutcomeValueWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.PredictiveOutcomeValue | EnumPredictiveOutcomeValueFieldRefInput<$PrismaModel>
+    in?: $Enums.PredictiveOutcomeValue[] | ListEnumPredictiveOutcomeValueFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PredictiveOutcomeValue[] | ListEnumPredictiveOutcomeValueFieldRefInput<$PrismaModel>
+    not?: NestedEnumPredictiveOutcomeValueWithAggregatesFilter<$PrismaModel> | $Enums.PredictiveOutcomeValue
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumPredictiveOutcomeValueFilter<$PrismaModel>
+    _max?: NestedEnumPredictiveOutcomeValueFilter<$PrismaModel>
+  }
+
   export type NestedEnumExecutionBlockerCategoryFilter<$PrismaModel = never> = {
     equals?: $Enums.ExecutionBlockerCategory | EnumExecutionBlockerCategoryFieldRefInput<$PrismaModel>
     in?: $Enums.ExecutionBlockerCategory[] | ListEnumExecutionBlockerCategoryFieldRefInput<$PrismaModel>
@@ -64819,6 +69341,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationCreateNestedManyWithoutIngestedByInput
     preparedCaseResourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutPreparedByInput
     createdPortfolioScenarios?: PortfolioScenarioCreateNestedManyWithoutCreatedByInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutCreatedByInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutVoidedByInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutRecordedByInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutVoidedByInput
   }
 
   export type UserUncheckedCreateWithoutDepartmentInput = {
@@ -64864,6 +69390,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutIngestedByInput
     preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutPreparedByInput
     createdPortfolioScenarios?: PortfolioScenarioUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutCreatedByInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutVoidedByInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutRecordedByInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutVoidedByInput
   }
 
   export type UserCreateOrConnectWithoutDepartmentInput = {
@@ -65879,6 +70409,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationCreateNestedManyWithoutIngestedByInput
     preparedCaseResourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutPreparedByInput
     createdPortfolioScenarios?: PortfolioScenarioCreateNestedManyWithoutCreatedByInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutCreatedByInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutVoidedByInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutRecordedByInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutVoidedByInput
   }
 
   export type UserUncheckedCreateWithoutJurisdictionInput = {
@@ -65924,6 +70458,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutIngestedByInput
     preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutPreparedByInput
     createdPortfolioScenarios?: PortfolioScenarioUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutCreatedByInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutVoidedByInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutRecordedByInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutVoidedByInput
   }
 
   export type UserCreateOrConnectWithoutJurisdictionInput = {
@@ -66958,6 +71496,7 @@ export namespace Prisma {
     dependencies?: ExecutionTaskDependencyCreateNestedManyWithoutDependentTaskInput
     requiredBy?: ExecutionTaskDependencyCreateNestedManyWithoutPredecessorTaskInput
     blockerEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutExecutionTaskInput
+    predictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutExecutionTaskInput
   }
 
   export type ExecutionTaskUncheckedCreateWithoutAssignedToInput = {
@@ -67001,6 +71540,7 @@ export namespace Prisma {
     dependencies?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutDependentTaskInput
     requiredBy?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutPredecessorTaskInput
     blockerEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutExecutionTaskInput
+    predictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutExecutionTaskInput
   }
 
   export type ExecutionTaskCreateOrConnectWithoutAssignedToInput = {
@@ -67054,6 +71594,7 @@ export namespace Prisma {
     dependencies?: ExecutionTaskDependencyCreateNestedManyWithoutDependentTaskInput
     requiredBy?: ExecutionTaskDependencyCreateNestedManyWithoutPredecessorTaskInput
     blockerEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutExecutionTaskInput
+    predictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutExecutionTaskInput
   }
 
   export type ExecutionTaskUncheckedCreateWithoutAssignedByInput = {
@@ -67097,6 +71638,7 @@ export namespace Prisma {
     dependencies?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutDependentTaskInput
     requiredBy?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutPredecessorTaskInput
     blockerEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutExecutionTaskInput
+    predictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutExecutionTaskInput
   }
 
   export type ExecutionTaskCreateOrConnectWithoutAssignedByInput = {
@@ -67150,6 +71692,7 @@ export namespace Prisma {
     dependencies?: ExecutionTaskDependencyCreateNestedManyWithoutDependentTaskInput
     requiredBy?: ExecutionTaskDependencyCreateNestedManyWithoutPredecessorTaskInput
     blockerEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutExecutionTaskInput
+    predictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutExecutionTaskInput
   }
 
   export type ExecutionTaskUncheckedCreateWithoutCompletionSubmittedByInput = {
@@ -67193,6 +71736,7 @@ export namespace Prisma {
     dependencies?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutDependentTaskInput
     requiredBy?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutPredecessorTaskInput
     blockerEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutExecutionTaskInput
+    predictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutExecutionTaskInput
   }
 
   export type ExecutionTaskCreateOrConnectWithoutCompletionSubmittedByInput = {
@@ -67246,6 +71790,7 @@ export namespace Prisma {
     dependencies?: ExecutionTaskDependencyCreateNestedManyWithoutDependentTaskInput
     requiredBy?: ExecutionTaskDependencyCreateNestedManyWithoutPredecessorTaskInput
     blockerEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutExecutionTaskInput
+    predictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutExecutionTaskInput
   }
 
   export type ExecutionTaskUncheckedCreateWithoutVerifiedByInput = {
@@ -67289,6 +71834,7 @@ export namespace Prisma {
     dependencies?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutDependentTaskInput
     requiredBy?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutPredecessorTaskInput
     blockerEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutExecutionTaskInput
+    predictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutExecutionTaskInput
   }
 
   export type ExecutionTaskCreateOrConnectWithoutVerifiedByInput = {
@@ -67342,6 +71888,7 @@ export namespace Prisma {
     dependencies?: ExecutionTaskDependencyCreateNestedManyWithoutDependentTaskInput
     requiredBy?: ExecutionTaskDependencyCreateNestedManyWithoutPredecessorTaskInput
     blockerEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutExecutionTaskInput
+    predictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutExecutionTaskInput
   }
 
   export type ExecutionTaskUncheckedCreateWithoutCancelledByInput = {
@@ -67385,6 +71932,7 @@ export namespace Prisma {
     dependencies?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutDependentTaskInput
     requiredBy?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutPredecessorTaskInput
     blockerEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutExecutionTaskInput
+    predictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutExecutionTaskInput
   }
 
   export type ExecutionTaskCreateOrConnectWithoutCancelledByInput = {
@@ -68363,6 +72911,214 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type PredictiveFeatureSnapshotCreateWithoutCreatedByInput = {
+    id?: string
+    targetType: $Enums.PredictiveTargetType
+    caseId: string
+    assetId: string
+    departmentId: string
+    jurisdictionId: string
+    predictionTimestamp: Date | string
+    featureContractVersion: string
+    featurePayload: JsonNullValueInput | InputJsonValue
+    provenanceClass: $Enums.PredictiveProvenanceClass
+    sourceReferences: JsonNullValueInput | InputJsonValue
+    sourceFingerprint: string
+    status?: $Enums.PredictiveRecordStatus
+    createdAt?: Date | string
+    voidedAt?: Date | string | null
+    voidReason?: string | null
+    executionTask: ExecutionTaskCreateNestedOneWithoutPredictiveSnapshotsInput
+    voidedBy?: UserCreateNestedOneWithoutVoidedPredictiveSnapshotsInput
+    replacementSnapshot?: PredictiveFeatureSnapshotCreateNestedOneWithoutReplacesInput
+    replaces?: PredictiveFeatureSnapshotCreateNestedOneWithoutReplacementSnapshotInput
+    outcomes?: PredictiveOutcomeCreateNestedManyWithoutSnapshotInput
+  }
+
+  export type PredictiveFeatureSnapshotUncheckedCreateWithoutCreatedByInput = {
+    id?: string
+    targetType: $Enums.PredictiveTargetType
+    executionTaskId: string
+    caseId: string
+    assetId: string
+    departmentId: string
+    jurisdictionId: string
+    predictionTimestamp: Date | string
+    featureContractVersion: string
+    featurePayload: JsonNullValueInput | InputJsonValue
+    provenanceClass: $Enums.PredictiveProvenanceClass
+    sourceReferences: JsonNullValueInput | InputJsonValue
+    sourceFingerprint: string
+    status?: $Enums.PredictiveRecordStatus
+    createdAt?: Date | string
+    voidedAt?: Date | string | null
+    voidedById?: string | null
+    voidReason?: string | null
+    replacementSnapshotId?: string | null
+    replaces?: PredictiveFeatureSnapshotUncheckedCreateNestedOneWithoutReplacementSnapshotInput
+    outcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutSnapshotInput
+  }
+
+  export type PredictiveFeatureSnapshotCreateOrConnectWithoutCreatedByInput = {
+    where: PredictiveFeatureSnapshotWhereUniqueInput
+    create: XOR<PredictiveFeatureSnapshotCreateWithoutCreatedByInput, PredictiveFeatureSnapshotUncheckedCreateWithoutCreatedByInput>
+  }
+
+  export type PredictiveFeatureSnapshotCreateManyCreatedByInputEnvelope = {
+    data: PredictiveFeatureSnapshotCreateManyCreatedByInput | PredictiveFeatureSnapshotCreateManyCreatedByInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type PredictiveFeatureSnapshotCreateWithoutVoidedByInput = {
+    id?: string
+    targetType: $Enums.PredictiveTargetType
+    caseId: string
+    assetId: string
+    departmentId: string
+    jurisdictionId: string
+    predictionTimestamp: Date | string
+    featureContractVersion: string
+    featurePayload: JsonNullValueInput | InputJsonValue
+    provenanceClass: $Enums.PredictiveProvenanceClass
+    sourceReferences: JsonNullValueInput | InputJsonValue
+    sourceFingerprint: string
+    status?: $Enums.PredictiveRecordStatus
+    createdAt?: Date | string
+    voidedAt?: Date | string | null
+    voidReason?: string | null
+    executionTask: ExecutionTaskCreateNestedOneWithoutPredictiveSnapshotsInput
+    createdBy: UserCreateNestedOneWithoutCreatedPredictiveSnapshotsInput
+    replacementSnapshot?: PredictiveFeatureSnapshotCreateNestedOneWithoutReplacesInput
+    replaces?: PredictiveFeatureSnapshotCreateNestedOneWithoutReplacementSnapshotInput
+    outcomes?: PredictiveOutcomeCreateNestedManyWithoutSnapshotInput
+  }
+
+  export type PredictiveFeatureSnapshotUncheckedCreateWithoutVoidedByInput = {
+    id?: string
+    targetType: $Enums.PredictiveTargetType
+    executionTaskId: string
+    caseId: string
+    assetId: string
+    departmentId: string
+    jurisdictionId: string
+    predictionTimestamp: Date | string
+    featureContractVersion: string
+    featurePayload: JsonNullValueInput | InputJsonValue
+    provenanceClass: $Enums.PredictiveProvenanceClass
+    sourceReferences: JsonNullValueInput | InputJsonValue
+    sourceFingerprint: string
+    status?: $Enums.PredictiveRecordStatus
+    createdById: string
+    createdAt?: Date | string
+    voidedAt?: Date | string | null
+    voidReason?: string | null
+    replacementSnapshotId?: string | null
+    replaces?: PredictiveFeatureSnapshotUncheckedCreateNestedOneWithoutReplacementSnapshotInput
+    outcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutSnapshotInput
+  }
+
+  export type PredictiveFeatureSnapshotCreateOrConnectWithoutVoidedByInput = {
+    where: PredictiveFeatureSnapshotWhereUniqueInput
+    create: XOR<PredictiveFeatureSnapshotCreateWithoutVoidedByInput, PredictiveFeatureSnapshotUncheckedCreateWithoutVoidedByInput>
+  }
+
+  export type PredictiveFeatureSnapshotCreateManyVoidedByInputEnvelope = {
+    data: PredictiveFeatureSnapshotCreateManyVoidedByInput | PredictiveFeatureSnapshotCreateManyVoidedByInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type PredictiveOutcomeCreateWithoutRecordedByInput = {
+    id?: string
+    outcomeContractVersion: string
+    outcomeTimestamp: Date | string
+    outcomeValue: $Enums.PredictiveOutcomeValue
+    provenanceClass: $Enums.PredictiveProvenanceClass
+    sourceReferences: JsonNullValueInput | InputJsonValue
+    sourceFingerprint: string
+    status?: $Enums.PredictiveRecordStatus
+    recordedAt?: Date | string
+    voidedAt?: Date | string | null
+    voidReason?: string | null
+    snapshot: PredictiveFeatureSnapshotCreateNestedOneWithoutOutcomesInput
+    voidedBy?: UserCreateNestedOneWithoutVoidedPredictiveOutcomesInput
+    replacementOutcome?: PredictiveOutcomeCreateNestedOneWithoutReplacesInput
+    replaces?: PredictiveOutcomeCreateNestedOneWithoutReplacementOutcomeInput
+  }
+
+  export type PredictiveOutcomeUncheckedCreateWithoutRecordedByInput = {
+    id?: string
+    snapshotId: string
+    outcomeContractVersion: string
+    outcomeTimestamp: Date | string
+    outcomeValue: $Enums.PredictiveOutcomeValue
+    provenanceClass: $Enums.PredictiveProvenanceClass
+    sourceReferences: JsonNullValueInput | InputJsonValue
+    sourceFingerprint: string
+    status?: $Enums.PredictiveRecordStatus
+    recordedAt?: Date | string
+    voidedAt?: Date | string | null
+    voidedById?: string | null
+    voidReason?: string | null
+    replacementOutcomeId?: string | null
+    replaces?: PredictiveOutcomeUncheckedCreateNestedOneWithoutReplacementOutcomeInput
+  }
+
+  export type PredictiveOutcomeCreateOrConnectWithoutRecordedByInput = {
+    where: PredictiveOutcomeWhereUniqueInput
+    create: XOR<PredictiveOutcomeCreateWithoutRecordedByInput, PredictiveOutcomeUncheckedCreateWithoutRecordedByInput>
+  }
+
+  export type PredictiveOutcomeCreateManyRecordedByInputEnvelope = {
+    data: PredictiveOutcomeCreateManyRecordedByInput | PredictiveOutcomeCreateManyRecordedByInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type PredictiveOutcomeCreateWithoutVoidedByInput = {
+    id?: string
+    outcomeContractVersion: string
+    outcomeTimestamp: Date | string
+    outcomeValue: $Enums.PredictiveOutcomeValue
+    provenanceClass: $Enums.PredictiveProvenanceClass
+    sourceReferences: JsonNullValueInput | InputJsonValue
+    sourceFingerprint: string
+    status?: $Enums.PredictiveRecordStatus
+    recordedAt?: Date | string
+    voidedAt?: Date | string | null
+    voidReason?: string | null
+    snapshot: PredictiveFeatureSnapshotCreateNestedOneWithoutOutcomesInput
+    recordedBy: UserCreateNestedOneWithoutRecordedPredictiveOutcomesInput
+    replacementOutcome?: PredictiveOutcomeCreateNestedOneWithoutReplacesInput
+    replaces?: PredictiveOutcomeCreateNestedOneWithoutReplacementOutcomeInput
+  }
+
+  export type PredictiveOutcomeUncheckedCreateWithoutVoidedByInput = {
+    id?: string
+    snapshotId: string
+    outcomeContractVersion: string
+    outcomeTimestamp: Date | string
+    outcomeValue: $Enums.PredictiveOutcomeValue
+    provenanceClass: $Enums.PredictiveProvenanceClass
+    sourceReferences: JsonNullValueInput | InputJsonValue
+    sourceFingerprint: string
+    status?: $Enums.PredictiveRecordStatus
+    recordedById: string
+    recordedAt?: Date | string
+    voidedAt?: Date | string | null
+    voidReason?: string | null
+    replacementOutcomeId?: string | null
+    replaces?: PredictiveOutcomeUncheckedCreateNestedOneWithoutReplacementOutcomeInput
+  }
+
+  export type PredictiveOutcomeCreateOrConnectWithoutVoidedByInput = {
+    where: PredictiveOutcomeWhereUniqueInput
+    create: XOR<PredictiveOutcomeCreateWithoutVoidedByInput, PredictiveOutcomeUncheckedCreateWithoutVoidedByInput>
+  }
+
+  export type PredictiveOutcomeCreateManyVoidedByInputEnvelope = {
+    data: PredictiveOutcomeCreateManyVoidedByInput | PredictiveOutcomeCreateManyVoidedByInput[]
+    skipDuplicates?: boolean
+  }
+
   export type DepartmentUpsertWithoutUsersInput = {
     update: XOR<DepartmentUpdateWithoutUsersInput, DepartmentUncheckedUpdateWithoutUsersInput>
     create: XOR<DepartmentCreateWithoutUsersInput, DepartmentUncheckedCreateWithoutUsersInput>
@@ -69188,6 +73944,117 @@ export namespace Prisma {
     data: XOR<PortfolioScenarioUpdateManyMutationInput, PortfolioScenarioUncheckedUpdateManyWithoutCreatedByInput>
   }
 
+  export type PredictiveFeatureSnapshotUpsertWithWhereUniqueWithoutCreatedByInput = {
+    where: PredictiveFeatureSnapshotWhereUniqueInput
+    update: XOR<PredictiveFeatureSnapshotUpdateWithoutCreatedByInput, PredictiveFeatureSnapshotUncheckedUpdateWithoutCreatedByInput>
+    create: XOR<PredictiveFeatureSnapshotCreateWithoutCreatedByInput, PredictiveFeatureSnapshotUncheckedCreateWithoutCreatedByInput>
+  }
+
+  export type PredictiveFeatureSnapshotUpdateWithWhereUniqueWithoutCreatedByInput = {
+    where: PredictiveFeatureSnapshotWhereUniqueInput
+    data: XOR<PredictiveFeatureSnapshotUpdateWithoutCreatedByInput, PredictiveFeatureSnapshotUncheckedUpdateWithoutCreatedByInput>
+  }
+
+  export type PredictiveFeatureSnapshotUpdateManyWithWhereWithoutCreatedByInput = {
+    where: PredictiveFeatureSnapshotScalarWhereInput
+    data: XOR<PredictiveFeatureSnapshotUpdateManyMutationInput, PredictiveFeatureSnapshotUncheckedUpdateManyWithoutCreatedByInput>
+  }
+
+  export type PredictiveFeatureSnapshotScalarWhereInput = {
+    AND?: PredictiveFeatureSnapshotScalarWhereInput | PredictiveFeatureSnapshotScalarWhereInput[]
+    OR?: PredictiveFeatureSnapshotScalarWhereInput[]
+    NOT?: PredictiveFeatureSnapshotScalarWhereInput | PredictiveFeatureSnapshotScalarWhereInput[]
+    id?: StringFilter<"PredictiveFeatureSnapshot"> | string
+    targetType?: EnumPredictiveTargetTypeFilter<"PredictiveFeatureSnapshot"> | $Enums.PredictiveTargetType
+    executionTaskId?: StringFilter<"PredictiveFeatureSnapshot"> | string
+    caseId?: StringFilter<"PredictiveFeatureSnapshot"> | string
+    assetId?: StringFilter<"PredictiveFeatureSnapshot"> | string
+    departmentId?: StringFilter<"PredictiveFeatureSnapshot"> | string
+    jurisdictionId?: StringFilter<"PredictiveFeatureSnapshot"> | string
+    predictionTimestamp?: DateTimeFilter<"PredictiveFeatureSnapshot"> | Date | string
+    featureContractVersion?: StringFilter<"PredictiveFeatureSnapshot"> | string
+    featurePayload?: JsonFilter<"PredictiveFeatureSnapshot">
+    provenanceClass?: EnumPredictiveProvenanceClassFilter<"PredictiveFeatureSnapshot"> | $Enums.PredictiveProvenanceClass
+    sourceReferences?: JsonFilter<"PredictiveFeatureSnapshot">
+    sourceFingerprint?: StringFilter<"PredictiveFeatureSnapshot"> | string
+    status?: EnumPredictiveRecordStatusFilter<"PredictiveFeatureSnapshot"> | $Enums.PredictiveRecordStatus
+    createdById?: StringFilter<"PredictiveFeatureSnapshot"> | string
+    createdAt?: DateTimeFilter<"PredictiveFeatureSnapshot"> | Date | string
+    voidedAt?: DateTimeNullableFilter<"PredictiveFeatureSnapshot"> | Date | string | null
+    voidedById?: StringNullableFilter<"PredictiveFeatureSnapshot"> | string | null
+    voidReason?: StringNullableFilter<"PredictiveFeatureSnapshot"> | string | null
+    replacementSnapshotId?: StringNullableFilter<"PredictiveFeatureSnapshot"> | string | null
+  }
+
+  export type PredictiveFeatureSnapshotUpsertWithWhereUniqueWithoutVoidedByInput = {
+    where: PredictiveFeatureSnapshotWhereUniqueInput
+    update: XOR<PredictiveFeatureSnapshotUpdateWithoutVoidedByInput, PredictiveFeatureSnapshotUncheckedUpdateWithoutVoidedByInput>
+    create: XOR<PredictiveFeatureSnapshotCreateWithoutVoidedByInput, PredictiveFeatureSnapshotUncheckedCreateWithoutVoidedByInput>
+  }
+
+  export type PredictiveFeatureSnapshotUpdateWithWhereUniqueWithoutVoidedByInput = {
+    where: PredictiveFeatureSnapshotWhereUniqueInput
+    data: XOR<PredictiveFeatureSnapshotUpdateWithoutVoidedByInput, PredictiveFeatureSnapshotUncheckedUpdateWithoutVoidedByInput>
+  }
+
+  export type PredictiveFeatureSnapshotUpdateManyWithWhereWithoutVoidedByInput = {
+    where: PredictiveFeatureSnapshotScalarWhereInput
+    data: XOR<PredictiveFeatureSnapshotUpdateManyMutationInput, PredictiveFeatureSnapshotUncheckedUpdateManyWithoutVoidedByInput>
+  }
+
+  export type PredictiveOutcomeUpsertWithWhereUniqueWithoutRecordedByInput = {
+    where: PredictiveOutcomeWhereUniqueInput
+    update: XOR<PredictiveOutcomeUpdateWithoutRecordedByInput, PredictiveOutcomeUncheckedUpdateWithoutRecordedByInput>
+    create: XOR<PredictiveOutcomeCreateWithoutRecordedByInput, PredictiveOutcomeUncheckedCreateWithoutRecordedByInput>
+  }
+
+  export type PredictiveOutcomeUpdateWithWhereUniqueWithoutRecordedByInput = {
+    where: PredictiveOutcomeWhereUniqueInput
+    data: XOR<PredictiveOutcomeUpdateWithoutRecordedByInput, PredictiveOutcomeUncheckedUpdateWithoutRecordedByInput>
+  }
+
+  export type PredictiveOutcomeUpdateManyWithWhereWithoutRecordedByInput = {
+    where: PredictiveOutcomeScalarWhereInput
+    data: XOR<PredictiveOutcomeUpdateManyMutationInput, PredictiveOutcomeUncheckedUpdateManyWithoutRecordedByInput>
+  }
+
+  export type PredictiveOutcomeScalarWhereInput = {
+    AND?: PredictiveOutcomeScalarWhereInput | PredictiveOutcomeScalarWhereInput[]
+    OR?: PredictiveOutcomeScalarWhereInput[]
+    NOT?: PredictiveOutcomeScalarWhereInput | PredictiveOutcomeScalarWhereInput[]
+    id?: StringFilter<"PredictiveOutcome"> | string
+    snapshotId?: StringFilter<"PredictiveOutcome"> | string
+    outcomeContractVersion?: StringFilter<"PredictiveOutcome"> | string
+    outcomeTimestamp?: DateTimeFilter<"PredictiveOutcome"> | Date | string
+    outcomeValue?: EnumPredictiveOutcomeValueFilter<"PredictiveOutcome"> | $Enums.PredictiveOutcomeValue
+    provenanceClass?: EnumPredictiveProvenanceClassFilter<"PredictiveOutcome"> | $Enums.PredictiveProvenanceClass
+    sourceReferences?: JsonFilter<"PredictiveOutcome">
+    sourceFingerprint?: StringFilter<"PredictiveOutcome"> | string
+    status?: EnumPredictiveRecordStatusFilter<"PredictiveOutcome"> | $Enums.PredictiveRecordStatus
+    recordedById?: StringFilter<"PredictiveOutcome"> | string
+    recordedAt?: DateTimeFilter<"PredictiveOutcome"> | Date | string
+    voidedAt?: DateTimeNullableFilter<"PredictiveOutcome"> | Date | string | null
+    voidedById?: StringNullableFilter<"PredictiveOutcome"> | string | null
+    voidReason?: StringNullableFilter<"PredictiveOutcome"> | string | null
+    replacementOutcomeId?: StringNullableFilter<"PredictiveOutcome"> | string | null
+  }
+
+  export type PredictiveOutcomeUpsertWithWhereUniqueWithoutVoidedByInput = {
+    where: PredictiveOutcomeWhereUniqueInput
+    update: XOR<PredictiveOutcomeUpdateWithoutVoidedByInput, PredictiveOutcomeUncheckedUpdateWithoutVoidedByInput>
+    create: XOR<PredictiveOutcomeCreateWithoutVoidedByInput, PredictiveOutcomeUncheckedCreateWithoutVoidedByInput>
+  }
+
+  export type PredictiveOutcomeUpdateWithWhereUniqueWithoutVoidedByInput = {
+    where: PredictiveOutcomeWhereUniqueInput
+    data: XOR<PredictiveOutcomeUpdateWithoutVoidedByInput, PredictiveOutcomeUncheckedUpdateWithoutVoidedByInput>
+  }
+
+  export type PredictiveOutcomeUpdateManyWithWhereWithoutVoidedByInput = {
+    where: PredictiveOutcomeScalarWhereInput
+    data: XOR<PredictiveOutcomeUpdateManyMutationInput, PredictiveOutcomeUncheckedUpdateManyWithoutVoidedByInput>
+  }
+
   export type DepartmentCreateWithoutAssetsInput = {
     id?: string
     name: string
@@ -69812,6 +74679,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationCreateNestedManyWithoutIngestedByInput
     preparedCaseResourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutPreparedByInput
     createdPortfolioScenarios?: PortfolioScenarioCreateNestedManyWithoutCreatedByInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutCreatedByInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutVoidedByInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutRecordedByInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutVoidedByInput
   }
 
   export type UserUncheckedCreateWithoutReviewedPublicReportsInput = {
@@ -69857,6 +74728,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutIngestedByInput
     preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutPreparedByInput
     createdPortfolioScenarios?: PortfolioScenarioUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutCreatedByInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutVoidedByInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutRecordedByInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutVoidedByInput
   }
 
   export type UserCreateOrConnectWithoutReviewedPublicReportsInput = {
@@ -69907,6 +74782,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationCreateNestedManyWithoutIngestedByInput
     preparedCaseResourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutPreparedByInput
     createdPortfolioScenarios?: PortfolioScenarioCreateNestedManyWithoutCreatedByInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutCreatedByInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutVoidedByInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutRecordedByInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutVoidedByInput
   }
 
   export type UserUncheckedCreateWithoutDecidedPublicReportsInput = {
@@ -69952,6 +74831,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutIngestedByInput
     preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutPreparedByInput
     createdPortfolioScenarios?: PortfolioScenarioUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutCreatedByInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutVoidedByInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutRecordedByInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutVoidedByInput
   }
 
   export type UserCreateOrConnectWithoutDecidedPublicReportsInput = {
@@ -70245,6 +75128,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationUpdateManyWithoutIngestedByNestedInput
     preparedCaseResourceEstimates?: CaseResourceEstimateUpdateManyWithoutPreparedByNestedInput
     createdPortfolioScenarios?: PortfolioScenarioUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutCreatedByNestedInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutVoidedByNestedInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutRecordedByNestedInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutVoidedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutReviewedPublicReportsInput = {
@@ -70290,6 +75177,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationUncheckedUpdateManyWithoutIngestedByNestedInput
     preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutPreparedByNestedInput
     createdPortfolioScenarios?: PortfolioScenarioUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutCreatedByNestedInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutVoidedByNestedInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutRecordedByNestedInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutVoidedByNestedInput
   }
 
   export type UserUpsertWithoutDecidedPublicReportsInput = {
@@ -70346,6 +75237,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationUpdateManyWithoutIngestedByNestedInput
     preparedCaseResourceEstimates?: CaseResourceEstimateUpdateManyWithoutPreparedByNestedInput
     createdPortfolioScenarios?: PortfolioScenarioUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutCreatedByNestedInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutVoidedByNestedInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutRecordedByNestedInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutVoidedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutDecidedPublicReportsInput = {
@@ -70391,6 +75286,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationUncheckedUpdateManyWithoutIngestedByNestedInput
     preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutPreparedByNestedInput
     createdPortfolioScenarios?: PortfolioScenarioUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutCreatedByNestedInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutVoidedByNestedInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutRecordedByNestedInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutVoidedByNestedInput
   }
 
   export type CaseUpsertWithoutSourcePublicReportInput = {
@@ -70613,6 +75512,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationCreateNestedManyWithoutIngestedByInput
     preparedCaseResourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutPreparedByInput
     createdPortfolioScenarios?: PortfolioScenarioCreateNestedManyWithoutCreatedByInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutCreatedByInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutVoidedByInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutRecordedByInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutVoidedByInput
   }
 
   export type UserUncheckedCreateWithoutCreatedTriageAnalysesInput = {
@@ -70658,6 +75561,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutIngestedByInput
     preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutPreparedByInput
     createdPortfolioScenarios?: PortfolioScenarioUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutCreatedByInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutVoidedByInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutRecordedByInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutVoidedByInput
   }
 
   export type UserCreateOrConnectWithoutCreatedTriageAnalysesInput = {
@@ -70829,6 +75736,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationUpdateManyWithoutIngestedByNestedInput
     preparedCaseResourceEstimates?: CaseResourceEstimateUpdateManyWithoutPreparedByNestedInput
     createdPortfolioScenarios?: PortfolioScenarioUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutCreatedByNestedInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutVoidedByNestedInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutRecordedByNestedInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutVoidedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCreatedTriageAnalysesInput = {
@@ -70874,6 +75785,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationUncheckedUpdateManyWithoutIngestedByNestedInput
     preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutPreparedByNestedInput
     createdPortfolioScenarios?: PortfolioScenarioUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutCreatedByNestedInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutVoidedByNestedInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutRecordedByNestedInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutVoidedByNestedInput
   }
 
   export type DepartmentCreateWithoutPolicyDocumentsInput = {
@@ -70997,6 +75912,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationCreateNestedManyWithoutIngestedByInput
     preparedCaseResourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutPreparedByInput
     createdPortfolioScenarios?: PortfolioScenarioCreateNestedManyWithoutCreatedByInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutCreatedByInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutVoidedByInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutRecordedByInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutVoidedByInput
   }
 
   export type UserUncheckedCreateWithoutCreatedPolicyDocumentsInput = {
@@ -71042,6 +75961,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutIngestedByInput
     preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutPreparedByInput
     createdPortfolioScenarios?: PortfolioScenarioUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutCreatedByInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutVoidedByInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutRecordedByInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutVoidedByInput
   }
 
   export type UserCreateOrConnectWithoutCreatedPolicyDocumentsInput = {
@@ -71092,6 +76015,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationCreateNestedManyWithoutIngestedByInput
     preparedCaseResourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutPreparedByInput
     createdPortfolioScenarios?: PortfolioScenarioCreateNestedManyWithoutCreatedByInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutCreatedByInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutVoidedByInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutRecordedByInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutVoidedByInput
   }
 
   export type UserUncheckedCreateWithoutApprovedPolicyDocumentsInput = {
@@ -71137,6 +76064,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutIngestedByInput
     preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutPreparedByInput
     createdPortfolioScenarios?: PortfolioScenarioUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutCreatedByInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutVoidedByInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutRecordedByInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutVoidedByInput
   }
 
   export type UserCreateOrConnectWithoutApprovedPolicyDocumentsInput = {
@@ -71382,6 +76313,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationUpdateManyWithoutIngestedByNestedInput
     preparedCaseResourceEstimates?: CaseResourceEstimateUpdateManyWithoutPreparedByNestedInput
     createdPortfolioScenarios?: PortfolioScenarioUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutCreatedByNestedInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutVoidedByNestedInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutRecordedByNestedInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutVoidedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCreatedPolicyDocumentsInput = {
@@ -71427,6 +76362,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationUncheckedUpdateManyWithoutIngestedByNestedInput
     preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutPreparedByNestedInput
     createdPortfolioScenarios?: PortfolioScenarioUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutCreatedByNestedInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutVoidedByNestedInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutRecordedByNestedInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutVoidedByNestedInput
   }
 
   export type UserUpsertWithoutApprovedPolicyDocumentsInput = {
@@ -71483,6 +76422,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationUpdateManyWithoutIngestedByNestedInput
     preparedCaseResourceEstimates?: CaseResourceEstimateUpdateManyWithoutPreparedByNestedInput
     createdPortfolioScenarios?: PortfolioScenarioUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutCreatedByNestedInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutVoidedByNestedInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutRecordedByNestedInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutVoidedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutApprovedPolicyDocumentsInput = {
@@ -71528,6 +76471,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationUncheckedUpdateManyWithoutIngestedByNestedInput
     preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutPreparedByNestedInput
     createdPortfolioScenarios?: PortfolioScenarioUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutCreatedByNestedInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutVoidedByNestedInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutRecordedByNestedInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutVoidedByNestedInput
   }
 
   export type PolicyRuleUpsertWithWhereUniqueWithoutPolicyDocumentInput = {
@@ -71748,6 +76695,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationCreateNestedManyWithoutIngestedByInput
     preparedCaseResourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutPreparedByInput
     createdPortfolioScenarios?: PortfolioScenarioCreateNestedManyWithoutCreatedByInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutCreatedByInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutVoidedByInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutRecordedByInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutVoidedByInput
   }
 
   export type UserUncheckedCreateWithoutCreatedApprovedActionsInput = {
@@ -71793,6 +76744,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutIngestedByInput
     preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutPreparedByInput
     createdPortfolioScenarios?: PortfolioScenarioUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutCreatedByInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutVoidedByInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutRecordedByInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutVoidedByInput
   }
 
   export type UserCreateOrConnectWithoutCreatedApprovedActionsInput = {
@@ -71843,6 +76798,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationCreateNestedManyWithoutIngestedByInput
     preparedCaseResourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutPreparedByInput
     createdPortfolioScenarios?: PortfolioScenarioCreateNestedManyWithoutCreatedByInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutCreatedByInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutVoidedByInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutRecordedByInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutVoidedByInput
   }
 
   export type UserUncheckedCreateWithoutApprovedApprovedActionsInput = {
@@ -71888,6 +76847,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutIngestedByInput
     preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutPreparedByInput
     createdPortfolioScenarios?: PortfolioScenarioUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutCreatedByInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutVoidedByInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutRecordedByInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutVoidedByInput
   }
 
   export type UserCreateOrConnectWithoutApprovedApprovedActionsInput = {
@@ -72020,6 +76983,7 @@ export namespace Prisma {
     dependencies?: ExecutionTaskDependencyCreateNestedManyWithoutDependentTaskInput
     requiredBy?: ExecutionTaskDependencyCreateNestedManyWithoutPredecessorTaskInput
     blockerEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutExecutionTaskInput
+    predictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutExecutionTaskInput
   }
 
   export type ExecutionTaskUncheckedCreateWithoutApprovedActionVersionInput = {
@@ -72063,6 +77027,7 @@ export namespace Prisma {
     dependencies?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutDependentTaskInput
     requiredBy?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutPredecessorTaskInput
     blockerEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutExecutionTaskInput
+    predictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutExecutionTaskInput
   }
 
   export type ExecutionTaskCreateOrConnectWithoutApprovedActionVersionInput = {
@@ -72274,6 +77239,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationUpdateManyWithoutIngestedByNestedInput
     preparedCaseResourceEstimates?: CaseResourceEstimateUpdateManyWithoutPreparedByNestedInput
     createdPortfolioScenarios?: PortfolioScenarioUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutCreatedByNestedInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutVoidedByNestedInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutRecordedByNestedInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutVoidedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCreatedApprovedActionsInput = {
@@ -72319,6 +77288,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationUncheckedUpdateManyWithoutIngestedByNestedInput
     preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutPreparedByNestedInput
     createdPortfolioScenarios?: PortfolioScenarioUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutCreatedByNestedInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutVoidedByNestedInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutRecordedByNestedInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutVoidedByNestedInput
   }
 
   export type UserUpsertWithoutApprovedApprovedActionsInput = {
@@ -72375,6 +77348,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationUpdateManyWithoutIngestedByNestedInput
     preparedCaseResourceEstimates?: CaseResourceEstimateUpdateManyWithoutPreparedByNestedInput
     createdPortfolioScenarios?: PortfolioScenarioUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutCreatedByNestedInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutVoidedByNestedInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutRecordedByNestedInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutVoidedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutApprovedApprovedActionsInput = {
@@ -72420,6 +77397,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationUncheckedUpdateManyWithoutIngestedByNestedInput
     preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutPreparedByNestedInput
     createdPortfolioScenarios?: PortfolioScenarioUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutCreatedByNestedInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutVoidedByNestedInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutRecordedByNestedInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutVoidedByNestedInput
   }
 
   export type PolicyRuleUpsertWithWhereUniqueWithoutActionInput = {
@@ -72646,6 +77627,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationCreateNestedManyWithoutIngestedByInput
     preparedCaseResourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutPreparedByInput
     createdPortfolioScenarios?: PortfolioScenarioCreateNestedManyWithoutCreatedByInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutCreatedByInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutVoidedByInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutRecordedByInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutVoidedByInput
   }
 
   export type UserUncheckedCreateWithoutCreatedGovernedExecutionTemplatesInput = {
@@ -72691,6 +77676,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutIngestedByInput
     preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutPreparedByInput
     createdPortfolioScenarios?: PortfolioScenarioUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutCreatedByInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutVoidedByInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutRecordedByInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutVoidedByInput
   }
 
   export type UserCreateOrConnectWithoutCreatedGovernedExecutionTemplatesInput = {
@@ -72741,6 +77730,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationCreateNestedManyWithoutIngestedByInput
     preparedCaseResourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutPreparedByInput
     createdPortfolioScenarios?: PortfolioScenarioCreateNestedManyWithoutCreatedByInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutCreatedByInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutVoidedByInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutRecordedByInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutVoidedByInput
   }
 
   export type UserUncheckedCreateWithoutApprovedGovernedExecutionTemplatesInput = {
@@ -72786,6 +77779,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutIngestedByInput
     preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutPreparedByInput
     createdPortfolioScenarios?: PortfolioScenarioUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutCreatedByInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutVoidedByInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutRecordedByInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutVoidedByInput
   }
 
   export type UserCreateOrConnectWithoutApprovedGovernedExecutionTemplatesInput = {
@@ -72874,6 +77871,7 @@ export namespace Prisma {
     dependencies?: ExecutionTaskDependencyCreateNestedManyWithoutDependentTaskInput
     requiredBy?: ExecutionTaskDependencyCreateNestedManyWithoutPredecessorTaskInput
     blockerEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutExecutionTaskInput
+    predictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutExecutionTaskInput
   }
 
   export type ExecutionTaskUncheckedCreateWithoutGovernedExecutionTemplateInput = {
@@ -72917,6 +77915,7 @@ export namespace Prisma {
     dependencies?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutDependentTaskInput
     requiredBy?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutPredecessorTaskInput
     blockerEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutExecutionTaskInput
+    predictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutExecutionTaskInput
   }
 
   export type ExecutionTaskCreateOrConnectWithoutGovernedExecutionTemplateInput = {
@@ -73134,6 +78133,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationUpdateManyWithoutIngestedByNestedInput
     preparedCaseResourceEstimates?: CaseResourceEstimateUpdateManyWithoutPreparedByNestedInput
     createdPortfolioScenarios?: PortfolioScenarioUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutCreatedByNestedInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutVoidedByNestedInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutRecordedByNestedInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutVoidedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCreatedGovernedExecutionTemplatesInput = {
@@ -73179,6 +78182,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationUncheckedUpdateManyWithoutIngestedByNestedInput
     preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutPreparedByNestedInput
     createdPortfolioScenarios?: PortfolioScenarioUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutCreatedByNestedInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutVoidedByNestedInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutRecordedByNestedInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutVoidedByNestedInput
   }
 
   export type UserUpsertWithoutApprovedGovernedExecutionTemplatesInput = {
@@ -73235,6 +78242,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationUpdateManyWithoutIngestedByNestedInput
     preparedCaseResourceEstimates?: CaseResourceEstimateUpdateManyWithoutPreparedByNestedInput
     createdPortfolioScenarios?: PortfolioScenarioUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutCreatedByNestedInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutVoidedByNestedInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutRecordedByNestedInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutVoidedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutApprovedGovernedExecutionTemplatesInput = {
@@ -73280,6 +78291,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationUncheckedUpdateManyWithoutIngestedByNestedInput
     preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutPreparedByNestedInput
     createdPortfolioScenarios?: PortfolioScenarioUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutCreatedByNestedInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutVoidedByNestedInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutRecordedByNestedInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutVoidedByNestedInput
   }
 
   export type GovernedExecutionTaskTemplateUpsertWithWhereUniqueWithoutExecutionTemplateInput = {
@@ -73418,6 +78433,7 @@ export namespace Prisma {
     dependencies?: ExecutionTaskDependencyCreateNestedManyWithoutDependentTaskInput
     requiredBy?: ExecutionTaskDependencyCreateNestedManyWithoutPredecessorTaskInput
     blockerEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutExecutionTaskInput
+    predictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutExecutionTaskInput
   }
 
   export type ExecutionTaskUncheckedCreateWithoutGovernedTaskTemplateInput = {
@@ -73461,6 +78477,7 @@ export namespace Prisma {
     dependencies?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutDependentTaskInput
     requiredBy?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutPredecessorTaskInput
     blockerEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutExecutionTaskInput
+    predictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutExecutionTaskInput
   }
 
   export type ExecutionTaskCreateOrConnectWithoutGovernedTaskTemplateInput = {
@@ -74858,6 +79875,10 @@ export namespace Prisma {
     deactivatedObservationSources?: ObservationSourceCreateNestedManyWithoutDeactivatedByInput
     ingestedExternalObservations?: ExternalObservationCreateNestedManyWithoutIngestedByInput
     createdPortfolioScenarios?: PortfolioScenarioCreateNestedManyWithoutCreatedByInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutCreatedByInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutVoidedByInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutRecordedByInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutVoidedByInput
   }
 
   export type UserUncheckedCreateWithoutPreparedCaseResourceEstimatesInput = {
@@ -74903,6 +79924,10 @@ export namespace Prisma {
     deactivatedObservationSources?: ObservationSourceUncheckedCreateNestedManyWithoutDeactivatedByInput
     ingestedExternalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutIngestedByInput
     createdPortfolioScenarios?: PortfolioScenarioUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutCreatedByInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutVoidedByInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutRecordedByInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutVoidedByInput
   }
 
   export type UserCreateOrConnectWithoutPreparedCaseResourceEstimatesInput = {
@@ -75027,6 +80052,10 @@ export namespace Prisma {
     deactivatedObservationSources?: ObservationSourceUpdateManyWithoutDeactivatedByNestedInput
     ingestedExternalObservations?: ExternalObservationUpdateManyWithoutIngestedByNestedInput
     createdPortfolioScenarios?: PortfolioScenarioUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutCreatedByNestedInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutVoidedByNestedInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutRecordedByNestedInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutVoidedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPreparedCaseResourceEstimatesInput = {
@@ -75072,6 +80101,10 @@ export namespace Prisma {
     deactivatedObservationSources?: ObservationSourceUncheckedUpdateManyWithoutDeactivatedByNestedInput
     ingestedExternalObservations?: ExternalObservationUncheckedUpdateManyWithoutIngestedByNestedInput
     createdPortfolioScenarios?: PortfolioScenarioUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutCreatedByNestedInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutVoidedByNestedInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutRecordedByNestedInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutVoidedByNestedInput
   }
 
   export type DepartmentCreateWithoutPortfolioScenariosInput = {
@@ -75195,6 +80228,10 @@ export namespace Prisma {
     deactivatedObservationSources?: ObservationSourceCreateNestedManyWithoutDeactivatedByInput
     ingestedExternalObservations?: ExternalObservationCreateNestedManyWithoutIngestedByInput
     preparedCaseResourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutPreparedByInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutCreatedByInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutVoidedByInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutRecordedByInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutVoidedByInput
   }
 
   export type UserUncheckedCreateWithoutCreatedPortfolioScenariosInput = {
@@ -75240,6 +80277,10 @@ export namespace Prisma {
     deactivatedObservationSources?: ObservationSourceUncheckedCreateNestedManyWithoutDeactivatedByInput
     ingestedExternalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutIngestedByInput
     preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutPreparedByInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutCreatedByInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutVoidedByInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutRecordedByInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutVoidedByInput
   }
 
   export type UserCreateOrConnectWithoutCreatedPortfolioScenariosInput = {
@@ -75391,6 +80432,10 @@ export namespace Prisma {
     deactivatedObservationSources?: ObservationSourceUpdateManyWithoutDeactivatedByNestedInput
     ingestedExternalObservations?: ExternalObservationUpdateManyWithoutIngestedByNestedInput
     preparedCaseResourceEstimates?: CaseResourceEstimateUpdateManyWithoutPreparedByNestedInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutCreatedByNestedInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutVoidedByNestedInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutRecordedByNestedInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutVoidedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCreatedPortfolioScenariosInput = {
@@ -75436,6 +80481,10 @@ export namespace Prisma {
     deactivatedObservationSources?: ObservationSourceUncheckedUpdateManyWithoutDeactivatedByNestedInput
     ingestedExternalObservations?: ExternalObservationUncheckedUpdateManyWithoutIngestedByNestedInput
     preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutPreparedByNestedInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutCreatedByNestedInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutVoidedByNestedInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutRecordedByNestedInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutVoidedByNestedInput
   }
 
   export type DepartmentCreateWithoutObservationSourcesInput = {
@@ -75559,6 +80608,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationCreateNestedManyWithoutIngestedByInput
     preparedCaseResourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutPreparedByInput
     createdPortfolioScenarios?: PortfolioScenarioCreateNestedManyWithoutCreatedByInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutCreatedByInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutVoidedByInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutRecordedByInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutVoidedByInput
   }
 
   export type UserUncheckedCreateWithoutCreatedObservationSourcesInput = {
@@ -75604,6 +80657,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutIngestedByInput
     preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutPreparedByInput
     createdPortfolioScenarios?: PortfolioScenarioUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutCreatedByInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutVoidedByInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutRecordedByInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutVoidedByInput
   }
 
   export type UserCreateOrConnectWithoutCreatedObservationSourcesInput = {
@@ -75654,6 +80711,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationCreateNestedManyWithoutIngestedByInput
     preparedCaseResourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutPreparedByInput
     createdPortfolioScenarios?: PortfolioScenarioCreateNestedManyWithoutCreatedByInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutCreatedByInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutVoidedByInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutRecordedByInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutVoidedByInput
   }
 
   export type UserUncheckedCreateWithoutDeactivatedObservationSourcesInput = {
@@ -75699,6 +80760,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutIngestedByInput
     preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutPreparedByInput
     createdPortfolioScenarios?: PortfolioScenarioUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutCreatedByInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutVoidedByInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutRecordedByInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutVoidedByInput
   }
 
   export type UserCreateOrConnectWithoutDeactivatedObservationSourcesInput = {
@@ -75900,6 +80965,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationUpdateManyWithoutIngestedByNestedInput
     preparedCaseResourceEstimates?: CaseResourceEstimateUpdateManyWithoutPreparedByNestedInput
     createdPortfolioScenarios?: PortfolioScenarioUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutCreatedByNestedInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutVoidedByNestedInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutRecordedByNestedInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutVoidedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCreatedObservationSourcesInput = {
@@ -75945,6 +81014,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationUncheckedUpdateManyWithoutIngestedByNestedInput
     preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutPreparedByNestedInput
     createdPortfolioScenarios?: PortfolioScenarioUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutCreatedByNestedInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutVoidedByNestedInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutRecordedByNestedInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutVoidedByNestedInput
   }
 
   export type UserUpsertWithoutDeactivatedObservationSourcesInput = {
@@ -76001,6 +81074,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationUpdateManyWithoutIngestedByNestedInput
     preparedCaseResourceEstimates?: CaseResourceEstimateUpdateManyWithoutPreparedByNestedInput
     createdPortfolioScenarios?: PortfolioScenarioUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutCreatedByNestedInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutVoidedByNestedInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutRecordedByNestedInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutVoidedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutDeactivatedObservationSourcesInput = {
@@ -76046,6 +81123,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationUncheckedUpdateManyWithoutIngestedByNestedInput
     preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutPreparedByNestedInput
     createdPortfolioScenarios?: PortfolioScenarioUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutCreatedByNestedInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutVoidedByNestedInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutRecordedByNestedInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutVoidedByNestedInput
   }
 
   export type ExternalObservationUpsertWithWhereUniqueWithoutSourceInput = {
@@ -76330,6 +81411,10 @@ export namespace Prisma {
     deactivatedObservationSources?: ObservationSourceCreateNestedManyWithoutDeactivatedByInput
     preparedCaseResourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutPreparedByInput
     createdPortfolioScenarios?: PortfolioScenarioCreateNestedManyWithoutCreatedByInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutCreatedByInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutVoidedByInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutRecordedByInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutVoidedByInput
   }
 
   export type UserUncheckedCreateWithoutIngestedExternalObservationsInput = {
@@ -76375,6 +81460,10 @@ export namespace Prisma {
     deactivatedObservationSources?: ObservationSourceUncheckedCreateNestedManyWithoutDeactivatedByInput
     preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutPreparedByInput
     createdPortfolioScenarios?: PortfolioScenarioUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutCreatedByInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutVoidedByInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutRecordedByInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutVoidedByInput
   }
 
   export type UserCreateOrConnectWithoutIngestedExternalObservationsInput = {
@@ -76689,6 +81778,10 @@ export namespace Prisma {
     deactivatedObservationSources?: ObservationSourceUpdateManyWithoutDeactivatedByNestedInput
     preparedCaseResourceEstimates?: CaseResourceEstimateUpdateManyWithoutPreparedByNestedInput
     createdPortfolioScenarios?: PortfolioScenarioUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutCreatedByNestedInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutVoidedByNestedInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutRecordedByNestedInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutVoidedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutIngestedExternalObservationsInput = {
@@ -76734,6 +81827,10 @@ export namespace Prisma {
     deactivatedObservationSources?: ObservationSourceUncheckedUpdateManyWithoutDeactivatedByNestedInput
     preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutPreparedByNestedInput
     createdPortfolioScenarios?: PortfolioScenarioUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutCreatedByNestedInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutVoidedByNestedInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutRecordedByNestedInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutVoidedByNestedInput
   }
 
   export type CaseCreateWithoutInspectionsInput = {
@@ -76836,6 +81933,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationCreateNestedManyWithoutIngestedByInput
     preparedCaseResourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutPreparedByInput
     createdPortfolioScenarios?: PortfolioScenarioCreateNestedManyWithoutCreatedByInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutCreatedByInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutVoidedByInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutRecordedByInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutVoidedByInput
   }
 
   export type UserUncheckedCreateWithoutInspectionsInput = {
@@ -76881,6 +81982,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutIngestedByInput
     preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutPreparedByInput
     createdPortfolioScenarios?: PortfolioScenarioUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutCreatedByInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutVoidedByInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutRecordedByInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutVoidedByInput
   }
 
   export type UserCreateOrConnectWithoutInspectionsInput = {
@@ -77167,6 +82272,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationUpdateManyWithoutIngestedByNestedInput
     preparedCaseResourceEstimates?: CaseResourceEstimateUpdateManyWithoutPreparedByNestedInput
     createdPortfolioScenarios?: PortfolioScenarioUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutCreatedByNestedInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutVoidedByNestedInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutRecordedByNestedInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutVoidedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutInspectionsInput = {
@@ -77212,6 +82321,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationUncheckedUpdateManyWithoutIngestedByNestedInput
     preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutPreparedByNestedInput
     createdPortfolioScenarios?: PortfolioScenarioUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutCreatedByNestedInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutVoidedByNestedInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutRecordedByNestedInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutVoidedByNestedInput
   }
 
   export type RiskAssessmentUpsertWithWhereUniqueWithoutInspectionInput = {
@@ -78946,6 +84059,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationCreateNestedManyWithoutIngestedByInput
     preparedCaseResourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutPreparedByInput
     createdPortfolioScenarios?: PortfolioScenarioCreateNestedManyWithoutCreatedByInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutCreatedByInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutVoidedByInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutRecordedByInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutVoidedByInput
   }
 
   export type UserUncheckedCreateWithoutPreparedDecisionPackagesInput = {
@@ -78991,6 +84108,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutIngestedByInput
     preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutPreparedByInput
     createdPortfolioScenarios?: PortfolioScenarioUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutCreatedByInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutVoidedByInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutRecordedByInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutVoidedByInput
   }
 
   export type UserCreateOrConnectWithoutPreparedDecisionPackagesInput = {
@@ -79261,6 +84382,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationUpdateManyWithoutIngestedByNestedInput
     preparedCaseResourceEstimates?: CaseResourceEstimateUpdateManyWithoutPreparedByNestedInput
     createdPortfolioScenarios?: PortfolioScenarioUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutCreatedByNestedInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutVoidedByNestedInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutRecordedByNestedInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutVoidedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPreparedDecisionPackagesInput = {
@@ -79306,6 +84431,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationUncheckedUpdateManyWithoutIngestedByNestedInput
     preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutPreparedByNestedInput
     createdPortfolioScenarios?: PortfolioScenarioUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutCreatedByNestedInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutVoidedByNestedInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutRecordedByNestedInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutVoidedByNestedInput
   }
 
   export type OperationalResponsePlanUpsertWithWhereUniqueWithoutDecisionPackageInput = {
@@ -79367,6 +84496,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationCreateNestedManyWithoutIngestedByInput
     preparedCaseResourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutPreparedByInput
     createdPortfolioScenarios?: PortfolioScenarioCreateNestedManyWithoutCreatedByInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutCreatedByInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutVoidedByInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutRecordedByInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutVoidedByInput
   }
 
   export type UserUncheckedCreateWithoutApprovalAuthoritiesInput = {
@@ -79412,6 +84545,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutIngestedByInput
     preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutPreparedByInput
     createdPortfolioScenarios?: PortfolioScenarioUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutCreatedByInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutVoidedByInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutRecordedByInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutVoidedByInput
   }
 
   export type UserCreateOrConnectWithoutApprovalAuthoritiesInput = {
@@ -79619,6 +84756,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationUpdateManyWithoutIngestedByNestedInput
     preparedCaseResourceEstimates?: CaseResourceEstimateUpdateManyWithoutPreparedByNestedInput
     createdPortfolioScenarios?: PortfolioScenarioUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutCreatedByNestedInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutVoidedByNestedInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutRecordedByNestedInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutVoidedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutApprovalAuthoritiesInput = {
@@ -79664,6 +84805,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationUncheckedUpdateManyWithoutIngestedByNestedInput
     preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutPreparedByNestedInput
     createdPortfolioScenarios?: PortfolioScenarioUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutCreatedByNestedInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutVoidedByNestedInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutRecordedByNestedInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutVoidedByNestedInput
   }
 
   export type DepartmentUpsertWithoutApprovalAuthoritiesInput = {
@@ -79935,6 +85080,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationCreateNestedManyWithoutIngestedByInput
     preparedCaseResourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutPreparedByInput
     createdPortfolioScenarios?: PortfolioScenarioCreateNestedManyWithoutCreatedByInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutCreatedByInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutVoidedByInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutRecordedByInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutVoidedByInput
   }
 
   export type UserUncheckedCreateWithoutReviewedOrpDecisionsInput = {
@@ -79980,6 +85129,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutIngestedByInput
     preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutPreparedByInput
     createdPortfolioScenarios?: PortfolioScenarioUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutCreatedByInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutVoidedByInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutRecordedByInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutVoidedByInput
   }
 
   export type UserCreateOrConnectWithoutReviewedOrpDecisionsInput = {
@@ -80075,6 +85228,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationCreateNestedManyWithoutIngestedByInput
     preparedCaseResourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutPreparedByInput
     createdPortfolioScenarios?: PortfolioScenarioCreateNestedManyWithoutCreatedByInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutCreatedByInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutVoidedByInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutRecordedByInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutVoidedByInput
   }
 
   export type UserUncheckedCreateWithoutForwardedOrpDecisionsInput = {
@@ -80120,6 +85277,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutIngestedByInput
     preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutPreparedByInput
     createdPortfolioScenarios?: PortfolioScenarioUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutCreatedByInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutVoidedByInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutRecordedByInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutVoidedByInput
   }
 
   export type UserCreateOrConnectWithoutForwardedOrpDecisionsInput = {
@@ -80350,6 +85511,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationUpdateManyWithoutIngestedByNestedInput
     preparedCaseResourceEstimates?: CaseResourceEstimateUpdateManyWithoutPreparedByNestedInput
     createdPortfolioScenarios?: PortfolioScenarioUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutCreatedByNestedInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutVoidedByNestedInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutRecordedByNestedInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutVoidedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutReviewedOrpDecisionsInput = {
@@ -80395,6 +85560,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationUncheckedUpdateManyWithoutIngestedByNestedInput
     preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutPreparedByNestedInput
     createdPortfolioScenarios?: PortfolioScenarioUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutCreatedByNestedInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutVoidedByNestedInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutRecordedByNestedInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutVoidedByNestedInput
   }
 
   export type ApprovalAuthorityUpsertWithoutDecisionsInput = {
@@ -80502,6 +85671,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationUpdateManyWithoutIngestedByNestedInput
     preparedCaseResourceEstimates?: CaseResourceEstimateUpdateManyWithoutPreparedByNestedInput
     createdPortfolioScenarios?: PortfolioScenarioUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutCreatedByNestedInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutVoidedByNestedInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutRecordedByNestedInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutVoidedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutForwardedOrpDecisionsInput = {
@@ -80547,6 +85720,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationUncheckedUpdateManyWithoutIngestedByNestedInput
     preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutPreparedByNestedInput
     createdPortfolioScenarios?: PortfolioScenarioUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutCreatedByNestedInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutVoidedByNestedInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutRecordedByNestedInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutVoidedByNestedInput
   }
 
   export type ExecutionPlanUpsertWithoutApprovalDecisionInput = {
@@ -80788,6 +85965,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationCreateNestedManyWithoutIngestedByInput
     preparedCaseResourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutPreparedByInput
     createdPortfolioScenarios?: PortfolioScenarioCreateNestedManyWithoutCreatedByInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutCreatedByInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutVoidedByInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutRecordedByInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutVoidedByInput
   }
 
   export type UserUncheckedCreateWithoutCreatedExecutionPlansInput = {
@@ -80833,6 +86014,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutIngestedByInput
     preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutPreparedByInput
     createdPortfolioScenarios?: PortfolioScenarioUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutCreatedByInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutVoidedByInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutRecordedByInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutVoidedByInput
   }
 
   export type UserCreateOrConnectWithoutCreatedExecutionPlansInput = {
@@ -80881,6 +86066,7 @@ export namespace Prisma {
     dependencies?: ExecutionTaskDependencyCreateNestedManyWithoutDependentTaskInput
     requiredBy?: ExecutionTaskDependencyCreateNestedManyWithoutPredecessorTaskInput
     blockerEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutExecutionTaskInput
+    predictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutExecutionTaskInput
   }
 
   export type ExecutionTaskUncheckedCreateWithoutExecutionPlanInput = {
@@ -80924,6 +86110,7 @@ export namespace Prisma {
     dependencies?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutDependentTaskInput
     requiredBy?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutPredecessorTaskInput
     blockerEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutExecutionTaskInput
+    predictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutExecutionTaskInput
   }
 
   export type ExecutionTaskCreateOrConnectWithoutExecutionPlanInput = {
@@ -81230,6 +86417,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationUpdateManyWithoutIngestedByNestedInput
     preparedCaseResourceEstimates?: CaseResourceEstimateUpdateManyWithoutPreparedByNestedInput
     createdPortfolioScenarios?: PortfolioScenarioUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutCreatedByNestedInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutVoidedByNestedInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutRecordedByNestedInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutVoidedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCreatedExecutionPlansInput = {
@@ -81275,6 +86466,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationUncheckedUpdateManyWithoutIngestedByNestedInput
     preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutPreparedByNestedInput
     createdPortfolioScenarios?: PortfolioScenarioUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutCreatedByNestedInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutVoidedByNestedInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutRecordedByNestedInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutVoidedByNestedInput
   }
 
   export type ExecutionTaskUpsertWithWhereUniqueWithoutExecutionPlanInput = {
@@ -81452,6 +86647,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationCreateNestedManyWithoutIngestedByInput
     preparedCaseResourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutPreparedByInput
     createdPortfolioScenarios?: PortfolioScenarioCreateNestedManyWithoutCreatedByInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutCreatedByInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutVoidedByInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutRecordedByInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutVoidedByInput
   }
 
   export type UserUncheckedCreateWithoutAssignedExecutionTasksInput = {
@@ -81497,6 +86696,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutIngestedByInput
     preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutPreparedByInput
     createdPortfolioScenarios?: PortfolioScenarioUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutCreatedByInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutVoidedByInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutRecordedByInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutVoidedByInput
   }
 
   export type UserCreateOrConnectWithoutAssignedExecutionTasksInput = {
@@ -81547,6 +86750,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationCreateNestedManyWithoutIngestedByInput
     preparedCaseResourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutPreparedByInput
     createdPortfolioScenarios?: PortfolioScenarioCreateNestedManyWithoutCreatedByInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutCreatedByInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutVoidedByInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutRecordedByInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutVoidedByInput
   }
 
   export type UserUncheckedCreateWithoutAssignedByExecutionTasksInput = {
@@ -81592,6 +86799,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutIngestedByInput
     preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutPreparedByInput
     createdPortfolioScenarios?: PortfolioScenarioUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutCreatedByInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutVoidedByInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutRecordedByInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutVoidedByInput
   }
 
   export type UserCreateOrConnectWithoutAssignedByExecutionTasksInput = {
@@ -81642,6 +86853,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationCreateNestedManyWithoutIngestedByInput
     preparedCaseResourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutPreparedByInput
     createdPortfolioScenarios?: PortfolioScenarioCreateNestedManyWithoutCreatedByInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutCreatedByInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutVoidedByInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutRecordedByInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutVoidedByInput
   }
 
   export type UserUncheckedCreateWithoutCompletedExecutionTasksInput = {
@@ -81687,6 +86902,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutIngestedByInput
     preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutPreparedByInput
     createdPortfolioScenarios?: PortfolioScenarioUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutCreatedByInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutVoidedByInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutRecordedByInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutVoidedByInput
   }
 
   export type UserCreateOrConnectWithoutCompletedExecutionTasksInput = {
@@ -81737,6 +86956,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationCreateNestedManyWithoutIngestedByInput
     preparedCaseResourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutPreparedByInput
     createdPortfolioScenarios?: PortfolioScenarioCreateNestedManyWithoutCreatedByInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutCreatedByInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutVoidedByInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutRecordedByInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutVoidedByInput
   }
 
   export type UserUncheckedCreateWithoutVerifiedExecutionTasksInput = {
@@ -81782,6 +87005,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutIngestedByInput
     preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutPreparedByInput
     createdPortfolioScenarios?: PortfolioScenarioUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutCreatedByInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutVoidedByInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutRecordedByInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutVoidedByInput
   }
 
   export type UserCreateOrConnectWithoutVerifiedExecutionTasksInput = {
@@ -81832,6 +87059,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationCreateNestedManyWithoutIngestedByInput
     preparedCaseResourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutPreparedByInput
     createdPortfolioScenarios?: PortfolioScenarioCreateNestedManyWithoutCreatedByInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutCreatedByInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutVoidedByInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutRecordedByInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutVoidedByInput
   }
 
   export type UserUncheckedCreateWithoutCancelledExecutionTasksInput = {
@@ -81877,6 +87108,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutIngestedByInput
     preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutPreparedByInput
     createdPortfolioScenarios?: PortfolioScenarioUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutCreatedByInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutVoidedByInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutRecordedByInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutVoidedByInput
   }
 
   export type UserCreateOrConnectWithoutCancelledExecutionTasksInput = {
@@ -82171,6 +87406,64 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type PredictiveFeatureSnapshotCreateWithoutExecutionTaskInput = {
+    id?: string
+    targetType: $Enums.PredictiveTargetType
+    caseId: string
+    assetId: string
+    departmentId: string
+    jurisdictionId: string
+    predictionTimestamp: Date | string
+    featureContractVersion: string
+    featurePayload: JsonNullValueInput | InputJsonValue
+    provenanceClass: $Enums.PredictiveProvenanceClass
+    sourceReferences: JsonNullValueInput | InputJsonValue
+    sourceFingerprint: string
+    status?: $Enums.PredictiveRecordStatus
+    createdAt?: Date | string
+    voidedAt?: Date | string | null
+    voidReason?: string | null
+    createdBy: UserCreateNestedOneWithoutCreatedPredictiveSnapshotsInput
+    voidedBy?: UserCreateNestedOneWithoutVoidedPredictiveSnapshotsInput
+    replacementSnapshot?: PredictiveFeatureSnapshotCreateNestedOneWithoutReplacesInput
+    replaces?: PredictiveFeatureSnapshotCreateNestedOneWithoutReplacementSnapshotInput
+    outcomes?: PredictiveOutcomeCreateNestedManyWithoutSnapshotInput
+  }
+
+  export type PredictiveFeatureSnapshotUncheckedCreateWithoutExecutionTaskInput = {
+    id?: string
+    targetType: $Enums.PredictiveTargetType
+    caseId: string
+    assetId: string
+    departmentId: string
+    jurisdictionId: string
+    predictionTimestamp: Date | string
+    featureContractVersion: string
+    featurePayload: JsonNullValueInput | InputJsonValue
+    provenanceClass: $Enums.PredictiveProvenanceClass
+    sourceReferences: JsonNullValueInput | InputJsonValue
+    sourceFingerprint: string
+    status?: $Enums.PredictiveRecordStatus
+    createdById: string
+    createdAt?: Date | string
+    voidedAt?: Date | string | null
+    voidedById?: string | null
+    voidReason?: string | null
+    replacementSnapshotId?: string | null
+    replaces?: PredictiveFeatureSnapshotUncheckedCreateNestedOneWithoutReplacementSnapshotInput
+    outcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutSnapshotInput
+  }
+
+  export type PredictiveFeatureSnapshotCreateOrConnectWithoutExecutionTaskInput = {
+    where: PredictiveFeatureSnapshotWhereUniqueInput
+    create: XOR<PredictiveFeatureSnapshotCreateWithoutExecutionTaskInput, PredictiveFeatureSnapshotUncheckedCreateWithoutExecutionTaskInput>
+  }
+
+  export type PredictiveFeatureSnapshotCreateManyExecutionTaskInputEnvelope = {
+    data: PredictiveFeatureSnapshotCreateManyExecutionTaskInput | PredictiveFeatureSnapshotCreateManyExecutionTaskInput[]
+    skipDuplicates?: boolean
+  }
+
   export type ExecutionPlanUpsertWithoutTasksInput = {
     update: XOR<ExecutionPlanUpdateWithoutTasksInput, ExecutionPlanUncheckedUpdateWithoutTasksInput>
     create: XOR<ExecutionPlanCreateWithoutTasksInput, ExecutionPlanUncheckedCreateWithoutTasksInput>
@@ -82284,6 +87577,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationUpdateManyWithoutIngestedByNestedInput
     preparedCaseResourceEstimates?: CaseResourceEstimateUpdateManyWithoutPreparedByNestedInput
     createdPortfolioScenarios?: PortfolioScenarioUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutCreatedByNestedInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutVoidedByNestedInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutRecordedByNestedInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutVoidedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAssignedExecutionTasksInput = {
@@ -82329,6 +87626,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationUncheckedUpdateManyWithoutIngestedByNestedInput
     preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutPreparedByNestedInput
     createdPortfolioScenarios?: PortfolioScenarioUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutCreatedByNestedInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutVoidedByNestedInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutRecordedByNestedInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutVoidedByNestedInput
   }
 
   export type UserUpsertWithoutAssignedByExecutionTasksInput = {
@@ -82385,6 +87686,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationUpdateManyWithoutIngestedByNestedInput
     preparedCaseResourceEstimates?: CaseResourceEstimateUpdateManyWithoutPreparedByNestedInput
     createdPortfolioScenarios?: PortfolioScenarioUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutCreatedByNestedInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutVoidedByNestedInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutRecordedByNestedInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutVoidedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAssignedByExecutionTasksInput = {
@@ -82430,6 +87735,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationUncheckedUpdateManyWithoutIngestedByNestedInput
     preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutPreparedByNestedInput
     createdPortfolioScenarios?: PortfolioScenarioUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutCreatedByNestedInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutVoidedByNestedInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutRecordedByNestedInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutVoidedByNestedInput
   }
 
   export type UserUpsertWithoutCompletedExecutionTasksInput = {
@@ -82486,6 +87795,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationUpdateManyWithoutIngestedByNestedInput
     preparedCaseResourceEstimates?: CaseResourceEstimateUpdateManyWithoutPreparedByNestedInput
     createdPortfolioScenarios?: PortfolioScenarioUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutCreatedByNestedInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutVoidedByNestedInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutRecordedByNestedInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutVoidedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCompletedExecutionTasksInput = {
@@ -82531,6 +87844,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationUncheckedUpdateManyWithoutIngestedByNestedInput
     preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutPreparedByNestedInput
     createdPortfolioScenarios?: PortfolioScenarioUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutCreatedByNestedInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutVoidedByNestedInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutRecordedByNestedInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutVoidedByNestedInput
   }
 
   export type UserUpsertWithoutVerifiedExecutionTasksInput = {
@@ -82587,6 +87904,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationUpdateManyWithoutIngestedByNestedInput
     preparedCaseResourceEstimates?: CaseResourceEstimateUpdateManyWithoutPreparedByNestedInput
     createdPortfolioScenarios?: PortfolioScenarioUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutCreatedByNestedInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutVoidedByNestedInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutRecordedByNestedInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutVoidedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutVerifiedExecutionTasksInput = {
@@ -82632,6 +87953,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationUncheckedUpdateManyWithoutIngestedByNestedInput
     preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutPreparedByNestedInput
     createdPortfolioScenarios?: PortfolioScenarioUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutCreatedByNestedInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutVoidedByNestedInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutRecordedByNestedInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutVoidedByNestedInput
   }
 
   export type UserUpsertWithoutCancelledExecutionTasksInput = {
@@ -82688,6 +88013,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationUpdateManyWithoutIngestedByNestedInput
     preparedCaseResourceEstimates?: CaseResourceEstimateUpdateManyWithoutPreparedByNestedInput
     createdPortfolioScenarios?: PortfolioScenarioUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutCreatedByNestedInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutVoidedByNestedInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutRecordedByNestedInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutVoidedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCancelledExecutionTasksInput = {
@@ -82733,6 +88062,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationUncheckedUpdateManyWithoutIngestedByNestedInput
     preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutPreparedByNestedInput
     createdPortfolioScenarios?: PortfolioScenarioUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutCreatedByNestedInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutVoidedByNestedInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutRecordedByNestedInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutVoidedByNestedInput
   }
 
   export type ExecutionEvidenceUpsertWithWhereUniqueWithoutExecutionTaskInput = {
@@ -82968,6 +88301,1636 @@ export namespace Prisma {
     data: XOR<ExecutionTaskBlockerEventUpdateManyMutationInput, ExecutionTaskBlockerEventUncheckedUpdateManyWithoutExecutionTaskInput>
   }
 
+  export type PredictiveFeatureSnapshotUpsertWithWhereUniqueWithoutExecutionTaskInput = {
+    where: PredictiveFeatureSnapshotWhereUniqueInput
+    update: XOR<PredictiveFeatureSnapshotUpdateWithoutExecutionTaskInput, PredictiveFeatureSnapshotUncheckedUpdateWithoutExecutionTaskInput>
+    create: XOR<PredictiveFeatureSnapshotCreateWithoutExecutionTaskInput, PredictiveFeatureSnapshotUncheckedCreateWithoutExecutionTaskInput>
+  }
+
+  export type PredictiveFeatureSnapshotUpdateWithWhereUniqueWithoutExecutionTaskInput = {
+    where: PredictiveFeatureSnapshotWhereUniqueInput
+    data: XOR<PredictiveFeatureSnapshotUpdateWithoutExecutionTaskInput, PredictiveFeatureSnapshotUncheckedUpdateWithoutExecutionTaskInput>
+  }
+
+  export type PredictiveFeatureSnapshotUpdateManyWithWhereWithoutExecutionTaskInput = {
+    where: PredictiveFeatureSnapshotScalarWhereInput
+    data: XOR<PredictiveFeatureSnapshotUpdateManyMutationInput, PredictiveFeatureSnapshotUncheckedUpdateManyWithoutExecutionTaskInput>
+  }
+
+  export type ExecutionTaskCreateWithoutPredictiveSnapshotsInput = {
+    id?: string
+    sequenceNumber: number
+    sourceActionCode: string
+    templateTaskKey: string
+    titleSnapshot: string
+    descriptionSnapshot: string
+    categorySnapshot: string
+    isMandatory?: boolean
+    status?: $Enums.ExecutionTaskStatus
+    assignedAt?: Date | string | null
+    startedAt?: Date | string | null
+    completionSubmittedAt?: Date | string | null
+    completionNote?: string | null
+    verifiedAt?: Date | string | null
+    verificationNote?: string | null
+    blockedReason?: string | null
+    cancelledAt?: Date | string | null
+    cancellationReason?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    sourceActionVersion?: number | null
+    sourceTemplateCode?: string | null
+    sourceTemplateVersion?: number | null
+    evidenceRequired?: boolean
+    verificationRequired?: boolean
+    plannedStartAt?: Date | string | null
+    plannedEndAt?: Date | string | null
+    executionPlan: ExecutionPlanCreateNestedOneWithoutTasksInput
+    assignedTo?: UserCreateNestedOneWithoutAssignedExecutionTasksInput
+    assignedBy?: UserCreateNestedOneWithoutAssignedByExecutionTasksInput
+    completionSubmittedBy?: UserCreateNestedOneWithoutCompletedExecutionTasksInput
+    verifiedBy?: UserCreateNestedOneWithoutVerifiedExecutionTasksInput
+    cancelledBy?: UserCreateNestedOneWithoutCancelledExecutionTasksInput
+    evidence?: ExecutionEvidenceCreateNestedManyWithoutExecutionTaskInput
+    approvedActionVersion?: ApprovedActionVersionCreateNestedOneWithoutExecutionTasksInput
+    governedExecutionTemplate?: GovernedExecutionTemplateCreateNestedOneWithoutExecutionTasksInput
+    governedTaskTemplate?: GovernedExecutionTaskTemplateCreateNestedOneWithoutExecutionTasksInput
+    scheduleRevisions?: ExecutionScheduleRevisionCreateNestedManyWithoutExecutionTaskInput
+    dependencies?: ExecutionTaskDependencyCreateNestedManyWithoutDependentTaskInput
+    requiredBy?: ExecutionTaskDependencyCreateNestedManyWithoutPredecessorTaskInput
+    blockerEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutExecutionTaskInput
+  }
+
+  export type ExecutionTaskUncheckedCreateWithoutPredictiveSnapshotsInput = {
+    id?: string
+    executionPlanId: string
+    sequenceNumber: number
+    sourceActionCode: string
+    templateTaskKey: string
+    titleSnapshot: string
+    descriptionSnapshot: string
+    categorySnapshot: string
+    isMandatory?: boolean
+    status?: $Enums.ExecutionTaskStatus
+    assignedToId?: string | null
+    assignedById?: string | null
+    assignedAt?: Date | string | null
+    startedAt?: Date | string | null
+    completionSubmittedById?: string | null
+    completionSubmittedAt?: Date | string | null
+    completionNote?: string | null
+    verifiedById?: string | null
+    verifiedAt?: Date | string | null
+    verificationNote?: string | null
+    blockedReason?: string | null
+    cancelledById?: string | null
+    cancelledAt?: Date | string | null
+    cancellationReason?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    approvedActionVersionId?: string | null
+    governedExecutionTemplateId?: string | null
+    governedTaskTemplateId?: string | null
+    sourceActionVersion?: number | null
+    sourceTemplateCode?: string | null
+    sourceTemplateVersion?: number | null
+    evidenceRequired?: boolean
+    verificationRequired?: boolean
+    plannedStartAt?: Date | string | null
+    plannedEndAt?: Date | string | null
+    evidence?: ExecutionEvidenceUncheckedCreateNestedManyWithoutExecutionTaskInput
+    scheduleRevisions?: ExecutionScheduleRevisionUncheckedCreateNestedManyWithoutExecutionTaskInput
+    dependencies?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutDependentTaskInput
+    requiredBy?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutPredecessorTaskInput
+    blockerEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutExecutionTaskInput
+  }
+
+  export type ExecutionTaskCreateOrConnectWithoutPredictiveSnapshotsInput = {
+    where: ExecutionTaskWhereUniqueInput
+    create: XOR<ExecutionTaskCreateWithoutPredictiveSnapshotsInput, ExecutionTaskUncheckedCreateWithoutPredictiveSnapshotsInput>
+  }
+
+  export type UserCreateWithoutCreatedPredictiveSnapshotsInput = {
+    id?: string
+    employeeCode: string
+    name: string
+    email: string
+    passwordHash: string
+    designation: string
+    role?: $Enums.SystemRole
+    status?: $Enums.UserStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    department: DepartmentCreateNestedOneWithoutUsersInput
+    jurisdiction: JurisdictionCreateNestedOneWithoutUsersInput
+    inspections?: InspectionCreateNestedManyWithoutInspectorInput
+    approvalAuthorities?: ApprovalAuthorityCreateNestedManyWithoutUserInput
+    reviewedOrpDecisions?: OrpDecisionCreateNestedManyWithoutReviewerInput
+    forwardedOrpDecisions?: OrpDecisionCreateNestedManyWithoutForwardedUserInput
+    createdExecutionPlans?: ExecutionPlanCreateNestedManyWithoutCreatedByInput
+    assignedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutAssignedToInput
+    assignedByExecutionTasks?: ExecutionTaskCreateNestedManyWithoutAssignedByInput
+    completedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCompletionSubmittedByInput
+    verifiedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutVerifiedByInput
+    cancelledExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCancelledByInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionCreateNestedManyWithoutChangedByInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutBlockedByInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutResolvedByInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyCreateNestedManyWithoutCreatedByInput
+    submittedExecutionEvidence?: ExecutionEvidenceCreateNestedManyWithoutSubmittedByInput
+    closedCases?: CaseClosureCreateNestedManyWithoutClosedByInput
+    reviewedPublicReports?: PublicReportCreateNestedManyWithoutReviewedByInput
+    decidedPublicReports?: PublicReportCreateNestedManyWithoutDecisionByInput
+    createdTriageAnalyses?: PublicReportTriageAnalysisCreateNestedManyWithoutCreatedByInput
+    createdPolicyDocuments?: PolicyDocumentCreateNestedManyWithoutCreatedByInput
+    approvedPolicyDocuments?: PolicyDocumentCreateNestedManyWithoutApprovedByInput
+    createdApprovedActions?: ApprovedActionVersionCreateNestedManyWithoutCreatedByInput
+    approvedApprovedActions?: ApprovedActionVersionCreateNestedManyWithoutApprovedByInput
+    preparedDecisionPackages?: DecisionPackageCreateNestedManyWithoutPreparedByInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutCreatedByInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutApprovedByInput
+    createdObservationSources?: ObservationSourceCreateNestedManyWithoutCreatedByInput
+    deactivatedObservationSources?: ObservationSourceCreateNestedManyWithoutDeactivatedByInput
+    ingestedExternalObservations?: ExternalObservationCreateNestedManyWithoutIngestedByInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutPreparedByInput
+    createdPortfolioScenarios?: PortfolioScenarioCreateNestedManyWithoutCreatedByInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutVoidedByInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutRecordedByInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutVoidedByInput
+  }
+
+  export type UserUncheckedCreateWithoutCreatedPredictiveSnapshotsInput = {
+    id?: string
+    employeeCode: string
+    name: string
+    email: string
+    passwordHash: string
+    designation: string
+    role?: $Enums.SystemRole
+    status?: $Enums.UserStatus
+    departmentId: string
+    jurisdictionId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    inspections?: InspectionUncheckedCreateNestedManyWithoutInspectorInput
+    approvalAuthorities?: ApprovalAuthorityUncheckedCreateNestedManyWithoutUserInput
+    reviewedOrpDecisions?: OrpDecisionUncheckedCreateNestedManyWithoutReviewerInput
+    forwardedOrpDecisions?: OrpDecisionUncheckedCreateNestedManyWithoutForwardedUserInput
+    createdExecutionPlans?: ExecutionPlanUncheckedCreateNestedManyWithoutCreatedByInput
+    assignedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutAssignedToInput
+    assignedByExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutAssignedByInput
+    completedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCompletionSubmittedByInput
+    verifiedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutVerifiedByInput
+    cancelledExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCancelledByInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUncheckedCreateNestedManyWithoutChangedByInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutBlockedByInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutResolvedByInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutCreatedByInput
+    submittedExecutionEvidence?: ExecutionEvidenceUncheckedCreateNestedManyWithoutSubmittedByInput
+    closedCases?: CaseClosureUncheckedCreateNestedManyWithoutClosedByInput
+    reviewedPublicReports?: PublicReportUncheckedCreateNestedManyWithoutReviewedByInput
+    decidedPublicReports?: PublicReportUncheckedCreateNestedManyWithoutDecisionByInput
+    createdTriageAnalyses?: PublicReportTriageAnalysisUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPolicyDocuments?: PolicyDocumentUncheckedCreateNestedManyWithoutCreatedByInput
+    approvedPolicyDocuments?: PolicyDocumentUncheckedCreateNestedManyWithoutApprovedByInput
+    createdApprovedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutCreatedByInput
+    approvedApprovedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutApprovedByInput
+    preparedDecisionPackages?: DecisionPackageUncheckedCreateNestedManyWithoutPreparedByInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutCreatedByInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutApprovedByInput
+    createdObservationSources?: ObservationSourceUncheckedCreateNestedManyWithoutCreatedByInput
+    deactivatedObservationSources?: ObservationSourceUncheckedCreateNestedManyWithoutDeactivatedByInput
+    ingestedExternalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutIngestedByInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutPreparedByInput
+    createdPortfolioScenarios?: PortfolioScenarioUncheckedCreateNestedManyWithoutCreatedByInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutVoidedByInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutRecordedByInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutVoidedByInput
+  }
+
+  export type UserCreateOrConnectWithoutCreatedPredictiveSnapshotsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutCreatedPredictiveSnapshotsInput, UserUncheckedCreateWithoutCreatedPredictiveSnapshotsInput>
+  }
+
+  export type UserCreateWithoutVoidedPredictiveSnapshotsInput = {
+    id?: string
+    employeeCode: string
+    name: string
+    email: string
+    passwordHash: string
+    designation: string
+    role?: $Enums.SystemRole
+    status?: $Enums.UserStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    department: DepartmentCreateNestedOneWithoutUsersInput
+    jurisdiction: JurisdictionCreateNestedOneWithoutUsersInput
+    inspections?: InspectionCreateNestedManyWithoutInspectorInput
+    approvalAuthorities?: ApprovalAuthorityCreateNestedManyWithoutUserInput
+    reviewedOrpDecisions?: OrpDecisionCreateNestedManyWithoutReviewerInput
+    forwardedOrpDecisions?: OrpDecisionCreateNestedManyWithoutForwardedUserInput
+    createdExecutionPlans?: ExecutionPlanCreateNestedManyWithoutCreatedByInput
+    assignedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutAssignedToInput
+    assignedByExecutionTasks?: ExecutionTaskCreateNestedManyWithoutAssignedByInput
+    completedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCompletionSubmittedByInput
+    verifiedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutVerifiedByInput
+    cancelledExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCancelledByInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionCreateNestedManyWithoutChangedByInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutBlockedByInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutResolvedByInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyCreateNestedManyWithoutCreatedByInput
+    submittedExecutionEvidence?: ExecutionEvidenceCreateNestedManyWithoutSubmittedByInput
+    closedCases?: CaseClosureCreateNestedManyWithoutClosedByInput
+    reviewedPublicReports?: PublicReportCreateNestedManyWithoutReviewedByInput
+    decidedPublicReports?: PublicReportCreateNestedManyWithoutDecisionByInput
+    createdTriageAnalyses?: PublicReportTriageAnalysisCreateNestedManyWithoutCreatedByInput
+    createdPolicyDocuments?: PolicyDocumentCreateNestedManyWithoutCreatedByInput
+    approvedPolicyDocuments?: PolicyDocumentCreateNestedManyWithoutApprovedByInput
+    createdApprovedActions?: ApprovedActionVersionCreateNestedManyWithoutCreatedByInput
+    approvedApprovedActions?: ApprovedActionVersionCreateNestedManyWithoutApprovedByInput
+    preparedDecisionPackages?: DecisionPackageCreateNestedManyWithoutPreparedByInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutCreatedByInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutApprovedByInput
+    createdObservationSources?: ObservationSourceCreateNestedManyWithoutCreatedByInput
+    deactivatedObservationSources?: ObservationSourceCreateNestedManyWithoutDeactivatedByInput
+    ingestedExternalObservations?: ExternalObservationCreateNestedManyWithoutIngestedByInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutPreparedByInput
+    createdPortfolioScenarios?: PortfolioScenarioCreateNestedManyWithoutCreatedByInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutCreatedByInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutRecordedByInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutVoidedByInput
+  }
+
+  export type UserUncheckedCreateWithoutVoidedPredictiveSnapshotsInput = {
+    id?: string
+    employeeCode: string
+    name: string
+    email: string
+    passwordHash: string
+    designation: string
+    role?: $Enums.SystemRole
+    status?: $Enums.UserStatus
+    departmentId: string
+    jurisdictionId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    inspections?: InspectionUncheckedCreateNestedManyWithoutInspectorInput
+    approvalAuthorities?: ApprovalAuthorityUncheckedCreateNestedManyWithoutUserInput
+    reviewedOrpDecisions?: OrpDecisionUncheckedCreateNestedManyWithoutReviewerInput
+    forwardedOrpDecisions?: OrpDecisionUncheckedCreateNestedManyWithoutForwardedUserInput
+    createdExecutionPlans?: ExecutionPlanUncheckedCreateNestedManyWithoutCreatedByInput
+    assignedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutAssignedToInput
+    assignedByExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutAssignedByInput
+    completedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCompletionSubmittedByInput
+    verifiedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutVerifiedByInput
+    cancelledExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCancelledByInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUncheckedCreateNestedManyWithoutChangedByInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutBlockedByInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutResolvedByInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutCreatedByInput
+    submittedExecutionEvidence?: ExecutionEvidenceUncheckedCreateNestedManyWithoutSubmittedByInput
+    closedCases?: CaseClosureUncheckedCreateNestedManyWithoutClosedByInput
+    reviewedPublicReports?: PublicReportUncheckedCreateNestedManyWithoutReviewedByInput
+    decidedPublicReports?: PublicReportUncheckedCreateNestedManyWithoutDecisionByInput
+    createdTriageAnalyses?: PublicReportTriageAnalysisUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPolicyDocuments?: PolicyDocumentUncheckedCreateNestedManyWithoutCreatedByInput
+    approvedPolicyDocuments?: PolicyDocumentUncheckedCreateNestedManyWithoutApprovedByInput
+    createdApprovedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutCreatedByInput
+    approvedApprovedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutApprovedByInput
+    preparedDecisionPackages?: DecisionPackageUncheckedCreateNestedManyWithoutPreparedByInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutCreatedByInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutApprovedByInput
+    createdObservationSources?: ObservationSourceUncheckedCreateNestedManyWithoutCreatedByInput
+    deactivatedObservationSources?: ObservationSourceUncheckedCreateNestedManyWithoutDeactivatedByInput
+    ingestedExternalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutIngestedByInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutPreparedByInput
+    createdPortfolioScenarios?: PortfolioScenarioUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutCreatedByInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutRecordedByInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutVoidedByInput
+  }
+
+  export type UserCreateOrConnectWithoutVoidedPredictiveSnapshotsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutVoidedPredictiveSnapshotsInput, UserUncheckedCreateWithoutVoidedPredictiveSnapshotsInput>
+  }
+
+  export type PredictiveFeatureSnapshotCreateWithoutReplacesInput = {
+    id?: string
+    targetType: $Enums.PredictiveTargetType
+    caseId: string
+    assetId: string
+    departmentId: string
+    jurisdictionId: string
+    predictionTimestamp: Date | string
+    featureContractVersion: string
+    featurePayload: JsonNullValueInput | InputJsonValue
+    provenanceClass: $Enums.PredictiveProvenanceClass
+    sourceReferences: JsonNullValueInput | InputJsonValue
+    sourceFingerprint: string
+    status?: $Enums.PredictiveRecordStatus
+    createdAt?: Date | string
+    voidedAt?: Date | string | null
+    voidReason?: string | null
+    executionTask: ExecutionTaskCreateNestedOneWithoutPredictiveSnapshotsInput
+    createdBy: UserCreateNestedOneWithoutCreatedPredictiveSnapshotsInput
+    voidedBy?: UserCreateNestedOneWithoutVoidedPredictiveSnapshotsInput
+    replacementSnapshot?: PredictiveFeatureSnapshotCreateNestedOneWithoutReplacesInput
+    outcomes?: PredictiveOutcomeCreateNestedManyWithoutSnapshotInput
+  }
+
+  export type PredictiveFeatureSnapshotUncheckedCreateWithoutReplacesInput = {
+    id?: string
+    targetType: $Enums.PredictiveTargetType
+    executionTaskId: string
+    caseId: string
+    assetId: string
+    departmentId: string
+    jurisdictionId: string
+    predictionTimestamp: Date | string
+    featureContractVersion: string
+    featurePayload: JsonNullValueInput | InputJsonValue
+    provenanceClass: $Enums.PredictiveProvenanceClass
+    sourceReferences: JsonNullValueInput | InputJsonValue
+    sourceFingerprint: string
+    status?: $Enums.PredictiveRecordStatus
+    createdById: string
+    createdAt?: Date | string
+    voidedAt?: Date | string | null
+    voidedById?: string | null
+    voidReason?: string | null
+    replacementSnapshotId?: string | null
+    outcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutSnapshotInput
+  }
+
+  export type PredictiveFeatureSnapshotCreateOrConnectWithoutReplacesInput = {
+    where: PredictiveFeatureSnapshotWhereUniqueInput
+    create: XOR<PredictiveFeatureSnapshotCreateWithoutReplacesInput, PredictiveFeatureSnapshotUncheckedCreateWithoutReplacesInput>
+  }
+
+  export type PredictiveFeatureSnapshotCreateWithoutReplacementSnapshotInput = {
+    id?: string
+    targetType: $Enums.PredictiveTargetType
+    caseId: string
+    assetId: string
+    departmentId: string
+    jurisdictionId: string
+    predictionTimestamp: Date | string
+    featureContractVersion: string
+    featurePayload: JsonNullValueInput | InputJsonValue
+    provenanceClass: $Enums.PredictiveProvenanceClass
+    sourceReferences: JsonNullValueInput | InputJsonValue
+    sourceFingerprint: string
+    status?: $Enums.PredictiveRecordStatus
+    createdAt?: Date | string
+    voidedAt?: Date | string | null
+    voidReason?: string | null
+    executionTask: ExecutionTaskCreateNestedOneWithoutPredictiveSnapshotsInput
+    createdBy: UserCreateNestedOneWithoutCreatedPredictiveSnapshotsInput
+    voidedBy?: UserCreateNestedOneWithoutVoidedPredictiveSnapshotsInput
+    replaces?: PredictiveFeatureSnapshotCreateNestedOneWithoutReplacementSnapshotInput
+    outcomes?: PredictiveOutcomeCreateNestedManyWithoutSnapshotInput
+  }
+
+  export type PredictiveFeatureSnapshotUncheckedCreateWithoutReplacementSnapshotInput = {
+    id?: string
+    targetType: $Enums.PredictiveTargetType
+    executionTaskId: string
+    caseId: string
+    assetId: string
+    departmentId: string
+    jurisdictionId: string
+    predictionTimestamp: Date | string
+    featureContractVersion: string
+    featurePayload: JsonNullValueInput | InputJsonValue
+    provenanceClass: $Enums.PredictiveProvenanceClass
+    sourceReferences: JsonNullValueInput | InputJsonValue
+    sourceFingerprint: string
+    status?: $Enums.PredictiveRecordStatus
+    createdById: string
+    createdAt?: Date | string
+    voidedAt?: Date | string | null
+    voidedById?: string | null
+    voidReason?: string | null
+    replaces?: PredictiveFeatureSnapshotUncheckedCreateNestedOneWithoutReplacementSnapshotInput
+    outcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutSnapshotInput
+  }
+
+  export type PredictiveFeatureSnapshotCreateOrConnectWithoutReplacementSnapshotInput = {
+    where: PredictiveFeatureSnapshotWhereUniqueInput
+    create: XOR<PredictiveFeatureSnapshotCreateWithoutReplacementSnapshotInput, PredictiveFeatureSnapshotUncheckedCreateWithoutReplacementSnapshotInput>
+  }
+
+  export type PredictiveOutcomeCreateWithoutSnapshotInput = {
+    id?: string
+    outcomeContractVersion: string
+    outcomeTimestamp: Date | string
+    outcomeValue: $Enums.PredictiveOutcomeValue
+    provenanceClass: $Enums.PredictiveProvenanceClass
+    sourceReferences: JsonNullValueInput | InputJsonValue
+    sourceFingerprint: string
+    status?: $Enums.PredictiveRecordStatus
+    recordedAt?: Date | string
+    voidedAt?: Date | string | null
+    voidReason?: string | null
+    recordedBy: UserCreateNestedOneWithoutRecordedPredictiveOutcomesInput
+    voidedBy?: UserCreateNestedOneWithoutVoidedPredictiveOutcomesInput
+    replacementOutcome?: PredictiveOutcomeCreateNestedOneWithoutReplacesInput
+    replaces?: PredictiveOutcomeCreateNestedOneWithoutReplacementOutcomeInput
+  }
+
+  export type PredictiveOutcomeUncheckedCreateWithoutSnapshotInput = {
+    id?: string
+    outcomeContractVersion: string
+    outcomeTimestamp: Date | string
+    outcomeValue: $Enums.PredictiveOutcomeValue
+    provenanceClass: $Enums.PredictiveProvenanceClass
+    sourceReferences: JsonNullValueInput | InputJsonValue
+    sourceFingerprint: string
+    status?: $Enums.PredictiveRecordStatus
+    recordedById: string
+    recordedAt?: Date | string
+    voidedAt?: Date | string | null
+    voidedById?: string | null
+    voidReason?: string | null
+    replacementOutcomeId?: string | null
+    replaces?: PredictiveOutcomeUncheckedCreateNestedOneWithoutReplacementOutcomeInput
+  }
+
+  export type PredictiveOutcomeCreateOrConnectWithoutSnapshotInput = {
+    where: PredictiveOutcomeWhereUniqueInput
+    create: XOR<PredictiveOutcomeCreateWithoutSnapshotInput, PredictiveOutcomeUncheckedCreateWithoutSnapshotInput>
+  }
+
+  export type PredictiveOutcomeCreateManySnapshotInputEnvelope = {
+    data: PredictiveOutcomeCreateManySnapshotInput | PredictiveOutcomeCreateManySnapshotInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ExecutionTaskUpsertWithoutPredictiveSnapshotsInput = {
+    update: XOR<ExecutionTaskUpdateWithoutPredictiveSnapshotsInput, ExecutionTaskUncheckedUpdateWithoutPredictiveSnapshotsInput>
+    create: XOR<ExecutionTaskCreateWithoutPredictiveSnapshotsInput, ExecutionTaskUncheckedCreateWithoutPredictiveSnapshotsInput>
+    where?: ExecutionTaskWhereInput
+  }
+
+  export type ExecutionTaskUpdateToOneWithWhereWithoutPredictiveSnapshotsInput = {
+    where?: ExecutionTaskWhereInput
+    data: XOR<ExecutionTaskUpdateWithoutPredictiveSnapshotsInput, ExecutionTaskUncheckedUpdateWithoutPredictiveSnapshotsInput>
+  }
+
+  export type ExecutionTaskUpdateWithoutPredictiveSnapshotsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sequenceNumber?: IntFieldUpdateOperationsInput | number
+    sourceActionCode?: StringFieldUpdateOperationsInput | string
+    templateTaskKey?: StringFieldUpdateOperationsInput | string
+    titleSnapshot?: StringFieldUpdateOperationsInput | string
+    descriptionSnapshot?: StringFieldUpdateOperationsInput | string
+    categorySnapshot?: StringFieldUpdateOperationsInput | string
+    isMandatory?: BoolFieldUpdateOperationsInput | boolean
+    status?: EnumExecutionTaskStatusFieldUpdateOperationsInput | $Enums.ExecutionTaskStatus
+    assignedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    startedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completionSubmittedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completionNote?: NullableStringFieldUpdateOperationsInput | string | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verificationNote?: NullableStringFieldUpdateOperationsInput | string | null
+    blockedReason?: NullableStringFieldUpdateOperationsInput | string | null
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sourceActionVersion?: NullableIntFieldUpdateOperationsInput | number | null
+    sourceTemplateCode?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceTemplateVersion?: NullableIntFieldUpdateOperationsInput | number | null
+    evidenceRequired?: BoolFieldUpdateOperationsInput | boolean
+    verificationRequired?: BoolFieldUpdateOperationsInput | boolean
+    plannedStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    plannedEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    executionPlan?: ExecutionPlanUpdateOneRequiredWithoutTasksNestedInput
+    assignedTo?: UserUpdateOneWithoutAssignedExecutionTasksNestedInput
+    assignedBy?: UserUpdateOneWithoutAssignedByExecutionTasksNestedInput
+    completionSubmittedBy?: UserUpdateOneWithoutCompletedExecutionTasksNestedInput
+    verifiedBy?: UserUpdateOneWithoutVerifiedExecutionTasksNestedInput
+    cancelledBy?: UserUpdateOneWithoutCancelledExecutionTasksNestedInput
+    evidence?: ExecutionEvidenceUpdateManyWithoutExecutionTaskNestedInput
+    approvedActionVersion?: ApprovedActionVersionUpdateOneWithoutExecutionTasksNestedInput
+    governedExecutionTemplate?: GovernedExecutionTemplateUpdateOneWithoutExecutionTasksNestedInput
+    governedTaskTemplate?: GovernedExecutionTaskTemplateUpdateOneWithoutExecutionTasksNestedInput
+    scheduleRevisions?: ExecutionScheduleRevisionUpdateManyWithoutExecutionTaskNestedInput
+    dependencies?: ExecutionTaskDependencyUpdateManyWithoutDependentTaskNestedInput
+    requiredBy?: ExecutionTaskDependencyUpdateManyWithoutPredecessorTaskNestedInput
+    blockerEvents?: ExecutionTaskBlockerEventUpdateManyWithoutExecutionTaskNestedInput
+  }
+
+  export type ExecutionTaskUncheckedUpdateWithoutPredictiveSnapshotsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    executionPlanId?: StringFieldUpdateOperationsInput | string
+    sequenceNumber?: IntFieldUpdateOperationsInput | number
+    sourceActionCode?: StringFieldUpdateOperationsInput | string
+    templateTaskKey?: StringFieldUpdateOperationsInput | string
+    titleSnapshot?: StringFieldUpdateOperationsInput | string
+    descriptionSnapshot?: StringFieldUpdateOperationsInput | string
+    categorySnapshot?: StringFieldUpdateOperationsInput | string
+    isMandatory?: BoolFieldUpdateOperationsInput | boolean
+    status?: EnumExecutionTaskStatusFieldUpdateOperationsInput | $Enums.ExecutionTaskStatus
+    assignedToId?: NullableStringFieldUpdateOperationsInput | string | null
+    assignedById?: NullableStringFieldUpdateOperationsInput | string | null
+    assignedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    startedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completionSubmittedById?: NullableStringFieldUpdateOperationsInput | string | null
+    completionSubmittedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completionNote?: NullableStringFieldUpdateOperationsInput | string | null
+    verifiedById?: NullableStringFieldUpdateOperationsInput | string | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verificationNote?: NullableStringFieldUpdateOperationsInput | string | null
+    blockedReason?: NullableStringFieldUpdateOperationsInput | string | null
+    cancelledById?: NullableStringFieldUpdateOperationsInput | string | null
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    approvedActionVersionId?: NullableStringFieldUpdateOperationsInput | string | null
+    governedExecutionTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
+    governedTaskTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceActionVersion?: NullableIntFieldUpdateOperationsInput | number | null
+    sourceTemplateCode?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceTemplateVersion?: NullableIntFieldUpdateOperationsInput | number | null
+    evidenceRequired?: BoolFieldUpdateOperationsInput | boolean
+    verificationRequired?: BoolFieldUpdateOperationsInput | boolean
+    plannedStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    plannedEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    evidence?: ExecutionEvidenceUncheckedUpdateManyWithoutExecutionTaskNestedInput
+    scheduleRevisions?: ExecutionScheduleRevisionUncheckedUpdateManyWithoutExecutionTaskNestedInput
+    dependencies?: ExecutionTaskDependencyUncheckedUpdateManyWithoutDependentTaskNestedInput
+    requiredBy?: ExecutionTaskDependencyUncheckedUpdateManyWithoutPredecessorTaskNestedInput
+    blockerEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutExecutionTaskNestedInput
+  }
+
+  export type UserUpsertWithoutCreatedPredictiveSnapshotsInput = {
+    update: XOR<UserUpdateWithoutCreatedPredictiveSnapshotsInput, UserUncheckedUpdateWithoutCreatedPredictiveSnapshotsInput>
+    create: XOR<UserCreateWithoutCreatedPredictiveSnapshotsInput, UserUncheckedCreateWithoutCreatedPredictiveSnapshotsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutCreatedPredictiveSnapshotsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutCreatedPredictiveSnapshotsInput, UserUncheckedUpdateWithoutCreatedPredictiveSnapshotsInput>
+  }
+
+  export type UserUpdateWithoutCreatedPredictiveSnapshotsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    employeeCode?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    designation?: StringFieldUpdateOperationsInput | string
+    role?: EnumSystemRoleFieldUpdateOperationsInput | $Enums.SystemRole
+    status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    department?: DepartmentUpdateOneRequiredWithoutUsersNestedInput
+    jurisdiction?: JurisdictionUpdateOneRequiredWithoutUsersNestedInput
+    inspections?: InspectionUpdateManyWithoutInspectorNestedInput
+    approvalAuthorities?: ApprovalAuthorityUpdateManyWithoutUserNestedInput
+    reviewedOrpDecisions?: OrpDecisionUpdateManyWithoutReviewerNestedInput
+    forwardedOrpDecisions?: OrpDecisionUpdateManyWithoutForwardedUserNestedInput
+    createdExecutionPlans?: ExecutionPlanUpdateManyWithoutCreatedByNestedInput
+    assignedExecutionTasks?: ExecutionTaskUpdateManyWithoutAssignedToNestedInput
+    assignedByExecutionTasks?: ExecutionTaskUpdateManyWithoutAssignedByNestedInput
+    completedExecutionTasks?: ExecutionTaskUpdateManyWithoutCompletionSubmittedByNestedInput
+    verifiedExecutionTasks?: ExecutionTaskUpdateManyWithoutVerifiedByNestedInput
+    cancelledExecutionTasks?: ExecutionTaskUpdateManyWithoutCancelledByNestedInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUpdateManyWithoutChangedByNestedInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUpdateManyWithoutBlockedByNestedInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUpdateManyWithoutResolvedByNestedInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUpdateManyWithoutCreatedByNestedInput
+    submittedExecutionEvidence?: ExecutionEvidenceUpdateManyWithoutSubmittedByNestedInput
+    closedCases?: CaseClosureUpdateManyWithoutClosedByNestedInput
+    reviewedPublicReports?: PublicReportUpdateManyWithoutReviewedByNestedInput
+    decidedPublicReports?: PublicReportUpdateManyWithoutDecisionByNestedInput
+    createdTriageAnalyses?: PublicReportTriageAnalysisUpdateManyWithoutCreatedByNestedInput
+    createdPolicyDocuments?: PolicyDocumentUpdateManyWithoutCreatedByNestedInput
+    approvedPolicyDocuments?: PolicyDocumentUpdateManyWithoutApprovedByNestedInput
+    createdApprovedActions?: ApprovedActionVersionUpdateManyWithoutCreatedByNestedInput
+    approvedApprovedActions?: ApprovedActionVersionUpdateManyWithoutApprovedByNestedInput
+    preparedDecisionPackages?: DecisionPackageUpdateManyWithoutPreparedByNestedInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutCreatedByNestedInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutApprovedByNestedInput
+    createdObservationSources?: ObservationSourceUpdateManyWithoutCreatedByNestedInput
+    deactivatedObservationSources?: ObservationSourceUpdateManyWithoutDeactivatedByNestedInput
+    ingestedExternalObservations?: ExternalObservationUpdateManyWithoutIngestedByNestedInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUpdateManyWithoutPreparedByNestedInput
+    createdPortfolioScenarios?: PortfolioScenarioUpdateManyWithoutCreatedByNestedInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutVoidedByNestedInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutRecordedByNestedInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutVoidedByNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutCreatedPredictiveSnapshotsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    employeeCode?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    designation?: StringFieldUpdateOperationsInput | string
+    role?: EnumSystemRoleFieldUpdateOperationsInput | $Enums.SystemRole
+    status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+    departmentId?: StringFieldUpdateOperationsInput | string
+    jurisdictionId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    inspections?: InspectionUncheckedUpdateManyWithoutInspectorNestedInput
+    approvalAuthorities?: ApprovalAuthorityUncheckedUpdateManyWithoutUserNestedInput
+    reviewedOrpDecisions?: OrpDecisionUncheckedUpdateManyWithoutReviewerNestedInput
+    forwardedOrpDecisions?: OrpDecisionUncheckedUpdateManyWithoutForwardedUserNestedInput
+    createdExecutionPlans?: ExecutionPlanUncheckedUpdateManyWithoutCreatedByNestedInput
+    assignedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutAssignedToNestedInput
+    assignedByExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutAssignedByNestedInput
+    completedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCompletionSubmittedByNestedInput
+    verifiedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutVerifiedByNestedInput
+    cancelledExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCancelledByNestedInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUncheckedUpdateManyWithoutChangedByNestedInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutBlockedByNestedInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutResolvedByNestedInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUncheckedUpdateManyWithoutCreatedByNestedInput
+    submittedExecutionEvidence?: ExecutionEvidenceUncheckedUpdateManyWithoutSubmittedByNestedInput
+    closedCases?: CaseClosureUncheckedUpdateManyWithoutClosedByNestedInput
+    reviewedPublicReports?: PublicReportUncheckedUpdateManyWithoutReviewedByNestedInput
+    decidedPublicReports?: PublicReportUncheckedUpdateManyWithoutDecisionByNestedInput
+    createdTriageAnalyses?: PublicReportTriageAnalysisUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPolicyDocuments?: PolicyDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
+    approvedPolicyDocuments?: PolicyDocumentUncheckedUpdateManyWithoutApprovedByNestedInput
+    createdApprovedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutCreatedByNestedInput
+    approvedApprovedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutApprovedByNestedInput
+    preparedDecisionPackages?: DecisionPackageUncheckedUpdateManyWithoutPreparedByNestedInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutCreatedByNestedInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutApprovedByNestedInput
+    createdObservationSources?: ObservationSourceUncheckedUpdateManyWithoutCreatedByNestedInput
+    deactivatedObservationSources?: ObservationSourceUncheckedUpdateManyWithoutDeactivatedByNestedInput
+    ingestedExternalObservations?: ExternalObservationUncheckedUpdateManyWithoutIngestedByNestedInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutPreparedByNestedInput
+    createdPortfolioScenarios?: PortfolioScenarioUncheckedUpdateManyWithoutCreatedByNestedInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutVoidedByNestedInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutRecordedByNestedInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutVoidedByNestedInput
+  }
+
+  export type UserUpsertWithoutVoidedPredictiveSnapshotsInput = {
+    update: XOR<UserUpdateWithoutVoidedPredictiveSnapshotsInput, UserUncheckedUpdateWithoutVoidedPredictiveSnapshotsInput>
+    create: XOR<UserCreateWithoutVoidedPredictiveSnapshotsInput, UserUncheckedCreateWithoutVoidedPredictiveSnapshotsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutVoidedPredictiveSnapshotsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutVoidedPredictiveSnapshotsInput, UserUncheckedUpdateWithoutVoidedPredictiveSnapshotsInput>
+  }
+
+  export type UserUpdateWithoutVoidedPredictiveSnapshotsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    employeeCode?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    designation?: StringFieldUpdateOperationsInput | string
+    role?: EnumSystemRoleFieldUpdateOperationsInput | $Enums.SystemRole
+    status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    department?: DepartmentUpdateOneRequiredWithoutUsersNestedInput
+    jurisdiction?: JurisdictionUpdateOneRequiredWithoutUsersNestedInput
+    inspections?: InspectionUpdateManyWithoutInspectorNestedInput
+    approvalAuthorities?: ApprovalAuthorityUpdateManyWithoutUserNestedInput
+    reviewedOrpDecisions?: OrpDecisionUpdateManyWithoutReviewerNestedInput
+    forwardedOrpDecisions?: OrpDecisionUpdateManyWithoutForwardedUserNestedInput
+    createdExecutionPlans?: ExecutionPlanUpdateManyWithoutCreatedByNestedInput
+    assignedExecutionTasks?: ExecutionTaskUpdateManyWithoutAssignedToNestedInput
+    assignedByExecutionTasks?: ExecutionTaskUpdateManyWithoutAssignedByNestedInput
+    completedExecutionTasks?: ExecutionTaskUpdateManyWithoutCompletionSubmittedByNestedInput
+    verifiedExecutionTasks?: ExecutionTaskUpdateManyWithoutVerifiedByNestedInput
+    cancelledExecutionTasks?: ExecutionTaskUpdateManyWithoutCancelledByNestedInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUpdateManyWithoutChangedByNestedInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUpdateManyWithoutBlockedByNestedInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUpdateManyWithoutResolvedByNestedInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUpdateManyWithoutCreatedByNestedInput
+    submittedExecutionEvidence?: ExecutionEvidenceUpdateManyWithoutSubmittedByNestedInput
+    closedCases?: CaseClosureUpdateManyWithoutClosedByNestedInput
+    reviewedPublicReports?: PublicReportUpdateManyWithoutReviewedByNestedInput
+    decidedPublicReports?: PublicReportUpdateManyWithoutDecisionByNestedInput
+    createdTriageAnalyses?: PublicReportTriageAnalysisUpdateManyWithoutCreatedByNestedInput
+    createdPolicyDocuments?: PolicyDocumentUpdateManyWithoutCreatedByNestedInput
+    approvedPolicyDocuments?: PolicyDocumentUpdateManyWithoutApprovedByNestedInput
+    createdApprovedActions?: ApprovedActionVersionUpdateManyWithoutCreatedByNestedInput
+    approvedApprovedActions?: ApprovedActionVersionUpdateManyWithoutApprovedByNestedInput
+    preparedDecisionPackages?: DecisionPackageUpdateManyWithoutPreparedByNestedInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutCreatedByNestedInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutApprovedByNestedInput
+    createdObservationSources?: ObservationSourceUpdateManyWithoutCreatedByNestedInput
+    deactivatedObservationSources?: ObservationSourceUpdateManyWithoutDeactivatedByNestedInput
+    ingestedExternalObservations?: ExternalObservationUpdateManyWithoutIngestedByNestedInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUpdateManyWithoutPreparedByNestedInput
+    createdPortfolioScenarios?: PortfolioScenarioUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutCreatedByNestedInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutRecordedByNestedInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutVoidedByNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutVoidedPredictiveSnapshotsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    employeeCode?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    designation?: StringFieldUpdateOperationsInput | string
+    role?: EnumSystemRoleFieldUpdateOperationsInput | $Enums.SystemRole
+    status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+    departmentId?: StringFieldUpdateOperationsInput | string
+    jurisdictionId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    inspections?: InspectionUncheckedUpdateManyWithoutInspectorNestedInput
+    approvalAuthorities?: ApprovalAuthorityUncheckedUpdateManyWithoutUserNestedInput
+    reviewedOrpDecisions?: OrpDecisionUncheckedUpdateManyWithoutReviewerNestedInput
+    forwardedOrpDecisions?: OrpDecisionUncheckedUpdateManyWithoutForwardedUserNestedInput
+    createdExecutionPlans?: ExecutionPlanUncheckedUpdateManyWithoutCreatedByNestedInput
+    assignedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutAssignedToNestedInput
+    assignedByExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutAssignedByNestedInput
+    completedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCompletionSubmittedByNestedInput
+    verifiedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutVerifiedByNestedInput
+    cancelledExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCancelledByNestedInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUncheckedUpdateManyWithoutChangedByNestedInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutBlockedByNestedInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutResolvedByNestedInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUncheckedUpdateManyWithoutCreatedByNestedInput
+    submittedExecutionEvidence?: ExecutionEvidenceUncheckedUpdateManyWithoutSubmittedByNestedInput
+    closedCases?: CaseClosureUncheckedUpdateManyWithoutClosedByNestedInput
+    reviewedPublicReports?: PublicReportUncheckedUpdateManyWithoutReviewedByNestedInput
+    decidedPublicReports?: PublicReportUncheckedUpdateManyWithoutDecisionByNestedInput
+    createdTriageAnalyses?: PublicReportTriageAnalysisUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPolicyDocuments?: PolicyDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
+    approvedPolicyDocuments?: PolicyDocumentUncheckedUpdateManyWithoutApprovedByNestedInput
+    createdApprovedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutCreatedByNestedInput
+    approvedApprovedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutApprovedByNestedInput
+    preparedDecisionPackages?: DecisionPackageUncheckedUpdateManyWithoutPreparedByNestedInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutCreatedByNestedInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutApprovedByNestedInput
+    createdObservationSources?: ObservationSourceUncheckedUpdateManyWithoutCreatedByNestedInput
+    deactivatedObservationSources?: ObservationSourceUncheckedUpdateManyWithoutDeactivatedByNestedInput
+    ingestedExternalObservations?: ExternalObservationUncheckedUpdateManyWithoutIngestedByNestedInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutPreparedByNestedInput
+    createdPortfolioScenarios?: PortfolioScenarioUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutCreatedByNestedInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutRecordedByNestedInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutVoidedByNestedInput
+  }
+
+  export type PredictiveFeatureSnapshotUpsertWithoutReplacesInput = {
+    update: XOR<PredictiveFeatureSnapshotUpdateWithoutReplacesInput, PredictiveFeatureSnapshotUncheckedUpdateWithoutReplacesInput>
+    create: XOR<PredictiveFeatureSnapshotCreateWithoutReplacesInput, PredictiveFeatureSnapshotUncheckedCreateWithoutReplacesInput>
+    where?: PredictiveFeatureSnapshotWhereInput
+  }
+
+  export type PredictiveFeatureSnapshotUpdateToOneWithWhereWithoutReplacesInput = {
+    where?: PredictiveFeatureSnapshotWhereInput
+    data: XOR<PredictiveFeatureSnapshotUpdateWithoutReplacesInput, PredictiveFeatureSnapshotUncheckedUpdateWithoutReplacesInput>
+  }
+
+  export type PredictiveFeatureSnapshotUpdateWithoutReplacesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    targetType?: EnumPredictiveTargetTypeFieldUpdateOperationsInput | $Enums.PredictiveTargetType
+    caseId?: StringFieldUpdateOperationsInput | string
+    assetId?: StringFieldUpdateOperationsInput | string
+    departmentId?: StringFieldUpdateOperationsInput | string
+    jurisdictionId?: StringFieldUpdateOperationsInput | string
+    predictionTimestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    featureContractVersion?: StringFieldUpdateOperationsInput | string
+    featurePayload?: JsonNullValueInput | InputJsonValue
+    provenanceClass?: EnumPredictiveProvenanceClassFieldUpdateOperationsInput | $Enums.PredictiveProvenanceClass
+    sourceReferences?: JsonNullValueInput | InputJsonValue
+    sourceFingerprint?: StringFieldUpdateOperationsInput | string
+    status?: EnumPredictiveRecordStatusFieldUpdateOperationsInput | $Enums.PredictiveRecordStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    voidedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    voidReason?: NullableStringFieldUpdateOperationsInput | string | null
+    executionTask?: ExecutionTaskUpdateOneRequiredWithoutPredictiveSnapshotsNestedInput
+    createdBy?: UserUpdateOneRequiredWithoutCreatedPredictiveSnapshotsNestedInput
+    voidedBy?: UserUpdateOneWithoutVoidedPredictiveSnapshotsNestedInput
+    replacementSnapshot?: PredictiveFeatureSnapshotUpdateOneWithoutReplacesNestedInput
+    outcomes?: PredictiveOutcomeUpdateManyWithoutSnapshotNestedInput
+  }
+
+  export type PredictiveFeatureSnapshotUncheckedUpdateWithoutReplacesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    targetType?: EnumPredictiveTargetTypeFieldUpdateOperationsInput | $Enums.PredictiveTargetType
+    executionTaskId?: StringFieldUpdateOperationsInput | string
+    caseId?: StringFieldUpdateOperationsInput | string
+    assetId?: StringFieldUpdateOperationsInput | string
+    departmentId?: StringFieldUpdateOperationsInput | string
+    jurisdictionId?: StringFieldUpdateOperationsInput | string
+    predictionTimestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    featureContractVersion?: StringFieldUpdateOperationsInput | string
+    featurePayload?: JsonNullValueInput | InputJsonValue
+    provenanceClass?: EnumPredictiveProvenanceClassFieldUpdateOperationsInput | $Enums.PredictiveProvenanceClass
+    sourceReferences?: JsonNullValueInput | InputJsonValue
+    sourceFingerprint?: StringFieldUpdateOperationsInput | string
+    status?: EnumPredictiveRecordStatusFieldUpdateOperationsInput | $Enums.PredictiveRecordStatus
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    voidedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    voidedById?: NullableStringFieldUpdateOperationsInput | string | null
+    voidReason?: NullableStringFieldUpdateOperationsInput | string | null
+    replacementSnapshotId?: NullableStringFieldUpdateOperationsInput | string | null
+    outcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutSnapshotNestedInput
+  }
+
+  export type PredictiveFeatureSnapshotUpsertWithoutReplacementSnapshotInput = {
+    update: XOR<PredictiveFeatureSnapshotUpdateWithoutReplacementSnapshotInput, PredictiveFeatureSnapshotUncheckedUpdateWithoutReplacementSnapshotInput>
+    create: XOR<PredictiveFeatureSnapshotCreateWithoutReplacementSnapshotInput, PredictiveFeatureSnapshotUncheckedCreateWithoutReplacementSnapshotInput>
+    where?: PredictiveFeatureSnapshotWhereInput
+  }
+
+  export type PredictiveFeatureSnapshotUpdateToOneWithWhereWithoutReplacementSnapshotInput = {
+    where?: PredictiveFeatureSnapshotWhereInput
+    data: XOR<PredictiveFeatureSnapshotUpdateWithoutReplacementSnapshotInput, PredictiveFeatureSnapshotUncheckedUpdateWithoutReplacementSnapshotInput>
+  }
+
+  export type PredictiveFeatureSnapshotUpdateWithoutReplacementSnapshotInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    targetType?: EnumPredictiveTargetTypeFieldUpdateOperationsInput | $Enums.PredictiveTargetType
+    caseId?: StringFieldUpdateOperationsInput | string
+    assetId?: StringFieldUpdateOperationsInput | string
+    departmentId?: StringFieldUpdateOperationsInput | string
+    jurisdictionId?: StringFieldUpdateOperationsInput | string
+    predictionTimestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    featureContractVersion?: StringFieldUpdateOperationsInput | string
+    featurePayload?: JsonNullValueInput | InputJsonValue
+    provenanceClass?: EnumPredictiveProvenanceClassFieldUpdateOperationsInput | $Enums.PredictiveProvenanceClass
+    sourceReferences?: JsonNullValueInput | InputJsonValue
+    sourceFingerprint?: StringFieldUpdateOperationsInput | string
+    status?: EnumPredictiveRecordStatusFieldUpdateOperationsInput | $Enums.PredictiveRecordStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    voidedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    voidReason?: NullableStringFieldUpdateOperationsInput | string | null
+    executionTask?: ExecutionTaskUpdateOneRequiredWithoutPredictiveSnapshotsNestedInput
+    createdBy?: UserUpdateOneRequiredWithoutCreatedPredictiveSnapshotsNestedInput
+    voidedBy?: UserUpdateOneWithoutVoidedPredictiveSnapshotsNestedInput
+    replaces?: PredictiveFeatureSnapshotUpdateOneWithoutReplacementSnapshotNestedInput
+    outcomes?: PredictiveOutcomeUpdateManyWithoutSnapshotNestedInput
+  }
+
+  export type PredictiveFeatureSnapshotUncheckedUpdateWithoutReplacementSnapshotInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    targetType?: EnumPredictiveTargetTypeFieldUpdateOperationsInput | $Enums.PredictiveTargetType
+    executionTaskId?: StringFieldUpdateOperationsInput | string
+    caseId?: StringFieldUpdateOperationsInput | string
+    assetId?: StringFieldUpdateOperationsInput | string
+    departmentId?: StringFieldUpdateOperationsInput | string
+    jurisdictionId?: StringFieldUpdateOperationsInput | string
+    predictionTimestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    featureContractVersion?: StringFieldUpdateOperationsInput | string
+    featurePayload?: JsonNullValueInput | InputJsonValue
+    provenanceClass?: EnumPredictiveProvenanceClassFieldUpdateOperationsInput | $Enums.PredictiveProvenanceClass
+    sourceReferences?: JsonNullValueInput | InputJsonValue
+    sourceFingerprint?: StringFieldUpdateOperationsInput | string
+    status?: EnumPredictiveRecordStatusFieldUpdateOperationsInput | $Enums.PredictiveRecordStatus
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    voidedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    voidedById?: NullableStringFieldUpdateOperationsInput | string | null
+    voidReason?: NullableStringFieldUpdateOperationsInput | string | null
+    replaces?: PredictiveFeatureSnapshotUncheckedUpdateOneWithoutReplacementSnapshotNestedInput
+    outcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutSnapshotNestedInput
+  }
+
+  export type PredictiveOutcomeUpsertWithWhereUniqueWithoutSnapshotInput = {
+    where: PredictiveOutcomeWhereUniqueInput
+    update: XOR<PredictiveOutcomeUpdateWithoutSnapshotInput, PredictiveOutcomeUncheckedUpdateWithoutSnapshotInput>
+    create: XOR<PredictiveOutcomeCreateWithoutSnapshotInput, PredictiveOutcomeUncheckedCreateWithoutSnapshotInput>
+  }
+
+  export type PredictiveOutcomeUpdateWithWhereUniqueWithoutSnapshotInput = {
+    where: PredictiveOutcomeWhereUniqueInput
+    data: XOR<PredictiveOutcomeUpdateWithoutSnapshotInput, PredictiveOutcomeUncheckedUpdateWithoutSnapshotInput>
+  }
+
+  export type PredictiveOutcomeUpdateManyWithWhereWithoutSnapshotInput = {
+    where: PredictiveOutcomeScalarWhereInput
+    data: XOR<PredictiveOutcomeUpdateManyMutationInput, PredictiveOutcomeUncheckedUpdateManyWithoutSnapshotInput>
+  }
+
+  export type PredictiveFeatureSnapshotCreateWithoutOutcomesInput = {
+    id?: string
+    targetType: $Enums.PredictiveTargetType
+    caseId: string
+    assetId: string
+    departmentId: string
+    jurisdictionId: string
+    predictionTimestamp: Date | string
+    featureContractVersion: string
+    featurePayload: JsonNullValueInput | InputJsonValue
+    provenanceClass: $Enums.PredictiveProvenanceClass
+    sourceReferences: JsonNullValueInput | InputJsonValue
+    sourceFingerprint: string
+    status?: $Enums.PredictiveRecordStatus
+    createdAt?: Date | string
+    voidedAt?: Date | string | null
+    voidReason?: string | null
+    executionTask: ExecutionTaskCreateNestedOneWithoutPredictiveSnapshotsInput
+    createdBy: UserCreateNestedOneWithoutCreatedPredictiveSnapshotsInput
+    voidedBy?: UserCreateNestedOneWithoutVoidedPredictiveSnapshotsInput
+    replacementSnapshot?: PredictiveFeatureSnapshotCreateNestedOneWithoutReplacesInput
+    replaces?: PredictiveFeatureSnapshotCreateNestedOneWithoutReplacementSnapshotInput
+  }
+
+  export type PredictiveFeatureSnapshotUncheckedCreateWithoutOutcomesInput = {
+    id?: string
+    targetType: $Enums.PredictiveTargetType
+    executionTaskId: string
+    caseId: string
+    assetId: string
+    departmentId: string
+    jurisdictionId: string
+    predictionTimestamp: Date | string
+    featureContractVersion: string
+    featurePayload: JsonNullValueInput | InputJsonValue
+    provenanceClass: $Enums.PredictiveProvenanceClass
+    sourceReferences: JsonNullValueInput | InputJsonValue
+    sourceFingerprint: string
+    status?: $Enums.PredictiveRecordStatus
+    createdById: string
+    createdAt?: Date | string
+    voidedAt?: Date | string | null
+    voidedById?: string | null
+    voidReason?: string | null
+    replacementSnapshotId?: string | null
+    replaces?: PredictiveFeatureSnapshotUncheckedCreateNestedOneWithoutReplacementSnapshotInput
+  }
+
+  export type PredictiveFeatureSnapshotCreateOrConnectWithoutOutcomesInput = {
+    where: PredictiveFeatureSnapshotWhereUniqueInput
+    create: XOR<PredictiveFeatureSnapshotCreateWithoutOutcomesInput, PredictiveFeatureSnapshotUncheckedCreateWithoutOutcomesInput>
+  }
+
+  export type UserCreateWithoutRecordedPredictiveOutcomesInput = {
+    id?: string
+    employeeCode: string
+    name: string
+    email: string
+    passwordHash: string
+    designation: string
+    role?: $Enums.SystemRole
+    status?: $Enums.UserStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    department: DepartmentCreateNestedOneWithoutUsersInput
+    jurisdiction: JurisdictionCreateNestedOneWithoutUsersInput
+    inspections?: InspectionCreateNestedManyWithoutInspectorInput
+    approvalAuthorities?: ApprovalAuthorityCreateNestedManyWithoutUserInput
+    reviewedOrpDecisions?: OrpDecisionCreateNestedManyWithoutReviewerInput
+    forwardedOrpDecisions?: OrpDecisionCreateNestedManyWithoutForwardedUserInput
+    createdExecutionPlans?: ExecutionPlanCreateNestedManyWithoutCreatedByInput
+    assignedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutAssignedToInput
+    assignedByExecutionTasks?: ExecutionTaskCreateNestedManyWithoutAssignedByInput
+    completedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCompletionSubmittedByInput
+    verifiedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutVerifiedByInput
+    cancelledExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCancelledByInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionCreateNestedManyWithoutChangedByInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutBlockedByInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutResolvedByInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyCreateNestedManyWithoutCreatedByInput
+    submittedExecutionEvidence?: ExecutionEvidenceCreateNestedManyWithoutSubmittedByInput
+    closedCases?: CaseClosureCreateNestedManyWithoutClosedByInput
+    reviewedPublicReports?: PublicReportCreateNestedManyWithoutReviewedByInput
+    decidedPublicReports?: PublicReportCreateNestedManyWithoutDecisionByInput
+    createdTriageAnalyses?: PublicReportTriageAnalysisCreateNestedManyWithoutCreatedByInput
+    createdPolicyDocuments?: PolicyDocumentCreateNestedManyWithoutCreatedByInput
+    approvedPolicyDocuments?: PolicyDocumentCreateNestedManyWithoutApprovedByInput
+    createdApprovedActions?: ApprovedActionVersionCreateNestedManyWithoutCreatedByInput
+    approvedApprovedActions?: ApprovedActionVersionCreateNestedManyWithoutApprovedByInput
+    preparedDecisionPackages?: DecisionPackageCreateNestedManyWithoutPreparedByInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutCreatedByInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutApprovedByInput
+    createdObservationSources?: ObservationSourceCreateNestedManyWithoutCreatedByInput
+    deactivatedObservationSources?: ObservationSourceCreateNestedManyWithoutDeactivatedByInput
+    ingestedExternalObservations?: ExternalObservationCreateNestedManyWithoutIngestedByInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutPreparedByInput
+    createdPortfolioScenarios?: PortfolioScenarioCreateNestedManyWithoutCreatedByInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutCreatedByInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutVoidedByInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutVoidedByInput
+  }
+
+  export type UserUncheckedCreateWithoutRecordedPredictiveOutcomesInput = {
+    id?: string
+    employeeCode: string
+    name: string
+    email: string
+    passwordHash: string
+    designation: string
+    role?: $Enums.SystemRole
+    status?: $Enums.UserStatus
+    departmentId: string
+    jurisdictionId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    inspections?: InspectionUncheckedCreateNestedManyWithoutInspectorInput
+    approvalAuthorities?: ApprovalAuthorityUncheckedCreateNestedManyWithoutUserInput
+    reviewedOrpDecisions?: OrpDecisionUncheckedCreateNestedManyWithoutReviewerInput
+    forwardedOrpDecisions?: OrpDecisionUncheckedCreateNestedManyWithoutForwardedUserInput
+    createdExecutionPlans?: ExecutionPlanUncheckedCreateNestedManyWithoutCreatedByInput
+    assignedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutAssignedToInput
+    assignedByExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutAssignedByInput
+    completedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCompletionSubmittedByInput
+    verifiedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutVerifiedByInput
+    cancelledExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCancelledByInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUncheckedCreateNestedManyWithoutChangedByInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutBlockedByInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutResolvedByInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutCreatedByInput
+    submittedExecutionEvidence?: ExecutionEvidenceUncheckedCreateNestedManyWithoutSubmittedByInput
+    closedCases?: CaseClosureUncheckedCreateNestedManyWithoutClosedByInput
+    reviewedPublicReports?: PublicReportUncheckedCreateNestedManyWithoutReviewedByInput
+    decidedPublicReports?: PublicReportUncheckedCreateNestedManyWithoutDecisionByInput
+    createdTriageAnalyses?: PublicReportTriageAnalysisUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPolicyDocuments?: PolicyDocumentUncheckedCreateNestedManyWithoutCreatedByInput
+    approvedPolicyDocuments?: PolicyDocumentUncheckedCreateNestedManyWithoutApprovedByInput
+    createdApprovedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutCreatedByInput
+    approvedApprovedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutApprovedByInput
+    preparedDecisionPackages?: DecisionPackageUncheckedCreateNestedManyWithoutPreparedByInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutCreatedByInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutApprovedByInput
+    createdObservationSources?: ObservationSourceUncheckedCreateNestedManyWithoutCreatedByInput
+    deactivatedObservationSources?: ObservationSourceUncheckedCreateNestedManyWithoutDeactivatedByInput
+    ingestedExternalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutIngestedByInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutPreparedByInput
+    createdPortfolioScenarios?: PortfolioScenarioUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutCreatedByInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutVoidedByInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutVoidedByInput
+  }
+
+  export type UserCreateOrConnectWithoutRecordedPredictiveOutcomesInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutRecordedPredictiveOutcomesInput, UserUncheckedCreateWithoutRecordedPredictiveOutcomesInput>
+  }
+
+  export type UserCreateWithoutVoidedPredictiveOutcomesInput = {
+    id?: string
+    employeeCode: string
+    name: string
+    email: string
+    passwordHash: string
+    designation: string
+    role?: $Enums.SystemRole
+    status?: $Enums.UserStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    department: DepartmentCreateNestedOneWithoutUsersInput
+    jurisdiction: JurisdictionCreateNestedOneWithoutUsersInput
+    inspections?: InspectionCreateNestedManyWithoutInspectorInput
+    approvalAuthorities?: ApprovalAuthorityCreateNestedManyWithoutUserInput
+    reviewedOrpDecisions?: OrpDecisionCreateNestedManyWithoutReviewerInput
+    forwardedOrpDecisions?: OrpDecisionCreateNestedManyWithoutForwardedUserInput
+    createdExecutionPlans?: ExecutionPlanCreateNestedManyWithoutCreatedByInput
+    assignedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutAssignedToInput
+    assignedByExecutionTasks?: ExecutionTaskCreateNestedManyWithoutAssignedByInput
+    completedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCompletionSubmittedByInput
+    verifiedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutVerifiedByInput
+    cancelledExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCancelledByInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionCreateNestedManyWithoutChangedByInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutBlockedByInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutResolvedByInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyCreateNestedManyWithoutCreatedByInput
+    submittedExecutionEvidence?: ExecutionEvidenceCreateNestedManyWithoutSubmittedByInput
+    closedCases?: CaseClosureCreateNestedManyWithoutClosedByInput
+    reviewedPublicReports?: PublicReportCreateNestedManyWithoutReviewedByInput
+    decidedPublicReports?: PublicReportCreateNestedManyWithoutDecisionByInput
+    createdTriageAnalyses?: PublicReportTriageAnalysisCreateNestedManyWithoutCreatedByInput
+    createdPolicyDocuments?: PolicyDocumentCreateNestedManyWithoutCreatedByInput
+    approvedPolicyDocuments?: PolicyDocumentCreateNestedManyWithoutApprovedByInput
+    createdApprovedActions?: ApprovedActionVersionCreateNestedManyWithoutCreatedByInput
+    approvedApprovedActions?: ApprovedActionVersionCreateNestedManyWithoutApprovedByInput
+    preparedDecisionPackages?: DecisionPackageCreateNestedManyWithoutPreparedByInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutCreatedByInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutApprovedByInput
+    createdObservationSources?: ObservationSourceCreateNestedManyWithoutCreatedByInput
+    deactivatedObservationSources?: ObservationSourceCreateNestedManyWithoutDeactivatedByInput
+    ingestedExternalObservations?: ExternalObservationCreateNestedManyWithoutIngestedByInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutPreparedByInput
+    createdPortfolioScenarios?: PortfolioScenarioCreateNestedManyWithoutCreatedByInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutCreatedByInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutVoidedByInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutRecordedByInput
+  }
+
+  export type UserUncheckedCreateWithoutVoidedPredictiveOutcomesInput = {
+    id?: string
+    employeeCode: string
+    name: string
+    email: string
+    passwordHash: string
+    designation: string
+    role?: $Enums.SystemRole
+    status?: $Enums.UserStatus
+    departmentId: string
+    jurisdictionId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    inspections?: InspectionUncheckedCreateNestedManyWithoutInspectorInput
+    approvalAuthorities?: ApprovalAuthorityUncheckedCreateNestedManyWithoutUserInput
+    reviewedOrpDecisions?: OrpDecisionUncheckedCreateNestedManyWithoutReviewerInput
+    forwardedOrpDecisions?: OrpDecisionUncheckedCreateNestedManyWithoutForwardedUserInput
+    createdExecutionPlans?: ExecutionPlanUncheckedCreateNestedManyWithoutCreatedByInput
+    assignedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutAssignedToInput
+    assignedByExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutAssignedByInput
+    completedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCompletionSubmittedByInput
+    verifiedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutVerifiedByInput
+    cancelledExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCancelledByInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUncheckedCreateNestedManyWithoutChangedByInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutBlockedByInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutResolvedByInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutCreatedByInput
+    submittedExecutionEvidence?: ExecutionEvidenceUncheckedCreateNestedManyWithoutSubmittedByInput
+    closedCases?: CaseClosureUncheckedCreateNestedManyWithoutClosedByInput
+    reviewedPublicReports?: PublicReportUncheckedCreateNestedManyWithoutReviewedByInput
+    decidedPublicReports?: PublicReportUncheckedCreateNestedManyWithoutDecisionByInput
+    createdTriageAnalyses?: PublicReportTriageAnalysisUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPolicyDocuments?: PolicyDocumentUncheckedCreateNestedManyWithoutCreatedByInput
+    approvedPolicyDocuments?: PolicyDocumentUncheckedCreateNestedManyWithoutApprovedByInput
+    createdApprovedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutCreatedByInput
+    approvedApprovedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutApprovedByInput
+    preparedDecisionPackages?: DecisionPackageUncheckedCreateNestedManyWithoutPreparedByInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutCreatedByInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutApprovedByInput
+    createdObservationSources?: ObservationSourceUncheckedCreateNestedManyWithoutCreatedByInput
+    deactivatedObservationSources?: ObservationSourceUncheckedCreateNestedManyWithoutDeactivatedByInput
+    ingestedExternalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutIngestedByInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutPreparedByInput
+    createdPortfolioScenarios?: PortfolioScenarioUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutCreatedByInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutVoidedByInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutRecordedByInput
+  }
+
+  export type UserCreateOrConnectWithoutVoidedPredictiveOutcomesInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutVoidedPredictiveOutcomesInput, UserUncheckedCreateWithoutVoidedPredictiveOutcomesInput>
+  }
+
+  export type PredictiveOutcomeCreateWithoutReplacesInput = {
+    id?: string
+    outcomeContractVersion: string
+    outcomeTimestamp: Date | string
+    outcomeValue: $Enums.PredictiveOutcomeValue
+    provenanceClass: $Enums.PredictiveProvenanceClass
+    sourceReferences: JsonNullValueInput | InputJsonValue
+    sourceFingerprint: string
+    status?: $Enums.PredictiveRecordStatus
+    recordedAt?: Date | string
+    voidedAt?: Date | string | null
+    voidReason?: string | null
+    snapshot: PredictiveFeatureSnapshotCreateNestedOneWithoutOutcomesInput
+    recordedBy: UserCreateNestedOneWithoutRecordedPredictiveOutcomesInput
+    voidedBy?: UserCreateNestedOneWithoutVoidedPredictiveOutcomesInput
+    replacementOutcome?: PredictiveOutcomeCreateNestedOneWithoutReplacesInput
+  }
+
+  export type PredictiveOutcomeUncheckedCreateWithoutReplacesInput = {
+    id?: string
+    snapshotId: string
+    outcomeContractVersion: string
+    outcomeTimestamp: Date | string
+    outcomeValue: $Enums.PredictiveOutcomeValue
+    provenanceClass: $Enums.PredictiveProvenanceClass
+    sourceReferences: JsonNullValueInput | InputJsonValue
+    sourceFingerprint: string
+    status?: $Enums.PredictiveRecordStatus
+    recordedById: string
+    recordedAt?: Date | string
+    voidedAt?: Date | string | null
+    voidedById?: string | null
+    voidReason?: string | null
+    replacementOutcomeId?: string | null
+  }
+
+  export type PredictiveOutcomeCreateOrConnectWithoutReplacesInput = {
+    where: PredictiveOutcomeWhereUniqueInput
+    create: XOR<PredictiveOutcomeCreateWithoutReplacesInput, PredictiveOutcomeUncheckedCreateWithoutReplacesInput>
+  }
+
+  export type PredictiveOutcomeCreateWithoutReplacementOutcomeInput = {
+    id?: string
+    outcomeContractVersion: string
+    outcomeTimestamp: Date | string
+    outcomeValue: $Enums.PredictiveOutcomeValue
+    provenanceClass: $Enums.PredictiveProvenanceClass
+    sourceReferences: JsonNullValueInput | InputJsonValue
+    sourceFingerprint: string
+    status?: $Enums.PredictiveRecordStatus
+    recordedAt?: Date | string
+    voidedAt?: Date | string | null
+    voidReason?: string | null
+    snapshot: PredictiveFeatureSnapshotCreateNestedOneWithoutOutcomesInput
+    recordedBy: UserCreateNestedOneWithoutRecordedPredictiveOutcomesInput
+    voidedBy?: UserCreateNestedOneWithoutVoidedPredictiveOutcomesInput
+    replaces?: PredictiveOutcomeCreateNestedOneWithoutReplacementOutcomeInput
+  }
+
+  export type PredictiveOutcomeUncheckedCreateWithoutReplacementOutcomeInput = {
+    id?: string
+    snapshotId: string
+    outcomeContractVersion: string
+    outcomeTimestamp: Date | string
+    outcomeValue: $Enums.PredictiveOutcomeValue
+    provenanceClass: $Enums.PredictiveProvenanceClass
+    sourceReferences: JsonNullValueInput | InputJsonValue
+    sourceFingerprint: string
+    status?: $Enums.PredictiveRecordStatus
+    recordedById: string
+    recordedAt?: Date | string
+    voidedAt?: Date | string | null
+    voidedById?: string | null
+    voidReason?: string | null
+    replaces?: PredictiveOutcomeUncheckedCreateNestedOneWithoutReplacementOutcomeInput
+  }
+
+  export type PredictiveOutcomeCreateOrConnectWithoutReplacementOutcomeInput = {
+    where: PredictiveOutcomeWhereUniqueInput
+    create: XOR<PredictiveOutcomeCreateWithoutReplacementOutcomeInput, PredictiveOutcomeUncheckedCreateWithoutReplacementOutcomeInput>
+  }
+
+  export type PredictiveFeatureSnapshotUpsertWithoutOutcomesInput = {
+    update: XOR<PredictiveFeatureSnapshotUpdateWithoutOutcomesInput, PredictiveFeatureSnapshotUncheckedUpdateWithoutOutcomesInput>
+    create: XOR<PredictiveFeatureSnapshotCreateWithoutOutcomesInput, PredictiveFeatureSnapshotUncheckedCreateWithoutOutcomesInput>
+    where?: PredictiveFeatureSnapshotWhereInput
+  }
+
+  export type PredictiveFeatureSnapshotUpdateToOneWithWhereWithoutOutcomesInput = {
+    where?: PredictiveFeatureSnapshotWhereInput
+    data: XOR<PredictiveFeatureSnapshotUpdateWithoutOutcomesInput, PredictiveFeatureSnapshotUncheckedUpdateWithoutOutcomesInput>
+  }
+
+  export type PredictiveFeatureSnapshotUpdateWithoutOutcomesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    targetType?: EnumPredictiveTargetTypeFieldUpdateOperationsInput | $Enums.PredictiveTargetType
+    caseId?: StringFieldUpdateOperationsInput | string
+    assetId?: StringFieldUpdateOperationsInput | string
+    departmentId?: StringFieldUpdateOperationsInput | string
+    jurisdictionId?: StringFieldUpdateOperationsInput | string
+    predictionTimestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    featureContractVersion?: StringFieldUpdateOperationsInput | string
+    featurePayload?: JsonNullValueInput | InputJsonValue
+    provenanceClass?: EnumPredictiveProvenanceClassFieldUpdateOperationsInput | $Enums.PredictiveProvenanceClass
+    sourceReferences?: JsonNullValueInput | InputJsonValue
+    sourceFingerprint?: StringFieldUpdateOperationsInput | string
+    status?: EnumPredictiveRecordStatusFieldUpdateOperationsInput | $Enums.PredictiveRecordStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    voidedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    voidReason?: NullableStringFieldUpdateOperationsInput | string | null
+    executionTask?: ExecutionTaskUpdateOneRequiredWithoutPredictiveSnapshotsNestedInput
+    createdBy?: UserUpdateOneRequiredWithoutCreatedPredictiveSnapshotsNestedInput
+    voidedBy?: UserUpdateOneWithoutVoidedPredictiveSnapshotsNestedInput
+    replacementSnapshot?: PredictiveFeatureSnapshotUpdateOneWithoutReplacesNestedInput
+    replaces?: PredictiveFeatureSnapshotUpdateOneWithoutReplacementSnapshotNestedInput
+  }
+
+  export type PredictiveFeatureSnapshotUncheckedUpdateWithoutOutcomesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    targetType?: EnumPredictiveTargetTypeFieldUpdateOperationsInput | $Enums.PredictiveTargetType
+    executionTaskId?: StringFieldUpdateOperationsInput | string
+    caseId?: StringFieldUpdateOperationsInput | string
+    assetId?: StringFieldUpdateOperationsInput | string
+    departmentId?: StringFieldUpdateOperationsInput | string
+    jurisdictionId?: StringFieldUpdateOperationsInput | string
+    predictionTimestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    featureContractVersion?: StringFieldUpdateOperationsInput | string
+    featurePayload?: JsonNullValueInput | InputJsonValue
+    provenanceClass?: EnumPredictiveProvenanceClassFieldUpdateOperationsInput | $Enums.PredictiveProvenanceClass
+    sourceReferences?: JsonNullValueInput | InputJsonValue
+    sourceFingerprint?: StringFieldUpdateOperationsInput | string
+    status?: EnumPredictiveRecordStatusFieldUpdateOperationsInput | $Enums.PredictiveRecordStatus
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    voidedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    voidedById?: NullableStringFieldUpdateOperationsInput | string | null
+    voidReason?: NullableStringFieldUpdateOperationsInput | string | null
+    replacementSnapshotId?: NullableStringFieldUpdateOperationsInput | string | null
+    replaces?: PredictiveFeatureSnapshotUncheckedUpdateOneWithoutReplacementSnapshotNestedInput
+  }
+
+  export type UserUpsertWithoutRecordedPredictiveOutcomesInput = {
+    update: XOR<UserUpdateWithoutRecordedPredictiveOutcomesInput, UserUncheckedUpdateWithoutRecordedPredictiveOutcomesInput>
+    create: XOR<UserCreateWithoutRecordedPredictiveOutcomesInput, UserUncheckedCreateWithoutRecordedPredictiveOutcomesInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutRecordedPredictiveOutcomesInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutRecordedPredictiveOutcomesInput, UserUncheckedUpdateWithoutRecordedPredictiveOutcomesInput>
+  }
+
+  export type UserUpdateWithoutRecordedPredictiveOutcomesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    employeeCode?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    designation?: StringFieldUpdateOperationsInput | string
+    role?: EnumSystemRoleFieldUpdateOperationsInput | $Enums.SystemRole
+    status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    department?: DepartmentUpdateOneRequiredWithoutUsersNestedInput
+    jurisdiction?: JurisdictionUpdateOneRequiredWithoutUsersNestedInput
+    inspections?: InspectionUpdateManyWithoutInspectorNestedInput
+    approvalAuthorities?: ApprovalAuthorityUpdateManyWithoutUserNestedInput
+    reviewedOrpDecisions?: OrpDecisionUpdateManyWithoutReviewerNestedInput
+    forwardedOrpDecisions?: OrpDecisionUpdateManyWithoutForwardedUserNestedInput
+    createdExecutionPlans?: ExecutionPlanUpdateManyWithoutCreatedByNestedInput
+    assignedExecutionTasks?: ExecutionTaskUpdateManyWithoutAssignedToNestedInput
+    assignedByExecutionTasks?: ExecutionTaskUpdateManyWithoutAssignedByNestedInput
+    completedExecutionTasks?: ExecutionTaskUpdateManyWithoutCompletionSubmittedByNestedInput
+    verifiedExecutionTasks?: ExecutionTaskUpdateManyWithoutVerifiedByNestedInput
+    cancelledExecutionTasks?: ExecutionTaskUpdateManyWithoutCancelledByNestedInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUpdateManyWithoutChangedByNestedInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUpdateManyWithoutBlockedByNestedInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUpdateManyWithoutResolvedByNestedInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUpdateManyWithoutCreatedByNestedInput
+    submittedExecutionEvidence?: ExecutionEvidenceUpdateManyWithoutSubmittedByNestedInput
+    closedCases?: CaseClosureUpdateManyWithoutClosedByNestedInput
+    reviewedPublicReports?: PublicReportUpdateManyWithoutReviewedByNestedInput
+    decidedPublicReports?: PublicReportUpdateManyWithoutDecisionByNestedInput
+    createdTriageAnalyses?: PublicReportTriageAnalysisUpdateManyWithoutCreatedByNestedInput
+    createdPolicyDocuments?: PolicyDocumentUpdateManyWithoutCreatedByNestedInput
+    approvedPolicyDocuments?: PolicyDocumentUpdateManyWithoutApprovedByNestedInput
+    createdApprovedActions?: ApprovedActionVersionUpdateManyWithoutCreatedByNestedInput
+    approvedApprovedActions?: ApprovedActionVersionUpdateManyWithoutApprovedByNestedInput
+    preparedDecisionPackages?: DecisionPackageUpdateManyWithoutPreparedByNestedInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutCreatedByNestedInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutApprovedByNestedInput
+    createdObservationSources?: ObservationSourceUpdateManyWithoutCreatedByNestedInput
+    deactivatedObservationSources?: ObservationSourceUpdateManyWithoutDeactivatedByNestedInput
+    ingestedExternalObservations?: ExternalObservationUpdateManyWithoutIngestedByNestedInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUpdateManyWithoutPreparedByNestedInput
+    createdPortfolioScenarios?: PortfolioScenarioUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutCreatedByNestedInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutVoidedByNestedInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutVoidedByNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutRecordedPredictiveOutcomesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    employeeCode?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    designation?: StringFieldUpdateOperationsInput | string
+    role?: EnumSystemRoleFieldUpdateOperationsInput | $Enums.SystemRole
+    status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+    departmentId?: StringFieldUpdateOperationsInput | string
+    jurisdictionId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    inspections?: InspectionUncheckedUpdateManyWithoutInspectorNestedInput
+    approvalAuthorities?: ApprovalAuthorityUncheckedUpdateManyWithoutUserNestedInput
+    reviewedOrpDecisions?: OrpDecisionUncheckedUpdateManyWithoutReviewerNestedInput
+    forwardedOrpDecisions?: OrpDecisionUncheckedUpdateManyWithoutForwardedUserNestedInput
+    createdExecutionPlans?: ExecutionPlanUncheckedUpdateManyWithoutCreatedByNestedInput
+    assignedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutAssignedToNestedInput
+    assignedByExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutAssignedByNestedInput
+    completedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCompletionSubmittedByNestedInput
+    verifiedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutVerifiedByNestedInput
+    cancelledExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCancelledByNestedInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUncheckedUpdateManyWithoutChangedByNestedInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutBlockedByNestedInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutResolvedByNestedInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUncheckedUpdateManyWithoutCreatedByNestedInput
+    submittedExecutionEvidence?: ExecutionEvidenceUncheckedUpdateManyWithoutSubmittedByNestedInput
+    closedCases?: CaseClosureUncheckedUpdateManyWithoutClosedByNestedInput
+    reviewedPublicReports?: PublicReportUncheckedUpdateManyWithoutReviewedByNestedInput
+    decidedPublicReports?: PublicReportUncheckedUpdateManyWithoutDecisionByNestedInput
+    createdTriageAnalyses?: PublicReportTriageAnalysisUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPolicyDocuments?: PolicyDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
+    approvedPolicyDocuments?: PolicyDocumentUncheckedUpdateManyWithoutApprovedByNestedInput
+    createdApprovedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutCreatedByNestedInput
+    approvedApprovedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutApprovedByNestedInput
+    preparedDecisionPackages?: DecisionPackageUncheckedUpdateManyWithoutPreparedByNestedInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutCreatedByNestedInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutApprovedByNestedInput
+    createdObservationSources?: ObservationSourceUncheckedUpdateManyWithoutCreatedByNestedInput
+    deactivatedObservationSources?: ObservationSourceUncheckedUpdateManyWithoutDeactivatedByNestedInput
+    ingestedExternalObservations?: ExternalObservationUncheckedUpdateManyWithoutIngestedByNestedInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutPreparedByNestedInput
+    createdPortfolioScenarios?: PortfolioScenarioUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutCreatedByNestedInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutVoidedByNestedInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutVoidedByNestedInput
+  }
+
+  export type UserUpsertWithoutVoidedPredictiveOutcomesInput = {
+    update: XOR<UserUpdateWithoutVoidedPredictiveOutcomesInput, UserUncheckedUpdateWithoutVoidedPredictiveOutcomesInput>
+    create: XOR<UserCreateWithoutVoidedPredictiveOutcomesInput, UserUncheckedCreateWithoutVoidedPredictiveOutcomesInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutVoidedPredictiveOutcomesInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutVoidedPredictiveOutcomesInput, UserUncheckedUpdateWithoutVoidedPredictiveOutcomesInput>
+  }
+
+  export type UserUpdateWithoutVoidedPredictiveOutcomesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    employeeCode?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    designation?: StringFieldUpdateOperationsInput | string
+    role?: EnumSystemRoleFieldUpdateOperationsInput | $Enums.SystemRole
+    status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    department?: DepartmentUpdateOneRequiredWithoutUsersNestedInput
+    jurisdiction?: JurisdictionUpdateOneRequiredWithoutUsersNestedInput
+    inspections?: InspectionUpdateManyWithoutInspectorNestedInput
+    approvalAuthorities?: ApprovalAuthorityUpdateManyWithoutUserNestedInput
+    reviewedOrpDecisions?: OrpDecisionUpdateManyWithoutReviewerNestedInput
+    forwardedOrpDecisions?: OrpDecisionUpdateManyWithoutForwardedUserNestedInput
+    createdExecutionPlans?: ExecutionPlanUpdateManyWithoutCreatedByNestedInput
+    assignedExecutionTasks?: ExecutionTaskUpdateManyWithoutAssignedToNestedInput
+    assignedByExecutionTasks?: ExecutionTaskUpdateManyWithoutAssignedByNestedInput
+    completedExecutionTasks?: ExecutionTaskUpdateManyWithoutCompletionSubmittedByNestedInput
+    verifiedExecutionTasks?: ExecutionTaskUpdateManyWithoutVerifiedByNestedInput
+    cancelledExecutionTasks?: ExecutionTaskUpdateManyWithoutCancelledByNestedInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUpdateManyWithoutChangedByNestedInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUpdateManyWithoutBlockedByNestedInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUpdateManyWithoutResolvedByNestedInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUpdateManyWithoutCreatedByNestedInput
+    submittedExecutionEvidence?: ExecutionEvidenceUpdateManyWithoutSubmittedByNestedInput
+    closedCases?: CaseClosureUpdateManyWithoutClosedByNestedInput
+    reviewedPublicReports?: PublicReportUpdateManyWithoutReviewedByNestedInput
+    decidedPublicReports?: PublicReportUpdateManyWithoutDecisionByNestedInput
+    createdTriageAnalyses?: PublicReportTriageAnalysisUpdateManyWithoutCreatedByNestedInput
+    createdPolicyDocuments?: PolicyDocumentUpdateManyWithoutCreatedByNestedInput
+    approvedPolicyDocuments?: PolicyDocumentUpdateManyWithoutApprovedByNestedInput
+    createdApprovedActions?: ApprovedActionVersionUpdateManyWithoutCreatedByNestedInput
+    approvedApprovedActions?: ApprovedActionVersionUpdateManyWithoutApprovedByNestedInput
+    preparedDecisionPackages?: DecisionPackageUpdateManyWithoutPreparedByNestedInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutCreatedByNestedInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutApprovedByNestedInput
+    createdObservationSources?: ObservationSourceUpdateManyWithoutCreatedByNestedInput
+    deactivatedObservationSources?: ObservationSourceUpdateManyWithoutDeactivatedByNestedInput
+    ingestedExternalObservations?: ExternalObservationUpdateManyWithoutIngestedByNestedInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUpdateManyWithoutPreparedByNestedInput
+    createdPortfolioScenarios?: PortfolioScenarioUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutCreatedByNestedInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutVoidedByNestedInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutRecordedByNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutVoidedPredictiveOutcomesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    employeeCode?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    designation?: StringFieldUpdateOperationsInput | string
+    role?: EnumSystemRoleFieldUpdateOperationsInput | $Enums.SystemRole
+    status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+    departmentId?: StringFieldUpdateOperationsInput | string
+    jurisdictionId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    inspections?: InspectionUncheckedUpdateManyWithoutInspectorNestedInput
+    approvalAuthorities?: ApprovalAuthorityUncheckedUpdateManyWithoutUserNestedInput
+    reviewedOrpDecisions?: OrpDecisionUncheckedUpdateManyWithoutReviewerNestedInput
+    forwardedOrpDecisions?: OrpDecisionUncheckedUpdateManyWithoutForwardedUserNestedInput
+    createdExecutionPlans?: ExecutionPlanUncheckedUpdateManyWithoutCreatedByNestedInput
+    assignedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutAssignedToNestedInput
+    assignedByExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutAssignedByNestedInput
+    completedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCompletionSubmittedByNestedInput
+    verifiedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutVerifiedByNestedInput
+    cancelledExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCancelledByNestedInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUncheckedUpdateManyWithoutChangedByNestedInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutBlockedByNestedInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutResolvedByNestedInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUncheckedUpdateManyWithoutCreatedByNestedInput
+    submittedExecutionEvidence?: ExecutionEvidenceUncheckedUpdateManyWithoutSubmittedByNestedInput
+    closedCases?: CaseClosureUncheckedUpdateManyWithoutClosedByNestedInput
+    reviewedPublicReports?: PublicReportUncheckedUpdateManyWithoutReviewedByNestedInput
+    decidedPublicReports?: PublicReportUncheckedUpdateManyWithoutDecisionByNestedInput
+    createdTriageAnalyses?: PublicReportTriageAnalysisUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPolicyDocuments?: PolicyDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
+    approvedPolicyDocuments?: PolicyDocumentUncheckedUpdateManyWithoutApprovedByNestedInput
+    createdApprovedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutCreatedByNestedInput
+    approvedApprovedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutApprovedByNestedInput
+    preparedDecisionPackages?: DecisionPackageUncheckedUpdateManyWithoutPreparedByNestedInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutCreatedByNestedInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutApprovedByNestedInput
+    createdObservationSources?: ObservationSourceUncheckedUpdateManyWithoutCreatedByNestedInput
+    deactivatedObservationSources?: ObservationSourceUncheckedUpdateManyWithoutDeactivatedByNestedInput
+    ingestedExternalObservations?: ExternalObservationUncheckedUpdateManyWithoutIngestedByNestedInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutPreparedByNestedInput
+    createdPortfolioScenarios?: PortfolioScenarioUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutCreatedByNestedInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutVoidedByNestedInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutRecordedByNestedInput
+  }
+
+  export type PredictiveOutcomeUpsertWithoutReplacesInput = {
+    update: XOR<PredictiveOutcomeUpdateWithoutReplacesInput, PredictiveOutcomeUncheckedUpdateWithoutReplacesInput>
+    create: XOR<PredictiveOutcomeCreateWithoutReplacesInput, PredictiveOutcomeUncheckedCreateWithoutReplacesInput>
+    where?: PredictiveOutcomeWhereInput
+  }
+
+  export type PredictiveOutcomeUpdateToOneWithWhereWithoutReplacesInput = {
+    where?: PredictiveOutcomeWhereInput
+    data: XOR<PredictiveOutcomeUpdateWithoutReplacesInput, PredictiveOutcomeUncheckedUpdateWithoutReplacesInput>
+  }
+
+  export type PredictiveOutcomeUpdateWithoutReplacesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    outcomeContractVersion?: StringFieldUpdateOperationsInput | string
+    outcomeTimestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    outcomeValue?: EnumPredictiveOutcomeValueFieldUpdateOperationsInput | $Enums.PredictiveOutcomeValue
+    provenanceClass?: EnumPredictiveProvenanceClassFieldUpdateOperationsInput | $Enums.PredictiveProvenanceClass
+    sourceReferences?: JsonNullValueInput | InputJsonValue
+    sourceFingerprint?: StringFieldUpdateOperationsInput | string
+    status?: EnumPredictiveRecordStatusFieldUpdateOperationsInput | $Enums.PredictiveRecordStatus
+    recordedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    voidedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    voidReason?: NullableStringFieldUpdateOperationsInput | string | null
+    snapshot?: PredictiveFeatureSnapshotUpdateOneRequiredWithoutOutcomesNestedInput
+    recordedBy?: UserUpdateOneRequiredWithoutRecordedPredictiveOutcomesNestedInput
+    voidedBy?: UserUpdateOneWithoutVoidedPredictiveOutcomesNestedInput
+    replacementOutcome?: PredictiveOutcomeUpdateOneWithoutReplacesNestedInput
+  }
+
+  export type PredictiveOutcomeUncheckedUpdateWithoutReplacesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    snapshotId?: StringFieldUpdateOperationsInput | string
+    outcomeContractVersion?: StringFieldUpdateOperationsInput | string
+    outcomeTimestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    outcomeValue?: EnumPredictiveOutcomeValueFieldUpdateOperationsInput | $Enums.PredictiveOutcomeValue
+    provenanceClass?: EnumPredictiveProvenanceClassFieldUpdateOperationsInput | $Enums.PredictiveProvenanceClass
+    sourceReferences?: JsonNullValueInput | InputJsonValue
+    sourceFingerprint?: StringFieldUpdateOperationsInput | string
+    status?: EnumPredictiveRecordStatusFieldUpdateOperationsInput | $Enums.PredictiveRecordStatus
+    recordedById?: StringFieldUpdateOperationsInput | string
+    recordedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    voidedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    voidedById?: NullableStringFieldUpdateOperationsInput | string | null
+    voidReason?: NullableStringFieldUpdateOperationsInput | string | null
+    replacementOutcomeId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type PredictiveOutcomeUpsertWithoutReplacementOutcomeInput = {
+    update: XOR<PredictiveOutcomeUpdateWithoutReplacementOutcomeInput, PredictiveOutcomeUncheckedUpdateWithoutReplacementOutcomeInput>
+    create: XOR<PredictiveOutcomeCreateWithoutReplacementOutcomeInput, PredictiveOutcomeUncheckedCreateWithoutReplacementOutcomeInput>
+    where?: PredictiveOutcomeWhereInput
+  }
+
+  export type PredictiveOutcomeUpdateToOneWithWhereWithoutReplacementOutcomeInput = {
+    where?: PredictiveOutcomeWhereInput
+    data: XOR<PredictiveOutcomeUpdateWithoutReplacementOutcomeInput, PredictiveOutcomeUncheckedUpdateWithoutReplacementOutcomeInput>
+  }
+
+  export type PredictiveOutcomeUpdateWithoutReplacementOutcomeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    outcomeContractVersion?: StringFieldUpdateOperationsInput | string
+    outcomeTimestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    outcomeValue?: EnumPredictiveOutcomeValueFieldUpdateOperationsInput | $Enums.PredictiveOutcomeValue
+    provenanceClass?: EnumPredictiveProvenanceClassFieldUpdateOperationsInput | $Enums.PredictiveProvenanceClass
+    sourceReferences?: JsonNullValueInput | InputJsonValue
+    sourceFingerprint?: StringFieldUpdateOperationsInput | string
+    status?: EnumPredictiveRecordStatusFieldUpdateOperationsInput | $Enums.PredictiveRecordStatus
+    recordedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    voidedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    voidReason?: NullableStringFieldUpdateOperationsInput | string | null
+    snapshot?: PredictiveFeatureSnapshotUpdateOneRequiredWithoutOutcomesNestedInput
+    recordedBy?: UserUpdateOneRequiredWithoutRecordedPredictiveOutcomesNestedInput
+    voidedBy?: UserUpdateOneWithoutVoidedPredictiveOutcomesNestedInput
+    replaces?: PredictiveOutcomeUpdateOneWithoutReplacementOutcomeNestedInput
+  }
+
+  export type PredictiveOutcomeUncheckedUpdateWithoutReplacementOutcomeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    snapshotId?: StringFieldUpdateOperationsInput | string
+    outcomeContractVersion?: StringFieldUpdateOperationsInput | string
+    outcomeTimestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    outcomeValue?: EnumPredictiveOutcomeValueFieldUpdateOperationsInput | $Enums.PredictiveOutcomeValue
+    provenanceClass?: EnumPredictiveProvenanceClassFieldUpdateOperationsInput | $Enums.PredictiveProvenanceClass
+    sourceReferences?: JsonNullValueInput | InputJsonValue
+    sourceFingerprint?: StringFieldUpdateOperationsInput | string
+    status?: EnumPredictiveRecordStatusFieldUpdateOperationsInput | $Enums.PredictiveRecordStatus
+    recordedById?: StringFieldUpdateOperationsInput | string
+    recordedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    voidedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    voidedById?: NullableStringFieldUpdateOperationsInput | string | null
+    voidReason?: NullableStringFieldUpdateOperationsInput | string | null
+    replaces?: PredictiveOutcomeUncheckedUpdateOneWithoutReplacementOutcomeNestedInput
+  }
+
   export type ExecutionPlanCreateWithoutTaskDependenciesInput = {
     id?: string
     status?: $Enums.ExecutionPlanStatus
@@ -83062,6 +90025,7 @@ export namespace Prisma {
     scheduleRevisions?: ExecutionScheduleRevisionCreateNestedManyWithoutExecutionTaskInput
     requiredBy?: ExecutionTaskDependencyCreateNestedManyWithoutPredecessorTaskInput
     blockerEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutExecutionTaskInput
+    predictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutExecutionTaskInput
   }
 
   export type ExecutionTaskUncheckedCreateWithoutDependenciesInput = {
@@ -83105,6 +90069,7 @@ export namespace Prisma {
     scheduleRevisions?: ExecutionScheduleRevisionUncheckedCreateNestedManyWithoutExecutionTaskInput
     requiredBy?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutPredecessorTaskInput
     blockerEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutExecutionTaskInput
+    predictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutExecutionTaskInput
   }
 
   export type ExecutionTaskCreateOrConnectWithoutDependenciesInput = {
@@ -83153,6 +90118,7 @@ export namespace Prisma {
     scheduleRevisions?: ExecutionScheduleRevisionCreateNestedManyWithoutExecutionTaskInput
     dependencies?: ExecutionTaskDependencyCreateNestedManyWithoutDependentTaskInput
     blockerEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutExecutionTaskInput
+    predictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutExecutionTaskInput
   }
 
   export type ExecutionTaskUncheckedCreateWithoutRequiredByInput = {
@@ -83196,6 +90162,7 @@ export namespace Prisma {
     scheduleRevisions?: ExecutionScheduleRevisionUncheckedCreateNestedManyWithoutExecutionTaskInput
     dependencies?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutDependentTaskInput
     blockerEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutExecutionTaskInput
+    predictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutExecutionTaskInput
   }
 
   export type ExecutionTaskCreateOrConnectWithoutRequiredByInput = {
@@ -83246,6 +90213,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationCreateNestedManyWithoutIngestedByInput
     preparedCaseResourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutPreparedByInput
     createdPortfolioScenarios?: PortfolioScenarioCreateNestedManyWithoutCreatedByInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutCreatedByInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutVoidedByInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutRecordedByInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutVoidedByInput
   }
 
   export type UserUncheckedCreateWithoutCreatedExecutionTaskDependenciesInput = {
@@ -83291,6 +90262,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutIngestedByInput
     preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutPreparedByInput
     createdPortfolioScenarios?: PortfolioScenarioUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutCreatedByInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutVoidedByInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutRecordedByInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutVoidedByInput
   }
 
   export type UserCreateOrConnectWithoutCreatedExecutionTaskDependenciesInput = {
@@ -83409,6 +90384,7 @@ export namespace Prisma {
     scheduleRevisions?: ExecutionScheduleRevisionUpdateManyWithoutExecutionTaskNestedInput
     requiredBy?: ExecutionTaskDependencyUpdateManyWithoutPredecessorTaskNestedInput
     blockerEvents?: ExecutionTaskBlockerEventUpdateManyWithoutExecutionTaskNestedInput
+    predictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutExecutionTaskNestedInput
   }
 
   export type ExecutionTaskUncheckedUpdateWithoutDependenciesInput = {
@@ -83452,6 +90428,7 @@ export namespace Prisma {
     scheduleRevisions?: ExecutionScheduleRevisionUncheckedUpdateManyWithoutExecutionTaskNestedInput
     requiredBy?: ExecutionTaskDependencyUncheckedUpdateManyWithoutPredecessorTaskNestedInput
     blockerEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutExecutionTaskNestedInput
+    predictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutExecutionTaskNestedInput
   }
 
   export type ExecutionTaskUpsertWithoutRequiredByInput = {
@@ -83506,6 +90483,7 @@ export namespace Prisma {
     scheduleRevisions?: ExecutionScheduleRevisionUpdateManyWithoutExecutionTaskNestedInput
     dependencies?: ExecutionTaskDependencyUpdateManyWithoutDependentTaskNestedInput
     blockerEvents?: ExecutionTaskBlockerEventUpdateManyWithoutExecutionTaskNestedInput
+    predictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutExecutionTaskNestedInput
   }
 
   export type ExecutionTaskUncheckedUpdateWithoutRequiredByInput = {
@@ -83549,6 +90527,7 @@ export namespace Prisma {
     scheduleRevisions?: ExecutionScheduleRevisionUncheckedUpdateManyWithoutExecutionTaskNestedInput
     dependencies?: ExecutionTaskDependencyUncheckedUpdateManyWithoutDependentTaskNestedInput
     blockerEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutExecutionTaskNestedInput
+    predictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutExecutionTaskNestedInput
   }
 
   export type UserUpsertWithoutCreatedExecutionTaskDependenciesInput = {
@@ -83605,6 +90584,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationUpdateManyWithoutIngestedByNestedInput
     preparedCaseResourceEstimates?: CaseResourceEstimateUpdateManyWithoutPreparedByNestedInput
     createdPortfolioScenarios?: PortfolioScenarioUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutCreatedByNestedInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutVoidedByNestedInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutRecordedByNestedInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutVoidedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCreatedExecutionTaskDependenciesInput = {
@@ -83650,6 +90633,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationUncheckedUpdateManyWithoutIngestedByNestedInput
     preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutPreparedByNestedInput
     createdPortfolioScenarios?: PortfolioScenarioUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutCreatedByNestedInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutVoidedByNestedInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutRecordedByNestedInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutVoidedByNestedInput
   }
 
   export type ExecutionTaskCreateWithoutBlockerEventsInput = {
@@ -83693,6 +90680,7 @@ export namespace Prisma {
     scheduleRevisions?: ExecutionScheduleRevisionCreateNestedManyWithoutExecutionTaskInput
     dependencies?: ExecutionTaskDependencyCreateNestedManyWithoutDependentTaskInput
     requiredBy?: ExecutionTaskDependencyCreateNestedManyWithoutPredecessorTaskInput
+    predictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutExecutionTaskInput
   }
 
   export type ExecutionTaskUncheckedCreateWithoutBlockerEventsInput = {
@@ -83736,6 +90724,7 @@ export namespace Prisma {
     scheduleRevisions?: ExecutionScheduleRevisionUncheckedCreateNestedManyWithoutExecutionTaskInput
     dependencies?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutDependentTaskInput
     requiredBy?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutPredecessorTaskInput
+    predictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutExecutionTaskInput
   }
 
   export type ExecutionTaskCreateOrConnectWithoutBlockerEventsInput = {
@@ -83786,6 +90775,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationCreateNestedManyWithoutIngestedByInput
     preparedCaseResourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutPreparedByInput
     createdPortfolioScenarios?: PortfolioScenarioCreateNestedManyWithoutCreatedByInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutCreatedByInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutVoidedByInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutRecordedByInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutVoidedByInput
   }
 
   export type UserUncheckedCreateWithoutBlockedExecutionTaskEventsInput = {
@@ -83831,6 +90824,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutIngestedByInput
     preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutPreparedByInput
     createdPortfolioScenarios?: PortfolioScenarioUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutCreatedByInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutVoidedByInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutRecordedByInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutVoidedByInput
   }
 
   export type UserCreateOrConnectWithoutBlockedExecutionTaskEventsInput = {
@@ -83881,6 +90878,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationCreateNestedManyWithoutIngestedByInput
     preparedCaseResourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutPreparedByInput
     createdPortfolioScenarios?: PortfolioScenarioCreateNestedManyWithoutCreatedByInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutCreatedByInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutVoidedByInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutRecordedByInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutVoidedByInput
   }
 
   export type UserUncheckedCreateWithoutResolvedExecutionTaskEventsInput = {
@@ -83926,6 +90927,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutIngestedByInput
     preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutPreparedByInput
     createdPortfolioScenarios?: PortfolioScenarioUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutCreatedByInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutVoidedByInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutRecordedByInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutVoidedByInput
   }
 
   export type UserCreateOrConnectWithoutResolvedExecutionTaskEventsInput = {
@@ -83985,6 +90990,7 @@ export namespace Prisma {
     scheduleRevisions?: ExecutionScheduleRevisionUpdateManyWithoutExecutionTaskNestedInput
     dependencies?: ExecutionTaskDependencyUpdateManyWithoutDependentTaskNestedInput
     requiredBy?: ExecutionTaskDependencyUpdateManyWithoutPredecessorTaskNestedInput
+    predictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutExecutionTaskNestedInput
   }
 
   export type ExecutionTaskUncheckedUpdateWithoutBlockerEventsInput = {
@@ -84028,6 +91034,7 @@ export namespace Prisma {
     scheduleRevisions?: ExecutionScheduleRevisionUncheckedUpdateManyWithoutExecutionTaskNestedInput
     dependencies?: ExecutionTaskDependencyUncheckedUpdateManyWithoutDependentTaskNestedInput
     requiredBy?: ExecutionTaskDependencyUncheckedUpdateManyWithoutPredecessorTaskNestedInput
+    predictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutExecutionTaskNestedInput
   }
 
   export type UserUpsertWithoutBlockedExecutionTaskEventsInput = {
@@ -84084,6 +91091,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationUpdateManyWithoutIngestedByNestedInput
     preparedCaseResourceEstimates?: CaseResourceEstimateUpdateManyWithoutPreparedByNestedInput
     createdPortfolioScenarios?: PortfolioScenarioUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutCreatedByNestedInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutVoidedByNestedInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutRecordedByNestedInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutVoidedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutBlockedExecutionTaskEventsInput = {
@@ -84129,6 +91140,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationUncheckedUpdateManyWithoutIngestedByNestedInput
     preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutPreparedByNestedInput
     createdPortfolioScenarios?: PortfolioScenarioUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutCreatedByNestedInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutVoidedByNestedInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutRecordedByNestedInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutVoidedByNestedInput
   }
 
   export type UserUpsertWithoutResolvedExecutionTaskEventsInput = {
@@ -84185,6 +91200,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationUpdateManyWithoutIngestedByNestedInput
     preparedCaseResourceEstimates?: CaseResourceEstimateUpdateManyWithoutPreparedByNestedInput
     createdPortfolioScenarios?: PortfolioScenarioUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutCreatedByNestedInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutVoidedByNestedInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutRecordedByNestedInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutVoidedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutResolvedExecutionTaskEventsInput = {
@@ -84230,6 +91249,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationUncheckedUpdateManyWithoutIngestedByNestedInput
     preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutPreparedByNestedInput
     createdPortfolioScenarios?: PortfolioScenarioUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutCreatedByNestedInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutVoidedByNestedInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutRecordedByNestedInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutVoidedByNestedInput
   }
 
   export type ExecutionPlanCreateWithoutScheduleRevisionsInput = {
@@ -84326,6 +91349,7 @@ export namespace Prisma {
     dependencies?: ExecutionTaskDependencyCreateNestedManyWithoutDependentTaskInput
     requiredBy?: ExecutionTaskDependencyCreateNestedManyWithoutPredecessorTaskInput
     blockerEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutExecutionTaskInput
+    predictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutExecutionTaskInput
   }
 
   export type ExecutionTaskUncheckedCreateWithoutScheduleRevisionsInput = {
@@ -84369,6 +91393,7 @@ export namespace Prisma {
     dependencies?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutDependentTaskInput
     requiredBy?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutPredecessorTaskInput
     blockerEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutExecutionTaskInput
+    predictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutExecutionTaskInput
   }
 
   export type ExecutionTaskCreateOrConnectWithoutScheduleRevisionsInput = {
@@ -84419,6 +91444,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationCreateNestedManyWithoutIngestedByInput
     preparedCaseResourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutPreparedByInput
     createdPortfolioScenarios?: PortfolioScenarioCreateNestedManyWithoutCreatedByInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutCreatedByInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutVoidedByInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutRecordedByInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutVoidedByInput
   }
 
   export type UserUncheckedCreateWithoutExecutionScheduleRevisionsInput = {
@@ -84464,6 +91493,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutIngestedByInput
     preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutPreparedByInput
     createdPortfolioScenarios?: PortfolioScenarioUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutCreatedByInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutVoidedByInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutRecordedByInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutVoidedByInput
   }
 
   export type UserCreateOrConnectWithoutExecutionScheduleRevisionsInput = {
@@ -84582,6 +91615,7 @@ export namespace Prisma {
     dependencies?: ExecutionTaskDependencyUpdateManyWithoutDependentTaskNestedInput
     requiredBy?: ExecutionTaskDependencyUpdateManyWithoutPredecessorTaskNestedInput
     blockerEvents?: ExecutionTaskBlockerEventUpdateManyWithoutExecutionTaskNestedInput
+    predictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutExecutionTaskNestedInput
   }
 
   export type ExecutionTaskUncheckedUpdateWithoutScheduleRevisionsInput = {
@@ -84625,6 +91659,7 @@ export namespace Prisma {
     dependencies?: ExecutionTaskDependencyUncheckedUpdateManyWithoutDependentTaskNestedInput
     requiredBy?: ExecutionTaskDependencyUncheckedUpdateManyWithoutPredecessorTaskNestedInput
     blockerEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutExecutionTaskNestedInput
+    predictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutExecutionTaskNestedInput
   }
 
   export type UserUpsertWithoutExecutionScheduleRevisionsInput = {
@@ -84681,6 +91716,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationUpdateManyWithoutIngestedByNestedInput
     preparedCaseResourceEstimates?: CaseResourceEstimateUpdateManyWithoutPreparedByNestedInput
     createdPortfolioScenarios?: PortfolioScenarioUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutCreatedByNestedInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutVoidedByNestedInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutRecordedByNestedInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutVoidedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutExecutionScheduleRevisionsInput = {
@@ -84726,6 +91765,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationUncheckedUpdateManyWithoutIngestedByNestedInput
     preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutPreparedByNestedInput
     createdPortfolioScenarios?: PortfolioScenarioUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutCreatedByNestedInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutVoidedByNestedInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutRecordedByNestedInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutVoidedByNestedInput
   }
 
   export type ExecutionTaskCreateWithoutEvidenceInput = {
@@ -84769,6 +91812,7 @@ export namespace Prisma {
     dependencies?: ExecutionTaskDependencyCreateNestedManyWithoutDependentTaskInput
     requiredBy?: ExecutionTaskDependencyCreateNestedManyWithoutPredecessorTaskInput
     blockerEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutExecutionTaskInput
+    predictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutExecutionTaskInput
   }
 
   export type ExecutionTaskUncheckedCreateWithoutEvidenceInput = {
@@ -84812,6 +91856,7 @@ export namespace Prisma {
     dependencies?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutDependentTaskInput
     requiredBy?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutPredecessorTaskInput
     blockerEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutExecutionTaskInput
+    predictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutExecutionTaskInput
   }
 
   export type ExecutionTaskCreateOrConnectWithoutEvidenceInput = {
@@ -84862,6 +91907,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationCreateNestedManyWithoutIngestedByInput
     preparedCaseResourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutPreparedByInput
     createdPortfolioScenarios?: PortfolioScenarioCreateNestedManyWithoutCreatedByInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutCreatedByInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutVoidedByInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutRecordedByInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutVoidedByInput
   }
 
   export type UserUncheckedCreateWithoutSubmittedExecutionEvidenceInput = {
@@ -84907,6 +91956,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutIngestedByInput
     preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutPreparedByInput
     createdPortfolioScenarios?: PortfolioScenarioUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutCreatedByInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutVoidedByInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutRecordedByInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutVoidedByInput
   }
 
   export type UserCreateOrConnectWithoutSubmittedExecutionEvidenceInput = {
@@ -84966,6 +92019,7 @@ export namespace Prisma {
     dependencies?: ExecutionTaskDependencyUpdateManyWithoutDependentTaskNestedInput
     requiredBy?: ExecutionTaskDependencyUpdateManyWithoutPredecessorTaskNestedInput
     blockerEvents?: ExecutionTaskBlockerEventUpdateManyWithoutExecutionTaskNestedInput
+    predictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutExecutionTaskNestedInput
   }
 
   export type ExecutionTaskUncheckedUpdateWithoutEvidenceInput = {
@@ -85009,6 +92063,7 @@ export namespace Prisma {
     dependencies?: ExecutionTaskDependencyUncheckedUpdateManyWithoutDependentTaskNestedInput
     requiredBy?: ExecutionTaskDependencyUncheckedUpdateManyWithoutPredecessorTaskNestedInput
     blockerEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutExecutionTaskNestedInput
+    predictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutExecutionTaskNestedInput
   }
 
   export type UserUpsertWithoutSubmittedExecutionEvidenceInput = {
@@ -85065,6 +92120,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationUpdateManyWithoutIngestedByNestedInput
     preparedCaseResourceEstimates?: CaseResourceEstimateUpdateManyWithoutPreparedByNestedInput
     createdPortfolioScenarios?: PortfolioScenarioUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutCreatedByNestedInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutVoidedByNestedInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutRecordedByNestedInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutVoidedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSubmittedExecutionEvidenceInput = {
@@ -85110,6 +92169,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationUncheckedUpdateManyWithoutIngestedByNestedInput
     preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutPreparedByNestedInput
     createdPortfolioScenarios?: PortfolioScenarioUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutCreatedByNestedInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutVoidedByNestedInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutRecordedByNestedInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutVoidedByNestedInput
   }
 
   export type CaseCreateWithoutClosureInput = {
@@ -85265,6 +92328,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationCreateNestedManyWithoutIngestedByInput
     preparedCaseResourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutPreparedByInput
     createdPortfolioScenarios?: PortfolioScenarioCreateNestedManyWithoutCreatedByInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutCreatedByInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutVoidedByInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutRecordedByInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutVoidedByInput
   }
 
   export type UserUncheckedCreateWithoutClosedCasesInput = {
@@ -85310,6 +92377,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutIngestedByInput
     preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutPreparedByInput
     createdPortfolioScenarios?: PortfolioScenarioUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutCreatedByInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutVoidedByInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutRecordedByInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutVoidedByInput
   }
 
   export type UserCreateOrConnectWithoutClosedCasesInput = {
@@ -85538,6 +92609,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationUpdateManyWithoutIngestedByNestedInput
     preparedCaseResourceEstimates?: CaseResourceEstimateUpdateManyWithoutPreparedByNestedInput
     createdPortfolioScenarios?: PortfolioScenarioUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutCreatedByNestedInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutVoidedByNestedInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutRecordedByNestedInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutVoidedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutClosedCasesInput = {
@@ -85583,6 +92658,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationUncheckedUpdateManyWithoutIngestedByNestedInput
     preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutPreparedByNestedInput
     createdPortfolioScenarios?: PortfolioScenarioUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutCreatedByNestedInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutVoidedByNestedInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutRecordedByNestedInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutVoidedByNestedInput
   }
 
   export type ApprovalAuthorityUpsertWithoutCaseClosuresInput = {
@@ -85872,6 +92951,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationUpdateManyWithoutIngestedByNestedInput
     preparedCaseResourceEstimates?: CaseResourceEstimateUpdateManyWithoutPreparedByNestedInput
     createdPortfolioScenarios?: PortfolioScenarioUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutCreatedByNestedInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutVoidedByNestedInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutRecordedByNestedInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutVoidedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutDepartmentInput = {
@@ -85917,6 +93000,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationUncheckedUpdateManyWithoutIngestedByNestedInput
     preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutPreparedByNestedInput
     createdPortfolioScenarios?: PortfolioScenarioUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutCreatedByNestedInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutVoidedByNestedInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutRecordedByNestedInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutVoidedByNestedInput
   }
 
   export type UserUncheckedUpdateManyWithoutDepartmentInput = {
@@ -86749,6 +93836,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationUpdateManyWithoutIngestedByNestedInput
     preparedCaseResourceEstimates?: CaseResourceEstimateUpdateManyWithoutPreparedByNestedInput
     createdPortfolioScenarios?: PortfolioScenarioUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutCreatedByNestedInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutVoidedByNestedInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutRecordedByNestedInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutVoidedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutJurisdictionInput = {
@@ -86794,6 +93885,10 @@ export namespace Prisma {
     ingestedExternalObservations?: ExternalObservationUncheckedUpdateManyWithoutIngestedByNestedInput
     preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutPreparedByNestedInput
     createdPortfolioScenarios?: PortfolioScenarioUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutCreatedByNestedInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutVoidedByNestedInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutRecordedByNestedInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutVoidedByNestedInput
   }
 
   export type UserUncheckedUpdateManyWithoutJurisdictionInput = {
@@ -87986,6 +95081,84 @@ export namespace Prisma {
     createdAt?: Date | string
   }
 
+  export type PredictiveFeatureSnapshotCreateManyCreatedByInput = {
+    id?: string
+    targetType: $Enums.PredictiveTargetType
+    executionTaskId: string
+    caseId: string
+    assetId: string
+    departmentId: string
+    jurisdictionId: string
+    predictionTimestamp: Date | string
+    featureContractVersion: string
+    featurePayload: JsonNullValueInput | InputJsonValue
+    provenanceClass: $Enums.PredictiveProvenanceClass
+    sourceReferences: JsonNullValueInput | InputJsonValue
+    sourceFingerprint: string
+    status?: $Enums.PredictiveRecordStatus
+    createdAt?: Date | string
+    voidedAt?: Date | string | null
+    voidedById?: string | null
+    voidReason?: string | null
+    replacementSnapshotId?: string | null
+  }
+
+  export type PredictiveFeatureSnapshotCreateManyVoidedByInput = {
+    id?: string
+    targetType: $Enums.PredictiveTargetType
+    executionTaskId: string
+    caseId: string
+    assetId: string
+    departmentId: string
+    jurisdictionId: string
+    predictionTimestamp: Date | string
+    featureContractVersion: string
+    featurePayload: JsonNullValueInput | InputJsonValue
+    provenanceClass: $Enums.PredictiveProvenanceClass
+    sourceReferences: JsonNullValueInput | InputJsonValue
+    sourceFingerprint: string
+    status?: $Enums.PredictiveRecordStatus
+    createdById: string
+    createdAt?: Date | string
+    voidedAt?: Date | string | null
+    voidReason?: string | null
+    replacementSnapshotId?: string | null
+  }
+
+  export type PredictiveOutcomeCreateManyRecordedByInput = {
+    id?: string
+    snapshotId: string
+    outcomeContractVersion: string
+    outcomeTimestamp: Date | string
+    outcomeValue: $Enums.PredictiveOutcomeValue
+    provenanceClass: $Enums.PredictiveProvenanceClass
+    sourceReferences: JsonNullValueInput | InputJsonValue
+    sourceFingerprint: string
+    status?: $Enums.PredictiveRecordStatus
+    recordedAt?: Date | string
+    voidedAt?: Date | string | null
+    voidedById?: string | null
+    voidReason?: string | null
+    replacementOutcomeId?: string | null
+  }
+
+  export type PredictiveOutcomeCreateManyVoidedByInput = {
+    id?: string
+    snapshotId: string
+    outcomeContractVersion: string
+    outcomeTimestamp: Date | string
+    outcomeValue: $Enums.PredictiveOutcomeValue
+    provenanceClass: $Enums.PredictiveProvenanceClass
+    sourceReferences: JsonNullValueInput | InputJsonValue
+    sourceFingerprint: string
+    status?: $Enums.PredictiveRecordStatus
+    recordedById: string
+    recordedAt?: Date | string
+    voidedAt?: Date | string | null
+    voidReason?: string | null
+    replacementOutcomeId?: string | null
+  }
+
   export type InspectionUpdateWithoutInspectorInput = {
     id?: StringFieldUpdateOperationsInput | string
     inspectionDate?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -88292,6 +95465,7 @@ export namespace Prisma {
     dependencies?: ExecutionTaskDependencyUpdateManyWithoutDependentTaskNestedInput
     requiredBy?: ExecutionTaskDependencyUpdateManyWithoutPredecessorTaskNestedInput
     blockerEvents?: ExecutionTaskBlockerEventUpdateManyWithoutExecutionTaskNestedInput
+    predictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutExecutionTaskNestedInput
   }
 
   export type ExecutionTaskUncheckedUpdateWithoutAssignedToInput = {
@@ -88335,6 +95509,7 @@ export namespace Prisma {
     dependencies?: ExecutionTaskDependencyUncheckedUpdateManyWithoutDependentTaskNestedInput
     requiredBy?: ExecutionTaskDependencyUncheckedUpdateManyWithoutPredecessorTaskNestedInput
     blockerEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutExecutionTaskNestedInput
+    predictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutExecutionTaskNestedInput
   }
 
   export type ExecutionTaskUncheckedUpdateManyWithoutAssignedToInput = {
@@ -88416,6 +95591,7 @@ export namespace Prisma {
     dependencies?: ExecutionTaskDependencyUpdateManyWithoutDependentTaskNestedInput
     requiredBy?: ExecutionTaskDependencyUpdateManyWithoutPredecessorTaskNestedInput
     blockerEvents?: ExecutionTaskBlockerEventUpdateManyWithoutExecutionTaskNestedInput
+    predictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutExecutionTaskNestedInput
   }
 
   export type ExecutionTaskUncheckedUpdateWithoutAssignedByInput = {
@@ -88459,6 +95635,7 @@ export namespace Prisma {
     dependencies?: ExecutionTaskDependencyUncheckedUpdateManyWithoutDependentTaskNestedInput
     requiredBy?: ExecutionTaskDependencyUncheckedUpdateManyWithoutPredecessorTaskNestedInput
     blockerEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutExecutionTaskNestedInput
+    predictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutExecutionTaskNestedInput
   }
 
   export type ExecutionTaskUncheckedUpdateManyWithoutAssignedByInput = {
@@ -88540,6 +95717,7 @@ export namespace Prisma {
     dependencies?: ExecutionTaskDependencyUpdateManyWithoutDependentTaskNestedInput
     requiredBy?: ExecutionTaskDependencyUpdateManyWithoutPredecessorTaskNestedInput
     blockerEvents?: ExecutionTaskBlockerEventUpdateManyWithoutExecutionTaskNestedInput
+    predictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutExecutionTaskNestedInput
   }
 
   export type ExecutionTaskUncheckedUpdateWithoutCompletionSubmittedByInput = {
@@ -88583,6 +95761,7 @@ export namespace Prisma {
     dependencies?: ExecutionTaskDependencyUncheckedUpdateManyWithoutDependentTaskNestedInput
     requiredBy?: ExecutionTaskDependencyUncheckedUpdateManyWithoutPredecessorTaskNestedInput
     blockerEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutExecutionTaskNestedInput
+    predictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutExecutionTaskNestedInput
   }
 
   export type ExecutionTaskUncheckedUpdateManyWithoutCompletionSubmittedByInput = {
@@ -88664,6 +95843,7 @@ export namespace Prisma {
     dependencies?: ExecutionTaskDependencyUpdateManyWithoutDependentTaskNestedInput
     requiredBy?: ExecutionTaskDependencyUpdateManyWithoutPredecessorTaskNestedInput
     blockerEvents?: ExecutionTaskBlockerEventUpdateManyWithoutExecutionTaskNestedInput
+    predictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutExecutionTaskNestedInput
   }
 
   export type ExecutionTaskUncheckedUpdateWithoutVerifiedByInput = {
@@ -88707,6 +95887,7 @@ export namespace Prisma {
     dependencies?: ExecutionTaskDependencyUncheckedUpdateManyWithoutDependentTaskNestedInput
     requiredBy?: ExecutionTaskDependencyUncheckedUpdateManyWithoutPredecessorTaskNestedInput
     blockerEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutExecutionTaskNestedInput
+    predictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutExecutionTaskNestedInput
   }
 
   export type ExecutionTaskUncheckedUpdateManyWithoutVerifiedByInput = {
@@ -88788,6 +95969,7 @@ export namespace Prisma {
     dependencies?: ExecutionTaskDependencyUpdateManyWithoutDependentTaskNestedInput
     requiredBy?: ExecutionTaskDependencyUpdateManyWithoutPredecessorTaskNestedInput
     blockerEvents?: ExecutionTaskBlockerEventUpdateManyWithoutExecutionTaskNestedInput
+    predictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutExecutionTaskNestedInput
   }
 
   export type ExecutionTaskUncheckedUpdateWithoutCancelledByInput = {
@@ -88831,6 +96013,7 @@ export namespace Prisma {
     dependencies?: ExecutionTaskDependencyUncheckedUpdateManyWithoutDependentTaskNestedInput
     requiredBy?: ExecutionTaskDependencyUncheckedUpdateManyWithoutPredecessorTaskNestedInput
     blockerEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutExecutionTaskNestedInput
+    predictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutExecutionTaskNestedInput
   }
 
   export type ExecutionTaskUncheckedUpdateManyWithoutCancelledByInput = {
@@ -89986,6 +97169,252 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type PredictiveFeatureSnapshotUpdateWithoutCreatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    targetType?: EnumPredictiveTargetTypeFieldUpdateOperationsInput | $Enums.PredictiveTargetType
+    caseId?: StringFieldUpdateOperationsInput | string
+    assetId?: StringFieldUpdateOperationsInput | string
+    departmentId?: StringFieldUpdateOperationsInput | string
+    jurisdictionId?: StringFieldUpdateOperationsInput | string
+    predictionTimestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    featureContractVersion?: StringFieldUpdateOperationsInput | string
+    featurePayload?: JsonNullValueInput | InputJsonValue
+    provenanceClass?: EnumPredictiveProvenanceClassFieldUpdateOperationsInput | $Enums.PredictiveProvenanceClass
+    sourceReferences?: JsonNullValueInput | InputJsonValue
+    sourceFingerprint?: StringFieldUpdateOperationsInput | string
+    status?: EnumPredictiveRecordStatusFieldUpdateOperationsInput | $Enums.PredictiveRecordStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    voidedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    voidReason?: NullableStringFieldUpdateOperationsInput | string | null
+    executionTask?: ExecutionTaskUpdateOneRequiredWithoutPredictiveSnapshotsNestedInput
+    voidedBy?: UserUpdateOneWithoutVoidedPredictiveSnapshotsNestedInput
+    replacementSnapshot?: PredictiveFeatureSnapshotUpdateOneWithoutReplacesNestedInput
+    replaces?: PredictiveFeatureSnapshotUpdateOneWithoutReplacementSnapshotNestedInput
+    outcomes?: PredictiveOutcomeUpdateManyWithoutSnapshotNestedInput
+  }
+
+  export type PredictiveFeatureSnapshotUncheckedUpdateWithoutCreatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    targetType?: EnumPredictiveTargetTypeFieldUpdateOperationsInput | $Enums.PredictiveTargetType
+    executionTaskId?: StringFieldUpdateOperationsInput | string
+    caseId?: StringFieldUpdateOperationsInput | string
+    assetId?: StringFieldUpdateOperationsInput | string
+    departmentId?: StringFieldUpdateOperationsInput | string
+    jurisdictionId?: StringFieldUpdateOperationsInput | string
+    predictionTimestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    featureContractVersion?: StringFieldUpdateOperationsInput | string
+    featurePayload?: JsonNullValueInput | InputJsonValue
+    provenanceClass?: EnumPredictiveProvenanceClassFieldUpdateOperationsInput | $Enums.PredictiveProvenanceClass
+    sourceReferences?: JsonNullValueInput | InputJsonValue
+    sourceFingerprint?: StringFieldUpdateOperationsInput | string
+    status?: EnumPredictiveRecordStatusFieldUpdateOperationsInput | $Enums.PredictiveRecordStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    voidedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    voidedById?: NullableStringFieldUpdateOperationsInput | string | null
+    voidReason?: NullableStringFieldUpdateOperationsInput | string | null
+    replacementSnapshotId?: NullableStringFieldUpdateOperationsInput | string | null
+    replaces?: PredictiveFeatureSnapshotUncheckedUpdateOneWithoutReplacementSnapshotNestedInput
+    outcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutSnapshotNestedInput
+  }
+
+  export type PredictiveFeatureSnapshotUncheckedUpdateManyWithoutCreatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    targetType?: EnumPredictiveTargetTypeFieldUpdateOperationsInput | $Enums.PredictiveTargetType
+    executionTaskId?: StringFieldUpdateOperationsInput | string
+    caseId?: StringFieldUpdateOperationsInput | string
+    assetId?: StringFieldUpdateOperationsInput | string
+    departmentId?: StringFieldUpdateOperationsInput | string
+    jurisdictionId?: StringFieldUpdateOperationsInput | string
+    predictionTimestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    featureContractVersion?: StringFieldUpdateOperationsInput | string
+    featurePayload?: JsonNullValueInput | InputJsonValue
+    provenanceClass?: EnumPredictiveProvenanceClassFieldUpdateOperationsInput | $Enums.PredictiveProvenanceClass
+    sourceReferences?: JsonNullValueInput | InputJsonValue
+    sourceFingerprint?: StringFieldUpdateOperationsInput | string
+    status?: EnumPredictiveRecordStatusFieldUpdateOperationsInput | $Enums.PredictiveRecordStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    voidedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    voidedById?: NullableStringFieldUpdateOperationsInput | string | null
+    voidReason?: NullableStringFieldUpdateOperationsInput | string | null
+    replacementSnapshotId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type PredictiveFeatureSnapshotUpdateWithoutVoidedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    targetType?: EnumPredictiveTargetTypeFieldUpdateOperationsInput | $Enums.PredictiveTargetType
+    caseId?: StringFieldUpdateOperationsInput | string
+    assetId?: StringFieldUpdateOperationsInput | string
+    departmentId?: StringFieldUpdateOperationsInput | string
+    jurisdictionId?: StringFieldUpdateOperationsInput | string
+    predictionTimestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    featureContractVersion?: StringFieldUpdateOperationsInput | string
+    featurePayload?: JsonNullValueInput | InputJsonValue
+    provenanceClass?: EnumPredictiveProvenanceClassFieldUpdateOperationsInput | $Enums.PredictiveProvenanceClass
+    sourceReferences?: JsonNullValueInput | InputJsonValue
+    sourceFingerprint?: StringFieldUpdateOperationsInput | string
+    status?: EnumPredictiveRecordStatusFieldUpdateOperationsInput | $Enums.PredictiveRecordStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    voidedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    voidReason?: NullableStringFieldUpdateOperationsInput | string | null
+    executionTask?: ExecutionTaskUpdateOneRequiredWithoutPredictiveSnapshotsNestedInput
+    createdBy?: UserUpdateOneRequiredWithoutCreatedPredictiveSnapshotsNestedInput
+    replacementSnapshot?: PredictiveFeatureSnapshotUpdateOneWithoutReplacesNestedInput
+    replaces?: PredictiveFeatureSnapshotUpdateOneWithoutReplacementSnapshotNestedInput
+    outcomes?: PredictiveOutcomeUpdateManyWithoutSnapshotNestedInput
+  }
+
+  export type PredictiveFeatureSnapshotUncheckedUpdateWithoutVoidedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    targetType?: EnumPredictiveTargetTypeFieldUpdateOperationsInput | $Enums.PredictiveTargetType
+    executionTaskId?: StringFieldUpdateOperationsInput | string
+    caseId?: StringFieldUpdateOperationsInput | string
+    assetId?: StringFieldUpdateOperationsInput | string
+    departmentId?: StringFieldUpdateOperationsInput | string
+    jurisdictionId?: StringFieldUpdateOperationsInput | string
+    predictionTimestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    featureContractVersion?: StringFieldUpdateOperationsInput | string
+    featurePayload?: JsonNullValueInput | InputJsonValue
+    provenanceClass?: EnumPredictiveProvenanceClassFieldUpdateOperationsInput | $Enums.PredictiveProvenanceClass
+    sourceReferences?: JsonNullValueInput | InputJsonValue
+    sourceFingerprint?: StringFieldUpdateOperationsInput | string
+    status?: EnumPredictiveRecordStatusFieldUpdateOperationsInput | $Enums.PredictiveRecordStatus
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    voidedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    voidReason?: NullableStringFieldUpdateOperationsInput | string | null
+    replacementSnapshotId?: NullableStringFieldUpdateOperationsInput | string | null
+    replaces?: PredictiveFeatureSnapshotUncheckedUpdateOneWithoutReplacementSnapshotNestedInput
+    outcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutSnapshotNestedInput
+  }
+
+  export type PredictiveFeatureSnapshotUncheckedUpdateManyWithoutVoidedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    targetType?: EnumPredictiveTargetTypeFieldUpdateOperationsInput | $Enums.PredictiveTargetType
+    executionTaskId?: StringFieldUpdateOperationsInput | string
+    caseId?: StringFieldUpdateOperationsInput | string
+    assetId?: StringFieldUpdateOperationsInput | string
+    departmentId?: StringFieldUpdateOperationsInput | string
+    jurisdictionId?: StringFieldUpdateOperationsInput | string
+    predictionTimestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    featureContractVersion?: StringFieldUpdateOperationsInput | string
+    featurePayload?: JsonNullValueInput | InputJsonValue
+    provenanceClass?: EnumPredictiveProvenanceClassFieldUpdateOperationsInput | $Enums.PredictiveProvenanceClass
+    sourceReferences?: JsonNullValueInput | InputJsonValue
+    sourceFingerprint?: StringFieldUpdateOperationsInput | string
+    status?: EnumPredictiveRecordStatusFieldUpdateOperationsInput | $Enums.PredictiveRecordStatus
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    voidedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    voidReason?: NullableStringFieldUpdateOperationsInput | string | null
+    replacementSnapshotId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type PredictiveOutcomeUpdateWithoutRecordedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    outcomeContractVersion?: StringFieldUpdateOperationsInput | string
+    outcomeTimestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    outcomeValue?: EnumPredictiveOutcomeValueFieldUpdateOperationsInput | $Enums.PredictiveOutcomeValue
+    provenanceClass?: EnumPredictiveProvenanceClassFieldUpdateOperationsInput | $Enums.PredictiveProvenanceClass
+    sourceReferences?: JsonNullValueInput | InputJsonValue
+    sourceFingerprint?: StringFieldUpdateOperationsInput | string
+    status?: EnumPredictiveRecordStatusFieldUpdateOperationsInput | $Enums.PredictiveRecordStatus
+    recordedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    voidedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    voidReason?: NullableStringFieldUpdateOperationsInput | string | null
+    snapshot?: PredictiveFeatureSnapshotUpdateOneRequiredWithoutOutcomesNestedInput
+    voidedBy?: UserUpdateOneWithoutVoidedPredictiveOutcomesNestedInput
+    replacementOutcome?: PredictiveOutcomeUpdateOneWithoutReplacesNestedInput
+    replaces?: PredictiveOutcomeUpdateOneWithoutReplacementOutcomeNestedInput
+  }
+
+  export type PredictiveOutcomeUncheckedUpdateWithoutRecordedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    snapshotId?: StringFieldUpdateOperationsInput | string
+    outcomeContractVersion?: StringFieldUpdateOperationsInput | string
+    outcomeTimestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    outcomeValue?: EnumPredictiveOutcomeValueFieldUpdateOperationsInput | $Enums.PredictiveOutcomeValue
+    provenanceClass?: EnumPredictiveProvenanceClassFieldUpdateOperationsInput | $Enums.PredictiveProvenanceClass
+    sourceReferences?: JsonNullValueInput | InputJsonValue
+    sourceFingerprint?: StringFieldUpdateOperationsInput | string
+    status?: EnumPredictiveRecordStatusFieldUpdateOperationsInput | $Enums.PredictiveRecordStatus
+    recordedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    voidedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    voidedById?: NullableStringFieldUpdateOperationsInput | string | null
+    voidReason?: NullableStringFieldUpdateOperationsInput | string | null
+    replacementOutcomeId?: NullableStringFieldUpdateOperationsInput | string | null
+    replaces?: PredictiveOutcomeUncheckedUpdateOneWithoutReplacementOutcomeNestedInput
+  }
+
+  export type PredictiveOutcomeUncheckedUpdateManyWithoutRecordedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    snapshotId?: StringFieldUpdateOperationsInput | string
+    outcomeContractVersion?: StringFieldUpdateOperationsInput | string
+    outcomeTimestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    outcomeValue?: EnumPredictiveOutcomeValueFieldUpdateOperationsInput | $Enums.PredictiveOutcomeValue
+    provenanceClass?: EnumPredictiveProvenanceClassFieldUpdateOperationsInput | $Enums.PredictiveProvenanceClass
+    sourceReferences?: JsonNullValueInput | InputJsonValue
+    sourceFingerprint?: StringFieldUpdateOperationsInput | string
+    status?: EnumPredictiveRecordStatusFieldUpdateOperationsInput | $Enums.PredictiveRecordStatus
+    recordedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    voidedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    voidedById?: NullableStringFieldUpdateOperationsInput | string | null
+    voidReason?: NullableStringFieldUpdateOperationsInput | string | null
+    replacementOutcomeId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type PredictiveOutcomeUpdateWithoutVoidedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    outcomeContractVersion?: StringFieldUpdateOperationsInput | string
+    outcomeTimestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    outcomeValue?: EnumPredictiveOutcomeValueFieldUpdateOperationsInput | $Enums.PredictiveOutcomeValue
+    provenanceClass?: EnumPredictiveProvenanceClassFieldUpdateOperationsInput | $Enums.PredictiveProvenanceClass
+    sourceReferences?: JsonNullValueInput | InputJsonValue
+    sourceFingerprint?: StringFieldUpdateOperationsInput | string
+    status?: EnumPredictiveRecordStatusFieldUpdateOperationsInput | $Enums.PredictiveRecordStatus
+    recordedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    voidedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    voidReason?: NullableStringFieldUpdateOperationsInput | string | null
+    snapshot?: PredictiveFeatureSnapshotUpdateOneRequiredWithoutOutcomesNestedInput
+    recordedBy?: UserUpdateOneRequiredWithoutRecordedPredictiveOutcomesNestedInput
+    replacementOutcome?: PredictiveOutcomeUpdateOneWithoutReplacesNestedInput
+    replaces?: PredictiveOutcomeUpdateOneWithoutReplacementOutcomeNestedInput
+  }
+
+  export type PredictiveOutcomeUncheckedUpdateWithoutVoidedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    snapshotId?: StringFieldUpdateOperationsInput | string
+    outcomeContractVersion?: StringFieldUpdateOperationsInput | string
+    outcomeTimestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    outcomeValue?: EnumPredictiveOutcomeValueFieldUpdateOperationsInput | $Enums.PredictiveOutcomeValue
+    provenanceClass?: EnumPredictiveProvenanceClassFieldUpdateOperationsInput | $Enums.PredictiveProvenanceClass
+    sourceReferences?: JsonNullValueInput | InputJsonValue
+    sourceFingerprint?: StringFieldUpdateOperationsInput | string
+    status?: EnumPredictiveRecordStatusFieldUpdateOperationsInput | $Enums.PredictiveRecordStatus
+    recordedById?: StringFieldUpdateOperationsInput | string
+    recordedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    voidedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    voidReason?: NullableStringFieldUpdateOperationsInput | string | null
+    replacementOutcomeId?: NullableStringFieldUpdateOperationsInput | string | null
+    replaces?: PredictiveOutcomeUncheckedUpdateOneWithoutReplacementOutcomeNestedInput
+  }
+
+  export type PredictiveOutcomeUncheckedUpdateManyWithoutVoidedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    snapshotId?: StringFieldUpdateOperationsInput | string
+    outcomeContractVersion?: StringFieldUpdateOperationsInput | string
+    outcomeTimestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    outcomeValue?: EnumPredictiveOutcomeValueFieldUpdateOperationsInput | $Enums.PredictiveOutcomeValue
+    provenanceClass?: EnumPredictiveProvenanceClassFieldUpdateOperationsInput | $Enums.PredictiveProvenanceClass
+    sourceReferences?: JsonNullValueInput | InputJsonValue
+    sourceFingerprint?: StringFieldUpdateOperationsInput | string
+    status?: EnumPredictiveRecordStatusFieldUpdateOperationsInput | $Enums.PredictiveRecordStatus
+    recordedById?: StringFieldUpdateOperationsInput | string
+    recordedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    voidedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    voidReason?: NullableStringFieldUpdateOperationsInput | string | null
+    replacementOutcomeId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
   export type CaseCreateManyAssetInput = {
     id?: string
     caseNumber: string
@@ -90705,6 +98134,7 @@ export namespace Prisma {
     dependencies?: ExecutionTaskDependencyUpdateManyWithoutDependentTaskNestedInput
     requiredBy?: ExecutionTaskDependencyUpdateManyWithoutPredecessorTaskNestedInput
     blockerEvents?: ExecutionTaskBlockerEventUpdateManyWithoutExecutionTaskNestedInput
+    predictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutExecutionTaskNestedInput
   }
 
   export type ExecutionTaskUncheckedUpdateWithoutApprovedActionVersionInput = {
@@ -90748,6 +98178,7 @@ export namespace Prisma {
     dependencies?: ExecutionTaskDependencyUncheckedUpdateManyWithoutDependentTaskNestedInput
     requiredBy?: ExecutionTaskDependencyUncheckedUpdateManyWithoutPredecessorTaskNestedInput
     blockerEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutExecutionTaskNestedInput
+    predictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutExecutionTaskNestedInput
   }
 
   export type ExecutionTaskUncheckedUpdateManyWithoutApprovedActionVersionInput = {
@@ -90925,6 +98356,7 @@ export namespace Prisma {
     dependencies?: ExecutionTaskDependencyUpdateManyWithoutDependentTaskNestedInput
     requiredBy?: ExecutionTaskDependencyUpdateManyWithoutPredecessorTaskNestedInput
     blockerEvents?: ExecutionTaskBlockerEventUpdateManyWithoutExecutionTaskNestedInput
+    predictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutExecutionTaskNestedInput
   }
 
   export type ExecutionTaskUncheckedUpdateWithoutGovernedExecutionTemplateInput = {
@@ -90968,6 +98400,7 @@ export namespace Prisma {
     dependencies?: ExecutionTaskDependencyUncheckedUpdateManyWithoutDependentTaskNestedInput
     requiredBy?: ExecutionTaskDependencyUncheckedUpdateManyWithoutPredecessorTaskNestedInput
     blockerEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutExecutionTaskNestedInput
+    predictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutExecutionTaskNestedInput
   }
 
   export type ExecutionTaskUncheckedUpdateManyWithoutGovernedExecutionTemplateInput = {
@@ -91087,6 +98520,7 @@ export namespace Prisma {
     dependencies?: ExecutionTaskDependencyUpdateManyWithoutDependentTaskNestedInput
     requiredBy?: ExecutionTaskDependencyUpdateManyWithoutPredecessorTaskNestedInput
     blockerEvents?: ExecutionTaskBlockerEventUpdateManyWithoutExecutionTaskNestedInput
+    predictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutExecutionTaskNestedInput
   }
 
   export type ExecutionTaskUncheckedUpdateWithoutGovernedTaskTemplateInput = {
@@ -91130,6 +98564,7 @@ export namespace Prisma {
     dependencies?: ExecutionTaskDependencyUncheckedUpdateManyWithoutDependentTaskNestedInput
     requiredBy?: ExecutionTaskDependencyUncheckedUpdateManyWithoutPredecessorTaskNestedInput
     blockerEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutExecutionTaskNestedInput
+    predictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutExecutionTaskNestedInput
   }
 
   export type ExecutionTaskUncheckedUpdateManyWithoutGovernedTaskTemplateInput = {
@@ -92901,6 +100336,7 @@ export namespace Prisma {
     dependencies?: ExecutionTaskDependencyUpdateManyWithoutDependentTaskNestedInput
     requiredBy?: ExecutionTaskDependencyUpdateManyWithoutPredecessorTaskNestedInput
     blockerEvents?: ExecutionTaskBlockerEventUpdateManyWithoutExecutionTaskNestedInput
+    predictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutExecutionTaskNestedInput
   }
 
   export type ExecutionTaskUncheckedUpdateWithoutExecutionPlanInput = {
@@ -92944,6 +100380,7 @@ export namespace Prisma {
     dependencies?: ExecutionTaskDependencyUncheckedUpdateManyWithoutDependentTaskNestedInput
     requiredBy?: ExecutionTaskDependencyUncheckedUpdateManyWithoutPredecessorTaskNestedInput
     blockerEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutExecutionTaskNestedInput
+    predictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutExecutionTaskNestedInput
   }
 
   export type ExecutionTaskUncheckedUpdateManyWithoutExecutionPlanInput = {
@@ -93093,6 +100530,28 @@ export namespace Prisma {
     resolvedById?: string | null
     resolvedAt?: Date | string | null
     resolutionReason?: string | null
+  }
+
+  export type PredictiveFeatureSnapshotCreateManyExecutionTaskInput = {
+    id?: string
+    targetType: $Enums.PredictiveTargetType
+    caseId: string
+    assetId: string
+    departmentId: string
+    jurisdictionId: string
+    predictionTimestamp: Date | string
+    featureContractVersion: string
+    featurePayload: JsonNullValueInput | InputJsonValue
+    provenanceClass: $Enums.PredictiveProvenanceClass
+    sourceReferences: JsonNullValueInput | InputJsonValue
+    sourceFingerprint: string
+    status?: $Enums.PredictiveRecordStatus
+    createdById: string
+    createdAt?: Date | string
+    voidedAt?: Date | string | null
+    voidedById?: string | null
+    voidReason?: string | null
+    replacementSnapshotId?: string | null
   }
 
   export type ExecutionEvidenceUpdateWithoutExecutionTaskInput = {
@@ -93246,6 +100705,146 @@ export namespace Prisma {
     resolvedById?: NullableStringFieldUpdateOperationsInput | string | null
     resolvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     resolutionReason?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type PredictiveFeatureSnapshotUpdateWithoutExecutionTaskInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    targetType?: EnumPredictiveTargetTypeFieldUpdateOperationsInput | $Enums.PredictiveTargetType
+    caseId?: StringFieldUpdateOperationsInput | string
+    assetId?: StringFieldUpdateOperationsInput | string
+    departmentId?: StringFieldUpdateOperationsInput | string
+    jurisdictionId?: StringFieldUpdateOperationsInput | string
+    predictionTimestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    featureContractVersion?: StringFieldUpdateOperationsInput | string
+    featurePayload?: JsonNullValueInput | InputJsonValue
+    provenanceClass?: EnumPredictiveProvenanceClassFieldUpdateOperationsInput | $Enums.PredictiveProvenanceClass
+    sourceReferences?: JsonNullValueInput | InputJsonValue
+    sourceFingerprint?: StringFieldUpdateOperationsInput | string
+    status?: EnumPredictiveRecordStatusFieldUpdateOperationsInput | $Enums.PredictiveRecordStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    voidedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    voidReason?: NullableStringFieldUpdateOperationsInput | string | null
+    createdBy?: UserUpdateOneRequiredWithoutCreatedPredictiveSnapshotsNestedInput
+    voidedBy?: UserUpdateOneWithoutVoidedPredictiveSnapshotsNestedInput
+    replacementSnapshot?: PredictiveFeatureSnapshotUpdateOneWithoutReplacesNestedInput
+    replaces?: PredictiveFeatureSnapshotUpdateOneWithoutReplacementSnapshotNestedInput
+    outcomes?: PredictiveOutcomeUpdateManyWithoutSnapshotNestedInput
+  }
+
+  export type PredictiveFeatureSnapshotUncheckedUpdateWithoutExecutionTaskInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    targetType?: EnumPredictiveTargetTypeFieldUpdateOperationsInput | $Enums.PredictiveTargetType
+    caseId?: StringFieldUpdateOperationsInput | string
+    assetId?: StringFieldUpdateOperationsInput | string
+    departmentId?: StringFieldUpdateOperationsInput | string
+    jurisdictionId?: StringFieldUpdateOperationsInput | string
+    predictionTimestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    featureContractVersion?: StringFieldUpdateOperationsInput | string
+    featurePayload?: JsonNullValueInput | InputJsonValue
+    provenanceClass?: EnumPredictiveProvenanceClassFieldUpdateOperationsInput | $Enums.PredictiveProvenanceClass
+    sourceReferences?: JsonNullValueInput | InputJsonValue
+    sourceFingerprint?: StringFieldUpdateOperationsInput | string
+    status?: EnumPredictiveRecordStatusFieldUpdateOperationsInput | $Enums.PredictiveRecordStatus
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    voidedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    voidedById?: NullableStringFieldUpdateOperationsInput | string | null
+    voidReason?: NullableStringFieldUpdateOperationsInput | string | null
+    replacementSnapshotId?: NullableStringFieldUpdateOperationsInput | string | null
+    replaces?: PredictiveFeatureSnapshotUncheckedUpdateOneWithoutReplacementSnapshotNestedInput
+    outcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutSnapshotNestedInput
+  }
+
+  export type PredictiveFeatureSnapshotUncheckedUpdateManyWithoutExecutionTaskInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    targetType?: EnumPredictiveTargetTypeFieldUpdateOperationsInput | $Enums.PredictiveTargetType
+    caseId?: StringFieldUpdateOperationsInput | string
+    assetId?: StringFieldUpdateOperationsInput | string
+    departmentId?: StringFieldUpdateOperationsInput | string
+    jurisdictionId?: StringFieldUpdateOperationsInput | string
+    predictionTimestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    featureContractVersion?: StringFieldUpdateOperationsInput | string
+    featurePayload?: JsonNullValueInput | InputJsonValue
+    provenanceClass?: EnumPredictiveProvenanceClassFieldUpdateOperationsInput | $Enums.PredictiveProvenanceClass
+    sourceReferences?: JsonNullValueInput | InputJsonValue
+    sourceFingerprint?: StringFieldUpdateOperationsInput | string
+    status?: EnumPredictiveRecordStatusFieldUpdateOperationsInput | $Enums.PredictiveRecordStatus
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    voidedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    voidedById?: NullableStringFieldUpdateOperationsInput | string | null
+    voidReason?: NullableStringFieldUpdateOperationsInput | string | null
+    replacementSnapshotId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type PredictiveOutcomeCreateManySnapshotInput = {
+    id?: string
+    outcomeContractVersion: string
+    outcomeTimestamp: Date | string
+    outcomeValue: $Enums.PredictiveOutcomeValue
+    provenanceClass: $Enums.PredictiveProvenanceClass
+    sourceReferences: JsonNullValueInput | InputJsonValue
+    sourceFingerprint: string
+    status?: $Enums.PredictiveRecordStatus
+    recordedById: string
+    recordedAt?: Date | string
+    voidedAt?: Date | string | null
+    voidedById?: string | null
+    voidReason?: string | null
+    replacementOutcomeId?: string | null
+  }
+
+  export type PredictiveOutcomeUpdateWithoutSnapshotInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    outcomeContractVersion?: StringFieldUpdateOperationsInput | string
+    outcomeTimestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    outcomeValue?: EnumPredictiveOutcomeValueFieldUpdateOperationsInput | $Enums.PredictiveOutcomeValue
+    provenanceClass?: EnumPredictiveProvenanceClassFieldUpdateOperationsInput | $Enums.PredictiveProvenanceClass
+    sourceReferences?: JsonNullValueInput | InputJsonValue
+    sourceFingerprint?: StringFieldUpdateOperationsInput | string
+    status?: EnumPredictiveRecordStatusFieldUpdateOperationsInput | $Enums.PredictiveRecordStatus
+    recordedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    voidedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    voidReason?: NullableStringFieldUpdateOperationsInput | string | null
+    recordedBy?: UserUpdateOneRequiredWithoutRecordedPredictiveOutcomesNestedInput
+    voidedBy?: UserUpdateOneWithoutVoidedPredictiveOutcomesNestedInput
+    replacementOutcome?: PredictiveOutcomeUpdateOneWithoutReplacesNestedInput
+    replaces?: PredictiveOutcomeUpdateOneWithoutReplacementOutcomeNestedInput
+  }
+
+  export type PredictiveOutcomeUncheckedUpdateWithoutSnapshotInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    outcomeContractVersion?: StringFieldUpdateOperationsInput | string
+    outcomeTimestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    outcomeValue?: EnumPredictiveOutcomeValueFieldUpdateOperationsInput | $Enums.PredictiveOutcomeValue
+    provenanceClass?: EnumPredictiveProvenanceClassFieldUpdateOperationsInput | $Enums.PredictiveProvenanceClass
+    sourceReferences?: JsonNullValueInput | InputJsonValue
+    sourceFingerprint?: StringFieldUpdateOperationsInput | string
+    status?: EnumPredictiveRecordStatusFieldUpdateOperationsInput | $Enums.PredictiveRecordStatus
+    recordedById?: StringFieldUpdateOperationsInput | string
+    recordedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    voidedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    voidedById?: NullableStringFieldUpdateOperationsInput | string | null
+    voidReason?: NullableStringFieldUpdateOperationsInput | string | null
+    replacementOutcomeId?: NullableStringFieldUpdateOperationsInput | string | null
+    replaces?: PredictiveOutcomeUncheckedUpdateOneWithoutReplacementOutcomeNestedInput
+  }
+
+  export type PredictiveOutcomeUncheckedUpdateManyWithoutSnapshotInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    outcomeContractVersion?: StringFieldUpdateOperationsInput | string
+    outcomeTimestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    outcomeValue?: EnumPredictiveOutcomeValueFieldUpdateOperationsInput | $Enums.PredictiveOutcomeValue
+    provenanceClass?: EnumPredictiveProvenanceClassFieldUpdateOperationsInput | $Enums.PredictiveProvenanceClass
+    sourceReferences?: JsonNullValueInput | InputJsonValue
+    sourceFingerprint?: StringFieldUpdateOperationsInput | string
+    status?: EnumPredictiveRecordStatusFieldUpdateOperationsInput | $Enums.PredictiveRecordStatus
+    recordedById?: StringFieldUpdateOperationsInput | string
+    recordedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    voidedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    voidedById?: NullableStringFieldUpdateOperationsInput | string | null
+    voidReason?: NullableStringFieldUpdateOperationsInput | string | null
+    replacementOutcomeId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
 

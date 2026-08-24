@@ -6,6 +6,7 @@ import { EXECUTION_TEMPLATE_VERSION, translateActionsToTasks } from './execution
 import { z } from 'zod';
 import { GovernedTemplateError, resolveGovernedTemplate } from '../execution-templates/governed-execution-template.service';
 import { pageFromRows, type StableCursor } from '../../lib/pagination';
+import { collectAssignmentBestEffort, collectOutcomeBestEffort } from '../predictive-data/predictive-data.service';
 
 export const GOVERNED_EXECUTION_CONTRACT_VERSION='ODYSSEY_GOVERNED_EXECUTION_V1';
 const governedAction=z.object({actionId:z.string().uuid(),actionCode:z.string().min(1),actionVersion:z.number().int().positive(),classification:z.enum(['MANDATORY','RECOMMENDED','OPTIONAL','PROHIBITED'])}).passthrough();
@@ -179,13 +180,15 @@ async function assertTaskMutable(tx: Prisma.TransactionClient, taskId: string) {
 
 export async function assignTask(taskId: string, assigneeId: string, principal: OrganizationalPrincipal) {
   const { task, assignee } = await assertEligibleExecutionAssignee(taskId, assigneeId, principal);
-  return prisma.$transaction(async (tx) => {
+  const assigned = await prisma.$transaction(async (tx) => {
     await assertTaskMutable(tx, taskId);
     const changed = await tx.executionTask.updateMany({ where: { id: taskId, status: ExecutionTaskStatus.PENDING }, data: { assignedToId: assignee.id, assignedById: principal.id, assignedAt: new Date(), status: ExecutionTaskStatus.ASSIGNED } });
     if (changed.count !== 1) throw new ExecutionError('INVALID_EXECUTION_TASK_STATE', 409, 'Task is not pending.');
     await refreshPlan(tx, task.executionPlanId);
     return tx.executionTask.findUniqueOrThrow({ where: { id: taskId }, include: taskInclude });
   }, { isolationLevel: Prisma.TransactionIsolationLevel.Serializable });
+  await collectAssignmentBestEffort(taskId, principal.id);
+  return assigned;
 }
 
 export async function changeTaskStatus(taskId: string, requested: 'IN_PROGRESS' | 'BLOCKED' | 'CANCELLED', reason: string | undefined, principal: OrganizationalPrincipal, blockerCategory?: ExecutionBlockerCategory) {
@@ -202,7 +205,7 @@ export async function changeTaskStatus(taskId: string, requested: 'IN_PROGRESS' 
     if (requested === 'BLOCKED' && !blockerCategory) throw new ExecutionError('INVALID_INPUT', 400, 'Blocker category is required.');
     if (requested === 'IN_PROGRESS' && task.status === ExecutionTaskStatus.BLOCKED && !reason?.trim()) throw new ExecutionError('INVALID_INPUT', 400, 'Resolution reason is required.');
   }
-  return prisma.$transaction(async (tx) => {
+  const changedTask = await prisma.$transaction(async (tx) => {
     await assertTaskMutable(tx, taskId);
     if(requested==='IN_PROGRESS'){
       const unmet=await findUnmetTaskDependencies(tx,taskId);
@@ -216,6 +219,8 @@ export async function changeTaskStatus(taskId: string, requested: 'IN_PROGRESS' 
     await refreshPlan(tx, task.executionPlanId);
     return tx.executionTask.findUniqueOrThrow({ where: { id: taskId }, include: taskInclude });
   }, { isolationLevel: Prisma.TransactionIsolationLevel.Serializable });
+  if (requested === 'CANCELLED') await collectOutcomeBestEffort(taskId, 'CANCELLED', principal.id);
+  return changedTask;
 }
 
 export async function addEvidence(taskId: string, input: { evidenceType: ExecutionEvidenceType; description: string; referenceUrl?: string; documentReference?: string; measurementData?: unknown; capturedAt?: Date }, principal: OrganizationalPrincipal) {
@@ -233,13 +238,15 @@ export async function submitCompletion(taskId: string, note: string, principal: 
   if (task.assignedToId !== principal.id) throw new ExecutionError('FORBIDDEN', 403, 'Only the assigned officer may submit completion.');
   if (task.status !== ExecutionTaskStatus.IN_PROGRESS) throw new ExecutionError('INVALID_EXECUTION_TASK_STATE', 409, 'Task is not in progress.');
   if (!task.evidence.length) throw new ExecutionError('EVIDENCE_REQUIRED', 409, 'At least one evidence record is required.');
-  return prisma.$transaction(async (tx) => {
+  const completed = await prisma.$transaction(async (tx) => {
     await assertTaskMutable(tx, taskId);
     const changed = await tx.executionTask.updateMany({ where: { id: taskId, status: ExecutionTaskStatus.IN_PROGRESS, assignedToId: principal.id }, data: { status: ExecutionTaskStatus.COMPLETION_SUBMITTED, completionSubmittedById: principal.id, completionSubmittedAt: new Date(), completionNote: note.trim() } });
     if (changed.count !== 1) throw new ExecutionError('INVALID_EXECUTION_TASK_STATE', 409, 'Task state changed concurrently.');
     await refreshPlan(tx, task.executionPlanId);
     return tx.executionTask.findUniqueOrThrow({ where: { id: taskId }, include: taskInclude });
   }, { isolationLevel: Prisma.TransactionIsolationLevel.Serializable });
+  await collectOutcomeBestEffort(taskId, 'COMPLETION', principal.id);
+  return completed;
 }
 
 export async function verifyTask(taskId: string, note: string, principal: OrganizationalPrincipal) {

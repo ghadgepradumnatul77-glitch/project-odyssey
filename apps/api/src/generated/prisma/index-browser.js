@@ -596,6 +596,47 @@ exports.Prisma.ExecutionTaskScalarFieldEnum = {
   plannedEndAt: 'plannedEndAt'
 };
 
+exports.Prisma.PredictiveFeatureSnapshotScalarFieldEnum = {
+  id: 'id',
+  targetType: 'targetType',
+  executionTaskId: 'executionTaskId',
+  caseId: 'caseId',
+  assetId: 'assetId',
+  departmentId: 'departmentId',
+  jurisdictionId: 'jurisdictionId',
+  predictionTimestamp: 'predictionTimestamp',
+  featureContractVersion: 'featureContractVersion',
+  featurePayload: 'featurePayload',
+  provenanceClass: 'provenanceClass',
+  sourceReferences: 'sourceReferences',
+  sourceFingerprint: 'sourceFingerprint',
+  status: 'status',
+  createdById: 'createdById',
+  createdAt: 'createdAt',
+  voidedAt: 'voidedAt',
+  voidedById: 'voidedById',
+  voidReason: 'voidReason',
+  replacementSnapshotId: 'replacementSnapshotId'
+};
+
+exports.Prisma.PredictiveOutcomeScalarFieldEnum = {
+  id: 'id',
+  snapshotId: 'snapshotId',
+  outcomeContractVersion: 'outcomeContractVersion',
+  outcomeTimestamp: 'outcomeTimestamp',
+  outcomeValue: 'outcomeValue',
+  provenanceClass: 'provenanceClass',
+  sourceReferences: 'sourceReferences',
+  sourceFingerprint: 'sourceFingerprint',
+  status: 'status',
+  recordedById: 'recordedById',
+  recordedAt: 'recordedAt',
+  voidedAt: 'voidedAt',
+  voidedById: 'voidedById',
+  voidReason: 'voidReason',
+  replacementOutcomeId: 'replacementOutcomeId'
+};
+
 exports.Prisma.ExecutionTaskDependencyScalarFieldEnum = {
   id: 'id',
   executionPlanId: 'executionPlanId',
@@ -865,6 +906,29 @@ exports.ExecutionTaskStatus = exports.$Enums.ExecutionTaskStatus = {
   CANCELLED: 'CANCELLED'
 };
 
+exports.PredictiveTargetType = exports.$Enums.PredictiveTargetType = {
+  TASK_LATENESS: 'TASK_LATENESS'
+};
+
+exports.PredictiveProvenanceClass = exports.$Enums.PredictiveProvenanceClass = {
+  PRODUCTION: 'PRODUCTION',
+  PILOT: 'PILOT',
+  DEMO: 'DEMO',
+  SYNTHETIC: 'SYNTHETIC',
+  TEST: 'TEST'
+};
+
+exports.PredictiveRecordStatus = exports.$Enums.PredictiveRecordStatus = {
+  ACTIVE: 'ACTIVE',
+  VOID: 'VOID'
+};
+
+exports.PredictiveOutcomeValue = exports.$Enums.PredictiveOutcomeValue = {
+  LATE: 'LATE',
+  ON_TIME: 'ON_TIME',
+  CANCELLED: 'CANCELLED'
+};
+
 exports.ExecutionBlockerCategory = exports.$Enums.ExecutionBlockerCategory = {
   RESOURCE_UNAVAILABLE: 'RESOURCE_UNAVAILABLE',
   ACCESS_RESTRICTED: 'ACCESS_RESTRICTED',
@@ -916,6 +980,8 @@ exports.Prisma.ModelName = {
   OrpDecision: 'OrpDecision',
   ExecutionPlan: 'ExecutionPlan',
   ExecutionTask: 'ExecutionTask',
+  PredictiveFeatureSnapshot: 'PredictiveFeatureSnapshot',
+  PredictiveOutcome: 'PredictiveOutcome',
   ExecutionTaskDependency: 'ExecutionTaskDependency',
   ExecutionTaskBlockerEvent: 'ExecutionTaskBlockerEvent',
   ExecutionScheduleRevision: 'ExecutionScheduleRevision',

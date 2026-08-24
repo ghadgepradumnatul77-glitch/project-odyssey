@@ -60,6 +60,7 @@ import intelligenceRoutes from './modules/intelligence/intelligence.routes';
 import observationRoutes from './modules/observations/observation.routes';
 import geospatialHotspotRoutes from './modules/geospatial/geospatial-hotspot.routes';
 import portfolioRoutes from './modules/portfolio/portfolio.routes';
+import predictiveDataRoutes from './modules/predictive-data/predictive-data.routes';
 
 import { getAuthConfig }
   from './config/auth';
@@ -272,6 +273,7 @@ app.use('/api/v1', intelligenceRoutes);
 app.use('/api/v1', observationRoutes);
 app.use('/api/v1', geospatialHotspotRoutes);
 app.use('/api/v1', portfolioRoutes);
+app.use('/api/v1', predictiveDataRoutes);
 
 
 
