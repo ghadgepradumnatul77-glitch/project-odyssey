@@ -53,7 +53,7 @@ router.post('/approval-authorities', async (req, res) => {
       maxPriorityLevel,
       validFrom,
       validUntil
-    });
+    }, req.user!);
     return res.status(201).json({ success: true, data: authority });
   } catch (error) {
     if (error instanceof WorkflowError) {

@@ -11,9 +11,11 @@ const ids = {
 };
 const mocks = vi.hoisted(() => ({
   userFindUnique: vi.fn(), policyFindMany: vi.fn(), policyFindUnique: vi.fn(),
-  policyCreate: vi.fn(), policyUpdate: vi.fn(), departmentCount: vi.fn(), jurisdictionCount: vi.fn()
+  policyCreate: vi.fn(), policyUpdate: vi.fn(), departmentCount: vi.fn(), jurisdictionCount: vi.fn(),
+  transaction: vi.fn()
 }));
 vi.mock('../src/lib/prisma', () => ({ default: {
+  $transaction: mocks.transaction,
   user: { findUnique: mocks.userFindUnique },
   policyDocument: { findMany: mocks.policyFindMany, findUnique: mocks.policyFindUnique, create: mocks.policyCreate, update: mocks.policyUpdate },
   department: { count: mocks.departmentCount }, jurisdiction: { count: mocks.jurisdictionCount }
@@ -39,6 +41,9 @@ describe('assembled application governance authorization', () => {
     mocks.policyFindUnique.mockResolvedValue({ status: 'DRAFT', validationState: 'NOT_VALIDATED', departmentId: ids.crossDepartment, jurisdictionId: ids.crossJurisdiction, _count: { rules: 1 } });
     mocks.policyCreate.mockImplementation(({ data }: any) => Promise.resolve({ id: 'global-policy', ...data }));
     mocks.policyUpdate.mockResolvedValue({ id: 'unexpected-update' });
+    mocks.transaction.mockImplementation((callback: (tx: unknown) => unknown) => callback({
+      policyDocument: { create: mocks.policyCreate, update: mocks.policyUpdate }
+    }));
     mocks.departmentCount.mockResolvedValue(1);
     mocks.jurisdictionCount.mockResolvedValue(1);
   });

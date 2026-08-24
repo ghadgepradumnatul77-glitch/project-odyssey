@@ -45,7 +45,7 @@ describe('approval authority routes', () => {
       maxPriorityLevel: 'CRITICAL'
     }).expect(201);
     expect(response.body.data.id).toBe('grant-1');
-    expect(mocks.create).toHaveBeenCalledWith(expect.objectContaining({ userId: 'user-1', canApprove: true, canCloseCase: true }));
+    expect(mocks.create).toHaveBeenCalledWith(expect.objectContaining({ userId: 'user-1', canApprove: true, canCloseCase: true }), expect.objectContaining({ id: 'user-SYSTEM_ADMIN', role: 'SYSTEM_ADMIN' }));
   });
 
   it('POST rejects invalid booleans', async () => {

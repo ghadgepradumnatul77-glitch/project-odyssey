@@ -17,6 +17,7 @@ import {
 } from '../../security/organizational-scope';
 import { isAuthorityActive, isPriorityWithinAuthority } from '../decisions/decision.service';
 import { CaseClosureError } from './case-closure-error';
+import { appendIntegrityEvent, integrityTextDigest } from '../integrity/integrity.service';
 
 export const MAX_CLOSURE_SUMMARY_LENGTH = 2000;
 
@@ -197,6 +198,13 @@ export async function closeCase(caseId: string, input: CloseCaseInput, principal
         createdAt: now
       },
       include: closureInclude
+    });
+    await appendIntegrityEvent(tx, {
+      eventType: 'CASE_CLOSED', sourceEventKey: `CASE_CLOSURE:${closure.id}`,
+      resourceType: 'CaseClosure', resourceId: closure.id, actor: principal,
+      departmentId: targetCase.asset.departmentId, jurisdictionId: targetCase.asset.jurisdictionId,
+      occurredAt: closure.createdAt,
+      facts: { closureId: closure.id, caseId, executionPlanId: plan.id, finalOrpId: plan.orpId, approvalDecisionId: plan.approvalDecisionId, closedById: principal.id, closureAuthorityGrantId: authority.id, closureReason: closure.closureReason, closureSummaryDigest: integrityTextDigest(closure.closureSummary), executionCompletedAt: plan.completedAt?.toISOString() ?? null }
     });
     return { closure, created: true };
   }, { isolationLevel: Prisma.TransactionIsolationLevel.Serializable });

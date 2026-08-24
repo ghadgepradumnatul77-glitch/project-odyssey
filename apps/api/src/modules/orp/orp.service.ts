@@ -7,6 +7,7 @@ import {
 import { DecisionPackageError, requireCurrentDecisionPackage } from '../decision-packages/decision-package.service';
 import { RISK_ASSESSMENT_VERSION } from '../risk/risk.service';
 import { z } from 'zod';
+import { appendIntegrityEvent } from '../integrity/integrity.service';
 
 export const GOVERNED_ACTION_PLAN_VERSION = 'ODYSSEY_ORP_GOVERNED_V1';
 
@@ -428,6 +429,14 @@ export async function createORPForCase(caseId: string, principal: Organizational
         governedActions: orpResult.governedActions as Prisma.InputJsonValue,
         actionPlanContractVersion: GOVERNED_ACTION_PLAN_VERSION
       }
+    });
+
+    await appendIntegrityEvent(tx, {
+      eventType: 'ACTION_PLAN_CREATED', sourceEventKey: `ACTION_PLAN:${createdORP.id}`,
+      resourceType: 'OperationalResponsePlan', resourceId: createdORP.id, actor: principal,
+      departmentId: principal.departmentId, jurisdictionId: principal.jurisdictionId,
+      occurredAt: createdORP.createdAt,
+      facts: { caseId, riskAssessmentId: createdORP.riskAssessmentId, decisionPackageId: createdORP.decisionPackageId, versionNumber: createdORP.versionNumber, planVersion: createdORP.planVersion, actionPlanContractVersion: createdORP.actionPlanContractVersion, governanceMode: createdORP.governanceMode, urgency: createdORP.urgency, status: createdORP.status, recommendedActionCodes: createdORP.recommendedActionCodes }
     });
 
     return createdORP;

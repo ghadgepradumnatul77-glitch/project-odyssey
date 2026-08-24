@@ -2,6 +2,8 @@ import prisma from '../../lib/prisma';
 import { PriorityLevel } from '../../generated/prisma';
 import { WorkflowError } from '../decisions/workflow-error';
 import { pageFromRows, type StableCursor } from '../../lib/pagination';
+import type { OrganizationalPrincipal } from '../../security/organizational-scope';
+import { appendIntegrityEvent } from '../integrity/integrity.service';
 
 export interface CreateAuthorityInput {
   userId: string;
@@ -18,7 +20,7 @@ export interface CreateAuthorityInput {
   validUntil?: Date | null;
 }
 
-export async function createApprovalAuthority(input: CreateAuthorityInput) {
+export async function createApprovalAuthority(input: CreateAuthorityInput, principal: OrganizationalPrincipal) {
   const [user, department, jurisdiction] = await Promise.all([
     prisma.user.findUnique({ where: { id: input.userId } }),
     prisma.department.findUnique({ where: { id: input.departmentId } }),
@@ -41,34 +43,33 @@ export async function createApprovalAuthority(input: CreateAuthorityInput) {
     throw new WorkflowError('INVALID_VALIDITY_PERIOD', 400, 'validFrom must not be after validUntil.');
   }
 
-  const duplicate = await prisma.approvalAuthority.findFirst({
-    where: {
-      userId: user.id,
-      departmentId: department.id,
-      jurisdictionId: jurisdiction.id,
-      isActive: true
-    }
-  });
-  if (duplicate) {
-    throw new WorkflowError('ACTIVE_AUTHORITY_EXISTS', 409, 'An active authority grant already exists for this user and scope.');
-  }
-
-  return prisma.approvalAuthority.create({
-    data: {
-      ...input,
-      canApprove: input.canApprove ?? false,
-      canReject: input.canReject ?? false,
-      canRequestModification: input.canRequestModification ?? false,
-      canRequestReinspection: input.canRequestReinspection ?? false,
-      canEscalate: input.canEscalate ?? false,
-      canCloseCase: input.canCloseCase ?? false
-    },
-    include: {
-      user: { select: { id: true, name: true, employeeCode: true, designation: true, role: true, status: true } },
-      department: { select: { id: true, name: true, code: true } },
-      jurisdiction: { select: { id: true, name: true, type: true } }
-    }
-  });
+  return prisma.$transaction(async (tx) => {
+    const duplicate = await tx.approvalAuthority.findFirst({ where: { userId: user.id, departmentId: department.id, jurisdictionId: jurisdiction.id, isActive: true } });
+    if (duplicate) throw new WorkflowError('ACTIVE_AUTHORITY_EXISTS', 409, 'An active authority grant already exists for this user and scope.');
+    const created = await tx.approvalAuthority.create({
+      data: {
+        ...input,
+        canApprove: input.canApprove ?? false,
+        canReject: input.canReject ?? false,
+        canRequestModification: input.canRequestModification ?? false,
+        canRequestReinspection: input.canRequestReinspection ?? false,
+        canEscalate: input.canEscalate ?? false,
+        canCloseCase: input.canCloseCase ?? false
+      },
+      include: {
+        user: { select: { id: true, name: true, employeeCode: true, designation: true, role: true, status: true } },
+        department: { select: { id: true, name: true, code: true } },
+        jurisdiction: { select: { id: true, name: true, type: true } }
+      }
+    });
+    await appendIntegrityEvent(tx, {
+      eventType: 'APPROVAL_AUTHORITY_GRANTED', sourceEventKey: `APPROVAL_AUTHORITY_GRANT:${created.id}`,
+      resourceType: 'ApprovalAuthority', resourceId: created.id, actor: principal,
+      departmentId: created.departmentId, jurisdictionId: created.jurisdictionId, occurredAt: created.createdAt,
+      facts: { grantId: created.id, officerId: created.userId, canApprove: created.canApprove, canReject: created.canReject, canRequestModification: created.canRequestModification, canRequestReinspection: created.canRequestReinspection, canEscalate: created.canEscalate, canCloseCase: created.canCloseCase, maxPriorityLevel: created.maxPriorityLevel, validFrom: created.validFrom?.toISOString() ?? null, validUntil: created.validUntil?.toISOString() ?? null, isActive: created.isActive }
+    });
+    return created;
+  }, { isolationLevel: 'Serializable' });
 }
 
 export async function listApprovalAuthorities(options: { limit: number; cursor?: StableCursor; active?: boolean; search?: string; departmentId?: string; jurisdictionId?: string }) {

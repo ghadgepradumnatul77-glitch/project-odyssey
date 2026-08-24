@@ -7,7 +7,7 @@ import { z } from 'zod';
 import { GovernedTemplateError, resolveGovernedTemplate } from '../execution-templates/governed-execution-template.service';
 import { pageFromRows, type StableCursor } from '../../lib/pagination';
 import { collectAssignmentBestEffort, collectOutcomeBestEffort } from '../predictive-data/predictive-data.service';
-import { appendIntegrityEvent, evidenceIntegrityFacts } from '../integrity/integrity.service';
+import { appendIntegrityEvent, evidenceIntegrityFacts, integrityTextDigest } from '../integrity/integrity.service';
 
 export const GOVERNED_EXECUTION_CONTRACT_VERSION='ODYSSEY_GOVERNED_EXECUTION_V1';
 const governedAction=z.object({actionId:z.string().uuid(),actionCode:z.string().min(1),actionVersion:z.number().int().positive(),classification:z.enum(['MANDATORY','RECOMMENDED','OPTIONAL','PROHIBITED'])}).passthrough();
@@ -86,7 +86,7 @@ export async function generateExecutionPlan(orpId: string, principal: Organizati
     let resolved;
     try{resolved=await Promise.all(executable.map(async action=>({action,template:await resolveGovernedTemplate(action.actionId,orp.case.asset.departmentId,orp.case.asset.jurisdictionId)})));}catch(error){if(error instanceof GovernedTemplateError)throw new ExecutionError(error.code,error.status,error.message);throw error;}
     const provenance={contractVersion:GOVERNED_EXECUTION_CONTRACT_VERSION,orp:{id:orp.id,versionNumber:orp.versionNumber},decisionPackage:{id:orp.decisionPackage.id,versionNumber:orp.decisionPackage.packageVersion},humanDecision:{id:decision.id},actions:resolved.map(({action,template})=>({approvedActionVersion:{id:action.actionId,code:action.actionCode,versionNumber:action.actionVersion},executionTemplate:{id:template.id,code:template.templateCode,versionNumber:template.versionNumber},tasks:template.tasks.map(task=>({id:task.id,code:task.taskCode,sequenceNumber:task.sequenceNumber}))}))};
-    try{const plan=await prisma.$transaction(async tx=>{const created=await tx.executionPlan.create({data:{orpId:orp.id,caseId:orp.caseId,approvalDecisionId:decision.id,createdById:principal.id,templateVersion:GOVERNED_EXECUTION_CONTRACT_VERSION,governanceMode:'GOVERNED',executionContractVersion:GOVERNED_EXECUTION_CONTRACT_VERSION,governedProvenance:provenance}});let sequence=1;const rows=resolved.flatMap(({action,template})=>template.tasks.map(task=>({executionPlanId:created.id,sequenceNumber:sequence++,sourceActionCode:action.actionCode,templateTaskKey:task.taskCode,titleSnapshot:task.title,descriptionSnapshot:task.description,categorySnapshot:template.approvedActionVersion.category,isMandatory:task.mandatory,approvedActionVersionId:action.actionId,governedExecutionTemplateId:template.id,governedTaskTemplateId:task.id,sourceActionVersion:action.actionVersion,sourceTemplateCode:template.templateCode,sourceTemplateVersion:template.versionNumber,evidenceRequired:task.evidenceRequired,verificationRequired:task.verificationRequired})));if(rows.length)await tx.executionTask.createMany({data:rows});const changed=await tx.case.updateMany({where:{id:orp.caseId,status:'APPROVED'},data:{status:'EXECUTION'}});if(changed.count!==1)throw new ExecutionError('INVALID_CASE_STATE',409,'Case state changed before execution planning.');return tx.executionPlan.findUniqueOrThrow({where:{id:created.id},include:{tasks:{include:taskInclude,orderBy:{sequenceNumber:'asc'}}}});});return{plan,created:true};}catch(error){if(error instanceof Prisma.PrismaClientKnownRequestError&&error.code==='P2002'){const plan=await prisma.executionPlan.findFirst({where:{orpId,...buildExecutionPlanMutationWhere(principal)},include:{tasks:{include:taskInclude,orderBy:{sequenceNumber:'asc'}}}});if(plan)return{plan,created:false};throw new ExecutionError('EXECUTION_PLAN_CONFLICT',409,'Execution plan creation conflicted.');}throw error;}
+    try{const plan=await prisma.$transaction(async tx=>{const created=await tx.executionPlan.create({data:{orpId:orp.id,caseId:orp.caseId,approvalDecisionId:decision.id,createdById:principal.id,templateVersion:GOVERNED_EXECUTION_CONTRACT_VERSION,governanceMode:'GOVERNED',executionContractVersion:GOVERNED_EXECUTION_CONTRACT_VERSION,governedProvenance:provenance}});let sequence=1;const rows=resolved.flatMap(({action,template})=>template.tasks.map(task=>({executionPlanId:created.id,sequenceNumber:sequence++,sourceActionCode:action.actionCode,templateTaskKey:task.taskCode,titleSnapshot:task.title,descriptionSnapshot:task.description,categorySnapshot:template.approvedActionVersion.category,isMandatory:task.mandatory,approvedActionVersionId:action.actionId,governedExecutionTemplateId:template.id,governedTaskTemplateId:task.id,sourceActionVersion:action.actionVersion,sourceTemplateCode:template.templateCode,sourceTemplateVersion:template.versionNumber,evidenceRequired:task.evidenceRequired,verificationRequired:task.verificationRequired})));if(rows.length)await tx.executionTask.createMany({data:rows});const changed=await tx.case.updateMany({where:{id:orp.caseId,status:'APPROVED'},data:{status:'EXECUTION'}});if(changed.count!==1)throw new ExecutionError('INVALID_CASE_STATE',409,'Case state changed before execution planning.');await appendIntegrityEvent(tx,{eventType:'EXECUTION_PLAN_CREATED',sourceEventKey:`EXECUTION_PLAN:${created.id}`,resourceType:'ExecutionPlan',resourceId:created.id,actor:principal,departmentId:orp.case.asset.departmentId,jurisdictionId:orp.case.asset.jurisdictionId,occurredAt:created.createdAt,facts:{orpId:orp.id,caseId:orp.caseId,approvalDecisionId:decision.id,governanceMode:'GOVERNED',executionContractVersion:GOVERNED_EXECUTION_CONTRACT_VERSION,taskCount:rows.length}});return tx.executionPlan.findUniqueOrThrow({where:{id:created.id},include:{tasks:{include:taskInclude,orderBy:{sequenceNumber:'asc'}}}});});return{plan,created:true};}catch(error){if(error instanceof Prisma.PrismaClientKnownRequestError&&error.code==='P2002'){const plan=await prisma.executionPlan.findFirst({where:{orpId,...buildExecutionPlanMutationWhere(principal)},include:{tasks:{include:taskInclude,orderBy:{sequenceNumber:'asc'}}}});if(plan)return{plan,created:false};throw new ExecutionError('EXECUTION_PLAN_CONFLICT',409,'Execution plan creation conflicted.');}throw error;}
   }
   const codes = actionCodes(orp.recommendedActionCodes);
   if (!codes) throw new ExecutionError('INVALID_ORP_ACTIONS', 409, 'Approved ORP actions are invalid.');
@@ -98,6 +98,7 @@ export async function generateExecutionPlan(orpId: string, principal: Organizati
       if (translated.tasks.length) await tx.executionTask.createMany({ data: translated.tasks.map((task) => ({ executionPlanId: created.id, sequenceNumber: task.sequenceNumber, sourceActionCode: task.sourceActionCode, templateTaskKey: task.templateTaskKey, titleSnapshot: task.title, descriptionSnapshot: task.description, categorySnapshot: task.category, isMandatory: task.isMandatory })) });
       const changed = await tx.case.updateMany({ where: { id: orp.caseId, status: 'APPROVED' }, data: { status: 'EXECUTION' } });
       if (changed.count !== 1) throw new ExecutionError('INVALID_CASE_STATE', 409, 'Case state changed before execution planning.');
+      await appendIntegrityEvent(tx, { eventType: 'EXECUTION_PLAN_CREATED', sourceEventKey: `EXECUTION_PLAN:${created.id}`, resourceType: 'ExecutionPlan', resourceId: created.id, actor: principal, departmentId: orp.case.asset.departmentId, jurisdictionId: orp.case.asset.jurisdictionId, occurredAt: created.createdAt, facts: { orpId: orp.id, caseId: orp.caseId, approvalDecisionId: decision.id, governanceMode: 'LEGACY', executionContractVersion: EXECUTION_TEMPLATE_VERSION, taskCount: translated.tasks.length } });
       return tx.executionPlan.findUniqueOrThrow({ where: { id: created.id }, include: { tasks: { include: taskInclude, orderBy: { sequenceNumber: 'asc' } } } });
     });
     return { plan, created: true };
@@ -186,9 +187,11 @@ export async function assignTask(taskId: string, assigneeId: string, principal: 
     const changed = await tx.executionTask.updateMany({ where: { id: taskId, status: ExecutionTaskStatus.PENDING }, data: { assignedToId: assignee.id, assignedById: principal.id, assignedAt: new Date(), status: ExecutionTaskStatus.ASSIGNED } });
     if (changed.count !== 1) throw new ExecutionError('INVALID_EXECUTION_TASK_STATE', 409, 'Task is not pending.');
     await refreshPlan(tx, task.executionPlanId);
-    return tx.executionTask.findUniqueOrThrow({ where: { id: taskId }, include: taskInclude });
+    const updated=await tx.executionTask.findUniqueOrThrow({ where: { id: taskId }, include: taskInclude });
+    await appendIntegrityEvent(tx,{eventType:'EXECUTION_TASK_ASSIGNED',sourceEventKey:`EXECUTION_TASK_ASSIGNED:${taskId}`,resourceType:'ExecutionTask',resourceId:taskId,actor:principal,departmentId:task.executionPlan.case.asset.departmentId,jurisdictionId:task.executionPlan.case.asset.jurisdictionId,occurredAt:updated.assignedAt!,facts:{executionPlanId:task.executionPlanId,taskId,assigneeId:assignee.id,assignedById:principal.id,status:updated.status}});
+    return updated;
   }, { isolationLevel: Prisma.TransactionIsolationLevel.Serializable });
-  await collectAssignmentBestEffort(taskId, principal.id);
+  await collectAssignmentBestEffort(taskId, principal);
   return assigned;
 }
 
@@ -215,12 +218,19 @@ export async function changeTaskStatus(taskId: string, requested: 'IN_PROGRESS' 
     const data = requested === 'CANCELLED' ? { status: ExecutionTaskStatus.CANCELLED, cancelledById: principal.id, cancelledAt: new Date(), cancellationReason: reason!.trim() } : requested === 'BLOCKED' ? { status: ExecutionTaskStatus.BLOCKED, blockedReason: reason!.trim() } : { status: ExecutionTaskStatus.IN_PROGRESS, startedAt: task.startedAt ?? new Date() };
     const changed = await tx.executionTask.updateMany({ where: { id: taskId, status: task.status }, data });
     if (changed.count !== 1) throw new ExecutionError('INVALID_EXECUTION_TASK_STATE', 409, 'Task state changed concurrently.');
-    if(requested==='BLOCKED')await tx.executionTaskBlockerEvent.create({data:{executionTaskId:taskId,category:blockerCategory!,reason:reason!.trim(),blockedById:principal.id}});
-    if(requested==='IN_PROGRESS'&&task.status===ExecutionTaskStatus.BLOCKED){const open=await tx.executionTaskBlockerEvent.findFirst({where:{executionTaskId:taskId,resolvedAt:null},orderBy:{blockedAt:'desc'}});if(open)await tx.executionTaskBlockerEvent.update({where:{id:open.id},data:{resolvedAt:new Date(),resolvedById:principal.id,resolutionReason:reason!.trim()}});}
+    const blocker=requested==='BLOCKED'?await tx.executionTaskBlockerEvent.create({data:{executionTaskId:taskId,category:blockerCategory!,reason:reason!.trim(),blockedById:principal.id}}):null;
+    let resolvedBlocker:null|{id:string;resolvedAt:Date|null}=null;
+    if(requested==='IN_PROGRESS'&&task.status===ExecutionTaskStatus.BLOCKED){const open=await tx.executionTaskBlockerEvent.findFirst({where:{executionTaskId:taskId,resolvedAt:null},orderBy:{blockedAt:'desc'}});if(open)resolvedBlocker=await tx.executionTaskBlockerEvent.update({where:{id:open.id},data:{resolvedAt:new Date(),resolvedById:principal.id,resolutionReason:reason!.trim()},select:{id:true,resolvedAt:true}});}
     await refreshPlan(tx, task.executionPlanId);
-    return tx.executionTask.findUniqueOrThrow({ where: { id: taskId }, include: taskInclude });
+    const updated=await tx.executionTask.findUniqueOrThrow({ where: { id: taskId }, include: taskInclude });
+    const scope={departmentId:task.executionPlan.case.asset.departmentId,jurisdictionId:task.executionPlan.case.asset.jurisdictionId};
+    if(requested==='CANCELLED')await appendIntegrityEvent(tx,{eventType:'EXECUTION_TASK_CANCELLED',sourceEventKey:`EXECUTION_TASK_CANCELLED:${taskId}`,resourceType:'ExecutionTask',resourceId:taskId,actor:principal,...scope,occurredAt:updated.cancelledAt!,facts:{executionPlanId:task.executionPlanId,taskId,cancelledById:principal.id,cancellationReasonDigest:integrityTextDigest(reason),status:updated.status}});
+    else if(blocker)await appendIntegrityEvent(tx,{eventType:'EXECUTION_TASK_BLOCKED',sourceEventKey:`EXECUTION_TASK_BLOCKED:${blocker.id}`,resourceType:'ExecutionTaskBlockerEvent',resourceId:blocker.id,actor:principal,...scope,occurredAt:blocker.blockedAt,facts:{executionTaskId:taskId,category:blocker.category,blockedById:principal.id,reasonDigest:integrityTextDigest(blocker.reason)}});
+    else if(resolvedBlocker)await appendIntegrityEvent(tx,{eventType:'EXECUTION_TASK_BLOCKER_RESOLVED',sourceEventKey:`EXECUTION_TASK_BLOCKER_RESOLVED:${resolvedBlocker.id}`,resourceType:'ExecutionTaskBlockerEvent',resourceId:resolvedBlocker.id,actor:principal,...scope,occurredAt:resolvedBlocker.resolvedAt!,facts:{executionTaskId:taskId,resolvedById:principal.id,resolutionReasonDigest:integrityTextDigest(reason),status:updated.status}});
+    else await appendIntegrityEvent(tx,{eventType:'EXECUTION_TASK_STARTED',sourceEventKey:`EXECUTION_TASK_STARTED:${taskId}`,resourceType:'ExecutionTask',resourceId:taskId,actor:principal,...scope,occurredAt:updated.startedAt!,facts:{executionPlanId:task.executionPlanId,taskId,assignedToId:updated.assignedToId,startedById:principal.id,status:updated.status}});
+    return updated;
   }, { isolationLevel: Prisma.TransactionIsolationLevel.Serializable });
-  if (requested === 'CANCELLED') await collectOutcomeBestEffort(taskId, 'CANCELLED', principal.id);
+  if (requested === 'CANCELLED') await collectOutcomeBestEffort(taskId, 'CANCELLED', principal);
   return changedTask;
 }
 
@@ -246,9 +256,11 @@ export async function submitCompletion(taskId: string, note: string, principal: 
     const changed = await tx.executionTask.updateMany({ where: { id: taskId, status: ExecutionTaskStatus.IN_PROGRESS, assignedToId: principal.id }, data: { status: ExecutionTaskStatus.COMPLETION_SUBMITTED, completionSubmittedById: principal.id, completionSubmittedAt: new Date(), completionNote: note.trim() } });
     if (changed.count !== 1) throw new ExecutionError('INVALID_EXECUTION_TASK_STATE', 409, 'Task state changed concurrently.');
     await refreshPlan(tx, task.executionPlanId);
-    return tx.executionTask.findUniqueOrThrow({ where: { id: taskId }, include: taskInclude });
+    const updated=await tx.executionTask.findUniqueOrThrow({ where: { id: taskId }, include: taskInclude });
+    await appendIntegrityEvent(tx,{eventType:'EXECUTION_TASK_COMPLETION_SUBMITTED',sourceEventKey:`EXECUTION_TASK_COMPLETION:${taskId}`,resourceType:'ExecutionTask',resourceId:taskId,actor:principal,departmentId:task.executionPlan.case.asset.departmentId,jurisdictionId:task.executionPlan.case.asset.jurisdictionId,occurredAt:updated.completionSubmittedAt!,facts:{executionPlanId:task.executionPlanId,taskId,completionSubmittedById:principal.id,completionNoteDigest:integrityTextDigest(note),evidenceCount:task.evidence.length,status:updated.status}});
+    return updated;
   }, { isolationLevel: Prisma.TransactionIsolationLevel.Serializable });
-  await collectOutcomeBestEffort(taskId, 'COMPLETION', principal.id);
+  await collectOutcomeBestEffort(taskId, 'COMPLETION', principal);
   return completed;
 }
 
@@ -264,6 +276,8 @@ export async function verifyTask(taskId: string, note: string, principal: Organi
     const changed = await tx.executionTask.updateMany({ where: { id: taskId, status: ExecutionTaskStatus.COMPLETION_SUBMITTED }, data: { status: ExecutionTaskStatus.VERIFIED, verifiedById: principal.id, verifiedAt: new Date(), verificationNote: note.trim() } });
     if (changed.count !== 1) throw new ExecutionError('INVALID_EXECUTION_TASK_STATE', 409, 'Task state changed concurrently.');
     await refreshPlan(tx, task.executionPlanId);
-    return tx.executionTask.findUniqueOrThrow({ where: { id: taskId }, include: taskInclude });
+    const updated=await tx.executionTask.findUniqueOrThrow({ where: { id: taskId }, include: taskInclude });
+    await appendIntegrityEvent(tx,{eventType:'EXECUTION_TASK_VERIFIED',sourceEventKey:`EXECUTION_TASK_VERIFIED:${taskId}`,resourceType:'ExecutionTask',resourceId:taskId,actor:principal,departmentId:task.executionPlan.case.asset.departmentId,jurisdictionId:task.executionPlan.case.asset.jurisdictionId,occurredAt:updated.verifiedAt!,facts:{executionPlanId:task.executionPlanId,taskId,assignedToId:task.assignedToId,completionSubmittedById:task.completionSubmittedById,verifiedById:principal.id,verificationNoteDigest:integrityTextDigest(note),evidenceCount:currentEvidence,status:updated.status}});
+    return updated;
   }, { isolationLevel: Prisma.TransactionIsolationLevel.Serializable });
 }

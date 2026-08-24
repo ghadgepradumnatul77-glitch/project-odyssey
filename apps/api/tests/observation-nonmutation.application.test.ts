@@ -7,7 +7,7 @@ const ids = { source: '10000000-0000-4000-8000-000000000001', asset: '20000000-0
 const state = vi.hoisted(() => ({ caseRisk: 'HIGH', casePriority: 'HIGH', observations: [] as unknown[] }));
 const workflowWrite = vi.hoisted(() => vi.fn());
 
-vi.mock('../src/lib/prisma', () => ({ default: {
+vi.mock('../src/lib/prisma', () => { const client = {
   user: { findUnique: vi.fn(async () => ({ id: 'admin', role: 'SYSTEM_ADMIN', status: 'ACTIVE', departmentId: ids.department, jurisdictionId: ids.jurisdiction })) },
   observationSource: { findUnique: vi.fn(async () => ({ id: ids.source, isActive: true, departmentId: null, jurisdictionId: null })) },
   externalObservation: {
@@ -21,7 +21,7 @@ vi.mock('../src/lib/prisma', () => ({ default: {
   operationalResponsePlan: { create: workflowWrite, update: workflowWrite }, decisionPackage: { create: workflowWrite, update: workflowWrite },
   orpDecision: { create: workflowWrite, update: workflowWrite }, executionPlan: { create: workflowWrite, update: workflowWrite },
   caseClosure: { create: workflowWrite, update: workflowWrite }
-} }));
+}; return { default: { ...client, $transaction: (callback: (tx: typeof client) => unknown) => callback(client) } }; });
 
 import { app } from '../src/server';
 

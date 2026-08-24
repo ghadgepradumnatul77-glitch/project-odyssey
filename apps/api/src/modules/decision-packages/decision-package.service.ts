@@ -7,6 +7,7 @@ import { assertVisibleCase, buildCaseReadWhere } from '../../security/organizati
 import { resolveCasePolicy } from '../policy-registry/policy-registry.service';
 import { evaluateCaseReadiness } from '../readiness/readiness.service';
 import { RISK_ASSESSMENT_VERSION } from '../risk/risk.service';
+import { appendIntegrityEvent } from '../integrity/integrity.service';
 
 export const DECISION_PACKAGE_CONTRACT_VERSION = 'ODYSSEY_DECISION_PACKAGE_V1';
 
@@ -107,6 +108,13 @@ export async function prepareDecisionPackage(caseId: string, principal: Organiza
       }, include: packageInclude
     });
     await tx.decisionPackage.updateMany({ where: { caseId, id: { not: record.id }, status: DecisionPackageStatus.PREPARED }, data: { status: DecisionPackageStatus.SUPERSEDED } });
+    await appendIntegrityEvent(tx, {
+      eventType: 'DECISION_PACKAGE_PREPARED', sourceEventKey: `DECISION_PACKAGE:${record.id}`,
+      resourceType: 'DecisionPackage', resourceId: record.id, actor: principal,
+      departmentId: source.target.asset.department.id, jurisdictionId: source.target.asset.jurisdiction.id,
+      occurredAt: record.preparedAt,
+      facts: { caseId, packageVersion: record.packageVersion, packageContractVersion: record.packageContractVersion, inspectionId: source.inspection.id, riskAssessmentId: source.risk.id, sourceFingerprint: source.fingerprint, status: record.status }
+    });
     return { record, reused: false };
   }, { isolationLevel: Prisma.TransactionIsolationLevel.Serializable });
 

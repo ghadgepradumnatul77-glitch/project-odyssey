@@ -1,5 +1,6 @@
 import prisma from '../../lib/prisma';
 import { pageFromRows, type StableCursor } from '../../lib/pagination';
+import { appendIntegrityEvent, integrityTextDigest } from '../integrity/integrity.service';
 import {
   ApprovalAuthority,
   CaseStatus,
@@ -189,6 +190,13 @@ export async function submitOrpDecision(orpId: string, principal: Organizational
       });
       await tx.operationalResponsePlan.update({ where: { id: orp.id }, data: { status: transition.orpStatus } });
       await tx.case.update({ where: { id: orp.caseId }, data: { status: transition.caseStatus } });
+      await appendIntegrityEvent(tx, {
+        eventType: 'HUMAN_DECISION_RECORDED', sourceEventKey: `HUMAN_DECISION:${decision.id}`,
+        resourceType: 'OrpDecision', resourceId: decision.id, actor: principal,
+        departmentId: orp.case.asset.departmentId, jurisdictionId: orp.case.asset.jurisdictionId,
+        occurredAt: decision.createdAt,
+        facts: { caseId: decision.caseId, orpId: decision.orpId, decisionType: decision.decisionType, reviewerId: decision.reviewerId, authorityGrantId: decision.authorityGrantId, reasonDigest: integrityTextDigest(decision.reason), remarksDigest: integrityTextDigest(decision.remarks), forwardToUserId: decision.forwardToUserId, resultingOrpStatus: transition.orpStatus, resultingCaseStatus: transition.caseStatus }
+      });
       return decision;
     });
   } catch (error) {
