@@ -1,4 +1,4 @@
-import { BookOpenCheck, BriefcaseBusiness, ClipboardList, LayoutDashboard, Map, Settings } from 'lucide-react';
+import { BookOpenCheck, BriefcaseBusiness, ClipboardList, LayoutDashboard, Map, Settings, WalletCards } from 'lucide-react';
 import type { SystemRole } from '../../types/api';
 
 export interface NavigationItem { id: string; label: string; description: string; }
@@ -7,14 +7,15 @@ export function navigationForRole(role: SystemRole): NavigationItem[] {
     { id: 'dashboard', label: 'Dashboard', description: 'Operational overview' },
     ...(['OFFICER','SYSTEM_ADMIN'].includes(role) ? [{ id: 'public-reports', label: 'Public Reports', description: 'Citizen infrastructure intake' }] : []),
     ...(['OFFICER','SYSTEM_ADMIN'].includes(role) ? [{ id: 'infrastructure-map', label: 'Infrastructure Map', description: 'Geospatial infrastructure intelligence' }] : []),
-    { id: 'cases', label: 'Cases', description: 'Infrastructure case workspace' }
+    { id: 'cases', label: 'Cases', description: 'Infrastructure case workspace' },
+    { id: 'portfolio-planning', label: 'Portfolio Planning', description: 'Governed cost and scenario support' }
   ];
   if (role === 'POLICY_ADMIN' || role === 'SYSTEM_ADMIN') items.push({id:'policy-actions',label:'Policy & Actions',description:'Governed planning inputs'});
   if (role === 'SYSTEM_ADMIN') items.push({ id: 'administration', label: 'Administration', description: 'Registry and authority management' });
   return items;
 }
 
-const icons = { dashboard: LayoutDashboard, 'public-reports': ClipboardList, 'infrastructure-map': Map, cases: BriefcaseBusiness, 'policy-actions':BookOpenCheck, administration: Settings };
+const icons = { dashboard: LayoutDashboard, 'public-reports': ClipboardList, 'infrastructure-map': Map, cases: BriefcaseBusiness, 'portfolio-planning': WalletCards, 'policy-actions': BookOpenCheck, administration: Settings };
 export default function Sidebar({ role, activeItem, onSelect }: { role: SystemRole; activeItem: string; onSelect(id: string): void }) {
   return (
     <aside className="sidebar">

@@ -208,6 +208,12 @@ enum IntelligenceAssessmentStatus {
   STALE
 }
 
+enum PlanningEstimateStatus {
+  ACTIVE
+  SUPERSEDED
+  WITHDRAWN
+}
+
 model Department {
   id                         String                      @id @default(uuid())
   name                       String
@@ -222,6 +228,7 @@ model Department {
   governedExecutionTemplates GovernedExecutionTemplate[]
   observationSources         ObservationSource[]
   externalObservations       ExternalObservation[]
+  portfolioScenarios         PortfolioScenario[]
   createdAt                  DateTime                    @default(now())
 }
 
@@ -240,6 +247,7 @@ model Jurisdiction {
   governedExecutionTemplates GovernedExecutionTemplate[]
   observationSources         ObservationSource[]
   externalObservations       ExternalObservation[]
+  portfolioScenarios         PortfolioScenario[]
   createdAt                  DateTime                    @default(now())
 
   @@index([departmentId])
@@ -290,6 +298,8 @@ model User {
   createdObservationSources          ObservationSource[]          @relation("ObservationSourceCreator")
   deactivatedObservationSources      ObservationSource[]          @relation("ObservationSourceDeactivator")
   ingestedExternalObservations       ExternalObservation[]
+  preparedCaseResourceEstimates      CaseResourceEstimate[] @relation("CaseResourceEstimatePreparer")
+  createdPortfolioScenarios          PortfolioScenario[] @relation("PortfolioScenarioCreator")
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -568,6 +578,7 @@ model Case {
   intelligenceAssessments     InfrastructureIntelligenceAssessment[]
   intelligenceReconciliations InfrastructureIntelligenceReconciliation[]
   externalObservations        ExternalObservation[]
+  resourceEstimates           CaseResourceEstimate[]
 
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
@@ -577,6 +588,50 @@ model Case {
   @@index([priorityLevel])
   @@index([riskLevel])
   @@index([assetId])
+}
+
+model CaseResourceEstimate {
+  id                    String                 @id @default(uuid())
+  caseId                String
+  estimateVersion       Int
+  status                PlanningEstimateStatus @default(ACTIVE)
+  currency              String                 @default("INR")
+  estimatedCostMinor    BigInt
+  estimatedDurationDays Int?
+  resourceRequirements  Json
+  estimateBasis         String
+  sourceReference       String
+  preparedById          String
+  preparedAt            DateTime               @default(now())
+  createdAt             DateTime               @default(now())
+  case                   Case                   @relation(fields: [caseId], references: [id], onDelete: Restrict)
+  preparedBy             User                   @relation("CaseResourceEstimatePreparer", fields: [preparedById], references: [id], onDelete: Restrict)
+
+  @@unique([caseId, estimateVersion])
+  @@index([caseId, status, estimateVersion])
+  @@index([preparedById])
+}
+
+model PortfolioScenario {
+  id                 String   @id @default(uuid())
+  scenarioVersion    Int      @default(1)
+  name               String
+  departmentId       String
+  jurisdictionId     String
+  budgetMinor        BigInt
+  currency           String   @default("INR")
+  resourceCapacities Json
+  algorithmVersion   String
+  inputSnapshot      Json
+  resultSnapshot     Json
+  createdById        String
+  createdAt          DateTime @default(now())
+  department         Department   @relation(fields: [departmentId], references: [id], onDelete: Restrict)
+  jurisdiction       Jurisdiction @relation(fields: [jurisdictionId], references: [id], onDelete: Restrict)
+  createdBy          User         @relation("PortfolioScenarioCreator", fields: [createdById], references: [id], onDelete: Restrict)
+
+  @@index([departmentId, jurisdictionId, createdAt])
+  @@index([createdById])
 }
 
 model ObservationSource {

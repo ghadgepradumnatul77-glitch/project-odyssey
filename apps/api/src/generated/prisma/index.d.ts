@@ -74,6 +74,16 @@ export type PolicyRule = $Result.DefaultSelection<Prisma.$PolicyRulePayload>
  */
 export type Case = $Result.DefaultSelection<Prisma.$CasePayload>
 /**
+ * Model CaseResourceEstimate
+ * 
+ */
+export type CaseResourceEstimate = $Result.DefaultSelection<Prisma.$CaseResourceEstimatePayload>
+/**
+ * Model PortfolioScenario
+ * 
+ */
+export type PortfolioScenario = $Result.DefaultSelection<Prisma.$PortfolioScenarioPayload>
+/**
  * Model ObservationSource
  * 
  */
@@ -440,6 +450,15 @@ export const IntelligenceAssessmentStatus: {
 
 export type IntelligenceAssessmentStatus = (typeof IntelligenceAssessmentStatus)[keyof typeof IntelligenceAssessmentStatus]
 
+
+export const PlanningEstimateStatus: {
+  ACTIVE: 'ACTIVE',
+  SUPERSEDED: 'SUPERSEDED',
+  WITHDRAWN: 'WITHDRAWN'
+};
+
+export type PlanningEstimateStatus = (typeof PlanningEstimateStatus)[keyof typeof PlanningEstimateStatus]
+
 }
 
 export type UserStatus = $Enums.UserStatus
@@ -545,6 +564,10 @@ export const ExecutionPlanGovernanceMode: typeof $Enums.ExecutionPlanGovernanceM
 export type IntelligenceAssessmentStatus = $Enums.IntelligenceAssessmentStatus
 
 export const IntelligenceAssessmentStatus: typeof $Enums.IntelligenceAssessmentStatus
+
+export type PlanningEstimateStatus = $Enums.PlanningEstimateStatus
+
+export const PlanningEstimateStatus: typeof $Enums.PlanningEstimateStatus
 
 /**
  * ##  Prisma Client ʲˢ
@@ -783,6 +806,26 @@ export class PrismaClient<
     * ```
     */
   get case(): Prisma.CaseDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.caseResourceEstimate`: Exposes CRUD operations for the **CaseResourceEstimate** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more CaseResourceEstimates
+    * const caseResourceEstimates = await prisma.caseResourceEstimate.findMany()
+    * ```
+    */
+  get caseResourceEstimate(): Prisma.CaseResourceEstimateDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.portfolioScenario`: Exposes CRUD operations for the **PortfolioScenario** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more PortfolioScenarios
+    * const portfolioScenarios = await prisma.portfolioScenario.findMany()
+    * ```
+    */
+  get portfolioScenario(): Prisma.PortfolioScenarioDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.observationSource`: Exposes CRUD operations for the **ObservationSource** model.
@@ -1406,6 +1449,8 @@ export namespace Prisma {
     GovernedExecutionTaskTemplate: 'GovernedExecutionTaskTemplate',
     PolicyRule: 'PolicyRule',
     Case: 'Case',
+    CaseResourceEstimate: 'CaseResourceEstimate',
+    PortfolioScenario: 'PortfolioScenario',
     ObservationSource: 'ObservationSource',
     ExternalObservation: 'ExternalObservation',
     Inspection: 'Inspection',
@@ -1441,7 +1486,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "department" | "jurisdiction" | "user" | "asset" | "publicReport" | "publicReportTriageAnalysis" | "policyDocument" | "approvedActionVersion" | "governedExecutionTemplate" | "governedExecutionTaskTemplate" | "policyRule" | "case" | "observationSource" | "externalObservation" | "inspection" | "riskAssessment" | "infrastructureIntelligenceAssessment" | "infrastructureIntelligenceReconciliation" | "operationalResponsePlan" | "decisionPackage" | "approvalAuthority" | "orpDecision" | "executionPlan" | "executionTask" | "executionTaskDependency" | "executionTaskBlockerEvent" | "executionScheduleRevision" | "executionEvidence" | "caseClosure"
+      modelProps: "department" | "jurisdiction" | "user" | "asset" | "publicReport" | "publicReportTriageAnalysis" | "policyDocument" | "approvedActionVersion" | "governedExecutionTemplate" | "governedExecutionTaskTemplate" | "policyRule" | "case" | "caseResourceEstimate" | "portfolioScenario" | "observationSource" | "externalObservation" | "inspection" | "riskAssessment" | "infrastructureIntelligenceAssessment" | "infrastructureIntelligenceReconciliation" | "operationalResponsePlan" | "decisionPackage" | "approvalAuthority" | "orpDecision" | "executionPlan" | "executionTask" | "executionTaskDependency" | "executionTaskBlockerEvent" | "executionScheduleRevision" | "executionEvidence" | "caseClosure"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -2330,6 +2375,154 @@ export namespace Prisma {
           count: {
             args: Prisma.CaseCountArgs<ExtArgs>
             result: $Utils.Optional<CaseCountAggregateOutputType> | number
+          }
+        }
+      }
+      CaseResourceEstimate: {
+        payload: Prisma.$CaseResourceEstimatePayload<ExtArgs>
+        fields: Prisma.CaseResourceEstimateFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.CaseResourceEstimateFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CaseResourceEstimatePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.CaseResourceEstimateFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CaseResourceEstimatePayload>
+          }
+          findFirst: {
+            args: Prisma.CaseResourceEstimateFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CaseResourceEstimatePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.CaseResourceEstimateFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CaseResourceEstimatePayload>
+          }
+          findMany: {
+            args: Prisma.CaseResourceEstimateFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CaseResourceEstimatePayload>[]
+          }
+          create: {
+            args: Prisma.CaseResourceEstimateCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CaseResourceEstimatePayload>
+          }
+          createMany: {
+            args: Prisma.CaseResourceEstimateCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.CaseResourceEstimateCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CaseResourceEstimatePayload>[]
+          }
+          delete: {
+            args: Prisma.CaseResourceEstimateDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CaseResourceEstimatePayload>
+          }
+          update: {
+            args: Prisma.CaseResourceEstimateUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CaseResourceEstimatePayload>
+          }
+          deleteMany: {
+            args: Prisma.CaseResourceEstimateDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.CaseResourceEstimateUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.CaseResourceEstimateUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CaseResourceEstimatePayload>[]
+          }
+          upsert: {
+            args: Prisma.CaseResourceEstimateUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CaseResourceEstimatePayload>
+          }
+          aggregate: {
+            args: Prisma.CaseResourceEstimateAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateCaseResourceEstimate>
+          }
+          groupBy: {
+            args: Prisma.CaseResourceEstimateGroupByArgs<ExtArgs>
+            result: $Utils.Optional<CaseResourceEstimateGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.CaseResourceEstimateCountArgs<ExtArgs>
+            result: $Utils.Optional<CaseResourceEstimateCountAggregateOutputType> | number
+          }
+        }
+      }
+      PortfolioScenario: {
+        payload: Prisma.$PortfolioScenarioPayload<ExtArgs>
+        fields: Prisma.PortfolioScenarioFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.PortfolioScenarioFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PortfolioScenarioPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.PortfolioScenarioFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PortfolioScenarioPayload>
+          }
+          findFirst: {
+            args: Prisma.PortfolioScenarioFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PortfolioScenarioPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.PortfolioScenarioFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PortfolioScenarioPayload>
+          }
+          findMany: {
+            args: Prisma.PortfolioScenarioFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PortfolioScenarioPayload>[]
+          }
+          create: {
+            args: Prisma.PortfolioScenarioCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PortfolioScenarioPayload>
+          }
+          createMany: {
+            args: Prisma.PortfolioScenarioCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.PortfolioScenarioCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PortfolioScenarioPayload>[]
+          }
+          delete: {
+            args: Prisma.PortfolioScenarioDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PortfolioScenarioPayload>
+          }
+          update: {
+            args: Prisma.PortfolioScenarioUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PortfolioScenarioPayload>
+          }
+          deleteMany: {
+            args: Prisma.PortfolioScenarioDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.PortfolioScenarioUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.PortfolioScenarioUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PortfolioScenarioPayload>[]
+          }
+          upsert: {
+            args: Prisma.PortfolioScenarioUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PortfolioScenarioPayload>
+          }
+          aggregate: {
+            args: Prisma.PortfolioScenarioAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregatePortfolioScenario>
+          }
+          groupBy: {
+            args: Prisma.PortfolioScenarioGroupByArgs<ExtArgs>
+            result: $Utils.Optional<PortfolioScenarioGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.PortfolioScenarioCountArgs<ExtArgs>
+            result: $Utils.Optional<PortfolioScenarioCountAggregateOutputType> | number
           }
         }
       }
@@ -3699,6 +3892,8 @@ export namespace Prisma {
     governedExecutionTaskTemplate?: GovernedExecutionTaskTemplateOmit
     policyRule?: PolicyRuleOmit
     case?: CaseOmit
+    caseResourceEstimate?: CaseResourceEstimateOmit
+    portfolioScenario?: PortfolioScenarioOmit
     observationSource?: ObservationSourceOmit
     externalObservation?: ExternalObservationOmit
     inspection?: InspectionOmit
@@ -3806,6 +4001,7 @@ export namespace Prisma {
     governedExecutionTemplates: number
     observationSources: number
     externalObservations: number
+    portfolioScenarios: number
   }
 
   export type DepartmentCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3819,6 +4015,7 @@ export namespace Prisma {
     governedExecutionTemplates?: boolean | DepartmentCountOutputTypeCountGovernedExecutionTemplatesArgs
     observationSources?: boolean | DepartmentCountOutputTypeCountObservationSourcesArgs
     externalObservations?: boolean | DepartmentCountOutputTypeCountExternalObservationsArgs
+    portfolioScenarios?: boolean | DepartmentCountOutputTypeCountPortfolioScenariosArgs
   }
 
   // Custom InputTypes
@@ -3902,6 +4099,13 @@ export namespace Prisma {
     where?: ExternalObservationWhereInput
   }
 
+  /**
+   * DepartmentCountOutputType without action
+   */
+  export type DepartmentCountOutputTypeCountPortfolioScenariosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PortfolioScenarioWhereInput
+  }
+
 
   /**
    * Count Type JurisdictionCountOutputType
@@ -3917,6 +4121,7 @@ export namespace Prisma {
     governedExecutionTemplates: number
     observationSources: number
     externalObservations: number
+    portfolioScenarios: number
   }
 
   export type JurisdictionCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3929,6 +4134,7 @@ export namespace Prisma {
     governedExecutionTemplates?: boolean | JurisdictionCountOutputTypeCountGovernedExecutionTemplatesArgs
     observationSources?: boolean | JurisdictionCountOutputTypeCountObservationSourcesArgs
     externalObservations?: boolean | JurisdictionCountOutputTypeCountExternalObservationsArgs
+    portfolioScenarios?: boolean | JurisdictionCountOutputTypeCountPortfolioScenariosArgs
   }
 
   // Custom InputTypes
@@ -4005,6 +4211,13 @@ export namespace Prisma {
     where?: ExternalObservationWhereInput
   }
 
+  /**
+   * JurisdictionCountOutputType without action
+   */
+  export type JurisdictionCountOutputTypeCountPortfolioScenariosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PortfolioScenarioWhereInput
+  }
+
 
   /**
    * Count Type UserCountOutputType
@@ -4040,6 +4253,8 @@ export namespace Prisma {
     createdObservationSources: number
     deactivatedObservationSources: number
     ingestedExternalObservations: number
+    preparedCaseResourceEstimates: number
+    createdPortfolioScenarios: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4072,6 +4287,8 @@ export namespace Prisma {
     createdObservationSources?: boolean | UserCountOutputTypeCountCreatedObservationSourcesArgs
     deactivatedObservationSources?: boolean | UserCountOutputTypeCountDeactivatedObservationSourcesArgs
     ingestedExternalObservations?: boolean | UserCountOutputTypeCountIngestedExternalObservationsArgs
+    preparedCaseResourceEstimates?: boolean | UserCountOutputTypeCountPreparedCaseResourceEstimatesArgs
+    createdPortfolioScenarios?: boolean | UserCountOutputTypeCountCreatedPortfolioScenariosArgs
   }
 
   // Custom InputTypes
@@ -4286,6 +4503,20 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountIngestedExternalObservationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ExternalObservationWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountPreparedCaseResourceEstimatesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CaseResourceEstimateWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountCreatedPortfolioScenariosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PortfolioScenarioWhereInput
   }
 
 
@@ -4552,6 +4783,7 @@ export namespace Prisma {
     intelligenceAssessments: number
     intelligenceReconciliations: number
     externalObservations: number
+    resourceEstimates: number
   }
 
   export type CaseCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4564,6 +4796,7 @@ export namespace Prisma {
     intelligenceAssessments?: boolean | CaseCountOutputTypeCountIntelligenceAssessmentsArgs
     intelligenceReconciliations?: boolean | CaseCountOutputTypeCountIntelligenceReconciliationsArgs
     externalObservations?: boolean | CaseCountOutputTypeCountExternalObservationsArgs
+    resourceEstimates?: boolean | CaseCountOutputTypeCountResourceEstimatesArgs
   }
 
   // Custom InputTypes
@@ -4638,6 +4871,13 @@ export namespace Prisma {
    */
   export type CaseCountOutputTypeCountExternalObservationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ExternalObservationWhereInput
+  }
+
+  /**
+   * CaseCountOutputType without action
+   */
+  export type CaseCountOutputTypeCountResourceEstimatesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CaseResourceEstimateWhereInput
   }
 
 
@@ -5189,6 +5429,7 @@ export namespace Prisma {
     governedExecutionTemplates?: boolean | Department$governedExecutionTemplatesArgs<ExtArgs>
     observationSources?: boolean | Department$observationSourcesArgs<ExtArgs>
     externalObservations?: boolean | Department$externalObservationsArgs<ExtArgs>
+    portfolioScenarios?: boolean | Department$portfolioScenariosArgs<ExtArgs>
     _count?: boolean | DepartmentCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["department"]>
 
@@ -5225,6 +5466,7 @@ export namespace Prisma {
     governedExecutionTemplates?: boolean | Department$governedExecutionTemplatesArgs<ExtArgs>
     observationSources?: boolean | Department$observationSourcesArgs<ExtArgs>
     externalObservations?: boolean | Department$externalObservationsArgs<ExtArgs>
+    portfolioScenarios?: boolean | Department$portfolioScenariosArgs<ExtArgs>
     _count?: boolean | DepartmentCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type DepartmentIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -5243,6 +5485,7 @@ export namespace Prisma {
       governedExecutionTemplates: Prisma.$GovernedExecutionTemplatePayload<ExtArgs>[]
       observationSources: Prisma.$ObservationSourcePayload<ExtArgs>[]
       externalObservations: Prisma.$ExternalObservationPayload<ExtArgs>[]
+      portfolioScenarios: Prisma.$PortfolioScenarioPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -5653,6 +5896,7 @@ export namespace Prisma {
     governedExecutionTemplates<T extends Department$governedExecutionTemplatesArgs<ExtArgs> = {}>(args?: Subset<T, Department$governedExecutionTemplatesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GovernedExecutionTemplatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     observationSources<T extends Department$observationSourcesArgs<ExtArgs> = {}>(args?: Subset<T, Department$observationSourcesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ObservationSourcePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     externalObservations<T extends Department$externalObservationsArgs<ExtArgs> = {}>(args?: Subset<T, Department$externalObservationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExternalObservationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    portfolioScenarios<T extends Department$portfolioScenariosArgs<ExtArgs> = {}>(args?: Subset<T, Department$portfolioScenariosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PortfolioScenarioPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -6314,6 +6558,30 @@ export namespace Prisma {
   }
 
   /**
+   * Department.portfolioScenarios
+   */
+  export type Department$portfolioScenariosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PortfolioScenario
+     */
+    select?: PortfolioScenarioSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PortfolioScenario
+     */
+    omit?: PortfolioScenarioOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PortfolioScenarioInclude<ExtArgs> | null
+    where?: PortfolioScenarioWhereInput
+    orderBy?: PortfolioScenarioOrderByWithRelationInput | PortfolioScenarioOrderByWithRelationInput[]
+    cursor?: PortfolioScenarioWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PortfolioScenarioScalarFieldEnum | PortfolioScenarioScalarFieldEnum[]
+  }
+
+  /**
    * Department without action
    */
   export type DepartmentDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -6506,6 +6774,7 @@ export namespace Prisma {
     governedExecutionTemplates?: boolean | Jurisdiction$governedExecutionTemplatesArgs<ExtArgs>
     observationSources?: boolean | Jurisdiction$observationSourcesArgs<ExtArgs>
     externalObservations?: boolean | Jurisdiction$externalObservationsArgs<ExtArgs>
+    portfolioScenarios?: boolean | Jurisdiction$portfolioScenariosArgs<ExtArgs>
     _count?: boolean | JurisdictionCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["jurisdiction"]>
 
@@ -6547,6 +6816,7 @@ export namespace Prisma {
     governedExecutionTemplates?: boolean | Jurisdiction$governedExecutionTemplatesArgs<ExtArgs>
     observationSources?: boolean | Jurisdiction$observationSourcesArgs<ExtArgs>
     externalObservations?: boolean | Jurisdiction$externalObservationsArgs<ExtArgs>
+    portfolioScenarios?: boolean | Jurisdiction$portfolioScenariosArgs<ExtArgs>
     _count?: boolean | JurisdictionCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type JurisdictionIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -6569,6 +6839,7 @@ export namespace Prisma {
       governedExecutionTemplates: Prisma.$GovernedExecutionTemplatePayload<ExtArgs>[]
       observationSources: Prisma.$ObservationSourcePayload<ExtArgs>[]
       externalObservations: Prisma.$ExternalObservationPayload<ExtArgs>[]
+      portfolioScenarios: Prisma.$PortfolioScenarioPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -6980,6 +7251,7 @@ export namespace Prisma {
     governedExecutionTemplates<T extends Jurisdiction$governedExecutionTemplatesArgs<ExtArgs> = {}>(args?: Subset<T, Jurisdiction$governedExecutionTemplatesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GovernedExecutionTemplatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     observationSources<T extends Jurisdiction$observationSourcesArgs<ExtArgs> = {}>(args?: Subset<T, Jurisdiction$observationSourcesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ObservationSourcePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     externalObservations<T extends Jurisdiction$externalObservationsArgs<ExtArgs> = {}>(args?: Subset<T, Jurisdiction$externalObservationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExternalObservationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    portfolioScenarios<T extends Jurisdiction$portfolioScenariosArgs<ExtArgs> = {}>(args?: Subset<T, Jurisdiction$portfolioScenariosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PortfolioScenarioPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -7626,6 +7898,30 @@ export namespace Prisma {
   }
 
   /**
+   * Jurisdiction.portfolioScenarios
+   */
+  export type Jurisdiction$portfolioScenariosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PortfolioScenario
+     */
+    select?: PortfolioScenarioSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PortfolioScenario
+     */
+    omit?: PortfolioScenarioOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PortfolioScenarioInclude<ExtArgs> | null
+    where?: PortfolioScenarioWhereInput
+    orderBy?: PortfolioScenarioOrderByWithRelationInput | PortfolioScenarioOrderByWithRelationInput[]
+    cursor?: PortfolioScenarioWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PortfolioScenarioScalarFieldEnum | PortfolioScenarioScalarFieldEnum[]
+  }
+
+  /**
    * Jurisdiction without action
    */
   export type JurisdictionDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -7895,6 +8191,8 @@ export namespace Prisma {
     createdObservationSources?: boolean | User$createdObservationSourcesArgs<ExtArgs>
     deactivatedObservationSources?: boolean | User$deactivatedObservationSourcesArgs<ExtArgs>
     ingestedExternalObservations?: boolean | User$ingestedExternalObservationsArgs<ExtArgs>
+    preparedCaseResourceEstimates?: boolean | User$preparedCaseResourceEstimatesArgs<ExtArgs>
+    createdPortfolioScenarios?: boolean | User$createdPortfolioScenariosArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -7980,6 +8278,8 @@ export namespace Prisma {
     createdObservationSources?: boolean | User$createdObservationSourcesArgs<ExtArgs>
     deactivatedObservationSources?: boolean | User$deactivatedObservationSourcesArgs<ExtArgs>
     ingestedExternalObservations?: boolean | User$ingestedExternalObservationsArgs<ExtArgs>
+    preparedCaseResourceEstimates?: boolean | User$preparedCaseResourceEstimatesArgs<ExtArgs>
+    createdPortfolioScenarios?: boolean | User$createdPortfolioScenariosArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -8025,6 +8325,8 @@ export namespace Prisma {
       createdObservationSources: Prisma.$ObservationSourcePayload<ExtArgs>[]
       deactivatedObservationSources: Prisma.$ObservationSourcePayload<ExtArgs>[]
       ingestedExternalObservations: Prisma.$ExternalObservationPayload<ExtArgs>[]
+      preparedCaseResourceEstimates: Prisma.$CaseResourceEstimatePayload<ExtArgs>[]
+      createdPortfolioScenarios: Prisma.$PortfolioScenarioPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -8464,6 +8766,8 @@ export namespace Prisma {
     createdObservationSources<T extends User$createdObservationSourcesArgs<ExtArgs> = {}>(args?: Subset<T, User$createdObservationSourcesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ObservationSourcePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     deactivatedObservationSources<T extends User$deactivatedObservationSourcesArgs<ExtArgs> = {}>(args?: Subset<T, User$deactivatedObservationSourcesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ObservationSourcePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     ingestedExternalObservations<T extends User$ingestedExternalObservationsArgs<ExtArgs> = {}>(args?: Subset<T, User$ingestedExternalObservationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExternalObservationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    preparedCaseResourceEstimates<T extends User$preparedCaseResourceEstimatesArgs<ExtArgs> = {}>(args?: Subset<T, User$preparedCaseResourceEstimatesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CaseResourceEstimatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    createdPortfolioScenarios<T extends User$createdPortfolioScenariosArgs<ExtArgs> = {}>(args?: Subset<T, User$createdPortfolioScenariosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PortfolioScenarioPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -9594,6 +9898,54 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ExternalObservationScalarFieldEnum | ExternalObservationScalarFieldEnum[]
+  }
+
+  /**
+   * User.preparedCaseResourceEstimates
+   */
+  export type User$preparedCaseResourceEstimatesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CaseResourceEstimate
+     */
+    select?: CaseResourceEstimateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CaseResourceEstimate
+     */
+    omit?: CaseResourceEstimateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CaseResourceEstimateInclude<ExtArgs> | null
+    where?: CaseResourceEstimateWhereInput
+    orderBy?: CaseResourceEstimateOrderByWithRelationInput | CaseResourceEstimateOrderByWithRelationInput[]
+    cursor?: CaseResourceEstimateWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: CaseResourceEstimateScalarFieldEnum | CaseResourceEstimateScalarFieldEnum[]
+  }
+
+  /**
+   * User.createdPortfolioScenarios
+   */
+  export type User$createdPortfolioScenariosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PortfolioScenario
+     */
+    select?: PortfolioScenarioSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PortfolioScenario
+     */
+    omit?: PortfolioScenarioOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PortfolioScenarioInclude<ExtArgs> | null
+    where?: PortfolioScenarioWhereInput
+    orderBy?: PortfolioScenarioOrderByWithRelationInput | PortfolioScenarioOrderByWithRelationInput[]
+    cursor?: PortfolioScenarioWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PortfolioScenarioScalarFieldEnum | PortfolioScenarioScalarFieldEnum[]
   }
 
   /**
@@ -20479,6 +20831,7 @@ export namespace Prisma {
     intelligenceAssessments?: boolean | Case$intelligenceAssessmentsArgs<ExtArgs>
     intelligenceReconciliations?: boolean | Case$intelligenceReconciliationsArgs<ExtArgs>
     externalObservations?: boolean | Case$externalObservationsArgs<ExtArgs>
+    resourceEstimates?: boolean | Case$resourceEstimatesArgs<ExtArgs>
     _count?: boolean | CaseCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["case"]>
 
@@ -20543,6 +20896,7 @@ export namespace Prisma {
     intelligenceAssessments?: boolean | Case$intelligenceAssessmentsArgs<ExtArgs>
     intelligenceReconciliations?: boolean | Case$intelligenceReconciliationsArgs<ExtArgs>
     externalObservations?: boolean | Case$externalObservationsArgs<ExtArgs>
+    resourceEstimates?: boolean | Case$resourceEstimatesArgs<ExtArgs>
     _count?: boolean | CaseCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type CaseIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -20567,6 +20921,7 @@ export namespace Prisma {
       intelligenceAssessments: Prisma.$InfrastructureIntelligenceAssessmentPayload<ExtArgs>[]
       intelligenceReconciliations: Prisma.$InfrastructureIntelligenceReconciliationPayload<ExtArgs>[]
       externalObservations: Prisma.$ExternalObservationPayload<ExtArgs>[]
+      resourceEstimates: Prisma.$CaseResourceEstimatePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -20987,6 +21342,7 @@ export namespace Prisma {
     intelligenceAssessments<T extends Case$intelligenceAssessmentsArgs<ExtArgs> = {}>(args?: Subset<T, Case$intelligenceAssessmentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InfrastructureIntelligenceAssessmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     intelligenceReconciliations<T extends Case$intelligenceReconciliationsArgs<ExtArgs> = {}>(args?: Subset<T, Case$intelligenceReconciliationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InfrastructureIntelligenceReconciliationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     externalObservations<T extends Case$externalObservationsArgs<ExtArgs> = {}>(args?: Subset<T, Case$externalObservationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExternalObservationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    resourceEstimates<T extends Case$resourceEstimatesArgs<ExtArgs> = {}>(args?: Subset<T, Case$resourceEstimatesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CaseResourceEstimatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -21678,6 +22034,30 @@ export namespace Prisma {
   }
 
   /**
+   * Case.resourceEstimates
+   */
+  export type Case$resourceEstimatesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CaseResourceEstimate
+     */
+    select?: CaseResourceEstimateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CaseResourceEstimate
+     */
+    omit?: CaseResourceEstimateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CaseResourceEstimateInclude<ExtArgs> | null
+    where?: CaseResourceEstimateWhereInput
+    orderBy?: CaseResourceEstimateOrderByWithRelationInput | CaseResourceEstimateOrderByWithRelationInput[]
+    cursor?: CaseResourceEstimateWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: CaseResourceEstimateScalarFieldEnum | CaseResourceEstimateScalarFieldEnum[]
+  }
+
+  /**
    * Case without action
    */
   export type CaseDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -21693,6 +22073,2418 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: CaseInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model CaseResourceEstimate
+   */
+
+  export type AggregateCaseResourceEstimate = {
+    _count: CaseResourceEstimateCountAggregateOutputType | null
+    _avg: CaseResourceEstimateAvgAggregateOutputType | null
+    _sum: CaseResourceEstimateSumAggregateOutputType | null
+    _min: CaseResourceEstimateMinAggregateOutputType | null
+    _max: CaseResourceEstimateMaxAggregateOutputType | null
+  }
+
+  export type CaseResourceEstimateAvgAggregateOutputType = {
+    estimateVersion: number | null
+    estimatedCostMinor: number | null
+    estimatedDurationDays: number | null
+  }
+
+  export type CaseResourceEstimateSumAggregateOutputType = {
+    estimateVersion: number | null
+    estimatedCostMinor: bigint | null
+    estimatedDurationDays: number | null
+  }
+
+  export type CaseResourceEstimateMinAggregateOutputType = {
+    id: string | null
+    caseId: string | null
+    estimateVersion: number | null
+    status: $Enums.PlanningEstimateStatus | null
+    currency: string | null
+    estimatedCostMinor: bigint | null
+    estimatedDurationDays: number | null
+    estimateBasis: string | null
+    sourceReference: string | null
+    preparedById: string | null
+    preparedAt: Date | null
+    createdAt: Date | null
+  }
+
+  export type CaseResourceEstimateMaxAggregateOutputType = {
+    id: string | null
+    caseId: string | null
+    estimateVersion: number | null
+    status: $Enums.PlanningEstimateStatus | null
+    currency: string | null
+    estimatedCostMinor: bigint | null
+    estimatedDurationDays: number | null
+    estimateBasis: string | null
+    sourceReference: string | null
+    preparedById: string | null
+    preparedAt: Date | null
+    createdAt: Date | null
+  }
+
+  export type CaseResourceEstimateCountAggregateOutputType = {
+    id: number
+    caseId: number
+    estimateVersion: number
+    status: number
+    currency: number
+    estimatedCostMinor: number
+    estimatedDurationDays: number
+    resourceRequirements: number
+    estimateBasis: number
+    sourceReference: number
+    preparedById: number
+    preparedAt: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type CaseResourceEstimateAvgAggregateInputType = {
+    estimateVersion?: true
+    estimatedCostMinor?: true
+    estimatedDurationDays?: true
+  }
+
+  export type CaseResourceEstimateSumAggregateInputType = {
+    estimateVersion?: true
+    estimatedCostMinor?: true
+    estimatedDurationDays?: true
+  }
+
+  export type CaseResourceEstimateMinAggregateInputType = {
+    id?: true
+    caseId?: true
+    estimateVersion?: true
+    status?: true
+    currency?: true
+    estimatedCostMinor?: true
+    estimatedDurationDays?: true
+    estimateBasis?: true
+    sourceReference?: true
+    preparedById?: true
+    preparedAt?: true
+    createdAt?: true
+  }
+
+  export type CaseResourceEstimateMaxAggregateInputType = {
+    id?: true
+    caseId?: true
+    estimateVersion?: true
+    status?: true
+    currency?: true
+    estimatedCostMinor?: true
+    estimatedDurationDays?: true
+    estimateBasis?: true
+    sourceReference?: true
+    preparedById?: true
+    preparedAt?: true
+    createdAt?: true
+  }
+
+  export type CaseResourceEstimateCountAggregateInputType = {
+    id?: true
+    caseId?: true
+    estimateVersion?: true
+    status?: true
+    currency?: true
+    estimatedCostMinor?: true
+    estimatedDurationDays?: true
+    resourceRequirements?: true
+    estimateBasis?: true
+    sourceReference?: true
+    preparedById?: true
+    preparedAt?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type CaseResourceEstimateAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which CaseResourceEstimate to aggregate.
+     */
+    where?: CaseResourceEstimateWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CaseResourceEstimates to fetch.
+     */
+    orderBy?: CaseResourceEstimateOrderByWithRelationInput | CaseResourceEstimateOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: CaseResourceEstimateWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CaseResourceEstimates from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CaseResourceEstimates.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned CaseResourceEstimates
+    **/
+    _count?: true | CaseResourceEstimateCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: CaseResourceEstimateAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: CaseResourceEstimateSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: CaseResourceEstimateMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: CaseResourceEstimateMaxAggregateInputType
+  }
+
+  export type GetCaseResourceEstimateAggregateType<T extends CaseResourceEstimateAggregateArgs> = {
+        [P in keyof T & keyof AggregateCaseResourceEstimate]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateCaseResourceEstimate[P]>
+      : GetScalarType<T[P], AggregateCaseResourceEstimate[P]>
+  }
+
+
+
+
+  export type CaseResourceEstimateGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CaseResourceEstimateWhereInput
+    orderBy?: CaseResourceEstimateOrderByWithAggregationInput | CaseResourceEstimateOrderByWithAggregationInput[]
+    by: CaseResourceEstimateScalarFieldEnum[] | CaseResourceEstimateScalarFieldEnum
+    having?: CaseResourceEstimateScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: CaseResourceEstimateCountAggregateInputType | true
+    _avg?: CaseResourceEstimateAvgAggregateInputType
+    _sum?: CaseResourceEstimateSumAggregateInputType
+    _min?: CaseResourceEstimateMinAggregateInputType
+    _max?: CaseResourceEstimateMaxAggregateInputType
+  }
+
+  export type CaseResourceEstimateGroupByOutputType = {
+    id: string
+    caseId: string
+    estimateVersion: number
+    status: $Enums.PlanningEstimateStatus
+    currency: string
+    estimatedCostMinor: bigint
+    estimatedDurationDays: number | null
+    resourceRequirements: JsonValue
+    estimateBasis: string
+    sourceReference: string
+    preparedById: string
+    preparedAt: Date
+    createdAt: Date
+    _count: CaseResourceEstimateCountAggregateOutputType | null
+    _avg: CaseResourceEstimateAvgAggregateOutputType | null
+    _sum: CaseResourceEstimateSumAggregateOutputType | null
+    _min: CaseResourceEstimateMinAggregateOutputType | null
+    _max: CaseResourceEstimateMaxAggregateOutputType | null
+  }
+
+  type GetCaseResourceEstimateGroupByPayload<T extends CaseResourceEstimateGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<CaseResourceEstimateGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof CaseResourceEstimateGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], CaseResourceEstimateGroupByOutputType[P]>
+            : GetScalarType<T[P], CaseResourceEstimateGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type CaseResourceEstimateSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    caseId?: boolean
+    estimateVersion?: boolean
+    status?: boolean
+    currency?: boolean
+    estimatedCostMinor?: boolean
+    estimatedDurationDays?: boolean
+    resourceRequirements?: boolean
+    estimateBasis?: boolean
+    sourceReference?: boolean
+    preparedById?: boolean
+    preparedAt?: boolean
+    createdAt?: boolean
+    case?: boolean | CaseDefaultArgs<ExtArgs>
+    preparedBy?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["caseResourceEstimate"]>
+
+  export type CaseResourceEstimateSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    caseId?: boolean
+    estimateVersion?: boolean
+    status?: boolean
+    currency?: boolean
+    estimatedCostMinor?: boolean
+    estimatedDurationDays?: boolean
+    resourceRequirements?: boolean
+    estimateBasis?: boolean
+    sourceReference?: boolean
+    preparedById?: boolean
+    preparedAt?: boolean
+    createdAt?: boolean
+    case?: boolean | CaseDefaultArgs<ExtArgs>
+    preparedBy?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["caseResourceEstimate"]>
+
+  export type CaseResourceEstimateSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    caseId?: boolean
+    estimateVersion?: boolean
+    status?: boolean
+    currency?: boolean
+    estimatedCostMinor?: boolean
+    estimatedDurationDays?: boolean
+    resourceRequirements?: boolean
+    estimateBasis?: boolean
+    sourceReference?: boolean
+    preparedById?: boolean
+    preparedAt?: boolean
+    createdAt?: boolean
+    case?: boolean | CaseDefaultArgs<ExtArgs>
+    preparedBy?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["caseResourceEstimate"]>
+
+  export type CaseResourceEstimateSelectScalar = {
+    id?: boolean
+    caseId?: boolean
+    estimateVersion?: boolean
+    status?: boolean
+    currency?: boolean
+    estimatedCostMinor?: boolean
+    estimatedDurationDays?: boolean
+    resourceRequirements?: boolean
+    estimateBasis?: boolean
+    sourceReference?: boolean
+    preparedById?: boolean
+    preparedAt?: boolean
+    createdAt?: boolean
+  }
+
+  export type CaseResourceEstimateOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "caseId" | "estimateVersion" | "status" | "currency" | "estimatedCostMinor" | "estimatedDurationDays" | "resourceRequirements" | "estimateBasis" | "sourceReference" | "preparedById" | "preparedAt" | "createdAt", ExtArgs["result"]["caseResourceEstimate"]>
+  export type CaseResourceEstimateInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    case?: boolean | CaseDefaultArgs<ExtArgs>
+    preparedBy?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type CaseResourceEstimateIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    case?: boolean | CaseDefaultArgs<ExtArgs>
+    preparedBy?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type CaseResourceEstimateIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    case?: boolean | CaseDefaultArgs<ExtArgs>
+    preparedBy?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $CaseResourceEstimatePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "CaseResourceEstimate"
+    objects: {
+      case: Prisma.$CasePayload<ExtArgs>
+      preparedBy: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      caseId: string
+      estimateVersion: number
+      status: $Enums.PlanningEstimateStatus
+      currency: string
+      estimatedCostMinor: bigint
+      estimatedDurationDays: number | null
+      resourceRequirements: Prisma.JsonValue
+      estimateBasis: string
+      sourceReference: string
+      preparedById: string
+      preparedAt: Date
+      createdAt: Date
+    }, ExtArgs["result"]["caseResourceEstimate"]>
+    composites: {}
+  }
+
+  type CaseResourceEstimateGetPayload<S extends boolean | null | undefined | CaseResourceEstimateDefaultArgs> = $Result.GetResult<Prisma.$CaseResourceEstimatePayload, S>
+
+  type CaseResourceEstimateCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<CaseResourceEstimateFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: CaseResourceEstimateCountAggregateInputType | true
+    }
+
+  export interface CaseResourceEstimateDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['CaseResourceEstimate'], meta: { name: 'CaseResourceEstimate' } }
+    /**
+     * Find zero or one CaseResourceEstimate that matches the filter.
+     * @param {CaseResourceEstimateFindUniqueArgs} args - Arguments to find a CaseResourceEstimate
+     * @example
+     * // Get one CaseResourceEstimate
+     * const caseResourceEstimate = await prisma.caseResourceEstimate.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends CaseResourceEstimateFindUniqueArgs>(args: SelectSubset<T, CaseResourceEstimateFindUniqueArgs<ExtArgs>>): Prisma__CaseResourceEstimateClient<$Result.GetResult<Prisma.$CaseResourceEstimatePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one CaseResourceEstimate that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {CaseResourceEstimateFindUniqueOrThrowArgs} args - Arguments to find a CaseResourceEstimate
+     * @example
+     * // Get one CaseResourceEstimate
+     * const caseResourceEstimate = await prisma.caseResourceEstimate.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends CaseResourceEstimateFindUniqueOrThrowArgs>(args: SelectSubset<T, CaseResourceEstimateFindUniqueOrThrowArgs<ExtArgs>>): Prisma__CaseResourceEstimateClient<$Result.GetResult<Prisma.$CaseResourceEstimatePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first CaseResourceEstimate that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CaseResourceEstimateFindFirstArgs} args - Arguments to find a CaseResourceEstimate
+     * @example
+     * // Get one CaseResourceEstimate
+     * const caseResourceEstimate = await prisma.caseResourceEstimate.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends CaseResourceEstimateFindFirstArgs>(args?: SelectSubset<T, CaseResourceEstimateFindFirstArgs<ExtArgs>>): Prisma__CaseResourceEstimateClient<$Result.GetResult<Prisma.$CaseResourceEstimatePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first CaseResourceEstimate that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CaseResourceEstimateFindFirstOrThrowArgs} args - Arguments to find a CaseResourceEstimate
+     * @example
+     * // Get one CaseResourceEstimate
+     * const caseResourceEstimate = await prisma.caseResourceEstimate.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends CaseResourceEstimateFindFirstOrThrowArgs>(args?: SelectSubset<T, CaseResourceEstimateFindFirstOrThrowArgs<ExtArgs>>): Prisma__CaseResourceEstimateClient<$Result.GetResult<Prisma.$CaseResourceEstimatePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more CaseResourceEstimates that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CaseResourceEstimateFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all CaseResourceEstimates
+     * const caseResourceEstimates = await prisma.caseResourceEstimate.findMany()
+     * 
+     * // Get first 10 CaseResourceEstimates
+     * const caseResourceEstimates = await prisma.caseResourceEstimate.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const caseResourceEstimateWithIdOnly = await prisma.caseResourceEstimate.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends CaseResourceEstimateFindManyArgs>(args?: SelectSubset<T, CaseResourceEstimateFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CaseResourceEstimatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a CaseResourceEstimate.
+     * @param {CaseResourceEstimateCreateArgs} args - Arguments to create a CaseResourceEstimate.
+     * @example
+     * // Create one CaseResourceEstimate
+     * const CaseResourceEstimate = await prisma.caseResourceEstimate.create({
+     *   data: {
+     *     // ... data to create a CaseResourceEstimate
+     *   }
+     * })
+     * 
+     */
+    create<T extends CaseResourceEstimateCreateArgs>(args: SelectSubset<T, CaseResourceEstimateCreateArgs<ExtArgs>>): Prisma__CaseResourceEstimateClient<$Result.GetResult<Prisma.$CaseResourceEstimatePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many CaseResourceEstimates.
+     * @param {CaseResourceEstimateCreateManyArgs} args - Arguments to create many CaseResourceEstimates.
+     * @example
+     * // Create many CaseResourceEstimates
+     * const caseResourceEstimate = await prisma.caseResourceEstimate.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends CaseResourceEstimateCreateManyArgs>(args?: SelectSubset<T, CaseResourceEstimateCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many CaseResourceEstimates and returns the data saved in the database.
+     * @param {CaseResourceEstimateCreateManyAndReturnArgs} args - Arguments to create many CaseResourceEstimates.
+     * @example
+     * // Create many CaseResourceEstimates
+     * const caseResourceEstimate = await prisma.caseResourceEstimate.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many CaseResourceEstimates and only return the `id`
+     * const caseResourceEstimateWithIdOnly = await prisma.caseResourceEstimate.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends CaseResourceEstimateCreateManyAndReturnArgs>(args?: SelectSubset<T, CaseResourceEstimateCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CaseResourceEstimatePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a CaseResourceEstimate.
+     * @param {CaseResourceEstimateDeleteArgs} args - Arguments to delete one CaseResourceEstimate.
+     * @example
+     * // Delete one CaseResourceEstimate
+     * const CaseResourceEstimate = await prisma.caseResourceEstimate.delete({
+     *   where: {
+     *     // ... filter to delete one CaseResourceEstimate
+     *   }
+     * })
+     * 
+     */
+    delete<T extends CaseResourceEstimateDeleteArgs>(args: SelectSubset<T, CaseResourceEstimateDeleteArgs<ExtArgs>>): Prisma__CaseResourceEstimateClient<$Result.GetResult<Prisma.$CaseResourceEstimatePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one CaseResourceEstimate.
+     * @param {CaseResourceEstimateUpdateArgs} args - Arguments to update one CaseResourceEstimate.
+     * @example
+     * // Update one CaseResourceEstimate
+     * const caseResourceEstimate = await prisma.caseResourceEstimate.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends CaseResourceEstimateUpdateArgs>(args: SelectSubset<T, CaseResourceEstimateUpdateArgs<ExtArgs>>): Prisma__CaseResourceEstimateClient<$Result.GetResult<Prisma.$CaseResourceEstimatePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more CaseResourceEstimates.
+     * @param {CaseResourceEstimateDeleteManyArgs} args - Arguments to filter CaseResourceEstimates to delete.
+     * @example
+     * // Delete a few CaseResourceEstimates
+     * const { count } = await prisma.caseResourceEstimate.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends CaseResourceEstimateDeleteManyArgs>(args?: SelectSubset<T, CaseResourceEstimateDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more CaseResourceEstimates.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CaseResourceEstimateUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many CaseResourceEstimates
+     * const caseResourceEstimate = await prisma.caseResourceEstimate.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends CaseResourceEstimateUpdateManyArgs>(args: SelectSubset<T, CaseResourceEstimateUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more CaseResourceEstimates and returns the data updated in the database.
+     * @param {CaseResourceEstimateUpdateManyAndReturnArgs} args - Arguments to update many CaseResourceEstimates.
+     * @example
+     * // Update many CaseResourceEstimates
+     * const caseResourceEstimate = await prisma.caseResourceEstimate.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more CaseResourceEstimates and only return the `id`
+     * const caseResourceEstimateWithIdOnly = await prisma.caseResourceEstimate.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends CaseResourceEstimateUpdateManyAndReturnArgs>(args: SelectSubset<T, CaseResourceEstimateUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CaseResourceEstimatePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one CaseResourceEstimate.
+     * @param {CaseResourceEstimateUpsertArgs} args - Arguments to update or create a CaseResourceEstimate.
+     * @example
+     * // Update or create a CaseResourceEstimate
+     * const caseResourceEstimate = await prisma.caseResourceEstimate.upsert({
+     *   create: {
+     *     // ... data to create a CaseResourceEstimate
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the CaseResourceEstimate we want to update
+     *   }
+     * })
+     */
+    upsert<T extends CaseResourceEstimateUpsertArgs>(args: SelectSubset<T, CaseResourceEstimateUpsertArgs<ExtArgs>>): Prisma__CaseResourceEstimateClient<$Result.GetResult<Prisma.$CaseResourceEstimatePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of CaseResourceEstimates.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CaseResourceEstimateCountArgs} args - Arguments to filter CaseResourceEstimates to count.
+     * @example
+     * // Count the number of CaseResourceEstimates
+     * const count = await prisma.caseResourceEstimate.count({
+     *   where: {
+     *     // ... the filter for the CaseResourceEstimates we want to count
+     *   }
+     * })
+    **/
+    count<T extends CaseResourceEstimateCountArgs>(
+      args?: Subset<T, CaseResourceEstimateCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], CaseResourceEstimateCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a CaseResourceEstimate.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CaseResourceEstimateAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends CaseResourceEstimateAggregateArgs>(args: Subset<T, CaseResourceEstimateAggregateArgs>): Prisma.PrismaPromise<GetCaseResourceEstimateAggregateType<T>>
+
+    /**
+     * Group by CaseResourceEstimate.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CaseResourceEstimateGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends CaseResourceEstimateGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: CaseResourceEstimateGroupByArgs['orderBy'] }
+        : { orderBy?: CaseResourceEstimateGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, CaseResourceEstimateGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCaseResourceEstimateGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the CaseResourceEstimate model
+   */
+  readonly fields: CaseResourceEstimateFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for CaseResourceEstimate.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__CaseResourceEstimateClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    case<T extends CaseDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CaseDefaultArgs<ExtArgs>>): Prisma__CaseClient<$Result.GetResult<Prisma.$CasePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    preparedBy<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the CaseResourceEstimate model
+   */
+  interface CaseResourceEstimateFieldRefs {
+    readonly id: FieldRef<"CaseResourceEstimate", 'String'>
+    readonly caseId: FieldRef<"CaseResourceEstimate", 'String'>
+    readonly estimateVersion: FieldRef<"CaseResourceEstimate", 'Int'>
+    readonly status: FieldRef<"CaseResourceEstimate", 'PlanningEstimateStatus'>
+    readonly currency: FieldRef<"CaseResourceEstimate", 'String'>
+    readonly estimatedCostMinor: FieldRef<"CaseResourceEstimate", 'BigInt'>
+    readonly estimatedDurationDays: FieldRef<"CaseResourceEstimate", 'Int'>
+    readonly resourceRequirements: FieldRef<"CaseResourceEstimate", 'Json'>
+    readonly estimateBasis: FieldRef<"CaseResourceEstimate", 'String'>
+    readonly sourceReference: FieldRef<"CaseResourceEstimate", 'String'>
+    readonly preparedById: FieldRef<"CaseResourceEstimate", 'String'>
+    readonly preparedAt: FieldRef<"CaseResourceEstimate", 'DateTime'>
+    readonly createdAt: FieldRef<"CaseResourceEstimate", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * CaseResourceEstimate findUnique
+   */
+  export type CaseResourceEstimateFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CaseResourceEstimate
+     */
+    select?: CaseResourceEstimateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CaseResourceEstimate
+     */
+    omit?: CaseResourceEstimateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CaseResourceEstimateInclude<ExtArgs> | null
+    /**
+     * Filter, which CaseResourceEstimate to fetch.
+     */
+    where: CaseResourceEstimateWhereUniqueInput
+  }
+
+  /**
+   * CaseResourceEstimate findUniqueOrThrow
+   */
+  export type CaseResourceEstimateFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CaseResourceEstimate
+     */
+    select?: CaseResourceEstimateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CaseResourceEstimate
+     */
+    omit?: CaseResourceEstimateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CaseResourceEstimateInclude<ExtArgs> | null
+    /**
+     * Filter, which CaseResourceEstimate to fetch.
+     */
+    where: CaseResourceEstimateWhereUniqueInput
+  }
+
+  /**
+   * CaseResourceEstimate findFirst
+   */
+  export type CaseResourceEstimateFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CaseResourceEstimate
+     */
+    select?: CaseResourceEstimateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CaseResourceEstimate
+     */
+    omit?: CaseResourceEstimateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CaseResourceEstimateInclude<ExtArgs> | null
+    /**
+     * Filter, which CaseResourceEstimate to fetch.
+     */
+    where?: CaseResourceEstimateWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CaseResourceEstimates to fetch.
+     */
+    orderBy?: CaseResourceEstimateOrderByWithRelationInput | CaseResourceEstimateOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for CaseResourceEstimates.
+     */
+    cursor?: CaseResourceEstimateWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CaseResourceEstimates from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CaseResourceEstimates.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of CaseResourceEstimates.
+     */
+    distinct?: CaseResourceEstimateScalarFieldEnum | CaseResourceEstimateScalarFieldEnum[]
+  }
+
+  /**
+   * CaseResourceEstimate findFirstOrThrow
+   */
+  export type CaseResourceEstimateFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CaseResourceEstimate
+     */
+    select?: CaseResourceEstimateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CaseResourceEstimate
+     */
+    omit?: CaseResourceEstimateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CaseResourceEstimateInclude<ExtArgs> | null
+    /**
+     * Filter, which CaseResourceEstimate to fetch.
+     */
+    where?: CaseResourceEstimateWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CaseResourceEstimates to fetch.
+     */
+    orderBy?: CaseResourceEstimateOrderByWithRelationInput | CaseResourceEstimateOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for CaseResourceEstimates.
+     */
+    cursor?: CaseResourceEstimateWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CaseResourceEstimates from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CaseResourceEstimates.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of CaseResourceEstimates.
+     */
+    distinct?: CaseResourceEstimateScalarFieldEnum | CaseResourceEstimateScalarFieldEnum[]
+  }
+
+  /**
+   * CaseResourceEstimate findMany
+   */
+  export type CaseResourceEstimateFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CaseResourceEstimate
+     */
+    select?: CaseResourceEstimateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CaseResourceEstimate
+     */
+    omit?: CaseResourceEstimateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CaseResourceEstimateInclude<ExtArgs> | null
+    /**
+     * Filter, which CaseResourceEstimates to fetch.
+     */
+    where?: CaseResourceEstimateWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CaseResourceEstimates to fetch.
+     */
+    orderBy?: CaseResourceEstimateOrderByWithRelationInput | CaseResourceEstimateOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing CaseResourceEstimates.
+     */
+    cursor?: CaseResourceEstimateWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CaseResourceEstimates from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CaseResourceEstimates.
+     */
+    skip?: number
+    distinct?: CaseResourceEstimateScalarFieldEnum | CaseResourceEstimateScalarFieldEnum[]
+  }
+
+  /**
+   * CaseResourceEstimate create
+   */
+  export type CaseResourceEstimateCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CaseResourceEstimate
+     */
+    select?: CaseResourceEstimateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CaseResourceEstimate
+     */
+    omit?: CaseResourceEstimateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CaseResourceEstimateInclude<ExtArgs> | null
+    /**
+     * The data needed to create a CaseResourceEstimate.
+     */
+    data: XOR<CaseResourceEstimateCreateInput, CaseResourceEstimateUncheckedCreateInput>
+  }
+
+  /**
+   * CaseResourceEstimate createMany
+   */
+  export type CaseResourceEstimateCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many CaseResourceEstimates.
+     */
+    data: CaseResourceEstimateCreateManyInput | CaseResourceEstimateCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * CaseResourceEstimate createManyAndReturn
+   */
+  export type CaseResourceEstimateCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CaseResourceEstimate
+     */
+    select?: CaseResourceEstimateSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the CaseResourceEstimate
+     */
+    omit?: CaseResourceEstimateOmit<ExtArgs> | null
+    /**
+     * The data used to create many CaseResourceEstimates.
+     */
+    data: CaseResourceEstimateCreateManyInput | CaseResourceEstimateCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CaseResourceEstimateIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * CaseResourceEstimate update
+   */
+  export type CaseResourceEstimateUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CaseResourceEstimate
+     */
+    select?: CaseResourceEstimateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CaseResourceEstimate
+     */
+    omit?: CaseResourceEstimateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CaseResourceEstimateInclude<ExtArgs> | null
+    /**
+     * The data needed to update a CaseResourceEstimate.
+     */
+    data: XOR<CaseResourceEstimateUpdateInput, CaseResourceEstimateUncheckedUpdateInput>
+    /**
+     * Choose, which CaseResourceEstimate to update.
+     */
+    where: CaseResourceEstimateWhereUniqueInput
+  }
+
+  /**
+   * CaseResourceEstimate updateMany
+   */
+  export type CaseResourceEstimateUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update CaseResourceEstimates.
+     */
+    data: XOR<CaseResourceEstimateUpdateManyMutationInput, CaseResourceEstimateUncheckedUpdateManyInput>
+    /**
+     * Filter which CaseResourceEstimates to update
+     */
+    where?: CaseResourceEstimateWhereInput
+    /**
+     * Limit how many CaseResourceEstimates to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * CaseResourceEstimate updateManyAndReturn
+   */
+  export type CaseResourceEstimateUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CaseResourceEstimate
+     */
+    select?: CaseResourceEstimateSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the CaseResourceEstimate
+     */
+    omit?: CaseResourceEstimateOmit<ExtArgs> | null
+    /**
+     * The data used to update CaseResourceEstimates.
+     */
+    data: XOR<CaseResourceEstimateUpdateManyMutationInput, CaseResourceEstimateUncheckedUpdateManyInput>
+    /**
+     * Filter which CaseResourceEstimates to update
+     */
+    where?: CaseResourceEstimateWhereInput
+    /**
+     * Limit how many CaseResourceEstimates to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CaseResourceEstimateIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * CaseResourceEstimate upsert
+   */
+  export type CaseResourceEstimateUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CaseResourceEstimate
+     */
+    select?: CaseResourceEstimateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CaseResourceEstimate
+     */
+    omit?: CaseResourceEstimateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CaseResourceEstimateInclude<ExtArgs> | null
+    /**
+     * The filter to search for the CaseResourceEstimate to update in case it exists.
+     */
+    where: CaseResourceEstimateWhereUniqueInput
+    /**
+     * In case the CaseResourceEstimate found by the `where` argument doesn't exist, create a new CaseResourceEstimate with this data.
+     */
+    create: XOR<CaseResourceEstimateCreateInput, CaseResourceEstimateUncheckedCreateInput>
+    /**
+     * In case the CaseResourceEstimate was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<CaseResourceEstimateUpdateInput, CaseResourceEstimateUncheckedUpdateInput>
+  }
+
+  /**
+   * CaseResourceEstimate delete
+   */
+  export type CaseResourceEstimateDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CaseResourceEstimate
+     */
+    select?: CaseResourceEstimateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CaseResourceEstimate
+     */
+    omit?: CaseResourceEstimateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CaseResourceEstimateInclude<ExtArgs> | null
+    /**
+     * Filter which CaseResourceEstimate to delete.
+     */
+    where: CaseResourceEstimateWhereUniqueInput
+  }
+
+  /**
+   * CaseResourceEstimate deleteMany
+   */
+  export type CaseResourceEstimateDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which CaseResourceEstimates to delete
+     */
+    where?: CaseResourceEstimateWhereInput
+    /**
+     * Limit how many CaseResourceEstimates to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * CaseResourceEstimate without action
+   */
+  export type CaseResourceEstimateDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CaseResourceEstimate
+     */
+    select?: CaseResourceEstimateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CaseResourceEstimate
+     */
+    omit?: CaseResourceEstimateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CaseResourceEstimateInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model PortfolioScenario
+   */
+
+  export type AggregatePortfolioScenario = {
+    _count: PortfolioScenarioCountAggregateOutputType | null
+    _avg: PortfolioScenarioAvgAggregateOutputType | null
+    _sum: PortfolioScenarioSumAggregateOutputType | null
+    _min: PortfolioScenarioMinAggregateOutputType | null
+    _max: PortfolioScenarioMaxAggregateOutputType | null
+  }
+
+  export type PortfolioScenarioAvgAggregateOutputType = {
+    scenarioVersion: number | null
+    budgetMinor: number | null
+  }
+
+  export type PortfolioScenarioSumAggregateOutputType = {
+    scenarioVersion: number | null
+    budgetMinor: bigint | null
+  }
+
+  export type PortfolioScenarioMinAggregateOutputType = {
+    id: string | null
+    scenarioVersion: number | null
+    name: string | null
+    departmentId: string | null
+    jurisdictionId: string | null
+    budgetMinor: bigint | null
+    currency: string | null
+    algorithmVersion: string | null
+    createdById: string | null
+    createdAt: Date | null
+  }
+
+  export type PortfolioScenarioMaxAggregateOutputType = {
+    id: string | null
+    scenarioVersion: number | null
+    name: string | null
+    departmentId: string | null
+    jurisdictionId: string | null
+    budgetMinor: bigint | null
+    currency: string | null
+    algorithmVersion: string | null
+    createdById: string | null
+    createdAt: Date | null
+  }
+
+  export type PortfolioScenarioCountAggregateOutputType = {
+    id: number
+    scenarioVersion: number
+    name: number
+    departmentId: number
+    jurisdictionId: number
+    budgetMinor: number
+    currency: number
+    resourceCapacities: number
+    algorithmVersion: number
+    inputSnapshot: number
+    resultSnapshot: number
+    createdById: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type PortfolioScenarioAvgAggregateInputType = {
+    scenarioVersion?: true
+    budgetMinor?: true
+  }
+
+  export type PortfolioScenarioSumAggregateInputType = {
+    scenarioVersion?: true
+    budgetMinor?: true
+  }
+
+  export type PortfolioScenarioMinAggregateInputType = {
+    id?: true
+    scenarioVersion?: true
+    name?: true
+    departmentId?: true
+    jurisdictionId?: true
+    budgetMinor?: true
+    currency?: true
+    algorithmVersion?: true
+    createdById?: true
+    createdAt?: true
+  }
+
+  export type PortfolioScenarioMaxAggregateInputType = {
+    id?: true
+    scenarioVersion?: true
+    name?: true
+    departmentId?: true
+    jurisdictionId?: true
+    budgetMinor?: true
+    currency?: true
+    algorithmVersion?: true
+    createdById?: true
+    createdAt?: true
+  }
+
+  export type PortfolioScenarioCountAggregateInputType = {
+    id?: true
+    scenarioVersion?: true
+    name?: true
+    departmentId?: true
+    jurisdictionId?: true
+    budgetMinor?: true
+    currency?: true
+    resourceCapacities?: true
+    algorithmVersion?: true
+    inputSnapshot?: true
+    resultSnapshot?: true
+    createdById?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type PortfolioScenarioAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PortfolioScenario to aggregate.
+     */
+    where?: PortfolioScenarioWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PortfolioScenarios to fetch.
+     */
+    orderBy?: PortfolioScenarioOrderByWithRelationInput | PortfolioScenarioOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: PortfolioScenarioWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PortfolioScenarios from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PortfolioScenarios.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned PortfolioScenarios
+    **/
+    _count?: true | PortfolioScenarioCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: PortfolioScenarioAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: PortfolioScenarioSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: PortfolioScenarioMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: PortfolioScenarioMaxAggregateInputType
+  }
+
+  export type GetPortfolioScenarioAggregateType<T extends PortfolioScenarioAggregateArgs> = {
+        [P in keyof T & keyof AggregatePortfolioScenario]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePortfolioScenario[P]>
+      : GetScalarType<T[P], AggregatePortfolioScenario[P]>
+  }
+
+
+
+
+  export type PortfolioScenarioGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PortfolioScenarioWhereInput
+    orderBy?: PortfolioScenarioOrderByWithAggregationInput | PortfolioScenarioOrderByWithAggregationInput[]
+    by: PortfolioScenarioScalarFieldEnum[] | PortfolioScenarioScalarFieldEnum
+    having?: PortfolioScenarioScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: PortfolioScenarioCountAggregateInputType | true
+    _avg?: PortfolioScenarioAvgAggregateInputType
+    _sum?: PortfolioScenarioSumAggregateInputType
+    _min?: PortfolioScenarioMinAggregateInputType
+    _max?: PortfolioScenarioMaxAggregateInputType
+  }
+
+  export type PortfolioScenarioGroupByOutputType = {
+    id: string
+    scenarioVersion: number
+    name: string
+    departmentId: string
+    jurisdictionId: string
+    budgetMinor: bigint
+    currency: string
+    resourceCapacities: JsonValue
+    algorithmVersion: string
+    inputSnapshot: JsonValue
+    resultSnapshot: JsonValue
+    createdById: string
+    createdAt: Date
+    _count: PortfolioScenarioCountAggregateOutputType | null
+    _avg: PortfolioScenarioAvgAggregateOutputType | null
+    _sum: PortfolioScenarioSumAggregateOutputType | null
+    _min: PortfolioScenarioMinAggregateOutputType | null
+    _max: PortfolioScenarioMaxAggregateOutputType | null
+  }
+
+  type GetPortfolioScenarioGroupByPayload<T extends PortfolioScenarioGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<PortfolioScenarioGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof PortfolioScenarioGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], PortfolioScenarioGroupByOutputType[P]>
+            : GetScalarType<T[P], PortfolioScenarioGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type PortfolioScenarioSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    scenarioVersion?: boolean
+    name?: boolean
+    departmentId?: boolean
+    jurisdictionId?: boolean
+    budgetMinor?: boolean
+    currency?: boolean
+    resourceCapacities?: boolean
+    algorithmVersion?: boolean
+    inputSnapshot?: boolean
+    resultSnapshot?: boolean
+    createdById?: boolean
+    createdAt?: boolean
+    department?: boolean | DepartmentDefaultArgs<ExtArgs>
+    jurisdiction?: boolean | JurisdictionDefaultArgs<ExtArgs>
+    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["portfolioScenario"]>
+
+  export type PortfolioScenarioSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    scenarioVersion?: boolean
+    name?: boolean
+    departmentId?: boolean
+    jurisdictionId?: boolean
+    budgetMinor?: boolean
+    currency?: boolean
+    resourceCapacities?: boolean
+    algorithmVersion?: boolean
+    inputSnapshot?: boolean
+    resultSnapshot?: boolean
+    createdById?: boolean
+    createdAt?: boolean
+    department?: boolean | DepartmentDefaultArgs<ExtArgs>
+    jurisdiction?: boolean | JurisdictionDefaultArgs<ExtArgs>
+    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["portfolioScenario"]>
+
+  export type PortfolioScenarioSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    scenarioVersion?: boolean
+    name?: boolean
+    departmentId?: boolean
+    jurisdictionId?: boolean
+    budgetMinor?: boolean
+    currency?: boolean
+    resourceCapacities?: boolean
+    algorithmVersion?: boolean
+    inputSnapshot?: boolean
+    resultSnapshot?: boolean
+    createdById?: boolean
+    createdAt?: boolean
+    department?: boolean | DepartmentDefaultArgs<ExtArgs>
+    jurisdiction?: boolean | JurisdictionDefaultArgs<ExtArgs>
+    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["portfolioScenario"]>
+
+  export type PortfolioScenarioSelectScalar = {
+    id?: boolean
+    scenarioVersion?: boolean
+    name?: boolean
+    departmentId?: boolean
+    jurisdictionId?: boolean
+    budgetMinor?: boolean
+    currency?: boolean
+    resourceCapacities?: boolean
+    algorithmVersion?: boolean
+    inputSnapshot?: boolean
+    resultSnapshot?: boolean
+    createdById?: boolean
+    createdAt?: boolean
+  }
+
+  export type PortfolioScenarioOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "scenarioVersion" | "name" | "departmentId" | "jurisdictionId" | "budgetMinor" | "currency" | "resourceCapacities" | "algorithmVersion" | "inputSnapshot" | "resultSnapshot" | "createdById" | "createdAt", ExtArgs["result"]["portfolioScenario"]>
+  export type PortfolioScenarioInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    department?: boolean | DepartmentDefaultArgs<ExtArgs>
+    jurisdiction?: boolean | JurisdictionDefaultArgs<ExtArgs>
+    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type PortfolioScenarioIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    department?: boolean | DepartmentDefaultArgs<ExtArgs>
+    jurisdiction?: boolean | JurisdictionDefaultArgs<ExtArgs>
+    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type PortfolioScenarioIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    department?: boolean | DepartmentDefaultArgs<ExtArgs>
+    jurisdiction?: boolean | JurisdictionDefaultArgs<ExtArgs>
+    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $PortfolioScenarioPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "PortfolioScenario"
+    objects: {
+      department: Prisma.$DepartmentPayload<ExtArgs>
+      jurisdiction: Prisma.$JurisdictionPayload<ExtArgs>
+      createdBy: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      scenarioVersion: number
+      name: string
+      departmentId: string
+      jurisdictionId: string
+      budgetMinor: bigint
+      currency: string
+      resourceCapacities: Prisma.JsonValue
+      algorithmVersion: string
+      inputSnapshot: Prisma.JsonValue
+      resultSnapshot: Prisma.JsonValue
+      createdById: string
+      createdAt: Date
+    }, ExtArgs["result"]["portfolioScenario"]>
+    composites: {}
+  }
+
+  type PortfolioScenarioGetPayload<S extends boolean | null | undefined | PortfolioScenarioDefaultArgs> = $Result.GetResult<Prisma.$PortfolioScenarioPayload, S>
+
+  type PortfolioScenarioCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<PortfolioScenarioFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: PortfolioScenarioCountAggregateInputType | true
+    }
+
+  export interface PortfolioScenarioDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['PortfolioScenario'], meta: { name: 'PortfolioScenario' } }
+    /**
+     * Find zero or one PortfolioScenario that matches the filter.
+     * @param {PortfolioScenarioFindUniqueArgs} args - Arguments to find a PortfolioScenario
+     * @example
+     * // Get one PortfolioScenario
+     * const portfolioScenario = await prisma.portfolioScenario.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends PortfolioScenarioFindUniqueArgs>(args: SelectSubset<T, PortfolioScenarioFindUniqueArgs<ExtArgs>>): Prisma__PortfolioScenarioClient<$Result.GetResult<Prisma.$PortfolioScenarioPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one PortfolioScenario that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {PortfolioScenarioFindUniqueOrThrowArgs} args - Arguments to find a PortfolioScenario
+     * @example
+     * // Get one PortfolioScenario
+     * const portfolioScenario = await prisma.portfolioScenario.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends PortfolioScenarioFindUniqueOrThrowArgs>(args: SelectSubset<T, PortfolioScenarioFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PortfolioScenarioClient<$Result.GetResult<Prisma.$PortfolioScenarioPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PortfolioScenario that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PortfolioScenarioFindFirstArgs} args - Arguments to find a PortfolioScenario
+     * @example
+     * // Get one PortfolioScenario
+     * const portfolioScenario = await prisma.portfolioScenario.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends PortfolioScenarioFindFirstArgs>(args?: SelectSubset<T, PortfolioScenarioFindFirstArgs<ExtArgs>>): Prisma__PortfolioScenarioClient<$Result.GetResult<Prisma.$PortfolioScenarioPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PortfolioScenario that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PortfolioScenarioFindFirstOrThrowArgs} args - Arguments to find a PortfolioScenario
+     * @example
+     * // Get one PortfolioScenario
+     * const portfolioScenario = await prisma.portfolioScenario.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends PortfolioScenarioFindFirstOrThrowArgs>(args?: SelectSubset<T, PortfolioScenarioFindFirstOrThrowArgs<ExtArgs>>): Prisma__PortfolioScenarioClient<$Result.GetResult<Prisma.$PortfolioScenarioPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more PortfolioScenarios that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PortfolioScenarioFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all PortfolioScenarios
+     * const portfolioScenarios = await prisma.portfolioScenario.findMany()
+     * 
+     * // Get first 10 PortfolioScenarios
+     * const portfolioScenarios = await prisma.portfolioScenario.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const portfolioScenarioWithIdOnly = await prisma.portfolioScenario.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends PortfolioScenarioFindManyArgs>(args?: SelectSubset<T, PortfolioScenarioFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PortfolioScenarioPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a PortfolioScenario.
+     * @param {PortfolioScenarioCreateArgs} args - Arguments to create a PortfolioScenario.
+     * @example
+     * // Create one PortfolioScenario
+     * const PortfolioScenario = await prisma.portfolioScenario.create({
+     *   data: {
+     *     // ... data to create a PortfolioScenario
+     *   }
+     * })
+     * 
+     */
+    create<T extends PortfolioScenarioCreateArgs>(args: SelectSubset<T, PortfolioScenarioCreateArgs<ExtArgs>>): Prisma__PortfolioScenarioClient<$Result.GetResult<Prisma.$PortfolioScenarioPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many PortfolioScenarios.
+     * @param {PortfolioScenarioCreateManyArgs} args - Arguments to create many PortfolioScenarios.
+     * @example
+     * // Create many PortfolioScenarios
+     * const portfolioScenario = await prisma.portfolioScenario.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends PortfolioScenarioCreateManyArgs>(args?: SelectSubset<T, PortfolioScenarioCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many PortfolioScenarios and returns the data saved in the database.
+     * @param {PortfolioScenarioCreateManyAndReturnArgs} args - Arguments to create many PortfolioScenarios.
+     * @example
+     * // Create many PortfolioScenarios
+     * const portfolioScenario = await prisma.portfolioScenario.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many PortfolioScenarios and only return the `id`
+     * const portfolioScenarioWithIdOnly = await prisma.portfolioScenario.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends PortfolioScenarioCreateManyAndReturnArgs>(args?: SelectSubset<T, PortfolioScenarioCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PortfolioScenarioPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a PortfolioScenario.
+     * @param {PortfolioScenarioDeleteArgs} args - Arguments to delete one PortfolioScenario.
+     * @example
+     * // Delete one PortfolioScenario
+     * const PortfolioScenario = await prisma.portfolioScenario.delete({
+     *   where: {
+     *     // ... filter to delete one PortfolioScenario
+     *   }
+     * })
+     * 
+     */
+    delete<T extends PortfolioScenarioDeleteArgs>(args: SelectSubset<T, PortfolioScenarioDeleteArgs<ExtArgs>>): Prisma__PortfolioScenarioClient<$Result.GetResult<Prisma.$PortfolioScenarioPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one PortfolioScenario.
+     * @param {PortfolioScenarioUpdateArgs} args - Arguments to update one PortfolioScenario.
+     * @example
+     * // Update one PortfolioScenario
+     * const portfolioScenario = await prisma.portfolioScenario.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends PortfolioScenarioUpdateArgs>(args: SelectSubset<T, PortfolioScenarioUpdateArgs<ExtArgs>>): Prisma__PortfolioScenarioClient<$Result.GetResult<Prisma.$PortfolioScenarioPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more PortfolioScenarios.
+     * @param {PortfolioScenarioDeleteManyArgs} args - Arguments to filter PortfolioScenarios to delete.
+     * @example
+     * // Delete a few PortfolioScenarios
+     * const { count } = await prisma.portfolioScenario.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends PortfolioScenarioDeleteManyArgs>(args?: SelectSubset<T, PortfolioScenarioDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PortfolioScenarios.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PortfolioScenarioUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many PortfolioScenarios
+     * const portfolioScenario = await prisma.portfolioScenario.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends PortfolioScenarioUpdateManyArgs>(args: SelectSubset<T, PortfolioScenarioUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PortfolioScenarios and returns the data updated in the database.
+     * @param {PortfolioScenarioUpdateManyAndReturnArgs} args - Arguments to update many PortfolioScenarios.
+     * @example
+     * // Update many PortfolioScenarios
+     * const portfolioScenario = await prisma.portfolioScenario.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more PortfolioScenarios and only return the `id`
+     * const portfolioScenarioWithIdOnly = await prisma.portfolioScenario.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends PortfolioScenarioUpdateManyAndReturnArgs>(args: SelectSubset<T, PortfolioScenarioUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PortfolioScenarioPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one PortfolioScenario.
+     * @param {PortfolioScenarioUpsertArgs} args - Arguments to update or create a PortfolioScenario.
+     * @example
+     * // Update or create a PortfolioScenario
+     * const portfolioScenario = await prisma.portfolioScenario.upsert({
+     *   create: {
+     *     // ... data to create a PortfolioScenario
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the PortfolioScenario we want to update
+     *   }
+     * })
+     */
+    upsert<T extends PortfolioScenarioUpsertArgs>(args: SelectSubset<T, PortfolioScenarioUpsertArgs<ExtArgs>>): Prisma__PortfolioScenarioClient<$Result.GetResult<Prisma.$PortfolioScenarioPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of PortfolioScenarios.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PortfolioScenarioCountArgs} args - Arguments to filter PortfolioScenarios to count.
+     * @example
+     * // Count the number of PortfolioScenarios
+     * const count = await prisma.portfolioScenario.count({
+     *   where: {
+     *     // ... the filter for the PortfolioScenarios we want to count
+     *   }
+     * })
+    **/
+    count<T extends PortfolioScenarioCountArgs>(
+      args?: Subset<T, PortfolioScenarioCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], PortfolioScenarioCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a PortfolioScenario.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PortfolioScenarioAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends PortfolioScenarioAggregateArgs>(args: Subset<T, PortfolioScenarioAggregateArgs>): Prisma.PrismaPromise<GetPortfolioScenarioAggregateType<T>>
+
+    /**
+     * Group by PortfolioScenario.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PortfolioScenarioGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends PortfolioScenarioGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: PortfolioScenarioGroupByArgs['orderBy'] }
+        : { orderBy?: PortfolioScenarioGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, PortfolioScenarioGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPortfolioScenarioGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the PortfolioScenario model
+   */
+  readonly fields: PortfolioScenarioFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for PortfolioScenario.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__PortfolioScenarioClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    department<T extends DepartmentDefaultArgs<ExtArgs> = {}>(args?: Subset<T, DepartmentDefaultArgs<ExtArgs>>): Prisma__DepartmentClient<$Result.GetResult<Prisma.$DepartmentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    jurisdiction<T extends JurisdictionDefaultArgs<ExtArgs> = {}>(args?: Subset<T, JurisdictionDefaultArgs<ExtArgs>>): Prisma__JurisdictionClient<$Result.GetResult<Prisma.$JurisdictionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    createdBy<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the PortfolioScenario model
+   */
+  interface PortfolioScenarioFieldRefs {
+    readonly id: FieldRef<"PortfolioScenario", 'String'>
+    readonly scenarioVersion: FieldRef<"PortfolioScenario", 'Int'>
+    readonly name: FieldRef<"PortfolioScenario", 'String'>
+    readonly departmentId: FieldRef<"PortfolioScenario", 'String'>
+    readonly jurisdictionId: FieldRef<"PortfolioScenario", 'String'>
+    readonly budgetMinor: FieldRef<"PortfolioScenario", 'BigInt'>
+    readonly currency: FieldRef<"PortfolioScenario", 'String'>
+    readonly resourceCapacities: FieldRef<"PortfolioScenario", 'Json'>
+    readonly algorithmVersion: FieldRef<"PortfolioScenario", 'String'>
+    readonly inputSnapshot: FieldRef<"PortfolioScenario", 'Json'>
+    readonly resultSnapshot: FieldRef<"PortfolioScenario", 'Json'>
+    readonly createdById: FieldRef<"PortfolioScenario", 'String'>
+    readonly createdAt: FieldRef<"PortfolioScenario", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * PortfolioScenario findUnique
+   */
+  export type PortfolioScenarioFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PortfolioScenario
+     */
+    select?: PortfolioScenarioSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PortfolioScenario
+     */
+    omit?: PortfolioScenarioOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PortfolioScenarioInclude<ExtArgs> | null
+    /**
+     * Filter, which PortfolioScenario to fetch.
+     */
+    where: PortfolioScenarioWhereUniqueInput
+  }
+
+  /**
+   * PortfolioScenario findUniqueOrThrow
+   */
+  export type PortfolioScenarioFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PortfolioScenario
+     */
+    select?: PortfolioScenarioSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PortfolioScenario
+     */
+    omit?: PortfolioScenarioOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PortfolioScenarioInclude<ExtArgs> | null
+    /**
+     * Filter, which PortfolioScenario to fetch.
+     */
+    where: PortfolioScenarioWhereUniqueInput
+  }
+
+  /**
+   * PortfolioScenario findFirst
+   */
+  export type PortfolioScenarioFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PortfolioScenario
+     */
+    select?: PortfolioScenarioSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PortfolioScenario
+     */
+    omit?: PortfolioScenarioOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PortfolioScenarioInclude<ExtArgs> | null
+    /**
+     * Filter, which PortfolioScenario to fetch.
+     */
+    where?: PortfolioScenarioWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PortfolioScenarios to fetch.
+     */
+    orderBy?: PortfolioScenarioOrderByWithRelationInput | PortfolioScenarioOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PortfolioScenarios.
+     */
+    cursor?: PortfolioScenarioWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PortfolioScenarios from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PortfolioScenarios.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PortfolioScenarios.
+     */
+    distinct?: PortfolioScenarioScalarFieldEnum | PortfolioScenarioScalarFieldEnum[]
+  }
+
+  /**
+   * PortfolioScenario findFirstOrThrow
+   */
+  export type PortfolioScenarioFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PortfolioScenario
+     */
+    select?: PortfolioScenarioSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PortfolioScenario
+     */
+    omit?: PortfolioScenarioOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PortfolioScenarioInclude<ExtArgs> | null
+    /**
+     * Filter, which PortfolioScenario to fetch.
+     */
+    where?: PortfolioScenarioWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PortfolioScenarios to fetch.
+     */
+    orderBy?: PortfolioScenarioOrderByWithRelationInput | PortfolioScenarioOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PortfolioScenarios.
+     */
+    cursor?: PortfolioScenarioWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PortfolioScenarios from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PortfolioScenarios.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PortfolioScenarios.
+     */
+    distinct?: PortfolioScenarioScalarFieldEnum | PortfolioScenarioScalarFieldEnum[]
+  }
+
+  /**
+   * PortfolioScenario findMany
+   */
+  export type PortfolioScenarioFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PortfolioScenario
+     */
+    select?: PortfolioScenarioSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PortfolioScenario
+     */
+    omit?: PortfolioScenarioOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PortfolioScenarioInclude<ExtArgs> | null
+    /**
+     * Filter, which PortfolioScenarios to fetch.
+     */
+    where?: PortfolioScenarioWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PortfolioScenarios to fetch.
+     */
+    orderBy?: PortfolioScenarioOrderByWithRelationInput | PortfolioScenarioOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing PortfolioScenarios.
+     */
+    cursor?: PortfolioScenarioWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PortfolioScenarios from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PortfolioScenarios.
+     */
+    skip?: number
+    distinct?: PortfolioScenarioScalarFieldEnum | PortfolioScenarioScalarFieldEnum[]
+  }
+
+  /**
+   * PortfolioScenario create
+   */
+  export type PortfolioScenarioCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PortfolioScenario
+     */
+    select?: PortfolioScenarioSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PortfolioScenario
+     */
+    omit?: PortfolioScenarioOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PortfolioScenarioInclude<ExtArgs> | null
+    /**
+     * The data needed to create a PortfolioScenario.
+     */
+    data: XOR<PortfolioScenarioCreateInput, PortfolioScenarioUncheckedCreateInput>
+  }
+
+  /**
+   * PortfolioScenario createMany
+   */
+  export type PortfolioScenarioCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many PortfolioScenarios.
+     */
+    data: PortfolioScenarioCreateManyInput | PortfolioScenarioCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * PortfolioScenario createManyAndReturn
+   */
+  export type PortfolioScenarioCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PortfolioScenario
+     */
+    select?: PortfolioScenarioSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PortfolioScenario
+     */
+    omit?: PortfolioScenarioOmit<ExtArgs> | null
+    /**
+     * The data used to create many PortfolioScenarios.
+     */
+    data: PortfolioScenarioCreateManyInput | PortfolioScenarioCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PortfolioScenarioIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * PortfolioScenario update
+   */
+  export type PortfolioScenarioUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PortfolioScenario
+     */
+    select?: PortfolioScenarioSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PortfolioScenario
+     */
+    omit?: PortfolioScenarioOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PortfolioScenarioInclude<ExtArgs> | null
+    /**
+     * The data needed to update a PortfolioScenario.
+     */
+    data: XOR<PortfolioScenarioUpdateInput, PortfolioScenarioUncheckedUpdateInput>
+    /**
+     * Choose, which PortfolioScenario to update.
+     */
+    where: PortfolioScenarioWhereUniqueInput
+  }
+
+  /**
+   * PortfolioScenario updateMany
+   */
+  export type PortfolioScenarioUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update PortfolioScenarios.
+     */
+    data: XOR<PortfolioScenarioUpdateManyMutationInput, PortfolioScenarioUncheckedUpdateManyInput>
+    /**
+     * Filter which PortfolioScenarios to update
+     */
+    where?: PortfolioScenarioWhereInput
+    /**
+     * Limit how many PortfolioScenarios to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * PortfolioScenario updateManyAndReturn
+   */
+  export type PortfolioScenarioUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PortfolioScenario
+     */
+    select?: PortfolioScenarioSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PortfolioScenario
+     */
+    omit?: PortfolioScenarioOmit<ExtArgs> | null
+    /**
+     * The data used to update PortfolioScenarios.
+     */
+    data: XOR<PortfolioScenarioUpdateManyMutationInput, PortfolioScenarioUncheckedUpdateManyInput>
+    /**
+     * Filter which PortfolioScenarios to update
+     */
+    where?: PortfolioScenarioWhereInput
+    /**
+     * Limit how many PortfolioScenarios to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PortfolioScenarioIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * PortfolioScenario upsert
+   */
+  export type PortfolioScenarioUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PortfolioScenario
+     */
+    select?: PortfolioScenarioSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PortfolioScenario
+     */
+    omit?: PortfolioScenarioOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PortfolioScenarioInclude<ExtArgs> | null
+    /**
+     * The filter to search for the PortfolioScenario to update in case it exists.
+     */
+    where: PortfolioScenarioWhereUniqueInput
+    /**
+     * In case the PortfolioScenario found by the `where` argument doesn't exist, create a new PortfolioScenario with this data.
+     */
+    create: XOR<PortfolioScenarioCreateInput, PortfolioScenarioUncheckedCreateInput>
+    /**
+     * In case the PortfolioScenario was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<PortfolioScenarioUpdateInput, PortfolioScenarioUncheckedUpdateInput>
+  }
+
+  /**
+   * PortfolioScenario delete
+   */
+  export type PortfolioScenarioDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PortfolioScenario
+     */
+    select?: PortfolioScenarioSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PortfolioScenario
+     */
+    omit?: PortfolioScenarioOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PortfolioScenarioInclude<ExtArgs> | null
+    /**
+     * Filter which PortfolioScenario to delete.
+     */
+    where: PortfolioScenarioWhereUniqueInput
+  }
+
+  /**
+   * PortfolioScenario deleteMany
+   */
+  export type PortfolioScenarioDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PortfolioScenarios to delete
+     */
+    where?: PortfolioScenarioWhereInput
+    /**
+     * Limit how many PortfolioScenarios to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * PortfolioScenario without action
+   */
+  export type PortfolioScenarioDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PortfolioScenario
+     */
+    select?: PortfolioScenarioSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PortfolioScenario
+     */
+    omit?: PortfolioScenarioOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PortfolioScenarioInclude<ExtArgs> | null
   }
 
 
@@ -43653,6 +46445,44 @@ export namespace Prisma {
   export type CaseScalarFieldEnum = (typeof CaseScalarFieldEnum)[keyof typeof CaseScalarFieldEnum]
 
 
+  export const CaseResourceEstimateScalarFieldEnum: {
+    id: 'id',
+    caseId: 'caseId',
+    estimateVersion: 'estimateVersion',
+    status: 'status',
+    currency: 'currency',
+    estimatedCostMinor: 'estimatedCostMinor',
+    estimatedDurationDays: 'estimatedDurationDays',
+    resourceRequirements: 'resourceRequirements',
+    estimateBasis: 'estimateBasis',
+    sourceReference: 'sourceReference',
+    preparedById: 'preparedById',
+    preparedAt: 'preparedAt',
+    createdAt: 'createdAt'
+  };
+
+  export type CaseResourceEstimateScalarFieldEnum = (typeof CaseResourceEstimateScalarFieldEnum)[keyof typeof CaseResourceEstimateScalarFieldEnum]
+
+
+  export const PortfolioScenarioScalarFieldEnum: {
+    id: 'id',
+    scenarioVersion: 'scenarioVersion',
+    name: 'name',
+    departmentId: 'departmentId',
+    jurisdictionId: 'jurisdictionId',
+    budgetMinor: 'budgetMinor',
+    currency: 'currency',
+    resourceCapacities: 'resourceCapacities',
+    algorithmVersion: 'algorithmVersion',
+    inputSnapshot: 'inputSnapshot',
+    resultSnapshot: 'resultSnapshot',
+    createdById: 'createdById',
+    createdAt: 'createdAt'
+  };
+
+  export type PortfolioScenarioScalarFieldEnum = (typeof PortfolioScenarioScalarFieldEnum)[keyof typeof PortfolioScenarioScalarFieldEnum]
+
+
   export const ObservationSourceScalarFieldEnum: {
     id: 'id',
     sourceCode: 'sourceCode',
@@ -44312,6 +47142,34 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'PlanningEstimateStatus'
+   */
+  export type EnumPlanningEstimateStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PlanningEstimateStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'PlanningEstimateStatus[]'
+   */
+  export type ListEnumPlanningEstimateStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PlanningEstimateStatus[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'BigInt'
+   */
+  export type BigIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BigInt'>
+    
+
+
+  /**
+   * Reference to a field of type 'BigInt[]'
+   */
+  export type ListBigIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BigInt[]'>
+    
+
+
+  /**
    * Reference to a field of type 'ObservationSourceType'
    */
   export type EnumObservationSourceTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ObservationSourceType'>
@@ -44542,6 +47400,7 @@ export namespace Prisma {
     governedExecutionTemplates?: GovernedExecutionTemplateListRelationFilter
     observationSources?: ObservationSourceListRelationFilter
     externalObservations?: ExternalObservationListRelationFilter
+    portfolioScenarios?: PortfolioScenarioListRelationFilter
   }
 
   export type DepartmentOrderByWithRelationInput = {
@@ -44559,6 +47418,7 @@ export namespace Prisma {
     governedExecutionTemplates?: GovernedExecutionTemplateOrderByRelationAggregateInput
     observationSources?: ObservationSourceOrderByRelationAggregateInput
     externalObservations?: ExternalObservationOrderByRelationAggregateInput
+    portfolioScenarios?: PortfolioScenarioOrderByRelationAggregateInput
   }
 
   export type DepartmentWhereUniqueInput = Prisma.AtLeast<{
@@ -44579,6 +47439,7 @@ export namespace Prisma {
     governedExecutionTemplates?: GovernedExecutionTemplateListRelationFilter
     observationSources?: ObservationSourceListRelationFilter
     externalObservations?: ExternalObservationListRelationFilter
+    portfolioScenarios?: PortfolioScenarioListRelationFilter
   }, "id" | "code">
 
   export type DepartmentOrderByWithAggregationInput = {
@@ -44620,6 +47481,7 @@ export namespace Prisma {
     governedExecutionTemplates?: GovernedExecutionTemplateListRelationFilter
     observationSources?: ObservationSourceListRelationFilter
     externalObservations?: ExternalObservationListRelationFilter
+    portfolioScenarios?: PortfolioScenarioListRelationFilter
   }
 
   export type JurisdictionOrderByWithRelationInput = {
@@ -44638,6 +47500,7 @@ export namespace Prisma {
     governedExecutionTemplates?: GovernedExecutionTemplateOrderByRelationAggregateInput
     observationSources?: ObservationSourceOrderByRelationAggregateInput
     externalObservations?: ExternalObservationOrderByRelationAggregateInput
+    portfolioScenarios?: PortfolioScenarioOrderByRelationAggregateInput
   }
 
   export type JurisdictionWhereUniqueInput = Prisma.AtLeast<{
@@ -44659,6 +47522,7 @@ export namespace Prisma {
     governedExecutionTemplates?: GovernedExecutionTemplateListRelationFilter
     observationSources?: ObservationSourceListRelationFilter
     externalObservations?: ExternalObservationListRelationFilter
+    portfolioScenarios?: PortfolioScenarioListRelationFilter
   }, "id">
 
   export type JurisdictionOrderByWithAggregationInput = {
@@ -44730,6 +47594,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceListRelationFilter
     deactivatedObservationSources?: ObservationSourceListRelationFilter
     ingestedExternalObservations?: ExternalObservationListRelationFilter
+    preparedCaseResourceEstimates?: CaseResourceEstimateListRelationFilter
+    createdPortfolioScenarios?: PortfolioScenarioListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -44776,6 +47642,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceOrderByRelationAggregateInput
     deactivatedObservationSources?: ObservationSourceOrderByRelationAggregateInput
     ingestedExternalObservations?: ExternalObservationOrderByRelationAggregateInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateOrderByRelationAggregateInput
+    createdPortfolioScenarios?: PortfolioScenarioOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -44825,6 +47693,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceListRelationFilter
     deactivatedObservationSources?: ObservationSourceListRelationFilter
     ingestedExternalObservations?: ExternalObservationListRelationFilter
+    preparedCaseResourceEstimates?: CaseResourceEstimateListRelationFilter
+    createdPortfolioScenarios?: PortfolioScenarioListRelationFilter
   }, "id" | "employeeCode" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -45866,6 +48736,7 @@ export namespace Prisma {
     intelligenceAssessments?: InfrastructureIntelligenceAssessmentListRelationFilter
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationListRelationFilter
     externalObservations?: ExternalObservationListRelationFilter
+    resourceEstimates?: CaseResourceEstimateListRelationFilter
   }
 
   export type CaseOrderByWithRelationInput = {
@@ -45893,6 +48764,7 @@ export namespace Prisma {
     intelligenceAssessments?: InfrastructureIntelligenceAssessmentOrderByRelationAggregateInput
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationOrderByRelationAggregateInput
     externalObservations?: ExternalObservationOrderByRelationAggregateInput
+    resourceEstimates?: CaseResourceEstimateOrderByRelationAggregateInput
   }
 
   export type CaseWhereUniqueInput = Prisma.AtLeast<{
@@ -45923,6 +48795,7 @@ export namespace Prisma {
     intelligenceAssessments?: InfrastructureIntelligenceAssessmentListRelationFilter
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationListRelationFilter
     externalObservations?: ExternalObservationListRelationFilter
+    resourceEstimates?: CaseResourceEstimateListRelationFilter
   }, "id" | "caseNumber">
 
   export type CaseOrderByWithAggregationInput = {
@@ -45959,6 +48832,210 @@ export namespace Prisma {
     createdAt?: DateTimeWithAggregatesFilter<"Case"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Case"> | Date | string
     closedAt?: DateTimeNullableWithAggregatesFilter<"Case"> | Date | string | null
+  }
+
+  export type CaseResourceEstimateWhereInput = {
+    AND?: CaseResourceEstimateWhereInput | CaseResourceEstimateWhereInput[]
+    OR?: CaseResourceEstimateWhereInput[]
+    NOT?: CaseResourceEstimateWhereInput | CaseResourceEstimateWhereInput[]
+    id?: StringFilter<"CaseResourceEstimate"> | string
+    caseId?: StringFilter<"CaseResourceEstimate"> | string
+    estimateVersion?: IntFilter<"CaseResourceEstimate"> | number
+    status?: EnumPlanningEstimateStatusFilter<"CaseResourceEstimate"> | $Enums.PlanningEstimateStatus
+    currency?: StringFilter<"CaseResourceEstimate"> | string
+    estimatedCostMinor?: BigIntFilter<"CaseResourceEstimate"> | bigint | number
+    estimatedDurationDays?: IntNullableFilter<"CaseResourceEstimate"> | number | null
+    resourceRequirements?: JsonFilter<"CaseResourceEstimate">
+    estimateBasis?: StringFilter<"CaseResourceEstimate"> | string
+    sourceReference?: StringFilter<"CaseResourceEstimate"> | string
+    preparedById?: StringFilter<"CaseResourceEstimate"> | string
+    preparedAt?: DateTimeFilter<"CaseResourceEstimate"> | Date | string
+    createdAt?: DateTimeFilter<"CaseResourceEstimate"> | Date | string
+    case?: XOR<CaseScalarRelationFilter, CaseWhereInput>
+    preparedBy?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type CaseResourceEstimateOrderByWithRelationInput = {
+    id?: SortOrder
+    caseId?: SortOrder
+    estimateVersion?: SortOrder
+    status?: SortOrder
+    currency?: SortOrder
+    estimatedCostMinor?: SortOrder
+    estimatedDurationDays?: SortOrderInput | SortOrder
+    resourceRequirements?: SortOrder
+    estimateBasis?: SortOrder
+    sourceReference?: SortOrder
+    preparedById?: SortOrder
+    preparedAt?: SortOrder
+    createdAt?: SortOrder
+    case?: CaseOrderByWithRelationInput
+    preparedBy?: UserOrderByWithRelationInput
+  }
+
+  export type CaseResourceEstimateWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    caseId_estimateVersion?: CaseResourceEstimateCaseIdEstimateVersionCompoundUniqueInput
+    AND?: CaseResourceEstimateWhereInput | CaseResourceEstimateWhereInput[]
+    OR?: CaseResourceEstimateWhereInput[]
+    NOT?: CaseResourceEstimateWhereInput | CaseResourceEstimateWhereInput[]
+    caseId?: StringFilter<"CaseResourceEstimate"> | string
+    estimateVersion?: IntFilter<"CaseResourceEstimate"> | number
+    status?: EnumPlanningEstimateStatusFilter<"CaseResourceEstimate"> | $Enums.PlanningEstimateStatus
+    currency?: StringFilter<"CaseResourceEstimate"> | string
+    estimatedCostMinor?: BigIntFilter<"CaseResourceEstimate"> | bigint | number
+    estimatedDurationDays?: IntNullableFilter<"CaseResourceEstimate"> | number | null
+    resourceRequirements?: JsonFilter<"CaseResourceEstimate">
+    estimateBasis?: StringFilter<"CaseResourceEstimate"> | string
+    sourceReference?: StringFilter<"CaseResourceEstimate"> | string
+    preparedById?: StringFilter<"CaseResourceEstimate"> | string
+    preparedAt?: DateTimeFilter<"CaseResourceEstimate"> | Date | string
+    createdAt?: DateTimeFilter<"CaseResourceEstimate"> | Date | string
+    case?: XOR<CaseScalarRelationFilter, CaseWhereInput>
+    preparedBy?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id" | "caseId_estimateVersion">
+
+  export type CaseResourceEstimateOrderByWithAggregationInput = {
+    id?: SortOrder
+    caseId?: SortOrder
+    estimateVersion?: SortOrder
+    status?: SortOrder
+    currency?: SortOrder
+    estimatedCostMinor?: SortOrder
+    estimatedDurationDays?: SortOrderInput | SortOrder
+    resourceRequirements?: SortOrder
+    estimateBasis?: SortOrder
+    sourceReference?: SortOrder
+    preparedById?: SortOrder
+    preparedAt?: SortOrder
+    createdAt?: SortOrder
+    _count?: CaseResourceEstimateCountOrderByAggregateInput
+    _avg?: CaseResourceEstimateAvgOrderByAggregateInput
+    _max?: CaseResourceEstimateMaxOrderByAggregateInput
+    _min?: CaseResourceEstimateMinOrderByAggregateInput
+    _sum?: CaseResourceEstimateSumOrderByAggregateInput
+  }
+
+  export type CaseResourceEstimateScalarWhereWithAggregatesInput = {
+    AND?: CaseResourceEstimateScalarWhereWithAggregatesInput | CaseResourceEstimateScalarWhereWithAggregatesInput[]
+    OR?: CaseResourceEstimateScalarWhereWithAggregatesInput[]
+    NOT?: CaseResourceEstimateScalarWhereWithAggregatesInput | CaseResourceEstimateScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"CaseResourceEstimate"> | string
+    caseId?: StringWithAggregatesFilter<"CaseResourceEstimate"> | string
+    estimateVersion?: IntWithAggregatesFilter<"CaseResourceEstimate"> | number
+    status?: EnumPlanningEstimateStatusWithAggregatesFilter<"CaseResourceEstimate"> | $Enums.PlanningEstimateStatus
+    currency?: StringWithAggregatesFilter<"CaseResourceEstimate"> | string
+    estimatedCostMinor?: BigIntWithAggregatesFilter<"CaseResourceEstimate"> | bigint | number
+    estimatedDurationDays?: IntNullableWithAggregatesFilter<"CaseResourceEstimate"> | number | null
+    resourceRequirements?: JsonWithAggregatesFilter<"CaseResourceEstimate">
+    estimateBasis?: StringWithAggregatesFilter<"CaseResourceEstimate"> | string
+    sourceReference?: StringWithAggregatesFilter<"CaseResourceEstimate"> | string
+    preparedById?: StringWithAggregatesFilter<"CaseResourceEstimate"> | string
+    preparedAt?: DateTimeWithAggregatesFilter<"CaseResourceEstimate"> | Date | string
+    createdAt?: DateTimeWithAggregatesFilter<"CaseResourceEstimate"> | Date | string
+  }
+
+  export type PortfolioScenarioWhereInput = {
+    AND?: PortfolioScenarioWhereInput | PortfolioScenarioWhereInput[]
+    OR?: PortfolioScenarioWhereInput[]
+    NOT?: PortfolioScenarioWhereInput | PortfolioScenarioWhereInput[]
+    id?: StringFilter<"PortfolioScenario"> | string
+    scenarioVersion?: IntFilter<"PortfolioScenario"> | number
+    name?: StringFilter<"PortfolioScenario"> | string
+    departmentId?: StringFilter<"PortfolioScenario"> | string
+    jurisdictionId?: StringFilter<"PortfolioScenario"> | string
+    budgetMinor?: BigIntFilter<"PortfolioScenario"> | bigint | number
+    currency?: StringFilter<"PortfolioScenario"> | string
+    resourceCapacities?: JsonFilter<"PortfolioScenario">
+    algorithmVersion?: StringFilter<"PortfolioScenario"> | string
+    inputSnapshot?: JsonFilter<"PortfolioScenario">
+    resultSnapshot?: JsonFilter<"PortfolioScenario">
+    createdById?: StringFilter<"PortfolioScenario"> | string
+    createdAt?: DateTimeFilter<"PortfolioScenario"> | Date | string
+    department?: XOR<DepartmentScalarRelationFilter, DepartmentWhereInput>
+    jurisdiction?: XOR<JurisdictionScalarRelationFilter, JurisdictionWhereInput>
+    createdBy?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type PortfolioScenarioOrderByWithRelationInput = {
+    id?: SortOrder
+    scenarioVersion?: SortOrder
+    name?: SortOrder
+    departmentId?: SortOrder
+    jurisdictionId?: SortOrder
+    budgetMinor?: SortOrder
+    currency?: SortOrder
+    resourceCapacities?: SortOrder
+    algorithmVersion?: SortOrder
+    inputSnapshot?: SortOrder
+    resultSnapshot?: SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+    department?: DepartmentOrderByWithRelationInput
+    jurisdiction?: JurisdictionOrderByWithRelationInput
+    createdBy?: UserOrderByWithRelationInput
+  }
+
+  export type PortfolioScenarioWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: PortfolioScenarioWhereInput | PortfolioScenarioWhereInput[]
+    OR?: PortfolioScenarioWhereInput[]
+    NOT?: PortfolioScenarioWhereInput | PortfolioScenarioWhereInput[]
+    scenarioVersion?: IntFilter<"PortfolioScenario"> | number
+    name?: StringFilter<"PortfolioScenario"> | string
+    departmentId?: StringFilter<"PortfolioScenario"> | string
+    jurisdictionId?: StringFilter<"PortfolioScenario"> | string
+    budgetMinor?: BigIntFilter<"PortfolioScenario"> | bigint | number
+    currency?: StringFilter<"PortfolioScenario"> | string
+    resourceCapacities?: JsonFilter<"PortfolioScenario">
+    algorithmVersion?: StringFilter<"PortfolioScenario"> | string
+    inputSnapshot?: JsonFilter<"PortfolioScenario">
+    resultSnapshot?: JsonFilter<"PortfolioScenario">
+    createdById?: StringFilter<"PortfolioScenario"> | string
+    createdAt?: DateTimeFilter<"PortfolioScenario"> | Date | string
+    department?: XOR<DepartmentScalarRelationFilter, DepartmentWhereInput>
+    jurisdiction?: XOR<JurisdictionScalarRelationFilter, JurisdictionWhereInput>
+    createdBy?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id">
+
+  export type PortfolioScenarioOrderByWithAggregationInput = {
+    id?: SortOrder
+    scenarioVersion?: SortOrder
+    name?: SortOrder
+    departmentId?: SortOrder
+    jurisdictionId?: SortOrder
+    budgetMinor?: SortOrder
+    currency?: SortOrder
+    resourceCapacities?: SortOrder
+    algorithmVersion?: SortOrder
+    inputSnapshot?: SortOrder
+    resultSnapshot?: SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+    _count?: PortfolioScenarioCountOrderByAggregateInput
+    _avg?: PortfolioScenarioAvgOrderByAggregateInput
+    _max?: PortfolioScenarioMaxOrderByAggregateInput
+    _min?: PortfolioScenarioMinOrderByAggregateInput
+    _sum?: PortfolioScenarioSumOrderByAggregateInput
+  }
+
+  export type PortfolioScenarioScalarWhereWithAggregatesInput = {
+    AND?: PortfolioScenarioScalarWhereWithAggregatesInput | PortfolioScenarioScalarWhereWithAggregatesInput[]
+    OR?: PortfolioScenarioScalarWhereWithAggregatesInput[]
+    NOT?: PortfolioScenarioScalarWhereWithAggregatesInput | PortfolioScenarioScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"PortfolioScenario"> | string
+    scenarioVersion?: IntWithAggregatesFilter<"PortfolioScenario"> | number
+    name?: StringWithAggregatesFilter<"PortfolioScenario"> | string
+    departmentId?: StringWithAggregatesFilter<"PortfolioScenario"> | string
+    jurisdictionId?: StringWithAggregatesFilter<"PortfolioScenario"> | string
+    budgetMinor?: BigIntWithAggregatesFilter<"PortfolioScenario"> | bigint | number
+    currency?: StringWithAggregatesFilter<"PortfolioScenario"> | string
+    resourceCapacities?: JsonWithAggregatesFilter<"PortfolioScenario">
+    algorithmVersion?: StringWithAggregatesFilter<"PortfolioScenario"> | string
+    inputSnapshot?: JsonWithAggregatesFilter<"PortfolioScenario">
+    resultSnapshot?: JsonWithAggregatesFilter<"PortfolioScenario">
+    createdById?: StringWithAggregatesFilter<"PortfolioScenario"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"PortfolioScenario"> | Date | string
   }
 
   export type ObservationSourceWhereInput = {
@@ -48005,6 +51082,7 @@ export namespace Prisma {
     governedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutDepartmentInput
     observationSources?: ObservationSourceCreateNestedManyWithoutDepartmentInput
     externalObservations?: ExternalObservationCreateNestedManyWithoutDepartmentInput
+    portfolioScenarios?: PortfolioScenarioCreateNestedManyWithoutDepartmentInput
   }
 
   export type DepartmentUncheckedCreateInput = {
@@ -48022,6 +51100,7 @@ export namespace Prisma {
     governedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutDepartmentInput
     observationSources?: ObservationSourceUncheckedCreateNestedManyWithoutDepartmentInput
     externalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutDepartmentInput
+    portfolioScenarios?: PortfolioScenarioUncheckedCreateNestedManyWithoutDepartmentInput
   }
 
   export type DepartmentUpdateInput = {
@@ -48039,6 +51118,7 @@ export namespace Prisma {
     governedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutDepartmentNestedInput
     observationSources?: ObservationSourceUpdateManyWithoutDepartmentNestedInput
     externalObservations?: ExternalObservationUpdateManyWithoutDepartmentNestedInput
+    portfolioScenarios?: PortfolioScenarioUpdateManyWithoutDepartmentNestedInput
   }
 
   export type DepartmentUncheckedUpdateInput = {
@@ -48056,6 +51136,7 @@ export namespace Prisma {
     governedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutDepartmentNestedInput
     observationSources?: ObservationSourceUncheckedUpdateManyWithoutDepartmentNestedInput
     externalObservations?: ExternalObservationUncheckedUpdateManyWithoutDepartmentNestedInput
+    portfolioScenarios?: PortfolioScenarioUncheckedUpdateManyWithoutDepartmentNestedInput
   }
 
   export type DepartmentCreateManyInput = {
@@ -48094,6 +51175,7 @@ export namespace Prisma {
     governedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutJurisdictionInput
     observationSources?: ObservationSourceCreateNestedManyWithoutJurisdictionInput
     externalObservations?: ExternalObservationCreateNestedManyWithoutJurisdictionInput
+    portfolioScenarios?: PortfolioScenarioCreateNestedManyWithoutJurisdictionInput
   }
 
   export type JurisdictionUncheckedCreateInput = {
@@ -48111,6 +51193,7 @@ export namespace Prisma {
     governedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutJurisdictionInput
     observationSources?: ObservationSourceUncheckedCreateNestedManyWithoutJurisdictionInput
     externalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutJurisdictionInput
+    portfolioScenarios?: PortfolioScenarioUncheckedCreateNestedManyWithoutJurisdictionInput
   }
 
   export type JurisdictionUpdateInput = {
@@ -48128,6 +51211,7 @@ export namespace Prisma {
     governedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutJurisdictionNestedInput
     observationSources?: ObservationSourceUpdateManyWithoutJurisdictionNestedInput
     externalObservations?: ExternalObservationUpdateManyWithoutJurisdictionNestedInput
+    portfolioScenarios?: PortfolioScenarioUpdateManyWithoutJurisdictionNestedInput
   }
 
   export type JurisdictionUncheckedUpdateInput = {
@@ -48145,6 +51229,7 @@ export namespace Prisma {
     governedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutJurisdictionNestedInput
     observationSources?: ObservationSourceUncheckedUpdateManyWithoutJurisdictionNestedInput
     externalObservations?: ExternalObservationUncheckedUpdateManyWithoutJurisdictionNestedInput
+    portfolioScenarios?: PortfolioScenarioUncheckedUpdateManyWithoutJurisdictionNestedInput
   }
 
   export type JurisdictionCreateManyInput = {
@@ -48212,6 +51297,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceCreateNestedManyWithoutCreatedByInput
     deactivatedObservationSources?: ObservationSourceCreateNestedManyWithoutDeactivatedByInput
     ingestedExternalObservations?: ExternalObservationCreateNestedManyWithoutIngestedByInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutPreparedByInput
+    createdPortfolioScenarios?: PortfolioScenarioCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -48256,6 +51343,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceUncheckedCreateNestedManyWithoutCreatedByInput
     deactivatedObservationSources?: ObservationSourceUncheckedCreateNestedManyWithoutDeactivatedByInput
     ingestedExternalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutIngestedByInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutPreparedByInput
+    createdPortfolioScenarios?: PortfolioScenarioUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserUpdateInput = {
@@ -48300,6 +51389,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceUpdateManyWithoutCreatedByNestedInput
     deactivatedObservationSources?: ObservationSourceUpdateManyWithoutDeactivatedByNestedInput
     ingestedExternalObservations?: ExternalObservationUpdateManyWithoutIngestedByNestedInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUpdateManyWithoutPreparedByNestedInput
+    createdPortfolioScenarios?: PortfolioScenarioUpdateManyWithoutCreatedByNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -48344,6 +51435,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceUncheckedUpdateManyWithoutCreatedByNestedInput
     deactivatedObservationSources?: ObservationSourceUncheckedUpdateManyWithoutDeactivatedByNestedInput
     ingestedExternalObservations?: ExternalObservationUncheckedUpdateManyWithoutIngestedByNestedInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutPreparedByNestedInput
+    createdPortfolioScenarios?: PortfolioScenarioUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -49466,6 +52559,7 @@ export namespace Prisma {
     intelligenceAssessments?: InfrastructureIntelligenceAssessmentCreateNestedManyWithoutCaseInput
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationCreateNestedManyWithoutCaseInput
     externalObservations?: ExternalObservationCreateNestedManyWithoutCaseInput
+    resourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutCaseInput
   }
 
   export type CaseUncheckedCreateInput = {
@@ -49492,6 +52586,7 @@ export namespace Prisma {
     intelligenceAssessments?: InfrastructureIntelligenceAssessmentUncheckedCreateNestedManyWithoutCaseInput
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUncheckedCreateNestedManyWithoutCaseInput
     externalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutCaseInput
+    resourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutCaseInput
   }
 
   export type CaseUpdateInput = {
@@ -49518,6 +52613,7 @@ export namespace Prisma {
     intelligenceAssessments?: InfrastructureIntelligenceAssessmentUpdateManyWithoutCaseNestedInput
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUpdateManyWithoutCaseNestedInput
     externalObservations?: ExternalObservationUpdateManyWithoutCaseNestedInput
+    resourceEstimates?: CaseResourceEstimateUpdateManyWithoutCaseNestedInput
   }
 
   export type CaseUncheckedUpdateInput = {
@@ -49544,6 +52640,7 @@ export namespace Prisma {
     intelligenceAssessments?: InfrastructureIntelligenceAssessmentUncheckedUpdateManyWithoutCaseNestedInput
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUncheckedUpdateManyWithoutCaseNestedInput
     externalObservations?: ExternalObservationUncheckedUpdateManyWithoutCaseNestedInput
+    resourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutCaseNestedInput
   }
 
   export type CaseCreateManyInput = {
@@ -49588,6 +52685,225 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type CaseResourceEstimateCreateInput = {
+    id?: string
+    estimateVersion: number
+    status?: $Enums.PlanningEstimateStatus
+    currency?: string
+    estimatedCostMinor: bigint | number
+    estimatedDurationDays?: number | null
+    resourceRequirements: JsonNullValueInput | InputJsonValue
+    estimateBasis: string
+    sourceReference: string
+    preparedAt?: Date | string
+    createdAt?: Date | string
+    case: CaseCreateNestedOneWithoutResourceEstimatesInput
+    preparedBy: UserCreateNestedOneWithoutPreparedCaseResourceEstimatesInput
+  }
+
+  export type CaseResourceEstimateUncheckedCreateInput = {
+    id?: string
+    caseId: string
+    estimateVersion: number
+    status?: $Enums.PlanningEstimateStatus
+    currency?: string
+    estimatedCostMinor: bigint | number
+    estimatedDurationDays?: number | null
+    resourceRequirements: JsonNullValueInput | InputJsonValue
+    estimateBasis: string
+    sourceReference: string
+    preparedById: string
+    preparedAt?: Date | string
+    createdAt?: Date | string
+  }
+
+  export type CaseResourceEstimateUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    estimateVersion?: IntFieldUpdateOperationsInput | number
+    status?: EnumPlanningEstimateStatusFieldUpdateOperationsInput | $Enums.PlanningEstimateStatus
+    currency?: StringFieldUpdateOperationsInput | string
+    estimatedCostMinor?: BigIntFieldUpdateOperationsInput | bigint | number
+    estimatedDurationDays?: NullableIntFieldUpdateOperationsInput | number | null
+    resourceRequirements?: JsonNullValueInput | InputJsonValue
+    estimateBasis?: StringFieldUpdateOperationsInput | string
+    sourceReference?: StringFieldUpdateOperationsInput | string
+    preparedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    case?: CaseUpdateOneRequiredWithoutResourceEstimatesNestedInput
+    preparedBy?: UserUpdateOneRequiredWithoutPreparedCaseResourceEstimatesNestedInput
+  }
+
+  export type CaseResourceEstimateUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    caseId?: StringFieldUpdateOperationsInput | string
+    estimateVersion?: IntFieldUpdateOperationsInput | number
+    status?: EnumPlanningEstimateStatusFieldUpdateOperationsInput | $Enums.PlanningEstimateStatus
+    currency?: StringFieldUpdateOperationsInput | string
+    estimatedCostMinor?: BigIntFieldUpdateOperationsInput | bigint | number
+    estimatedDurationDays?: NullableIntFieldUpdateOperationsInput | number | null
+    resourceRequirements?: JsonNullValueInput | InputJsonValue
+    estimateBasis?: StringFieldUpdateOperationsInput | string
+    sourceReference?: StringFieldUpdateOperationsInput | string
+    preparedById?: StringFieldUpdateOperationsInput | string
+    preparedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CaseResourceEstimateCreateManyInput = {
+    id?: string
+    caseId: string
+    estimateVersion: number
+    status?: $Enums.PlanningEstimateStatus
+    currency?: string
+    estimatedCostMinor: bigint | number
+    estimatedDurationDays?: number | null
+    resourceRequirements: JsonNullValueInput | InputJsonValue
+    estimateBasis: string
+    sourceReference: string
+    preparedById: string
+    preparedAt?: Date | string
+    createdAt?: Date | string
+  }
+
+  export type CaseResourceEstimateUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    estimateVersion?: IntFieldUpdateOperationsInput | number
+    status?: EnumPlanningEstimateStatusFieldUpdateOperationsInput | $Enums.PlanningEstimateStatus
+    currency?: StringFieldUpdateOperationsInput | string
+    estimatedCostMinor?: BigIntFieldUpdateOperationsInput | bigint | number
+    estimatedDurationDays?: NullableIntFieldUpdateOperationsInput | number | null
+    resourceRequirements?: JsonNullValueInput | InputJsonValue
+    estimateBasis?: StringFieldUpdateOperationsInput | string
+    sourceReference?: StringFieldUpdateOperationsInput | string
+    preparedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CaseResourceEstimateUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    caseId?: StringFieldUpdateOperationsInput | string
+    estimateVersion?: IntFieldUpdateOperationsInput | number
+    status?: EnumPlanningEstimateStatusFieldUpdateOperationsInput | $Enums.PlanningEstimateStatus
+    currency?: StringFieldUpdateOperationsInput | string
+    estimatedCostMinor?: BigIntFieldUpdateOperationsInput | bigint | number
+    estimatedDurationDays?: NullableIntFieldUpdateOperationsInput | number | null
+    resourceRequirements?: JsonNullValueInput | InputJsonValue
+    estimateBasis?: StringFieldUpdateOperationsInput | string
+    sourceReference?: StringFieldUpdateOperationsInput | string
+    preparedById?: StringFieldUpdateOperationsInput | string
+    preparedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PortfolioScenarioCreateInput = {
+    id?: string
+    scenarioVersion?: number
+    name: string
+    budgetMinor: bigint | number
+    currency?: string
+    resourceCapacities: JsonNullValueInput | InputJsonValue
+    algorithmVersion: string
+    inputSnapshot: JsonNullValueInput | InputJsonValue
+    resultSnapshot: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    department: DepartmentCreateNestedOneWithoutPortfolioScenariosInput
+    jurisdiction: JurisdictionCreateNestedOneWithoutPortfolioScenariosInput
+    createdBy: UserCreateNestedOneWithoutCreatedPortfolioScenariosInput
+  }
+
+  export type PortfolioScenarioUncheckedCreateInput = {
+    id?: string
+    scenarioVersion?: number
+    name: string
+    departmentId: string
+    jurisdictionId: string
+    budgetMinor: bigint | number
+    currency?: string
+    resourceCapacities: JsonNullValueInput | InputJsonValue
+    algorithmVersion: string
+    inputSnapshot: JsonNullValueInput | InputJsonValue
+    resultSnapshot: JsonNullValueInput | InputJsonValue
+    createdById: string
+    createdAt?: Date | string
+  }
+
+  export type PortfolioScenarioUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    scenarioVersion?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    budgetMinor?: BigIntFieldUpdateOperationsInput | bigint | number
+    currency?: StringFieldUpdateOperationsInput | string
+    resourceCapacities?: JsonNullValueInput | InputJsonValue
+    algorithmVersion?: StringFieldUpdateOperationsInput | string
+    inputSnapshot?: JsonNullValueInput | InputJsonValue
+    resultSnapshot?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    department?: DepartmentUpdateOneRequiredWithoutPortfolioScenariosNestedInput
+    jurisdiction?: JurisdictionUpdateOneRequiredWithoutPortfolioScenariosNestedInput
+    createdBy?: UserUpdateOneRequiredWithoutCreatedPortfolioScenariosNestedInput
+  }
+
+  export type PortfolioScenarioUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    scenarioVersion?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    departmentId?: StringFieldUpdateOperationsInput | string
+    jurisdictionId?: StringFieldUpdateOperationsInput | string
+    budgetMinor?: BigIntFieldUpdateOperationsInput | bigint | number
+    currency?: StringFieldUpdateOperationsInput | string
+    resourceCapacities?: JsonNullValueInput | InputJsonValue
+    algorithmVersion?: StringFieldUpdateOperationsInput | string
+    inputSnapshot?: JsonNullValueInput | InputJsonValue
+    resultSnapshot?: JsonNullValueInput | InputJsonValue
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PortfolioScenarioCreateManyInput = {
+    id?: string
+    scenarioVersion?: number
+    name: string
+    departmentId: string
+    jurisdictionId: string
+    budgetMinor: bigint | number
+    currency?: string
+    resourceCapacities: JsonNullValueInput | InputJsonValue
+    algorithmVersion: string
+    inputSnapshot: JsonNullValueInput | InputJsonValue
+    resultSnapshot: JsonNullValueInput | InputJsonValue
+    createdById: string
+    createdAt?: Date | string
+  }
+
+  export type PortfolioScenarioUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    scenarioVersion?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    budgetMinor?: BigIntFieldUpdateOperationsInput | bigint | number
+    currency?: StringFieldUpdateOperationsInput | string
+    resourceCapacities?: JsonNullValueInput | InputJsonValue
+    algorithmVersion?: StringFieldUpdateOperationsInput | string
+    inputSnapshot?: JsonNullValueInput | InputJsonValue
+    resultSnapshot?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PortfolioScenarioUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    scenarioVersion?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    departmentId?: StringFieldUpdateOperationsInput | string
+    jurisdictionId?: StringFieldUpdateOperationsInput | string
+    budgetMinor?: BigIntFieldUpdateOperationsInput | bigint | number
+    currency?: StringFieldUpdateOperationsInput | string
+    resourceCapacities?: JsonNullValueInput | InputJsonValue
+    algorithmVersion?: StringFieldUpdateOperationsInput | string
+    inputSnapshot?: JsonNullValueInput | InputJsonValue
+    resultSnapshot?: JsonNullValueInput | InputJsonValue
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ObservationSourceCreateInput = {
@@ -51868,6 +55184,12 @@ export namespace Prisma {
     none?: ExternalObservationWhereInput
   }
 
+  export type PortfolioScenarioListRelationFilter = {
+    every?: PortfolioScenarioWhereInput
+    some?: PortfolioScenarioWhereInput
+    none?: PortfolioScenarioWhereInput
+  }
+
   export type UserOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -51905,6 +55227,10 @@ export namespace Prisma {
   }
 
   export type ExternalObservationOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type PortfolioScenarioOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -52075,6 +55401,12 @@ export namespace Prisma {
     none?: DecisionPackageWhereInput
   }
 
+  export type CaseResourceEstimateListRelationFilter = {
+    every?: CaseResourceEstimateWhereInput
+    some?: CaseResourceEstimateWhereInput
+    none?: CaseResourceEstimateWhereInput
+  }
+
   export type InspectionOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -52116,6 +55448,10 @@ export namespace Prisma {
   }
 
   export type DecisionPackageOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type CaseResourceEstimateOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -53273,6 +56609,170 @@ export namespace Prisma {
     _max?: NestedEnumPriorityLevelNullableFilter<$PrismaModel>
   }
 
+  export type EnumPlanningEstimateStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.PlanningEstimateStatus | EnumPlanningEstimateStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.PlanningEstimateStatus[] | ListEnumPlanningEstimateStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PlanningEstimateStatus[] | ListEnumPlanningEstimateStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumPlanningEstimateStatusFilter<$PrismaModel> | $Enums.PlanningEstimateStatus
+  }
+
+  export type BigIntFilter<$PrismaModel = never> = {
+    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    in?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel>
+    notIn?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel>
+    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    not?: NestedBigIntFilter<$PrismaModel> | bigint | number
+  }
+
+  export type CaseScalarRelationFilter = {
+    is?: CaseWhereInput
+    isNot?: CaseWhereInput
+  }
+
+  export type CaseResourceEstimateCaseIdEstimateVersionCompoundUniqueInput = {
+    caseId: string
+    estimateVersion: number
+  }
+
+  export type CaseResourceEstimateCountOrderByAggregateInput = {
+    id?: SortOrder
+    caseId?: SortOrder
+    estimateVersion?: SortOrder
+    status?: SortOrder
+    currency?: SortOrder
+    estimatedCostMinor?: SortOrder
+    estimatedDurationDays?: SortOrder
+    resourceRequirements?: SortOrder
+    estimateBasis?: SortOrder
+    sourceReference?: SortOrder
+    preparedById?: SortOrder
+    preparedAt?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type CaseResourceEstimateAvgOrderByAggregateInput = {
+    estimateVersion?: SortOrder
+    estimatedCostMinor?: SortOrder
+    estimatedDurationDays?: SortOrder
+  }
+
+  export type CaseResourceEstimateMaxOrderByAggregateInput = {
+    id?: SortOrder
+    caseId?: SortOrder
+    estimateVersion?: SortOrder
+    status?: SortOrder
+    currency?: SortOrder
+    estimatedCostMinor?: SortOrder
+    estimatedDurationDays?: SortOrder
+    estimateBasis?: SortOrder
+    sourceReference?: SortOrder
+    preparedById?: SortOrder
+    preparedAt?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type CaseResourceEstimateMinOrderByAggregateInput = {
+    id?: SortOrder
+    caseId?: SortOrder
+    estimateVersion?: SortOrder
+    status?: SortOrder
+    currency?: SortOrder
+    estimatedCostMinor?: SortOrder
+    estimatedDurationDays?: SortOrder
+    estimateBasis?: SortOrder
+    sourceReference?: SortOrder
+    preparedById?: SortOrder
+    preparedAt?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type CaseResourceEstimateSumOrderByAggregateInput = {
+    estimateVersion?: SortOrder
+    estimatedCostMinor?: SortOrder
+    estimatedDurationDays?: SortOrder
+  }
+
+  export type EnumPlanningEstimateStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.PlanningEstimateStatus | EnumPlanningEstimateStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.PlanningEstimateStatus[] | ListEnumPlanningEstimateStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PlanningEstimateStatus[] | ListEnumPlanningEstimateStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumPlanningEstimateStatusWithAggregatesFilter<$PrismaModel> | $Enums.PlanningEstimateStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumPlanningEstimateStatusFilter<$PrismaModel>
+    _max?: NestedEnumPlanningEstimateStatusFilter<$PrismaModel>
+  }
+
+  export type BigIntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    in?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel>
+    notIn?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel>
+    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    not?: NestedBigIntWithAggregatesFilter<$PrismaModel> | bigint | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedBigIntFilter<$PrismaModel>
+    _min?: NestedBigIntFilter<$PrismaModel>
+    _max?: NestedBigIntFilter<$PrismaModel>
+  }
+
+  export type PortfolioScenarioCountOrderByAggregateInput = {
+    id?: SortOrder
+    scenarioVersion?: SortOrder
+    name?: SortOrder
+    departmentId?: SortOrder
+    jurisdictionId?: SortOrder
+    budgetMinor?: SortOrder
+    currency?: SortOrder
+    resourceCapacities?: SortOrder
+    algorithmVersion?: SortOrder
+    inputSnapshot?: SortOrder
+    resultSnapshot?: SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type PortfolioScenarioAvgOrderByAggregateInput = {
+    scenarioVersion?: SortOrder
+    budgetMinor?: SortOrder
+  }
+
+  export type PortfolioScenarioMaxOrderByAggregateInput = {
+    id?: SortOrder
+    scenarioVersion?: SortOrder
+    name?: SortOrder
+    departmentId?: SortOrder
+    jurisdictionId?: SortOrder
+    budgetMinor?: SortOrder
+    currency?: SortOrder
+    algorithmVersion?: SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type PortfolioScenarioMinOrderByAggregateInput = {
+    id?: SortOrder
+    scenarioVersion?: SortOrder
+    name?: SortOrder
+    departmentId?: SortOrder
+    jurisdictionId?: SortOrder
+    budgetMinor?: SortOrder
+    currency?: SortOrder
+    algorithmVersion?: SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type PortfolioScenarioSumOrderByAggregateInput = {
+    scenarioVersion?: SortOrder
+    budgetMinor?: SortOrder
+  }
+
   export type EnumObservationSourceTypeFilter<$PrismaModel = never> = {
     equals?: $Enums.ObservationSourceType | EnumObservationSourceTypeFieldRefInput<$PrismaModel>
     in?: $Enums.ObservationSourceType[] | ListEnumObservationSourceTypeFieldRefInput<$PrismaModel>
@@ -53482,11 +56982,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumObservationValidationStateFilter<$PrismaModel>
     _max?: NestedEnumObservationValidationStateFilter<$PrismaModel>
-  }
-
-  export type CaseScalarRelationFilter = {
-    is?: CaseWhereInput
-    isNot?: CaseWhereInput
   }
 
   export type InspectionCountOrderByAggregateInput = {
@@ -54747,6 +58242,13 @@ export namespace Prisma {
     connect?: ExternalObservationWhereUniqueInput | ExternalObservationWhereUniqueInput[]
   }
 
+  export type PortfolioScenarioCreateNestedManyWithoutDepartmentInput = {
+    create?: XOR<PortfolioScenarioCreateWithoutDepartmentInput, PortfolioScenarioUncheckedCreateWithoutDepartmentInput> | PortfolioScenarioCreateWithoutDepartmentInput[] | PortfolioScenarioUncheckedCreateWithoutDepartmentInput[]
+    connectOrCreate?: PortfolioScenarioCreateOrConnectWithoutDepartmentInput | PortfolioScenarioCreateOrConnectWithoutDepartmentInput[]
+    createMany?: PortfolioScenarioCreateManyDepartmentInputEnvelope
+    connect?: PortfolioScenarioWhereUniqueInput | PortfolioScenarioWhereUniqueInput[]
+  }
+
   export type UserUncheckedCreateNestedManyWithoutDepartmentInput = {
     create?: XOR<UserCreateWithoutDepartmentInput, UserUncheckedCreateWithoutDepartmentInput> | UserCreateWithoutDepartmentInput[] | UserUncheckedCreateWithoutDepartmentInput[]
     connectOrCreate?: UserCreateOrConnectWithoutDepartmentInput | UserCreateOrConnectWithoutDepartmentInput[]
@@ -54815,6 +58317,13 @@ export namespace Prisma {
     connectOrCreate?: ExternalObservationCreateOrConnectWithoutDepartmentInput | ExternalObservationCreateOrConnectWithoutDepartmentInput[]
     createMany?: ExternalObservationCreateManyDepartmentInputEnvelope
     connect?: ExternalObservationWhereUniqueInput | ExternalObservationWhereUniqueInput[]
+  }
+
+  export type PortfolioScenarioUncheckedCreateNestedManyWithoutDepartmentInput = {
+    create?: XOR<PortfolioScenarioCreateWithoutDepartmentInput, PortfolioScenarioUncheckedCreateWithoutDepartmentInput> | PortfolioScenarioCreateWithoutDepartmentInput[] | PortfolioScenarioUncheckedCreateWithoutDepartmentInput[]
+    connectOrCreate?: PortfolioScenarioCreateOrConnectWithoutDepartmentInput | PortfolioScenarioCreateOrConnectWithoutDepartmentInput[]
+    createMany?: PortfolioScenarioCreateManyDepartmentInputEnvelope
+    connect?: PortfolioScenarioWhereUniqueInput | PortfolioScenarioWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -54965,6 +58474,20 @@ export namespace Prisma {
     deleteMany?: ExternalObservationScalarWhereInput | ExternalObservationScalarWhereInput[]
   }
 
+  export type PortfolioScenarioUpdateManyWithoutDepartmentNestedInput = {
+    create?: XOR<PortfolioScenarioCreateWithoutDepartmentInput, PortfolioScenarioUncheckedCreateWithoutDepartmentInput> | PortfolioScenarioCreateWithoutDepartmentInput[] | PortfolioScenarioUncheckedCreateWithoutDepartmentInput[]
+    connectOrCreate?: PortfolioScenarioCreateOrConnectWithoutDepartmentInput | PortfolioScenarioCreateOrConnectWithoutDepartmentInput[]
+    upsert?: PortfolioScenarioUpsertWithWhereUniqueWithoutDepartmentInput | PortfolioScenarioUpsertWithWhereUniqueWithoutDepartmentInput[]
+    createMany?: PortfolioScenarioCreateManyDepartmentInputEnvelope
+    set?: PortfolioScenarioWhereUniqueInput | PortfolioScenarioWhereUniqueInput[]
+    disconnect?: PortfolioScenarioWhereUniqueInput | PortfolioScenarioWhereUniqueInput[]
+    delete?: PortfolioScenarioWhereUniqueInput | PortfolioScenarioWhereUniqueInput[]
+    connect?: PortfolioScenarioWhereUniqueInput | PortfolioScenarioWhereUniqueInput[]
+    update?: PortfolioScenarioUpdateWithWhereUniqueWithoutDepartmentInput | PortfolioScenarioUpdateWithWhereUniqueWithoutDepartmentInput[]
+    updateMany?: PortfolioScenarioUpdateManyWithWhereWithoutDepartmentInput | PortfolioScenarioUpdateManyWithWhereWithoutDepartmentInput[]
+    deleteMany?: PortfolioScenarioScalarWhereInput | PortfolioScenarioScalarWhereInput[]
+  }
+
   export type UserUncheckedUpdateManyWithoutDepartmentNestedInput = {
     create?: XOR<UserCreateWithoutDepartmentInput, UserUncheckedCreateWithoutDepartmentInput> | UserCreateWithoutDepartmentInput[] | UserUncheckedCreateWithoutDepartmentInput[]
     connectOrCreate?: UserCreateOrConnectWithoutDepartmentInput | UserCreateOrConnectWithoutDepartmentInput[]
@@ -55105,6 +58628,20 @@ export namespace Prisma {
     deleteMany?: ExternalObservationScalarWhereInput | ExternalObservationScalarWhereInput[]
   }
 
+  export type PortfolioScenarioUncheckedUpdateManyWithoutDepartmentNestedInput = {
+    create?: XOR<PortfolioScenarioCreateWithoutDepartmentInput, PortfolioScenarioUncheckedCreateWithoutDepartmentInput> | PortfolioScenarioCreateWithoutDepartmentInput[] | PortfolioScenarioUncheckedCreateWithoutDepartmentInput[]
+    connectOrCreate?: PortfolioScenarioCreateOrConnectWithoutDepartmentInput | PortfolioScenarioCreateOrConnectWithoutDepartmentInput[]
+    upsert?: PortfolioScenarioUpsertWithWhereUniqueWithoutDepartmentInput | PortfolioScenarioUpsertWithWhereUniqueWithoutDepartmentInput[]
+    createMany?: PortfolioScenarioCreateManyDepartmentInputEnvelope
+    set?: PortfolioScenarioWhereUniqueInput | PortfolioScenarioWhereUniqueInput[]
+    disconnect?: PortfolioScenarioWhereUniqueInput | PortfolioScenarioWhereUniqueInput[]
+    delete?: PortfolioScenarioWhereUniqueInput | PortfolioScenarioWhereUniqueInput[]
+    connect?: PortfolioScenarioWhereUniqueInput | PortfolioScenarioWhereUniqueInput[]
+    update?: PortfolioScenarioUpdateWithWhereUniqueWithoutDepartmentInput | PortfolioScenarioUpdateWithWhereUniqueWithoutDepartmentInput[]
+    updateMany?: PortfolioScenarioUpdateManyWithWhereWithoutDepartmentInput | PortfolioScenarioUpdateManyWithWhereWithoutDepartmentInput[]
+    deleteMany?: PortfolioScenarioScalarWhereInput | PortfolioScenarioScalarWhereInput[]
+  }
+
   export type DepartmentCreateNestedOneWithoutJurisdictionsInput = {
     create?: XOR<DepartmentCreateWithoutJurisdictionsInput, DepartmentUncheckedCreateWithoutJurisdictionsInput>
     connectOrCreate?: DepartmentCreateOrConnectWithoutJurisdictionsInput
@@ -55174,6 +58711,13 @@ export namespace Prisma {
     connect?: ExternalObservationWhereUniqueInput | ExternalObservationWhereUniqueInput[]
   }
 
+  export type PortfolioScenarioCreateNestedManyWithoutJurisdictionInput = {
+    create?: XOR<PortfolioScenarioCreateWithoutJurisdictionInput, PortfolioScenarioUncheckedCreateWithoutJurisdictionInput> | PortfolioScenarioCreateWithoutJurisdictionInput[] | PortfolioScenarioUncheckedCreateWithoutJurisdictionInput[]
+    connectOrCreate?: PortfolioScenarioCreateOrConnectWithoutJurisdictionInput | PortfolioScenarioCreateOrConnectWithoutJurisdictionInput[]
+    createMany?: PortfolioScenarioCreateManyJurisdictionInputEnvelope
+    connect?: PortfolioScenarioWhereUniqueInput | PortfolioScenarioWhereUniqueInput[]
+  }
+
   export type UserUncheckedCreateNestedManyWithoutJurisdictionInput = {
     create?: XOR<UserCreateWithoutJurisdictionInput, UserUncheckedCreateWithoutJurisdictionInput> | UserCreateWithoutJurisdictionInput[] | UserUncheckedCreateWithoutJurisdictionInput[]
     connectOrCreate?: UserCreateOrConnectWithoutJurisdictionInput | UserCreateOrConnectWithoutJurisdictionInput[]
@@ -55235,6 +58779,13 @@ export namespace Prisma {
     connectOrCreate?: ExternalObservationCreateOrConnectWithoutJurisdictionInput | ExternalObservationCreateOrConnectWithoutJurisdictionInput[]
     createMany?: ExternalObservationCreateManyJurisdictionInputEnvelope
     connect?: ExternalObservationWhereUniqueInput | ExternalObservationWhereUniqueInput[]
+  }
+
+  export type PortfolioScenarioUncheckedCreateNestedManyWithoutJurisdictionInput = {
+    create?: XOR<PortfolioScenarioCreateWithoutJurisdictionInput, PortfolioScenarioUncheckedCreateWithoutJurisdictionInput> | PortfolioScenarioCreateWithoutJurisdictionInput[] | PortfolioScenarioUncheckedCreateWithoutJurisdictionInput[]
+    connectOrCreate?: PortfolioScenarioCreateOrConnectWithoutJurisdictionInput | PortfolioScenarioCreateOrConnectWithoutJurisdictionInput[]
+    createMany?: PortfolioScenarioCreateManyJurisdictionInputEnvelope
+    connect?: PortfolioScenarioWhereUniqueInput | PortfolioScenarioWhereUniqueInput[]
   }
 
   export type DepartmentUpdateOneRequiredWithoutJurisdictionsNestedInput = {
@@ -55371,6 +58922,20 @@ export namespace Prisma {
     deleteMany?: ExternalObservationScalarWhereInput | ExternalObservationScalarWhereInput[]
   }
 
+  export type PortfolioScenarioUpdateManyWithoutJurisdictionNestedInput = {
+    create?: XOR<PortfolioScenarioCreateWithoutJurisdictionInput, PortfolioScenarioUncheckedCreateWithoutJurisdictionInput> | PortfolioScenarioCreateWithoutJurisdictionInput[] | PortfolioScenarioUncheckedCreateWithoutJurisdictionInput[]
+    connectOrCreate?: PortfolioScenarioCreateOrConnectWithoutJurisdictionInput | PortfolioScenarioCreateOrConnectWithoutJurisdictionInput[]
+    upsert?: PortfolioScenarioUpsertWithWhereUniqueWithoutJurisdictionInput | PortfolioScenarioUpsertWithWhereUniqueWithoutJurisdictionInput[]
+    createMany?: PortfolioScenarioCreateManyJurisdictionInputEnvelope
+    set?: PortfolioScenarioWhereUniqueInput | PortfolioScenarioWhereUniqueInput[]
+    disconnect?: PortfolioScenarioWhereUniqueInput | PortfolioScenarioWhereUniqueInput[]
+    delete?: PortfolioScenarioWhereUniqueInput | PortfolioScenarioWhereUniqueInput[]
+    connect?: PortfolioScenarioWhereUniqueInput | PortfolioScenarioWhereUniqueInput[]
+    update?: PortfolioScenarioUpdateWithWhereUniqueWithoutJurisdictionInput | PortfolioScenarioUpdateWithWhereUniqueWithoutJurisdictionInput[]
+    updateMany?: PortfolioScenarioUpdateManyWithWhereWithoutJurisdictionInput | PortfolioScenarioUpdateManyWithWhereWithoutJurisdictionInput[]
+    deleteMany?: PortfolioScenarioScalarWhereInput | PortfolioScenarioScalarWhereInput[]
+  }
+
   export type UserUncheckedUpdateManyWithoutJurisdictionNestedInput = {
     create?: XOR<UserCreateWithoutJurisdictionInput, UserUncheckedCreateWithoutJurisdictionInput> | UserCreateWithoutJurisdictionInput[] | UserUncheckedCreateWithoutJurisdictionInput[]
     connectOrCreate?: UserCreateOrConnectWithoutJurisdictionInput | UserCreateOrConnectWithoutJurisdictionInput[]
@@ -55495,6 +59060,20 @@ export namespace Prisma {
     update?: ExternalObservationUpdateWithWhereUniqueWithoutJurisdictionInput | ExternalObservationUpdateWithWhereUniqueWithoutJurisdictionInput[]
     updateMany?: ExternalObservationUpdateManyWithWhereWithoutJurisdictionInput | ExternalObservationUpdateManyWithWhereWithoutJurisdictionInput[]
     deleteMany?: ExternalObservationScalarWhereInput | ExternalObservationScalarWhereInput[]
+  }
+
+  export type PortfolioScenarioUncheckedUpdateManyWithoutJurisdictionNestedInput = {
+    create?: XOR<PortfolioScenarioCreateWithoutJurisdictionInput, PortfolioScenarioUncheckedCreateWithoutJurisdictionInput> | PortfolioScenarioCreateWithoutJurisdictionInput[] | PortfolioScenarioUncheckedCreateWithoutJurisdictionInput[]
+    connectOrCreate?: PortfolioScenarioCreateOrConnectWithoutJurisdictionInput | PortfolioScenarioCreateOrConnectWithoutJurisdictionInput[]
+    upsert?: PortfolioScenarioUpsertWithWhereUniqueWithoutJurisdictionInput | PortfolioScenarioUpsertWithWhereUniqueWithoutJurisdictionInput[]
+    createMany?: PortfolioScenarioCreateManyJurisdictionInputEnvelope
+    set?: PortfolioScenarioWhereUniqueInput | PortfolioScenarioWhereUniqueInput[]
+    disconnect?: PortfolioScenarioWhereUniqueInput | PortfolioScenarioWhereUniqueInput[]
+    delete?: PortfolioScenarioWhereUniqueInput | PortfolioScenarioWhereUniqueInput[]
+    connect?: PortfolioScenarioWhereUniqueInput | PortfolioScenarioWhereUniqueInput[]
+    update?: PortfolioScenarioUpdateWithWhereUniqueWithoutJurisdictionInput | PortfolioScenarioUpdateWithWhereUniqueWithoutJurisdictionInput[]
+    updateMany?: PortfolioScenarioUpdateManyWithWhereWithoutJurisdictionInput | PortfolioScenarioUpdateManyWithWhereWithoutJurisdictionInput[]
+    deleteMany?: PortfolioScenarioScalarWhereInput | PortfolioScenarioScalarWhereInput[]
   }
 
   export type DepartmentCreateNestedOneWithoutUsersInput = {
@@ -55712,6 +59291,20 @@ export namespace Prisma {
     connect?: ExternalObservationWhereUniqueInput | ExternalObservationWhereUniqueInput[]
   }
 
+  export type CaseResourceEstimateCreateNestedManyWithoutPreparedByInput = {
+    create?: XOR<CaseResourceEstimateCreateWithoutPreparedByInput, CaseResourceEstimateUncheckedCreateWithoutPreparedByInput> | CaseResourceEstimateCreateWithoutPreparedByInput[] | CaseResourceEstimateUncheckedCreateWithoutPreparedByInput[]
+    connectOrCreate?: CaseResourceEstimateCreateOrConnectWithoutPreparedByInput | CaseResourceEstimateCreateOrConnectWithoutPreparedByInput[]
+    createMany?: CaseResourceEstimateCreateManyPreparedByInputEnvelope
+    connect?: CaseResourceEstimateWhereUniqueInput | CaseResourceEstimateWhereUniqueInput[]
+  }
+
+  export type PortfolioScenarioCreateNestedManyWithoutCreatedByInput = {
+    create?: XOR<PortfolioScenarioCreateWithoutCreatedByInput, PortfolioScenarioUncheckedCreateWithoutCreatedByInput> | PortfolioScenarioCreateWithoutCreatedByInput[] | PortfolioScenarioUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: PortfolioScenarioCreateOrConnectWithoutCreatedByInput | PortfolioScenarioCreateOrConnectWithoutCreatedByInput[]
+    createMany?: PortfolioScenarioCreateManyCreatedByInputEnvelope
+    connect?: PortfolioScenarioWhereUniqueInput | PortfolioScenarioWhereUniqueInput[]
+  }
+
   export type InspectionUncheckedCreateNestedManyWithoutInspectorInput = {
     create?: XOR<InspectionCreateWithoutInspectorInput, InspectionUncheckedCreateWithoutInspectorInput> | InspectionCreateWithoutInspectorInput[] | InspectionUncheckedCreateWithoutInspectorInput[]
     connectOrCreate?: InspectionCreateOrConnectWithoutInspectorInput | InspectionCreateOrConnectWithoutInspectorInput[]
@@ -55913,6 +59506,20 @@ export namespace Prisma {
     connectOrCreate?: ExternalObservationCreateOrConnectWithoutIngestedByInput | ExternalObservationCreateOrConnectWithoutIngestedByInput[]
     createMany?: ExternalObservationCreateManyIngestedByInputEnvelope
     connect?: ExternalObservationWhereUniqueInput | ExternalObservationWhereUniqueInput[]
+  }
+
+  export type CaseResourceEstimateUncheckedCreateNestedManyWithoutPreparedByInput = {
+    create?: XOR<CaseResourceEstimateCreateWithoutPreparedByInput, CaseResourceEstimateUncheckedCreateWithoutPreparedByInput> | CaseResourceEstimateCreateWithoutPreparedByInput[] | CaseResourceEstimateUncheckedCreateWithoutPreparedByInput[]
+    connectOrCreate?: CaseResourceEstimateCreateOrConnectWithoutPreparedByInput | CaseResourceEstimateCreateOrConnectWithoutPreparedByInput[]
+    createMany?: CaseResourceEstimateCreateManyPreparedByInputEnvelope
+    connect?: CaseResourceEstimateWhereUniqueInput | CaseResourceEstimateWhereUniqueInput[]
+  }
+
+  export type PortfolioScenarioUncheckedCreateNestedManyWithoutCreatedByInput = {
+    create?: XOR<PortfolioScenarioCreateWithoutCreatedByInput, PortfolioScenarioUncheckedCreateWithoutCreatedByInput> | PortfolioScenarioCreateWithoutCreatedByInput[] | PortfolioScenarioUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: PortfolioScenarioCreateOrConnectWithoutCreatedByInput | PortfolioScenarioCreateOrConnectWithoutCreatedByInput[]
+    createMany?: PortfolioScenarioCreateManyCreatedByInputEnvelope
+    connect?: PortfolioScenarioWhereUniqueInput | PortfolioScenarioWhereUniqueInput[]
   }
 
   export type EnumSystemRoleFieldUpdateOperationsInput = {
@@ -56345,6 +59952,34 @@ export namespace Prisma {
     deleteMany?: ExternalObservationScalarWhereInput | ExternalObservationScalarWhereInput[]
   }
 
+  export type CaseResourceEstimateUpdateManyWithoutPreparedByNestedInput = {
+    create?: XOR<CaseResourceEstimateCreateWithoutPreparedByInput, CaseResourceEstimateUncheckedCreateWithoutPreparedByInput> | CaseResourceEstimateCreateWithoutPreparedByInput[] | CaseResourceEstimateUncheckedCreateWithoutPreparedByInput[]
+    connectOrCreate?: CaseResourceEstimateCreateOrConnectWithoutPreparedByInput | CaseResourceEstimateCreateOrConnectWithoutPreparedByInput[]
+    upsert?: CaseResourceEstimateUpsertWithWhereUniqueWithoutPreparedByInput | CaseResourceEstimateUpsertWithWhereUniqueWithoutPreparedByInput[]
+    createMany?: CaseResourceEstimateCreateManyPreparedByInputEnvelope
+    set?: CaseResourceEstimateWhereUniqueInput | CaseResourceEstimateWhereUniqueInput[]
+    disconnect?: CaseResourceEstimateWhereUniqueInput | CaseResourceEstimateWhereUniqueInput[]
+    delete?: CaseResourceEstimateWhereUniqueInput | CaseResourceEstimateWhereUniqueInput[]
+    connect?: CaseResourceEstimateWhereUniqueInput | CaseResourceEstimateWhereUniqueInput[]
+    update?: CaseResourceEstimateUpdateWithWhereUniqueWithoutPreparedByInput | CaseResourceEstimateUpdateWithWhereUniqueWithoutPreparedByInput[]
+    updateMany?: CaseResourceEstimateUpdateManyWithWhereWithoutPreparedByInput | CaseResourceEstimateUpdateManyWithWhereWithoutPreparedByInput[]
+    deleteMany?: CaseResourceEstimateScalarWhereInput | CaseResourceEstimateScalarWhereInput[]
+  }
+
+  export type PortfolioScenarioUpdateManyWithoutCreatedByNestedInput = {
+    create?: XOR<PortfolioScenarioCreateWithoutCreatedByInput, PortfolioScenarioUncheckedCreateWithoutCreatedByInput> | PortfolioScenarioCreateWithoutCreatedByInput[] | PortfolioScenarioUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: PortfolioScenarioCreateOrConnectWithoutCreatedByInput | PortfolioScenarioCreateOrConnectWithoutCreatedByInput[]
+    upsert?: PortfolioScenarioUpsertWithWhereUniqueWithoutCreatedByInput | PortfolioScenarioUpsertWithWhereUniqueWithoutCreatedByInput[]
+    createMany?: PortfolioScenarioCreateManyCreatedByInputEnvelope
+    set?: PortfolioScenarioWhereUniqueInput | PortfolioScenarioWhereUniqueInput[]
+    disconnect?: PortfolioScenarioWhereUniqueInput | PortfolioScenarioWhereUniqueInput[]
+    delete?: PortfolioScenarioWhereUniqueInput | PortfolioScenarioWhereUniqueInput[]
+    connect?: PortfolioScenarioWhereUniqueInput | PortfolioScenarioWhereUniqueInput[]
+    update?: PortfolioScenarioUpdateWithWhereUniqueWithoutCreatedByInput | PortfolioScenarioUpdateWithWhereUniqueWithoutCreatedByInput[]
+    updateMany?: PortfolioScenarioUpdateManyWithWhereWithoutCreatedByInput | PortfolioScenarioUpdateManyWithWhereWithoutCreatedByInput[]
+    deleteMany?: PortfolioScenarioScalarWhereInput | PortfolioScenarioScalarWhereInput[]
+  }
+
   export type InspectionUncheckedUpdateManyWithoutInspectorNestedInput = {
     create?: XOR<InspectionCreateWithoutInspectorInput, InspectionUncheckedCreateWithoutInspectorInput> | InspectionCreateWithoutInspectorInput[] | InspectionUncheckedCreateWithoutInspectorInput[]
     connectOrCreate?: InspectionCreateOrConnectWithoutInspectorInput | InspectionCreateOrConnectWithoutInspectorInput[]
@@ -56749,6 +60384,34 @@ export namespace Prisma {
     update?: ExternalObservationUpdateWithWhereUniqueWithoutIngestedByInput | ExternalObservationUpdateWithWhereUniqueWithoutIngestedByInput[]
     updateMany?: ExternalObservationUpdateManyWithWhereWithoutIngestedByInput | ExternalObservationUpdateManyWithWhereWithoutIngestedByInput[]
     deleteMany?: ExternalObservationScalarWhereInput | ExternalObservationScalarWhereInput[]
+  }
+
+  export type CaseResourceEstimateUncheckedUpdateManyWithoutPreparedByNestedInput = {
+    create?: XOR<CaseResourceEstimateCreateWithoutPreparedByInput, CaseResourceEstimateUncheckedCreateWithoutPreparedByInput> | CaseResourceEstimateCreateWithoutPreparedByInput[] | CaseResourceEstimateUncheckedCreateWithoutPreparedByInput[]
+    connectOrCreate?: CaseResourceEstimateCreateOrConnectWithoutPreparedByInput | CaseResourceEstimateCreateOrConnectWithoutPreparedByInput[]
+    upsert?: CaseResourceEstimateUpsertWithWhereUniqueWithoutPreparedByInput | CaseResourceEstimateUpsertWithWhereUniqueWithoutPreparedByInput[]
+    createMany?: CaseResourceEstimateCreateManyPreparedByInputEnvelope
+    set?: CaseResourceEstimateWhereUniqueInput | CaseResourceEstimateWhereUniqueInput[]
+    disconnect?: CaseResourceEstimateWhereUniqueInput | CaseResourceEstimateWhereUniqueInput[]
+    delete?: CaseResourceEstimateWhereUniqueInput | CaseResourceEstimateWhereUniqueInput[]
+    connect?: CaseResourceEstimateWhereUniqueInput | CaseResourceEstimateWhereUniqueInput[]
+    update?: CaseResourceEstimateUpdateWithWhereUniqueWithoutPreparedByInput | CaseResourceEstimateUpdateWithWhereUniqueWithoutPreparedByInput[]
+    updateMany?: CaseResourceEstimateUpdateManyWithWhereWithoutPreparedByInput | CaseResourceEstimateUpdateManyWithWhereWithoutPreparedByInput[]
+    deleteMany?: CaseResourceEstimateScalarWhereInput | CaseResourceEstimateScalarWhereInput[]
+  }
+
+  export type PortfolioScenarioUncheckedUpdateManyWithoutCreatedByNestedInput = {
+    create?: XOR<PortfolioScenarioCreateWithoutCreatedByInput, PortfolioScenarioUncheckedCreateWithoutCreatedByInput> | PortfolioScenarioCreateWithoutCreatedByInput[] | PortfolioScenarioUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: PortfolioScenarioCreateOrConnectWithoutCreatedByInput | PortfolioScenarioCreateOrConnectWithoutCreatedByInput[]
+    upsert?: PortfolioScenarioUpsertWithWhereUniqueWithoutCreatedByInput | PortfolioScenarioUpsertWithWhereUniqueWithoutCreatedByInput[]
+    createMany?: PortfolioScenarioCreateManyCreatedByInputEnvelope
+    set?: PortfolioScenarioWhereUniqueInput | PortfolioScenarioWhereUniqueInput[]
+    disconnect?: PortfolioScenarioWhereUniqueInput | PortfolioScenarioWhereUniqueInput[]
+    delete?: PortfolioScenarioWhereUniqueInput | PortfolioScenarioWhereUniqueInput[]
+    connect?: PortfolioScenarioWhereUniqueInput | PortfolioScenarioWhereUniqueInput[]
+    update?: PortfolioScenarioUpdateWithWhereUniqueWithoutCreatedByInput | PortfolioScenarioUpdateWithWhereUniqueWithoutCreatedByInput[]
+    updateMany?: PortfolioScenarioUpdateManyWithWhereWithoutCreatedByInput | PortfolioScenarioUpdateManyWithWhereWithoutCreatedByInput[]
+    deleteMany?: PortfolioScenarioScalarWhereInput | PortfolioScenarioScalarWhereInput[]
   }
 
   export type DepartmentCreateNestedOneWithoutAssetsInput = {
@@ -57868,6 +61531,13 @@ export namespace Prisma {
     connect?: ExternalObservationWhereUniqueInput | ExternalObservationWhereUniqueInput[]
   }
 
+  export type CaseResourceEstimateCreateNestedManyWithoutCaseInput = {
+    create?: XOR<CaseResourceEstimateCreateWithoutCaseInput, CaseResourceEstimateUncheckedCreateWithoutCaseInput> | CaseResourceEstimateCreateWithoutCaseInput[] | CaseResourceEstimateUncheckedCreateWithoutCaseInput[]
+    connectOrCreate?: CaseResourceEstimateCreateOrConnectWithoutCaseInput | CaseResourceEstimateCreateOrConnectWithoutCaseInput[]
+    createMany?: CaseResourceEstimateCreateManyCaseInputEnvelope
+    connect?: CaseResourceEstimateWhereUniqueInput | CaseResourceEstimateWhereUniqueInput[]
+  }
+
   export type InspectionUncheckedCreateNestedManyWithoutCaseInput = {
     create?: XOR<InspectionCreateWithoutCaseInput, InspectionUncheckedCreateWithoutCaseInput> | InspectionCreateWithoutCaseInput[] | InspectionUncheckedCreateWithoutCaseInput[]
     connectOrCreate?: InspectionCreateOrConnectWithoutCaseInput | InspectionCreateOrConnectWithoutCaseInput[]
@@ -57941,6 +61611,13 @@ export namespace Prisma {
     connectOrCreate?: ExternalObservationCreateOrConnectWithoutCaseInput | ExternalObservationCreateOrConnectWithoutCaseInput[]
     createMany?: ExternalObservationCreateManyCaseInputEnvelope
     connect?: ExternalObservationWhereUniqueInput | ExternalObservationWhereUniqueInput[]
+  }
+
+  export type CaseResourceEstimateUncheckedCreateNestedManyWithoutCaseInput = {
+    create?: XOR<CaseResourceEstimateCreateWithoutCaseInput, CaseResourceEstimateUncheckedCreateWithoutCaseInput> | CaseResourceEstimateCreateWithoutCaseInput[] | CaseResourceEstimateUncheckedCreateWithoutCaseInput[]
+    connectOrCreate?: CaseResourceEstimateCreateOrConnectWithoutCaseInput | CaseResourceEstimateCreateOrConnectWithoutCaseInput[]
+    createMany?: CaseResourceEstimateCreateManyCaseInputEnvelope
+    connect?: CaseResourceEstimateWhereUniqueInput | CaseResourceEstimateWhereUniqueInput[]
   }
 
   export type EnumCaseStatusFieldUpdateOperationsInput = {
@@ -58109,6 +61786,20 @@ export namespace Prisma {
     deleteMany?: ExternalObservationScalarWhereInput | ExternalObservationScalarWhereInput[]
   }
 
+  export type CaseResourceEstimateUpdateManyWithoutCaseNestedInput = {
+    create?: XOR<CaseResourceEstimateCreateWithoutCaseInput, CaseResourceEstimateUncheckedCreateWithoutCaseInput> | CaseResourceEstimateCreateWithoutCaseInput[] | CaseResourceEstimateUncheckedCreateWithoutCaseInput[]
+    connectOrCreate?: CaseResourceEstimateCreateOrConnectWithoutCaseInput | CaseResourceEstimateCreateOrConnectWithoutCaseInput[]
+    upsert?: CaseResourceEstimateUpsertWithWhereUniqueWithoutCaseInput | CaseResourceEstimateUpsertWithWhereUniqueWithoutCaseInput[]
+    createMany?: CaseResourceEstimateCreateManyCaseInputEnvelope
+    set?: CaseResourceEstimateWhereUniqueInput | CaseResourceEstimateWhereUniqueInput[]
+    disconnect?: CaseResourceEstimateWhereUniqueInput | CaseResourceEstimateWhereUniqueInput[]
+    delete?: CaseResourceEstimateWhereUniqueInput | CaseResourceEstimateWhereUniqueInput[]
+    connect?: CaseResourceEstimateWhereUniqueInput | CaseResourceEstimateWhereUniqueInput[]
+    update?: CaseResourceEstimateUpdateWithWhereUniqueWithoutCaseInput | CaseResourceEstimateUpdateWithWhereUniqueWithoutCaseInput[]
+    updateMany?: CaseResourceEstimateUpdateManyWithWhereWithoutCaseInput | CaseResourceEstimateUpdateManyWithWhereWithoutCaseInput[]
+    deleteMany?: CaseResourceEstimateScalarWhereInput | CaseResourceEstimateScalarWhereInput[]
+  }
+
   export type InspectionUncheckedUpdateManyWithoutCaseNestedInput = {
     create?: XOR<InspectionCreateWithoutCaseInput, InspectionUncheckedCreateWithoutCaseInput> | InspectionCreateWithoutCaseInput[] | InspectionUncheckedCreateWithoutCaseInput[]
     connectOrCreate?: InspectionCreateOrConnectWithoutCaseInput | InspectionCreateOrConnectWithoutCaseInput[]
@@ -58253,6 +61944,102 @@ export namespace Prisma {
     update?: ExternalObservationUpdateWithWhereUniqueWithoutCaseInput | ExternalObservationUpdateWithWhereUniqueWithoutCaseInput[]
     updateMany?: ExternalObservationUpdateManyWithWhereWithoutCaseInput | ExternalObservationUpdateManyWithWhereWithoutCaseInput[]
     deleteMany?: ExternalObservationScalarWhereInput | ExternalObservationScalarWhereInput[]
+  }
+
+  export type CaseResourceEstimateUncheckedUpdateManyWithoutCaseNestedInput = {
+    create?: XOR<CaseResourceEstimateCreateWithoutCaseInput, CaseResourceEstimateUncheckedCreateWithoutCaseInput> | CaseResourceEstimateCreateWithoutCaseInput[] | CaseResourceEstimateUncheckedCreateWithoutCaseInput[]
+    connectOrCreate?: CaseResourceEstimateCreateOrConnectWithoutCaseInput | CaseResourceEstimateCreateOrConnectWithoutCaseInput[]
+    upsert?: CaseResourceEstimateUpsertWithWhereUniqueWithoutCaseInput | CaseResourceEstimateUpsertWithWhereUniqueWithoutCaseInput[]
+    createMany?: CaseResourceEstimateCreateManyCaseInputEnvelope
+    set?: CaseResourceEstimateWhereUniqueInput | CaseResourceEstimateWhereUniqueInput[]
+    disconnect?: CaseResourceEstimateWhereUniqueInput | CaseResourceEstimateWhereUniqueInput[]
+    delete?: CaseResourceEstimateWhereUniqueInput | CaseResourceEstimateWhereUniqueInput[]
+    connect?: CaseResourceEstimateWhereUniqueInput | CaseResourceEstimateWhereUniqueInput[]
+    update?: CaseResourceEstimateUpdateWithWhereUniqueWithoutCaseInput | CaseResourceEstimateUpdateWithWhereUniqueWithoutCaseInput[]
+    updateMany?: CaseResourceEstimateUpdateManyWithWhereWithoutCaseInput | CaseResourceEstimateUpdateManyWithWhereWithoutCaseInput[]
+    deleteMany?: CaseResourceEstimateScalarWhereInput | CaseResourceEstimateScalarWhereInput[]
+  }
+
+  export type CaseCreateNestedOneWithoutResourceEstimatesInput = {
+    create?: XOR<CaseCreateWithoutResourceEstimatesInput, CaseUncheckedCreateWithoutResourceEstimatesInput>
+    connectOrCreate?: CaseCreateOrConnectWithoutResourceEstimatesInput
+    connect?: CaseWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutPreparedCaseResourceEstimatesInput = {
+    create?: XOR<UserCreateWithoutPreparedCaseResourceEstimatesInput, UserUncheckedCreateWithoutPreparedCaseResourceEstimatesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutPreparedCaseResourceEstimatesInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type EnumPlanningEstimateStatusFieldUpdateOperationsInput = {
+    set?: $Enums.PlanningEstimateStatus
+  }
+
+  export type BigIntFieldUpdateOperationsInput = {
+    set?: bigint | number
+    increment?: bigint | number
+    decrement?: bigint | number
+    multiply?: bigint | number
+    divide?: bigint | number
+  }
+
+  export type CaseUpdateOneRequiredWithoutResourceEstimatesNestedInput = {
+    create?: XOR<CaseCreateWithoutResourceEstimatesInput, CaseUncheckedCreateWithoutResourceEstimatesInput>
+    connectOrCreate?: CaseCreateOrConnectWithoutResourceEstimatesInput
+    upsert?: CaseUpsertWithoutResourceEstimatesInput
+    connect?: CaseWhereUniqueInput
+    update?: XOR<XOR<CaseUpdateToOneWithWhereWithoutResourceEstimatesInput, CaseUpdateWithoutResourceEstimatesInput>, CaseUncheckedUpdateWithoutResourceEstimatesInput>
+  }
+
+  export type UserUpdateOneRequiredWithoutPreparedCaseResourceEstimatesNestedInput = {
+    create?: XOR<UserCreateWithoutPreparedCaseResourceEstimatesInput, UserUncheckedCreateWithoutPreparedCaseResourceEstimatesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutPreparedCaseResourceEstimatesInput
+    upsert?: UserUpsertWithoutPreparedCaseResourceEstimatesInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutPreparedCaseResourceEstimatesInput, UserUpdateWithoutPreparedCaseResourceEstimatesInput>, UserUncheckedUpdateWithoutPreparedCaseResourceEstimatesInput>
+  }
+
+  export type DepartmentCreateNestedOneWithoutPortfolioScenariosInput = {
+    create?: XOR<DepartmentCreateWithoutPortfolioScenariosInput, DepartmentUncheckedCreateWithoutPortfolioScenariosInput>
+    connectOrCreate?: DepartmentCreateOrConnectWithoutPortfolioScenariosInput
+    connect?: DepartmentWhereUniqueInput
+  }
+
+  export type JurisdictionCreateNestedOneWithoutPortfolioScenariosInput = {
+    create?: XOR<JurisdictionCreateWithoutPortfolioScenariosInput, JurisdictionUncheckedCreateWithoutPortfolioScenariosInput>
+    connectOrCreate?: JurisdictionCreateOrConnectWithoutPortfolioScenariosInput
+    connect?: JurisdictionWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutCreatedPortfolioScenariosInput = {
+    create?: XOR<UserCreateWithoutCreatedPortfolioScenariosInput, UserUncheckedCreateWithoutCreatedPortfolioScenariosInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCreatedPortfolioScenariosInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type DepartmentUpdateOneRequiredWithoutPortfolioScenariosNestedInput = {
+    create?: XOR<DepartmentCreateWithoutPortfolioScenariosInput, DepartmentUncheckedCreateWithoutPortfolioScenariosInput>
+    connectOrCreate?: DepartmentCreateOrConnectWithoutPortfolioScenariosInput
+    upsert?: DepartmentUpsertWithoutPortfolioScenariosInput
+    connect?: DepartmentWhereUniqueInput
+    update?: XOR<XOR<DepartmentUpdateToOneWithWhereWithoutPortfolioScenariosInput, DepartmentUpdateWithoutPortfolioScenariosInput>, DepartmentUncheckedUpdateWithoutPortfolioScenariosInput>
+  }
+
+  export type JurisdictionUpdateOneRequiredWithoutPortfolioScenariosNestedInput = {
+    create?: XOR<JurisdictionCreateWithoutPortfolioScenariosInput, JurisdictionUncheckedCreateWithoutPortfolioScenariosInput>
+    connectOrCreate?: JurisdictionCreateOrConnectWithoutPortfolioScenariosInput
+    upsert?: JurisdictionUpsertWithoutPortfolioScenariosInput
+    connect?: JurisdictionWhereUniqueInput
+    update?: XOR<XOR<JurisdictionUpdateToOneWithWhereWithoutPortfolioScenariosInput, JurisdictionUpdateWithoutPortfolioScenariosInput>, JurisdictionUncheckedUpdateWithoutPortfolioScenariosInput>
+  }
+
+  export type UserUpdateOneRequiredWithoutCreatedPortfolioScenariosNestedInput = {
+    create?: XOR<UserCreateWithoutCreatedPortfolioScenariosInput, UserUncheckedCreateWithoutCreatedPortfolioScenariosInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCreatedPortfolioScenariosInput
+    upsert?: UserUpsertWithoutCreatedPortfolioScenariosInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutCreatedPortfolioScenariosInput, UserUpdateWithoutCreatedPortfolioScenariosInput>, UserUncheckedUpdateWithoutCreatedPortfolioScenariosInput>
   }
 
   export type DepartmentCreateNestedOneWithoutObservationSourcesInput = {
@@ -60634,6 +64421,50 @@ export namespace Prisma {
     _max?: NestedEnumPriorityLevelNullableFilter<$PrismaModel>
   }
 
+  export type NestedEnumPlanningEstimateStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.PlanningEstimateStatus | EnumPlanningEstimateStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.PlanningEstimateStatus[] | ListEnumPlanningEstimateStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PlanningEstimateStatus[] | ListEnumPlanningEstimateStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumPlanningEstimateStatusFilter<$PrismaModel> | $Enums.PlanningEstimateStatus
+  }
+
+  export type NestedBigIntFilter<$PrismaModel = never> = {
+    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    in?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel>
+    notIn?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel>
+    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    not?: NestedBigIntFilter<$PrismaModel> | bigint | number
+  }
+
+  export type NestedEnumPlanningEstimateStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.PlanningEstimateStatus | EnumPlanningEstimateStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.PlanningEstimateStatus[] | ListEnumPlanningEstimateStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PlanningEstimateStatus[] | ListEnumPlanningEstimateStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumPlanningEstimateStatusWithAggregatesFilter<$PrismaModel> | $Enums.PlanningEstimateStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumPlanningEstimateStatusFilter<$PrismaModel>
+    _max?: NestedEnumPlanningEstimateStatusFilter<$PrismaModel>
+  }
+
+  export type NestedBigIntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    in?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel>
+    notIn?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel>
+    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    not?: NestedBigIntWithAggregatesFilter<$PrismaModel> | bigint | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedBigIntFilter<$PrismaModel>
+    _min?: NestedBigIntFilter<$PrismaModel>
+    _max?: NestedBigIntFilter<$PrismaModel>
+  }
+
   export type NestedEnumObservationSourceTypeFilter<$PrismaModel = never> = {
     equals?: $Enums.ObservationSourceType | EnumObservationSourceTypeFieldRefInput<$PrismaModel>
     in?: $Enums.ObservationSourceType[] | ListEnumObservationSourceTypeFieldRefInput<$PrismaModel>
@@ -60986,6 +64817,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceCreateNestedManyWithoutCreatedByInput
     deactivatedObservationSources?: ObservationSourceCreateNestedManyWithoutDeactivatedByInput
     ingestedExternalObservations?: ExternalObservationCreateNestedManyWithoutIngestedByInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutPreparedByInput
+    createdPortfolioScenarios?: PortfolioScenarioCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserUncheckedCreateWithoutDepartmentInput = {
@@ -61029,6 +64862,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceUncheckedCreateNestedManyWithoutCreatedByInput
     deactivatedObservationSources?: ObservationSourceUncheckedCreateNestedManyWithoutDeactivatedByInput
     ingestedExternalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutIngestedByInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutPreparedByInput
+    createdPortfolioScenarios?: PortfolioScenarioUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserCreateOrConnectWithoutDepartmentInput = {
@@ -61101,6 +64936,7 @@ export namespace Prisma {
     governedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutJurisdictionInput
     observationSources?: ObservationSourceCreateNestedManyWithoutJurisdictionInput
     externalObservations?: ExternalObservationCreateNestedManyWithoutJurisdictionInput
+    portfolioScenarios?: PortfolioScenarioCreateNestedManyWithoutJurisdictionInput
   }
 
   export type JurisdictionUncheckedCreateWithoutDepartmentInput = {
@@ -61117,6 +64953,7 @@ export namespace Prisma {
     governedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutJurisdictionInput
     observationSources?: ObservationSourceUncheckedCreateNestedManyWithoutJurisdictionInput
     externalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutJurisdictionInput
+    portfolioScenarios?: PortfolioScenarioUncheckedCreateNestedManyWithoutJurisdictionInput
   }
 
   export type JurisdictionCreateOrConnectWithoutDepartmentInput = {
@@ -61507,6 +65344,46 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type PortfolioScenarioCreateWithoutDepartmentInput = {
+    id?: string
+    scenarioVersion?: number
+    name: string
+    budgetMinor: bigint | number
+    currency?: string
+    resourceCapacities: JsonNullValueInput | InputJsonValue
+    algorithmVersion: string
+    inputSnapshot: JsonNullValueInput | InputJsonValue
+    resultSnapshot: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    jurisdiction: JurisdictionCreateNestedOneWithoutPortfolioScenariosInput
+    createdBy: UserCreateNestedOneWithoutCreatedPortfolioScenariosInput
+  }
+
+  export type PortfolioScenarioUncheckedCreateWithoutDepartmentInput = {
+    id?: string
+    scenarioVersion?: number
+    name: string
+    jurisdictionId: string
+    budgetMinor: bigint | number
+    currency?: string
+    resourceCapacities: JsonNullValueInput | InputJsonValue
+    algorithmVersion: string
+    inputSnapshot: JsonNullValueInput | InputJsonValue
+    resultSnapshot: JsonNullValueInput | InputJsonValue
+    createdById: string
+    createdAt?: Date | string
+  }
+
+  export type PortfolioScenarioCreateOrConnectWithoutDepartmentInput = {
+    where: PortfolioScenarioWhereUniqueInput
+    create: XOR<PortfolioScenarioCreateWithoutDepartmentInput, PortfolioScenarioUncheckedCreateWithoutDepartmentInput>
+  }
+
+  export type PortfolioScenarioCreateManyDepartmentInputEnvelope = {
+    data: PortfolioScenarioCreateManyDepartmentInput | PortfolioScenarioCreateManyDepartmentInput[]
+    skipDuplicates?: boolean
+  }
+
   export type UserUpsertWithWhereUniqueWithoutDepartmentInput = {
     where: UserWhereUniqueInput
     update: XOR<UserUpdateWithoutDepartmentInput, UserUncheckedUpdateWithoutDepartmentInput>
@@ -61885,6 +65762,41 @@ export namespace Prisma {
     ingestedById?: StringFilter<"ExternalObservation"> | string
   }
 
+  export type PortfolioScenarioUpsertWithWhereUniqueWithoutDepartmentInput = {
+    where: PortfolioScenarioWhereUniqueInput
+    update: XOR<PortfolioScenarioUpdateWithoutDepartmentInput, PortfolioScenarioUncheckedUpdateWithoutDepartmentInput>
+    create: XOR<PortfolioScenarioCreateWithoutDepartmentInput, PortfolioScenarioUncheckedCreateWithoutDepartmentInput>
+  }
+
+  export type PortfolioScenarioUpdateWithWhereUniqueWithoutDepartmentInput = {
+    where: PortfolioScenarioWhereUniqueInput
+    data: XOR<PortfolioScenarioUpdateWithoutDepartmentInput, PortfolioScenarioUncheckedUpdateWithoutDepartmentInput>
+  }
+
+  export type PortfolioScenarioUpdateManyWithWhereWithoutDepartmentInput = {
+    where: PortfolioScenarioScalarWhereInput
+    data: XOR<PortfolioScenarioUpdateManyMutationInput, PortfolioScenarioUncheckedUpdateManyWithoutDepartmentInput>
+  }
+
+  export type PortfolioScenarioScalarWhereInput = {
+    AND?: PortfolioScenarioScalarWhereInput | PortfolioScenarioScalarWhereInput[]
+    OR?: PortfolioScenarioScalarWhereInput[]
+    NOT?: PortfolioScenarioScalarWhereInput | PortfolioScenarioScalarWhereInput[]
+    id?: StringFilter<"PortfolioScenario"> | string
+    scenarioVersion?: IntFilter<"PortfolioScenario"> | number
+    name?: StringFilter<"PortfolioScenario"> | string
+    departmentId?: StringFilter<"PortfolioScenario"> | string
+    jurisdictionId?: StringFilter<"PortfolioScenario"> | string
+    budgetMinor?: BigIntFilter<"PortfolioScenario"> | bigint | number
+    currency?: StringFilter<"PortfolioScenario"> | string
+    resourceCapacities?: JsonFilter<"PortfolioScenario">
+    algorithmVersion?: StringFilter<"PortfolioScenario"> | string
+    inputSnapshot?: JsonFilter<"PortfolioScenario">
+    resultSnapshot?: JsonFilter<"PortfolioScenario">
+    createdById?: StringFilter<"PortfolioScenario"> | string
+    createdAt?: DateTimeFilter<"PortfolioScenario"> | Date | string
+  }
+
   export type DepartmentCreateWithoutJurisdictionsInput = {
     id?: string
     name: string
@@ -61899,6 +65811,7 @@ export namespace Prisma {
     governedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutDepartmentInput
     observationSources?: ObservationSourceCreateNestedManyWithoutDepartmentInput
     externalObservations?: ExternalObservationCreateNestedManyWithoutDepartmentInput
+    portfolioScenarios?: PortfolioScenarioCreateNestedManyWithoutDepartmentInput
   }
 
   export type DepartmentUncheckedCreateWithoutJurisdictionsInput = {
@@ -61915,6 +65828,7 @@ export namespace Prisma {
     governedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutDepartmentInput
     observationSources?: ObservationSourceUncheckedCreateNestedManyWithoutDepartmentInput
     externalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutDepartmentInput
+    portfolioScenarios?: PortfolioScenarioUncheckedCreateNestedManyWithoutDepartmentInput
   }
 
   export type DepartmentCreateOrConnectWithoutJurisdictionsInput = {
@@ -61963,6 +65877,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceCreateNestedManyWithoutCreatedByInput
     deactivatedObservationSources?: ObservationSourceCreateNestedManyWithoutDeactivatedByInput
     ingestedExternalObservations?: ExternalObservationCreateNestedManyWithoutIngestedByInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutPreparedByInput
+    createdPortfolioScenarios?: PortfolioScenarioCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserUncheckedCreateWithoutJurisdictionInput = {
@@ -62006,6 +65922,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceUncheckedCreateNestedManyWithoutCreatedByInput
     deactivatedObservationSources?: ObservationSourceUncheckedCreateNestedManyWithoutDeactivatedByInput
     ingestedExternalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutIngestedByInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutPreparedByInput
+    createdPortfolioScenarios?: PortfolioScenarioUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserCreateOrConnectWithoutJurisdictionInput = {
@@ -62442,6 +66360,46 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type PortfolioScenarioCreateWithoutJurisdictionInput = {
+    id?: string
+    scenarioVersion?: number
+    name: string
+    budgetMinor: bigint | number
+    currency?: string
+    resourceCapacities: JsonNullValueInput | InputJsonValue
+    algorithmVersion: string
+    inputSnapshot: JsonNullValueInput | InputJsonValue
+    resultSnapshot: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    department: DepartmentCreateNestedOneWithoutPortfolioScenariosInput
+    createdBy: UserCreateNestedOneWithoutCreatedPortfolioScenariosInput
+  }
+
+  export type PortfolioScenarioUncheckedCreateWithoutJurisdictionInput = {
+    id?: string
+    scenarioVersion?: number
+    name: string
+    departmentId: string
+    budgetMinor: bigint | number
+    currency?: string
+    resourceCapacities: JsonNullValueInput | InputJsonValue
+    algorithmVersion: string
+    inputSnapshot: JsonNullValueInput | InputJsonValue
+    resultSnapshot: JsonNullValueInput | InputJsonValue
+    createdById: string
+    createdAt?: Date | string
+  }
+
+  export type PortfolioScenarioCreateOrConnectWithoutJurisdictionInput = {
+    where: PortfolioScenarioWhereUniqueInput
+    create: XOR<PortfolioScenarioCreateWithoutJurisdictionInput, PortfolioScenarioUncheckedCreateWithoutJurisdictionInput>
+  }
+
+  export type PortfolioScenarioCreateManyJurisdictionInputEnvelope = {
+    data: PortfolioScenarioCreateManyJurisdictionInput | PortfolioScenarioCreateManyJurisdictionInput[]
+    skipDuplicates?: boolean
+  }
+
   export type DepartmentUpsertWithoutJurisdictionsInput = {
     update: XOR<DepartmentUpdateWithoutJurisdictionsInput, DepartmentUncheckedUpdateWithoutJurisdictionsInput>
     create: XOR<DepartmentCreateWithoutJurisdictionsInput, DepartmentUncheckedCreateWithoutJurisdictionsInput>
@@ -62467,6 +66425,7 @@ export namespace Prisma {
     governedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutDepartmentNestedInput
     observationSources?: ObservationSourceUpdateManyWithoutDepartmentNestedInput
     externalObservations?: ExternalObservationUpdateManyWithoutDepartmentNestedInput
+    portfolioScenarios?: PortfolioScenarioUpdateManyWithoutDepartmentNestedInput
   }
 
   export type DepartmentUncheckedUpdateWithoutJurisdictionsInput = {
@@ -62483,6 +66442,7 @@ export namespace Prisma {
     governedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutDepartmentNestedInput
     observationSources?: ObservationSourceUncheckedUpdateManyWithoutDepartmentNestedInput
     externalObservations?: ExternalObservationUncheckedUpdateManyWithoutDepartmentNestedInput
+    portfolioScenarios?: PortfolioScenarioUncheckedUpdateManyWithoutDepartmentNestedInput
   }
 
   export type UserUpsertWithWhereUniqueWithoutJurisdictionInput = {
@@ -62629,6 +66589,22 @@ export namespace Prisma {
     data: XOR<ExternalObservationUpdateManyMutationInput, ExternalObservationUncheckedUpdateManyWithoutJurisdictionInput>
   }
 
+  export type PortfolioScenarioUpsertWithWhereUniqueWithoutJurisdictionInput = {
+    where: PortfolioScenarioWhereUniqueInput
+    update: XOR<PortfolioScenarioUpdateWithoutJurisdictionInput, PortfolioScenarioUncheckedUpdateWithoutJurisdictionInput>
+    create: XOR<PortfolioScenarioCreateWithoutJurisdictionInput, PortfolioScenarioUncheckedCreateWithoutJurisdictionInput>
+  }
+
+  export type PortfolioScenarioUpdateWithWhereUniqueWithoutJurisdictionInput = {
+    where: PortfolioScenarioWhereUniqueInput
+    data: XOR<PortfolioScenarioUpdateWithoutJurisdictionInput, PortfolioScenarioUncheckedUpdateWithoutJurisdictionInput>
+  }
+
+  export type PortfolioScenarioUpdateManyWithWhereWithoutJurisdictionInput = {
+    where: PortfolioScenarioScalarWhereInput
+    data: XOR<PortfolioScenarioUpdateManyMutationInput, PortfolioScenarioUncheckedUpdateManyWithoutJurisdictionInput>
+  }
+
   export type DepartmentCreateWithoutUsersInput = {
     id?: string
     name: string
@@ -62643,6 +66619,7 @@ export namespace Prisma {
     governedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutDepartmentInput
     observationSources?: ObservationSourceCreateNestedManyWithoutDepartmentInput
     externalObservations?: ExternalObservationCreateNestedManyWithoutDepartmentInput
+    portfolioScenarios?: PortfolioScenarioCreateNestedManyWithoutDepartmentInput
   }
 
   export type DepartmentUncheckedCreateWithoutUsersInput = {
@@ -62659,6 +66636,7 @@ export namespace Prisma {
     governedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutDepartmentInput
     observationSources?: ObservationSourceUncheckedCreateNestedManyWithoutDepartmentInput
     externalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutDepartmentInput
+    portfolioScenarios?: PortfolioScenarioUncheckedCreateNestedManyWithoutDepartmentInput
   }
 
   export type DepartmentCreateOrConnectWithoutUsersInput = {
@@ -62680,6 +66658,7 @@ export namespace Prisma {
     governedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutJurisdictionInput
     observationSources?: ObservationSourceCreateNestedManyWithoutJurisdictionInput
     externalObservations?: ExternalObservationCreateNestedManyWithoutJurisdictionInput
+    portfolioScenarios?: PortfolioScenarioCreateNestedManyWithoutJurisdictionInput
   }
 
   export type JurisdictionUncheckedCreateWithoutUsersInput = {
@@ -62696,6 +66675,7 @@ export namespace Prisma {
     governedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutJurisdictionInput
     observationSources?: ObservationSourceUncheckedCreateNestedManyWithoutJurisdictionInput
     externalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutJurisdictionInput
+    portfolioScenarios?: PortfolioScenarioUncheckedCreateNestedManyWithoutJurisdictionInput
   }
 
   export type JurisdictionCreateOrConnectWithoutUsersInput = {
@@ -64303,6 +68283,86 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type CaseResourceEstimateCreateWithoutPreparedByInput = {
+    id?: string
+    estimateVersion: number
+    status?: $Enums.PlanningEstimateStatus
+    currency?: string
+    estimatedCostMinor: bigint | number
+    estimatedDurationDays?: number | null
+    resourceRequirements: JsonNullValueInput | InputJsonValue
+    estimateBasis: string
+    sourceReference: string
+    preparedAt?: Date | string
+    createdAt?: Date | string
+    case: CaseCreateNestedOneWithoutResourceEstimatesInput
+  }
+
+  export type CaseResourceEstimateUncheckedCreateWithoutPreparedByInput = {
+    id?: string
+    caseId: string
+    estimateVersion: number
+    status?: $Enums.PlanningEstimateStatus
+    currency?: string
+    estimatedCostMinor: bigint | number
+    estimatedDurationDays?: number | null
+    resourceRequirements: JsonNullValueInput | InputJsonValue
+    estimateBasis: string
+    sourceReference: string
+    preparedAt?: Date | string
+    createdAt?: Date | string
+  }
+
+  export type CaseResourceEstimateCreateOrConnectWithoutPreparedByInput = {
+    where: CaseResourceEstimateWhereUniqueInput
+    create: XOR<CaseResourceEstimateCreateWithoutPreparedByInput, CaseResourceEstimateUncheckedCreateWithoutPreparedByInput>
+  }
+
+  export type CaseResourceEstimateCreateManyPreparedByInputEnvelope = {
+    data: CaseResourceEstimateCreateManyPreparedByInput | CaseResourceEstimateCreateManyPreparedByInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type PortfolioScenarioCreateWithoutCreatedByInput = {
+    id?: string
+    scenarioVersion?: number
+    name: string
+    budgetMinor: bigint | number
+    currency?: string
+    resourceCapacities: JsonNullValueInput | InputJsonValue
+    algorithmVersion: string
+    inputSnapshot: JsonNullValueInput | InputJsonValue
+    resultSnapshot: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    department: DepartmentCreateNestedOneWithoutPortfolioScenariosInput
+    jurisdiction: JurisdictionCreateNestedOneWithoutPortfolioScenariosInput
+  }
+
+  export type PortfolioScenarioUncheckedCreateWithoutCreatedByInput = {
+    id?: string
+    scenarioVersion?: number
+    name: string
+    departmentId: string
+    jurisdictionId: string
+    budgetMinor: bigint | number
+    currency?: string
+    resourceCapacities: JsonNullValueInput | InputJsonValue
+    algorithmVersion: string
+    inputSnapshot: JsonNullValueInput | InputJsonValue
+    resultSnapshot: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+  }
+
+  export type PortfolioScenarioCreateOrConnectWithoutCreatedByInput = {
+    where: PortfolioScenarioWhereUniqueInput
+    create: XOR<PortfolioScenarioCreateWithoutCreatedByInput, PortfolioScenarioUncheckedCreateWithoutCreatedByInput>
+  }
+
+  export type PortfolioScenarioCreateManyCreatedByInputEnvelope = {
+    data: PortfolioScenarioCreateManyCreatedByInput | PortfolioScenarioCreateManyCreatedByInput[]
+    skipDuplicates?: boolean
+  }
+
   export type DepartmentUpsertWithoutUsersInput = {
     update: XOR<DepartmentUpdateWithoutUsersInput, DepartmentUncheckedUpdateWithoutUsersInput>
     create: XOR<DepartmentCreateWithoutUsersInput, DepartmentUncheckedCreateWithoutUsersInput>
@@ -64328,6 +68388,7 @@ export namespace Prisma {
     governedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutDepartmentNestedInput
     observationSources?: ObservationSourceUpdateManyWithoutDepartmentNestedInput
     externalObservations?: ExternalObservationUpdateManyWithoutDepartmentNestedInput
+    portfolioScenarios?: PortfolioScenarioUpdateManyWithoutDepartmentNestedInput
   }
 
   export type DepartmentUncheckedUpdateWithoutUsersInput = {
@@ -64344,6 +68405,7 @@ export namespace Prisma {
     governedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutDepartmentNestedInput
     observationSources?: ObservationSourceUncheckedUpdateManyWithoutDepartmentNestedInput
     externalObservations?: ExternalObservationUncheckedUpdateManyWithoutDepartmentNestedInput
+    portfolioScenarios?: PortfolioScenarioUncheckedUpdateManyWithoutDepartmentNestedInput
   }
 
   export type JurisdictionUpsertWithoutUsersInput = {
@@ -64371,6 +68433,7 @@ export namespace Prisma {
     governedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutJurisdictionNestedInput
     observationSources?: ObservationSourceUpdateManyWithoutJurisdictionNestedInput
     externalObservations?: ExternalObservationUpdateManyWithoutJurisdictionNestedInput
+    portfolioScenarios?: PortfolioScenarioUpdateManyWithoutJurisdictionNestedInput
   }
 
   export type JurisdictionUncheckedUpdateWithoutUsersInput = {
@@ -64387,6 +68450,7 @@ export namespace Prisma {
     governedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutJurisdictionNestedInput
     observationSources?: ObservationSourceUncheckedUpdateManyWithoutJurisdictionNestedInput
     externalObservations?: ExternalObservationUncheckedUpdateManyWithoutJurisdictionNestedInput
+    portfolioScenarios?: PortfolioScenarioUncheckedUpdateManyWithoutJurisdictionNestedInput
   }
 
   export type InspectionUpsertWithWhereUniqueWithoutInspectorInput = {
@@ -65073,6 +69137,57 @@ export namespace Prisma {
     data: XOR<ExternalObservationUpdateManyMutationInput, ExternalObservationUncheckedUpdateManyWithoutIngestedByInput>
   }
 
+  export type CaseResourceEstimateUpsertWithWhereUniqueWithoutPreparedByInput = {
+    where: CaseResourceEstimateWhereUniqueInput
+    update: XOR<CaseResourceEstimateUpdateWithoutPreparedByInput, CaseResourceEstimateUncheckedUpdateWithoutPreparedByInput>
+    create: XOR<CaseResourceEstimateCreateWithoutPreparedByInput, CaseResourceEstimateUncheckedCreateWithoutPreparedByInput>
+  }
+
+  export type CaseResourceEstimateUpdateWithWhereUniqueWithoutPreparedByInput = {
+    where: CaseResourceEstimateWhereUniqueInput
+    data: XOR<CaseResourceEstimateUpdateWithoutPreparedByInput, CaseResourceEstimateUncheckedUpdateWithoutPreparedByInput>
+  }
+
+  export type CaseResourceEstimateUpdateManyWithWhereWithoutPreparedByInput = {
+    where: CaseResourceEstimateScalarWhereInput
+    data: XOR<CaseResourceEstimateUpdateManyMutationInput, CaseResourceEstimateUncheckedUpdateManyWithoutPreparedByInput>
+  }
+
+  export type CaseResourceEstimateScalarWhereInput = {
+    AND?: CaseResourceEstimateScalarWhereInput | CaseResourceEstimateScalarWhereInput[]
+    OR?: CaseResourceEstimateScalarWhereInput[]
+    NOT?: CaseResourceEstimateScalarWhereInput | CaseResourceEstimateScalarWhereInput[]
+    id?: StringFilter<"CaseResourceEstimate"> | string
+    caseId?: StringFilter<"CaseResourceEstimate"> | string
+    estimateVersion?: IntFilter<"CaseResourceEstimate"> | number
+    status?: EnumPlanningEstimateStatusFilter<"CaseResourceEstimate"> | $Enums.PlanningEstimateStatus
+    currency?: StringFilter<"CaseResourceEstimate"> | string
+    estimatedCostMinor?: BigIntFilter<"CaseResourceEstimate"> | bigint | number
+    estimatedDurationDays?: IntNullableFilter<"CaseResourceEstimate"> | number | null
+    resourceRequirements?: JsonFilter<"CaseResourceEstimate">
+    estimateBasis?: StringFilter<"CaseResourceEstimate"> | string
+    sourceReference?: StringFilter<"CaseResourceEstimate"> | string
+    preparedById?: StringFilter<"CaseResourceEstimate"> | string
+    preparedAt?: DateTimeFilter<"CaseResourceEstimate"> | Date | string
+    createdAt?: DateTimeFilter<"CaseResourceEstimate"> | Date | string
+  }
+
+  export type PortfolioScenarioUpsertWithWhereUniqueWithoutCreatedByInput = {
+    where: PortfolioScenarioWhereUniqueInput
+    update: XOR<PortfolioScenarioUpdateWithoutCreatedByInput, PortfolioScenarioUncheckedUpdateWithoutCreatedByInput>
+    create: XOR<PortfolioScenarioCreateWithoutCreatedByInput, PortfolioScenarioUncheckedCreateWithoutCreatedByInput>
+  }
+
+  export type PortfolioScenarioUpdateWithWhereUniqueWithoutCreatedByInput = {
+    where: PortfolioScenarioWhereUniqueInput
+    data: XOR<PortfolioScenarioUpdateWithoutCreatedByInput, PortfolioScenarioUncheckedUpdateWithoutCreatedByInput>
+  }
+
+  export type PortfolioScenarioUpdateManyWithWhereWithoutCreatedByInput = {
+    where: PortfolioScenarioScalarWhereInput
+    data: XOR<PortfolioScenarioUpdateManyMutationInput, PortfolioScenarioUncheckedUpdateManyWithoutCreatedByInput>
+  }
+
   export type DepartmentCreateWithoutAssetsInput = {
     id?: string
     name: string
@@ -65087,6 +69202,7 @@ export namespace Prisma {
     governedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutDepartmentInput
     observationSources?: ObservationSourceCreateNestedManyWithoutDepartmentInput
     externalObservations?: ExternalObservationCreateNestedManyWithoutDepartmentInput
+    portfolioScenarios?: PortfolioScenarioCreateNestedManyWithoutDepartmentInput
   }
 
   export type DepartmentUncheckedCreateWithoutAssetsInput = {
@@ -65103,6 +69219,7 @@ export namespace Prisma {
     governedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutDepartmentInput
     observationSources?: ObservationSourceUncheckedCreateNestedManyWithoutDepartmentInput
     externalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutDepartmentInput
+    portfolioScenarios?: PortfolioScenarioUncheckedCreateNestedManyWithoutDepartmentInput
   }
 
   export type DepartmentCreateOrConnectWithoutAssetsInput = {
@@ -65124,6 +69241,7 @@ export namespace Prisma {
     governedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutJurisdictionInput
     observationSources?: ObservationSourceCreateNestedManyWithoutJurisdictionInput
     externalObservations?: ExternalObservationCreateNestedManyWithoutJurisdictionInput
+    portfolioScenarios?: PortfolioScenarioCreateNestedManyWithoutJurisdictionInput
   }
 
   export type JurisdictionUncheckedCreateWithoutAssetsInput = {
@@ -65140,6 +69258,7 @@ export namespace Prisma {
     governedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutJurisdictionInput
     observationSources?: ObservationSourceUncheckedCreateNestedManyWithoutJurisdictionInput
     externalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutJurisdictionInput
+    portfolioScenarios?: PortfolioScenarioUncheckedCreateNestedManyWithoutJurisdictionInput
   }
 
   export type JurisdictionCreateOrConnectWithoutAssetsInput = {
@@ -65170,6 +69289,7 @@ export namespace Prisma {
     intelligenceAssessments?: InfrastructureIntelligenceAssessmentCreateNestedManyWithoutCaseInput
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationCreateNestedManyWithoutCaseInput
     externalObservations?: ExternalObservationCreateNestedManyWithoutCaseInput
+    resourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutCaseInput
   }
 
   export type CaseUncheckedCreateWithoutAssetInput = {
@@ -65195,6 +69315,7 @@ export namespace Prisma {
     intelligenceAssessments?: InfrastructureIntelligenceAssessmentUncheckedCreateNestedManyWithoutCaseInput
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUncheckedCreateNestedManyWithoutCaseInput
     externalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutCaseInput
+    resourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutCaseInput
   }
 
   export type CaseCreateOrConnectWithoutAssetInput = {
@@ -65382,6 +69503,7 @@ export namespace Prisma {
     governedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutDepartmentNestedInput
     observationSources?: ObservationSourceUpdateManyWithoutDepartmentNestedInput
     externalObservations?: ExternalObservationUpdateManyWithoutDepartmentNestedInput
+    portfolioScenarios?: PortfolioScenarioUpdateManyWithoutDepartmentNestedInput
   }
 
   export type DepartmentUncheckedUpdateWithoutAssetsInput = {
@@ -65398,6 +69520,7 @@ export namespace Prisma {
     governedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutDepartmentNestedInput
     observationSources?: ObservationSourceUncheckedUpdateManyWithoutDepartmentNestedInput
     externalObservations?: ExternalObservationUncheckedUpdateManyWithoutDepartmentNestedInput
+    portfolioScenarios?: PortfolioScenarioUncheckedUpdateManyWithoutDepartmentNestedInput
   }
 
   export type JurisdictionUpsertWithoutAssetsInput = {
@@ -65425,6 +69548,7 @@ export namespace Prisma {
     governedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutJurisdictionNestedInput
     observationSources?: ObservationSourceUpdateManyWithoutJurisdictionNestedInput
     externalObservations?: ExternalObservationUpdateManyWithoutJurisdictionNestedInput
+    portfolioScenarios?: PortfolioScenarioUpdateManyWithoutJurisdictionNestedInput
   }
 
   export type JurisdictionUncheckedUpdateWithoutAssetsInput = {
@@ -65441,6 +69565,7 @@ export namespace Prisma {
     governedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutJurisdictionNestedInput
     observationSources?: ObservationSourceUncheckedUpdateManyWithoutJurisdictionNestedInput
     externalObservations?: ExternalObservationUncheckedUpdateManyWithoutJurisdictionNestedInput
+    portfolioScenarios?: PortfolioScenarioUncheckedUpdateManyWithoutJurisdictionNestedInput
   }
 
   export type CaseUpsertWithWhereUniqueWithoutAssetInput = {
@@ -65539,6 +69664,7 @@ export namespace Prisma {
     governedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutDepartmentInput
     observationSources?: ObservationSourceCreateNestedManyWithoutDepartmentInput
     externalObservations?: ExternalObservationCreateNestedManyWithoutDepartmentInput
+    portfolioScenarios?: PortfolioScenarioCreateNestedManyWithoutDepartmentInput
   }
 
   export type DepartmentUncheckedCreateWithoutPublicReportsInput = {
@@ -65555,6 +69681,7 @@ export namespace Prisma {
     governedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutDepartmentInput
     observationSources?: ObservationSourceUncheckedCreateNestedManyWithoutDepartmentInput
     externalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutDepartmentInput
+    portfolioScenarios?: PortfolioScenarioUncheckedCreateNestedManyWithoutDepartmentInput
   }
 
   export type DepartmentCreateOrConnectWithoutPublicReportsInput = {
@@ -65576,6 +69703,7 @@ export namespace Prisma {
     governedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutJurisdictionInput
     observationSources?: ObservationSourceCreateNestedManyWithoutJurisdictionInput
     externalObservations?: ExternalObservationCreateNestedManyWithoutJurisdictionInput
+    portfolioScenarios?: PortfolioScenarioCreateNestedManyWithoutJurisdictionInput
   }
 
   export type JurisdictionUncheckedCreateWithoutPublicReportsInput = {
@@ -65592,6 +69720,7 @@ export namespace Prisma {
     governedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutJurisdictionInput
     observationSources?: ObservationSourceUncheckedCreateNestedManyWithoutJurisdictionInput
     externalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutJurisdictionInput
+    portfolioScenarios?: PortfolioScenarioUncheckedCreateNestedManyWithoutJurisdictionInput
   }
 
   export type JurisdictionCreateOrConnectWithoutPublicReportsInput = {
@@ -65681,6 +69810,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceCreateNestedManyWithoutCreatedByInput
     deactivatedObservationSources?: ObservationSourceCreateNestedManyWithoutDeactivatedByInput
     ingestedExternalObservations?: ExternalObservationCreateNestedManyWithoutIngestedByInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutPreparedByInput
+    createdPortfolioScenarios?: PortfolioScenarioCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserUncheckedCreateWithoutReviewedPublicReportsInput = {
@@ -65724,6 +69855,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceUncheckedCreateNestedManyWithoutCreatedByInput
     deactivatedObservationSources?: ObservationSourceUncheckedCreateNestedManyWithoutDeactivatedByInput
     ingestedExternalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutIngestedByInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutPreparedByInput
+    createdPortfolioScenarios?: PortfolioScenarioUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserCreateOrConnectWithoutReviewedPublicReportsInput = {
@@ -65772,6 +69905,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceCreateNestedManyWithoutCreatedByInput
     deactivatedObservationSources?: ObservationSourceCreateNestedManyWithoutDeactivatedByInput
     ingestedExternalObservations?: ExternalObservationCreateNestedManyWithoutIngestedByInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutPreparedByInput
+    createdPortfolioScenarios?: PortfolioScenarioCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserUncheckedCreateWithoutDecidedPublicReportsInput = {
@@ -65815,6 +69950,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceUncheckedCreateNestedManyWithoutCreatedByInput
     deactivatedObservationSources?: ObservationSourceUncheckedCreateNestedManyWithoutDeactivatedByInput
     ingestedExternalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutIngestedByInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutPreparedByInput
+    createdPortfolioScenarios?: PortfolioScenarioUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserCreateOrConnectWithoutDecidedPublicReportsInput = {
@@ -65845,6 +69982,7 @@ export namespace Prisma {
     intelligenceAssessments?: InfrastructureIntelligenceAssessmentCreateNestedManyWithoutCaseInput
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationCreateNestedManyWithoutCaseInput
     externalObservations?: ExternalObservationCreateNestedManyWithoutCaseInput
+    resourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutCaseInput
   }
 
   export type CaseUncheckedCreateWithoutSourcePublicReportInput = {
@@ -65870,6 +70008,7 @@ export namespace Prisma {
     intelligenceAssessments?: InfrastructureIntelligenceAssessmentUncheckedCreateNestedManyWithoutCaseInput
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUncheckedCreateNestedManyWithoutCaseInput
     externalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutCaseInput
+    resourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutCaseInput
   }
 
   export type CaseCreateOrConnectWithoutSourcePublicReportInput = {
@@ -65940,6 +70079,7 @@ export namespace Prisma {
     governedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutDepartmentNestedInput
     observationSources?: ObservationSourceUpdateManyWithoutDepartmentNestedInput
     externalObservations?: ExternalObservationUpdateManyWithoutDepartmentNestedInput
+    portfolioScenarios?: PortfolioScenarioUpdateManyWithoutDepartmentNestedInput
   }
 
   export type DepartmentUncheckedUpdateWithoutPublicReportsInput = {
@@ -65956,6 +70096,7 @@ export namespace Prisma {
     governedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutDepartmentNestedInput
     observationSources?: ObservationSourceUncheckedUpdateManyWithoutDepartmentNestedInput
     externalObservations?: ExternalObservationUncheckedUpdateManyWithoutDepartmentNestedInput
+    portfolioScenarios?: PortfolioScenarioUncheckedUpdateManyWithoutDepartmentNestedInput
   }
 
   export type JurisdictionUpsertWithoutPublicReportsInput = {
@@ -65983,6 +70124,7 @@ export namespace Prisma {
     governedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutJurisdictionNestedInput
     observationSources?: ObservationSourceUpdateManyWithoutJurisdictionNestedInput
     externalObservations?: ExternalObservationUpdateManyWithoutJurisdictionNestedInput
+    portfolioScenarios?: PortfolioScenarioUpdateManyWithoutJurisdictionNestedInput
   }
 
   export type JurisdictionUncheckedUpdateWithoutPublicReportsInput = {
@@ -65999,6 +70141,7 @@ export namespace Prisma {
     governedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutJurisdictionNestedInput
     observationSources?: ObservationSourceUncheckedUpdateManyWithoutJurisdictionNestedInput
     externalObservations?: ExternalObservationUncheckedUpdateManyWithoutJurisdictionNestedInput
+    portfolioScenarios?: PortfolioScenarioUncheckedUpdateManyWithoutJurisdictionNestedInput
   }
 
   export type AssetUpsertWithoutPublicReportsInput = {
@@ -66100,6 +70243,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceUpdateManyWithoutCreatedByNestedInput
     deactivatedObservationSources?: ObservationSourceUpdateManyWithoutDeactivatedByNestedInput
     ingestedExternalObservations?: ExternalObservationUpdateManyWithoutIngestedByNestedInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUpdateManyWithoutPreparedByNestedInput
+    createdPortfolioScenarios?: PortfolioScenarioUpdateManyWithoutCreatedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutReviewedPublicReportsInput = {
@@ -66143,6 +70288,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceUncheckedUpdateManyWithoutCreatedByNestedInput
     deactivatedObservationSources?: ObservationSourceUncheckedUpdateManyWithoutDeactivatedByNestedInput
     ingestedExternalObservations?: ExternalObservationUncheckedUpdateManyWithoutIngestedByNestedInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutPreparedByNestedInput
+    createdPortfolioScenarios?: PortfolioScenarioUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type UserUpsertWithoutDecidedPublicReportsInput = {
@@ -66197,6 +70344,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceUpdateManyWithoutCreatedByNestedInput
     deactivatedObservationSources?: ObservationSourceUpdateManyWithoutDeactivatedByNestedInput
     ingestedExternalObservations?: ExternalObservationUpdateManyWithoutIngestedByNestedInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUpdateManyWithoutPreparedByNestedInput
+    createdPortfolioScenarios?: PortfolioScenarioUpdateManyWithoutCreatedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutDecidedPublicReportsInput = {
@@ -66240,6 +70389,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceUncheckedUpdateManyWithoutCreatedByNestedInput
     deactivatedObservationSources?: ObservationSourceUncheckedUpdateManyWithoutDeactivatedByNestedInput
     ingestedExternalObservations?: ExternalObservationUncheckedUpdateManyWithoutIngestedByNestedInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutPreparedByNestedInput
+    createdPortfolioScenarios?: PortfolioScenarioUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type CaseUpsertWithoutSourcePublicReportInput = {
@@ -66276,6 +70427,7 @@ export namespace Prisma {
     intelligenceAssessments?: InfrastructureIntelligenceAssessmentUpdateManyWithoutCaseNestedInput
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUpdateManyWithoutCaseNestedInput
     externalObservations?: ExternalObservationUpdateManyWithoutCaseNestedInput
+    resourceEstimates?: CaseResourceEstimateUpdateManyWithoutCaseNestedInput
   }
 
   export type CaseUncheckedUpdateWithoutSourcePublicReportInput = {
@@ -66301,6 +70453,7 @@ export namespace Prisma {
     intelligenceAssessments?: InfrastructureIntelligenceAssessmentUncheckedUpdateManyWithoutCaseNestedInput
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUncheckedUpdateManyWithoutCaseNestedInput
     externalObservations?: ExternalObservationUncheckedUpdateManyWithoutCaseNestedInput
+    resourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutCaseNestedInput
   }
 
   export type PublicReportTriageAnalysisUpsertWithWhereUniqueWithoutPublicReportInput = {
@@ -66458,6 +70611,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceCreateNestedManyWithoutCreatedByInput
     deactivatedObservationSources?: ObservationSourceCreateNestedManyWithoutDeactivatedByInput
     ingestedExternalObservations?: ExternalObservationCreateNestedManyWithoutIngestedByInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutPreparedByInput
+    createdPortfolioScenarios?: PortfolioScenarioCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserUncheckedCreateWithoutCreatedTriageAnalysesInput = {
@@ -66501,6 +70656,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceUncheckedCreateNestedManyWithoutCreatedByInput
     deactivatedObservationSources?: ObservationSourceUncheckedCreateNestedManyWithoutDeactivatedByInput
     ingestedExternalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutIngestedByInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutPreparedByInput
+    createdPortfolioScenarios?: PortfolioScenarioUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserCreateOrConnectWithoutCreatedTriageAnalysesInput = {
@@ -66670,6 +70827,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceUpdateManyWithoutCreatedByNestedInput
     deactivatedObservationSources?: ObservationSourceUpdateManyWithoutDeactivatedByNestedInput
     ingestedExternalObservations?: ExternalObservationUpdateManyWithoutIngestedByNestedInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUpdateManyWithoutPreparedByNestedInput
+    createdPortfolioScenarios?: PortfolioScenarioUpdateManyWithoutCreatedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCreatedTriageAnalysesInput = {
@@ -66713,6 +70872,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceUncheckedUpdateManyWithoutCreatedByNestedInput
     deactivatedObservationSources?: ObservationSourceUncheckedUpdateManyWithoutDeactivatedByNestedInput
     ingestedExternalObservations?: ExternalObservationUncheckedUpdateManyWithoutIngestedByNestedInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutPreparedByNestedInput
+    createdPortfolioScenarios?: PortfolioScenarioUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type DepartmentCreateWithoutPolicyDocumentsInput = {
@@ -66729,6 +70890,7 @@ export namespace Prisma {
     governedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutDepartmentInput
     observationSources?: ObservationSourceCreateNestedManyWithoutDepartmentInput
     externalObservations?: ExternalObservationCreateNestedManyWithoutDepartmentInput
+    portfolioScenarios?: PortfolioScenarioCreateNestedManyWithoutDepartmentInput
   }
 
   export type DepartmentUncheckedCreateWithoutPolicyDocumentsInput = {
@@ -66745,6 +70907,7 @@ export namespace Prisma {
     governedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutDepartmentInput
     observationSources?: ObservationSourceUncheckedCreateNestedManyWithoutDepartmentInput
     externalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutDepartmentInput
+    portfolioScenarios?: PortfolioScenarioUncheckedCreateNestedManyWithoutDepartmentInput
   }
 
   export type DepartmentCreateOrConnectWithoutPolicyDocumentsInput = {
@@ -66766,6 +70929,7 @@ export namespace Prisma {
     governedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutJurisdictionInput
     observationSources?: ObservationSourceCreateNestedManyWithoutJurisdictionInput
     externalObservations?: ExternalObservationCreateNestedManyWithoutJurisdictionInput
+    portfolioScenarios?: PortfolioScenarioCreateNestedManyWithoutJurisdictionInput
   }
 
   export type JurisdictionUncheckedCreateWithoutPolicyDocumentsInput = {
@@ -66782,6 +70946,7 @@ export namespace Prisma {
     governedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutJurisdictionInput
     observationSources?: ObservationSourceUncheckedCreateNestedManyWithoutJurisdictionInput
     externalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutJurisdictionInput
+    portfolioScenarios?: PortfolioScenarioUncheckedCreateNestedManyWithoutJurisdictionInput
   }
 
   export type JurisdictionCreateOrConnectWithoutPolicyDocumentsInput = {
@@ -66830,6 +70995,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceCreateNestedManyWithoutCreatedByInput
     deactivatedObservationSources?: ObservationSourceCreateNestedManyWithoutDeactivatedByInput
     ingestedExternalObservations?: ExternalObservationCreateNestedManyWithoutIngestedByInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutPreparedByInput
+    createdPortfolioScenarios?: PortfolioScenarioCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserUncheckedCreateWithoutCreatedPolicyDocumentsInput = {
@@ -66873,6 +71040,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceUncheckedCreateNestedManyWithoutCreatedByInput
     deactivatedObservationSources?: ObservationSourceUncheckedCreateNestedManyWithoutDeactivatedByInput
     ingestedExternalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutIngestedByInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutPreparedByInput
+    createdPortfolioScenarios?: PortfolioScenarioUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserCreateOrConnectWithoutCreatedPolicyDocumentsInput = {
@@ -66921,6 +71090,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceCreateNestedManyWithoutCreatedByInput
     deactivatedObservationSources?: ObservationSourceCreateNestedManyWithoutDeactivatedByInput
     ingestedExternalObservations?: ExternalObservationCreateNestedManyWithoutIngestedByInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutPreparedByInput
+    createdPortfolioScenarios?: PortfolioScenarioCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserUncheckedCreateWithoutApprovedPolicyDocumentsInput = {
@@ -66964,6 +71135,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceUncheckedCreateNestedManyWithoutCreatedByInput
     deactivatedObservationSources?: ObservationSourceUncheckedCreateNestedManyWithoutDeactivatedByInput
     ingestedExternalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutIngestedByInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutPreparedByInput
+    createdPortfolioScenarios?: PortfolioScenarioUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserCreateOrConnectWithoutApprovedPolicyDocumentsInput = {
@@ -67090,6 +71263,7 @@ export namespace Prisma {
     governedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutDepartmentNestedInput
     observationSources?: ObservationSourceUpdateManyWithoutDepartmentNestedInput
     externalObservations?: ExternalObservationUpdateManyWithoutDepartmentNestedInput
+    portfolioScenarios?: PortfolioScenarioUpdateManyWithoutDepartmentNestedInput
   }
 
   export type DepartmentUncheckedUpdateWithoutPolicyDocumentsInput = {
@@ -67106,6 +71280,7 @@ export namespace Prisma {
     governedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutDepartmentNestedInput
     observationSources?: ObservationSourceUncheckedUpdateManyWithoutDepartmentNestedInput
     externalObservations?: ExternalObservationUncheckedUpdateManyWithoutDepartmentNestedInput
+    portfolioScenarios?: PortfolioScenarioUncheckedUpdateManyWithoutDepartmentNestedInput
   }
 
   export type JurisdictionUpsertWithoutPolicyDocumentsInput = {
@@ -67133,6 +71308,7 @@ export namespace Prisma {
     governedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutJurisdictionNestedInput
     observationSources?: ObservationSourceUpdateManyWithoutJurisdictionNestedInput
     externalObservations?: ExternalObservationUpdateManyWithoutJurisdictionNestedInput
+    portfolioScenarios?: PortfolioScenarioUpdateManyWithoutJurisdictionNestedInput
   }
 
   export type JurisdictionUncheckedUpdateWithoutPolicyDocumentsInput = {
@@ -67149,6 +71325,7 @@ export namespace Prisma {
     governedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutJurisdictionNestedInput
     observationSources?: ObservationSourceUncheckedUpdateManyWithoutJurisdictionNestedInput
     externalObservations?: ExternalObservationUncheckedUpdateManyWithoutJurisdictionNestedInput
+    portfolioScenarios?: PortfolioScenarioUncheckedUpdateManyWithoutJurisdictionNestedInput
   }
 
   export type UserUpsertWithoutCreatedPolicyDocumentsInput = {
@@ -67203,6 +71380,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceUpdateManyWithoutCreatedByNestedInput
     deactivatedObservationSources?: ObservationSourceUpdateManyWithoutDeactivatedByNestedInput
     ingestedExternalObservations?: ExternalObservationUpdateManyWithoutIngestedByNestedInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUpdateManyWithoutPreparedByNestedInput
+    createdPortfolioScenarios?: PortfolioScenarioUpdateManyWithoutCreatedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCreatedPolicyDocumentsInput = {
@@ -67246,6 +71425,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceUncheckedUpdateManyWithoutCreatedByNestedInput
     deactivatedObservationSources?: ObservationSourceUncheckedUpdateManyWithoutDeactivatedByNestedInput
     ingestedExternalObservations?: ExternalObservationUncheckedUpdateManyWithoutIngestedByNestedInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutPreparedByNestedInput
+    createdPortfolioScenarios?: PortfolioScenarioUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type UserUpsertWithoutApprovedPolicyDocumentsInput = {
@@ -67300,6 +71481,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceUpdateManyWithoutCreatedByNestedInput
     deactivatedObservationSources?: ObservationSourceUpdateManyWithoutDeactivatedByNestedInput
     ingestedExternalObservations?: ExternalObservationUpdateManyWithoutIngestedByNestedInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUpdateManyWithoutPreparedByNestedInput
+    createdPortfolioScenarios?: PortfolioScenarioUpdateManyWithoutCreatedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutApprovedPolicyDocumentsInput = {
@@ -67343,6 +71526,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceUncheckedUpdateManyWithoutCreatedByNestedInput
     deactivatedObservationSources?: ObservationSourceUncheckedUpdateManyWithoutDeactivatedByNestedInput
     ingestedExternalObservations?: ExternalObservationUncheckedUpdateManyWithoutIngestedByNestedInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutPreparedByNestedInput
+    createdPortfolioScenarios?: PortfolioScenarioUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type PolicyRuleUpsertWithWhereUniqueWithoutPolicyDocumentInput = {
@@ -67456,6 +71641,7 @@ export namespace Prisma {
     governedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutDepartmentInput
     observationSources?: ObservationSourceCreateNestedManyWithoutDepartmentInput
     externalObservations?: ExternalObservationCreateNestedManyWithoutDepartmentInput
+    portfolioScenarios?: PortfolioScenarioCreateNestedManyWithoutDepartmentInput
   }
 
   export type DepartmentUncheckedCreateWithoutApprovedActionsInput = {
@@ -67472,6 +71658,7 @@ export namespace Prisma {
     governedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutDepartmentInput
     observationSources?: ObservationSourceUncheckedCreateNestedManyWithoutDepartmentInput
     externalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutDepartmentInput
+    portfolioScenarios?: PortfolioScenarioUncheckedCreateNestedManyWithoutDepartmentInput
   }
 
   export type DepartmentCreateOrConnectWithoutApprovedActionsInput = {
@@ -67493,6 +71680,7 @@ export namespace Prisma {
     governedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutJurisdictionInput
     observationSources?: ObservationSourceCreateNestedManyWithoutJurisdictionInput
     externalObservations?: ExternalObservationCreateNestedManyWithoutJurisdictionInput
+    portfolioScenarios?: PortfolioScenarioCreateNestedManyWithoutJurisdictionInput
   }
 
   export type JurisdictionUncheckedCreateWithoutApprovedActionsInput = {
@@ -67509,6 +71697,7 @@ export namespace Prisma {
     governedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutJurisdictionInput
     observationSources?: ObservationSourceUncheckedCreateNestedManyWithoutJurisdictionInput
     externalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutJurisdictionInput
+    portfolioScenarios?: PortfolioScenarioUncheckedCreateNestedManyWithoutJurisdictionInput
   }
 
   export type JurisdictionCreateOrConnectWithoutApprovedActionsInput = {
@@ -67557,6 +71746,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceCreateNestedManyWithoutCreatedByInput
     deactivatedObservationSources?: ObservationSourceCreateNestedManyWithoutDeactivatedByInput
     ingestedExternalObservations?: ExternalObservationCreateNestedManyWithoutIngestedByInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutPreparedByInput
+    createdPortfolioScenarios?: PortfolioScenarioCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserUncheckedCreateWithoutCreatedApprovedActionsInput = {
@@ -67600,6 +71791,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceUncheckedCreateNestedManyWithoutCreatedByInput
     deactivatedObservationSources?: ObservationSourceUncheckedCreateNestedManyWithoutDeactivatedByInput
     ingestedExternalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutIngestedByInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutPreparedByInput
+    createdPortfolioScenarios?: PortfolioScenarioUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserCreateOrConnectWithoutCreatedApprovedActionsInput = {
@@ -67648,6 +71841,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceCreateNestedManyWithoutCreatedByInput
     deactivatedObservationSources?: ObservationSourceCreateNestedManyWithoutDeactivatedByInput
     ingestedExternalObservations?: ExternalObservationCreateNestedManyWithoutIngestedByInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutPreparedByInput
+    createdPortfolioScenarios?: PortfolioScenarioCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserUncheckedCreateWithoutApprovedApprovedActionsInput = {
@@ -67691,6 +71886,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceUncheckedCreateNestedManyWithoutCreatedByInput
     deactivatedObservationSources?: ObservationSourceUncheckedCreateNestedManyWithoutDeactivatedByInput
     ingestedExternalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutIngestedByInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutPreparedByInput
+    createdPortfolioScenarios?: PortfolioScenarioUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserCreateOrConnectWithoutApprovedApprovedActionsInput = {
@@ -67958,6 +72155,7 @@ export namespace Prisma {
     governedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutDepartmentNestedInput
     observationSources?: ObservationSourceUpdateManyWithoutDepartmentNestedInput
     externalObservations?: ExternalObservationUpdateManyWithoutDepartmentNestedInput
+    portfolioScenarios?: PortfolioScenarioUpdateManyWithoutDepartmentNestedInput
   }
 
   export type DepartmentUncheckedUpdateWithoutApprovedActionsInput = {
@@ -67974,6 +72172,7 @@ export namespace Prisma {
     governedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutDepartmentNestedInput
     observationSources?: ObservationSourceUncheckedUpdateManyWithoutDepartmentNestedInput
     externalObservations?: ExternalObservationUncheckedUpdateManyWithoutDepartmentNestedInput
+    portfolioScenarios?: PortfolioScenarioUncheckedUpdateManyWithoutDepartmentNestedInput
   }
 
   export type JurisdictionUpsertWithoutApprovedActionsInput = {
@@ -68001,6 +72200,7 @@ export namespace Prisma {
     governedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutJurisdictionNestedInput
     observationSources?: ObservationSourceUpdateManyWithoutJurisdictionNestedInput
     externalObservations?: ExternalObservationUpdateManyWithoutJurisdictionNestedInput
+    portfolioScenarios?: PortfolioScenarioUpdateManyWithoutJurisdictionNestedInput
   }
 
   export type JurisdictionUncheckedUpdateWithoutApprovedActionsInput = {
@@ -68017,6 +72217,7 @@ export namespace Prisma {
     governedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutJurisdictionNestedInput
     observationSources?: ObservationSourceUncheckedUpdateManyWithoutJurisdictionNestedInput
     externalObservations?: ExternalObservationUncheckedUpdateManyWithoutJurisdictionNestedInput
+    portfolioScenarios?: PortfolioScenarioUncheckedUpdateManyWithoutJurisdictionNestedInput
   }
 
   export type UserUpsertWithoutCreatedApprovedActionsInput = {
@@ -68071,6 +72272,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceUpdateManyWithoutCreatedByNestedInput
     deactivatedObservationSources?: ObservationSourceUpdateManyWithoutDeactivatedByNestedInput
     ingestedExternalObservations?: ExternalObservationUpdateManyWithoutIngestedByNestedInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUpdateManyWithoutPreparedByNestedInput
+    createdPortfolioScenarios?: PortfolioScenarioUpdateManyWithoutCreatedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCreatedApprovedActionsInput = {
@@ -68114,6 +72317,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceUncheckedUpdateManyWithoutCreatedByNestedInput
     deactivatedObservationSources?: ObservationSourceUncheckedUpdateManyWithoutDeactivatedByNestedInput
     ingestedExternalObservations?: ExternalObservationUncheckedUpdateManyWithoutIngestedByNestedInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutPreparedByNestedInput
+    createdPortfolioScenarios?: PortfolioScenarioUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type UserUpsertWithoutApprovedApprovedActionsInput = {
@@ -68168,6 +72373,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceUpdateManyWithoutCreatedByNestedInput
     deactivatedObservationSources?: ObservationSourceUpdateManyWithoutDeactivatedByNestedInput
     ingestedExternalObservations?: ExternalObservationUpdateManyWithoutIngestedByNestedInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUpdateManyWithoutPreparedByNestedInput
+    createdPortfolioScenarios?: PortfolioScenarioUpdateManyWithoutCreatedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutApprovedApprovedActionsInput = {
@@ -68211,6 +72418,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceUncheckedUpdateManyWithoutCreatedByNestedInput
     deactivatedObservationSources?: ObservationSourceUncheckedUpdateManyWithoutDeactivatedByNestedInput
     ingestedExternalObservations?: ExternalObservationUncheckedUpdateManyWithoutIngestedByNestedInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutPreparedByNestedInput
+    createdPortfolioScenarios?: PortfolioScenarioUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type PolicyRuleUpsertWithWhereUniqueWithoutActionInput = {
@@ -68330,6 +72539,7 @@ export namespace Prisma {
     approvedActions?: ApprovedActionVersionCreateNestedManyWithoutDepartmentInput
     observationSources?: ObservationSourceCreateNestedManyWithoutDepartmentInput
     externalObservations?: ExternalObservationCreateNestedManyWithoutDepartmentInput
+    portfolioScenarios?: PortfolioScenarioCreateNestedManyWithoutDepartmentInput
   }
 
   export type DepartmentUncheckedCreateWithoutGovernedExecutionTemplatesInput = {
@@ -68346,6 +72556,7 @@ export namespace Prisma {
     approvedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutDepartmentInput
     observationSources?: ObservationSourceUncheckedCreateNestedManyWithoutDepartmentInput
     externalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutDepartmentInput
+    portfolioScenarios?: PortfolioScenarioUncheckedCreateNestedManyWithoutDepartmentInput
   }
 
   export type DepartmentCreateOrConnectWithoutGovernedExecutionTemplatesInput = {
@@ -68367,6 +72578,7 @@ export namespace Prisma {
     approvedActions?: ApprovedActionVersionCreateNestedManyWithoutJurisdictionInput
     observationSources?: ObservationSourceCreateNestedManyWithoutJurisdictionInput
     externalObservations?: ExternalObservationCreateNestedManyWithoutJurisdictionInput
+    portfolioScenarios?: PortfolioScenarioCreateNestedManyWithoutJurisdictionInput
   }
 
   export type JurisdictionUncheckedCreateWithoutGovernedExecutionTemplatesInput = {
@@ -68383,6 +72595,7 @@ export namespace Prisma {
     approvedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutJurisdictionInput
     observationSources?: ObservationSourceUncheckedCreateNestedManyWithoutJurisdictionInput
     externalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutJurisdictionInput
+    portfolioScenarios?: PortfolioScenarioUncheckedCreateNestedManyWithoutJurisdictionInput
   }
 
   export type JurisdictionCreateOrConnectWithoutGovernedExecutionTemplatesInput = {
@@ -68431,6 +72644,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceCreateNestedManyWithoutCreatedByInput
     deactivatedObservationSources?: ObservationSourceCreateNestedManyWithoutDeactivatedByInput
     ingestedExternalObservations?: ExternalObservationCreateNestedManyWithoutIngestedByInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutPreparedByInput
+    createdPortfolioScenarios?: PortfolioScenarioCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserUncheckedCreateWithoutCreatedGovernedExecutionTemplatesInput = {
@@ -68474,6 +72689,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceUncheckedCreateNestedManyWithoutCreatedByInput
     deactivatedObservationSources?: ObservationSourceUncheckedCreateNestedManyWithoutDeactivatedByInput
     ingestedExternalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutIngestedByInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutPreparedByInput
+    createdPortfolioScenarios?: PortfolioScenarioUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserCreateOrConnectWithoutCreatedGovernedExecutionTemplatesInput = {
@@ -68522,6 +72739,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceCreateNestedManyWithoutCreatedByInput
     deactivatedObservationSources?: ObservationSourceCreateNestedManyWithoutDeactivatedByInput
     ingestedExternalObservations?: ExternalObservationCreateNestedManyWithoutIngestedByInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutPreparedByInput
+    createdPortfolioScenarios?: PortfolioScenarioCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserUncheckedCreateWithoutApprovedGovernedExecutionTemplatesInput = {
@@ -68565,6 +72784,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceUncheckedCreateNestedManyWithoutCreatedByInput
     deactivatedObservationSources?: ObservationSourceUncheckedCreateNestedManyWithoutDeactivatedByInput
     ingestedExternalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutIngestedByInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutPreparedByInput
+    createdPortfolioScenarios?: PortfolioScenarioUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserCreateOrConnectWithoutApprovedGovernedExecutionTemplatesInput = {
@@ -68794,6 +73015,7 @@ export namespace Prisma {
     approvedActions?: ApprovedActionVersionUpdateManyWithoutDepartmentNestedInput
     observationSources?: ObservationSourceUpdateManyWithoutDepartmentNestedInput
     externalObservations?: ExternalObservationUpdateManyWithoutDepartmentNestedInput
+    portfolioScenarios?: PortfolioScenarioUpdateManyWithoutDepartmentNestedInput
   }
 
   export type DepartmentUncheckedUpdateWithoutGovernedExecutionTemplatesInput = {
@@ -68810,6 +73032,7 @@ export namespace Prisma {
     approvedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutDepartmentNestedInput
     observationSources?: ObservationSourceUncheckedUpdateManyWithoutDepartmentNestedInput
     externalObservations?: ExternalObservationUncheckedUpdateManyWithoutDepartmentNestedInput
+    portfolioScenarios?: PortfolioScenarioUncheckedUpdateManyWithoutDepartmentNestedInput
   }
 
   export type JurisdictionUpsertWithoutGovernedExecutionTemplatesInput = {
@@ -68837,6 +73060,7 @@ export namespace Prisma {
     approvedActions?: ApprovedActionVersionUpdateManyWithoutJurisdictionNestedInput
     observationSources?: ObservationSourceUpdateManyWithoutJurisdictionNestedInput
     externalObservations?: ExternalObservationUpdateManyWithoutJurisdictionNestedInput
+    portfolioScenarios?: PortfolioScenarioUpdateManyWithoutJurisdictionNestedInput
   }
 
   export type JurisdictionUncheckedUpdateWithoutGovernedExecutionTemplatesInput = {
@@ -68853,6 +73077,7 @@ export namespace Prisma {
     approvedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutJurisdictionNestedInput
     observationSources?: ObservationSourceUncheckedUpdateManyWithoutJurisdictionNestedInput
     externalObservations?: ExternalObservationUncheckedUpdateManyWithoutJurisdictionNestedInput
+    portfolioScenarios?: PortfolioScenarioUncheckedUpdateManyWithoutJurisdictionNestedInput
   }
 
   export type UserUpsertWithoutCreatedGovernedExecutionTemplatesInput = {
@@ -68907,6 +73132,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceUpdateManyWithoutCreatedByNestedInput
     deactivatedObservationSources?: ObservationSourceUpdateManyWithoutDeactivatedByNestedInput
     ingestedExternalObservations?: ExternalObservationUpdateManyWithoutIngestedByNestedInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUpdateManyWithoutPreparedByNestedInput
+    createdPortfolioScenarios?: PortfolioScenarioUpdateManyWithoutCreatedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCreatedGovernedExecutionTemplatesInput = {
@@ -68950,6 +73177,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceUncheckedUpdateManyWithoutCreatedByNestedInput
     deactivatedObservationSources?: ObservationSourceUncheckedUpdateManyWithoutDeactivatedByNestedInput
     ingestedExternalObservations?: ExternalObservationUncheckedUpdateManyWithoutIngestedByNestedInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutPreparedByNestedInput
+    createdPortfolioScenarios?: PortfolioScenarioUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type UserUpsertWithoutApprovedGovernedExecutionTemplatesInput = {
@@ -69004,6 +73233,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceUpdateManyWithoutCreatedByNestedInput
     deactivatedObservationSources?: ObservationSourceUpdateManyWithoutDeactivatedByNestedInput
     ingestedExternalObservations?: ExternalObservationUpdateManyWithoutIngestedByNestedInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUpdateManyWithoutPreparedByNestedInput
+    createdPortfolioScenarios?: PortfolioScenarioUpdateManyWithoutCreatedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutApprovedGovernedExecutionTemplatesInput = {
@@ -69047,6 +73278,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceUncheckedUpdateManyWithoutCreatedByNestedInput
     deactivatedObservationSources?: ObservationSourceUncheckedUpdateManyWithoutDeactivatedByNestedInput
     ingestedExternalObservations?: ExternalObservationUncheckedUpdateManyWithoutIngestedByNestedInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutPreparedByNestedInput
+    createdPortfolioScenarios?: PortfolioScenarioUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type GovernedExecutionTaskTemplateUpsertWithWhereUniqueWithoutExecutionTemplateInput = {
@@ -70096,6 +74329,46 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type CaseResourceEstimateCreateWithoutCaseInput = {
+    id?: string
+    estimateVersion: number
+    status?: $Enums.PlanningEstimateStatus
+    currency?: string
+    estimatedCostMinor: bigint | number
+    estimatedDurationDays?: number | null
+    resourceRequirements: JsonNullValueInput | InputJsonValue
+    estimateBasis: string
+    sourceReference: string
+    preparedAt?: Date | string
+    createdAt?: Date | string
+    preparedBy: UserCreateNestedOneWithoutPreparedCaseResourceEstimatesInput
+  }
+
+  export type CaseResourceEstimateUncheckedCreateWithoutCaseInput = {
+    id?: string
+    estimateVersion: number
+    status?: $Enums.PlanningEstimateStatus
+    currency?: string
+    estimatedCostMinor: bigint | number
+    estimatedDurationDays?: number | null
+    resourceRequirements: JsonNullValueInput | InputJsonValue
+    estimateBasis: string
+    sourceReference: string
+    preparedById: string
+    preparedAt?: Date | string
+    createdAt?: Date | string
+  }
+
+  export type CaseResourceEstimateCreateOrConnectWithoutCaseInput = {
+    where: CaseResourceEstimateWhereUniqueInput
+    create: XOR<CaseResourceEstimateCreateWithoutCaseInput, CaseResourceEstimateUncheckedCreateWithoutCaseInput>
+  }
+
+  export type CaseResourceEstimateCreateManyCaseInputEnvelope = {
+    data: CaseResourceEstimateCreateManyCaseInput | CaseResourceEstimateCreateManyCaseInput[]
+    skipDuplicates?: boolean
+  }
+
   export type AssetUpsertWithoutCasesInput = {
     update: XOR<AssetUpdateWithoutCasesInput, AssetUncheckedUpdateWithoutCasesInput>
     create: XOR<AssetCreateWithoutCasesInput, AssetUncheckedCreateWithoutCasesInput>
@@ -70469,6 +74742,702 @@ export namespace Prisma {
     data: XOR<ExternalObservationUpdateManyMutationInput, ExternalObservationUncheckedUpdateManyWithoutCaseInput>
   }
 
+  export type CaseResourceEstimateUpsertWithWhereUniqueWithoutCaseInput = {
+    where: CaseResourceEstimateWhereUniqueInput
+    update: XOR<CaseResourceEstimateUpdateWithoutCaseInput, CaseResourceEstimateUncheckedUpdateWithoutCaseInput>
+    create: XOR<CaseResourceEstimateCreateWithoutCaseInput, CaseResourceEstimateUncheckedCreateWithoutCaseInput>
+  }
+
+  export type CaseResourceEstimateUpdateWithWhereUniqueWithoutCaseInput = {
+    where: CaseResourceEstimateWhereUniqueInput
+    data: XOR<CaseResourceEstimateUpdateWithoutCaseInput, CaseResourceEstimateUncheckedUpdateWithoutCaseInput>
+  }
+
+  export type CaseResourceEstimateUpdateManyWithWhereWithoutCaseInput = {
+    where: CaseResourceEstimateScalarWhereInput
+    data: XOR<CaseResourceEstimateUpdateManyMutationInput, CaseResourceEstimateUncheckedUpdateManyWithoutCaseInput>
+  }
+
+  export type CaseCreateWithoutResourceEstimatesInput = {
+    id?: string
+    caseNumber: string
+    title: string
+    description?: string | null
+    status?: $Enums.CaseStatus
+    riskLevel?: $Enums.RiskLevel | null
+    priorityLevel?: $Enums.PriorityLevel | null
+    emergencyFlag?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    closedAt?: Date | string | null
+    asset: AssetCreateNestedOneWithoutCasesInput
+    inspections?: InspectionCreateNestedManyWithoutCaseInput
+    riskAssessments?: RiskAssessmentCreateNestedManyWithoutCaseInput
+    operationalResponsePlans?: OperationalResponsePlanCreateNestedManyWithoutCaseInput
+    orpDecisions?: OrpDecisionCreateNestedManyWithoutCaseInput
+    executionPlans?: ExecutionPlanCreateNestedManyWithoutCaseInput
+    closure?: CaseClosureCreateNestedOneWithoutCaseInput
+    sourcePublicReport?: PublicReportCreateNestedOneWithoutCreatedCaseInput
+    decisionPackages?: DecisionPackageCreateNestedManyWithoutCaseInput
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentCreateNestedManyWithoutCaseInput
+    intelligenceReconciliations?: InfrastructureIntelligenceReconciliationCreateNestedManyWithoutCaseInput
+    externalObservations?: ExternalObservationCreateNestedManyWithoutCaseInput
+  }
+
+  export type CaseUncheckedCreateWithoutResourceEstimatesInput = {
+    id?: string
+    caseNumber: string
+    assetId: string
+    title: string
+    description?: string | null
+    status?: $Enums.CaseStatus
+    riskLevel?: $Enums.RiskLevel | null
+    priorityLevel?: $Enums.PriorityLevel | null
+    emergencyFlag?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    closedAt?: Date | string | null
+    inspections?: InspectionUncheckedCreateNestedManyWithoutCaseInput
+    riskAssessments?: RiskAssessmentUncheckedCreateNestedManyWithoutCaseInput
+    operationalResponsePlans?: OperationalResponsePlanUncheckedCreateNestedManyWithoutCaseInput
+    orpDecisions?: OrpDecisionUncheckedCreateNestedManyWithoutCaseInput
+    executionPlans?: ExecutionPlanUncheckedCreateNestedManyWithoutCaseInput
+    closure?: CaseClosureUncheckedCreateNestedOneWithoutCaseInput
+    sourcePublicReport?: PublicReportUncheckedCreateNestedOneWithoutCreatedCaseInput
+    decisionPackages?: DecisionPackageUncheckedCreateNestedManyWithoutCaseInput
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentUncheckedCreateNestedManyWithoutCaseInput
+    intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUncheckedCreateNestedManyWithoutCaseInput
+    externalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutCaseInput
+  }
+
+  export type CaseCreateOrConnectWithoutResourceEstimatesInput = {
+    where: CaseWhereUniqueInput
+    create: XOR<CaseCreateWithoutResourceEstimatesInput, CaseUncheckedCreateWithoutResourceEstimatesInput>
+  }
+
+  export type UserCreateWithoutPreparedCaseResourceEstimatesInput = {
+    id?: string
+    employeeCode: string
+    name: string
+    email: string
+    passwordHash: string
+    designation: string
+    role?: $Enums.SystemRole
+    status?: $Enums.UserStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    department: DepartmentCreateNestedOneWithoutUsersInput
+    jurisdiction: JurisdictionCreateNestedOneWithoutUsersInput
+    inspections?: InspectionCreateNestedManyWithoutInspectorInput
+    approvalAuthorities?: ApprovalAuthorityCreateNestedManyWithoutUserInput
+    reviewedOrpDecisions?: OrpDecisionCreateNestedManyWithoutReviewerInput
+    forwardedOrpDecisions?: OrpDecisionCreateNestedManyWithoutForwardedUserInput
+    createdExecutionPlans?: ExecutionPlanCreateNestedManyWithoutCreatedByInput
+    assignedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutAssignedToInput
+    assignedByExecutionTasks?: ExecutionTaskCreateNestedManyWithoutAssignedByInput
+    completedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCompletionSubmittedByInput
+    verifiedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutVerifiedByInput
+    cancelledExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCancelledByInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionCreateNestedManyWithoutChangedByInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutBlockedByInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutResolvedByInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyCreateNestedManyWithoutCreatedByInput
+    submittedExecutionEvidence?: ExecutionEvidenceCreateNestedManyWithoutSubmittedByInput
+    closedCases?: CaseClosureCreateNestedManyWithoutClosedByInput
+    reviewedPublicReports?: PublicReportCreateNestedManyWithoutReviewedByInput
+    decidedPublicReports?: PublicReportCreateNestedManyWithoutDecisionByInput
+    createdTriageAnalyses?: PublicReportTriageAnalysisCreateNestedManyWithoutCreatedByInput
+    createdPolicyDocuments?: PolicyDocumentCreateNestedManyWithoutCreatedByInput
+    approvedPolicyDocuments?: PolicyDocumentCreateNestedManyWithoutApprovedByInput
+    createdApprovedActions?: ApprovedActionVersionCreateNestedManyWithoutCreatedByInput
+    approvedApprovedActions?: ApprovedActionVersionCreateNestedManyWithoutApprovedByInput
+    preparedDecisionPackages?: DecisionPackageCreateNestedManyWithoutPreparedByInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutCreatedByInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutApprovedByInput
+    createdObservationSources?: ObservationSourceCreateNestedManyWithoutCreatedByInput
+    deactivatedObservationSources?: ObservationSourceCreateNestedManyWithoutDeactivatedByInput
+    ingestedExternalObservations?: ExternalObservationCreateNestedManyWithoutIngestedByInput
+    createdPortfolioScenarios?: PortfolioScenarioCreateNestedManyWithoutCreatedByInput
+  }
+
+  export type UserUncheckedCreateWithoutPreparedCaseResourceEstimatesInput = {
+    id?: string
+    employeeCode: string
+    name: string
+    email: string
+    passwordHash: string
+    designation: string
+    role?: $Enums.SystemRole
+    status?: $Enums.UserStatus
+    departmentId: string
+    jurisdictionId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    inspections?: InspectionUncheckedCreateNestedManyWithoutInspectorInput
+    approvalAuthorities?: ApprovalAuthorityUncheckedCreateNestedManyWithoutUserInput
+    reviewedOrpDecisions?: OrpDecisionUncheckedCreateNestedManyWithoutReviewerInput
+    forwardedOrpDecisions?: OrpDecisionUncheckedCreateNestedManyWithoutForwardedUserInput
+    createdExecutionPlans?: ExecutionPlanUncheckedCreateNestedManyWithoutCreatedByInput
+    assignedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutAssignedToInput
+    assignedByExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutAssignedByInput
+    completedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCompletionSubmittedByInput
+    verifiedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutVerifiedByInput
+    cancelledExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCancelledByInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUncheckedCreateNestedManyWithoutChangedByInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutBlockedByInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutResolvedByInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutCreatedByInput
+    submittedExecutionEvidence?: ExecutionEvidenceUncheckedCreateNestedManyWithoutSubmittedByInput
+    closedCases?: CaseClosureUncheckedCreateNestedManyWithoutClosedByInput
+    reviewedPublicReports?: PublicReportUncheckedCreateNestedManyWithoutReviewedByInput
+    decidedPublicReports?: PublicReportUncheckedCreateNestedManyWithoutDecisionByInput
+    createdTriageAnalyses?: PublicReportTriageAnalysisUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPolicyDocuments?: PolicyDocumentUncheckedCreateNestedManyWithoutCreatedByInput
+    approvedPolicyDocuments?: PolicyDocumentUncheckedCreateNestedManyWithoutApprovedByInput
+    createdApprovedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutCreatedByInput
+    approvedApprovedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutApprovedByInput
+    preparedDecisionPackages?: DecisionPackageUncheckedCreateNestedManyWithoutPreparedByInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutCreatedByInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutApprovedByInput
+    createdObservationSources?: ObservationSourceUncheckedCreateNestedManyWithoutCreatedByInput
+    deactivatedObservationSources?: ObservationSourceUncheckedCreateNestedManyWithoutDeactivatedByInput
+    ingestedExternalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutIngestedByInput
+    createdPortfolioScenarios?: PortfolioScenarioUncheckedCreateNestedManyWithoutCreatedByInput
+  }
+
+  export type UserCreateOrConnectWithoutPreparedCaseResourceEstimatesInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutPreparedCaseResourceEstimatesInput, UserUncheckedCreateWithoutPreparedCaseResourceEstimatesInput>
+  }
+
+  export type CaseUpsertWithoutResourceEstimatesInput = {
+    update: XOR<CaseUpdateWithoutResourceEstimatesInput, CaseUncheckedUpdateWithoutResourceEstimatesInput>
+    create: XOR<CaseCreateWithoutResourceEstimatesInput, CaseUncheckedCreateWithoutResourceEstimatesInput>
+    where?: CaseWhereInput
+  }
+
+  export type CaseUpdateToOneWithWhereWithoutResourceEstimatesInput = {
+    where?: CaseWhereInput
+    data: XOR<CaseUpdateWithoutResourceEstimatesInput, CaseUncheckedUpdateWithoutResourceEstimatesInput>
+  }
+
+  export type CaseUpdateWithoutResourceEstimatesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    caseNumber?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumCaseStatusFieldUpdateOperationsInput | $Enums.CaseStatus
+    riskLevel?: NullableEnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel | null
+    priorityLevel?: NullableEnumPriorityLevelFieldUpdateOperationsInput | $Enums.PriorityLevel | null
+    emergencyFlag?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    asset?: AssetUpdateOneRequiredWithoutCasesNestedInput
+    inspections?: InspectionUpdateManyWithoutCaseNestedInput
+    riskAssessments?: RiskAssessmentUpdateManyWithoutCaseNestedInput
+    operationalResponsePlans?: OperationalResponsePlanUpdateManyWithoutCaseNestedInput
+    orpDecisions?: OrpDecisionUpdateManyWithoutCaseNestedInput
+    executionPlans?: ExecutionPlanUpdateManyWithoutCaseNestedInput
+    closure?: CaseClosureUpdateOneWithoutCaseNestedInput
+    sourcePublicReport?: PublicReportUpdateOneWithoutCreatedCaseNestedInput
+    decisionPackages?: DecisionPackageUpdateManyWithoutCaseNestedInput
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentUpdateManyWithoutCaseNestedInput
+    intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUpdateManyWithoutCaseNestedInput
+    externalObservations?: ExternalObservationUpdateManyWithoutCaseNestedInput
+  }
+
+  export type CaseUncheckedUpdateWithoutResourceEstimatesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    caseNumber?: StringFieldUpdateOperationsInput | string
+    assetId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumCaseStatusFieldUpdateOperationsInput | $Enums.CaseStatus
+    riskLevel?: NullableEnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel | null
+    priorityLevel?: NullableEnumPriorityLevelFieldUpdateOperationsInput | $Enums.PriorityLevel | null
+    emergencyFlag?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    inspections?: InspectionUncheckedUpdateManyWithoutCaseNestedInput
+    riskAssessments?: RiskAssessmentUncheckedUpdateManyWithoutCaseNestedInput
+    operationalResponsePlans?: OperationalResponsePlanUncheckedUpdateManyWithoutCaseNestedInput
+    orpDecisions?: OrpDecisionUncheckedUpdateManyWithoutCaseNestedInput
+    executionPlans?: ExecutionPlanUncheckedUpdateManyWithoutCaseNestedInput
+    closure?: CaseClosureUncheckedUpdateOneWithoutCaseNestedInput
+    sourcePublicReport?: PublicReportUncheckedUpdateOneWithoutCreatedCaseNestedInput
+    decisionPackages?: DecisionPackageUncheckedUpdateManyWithoutCaseNestedInput
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentUncheckedUpdateManyWithoutCaseNestedInput
+    intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUncheckedUpdateManyWithoutCaseNestedInput
+    externalObservations?: ExternalObservationUncheckedUpdateManyWithoutCaseNestedInput
+  }
+
+  export type UserUpsertWithoutPreparedCaseResourceEstimatesInput = {
+    update: XOR<UserUpdateWithoutPreparedCaseResourceEstimatesInput, UserUncheckedUpdateWithoutPreparedCaseResourceEstimatesInput>
+    create: XOR<UserCreateWithoutPreparedCaseResourceEstimatesInput, UserUncheckedCreateWithoutPreparedCaseResourceEstimatesInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutPreparedCaseResourceEstimatesInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutPreparedCaseResourceEstimatesInput, UserUncheckedUpdateWithoutPreparedCaseResourceEstimatesInput>
+  }
+
+  export type UserUpdateWithoutPreparedCaseResourceEstimatesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    employeeCode?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    designation?: StringFieldUpdateOperationsInput | string
+    role?: EnumSystemRoleFieldUpdateOperationsInput | $Enums.SystemRole
+    status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    department?: DepartmentUpdateOneRequiredWithoutUsersNestedInput
+    jurisdiction?: JurisdictionUpdateOneRequiredWithoutUsersNestedInput
+    inspections?: InspectionUpdateManyWithoutInspectorNestedInput
+    approvalAuthorities?: ApprovalAuthorityUpdateManyWithoutUserNestedInput
+    reviewedOrpDecisions?: OrpDecisionUpdateManyWithoutReviewerNestedInput
+    forwardedOrpDecisions?: OrpDecisionUpdateManyWithoutForwardedUserNestedInput
+    createdExecutionPlans?: ExecutionPlanUpdateManyWithoutCreatedByNestedInput
+    assignedExecutionTasks?: ExecutionTaskUpdateManyWithoutAssignedToNestedInput
+    assignedByExecutionTasks?: ExecutionTaskUpdateManyWithoutAssignedByNestedInput
+    completedExecutionTasks?: ExecutionTaskUpdateManyWithoutCompletionSubmittedByNestedInput
+    verifiedExecutionTasks?: ExecutionTaskUpdateManyWithoutVerifiedByNestedInput
+    cancelledExecutionTasks?: ExecutionTaskUpdateManyWithoutCancelledByNestedInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUpdateManyWithoutChangedByNestedInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUpdateManyWithoutBlockedByNestedInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUpdateManyWithoutResolvedByNestedInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUpdateManyWithoutCreatedByNestedInput
+    submittedExecutionEvidence?: ExecutionEvidenceUpdateManyWithoutSubmittedByNestedInput
+    closedCases?: CaseClosureUpdateManyWithoutClosedByNestedInput
+    reviewedPublicReports?: PublicReportUpdateManyWithoutReviewedByNestedInput
+    decidedPublicReports?: PublicReportUpdateManyWithoutDecisionByNestedInput
+    createdTriageAnalyses?: PublicReportTriageAnalysisUpdateManyWithoutCreatedByNestedInput
+    createdPolicyDocuments?: PolicyDocumentUpdateManyWithoutCreatedByNestedInput
+    approvedPolicyDocuments?: PolicyDocumentUpdateManyWithoutApprovedByNestedInput
+    createdApprovedActions?: ApprovedActionVersionUpdateManyWithoutCreatedByNestedInput
+    approvedApprovedActions?: ApprovedActionVersionUpdateManyWithoutApprovedByNestedInput
+    preparedDecisionPackages?: DecisionPackageUpdateManyWithoutPreparedByNestedInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutCreatedByNestedInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutApprovedByNestedInput
+    createdObservationSources?: ObservationSourceUpdateManyWithoutCreatedByNestedInput
+    deactivatedObservationSources?: ObservationSourceUpdateManyWithoutDeactivatedByNestedInput
+    ingestedExternalObservations?: ExternalObservationUpdateManyWithoutIngestedByNestedInput
+    createdPortfolioScenarios?: PortfolioScenarioUpdateManyWithoutCreatedByNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutPreparedCaseResourceEstimatesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    employeeCode?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    designation?: StringFieldUpdateOperationsInput | string
+    role?: EnumSystemRoleFieldUpdateOperationsInput | $Enums.SystemRole
+    status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+    departmentId?: StringFieldUpdateOperationsInput | string
+    jurisdictionId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    inspections?: InspectionUncheckedUpdateManyWithoutInspectorNestedInput
+    approvalAuthorities?: ApprovalAuthorityUncheckedUpdateManyWithoutUserNestedInput
+    reviewedOrpDecisions?: OrpDecisionUncheckedUpdateManyWithoutReviewerNestedInput
+    forwardedOrpDecisions?: OrpDecisionUncheckedUpdateManyWithoutForwardedUserNestedInput
+    createdExecutionPlans?: ExecutionPlanUncheckedUpdateManyWithoutCreatedByNestedInput
+    assignedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutAssignedToNestedInput
+    assignedByExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutAssignedByNestedInput
+    completedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCompletionSubmittedByNestedInput
+    verifiedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutVerifiedByNestedInput
+    cancelledExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCancelledByNestedInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUncheckedUpdateManyWithoutChangedByNestedInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutBlockedByNestedInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutResolvedByNestedInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUncheckedUpdateManyWithoutCreatedByNestedInput
+    submittedExecutionEvidence?: ExecutionEvidenceUncheckedUpdateManyWithoutSubmittedByNestedInput
+    closedCases?: CaseClosureUncheckedUpdateManyWithoutClosedByNestedInput
+    reviewedPublicReports?: PublicReportUncheckedUpdateManyWithoutReviewedByNestedInput
+    decidedPublicReports?: PublicReportUncheckedUpdateManyWithoutDecisionByNestedInput
+    createdTriageAnalyses?: PublicReportTriageAnalysisUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPolicyDocuments?: PolicyDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
+    approvedPolicyDocuments?: PolicyDocumentUncheckedUpdateManyWithoutApprovedByNestedInput
+    createdApprovedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutCreatedByNestedInput
+    approvedApprovedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutApprovedByNestedInput
+    preparedDecisionPackages?: DecisionPackageUncheckedUpdateManyWithoutPreparedByNestedInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutCreatedByNestedInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutApprovedByNestedInput
+    createdObservationSources?: ObservationSourceUncheckedUpdateManyWithoutCreatedByNestedInput
+    deactivatedObservationSources?: ObservationSourceUncheckedUpdateManyWithoutDeactivatedByNestedInput
+    ingestedExternalObservations?: ExternalObservationUncheckedUpdateManyWithoutIngestedByNestedInput
+    createdPortfolioScenarios?: PortfolioScenarioUncheckedUpdateManyWithoutCreatedByNestedInput
+  }
+
+  export type DepartmentCreateWithoutPortfolioScenariosInput = {
+    id?: string
+    name: string
+    code: string
+    createdAt?: Date | string
+    users?: UserCreateNestedManyWithoutDepartmentInput
+    assets?: AssetCreateNestedManyWithoutDepartmentInput
+    jurisdictions?: JurisdictionCreateNestedManyWithoutDepartmentInput
+    approvalAuthorities?: ApprovalAuthorityCreateNestedManyWithoutDepartmentInput
+    publicReports?: PublicReportCreateNestedManyWithoutDepartmentInput
+    policyDocuments?: PolicyDocumentCreateNestedManyWithoutDepartmentInput
+    approvedActions?: ApprovedActionVersionCreateNestedManyWithoutDepartmentInput
+    governedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutDepartmentInput
+    observationSources?: ObservationSourceCreateNestedManyWithoutDepartmentInput
+    externalObservations?: ExternalObservationCreateNestedManyWithoutDepartmentInput
+  }
+
+  export type DepartmentUncheckedCreateWithoutPortfolioScenariosInput = {
+    id?: string
+    name: string
+    code: string
+    createdAt?: Date | string
+    users?: UserUncheckedCreateNestedManyWithoutDepartmentInput
+    assets?: AssetUncheckedCreateNestedManyWithoutDepartmentInput
+    jurisdictions?: JurisdictionUncheckedCreateNestedManyWithoutDepartmentInput
+    approvalAuthorities?: ApprovalAuthorityUncheckedCreateNestedManyWithoutDepartmentInput
+    publicReports?: PublicReportUncheckedCreateNestedManyWithoutDepartmentInput
+    policyDocuments?: PolicyDocumentUncheckedCreateNestedManyWithoutDepartmentInput
+    approvedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutDepartmentInput
+    governedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutDepartmentInput
+    observationSources?: ObservationSourceUncheckedCreateNestedManyWithoutDepartmentInput
+    externalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutDepartmentInput
+  }
+
+  export type DepartmentCreateOrConnectWithoutPortfolioScenariosInput = {
+    where: DepartmentWhereUniqueInput
+    create: XOR<DepartmentCreateWithoutPortfolioScenariosInput, DepartmentUncheckedCreateWithoutPortfolioScenariosInput>
+  }
+
+  export type JurisdictionCreateWithoutPortfolioScenariosInput = {
+    id?: string
+    name: string
+    type: string
+    createdAt?: Date | string
+    department: DepartmentCreateNestedOneWithoutJurisdictionsInput
+    users?: UserCreateNestedManyWithoutJurisdictionInput
+    assets?: AssetCreateNestedManyWithoutJurisdictionInput
+    approvalAuthorities?: ApprovalAuthorityCreateNestedManyWithoutJurisdictionInput
+    publicReports?: PublicReportCreateNestedManyWithoutJurisdictionInput
+    policyDocuments?: PolicyDocumentCreateNestedManyWithoutJurisdictionInput
+    approvedActions?: ApprovedActionVersionCreateNestedManyWithoutJurisdictionInput
+    governedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutJurisdictionInput
+    observationSources?: ObservationSourceCreateNestedManyWithoutJurisdictionInput
+    externalObservations?: ExternalObservationCreateNestedManyWithoutJurisdictionInput
+  }
+
+  export type JurisdictionUncheckedCreateWithoutPortfolioScenariosInput = {
+    id?: string
+    name: string
+    type: string
+    departmentId: string
+    createdAt?: Date | string
+    users?: UserUncheckedCreateNestedManyWithoutJurisdictionInput
+    assets?: AssetUncheckedCreateNestedManyWithoutJurisdictionInput
+    approvalAuthorities?: ApprovalAuthorityUncheckedCreateNestedManyWithoutJurisdictionInput
+    publicReports?: PublicReportUncheckedCreateNestedManyWithoutJurisdictionInput
+    policyDocuments?: PolicyDocumentUncheckedCreateNestedManyWithoutJurisdictionInput
+    approvedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutJurisdictionInput
+    governedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutJurisdictionInput
+    observationSources?: ObservationSourceUncheckedCreateNestedManyWithoutJurisdictionInput
+    externalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutJurisdictionInput
+  }
+
+  export type JurisdictionCreateOrConnectWithoutPortfolioScenariosInput = {
+    where: JurisdictionWhereUniqueInput
+    create: XOR<JurisdictionCreateWithoutPortfolioScenariosInput, JurisdictionUncheckedCreateWithoutPortfolioScenariosInput>
+  }
+
+  export type UserCreateWithoutCreatedPortfolioScenariosInput = {
+    id?: string
+    employeeCode: string
+    name: string
+    email: string
+    passwordHash: string
+    designation: string
+    role?: $Enums.SystemRole
+    status?: $Enums.UserStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    department: DepartmentCreateNestedOneWithoutUsersInput
+    jurisdiction: JurisdictionCreateNestedOneWithoutUsersInput
+    inspections?: InspectionCreateNestedManyWithoutInspectorInput
+    approvalAuthorities?: ApprovalAuthorityCreateNestedManyWithoutUserInput
+    reviewedOrpDecisions?: OrpDecisionCreateNestedManyWithoutReviewerInput
+    forwardedOrpDecisions?: OrpDecisionCreateNestedManyWithoutForwardedUserInput
+    createdExecutionPlans?: ExecutionPlanCreateNestedManyWithoutCreatedByInput
+    assignedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutAssignedToInput
+    assignedByExecutionTasks?: ExecutionTaskCreateNestedManyWithoutAssignedByInput
+    completedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCompletionSubmittedByInput
+    verifiedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutVerifiedByInput
+    cancelledExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCancelledByInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionCreateNestedManyWithoutChangedByInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutBlockedByInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutResolvedByInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyCreateNestedManyWithoutCreatedByInput
+    submittedExecutionEvidence?: ExecutionEvidenceCreateNestedManyWithoutSubmittedByInput
+    closedCases?: CaseClosureCreateNestedManyWithoutClosedByInput
+    reviewedPublicReports?: PublicReportCreateNestedManyWithoutReviewedByInput
+    decidedPublicReports?: PublicReportCreateNestedManyWithoutDecisionByInput
+    createdTriageAnalyses?: PublicReportTriageAnalysisCreateNestedManyWithoutCreatedByInput
+    createdPolicyDocuments?: PolicyDocumentCreateNestedManyWithoutCreatedByInput
+    approvedPolicyDocuments?: PolicyDocumentCreateNestedManyWithoutApprovedByInput
+    createdApprovedActions?: ApprovedActionVersionCreateNestedManyWithoutCreatedByInput
+    approvedApprovedActions?: ApprovedActionVersionCreateNestedManyWithoutApprovedByInput
+    preparedDecisionPackages?: DecisionPackageCreateNestedManyWithoutPreparedByInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutCreatedByInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutApprovedByInput
+    createdObservationSources?: ObservationSourceCreateNestedManyWithoutCreatedByInput
+    deactivatedObservationSources?: ObservationSourceCreateNestedManyWithoutDeactivatedByInput
+    ingestedExternalObservations?: ExternalObservationCreateNestedManyWithoutIngestedByInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutPreparedByInput
+  }
+
+  export type UserUncheckedCreateWithoutCreatedPortfolioScenariosInput = {
+    id?: string
+    employeeCode: string
+    name: string
+    email: string
+    passwordHash: string
+    designation: string
+    role?: $Enums.SystemRole
+    status?: $Enums.UserStatus
+    departmentId: string
+    jurisdictionId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    inspections?: InspectionUncheckedCreateNestedManyWithoutInspectorInput
+    approvalAuthorities?: ApprovalAuthorityUncheckedCreateNestedManyWithoutUserInput
+    reviewedOrpDecisions?: OrpDecisionUncheckedCreateNestedManyWithoutReviewerInput
+    forwardedOrpDecisions?: OrpDecisionUncheckedCreateNestedManyWithoutForwardedUserInput
+    createdExecutionPlans?: ExecutionPlanUncheckedCreateNestedManyWithoutCreatedByInput
+    assignedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutAssignedToInput
+    assignedByExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutAssignedByInput
+    completedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCompletionSubmittedByInput
+    verifiedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutVerifiedByInput
+    cancelledExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCancelledByInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUncheckedCreateNestedManyWithoutChangedByInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutBlockedByInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutResolvedByInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutCreatedByInput
+    submittedExecutionEvidence?: ExecutionEvidenceUncheckedCreateNestedManyWithoutSubmittedByInput
+    closedCases?: CaseClosureUncheckedCreateNestedManyWithoutClosedByInput
+    reviewedPublicReports?: PublicReportUncheckedCreateNestedManyWithoutReviewedByInput
+    decidedPublicReports?: PublicReportUncheckedCreateNestedManyWithoutDecisionByInput
+    createdTriageAnalyses?: PublicReportTriageAnalysisUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPolicyDocuments?: PolicyDocumentUncheckedCreateNestedManyWithoutCreatedByInput
+    approvedPolicyDocuments?: PolicyDocumentUncheckedCreateNestedManyWithoutApprovedByInput
+    createdApprovedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutCreatedByInput
+    approvedApprovedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutApprovedByInput
+    preparedDecisionPackages?: DecisionPackageUncheckedCreateNestedManyWithoutPreparedByInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutCreatedByInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutApprovedByInput
+    createdObservationSources?: ObservationSourceUncheckedCreateNestedManyWithoutCreatedByInput
+    deactivatedObservationSources?: ObservationSourceUncheckedCreateNestedManyWithoutDeactivatedByInput
+    ingestedExternalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutIngestedByInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutPreparedByInput
+  }
+
+  export type UserCreateOrConnectWithoutCreatedPortfolioScenariosInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutCreatedPortfolioScenariosInput, UserUncheckedCreateWithoutCreatedPortfolioScenariosInput>
+  }
+
+  export type DepartmentUpsertWithoutPortfolioScenariosInput = {
+    update: XOR<DepartmentUpdateWithoutPortfolioScenariosInput, DepartmentUncheckedUpdateWithoutPortfolioScenariosInput>
+    create: XOR<DepartmentCreateWithoutPortfolioScenariosInput, DepartmentUncheckedCreateWithoutPortfolioScenariosInput>
+    where?: DepartmentWhereInput
+  }
+
+  export type DepartmentUpdateToOneWithWhereWithoutPortfolioScenariosInput = {
+    where?: DepartmentWhereInput
+    data: XOR<DepartmentUpdateWithoutPortfolioScenariosInput, DepartmentUncheckedUpdateWithoutPortfolioScenariosInput>
+  }
+
+  export type DepartmentUpdateWithoutPortfolioScenariosInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    users?: UserUpdateManyWithoutDepartmentNestedInput
+    assets?: AssetUpdateManyWithoutDepartmentNestedInput
+    jurisdictions?: JurisdictionUpdateManyWithoutDepartmentNestedInput
+    approvalAuthorities?: ApprovalAuthorityUpdateManyWithoutDepartmentNestedInput
+    publicReports?: PublicReportUpdateManyWithoutDepartmentNestedInput
+    policyDocuments?: PolicyDocumentUpdateManyWithoutDepartmentNestedInput
+    approvedActions?: ApprovedActionVersionUpdateManyWithoutDepartmentNestedInput
+    governedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutDepartmentNestedInput
+    observationSources?: ObservationSourceUpdateManyWithoutDepartmentNestedInput
+    externalObservations?: ExternalObservationUpdateManyWithoutDepartmentNestedInput
+  }
+
+  export type DepartmentUncheckedUpdateWithoutPortfolioScenariosInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    users?: UserUncheckedUpdateManyWithoutDepartmentNestedInput
+    assets?: AssetUncheckedUpdateManyWithoutDepartmentNestedInput
+    jurisdictions?: JurisdictionUncheckedUpdateManyWithoutDepartmentNestedInput
+    approvalAuthorities?: ApprovalAuthorityUncheckedUpdateManyWithoutDepartmentNestedInput
+    publicReports?: PublicReportUncheckedUpdateManyWithoutDepartmentNestedInput
+    policyDocuments?: PolicyDocumentUncheckedUpdateManyWithoutDepartmentNestedInput
+    approvedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutDepartmentNestedInput
+    governedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutDepartmentNestedInput
+    observationSources?: ObservationSourceUncheckedUpdateManyWithoutDepartmentNestedInput
+    externalObservations?: ExternalObservationUncheckedUpdateManyWithoutDepartmentNestedInput
+  }
+
+  export type JurisdictionUpsertWithoutPortfolioScenariosInput = {
+    update: XOR<JurisdictionUpdateWithoutPortfolioScenariosInput, JurisdictionUncheckedUpdateWithoutPortfolioScenariosInput>
+    create: XOR<JurisdictionCreateWithoutPortfolioScenariosInput, JurisdictionUncheckedCreateWithoutPortfolioScenariosInput>
+    where?: JurisdictionWhereInput
+  }
+
+  export type JurisdictionUpdateToOneWithWhereWithoutPortfolioScenariosInput = {
+    where?: JurisdictionWhereInput
+    data: XOR<JurisdictionUpdateWithoutPortfolioScenariosInput, JurisdictionUncheckedUpdateWithoutPortfolioScenariosInput>
+  }
+
+  export type JurisdictionUpdateWithoutPortfolioScenariosInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    department?: DepartmentUpdateOneRequiredWithoutJurisdictionsNestedInput
+    users?: UserUpdateManyWithoutJurisdictionNestedInput
+    assets?: AssetUpdateManyWithoutJurisdictionNestedInput
+    approvalAuthorities?: ApprovalAuthorityUpdateManyWithoutJurisdictionNestedInput
+    publicReports?: PublicReportUpdateManyWithoutJurisdictionNestedInput
+    policyDocuments?: PolicyDocumentUpdateManyWithoutJurisdictionNestedInput
+    approvedActions?: ApprovedActionVersionUpdateManyWithoutJurisdictionNestedInput
+    governedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutJurisdictionNestedInput
+    observationSources?: ObservationSourceUpdateManyWithoutJurisdictionNestedInput
+    externalObservations?: ExternalObservationUpdateManyWithoutJurisdictionNestedInput
+  }
+
+  export type JurisdictionUncheckedUpdateWithoutPortfolioScenariosInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    departmentId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    users?: UserUncheckedUpdateManyWithoutJurisdictionNestedInput
+    assets?: AssetUncheckedUpdateManyWithoutJurisdictionNestedInput
+    approvalAuthorities?: ApprovalAuthorityUncheckedUpdateManyWithoutJurisdictionNestedInput
+    publicReports?: PublicReportUncheckedUpdateManyWithoutJurisdictionNestedInput
+    policyDocuments?: PolicyDocumentUncheckedUpdateManyWithoutJurisdictionNestedInput
+    approvedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutJurisdictionNestedInput
+    governedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutJurisdictionNestedInput
+    observationSources?: ObservationSourceUncheckedUpdateManyWithoutJurisdictionNestedInput
+    externalObservations?: ExternalObservationUncheckedUpdateManyWithoutJurisdictionNestedInput
+  }
+
+  export type UserUpsertWithoutCreatedPortfolioScenariosInput = {
+    update: XOR<UserUpdateWithoutCreatedPortfolioScenariosInput, UserUncheckedUpdateWithoutCreatedPortfolioScenariosInput>
+    create: XOR<UserCreateWithoutCreatedPortfolioScenariosInput, UserUncheckedCreateWithoutCreatedPortfolioScenariosInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutCreatedPortfolioScenariosInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutCreatedPortfolioScenariosInput, UserUncheckedUpdateWithoutCreatedPortfolioScenariosInput>
+  }
+
+  export type UserUpdateWithoutCreatedPortfolioScenariosInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    employeeCode?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    designation?: StringFieldUpdateOperationsInput | string
+    role?: EnumSystemRoleFieldUpdateOperationsInput | $Enums.SystemRole
+    status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    department?: DepartmentUpdateOneRequiredWithoutUsersNestedInput
+    jurisdiction?: JurisdictionUpdateOneRequiredWithoutUsersNestedInput
+    inspections?: InspectionUpdateManyWithoutInspectorNestedInput
+    approvalAuthorities?: ApprovalAuthorityUpdateManyWithoutUserNestedInput
+    reviewedOrpDecisions?: OrpDecisionUpdateManyWithoutReviewerNestedInput
+    forwardedOrpDecisions?: OrpDecisionUpdateManyWithoutForwardedUserNestedInput
+    createdExecutionPlans?: ExecutionPlanUpdateManyWithoutCreatedByNestedInput
+    assignedExecutionTasks?: ExecutionTaskUpdateManyWithoutAssignedToNestedInput
+    assignedByExecutionTasks?: ExecutionTaskUpdateManyWithoutAssignedByNestedInput
+    completedExecutionTasks?: ExecutionTaskUpdateManyWithoutCompletionSubmittedByNestedInput
+    verifiedExecutionTasks?: ExecutionTaskUpdateManyWithoutVerifiedByNestedInput
+    cancelledExecutionTasks?: ExecutionTaskUpdateManyWithoutCancelledByNestedInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUpdateManyWithoutChangedByNestedInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUpdateManyWithoutBlockedByNestedInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUpdateManyWithoutResolvedByNestedInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUpdateManyWithoutCreatedByNestedInput
+    submittedExecutionEvidence?: ExecutionEvidenceUpdateManyWithoutSubmittedByNestedInput
+    closedCases?: CaseClosureUpdateManyWithoutClosedByNestedInput
+    reviewedPublicReports?: PublicReportUpdateManyWithoutReviewedByNestedInput
+    decidedPublicReports?: PublicReportUpdateManyWithoutDecisionByNestedInput
+    createdTriageAnalyses?: PublicReportTriageAnalysisUpdateManyWithoutCreatedByNestedInput
+    createdPolicyDocuments?: PolicyDocumentUpdateManyWithoutCreatedByNestedInput
+    approvedPolicyDocuments?: PolicyDocumentUpdateManyWithoutApprovedByNestedInput
+    createdApprovedActions?: ApprovedActionVersionUpdateManyWithoutCreatedByNestedInput
+    approvedApprovedActions?: ApprovedActionVersionUpdateManyWithoutApprovedByNestedInput
+    preparedDecisionPackages?: DecisionPackageUpdateManyWithoutPreparedByNestedInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutCreatedByNestedInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutApprovedByNestedInput
+    createdObservationSources?: ObservationSourceUpdateManyWithoutCreatedByNestedInput
+    deactivatedObservationSources?: ObservationSourceUpdateManyWithoutDeactivatedByNestedInput
+    ingestedExternalObservations?: ExternalObservationUpdateManyWithoutIngestedByNestedInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUpdateManyWithoutPreparedByNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutCreatedPortfolioScenariosInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    employeeCode?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    designation?: StringFieldUpdateOperationsInput | string
+    role?: EnumSystemRoleFieldUpdateOperationsInput | $Enums.SystemRole
+    status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+    departmentId?: StringFieldUpdateOperationsInput | string
+    jurisdictionId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    inspections?: InspectionUncheckedUpdateManyWithoutInspectorNestedInput
+    approvalAuthorities?: ApprovalAuthorityUncheckedUpdateManyWithoutUserNestedInput
+    reviewedOrpDecisions?: OrpDecisionUncheckedUpdateManyWithoutReviewerNestedInput
+    forwardedOrpDecisions?: OrpDecisionUncheckedUpdateManyWithoutForwardedUserNestedInput
+    createdExecutionPlans?: ExecutionPlanUncheckedUpdateManyWithoutCreatedByNestedInput
+    assignedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutAssignedToNestedInput
+    assignedByExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutAssignedByNestedInput
+    completedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCompletionSubmittedByNestedInput
+    verifiedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutVerifiedByNestedInput
+    cancelledExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCancelledByNestedInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUncheckedUpdateManyWithoutChangedByNestedInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutBlockedByNestedInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutResolvedByNestedInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUncheckedUpdateManyWithoutCreatedByNestedInput
+    submittedExecutionEvidence?: ExecutionEvidenceUncheckedUpdateManyWithoutSubmittedByNestedInput
+    closedCases?: CaseClosureUncheckedUpdateManyWithoutClosedByNestedInput
+    reviewedPublicReports?: PublicReportUncheckedUpdateManyWithoutReviewedByNestedInput
+    decidedPublicReports?: PublicReportUncheckedUpdateManyWithoutDecisionByNestedInput
+    createdTriageAnalyses?: PublicReportTriageAnalysisUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPolicyDocuments?: PolicyDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
+    approvedPolicyDocuments?: PolicyDocumentUncheckedUpdateManyWithoutApprovedByNestedInput
+    createdApprovedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutCreatedByNestedInput
+    approvedApprovedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutApprovedByNestedInput
+    preparedDecisionPackages?: DecisionPackageUncheckedUpdateManyWithoutPreparedByNestedInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutCreatedByNestedInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutApprovedByNestedInput
+    createdObservationSources?: ObservationSourceUncheckedUpdateManyWithoutCreatedByNestedInput
+    deactivatedObservationSources?: ObservationSourceUncheckedUpdateManyWithoutDeactivatedByNestedInput
+    ingestedExternalObservations?: ExternalObservationUncheckedUpdateManyWithoutIngestedByNestedInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutPreparedByNestedInput
+  }
+
   export type DepartmentCreateWithoutObservationSourcesInput = {
     id?: string
     name: string
@@ -70483,6 +75452,7 @@ export namespace Prisma {
     approvedActions?: ApprovedActionVersionCreateNestedManyWithoutDepartmentInput
     governedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutDepartmentInput
     externalObservations?: ExternalObservationCreateNestedManyWithoutDepartmentInput
+    portfolioScenarios?: PortfolioScenarioCreateNestedManyWithoutDepartmentInput
   }
 
   export type DepartmentUncheckedCreateWithoutObservationSourcesInput = {
@@ -70499,6 +75469,7 @@ export namespace Prisma {
     approvedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutDepartmentInput
     governedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutDepartmentInput
     externalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutDepartmentInput
+    portfolioScenarios?: PortfolioScenarioUncheckedCreateNestedManyWithoutDepartmentInput
   }
 
   export type DepartmentCreateOrConnectWithoutObservationSourcesInput = {
@@ -70520,6 +75491,7 @@ export namespace Prisma {
     approvedActions?: ApprovedActionVersionCreateNestedManyWithoutJurisdictionInput
     governedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutJurisdictionInput
     externalObservations?: ExternalObservationCreateNestedManyWithoutJurisdictionInput
+    portfolioScenarios?: PortfolioScenarioCreateNestedManyWithoutJurisdictionInput
   }
 
   export type JurisdictionUncheckedCreateWithoutObservationSourcesInput = {
@@ -70536,6 +75508,7 @@ export namespace Prisma {
     approvedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutJurisdictionInput
     governedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutJurisdictionInput
     externalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutJurisdictionInput
+    portfolioScenarios?: PortfolioScenarioUncheckedCreateNestedManyWithoutJurisdictionInput
   }
 
   export type JurisdictionCreateOrConnectWithoutObservationSourcesInput = {
@@ -70584,6 +75557,8 @@ export namespace Prisma {
     approvedGovernedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutApprovedByInput
     deactivatedObservationSources?: ObservationSourceCreateNestedManyWithoutDeactivatedByInput
     ingestedExternalObservations?: ExternalObservationCreateNestedManyWithoutIngestedByInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutPreparedByInput
+    createdPortfolioScenarios?: PortfolioScenarioCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserUncheckedCreateWithoutCreatedObservationSourcesInput = {
@@ -70627,6 +75602,8 @@ export namespace Prisma {
     approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutApprovedByInput
     deactivatedObservationSources?: ObservationSourceUncheckedCreateNestedManyWithoutDeactivatedByInput
     ingestedExternalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutIngestedByInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutPreparedByInput
+    createdPortfolioScenarios?: PortfolioScenarioUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserCreateOrConnectWithoutCreatedObservationSourcesInput = {
@@ -70675,6 +75652,8 @@ export namespace Prisma {
     approvedGovernedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutApprovedByInput
     createdObservationSources?: ObservationSourceCreateNestedManyWithoutCreatedByInput
     ingestedExternalObservations?: ExternalObservationCreateNestedManyWithoutIngestedByInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutPreparedByInput
+    createdPortfolioScenarios?: PortfolioScenarioCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserUncheckedCreateWithoutDeactivatedObservationSourcesInput = {
@@ -70718,6 +75697,8 @@ export namespace Prisma {
     approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutApprovedByInput
     createdObservationSources?: ObservationSourceUncheckedCreateNestedManyWithoutCreatedByInput
     ingestedExternalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutIngestedByInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutPreparedByInput
+    createdPortfolioScenarios?: PortfolioScenarioUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserCreateOrConnectWithoutDeactivatedObservationSourcesInput = {
@@ -70800,6 +75781,7 @@ export namespace Prisma {
     approvedActions?: ApprovedActionVersionUpdateManyWithoutDepartmentNestedInput
     governedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutDepartmentNestedInput
     externalObservations?: ExternalObservationUpdateManyWithoutDepartmentNestedInput
+    portfolioScenarios?: PortfolioScenarioUpdateManyWithoutDepartmentNestedInput
   }
 
   export type DepartmentUncheckedUpdateWithoutObservationSourcesInput = {
@@ -70816,6 +75798,7 @@ export namespace Prisma {
     approvedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutDepartmentNestedInput
     governedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutDepartmentNestedInput
     externalObservations?: ExternalObservationUncheckedUpdateManyWithoutDepartmentNestedInput
+    portfolioScenarios?: PortfolioScenarioUncheckedUpdateManyWithoutDepartmentNestedInput
   }
 
   export type JurisdictionUpsertWithoutObservationSourcesInput = {
@@ -70843,6 +75826,7 @@ export namespace Prisma {
     approvedActions?: ApprovedActionVersionUpdateManyWithoutJurisdictionNestedInput
     governedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutJurisdictionNestedInput
     externalObservations?: ExternalObservationUpdateManyWithoutJurisdictionNestedInput
+    portfolioScenarios?: PortfolioScenarioUpdateManyWithoutJurisdictionNestedInput
   }
 
   export type JurisdictionUncheckedUpdateWithoutObservationSourcesInput = {
@@ -70859,6 +75843,7 @@ export namespace Prisma {
     approvedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutJurisdictionNestedInput
     governedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutJurisdictionNestedInput
     externalObservations?: ExternalObservationUncheckedUpdateManyWithoutJurisdictionNestedInput
+    portfolioScenarios?: PortfolioScenarioUncheckedUpdateManyWithoutJurisdictionNestedInput
   }
 
   export type UserUpsertWithoutCreatedObservationSourcesInput = {
@@ -70913,6 +75898,8 @@ export namespace Prisma {
     approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutApprovedByNestedInput
     deactivatedObservationSources?: ObservationSourceUpdateManyWithoutDeactivatedByNestedInput
     ingestedExternalObservations?: ExternalObservationUpdateManyWithoutIngestedByNestedInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUpdateManyWithoutPreparedByNestedInput
+    createdPortfolioScenarios?: PortfolioScenarioUpdateManyWithoutCreatedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCreatedObservationSourcesInput = {
@@ -70956,6 +75943,8 @@ export namespace Prisma {
     approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutApprovedByNestedInput
     deactivatedObservationSources?: ObservationSourceUncheckedUpdateManyWithoutDeactivatedByNestedInput
     ingestedExternalObservations?: ExternalObservationUncheckedUpdateManyWithoutIngestedByNestedInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutPreparedByNestedInput
+    createdPortfolioScenarios?: PortfolioScenarioUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type UserUpsertWithoutDeactivatedObservationSourcesInput = {
@@ -71010,6 +75999,8 @@ export namespace Prisma {
     approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutApprovedByNestedInput
     createdObservationSources?: ObservationSourceUpdateManyWithoutCreatedByNestedInput
     ingestedExternalObservations?: ExternalObservationUpdateManyWithoutIngestedByNestedInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUpdateManyWithoutPreparedByNestedInput
+    createdPortfolioScenarios?: PortfolioScenarioUpdateManyWithoutCreatedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutDeactivatedObservationSourcesInput = {
@@ -71053,6 +76044,8 @@ export namespace Prisma {
     approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutApprovedByNestedInput
     createdObservationSources?: ObservationSourceUncheckedUpdateManyWithoutCreatedByNestedInput
     ingestedExternalObservations?: ExternalObservationUncheckedUpdateManyWithoutIngestedByNestedInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutPreparedByNestedInput
+    createdPortfolioScenarios?: PortfolioScenarioUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type ExternalObservationUpsertWithWhereUniqueWithoutSourceInput = {
@@ -71132,6 +76125,7 @@ export namespace Prisma {
     approvedActions?: ApprovedActionVersionCreateNestedManyWithoutDepartmentInput
     governedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutDepartmentInput
     observationSources?: ObservationSourceCreateNestedManyWithoutDepartmentInput
+    portfolioScenarios?: PortfolioScenarioCreateNestedManyWithoutDepartmentInput
   }
 
   export type DepartmentUncheckedCreateWithoutExternalObservationsInput = {
@@ -71148,6 +76142,7 @@ export namespace Prisma {
     approvedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutDepartmentInput
     governedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutDepartmentInput
     observationSources?: ObservationSourceUncheckedCreateNestedManyWithoutDepartmentInput
+    portfolioScenarios?: PortfolioScenarioUncheckedCreateNestedManyWithoutDepartmentInput
   }
 
   export type DepartmentCreateOrConnectWithoutExternalObservationsInput = {
@@ -71169,6 +76164,7 @@ export namespace Prisma {
     approvedActions?: ApprovedActionVersionCreateNestedManyWithoutJurisdictionInput
     governedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutJurisdictionInput
     observationSources?: ObservationSourceCreateNestedManyWithoutJurisdictionInput
+    portfolioScenarios?: PortfolioScenarioCreateNestedManyWithoutJurisdictionInput
   }
 
   export type JurisdictionUncheckedCreateWithoutExternalObservationsInput = {
@@ -71185,6 +76181,7 @@ export namespace Prisma {
     approvedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutJurisdictionInput
     governedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutJurisdictionInput
     observationSources?: ObservationSourceUncheckedCreateNestedManyWithoutJurisdictionInput
+    portfolioScenarios?: PortfolioScenarioUncheckedCreateNestedManyWithoutJurisdictionInput
   }
 
   export type JurisdictionCreateOrConnectWithoutExternalObservationsInput = {
@@ -71256,6 +76253,7 @@ export namespace Prisma {
     decisionPackages?: DecisionPackageCreateNestedManyWithoutCaseInput
     intelligenceAssessments?: InfrastructureIntelligenceAssessmentCreateNestedManyWithoutCaseInput
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationCreateNestedManyWithoutCaseInput
+    resourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutCaseInput
   }
 
   export type CaseUncheckedCreateWithoutExternalObservationsInput = {
@@ -71281,6 +76279,7 @@ export namespace Prisma {
     decisionPackages?: DecisionPackageUncheckedCreateNestedManyWithoutCaseInput
     intelligenceAssessments?: InfrastructureIntelligenceAssessmentUncheckedCreateNestedManyWithoutCaseInput
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUncheckedCreateNestedManyWithoutCaseInput
+    resourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutCaseInput
   }
 
   export type CaseCreateOrConnectWithoutExternalObservationsInput = {
@@ -71329,6 +76328,8 @@ export namespace Prisma {
     approvedGovernedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutApprovedByInput
     createdObservationSources?: ObservationSourceCreateNestedManyWithoutCreatedByInput
     deactivatedObservationSources?: ObservationSourceCreateNestedManyWithoutDeactivatedByInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutPreparedByInput
+    createdPortfolioScenarios?: PortfolioScenarioCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserUncheckedCreateWithoutIngestedExternalObservationsInput = {
@@ -71372,6 +76373,8 @@ export namespace Prisma {
     approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutApprovedByInput
     createdObservationSources?: ObservationSourceUncheckedCreateNestedManyWithoutCreatedByInput
     deactivatedObservationSources?: ObservationSourceUncheckedCreateNestedManyWithoutDeactivatedByInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutPreparedByInput
+    createdPortfolioScenarios?: PortfolioScenarioUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserCreateOrConnectWithoutIngestedExternalObservationsInput = {
@@ -71457,6 +76460,7 @@ export namespace Prisma {
     approvedActions?: ApprovedActionVersionUpdateManyWithoutDepartmentNestedInput
     governedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutDepartmentNestedInput
     observationSources?: ObservationSourceUpdateManyWithoutDepartmentNestedInput
+    portfolioScenarios?: PortfolioScenarioUpdateManyWithoutDepartmentNestedInput
   }
 
   export type DepartmentUncheckedUpdateWithoutExternalObservationsInput = {
@@ -71473,6 +76477,7 @@ export namespace Prisma {
     approvedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutDepartmentNestedInput
     governedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutDepartmentNestedInput
     observationSources?: ObservationSourceUncheckedUpdateManyWithoutDepartmentNestedInput
+    portfolioScenarios?: PortfolioScenarioUncheckedUpdateManyWithoutDepartmentNestedInput
   }
 
   export type JurisdictionUpsertWithoutExternalObservationsInput = {
@@ -71500,6 +76505,7 @@ export namespace Prisma {
     approvedActions?: ApprovedActionVersionUpdateManyWithoutJurisdictionNestedInput
     governedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutJurisdictionNestedInput
     observationSources?: ObservationSourceUpdateManyWithoutJurisdictionNestedInput
+    portfolioScenarios?: PortfolioScenarioUpdateManyWithoutJurisdictionNestedInput
   }
 
   export type JurisdictionUncheckedUpdateWithoutExternalObservationsInput = {
@@ -71516,6 +76522,7 @@ export namespace Prisma {
     approvedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutJurisdictionNestedInput
     governedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutJurisdictionNestedInput
     observationSources?: ObservationSourceUncheckedUpdateManyWithoutJurisdictionNestedInput
+    portfolioScenarios?: PortfolioScenarioUncheckedUpdateManyWithoutJurisdictionNestedInput
   }
 
   export type AssetUpsertWithoutExternalObservationsInput = {
@@ -71599,6 +76606,7 @@ export namespace Prisma {
     decisionPackages?: DecisionPackageUpdateManyWithoutCaseNestedInput
     intelligenceAssessments?: InfrastructureIntelligenceAssessmentUpdateManyWithoutCaseNestedInput
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUpdateManyWithoutCaseNestedInput
+    resourceEstimates?: CaseResourceEstimateUpdateManyWithoutCaseNestedInput
   }
 
   export type CaseUncheckedUpdateWithoutExternalObservationsInput = {
@@ -71624,6 +76632,7 @@ export namespace Prisma {
     decisionPackages?: DecisionPackageUncheckedUpdateManyWithoutCaseNestedInput
     intelligenceAssessments?: InfrastructureIntelligenceAssessmentUncheckedUpdateManyWithoutCaseNestedInput
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUncheckedUpdateManyWithoutCaseNestedInput
+    resourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutCaseNestedInput
   }
 
   export type UserUpsertWithoutIngestedExternalObservationsInput = {
@@ -71678,6 +76687,8 @@ export namespace Prisma {
     approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutApprovedByNestedInput
     createdObservationSources?: ObservationSourceUpdateManyWithoutCreatedByNestedInput
     deactivatedObservationSources?: ObservationSourceUpdateManyWithoutDeactivatedByNestedInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUpdateManyWithoutPreparedByNestedInput
+    createdPortfolioScenarios?: PortfolioScenarioUpdateManyWithoutCreatedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutIngestedExternalObservationsInput = {
@@ -71721,6 +76732,8 @@ export namespace Prisma {
     approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutApprovedByNestedInput
     createdObservationSources?: ObservationSourceUncheckedUpdateManyWithoutCreatedByNestedInput
     deactivatedObservationSources?: ObservationSourceUncheckedUpdateManyWithoutDeactivatedByNestedInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutPreparedByNestedInput
+    createdPortfolioScenarios?: PortfolioScenarioUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type CaseCreateWithoutInspectionsInput = {
@@ -71746,6 +76759,7 @@ export namespace Prisma {
     intelligenceAssessments?: InfrastructureIntelligenceAssessmentCreateNestedManyWithoutCaseInput
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationCreateNestedManyWithoutCaseInput
     externalObservations?: ExternalObservationCreateNestedManyWithoutCaseInput
+    resourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutCaseInput
   }
 
   export type CaseUncheckedCreateWithoutInspectionsInput = {
@@ -71771,6 +76785,7 @@ export namespace Prisma {
     intelligenceAssessments?: InfrastructureIntelligenceAssessmentUncheckedCreateNestedManyWithoutCaseInput
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUncheckedCreateNestedManyWithoutCaseInput
     externalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutCaseInput
+    resourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutCaseInput
   }
 
   export type CaseCreateOrConnectWithoutInspectionsInput = {
@@ -71819,6 +76834,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceCreateNestedManyWithoutCreatedByInput
     deactivatedObservationSources?: ObservationSourceCreateNestedManyWithoutDeactivatedByInput
     ingestedExternalObservations?: ExternalObservationCreateNestedManyWithoutIngestedByInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutPreparedByInput
+    createdPortfolioScenarios?: PortfolioScenarioCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserUncheckedCreateWithoutInspectionsInput = {
@@ -71862,6 +76879,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceUncheckedCreateNestedManyWithoutCreatedByInput
     deactivatedObservationSources?: ObservationSourceUncheckedCreateNestedManyWithoutDeactivatedByInput
     ingestedExternalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutIngestedByInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutPreparedByInput
+    createdPortfolioScenarios?: PortfolioScenarioUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserCreateOrConnectWithoutInspectionsInput = {
@@ -72065,6 +77084,7 @@ export namespace Prisma {
     intelligenceAssessments?: InfrastructureIntelligenceAssessmentUpdateManyWithoutCaseNestedInput
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUpdateManyWithoutCaseNestedInput
     externalObservations?: ExternalObservationUpdateManyWithoutCaseNestedInput
+    resourceEstimates?: CaseResourceEstimateUpdateManyWithoutCaseNestedInput
   }
 
   export type CaseUncheckedUpdateWithoutInspectionsInput = {
@@ -72090,6 +77110,7 @@ export namespace Prisma {
     intelligenceAssessments?: InfrastructureIntelligenceAssessmentUncheckedUpdateManyWithoutCaseNestedInput
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUncheckedUpdateManyWithoutCaseNestedInput
     externalObservations?: ExternalObservationUncheckedUpdateManyWithoutCaseNestedInput
+    resourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutCaseNestedInput
   }
 
   export type UserUpsertWithoutInspectionsInput = {
@@ -72144,6 +77165,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceUpdateManyWithoutCreatedByNestedInput
     deactivatedObservationSources?: ObservationSourceUpdateManyWithoutDeactivatedByNestedInput
     ingestedExternalObservations?: ExternalObservationUpdateManyWithoutIngestedByNestedInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUpdateManyWithoutPreparedByNestedInput
+    createdPortfolioScenarios?: PortfolioScenarioUpdateManyWithoutCreatedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutInspectionsInput = {
@@ -72187,6 +77210,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceUncheckedUpdateManyWithoutCreatedByNestedInput
     deactivatedObservationSources?: ObservationSourceUncheckedUpdateManyWithoutDeactivatedByNestedInput
     ingestedExternalObservations?: ExternalObservationUncheckedUpdateManyWithoutIngestedByNestedInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutPreparedByNestedInput
+    createdPortfolioScenarios?: PortfolioScenarioUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type RiskAssessmentUpsertWithWhereUniqueWithoutInspectionInput = {
@@ -72260,6 +77285,7 @@ export namespace Prisma {
     intelligenceAssessments?: InfrastructureIntelligenceAssessmentCreateNestedManyWithoutCaseInput
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationCreateNestedManyWithoutCaseInput
     externalObservations?: ExternalObservationCreateNestedManyWithoutCaseInput
+    resourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutCaseInput
   }
 
   export type CaseUncheckedCreateWithoutRiskAssessmentsInput = {
@@ -72285,6 +77311,7 @@ export namespace Prisma {
     intelligenceAssessments?: InfrastructureIntelligenceAssessmentUncheckedCreateNestedManyWithoutCaseInput
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUncheckedCreateNestedManyWithoutCaseInput
     externalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutCaseInput
+    resourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutCaseInput
   }
 
   export type CaseCreateOrConnectWithoutRiskAssessmentsInput = {
@@ -72543,6 +77570,7 @@ export namespace Prisma {
     intelligenceAssessments?: InfrastructureIntelligenceAssessmentUpdateManyWithoutCaseNestedInput
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUpdateManyWithoutCaseNestedInput
     externalObservations?: ExternalObservationUpdateManyWithoutCaseNestedInput
+    resourceEstimates?: CaseResourceEstimateUpdateManyWithoutCaseNestedInput
   }
 
   export type CaseUncheckedUpdateWithoutRiskAssessmentsInput = {
@@ -72568,6 +77596,7 @@ export namespace Prisma {
     intelligenceAssessments?: InfrastructureIntelligenceAssessmentUncheckedUpdateManyWithoutCaseNestedInput
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUncheckedUpdateManyWithoutCaseNestedInput
     externalObservations?: ExternalObservationUncheckedUpdateManyWithoutCaseNestedInput
+    resourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutCaseNestedInput
   }
 
   export type InspectionUpsertWithoutRiskAssessmentsInput = {
@@ -72728,6 +77757,7 @@ export namespace Prisma {
     decisionPackages?: DecisionPackageCreateNestedManyWithoutCaseInput
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationCreateNestedManyWithoutCaseInput
     externalObservations?: ExternalObservationCreateNestedManyWithoutCaseInput
+    resourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutCaseInput
   }
 
   export type CaseUncheckedCreateWithoutIntelligenceAssessmentsInput = {
@@ -72753,6 +77783,7 @@ export namespace Prisma {
     decisionPackages?: DecisionPackageUncheckedCreateNestedManyWithoutCaseInput
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUncheckedCreateNestedManyWithoutCaseInput
     externalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutCaseInput
+    resourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutCaseInput
   }
 
   export type CaseCreateOrConnectWithoutIntelligenceAssessmentsInput = {
@@ -72892,6 +77923,7 @@ export namespace Prisma {
     decisionPackages?: DecisionPackageUpdateManyWithoutCaseNestedInput
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUpdateManyWithoutCaseNestedInput
     externalObservations?: ExternalObservationUpdateManyWithoutCaseNestedInput
+    resourceEstimates?: CaseResourceEstimateUpdateManyWithoutCaseNestedInput
   }
 
   export type CaseUncheckedUpdateWithoutIntelligenceAssessmentsInput = {
@@ -72917,6 +77949,7 @@ export namespace Prisma {
     decisionPackages?: DecisionPackageUncheckedUpdateManyWithoutCaseNestedInput
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUncheckedUpdateManyWithoutCaseNestedInput
     externalObservations?: ExternalObservationUncheckedUpdateManyWithoutCaseNestedInput
+    resourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutCaseNestedInput
   }
 
   export type InspectionUpsertWithoutIntelligenceAssessmentsInput = {
@@ -73097,6 +78130,7 @@ export namespace Prisma {
     decisionPackages?: DecisionPackageCreateNestedManyWithoutCaseInput
     intelligenceAssessments?: InfrastructureIntelligenceAssessmentCreateNestedManyWithoutCaseInput
     externalObservations?: ExternalObservationCreateNestedManyWithoutCaseInput
+    resourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutCaseInput
   }
 
   export type CaseUncheckedCreateWithoutIntelligenceReconciliationsInput = {
@@ -73122,6 +78156,7 @@ export namespace Prisma {
     decisionPackages?: DecisionPackageUncheckedCreateNestedManyWithoutCaseInput
     intelligenceAssessments?: InfrastructureIntelligenceAssessmentUncheckedCreateNestedManyWithoutCaseInput
     externalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutCaseInput
+    resourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutCaseInput
   }
 
   export type CaseCreateOrConnectWithoutIntelligenceReconciliationsInput = {
@@ -73230,6 +78265,7 @@ export namespace Prisma {
     decisionPackages?: DecisionPackageUpdateManyWithoutCaseNestedInput
     intelligenceAssessments?: InfrastructureIntelligenceAssessmentUpdateManyWithoutCaseNestedInput
     externalObservations?: ExternalObservationUpdateManyWithoutCaseNestedInput
+    resourceEstimates?: CaseResourceEstimateUpdateManyWithoutCaseNestedInput
   }
 
   export type CaseUncheckedUpdateWithoutIntelligenceReconciliationsInput = {
@@ -73255,6 +78291,7 @@ export namespace Prisma {
     decisionPackages?: DecisionPackageUncheckedUpdateManyWithoutCaseNestedInput
     intelligenceAssessments?: InfrastructureIntelligenceAssessmentUncheckedUpdateManyWithoutCaseNestedInput
     externalObservations?: ExternalObservationUncheckedUpdateManyWithoutCaseNestedInput
+    resourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutCaseNestedInput
   }
 
   export type CaseCreateWithoutOperationalResponsePlansInput = {
@@ -73280,6 +78317,7 @@ export namespace Prisma {
     intelligenceAssessments?: InfrastructureIntelligenceAssessmentCreateNestedManyWithoutCaseInput
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationCreateNestedManyWithoutCaseInput
     externalObservations?: ExternalObservationCreateNestedManyWithoutCaseInput
+    resourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutCaseInput
   }
 
   export type CaseUncheckedCreateWithoutOperationalResponsePlansInput = {
@@ -73305,6 +78343,7 @@ export namespace Prisma {
     intelligenceAssessments?: InfrastructureIntelligenceAssessmentUncheckedCreateNestedManyWithoutCaseInput
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUncheckedCreateNestedManyWithoutCaseInput
     externalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutCaseInput
+    resourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutCaseInput
   }
 
   export type CaseCreateOrConnectWithoutOperationalResponsePlansInput = {
@@ -73523,6 +78562,7 @@ export namespace Prisma {
     intelligenceAssessments?: InfrastructureIntelligenceAssessmentUpdateManyWithoutCaseNestedInput
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUpdateManyWithoutCaseNestedInput
     externalObservations?: ExternalObservationUpdateManyWithoutCaseNestedInput
+    resourceEstimates?: CaseResourceEstimateUpdateManyWithoutCaseNestedInput
   }
 
   export type CaseUncheckedUpdateWithoutOperationalResponsePlansInput = {
@@ -73548,6 +78588,7 @@ export namespace Prisma {
     intelligenceAssessments?: InfrastructureIntelligenceAssessmentUncheckedUpdateManyWithoutCaseNestedInput
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUncheckedUpdateManyWithoutCaseNestedInput
     externalObservations?: ExternalObservationUncheckedUpdateManyWithoutCaseNestedInput
+    resourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutCaseNestedInput
   }
 
   export type RiskAssessmentUpsertWithoutOperationalResponsePlansInput = {
@@ -73746,6 +78787,7 @@ export namespace Prisma {
     intelligenceAssessments?: InfrastructureIntelligenceAssessmentCreateNestedManyWithoutCaseInput
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationCreateNestedManyWithoutCaseInput
     externalObservations?: ExternalObservationCreateNestedManyWithoutCaseInput
+    resourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutCaseInput
   }
 
   export type CaseUncheckedCreateWithoutDecisionPackagesInput = {
@@ -73771,6 +78813,7 @@ export namespace Prisma {
     intelligenceAssessments?: InfrastructureIntelligenceAssessmentUncheckedCreateNestedManyWithoutCaseInput
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUncheckedCreateNestedManyWithoutCaseInput
     externalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutCaseInput
+    resourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutCaseInput
   }
 
   export type CaseCreateOrConnectWithoutDecisionPackagesInput = {
@@ -73901,6 +78944,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceCreateNestedManyWithoutCreatedByInput
     deactivatedObservationSources?: ObservationSourceCreateNestedManyWithoutDeactivatedByInput
     ingestedExternalObservations?: ExternalObservationCreateNestedManyWithoutIngestedByInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutPreparedByInput
+    createdPortfolioScenarios?: PortfolioScenarioCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserUncheckedCreateWithoutPreparedDecisionPackagesInput = {
@@ -73944,6 +78989,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceUncheckedCreateNestedManyWithoutCreatedByInput
     deactivatedObservationSources?: ObservationSourceUncheckedCreateNestedManyWithoutDeactivatedByInput
     ingestedExternalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutIngestedByInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutPreparedByInput
+    createdPortfolioScenarios?: PortfolioScenarioUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserCreateOrConnectWithoutPreparedDecisionPackagesInput = {
@@ -74037,6 +79084,7 @@ export namespace Prisma {
     intelligenceAssessments?: InfrastructureIntelligenceAssessmentUpdateManyWithoutCaseNestedInput
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUpdateManyWithoutCaseNestedInput
     externalObservations?: ExternalObservationUpdateManyWithoutCaseNestedInput
+    resourceEstimates?: CaseResourceEstimateUpdateManyWithoutCaseNestedInput
   }
 
   export type CaseUncheckedUpdateWithoutDecisionPackagesInput = {
@@ -74062,6 +79110,7 @@ export namespace Prisma {
     intelligenceAssessments?: InfrastructureIntelligenceAssessmentUncheckedUpdateManyWithoutCaseNestedInput
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUncheckedUpdateManyWithoutCaseNestedInput
     externalObservations?: ExternalObservationUncheckedUpdateManyWithoutCaseNestedInput
+    resourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutCaseNestedInput
   }
 
   export type InspectionUpsertWithoutDecisionPackagesInput = {
@@ -74210,6 +79259,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceUpdateManyWithoutCreatedByNestedInput
     deactivatedObservationSources?: ObservationSourceUpdateManyWithoutDeactivatedByNestedInput
     ingestedExternalObservations?: ExternalObservationUpdateManyWithoutIngestedByNestedInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUpdateManyWithoutPreparedByNestedInput
+    createdPortfolioScenarios?: PortfolioScenarioUpdateManyWithoutCreatedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPreparedDecisionPackagesInput = {
@@ -74253,6 +79304,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceUncheckedUpdateManyWithoutCreatedByNestedInput
     deactivatedObservationSources?: ObservationSourceUncheckedUpdateManyWithoutDeactivatedByNestedInput
     ingestedExternalObservations?: ExternalObservationUncheckedUpdateManyWithoutIngestedByNestedInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutPreparedByNestedInput
+    createdPortfolioScenarios?: PortfolioScenarioUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type OperationalResponsePlanUpsertWithWhereUniqueWithoutDecisionPackageInput = {
@@ -74312,6 +79365,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceCreateNestedManyWithoutCreatedByInput
     deactivatedObservationSources?: ObservationSourceCreateNestedManyWithoutDeactivatedByInput
     ingestedExternalObservations?: ExternalObservationCreateNestedManyWithoutIngestedByInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutPreparedByInput
+    createdPortfolioScenarios?: PortfolioScenarioCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserUncheckedCreateWithoutApprovalAuthoritiesInput = {
@@ -74355,6 +79410,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceUncheckedCreateNestedManyWithoutCreatedByInput
     deactivatedObservationSources?: ObservationSourceUncheckedCreateNestedManyWithoutDeactivatedByInput
     ingestedExternalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutIngestedByInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutPreparedByInput
+    createdPortfolioScenarios?: PortfolioScenarioUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserCreateOrConnectWithoutApprovalAuthoritiesInput = {
@@ -74376,6 +79433,7 @@ export namespace Prisma {
     governedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutDepartmentInput
     observationSources?: ObservationSourceCreateNestedManyWithoutDepartmentInput
     externalObservations?: ExternalObservationCreateNestedManyWithoutDepartmentInput
+    portfolioScenarios?: PortfolioScenarioCreateNestedManyWithoutDepartmentInput
   }
 
   export type DepartmentUncheckedCreateWithoutApprovalAuthoritiesInput = {
@@ -74392,6 +79450,7 @@ export namespace Prisma {
     governedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutDepartmentInput
     observationSources?: ObservationSourceUncheckedCreateNestedManyWithoutDepartmentInput
     externalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutDepartmentInput
+    portfolioScenarios?: PortfolioScenarioUncheckedCreateNestedManyWithoutDepartmentInput
   }
 
   export type DepartmentCreateOrConnectWithoutApprovalAuthoritiesInput = {
@@ -74413,6 +79472,7 @@ export namespace Prisma {
     governedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutJurisdictionInput
     observationSources?: ObservationSourceCreateNestedManyWithoutJurisdictionInput
     externalObservations?: ExternalObservationCreateNestedManyWithoutJurisdictionInput
+    portfolioScenarios?: PortfolioScenarioCreateNestedManyWithoutJurisdictionInput
   }
 
   export type JurisdictionUncheckedCreateWithoutApprovalAuthoritiesInput = {
@@ -74429,6 +79489,7 @@ export namespace Prisma {
     governedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutJurisdictionInput
     observationSources?: ObservationSourceUncheckedCreateNestedManyWithoutJurisdictionInput
     externalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutJurisdictionInput
+    portfolioScenarios?: PortfolioScenarioUncheckedCreateNestedManyWithoutJurisdictionInput
   }
 
   export type JurisdictionCreateOrConnectWithoutApprovalAuthoritiesInput = {
@@ -74556,6 +79617,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceUpdateManyWithoutCreatedByNestedInput
     deactivatedObservationSources?: ObservationSourceUpdateManyWithoutDeactivatedByNestedInput
     ingestedExternalObservations?: ExternalObservationUpdateManyWithoutIngestedByNestedInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUpdateManyWithoutPreparedByNestedInput
+    createdPortfolioScenarios?: PortfolioScenarioUpdateManyWithoutCreatedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutApprovalAuthoritiesInput = {
@@ -74599,6 +79662,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceUncheckedUpdateManyWithoutCreatedByNestedInput
     deactivatedObservationSources?: ObservationSourceUncheckedUpdateManyWithoutDeactivatedByNestedInput
     ingestedExternalObservations?: ExternalObservationUncheckedUpdateManyWithoutIngestedByNestedInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutPreparedByNestedInput
+    createdPortfolioScenarios?: PortfolioScenarioUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type DepartmentUpsertWithoutApprovalAuthoritiesInput = {
@@ -74626,6 +79691,7 @@ export namespace Prisma {
     governedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutDepartmentNestedInput
     observationSources?: ObservationSourceUpdateManyWithoutDepartmentNestedInput
     externalObservations?: ExternalObservationUpdateManyWithoutDepartmentNestedInput
+    portfolioScenarios?: PortfolioScenarioUpdateManyWithoutDepartmentNestedInput
   }
 
   export type DepartmentUncheckedUpdateWithoutApprovalAuthoritiesInput = {
@@ -74642,6 +79708,7 @@ export namespace Prisma {
     governedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutDepartmentNestedInput
     observationSources?: ObservationSourceUncheckedUpdateManyWithoutDepartmentNestedInput
     externalObservations?: ExternalObservationUncheckedUpdateManyWithoutDepartmentNestedInput
+    portfolioScenarios?: PortfolioScenarioUncheckedUpdateManyWithoutDepartmentNestedInput
   }
 
   export type JurisdictionUpsertWithoutApprovalAuthoritiesInput = {
@@ -74669,6 +79736,7 @@ export namespace Prisma {
     governedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutJurisdictionNestedInput
     observationSources?: ObservationSourceUpdateManyWithoutJurisdictionNestedInput
     externalObservations?: ExternalObservationUpdateManyWithoutJurisdictionNestedInput
+    portfolioScenarios?: PortfolioScenarioUpdateManyWithoutJurisdictionNestedInput
   }
 
   export type JurisdictionUncheckedUpdateWithoutApprovalAuthoritiesInput = {
@@ -74685,6 +79753,7 @@ export namespace Prisma {
     governedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutJurisdictionNestedInput
     observationSources?: ObservationSourceUncheckedUpdateManyWithoutJurisdictionNestedInput
     externalObservations?: ExternalObservationUncheckedUpdateManyWithoutJurisdictionNestedInput
+    portfolioScenarios?: PortfolioScenarioUncheckedUpdateManyWithoutJurisdictionNestedInput
   }
 
   export type OrpDecisionUpsertWithWhereUniqueWithoutAuthorityGrantInput = {
@@ -74742,6 +79811,7 @@ export namespace Prisma {
     intelligenceAssessments?: InfrastructureIntelligenceAssessmentCreateNestedManyWithoutCaseInput
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationCreateNestedManyWithoutCaseInput
     externalObservations?: ExternalObservationCreateNestedManyWithoutCaseInput
+    resourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutCaseInput
   }
 
   export type CaseUncheckedCreateWithoutOrpDecisionsInput = {
@@ -74767,6 +79837,7 @@ export namespace Prisma {
     intelligenceAssessments?: InfrastructureIntelligenceAssessmentUncheckedCreateNestedManyWithoutCaseInput
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUncheckedCreateNestedManyWithoutCaseInput
     externalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutCaseInput
+    resourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutCaseInput
   }
 
   export type CaseCreateOrConnectWithoutOrpDecisionsInput = {
@@ -74862,6 +79933,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceCreateNestedManyWithoutCreatedByInput
     deactivatedObservationSources?: ObservationSourceCreateNestedManyWithoutDeactivatedByInput
     ingestedExternalObservations?: ExternalObservationCreateNestedManyWithoutIngestedByInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutPreparedByInput
+    createdPortfolioScenarios?: PortfolioScenarioCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserUncheckedCreateWithoutReviewedOrpDecisionsInput = {
@@ -74905,6 +79978,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceUncheckedCreateNestedManyWithoutCreatedByInput
     deactivatedObservationSources?: ObservationSourceUncheckedCreateNestedManyWithoutDeactivatedByInput
     ingestedExternalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutIngestedByInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutPreparedByInput
+    createdPortfolioScenarios?: PortfolioScenarioUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserCreateOrConnectWithoutReviewedOrpDecisionsInput = {
@@ -74998,6 +80073,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceCreateNestedManyWithoutCreatedByInput
     deactivatedObservationSources?: ObservationSourceCreateNestedManyWithoutDeactivatedByInput
     ingestedExternalObservations?: ExternalObservationCreateNestedManyWithoutIngestedByInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutPreparedByInput
+    createdPortfolioScenarios?: PortfolioScenarioCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserUncheckedCreateWithoutForwardedOrpDecisionsInput = {
@@ -75041,6 +80118,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceUncheckedCreateNestedManyWithoutCreatedByInput
     deactivatedObservationSources?: ObservationSourceUncheckedCreateNestedManyWithoutDeactivatedByInput
     ingestedExternalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutIngestedByInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutPreparedByInput
+    createdPortfolioScenarios?: PortfolioScenarioUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserCreateOrConnectWithoutForwardedOrpDecisionsInput = {
@@ -75135,6 +80214,7 @@ export namespace Prisma {
     intelligenceAssessments?: InfrastructureIntelligenceAssessmentUpdateManyWithoutCaseNestedInput
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUpdateManyWithoutCaseNestedInput
     externalObservations?: ExternalObservationUpdateManyWithoutCaseNestedInput
+    resourceEstimates?: CaseResourceEstimateUpdateManyWithoutCaseNestedInput
   }
 
   export type CaseUncheckedUpdateWithoutOrpDecisionsInput = {
@@ -75160,6 +80240,7 @@ export namespace Prisma {
     intelligenceAssessments?: InfrastructureIntelligenceAssessmentUncheckedUpdateManyWithoutCaseNestedInput
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUncheckedUpdateManyWithoutCaseNestedInput
     externalObservations?: ExternalObservationUncheckedUpdateManyWithoutCaseNestedInput
+    resourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutCaseNestedInput
   }
 
   export type OperationalResponsePlanUpsertWithoutDecisionsInput = {
@@ -75267,6 +80348,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceUpdateManyWithoutCreatedByNestedInput
     deactivatedObservationSources?: ObservationSourceUpdateManyWithoutDeactivatedByNestedInput
     ingestedExternalObservations?: ExternalObservationUpdateManyWithoutIngestedByNestedInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUpdateManyWithoutPreparedByNestedInput
+    createdPortfolioScenarios?: PortfolioScenarioUpdateManyWithoutCreatedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutReviewedOrpDecisionsInput = {
@@ -75310,6 +80393,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceUncheckedUpdateManyWithoutCreatedByNestedInput
     deactivatedObservationSources?: ObservationSourceUncheckedUpdateManyWithoutDeactivatedByNestedInput
     ingestedExternalObservations?: ExternalObservationUncheckedUpdateManyWithoutIngestedByNestedInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutPreparedByNestedInput
+    createdPortfolioScenarios?: PortfolioScenarioUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type ApprovalAuthorityUpsertWithoutDecisionsInput = {
@@ -75415,6 +80500,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceUpdateManyWithoutCreatedByNestedInput
     deactivatedObservationSources?: ObservationSourceUpdateManyWithoutDeactivatedByNestedInput
     ingestedExternalObservations?: ExternalObservationUpdateManyWithoutIngestedByNestedInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUpdateManyWithoutPreparedByNestedInput
+    createdPortfolioScenarios?: PortfolioScenarioUpdateManyWithoutCreatedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutForwardedOrpDecisionsInput = {
@@ -75458,6 +80545,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceUncheckedUpdateManyWithoutCreatedByNestedInput
     deactivatedObservationSources?: ObservationSourceUncheckedUpdateManyWithoutDeactivatedByNestedInput
     ingestedExternalObservations?: ExternalObservationUncheckedUpdateManyWithoutIngestedByNestedInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutPreparedByNestedInput
+    createdPortfolioScenarios?: PortfolioScenarioUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type ExecutionPlanUpsertWithoutApprovalDecisionInput = {
@@ -75589,6 +80678,7 @@ export namespace Prisma {
     intelligenceAssessments?: InfrastructureIntelligenceAssessmentCreateNestedManyWithoutCaseInput
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationCreateNestedManyWithoutCaseInput
     externalObservations?: ExternalObservationCreateNestedManyWithoutCaseInput
+    resourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutCaseInput
   }
 
   export type CaseUncheckedCreateWithoutExecutionPlansInput = {
@@ -75614,6 +80704,7 @@ export namespace Prisma {
     intelligenceAssessments?: InfrastructureIntelligenceAssessmentUncheckedCreateNestedManyWithoutCaseInput
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUncheckedCreateNestedManyWithoutCaseInput
     externalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutCaseInput
+    resourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutCaseInput
   }
 
   export type CaseCreateOrConnectWithoutExecutionPlansInput = {
@@ -75695,6 +80786,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceCreateNestedManyWithoutCreatedByInput
     deactivatedObservationSources?: ObservationSourceCreateNestedManyWithoutDeactivatedByInput
     ingestedExternalObservations?: ExternalObservationCreateNestedManyWithoutIngestedByInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutPreparedByInput
+    createdPortfolioScenarios?: PortfolioScenarioCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserUncheckedCreateWithoutCreatedExecutionPlansInput = {
@@ -75738,6 +80831,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceUncheckedCreateNestedManyWithoutCreatedByInput
     deactivatedObservationSources?: ObservationSourceUncheckedCreateNestedManyWithoutDeactivatedByInput
     ingestedExternalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutIngestedByInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutPreparedByInput
+    createdPortfolioScenarios?: PortfolioScenarioUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserCreateOrConnectWithoutCreatedExecutionPlansInput = {
@@ -76013,6 +81108,7 @@ export namespace Prisma {
     intelligenceAssessments?: InfrastructureIntelligenceAssessmentUpdateManyWithoutCaseNestedInput
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUpdateManyWithoutCaseNestedInput
     externalObservations?: ExternalObservationUpdateManyWithoutCaseNestedInput
+    resourceEstimates?: CaseResourceEstimateUpdateManyWithoutCaseNestedInput
   }
 
   export type CaseUncheckedUpdateWithoutExecutionPlansInput = {
@@ -76038,6 +81134,7 @@ export namespace Prisma {
     intelligenceAssessments?: InfrastructureIntelligenceAssessmentUncheckedUpdateManyWithoutCaseNestedInput
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUncheckedUpdateManyWithoutCaseNestedInput
     externalObservations?: ExternalObservationUncheckedUpdateManyWithoutCaseNestedInput
+    resourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutCaseNestedInput
   }
 
   export type OrpDecisionUpsertWithoutExecutionPlanInput = {
@@ -76131,6 +81228,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceUpdateManyWithoutCreatedByNestedInput
     deactivatedObservationSources?: ObservationSourceUpdateManyWithoutDeactivatedByNestedInput
     ingestedExternalObservations?: ExternalObservationUpdateManyWithoutIngestedByNestedInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUpdateManyWithoutPreparedByNestedInput
+    createdPortfolioScenarios?: PortfolioScenarioUpdateManyWithoutCreatedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCreatedExecutionPlansInput = {
@@ -76174,6 +81273,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceUncheckedUpdateManyWithoutCreatedByNestedInput
     deactivatedObservationSources?: ObservationSourceUncheckedUpdateManyWithoutDeactivatedByNestedInput
     ingestedExternalObservations?: ExternalObservationUncheckedUpdateManyWithoutIngestedByNestedInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutPreparedByNestedInput
+    createdPortfolioScenarios?: PortfolioScenarioUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type ExecutionTaskUpsertWithWhereUniqueWithoutExecutionPlanInput = {
@@ -76349,6 +81450,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceCreateNestedManyWithoutCreatedByInput
     deactivatedObservationSources?: ObservationSourceCreateNestedManyWithoutDeactivatedByInput
     ingestedExternalObservations?: ExternalObservationCreateNestedManyWithoutIngestedByInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutPreparedByInput
+    createdPortfolioScenarios?: PortfolioScenarioCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserUncheckedCreateWithoutAssignedExecutionTasksInput = {
@@ -76392,6 +81495,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceUncheckedCreateNestedManyWithoutCreatedByInput
     deactivatedObservationSources?: ObservationSourceUncheckedCreateNestedManyWithoutDeactivatedByInput
     ingestedExternalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutIngestedByInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutPreparedByInput
+    createdPortfolioScenarios?: PortfolioScenarioUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserCreateOrConnectWithoutAssignedExecutionTasksInput = {
@@ -76440,6 +81545,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceCreateNestedManyWithoutCreatedByInput
     deactivatedObservationSources?: ObservationSourceCreateNestedManyWithoutDeactivatedByInput
     ingestedExternalObservations?: ExternalObservationCreateNestedManyWithoutIngestedByInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutPreparedByInput
+    createdPortfolioScenarios?: PortfolioScenarioCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserUncheckedCreateWithoutAssignedByExecutionTasksInput = {
@@ -76483,6 +81590,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceUncheckedCreateNestedManyWithoutCreatedByInput
     deactivatedObservationSources?: ObservationSourceUncheckedCreateNestedManyWithoutDeactivatedByInput
     ingestedExternalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutIngestedByInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutPreparedByInput
+    createdPortfolioScenarios?: PortfolioScenarioUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserCreateOrConnectWithoutAssignedByExecutionTasksInput = {
@@ -76531,6 +81640,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceCreateNestedManyWithoutCreatedByInput
     deactivatedObservationSources?: ObservationSourceCreateNestedManyWithoutDeactivatedByInput
     ingestedExternalObservations?: ExternalObservationCreateNestedManyWithoutIngestedByInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutPreparedByInput
+    createdPortfolioScenarios?: PortfolioScenarioCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserUncheckedCreateWithoutCompletedExecutionTasksInput = {
@@ -76574,6 +81685,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceUncheckedCreateNestedManyWithoutCreatedByInput
     deactivatedObservationSources?: ObservationSourceUncheckedCreateNestedManyWithoutDeactivatedByInput
     ingestedExternalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutIngestedByInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutPreparedByInput
+    createdPortfolioScenarios?: PortfolioScenarioUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserCreateOrConnectWithoutCompletedExecutionTasksInput = {
@@ -76622,6 +81735,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceCreateNestedManyWithoutCreatedByInput
     deactivatedObservationSources?: ObservationSourceCreateNestedManyWithoutDeactivatedByInput
     ingestedExternalObservations?: ExternalObservationCreateNestedManyWithoutIngestedByInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutPreparedByInput
+    createdPortfolioScenarios?: PortfolioScenarioCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserUncheckedCreateWithoutVerifiedExecutionTasksInput = {
@@ -76665,6 +81780,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceUncheckedCreateNestedManyWithoutCreatedByInput
     deactivatedObservationSources?: ObservationSourceUncheckedCreateNestedManyWithoutDeactivatedByInput
     ingestedExternalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutIngestedByInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutPreparedByInput
+    createdPortfolioScenarios?: PortfolioScenarioUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserCreateOrConnectWithoutVerifiedExecutionTasksInput = {
@@ -76713,6 +81830,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceCreateNestedManyWithoutCreatedByInput
     deactivatedObservationSources?: ObservationSourceCreateNestedManyWithoutDeactivatedByInput
     ingestedExternalObservations?: ExternalObservationCreateNestedManyWithoutIngestedByInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutPreparedByInput
+    createdPortfolioScenarios?: PortfolioScenarioCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserUncheckedCreateWithoutCancelledExecutionTasksInput = {
@@ -76756,6 +81875,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceUncheckedCreateNestedManyWithoutCreatedByInput
     deactivatedObservationSources?: ObservationSourceUncheckedCreateNestedManyWithoutDeactivatedByInput
     ingestedExternalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutIngestedByInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutPreparedByInput
+    createdPortfolioScenarios?: PortfolioScenarioUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserCreateOrConnectWithoutCancelledExecutionTasksInput = {
@@ -77161,6 +82282,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceUpdateManyWithoutCreatedByNestedInput
     deactivatedObservationSources?: ObservationSourceUpdateManyWithoutDeactivatedByNestedInput
     ingestedExternalObservations?: ExternalObservationUpdateManyWithoutIngestedByNestedInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUpdateManyWithoutPreparedByNestedInput
+    createdPortfolioScenarios?: PortfolioScenarioUpdateManyWithoutCreatedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAssignedExecutionTasksInput = {
@@ -77204,6 +82327,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceUncheckedUpdateManyWithoutCreatedByNestedInput
     deactivatedObservationSources?: ObservationSourceUncheckedUpdateManyWithoutDeactivatedByNestedInput
     ingestedExternalObservations?: ExternalObservationUncheckedUpdateManyWithoutIngestedByNestedInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutPreparedByNestedInput
+    createdPortfolioScenarios?: PortfolioScenarioUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type UserUpsertWithoutAssignedByExecutionTasksInput = {
@@ -77258,6 +82383,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceUpdateManyWithoutCreatedByNestedInput
     deactivatedObservationSources?: ObservationSourceUpdateManyWithoutDeactivatedByNestedInput
     ingestedExternalObservations?: ExternalObservationUpdateManyWithoutIngestedByNestedInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUpdateManyWithoutPreparedByNestedInput
+    createdPortfolioScenarios?: PortfolioScenarioUpdateManyWithoutCreatedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAssignedByExecutionTasksInput = {
@@ -77301,6 +82428,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceUncheckedUpdateManyWithoutCreatedByNestedInput
     deactivatedObservationSources?: ObservationSourceUncheckedUpdateManyWithoutDeactivatedByNestedInput
     ingestedExternalObservations?: ExternalObservationUncheckedUpdateManyWithoutIngestedByNestedInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutPreparedByNestedInput
+    createdPortfolioScenarios?: PortfolioScenarioUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type UserUpsertWithoutCompletedExecutionTasksInput = {
@@ -77355,6 +82484,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceUpdateManyWithoutCreatedByNestedInput
     deactivatedObservationSources?: ObservationSourceUpdateManyWithoutDeactivatedByNestedInput
     ingestedExternalObservations?: ExternalObservationUpdateManyWithoutIngestedByNestedInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUpdateManyWithoutPreparedByNestedInput
+    createdPortfolioScenarios?: PortfolioScenarioUpdateManyWithoutCreatedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCompletedExecutionTasksInput = {
@@ -77398,6 +82529,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceUncheckedUpdateManyWithoutCreatedByNestedInput
     deactivatedObservationSources?: ObservationSourceUncheckedUpdateManyWithoutDeactivatedByNestedInput
     ingestedExternalObservations?: ExternalObservationUncheckedUpdateManyWithoutIngestedByNestedInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutPreparedByNestedInput
+    createdPortfolioScenarios?: PortfolioScenarioUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type UserUpsertWithoutVerifiedExecutionTasksInput = {
@@ -77452,6 +82585,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceUpdateManyWithoutCreatedByNestedInput
     deactivatedObservationSources?: ObservationSourceUpdateManyWithoutDeactivatedByNestedInput
     ingestedExternalObservations?: ExternalObservationUpdateManyWithoutIngestedByNestedInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUpdateManyWithoutPreparedByNestedInput
+    createdPortfolioScenarios?: PortfolioScenarioUpdateManyWithoutCreatedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutVerifiedExecutionTasksInput = {
@@ -77495,6 +82630,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceUncheckedUpdateManyWithoutCreatedByNestedInput
     deactivatedObservationSources?: ObservationSourceUncheckedUpdateManyWithoutDeactivatedByNestedInput
     ingestedExternalObservations?: ExternalObservationUncheckedUpdateManyWithoutIngestedByNestedInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutPreparedByNestedInput
+    createdPortfolioScenarios?: PortfolioScenarioUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type UserUpsertWithoutCancelledExecutionTasksInput = {
@@ -77549,6 +82686,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceUpdateManyWithoutCreatedByNestedInput
     deactivatedObservationSources?: ObservationSourceUpdateManyWithoutDeactivatedByNestedInput
     ingestedExternalObservations?: ExternalObservationUpdateManyWithoutIngestedByNestedInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUpdateManyWithoutPreparedByNestedInput
+    createdPortfolioScenarios?: PortfolioScenarioUpdateManyWithoutCreatedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCancelledExecutionTasksInput = {
@@ -77592,6 +82731,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceUncheckedUpdateManyWithoutCreatedByNestedInput
     deactivatedObservationSources?: ObservationSourceUncheckedUpdateManyWithoutDeactivatedByNestedInput
     ingestedExternalObservations?: ExternalObservationUncheckedUpdateManyWithoutIngestedByNestedInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutPreparedByNestedInput
+    createdPortfolioScenarios?: PortfolioScenarioUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type ExecutionEvidenceUpsertWithWhereUniqueWithoutExecutionTaskInput = {
@@ -78103,6 +83244,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceCreateNestedManyWithoutCreatedByInput
     deactivatedObservationSources?: ObservationSourceCreateNestedManyWithoutDeactivatedByInput
     ingestedExternalObservations?: ExternalObservationCreateNestedManyWithoutIngestedByInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutPreparedByInput
+    createdPortfolioScenarios?: PortfolioScenarioCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserUncheckedCreateWithoutCreatedExecutionTaskDependenciesInput = {
@@ -78146,6 +83289,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceUncheckedCreateNestedManyWithoutCreatedByInput
     deactivatedObservationSources?: ObservationSourceUncheckedCreateNestedManyWithoutDeactivatedByInput
     ingestedExternalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutIngestedByInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutPreparedByInput
+    createdPortfolioScenarios?: PortfolioScenarioUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserCreateOrConnectWithoutCreatedExecutionTaskDependenciesInput = {
@@ -78458,6 +83603,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceUpdateManyWithoutCreatedByNestedInput
     deactivatedObservationSources?: ObservationSourceUpdateManyWithoutDeactivatedByNestedInput
     ingestedExternalObservations?: ExternalObservationUpdateManyWithoutIngestedByNestedInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUpdateManyWithoutPreparedByNestedInput
+    createdPortfolioScenarios?: PortfolioScenarioUpdateManyWithoutCreatedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCreatedExecutionTaskDependenciesInput = {
@@ -78501,6 +83648,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceUncheckedUpdateManyWithoutCreatedByNestedInput
     deactivatedObservationSources?: ObservationSourceUncheckedUpdateManyWithoutDeactivatedByNestedInput
     ingestedExternalObservations?: ExternalObservationUncheckedUpdateManyWithoutIngestedByNestedInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutPreparedByNestedInput
+    createdPortfolioScenarios?: PortfolioScenarioUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type ExecutionTaskCreateWithoutBlockerEventsInput = {
@@ -78635,6 +83784,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceCreateNestedManyWithoutCreatedByInput
     deactivatedObservationSources?: ObservationSourceCreateNestedManyWithoutDeactivatedByInput
     ingestedExternalObservations?: ExternalObservationCreateNestedManyWithoutIngestedByInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutPreparedByInput
+    createdPortfolioScenarios?: PortfolioScenarioCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserUncheckedCreateWithoutBlockedExecutionTaskEventsInput = {
@@ -78678,6 +83829,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceUncheckedCreateNestedManyWithoutCreatedByInput
     deactivatedObservationSources?: ObservationSourceUncheckedCreateNestedManyWithoutDeactivatedByInput
     ingestedExternalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutIngestedByInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutPreparedByInput
+    createdPortfolioScenarios?: PortfolioScenarioUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserCreateOrConnectWithoutBlockedExecutionTaskEventsInput = {
@@ -78726,6 +83879,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceCreateNestedManyWithoutCreatedByInput
     deactivatedObservationSources?: ObservationSourceCreateNestedManyWithoutDeactivatedByInput
     ingestedExternalObservations?: ExternalObservationCreateNestedManyWithoutIngestedByInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutPreparedByInput
+    createdPortfolioScenarios?: PortfolioScenarioCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserUncheckedCreateWithoutResolvedExecutionTaskEventsInput = {
@@ -78769,6 +83924,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceUncheckedCreateNestedManyWithoutCreatedByInput
     deactivatedObservationSources?: ObservationSourceUncheckedCreateNestedManyWithoutDeactivatedByInput
     ingestedExternalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutIngestedByInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutPreparedByInput
+    createdPortfolioScenarios?: PortfolioScenarioUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserCreateOrConnectWithoutResolvedExecutionTaskEventsInput = {
@@ -78925,6 +84082,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceUpdateManyWithoutCreatedByNestedInput
     deactivatedObservationSources?: ObservationSourceUpdateManyWithoutDeactivatedByNestedInput
     ingestedExternalObservations?: ExternalObservationUpdateManyWithoutIngestedByNestedInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUpdateManyWithoutPreparedByNestedInput
+    createdPortfolioScenarios?: PortfolioScenarioUpdateManyWithoutCreatedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutBlockedExecutionTaskEventsInput = {
@@ -78968,6 +84127,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceUncheckedUpdateManyWithoutCreatedByNestedInput
     deactivatedObservationSources?: ObservationSourceUncheckedUpdateManyWithoutDeactivatedByNestedInput
     ingestedExternalObservations?: ExternalObservationUncheckedUpdateManyWithoutIngestedByNestedInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutPreparedByNestedInput
+    createdPortfolioScenarios?: PortfolioScenarioUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type UserUpsertWithoutResolvedExecutionTaskEventsInput = {
@@ -79022,6 +84183,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceUpdateManyWithoutCreatedByNestedInput
     deactivatedObservationSources?: ObservationSourceUpdateManyWithoutDeactivatedByNestedInput
     ingestedExternalObservations?: ExternalObservationUpdateManyWithoutIngestedByNestedInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUpdateManyWithoutPreparedByNestedInput
+    createdPortfolioScenarios?: PortfolioScenarioUpdateManyWithoutCreatedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutResolvedExecutionTaskEventsInput = {
@@ -79065,6 +84228,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceUncheckedUpdateManyWithoutCreatedByNestedInput
     deactivatedObservationSources?: ObservationSourceUncheckedUpdateManyWithoutDeactivatedByNestedInput
     ingestedExternalObservations?: ExternalObservationUncheckedUpdateManyWithoutIngestedByNestedInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutPreparedByNestedInput
+    createdPortfolioScenarios?: PortfolioScenarioUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type ExecutionPlanCreateWithoutScheduleRevisionsInput = {
@@ -79252,6 +84417,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceCreateNestedManyWithoutCreatedByInput
     deactivatedObservationSources?: ObservationSourceCreateNestedManyWithoutDeactivatedByInput
     ingestedExternalObservations?: ExternalObservationCreateNestedManyWithoutIngestedByInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutPreparedByInput
+    createdPortfolioScenarios?: PortfolioScenarioCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserUncheckedCreateWithoutExecutionScheduleRevisionsInput = {
@@ -79295,6 +84462,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceUncheckedCreateNestedManyWithoutCreatedByInput
     deactivatedObservationSources?: ObservationSourceUncheckedCreateNestedManyWithoutDeactivatedByInput
     ingestedExternalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutIngestedByInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutPreparedByInput
+    createdPortfolioScenarios?: PortfolioScenarioUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserCreateOrConnectWithoutExecutionScheduleRevisionsInput = {
@@ -79510,6 +84679,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceUpdateManyWithoutCreatedByNestedInput
     deactivatedObservationSources?: ObservationSourceUpdateManyWithoutDeactivatedByNestedInput
     ingestedExternalObservations?: ExternalObservationUpdateManyWithoutIngestedByNestedInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUpdateManyWithoutPreparedByNestedInput
+    createdPortfolioScenarios?: PortfolioScenarioUpdateManyWithoutCreatedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutExecutionScheduleRevisionsInput = {
@@ -79553,6 +84724,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceUncheckedUpdateManyWithoutCreatedByNestedInput
     deactivatedObservationSources?: ObservationSourceUncheckedUpdateManyWithoutDeactivatedByNestedInput
     ingestedExternalObservations?: ExternalObservationUncheckedUpdateManyWithoutIngestedByNestedInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutPreparedByNestedInput
+    createdPortfolioScenarios?: PortfolioScenarioUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type ExecutionTaskCreateWithoutEvidenceInput = {
@@ -79687,6 +84860,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceCreateNestedManyWithoutCreatedByInput
     deactivatedObservationSources?: ObservationSourceCreateNestedManyWithoutDeactivatedByInput
     ingestedExternalObservations?: ExternalObservationCreateNestedManyWithoutIngestedByInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutPreparedByInput
+    createdPortfolioScenarios?: PortfolioScenarioCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserUncheckedCreateWithoutSubmittedExecutionEvidenceInput = {
@@ -79730,6 +84905,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceUncheckedCreateNestedManyWithoutCreatedByInput
     deactivatedObservationSources?: ObservationSourceUncheckedCreateNestedManyWithoutDeactivatedByInput
     ingestedExternalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutIngestedByInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutPreparedByInput
+    createdPortfolioScenarios?: PortfolioScenarioUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserCreateOrConnectWithoutSubmittedExecutionEvidenceInput = {
@@ -79886,6 +85063,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceUpdateManyWithoutCreatedByNestedInput
     deactivatedObservationSources?: ObservationSourceUpdateManyWithoutDeactivatedByNestedInput
     ingestedExternalObservations?: ExternalObservationUpdateManyWithoutIngestedByNestedInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUpdateManyWithoutPreparedByNestedInput
+    createdPortfolioScenarios?: PortfolioScenarioUpdateManyWithoutCreatedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSubmittedExecutionEvidenceInput = {
@@ -79929,6 +85108,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceUncheckedUpdateManyWithoutCreatedByNestedInput
     deactivatedObservationSources?: ObservationSourceUncheckedUpdateManyWithoutDeactivatedByNestedInput
     ingestedExternalObservations?: ExternalObservationUncheckedUpdateManyWithoutIngestedByNestedInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutPreparedByNestedInput
+    createdPortfolioScenarios?: PortfolioScenarioUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type CaseCreateWithoutClosureInput = {
@@ -79954,6 +85135,7 @@ export namespace Prisma {
     intelligenceAssessments?: InfrastructureIntelligenceAssessmentCreateNestedManyWithoutCaseInput
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationCreateNestedManyWithoutCaseInput
     externalObservations?: ExternalObservationCreateNestedManyWithoutCaseInput
+    resourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutCaseInput
   }
 
   export type CaseUncheckedCreateWithoutClosureInput = {
@@ -79979,6 +85161,7 @@ export namespace Prisma {
     intelligenceAssessments?: InfrastructureIntelligenceAssessmentUncheckedCreateNestedManyWithoutCaseInput
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUncheckedCreateNestedManyWithoutCaseInput
     externalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutCaseInput
+    resourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutCaseInput
   }
 
   export type CaseCreateOrConnectWithoutClosureInput = {
@@ -80080,6 +85263,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceCreateNestedManyWithoutCreatedByInput
     deactivatedObservationSources?: ObservationSourceCreateNestedManyWithoutDeactivatedByInput
     ingestedExternalObservations?: ExternalObservationCreateNestedManyWithoutIngestedByInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutPreparedByInput
+    createdPortfolioScenarios?: PortfolioScenarioCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserUncheckedCreateWithoutClosedCasesInput = {
@@ -80123,6 +85308,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceUncheckedCreateNestedManyWithoutCreatedByInput
     deactivatedObservationSources?: ObservationSourceUncheckedCreateNestedManyWithoutDeactivatedByInput
     ingestedExternalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutIngestedByInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutPreparedByInput
+    createdPortfolioScenarios?: PortfolioScenarioUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserCreateOrConnectWithoutClosedCasesInput = {
@@ -80209,6 +85396,7 @@ export namespace Prisma {
     intelligenceAssessments?: InfrastructureIntelligenceAssessmentUpdateManyWithoutCaseNestedInput
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUpdateManyWithoutCaseNestedInput
     externalObservations?: ExternalObservationUpdateManyWithoutCaseNestedInput
+    resourceEstimates?: CaseResourceEstimateUpdateManyWithoutCaseNestedInput
   }
 
   export type CaseUncheckedUpdateWithoutClosureInput = {
@@ -80234,6 +85422,7 @@ export namespace Prisma {
     intelligenceAssessments?: InfrastructureIntelligenceAssessmentUncheckedUpdateManyWithoutCaseNestedInput
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUncheckedUpdateManyWithoutCaseNestedInput
     externalObservations?: ExternalObservationUncheckedUpdateManyWithoutCaseNestedInput
+    resourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutCaseNestedInput
   }
 
   export type ExecutionPlanUpsertWithoutClosureInput = {
@@ -80347,6 +85536,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceUpdateManyWithoutCreatedByNestedInput
     deactivatedObservationSources?: ObservationSourceUpdateManyWithoutDeactivatedByNestedInput
     ingestedExternalObservations?: ExternalObservationUpdateManyWithoutIngestedByNestedInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUpdateManyWithoutPreparedByNestedInput
+    createdPortfolioScenarios?: PortfolioScenarioUpdateManyWithoutCreatedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutClosedCasesInput = {
@@ -80390,6 +85581,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceUncheckedUpdateManyWithoutCreatedByNestedInput
     deactivatedObservationSources?: ObservationSourceUncheckedUpdateManyWithoutDeactivatedByNestedInput
     ingestedExternalObservations?: ExternalObservationUncheckedUpdateManyWithoutIngestedByNestedInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutPreparedByNestedInput
+    createdPortfolioScenarios?: PortfolioScenarioUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type ApprovalAuthorityUpsertWithoutCaseClosuresInput = {
@@ -80621,6 +85814,21 @@ export namespace Prisma {
     ingestedById: string
   }
 
+  export type PortfolioScenarioCreateManyDepartmentInput = {
+    id?: string
+    scenarioVersion?: number
+    name: string
+    jurisdictionId: string
+    budgetMinor: bigint | number
+    currency?: string
+    resourceCapacities: JsonNullValueInput | InputJsonValue
+    algorithmVersion: string
+    inputSnapshot: JsonNullValueInput | InputJsonValue
+    resultSnapshot: JsonNullValueInput | InputJsonValue
+    createdById: string
+    createdAt?: Date | string
+  }
+
   export type UserUpdateWithoutDepartmentInput = {
     id?: StringFieldUpdateOperationsInput | string
     employeeCode?: StringFieldUpdateOperationsInput | string
@@ -80662,6 +85870,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceUpdateManyWithoutCreatedByNestedInput
     deactivatedObservationSources?: ObservationSourceUpdateManyWithoutDeactivatedByNestedInput
     ingestedExternalObservations?: ExternalObservationUpdateManyWithoutIngestedByNestedInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUpdateManyWithoutPreparedByNestedInput
+    createdPortfolioScenarios?: PortfolioScenarioUpdateManyWithoutCreatedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutDepartmentInput = {
@@ -80705,6 +85915,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceUncheckedUpdateManyWithoutCreatedByNestedInput
     deactivatedObservationSources?: ObservationSourceUncheckedUpdateManyWithoutDeactivatedByNestedInput
     ingestedExternalObservations?: ExternalObservationUncheckedUpdateManyWithoutIngestedByNestedInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutPreparedByNestedInput
+    createdPortfolioScenarios?: PortfolioScenarioUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type UserUncheckedUpdateManyWithoutDepartmentInput = {
@@ -80785,6 +85997,7 @@ export namespace Prisma {
     governedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutJurisdictionNestedInput
     observationSources?: ObservationSourceUpdateManyWithoutJurisdictionNestedInput
     externalObservations?: ExternalObservationUpdateManyWithoutJurisdictionNestedInput
+    portfolioScenarios?: PortfolioScenarioUpdateManyWithoutJurisdictionNestedInput
   }
 
   export type JurisdictionUncheckedUpdateWithoutDepartmentInput = {
@@ -80801,6 +86014,7 @@ export namespace Prisma {
     governedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutJurisdictionNestedInput
     observationSources?: ObservationSourceUncheckedUpdateManyWithoutJurisdictionNestedInput
     externalObservations?: ExternalObservationUncheckedUpdateManyWithoutJurisdictionNestedInput
+    portfolioScenarios?: PortfolioScenarioUncheckedUpdateManyWithoutJurisdictionNestedInput
   }
 
   export type JurisdictionUncheckedUpdateManyWithoutDepartmentInput = {
@@ -81261,6 +86475,51 @@ export namespace Prisma {
     ingestedById?: StringFieldUpdateOperationsInput | string
   }
 
+  export type PortfolioScenarioUpdateWithoutDepartmentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    scenarioVersion?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    budgetMinor?: BigIntFieldUpdateOperationsInput | bigint | number
+    currency?: StringFieldUpdateOperationsInput | string
+    resourceCapacities?: JsonNullValueInput | InputJsonValue
+    algorithmVersion?: StringFieldUpdateOperationsInput | string
+    inputSnapshot?: JsonNullValueInput | InputJsonValue
+    resultSnapshot?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    jurisdiction?: JurisdictionUpdateOneRequiredWithoutPortfolioScenariosNestedInput
+    createdBy?: UserUpdateOneRequiredWithoutCreatedPortfolioScenariosNestedInput
+  }
+
+  export type PortfolioScenarioUncheckedUpdateWithoutDepartmentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    scenarioVersion?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    jurisdictionId?: StringFieldUpdateOperationsInput | string
+    budgetMinor?: BigIntFieldUpdateOperationsInput | bigint | number
+    currency?: StringFieldUpdateOperationsInput | string
+    resourceCapacities?: JsonNullValueInput | InputJsonValue
+    algorithmVersion?: StringFieldUpdateOperationsInput | string
+    inputSnapshot?: JsonNullValueInput | InputJsonValue
+    resultSnapshot?: JsonNullValueInput | InputJsonValue
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PortfolioScenarioUncheckedUpdateManyWithoutDepartmentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    scenarioVersion?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    jurisdictionId?: StringFieldUpdateOperationsInput | string
+    budgetMinor?: BigIntFieldUpdateOperationsInput | bigint | number
+    currency?: StringFieldUpdateOperationsInput | string
+    resourceCapacities?: JsonNullValueInput | InputJsonValue
+    algorithmVersion?: StringFieldUpdateOperationsInput | string
+    inputSnapshot?: JsonNullValueInput | InputJsonValue
+    resultSnapshot?: JsonNullValueInput | InputJsonValue
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type UserCreateManyJurisdictionInput = {
     id?: string
     employeeCode: string
@@ -81432,6 +86691,21 @@ export namespace Prisma {
     ingestedById: string
   }
 
+  export type PortfolioScenarioCreateManyJurisdictionInput = {
+    id?: string
+    scenarioVersion?: number
+    name: string
+    departmentId: string
+    budgetMinor: bigint | number
+    currency?: string
+    resourceCapacities: JsonNullValueInput | InputJsonValue
+    algorithmVersion: string
+    inputSnapshot: JsonNullValueInput | InputJsonValue
+    resultSnapshot: JsonNullValueInput | InputJsonValue
+    createdById: string
+    createdAt?: Date | string
+  }
+
   export type UserUpdateWithoutJurisdictionInput = {
     id?: StringFieldUpdateOperationsInput | string
     employeeCode?: StringFieldUpdateOperationsInput | string
@@ -81473,6 +86747,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceUpdateManyWithoutCreatedByNestedInput
     deactivatedObservationSources?: ObservationSourceUpdateManyWithoutDeactivatedByNestedInput
     ingestedExternalObservations?: ExternalObservationUpdateManyWithoutIngestedByNestedInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUpdateManyWithoutPreparedByNestedInput
+    createdPortfolioScenarios?: PortfolioScenarioUpdateManyWithoutCreatedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutJurisdictionInput = {
@@ -81516,6 +86792,8 @@ export namespace Prisma {
     createdObservationSources?: ObservationSourceUncheckedUpdateManyWithoutCreatedByNestedInput
     deactivatedObservationSources?: ObservationSourceUncheckedUpdateManyWithoutDeactivatedByNestedInput
     ingestedExternalObservations?: ExternalObservationUncheckedUpdateManyWithoutIngestedByNestedInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutPreparedByNestedInput
+    createdPortfolioScenarios?: PortfolioScenarioUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type UserUncheckedUpdateManyWithoutJurisdictionInput = {
@@ -82031,6 +87309,51 @@ export namespace Prisma {
     assetId?: NullableStringFieldUpdateOperationsInput | string | null
     caseId?: NullableStringFieldUpdateOperationsInput | string | null
     ingestedById?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type PortfolioScenarioUpdateWithoutJurisdictionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    scenarioVersion?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    budgetMinor?: BigIntFieldUpdateOperationsInput | bigint | number
+    currency?: StringFieldUpdateOperationsInput | string
+    resourceCapacities?: JsonNullValueInput | InputJsonValue
+    algorithmVersion?: StringFieldUpdateOperationsInput | string
+    inputSnapshot?: JsonNullValueInput | InputJsonValue
+    resultSnapshot?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    department?: DepartmentUpdateOneRequiredWithoutPortfolioScenariosNestedInput
+    createdBy?: UserUpdateOneRequiredWithoutCreatedPortfolioScenariosNestedInput
+  }
+
+  export type PortfolioScenarioUncheckedUpdateWithoutJurisdictionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    scenarioVersion?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    departmentId?: StringFieldUpdateOperationsInput | string
+    budgetMinor?: BigIntFieldUpdateOperationsInput | bigint | number
+    currency?: StringFieldUpdateOperationsInput | string
+    resourceCapacities?: JsonNullValueInput | InputJsonValue
+    algorithmVersion?: StringFieldUpdateOperationsInput | string
+    inputSnapshot?: JsonNullValueInput | InputJsonValue
+    resultSnapshot?: JsonNullValueInput | InputJsonValue
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PortfolioScenarioUncheckedUpdateManyWithoutJurisdictionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    scenarioVersion?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    departmentId?: StringFieldUpdateOperationsInput | string
+    budgetMinor?: BigIntFieldUpdateOperationsInput | bigint | number
+    currency?: StringFieldUpdateOperationsInput | string
+    resourceCapacities?: JsonNullValueInput | InputJsonValue
+    algorithmVersion?: StringFieldUpdateOperationsInput | string
+    inputSnapshot?: JsonNullValueInput | InputJsonValue
+    resultSnapshot?: JsonNullValueInput | InputJsonValue
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type InspectionCreateManyInspectorInput = {
@@ -82631,6 +87954,36 @@ export namespace Prisma {
     jurisdictionId: string
     assetId?: string | null
     caseId?: string | null
+  }
+
+  export type CaseResourceEstimateCreateManyPreparedByInput = {
+    id?: string
+    caseId: string
+    estimateVersion: number
+    status?: $Enums.PlanningEstimateStatus
+    currency?: string
+    estimatedCostMinor: bigint | number
+    estimatedDurationDays?: number | null
+    resourceRequirements: JsonNullValueInput | InputJsonValue
+    estimateBasis: string
+    sourceReference: string
+    preparedAt?: Date | string
+    createdAt?: Date | string
+  }
+
+  export type PortfolioScenarioCreateManyCreatedByInput = {
+    id?: string
+    scenarioVersion?: number
+    name: string
+    departmentId: string
+    jurisdictionId: string
+    budgetMinor: bigint | number
+    currency?: string
+    resourceCapacities: JsonNullValueInput | InputJsonValue
+    algorithmVersion: string
+    inputSnapshot: JsonNullValueInput | InputJsonValue
+    resultSnapshot: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
   }
 
   export type InspectionUpdateWithoutInspectorInput = {
@@ -84543,6 +89896,96 @@ export namespace Prisma {
     caseId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
+  export type CaseResourceEstimateUpdateWithoutPreparedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    estimateVersion?: IntFieldUpdateOperationsInput | number
+    status?: EnumPlanningEstimateStatusFieldUpdateOperationsInput | $Enums.PlanningEstimateStatus
+    currency?: StringFieldUpdateOperationsInput | string
+    estimatedCostMinor?: BigIntFieldUpdateOperationsInput | bigint | number
+    estimatedDurationDays?: NullableIntFieldUpdateOperationsInput | number | null
+    resourceRequirements?: JsonNullValueInput | InputJsonValue
+    estimateBasis?: StringFieldUpdateOperationsInput | string
+    sourceReference?: StringFieldUpdateOperationsInput | string
+    preparedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    case?: CaseUpdateOneRequiredWithoutResourceEstimatesNestedInput
+  }
+
+  export type CaseResourceEstimateUncheckedUpdateWithoutPreparedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    caseId?: StringFieldUpdateOperationsInput | string
+    estimateVersion?: IntFieldUpdateOperationsInput | number
+    status?: EnumPlanningEstimateStatusFieldUpdateOperationsInput | $Enums.PlanningEstimateStatus
+    currency?: StringFieldUpdateOperationsInput | string
+    estimatedCostMinor?: BigIntFieldUpdateOperationsInput | bigint | number
+    estimatedDurationDays?: NullableIntFieldUpdateOperationsInput | number | null
+    resourceRequirements?: JsonNullValueInput | InputJsonValue
+    estimateBasis?: StringFieldUpdateOperationsInput | string
+    sourceReference?: StringFieldUpdateOperationsInput | string
+    preparedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CaseResourceEstimateUncheckedUpdateManyWithoutPreparedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    caseId?: StringFieldUpdateOperationsInput | string
+    estimateVersion?: IntFieldUpdateOperationsInput | number
+    status?: EnumPlanningEstimateStatusFieldUpdateOperationsInput | $Enums.PlanningEstimateStatus
+    currency?: StringFieldUpdateOperationsInput | string
+    estimatedCostMinor?: BigIntFieldUpdateOperationsInput | bigint | number
+    estimatedDurationDays?: NullableIntFieldUpdateOperationsInput | number | null
+    resourceRequirements?: JsonNullValueInput | InputJsonValue
+    estimateBasis?: StringFieldUpdateOperationsInput | string
+    sourceReference?: StringFieldUpdateOperationsInput | string
+    preparedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PortfolioScenarioUpdateWithoutCreatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    scenarioVersion?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    budgetMinor?: BigIntFieldUpdateOperationsInput | bigint | number
+    currency?: StringFieldUpdateOperationsInput | string
+    resourceCapacities?: JsonNullValueInput | InputJsonValue
+    algorithmVersion?: StringFieldUpdateOperationsInput | string
+    inputSnapshot?: JsonNullValueInput | InputJsonValue
+    resultSnapshot?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    department?: DepartmentUpdateOneRequiredWithoutPortfolioScenariosNestedInput
+    jurisdiction?: JurisdictionUpdateOneRequiredWithoutPortfolioScenariosNestedInput
+  }
+
+  export type PortfolioScenarioUncheckedUpdateWithoutCreatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    scenarioVersion?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    departmentId?: StringFieldUpdateOperationsInput | string
+    jurisdictionId?: StringFieldUpdateOperationsInput | string
+    budgetMinor?: BigIntFieldUpdateOperationsInput | bigint | number
+    currency?: StringFieldUpdateOperationsInput | string
+    resourceCapacities?: JsonNullValueInput | InputJsonValue
+    algorithmVersion?: StringFieldUpdateOperationsInput | string
+    inputSnapshot?: JsonNullValueInput | InputJsonValue
+    resultSnapshot?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PortfolioScenarioUncheckedUpdateManyWithoutCreatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    scenarioVersion?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    departmentId?: StringFieldUpdateOperationsInput | string
+    jurisdictionId?: StringFieldUpdateOperationsInput | string
+    budgetMinor?: BigIntFieldUpdateOperationsInput | bigint | number
+    currency?: StringFieldUpdateOperationsInput | string
+    resourceCapacities?: JsonNullValueInput | InputJsonValue
+    algorithmVersion?: StringFieldUpdateOperationsInput | string
+    inputSnapshot?: JsonNullValueInput | InputJsonValue
+    resultSnapshot?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type CaseCreateManyAssetInput = {
     id?: string
     caseNumber: string
@@ -84639,6 +90082,7 @@ export namespace Prisma {
     intelligenceAssessments?: InfrastructureIntelligenceAssessmentUpdateManyWithoutCaseNestedInput
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUpdateManyWithoutCaseNestedInput
     externalObservations?: ExternalObservationUpdateManyWithoutCaseNestedInput
+    resourceEstimates?: CaseResourceEstimateUpdateManyWithoutCaseNestedInput
   }
 
   export type CaseUncheckedUpdateWithoutAssetInput = {
@@ -84664,6 +90108,7 @@ export namespace Prisma {
     intelligenceAssessments?: InfrastructureIntelligenceAssessmentUncheckedUpdateManyWithoutCaseNestedInput
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUncheckedUpdateManyWithoutCaseNestedInput
     externalObservations?: ExternalObservationUncheckedUpdateManyWithoutCaseNestedInput
+    resourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutCaseNestedInput
   }
 
   export type CaseUncheckedUpdateManyWithoutAssetInput = {
@@ -85888,6 +91333,21 @@ export namespace Prisma {
     ingestedById: string
   }
 
+  export type CaseResourceEstimateCreateManyCaseInput = {
+    id?: string
+    estimateVersion: number
+    status?: $Enums.PlanningEstimateStatus
+    currency?: string
+    estimatedCostMinor: bigint | number
+    estimatedDurationDays?: number | null
+    resourceRequirements: JsonNullValueInput | InputJsonValue
+    estimateBasis: string
+    sourceReference: string
+    preparedById: string
+    preparedAt?: Date | string
+    createdAt?: Date | string
+  }
+
   export type InspectionUpdateWithoutCaseInput = {
     id?: StringFieldUpdateOperationsInput | string
     inspectionDate?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -86405,6 +91865,51 @@ export namespace Prisma {
     jurisdictionId?: StringFieldUpdateOperationsInput | string
     assetId?: NullableStringFieldUpdateOperationsInput | string | null
     ingestedById?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type CaseResourceEstimateUpdateWithoutCaseInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    estimateVersion?: IntFieldUpdateOperationsInput | number
+    status?: EnumPlanningEstimateStatusFieldUpdateOperationsInput | $Enums.PlanningEstimateStatus
+    currency?: StringFieldUpdateOperationsInput | string
+    estimatedCostMinor?: BigIntFieldUpdateOperationsInput | bigint | number
+    estimatedDurationDays?: NullableIntFieldUpdateOperationsInput | number | null
+    resourceRequirements?: JsonNullValueInput | InputJsonValue
+    estimateBasis?: StringFieldUpdateOperationsInput | string
+    sourceReference?: StringFieldUpdateOperationsInput | string
+    preparedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    preparedBy?: UserUpdateOneRequiredWithoutPreparedCaseResourceEstimatesNestedInput
+  }
+
+  export type CaseResourceEstimateUncheckedUpdateWithoutCaseInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    estimateVersion?: IntFieldUpdateOperationsInput | number
+    status?: EnumPlanningEstimateStatusFieldUpdateOperationsInput | $Enums.PlanningEstimateStatus
+    currency?: StringFieldUpdateOperationsInput | string
+    estimatedCostMinor?: BigIntFieldUpdateOperationsInput | bigint | number
+    estimatedDurationDays?: NullableIntFieldUpdateOperationsInput | number | null
+    resourceRequirements?: JsonNullValueInput | InputJsonValue
+    estimateBasis?: StringFieldUpdateOperationsInput | string
+    sourceReference?: StringFieldUpdateOperationsInput | string
+    preparedById?: StringFieldUpdateOperationsInput | string
+    preparedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CaseResourceEstimateUncheckedUpdateManyWithoutCaseInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    estimateVersion?: IntFieldUpdateOperationsInput | number
+    status?: EnumPlanningEstimateStatusFieldUpdateOperationsInput | $Enums.PlanningEstimateStatus
+    currency?: StringFieldUpdateOperationsInput | string
+    estimatedCostMinor?: BigIntFieldUpdateOperationsInput | bigint | number
+    estimatedDurationDays?: NullableIntFieldUpdateOperationsInput | number | null
+    resourceRequirements?: JsonNullValueInput | InputJsonValue
+    estimateBasis?: StringFieldUpdateOperationsInput | string
+    sourceReference?: StringFieldUpdateOperationsInput | string
+    preparedById?: StringFieldUpdateOperationsInput | string
+    preparedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ExternalObservationCreateManySourceInput = {

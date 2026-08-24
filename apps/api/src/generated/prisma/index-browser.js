@@ -313,6 +313,38 @@ exports.Prisma.CaseScalarFieldEnum = {
   closedAt: 'closedAt'
 };
 
+exports.Prisma.CaseResourceEstimateScalarFieldEnum = {
+  id: 'id',
+  caseId: 'caseId',
+  estimateVersion: 'estimateVersion',
+  status: 'status',
+  currency: 'currency',
+  estimatedCostMinor: 'estimatedCostMinor',
+  estimatedDurationDays: 'estimatedDurationDays',
+  resourceRequirements: 'resourceRequirements',
+  estimateBasis: 'estimateBasis',
+  sourceReference: 'sourceReference',
+  preparedById: 'preparedById',
+  preparedAt: 'preparedAt',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.PortfolioScenarioScalarFieldEnum = {
+  id: 'id',
+  scenarioVersion: 'scenarioVersion',
+  name: 'name',
+  departmentId: 'departmentId',
+  jurisdictionId: 'jurisdictionId',
+  budgetMinor: 'budgetMinor',
+  currency: 'currency',
+  resourceCapacities: 'resourceCapacities',
+  algorithmVersion: 'algorithmVersion',
+  inputSnapshot: 'inputSnapshot',
+  resultSnapshot: 'resultSnapshot',
+  createdById: 'createdById',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.ObservationSourceScalarFieldEnum = {
   id: 'id',
   sourceCode: 'sourceCode',
@@ -746,6 +778,12 @@ exports.PriorityLevel = exports.$Enums.PriorityLevel = {
   CRITICAL: 'CRITICAL'
 };
 
+exports.PlanningEstimateStatus = exports.$Enums.PlanningEstimateStatus = {
+  ACTIVE: 'ACTIVE',
+  SUPERSEDED: 'SUPERSEDED',
+  WITHDRAWN: 'WITHDRAWN'
+};
+
 exports.ObservationSourceType = exports.$Enums.ObservationSourceType = {
   OFFICIAL_GOVERNMENT: 'OFFICIAL_GOVERNMENT',
   WEATHER_PROVIDER: 'WEATHER_PROVIDER',
@@ -864,6 +902,8 @@ exports.Prisma.ModelName = {
   GovernedExecutionTaskTemplate: 'GovernedExecutionTaskTemplate',
   PolicyRule: 'PolicyRule',
   Case: 'Case',
+  CaseResourceEstimate: 'CaseResourceEstimate',
+  PortfolioScenario: 'PortfolioScenario',
   ObservationSource: 'ObservationSource',
   ExternalObservation: 'ExternalObservation',
   Inspection: 'Inspection',
