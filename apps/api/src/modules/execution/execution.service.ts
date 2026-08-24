@@ -23,6 +23,7 @@ function actorFields(body: Record<string, unknown>) {
 }
 export function hasClientActorFields(body: Record<string, unknown>) { return actorFields(body); }
 export function unmetDependencyMessage(rows:Array<{predecessorTask:{id:string;status:ExecutionTaskStatus}}>){return rows.length?`Task cannot start until predecessors are verified: ${rows.map(item=>`${item.predecessorTask.id} (${item.predecessorTask.status})`).join(', ')}.`:null;}
+export function findUnmetTaskDependencies(tx:Prisma.TransactionClient,taskId:string){return tx.executionTaskDependency.findMany({where:{dependentTaskId:taskId,predecessorTask:{status:{not:ExecutionTaskStatus.VERIFIED}}},select:{predecessorTask:{select:{id:true,status:true}}}});}
 
 function actionCodes(value: unknown): string[] | null {
   return Array.isArray(value) && value.every((item) => typeof item === 'string') ? value : null;
@@ -204,7 +205,7 @@ export async function changeTaskStatus(taskId: string, requested: 'IN_PROGRESS' 
   return prisma.$transaction(async (tx) => {
     await assertTaskMutable(tx, taskId);
     if(requested==='IN_PROGRESS'){
-      const unmet=await tx.executionTaskDependency.findMany({where:{dependentTaskId:taskId,predecessorTask:{status:{not:ExecutionTaskStatus.VERIFIED}}},select:{predecessorTask:{select:{id:true,status:true}}}});
+      const unmet=await findUnmetTaskDependencies(tx,taskId);
       const message=unmetDependencyMessage(unmet);if(message)throw new ExecutionError('UNMET_TASK_DEPENDENCIES',409,message);
     }
     const data = requested === 'CANCELLED' ? { status: ExecutionTaskStatus.CANCELLED, cancelledById: principal.id, cancelledAt: new Date(), cancellationReason: reason!.trim() } : requested === 'BLOCKED' ? { status: ExecutionTaskStatus.BLOCKED, blockedReason: reason!.trim() } : { status: ExecutionTaskStatus.IN_PROGRESS, startedAt: task.startedAt ?? new Date() };

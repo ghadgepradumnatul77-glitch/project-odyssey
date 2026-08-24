@@ -16,6 +16,8 @@ Tasks use planned start/end timestamps. Planned duration is derived from those t
 
 `ExecutionTaskDependency` represents “dependent task requires predecessor task.” Both tasks must belong to the same plan. Self, duplicate, cross-plan, and cyclic dependencies are rejected. A dependent task cannot start until every predecessor is `VERIFIED`. Cancelled mandatory or optional predecessors do not silently satisfy the dependency; an authorized officer must correct the governed plan.
 
+Dependency start enforcement queries every unmet predecessor for the selected task directly and has no presentation or schedule-analysis pagination bound.
+
 ## Blockers
 
 Categories are `RESOURCE_UNAVAILABLE`, `ACCESS_RESTRICTED`, `MATERIAL_UNAVAILABLE`, `WEATHER`, `DEPENDENCY`, `SAFETY_CONDITION`, `EXTERNAL_APPROVAL`, and `OTHER`. The assigned officer records a category and reason. `ExecutionTaskBlockerEvent` preserves actor/time/reason history and resolution metadata across repeated blocks. Resumption requires a resolution reason.
@@ -25,6 +27,8 @@ Categories are `RESOURCE_UNAVAILABLE`, `ACCESS_RESTRICTED`, `MATERIAL_UNAVAILABL
 The deterministic task states are `UNSCHEDULED`, `NOT_STARTED_ON_SCHEDULE`, `NOT_STARTED_LATE`, `STARTED_ON_TIME`, `STARTED_LATE`, `OVERDUE`, `COMPLETED_ON_TIME`, and `COMPLETED_LATE`. Analysis uses a single server-controlled `asOf` time. Completed classification uses recorded completion submission/verification; overdue means the planned end is past while work remains incomplete.
 
 ## Cycle time
+
+There is no hard 500-task domain maximum for an Execution Plan. Authoritative plan health, counts, reasons, dependency counts, and plan cycle-time inputs evaluate every persisted task using bounded internal batches of 500 inside one repeatable-read snapshot. The batch size is a query safety control, not an analytical limit, and every batch in one response uses the same server-selected `asOf` instant. The task-detail array returned for presentation is limited to the first 100 tasks in sequence order and is accompanied by `tasksTruncated`; task list endpoints remain cursor-paginated under the Pilot P3 contract. Presentation bounds never change plan-level analytics.
 
 Available durations are assignment-to-start, start-to-completion-submission, completion-submission-to-verification, assignment-to-verification, plan-creation-to-first-start, and plan-creation-to-completion. A missing endpoint timestamp yields `null`, never zero.
 
