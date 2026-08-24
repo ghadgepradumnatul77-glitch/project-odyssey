@@ -61,6 +61,7 @@ import observationRoutes from './modules/observations/observation.routes';
 import geospatialHotspotRoutes from './modules/geospatial/geospatial-hotspot.routes';
 import portfolioRoutes from './modules/portfolio/portfolio.routes';
 import predictiveDataRoutes from './modules/predictive-data/predictive-data.routes';
+import predictiveModelGovernanceRoutes from './modules/predictive-models/predictive-model-governance.routes';
 
 import { getAuthConfig }
   from './config/auth';
@@ -274,6 +275,7 @@ app.use('/api/v1', observationRoutes);
 app.use('/api/v1', geospatialHotspotRoutes);
 app.use('/api/v1', portfolioRoutes);
 app.use('/api/v1', predictiveDataRoutes);
+app.use('/api/v1', predictiveModelGovernanceRoutes);
 
 
 

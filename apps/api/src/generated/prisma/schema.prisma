@@ -237,6 +237,33 @@ enum PredictiveOutcomeValue {
   CANCELLED
 }
 
+enum PredictiveModelLifecycleStatus {
+  EXPERIMENTAL
+  EVALUATED
+  REJECTED
+  VALIDATED
+  APPROVED
+  ACTIVE
+  DEPRECATED
+}
+
+enum PredictiveModelApprovalDecision {
+  APPROVED
+  REJECTED
+}
+
+enum PredictiveModelLifecycleAction {
+  REGISTERED
+  EVALUATED
+  VALIDATED
+  APPROVED
+  REJECTED
+  ACTIVATED
+  REPLACED
+  DEPRECATED
+  ROLLED_BACK
+}
+
 model Department {
   id                         String                      @id @default(uuid())
   name                       String
@@ -294,39 +321,45 @@ model User {
 
   inspections                        Inspection[]
   approvalAuthorities                ApprovalAuthority[]
-  reviewedOrpDecisions               OrpDecision[]                @relation("DecisionReviewer")
-  forwardedOrpDecisions              OrpDecision[]                @relation("DecisionForwardedUser")
-  createdExecutionPlans              ExecutionPlan[]              @relation("ExecutionPlanCreator")
-  assignedExecutionTasks             ExecutionTask[]              @relation("ExecutionTaskAssignee")
-  assignedByExecutionTasks           ExecutionTask[]              @relation("ExecutionTaskAssigner")
-  completedExecutionTasks            ExecutionTask[]              @relation("ExecutionTaskCompleter")
-  verifiedExecutionTasks             ExecutionTask[]              @relation("ExecutionTaskVerifier")
-  cancelledExecutionTasks            ExecutionTask[]              @relation("ExecutionTaskCanceller")
-  executionScheduleRevisions         ExecutionScheduleRevision[]  @relation("ExecutionScheduleRevisionActor")
-  blockedExecutionTaskEvents         ExecutionTaskBlockerEvent[]  @relation("ExecutionTaskBlocker")
-  resolvedExecutionTaskEvents        ExecutionTaskBlockerEvent[]  @relation("ExecutionTaskBlockerResolver")
+  reviewedOrpDecisions               OrpDecision[]                   @relation("DecisionReviewer")
+  forwardedOrpDecisions              OrpDecision[]                   @relation("DecisionForwardedUser")
+  createdExecutionPlans              ExecutionPlan[]                 @relation("ExecutionPlanCreator")
+  assignedExecutionTasks             ExecutionTask[]                 @relation("ExecutionTaskAssignee")
+  assignedByExecutionTasks           ExecutionTask[]                 @relation("ExecutionTaskAssigner")
+  completedExecutionTasks            ExecutionTask[]                 @relation("ExecutionTaskCompleter")
+  verifiedExecutionTasks             ExecutionTask[]                 @relation("ExecutionTaskVerifier")
+  cancelledExecutionTasks            ExecutionTask[]                 @relation("ExecutionTaskCanceller")
+  executionScheduleRevisions         ExecutionScheduleRevision[]     @relation("ExecutionScheduleRevisionActor")
+  blockedExecutionTaskEvents         ExecutionTaskBlockerEvent[]     @relation("ExecutionTaskBlocker")
+  resolvedExecutionTaskEvents        ExecutionTaskBlockerEvent[]     @relation("ExecutionTaskBlockerResolver")
   createdExecutionTaskDependencies   ExecutionTaskDependency[]
   submittedExecutionEvidence         ExecutionEvidence[]
-  closedCases                        CaseClosure[]                @relation("CaseClosureCloser")
-  reviewedPublicReports              PublicReport[]               @relation("PublicReportReviewer")
-  decidedPublicReports               PublicReport[]               @relation("PublicReportDecisionActor")
+  closedCases                        CaseClosure[]                   @relation("CaseClosureCloser")
+  reviewedPublicReports              PublicReport[]                  @relation("PublicReportReviewer")
+  decidedPublicReports               PublicReport[]                  @relation("PublicReportDecisionActor")
   createdTriageAnalyses              PublicReportTriageAnalysis[]
-  createdPolicyDocuments             PolicyDocument[]             @relation("PolicyDocumentCreator")
-  approvedPolicyDocuments            PolicyDocument[]             @relation("PolicyDocumentApprover")
-  createdApprovedActions             ApprovedActionVersion[]      @relation("ApprovedActionCreator")
-  approvedApprovedActions            ApprovedActionVersion[]      @relation("ApprovedActionApprover")
-  preparedDecisionPackages           DecisionPackage[]            @relation("DecisionPackagePreparer")
-  createdGovernedExecutionTemplates  GovernedExecutionTemplate[]  @relation("GovernedExecutionTemplateCreator")
-  approvedGovernedExecutionTemplates GovernedExecutionTemplate[]  @relation("GovernedExecutionTemplateApprover")
-  createdObservationSources          ObservationSource[]          @relation("ObservationSourceCreator")
-  deactivatedObservationSources      ObservationSource[]          @relation("ObservationSourceDeactivator")
+  createdPolicyDocuments             PolicyDocument[]                @relation("PolicyDocumentCreator")
+  approvedPolicyDocuments            PolicyDocument[]                @relation("PolicyDocumentApprover")
+  createdApprovedActions             ApprovedActionVersion[]         @relation("ApprovedActionCreator")
+  approvedApprovedActions            ApprovedActionVersion[]         @relation("ApprovedActionApprover")
+  preparedDecisionPackages           DecisionPackage[]               @relation("DecisionPackagePreparer")
+  createdGovernedExecutionTemplates  GovernedExecutionTemplate[]     @relation("GovernedExecutionTemplateCreator")
+  approvedGovernedExecutionTemplates GovernedExecutionTemplate[]     @relation("GovernedExecutionTemplateApprover")
+  createdObservationSources          ObservationSource[]             @relation("ObservationSourceCreator")
+  deactivatedObservationSources      ObservationSource[]             @relation("ObservationSourceDeactivator")
   ingestedExternalObservations       ExternalObservation[]
-  preparedCaseResourceEstimates      CaseResourceEstimate[]       @relation("CaseResourceEstimatePreparer")
-  createdPortfolioScenarios          PortfolioScenario[]          @relation("PortfolioScenarioCreator")
-  createdPredictiveSnapshots         PredictiveFeatureSnapshot[]  @relation("PredictiveSnapshotCreator")
-  voidedPredictiveSnapshots          PredictiveFeatureSnapshot[]  @relation("PredictiveSnapshotVoider")
-  recordedPredictiveOutcomes         PredictiveOutcome[]          @relation("PredictiveOutcomeRecorder")
-  voidedPredictiveOutcomes           PredictiveOutcome[]          @relation("PredictiveOutcomeVoider")
+  preparedCaseResourceEstimates      CaseResourceEstimate[]          @relation("CaseResourceEstimatePreparer")
+  createdPortfolioScenarios          PortfolioScenario[]             @relation("PortfolioScenarioCreator")
+  createdPredictiveSnapshots         PredictiveFeatureSnapshot[]     @relation("PredictiveSnapshotCreator")
+  voidedPredictiveSnapshots          PredictiveFeatureSnapshot[]     @relation("PredictiveSnapshotVoider")
+  recordedPredictiveOutcomes         PredictiveOutcome[]             @relation("PredictiveOutcomeRecorder")
+  voidedPredictiveOutcomes           PredictiveOutcome[]             @relation("PredictiveOutcomeVoider")
+  createdPredictiveDatasetSnapshots  PredictiveDatasetSnapshot[]     @relation("PredictiveDatasetSnapshotCreator")
+  createdPredictiveModelVersions     PredictiveModelVersion[]        @relation("PredictiveModelCreator")
+  validatedPredictiveModelVersions   PredictiveModelVersion[]        @relation("PredictiveModelValidator")
+  recordedPredictiveEvaluations      PredictiveModelEvaluation[]     @relation("PredictiveEvaluationRecorder")
+  decidedPredictiveApprovals         PredictiveModelApproval[]       @relation("PredictiveModelApprover")
+  predictiveModelLifecycleEvents     PredictiveModelLifecycleEvent[] @relation("PredictiveModelLifecycleActor")
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -1138,6 +1171,148 @@ model PredictiveOutcome {
   @@index([outcomeValue, outcomeTimestamp])
   @@index([provenanceClass, status])
   @@index([recordedById])
+}
+
+model PredictiveDatasetSnapshot {
+  id                     String               @id @default(uuid())
+  datasetContractVersion String
+  targetType             PredictiveTargetType
+  featureContractVersion String
+  outcomeContractVersion String
+  departmentId           String?
+  jurisdictionId         String?
+  includedProvenance     Json
+  sampleCount            Int
+  classBalance           Json
+  periodStart            DateTime?
+  periodEnd              DateTime?
+  sampleIdentities       Json
+  datasetFingerprint     String               @unique
+  createdById            String
+  createdAt              DateTime             @default(now())
+
+  createdBy     User                        @relation("PredictiveDatasetSnapshotCreator", fields: [createdById], references: [id], onDelete: Restrict)
+  modelVersions PredictiveModelVersion[]
+  evaluations   PredictiveModelEvaluation[]
+
+  @@index([targetType, createdAt, id])
+  @@index([departmentId, jurisdictionId, createdAt])
+  @@index([createdById])
+}
+
+model PredictiveModelVersion {
+  id                     String                         @id @default(uuid())
+  modelName              String
+  modelVersion           String
+  targetType             PredictiveTargetType
+  deploymentSlot         String
+  intendedUse            String
+  forbiddenUse           String
+  featureContractVersion String
+  outcomeContractVersion String
+  datasetSnapshotId      String
+  trainingCodeVersion    String
+  artifactReference      String
+  artifactDigest         String
+  artifactFormat         String
+  artifactSizeBytes      BigInt?
+  trainingTimestamp      DateTime
+  lifecycleStatus        PredictiveModelLifecycleStatus @default(EXPERIMENTAL)
+  createdById            String
+  createdAt              DateTime                       @default(now())
+  validatedById          String?
+  validatedAt            DateTime?
+
+  datasetSnapshot PredictiveDatasetSnapshot       @relation(fields: [datasetSnapshotId], references: [id], onDelete: Restrict)
+  createdBy       User                            @relation("PredictiveModelCreator", fields: [createdById], references: [id], onDelete: Restrict)
+  validatedBy     User?                           @relation("PredictiveModelValidator", fields: [validatedById], references: [id], onDelete: Restrict)
+  evaluations     PredictiveModelEvaluation[]
+  approvals       PredictiveModelApproval[]
+  lifecycleEvents PredictiveModelLifecycleEvent[]
+
+  @@unique([modelName, modelVersion, targetType])
+  @@index([targetType, lifecycleStatus, createdAt, id])
+  @@index([deploymentSlot, lifecycleStatus])
+  @@index([datasetSnapshotId])
+  @@index([createdById])
+}
+
+model PredictiveModelEvaluation {
+  id                           String   @id @default(uuid())
+  modelVersionId               String
+  datasetSnapshotId            String
+  evaluationContractVersion    String
+  splitStrategy                String
+  evaluationPeriodStart        DateTime
+  evaluationPeriodEnd          DateTime
+  testSampleCount              Int
+  lateCount                    Int
+  onTimeCount                  Int
+  truePositiveCount            Int
+  trueNegativeCount            Int
+  falsePositiveCount           Int
+  falseNegativeCount           Int
+  precision                    Float
+  recall                       Float
+  f1                           Float
+  prAuc                        Float
+  calibrationError             Float
+  falseNegativeRate            Float
+  baselineEvidence             Json
+  subgroupMetricsReference     Json?
+  featureDistributionReference Json?
+  missingnessReference         Json?
+  evaluationArtifactReference  String
+  evaluationFingerprint        String   @unique
+  recordedById                 String
+  recordedAt                   DateTime @default(now())
+
+  modelVersion    PredictiveModelVersion    @relation(fields: [modelVersionId], references: [id], onDelete: Restrict)
+  datasetSnapshot PredictiveDatasetSnapshot @relation(fields: [datasetSnapshotId], references: [id], onDelete: Restrict)
+  recordedBy      User                      @relation("PredictiveEvaluationRecorder", fields: [recordedById], references: [id], onDelete: Restrict)
+
+  @@unique([modelVersionId, datasetSnapshotId, evaluationContractVersion])
+  @@index([modelVersionId, recordedAt])
+  @@index([datasetSnapshotId])
+  @@index([recordedById])
+}
+
+model PredictiveModelApproval {
+  id                String                          @id @default(uuid())
+  modelVersionId    String
+  decision          PredictiveModelApprovalDecision
+  reason            String
+  restrictions      Json?
+  reviewDueAt       DateTime?
+  approvalExpiresAt DateTime?
+  approvedById      String
+  decidedAt         DateTime                        @default(now())
+
+  modelVersion PredictiveModelVersion @relation(fields: [modelVersionId], references: [id], onDelete: Restrict)
+  approvedBy   User                   @relation("PredictiveModelApprover", fields: [approvedById], references: [id], onDelete: Restrict)
+
+  @@unique([modelVersionId])
+  @@index([approvedById])
+  @@index([decision, approvalExpiresAt])
+}
+
+model PredictiveModelLifecycleEvent {
+  id                    String                          @id @default(uuid())
+  modelVersionId        String
+  action                PredictiveModelLifecycleAction
+  fromStatus            PredictiveModelLifecycleStatus?
+  toStatus              PredictiveModelLifecycleStatus
+  reason                String
+  relatedModelVersionId String?
+  actorId               String
+  occurredAt            DateTime                        @default(now())
+
+  modelVersion PredictiveModelVersion @relation(fields: [modelVersionId], references: [id], onDelete: Restrict)
+  actor        User                   @relation("PredictiveModelLifecycleActor", fields: [actorId], references: [id], onDelete: Restrict)
+
+  @@index([modelVersionId, occurredAt, id])
+  @@index([actorId])
+  @@index([action, occurredAt])
 }
 
 model ExecutionTaskDependency {

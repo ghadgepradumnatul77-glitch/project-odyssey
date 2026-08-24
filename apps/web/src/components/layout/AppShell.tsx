@@ -9,7 +9,7 @@ import PublicReportsPage from '../../pages/PublicReportsPage';
 import InfrastructureMapPage from '../../pages/InfrastructureMapPage';
 import PolicyActionsPage from '../../pages/PolicyActionsPage';
 import PortfolioPlanningPage from '../../pages/PortfolioPlanningPage';
-import PredictiveDataReadinessPage from '../../pages/PredictiveDataReadinessPage';
+import PredictiveModelGovernancePage from '../../pages/PredictiveModelGovernancePage';
 
 export default function AppShell() {
   const { user, organization, logout } = useAuth();
@@ -30,7 +30,7 @@ export default function AppShell() {
             onCases={(filter) => { setSelectedCaseId(null); setCasesFilter(filter ?? null); setActiveItem('cases'); }}
             onCase={(caseId) => { setCasesFilter(null); setSelectedCaseId(caseId); setActiveItem('cases'); }}
             onAdmin={(tab) => { setAdministrationTab(tab ?? 'Departments'); setActiveItem('administration'); }}
-          /> : selected.id === 'administration' ? <AdministrationPage initialTab={administrationTab} /> : selected.id === 'policy-actions'?<PolicyActionsPage/>:selected.id==='portfolio-planning'?<PortfolioPlanningPage/>:selected.id==='predictive-readiness'?<PredictiveDataReadinessPage/> : <>
+          /> : selected.id === 'administration' ? <AdministrationPage initialTab={administrationTab} /> : selected.id === 'policy-actions'?<PolicyActionsPage/>:selected.id==='portfolio-planning'?<PortfolioPlanningPage/>:selected.id==='predictive-governance'?<PredictiveModelGovernancePage/> : <>
           <p className="eyebrow">PROTECTED WORKSPACE</p><h1>{selected.label}</h1>
           <p className="summary">{selected.description} will be implemented in a later product phase.</p>
           {user.role === 'SYSTEM_ADMIN' && selected.id === 'dashboard' && <div className="boundary-note"><strong>Administrative boundary</strong><p>System administrators have global read and registry administration access. Operational officer actions require the appropriate officer identity and authority.</p></div>}

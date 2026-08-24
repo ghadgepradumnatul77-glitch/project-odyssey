@@ -154,6 +154,31 @@ export type PredictiveFeatureSnapshot = $Result.DefaultSelection<Prisma.$Predict
  */
 export type PredictiveOutcome = $Result.DefaultSelection<Prisma.$PredictiveOutcomePayload>
 /**
+ * Model PredictiveDatasetSnapshot
+ * 
+ */
+export type PredictiveDatasetSnapshot = $Result.DefaultSelection<Prisma.$PredictiveDatasetSnapshotPayload>
+/**
+ * Model PredictiveModelVersion
+ * 
+ */
+export type PredictiveModelVersion = $Result.DefaultSelection<Prisma.$PredictiveModelVersionPayload>
+/**
+ * Model PredictiveModelEvaluation
+ * 
+ */
+export type PredictiveModelEvaluation = $Result.DefaultSelection<Prisma.$PredictiveModelEvaluationPayload>
+/**
+ * Model PredictiveModelApproval
+ * 
+ */
+export type PredictiveModelApproval = $Result.DefaultSelection<Prisma.$PredictiveModelApprovalPayload>
+/**
+ * Model PredictiveModelLifecycleEvent
+ * 
+ */
+export type PredictiveModelLifecycleEvent = $Result.DefaultSelection<Prisma.$PredictiveModelLifecycleEventPayload>
+/**
  * Model ExecutionTaskDependency
  * 
  */
@@ -504,6 +529,42 @@ export const PredictiveOutcomeValue: {
 
 export type PredictiveOutcomeValue = (typeof PredictiveOutcomeValue)[keyof typeof PredictiveOutcomeValue]
 
+
+export const PredictiveModelLifecycleStatus: {
+  EXPERIMENTAL: 'EXPERIMENTAL',
+  EVALUATED: 'EVALUATED',
+  REJECTED: 'REJECTED',
+  VALIDATED: 'VALIDATED',
+  APPROVED: 'APPROVED',
+  ACTIVE: 'ACTIVE',
+  DEPRECATED: 'DEPRECATED'
+};
+
+export type PredictiveModelLifecycleStatus = (typeof PredictiveModelLifecycleStatus)[keyof typeof PredictiveModelLifecycleStatus]
+
+
+export const PredictiveModelApprovalDecision: {
+  APPROVED: 'APPROVED',
+  REJECTED: 'REJECTED'
+};
+
+export type PredictiveModelApprovalDecision = (typeof PredictiveModelApprovalDecision)[keyof typeof PredictiveModelApprovalDecision]
+
+
+export const PredictiveModelLifecycleAction: {
+  REGISTERED: 'REGISTERED',
+  EVALUATED: 'EVALUATED',
+  VALIDATED: 'VALIDATED',
+  APPROVED: 'APPROVED',
+  REJECTED: 'REJECTED',
+  ACTIVATED: 'ACTIVATED',
+  REPLACED: 'REPLACED',
+  DEPRECATED: 'DEPRECATED',
+  ROLLED_BACK: 'ROLLED_BACK'
+};
+
+export type PredictiveModelLifecycleAction = (typeof PredictiveModelLifecycleAction)[keyof typeof PredictiveModelLifecycleAction]
+
 }
 
 export type UserStatus = $Enums.UserStatus
@@ -629,6 +690,18 @@ export const PredictiveRecordStatus: typeof $Enums.PredictiveRecordStatus
 export type PredictiveOutcomeValue = $Enums.PredictiveOutcomeValue
 
 export const PredictiveOutcomeValue: typeof $Enums.PredictiveOutcomeValue
+
+export type PredictiveModelLifecycleStatus = $Enums.PredictiveModelLifecycleStatus
+
+export const PredictiveModelLifecycleStatus: typeof $Enums.PredictiveModelLifecycleStatus
+
+export type PredictiveModelApprovalDecision = $Enums.PredictiveModelApprovalDecision
+
+export const PredictiveModelApprovalDecision: typeof $Enums.PredictiveModelApprovalDecision
+
+export type PredictiveModelLifecycleAction = $Enums.PredictiveModelLifecycleAction
+
+export const PredictiveModelLifecycleAction: typeof $Enums.PredictiveModelLifecycleAction
 
 /**
  * ##  Prisma Client ʲˢ
@@ -1027,6 +1100,56 @@ export class PrismaClient<
     * ```
     */
   get predictiveOutcome(): Prisma.PredictiveOutcomeDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.predictiveDatasetSnapshot`: Exposes CRUD operations for the **PredictiveDatasetSnapshot** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more PredictiveDatasetSnapshots
+    * const predictiveDatasetSnapshots = await prisma.predictiveDatasetSnapshot.findMany()
+    * ```
+    */
+  get predictiveDatasetSnapshot(): Prisma.PredictiveDatasetSnapshotDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.predictiveModelVersion`: Exposes CRUD operations for the **PredictiveModelVersion** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more PredictiveModelVersions
+    * const predictiveModelVersions = await prisma.predictiveModelVersion.findMany()
+    * ```
+    */
+  get predictiveModelVersion(): Prisma.PredictiveModelVersionDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.predictiveModelEvaluation`: Exposes CRUD operations for the **PredictiveModelEvaluation** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more PredictiveModelEvaluations
+    * const predictiveModelEvaluations = await prisma.predictiveModelEvaluation.findMany()
+    * ```
+    */
+  get predictiveModelEvaluation(): Prisma.PredictiveModelEvaluationDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.predictiveModelApproval`: Exposes CRUD operations for the **PredictiveModelApproval** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more PredictiveModelApprovals
+    * const predictiveModelApprovals = await prisma.predictiveModelApproval.findMany()
+    * ```
+    */
+  get predictiveModelApproval(): Prisma.PredictiveModelApprovalDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.predictiveModelLifecycleEvent`: Exposes CRUD operations for the **PredictiveModelLifecycleEvent** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more PredictiveModelLifecycleEvents
+    * const predictiveModelLifecycleEvents = await prisma.predictiveModelLifecycleEvent.findMany()
+    * ```
+    */
+  get predictiveModelLifecycleEvent(): Prisma.PredictiveModelLifecycleEventDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.executionTaskDependency`: Exposes CRUD operations for the **ExecutionTaskDependency** model.
@@ -1546,6 +1669,11 @@ export namespace Prisma {
     ExecutionTask: 'ExecutionTask',
     PredictiveFeatureSnapshot: 'PredictiveFeatureSnapshot',
     PredictiveOutcome: 'PredictiveOutcome',
+    PredictiveDatasetSnapshot: 'PredictiveDatasetSnapshot',
+    PredictiveModelVersion: 'PredictiveModelVersion',
+    PredictiveModelEvaluation: 'PredictiveModelEvaluation',
+    PredictiveModelApproval: 'PredictiveModelApproval',
+    PredictiveModelLifecycleEvent: 'PredictiveModelLifecycleEvent',
     ExecutionTaskDependency: 'ExecutionTaskDependency',
     ExecutionTaskBlockerEvent: 'ExecutionTaskBlockerEvent',
     ExecutionScheduleRevision: 'ExecutionScheduleRevision',
@@ -1569,7 +1697,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "department" | "jurisdiction" | "user" | "asset" | "publicReport" | "publicReportTriageAnalysis" | "policyDocument" | "approvedActionVersion" | "governedExecutionTemplate" | "governedExecutionTaskTemplate" | "policyRule" | "case" | "caseResourceEstimate" | "portfolioScenario" | "observationSource" | "externalObservation" | "inspection" | "riskAssessment" | "infrastructureIntelligenceAssessment" | "infrastructureIntelligenceReconciliation" | "operationalResponsePlan" | "decisionPackage" | "approvalAuthority" | "orpDecision" | "executionPlan" | "executionTask" | "predictiveFeatureSnapshot" | "predictiveOutcome" | "executionTaskDependency" | "executionTaskBlockerEvent" | "executionScheduleRevision" | "executionEvidence" | "caseClosure"
+      modelProps: "department" | "jurisdiction" | "user" | "asset" | "publicReport" | "publicReportTriageAnalysis" | "policyDocument" | "approvedActionVersion" | "governedExecutionTemplate" | "governedExecutionTaskTemplate" | "policyRule" | "case" | "caseResourceEstimate" | "portfolioScenario" | "observationSource" | "externalObservation" | "inspection" | "riskAssessment" | "infrastructureIntelligenceAssessment" | "infrastructureIntelligenceReconciliation" | "operationalResponsePlan" | "decisionPackage" | "approvalAuthority" | "orpDecision" | "executionPlan" | "executionTask" | "predictiveFeatureSnapshot" | "predictiveOutcome" | "predictiveDatasetSnapshot" | "predictiveModelVersion" | "predictiveModelEvaluation" | "predictiveModelApproval" | "predictiveModelLifecycleEvent" | "executionTaskDependency" | "executionTaskBlockerEvent" | "executionScheduleRevision" | "executionEvidence" | "caseClosure"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -3645,6 +3773,376 @@ export namespace Prisma {
           }
         }
       }
+      PredictiveDatasetSnapshot: {
+        payload: Prisma.$PredictiveDatasetSnapshotPayload<ExtArgs>
+        fields: Prisma.PredictiveDatasetSnapshotFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.PredictiveDatasetSnapshotFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PredictiveDatasetSnapshotPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.PredictiveDatasetSnapshotFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PredictiveDatasetSnapshotPayload>
+          }
+          findFirst: {
+            args: Prisma.PredictiveDatasetSnapshotFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PredictiveDatasetSnapshotPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.PredictiveDatasetSnapshotFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PredictiveDatasetSnapshotPayload>
+          }
+          findMany: {
+            args: Prisma.PredictiveDatasetSnapshotFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PredictiveDatasetSnapshotPayload>[]
+          }
+          create: {
+            args: Prisma.PredictiveDatasetSnapshotCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PredictiveDatasetSnapshotPayload>
+          }
+          createMany: {
+            args: Prisma.PredictiveDatasetSnapshotCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.PredictiveDatasetSnapshotCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PredictiveDatasetSnapshotPayload>[]
+          }
+          delete: {
+            args: Prisma.PredictiveDatasetSnapshotDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PredictiveDatasetSnapshotPayload>
+          }
+          update: {
+            args: Prisma.PredictiveDatasetSnapshotUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PredictiveDatasetSnapshotPayload>
+          }
+          deleteMany: {
+            args: Prisma.PredictiveDatasetSnapshotDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.PredictiveDatasetSnapshotUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.PredictiveDatasetSnapshotUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PredictiveDatasetSnapshotPayload>[]
+          }
+          upsert: {
+            args: Prisma.PredictiveDatasetSnapshotUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PredictiveDatasetSnapshotPayload>
+          }
+          aggregate: {
+            args: Prisma.PredictiveDatasetSnapshotAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregatePredictiveDatasetSnapshot>
+          }
+          groupBy: {
+            args: Prisma.PredictiveDatasetSnapshotGroupByArgs<ExtArgs>
+            result: $Utils.Optional<PredictiveDatasetSnapshotGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.PredictiveDatasetSnapshotCountArgs<ExtArgs>
+            result: $Utils.Optional<PredictiveDatasetSnapshotCountAggregateOutputType> | number
+          }
+        }
+      }
+      PredictiveModelVersion: {
+        payload: Prisma.$PredictiveModelVersionPayload<ExtArgs>
+        fields: Prisma.PredictiveModelVersionFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.PredictiveModelVersionFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PredictiveModelVersionPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.PredictiveModelVersionFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PredictiveModelVersionPayload>
+          }
+          findFirst: {
+            args: Prisma.PredictiveModelVersionFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PredictiveModelVersionPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.PredictiveModelVersionFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PredictiveModelVersionPayload>
+          }
+          findMany: {
+            args: Prisma.PredictiveModelVersionFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PredictiveModelVersionPayload>[]
+          }
+          create: {
+            args: Prisma.PredictiveModelVersionCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PredictiveModelVersionPayload>
+          }
+          createMany: {
+            args: Prisma.PredictiveModelVersionCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.PredictiveModelVersionCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PredictiveModelVersionPayload>[]
+          }
+          delete: {
+            args: Prisma.PredictiveModelVersionDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PredictiveModelVersionPayload>
+          }
+          update: {
+            args: Prisma.PredictiveModelVersionUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PredictiveModelVersionPayload>
+          }
+          deleteMany: {
+            args: Prisma.PredictiveModelVersionDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.PredictiveModelVersionUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.PredictiveModelVersionUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PredictiveModelVersionPayload>[]
+          }
+          upsert: {
+            args: Prisma.PredictiveModelVersionUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PredictiveModelVersionPayload>
+          }
+          aggregate: {
+            args: Prisma.PredictiveModelVersionAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregatePredictiveModelVersion>
+          }
+          groupBy: {
+            args: Prisma.PredictiveModelVersionGroupByArgs<ExtArgs>
+            result: $Utils.Optional<PredictiveModelVersionGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.PredictiveModelVersionCountArgs<ExtArgs>
+            result: $Utils.Optional<PredictiveModelVersionCountAggregateOutputType> | number
+          }
+        }
+      }
+      PredictiveModelEvaluation: {
+        payload: Prisma.$PredictiveModelEvaluationPayload<ExtArgs>
+        fields: Prisma.PredictiveModelEvaluationFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.PredictiveModelEvaluationFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PredictiveModelEvaluationPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.PredictiveModelEvaluationFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PredictiveModelEvaluationPayload>
+          }
+          findFirst: {
+            args: Prisma.PredictiveModelEvaluationFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PredictiveModelEvaluationPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.PredictiveModelEvaluationFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PredictiveModelEvaluationPayload>
+          }
+          findMany: {
+            args: Prisma.PredictiveModelEvaluationFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PredictiveModelEvaluationPayload>[]
+          }
+          create: {
+            args: Prisma.PredictiveModelEvaluationCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PredictiveModelEvaluationPayload>
+          }
+          createMany: {
+            args: Prisma.PredictiveModelEvaluationCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.PredictiveModelEvaluationCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PredictiveModelEvaluationPayload>[]
+          }
+          delete: {
+            args: Prisma.PredictiveModelEvaluationDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PredictiveModelEvaluationPayload>
+          }
+          update: {
+            args: Prisma.PredictiveModelEvaluationUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PredictiveModelEvaluationPayload>
+          }
+          deleteMany: {
+            args: Prisma.PredictiveModelEvaluationDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.PredictiveModelEvaluationUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.PredictiveModelEvaluationUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PredictiveModelEvaluationPayload>[]
+          }
+          upsert: {
+            args: Prisma.PredictiveModelEvaluationUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PredictiveModelEvaluationPayload>
+          }
+          aggregate: {
+            args: Prisma.PredictiveModelEvaluationAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregatePredictiveModelEvaluation>
+          }
+          groupBy: {
+            args: Prisma.PredictiveModelEvaluationGroupByArgs<ExtArgs>
+            result: $Utils.Optional<PredictiveModelEvaluationGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.PredictiveModelEvaluationCountArgs<ExtArgs>
+            result: $Utils.Optional<PredictiveModelEvaluationCountAggregateOutputType> | number
+          }
+        }
+      }
+      PredictiveModelApproval: {
+        payload: Prisma.$PredictiveModelApprovalPayload<ExtArgs>
+        fields: Prisma.PredictiveModelApprovalFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.PredictiveModelApprovalFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PredictiveModelApprovalPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.PredictiveModelApprovalFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PredictiveModelApprovalPayload>
+          }
+          findFirst: {
+            args: Prisma.PredictiveModelApprovalFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PredictiveModelApprovalPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.PredictiveModelApprovalFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PredictiveModelApprovalPayload>
+          }
+          findMany: {
+            args: Prisma.PredictiveModelApprovalFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PredictiveModelApprovalPayload>[]
+          }
+          create: {
+            args: Prisma.PredictiveModelApprovalCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PredictiveModelApprovalPayload>
+          }
+          createMany: {
+            args: Prisma.PredictiveModelApprovalCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.PredictiveModelApprovalCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PredictiveModelApprovalPayload>[]
+          }
+          delete: {
+            args: Prisma.PredictiveModelApprovalDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PredictiveModelApprovalPayload>
+          }
+          update: {
+            args: Prisma.PredictiveModelApprovalUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PredictiveModelApprovalPayload>
+          }
+          deleteMany: {
+            args: Prisma.PredictiveModelApprovalDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.PredictiveModelApprovalUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.PredictiveModelApprovalUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PredictiveModelApprovalPayload>[]
+          }
+          upsert: {
+            args: Prisma.PredictiveModelApprovalUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PredictiveModelApprovalPayload>
+          }
+          aggregate: {
+            args: Prisma.PredictiveModelApprovalAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregatePredictiveModelApproval>
+          }
+          groupBy: {
+            args: Prisma.PredictiveModelApprovalGroupByArgs<ExtArgs>
+            result: $Utils.Optional<PredictiveModelApprovalGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.PredictiveModelApprovalCountArgs<ExtArgs>
+            result: $Utils.Optional<PredictiveModelApprovalCountAggregateOutputType> | number
+          }
+        }
+      }
+      PredictiveModelLifecycleEvent: {
+        payload: Prisma.$PredictiveModelLifecycleEventPayload<ExtArgs>
+        fields: Prisma.PredictiveModelLifecycleEventFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.PredictiveModelLifecycleEventFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PredictiveModelLifecycleEventPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.PredictiveModelLifecycleEventFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PredictiveModelLifecycleEventPayload>
+          }
+          findFirst: {
+            args: Prisma.PredictiveModelLifecycleEventFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PredictiveModelLifecycleEventPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.PredictiveModelLifecycleEventFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PredictiveModelLifecycleEventPayload>
+          }
+          findMany: {
+            args: Prisma.PredictiveModelLifecycleEventFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PredictiveModelLifecycleEventPayload>[]
+          }
+          create: {
+            args: Prisma.PredictiveModelLifecycleEventCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PredictiveModelLifecycleEventPayload>
+          }
+          createMany: {
+            args: Prisma.PredictiveModelLifecycleEventCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.PredictiveModelLifecycleEventCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PredictiveModelLifecycleEventPayload>[]
+          }
+          delete: {
+            args: Prisma.PredictiveModelLifecycleEventDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PredictiveModelLifecycleEventPayload>
+          }
+          update: {
+            args: Prisma.PredictiveModelLifecycleEventUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PredictiveModelLifecycleEventPayload>
+          }
+          deleteMany: {
+            args: Prisma.PredictiveModelLifecycleEventDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.PredictiveModelLifecycleEventUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.PredictiveModelLifecycleEventUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PredictiveModelLifecycleEventPayload>[]
+          }
+          upsert: {
+            args: Prisma.PredictiveModelLifecycleEventUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PredictiveModelLifecycleEventPayload>
+          }
+          aggregate: {
+            args: Prisma.PredictiveModelLifecycleEventAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregatePredictiveModelLifecycleEvent>
+          }
+          groupBy: {
+            args: Prisma.PredictiveModelLifecycleEventGroupByArgs<ExtArgs>
+            result: $Utils.Optional<PredictiveModelLifecycleEventGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.PredictiveModelLifecycleEventCountArgs<ExtArgs>
+            result: $Utils.Optional<PredictiveModelLifecycleEventCountAggregateOutputType> | number
+          }
+        }
+      }
       ExecutionTaskDependency: {
         payload: Prisma.$ExecutionTaskDependencyPayload<ExtArgs>
         fields: Prisma.ExecutionTaskDependencyFieldRefs
@@ -4139,6 +4637,11 @@ export namespace Prisma {
     executionTask?: ExecutionTaskOmit
     predictiveFeatureSnapshot?: PredictiveFeatureSnapshotOmit
     predictiveOutcome?: PredictiveOutcomeOmit
+    predictiveDatasetSnapshot?: PredictiveDatasetSnapshotOmit
+    predictiveModelVersion?: PredictiveModelVersionOmit
+    predictiveModelEvaluation?: PredictiveModelEvaluationOmit
+    predictiveModelApproval?: PredictiveModelApprovalOmit
+    predictiveModelLifecycleEvent?: PredictiveModelLifecycleEventOmit
     executionTaskDependency?: ExecutionTaskDependencyOmit
     executionTaskBlockerEvent?: ExecutionTaskBlockerEventOmit
     executionScheduleRevision?: ExecutionScheduleRevisionOmit
@@ -4492,6 +4995,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots: number
     recordedPredictiveOutcomes: number
     voidedPredictiveOutcomes: number
+    createdPredictiveDatasetSnapshots: number
+    createdPredictiveModelVersions: number
+    validatedPredictiveModelVersions: number
+    recordedPredictiveEvaluations: number
+    decidedPredictiveApprovals: number
+    predictiveModelLifecycleEvents: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4530,6 +5039,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: boolean | UserCountOutputTypeCountVoidedPredictiveSnapshotsArgs
     recordedPredictiveOutcomes?: boolean | UserCountOutputTypeCountRecordedPredictiveOutcomesArgs
     voidedPredictiveOutcomes?: boolean | UserCountOutputTypeCountVoidedPredictiveOutcomesArgs
+    createdPredictiveDatasetSnapshots?: boolean | UserCountOutputTypeCountCreatedPredictiveDatasetSnapshotsArgs
+    createdPredictiveModelVersions?: boolean | UserCountOutputTypeCountCreatedPredictiveModelVersionsArgs
+    validatedPredictiveModelVersions?: boolean | UserCountOutputTypeCountValidatedPredictiveModelVersionsArgs
+    recordedPredictiveEvaluations?: boolean | UserCountOutputTypeCountRecordedPredictiveEvaluationsArgs
+    decidedPredictiveApprovals?: boolean | UserCountOutputTypeCountDecidedPredictiveApprovalsArgs
+    predictiveModelLifecycleEvents?: boolean | UserCountOutputTypeCountPredictiveModelLifecycleEventsArgs
   }
 
   // Custom InputTypes
@@ -4786,6 +5301,48 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountVoidedPredictiveOutcomesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: PredictiveOutcomeWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountCreatedPredictiveDatasetSnapshotsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PredictiveDatasetSnapshotWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountCreatedPredictiveModelVersionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PredictiveModelVersionWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountValidatedPredictiveModelVersionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PredictiveModelVersionWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountRecordedPredictiveEvaluationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PredictiveModelEvaluationWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountDecidedPredictiveApprovalsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PredictiveModelApprovalWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountPredictiveModelLifecycleEventsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PredictiveModelLifecycleEventWhereInput
   }
 
 
@@ -5565,6 +6122,95 @@ export namespace Prisma {
    */
   export type PredictiveFeatureSnapshotCountOutputTypeCountOutcomesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: PredictiveOutcomeWhereInput
+  }
+
+
+  /**
+   * Count Type PredictiveDatasetSnapshotCountOutputType
+   */
+
+  export type PredictiveDatasetSnapshotCountOutputType = {
+    modelVersions: number
+    evaluations: number
+  }
+
+  export type PredictiveDatasetSnapshotCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    modelVersions?: boolean | PredictiveDatasetSnapshotCountOutputTypeCountModelVersionsArgs
+    evaluations?: boolean | PredictiveDatasetSnapshotCountOutputTypeCountEvaluationsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * PredictiveDatasetSnapshotCountOutputType without action
+   */
+  export type PredictiveDatasetSnapshotCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveDatasetSnapshotCountOutputType
+     */
+    select?: PredictiveDatasetSnapshotCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * PredictiveDatasetSnapshotCountOutputType without action
+   */
+  export type PredictiveDatasetSnapshotCountOutputTypeCountModelVersionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PredictiveModelVersionWhereInput
+  }
+
+  /**
+   * PredictiveDatasetSnapshotCountOutputType without action
+   */
+  export type PredictiveDatasetSnapshotCountOutputTypeCountEvaluationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PredictiveModelEvaluationWhereInput
+  }
+
+
+  /**
+   * Count Type PredictiveModelVersionCountOutputType
+   */
+
+  export type PredictiveModelVersionCountOutputType = {
+    evaluations: number
+    approvals: number
+    lifecycleEvents: number
+  }
+
+  export type PredictiveModelVersionCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    evaluations?: boolean | PredictiveModelVersionCountOutputTypeCountEvaluationsArgs
+    approvals?: boolean | PredictiveModelVersionCountOutputTypeCountApprovalsArgs
+    lifecycleEvents?: boolean | PredictiveModelVersionCountOutputTypeCountLifecycleEventsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * PredictiveModelVersionCountOutputType without action
+   */
+  export type PredictiveModelVersionCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveModelVersionCountOutputType
+     */
+    select?: PredictiveModelVersionCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * PredictiveModelVersionCountOutputType without action
+   */
+  export type PredictiveModelVersionCountOutputTypeCountEvaluationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PredictiveModelEvaluationWhereInput
+  }
+
+  /**
+   * PredictiveModelVersionCountOutputType without action
+   */
+  export type PredictiveModelVersionCountOutputTypeCountApprovalsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PredictiveModelApprovalWhereInput
+  }
+
+  /**
+   * PredictiveModelVersionCountOutputType without action
+   */
+  export type PredictiveModelVersionCountOutputTypeCountLifecycleEventsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PredictiveModelLifecycleEventWhereInput
   }
 
 
@@ -8506,6 +9152,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: boolean | User$voidedPredictiveSnapshotsArgs<ExtArgs>
     recordedPredictiveOutcomes?: boolean | User$recordedPredictiveOutcomesArgs<ExtArgs>
     voidedPredictiveOutcomes?: boolean | User$voidedPredictiveOutcomesArgs<ExtArgs>
+    createdPredictiveDatasetSnapshots?: boolean | User$createdPredictiveDatasetSnapshotsArgs<ExtArgs>
+    createdPredictiveModelVersions?: boolean | User$createdPredictiveModelVersionsArgs<ExtArgs>
+    validatedPredictiveModelVersions?: boolean | User$validatedPredictiveModelVersionsArgs<ExtArgs>
+    recordedPredictiveEvaluations?: boolean | User$recordedPredictiveEvaluationsArgs<ExtArgs>
+    decidedPredictiveApprovals?: boolean | User$decidedPredictiveApprovalsArgs<ExtArgs>
+    predictiveModelLifecycleEvents?: boolean | User$predictiveModelLifecycleEventsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -8597,6 +9249,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: boolean | User$voidedPredictiveSnapshotsArgs<ExtArgs>
     recordedPredictiveOutcomes?: boolean | User$recordedPredictiveOutcomesArgs<ExtArgs>
     voidedPredictiveOutcomes?: boolean | User$voidedPredictiveOutcomesArgs<ExtArgs>
+    createdPredictiveDatasetSnapshots?: boolean | User$createdPredictiveDatasetSnapshotsArgs<ExtArgs>
+    createdPredictiveModelVersions?: boolean | User$createdPredictiveModelVersionsArgs<ExtArgs>
+    validatedPredictiveModelVersions?: boolean | User$validatedPredictiveModelVersionsArgs<ExtArgs>
+    recordedPredictiveEvaluations?: boolean | User$recordedPredictiveEvaluationsArgs<ExtArgs>
+    decidedPredictiveApprovals?: boolean | User$decidedPredictiveApprovalsArgs<ExtArgs>
+    predictiveModelLifecycleEvents?: boolean | User$predictiveModelLifecycleEventsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -8648,6 +9306,12 @@ export namespace Prisma {
       voidedPredictiveSnapshots: Prisma.$PredictiveFeatureSnapshotPayload<ExtArgs>[]
       recordedPredictiveOutcomes: Prisma.$PredictiveOutcomePayload<ExtArgs>[]
       voidedPredictiveOutcomes: Prisma.$PredictiveOutcomePayload<ExtArgs>[]
+      createdPredictiveDatasetSnapshots: Prisma.$PredictiveDatasetSnapshotPayload<ExtArgs>[]
+      createdPredictiveModelVersions: Prisma.$PredictiveModelVersionPayload<ExtArgs>[]
+      validatedPredictiveModelVersions: Prisma.$PredictiveModelVersionPayload<ExtArgs>[]
+      recordedPredictiveEvaluations: Prisma.$PredictiveModelEvaluationPayload<ExtArgs>[]
+      decidedPredictiveApprovals: Prisma.$PredictiveModelApprovalPayload<ExtArgs>[]
+      predictiveModelLifecycleEvents: Prisma.$PredictiveModelLifecycleEventPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -9093,6 +9757,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots<T extends User$voidedPredictiveSnapshotsArgs<ExtArgs> = {}>(args?: Subset<T, User$voidedPredictiveSnapshotsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PredictiveFeatureSnapshotPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     recordedPredictiveOutcomes<T extends User$recordedPredictiveOutcomesArgs<ExtArgs> = {}>(args?: Subset<T, User$recordedPredictiveOutcomesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PredictiveOutcomePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     voidedPredictiveOutcomes<T extends User$voidedPredictiveOutcomesArgs<ExtArgs> = {}>(args?: Subset<T, User$voidedPredictiveOutcomesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PredictiveOutcomePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    createdPredictiveDatasetSnapshots<T extends User$createdPredictiveDatasetSnapshotsArgs<ExtArgs> = {}>(args?: Subset<T, User$createdPredictiveDatasetSnapshotsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PredictiveDatasetSnapshotPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    createdPredictiveModelVersions<T extends User$createdPredictiveModelVersionsArgs<ExtArgs> = {}>(args?: Subset<T, User$createdPredictiveModelVersionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PredictiveModelVersionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    validatedPredictiveModelVersions<T extends User$validatedPredictiveModelVersionsArgs<ExtArgs> = {}>(args?: Subset<T, User$validatedPredictiveModelVersionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PredictiveModelVersionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    recordedPredictiveEvaluations<T extends User$recordedPredictiveEvaluationsArgs<ExtArgs> = {}>(args?: Subset<T, User$recordedPredictiveEvaluationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PredictiveModelEvaluationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    decidedPredictiveApprovals<T extends User$decidedPredictiveApprovalsArgs<ExtArgs> = {}>(args?: Subset<T, User$decidedPredictiveApprovalsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PredictiveModelApprovalPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    predictiveModelLifecycleEvents<T extends User$predictiveModelLifecycleEventsArgs<ExtArgs> = {}>(args?: Subset<T, User$predictiveModelLifecycleEventsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PredictiveModelLifecycleEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -10367,6 +11037,150 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: PredictiveOutcomeScalarFieldEnum | PredictiveOutcomeScalarFieldEnum[]
+  }
+
+  /**
+   * User.createdPredictiveDatasetSnapshots
+   */
+  export type User$createdPredictiveDatasetSnapshotsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveDatasetSnapshot
+     */
+    select?: PredictiveDatasetSnapshotSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveDatasetSnapshot
+     */
+    omit?: PredictiveDatasetSnapshotOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveDatasetSnapshotInclude<ExtArgs> | null
+    where?: PredictiveDatasetSnapshotWhereInput
+    orderBy?: PredictiveDatasetSnapshotOrderByWithRelationInput | PredictiveDatasetSnapshotOrderByWithRelationInput[]
+    cursor?: PredictiveDatasetSnapshotWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PredictiveDatasetSnapshotScalarFieldEnum | PredictiveDatasetSnapshotScalarFieldEnum[]
+  }
+
+  /**
+   * User.createdPredictiveModelVersions
+   */
+  export type User$createdPredictiveModelVersionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveModelVersion
+     */
+    select?: PredictiveModelVersionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveModelVersion
+     */
+    omit?: PredictiveModelVersionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveModelVersionInclude<ExtArgs> | null
+    where?: PredictiveModelVersionWhereInput
+    orderBy?: PredictiveModelVersionOrderByWithRelationInput | PredictiveModelVersionOrderByWithRelationInput[]
+    cursor?: PredictiveModelVersionWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PredictiveModelVersionScalarFieldEnum | PredictiveModelVersionScalarFieldEnum[]
+  }
+
+  /**
+   * User.validatedPredictiveModelVersions
+   */
+  export type User$validatedPredictiveModelVersionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveModelVersion
+     */
+    select?: PredictiveModelVersionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveModelVersion
+     */
+    omit?: PredictiveModelVersionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveModelVersionInclude<ExtArgs> | null
+    where?: PredictiveModelVersionWhereInput
+    orderBy?: PredictiveModelVersionOrderByWithRelationInput | PredictiveModelVersionOrderByWithRelationInput[]
+    cursor?: PredictiveModelVersionWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PredictiveModelVersionScalarFieldEnum | PredictiveModelVersionScalarFieldEnum[]
+  }
+
+  /**
+   * User.recordedPredictiveEvaluations
+   */
+  export type User$recordedPredictiveEvaluationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveModelEvaluation
+     */
+    select?: PredictiveModelEvaluationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveModelEvaluation
+     */
+    omit?: PredictiveModelEvaluationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveModelEvaluationInclude<ExtArgs> | null
+    where?: PredictiveModelEvaluationWhereInput
+    orderBy?: PredictiveModelEvaluationOrderByWithRelationInput | PredictiveModelEvaluationOrderByWithRelationInput[]
+    cursor?: PredictiveModelEvaluationWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PredictiveModelEvaluationScalarFieldEnum | PredictiveModelEvaluationScalarFieldEnum[]
+  }
+
+  /**
+   * User.decidedPredictiveApprovals
+   */
+  export type User$decidedPredictiveApprovalsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveModelApproval
+     */
+    select?: PredictiveModelApprovalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveModelApproval
+     */
+    omit?: PredictiveModelApprovalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveModelApprovalInclude<ExtArgs> | null
+    where?: PredictiveModelApprovalWhereInput
+    orderBy?: PredictiveModelApprovalOrderByWithRelationInput | PredictiveModelApprovalOrderByWithRelationInput[]
+    cursor?: PredictiveModelApprovalWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PredictiveModelApprovalScalarFieldEnum | PredictiveModelApprovalScalarFieldEnum[]
+  }
+
+  /**
+   * User.predictiveModelLifecycleEvents
+   */
+  export type User$predictiveModelLifecycleEventsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveModelLifecycleEvent
+     */
+    select?: PredictiveModelLifecycleEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveModelLifecycleEvent
+     */
+    omit?: PredictiveModelLifecycleEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveModelLifecycleEventInclude<ExtArgs> | null
+    where?: PredictiveModelLifecycleEventWhereInput
+    orderBy?: PredictiveModelLifecycleEventOrderByWithRelationInput | PredictiveModelLifecycleEventOrderByWithRelationInput[]
+    cursor?: PredictiveModelLifecycleEventWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PredictiveModelLifecycleEventScalarFieldEnum | PredictiveModelLifecycleEventScalarFieldEnum[]
   }
 
   /**
@@ -43636,6 +44450,6379 @@ export namespace Prisma {
 
 
   /**
+   * Model PredictiveDatasetSnapshot
+   */
+
+  export type AggregatePredictiveDatasetSnapshot = {
+    _count: PredictiveDatasetSnapshotCountAggregateOutputType | null
+    _avg: PredictiveDatasetSnapshotAvgAggregateOutputType | null
+    _sum: PredictiveDatasetSnapshotSumAggregateOutputType | null
+    _min: PredictiveDatasetSnapshotMinAggregateOutputType | null
+    _max: PredictiveDatasetSnapshotMaxAggregateOutputType | null
+  }
+
+  export type PredictiveDatasetSnapshotAvgAggregateOutputType = {
+    sampleCount: number | null
+  }
+
+  export type PredictiveDatasetSnapshotSumAggregateOutputType = {
+    sampleCount: number | null
+  }
+
+  export type PredictiveDatasetSnapshotMinAggregateOutputType = {
+    id: string | null
+    datasetContractVersion: string | null
+    targetType: $Enums.PredictiveTargetType | null
+    featureContractVersion: string | null
+    outcomeContractVersion: string | null
+    departmentId: string | null
+    jurisdictionId: string | null
+    sampleCount: number | null
+    periodStart: Date | null
+    periodEnd: Date | null
+    datasetFingerprint: string | null
+    createdById: string | null
+    createdAt: Date | null
+  }
+
+  export type PredictiveDatasetSnapshotMaxAggregateOutputType = {
+    id: string | null
+    datasetContractVersion: string | null
+    targetType: $Enums.PredictiveTargetType | null
+    featureContractVersion: string | null
+    outcomeContractVersion: string | null
+    departmentId: string | null
+    jurisdictionId: string | null
+    sampleCount: number | null
+    periodStart: Date | null
+    periodEnd: Date | null
+    datasetFingerprint: string | null
+    createdById: string | null
+    createdAt: Date | null
+  }
+
+  export type PredictiveDatasetSnapshotCountAggregateOutputType = {
+    id: number
+    datasetContractVersion: number
+    targetType: number
+    featureContractVersion: number
+    outcomeContractVersion: number
+    departmentId: number
+    jurisdictionId: number
+    includedProvenance: number
+    sampleCount: number
+    classBalance: number
+    periodStart: number
+    periodEnd: number
+    sampleIdentities: number
+    datasetFingerprint: number
+    createdById: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type PredictiveDatasetSnapshotAvgAggregateInputType = {
+    sampleCount?: true
+  }
+
+  export type PredictiveDatasetSnapshotSumAggregateInputType = {
+    sampleCount?: true
+  }
+
+  export type PredictiveDatasetSnapshotMinAggregateInputType = {
+    id?: true
+    datasetContractVersion?: true
+    targetType?: true
+    featureContractVersion?: true
+    outcomeContractVersion?: true
+    departmentId?: true
+    jurisdictionId?: true
+    sampleCount?: true
+    periodStart?: true
+    periodEnd?: true
+    datasetFingerprint?: true
+    createdById?: true
+    createdAt?: true
+  }
+
+  export type PredictiveDatasetSnapshotMaxAggregateInputType = {
+    id?: true
+    datasetContractVersion?: true
+    targetType?: true
+    featureContractVersion?: true
+    outcomeContractVersion?: true
+    departmentId?: true
+    jurisdictionId?: true
+    sampleCount?: true
+    periodStart?: true
+    periodEnd?: true
+    datasetFingerprint?: true
+    createdById?: true
+    createdAt?: true
+  }
+
+  export type PredictiveDatasetSnapshotCountAggregateInputType = {
+    id?: true
+    datasetContractVersion?: true
+    targetType?: true
+    featureContractVersion?: true
+    outcomeContractVersion?: true
+    departmentId?: true
+    jurisdictionId?: true
+    includedProvenance?: true
+    sampleCount?: true
+    classBalance?: true
+    periodStart?: true
+    periodEnd?: true
+    sampleIdentities?: true
+    datasetFingerprint?: true
+    createdById?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type PredictiveDatasetSnapshotAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PredictiveDatasetSnapshot to aggregate.
+     */
+    where?: PredictiveDatasetSnapshotWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PredictiveDatasetSnapshots to fetch.
+     */
+    orderBy?: PredictiveDatasetSnapshotOrderByWithRelationInput | PredictiveDatasetSnapshotOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: PredictiveDatasetSnapshotWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PredictiveDatasetSnapshots from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PredictiveDatasetSnapshots.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned PredictiveDatasetSnapshots
+    **/
+    _count?: true | PredictiveDatasetSnapshotCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: PredictiveDatasetSnapshotAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: PredictiveDatasetSnapshotSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: PredictiveDatasetSnapshotMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: PredictiveDatasetSnapshotMaxAggregateInputType
+  }
+
+  export type GetPredictiveDatasetSnapshotAggregateType<T extends PredictiveDatasetSnapshotAggregateArgs> = {
+        [P in keyof T & keyof AggregatePredictiveDatasetSnapshot]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePredictiveDatasetSnapshot[P]>
+      : GetScalarType<T[P], AggregatePredictiveDatasetSnapshot[P]>
+  }
+
+
+
+
+  export type PredictiveDatasetSnapshotGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PredictiveDatasetSnapshotWhereInput
+    orderBy?: PredictiveDatasetSnapshotOrderByWithAggregationInput | PredictiveDatasetSnapshotOrderByWithAggregationInput[]
+    by: PredictiveDatasetSnapshotScalarFieldEnum[] | PredictiveDatasetSnapshotScalarFieldEnum
+    having?: PredictiveDatasetSnapshotScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: PredictiveDatasetSnapshotCountAggregateInputType | true
+    _avg?: PredictiveDatasetSnapshotAvgAggregateInputType
+    _sum?: PredictiveDatasetSnapshotSumAggregateInputType
+    _min?: PredictiveDatasetSnapshotMinAggregateInputType
+    _max?: PredictiveDatasetSnapshotMaxAggregateInputType
+  }
+
+  export type PredictiveDatasetSnapshotGroupByOutputType = {
+    id: string
+    datasetContractVersion: string
+    targetType: $Enums.PredictiveTargetType
+    featureContractVersion: string
+    outcomeContractVersion: string
+    departmentId: string | null
+    jurisdictionId: string | null
+    includedProvenance: JsonValue
+    sampleCount: number
+    classBalance: JsonValue
+    periodStart: Date | null
+    periodEnd: Date | null
+    sampleIdentities: JsonValue
+    datasetFingerprint: string
+    createdById: string
+    createdAt: Date
+    _count: PredictiveDatasetSnapshotCountAggregateOutputType | null
+    _avg: PredictiveDatasetSnapshotAvgAggregateOutputType | null
+    _sum: PredictiveDatasetSnapshotSumAggregateOutputType | null
+    _min: PredictiveDatasetSnapshotMinAggregateOutputType | null
+    _max: PredictiveDatasetSnapshotMaxAggregateOutputType | null
+  }
+
+  type GetPredictiveDatasetSnapshotGroupByPayload<T extends PredictiveDatasetSnapshotGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<PredictiveDatasetSnapshotGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof PredictiveDatasetSnapshotGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], PredictiveDatasetSnapshotGroupByOutputType[P]>
+            : GetScalarType<T[P], PredictiveDatasetSnapshotGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type PredictiveDatasetSnapshotSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    datasetContractVersion?: boolean
+    targetType?: boolean
+    featureContractVersion?: boolean
+    outcomeContractVersion?: boolean
+    departmentId?: boolean
+    jurisdictionId?: boolean
+    includedProvenance?: boolean
+    sampleCount?: boolean
+    classBalance?: boolean
+    periodStart?: boolean
+    periodEnd?: boolean
+    sampleIdentities?: boolean
+    datasetFingerprint?: boolean
+    createdById?: boolean
+    createdAt?: boolean
+    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+    modelVersions?: boolean | PredictiveDatasetSnapshot$modelVersionsArgs<ExtArgs>
+    evaluations?: boolean | PredictiveDatasetSnapshot$evaluationsArgs<ExtArgs>
+    _count?: boolean | PredictiveDatasetSnapshotCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["predictiveDatasetSnapshot"]>
+
+  export type PredictiveDatasetSnapshotSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    datasetContractVersion?: boolean
+    targetType?: boolean
+    featureContractVersion?: boolean
+    outcomeContractVersion?: boolean
+    departmentId?: boolean
+    jurisdictionId?: boolean
+    includedProvenance?: boolean
+    sampleCount?: boolean
+    classBalance?: boolean
+    periodStart?: boolean
+    periodEnd?: boolean
+    sampleIdentities?: boolean
+    datasetFingerprint?: boolean
+    createdById?: boolean
+    createdAt?: boolean
+    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["predictiveDatasetSnapshot"]>
+
+  export type PredictiveDatasetSnapshotSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    datasetContractVersion?: boolean
+    targetType?: boolean
+    featureContractVersion?: boolean
+    outcomeContractVersion?: boolean
+    departmentId?: boolean
+    jurisdictionId?: boolean
+    includedProvenance?: boolean
+    sampleCount?: boolean
+    classBalance?: boolean
+    periodStart?: boolean
+    periodEnd?: boolean
+    sampleIdentities?: boolean
+    datasetFingerprint?: boolean
+    createdById?: boolean
+    createdAt?: boolean
+    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["predictiveDatasetSnapshot"]>
+
+  export type PredictiveDatasetSnapshotSelectScalar = {
+    id?: boolean
+    datasetContractVersion?: boolean
+    targetType?: boolean
+    featureContractVersion?: boolean
+    outcomeContractVersion?: boolean
+    departmentId?: boolean
+    jurisdictionId?: boolean
+    includedProvenance?: boolean
+    sampleCount?: boolean
+    classBalance?: boolean
+    periodStart?: boolean
+    periodEnd?: boolean
+    sampleIdentities?: boolean
+    datasetFingerprint?: boolean
+    createdById?: boolean
+    createdAt?: boolean
+  }
+
+  export type PredictiveDatasetSnapshotOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "datasetContractVersion" | "targetType" | "featureContractVersion" | "outcomeContractVersion" | "departmentId" | "jurisdictionId" | "includedProvenance" | "sampleCount" | "classBalance" | "periodStart" | "periodEnd" | "sampleIdentities" | "datasetFingerprint" | "createdById" | "createdAt", ExtArgs["result"]["predictiveDatasetSnapshot"]>
+  export type PredictiveDatasetSnapshotInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+    modelVersions?: boolean | PredictiveDatasetSnapshot$modelVersionsArgs<ExtArgs>
+    evaluations?: boolean | PredictiveDatasetSnapshot$evaluationsArgs<ExtArgs>
+    _count?: boolean | PredictiveDatasetSnapshotCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type PredictiveDatasetSnapshotIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type PredictiveDatasetSnapshotIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $PredictiveDatasetSnapshotPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "PredictiveDatasetSnapshot"
+    objects: {
+      createdBy: Prisma.$UserPayload<ExtArgs>
+      modelVersions: Prisma.$PredictiveModelVersionPayload<ExtArgs>[]
+      evaluations: Prisma.$PredictiveModelEvaluationPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      datasetContractVersion: string
+      targetType: $Enums.PredictiveTargetType
+      featureContractVersion: string
+      outcomeContractVersion: string
+      departmentId: string | null
+      jurisdictionId: string | null
+      includedProvenance: Prisma.JsonValue
+      sampleCount: number
+      classBalance: Prisma.JsonValue
+      periodStart: Date | null
+      periodEnd: Date | null
+      sampleIdentities: Prisma.JsonValue
+      datasetFingerprint: string
+      createdById: string
+      createdAt: Date
+    }, ExtArgs["result"]["predictiveDatasetSnapshot"]>
+    composites: {}
+  }
+
+  type PredictiveDatasetSnapshotGetPayload<S extends boolean | null | undefined | PredictiveDatasetSnapshotDefaultArgs> = $Result.GetResult<Prisma.$PredictiveDatasetSnapshotPayload, S>
+
+  type PredictiveDatasetSnapshotCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<PredictiveDatasetSnapshotFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: PredictiveDatasetSnapshotCountAggregateInputType | true
+    }
+
+  export interface PredictiveDatasetSnapshotDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['PredictiveDatasetSnapshot'], meta: { name: 'PredictiveDatasetSnapshot' } }
+    /**
+     * Find zero or one PredictiveDatasetSnapshot that matches the filter.
+     * @param {PredictiveDatasetSnapshotFindUniqueArgs} args - Arguments to find a PredictiveDatasetSnapshot
+     * @example
+     * // Get one PredictiveDatasetSnapshot
+     * const predictiveDatasetSnapshot = await prisma.predictiveDatasetSnapshot.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends PredictiveDatasetSnapshotFindUniqueArgs>(args: SelectSubset<T, PredictiveDatasetSnapshotFindUniqueArgs<ExtArgs>>): Prisma__PredictiveDatasetSnapshotClient<$Result.GetResult<Prisma.$PredictiveDatasetSnapshotPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one PredictiveDatasetSnapshot that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {PredictiveDatasetSnapshotFindUniqueOrThrowArgs} args - Arguments to find a PredictiveDatasetSnapshot
+     * @example
+     * // Get one PredictiveDatasetSnapshot
+     * const predictiveDatasetSnapshot = await prisma.predictiveDatasetSnapshot.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends PredictiveDatasetSnapshotFindUniqueOrThrowArgs>(args: SelectSubset<T, PredictiveDatasetSnapshotFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PredictiveDatasetSnapshotClient<$Result.GetResult<Prisma.$PredictiveDatasetSnapshotPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PredictiveDatasetSnapshot that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PredictiveDatasetSnapshotFindFirstArgs} args - Arguments to find a PredictiveDatasetSnapshot
+     * @example
+     * // Get one PredictiveDatasetSnapshot
+     * const predictiveDatasetSnapshot = await prisma.predictiveDatasetSnapshot.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends PredictiveDatasetSnapshotFindFirstArgs>(args?: SelectSubset<T, PredictiveDatasetSnapshotFindFirstArgs<ExtArgs>>): Prisma__PredictiveDatasetSnapshotClient<$Result.GetResult<Prisma.$PredictiveDatasetSnapshotPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PredictiveDatasetSnapshot that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PredictiveDatasetSnapshotFindFirstOrThrowArgs} args - Arguments to find a PredictiveDatasetSnapshot
+     * @example
+     * // Get one PredictiveDatasetSnapshot
+     * const predictiveDatasetSnapshot = await prisma.predictiveDatasetSnapshot.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends PredictiveDatasetSnapshotFindFirstOrThrowArgs>(args?: SelectSubset<T, PredictiveDatasetSnapshotFindFirstOrThrowArgs<ExtArgs>>): Prisma__PredictiveDatasetSnapshotClient<$Result.GetResult<Prisma.$PredictiveDatasetSnapshotPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more PredictiveDatasetSnapshots that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PredictiveDatasetSnapshotFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all PredictiveDatasetSnapshots
+     * const predictiveDatasetSnapshots = await prisma.predictiveDatasetSnapshot.findMany()
+     * 
+     * // Get first 10 PredictiveDatasetSnapshots
+     * const predictiveDatasetSnapshots = await prisma.predictiveDatasetSnapshot.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const predictiveDatasetSnapshotWithIdOnly = await prisma.predictiveDatasetSnapshot.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends PredictiveDatasetSnapshotFindManyArgs>(args?: SelectSubset<T, PredictiveDatasetSnapshotFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PredictiveDatasetSnapshotPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a PredictiveDatasetSnapshot.
+     * @param {PredictiveDatasetSnapshotCreateArgs} args - Arguments to create a PredictiveDatasetSnapshot.
+     * @example
+     * // Create one PredictiveDatasetSnapshot
+     * const PredictiveDatasetSnapshot = await prisma.predictiveDatasetSnapshot.create({
+     *   data: {
+     *     // ... data to create a PredictiveDatasetSnapshot
+     *   }
+     * })
+     * 
+     */
+    create<T extends PredictiveDatasetSnapshotCreateArgs>(args: SelectSubset<T, PredictiveDatasetSnapshotCreateArgs<ExtArgs>>): Prisma__PredictiveDatasetSnapshotClient<$Result.GetResult<Prisma.$PredictiveDatasetSnapshotPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many PredictiveDatasetSnapshots.
+     * @param {PredictiveDatasetSnapshotCreateManyArgs} args - Arguments to create many PredictiveDatasetSnapshots.
+     * @example
+     * // Create many PredictiveDatasetSnapshots
+     * const predictiveDatasetSnapshot = await prisma.predictiveDatasetSnapshot.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends PredictiveDatasetSnapshotCreateManyArgs>(args?: SelectSubset<T, PredictiveDatasetSnapshotCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many PredictiveDatasetSnapshots and returns the data saved in the database.
+     * @param {PredictiveDatasetSnapshotCreateManyAndReturnArgs} args - Arguments to create many PredictiveDatasetSnapshots.
+     * @example
+     * // Create many PredictiveDatasetSnapshots
+     * const predictiveDatasetSnapshot = await prisma.predictiveDatasetSnapshot.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many PredictiveDatasetSnapshots and only return the `id`
+     * const predictiveDatasetSnapshotWithIdOnly = await prisma.predictiveDatasetSnapshot.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends PredictiveDatasetSnapshotCreateManyAndReturnArgs>(args?: SelectSubset<T, PredictiveDatasetSnapshotCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PredictiveDatasetSnapshotPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a PredictiveDatasetSnapshot.
+     * @param {PredictiveDatasetSnapshotDeleteArgs} args - Arguments to delete one PredictiveDatasetSnapshot.
+     * @example
+     * // Delete one PredictiveDatasetSnapshot
+     * const PredictiveDatasetSnapshot = await prisma.predictiveDatasetSnapshot.delete({
+     *   where: {
+     *     // ... filter to delete one PredictiveDatasetSnapshot
+     *   }
+     * })
+     * 
+     */
+    delete<T extends PredictiveDatasetSnapshotDeleteArgs>(args: SelectSubset<T, PredictiveDatasetSnapshotDeleteArgs<ExtArgs>>): Prisma__PredictiveDatasetSnapshotClient<$Result.GetResult<Prisma.$PredictiveDatasetSnapshotPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one PredictiveDatasetSnapshot.
+     * @param {PredictiveDatasetSnapshotUpdateArgs} args - Arguments to update one PredictiveDatasetSnapshot.
+     * @example
+     * // Update one PredictiveDatasetSnapshot
+     * const predictiveDatasetSnapshot = await prisma.predictiveDatasetSnapshot.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends PredictiveDatasetSnapshotUpdateArgs>(args: SelectSubset<T, PredictiveDatasetSnapshotUpdateArgs<ExtArgs>>): Prisma__PredictiveDatasetSnapshotClient<$Result.GetResult<Prisma.$PredictiveDatasetSnapshotPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more PredictiveDatasetSnapshots.
+     * @param {PredictiveDatasetSnapshotDeleteManyArgs} args - Arguments to filter PredictiveDatasetSnapshots to delete.
+     * @example
+     * // Delete a few PredictiveDatasetSnapshots
+     * const { count } = await prisma.predictiveDatasetSnapshot.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends PredictiveDatasetSnapshotDeleteManyArgs>(args?: SelectSubset<T, PredictiveDatasetSnapshotDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PredictiveDatasetSnapshots.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PredictiveDatasetSnapshotUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many PredictiveDatasetSnapshots
+     * const predictiveDatasetSnapshot = await prisma.predictiveDatasetSnapshot.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends PredictiveDatasetSnapshotUpdateManyArgs>(args: SelectSubset<T, PredictiveDatasetSnapshotUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PredictiveDatasetSnapshots and returns the data updated in the database.
+     * @param {PredictiveDatasetSnapshotUpdateManyAndReturnArgs} args - Arguments to update many PredictiveDatasetSnapshots.
+     * @example
+     * // Update many PredictiveDatasetSnapshots
+     * const predictiveDatasetSnapshot = await prisma.predictiveDatasetSnapshot.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more PredictiveDatasetSnapshots and only return the `id`
+     * const predictiveDatasetSnapshotWithIdOnly = await prisma.predictiveDatasetSnapshot.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends PredictiveDatasetSnapshotUpdateManyAndReturnArgs>(args: SelectSubset<T, PredictiveDatasetSnapshotUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PredictiveDatasetSnapshotPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one PredictiveDatasetSnapshot.
+     * @param {PredictiveDatasetSnapshotUpsertArgs} args - Arguments to update or create a PredictiveDatasetSnapshot.
+     * @example
+     * // Update or create a PredictiveDatasetSnapshot
+     * const predictiveDatasetSnapshot = await prisma.predictiveDatasetSnapshot.upsert({
+     *   create: {
+     *     // ... data to create a PredictiveDatasetSnapshot
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the PredictiveDatasetSnapshot we want to update
+     *   }
+     * })
+     */
+    upsert<T extends PredictiveDatasetSnapshotUpsertArgs>(args: SelectSubset<T, PredictiveDatasetSnapshotUpsertArgs<ExtArgs>>): Prisma__PredictiveDatasetSnapshotClient<$Result.GetResult<Prisma.$PredictiveDatasetSnapshotPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of PredictiveDatasetSnapshots.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PredictiveDatasetSnapshotCountArgs} args - Arguments to filter PredictiveDatasetSnapshots to count.
+     * @example
+     * // Count the number of PredictiveDatasetSnapshots
+     * const count = await prisma.predictiveDatasetSnapshot.count({
+     *   where: {
+     *     // ... the filter for the PredictiveDatasetSnapshots we want to count
+     *   }
+     * })
+    **/
+    count<T extends PredictiveDatasetSnapshotCountArgs>(
+      args?: Subset<T, PredictiveDatasetSnapshotCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], PredictiveDatasetSnapshotCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a PredictiveDatasetSnapshot.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PredictiveDatasetSnapshotAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends PredictiveDatasetSnapshotAggregateArgs>(args: Subset<T, PredictiveDatasetSnapshotAggregateArgs>): Prisma.PrismaPromise<GetPredictiveDatasetSnapshotAggregateType<T>>
+
+    /**
+     * Group by PredictiveDatasetSnapshot.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PredictiveDatasetSnapshotGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends PredictiveDatasetSnapshotGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: PredictiveDatasetSnapshotGroupByArgs['orderBy'] }
+        : { orderBy?: PredictiveDatasetSnapshotGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, PredictiveDatasetSnapshotGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPredictiveDatasetSnapshotGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the PredictiveDatasetSnapshot model
+   */
+  readonly fields: PredictiveDatasetSnapshotFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for PredictiveDatasetSnapshot.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__PredictiveDatasetSnapshotClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    createdBy<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    modelVersions<T extends PredictiveDatasetSnapshot$modelVersionsArgs<ExtArgs> = {}>(args?: Subset<T, PredictiveDatasetSnapshot$modelVersionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PredictiveModelVersionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    evaluations<T extends PredictiveDatasetSnapshot$evaluationsArgs<ExtArgs> = {}>(args?: Subset<T, PredictiveDatasetSnapshot$evaluationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PredictiveModelEvaluationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the PredictiveDatasetSnapshot model
+   */
+  interface PredictiveDatasetSnapshotFieldRefs {
+    readonly id: FieldRef<"PredictiveDatasetSnapshot", 'String'>
+    readonly datasetContractVersion: FieldRef<"PredictiveDatasetSnapshot", 'String'>
+    readonly targetType: FieldRef<"PredictiveDatasetSnapshot", 'PredictiveTargetType'>
+    readonly featureContractVersion: FieldRef<"PredictiveDatasetSnapshot", 'String'>
+    readonly outcomeContractVersion: FieldRef<"PredictiveDatasetSnapshot", 'String'>
+    readonly departmentId: FieldRef<"PredictiveDatasetSnapshot", 'String'>
+    readonly jurisdictionId: FieldRef<"PredictiveDatasetSnapshot", 'String'>
+    readonly includedProvenance: FieldRef<"PredictiveDatasetSnapshot", 'Json'>
+    readonly sampleCount: FieldRef<"PredictiveDatasetSnapshot", 'Int'>
+    readonly classBalance: FieldRef<"PredictiveDatasetSnapshot", 'Json'>
+    readonly periodStart: FieldRef<"PredictiveDatasetSnapshot", 'DateTime'>
+    readonly periodEnd: FieldRef<"PredictiveDatasetSnapshot", 'DateTime'>
+    readonly sampleIdentities: FieldRef<"PredictiveDatasetSnapshot", 'Json'>
+    readonly datasetFingerprint: FieldRef<"PredictiveDatasetSnapshot", 'String'>
+    readonly createdById: FieldRef<"PredictiveDatasetSnapshot", 'String'>
+    readonly createdAt: FieldRef<"PredictiveDatasetSnapshot", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * PredictiveDatasetSnapshot findUnique
+   */
+  export type PredictiveDatasetSnapshotFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveDatasetSnapshot
+     */
+    select?: PredictiveDatasetSnapshotSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveDatasetSnapshot
+     */
+    omit?: PredictiveDatasetSnapshotOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveDatasetSnapshotInclude<ExtArgs> | null
+    /**
+     * Filter, which PredictiveDatasetSnapshot to fetch.
+     */
+    where: PredictiveDatasetSnapshotWhereUniqueInput
+  }
+
+  /**
+   * PredictiveDatasetSnapshot findUniqueOrThrow
+   */
+  export type PredictiveDatasetSnapshotFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveDatasetSnapshot
+     */
+    select?: PredictiveDatasetSnapshotSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveDatasetSnapshot
+     */
+    omit?: PredictiveDatasetSnapshotOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveDatasetSnapshotInclude<ExtArgs> | null
+    /**
+     * Filter, which PredictiveDatasetSnapshot to fetch.
+     */
+    where: PredictiveDatasetSnapshotWhereUniqueInput
+  }
+
+  /**
+   * PredictiveDatasetSnapshot findFirst
+   */
+  export type PredictiveDatasetSnapshotFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveDatasetSnapshot
+     */
+    select?: PredictiveDatasetSnapshotSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveDatasetSnapshot
+     */
+    omit?: PredictiveDatasetSnapshotOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveDatasetSnapshotInclude<ExtArgs> | null
+    /**
+     * Filter, which PredictiveDatasetSnapshot to fetch.
+     */
+    where?: PredictiveDatasetSnapshotWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PredictiveDatasetSnapshots to fetch.
+     */
+    orderBy?: PredictiveDatasetSnapshotOrderByWithRelationInput | PredictiveDatasetSnapshotOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PredictiveDatasetSnapshots.
+     */
+    cursor?: PredictiveDatasetSnapshotWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PredictiveDatasetSnapshots from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PredictiveDatasetSnapshots.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PredictiveDatasetSnapshots.
+     */
+    distinct?: PredictiveDatasetSnapshotScalarFieldEnum | PredictiveDatasetSnapshotScalarFieldEnum[]
+  }
+
+  /**
+   * PredictiveDatasetSnapshot findFirstOrThrow
+   */
+  export type PredictiveDatasetSnapshotFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveDatasetSnapshot
+     */
+    select?: PredictiveDatasetSnapshotSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveDatasetSnapshot
+     */
+    omit?: PredictiveDatasetSnapshotOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveDatasetSnapshotInclude<ExtArgs> | null
+    /**
+     * Filter, which PredictiveDatasetSnapshot to fetch.
+     */
+    where?: PredictiveDatasetSnapshotWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PredictiveDatasetSnapshots to fetch.
+     */
+    orderBy?: PredictiveDatasetSnapshotOrderByWithRelationInput | PredictiveDatasetSnapshotOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PredictiveDatasetSnapshots.
+     */
+    cursor?: PredictiveDatasetSnapshotWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PredictiveDatasetSnapshots from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PredictiveDatasetSnapshots.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PredictiveDatasetSnapshots.
+     */
+    distinct?: PredictiveDatasetSnapshotScalarFieldEnum | PredictiveDatasetSnapshotScalarFieldEnum[]
+  }
+
+  /**
+   * PredictiveDatasetSnapshot findMany
+   */
+  export type PredictiveDatasetSnapshotFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveDatasetSnapshot
+     */
+    select?: PredictiveDatasetSnapshotSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveDatasetSnapshot
+     */
+    omit?: PredictiveDatasetSnapshotOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveDatasetSnapshotInclude<ExtArgs> | null
+    /**
+     * Filter, which PredictiveDatasetSnapshots to fetch.
+     */
+    where?: PredictiveDatasetSnapshotWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PredictiveDatasetSnapshots to fetch.
+     */
+    orderBy?: PredictiveDatasetSnapshotOrderByWithRelationInput | PredictiveDatasetSnapshotOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing PredictiveDatasetSnapshots.
+     */
+    cursor?: PredictiveDatasetSnapshotWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PredictiveDatasetSnapshots from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PredictiveDatasetSnapshots.
+     */
+    skip?: number
+    distinct?: PredictiveDatasetSnapshotScalarFieldEnum | PredictiveDatasetSnapshotScalarFieldEnum[]
+  }
+
+  /**
+   * PredictiveDatasetSnapshot create
+   */
+  export type PredictiveDatasetSnapshotCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveDatasetSnapshot
+     */
+    select?: PredictiveDatasetSnapshotSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveDatasetSnapshot
+     */
+    omit?: PredictiveDatasetSnapshotOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveDatasetSnapshotInclude<ExtArgs> | null
+    /**
+     * The data needed to create a PredictiveDatasetSnapshot.
+     */
+    data: XOR<PredictiveDatasetSnapshotCreateInput, PredictiveDatasetSnapshotUncheckedCreateInput>
+  }
+
+  /**
+   * PredictiveDatasetSnapshot createMany
+   */
+  export type PredictiveDatasetSnapshotCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many PredictiveDatasetSnapshots.
+     */
+    data: PredictiveDatasetSnapshotCreateManyInput | PredictiveDatasetSnapshotCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * PredictiveDatasetSnapshot createManyAndReturn
+   */
+  export type PredictiveDatasetSnapshotCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveDatasetSnapshot
+     */
+    select?: PredictiveDatasetSnapshotSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveDatasetSnapshot
+     */
+    omit?: PredictiveDatasetSnapshotOmit<ExtArgs> | null
+    /**
+     * The data used to create many PredictiveDatasetSnapshots.
+     */
+    data: PredictiveDatasetSnapshotCreateManyInput | PredictiveDatasetSnapshotCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveDatasetSnapshotIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * PredictiveDatasetSnapshot update
+   */
+  export type PredictiveDatasetSnapshotUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveDatasetSnapshot
+     */
+    select?: PredictiveDatasetSnapshotSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveDatasetSnapshot
+     */
+    omit?: PredictiveDatasetSnapshotOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveDatasetSnapshotInclude<ExtArgs> | null
+    /**
+     * The data needed to update a PredictiveDatasetSnapshot.
+     */
+    data: XOR<PredictiveDatasetSnapshotUpdateInput, PredictiveDatasetSnapshotUncheckedUpdateInput>
+    /**
+     * Choose, which PredictiveDatasetSnapshot to update.
+     */
+    where: PredictiveDatasetSnapshotWhereUniqueInput
+  }
+
+  /**
+   * PredictiveDatasetSnapshot updateMany
+   */
+  export type PredictiveDatasetSnapshotUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update PredictiveDatasetSnapshots.
+     */
+    data: XOR<PredictiveDatasetSnapshotUpdateManyMutationInput, PredictiveDatasetSnapshotUncheckedUpdateManyInput>
+    /**
+     * Filter which PredictiveDatasetSnapshots to update
+     */
+    where?: PredictiveDatasetSnapshotWhereInput
+    /**
+     * Limit how many PredictiveDatasetSnapshots to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * PredictiveDatasetSnapshot updateManyAndReturn
+   */
+  export type PredictiveDatasetSnapshotUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveDatasetSnapshot
+     */
+    select?: PredictiveDatasetSnapshotSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveDatasetSnapshot
+     */
+    omit?: PredictiveDatasetSnapshotOmit<ExtArgs> | null
+    /**
+     * The data used to update PredictiveDatasetSnapshots.
+     */
+    data: XOR<PredictiveDatasetSnapshotUpdateManyMutationInput, PredictiveDatasetSnapshotUncheckedUpdateManyInput>
+    /**
+     * Filter which PredictiveDatasetSnapshots to update
+     */
+    where?: PredictiveDatasetSnapshotWhereInput
+    /**
+     * Limit how many PredictiveDatasetSnapshots to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveDatasetSnapshotIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * PredictiveDatasetSnapshot upsert
+   */
+  export type PredictiveDatasetSnapshotUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveDatasetSnapshot
+     */
+    select?: PredictiveDatasetSnapshotSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveDatasetSnapshot
+     */
+    omit?: PredictiveDatasetSnapshotOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveDatasetSnapshotInclude<ExtArgs> | null
+    /**
+     * The filter to search for the PredictiveDatasetSnapshot to update in case it exists.
+     */
+    where: PredictiveDatasetSnapshotWhereUniqueInput
+    /**
+     * In case the PredictiveDatasetSnapshot found by the `where` argument doesn't exist, create a new PredictiveDatasetSnapshot with this data.
+     */
+    create: XOR<PredictiveDatasetSnapshotCreateInput, PredictiveDatasetSnapshotUncheckedCreateInput>
+    /**
+     * In case the PredictiveDatasetSnapshot was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<PredictiveDatasetSnapshotUpdateInput, PredictiveDatasetSnapshotUncheckedUpdateInput>
+  }
+
+  /**
+   * PredictiveDatasetSnapshot delete
+   */
+  export type PredictiveDatasetSnapshotDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveDatasetSnapshot
+     */
+    select?: PredictiveDatasetSnapshotSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveDatasetSnapshot
+     */
+    omit?: PredictiveDatasetSnapshotOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveDatasetSnapshotInclude<ExtArgs> | null
+    /**
+     * Filter which PredictiveDatasetSnapshot to delete.
+     */
+    where: PredictiveDatasetSnapshotWhereUniqueInput
+  }
+
+  /**
+   * PredictiveDatasetSnapshot deleteMany
+   */
+  export type PredictiveDatasetSnapshotDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PredictiveDatasetSnapshots to delete
+     */
+    where?: PredictiveDatasetSnapshotWhereInput
+    /**
+     * Limit how many PredictiveDatasetSnapshots to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * PredictiveDatasetSnapshot.modelVersions
+   */
+  export type PredictiveDatasetSnapshot$modelVersionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveModelVersion
+     */
+    select?: PredictiveModelVersionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveModelVersion
+     */
+    omit?: PredictiveModelVersionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveModelVersionInclude<ExtArgs> | null
+    where?: PredictiveModelVersionWhereInput
+    orderBy?: PredictiveModelVersionOrderByWithRelationInput | PredictiveModelVersionOrderByWithRelationInput[]
+    cursor?: PredictiveModelVersionWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PredictiveModelVersionScalarFieldEnum | PredictiveModelVersionScalarFieldEnum[]
+  }
+
+  /**
+   * PredictiveDatasetSnapshot.evaluations
+   */
+  export type PredictiveDatasetSnapshot$evaluationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveModelEvaluation
+     */
+    select?: PredictiveModelEvaluationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveModelEvaluation
+     */
+    omit?: PredictiveModelEvaluationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveModelEvaluationInclude<ExtArgs> | null
+    where?: PredictiveModelEvaluationWhereInput
+    orderBy?: PredictiveModelEvaluationOrderByWithRelationInput | PredictiveModelEvaluationOrderByWithRelationInput[]
+    cursor?: PredictiveModelEvaluationWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PredictiveModelEvaluationScalarFieldEnum | PredictiveModelEvaluationScalarFieldEnum[]
+  }
+
+  /**
+   * PredictiveDatasetSnapshot without action
+   */
+  export type PredictiveDatasetSnapshotDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveDatasetSnapshot
+     */
+    select?: PredictiveDatasetSnapshotSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveDatasetSnapshot
+     */
+    omit?: PredictiveDatasetSnapshotOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveDatasetSnapshotInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model PredictiveModelVersion
+   */
+
+  export type AggregatePredictiveModelVersion = {
+    _count: PredictiveModelVersionCountAggregateOutputType | null
+    _avg: PredictiveModelVersionAvgAggregateOutputType | null
+    _sum: PredictiveModelVersionSumAggregateOutputType | null
+    _min: PredictiveModelVersionMinAggregateOutputType | null
+    _max: PredictiveModelVersionMaxAggregateOutputType | null
+  }
+
+  export type PredictiveModelVersionAvgAggregateOutputType = {
+    artifactSizeBytes: number | null
+  }
+
+  export type PredictiveModelVersionSumAggregateOutputType = {
+    artifactSizeBytes: bigint | null
+  }
+
+  export type PredictiveModelVersionMinAggregateOutputType = {
+    id: string | null
+    modelName: string | null
+    modelVersion: string | null
+    targetType: $Enums.PredictiveTargetType | null
+    deploymentSlot: string | null
+    intendedUse: string | null
+    forbiddenUse: string | null
+    featureContractVersion: string | null
+    outcomeContractVersion: string | null
+    datasetSnapshotId: string | null
+    trainingCodeVersion: string | null
+    artifactReference: string | null
+    artifactDigest: string | null
+    artifactFormat: string | null
+    artifactSizeBytes: bigint | null
+    trainingTimestamp: Date | null
+    lifecycleStatus: $Enums.PredictiveModelLifecycleStatus | null
+    createdById: string | null
+    createdAt: Date | null
+    validatedById: string | null
+    validatedAt: Date | null
+  }
+
+  export type PredictiveModelVersionMaxAggregateOutputType = {
+    id: string | null
+    modelName: string | null
+    modelVersion: string | null
+    targetType: $Enums.PredictiveTargetType | null
+    deploymentSlot: string | null
+    intendedUse: string | null
+    forbiddenUse: string | null
+    featureContractVersion: string | null
+    outcomeContractVersion: string | null
+    datasetSnapshotId: string | null
+    trainingCodeVersion: string | null
+    artifactReference: string | null
+    artifactDigest: string | null
+    artifactFormat: string | null
+    artifactSizeBytes: bigint | null
+    trainingTimestamp: Date | null
+    lifecycleStatus: $Enums.PredictiveModelLifecycleStatus | null
+    createdById: string | null
+    createdAt: Date | null
+    validatedById: string | null
+    validatedAt: Date | null
+  }
+
+  export type PredictiveModelVersionCountAggregateOutputType = {
+    id: number
+    modelName: number
+    modelVersion: number
+    targetType: number
+    deploymentSlot: number
+    intendedUse: number
+    forbiddenUse: number
+    featureContractVersion: number
+    outcomeContractVersion: number
+    datasetSnapshotId: number
+    trainingCodeVersion: number
+    artifactReference: number
+    artifactDigest: number
+    artifactFormat: number
+    artifactSizeBytes: number
+    trainingTimestamp: number
+    lifecycleStatus: number
+    createdById: number
+    createdAt: number
+    validatedById: number
+    validatedAt: number
+    _all: number
+  }
+
+
+  export type PredictiveModelVersionAvgAggregateInputType = {
+    artifactSizeBytes?: true
+  }
+
+  export type PredictiveModelVersionSumAggregateInputType = {
+    artifactSizeBytes?: true
+  }
+
+  export type PredictiveModelVersionMinAggregateInputType = {
+    id?: true
+    modelName?: true
+    modelVersion?: true
+    targetType?: true
+    deploymentSlot?: true
+    intendedUse?: true
+    forbiddenUse?: true
+    featureContractVersion?: true
+    outcomeContractVersion?: true
+    datasetSnapshotId?: true
+    trainingCodeVersion?: true
+    artifactReference?: true
+    artifactDigest?: true
+    artifactFormat?: true
+    artifactSizeBytes?: true
+    trainingTimestamp?: true
+    lifecycleStatus?: true
+    createdById?: true
+    createdAt?: true
+    validatedById?: true
+    validatedAt?: true
+  }
+
+  export type PredictiveModelVersionMaxAggregateInputType = {
+    id?: true
+    modelName?: true
+    modelVersion?: true
+    targetType?: true
+    deploymentSlot?: true
+    intendedUse?: true
+    forbiddenUse?: true
+    featureContractVersion?: true
+    outcomeContractVersion?: true
+    datasetSnapshotId?: true
+    trainingCodeVersion?: true
+    artifactReference?: true
+    artifactDigest?: true
+    artifactFormat?: true
+    artifactSizeBytes?: true
+    trainingTimestamp?: true
+    lifecycleStatus?: true
+    createdById?: true
+    createdAt?: true
+    validatedById?: true
+    validatedAt?: true
+  }
+
+  export type PredictiveModelVersionCountAggregateInputType = {
+    id?: true
+    modelName?: true
+    modelVersion?: true
+    targetType?: true
+    deploymentSlot?: true
+    intendedUse?: true
+    forbiddenUse?: true
+    featureContractVersion?: true
+    outcomeContractVersion?: true
+    datasetSnapshotId?: true
+    trainingCodeVersion?: true
+    artifactReference?: true
+    artifactDigest?: true
+    artifactFormat?: true
+    artifactSizeBytes?: true
+    trainingTimestamp?: true
+    lifecycleStatus?: true
+    createdById?: true
+    createdAt?: true
+    validatedById?: true
+    validatedAt?: true
+    _all?: true
+  }
+
+  export type PredictiveModelVersionAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PredictiveModelVersion to aggregate.
+     */
+    where?: PredictiveModelVersionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PredictiveModelVersions to fetch.
+     */
+    orderBy?: PredictiveModelVersionOrderByWithRelationInput | PredictiveModelVersionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: PredictiveModelVersionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PredictiveModelVersions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PredictiveModelVersions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned PredictiveModelVersions
+    **/
+    _count?: true | PredictiveModelVersionCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: PredictiveModelVersionAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: PredictiveModelVersionSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: PredictiveModelVersionMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: PredictiveModelVersionMaxAggregateInputType
+  }
+
+  export type GetPredictiveModelVersionAggregateType<T extends PredictiveModelVersionAggregateArgs> = {
+        [P in keyof T & keyof AggregatePredictiveModelVersion]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePredictiveModelVersion[P]>
+      : GetScalarType<T[P], AggregatePredictiveModelVersion[P]>
+  }
+
+
+
+
+  export type PredictiveModelVersionGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PredictiveModelVersionWhereInput
+    orderBy?: PredictiveModelVersionOrderByWithAggregationInput | PredictiveModelVersionOrderByWithAggregationInput[]
+    by: PredictiveModelVersionScalarFieldEnum[] | PredictiveModelVersionScalarFieldEnum
+    having?: PredictiveModelVersionScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: PredictiveModelVersionCountAggregateInputType | true
+    _avg?: PredictiveModelVersionAvgAggregateInputType
+    _sum?: PredictiveModelVersionSumAggregateInputType
+    _min?: PredictiveModelVersionMinAggregateInputType
+    _max?: PredictiveModelVersionMaxAggregateInputType
+  }
+
+  export type PredictiveModelVersionGroupByOutputType = {
+    id: string
+    modelName: string
+    modelVersion: string
+    targetType: $Enums.PredictiveTargetType
+    deploymentSlot: string
+    intendedUse: string
+    forbiddenUse: string
+    featureContractVersion: string
+    outcomeContractVersion: string
+    datasetSnapshotId: string
+    trainingCodeVersion: string
+    artifactReference: string
+    artifactDigest: string
+    artifactFormat: string
+    artifactSizeBytes: bigint | null
+    trainingTimestamp: Date
+    lifecycleStatus: $Enums.PredictiveModelLifecycleStatus
+    createdById: string
+    createdAt: Date
+    validatedById: string | null
+    validatedAt: Date | null
+    _count: PredictiveModelVersionCountAggregateOutputType | null
+    _avg: PredictiveModelVersionAvgAggregateOutputType | null
+    _sum: PredictiveModelVersionSumAggregateOutputType | null
+    _min: PredictiveModelVersionMinAggregateOutputType | null
+    _max: PredictiveModelVersionMaxAggregateOutputType | null
+  }
+
+  type GetPredictiveModelVersionGroupByPayload<T extends PredictiveModelVersionGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<PredictiveModelVersionGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof PredictiveModelVersionGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], PredictiveModelVersionGroupByOutputType[P]>
+            : GetScalarType<T[P], PredictiveModelVersionGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type PredictiveModelVersionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    modelName?: boolean
+    modelVersion?: boolean
+    targetType?: boolean
+    deploymentSlot?: boolean
+    intendedUse?: boolean
+    forbiddenUse?: boolean
+    featureContractVersion?: boolean
+    outcomeContractVersion?: boolean
+    datasetSnapshotId?: boolean
+    trainingCodeVersion?: boolean
+    artifactReference?: boolean
+    artifactDigest?: boolean
+    artifactFormat?: boolean
+    artifactSizeBytes?: boolean
+    trainingTimestamp?: boolean
+    lifecycleStatus?: boolean
+    createdById?: boolean
+    createdAt?: boolean
+    validatedById?: boolean
+    validatedAt?: boolean
+    datasetSnapshot?: boolean | PredictiveDatasetSnapshotDefaultArgs<ExtArgs>
+    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+    validatedBy?: boolean | PredictiveModelVersion$validatedByArgs<ExtArgs>
+    evaluations?: boolean | PredictiveModelVersion$evaluationsArgs<ExtArgs>
+    approvals?: boolean | PredictiveModelVersion$approvalsArgs<ExtArgs>
+    lifecycleEvents?: boolean | PredictiveModelVersion$lifecycleEventsArgs<ExtArgs>
+    _count?: boolean | PredictiveModelVersionCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["predictiveModelVersion"]>
+
+  export type PredictiveModelVersionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    modelName?: boolean
+    modelVersion?: boolean
+    targetType?: boolean
+    deploymentSlot?: boolean
+    intendedUse?: boolean
+    forbiddenUse?: boolean
+    featureContractVersion?: boolean
+    outcomeContractVersion?: boolean
+    datasetSnapshotId?: boolean
+    trainingCodeVersion?: boolean
+    artifactReference?: boolean
+    artifactDigest?: boolean
+    artifactFormat?: boolean
+    artifactSizeBytes?: boolean
+    trainingTimestamp?: boolean
+    lifecycleStatus?: boolean
+    createdById?: boolean
+    createdAt?: boolean
+    validatedById?: boolean
+    validatedAt?: boolean
+    datasetSnapshot?: boolean | PredictiveDatasetSnapshotDefaultArgs<ExtArgs>
+    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+    validatedBy?: boolean | PredictiveModelVersion$validatedByArgs<ExtArgs>
+  }, ExtArgs["result"]["predictiveModelVersion"]>
+
+  export type PredictiveModelVersionSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    modelName?: boolean
+    modelVersion?: boolean
+    targetType?: boolean
+    deploymentSlot?: boolean
+    intendedUse?: boolean
+    forbiddenUse?: boolean
+    featureContractVersion?: boolean
+    outcomeContractVersion?: boolean
+    datasetSnapshotId?: boolean
+    trainingCodeVersion?: boolean
+    artifactReference?: boolean
+    artifactDigest?: boolean
+    artifactFormat?: boolean
+    artifactSizeBytes?: boolean
+    trainingTimestamp?: boolean
+    lifecycleStatus?: boolean
+    createdById?: boolean
+    createdAt?: boolean
+    validatedById?: boolean
+    validatedAt?: boolean
+    datasetSnapshot?: boolean | PredictiveDatasetSnapshotDefaultArgs<ExtArgs>
+    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+    validatedBy?: boolean | PredictiveModelVersion$validatedByArgs<ExtArgs>
+  }, ExtArgs["result"]["predictiveModelVersion"]>
+
+  export type PredictiveModelVersionSelectScalar = {
+    id?: boolean
+    modelName?: boolean
+    modelVersion?: boolean
+    targetType?: boolean
+    deploymentSlot?: boolean
+    intendedUse?: boolean
+    forbiddenUse?: boolean
+    featureContractVersion?: boolean
+    outcomeContractVersion?: boolean
+    datasetSnapshotId?: boolean
+    trainingCodeVersion?: boolean
+    artifactReference?: boolean
+    artifactDigest?: boolean
+    artifactFormat?: boolean
+    artifactSizeBytes?: boolean
+    trainingTimestamp?: boolean
+    lifecycleStatus?: boolean
+    createdById?: boolean
+    createdAt?: boolean
+    validatedById?: boolean
+    validatedAt?: boolean
+  }
+
+  export type PredictiveModelVersionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "modelName" | "modelVersion" | "targetType" | "deploymentSlot" | "intendedUse" | "forbiddenUse" | "featureContractVersion" | "outcomeContractVersion" | "datasetSnapshotId" | "trainingCodeVersion" | "artifactReference" | "artifactDigest" | "artifactFormat" | "artifactSizeBytes" | "trainingTimestamp" | "lifecycleStatus" | "createdById" | "createdAt" | "validatedById" | "validatedAt", ExtArgs["result"]["predictiveModelVersion"]>
+  export type PredictiveModelVersionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    datasetSnapshot?: boolean | PredictiveDatasetSnapshotDefaultArgs<ExtArgs>
+    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+    validatedBy?: boolean | PredictiveModelVersion$validatedByArgs<ExtArgs>
+    evaluations?: boolean | PredictiveModelVersion$evaluationsArgs<ExtArgs>
+    approvals?: boolean | PredictiveModelVersion$approvalsArgs<ExtArgs>
+    lifecycleEvents?: boolean | PredictiveModelVersion$lifecycleEventsArgs<ExtArgs>
+    _count?: boolean | PredictiveModelVersionCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type PredictiveModelVersionIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    datasetSnapshot?: boolean | PredictiveDatasetSnapshotDefaultArgs<ExtArgs>
+    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+    validatedBy?: boolean | PredictiveModelVersion$validatedByArgs<ExtArgs>
+  }
+  export type PredictiveModelVersionIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    datasetSnapshot?: boolean | PredictiveDatasetSnapshotDefaultArgs<ExtArgs>
+    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+    validatedBy?: boolean | PredictiveModelVersion$validatedByArgs<ExtArgs>
+  }
+
+  export type $PredictiveModelVersionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "PredictiveModelVersion"
+    objects: {
+      datasetSnapshot: Prisma.$PredictiveDatasetSnapshotPayload<ExtArgs>
+      createdBy: Prisma.$UserPayload<ExtArgs>
+      validatedBy: Prisma.$UserPayload<ExtArgs> | null
+      evaluations: Prisma.$PredictiveModelEvaluationPayload<ExtArgs>[]
+      approvals: Prisma.$PredictiveModelApprovalPayload<ExtArgs>[]
+      lifecycleEvents: Prisma.$PredictiveModelLifecycleEventPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      modelName: string
+      modelVersion: string
+      targetType: $Enums.PredictiveTargetType
+      deploymentSlot: string
+      intendedUse: string
+      forbiddenUse: string
+      featureContractVersion: string
+      outcomeContractVersion: string
+      datasetSnapshotId: string
+      trainingCodeVersion: string
+      artifactReference: string
+      artifactDigest: string
+      artifactFormat: string
+      artifactSizeBytes: bigint | null
+      trainingTimestamp: Date
+      lifecycleStatus: $Enums.PredictiveModelLifecycleStatus
+      createdById: string
+      createdAt: Date
+      validatedById: string | null
+      validatedAt: Date | null
+    }, ExtArgs["result"]["predictiveModelVersion"]>
+    composites: {}
+  }
+
+  type PredictiveModelVersionGetPayload<S extends boolean | null | undefined | PredictiveModelVersionDefaultArgs> = $Result.GetResult<Prisma.$PredictiveModelVersionPayload, S>
+
+  type PredictiveModelVersionCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<PredictiveModelVersionFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: PredictiveModelVersionCountAggregateInputType | true
+    }
+
+  export interface PredictiveModelVersionDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['PredictiveModelVersion'], meta: { name: 'PredictiveModelVersion' } }
+    /**
+     * Find zero or one PredictiveModelVersion that matches the filter.
+     * @param {PredictiveModelVersionFindUniqueArgs} args - Arguments to find a PredictiveModelVersion
+     * @example
+     * // Get one PredictiveModelVersion
+     * const predictiveModelVersion = await prisma.predictiveModelVersion.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends PredictiveModelVersionFindUniqueArgs>(args: SelectSubset<T, PredictiveModelVersionFindUniqueArgs<ExtArgs>>): Prisma__PredictiveModelVersionClient<$Result.GetResult<Prisma.$PredictiveModelVersionPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one PredictiveModelVersion that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {PredictiveModelVersionFindUniqueOrThrowArgs} args - Arguments to find a PredictiveModelVersion
+     * @example
+     * // Get one PredictiveModelVersion
+     * const predictiveModelVersion = await prisma.predictiveModelVersion.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends PredictiveModelVersionFindUniqueOrThrowArgs>(args: SelectSubset<T, PredictiveModelVersionFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PredictiveModelVersionClient<$Result.GetResult<Prisma.$PredictiveModelVersionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PredictiveModelVersion that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PredictiveModelVersionFindFirstArgs} args - Arguments to find a PredictiveModelVersion
+     * @example
+     * // Get one PredictiveModelVersion
+     * const predictiveModelVersion = await prisma.predictiveModelVersion.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends PredictiveModelVersionFindFirstArgs>(args?: SelectSubset<T, PredictiveModelVersionFindFirstArgs<ExtArgs>>): Prisma__PredictiveModelVersionClient<$Result.GetResult<Prisma.$PredictiveModelVersionPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PredictiveModelVersion that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PredictiveModelVersionFindFirstOrThrowArgs} args - Arguments to find a PredictiveModelVersion
+     * @example
+     * // Get one PredictiveModelVersion
+     * const predictiveModelVersion = await prisma.predictiveModelVersion.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends PredictiveModelVersionFindFirstOrThrowArgs>(args?: SelectSubset<T, PredictiveModelVersionFindFirstOrThrowArgs<ExtArgs>>): Prisma__PredictiveModelVersionClient<$Result.GetResult<Prisma.$PredictiveModelVersionPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more PredictiveModelVersions that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PredictiveModelVersionFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all PredictiveModelVersions
+     * const predictiveModelVersions = await prisma.predictiveModelVersion.findMany()
+     * 
+     * // Get first 10 PredictiveModelVersions
+     * const predictiveModelVersions = await prisma.predictiveModelVersion.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const predictiveModelVersionWithIdOnly = await prisma.predictiveModelVersion.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends PredictiveModelVersionFindManyArgs>(args?: SelectSubset<T, PredictiveModelVersionFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PredictiveModelVersionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a PredictiveModelVersion.
+     * @param {PredictiveModelVersionCreateArgs} args - Arguments to create a PredictiveModelVersion.
+     * @example
+     * // Create one PredictiveModelVersion
+     * const PredictiveModelVersion = await prisma.predictiveModelVersion.create({
+     *   data: {
+     *     // ... data to create a PredictiveModelVersion
+     *   }
+     * })
+     * 
+     */
+    create<T extends PredictiveModelVersionCreateArgs>(args: SelectSubset<T, PredictiveModelVersionCreateArgs<ExtArgs>>): Prisma__PredictiveModelVersionClient<$Result.GetResult<Prisma.$PredictiveModelVersionPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many PredictiveModelVersions.
+     * @param {PredictiveModelVersionCreateManyArgs} args - Arguments to create many PredictiveModelVersions.
+     * @example
+     * // Create many PredictiveModelVersions
+     * const predictiveModelVersion = await prisma.predictiveModelVersion.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends PredictiveModelVersionCreateManyArgs>(args?: SelectSubset<T, PredictiveModelVersionCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many PredictiveModelVersions and returns the data saved in the database.
+     * @param {PredictiveModelVersionCreateManyAndReturnArgs} args - Arguments to create many PredictiveModelVersions.
+     * @example
+     * // Create many PredictiveModelVersions
+     * const predictiveModelVersion = await prisma.predictiveModelVersion.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many PredictiveModelVersions and only return the `id`
+     * const predictiveModelVersionWithIdOnly = await prisma.predictiveModelVersion.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends PredictiveModelVersionCreateManyAndReturnArgs>(args?: SelectSubset<T, PredictiveModelVersionCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PredictiveModelVersionPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a PredictiveModelVersion.
+     * @param {PredictiveModelVersionDeleteArgs} args - Arguments to delete one PredictiveModelVersion.
+     * @example
+     * // Delete one PredictiveModelVersion
+     * const PredictiveModelVersion = await prisma.predictiveModelVersion.delete({
+     *   where: {
+     *     // ... filter to delete one PredictiveModelVersion
+     *   }
+     * })
+     * 
+     */
+    delete<T extends PredictiveModelVersionDeleteArgs>(args: SelectSubset<T, PredictiveModelVersionDeleteArgs<ExtArgs>>): Prisma__PredictiveModelVersionClient<$Result.GetResult<Prisma.$PredictiveModelVersionPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one PredictiveModelVersion.
+     * @param {PredictiveModelVersionUpdateArgs} args - Arguments to update one PredictiveModelVersion.
+     * @example
+     * // Update one PredictiveModelVersion
+     * const predictiveModelVersion = await prisma.predictiveModelVersion.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends PredictiveModelVersionUpdateArgs>(args: SelectSubset<T, PredictiveModelVersionUpdateArgs<ExtArgs>>): Prisma__PredictiveModelVersionClient<$Result.GetResult<Prisma.$PredictiveModelVersionPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more PredictiveModelVersions.
+     * @param {PredictiveModelVersionDeleteManyArgs} args - Arguments to filter PredictiveModelVersions to delete.
+     * @example
+     * // Delete a few PredictiveModelVersions
+     * const { count } = await prisma.predictiveModelVersion.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends PredictiveModelVersionDeleteManyArgs>(args?: SelectSubset<T, PredictiveModelVersionDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PredictiveModelVersions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PredictiveModelVersionUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many PredictiveModelVersions
+     * const predictiveModelVersion = await prisma.predictiveModelVersion.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends PredictiveModelVersionUpdateManyArgs>(args: SelectSubset<T, PredictiveModelVersionUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PredictiveModelVersions and returns the data updated in the database.
+     * @param {PredictiveModelVersionUpdateManyAndReturnArgs} args - Arguments to update many PredictiveModelVersions.
+     * @example
+     * // Update many PredictiveModelVersions
+     * const predictiveModelVersion = await prisma.predictiveModelVersion.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more PredictiveModelVersions and only return the `id`
+     * const predictiveModelVersionWithIdOnly = await prisma.predictiveModelVersion.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends PredictiveModelVersionUpdateManyAndReturnArgs>(args: SelectSubset<T, PredictiveModelVersionUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PredictiveModelVersionPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one PredictiveModelVersion.
+     * @param {PredictiveModelVersionUpsertArgs} args - Arguments to update or create a PredictiveModelVersion.
+     * @example
+     * // Update or create a PredictiveModelVersion
+     * const predictiveModelVersion = await prisma.predictiveModelVersion.upsert({
+     *   create: {
+     *     // ... data to create a PredictiveModelVersion
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the PredictiveModelVersion we want to update
+     *   }
+     * })
+     */
+    upsert<T extends PredictiveModelVersionUpsertArgs>(args: SelectSubset<T, PredictiveModelVersionUpsertArgs<ExtArgs>>): Prisma__PredictiveModelVersionClient<$Result.GetResult<Prisma.$PredictiveModelVersionPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of PredictiveModelVersions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PredictiveModelVersionCountArgs} args - Arguments to filter PredictiveModelVersions to count.
+     * @example
+     * // Count the number of PredictiveModelVersions
+     * const count = await prisma.predictiveModelVersion.count({
+     *   where: {
+     *     // ... the filter for the PredictiveModelVersions we want to count
+     *   }
+     * })
+    **/
+    count<T extends PredictiveModelVersionCountArgs>(
+      args?: Subset<T, PredictiveModelVersionCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], PredictiveModelVersionCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a PredictiveModelVersion.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PredictiveModelVersionAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends PredictiveModelVersionAggregateArgs>(args: Subset<T, PredictiveModelVersionAggregateArgs>): Prisma.PrismaPromise<GetPredictiveModelVersionAggregateType<T>>
+
+    /**
+     * Group by PredictiveModelVersion.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PredictiveModelVersionGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends PredictiveModelVersionGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: PredictiveModelVersionGroupByArgs['orderBy'] }
+        : { orderBy?: PredictiveModelVersionGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, PredictiveModelVersionGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPredictiveModelVersionGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the PredictiveModelVersion model
+   */
+  readonly fields: PredictiveModelVersionFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for PredictiveModelVersion.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__PredictiveModelVersionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    datasetSnapshot<T extends PredictiveDatasetSnapshotDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PredictiveDatasetSnapshotDefaultArgs<ExtArgs>>): Prisma__PredictiveDatasetSnapshotClient<$Result.GetResult<Prisma.$PredictiveDatasetSnapshotPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    createdBy<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    validatedBy<T extends PredictiveModelVersion$validatedByArgs<ExtArgs> = {}>(args?: Subset<T, PredictiveModelVersion$validatedByArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    evaluations<T extends PredictiveModelVersion$evaluationsArgs<ExtArgs> = {}>(args?: Subset<T, PredictiveModelVersion$evaluationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PredictiveModelEvaluationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    approvals<T extends PredictiveModelVersion$approvalsArgs<ExtArgs> = {}>(args?: Subset<T, PredictiveModelVersion$approvalsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PredictiveModelApprovalPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    lifecycleEvents<T extends PredictiveModelVersion$lifecycleEventsArgs<ExtArgs> = {}>(args?: Subset<T, PredictiveModelVersion$lifecycleEventsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PredictiveModelLifecycleEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the PredictiveModelVersion model
+   */
+  interface PredictiveModelVersionFieldRefs {
+    readonly id: FieldRef<"PredictiveModelVersion", 'String'>
+    readonly modelName: FieldRef<"PredictiveModelVersion", 'String'>
+    readonly modelVersion: FieldRef<"PredictiveModelVersion", 'String'>
+    readonly targetType: FieldRef<"PredictiveModelVersion", 'PredictiveTargetType'>
+    readonly deploymentSlot: FieldRef<"PredictiveModelVersion", 'String'>
+    readonly intendedUse: FieldRef<"PredictiveModelVersion", 'String'>
+    readonly forbiddenUse: FieldRef<"PredictiveModelVersion", 'String'>
+    readonly featureContractVersion: FieldRef<"PredictiveModelVersion", 'String'>
+    readonly outcomeContractVersion: FieldRef<"PredictiveModelVersion", 'String'>
+    readonly datasetSnapshotId: FieldRef<"PredictiveModelVersion", 'String'>
+    readonly trainingCodeVersion: FieldRef<"PredictiveModelVersion", 'String'>
+    readonly artifactReference: FieldRef<"PredictiveModelVersion", 'String'>
+    readonly artifactDigest: FieldRef<"PredictiveModelVersion", 'String'>
+    readonly artifactFormat: FieldRef<"PredictiveModelVersion", 'String'>
+    readonly artifactSizeBytes: FieldRef<"PredictiveModelVersion", 'BigInt'>
+    readonly trainingTimestamp: FieldRef<"PredictiveModelVersion", 'DateTime'>
+    readonly lifecycleStatus: FieldRef<"PredictiveModelVersion", 'PredictiveModelLifecycleStatus'>
+    readonly createdById: FieldRef<"PredictiveModelVersion", 'String'>
+    readonly createdAt: FieldRef<"PredictiveModelVersion", 'DateTime'>
+    readonly validatedById: FieldRef<"PredictiveModelVersion", 'String'>
+    readonly validatedAt: FieldRef<"PredictiveModelVersion", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * PredictiveModelVersion findUnique
+   */
+  export type PredictiveModelVersionFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveModelVersion
+     */
+    select?: PredictiveModelVersionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveModelVersion
+     */
+    omit?: PredictiveModelVersionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveModelVersionInclude<ExtArgs> | null
+    /**
+     * Filter, which PredictiveModelVersion to fetch.
+     */
+    where: PredictiveModelVersionWhereUniqueInput
+  }
+
+  /**
+   * PredictiveModelVersion findUniqueOrThrow
+   */
+  export type PredictiveModelVersionFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveModelVersion
+     */
+    select?: PredictiveModelVersionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveModelVersion
+     */
+    omit?: PredictiveModelVersionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveModelVersionInclude<ExtArgs> | null
+    /**
+     * Filter, which PredictiveModelVersion to fetch.
+     */
+    where: PredictiveModelVersionWhereUniqueInput
+  }
+
+  /**
+   * PredictiveModelVersion findFirst
+   */
+  export type PredictiveModelVersionFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveModelVersion
+     */
+    select?: PredictiveModelVersionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveModelVersion
+     */
+    omit?: PredictiveModelVersionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveModelVersionInclude<ExtArgs> | null
+    /**
+     * Filter, which PredictiveModelVersion to fetch.
+     */
+    where?: PredictiveModelVersionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PredictiveModelVersions to fetch.
+     */
+    orderBy?: PredictiveModelVersionOrderByWithRelationInput | PredictiveModelVersionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PredictiveModelVersions.
+     */
+    cursor?: PredictiveModelVersionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PredictiveModelVersions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PredictiveModelVersions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PredictiveModelVersions.
+     */
+    distinct?: PredictiveModelVersionScalarFieldEnum | PredictiveModelVersionScalarFieldEnum[]
+  }
+
+  /**
+   * PredictiveModelVersion findFirstOrThrow
+   */
+  export type PredictiveModelVersionFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveModelVersion
+     */
+    select?: PredictiveModelVersionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveModelVersion
+     */
+    omit?: PredictiveModelVersionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveModelVersionInclude<ExtArgs> | null
+    /**
+     * Filter, which PredictiveModelVersion to fetch.
+     */
+    where?: PredictiveModelVersionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PredictiveModelVersions to fetch.
+     */
+    orderBy?: PredictiveModelVersionOrderByWithRelationInput | PredictiveModelVersionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PredictiveModelVersions.
+     */
+    cursor?: PredictiveModelVersionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PredictiveModelVersions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PredictiveModelVersions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PredictiveModelVersions.
+     */
+    distinct?: PredictiveModelVersionScalarFieldEnum | PredictiveModelVersionScalarFieldEnum[]
+  }
+
+  /**
+   * PredictiveModelVersion findMany
+   */
+  export type PredictiveModelVersionFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveModelVersion
+     */
+    select?: PredictiveModelVersionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveModelVersion
+     */
+    omit?: PredictiveModelVersionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveModelVersionInclude<ExtArgs> | null
+    /**
+     * Filter, which PredictiveModelVersions to fetch.
+     */
+    where?: PredictiveModelVersionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PredictiveModelVersions to fetch.
+     */
+    orderBy?: PredictiveModelVersionOrderByWithRelationInput | PredictiveModelVersionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing PredictiveModelVersions.
+     */
+    cursor?: PredictiveModelVersionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PredictiveModelVersions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PredictiveModelVersions.
+     */
+    skip?: number
+    distinct?: PredictiveModelVersionScalarFieldEnum | PredictiveModelVersionScalarFieldEnum[]
+  }
+
+  /**
+   * PredictiveModelVersion create
+   */
+  export type PredictiveModelVersionCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveModelVersion
+     */
+    select?: PredictiveModelVersionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveModelVersion
+     */
+    omit?: PredictiveModelVersionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveModelVersionInclude<ExtArgs> | null
+    /**
+     * The data needed to create a PredictiveModelVersion.
+     */
+    data: XOR<PredictiveModelVersionCreateInput, PredictiveModelVersionUncheckedCreateInput>
+  }
+
+  /**
+   * PredictiveModelVersion createMany
+   */
+  export type PredictiveModelVersionCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many PredictiveModelVersions.
+     */
+    data: PredictiveModelVersionCreateManyInput | PredictiveModelVersionCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * PredictiveModelVersion createManyAndReturn
+   */
+  export type PredictiveModelVersionCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveModelVersion
+     */
+    select?: PredictiveModelVersionSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveModelVersion
+     */
+    omit?: PredictiveModelVersionOmit<ExtArgs> | null
+    /**
+     * The data used to create many PredictiveModelVersions.
+     */
+    data: PredictiveModelVersionCreateManyInput | PredictiveModelVersionCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveModelVersionIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * PredictiveModelVersion update
+   */
+  export type PredictiveModelVersionUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveModelVersion
+     */
+    select?: PredictiveModelVersionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveModelVersion
+     */
+    omit?: PredictiveModelVersionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveModelVersionInclude<ExtArgs> | null
+    /**
+     * The data needed to update a PredictiveModelVersion.
+     */
+    data: XOR<PredictiveModelVersionUpdateInput, PredictiveModelVersionUncheckedUpdateInput>
+    /**
+     * Choose, which PredictiveModelVersion to update.
+     */
+    where: PredictiveModelVersionWhereUniqueInput
+  }
+
+  /**
+   * PredictiveModelVersion updateMany
+   */
+  export type PredictiveModelVersionUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update PredictiveModelVersions.
+     */
+    data: XOR<PredictiveModelVersionUpdateManyMutationInput, PredictiveModelVersionUncheckedUpdateManyInput>
+    /**
+     * Filter which PredictiveModelVersions to update
+     */
+    where?: PredictiveModelVersionWhereInput
+    /**
+     * Limit how many PredictiveModelVersions to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * PredictiveModelVersion updateManyAndReturn
+   */
+  export type PredictiveModelVersionUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveModelVersion
+     */
+    select?: PredictiveModelVersionSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveModelVersion
+     */
+    omit?: PredictiveModelVersionOmit<ExtArgs> | null
+    /**
+     * The data used to update PredictiveModelVersions.
+     */
+    data: XOR<PredictiveModelVersionUpdateManyMutationInput, PredictiveModelVersionUncheckedUpdateManyInput>
+    /**
+     * Filter which PredictiveModelVersions to update
+     */
+    where?: PredictiveModelVersionWhereInput
+    /**
+     * Limit how many PredictiveModelVersions to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveModelVersionIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * PredictiveModelVersion upsert
+   */
+  export type PredictiveModelVersionUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveModelVersion
+     */
+    select?: PredictiveModelVersionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveModelVersion
+     */
+    omit?: PredictiveModelVersionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveModelVersionInclude<ExtArgs> | null
+    /**
+     * The filter to search for the PredictiveModelVersion to update in case it exists.
+     */
+    where: PredictiveModelVersionWhereUniqueInput
+    /**
+     * In case the PredictiveModelVersion found by the `where` argument doesn't exist, create a new PredictiveModelVersion with this data.
+     */
+    create: XOR<PredictiveModelVersionCreateInput, PredictiveModelVersionUncheckedCreateInput>
+    /**
+     * In case the PredictiveModelVersion was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<PredictiveModelVersionUpdateInput, PredictiveModelVersionUncheckedUpdateInput>
+  }
+
+  /**
+   * PredictiveModelVersion delete
+   */
+  export type PredictiveModelVersionDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveModelVersion
+     */
+    select?: PredictiveModelVersionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveModelVersion
+     */
+    omit?: PredictiveModelVersionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveModelVersionInclude<ExtArgs> | null
+    /**
+     * Filter which PredictiveModelVersion to delete.
+     */
+    where: PredictiveModelVersionWhereUniqueInput
+  }
+
+  /**
+   * PredictiveModelVersion deleteMany
+   */
+  export type PredictiveModelVersionDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PredictiveModelVersions to delete
+     */
+    where?: PredictiveModelVersionWhereInput
+    /**
+     * Limit how many PredictiveModelVersions to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * PredictiveModelVersion.validatedBy
+   */
+  export type PredictiveModelVersion$validatedByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+  }
+
+  /**
+   * PredictiveModelVersion.evaluations
+   */
+  export type PredictiveModelVersion$evaluationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveModelEvaluation
+     */
+    select?: PredictiveModelEvaluationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveModelEvaluation
+     */
+    omit?: PredictiveModelEvaluationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveModelEvaluationInclude<ExtArgs> | null
+    where?: PredictiveModelEvaluationWhereInput
+    orderBy?: PredictiveModelEvaluationOrderByWithRelationInput | PredictiveModelEvaluationOrderByWithRelationInput[]
+    cursor?: PredictiveModelEvaluationWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PredictiveModelEvaluationScalarFieldEnum | PredictiveModelEvaluationScalarFieldEnum[]
+  }
+
+  /**
+   * PredictiveModelVersion.approvals
+   */
+  export type PredictiveModelVersion$approvalsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveModelApproval
+     */
+    select?: PredictiveModelApprovalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveModelApproval
+     */
+    omit?: PredictiveModelApprovalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveModelApprovalInclude<ExtArgs> | null
+    where?: PredictiveModelApprovalWhereInput
+    orderBy?: PredictiveModelApprovalOrderByWithRelationInput | PredictiveModelApprovalOrderByWithRelationInput[]
+    cursor?: PredictiveModelApprovalWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PredictiveModelApprovalScalarFieldEnum | PredictiveModelApprovalScalarFieldEnum[]
+  }
+
+  /**
+   * PredictiveModelVersion.lifecycleEvents
+   */
+  export type PredictiveModelVersion$lifecycleEventsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveModelLifecycleEvent
+     */
+    select?: PredictiveModelLifecycleEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveModelLifecycleEvent
+     */
+    omit?: PredictiveModelLifecycleEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveModelLifecycleEventInclude<ExtArgs> | null
+    where?: PredictiveModelLifecycleEventWhereInput
+    orderBy?: PredictiveModelLifecycleEventOrderByWithRelationInput | PredictiveModelLifecycleEventOrderByWithRelationInput[]
+    cursor?: PredictiveModelLifecycleEventWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PredictiveModelLifecycleEventScalarFieldEnum | PredictiveModelLifecycleEventScalarFieldEnum[]
+  }
+
+  /**
+   * PredictiveModelVersion without action
+   */
+  export type PredictiveModelVersionDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveModelVersion
+     */
+    select?: PredictiveModelVersionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveModelVersion
+     */
+    omit?: PredictiveModelVersionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveModelVersionInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model PredictiveModelEvaluation
+   */
+
+  export type AggregatePredictiveModelEvaluation = {
+    _count: PredictiveModelEvaluationCountAggregateOutputType | null
+    _avg: PredictiveModelEvaluationAvgAggregateOutputType | null
+    _sum: PredictiveModelEvaluationSumAggregateOutputType | null
+    _min: PredictiveModelEvaluationMinAggregateOutputType | null
+    _max: PredictiveModelEvaluationMaxAggregateOutputType | null
+  }
+
+  export type PredictiveModelEvaluationAvgAggregateOutputType = {
+    testSampleCount: number | null
+    lateCount: number | null
+    onTimeCount: number | null
+    truePositiveCount: number | null
+    trueNegativeCount: number | null
+    falsePositiveCount: number | null
+    falseNegativeCount: number | null
+    precision: number | null
+    recall: number | null
+    f1: number | null
+    prAuc: number | null
+    calibrationError: number | null
+    falseNegativeRate: number | null
+  }
+
+  export type PredictiveModelEvaluationSumAggregateOutputType = {
+    testSampleCount: number | null
+    lateCount: number | null
+    onTimeCount: number | null
+    truePositiveCount: number | null
+    trueNegativeCount: number | null
+    falsePositiveCount: number | null
+    falseNegativeCount: number | null
+    precision: number | null
+    recall: number | null
+    f1: number | null
+    prAuc: number | null
+    calibrationError: number | null
+    falseNegativeRate: number | null
+  }
+
+  export type PredictiveModelEvaluationMinAggregateOutputType = {
+    id: string | null
+    modelVersionId: string | null
+    datasetSnapshotId: string | null
+    evaluationContractVersion: string | null
+    splitStrategy: string | null
+    evaluationPeriodStart: Date | null
+    evaluationPeriodEnd: Date | null
+    testSampleCount: number | null
+    lateCount: number | null
+    onTimeCount: number | null
+    truePositiveCount: number | null
+    trueNegativeCount: number | null
+    falsePositiveCount: number | null
+    falseNegativeCount: number | null
+    precision: number | null
+    recall: number | null
+    f1: number | null
+    prAuc: number | null
+    calibrationError: number | null
+    falseNegativeRate: number | null
+    evaluationArtifactReference: string | null
+    evaluationFingerprint: string | null
+    recordedById: string | null
+    recordedAt: Date | null
+  }
+
+  export type PredictiveModelEvaluationMaxAggregateOutputType = {
+    id: string | null
+    modelVersionId: string | null
+    datasetSnapshotId: string | null
+    evaluationContractVersion: string | null
+    splitStrategy: string | null
+    evaluationPeriodStart: Date | null
+    evaluationPeriodEnd: Date | null
+    testSampleCount: number | null
+    lateCount: number | null
+    onTimeCount: number | null
+    truePositiveCount: number | null
+    trueNegativeCount: number | null
+    falsePositiveCount: number | null
+    falseNegativeCount: number | null
+    precision: number | null
+    recall: number | null
+    f1: number | null
+    prAuc: number | null
+    calibrationError: number | null
+    falseNegativeRate: number | null
+    evaluationArtifactReference: string | null
+    evaluationFingerprint: string | null
+    recordedById: string | null
+    recordedAt: Date | null
+  }
+
+  export type PredictiveModelEvaluationCountAggregateOutputType = {
+    id: number
+    modelVersionId: number
+    datasetSnapshotId: number
+    evaluationContractVersion: number
+    splitStrategy: number
+    evaluationPeriodStart: number
+    evaluationPeriodEnd: number
+    testSampleCount: number
+    lateCount: number
+    onTimeCount: number
+    truePositiveCount: number
+    trueNegativeCount: number
+    falsePositiveCount: number
+    falseNegativeCount: number
+    precision: number
+    recall: number
+    f1: number
+    prAuc: number
+    calibrationError: number
+    falseNegativeRate: number
+    baselineEvidence: number
+    subgroupMetricsReference: number
+    featureDistributionReference: number
+    missingnessReference: number
+    evaluationArtifactReference: number
+    evaluationFingerprint: number
+    recordedById: number
+    recordedAt: number
+    _all: number
+  }
+
+
+  export type PredictiveModelEvaluationAvgAggregateInputType = {
+    testSampleCount?: true
+    lateCount?: true
+    onTimeCount?: true
+    truePositiveCount?: true
+    trueNegativeCount?: true
+    falsePositiveCount?: true
+    falseNegativeCount?: true
+    precision?: true
+    recall?: true
+    f1?: true
+    prAuc?: true
+    calibrationError?: true
+    falseNegativeRate?: true
+  }
+
+  export type PredictiveModelEvaluationSumAggregateInputType = {
+    testSampleCount?: true
+    lateCount?: true
+    onTimeCount?: true
+    truePositiveCount?: true
+    trueNegativeCount?: true
+    falsePositiveCount?: true
+    falseNegativeCount?: true
+    precision?: true
+    recall?: true
+    f1?: true
+    prAuc?: true
+    calibrationError?: true
+    falseNegativeRate?: true
+  }
+
+  export type PredictiveModelEvaluationMinAggregateInputType = {
+    id?: true
+    modelVersionId?: true
+    datasetSnapshotId?: true
+    evaluationContractVersion?: true
+    splitStrategy?: true
+    evaluationPeriodStart?: true
+    evaluationPeriodEnd?: true
+    testSampleCount?: true
+    lateCount?: true
+    onTimeCount?: true
+    truePositiveCount?: true
+    trueNegativeCount?: true
+    falsePositiveCount?: true
+    falseNegativeCount?: true
+    precision?: true
+    recall?: true
+    f1?: true
+    prAuc?: true
+    calibrationError?: true
+    falseNegativeRate?: true
+    evaluationArtifactReference?: true
+    evaluationFingerprint?: true
+    recordedById?: true
+    recordedAt?: true
+  }
+
+  export type PredictiveModelEvaluationMaxAggregateInputType = {
+    id?: true
+    modelVersionId?: true
+    datasetSnapshotId?: true
+    evaluationContractVersion?: true
+    splitStrategy?: true
+    evaluationPeriodStart?: true
+    evaluationPeriodEnd?: true
+    testSampleCount?: true
+    lateCount?: true
+    onTimeCount?: true
+    truePositiveCount?: true
+    trueNegativeCount?: true
+    falsePositiveCount?: true
+    falseNegativeCount?: true
+    precision?: true
+    recall?: true
+    f1?: true
+    prAuc?: true
+    calibrationError?: true
+    falseNegativeRate?: true
+    evaluationArtifactReference?: true
+    evaluationFingerprint?: true
+    recordedById?: true
+    recordedAt?: true
+  }
+
+  export type PredictiveModelEvaluationCountAggregateInputType = {
+    id?: true
+    modelVersionId?: true
+    datasetSnapshotId?: true
+    evaluationContractVersion?: true
+    splitStrategy?: true
+    evaluationPeriodStart?: true
+    evaluationPeriodEnd?: true
+    testSampleCount?: true
+    lateCount?: true
+    onTimeCount?: true
+    truePositiveCount?: true
+    trueNegativeCount?: true
+    falsePositiveCount?: true
+    falseNegativeCount?: true
+    precision?: true
+    recall?: true
+    f1?: true
+    prAuc?: true
+    calibrationError?: true
+    falseNegativeRate?: true
+    baselineEvidence?: true
+    subgroupMetricsReference?: true
+    featureDistributionReference?: true
+    missingnessReference?: true
+    evaluationArtifactReference?: true
+    evaluationFingerprint?: true
+    recordedById?: true
+    recordedAt?: true
+    _all?: true
+  }
+
+  export type PredictiveModelEvaluationAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PredictiveModelEvaluation to aggregate.
+     */
+    where?: PredictiveModelEvaluationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PredictiveModelEvaluations to fetch.
+     */
+    orderBy?: PredictiveModelEvaluationOrderByWithRelationInput | PredictiveModelEvaluationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: PredictiveModelEvaluationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PredictiveModelEvaluations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PredictiveModelEvaluations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned PredictiveModelEvaluations
+    **/
+    _count?: true | PredictiveModelEvaluationCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: PredictiveModelEvaluationAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: PredictiveModelEvaluationSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: PredictiveModelEvaluationMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: PredictiveModelEvaluationMaxAggregateInputType
+  }
+
+  export type GetPredictiveModelEvaluationAggregateType<T extends PredictiveModelEvaluationAggregateArgs> = {
+        [P in keyof T & keyof AggregatePredictiveModelEvaluation]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePredictiveModelEvaluation[P]>
+      : GetScalarType<T[P], AggregatePredictiveModelEvaluation[P]>
+  }
+
+
+
+
+  export type PredictiveModelEvaluationGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PredictiveModelEvaluationWhereInput
+    orderBy?: PredictiveModelEvaluationOrderByWithAggregationInput | PredictiveModelEvaluationOrderByWithAggregationInput[]
+    by: PredictiveModelEvaluationScalarFieldEnum[] | PredictiveModelEvaluationScalarFieldEnum
+    having?: PredictiveModelEvaluationScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: PredictiveModelEvaluationCountAggregateInputType | true
+    _avg?: PredictiveModelEvaluationAvgAggregateInputType
+    _sum?: PredictiveModelEvaluationSumAggregateInputType
+    _min?: PredictiveModelEvaluationMinAggregateInputType
+    _max?: PredictiveModelEvaluationMaxAggregateInputType
+  }
+
+  export type PredictiveModelEvaluationGroupByOutputType = {
+    id: string
+    modelVersionId: string
+    datasetSnapshotId: string
+    evaluationContractVersion: string
+    splitStrategy: string
+    evaluationPeriodStart: Date
+    evaluationPeriodEnd: Date
+    testSampleCount: number
+    lateCount: number
+    onTimeCount: number
+    truePositiveCount: number
+    trueNegativeCount: number
+    falsePositiveCount: number
+    falseNegativeCount: number
+    precision: number
+    recall: number
+    f1: number
+    prAuc: number
+    calibrationError: number
+    falseNegativeRate: number
+    baselineEvidence: JsonValue
+    subgroupMetricsReference: JsonValue | null
+    featureDistributionReference: JsonValue | null
+    missingnessReference: JsonValue | null
+    evaluationArtifactReference: string
+    evaluationFingerprint: string
+    recordedById: string
+    recordedAt: Date
+    _count: PredictiveModelEvaluationCountAggregateOutputType | null
+    _avg: PredictiveModelEvaluationAvgAggregateOutputType | null
+    _sum: PredictiveModelEvaluationSumAggregateOutputType | null
+    _min: PredictiveModelEvaluationMinAggregateOutputType | null
+    _max: PredictiveModelEvaluationMaxAggregateOutputType | null
+  }
+
+  type GetPredictiveModelEvaluationGroupByPayload<T extends PredictiveModelEvaluationGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<PredictiveModelEvaluationGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof PredictiveModelEvaluationGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], PredictiveModelEvaluationGroupByOutputType[P]>
+            : GetScalarType<T[P], PredictiveModelEvaluationGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type PredictiveModelEvaluationSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    modelVersionId?: boolean
+    datasetSnapshotId?: boolean
+    evaluationContractVersion?: boolean
+    splitStrategy?: boolean
+    evaluationPeriodStart?: boolean
+    evaluationPeriodEnd?: boolean
+    testSampleCount?: boolean
+    lateCount?: boolean
+    onTimeCount?: boolean
+    truePositiveCount?: boolean
+    trueNegativeCount?: boolean
+    falsePositiveCount?: boolean
+    falseNegativeCount?: boolean
+    precision?: boolean
+    recall?: boolean
+    f1?: boolean
+    prAuc?: boolean
+    calibrationError?: boolean
+    falseNegativeRate?: boolean
+    baselineEvidence?: boolean
+    subgroupMetricsReference?: boolean
+    featureDistributionReference?: boolean
+    missingnessReference?: boolean
+    evaluationArtifactReference?: boolean
+    evaluationFingerprint?: boolean
+    recordedById?: boolean
+    recordedAt?: boolean
+    modelVersion?: boolean | PredictiveModelVersionDefaultArgs<ExtArgs>
+    datasetSnapshot?: boolean | PredictiveDatasetSnapshotDefaultArgs<ExtArgs>
+    recordedBy?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["predictiveModelEvaluation"]>
+
+  export type PredictiveModelEvaluationSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    modelVersionId?: boolean
+    datasetSnapshotId?: boolean
+    evaluationContractVersion?: boolean
+    splitStrategy?: boolean
+    evaluationPeriodStart?: boolean
+    evaluationPeriodEnd?: boolean
+    testSampleCount?: boolean
+    lateCount?: boolean
+    onTimeCount?: boolean
+    truePositiveCount?: boolean
+    trueNegativeCount?: boolean
+    falsePositiveCount?: boolean
+    falseNegativeCount?: boolean
+    precision?: boolean
+    recall?: boolean
+    f1?: boolean
+    prAuc?: boolean
+    calibrationError?: boolean
+    falseNegativeRate?: boolean
+    baselineEvidence?: boolean
+    subgroupMetricsReference?: boolean
+    featureDistributionReference?: boolean
+    missingnessReference?: boolean
+    evaluationArtifactReference?: boolean
+    evaluationFingerprint?: boolean
+    recordedById?: boolean
+    recordedAt?: boolean
+    modelVersion?: boolean | PredictiveModelVersionDefaultArgs<ExtArgs>
+    datasetSnapshot?: boolean | PredictiveDatasetSnapshotDefaultArgs<ExtArgs>
+    recordedBy?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["predictiveModelEvaluation"]>
+
+  export type PredictiveModelEvaluationSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    modelVersionId?: boolean
+    datasetSnapshotId?: boolean
+    evaluationContractVersion?: boolean
+    splitStrategy?: boolean
+    evaluationPeriodStart?: boolean
+    evaluationPeriodEnd?: boolean
+    testSampleCount?: boolean
+    lateCount?: boolean
+    onTimeCount?: boolean
+    truePositiveCount?: boolean
+    trueNegativeCount?: boolean
+    falsePositiveCount?: boolean
+    falseNegativeCount?: boolean
+    precision?: boolean
+    recall?: boolean
+    f1?: boolean
+    prAuc?: boolean
+    calibrationError?: boolean
+    falseNegativeRate?: boolean
+    baselineEvidence?: boolean
+    subgroupMetricsReference?: boolean
+    featureDistributionReference?: boolean
+    missingnessReference?: boolean
+    evaluationArtifactReference?: boolean
+    evaluationFingerprint?: boolean
+    recordedById?: boolean
+    recordedAt?: boolean
+    modelVersion?: boolean | PredictiveModelVersionDefaultArgs<ExtArgs>
+    datasetSnapshot?: boolean | PredictiveDatasetSnapshotDefaultArgs<ExtArgs>
+    recordedBy?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["predictiveModelEvaluation"]>
+
+  export type PredictiveModelEvaluationSelectScalar = {
+    id?: boolean
+    modelVersionId?: boolean
+    datasetSnapshotId?: boolean
+    evaluationContractVersion?: boolean
+    splitStrategy?: boolean
+    evaluationPeriodStart?: boolean
+    evaluationPeriodEnd?: boolean
+    testSampleCount?: boolean
+    lateCount?: boolean
+    onTimeCount?: boolean
+    truePositiveCount?: boolean
+    trueNegativeCount?: boolean
+    falsePositiveCount?: boolean
+    falseNegativeCount?: boolean
+    precision?: boolean
+    recall?: boolean
+    f1?: boolean
+    prAuc?: boolean
+    calibrationError?: boolean
+    falseNegativeRate?: boolean
+    baselineEvidence?: boolean
+    subgroupMetricsReference?: boolean
+    featureDistributionReference?: boolean
+    missingnessReference?: boolean
+    evaluationArtifactReference?: boolean
+    evaluationFingerprint?: boolean
+    recordedById?: boolean
+    recordedAt?: boolean
+  }
+
+  export type PredictiveModelEvaluationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "modelVersionId" | "datasetSnapshotId" | "evaluationContractVersion" | "splitStrategy" | "evaluationPeriodStart" | "evaluationPeriodEnd" | "testSampleCount" | "lateCount" | "onTimeCount" | "truePositiveCount" | "trueNegativeCount" | "falsePositiveCount" | "falseNegativeCount" | "precision" | "recall" | "f1" | "prAuc" | "calibrationError" | "falseNegativeRate" | "baselineEvidence" | "subgroupMetricsReference" | "featureDistributionReference" | "missingnessReference" | "evaluationArtifactReference" | "evaluationFingerprint" | "recordedById" | "recordedAt", ExtArgs["result"]["predictiveModelEvaluation"]>
+  export type PredictiveModelEvaluationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    modelVersion?: boolean | PredictiveModelVersionDefaultArgs<ExtArgs>
+    datasetSnapshot?: boolean | PredictiveDatasetSnapshotDefaultArgs<ExtArgs>
+    recordedBy?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type PredictiveModelEvaluationIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    modelVersion?: boolean | PredictiveModelVersionDefaultArgs<ExtArgs>
+    datasetSnapshot?: boolean | PredictiveDatasetSnapshotDefaultArgs<ExtArgs>
+    recordedBy?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type PredictiveModelEvaluationIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    modelVersion?: boolean | PredictiveModelVersionDefaultArgs<ExtArgs>
+    datasetSnapshot?: boolean | PredictiveDatasetSnapshotDefaultArgs<ExtArgs>
+    recordedBy?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $PredictiveModelEvaluationPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "PredictiveModelEvaluation"
+    objects: {
+      modelVersion: Prisma.$PredictiveModelVersionPayload<ExtArgs>
+      datasetSnapshot: Prisma.$PredictiveDatasetSnapshotPayload<ExtArgs>
+      recordedBy: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      modelVersionId: string
+      datasetSnapshotId: string
+      evaluationContractVersion: string
+      splitStrategy: string
+      evaluationPeriodStart: Date
+      evaluationPeriodEnd: Date
+      testSampleCount: number
+      lateCount: number
+      onTimeCount: number
+      truePositiveCount: number
+      trueNegativeCount: number
+      falsePositiveCount: number
+      falseNegativeCount: number
+      precision: number
+      recall: number
+      f1: number
+      prAuc: number
+      calibrationError: number
+      falseNegativeRate: number
+      baselineEvidence: Prisma.JsonValue
+      subgroupMetricsReference: Prisma.JsonValue | null
+      featureDistributionReference: Prisma.JsonValue | null
+      missingnessReference: Prisma.JsonValue | null
+      evaluationArtifactReference: string
+      evaluationFingerprint: string
+      recordedById: string
+      recordedAt: Date
+    }, ExtArgs["result"]["predictiveModelEvaluation"]>
+    composites: {}
+  }
+
+  type PredictiveModelEvaluationGetPayload<S extends boolean | null | undefined | PredictiveModelEvaluationDefaultArgs> = $Result.GetResult<Prisma.$PredictiveModelEvaluationPayload, S>
+
+  type PredictiveModelEvaluationCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<PredictiveModelEvaluationFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: PredictiveModelEvaluationCountAggregateInputType | true
+    }
+
+  export interface PredictiveModelEvaluationDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['PredictiveModelEvaluation'], meta: { name: 'PredictiveModelEvaluation' } }
+    /**
+     * Find zero or one PredictiveModelEvaluation that matches the filter.
+     * @param {PredictiveModelEvaluationFindUniqueArgs} args - Arguments to find a PredictiveModelEvaluation
+     * @example
+     * // Get one PredictiveModelEvaluation
+     * const predictiveModelEvaluation = await prisma.predictiveModelEvaluation.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends PredictiveModelEvaluationFindUniqueArgs>(args: SelectSubset<T, PredictiveModelEvaluationFindUniqueArgs<ExtArgs>>): Prisma__PredictiveModelEvaluationClient<$Result.GetResult<Prisma.$PredictiveModelEvaluationPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one PredictiveModelEvaluation that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {PredictiveModelEvaluationFindUniqueOrThrowArgs} args - Arguments to find a PredictiveModelEvaluation
+     * @example
+     * // Get one PredictiveModelEvaluation
+     * const predictiveModelEvaluation = await prisma.predictiveModelEvaluation.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends PredictiveModelEvaluationFindUniqueOrThrowArgs>(args: SelectSubset<T, PredictiveModelEvaluationFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PredictiveModelEvaluationClient<$Result.GetResult<Prisma.$PredictiveModelEvaluationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PredictiveModelEvaluation that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PredictiveModelEvaluationFindFirstArgs} args - Arguments to find a PredictiveModelEvaluation
+     * @example
+     * // Get one PredictiveModelEvaluation
+     * const predictiveModelEvaluation = await prisma.predictiveModelEvaluation.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends PredictiveModelEvaluationFindFirstArgs>(args?: SelectSubset<T, PredictiveModelEvaluationFindFirstArgs<ExtArgs>>): Prisma__PredictiveModelEvaluationClient<$Result.GetResult<Prisma.$PredictiveModelEvaluationPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PredictiveModelEvaluation that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PredictiveModelEvaluationFindFirstOrThrowArgs} args - Arguments to find a PredictiveModelEvaluation
+     * @example
+     * // Get one PredictiveModelEvaluation
+     * const predictiveModelEvaluation = await prisma.predictiveModelEvaluation.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends PredictiveModelEvaluationFindFirstOrThrowArgs>(args?: SelectSubset<T, PredictiveModelEvaluationFindFirstOrThrowArgs<ExtArgs>>): Prisma__PredictiveModelEvaluationClient<$Result.GetResult<Prisma.$PredictiveModelEvaluationPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more PredictiveModelEvaluations that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PredictiveModelEvaluationFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all PredictiveModelEvaluations
+     * const predictiveModelEvaluations = await prisma.predictiveModelEvaluation.findMany()
+     * 
+     * // Get first 10 PredictiveModelEvaluations
+     * const predictiveModelEvaluations = await prisma.predictiveModelEvaluation.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const predictiveModelEvaluationWithIdOnly = await prisma.predictiveModelEvaluation.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends PredictiveModelEvaluationFindManyArgs>(args?: SelectSubset<T, PredictiveModelEvaluationFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PredictiveModelEvaluationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a PredictiveModelEvaluation.
+     * @param {PredictiveModelEvaluationCreateArgs} args - Arguments to create a PredictiveModelEvaluation.
+     * @example
+     * // Create one PredictiveModelEvaluation
+     * const PredictiveModelEvaluation = await prisma.predictiveModelEvaluation.create({
+     *   data: {
+     *     // ... data to create a PredictiveModelEvaluation
+     *   }
+     * })
+     * 
+     */
+    create<T extends PredictiveModelEvaluationCreateArgs>(args: SelectSubset<T, PredictiveModelEvaluationCreateArgs<ExtArgs>>): Prisma__PredictiveModelEvaluationClient<$Result.GetResult<Prisma.$PredictiveModelEvaluationPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many PredictiveModelEvaluations.
+     * @param {PredictiveModelEvaluationCreateManyArgs} args - Arguments to create many PredictiveModelEvaluations.
+     * @example
+     * // Create many PredictiveModelEvaluations
+     * const predictiveModelEvaluation = await prisma.predictiveModelEvaluation.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends PredictiveModelEvaluationCreateManyArgs>(args?: SelectSubset<T, PredictiveModelEvaluationCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many PredictiveModelEvaluations and returns the data saved in the database.
+     * @param {PredictiveModelEvaluationCreateManyAndReturnArgs} args - Arguments to create many PredictiveModelEvaluations.
+     * @example
+     * // Create many PredictiveModelEvaluations
+     * const predictiveModelEvaluation = await prisma.predictiveModelEvaluation.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many PredictiveModelEvaluations and only return the `id`
+     * const predictiveModelEvaluationWithIdOnly = await prisma.predictiveModelEvaluation.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends PredictiveModelEvaluationCreateManyAndReturnArgs>(args?: SelectSubset<T, PredictiveModelEvaluationCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PredictiveModelEvaluationPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a PredictiveModelEvaluation.
+     * @param {PredictiveModelEvaluationDeleteArgs} args - Arguments to delete one PredictiveModelEvaluation.
+     * @example
+     * // Delete one PredictiveModelEvaluation
+     * const PredictiveModelEvaluation = await prisma.predictiveModelEvaluation.delete({
+     *   where: {
+     *     // ... filter to delete one PredictiveModelEvaluation
+     *   }
+     * })
+     * 
+     */
+    delete<T extends PredictiveModelEvaluationDeleteArgs>(args: SelectSubset<T, PredictiveModelEvaluationDeleteArgs<ExtArgs>>): Prisma__PredictiveModelEvaluationClient<$Result.GetResult<Prisma.$PredictiveModelEvaluationPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one PredictiveModelEvaluation.
+     * @param {PredictiveModelEvaluationUpdateArgs} args - Arguments to update one PredictiveModelEvaluation.
+     * @example
+     * // Update one PredictiveModelEvaluation
+     * const predictiveModelEvaluation = await prisma.predictiveModelEvaluation.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends PredictiveModelEvaluationUpdateArgs>(args: SelectSubset<T, PredictiveModelEvaluationUpdateArgs<ExtArgs>>): Prisma__PredictiveModelEvaluationClient<$Result.GetResult<Prisma.$PredictiveModelEvaluationPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more PredictiveModelEvaluations.
+     * @param {PredictiveModelEvaluationDeleteManyArgs} args - Arguments to filter PredictiveModelEvaluations to delete.
+     * @example
+     * // Delete a few PredictiveModelEvaluations
+     * const { count } = await prisma.predictiveModelEvaluation.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends PredictiveModelEvaluationDeleteManyArgs>(args?: SelectSubset<T, PredictiveModelEvaluationDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PredictiveModelEvaluations.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PredictiveModelEvaluationUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many PredictiveModelEvaluations
+     * const predictiveModelEvaluation = await prisma.predictiveModelEvaluation.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends PredictiveModelEvaluationUpdateManyArgs>(args: SelectSubset<T, PredictiveModelEvaluationUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PredictiveModelEvaluations and returns the data updated in the database.
+     * @param {PredictiveModelEvaluationUpdateManyAndReturnArgs} args - Arguments to update many PredictiveModelEvaluations.
+     * @example
+     * // Update many PredictiveModelEvaluations
+     * const predictiveModelEvaluation = await prisma.predictiveModelEvaluation.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more PredictiveModelEvaluations and only return the `id`
+     * const predictiveModelEvaluationWithIdOnly = await prisma.predictiveModelEvaluation.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends PredictiveModelEvaluationUpdateManyAndReturnArgs>(args: SelectSubset<T, PredictiveModelEvaluationUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PredictiveModelEvaluationPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one PredictiveModelEvaluation.
+     * @param {PredictiveModelEvaluationUpsertArgs} args - Arguments to update or create a PredictiveModelEvaluation.
+     * @example
+     * // Update or create a PredictiveModelEvaluation
+     * const predictiveModelEvaluation = await prisma.predictiveModelEvaluation.upsert({
+     *   create: {
+     *     // ... data to create a PredictiveModelEvaluation
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the PredictiveModelEvaluation we want to update
+     *   }
+     * })
+     */
+    upsert<T extends PredictiveModelEvaluationUpsertArgs>(args: SelectSubset<T, PredictiveModelEvaluationUpsertArgs<ExtArgs>>): Prisma__PredictiveModelEvaluationClient<$Result.GetResult<Prisma.$PredictiveModelEvaluationPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of PredictiveModelEvaluations.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PredictiveModelEvaluationCountArgs} args - Arguments to filter PredictiveModelEvaluations to count.
+     * @example
+     * // Count the number of PredictiveModelEvaluations
+     * const count = await prisma.predictiveModelEvaluation.count({
+     *   where: {
+     *     // ... the filter for the PredictiveModelEvaluations we want to count
+     *   }
+     * })
+    **/
+    count<T extends PredictiveModelEvaluationCountArgs>(
+      args?: Subset<T, PredictiveModelEvaluationCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], PredictiveModelEvaluationCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a PredictiveModelEvaluation.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PredictiveModelEvaluationAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends PredictiveModelEvaluationAggregateArgs>(args: Subset<T, PredictiveModelEvaluationAggregateArgs>): Prisma.PrismaPromise<GetPredictiveModelEvaluationAggregateType<T>>
+
+    /**
+     * Group by PredictiveModelEvaluation.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PredictiveModelEvaluationGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends PredictiveModelEvaluationGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: PredictiveModelEvaluationGroupByArgs['orderBy'] }
+        : { orderBy?: PredictiveModelEvaluationGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, PredictiveModelEvaluationGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPredictiveModelEvaluationGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the PredictiveModelEvaluation model
+   */
+  readonly fields: PredictiveModelEvaluationFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for PredictiveModelEvaluation.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__PredictiveModelEvaluationClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    modelVersion<T extends PredictiveModelVersionDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PredictiveModelVersionDefaultArgs<ExtArgs>>): Prisma__PredictiveModelVersionClient<$Result.GetResult<Prisma.$PredictiveModelVersionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    datasetSnapshot<T extends PredictiveDatasetSnapshotDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PredictiveDatasetSnapshotDefaultArgs<ExtArgs>>): Prisma__PredictiveDatasetSnapshotClient<$Result.GetResult<Prisma.$PredictiveDatasetSnapshotPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    recordedBy<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the PredictiveModelEvaluation model
+   */
+  interface PredictiveModelEvaluationFieldRefs {
+    readonly id: FieldRef<"PredictiveModelEvaluation", 'String'>
+    readonly modelVersionId: FieldRef<"PredictiveModelEvaluation", 'String'>
+    readonly datasetSnapshotId: FieldRef<"PredictiveModelEvaluation", 'String'>
+    readonly evaluationContractVersion: FieldRef<"PredictiveModelEvaluation", 'String'>
+    readonly splitStrategy: FieldRef<"PredictiveModelEvaluation", 'String'>
+    readonly evaluationPeriodStart: FieldRef<"PredictiveModelEvaluation", 'DateTime'>
+    readonly evaluationPeriodEnd: FieldRef<"PredictiveModelEvaluation", 'DateTime'>
+    readonly testSampleCount: FieldRef<"PredictiveModelEvaluation", 'Int'>
+    readonly lateCount: FieldRef<"PredictiveModelEvaluation", 'Int'>
+    readonly onTimeCount: FieldRef<"PredictiveModelEvaluation", 'Int'>
+    readonly truePositiveCount: FieldRef<"PredictiveModelEvaluation", 'Int'>
+    readonly trueNegativeCount: FieldRef<"PredictiveModelEvaluation", 'Int'>
+    readonly falsePositiveCount: FieldRef<"PredictiveModelEvaluation", 'Int'>
+    readonly falseNegativeCount: FieldRef<"PredictiveModelEvaluation", 'Int'>
+    readonly precision: FieldRef<"PredictiveModelEvaluation", 'Float'>
+    readonly recall: FieldRef<"PredictiveModelEvaluation", 'Float'>
+    readonly f1: FieldRef<"PredictiveModelEvaluation", 'Float'>
+    readonly prAuc: FieldRef<"PredictiveModelEvaluation", 'Float'>
+    readonly calibrationError: FieldRef<"PredictiveModelEvaluation", 'Float'>
+    readonly falseNegativeRate: FieldRef<"PredictiveModelEvaluation", 'Float'>
+    readonly baselineEvidence: FieldRef<"PredictiveModelEvaluation", 'Json'>
+    readonly subgroupMetricsReference: FieldRef<"PredictiveModelEvaluation", 'Json'>
+    readonly featureDistributionReference: FieldRef<"PredictiveModelEvaluation", 'Json'>
+    readonly missingnessReference: FieldRef<"PredictiveModelEvaluation", 'Json'>
+    readonly evaluationArtifactReference: FieldRef<"PredictiveModelEvaluation", 'String'>
+    readonly evaluationFingerprint: FieldRef<"PredictiveModelEvaluation", 'String'>
+    readonly recordedById: FieldRef<"PredictiveModelEvaluation", 'String'>
+    readonly recordedAt: FieldRef<"PredictiveModelEvaluation", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * PredictiveModelEvaluation findUnique
+   */
+  export type PredictiveModelEvaluationFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveModelEvaluation
+     */
+    select?: PredictiveModelEvaluationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveModelEvaluation
+     */
+    omit?: PredictiveModelEvaluationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveModelEvaluationInclude<ExtArgs> | null
+    /**
+     * Filter, which PredictiveModelEvaluation to fetch.
+     */
+    where: PredictiveModelEvaluationWhereUniqueInput
+  }
+
+  /**
+   * PredictiveModelEvaluation findUniqueOrThrow
+   */
+  export type PredictiveModelEvaluationFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveModelEvaluation
+     */
+    select?: PredictiveModelEvaluationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveModelEvaluation
+     */
+    omit?: PredictiveModelEvaluationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveModelEvaluationInclude<ExtArgs> | null
+    /**
+     * Filter, which PredictiveModelEvaluation to fetch.
+     */
+    where: PredictiveModelEvaluationWhereUniqueInput
+  }
+
+  /**
+   * PredictiveModelEvaluation findFirst
+   */
+  export type PredictiveModelEvaluationFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveModelEvaluation
+     */
+    select?: PredictiveModelEvaluationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveModelEvaluation
+     */
+    omit?: PredictiveModelEvaluationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveModelEvaluationInclude<ExtArgs> | null
+    /**
+     * Filter, which PredictiveModelEvaluation to fetch.
+     */
+    where?: PredictiveModelEvaluationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PredictiveModelEvaluations to fetch.
+     */
+    orderBy?: PredictiveModelEvaluationOrderByWithRelationInput | PredictiveModelEvaluationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PredictiveModelEvaluations.
+     */
+    cursor?: PredictiveModelEvaluationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PredictiveModelEvaluations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PredictiveModelEvaluations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PredictiveModelEvaluations.
+     */
+    distinct?: PredictiveModelEvaluationScalarFieldEnum | PredictiveModelEvaluationScalarFieldEnum[]
+  }
+
+  /**
+   * PredictiveModelEvaluation findFirstOrThrow
+   */
+  export type PredictiveModelEvaluationFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveModelEvaluation
+     */
+    select?: PredictiveModelEvaluationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveModelEvaluation
+     */
+    omit?: PredictiveModelEvaluationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveModelEvaluationInclude<ExtArgs> | null
+    /**
+     * Filter, which PredictiveModelEvaluation to fetch.
+     */
+    where?: PredictiveModelEvaluationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PredictiveModelEvaluations to fetch.
+     */
+    orderBy?: PredictiveModelEvaluationOrderByWithRelationInput | PredictiveModelEvaluationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PredictiveModelEvaluations.
+     */
+    cursor?: PredictiveModelEvaluationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PredictiveModelEvaluations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PredictiveModelEvaluations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PredictiveModelEvaluations.
+     */
+    distinct?: PredictiveModelEvaluationScalarFieldEnum | PredictiveModelEvaluationScalarFieldEnum[]
+  }
+
+  /**
+   * PredictiveModelEvaluation findMany
+   */
+  export type PredictiveModelEvaluationFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveModelEvaluation
+     */
+    select?: PredictiveModelEvaluationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveModelEvaluation
+     */
+    omit?: PredictiveModelEvaluationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveModelEvaluationInclude<ExtArgs> | null
+    /**
+     * Filter, which PredictiveModelEvaluations to fetch.
+     */
+    where?: PredictiveModelEvaluationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PredictiveModelEvaluations to fetch.
+     */
+    orderBy?: PredictiveModelEvaluationOrderByWithRelationInput | PredictiveModelEvaluationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing PredictiveModelEvaluations.
+     */
+    cursor?: PredictiveModelEvaluationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PredictiveModelEvaluations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PredictiveModelEvaluations.
+     */
+    skip?: number
+    distinct?: PredictiveModelEvaluationScalarFieldEnum | PredictiveModelEvaluationScalarFieldEnum[]
+  }
+
+  /**
+   * PredictiveModelEvaluation create
+   */
+  export type PredictiveModelEvaluationCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveModelEvaluation
+     */
+    select?: PredictiveModelEvaluationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveModelEvaluation
+     */
+    omit?: PredictiveModelEvaluationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveModelEvaluationInclude<ExtArgs> | null
+    /**
+     * The data needed to create a PredictiveModelEvaluation.
+     */
+    data: XOR<PredictiveModelEvaluationCreateInput, PredictiveModelEvaluationUncheckedCreateInput>
+  }
+
+  /**
+   * PredictiveModelEvaluation createMany
+   */
+  export type PredictiveModelEvaluationCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many PredictiveModelEvaluations.
+     */
+    data: PredictiveModelEvaluationCreateManyInput | PredictiveModelEvaluationCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * PredictiveModelEvaluation createManyAndReturn
+   */
+  export type PredictiveModelEvaluationCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveModelEvaluation
+     */
+    select?: PredictiveModelEvaluationSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveModelEvaluation
+     */
+    omit?: PredictiveModelEvaluationOmit<ExtArgs> | null
+    /**
+     * The data used to create many PredictiveModelEvaluations.
+     */
+    data: PredictiveModelEvaluationCreateManyInput | PredictiveModelEvaluationCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveModelEvaluationIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * PredictiveModelEvaluation update
+   */
+  export type PredictiveModelEvaluationUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveModelEvaluation
+     */
+    select?: PredictiveModelEvaluationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveModelEvaluation
+     */
+    omit?: PredictiveModelEvaluationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveModelEvaluationInclude<ExtArgs> | null
+    /**
+     * The data needed to update a PredictiveModelEvaluation.
+     */
+    data: XOR<PredictiveModelEvaluationUpdateInput, PredictiveModelEvaluationUncheckedUpdateInput>
+    /**
+     * Choose, which PredictiveModelEvaluation to update.
+     */
+    where: PredictiveModelEvaluationWhereUniqueInput
+  }
+
+  /**
+   * PredictiveModelEvaluation updateMany
+   */
+  export type PredictiveModelEvaluationUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update PredictiveModelEvaluations.
+     */
+    data: XOR<PredictiveModelEvaluationUpdateManyMutationInput, PredictiveModelEvaluationUncheckedUpdateManyInput>
+    /**
+     * Filter which PredictiveModelEvaluations to update
+     */
+    where?: PredictiveModelEvaluationWhereInput
+    /**
+     * Limit how many PredictiveModelEvaluations to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * PredictiveModelEvaluation updateManyAndReturn
+   */
+  export type PredictiveModelEvaluationUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveModelEvaluation
+     */
+    select?: PredictiveModelEvaluationSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveModelEvaluation
+     */
+    omit?: PredictiveModelEvaluationOmit<ExtArgs> | null
+    /**
+     * The data used to update PredictiveModelEvaluations.
+     */
+    data: XOR<PredictiveModelEvaluationUpdateManyMutationInput, PredictiveModelEvaluationUncheckedUpdateManyInput>
+    /**
+     * Filter which PredictiveModelEvaluations to update
+     */
+    where?: PredictiveModelEvaluationWhereInput
+    /**
+     * Limit how many PredictiveModelEvaluations to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveModelEvaluationIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * PredictiveModelEvaluation upsert
+   */
+  export type PredictiveModelEvaluationUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveModelEvaluation
+     */
+    select?: PredictiveModelEvaluationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveModelEvaluation
+     */
+    omit?: PredictiveModelEvaluationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveModelEvaluationInclude<ExtArgs> | null
+    /**
+     * The filter to search for the PredictiveModelEvaluation to update in case it exists.
+     */
+    where: PredictiveModelEvaluationWhereUniqueInput
+    /**
+     * In case the PredictiveModelEvaluation found by the `where` argument doesn't exist, create a new PredictiveModelEvaluation with this data.
+     */
+    create: XOR<PredictiveModelEvaluationCreateInput, PredictiveModelEvaluationUncheckedCreateInput>
+    /**
+     * In case the PredictiveModelEvaluation was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<PredictiveModelEvaluationUpdateInput, PredictiveModelEvaluationUncheckedUpdateInput>
+  }
+
+  /**
+   * PredictiveModelEvaluation delete
+   */
+  export type PredictiveModelEvaluationDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveModelEvaluation
+     */
+    select?: PredictiveModelEvaluationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveModelEvaluation
+     */
+    omit?: PredictiveModelEvaluationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveModelEvaluationInclude<ExtArgs> | null
+    /**
+     * Filter which PredictiveModelEvaluation to delete.
+     */
+    where: PredictiveModelEvaluationWhereUniqueInput
+  }
+
+  /**
+   * PredictiveModelEvaluation deleteMany
+   */
+  export type PredictiveModelEvaluationDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PredictiveModelEvaluations to delete
+     */
+    where?: PredictiveModelEvaluationWhereInput
+    /**
+     * Limit how many PredictiveModelEvaluations to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * PredictiveModelEvaluation without action
+   */
+  export type PredictiveModelEvaluationDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveModelEvaluation
+     */
+    select?: PredictiveModelEvaluationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveModelEvaluation
+     */
+    omit?: PredictiveModelEvaluationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveModelEvaluationInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model PredictiveModelApproval
+   */
+
+  export type AggregatePredictiveModelApproval = {
+    _count: PredictiveModelApprovalCountAggregateOutputType | null
+    _min: PredictiveModelApprovalMinAggregateOutputType | null
+    _max: PredictiveModelApprovalMaxAggregateOutputType | null
+  }
+
+  export type PredictiveModelApprovalMinAggregateOutputType = {
+    id: string | null
+    modelVersionId: string | null
+    decision: $Enums.PredictiveModelApprovalDecision | null
+    reason: string | null
+    reviewDueAt: Date | null
+    approvalExpiresAt: Date | null
+    approvedById: string | null
+    decidedAt: Date | null
+  }
+
+  export type PredictiveModelApprovalMaxAggregateOutputType = {
+    id: string | null
+    modelVersionId: string | null
+    decision: $Enums.PredictiveModelApprovalDecision | null
+    reason: string | null
+    reviewDueAt: Date | null
+    approvalExpiresAt: Date | null
+    approvedById: string | null
+    decidedAt: Date | null
+  }
+
+  export type PredictiveModelApprovalCountAggregateOutputType = {
+    id: number
+    modelVersionId: number
+    decision: number
+    reason: number
+    restrictions: number
+    reviewDueAt: number
+    approvalExpiresAt: number
+    approvedById: number
+    decidedAt: number
+    _all: number
+  }
+
+
+  export type PredictiveModelApprovalMinAggregateInputType = {
+    id?: true
+    modelVersionId?: true
+    decision?: true
+    reason?: true
+    reviewDueAt?: true
+    approvalExpiresAt?: true
+    approvedById?: true
+    decidedAt?: true
+  }
+
+  export type PredictiveModelApprovalMaxAggregateInputType = {
+    id?: true
+    modelVersionId?: true
+    decision?: true
+    reason?: true
+    reviewDueAt?: true
+    approvalExpiresAt?: true
+    approvedById?: true
+    decidedAt?: true
+  }
+
+  export type PredictiveModelApprovalCountAggregateInputType = {
+    id?: true
+    modelVersionId?: true
+    decision?: true
+    reason?: true
+    restrictions?: true
+    reviewDueAt?: true
+    approvalExpiresAt?: true
+    approvedById?: true
+    decidedAt?: true
+    _all?: true
+  }
+
+  export type PredictiveModelApprovalAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PredictiveModelApproval to aggregate.
+     */
+    where?: PredictiveModelApprovalWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PredictiveModelApprovals to fetch.
+     */
+    orderBy?: PredictiveModelApprovalOrderByWithRelationInput | PredictiveModelApprovalOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: PredictiveModelApprovalWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PredictiveModelApprovals from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PredictiveModelApprovals.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned PredictiveModelApprovals
+    **/
+    _count?: true | PredictiveModelApprovalCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: PredictiveModelApprovalMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: PredictiveModelApprovalMaxAggregateInputType
+  }
+
+  export type GetPredictiveModelApprovalAggregateType<T extends PredictiveModelApprovalAggregateArgs> = {
+        [P in keyof T & keyof AggregatePredictiveModelApproval]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePredictiveModelApproval[P]>
+      : GetScalarType<T[P], AggregatePredictiveModelApproval[P]>
+  }
+
+
+
+
+  export type PredictiveModelApprovalGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PredictiveModelApprovalWhereInput
+    orderBy?: PredictiveModelApprovalOrderByWithAggregationInput | PredictiveModelApprovalOrderByWithAggregationInput[]
+    by: PredictiveModelApprovalScalarFieldEnum[] | PredictiveModelApprovalScalarFieldEnum
+    having?: PredictiveModelApprovalScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: PredictiveModelApprovalCountAggregateInputType | true
+    _min?: PredictiveModelApprovalMinAggregateInputType
+    _max?: PredictiveModelApprovalMaxAggregateInputType
+  }
+
+  export type PredictiveModelApprovalGroupByOutputType = {
+    id: string
+    modelVersionId: string
+    decision: $Enums.PredictiveModelApprovalDecision
+    reason: string
+    restrictions: JsonValue | null
+    reviewDueAt: Date | null
+    approvalExpiresAt: Date | null
+    approvedById: string
+    decidedAt: Date
+    _count: PredictiveModelApprovalCountAggregateOutputType | null
+    _min: PredictiveModelApprovalMinAggregateOutputType | null
+    _max: PredictiveModelApprovalMaxAggregateOutputType | null
+  }
+
+  type GetPredictiveModelApprovalGroupByPayload<T extends PredictiveModelApprovalGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<PredictiveModelApprovalGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof PredictiveModelApprovalGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], PredictiveModelApprovalGroupByOutputType[P]>
+            : GetScalarType<T[P], PredictiveModelApprovalGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type PredictiveModelApprovalSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    modelVersionId?: boolean
+    decision?: boolean
+    reason?: boolean
+    restrictions?: boolean
+    reviewDueAt?: boolean
+    approvalExpiresAt?: boolean
+    approvedById?: boolean
+    decidedAt?: boolean
+    modelVersion?: boolean | PredictiveModelVersionDefaultArgs<ExtArgs>
+    approvedBy?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["predictiveModelApproval"]>
+
+  export type PredictiveModelApprovalSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    modelVersionId?: boolean
+    decision?: boolean
+    reason?: boolean
+    restrictions?: boolean
+    reviewDueAt?: boolean
+    approvalExpiresAt?: boolean
+    approvedById?: boolean
+    decidedAt?: boolean
+    modelVersion?: boolean | PredictiveModelVersionDefaultArgs<ExtArgs>
+    approvedBy?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["predictiveModelApproval"]>
+
+  export type PredictiveModelApprovalSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    modelVersionId?: boolean
+    decision?: boolean
+    reason?: boolean
+    restrictions?: boolean
+    reviewDueAt?: boolean
+    approvalExpiresAt?: boolean
+    approvedById?: boolean
+    decidedAt?: boolean
+    modelVersion?: boolean | PredictiveModelVersionDefaultArgs<ExtArgs>
+    approvedBy?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["predictiveModelApproval"]>
+
+  export type PredictiveModelApprovalSelectScalar = {
+    id?: boolean
+    modelVersionId?: boolean
+    decision?: boolean
+    reason?: boolean
+    restrictions?: boolean
+    reviewDueAt?: boolean
+    approvalExpiresAt?: boolean
+    approvedById?: boolean
+    decidedAt?: boolean
+  }
+
+  export type PredictiveModelApprovalOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "modelVersionId" | "decision" | "reason" | "restrictions" | "reviewDueAt" | "approvalExpiresAt" | "approvedById" | "decidedAt", ExtArgs["result"]["predictiveModelApproval"]>
+  export type PredictiveModelApprovalInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    modelVersion?: boolean | PredictiveModelVersionDefaultArgs<ExtArgs>
+    approvedBy?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type PredictiveModelApprovalIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    modelVersion?: boolean | PredictiveModelVersionDefaultArgs<ExtArgs>
+    approvedBy?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type PredictiveModelApprovalIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    modelVersion?: boolean | PredictiveModelVersionDefaultArgs<ExtArgs>
+    approvedBy?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $PredictiveModelApprovalPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "PredictiveModelApproval"
+    objects: {
+      modelVersion: Prisma.$PredictiveModelVersionPayload<ExtArgs>
+      approvedBy: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      modelVersionId: string
+      decision: $Enums.PredictiveModelApprovalDecision
+      reason: string
+      restrictions: Prisma.JsonValue | null
+      reviewDueAt: Date | null
+      approvalExpiresAt: Date | null
+      approvedById: string
+      decidedAt: Date
+    }, ExtArgs["result"]["predictiveModelApproval"]>
+    composites: {}
+  }
+
+  type PredictiveModelApprovalGetPayload<S extends boolean | null | undefined | PredictiveModelApprovalDefaultArgs> = $Result.GetResult<Prisma.$PredictiveModelApprovalPayload, S>
+
+  type PredictiveModelApprovalCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<PredictiveModelApprovalFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: PredictiveModelApprovalCountAggregateInputType | true
+    }
+
+  export interface PredictiveModelApprovalDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['PredictiveModelApproval'], meta: { name: 'PredictiveModelApproval' } }
+    /**
+     * Find zero or one PredictiveModelApproval that matches the filter.
+     * @param {PredictiveModelApprovalFindUniqueArgs} args - Arguments to find a PredictiveModelApproval
+     * @example
+     * // Get one PredictiveModelApproval
+     * const predictiveModelApproval = await prisma.predictiveModelApproval.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends PredictiveModelApprovalFindUniqueArgs>(args: SelectSubset<T, PredictiveModelApprovalFindUniqueArgs<ExtArgs>>): Prisma__PredictiveModelApprovalClient<$Result.GetResult<Prisma.$PredictiveModelApprovalPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one PredictiveModelApproval that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {PredictiveModelApprovalFindUniqueOrThrowArgs} args - Arguments to find a PredictiveModelApproval
+     * @example
+     * // Get one PredictiveModelApproval
+     * const predictiveModelApproval = await prisma.predictiveModelApproval.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends PredictiveModelApprovalFindUniqueOrThrowArgs>(args: SelectSubset<T, PredictiveModelApprovalFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PredictiveModelApprovalClient<$Result.GetResult<Prisma.$PredictiveModelApprovalPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PredictiveModelApproval that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PredictiveModelApprovalFindFirstArgs} args - Arguments to find a PredictiveModelApproval
+     * @example
+     * // Get one PredictiveModelApproval
+     * const predictiveModelApproval = await prisma.predictiveModelApproval.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends PredictiveModelApprovalFindFirstArgs>(args?: SelectSubset<T, PredictiveModelApprovalFindFirstArgs<ExtArgs>>): Prisma__PredictiveModelApprovalClient<$Result.GetResult<Prisma.$PredictiveModelApprovalPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PredictiveModelApproval that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PredictiveModelApprovalFindFirstOrThrowArgs} args - Arguments to find a PredictiveModelApproval
+     * @example
+     * // Get one PredictiveModelApproval
+     * const predictiveModelApproval = await prisma.predictiveModelApproval.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends PredictiveModelApprovalFindFirstOrThrowArgs>(args?: SelectSubset<T, PredictiveModelApprovalFindFirstOrThrowArgs<ExtArgs>>): Prisma__PredictiveModelApprovalClient<$Result.GetResult<Prisma.$PredictiveModelApprovalPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more PredictiveModelApprovals that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PredictiveModelApprovalFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all PredictiveModelApprovals
+     * const predictiveModelApprovals = await prisma.predictiveModelApproval.findMany()
+     * 
+     * // Get first 10 PredictiveModelApprovals
+     * const predictiveModelApprovals = await prisma.predictiveModelApproval.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const predictiveModelApprovalWithIdOnly = await prisma.predictiveModelApproval.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends PredictiveModelApprovalFindManyArgs>(args?: SelectSubset<T, PredictiveModelApprovalFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PredictiveModelApprovalPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a PredictiveModelApproval.
+     * @param {PredictiveModelApprovalCreateArgs} args - Arguments to create a PredictiveModelApproval.
+     * @example
+     * // Create one PredictiveModelApproval
+     * const PredictiveModelApproval = await prisma.predictiveModelApproval.create({
+     *   data: {
+     *     // ... data to create a PredictiveModelApproval
+     *   }
+     * })
+     * 
+     */
+    create<T extends PredictiveModelApprovalCreateArgs>(args: SelectSubset<T, PredictiveModelApprovalCreateArgs<ExtArgs>>): Prisma__PredictiveModelApprovalClient<$Result.GetResult<Prisma.$PredictiveModelApprovalPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many PredictiveModelApprovals.
+     * @param {PredictiveModelApprovalCreateManyArgs} args - Arguments to create many PredictiveModelApprovals.
+     * @example
+     * // Create many PredictiveModelApprovals
+     * const predictiveModelApproval = await prisma.predictiveModelApproval.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends PredictiveModelApprovalCreateManyArgs>(args?: SelectSubset<T, PredictiveModelApprovalCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many PredictiveModelApprovals and returns the data saved in the database.
+     * @param {PredictiveModelApprovalCreateManyAndReturnArgs} args - Arguments to create many PredictiveModelApprovals.
+     * @example
+     * // Create many PredictiveModelApprovals
+     * const predictiveModelApproval = await prisma.predictiveModelApproval.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many PredictiveModelApprovals and only return the `id`
+     * const predictiveModelApprovalWithIdOnly = await prisma.predictiveModelApproval.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends PredictiveModelApprovalCreateManyAndReturnArgs>(args?: SelectSubset<T, PredictiveModelApprovalCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PredictiveModelApprovalPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a PredictiveModelApproval.
+     * @param {PredictiveModelApprovalDeleteArgs} args - Arguments to delete one PredictiveModelApproval.
+     * @example
+     * // Delete one PredictiveModelApproval
+     * const PredictiveModelApproval = await prisma.predictiveModelApproval.delete({
+     *   where: {
+     *     // ... filter to delete one PredictiveModelApproval
+     *   }
+     * })
+     * 
+     */
+    delete<T extends PredictiveModelApprovalDeleteArgs>(args: SelectSubset<T, PredictiveModelApprovalDeleteArgs<ExtArgs>>): Prisma__PredictiveModelApprovalClient<$Result.GetResult<Prisma.$PredictiveModelApprovalPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one PredictiveModelApproval.
+     * @param {PredictiveModelApprovalUpdateArgs} args - Arguments to update one PredictiveModelApproval.
+     * @example
+     * // Update one PredictiveModelApproval
+     * const predictiveModelApproval = await prisma.predictiveModelApproval.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends PredictiveModelApprovalUpdateArgs>(args: SelectSubset<T, PredictiveModelApprovalUpdateArgs<ExtArgs>>): Prisma__PredictiveModelApprovalClient<$Result.GetResult<Prisma.$PredictiveModelApprovalPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more PredictiveModelApprovals.
+     * @param {PredictiveModelApprovalDeleteManyArgs} args - Arguments to filter PredictiveModelApprovals to delete.
+     * @example
+     * // Delete a few PredictiveModelApprovals
+     * const { count } = await prisma.predictiveModelApproval.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends PredictiveModelApprovalDeleteManyArgs>(args?: SelectSubset<T, PredictiveModelApprovalDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PredictiveModelApprovals.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PredictiveModelApprovalUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many PredictiveModelApprovals
+     * const predictiveModelApproval = await prisma.predictiveModelApproval.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends PredictiveModelApprovalUpdateManyArgs>(args: SelectSubset<T, PredictiveModelApprovalUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PredictiveModelApprovals and returns the data updated in the database.
+     * @param {PredictiveModelApprovalUpdateManyAndReturnArgs} args - Arguments to update many PredictiveModelApprovals.
+     * @example
+     * // Update many PredictiveModelApprovals
+     * const predictiveModelApproval = await prisma.predictiveModelApproval.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more PredictiveModelApprovals and only return the `id`
+     * const predictiveModelApprovalWithIdOnly = await prisma.predictiveModelApproval.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends PredictiveModelApprovalUpdateManyAndReturnArgs>(args: SelectSubset<T, PredictiveModelApprovalUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PredictiveModelApprovalPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one PredictiveModelApproval.
+     * @param {PredictiveModelApprovalUpsertArgs} args - Arguments to update or create a PredictiveModelApproval.
+     * @example
+     * // Update or create a PredictiveModelApproval
+     * const predictiveModelApproval = await prisma.predictiveModelApproval.upsert({
+     *   create: {
+     *     // ... data to create a PredictiveModelApproval
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the PredictiveModelApproval we want to update
+     *   }
+     * })
+     */
+    upsert<T extends PredictiveModelApprovalUpsertArgs>(args: SelectSubset<T, PredictiveModelApprovalUpsertArgs<ExtArgs>>): Prisma__PredictiveModelApprovalClient<$Result.GetResult<Prisma.$PredictiveModelApprovalPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of PredictiveModelApprovals.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PredictiveModelApprovalCountArgs} args - Arguments to filter PredictiveModelApprovals to count.
+     * @example
+     * // Count the number of PredictiveModelApprovals
+     * const count = await prisma.predictiveModelApproval.count({
+     *   where: {
+     *     // ... the filter for the PredictiveModelApprovals we want to count
+     *   }
+     * })
+    **/
+    count<T extends PredictiveModelApprovalCountArgs>(
+      args?: Subset<T, PredictiveModelApprovalCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], PredictiveModelApprovalCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a PredictiveModelApproval.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PredictiveModelApprovalAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends PredictiveModelApprovalAggregateArgs>(args: Subset<T, PredictiveModelApprovalAggregateArgs>): Prisma.PrismaPromise<GetPredictiveModelApprovalAggregateType<T>>
+
+    /**
+     * Group by PredictiveModelApproval.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PredictiveModelApprovalGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends PredictiveModelApprovalGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: PredictiveModelApprovalGroupByArgs['orderBy'] }
+        : { orderBy?: PredictiveModelApprovalGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, PredictiveModelApprovalGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPredictiveModelApprovalGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the PredictiveModelApproval model
+   */
+  readonly fields: PredictiveModelApprovalFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for PredictiveModelApproval.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__PredictiveModelApprovalClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    modelVersion<T extends PredictiveModelVersionDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PredictiveModelVersionDefaultArgs<ExtArgs>>): Prisma__PredictiveModelVersionClient<$Result.GetResult<Prisma.$PredictiveModelVersionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    approvedBy<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the PredictiveModelApproval model
+   */
+  interface PredictiveModelApprovalFieldRefs {
+    readonly id: FieldRef<"PredictiveModelApproval", 'String'>
+    readonly modelVersionId: FieldRef<"PredictiveModelApproval", 'String'>
+    readonly decision: FieldRef<"PredictiveModelApproval", 'PredictiveModelApprovalDecision'>
+    readonly reason: FieldRef<"PredictiveModelApproval", 'String'>
+    readonly restrictions: FieldRef<"PredictiveModelApproval", 'Json'>
+    readonly reviewDueAt: FieldRef<"PredictiveModelApproval", 'DateTime'>
+    readonly approvalExpiresAt: FieldRef<"PredictiveModelApproval", 'DateTime'>
+    readonly approvedById: FieldRef<"PredictiveModelApproval", 'String'>
+    readonly decidedAt: FieldRef<"PredictiveModelApproval", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * PredictiveModelApproval findUnique
+   */
+  export type PredictiveModelApprovalFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveModelApproval
+     */
+    select?: PredictiveModelApprovalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveModelApproval
+     */
+    omit?: PredictiveModelApprovalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveModelApprovalInclude<ExtArgs> | null
+    /**
+     * Filter, which PredictiveModelApproval to fetch.
+     */
+    where: PredictiveModelApprovalWhereUniqueInput
+  }
+
+  /**
+   * PredictiveModelApproval findUniqueOrThrow
+   */
+  export type PredictiveModelApprovalFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveModelApproval
+     */
+    select?: PredictiveModelApprovalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveModelApproval
+     */
+    omit?: PredictiveModelApprovalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveModelApprovalInclude<ExtArgs> | null
+    /**
+     * Filter, which PredictiveModelApproval to fetch.
+     */
+    where: PredictiveModelApprovalWhereUniqueInput
+  }
+
+  /**
+   * PredictiveModelApproval findFirst
+   */
+  export type PredictiveModelApprovalFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveModelApproval
+     */
+    select?: PredictiveModelApprovalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveModelApproval
+     */
+    omit?: PredictiveModelApprovalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveModelApprovalInclude<ExtArgs> | null
+    /**
+     * Filter, which PredictiveModelApproval to fetch.
+     */
+    where?: PredictiveModelApprovalWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PredictiveModelApprovals to fetch.
+     */
+    orderBy?: PredictiveModelApprovalOrderByWithRelationInput | PredictiveModelApprovalOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PredictiveModelApprovals.
+     */
+    cursor?: PredictiveModelApprovalWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PredictiveModelApprovals from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PredictiveModelApprovals.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PredictiveModelApprovals.
+     */
+    distinct?: PredictiveModelApprovalScalarFieldEnum | PredictiveModelApprovalScalarFieldEnum[]
+  }
+
+  /**
+   * PredictiveModelApproval findFirstOrThrow
+   */
+  export type PredictiveModelApprovalFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveModelApproval
+     */
+    select?: PredictiveModelApprovalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveModelApproval
+     */
+    omit?: PredictiveModelApprovalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveModelApprovalInclude<ExtArgs> | null
+    /**
+     * Filter, which PredictiveModelApproval to fetch.
+     */
+    where?: PredictiveModelApprovalWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PredictiveModelApprovals to fetch.
+     */
+    orderBy?: PredictiveModelApprovalOrderByWithRelationInput | PredictiveModelApprovalOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PredictiveModelApprovals.
+     */
+    cursor?: PredictiveModelApprovalWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PredictiveModelApprovals from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PredictiveModelApprovals.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PredictiveModelApprovals.
+     */
+    distinct?: PredictiveModelApprovalScalarFieldEnum | PredictiveModelApprovalScalarFieldEnum[]
+  }
+
+  /**
+   * PredictiveModelApproval findMany
+   */
+  export type PredictiveModelApprovalFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveModelApproval
+     */
+    select?: PredictiveModelApprovalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveModelApproval
+     */
+    omit?: PredictiveModelApprovalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveModelApprovalInclude<ExtArgs> | null
+    /**
+     * Filter, which PredictiveModelApprovals to fetch.
+     */
+    where?: PredictiveModelApprovalWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PredictiveModelApprovals to fetch.
+     */
+    orderBy?: PredictiveModelApprovalOrderByWithRelationInput | PredictiveModelApprovalOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing PredictiveModelApprovals.
+     */
+    cursor?: PredictiveModelApprovalWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PredictiveModelApprovals from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PredictiveModelApprovals.
+     */
+    skip?: number
+    distinct?: PredictiveModelApprovalScalarFieldEnum | PredictiveModelApprovalScalarFieldEnum[]
+  }
+
+  /**
+   * PredictiveModelApproval create
+   */
+  export type PredictiveModelApprovalCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveModelApproval
+     */
+    select?: PredictiveModelApprovalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveModelApproval
+     */
+    omit?: PredictiveModelApprovalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveModelApprovalInclude<ExtArgs> | null
+    /**
+     * The data needed to create a PredictiveModelApproval.
+     */
+    data: XOR<PredictiveModelApprovalCreateInput, PredictiveModelApprovalUncheckedCreateInput>
+  }
+
+  /**
+   * PredictiveModelApproval createMany
+   */
+  export type PredictiveModelApprovalCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many PredictiveModelApprovals.
+     */
+    data: PredictiveModelApprovalCreateManyInput | PredictiveModelApprovalCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * PredictiveModelApproval createManyAndReturn
+   */
+  export type PredictiveModelApprovalCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveModelApproval
+     */
+    select?: PredictiveModelApprovalSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveModelApproval
+     */
+    omit?: PredictiveModelApprovalOmit<ExtArgs> | null
+    /**
+     * The data used to create many PredictiveModelApprovals.
+     */
+    data: PredictiveModelApprovalCreateManyInput | PredictiveModelApprovalCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveModelApprovalIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * PredictiveModelApproval update
+   */
+  export type PredictiveModelApprovalUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveModelApproval
+     */
+    select?: PredictiveModelApprovalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveModelApproval
+     */
+    omit?: PredictiveModelApprovalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveModelApprovalInclude<ExtArgs> | null
+    /**
+     * The data needed to update a PredictiveModelApproval.
+     */
+    data: XOR<PredictiveModelApprovalUpdateInput, PredictiveModelApprovalUncheckedUpdateInput>
+    /**
+     * Choose, which PredictiveModelApproval to update.
+     */
+    where: PredictiveModelApprovalWhereUniqueInput
+  }
+
+  /**
+   * PredictiveModelApproval updateMany
+   */
+  export type PredictiveModelApprovalUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update PredictiveModelApprovals.
+     */
+    data: XOR<PredictiveModelApprovalUpdateManyMutationInput, PredictiveModelApprovalUncheckedUpdateManyInput>
+    /**
+     * Filter which PredictiveModelApprovals to update
+     */
+    where?: PredictiveModelApprovalWhereInput
+    /**
+     * Limit how many PredictiveModelApprovals to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * PredictiveModelApproval updateManyAndReturn
+   */
+  export type PredictiveModelApprovalUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveModelApproval
+     */
+    select?: PredictiveModelApprovalSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveModelApproval
+     */
+    omit?: PredictiveModelApprovalOmit<ExtArgs> | null
+    /**
+     * The data used to update PredictiveModelApprovals.
+     */
+    data: XOR<PredictiveModelApprovalUpdateManyMutationInput, PredictiveModelApprovalUncheckedUpdateManyInput>
+    /**
+     * Filter which PredictiveModelApprovals to update
+     */
+    where?: PredictiveModelApprovalWhereInput
+    /**
+     * Limit how many PredictiveModelApprovals to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveModelApprovalIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * PredictiveModelApproval upsert
+   */
+  export type PredictiveModelApprovalUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveModelApproval
+     */
+    select?: PredictiveModelApprovalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveModelApproval
+     */
+    omit?: PredictiveModelApprovalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveModelApprovalInclude<ExtArgs> | null
+    /**
+     * The filter to search for the PredictiveModelApproval to update in case it exists.
+     */
+    where: PredictiveModelApprovalWhereUniqueInput
+    /**
+     * In case the PredictiveModelApproval found by the `where` argument doesn't exist, create a new PredictiveModelApproval with this data.
+     */
+    create: XOR<PredictiveModelApprovalCreateInput, PredictiveModelApprovalUncheckedCreateInput>
+    /**
+     * In case the PredictiveModelApproval was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<PredictiveModelApprovalUpdateInput, PredictiveModelApprovalUncheckedUpdateInput>
+  }
+
+  /**
+   * PredictiveModelApproval delete
+   */
+  export type PredictiveModelApprovalDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveModelApproval
+     */
+    select?: PredictiveModelApprovalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveModelApproval
+     */
+    omit?: PredictiveModelApprovalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveModelApprovalInclude<ExtArgs> | null
+    /**
+     * Filter which PredictiveModelApproval to delete.
+     */
+    where: PredictiveModelApprovalWhereUniqueInput
+  }
+
+  /**
+   * PredictiveModelApproval deleteMany
+   */
+  export type PredictiveModelApprovalDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PredictiveModelApprovals to delete
+     */
+    where?: PredictiveModelApprovalWhereInput
+    /**
+     * Limit how many PredictiveModelApprovals to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * PredictiveModelApproval without action
+   */
+  export type PredictiveModelApprovalDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveModelApproval
+     */
+    select?: PredictiveModelApprovalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveModelApproval
+     */
+    omit?: PredictiveModelApprovalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveModelApprovalInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model PredictiveModelLifecycleEvent
+   */
+
+  export type AggregatePredictiveModelLifecycleEvent = {
+    _count: PredictiveModelLifecycleEventCountAggregateOutputType | null
+    _min: PredictiveModelLifecycleEventMinAggregateOutputType | null
+    _max: PredictiveModelLifecycleEventMaxAggregateOutputType | null
+  }
+
+  export type PredictiveModelLifecycleEventMinAggregateOutputType = {
+    id: string | null
+    modelVersionId: string | null
+    action: $Enums.PredictiveModelLifecycleAction | null
+    fromStatus: $Enums.PredictiveModelLifecycleStatus | null
+    toStatus: $Enums.PredictiveModelLifecycleStatus | null
+    reason: string | null
+    relatedModelVersionId: string | null
+    actorId: string | null
+    occurredAt: Date | null
+  }
+
+  export type PredictiveModelLifecycleEventMaxAggregateOutputType = {
+    id: string | null
+    modelVersionId: string | null
+    action: $Enums.PredictiveModelLifecycleAction | null
+    fromStatus: $Enums.PredictiveModelLifecycleStatus | null
+    toStatus: $Enums.PredictiveModelLifecycleStatus | null
+    reason: string | null
+    relatedModelVersionId: string | null
+    actorId: string | null
+    occurredAt: Date | null
+  }
+
+  export type PredictiveModelLifecycleEventCountAggregateOutputType = {
+    id: number
+    modelVersionId: number
+    action: number
+    fromStatus: number
+    toStatus: number
+    reason: number
+    relatedModelVersionId: number
+    actorId: number
+    occurredAt: number
+    _all: number
+  }
+
+
+  export type PredictiveModelLifecycleEventMinAggregateInputType = {
+    id?: true
+    modelVersionId?: true
+    action?: true
+    fromStatus?: true
+    toStatus?: true
+    reason?: true
+    relatedModelVersionId?: true
+    actorId?: true
+    occurredAt?: true
+  }
+
+  export type PredictiveModelLifecycleEventMaxAggregateInputType = {
+    id?: true
+    modelVersionId?: true
+    action?: true
+    fromStatus?: true
+    toStatus?: true
+    reason?: true
+    relatedModelVersionId?: true
+    actorId?: true
+    occurredAt?: true
+  }
+
+  export type PredictiveModelLifecycleEventCountAggregateInputType = {
+    id?: true
+    modelVersionId?: true
+    action?: true
+    fromStatus?: true
+    toStatus?: true
+    reason?: true
+    relatedModelVersionId?: true
+    actorId?: true
+    occurredAt?: true
+    _all?: true
+  }
+
+  export type PredictiveModelLifecycleEventAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PredictiveModelLifecycleEvent to aggregate.
+     */
+    where?: PredictiveModelLifecycleEventWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PredictiveModelLifecycleEvents to fetch.
+     */
+    orderBy?: PredictiveModelLifecycleEventOrderByWithRelationInput | PredictiveModelLifecycleEventOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: PredictiveModelLifecycleEventWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PredictiveModelLifecycleEvents from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PredictiveModelLifecycleEvents.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned PredictiveModelLifecycleEvents
+    **/
+    _count?: true | PredictiveModelLifecycleEventCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: PredictiveModelLifecycleEventMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: PredictiveModelLifecycleEventMaxAggregateInputType
+  }
+
+  export type GetPredictiveModelLifecycleEventAggregateType<T extends PredictiveModelLifecycleEventAggregateArgs> = {
+        [P in keyof T & keyof AggregatePredictiveModelLifecycleEvent]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePredictiveModelLifecycleEvent[P]>
+      : GetScalarType<T[P], AggregatePredictiveModelLifecycleEvent[P]>
+  }
+
+
+
+
+  export type PredictiveModelLifecycleEventGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PredictiveModelLifecycleEventWhereInput
+    orderBy?: PredictiveModelLifecycleEventOrderByWithAggregationInput | PredictiveModelLifecycleEventOrderByWithAggregationInput[]
+    by: PredictiveModelLifecycleEventScalarFieldEnum[] | PredictiveModelLifecycleEventScalarFieldEnum
+    having?: PredictiveModelLifecycleEventScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: PredictiveModelLifecycleEventCountAggregateInputType | true
+    _min?: PredictiveModelLifecycleEventMinAggregateInputType
+    _max?: PredictiveModelLifecycleEventMaxAggregateInputType
+  }
+
+  export type PredictiveModelLifecycleEventGroupByOutputType = {
+    id: string
+    modelVersionId: string
+    action: $Enums.PredictiveModelLifecycleAction
+    fromStatus: $Enums.PredictiveModelLifecycleStatus | null
+    toStatus: $Enums.PredictiveModelLifecycleStatus
+    reason: string
+    relatedModelVersionId: string | null
+    actorId: string
+    occurredAt: Date
+    _count: PredictiveModelLifecycleEventCountAggregateOutputType | null
+    _min: PredictiveModelLifecycleEventMinAggregateOutputType | null
+    _max: PredictiveModelLifecycleEventMaxAggregateOutputType | null
+  }
+
+  type GetPredictiveModelLifecycleEventGroupByPayload<T extends PredictiveModelLifecycleEventGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<PredictiveModelLifecycleEventGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof PredictiveModelLifecycleEventGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], PredictiveModelLifecycleEventGroupByOutputType[P]>
+            : GetScalarType<T[P], PredictiveModelLifecycleEventGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type PredictiveModelLifecycleEventSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    modelVersionId?: boolean
+    action?: boolean
+    fromStatus?: boolean
+    toStatus?: boolean
+    reason?: boolean
+    relatedModelVersionId?: boolean
+    actorId?: boolean
+    occurredAt?: boolean
+    modelVersion?: boolean | PredictiveModelVersionDefaultArgs<ExtArgs>
+    actor?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["predictiveModelLifecycleEvent"]>
+
+  export type PredictiveModelLifecycleEventSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    modelVersionId?: boolean
+    action?: boolean
+    fromStatus?: boolean
+    toStatus?: boolean
+    reason?: boolean
+    relatedModelVersionId?: boolean
+    actorId?: boolean
+    occurredAt?: boolean
+    modelVersion?: boolean | PredictiveModelVersionDefaultArgs<ExtArgs>
+    actor?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["predictiveModelLifecycleEvent"]>
+
+  export type PredictiveModelLifecycleEventSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    modelVersionId?: boolean
+    action?: boolean
+    fromStatus?: boolean
+    toStatus?: boolean
+    reason?: boolean
+    relatedModelVersionId?: boolean
+    actorId?: boolean
+    occurredAt?: boolean
+    modelVersion?: boolean | PredictiveModelVersionDefaultArgs<ExtArgs>
+    actor?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["predictiveModelLifecycleEvent"]>
+
+  export type PredictiveModelLifecycleEventSelectScalar = {
+    id?: boolean
+    modelVersionId?: boolean
+    action?: boolean
+    fromStatus?: boolean
+    toStatus?: boolean
+    reason?: boolean
+    relatedModelVersionId?: boolean
+    actorId?: boolean
+    occurredAt?: boolean
+  }
+
+  export type PredictiveModelLifecycleEventOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "modelVersionId" | "action" | "fromStatus" | "toStatus" | "reason" | "relatedModelVersionId" | "actorId" | "occurredAt", ExtArgs["result"]["predictiveModelLifecycleEvent"]>
+  export type PredictiveModelLifecycleEventInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    modelVersion?: boolean | PredictiveModelVersionDefaultArgs<ExtArgs>
+    actor?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type PredictiveModelLifecycleEventIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    modelVersion?: boolean | PredictiveModelVersionDefaultArgs<ExtArgs>
+    actor?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type PredictiveModelLifecycleEventIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    modelVersion?: boolean | PredictiveModelVersionDefaultArgs<ExtArgs>
+    actor?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $PredictiveModelLifecycleEventPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "PredictiveModelLifecycleEvent"
+    objects: {
+      modelVersion: Prisma.$PredictiveModelVersionPayload<ExtArgs>
+      actor: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      modelVersionId: string
+      action: $Enums.PredictiveModelLifecycleAction
+      fromStatus: $Enums.PredictiveModelLifecycleStatus | null
+      toStatus: $Enums.PredictiveModelLifecycleStatus
+      reason: string
+      relatedModelVersionId: string | null
+      actorId: string
+      occurredAt: Date
+    }, ExtArgs["result"]["predictiveModelLifecycleEvent"]>
+    composites: {}
+  }
+
+  type PredictiveModelLifecycleEventGetPayload<S extends boolean | null | undefined | PredictiveModelLifecycleEventDefaultArgs> = $Result.GetResult<Prisma.$PredictiveModelLifecycleEventPayload, S>
+
+  type PredictiveModelLifecycleEventCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<PredictiveModelLifecycleEventFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: PredictiveModelLifecycleEventCountAggregateInputType | true
+    }
+
+  export interface PredictiveModelLifecycleEventDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['PredictiveModelLifecycleEvent'], meta: { name: 'PredictiveModelLifecycleEvent' } }
+    /**
+     * Find zero or one PredictiveModelLifecycleEvent that matches the filter.
+     * @param {PredictiveModelLifecycleEventFindUniqueArgs} args - Arguments to find a PredictiveModelLifecycleEvent
+     * @example
+     * // Get one PredictiveModelLifecycleEvent
+     * const predictiveModelLifecycleEvent = await prisma.predictiveModelLifecycleEvent.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends PredictiveModelLifecycleEventFindUniqueArgs>(args: SelectSubset<T, PredictiveModelLifecycleEventFindUniqueArgs<ExtArgs>>): Prisma__PredictiveModelLifecycleEventClient<$Result.GetResult<Prisma.$PredictiveModelLifecycleEventPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one PredictiveModelLifecycleEvent that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {PredictiveModelLifecycleEventFindUniqueOrThrowArgs} args - Arguments to find a PredictiveModelLifecycleEvent
+     * @example
+     * // Get one PredictiveModelLifecycleEvent
+     * const predictiveModelLifecycleEvent = await prisma.predictiveModelLifecycleEvent.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends PredictiveModelLifecycleEventFindUniqueOrThrowArgs>(args: SelectSubset<T, PredictiveModelLifecycleEventFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PredictiveModelLifecycleEventClient<$Result.GetResult<Prisma.$PredictiveModelLifecycleEventPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PredictiveModelLifecycleEvent that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PredictiveModelLifecycleEventFindFirstArgs} args - Arguments to find a PredictiveModelLifecycleEvent
+     * @example
+     * // Get one PredictiveModelLifecycleEvent
+     * const predictiveModelLifecycleEvent = await prisma.predictiveModelLifecycleEvent.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends PredictiveModelLifecycleEventFindFirstArgs>(args?: SelectSubset<T, PredictiveModelLifecycleEventFindFirstArgs<ExtArgs>>): Prisma__PredictiveModelLifecycleEventClient<$Result.GetResult<Prisma.$PredictiveModelLifecycleEventPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PredictiveModelLifecycleEvent that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PredictiveModelLifecycleEventFindFirstOrThrowArgs} args - Arguments to find a PredictiveModelLifecycleEvent
+     * @example
+     * // Get one PredictiveModelLifecycleEvent
+     * const predictiveModelLifecycleEvent = await prisma.predictiveModelLifecycleEvent.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends PredictiveModelLifecycleEventFindFirstOrThrowArgs>(args?: SelectSubset<T, PredictiveModelLifecycleEventFindFirstOrThrowArgs<ExtArgs>>): Prisma__PredictiveModelLifecycleEventClient<$Result.GetResult<Prisma.$PredictiveModelLifecycleEventPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more PredictiveModelLifecycleEvents that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PredictiveModelLifecycleEventFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all PredictiveModelLifecycleEvents
+     * const predictiveModelLifecycleEvents = await prisma.predictiveModelLifecycleEvent.findMany()
+     * 
+     * // Get first 10 PredictiveModelLifecycleEvents
+     * const predictiveModelLifecycleEvents = await prisma.predictiveModelLifecycleEvent.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const predictiveModelLifecycleEventWithIdOnly = await prisma.predictiveModelLifecycleEvent.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends PredictiveModelLifecycleEventFindManyArgs>(args?: SelectSubset<T, PredictiveModelLifecycleEventFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PredictiveModelLifecycleEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a PredictiveModelLifecycleEvent.
+     * @param {PredictiveModelLifecycleEventCreateArgs} args - Arguments to create a PredictiveModelLifecycleEvent.
+     * @example
+     * // Create one PredictiveModelLifecycleEvent
+     * const PredictiveModelLifecycleEvent = await prisma.predictiveModelLifecycleEvent.create({
+     *   data: {
+     *     // ... data to create a PredictiveModelLifecycleEvent
+     *   }
+     * })
+     * 
+     */
+    create<T extends PredictiveModelLifecycleEventCreateArgs>(args: SelectSubset<T, PredictiveModelLifecycleEventCreateArgs<ExtArgs>>): Prisma__PredictiveModelLifecycleEventClient<$Result.GetResult<Prisma.$PredictiveModelLifecycleEventPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many PredictiveModelLifecycleEvents.
+     * @param {PredictiveModelLifecycleEventCreateManyArgs} args - Arguments to create many PredictiveModelLifecycleEvents.
+     * @example
+     * // Create many PredictiveModelLifecycleEvents
+     * const predictiveModelLifecycleEvent = await prisma.predictiveModelLifecycleEvent.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends PredictiveModelLifecycleEventCreateManyArgs>(args?: SelectSubset<T, PredictiveModelLifecycleEventCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many PredictiveModelLifecycleEvents and returns the data saved in the database.
+     * @param {PredictiveModelLifecycleEventCreateManyAndReturnArgs} args - Arguments to create many PredictiveModelLifecycleEvents.
+     * @example
+     * // Create many PredictiveModelLifecycleEvents
+     * const predictiveModelLifecycleEvent = await prisma.predictiveModelLifecycleEvent.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many PredictiveModelLifecycleEvents and only return the `id`
+     * const predictiveModelLifecycleEventWithIdOnly = await prisma.predictiveModelLifecycleEvent.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends PredictiveModelLifecycleEventCreateManyAndReturnArgs>(args?: SelectSubset<T, PredictiveModelLifecycleEventCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PredictiveModelLifecycleEventPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a PredictiveModelLifecycleEvent.
+     * @param {PredictiveModelLifecycleEventDeleteArgs} args - Arguments to delete one PredictiveModelLifecycleEvent.
+     * @example
+     * // Delete one PredictiveModelLifecycleEvent
+     * const PredictiveModelLifecycleEvent = await prisma.predictiveModelLifecycleEvent.delete({
+     *   where: {
+     *     // ... filter to delete one PredictiveModelLifecycleEvent
+     *   }
+     * })
+     * 
+     */
+    delete<T extends PredictiveModelLifecycleEventDeleteArgs>(args: SelectSubset<T, PredictiveModelLifecycleEventDeleteArgs<ExtArgs>>): Prisma__PredictiveModelLifecycleEventClient<$Result.GetResult<Prisma.$PredictiveModelLifecycleEventPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one PredictiveModelLifecycleEvent.
+     * @param {PredictiveModelLifecycleEventUpdateArgs} args - Arguments to update one PredictiveModelLifecycleEvent.
+     * @example
+     * // Update one PredictiveModelLifecycleEvent
+     * const predictiveModelLifecycleEvent = await prisma.predictiveModelLifecycleEvent.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends PredictiveModelLifecycleEventUpdateArgs>(args: SelectSubset<T, PredictiveModelLifecycleEventUpdateArgs<ExtArgs>>): Prisma__PredictiveModelLifecycleEventClient<$Result.GetResult<Prisma.$PredictiveModelLifecycleEventPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more PredictiveModelLifecycleEvents.
+     * @param {PredictiveModelLifecycleEventDeleteManyArgs} args - Arguments to filter PredictiveModelLifecycleEvents to delete.
+     * @example
+     * // Delete a few PredictiveModelLifecycleEvents
+     * const { count } = await prisma.predictiveModelLifecycleEvent.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends PredictiveModelLifecycleEventDeleteManyArgs>(args?: SelectSubset<T, PredictiveModelLifecycleEventDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PredictiveModelLifecycleEvents.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PredictiveModelLifecycleEventUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many PredictiveModelLifecycleEvents
+     * const predictiveModelLifecycleEvent = await prisma.predictiveModelLifecycleEvent.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends PredictiveModelLifecycleEventUpdateManyArgs>(args: SelectSubset<T, PredictiveModelLifecycleEventUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PredictiveModelLifecycleEvents and returns the data updated in the database.
+     * @param {PredictiveModelLifecycleEventUpdateManyAndReturnArgs} args - Arguments to update many PredictiveModelLifecycleEvents.
+     * @example
+     * // Update many PredictiveModelLifecycleEvents
+     * const predictiveModelLifecycleEvent = await prisma.predictiveModelLifecycleEvent.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more PredictiveModelLifecycleEvents and only return the `id`
+     * const predictiveModelLifecycleEventWithIdOnly = await prisma.predictiveModelLifecycleEvent.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends PredictiveModelLifecycleEventUpdateManyAndReturnArgs>(args: SelectSubset<T, PredictiveModelLifecycleEventUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PredictiveModelLifecycleEventPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one PredictiveModelLifecycleEvent.
+     * @param {PredictiveModelLifecycleEventUpsertArgs} args - Arguments to update or create a PredictiveModelLifecycleEvent.
+     * @example
+     * // Update or create a PredictiveModelLifecycleEvent
+     * const predictiveModelLifecycleEvent = await prisma.predictiveModelLifecycleEvent.upsert({
+     *   create: {
+     *     // ... data to create a PredictiveModelLifecycleEvent
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the PredictiveModelLifecycleEvent we want to update
+     *   }
+     * })
+     */
+    upsert<T extends PredictiveModelLifecycleEventUpsertArgs>(args: SelectSubset<T, PredictiveModelLifecycleEventUpsertArgs<ExtArgs>>): Prisma__PredictiveModelLifecycleEventClient<$Result.GetResult<Prisma.$PredictiveModelLifecycleEventPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of PredictiveModelLifecycleEvents.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PredictiveModelLifecycleEventCountArgs} args - Arguments to filter PredictiveModelLifecycleEvents to count.
+     * @example
+     * // Count the number of PredictiveModelLifecycleEvents
+     * const count = await prisma.predictiveModelLifecycleEvent.count({
+     *   where: {
+     *     // ... the filter for the PredictiveModelLifecycleEvents we want to count
+     *   }
+     * })
+    **/
+    count<T extends PredictiveModelLifecycleEventCountArgs>(
+      args?: Subset<T, PredictiveModelLifecycleEventCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], PredictiveModelLifecycleEventCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a PredictiveModelLifecycleEvent.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PredictiveModelLifecycleEventAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends PredictiveModelLifecycleEventAggregateArgs>(args: Subset<T, PredictiveModelLifecycleEventAggregateArgs>): Prisma.PrismaPromise<GetPredictiveModelLifecycleEventAggregateType<T>>
+
+    /**
+     * Group by PredictiveModelLifecycleEvent.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PredictiveModelLifecycleEventGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends PredictiveModelLifecycleEventGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: PredictiveModelLifecycleEventGroupByArgs['orderBy'] }
+        : { orderBy?: PredictiveModelLifecycleEventGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, PredictiveModelLifecycleEventGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPredictiveModelLifecycleEventGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the PredictiveModelLifecycleEvent model
+   */
+  readonly fields: PredictiveModelLifecycleEventFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for PredictiveModelLifecycleEvent.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__PredictiveModelLifecycleEventClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    modelVersion<T extends PredictiveModelVersionDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PredictiveModelVersionDefaultArgs<ExtArgs>>): Prisma__PredictiveModelVersionClient<$Result.GetResult<Prisma.$PredictiveModelVersionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    actor<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the PredictiveModelLifecycleEvent model
+   */
+  interface PredictiveModelLifecycleEventFieldRefs {
+    readonly id: FieldRef<"PredictiveModelLifecycleEvent", 'String'>
+    readonly modelVersionId: FieldRef<"PredictiveModelLifecycleEvent", 'String'>
+    readonly action: FieldRef<"PredictiveModelLifecycleEvent", 'PredictiveModelLifecycleAction'>
+    readonly fromStatus: FieldRef<"PredictiveModelLifecycleEvent", 'PredictiveModelLifecycleStatus'>
+    readonly toStatus: FieldRef<"PredictiveModelLifecycleEvent", 'PredictiveModelLifecycleStatus'>
+    readonly reason: FieldRef<"PredictiveModelLifecycleEvent", 'String'>
+    readonly relatedModelVersionId: FieldRef<"PredictiveModelLifecycleEvent", 'String'>
+    readonly actorId: FieldRef<"PredictiveModelLifecycleEvent", 'String'>
+    readonly occurredAt: FieldRef<"PredictiveModelLifecycleEvent", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * PredictiveModelLifecycleEvent findUnique
+   */
+  export type PredictiveModelLifecycleEventFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveModelLifecycleEvent
+     */
+    select?: PredictiveModelLifecycleEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveModelLifecycleEvent
+     */
+    omit?: PredictiveModelLifecycleEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveModelLifecycleEventInclude<ExtArgs> | null
+    /**
+     * Filter, which PredictiveModelLifecycleEvent to fetch.
+     */
+    where: PredictiveModelLifecycleEventWhereUniqueInput
+  }
+
+  /**
+   * PredictiveModelLifecycleEvent findUniqueOrThrow
+   */
+  export type PredictiveModelLifecycleEventFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveModelLifecycleEvent
+     */
+    select?: PredictiveModelLifecycleEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveModelLifecycleEvent
+     */
+    omit?: PredictiveModelLifecycleEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveModelLifecycleEventInclude<ExtArgs> | null
+    /**
+     * Filter, which PredictiveModelLifecycleEvent to fetch.
+     */
+    where: PredictiveModelLifecycleEventWhereUniqueInput
+  }
+
+  /**
+   * PredictiveModelLifecycleEvent findFirst
+   */
+  export type PredictiveModelLifecycleEventFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveModelLifecycleEvent
+     */
+    select?: PredictiveModelLifecycleEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveModelLifecycleEvent
+     */
+    omit?: PredictiveModelLifecycleEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveModelLifecycleEventInclude<ExtArgs> | null
+    /**
+     * Filter, which PredictiveModelLifecycleEvent to fetch.
+     */
+    where?: PredictiveModelLifecycleEventWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PredictiveModelLifecycleEvents to fetch.
+     */
+    orderBy?: PredictiveModelLifecycleEventOrderByWithRelationInput | PredictiveModelLifecycleEventOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PredictiveModelLifecycleEvents.
+     */
+    cursor?: PredictiveModelLifecycleEventWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PredictiveModelLifecycleEvents from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PredictiveModelLifecycleEvents.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PredictiveModelLifecycleEvents.
+     */
+    distinct?: PredictiveModelLifecycleEventScalarFieldEnum | PredictiveModelLifecycleEventScalarFieldEnum[]
+  }
+
+  /**
+   * PredictiveModelLifecycleEvent findFirstOrThrow
+   */
+  export type PredictiveModelLifecycleEventFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveModelLifecycleEvent
+     */
+    select?: PredictiveModelLifecycleEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveModelLifecycleEvent
+     */
+    omit?: PredictiveModelLifecycleEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveModelLifecycleEventInclude<ExtArgs> | null
+    /**
+     * Filter, which PredictiveModelLifecycleEvent to fetch.
+     */
+    where?: PredictiveModelLifecycleEventWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PredictiveModelLifecycleEvents to fetch.
+     */
+    orderBy?: PredictiveModelLifecycleEventOrderByWithRelationInput | PredictiveModelLifecycleEventOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PredictiveModelLifecycleEvents.
+     */
+    cursor?: PredictiveModelLifecycleEventWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PredictiveModelLifecycleEvents from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PredictiveModelLifecycleEvents.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PredictiveModelLifecycleEvents.
+     */
+    distinct?: PredictiveModelLifecycleEventScalarFieldEnum | PredictiveModelLifecycleEventScalarFieldEnum[]
+  }
+
+  /**
+   * PredictiveModelLifecycleEvent findMany
+   */
+  export type PredictiveModelLifecycleEventFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveModelLifecycleEvent
+     */
+    select?: PredictiveModelLifecycleEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveModelLifecycleEvent
+     */
+    omit?: PredictiveModelLifecycleEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveModelLifecycleEventInclude<ExtArgs> | null
+    /**
+     * Filter, which PredictiveModelLifecycleEvents to fetch.
+     */
+    where?: PredictiveModelLifecycleEventWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PredictiveModelLifecycleEvents to fetch.
+     */
+    orderBy?: PredictiveModelLifecycleEventOrderByWithRelationInput | PredictiveModelLifecycleEventOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing PredictiveModelLifecycleEvents.
+     */
+    cursor?: PredictiveModelLifecycleEventWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PredictiveModelLifecycleEvents from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PredictiveModelLifecycleEvents.
+     */
+    skip?: number
+    distinct?: PredictiveModelLifecycleEventScalarFieldEnum | PredictiveModelLifecycleEventScalarFieldEnum[]
+  }
+
+  /**
+   * PredictiveModelLifecycleEvent create
+   */
+  export type PredictiveModelLifecycleEventCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveModelLifecycleEvent
+     */
+    select?: PredictiveModelLifecycleEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveModelLifecycleEvent
+     */
+    omit?: PredictiveModelLifecycleEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveModelLifecycleEventInclude<ExtArgs> | null
+    /**
+     * The data needed to create a PredictiveModelLifecycleEvent.
+     */
+    data: XOR<PredictiveModelLifecycleEventCreateInput, PredictiveModelLifecycleEventUncheckedCreateInput>
+  }
+
+  /**
+   * PredictiveModelLifecycleEvent createMany
+   */
+  export type PredictiveModelLifecycleEventCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many PredictiveModelLifecycleEvents.
+     */
+    data: PredictiveModelLifecycleEventCreateManyInput | PredictiveModelLifecycleEventCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * PredictiveModelLifecycleEvent createManyAndReturn
+   */
+  export type PredictiveModelLifecycleEventCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveModelLifecycleEvent
+     */
+    select?: PredictiveModelLifecycleEventSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveModelLifecycleEvent
+     */
+    omit?: PredictiveModelLifecycleEventOmit<ExtArgs> | null
+    /**
+     * The data used to create many PredictiveModelLifecycleEvents.
+     */
+    data: PredictiveModelLifecycleEventCreateManyInput | PredictiveModelLifecycleEventCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveModelLifecycleEventIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * PredictiveModelLifecycleEvent update
+   */
+  export type PredictiveModelLifecycleEventUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveModelLifecycleEvent
+     */
+    select?: PredictiveModelLifecycleEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveModelLifecycleEvent
+     */
+    omit?: PredictiveModelLifecycleEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveModelLifecycleEventInclude<ExtArgs> | null
+    /**
+     * The data needed to update a PredictiveModelLifecycleEvent.
+     */
+    data: XOR<PredictiveModelLifecycleEventUpdateInput, PredictiveModelLifecycleEventUncheckedUpdateInput>
+    /**
+     * Choose, which PredictiveModelLifecycleEvent to update.
+     */
+    where: PredictiveModelLifecycleEventWhereUniqueInput
+  }
+
+  /**
+   * PredictiveModelLifecycleEvent updateMany
+   */
+  export type PredictiveModelLifecycleEventUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update PredictiveModelLifecycleEvents.
+     */
+    data: XOR<PredictiveModelLifecycleEventUpdateManyMutationInput, PredictiveModelLifecycleEventUncheckedUpdateManyInput>
+    /**
+     * Filter which PredictiveModelLifecycleEvents to update
+     */
+    where?: PredictiveModelLifecycleEventWhereInput
+    /**
+     * Limit how many PredictiveModelLifecycleEvents to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * PredictiveModelLifecycleEvent updateManyAndReturn
+   */
+  export type PredictiveModelLifecycleEventUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveModelLifecycleEvent
+     */
+    select?: PredictiveModelLifecycleEventSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveModelLifecycleEvent
+     */
+    omit?: PredictiveModelLifecycleEventOmit<ExtArgs> | null
+    /**
+     * The data used to update PredictiveModelLifecycleEvents.
+     */
+    data: XOR<PredictiveModelLifecycleEventUpdateManyMutationInput, PredictiveModelLifecycleEventUncheckedUpdateManyInput>
+    /**
+     * Filter which PredictiveModelLifecycleEvents to update
+     */
+    where?: PredictiveModelLifecycleEventWhereInput
+    /**
+     * Limit how many PredictiveModelLifecycleEvents to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveModelLifecycleEventIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * PredictiveModelLifecycleEvent upsert
+   */
+  export type PredictiveModelLifecycleEventUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveModelLifecycleEvent
+     */
+    select?: PredictiveModelLifecycleEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveModelLifecycleEvent
+     */
+    omit?: PredictiveModelLifecycleEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveModelLifecycleEventInclude<ExtArgs> | null
+    /**
+     * The filter to search for the PredictiveModelLifecycleEvent to update in case it exists.
+     */
+    where: PredictiveModelLifecycleEventWhereUniqueInput
+    /**
+     * In case the PredictiveModelLifecycleEvent found by the `where` argument doesn't exist, create a new PredictiveModelLifecycleEvent with this data.
+     */
+    create: XOR<PredictiveModelLifecycleEventCreateInput, PredictiveModelLifecycleEventUncheckedCreateInput>
+    /**
+     * In case the PredictiveModelLifecycleEvent was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<PredictiveModelLifecycleEventUpdateInput, PredictiveModelLifecycleEventUncheckedUpdateInput>
+  }
+
+  /**
+   * PredictiveModelLifecycleEvent delete
+   */
+  export type PredictiveModelLifecycleEventDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveModelLifecycleEvent
+     */
+    select?: PredictiveModelLifecycleEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveModelLifecycleEvent
+     */
+    omit?: PredictiveModelLifecycleEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveModelLifecycleEventInclude<ExtArgs> | null
+    /**
+     * Filter which PredictiveModelLifecycleEvent to delete.
+     */
+    where: PredictiveModelLifecycleEventWhereUniqueInput
+  }
+
+  /**
+   * PredictiveModelLifecycleEvent deleteMany
+   */
+  export type PredictiveModelLifecycleEventDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PredictiveModelLifecycleEvents to delete
+     */
+    where?: PredictiveModelLifecycleEventWhereInput
+    /**
+     * Limit how many PredictiveModelLifecycleEvents to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * PredictiveModelLifecycleEvent without action
+   */
+  export type PredictiveModelLifecycleEventDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PredictiveModelLifecycleEvent
+     */
+    select?: PredictiveModelLifecycleEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PredictiveModelLifecycleEvent
+     */
+    omit?: PredictiveModelLifecycleEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PredictiveModelLifecycleEventInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Model ExecutionTaskDependency
    */
 
@@ -49895,6 +57082,119 @@ export namespace Prisma {
   export type PredictiveOutcomeScalarFieldEnum = (typeof PredictiveOutcomeScalarFieldEnum)[keyof typeof PredictiveOutcomeScalarFieldEnum]
 
 
+  export const PredictiveDatasetSnapshotScalarFieldEnum: {
+    id: 'id',
+    datasetContractVersion: 'datasetContractVersion',
+    targetType: 'targetType',
+    featureContractVersion: 'featureContractVersion',
+    outcomeContractVersion: 'outcomeContractVersion',
+    departmentId: 'departmentId',
+    jurisdictionId: 'jurisdictionId',
+    includedProvenance: 'includedProvenance',
+    sampleCount: 'sampleCount',
+    classBalance: 'classBalance',
+    periodStart: 'periodStart',
+    periodEnd: 'periodEnd',
+    sampleIdentities: 'sampleIdentities',
+    datasetFingerprint: 'datasetFingerprint',
+    createdById: 'createdById',
+    createdAt: 'createdAt'
+  };
+
+  export type PredictiveDatasetSnapshotScalarFieldEnum = (typeof PredictiveDatasetSnapshotScalarFieldEnum)[keyof typeof PredictiveDatasetSnapshotScalarFieldEnum]
+
+
+  export const PredictiveModelVersionScalarFieldEnum: {
+    id: 'id',
+    modelName: 'modelName',
+    modelVersion: 'modelVersion',
+    targetType: 'targetType',
+    deploymentSlot: 'deploymentSlot',
+    intendedUse: 'intendedUse',
+    forbiddenUse: 'forbiddenUse',
+    featureContractVersion: 'featureContractVersion',
+    outcomeContractVersion: 'outcomeContractVersion',
+    datasetSnapshotId: 'datasetSnapshotId',
+    trainingCodeVersion: 'trainingCodeVersion',
+    artifactReference: 'artifactReference',
+    artifactDigest: 'artifactDigest',
+    artifactFormat: 'artifactFormat',
+    artifactSizeBytes: 'artifactSizeBytes',
+    trainingTimestamp: 'trainingTimestamp',
+    lifecycleStatus: 'lifecycleStatus',
+    createdById: 'createdById',
+    createdAt: 'createdAt',
+    validatedById: 'validatedById',
+    validatedAt: 'validatedAt'
+  };
+
+  export type PredictiveModelVersionScalarFieldEnum = (typeof PredictiveModelVersionScalarFieldEnum)[keyof typeof PredictiveModelVersionScalarFieldEnum]
+
+
+  export const PredictiveModelEvaluationScalarFieldEnum: {
+    id: 'id',
+    modelVersionId: 'modelVersionId',
+    datasetSnapshotId: 'datasetSnapshotId',
+    evaluationContractVersion: 'evaluationContractVersion',
+    splitStrategy: 'splitStrategy',
+    evaluationPeriodStart: 'evaluationPeriodStart',
+    evaluationPeriodEnd: 'evaluationPeriodEnd',
+    testSampleCount: 'testSampleCount',
+    lateCount: 'lateCount',
+    onTimeCount: 'onTimeCount',
+    truePositiveCount: 'truePositiveCount',
+    trueNegativeCount: 'trueNegativeCount',
+    falsePositiveCount: 'falsePositiveCount',
+    falseNegativeCount: 'falseNegativeCount',
+    precision: 'precision',
+    recall: 'recall',
+    f1: 'f1',
+    prAuc: 'prAuc',
+    calibrationError: 'calibrationError',
+    falseNegativeRate: 'falseNegativeRate',
+    baselineEvidence: 'baselineEvidence',
+    subgroupMetricsReference: 'subgroupMetricsReference',
+    featureDistributionReference: 'featureDistributionReference',
+    missingnessReference: 'missingnessReference',
+    evaluationArtifactReference: 'evaluationArtifactReference',
+    evaluationFingerprint: 'evaluationFingerprint',
+    recordedById: 'recordedById',
+    recordedAt: 'recordedAt'
+  };
+
+  export type PredictiveModelEvaluationScalarFieldEnum = (typeof PredictiveModelEvaluationScalarFieldEnum)[keyof typeof PredictiveModelEvaluationScalarFieldEnum]
+
+
+  export const PredictiveModelApprovalScalarFieldEnum: {
+    id: 'id',
+    modelVersionId: 'modelVersionId',
+    decision: 'decision',
+    reason: 'reason',
+    restrictions: 'restrictions',
+    reviewDueAt: 'reviewDueAt',
+    approvalExpiresAt: 'approvalExpiresAt',
+    approvedById: 'approvedById',
+    decidedAt: 'decidedAt'
+  };
+
+  export type PredictiveModelApprovalScalarFieldEnum = (typeof PredictiveModelApprovalScalarFieldEnum)[keyof typeof PredictiveModelApprovalScalarFieldEnum]
+
+
+  export const PredictiveModelLifecycleEventScalarFieldEnum: {
+    id: 'id',
+    modelVersionId: 'modelVersionId',
+    action: 'action',
+    fromStatus: 'fromStatus',
+    toStatus: 'toStatus',
+    reason: 'reason',
+    relatedModelVersionId: 'relatedModelVersionId',
+    actorId: 'actorId',
+    occurredAt: 'occurredAt'
+  };
+
+  export type PredictiveModelLifecycleEventScalarFieldEnum = (typeof PredictiveModelLifecycleEventScalarFieldEnum)[keyof typeof PredictiveModelLifecycleEventScalarFieldEnum]
+
+
   export const ExecutionTaskDependencyScalarFieldEnum: {
     id: 'id',
     executionPlanId: 'executionPlanId',
@@ -50519,6 +57819,48 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'PredictiveModelLifecycleStatus'
+   */
+  export type EnumPredictiveModelLifecycleStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PredictiveModelLifecycleStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'PredictiveModelLifecycleStatus[]'
+   */
+  export type ListEnumPredictiveModelLifecycleStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PredictiveModelLifecycleStatus[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'PredictiveModelApprovalDecision'
+   */
+  export type EnumPredictiveModelApprovalDecisionFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PredictiveModelApprovalDecision'>
+    
+
+
+  /**
+   * Reference to a field of type 'PredictiveModelApprovalDecision[]'
+   */
+  export type ListEnumPredictiveModelApprovalDecisionFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PredictiveModelApprovalDecision[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'PredictiveModelLifecycleAction'
+   */
+  export type EnumPredictiveModelLifecycleActionFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PredictiveModelLifecycleAction'>
+    
+
+
+  /**
+   * Reference to a field of type 'PredictiveModelLifecycleAction[]'
+   */
+  export type ListEnumPredictiveModelLifecycleActionFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PredictiveModelLifecycleAction[]'>
+    
+
+
+  /**
    * Reference to a field of type 'ExecutionBlockerCategory'
    */
   export type EnumExecutionBlockerCategoryFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ExecutionBlockerCategory'>
@@ -50781,6 +58123,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotListRelationFilter
     recordedPredictiveOutcomes?: PredictiveOutcomeListRelationFilter
     voidedPredictiveOutcomes?: PredictiveOutcomeListRelationFilter
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotListRelationFilter
+    createdPredictiveModelVersions?: PredictiveModelVersionListRelationFilter
+    validatedPredictiveModelVersions?: PredictiveModelVersionListRelationFilter
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationListRelationFilter
+    decidedPredictiveApprovals?: PredictiveModelApprovalListRelationFilter
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -50833,6 +58181,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotOrderByRelationAggregateInput
     recordedPredictiveOutcomes?: PredictiveOutcomeOrderByRelationAggregateInput
     voidedPredictiveOutcomes?: PredictiveOutcomeOrderByRelationAggregateInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotOrderByRelationAggregateInput
+    createdPredictiveModelVersions?: PredictiveModelVersionOrderByRelationAggregateInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionOrderByRelationAggregateInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationOrderByRelationAggregateInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalOrderByRelationAggregateInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -50888,6 +58242,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotListRelationFilter
     recordedPredictiveOutcomes?: PredictiveOutcomeListRelationFilter
     voidedPredictiveOutcomes?: PredictiveOutcomeListRelationFilter
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotListRelationFilter
+    createdPredictiveModelVersions?: PredictiveModelVersionListRelationFilter
+    validatedPredictiveModelVersions?: PredictiveModelVersionListRelationFilter
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationListRelationFilter
+    decidedPredictiveApprovals?: PredictiveModelApprovalListRelationFilter
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventListRelationFilter
   }, "id" | "employeeCode" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -54128,6 +61488,612 @@ export namespace Prisma {
     replacementOutcomeId?: StringNullableWithAggregatesFilter<"PredictiveOutcome"> | string | null
   }
 
+  export type PredictiveDatasetSnapshotWhereInput = {
+    AND?: PredictiveDatasetSnapshotWhereInput | PredictiveDatasetSnapshotWhereInput[]
+    OR?: PredictiveDatasetSnapshotWhereInput[]
+    NOT?: PredictiveDatasetSnapshotWhereInput | PredictiveDatasetSnapshotWhereInput[]
+    id?: StringFilter<"PredictiveDatasetSnapshot"> | string
+    datasetContractVersion?: StringFilter<"PredictiveDatasetSnapshot"> | string
+    targetType?: EnumPredictiveTargetTypeFilter<"PredictiveDatasetSnapshot"> | $Enums.PredictiveTargetType
+    featureContractVersion?: StringFilter<"PredictiveDatasetSnapshot"> | string
+    outcomeContractVersion?: StringFilter<"PredictiveDatasetSnapshot"> | string
+    departmentId?: StringNullableFilter<"PredictiveDatasetSnapshot"> | string | null
+    jurisdictionId?: StringNullableFilter<"PredictiveDatasetSnapshot"> | string | null
+    includedProvenance?: JsonFilter<"PredictiveDatasetSnapshot">
+    sampleCount?: IntFilter<"PredictiveDatasetSnapshot"> | number
+    classBalance?: JsonFilter<"PredictiveDatasetSnapshot">
+    periodStart?: DateTimeNullableFilter<"PredictiveDatasetSnapshot"> | Date | string | null
+    periodEnd?: DateTimeNullableFilter<"PredictiveDatasetSnapshot"> | Date | string | null
+    sampleIdentities?: JsonFilter<"PredictiveDatasetSnapshot">
+    datasetFingerprint?: StringFilter<"PredictiveDatasetSnapshot"> | string
+    createdById?: StringFilter<"PredictiveDatasetSnapshot"> | string
+    createdAt?: DateTimeFilter<"PredictiveDatasetSnapshot"> | Date | string
+    createdBy?: XOR<UserScalarRelationFilter, UserWhereInput>
+    modelVersions?: PredictiveModelVersionListRelationFilter
+    evaluations?: PredictiveModelEvaluationListRelationFilter
+  }
+
+  export type PredictiveDatasetSnapshotOrderByWithRelationInput = {
+    id?: SortOrder
+    datasetContractVersion?: SortOrder
+    targetType?: SortOrder
+    featureContractVersion?: SortOrder
+    outcomeContractVersion?: SortOrder
+    departmentId?: SortOrderInput | SortOrder
+    jurisdictionId?: SortOrderInput | SortOrder
+    includedProvenance?: SortOrder
+    sampleCount?: SortOrder
+    classBalance?: SortOrder
+    periodStart?: SortOrderInput | SortOrder
+    periodEnd?: SortOrderInput | SortOrder
+    sampleIdentities?: SortOrder
+    datasetFingerprint?: SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+    createdBy?: UserOrderByWithRelationInput
+    modelVersions?: PredictiveModelVersionOrderByRelationAggregateInput
+    evaluations?: PredictiveModelEvaluationOrderByRelationAggregateInput
+  }
+
+  export type PredictiveDatasetSnapshotWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    datasetFingerprint?: string
+    AND?: PredictiveDatasetSnapshotWhereInput | PredictiveDatasetSnapshotWhereInput[]
+    OR?: PredictiveDatasetSnapshotWhereInput[]
+    NOT?: PredictiveDatasetSnapshotWhereInput | PredictiveDatasetSnapshotWhereInput[]
+    datasetContractVersion?: StringFilter<"PredictiveDatasetSnapshot"> | string
+    targetType?: EnumPredictiveTargetTypeFilter<"PredictiveDatasetSnapshot"> | $Enums.PredictiveTargetType
+    featureContractVersion?: StringFilter<"PredictiveDatasetSnapshot"> | string
+    outcomeContractVersion?: StringFilter<"PredictiveDatasetSnapshot"> | string
+    departmentId?: StringNullableFilter<"PredictiveDatasetSnapshot"> | string | null
+    jurisdictionId?: StringNullableFilter<"PredictiveDatasetSnapshot"> | string | null
+    includedProvenance?: JsonFilter<"PredictiveDatasetSnapshot">
+    sampleCount?: IntFilter<"PredictiveDatasetSnapshot"> | number
+    classBalance?: JsonFilter<"PredictiveDatasetSnapshot">
+    periodStart?: DateTimeNullableFilter<"PredictiveDatasetSnapshot"> | Date | string | null
+    periodEnd?: DateTimeNullableFilter<"PredictiveDatasetSnapshot"> | Date | string | null
+    sampleIdentities?: JsonFilter<"PredictiveDatasetSnapshot">
+    createdById?: StringFilter<"PredictiveDatasetSnapshot"> | string
+    createdAt?: DateTimeFilter<"PredictiveDatasetSnapshot"> | Date | string
+    createdBy?: XOR<UserScalarRelationFilter, UserWhereInput>
+    modelVersions?: PredictiveModelVersionListRelationFilter
+    evaluations?: PredictiveModelEvaluationListRelationFilter
+  }, "id" | "datasetFingerprint">
+
+  export type PredictiveDatasetSnapshotOrderByWithAggregationInput = {
+    id?: SortOrder
+    datasetContractVersion?: SortOrder
+    targetType?: SortOrder
+    featureContractVersion?: SortOrder
+    outcomeContractVersion?: SortOrder
+    departmentId?: SortOrderInput | SortOrder
+    jurisdictionId?: SortOrderInput | SortOrder
+    includedProvenance?: SortOrder
+    sampleCount?: SortOrder
+    classBalance?: SortOrder
+    periodStart?: SortOrderInput | SortOrder
+    periodEnd?: SortOrderInput | SortOrder
+    sampleIdentities?: SortOrder
+    datasetFingerprint?: SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+    _count?: PredictiveDatasetSnapshotCountOrderByAggregateInput
+    _avg?: PredictiveDatasetSnapshotAvgOrderByAggregateInput
+    _max?: PredictiveDatasetSnapshotMaxOrderByAggregateInput
+    _min?: PredictiveDatasetSnapshotMinOrderByAggregateInput
+    _sum?: PredictiveDatasetSnapshotSumOrderByAggregateInput
+  }
+
+  export type PredictiveDatasetSnapshotScalarWhereWithAggregatesInput = {
+    AND?: PredictiveDatasetSnapshotScalarWhereWithAggregatesInput | PredictiveDatasetSnapshotScalarWhereWithAggregatesInput[]
+    OR?: PredictiveDatasetSnapshotScalarWhereWithAggregatesInput[]
+    NOT?: PredictiveDatasetSnapshotScalarWhereWithAggregatesInput | PredictiveDatasetSnapshotScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"PredictiveDatasetSnapshot"> | string
+    datasetContractVersion?: StringWithAggregatesFilter<"PredictiveDatasetSnapshot"> | string
+    targetType?: EnumPredictiveTargetTypeWithAggregatesFilter<"PredictiveDatasetSnapshot"> | $Enums.PredictiveTargetType
+    featureContractVersion?: StringWithAggregatesFilter<"PredictiveDatasetSnapshot"> | string
+    outcomeContractVersion?: StringWithAggregatesFilter<"PredictiveDatasetSnapshot"> | string
+    departmentId?: StringNullableWithAggregatesFilter<"PredictiveDatasetSnapshot"> | string | null
+    jurisdictionId?: StringNullableWithAggregatesFilter<"PredictiveDatasetSnapshot"> | string | null
+    includedProvenance?: JsonWithAggregatesFilter<"PredictiveDatasetSnapshot">
+    sampleCount?: IntWithAggregatesFilter<"PredictiveDatasetSnapshot"> | number
+    classBalance?: JsonWithAggregatesFilter<"PredictiveDatasetSnapshot">
+    periodStart?: DateTimeNullableWithAggregatesFilter<"PredictiveDatasetSnapshot"> | Date | string | null
+    periodEnd?: DateTimeNullableWithAggregatesFilter<"PredictiveDatasetSnapshot"> | Date | string | null
+    sampleIdentities?: JsonWithAggregatesFilter<"PredictiveDatasetSnapshot">
+    datasetFingerprint?: StringWithAggregatesFilter<"PredictiveDatasetSnapshot"> | string
+    createdById?: StringWithAggregatesFilter<"PredictiveDatasetSnapshot"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"PredictiveDatasetSnapshot"> | Date | string
+  }
+
+  export type PredictiveModelVersionWhereInput = {
+    AND?: PredictiveModelVersionWhereInput | PredictiveModelVersionWhereInput[]
+    OR?: PredictiveModelVersionWhereInput[]
+    NOT?: PredictiveModelVersionWhereInput | PredictiveModelVersionWhereInput[]
+    id?: StringFilter<"PredictiveModelVersion"> | string
+    modelName?: StringFilter<"PredictiveModelVersion"> | string
+    modelVersion?: StringFilter<"PredictiveModelVersion"> | string
+    targetType?: EnumPredictiveTargetTypeFilter<"PredictiveModelVersion"> | $Enums.PredictiveTargetType
+    deploymentSlot?: StringFilter<"PredictiveModelVersion"> | string
+    intendedUse?: StringFilter<"PredictiveModelVersion"> | string
+    forbiddenUse?: StringFilter<"PredictiveModelVersion"> | string
+    featureContractVersion?: StringFilter<"PredictiveModelVersion"> | string
+    outcomeContractVersion?: StringFilter<"PredictiveModelVersion"> | string
+    datasetSnapshotId?: StringFilter<"PredictiveModelVersion"> | string
+    trainingCodeVersion?: StringFilter<"PredictiveModelVersion"> | string
+    artifactReference?: StringFilter<"PredictiveModelVersion"> | string
+    artifactDigest?: StringFilter<"PredictiveModelVersion"> | string
+    artifactFormat?: StringFilter<"PredictiveModelVersion"> | string
+    artifactSizeBytes?: BigIntNullableFilter<"PredictiveModelVersion"> | bigint | number | null
+    trainingTimestamp?: DateTimeFilter<"PredictiveModelVersion"> | Date | string
+    lifecycleStatus?: EnumPredictiveModelLifecycleStatusFilter<"PredictiveModelVersion"> | $Enums.PredictiveModelLifecycleStatus
+    createdById?: StringFilter<"PredictiveModelVersion"> | string
+    createdAt?: DateTimeFilter<"PredictiveModelVersion"> | Date | string
+    validatedById?: StringNullableFilter<"PredictiveModelVersion"> | string | null
+    validatedAt?: DateTimeNullableFilter<"PredictiveModelVersion"> | Date | string | null
+    datasetSnapshot?: XOR<PredictiveDatasetSnapshotScalarRelationFilter, PredictiveDatasetSnapshotWhereInput>
+    createdBy?: XOR<UserScalarRelationFilter, UserWhereInput>
+    validatedBy?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+    evaluations?: PredictiveModelEvaluationListRelationFilter
+    approvals?: PredictiveModelApprovalListRelationFilter
+    lifecycleEvents?: PredictiveModelLifecycleEventListRelationFilter
+  }
+
+  export type PredictiveModelVersionOrderByWithRelationInput = {
+    id?: SortOrder
+    modelName?: SortOrder
+    modelVersion?: SortOrder
+    targetType?: SortOrder
+    deploymentSlot?: SortOrder
+    intendedUse?: SortOrder
+    forbiddenUse?: SortOrder
+    featureContractVersion?: SortOrder
+    outcomeContractVersion?: SortOrder
+    datasetSnapshotId?: SortOrder
+    trainingCodeVersion?: SortOrder
+    artifactReference?: SortOrder
+    artifactDigest?: SortOrder
+    artifactFormat?: SortOrder
+    artifactSizeBytes?: SortOrderInput | SortOrder
+    trainingTimestamp?: SortOrder
+    lifecycleStatus?: SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+    validatedById?: SortOrderInput | SortOrder
+    validatedAt?: SortOrderInput | SortOrder
+    datasetSnapshot?: PredictiveDatasetSnapshotOrderByWithRelationInput
+    createdBy?: UserOrderByWithRelationInput
+    validatedBy?: UserOrderByWithRelationInput
+    evaluations?: PredictiveModelEvaluationOrderByRelationAggregateInput
+    approvals?: PredictiveModelApprovalOrderByRelationAggregateInput
+    lifecycleEvents?: PredictiveModelLifecycleEventOrderByRelationAggregateInput
+  }
+
+  export type PredictiveModelVersionWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    modelName_modelVersion_targetType?: PredictiveModelVersionModelNameModelVersionTargetTypeCompoundUniqueInput
+    AND?: PredictiveModelVersionWhereInput | PredictiveModelVersionWhereInput[]
+    OR?: PredictiveModelVersionWhereInput[]
+    NOT?: PredictiveModelVersionWhereInput | PredictiveModelVersionWhereInput[]
+    modelName?: StringFilter<"PredictiveModelVersion"> | string
+    modelVersion?: StringFilter<"PredictiveModelVersion"> | string
+    targetType?: EnumPredictiveTargetTypeFilter<"PredictiveModelVersion"> | $Enums.PredictiveTargetType
+    deploymentSlot?: StringFilter<"PredictiveModelVersion"> | string
+    intendedUse?: StringFilter<"PredictiveModelVersion"> | string
+    forbiddenUse?: StringFilter<"PredictiveModelVersion"> | string
+    featureContractVersion?: StringFilter<"PredictiveModelVersion"> | string
+    outcomeContractVersion?: StringFilter<"PredictiveModelVersion"> | string
+    datasetSnapshotId?: StringFilter<"PredictiveModelVersion"> | string
+    trainingCodeVersion?: StringFilter<"PredictiveModelVersion"> | string
+    artifactReference?: StringFilter<"PredictiveModelVersion"> | string
+    artifactDigest?: StringFilter<"PredictiveModelVersion"> | string
+    artifactFormat?: StringFilter<"PredictiveModelVersion"> | string
+    artifactSizeBytes?: BigIntNullableFilter<"PredictiveModelVersion"> | bigint | number | null
+    trainingTimestamp?: DateTimeFilter<"PredictiveModelVersion"> | Date | string
+    lifecycleStatus?: EnumPredictiveModelLifecycleStatusFilter<"PredictiveModelVersion"> | $Enums.PredictiveModelLifecycleStatus
+    createdById?: StringFilter<"PredictiveModelVersion"> | string
+    createdAt?: DateTimeFilter<"PredictiveModelVersion"> | Date | string
+    validatedById?: StringNullableFilter<"PredictiveModelVersion"> | string | null
+    validatedAt?: DateTimeNullableFilter<"PredictiveModelVersion"> | Date | string | null
+    datasetSnapshot?: XOR<PredictiveDatasetSnapshotScalarRelationFilter, PredictiveDatasetSnapshotWhereInput>
+    createdBy?: XOR<UserScalarRelationFilter, UserWhereInput>
+    validatedBy?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+    evaluations?: PredictiveModelEvaluationListRelationFilter
+    approvals?: PredictiveModelApprovalListRelationFilter
+    lifecycleEvents?: PredictiveModelLifecycleEventListRelationFilter
+  }, "id" | "modelName_modelVersion_targetType">
+
+  export type PredictiveModelVersionOrderByWithAggregationInput = {
+    id?: SortOrder
+    modelName?: SortOrder
+    modelVersion?: SortOrder
+    targetType?: SortOrder
+    deploymentSlot?: SortOrder
+    intendedUse?: SortOrder
+    forbiddenUse?: SortOrder
+    featureContractVersion?: SortOrder
+    outcomeContractVersion?: SortOrder
+    datasetSnapshotId?: SortOrder
+    trainingCodeVersion?: SortOrder
+    artifactReference?: SortOrder
+    artifactDigest?: SortOrder
+    artifactFormat?: SortOrder
+    artifactSizeBytes?: SortOrderInput | SortOrder
+    trainingTimestamp?: SortOrder
+    lifecycleStatus?: SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+    validatedById?: SortOrderInput | SortOrder
+    validatedAt?: SortOrderInput | SortOrder
+    _count?: PredictiveModelVersionCountOrderByAggregateInput
+    _avg?: PredictiveModelVersionAvgOrderByAggregateInput
+    _max?: PredictiveModelVersionMaxOrderByAggregateInput
+    _min?: PredictiveModelVersionMinOrderByAggregateInput
+    _sum?: PredictiveModelVersionSumOrderByAggregateInput
+  }
+
+  export type PredictiveModelVersionScalarWhereWithAggregatesInput = {
+    AND?: PredictiveModelVersionScalarWhereWithAggregatesInput | PredictiveModelVersionScalarWhereWithAggregatesInput[]
+    OR?: PredictiveModelVersionScalarWhereWithAggregatesInput[]
+    NOT?: PredictiveModelVersionScalarWhereWithAggregatesInput | PredictiveModelVersionScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"PredictiveModelVersion"> | string
+    modelName?: StringWithAggregatesFilter<"PredictiveModelVersion"> | string
+    modelVersion?: StringWithAggregatesFilter<"PredictiveModelVersion"> | string
+    targetType?: EnumPredictiveTargetTypeWithAggregatesFilter<"PredictiveModelVersion"> | $Enums.PredictiveTargetType
+    deploymentSlot?: StringWithAggregatesFilter<"PredictiveModelVersion"> | string
+    intendedUse?: StringWithAggregatesFilter<"PredictiveModelVersion"> | string
+    forbiddenUse?: StringWithAggregatesFilter<"PredictiveModelVersion"> | string
+    featureContractVersion?: StringWithAggregatesFilter<"PredictiveModelVersion"> | string
+    outcomeContractVersion?: StringWithAggregatesFilter<"PredictiveModelVersion"> | string
+    datasetSnapshotId?: StringWithAggregatesFilter<"PredictiveModelVersion"> | string
+    trainingCodeVersion?: StringWithAggregatesFilter<"PredictiveModelVersion"> | string
+    artifactReference?: StringWithAggregatesFilter<"PredictiveModelVersion"> | string
+    artifactDigest?: StringWithAggregatesFilter<"PredictiveModelVersion"> | string
+    artifactFormat?: StringWithAggregatesFilter<"PredictiveModelVersion"> | string
+    artifactSizeBytes?: BigIntNullableWithAggregatesFilter<"PredictiveModelVersion"> | bigint | number | null
+    trainingTimestamp?: DateTimeWithAggregatesFilter<"PredictiveModelVersion"> | Date | string
+    lifecycleStatus?: EnumPredictiveModelLifecycleStatusWithAggregatesFilter<"PredictiveModelVersion"> | $Enums.PredictiveModelLifecycleStatus
+    createdById?: StringWithAggregatesFilter<"PredictiveModelVersion"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"PredictiveModelVersion"> | Date | string
+    validatedById?: StringNullableWithAggregatesFilter<"PredictiveModelVersion"> | string | null
+    validatedAt?: DateTimeNullableWithAggregatesFilter<"PredictiveModelVersion"> | Date | string | null
+  }
+
+  export type PredictiveModelEvaluationWhereInput = {
+    AND?: PredictiveModelEvaluationWhereInput | PredictiveModelEvaluationWhereInput[]
+    OR?: PredictiveModelEvaluationWhereInput[]
+    NOT?: PredictiveModelEvaluationWhereInput | PredictiveModelEvaluationWhereInput[]
+    id?: StringFilter<"PredictiveModelEvaluation"> | string
+    modelVersionId?: StringFilter<"PredictiveModelEvaluation"> | string
+    datasetSnapshotId?: StringFilter<"PredictiveModelEvaluation"> | string
+    evaluationContractVersion?: StringFilter<"PredictiveModelEvaluation"> | string
+    splitStrategy?: StringFilter<"PredictiveModelEvaluation"> | string
+    evaluationPeriodStart?: DateTimeFilter<"PredictiveModelEvaluation"> | Date | string
+    evaluationPeriodEnd?: DateTimeFilter<"PredictiveModelEvaluation"> | Date | string
+    testSampleCount?: IntFilter<"PredictiveModelEvaluation"> | number
+    lateCount?: IntFilter<"PredictiveModelEvaluation"> | number
+    onTimeCount?: IntFilter<"PredictiveModelEvaluation"> | number
+    truePositiveCount?: IntFilter<"PredictiveModelEvaluation"> | number
+    trueNegativeCount?: IntFilter<"PredictiveModelEvaluation"> | number
+    falsePositiveCount?: IntFilter<"PredictiveModelEvaluation"> | number
+    falseNegativeCount?: IntFilter<"PredictiveModelEvaluation"> | number
+    precision?: FloatFilter<"PredictiveModelEvaluation"> | number
+    recall?: FloatFilter<"PredictiveModelEvaluation"> | number
+    f1?: FloatFilter<"PredictiveModelEvaluation"> | number
+    prAuc?: FloatFilter<"PredictiveModelEvaluation"> | number
+    calibrationError?: FloatFilter<"PredictiveModelEvaluation"> | number
+    falseNegativeRate?: FloatFilter<"PredictiveModelEvaluation"> | number
+    baselineEvidence?: JsonFilter<"PredictiveModelEvaluation">
+    subgroupMetricsReference?: JsonNullableFilter<"PredictiveModelEvaluation">
+    featureDistributionReference?: JsonNullableFilter<"PredictiveModelEvaluation">
+    missingnessReference?: JsonNullableFilter<"PredictiveModelEvaluation">
+    evaluationArtifactReference?: StringFilter<"PredictiveModelEvaluation"> | string
+    evaluationFingerprint?: StringFilter<"PredictiveModelEvaluation"> | string
+    recordedById?: StringFilter<"PredictiveModelEvaluation"> | string
+    recordedAt?: DateTimeFilter<"PredictiveModelEvaluation"> | Date | string
+    modelVersion?: XOR<PredictiveModelVersionScalarRelationFilter, PredictiveModelVersionWhereInput>
+    datasetSnapshot?: XOR<PredictiveDatasetSnapshotScalarRelationFilter, PredictiveDatasetSnapshotWhereInput>
+    recordedBy?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type PredictiveModelEvaluationOrderByWithRelationInput = {
+    id?: SortOrder
+    modelVersionId?: SortOrder
+    datasetSnapshotId?: SortOrder
+    evaluationContractVersion?: SortOrder
+    splitStrategy?: SortOrder
+    evaluationPeriodStart?: SortOrder
+    evaluationPeriodEnd?: SortOrder
+    testSampleCount?: SortOrder
+    lateCount?: SortOrder
+    onTimeCount?: SortOrder
+    truePositiveCount?: SortOrder
+    trueNegativeCount?: SortOrder
+    falsePositiveCount?: SortOrder
+    falseNegativeCount?: SortOrder
+    precision?: SortOrder
+    recall?: SortOrder
+    f1?: SortOrder
+    prAuc?: SortOrder
+    calibrationError?: SortOrder
+    falseNegativeRate?: SortOrder
+    baselineEvidence?: SortOrder
+    subgroupMetricsReference?: SortOrderInput | SortOrder
+    featureDistributionReference?: SortOrderInput | SortOrder
+    missingnessReference?: SortOrderInput | SortOrder
+    evaluationArtifactReference?: SortOrder
+    evaluationFingerprint?: SortOrder
+    recordedById?: SortOrder
+    recordedAt?: SortOrder
+    modelVersion?: PredictiveModelVersionOrderByWithRelationInput
+    datasetSnapshot?: PredictiveDatasetSnapshotOrderByWithRelationInput
+    recordedBy?: UserOrderByWithRelationInput
+  }
+
+  export type PredictiveModelEvaluationWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    evaluationFingerprint?: string
+    modelVersionId_datasetSnapshotId_evaluationContractVersion?: PredictiveModelEvaluationModelVersionIdDatasetSnapshotIdEvaluationContractVersionCompoundUniqueInput
+    AND?: PredictiveModelEvaluationWhereInput | PredictiveModelEvaluationWhereInput[]
+    OR?: PredictiveModelEvaluationWhereInput[]
+    NOT?: PredictiveModelEvaluationWhereInput | PredictiveModelEvaluationWhereInput[]
+    modelVersionId?: StringFilter<"PredictiveModelEvaluation"> | string
+    datasetSnapshotId?: StringFilter<"PredictiveModelEvaluation"> | string
+    evaluationContractVersion?: StringFilter<"PredictiveModelEvaluation"> | string
+    splitStrategy?: StringFilter<"PredictiveModelEvaluation"> | string
+    evaluationPeriodStart?: DateTimeFilter<"PredictiveModelEvaluation"> | Date | string
+    evaluationPeriodEnd?: DateTimeFilter<"PredictiveModelEvaluation"> | Date | string
+    testSampleCount?: IntFilter<"PredictiveModelEvaluation"> | number
+    lateCount?: IntFilter<"PredictiveModelEvaluation"> | number
+    onTimeCount?: IntFilter<"PredictiveModelEvaluation"> | number
+    truePositiveCount?: IntFilter<"PredictiveModelEvaluation"> | number
+    trueNegativeCount?: IntFilter<"PredictiveModelEvaluation"> | number
+    falsePositiveCount?: IntFilter<"PredictiveModelEvaluation"> | number
+    falseNegativeCount?: IntFilter<"PredictiveModelEvaluation"> | number
+    precision?: FloatFilter<"PredictiveModelEvaluation"> | number
+    recall?: FloatFilter<"PredictiveModelEvaluation"> | number
+    f1?: FloatFilter<"PredictiveModelEvaluation"> | number
+    prAuc?: FloatFilter<"PredictiveModelEvaluation"> | number
+    calibrationError?: FloatFilter<"PredictiveModelEvaluation"> | number
+    falseNegativeRate?: FloatFilter<"PredictiveModelEvaluation"> | number
+    baselineEvidence?: JsonFilter<"PredictiveModelEvaluation">
+    subgroupMetricsReference?: JsonNullableFilter<"PredictiveModelEvaluation">
+    featureDistributionReference?: JsonNullableFilter<"PredictiveModelEvaluation">
+    missingnessReference?: JsonNullableFilter<"PredictiveModelEvaluation">
+    evaluationArtifactReference?: StringFilter<"PredictiveModelEvaluation"> | string
+    recordedById?: StringFilter<"PredictiveModelEvaluation"> | string
+    recordedAt?: DateTimeFilter<"PredictiveModelEvaluation"> | Date | string
+    modelVersion?: XOR<PredictiveModelVersionScalarRelationFilter, PredictiveModelVersionWhereInput>
+    datasetSnapshot?: XOR<PredictiveDatasetSnapshotScalarRelationFilter, PredictiveDatasetSnapshotWhereInput>
+    recordedBy?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id" | "evaluationFingerprint" | "modelVersionId_datasetSnapshotId_evaluationContractVersion">
+
+  export type PredictiveModelEvaluationOrderByWithAggregationInput = {
+    id?: SortOrder
+    modelVersionId?: SortOrder
+    datasetSnapshotId?: SortOrder
+    evaluationContractVersion?: SortOrder
+    splitStrategy?: SortOrder
+    evaluationPeriodStart?: SortOrder
+    evaluationPeriodEnd?: SortOrder
+    testSampleCount?: SortOrder
+    lateCount?: SortOrder
+    onTimeCount?: SortOrder
+    truePositiveCount?: SortOrder
+    trueNegativeCount?: SortOrder
+    falsePositiveCount?: SortOrder
+    falseNegativeCount?: SortOrder
+    precision?: SortOrder
+    recall?: SortOrder
+    f1?: SortOrder
+    prAuc?: SortOrder
+    calibrationError?: SortOrder
+    falseNegativeRate?: SortOrder
+    baselineEvidence?: SortOrder
+    subgroupMetricsReference?: SortOrderInput | SortOrder
+    featureDistributionReference?: SortOrderInput | SortOrder
+    missingnessReference?: SortOrderInput | SortOrder
+    evaluationArtifactReference?: SortOrder
+    evaluationFingerprint?: SortOrder
+    recordedById?: SortOrder
+    recordedAt?: SortOrder
+    _count?: PredictiveModelEvaluationCountOrderByAggregateInput
+    _avg?: PredictiveModelEvaluationAvgOrderByAggregateInput
+    _max?: PredictiveModelEvaluationMaxOrderByAggregateInput
+    _min?: PredictiveModelEvaluationMinOrderByAggregateInput
+    _sum?: PredictiveModelEvaluationSumOrderByAggregateInput
+  }
+
+  export type PredictiveModelEvaluationScalarWhereWithAggregatesInput = {
+    AND?: PredictiveModelEvaluationScalarWhereWithAggregatesInput | PredictiveModelEvaluationScalarWhereWithAggregatesInput[]
+    OR?: PredictiveModelEvaluationScalarWhereWithAggregatesInput[]
+    NOT?: PredictiveModelEvaluationScalarWhereWithAggregatesInput | PredictiveModelEvaluationScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"PredictiveModelEvaluation"> | string
+    modelVersionId?: StringWithAggregatesFilter<"PredictiveModelEvaluation"> | string
+    datasetSnapshotId?: StringWithAggregatesFilter<"PredictiveModelEvaluation"> | string
+    evaluationContractVersion?: StringWithAggregatesFilter<"PredictiveModelEvaluation"> | string
+    splitStrategy?: StringWithAggregatesFilter<"PredictiveModelEvaluation"> | string
+    evaluationPeriodStart?: DateTimeWithAggregatesFilter<"PredictiveModelEvaluation"> | Date | string
+    evaluationPeriodEnd?: DateTimeWithAggregatesFilter<"PredictiveModelEvaluation"> | Date | string
+    testSampleCount?: IntWithAggregatesFilter<"PredictiveModelEvaluation"> | number
+    lateCount?: IntWithAggregatesFilter<"PredictiveModelEvaluation"> | number
+    onTimeCount?: IntWithAggregatesFilter<"PredictiveModelEvaluation"> | number
+    truePositiveCount?: IntWithAggregatesFilter<"PredictiveModelEvaluation"> | number
+    trueNegativeCount?: IntWithAggregatesFilter<"PredictiveModelEvaluation"> | number
+    falsePositiveCount?: IntWithAggregatesFilter<"PredictiveModelEvaluation"> | number
+    falseNegativeCount?: IntWithAggregatesFilter<"PredictiveModelEvaluation"> | number
+    precision?: FloatWithAggregatesFilter<"PredictiveModelEvaluation"> | number
+    recall?: FloatWithAggregatesFilter<"PredictiveModelEvaluation"> | number
+    f1?: FloatWithAggregatesFilter<"PredictiveModelEvaluation"> | number
+    prAuc?: FloatWithAggregatesFilter<"PredictiveModelEvaluation"> | number
+    calibrationError?: FloatWithAggregatesFilter<"PredictiveModelEvaluation"> | number
+    falseNegativeRate?: FloatWithAggregatesFilter<"PredictiveModelEvaluation"> | number
+    baselineEvidence?: JsonWithAggregatesFilter<"PredictiveModelEvaluation">
+    subgroupMetricsReference?: JsonNullableWithAggregatesFilter<"PredictiveModelEvaluation">
+    featureDistributionReference?: JsonNullableWithAggregatesFilter<"PredictiveModelEvaluation">
+    missingnessReference?: JsonNullableWithAggregatesFilter<"PredictiveModelEvaluation">
+    evaluationArtifactReference?: StringWithAggregatesFilter<"PredictiveModelEvaluation"> | string
+    evaluationFingerprint?: StringWithAggregatesFilter<"PredictiveModelEvaluation"> | string
+    recordedById?: StringWithAggregatesFilter<"PredictiveModelEvaluation"> | string
+    recordedAt?: DateTimeWithAggregatesFilter<"PredictiveModelEvaluation"> | Date | string
+  }
+
+  export type PredictiveModelApprovalWhereInput = {
+    AND?: PredictiveModelApprovalWhereInput | PredictiveModelApprovalWhereInput[]
+    OR?: PredictiveModelApprovalWhereInput[]
+    NOT?: PredictiveModelApprovalWhereInput | PredictiveModelApprovalWhereInput[]
+    id?: StringFilter<"PredictiveModelApproval"> | string
+    modelVersionId?: StringFilter<"PredictiveModelApproval"> | string
+    decision?: EnumPredictiveModelApprovalDecisionFilter<"PredictiveModelApproval"> | $Enums.PredictiveModelApprovalDecision
+    reason?: StringFilter<"PredictiveModelApproval"> | string
+    restrictions?: JsonNullableFilter<"PredictiveModelApproval">
+    reviewDueAt?: DateTimeNullableFilter<"PredictiveModelApproval"> | Date | string | null
+    approvalExpiresAt?: DateTimeNullableFilter<"PredictiveModelApproval"> | Date | string | null
+    approvedById?: StringFilter<"PredictiveModelApproval"> | string
+    decidedAt?: DateTimeFilter<"PredictiveModelApproval"> | Date | string
+    modelVersion?: XOR<PredictiveModelVersionScalarRelationFilter, PredictiveModelVersionWhereInput>
+    approvedBy?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type PredictiveModelApprovalOrderByWithRelationInput = {
+    id?: SortOrder
+    modelVersionId?: SortOrder
+    decision?: SortOrder
+    reason?: SortOrder
+    restrictions?: SortOrderInput | SortOrder
+    reviewDueAt?: SortOrderInput | SortOrder
+    approvalExpiresAt?: SortOrderInput | SortOrder
+    approvedById?: SortOrder
+    decidedAt?: SortOrder
+    modelVersion?: PredictiveModelVersionOrderByWithRelationInput
+    approvedBy?: UserOrderByWithRelationInput
+  }
+
+  export type PredictiveModelApprovalWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    modelVersionId?: string
+    AND?: PredictiveModelApprovalWhereInput | PredictiveModelApprovalWhereInput[]
+    OR?: PredictiveModelApprovalWhereInput[]
+    NOT?: PredictiveModelApprovalWhereInput | PredictiveModelApprovalWhereInput[]
+    decision?: EnumPredictiveModelApprovalDecisionFilter<"PredictiveModelApproval"> | $Enums.PredictiveModelApprovalDecision
+    reason?: StringFilter<"PredictiveModelApproval"> | string
+    restrictions?: JsonNullableFilter<"PredictiveModelApproval">
+    reviewDueAt?: DateTimeNullableFilter<"PredictiveModelApproval"> | Date | string | null
+    approvalExpiresAt?: DateTimeNullableFilter<"PredictiveModelApproval"> | Date | string | null
+    approvedById?: StringFilter<"PredictiveModelApproval"> | string
+    decidedAt?: DateTimeFilter<"PredictiveModelApproval"> | Date | string
+    modelVersion?: XOR<PredictiveModelVersionScalarRelationFilter, PredictiveModelVersionWhereInput>
+    approvedBy?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id" | "modelVersionId">
+
+  export type PredictiveModelApprovalOrderByWithAggregationInput = {
+    id?: SortOrder
+    modelVersionId?: SortOrder
+    decision?: SortOrder
+    reason?: SortOrder
+    restrictions?: SortOrderInput | SortOrder
+    reviewDueAt?: SortOrderInput | SortOrder
+    approvalExpiresAt?: SortOrderInput | SortOrder
+    approvedById?: SortOrder
+    decidedAt?: SortOrder
+    _count?: PredictiveModelApprovalCountOrderByAggregateInput
+    _max?: PredictiveModelApprovalMaxOrderByAggregateInput
+    _min?: PredictiveModelApprovalMinOrderByAggregateInput
+  }
+
+  export type PredictiveModelApprovalScalarWhereWithAggregatesInput = {
+    AND?: PredictiveModelApprovalScalarWhereWithAggregatesInput | PredictiveModelApprovalScalarWhereWithAggregatesInput[]
+    OR?: PredictiveModelApprovalScalarWhereWithAggregatesInput[]
+    NOT?: PredictiveModelApprovalScalarWhereWithAggregatesInput | PredictiveModelApprovalScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"PredictiveModelApproval"> | string
+    modelVersionId?: StringWithAggregatesFilter<"PredictiveModelApproval"> | string
+    decision?: EnumPredictiveModelApprovalDecisionWithAggregatesFilter<"PredictiveModelApproval"> | $Enums.PredictiveModelApprovalDecision
+    reason?: StringWithAggregatesFilter<"PredictiveModelApproval"> | string
+    restrictions?: JsonNullableWithAggregatesFilter<"PredictiveModelApproval">
+    reviewDueAt?: DateTimeNullableWithAggregatesFilter<"PredictiveModelApproval"> | Date | string | null
+    approvalExpiresAt?: DateTimeNullableWithAggregatesFilter<"PredictiveModelApproval"> | Date | string | null
+    approvedById?: StringWithAggregatesFilter<"PredictiveModelApproval"> | string
+    decidedAt?: DateTimeWithAggregatesFilter<"PredictiveModelApproval"> | Date | string
+  }
+
+  export type PredictiveModelLifecycleEventWhereInput = {
+    AND?: PredictiveModelLifecycleEventWhereInput | PredictiveModelLifecycleEventWhereInput[]
+    OR?: PredictiveModelLifecycleEventWhereInput[]
+    NOT?: PredictiveModelLifecycleEventWhereInput | PredictiveModelLifecycleEventWhereInput[]
+    id?: StringFilter<"PredictiveModelLifecycleEvent"> | string
+    modelVersionId?: StringFilter<"PredictiveModelLifecycleEvent"> | string
+    action?: EnumPredictiveModelLifecycleActionFilter<"PredictiveModelLifecycleEvent"> | $Enums.PredictiveModelLifecycleAction
+    fromStatus?: EnumPredictiveModelLifecycleStatusNullableFilter<"PredictiveModelLifecycleEvent"> | $Enums.PredictiveModelLifecycleStatus | null
+    toStatus?: EnumPredictiveModelLifecycleStatusFilter<"PredictiveModelLifecycleEvent"> | $Enums.PredictiveModelLifecycleStatus
+    reason?: StringFilter<"PredictiveModelLifecycleEvent"> | string
+    relatedModelVersionId?: StringNullableFilter<"PredictiveModelLifecycleEvent"> | string | null
+    actorId?: StringFilter<"PredictiveModelLifecycleEvent"> | string
+    occurredAt?: DateTimeFilter<"PredictiveModelLifecycleEvent"> | Date | string
+    modelVersion?: XOR<PredictiveModelVersionScalarRelationFilter, PredictiveModelVersionWhereInput>
+    actor?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type PredictiveModelLifecycleEventOrderByWithRelationInput = {
+    id?: SortOrder
+    modelVersionId?: SortOrder
+    action?: SortOrder
+    fromStatus?: SortOrderInput | SortOrder
+    toStatus?: SortOrder
+    reason?: SortOrder
+    relatedModelVersionId?: SortOrderInput | SortOrder
+    actorId?: SortOrder
+    occurredAt?: SortOrder
+    modelVersion?: PredictiveModelVersionOrderByWithRelationInput
+    actor?: UserOrderByWithRelationInput
+  }
+
+  export type PredictiveModelLifecycleEventWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: PredictiveModelLifecycleEventWhereInput | PredictiveModelLifecycleEventWhereInput[]
+    OR?: PredictiveModelLifecycleEventWhereInput[]
+    NOT?: PredictiveModelLifecycleEventWhereInput | PredictiveModelLifecycleEventWhereInput[]
+    modelVersionId?: StringFilter<"PredictiveModelLifecycleEvent"> | string
+    action?: EnumPredictiveModelLifecycleActionFilter<"PredictiveModelLifecycleEvent"> | $Enums.PredictiveModelLifecycleAction
+    fromStatus?: EnumPredictiveModelLifecycleStatusNullableFilter<"PredictiveModelLifecycleEvent"> | $Enums.PredictiveModelLifecycleStatus | null
+    toStatus?: EnumPredictiveModelLifecycleStatusFilter<"PredictiveModelLifecycleEvent"> | $Enums.PredictiveModelLifecycleStatus
+    reason?: StringFilter<"PredictiveModelLifecycleEvent"> | string
+    relatedModelVersionId?: StringNullableFilter<"PredictiveModelLifecycleEvent"> | string | null
+    actorId?: StringFilter<"PredictiveModelLifecycleEvent"> | string
+    occurredAt?: DateTimeFilter<"PredictiveModelLifecycleEvent"> | Date | string
+    modelVersion?: XOR<PredictiveModelVersionScalarRelationFilter, PredictiveModelVersionWhereInput>
+    actor?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id">
+
+  export type PredictiveModelLifecycleEventOrderByWithAggregationInput = {
+    id?: SortOrder
+    modelVersionId?: SortOrder
+    action?: SortOrder
+    fromStatus?: SortOrderInput | SortOrder
+    toStatus?: SortOrder
+    reason?: SortOrder
+    relatedModelVersionId?: SortOrderInput | SortOrder
+    actorId?: SortOrder
+    occurredAt?: SortOrder
+    _count?: PredictiveModelLifecycleEventCountOrderByAggregateInput
+    _max?: PredictiveModelLifecycleEventMaxOrderByAggregateInput
+    _min?: PredictiveModelLifecycleEventMinOrderByAggregateInput
+  }
+
+  export type PredictiveModelLifecycleEventScalarWhereWithAggregatesInput = {
+    AND?: PredictiveModelLifecycleEventScalarWhereWithAggregatesInput | PredictiveModelLifecycleEventScalarWhereWithAggregatesInput[]
+    OR?: PredictiveModelLifecycleEventScalarWhereWithAggregatesInput[]
+    NOT?: PredictiveModelLifecycleEventScalarWhereWithAggregatesInput | PredictiveModelLifecycleEventScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"PredictiveModelLifecycleEvent"> | string
+    modelVersionId?: StringWithAggregatesFilter<"PredictiveModelLifecycleEvent"> | string
+    action?: EnumPredictiveModelLifecycleActionWithAggregatesFilter<"PredictiveModelLifecycleEvent"> | $Enums.PredictiveModelLifecycleAction
+    fromStatus?: EnumPredictiveModelLifecycleStatusNullableWithAggregatesFilter<"PredictiveModelLifecycleEvent"> | $Enums.PredictiveModelLifecycleStatus | null
+    toStatus?: EnumPredictiveModelLifecycleStatusWithAggregatesFilter<"PredictiveModelLifecycleEvent"> | $Enums.PredictiveModelLifecycleStatus
+    reason?: StringWithAggregatesFilter<"PredictiveModelLifecycleEvent"> | string
+    relatedModelVersionId?: StringNullableWithAggregatesFilter<"PredictiveModelLifecycleEvent"> | string | null
+    actorId?: StringWithAggregatesFilter<"PredictiveModelLifecycleEvent"> | string
+    occurredAt?: DateTimeWithAggregatesFilter<"PredictiveModelLifecycleEvent"> | Date | string
+  }
+
   export type ExecutionTaskDependencyWhereInput = {
     AND?: ExecutionTaskDependencyWhereInput | ExecutionTaskDependencyWhereInput[]
     OR?: ExecutionTaskDependencyWhereInput[]
@@ -54763,6 +62729,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutVoidedByInput
     recordedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutRecordedByInput
     voidedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutVoidedByInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotCreateNestedManyWithoutCreatedByInput
+    createdPredictiveModelVersions?: PredictiveModelVersionCreateNestedManyWithoutCreatedByInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionCreateNestedManyWithoutValidatedByInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationCreateNestedManyWithoutRecordedByInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -54813,6 +62785,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutVoidedByInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutRecordedByInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutVoidedByInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUncheckedCreateNestedManyWithoutCreatedByInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUncheckedCreateNestedManyWithoutValidatedByInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedCreateNestedManyWithoutRecordedByInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
   }
 
   export type UserUpdateInput = {
@@ -54863,6 +62841,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutVoidedByNestedInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutRecordedByNestedInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutVoidedByNestedInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUpdateManyWithoutCreatedByNestedInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUpdateManyWithoutValidatedByNestedInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUpdateManyWithoutRecordedByNestedInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -54913,6 +62897,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutVoidedByNestedInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutRecordedByNestedInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutVoidedByNestedInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUncheckedUpdateManyWithoutCreatedByNestedInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUncheckedUpdateManyWithoutValidatedByNestedInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedUpdateManyWithoutRecordedByNestedInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -58479,6 +66469,701 @@ export namespace Prisma {
     replacementOutcomeId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
+  export type PredictiveDatasetSnapshotCreateInput = {
+    id?: string
+    datasetContractVersion: string
+    targetType: $Enums.PredictiveTargetType
+    featureContractVersion: string
+    outcomeContractVersion: string
+    departmentId?: string | null
+    jurisdictionId?: string | null
+    includedProvenance: JsonNullValueInput | InputJsonValue
+    sampleCount: number
+    classBalance: JsonNullValueInput | InputJsonValue
+    periodStart?: Date | string | null
+    periodEnd?: Date | string | null
+    sampleIdentities: JsonNullValueInput | InputJsonValue
+    datasetFingerprint: string
+    createdAt?: Date | string
+    createdBy: UserCreateNestedOneWithoutCreatedPredictiveDatasetSnapshotsInput
+    modelVersions?: PredictiveModelVersionCreateNestedManyWithoutDatasetSnapshotInput
+    evaluations?: PredictiveModelEvaluationCreateNestedManyWithoutDatasetSnapshotInput
+  }
+
+  export type PredictiveDatasetSnapshotUncheckedCreateInput = {
+    id?: string
+    datasetContractVersion: string
+    targetType: $Enums.PredictiveTargetType
+    featureContractVersion: string
+    outcomeContractVersion: string
+    departmentId?: string | null
+    jurisdictionId?: string | null
+    includedProvenance: JsonNullValueInput | InputJsonValue
+    sampleCount: number
+    classBalance: JsonNullValueInput | InputJsonValue
+    periodStart?: Date | string | null
+    periodEnd?: Date | string | null
+    sampleIdentities: JsonNullValueInput | InputJsonValue
+    datasetFingerprint: string
+    createdById: string
+    createdAt?: Date | string
+    modelVersions?: PredictiveModelVersionUncheckedCreateNestedManyWithoutDatasetSnapshotInput
+    evaluations?: PredictiveModelEvaluationUncheckedCreateNestedManyWithoutDatasetSnapshotInput
+  }
+
+  export type PredictiveDatasetSnapshotUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    datasetContractVersion?: StringFieldUpdateOperationsInput | string
+    targetType?: EnumPredictiveTargetTypeFieldUpdateOperationsInput | $Enums.PredictiveTargetType
+    featureContractVersion?: StringFieldUpdateOperationsInput | string
+    outcomeContractVersion?: StringFieldUpdateOperationsInput | string
+    departmentId?: NullableStringFieldUpdateOperationsInput | string | null
+    jurisdictionId?: NullableStringFieldUpdateOperationsInput | string | null
+    includedProvenance?: JsonNullValueInput | InputJsonValue
+    sampleCount?: IntFieldUpdateOperationsInput | number
+    classBalance?: JsonNullValueInput | InputJsonValue
+    periodStart?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    periodEnd?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    sampleIdentities?: JsonNullValueInput | InputJsonValue
+    datasetFingerprint?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: UserUpdateOneRequiredWithoutCreatedPredictiveDatasetSnapshotsNestedInput
+    modelVersions?: PredictiveModelVersionUpdateManyWithoutDatasetSnapshotNestedInput
+    evaluations?: PredictiveModelEvaluationUpdateManyWithoutDatasetSnapshotNestedInput
+  }
+
+  export type PredictiveDatasetSnapshotUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    datasetContractVersion?: StringFieldUpdateOperationsInput | string
+    targetType?: EnumPredictiveTargetTypeFieldUpdateOperationsInput | $Enums.PredictiveTargetType
+    featureContractVersion?: StringFieldUpdateOperationsInput | string
+    outcomeContractVersion?: StringFieldUpdateOperationsInput | string
+    departmentId?: NullableStringFieldUpdateOperationsInput | string | null
+    jurisdictionId?: NullableStringFieldUpdateOperationsInput | string | null
+    includedProvenance?: JsonNullValueInput | InputJsonValue
+    sampleCount?: IntFieldUpdateOperationsInput | number
+    classBalance?: JsonNullValueInput | InputJsonValue
+    periodStart?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    periodEnd?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    sampleIdentities?: JsonNullValueInput | InputJsonValue
+    datasetFingerprint?: StringFieldUpdateOperationsInput | string
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    modelVersions?: PredictiveModelVersionUncheckedUpdateManyWithoutDatasetSnapshotNestedInput
+    evaluations?: PredictiveModelEvaluationUncheckedUpdateManyWithoutDatasetSnapshotNestedInput
+  }
+
+  export type PredictiveDatasetSnapshotCreateManyInput = {
+    id?: string
+    datasetContractVersion: string
+    targetType: $Enums.PredictiveTargetType
+    featureContractVersion: string
+    outcomeContractVersion: string
+    departmentId?: string | null
+    jurisdictionId?: string | null
+    includedProvenance: JsonNullValueInput | InputJsonValue
+    sampleCount: number
+    classBalance: JsonNullValueInput | InputJsonValue
+    periodStart?: Date | string | null
+    periodEnd?: Date | string | null
+    sampleIdentities: JsonNullValueInput | InputJsonValue
+    datasetFingerprint: string
+    createdById: string
+    createdAt?: Date | string
+  }
+
+  export type PredictiveDatasetSnapshotUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    datasetContractVersion?: StringFieldUpdateOperationsInput | string
+    targetType?: EnumPredictiveTargetTypeFieldUpdateOperationsInput | $Enums.PredictiveTargetType
+    featureContractVersion?: StringFieldUpdateOperationsInput | string
+    outcomeContractVersion?: StringFieldUpdateOperationsInput | string
+    departmentId?: NullableStringFieldUpdateOperationsInput | string | null
+    jurisdictionId?: NullableStringFieldUpdateOperationsInput | string | null
+    includedProvenance?: JsonNullValueInput | InputJsonValue
+    sampleCount?: IntFieldUpdateOperationsInput | number
+    classBalance?: JsonNullValueInput | InputJsonValue
+    periodStart?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    periodEnd?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    sampleIdentities?: JsonNullValueInput | InputJsonValue
+    datasetFingerprint?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PredictiveDatasetSnapshotUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    datasetContractVersion?: StringFieldUpdateOperationsInput | string
+    targetType?: EnumPredictiveTargetTypeFieldUpdateOperationsInput | $Enums.PredictiveTargetType
+    featureContractVersion?: StringFieldUpdateOperationsInput | string
+    outcomeContractVersion?: StringFieldUpdateOperationsInput | string
+    departmentId?: NullableStringFieldUpdateOperationsInput | string | null
+    jurisdictionId?: NullableStringFieldUpdateOperationsInput | string | null
+    includedProvenance?: JsonNullValueInput | InputJsonValue
+    sampleCount?: IntFieldUpdateOperationsInput | number
+    classBalance?: JsonNullValueInput | InputJsonValue
+    periodStart?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    periodEnd?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    sampleIdentities?: JsonNullValueInput | InputJsonValue
+    datasetFingerprint?: StringFieldUpdateOperationsInput | string
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PredictiveModelVersionCreateInput = {
+    id?: string
+    modelName: string
+    modelVersion: string
+    targetType: $Enums.PredictiveTargetType
+    deploymentSlot: string
+    intendedUse: string
+    forbiddenUse: string
+    featureContractVersion: string
+    outcomeContractVersion: string
+    trainingCodeVersion: string
+    artifactReference: string
+    artifactDigest: string
+    artifactFormat: string
+    artifactSizeBytes?: bigint | number | null
+    trainingTimestamp: Date | string
+    lifecycleStatus?: $Enums.PredictiveModelLifecycleStatus
+    createdAt?: Date | string
+    validatedAt?: Date | string | null
+    datasetSnapshot: PredictiveDatasetSnapshotCreateNestedOneWithoutModelVersionsInput
+    createdBy: UserCreateNestedOneWithoutCreatedPredictiveModelVersionsInput
+    validatedBy?: UserCreateNestedOneWithoutValidatedPredictiveModelVersionsInput
+    evaluations?: PredictiveModelEvaluationCreateNestedManyWithoutModelVersionInput
+    approvals?: PredictiveModelApprovalCreateNestedManyWithoutModelVersionInput
+    lifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutModelVersionInput
+  }
+
+  export type PredictiveModelVersionUncheckedCreateInput = {
+    id?: string
+    modelName: string
+    modelVersion: string
+    targetType: $Enums.PredictiveTargetType
+    deploymentSlot: string
+    intendedUse: string
+    forbiddenUse: string
+    featureContractVersion: string
+    outcomeContractVersion: string
+    datasetSnapshotId: string
+    trainingCodeVersion: string
+    artifactReference: string
+    artifactDigest: string
+    artifactFormat: string
+    artifactSizeBytes?: bigint | number | null
+    trainingTimestamp: Date | string
+    lifecycleStatus?: $Enums.PredictiveModelLifecycleStatus
+    createdById: string
+    createdAt?: Date | string
+    validatedById?: string | null
+    validatedAt?: Date | string | null
+    evaluations?: PredictiveModelEvaluationUncheckedCreateNestedManyWithoutModelVersionInput
+    approvals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutModelVersionInput
+    lifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutModelVersionInput
+  }
+
+  export type PredictiveModelVersionUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    modelName?: StringFieldUpdateOperationsInput | string
+    modelVersion?: StringFieldUpdateOperationsInput | string
+    targetType?: EnumPredictiveTargetTypeFieldUpdateOperationsInput | $Enums.PredictiveTargetType
+    deploymentSlot?: StringFieldUpdateOperationsInput | string
+    intendedUse?: StringFieldUpdateOperationsInput | string
+    forbiddenUse?: StringFieldUpdateOperationsInput | string
+    featureContractVersion?: StringFieldUpdateOperationsInput | string
+    outcomeContractVersion?: StringFieldUpdateOperationsInput | string
+    trainingCodeVersion?: StringFieldUpdateOperationsInput | string
+    artifactReference?: StringFieldUpdateOperationsInput | string
+    artifactDigest?: StringFieldUpdateOperationsInput | string
+    artifactFormat?: StringFieldUpdateOperationsInput | string
+    artifactSizeBytes?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    trainingTimestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    lifecycleStatus?: EnumPredictiveModelLifecycleStatusFieldUpdateOperationsInput | $Enums.PredictiveModelLifecycleStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    validatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    datasetSnapshot?: PredictiveDatasetSnapshotUpdateOneRequiredWithoutModelVersionsNestedInput
+    createdBy?: UserUpdateOneRequiredWithoutCreatedPredictiveModelVersionsNestedInput
+    validatedBy?: UserUpdateOneWithoutValidatedPredictiveModelVersionsNestedInput
+    evaluations?: PredictiveModelEvaluationUpdateManyWithoutModelVersionNestedInput
+    approvals?: PredictiveModelApprovalUpdateManyWithoutModelVersionNestedInput
+    lifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutModelVersionNestedInput
+  }
+
+  export type PredictiveModelVersionUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    modelName?: StringFieldUpdateOperationsInput | string
+    modelVersion?: StringFieldUpdateOperationsInput | string
+    targetType?: EnumPredictiveTargetTypeFieldUpdateOperationsInput | $Enums.PredictiveTargetType
+    deploymentSlot?: StringFieldUpdateOperationsInput | string
+    intendedUse?: StringFieldUpdateOperationsInput | string
+    forbiddenUse?: StringFieldUpdateOperationsInput | string
+    featureContractVersion?: StringFieldUpdateOperationsInput | string
+    outcomeContractVersion?: StringFieldUpdateOperationsInput | string
+    datasetSnapshotId?: StringFieldUpdateOperationsInput | string
+    trainingCodeVersion?: StringFieldUpdateOperationsInput | string
+    artifactReference?: StringFieldUpdateOperationsInput | string
+    artifactDigest?: StringFieldUpdateOperationsInput | string
+    artifactFormat?: StringFieldUpdateOperationsInput | string
+    artifactSizeBytes?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    trainingTimestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    lifecycleStatus?: EnumPredictiveModelLifecycleStatusFieldUpdateOperationsInput | $Enums.PredictiveModelLifecycleStatus
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    validatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    validatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    evaluations?: PredictiveModelEvaluationUncheckedUpdateManyWithoutModelVersionNestedInput
+    approvals?: PredictiveModelApprovalUncheckedUpdateManyWithoutModelVersionNestedInput
+    lifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutModelVersionNestedInput
+  }
+
+  export type PredictiveModelVersionCreateManyInput = {
+    id?: string
+    modelName: string
+    modelVersion: string
+    targetType: $Enums.PredictiveTargetType
+    deploymentSlot: string
+    intendedUse: string
+    forbiddenUse: string
+    featureContractVersion: string
+    outcomeContractVersion: string
+    datasetSnapshotId: string
+    trainingCodeVersion: string
+    artifactReference: string
+    artifactDigest: string
+    artifactFormat: string
+    artifactSizeBytes?: bigint | number | null
+    trainingTimestamp: Date | string
+    lifecycleStatus?: $Enums.PredictiveModelLifecycleStatus
+    createdById: string
+    createdAt?: Date | string
+    validatedById?: string | null
+    validatedAt?: Date | string | null
+  }
+
+  export type PredictiveModelVersionUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    modelName?: StringFieldUpdateOperationsInput | string
+    modelVersion?: StringFieldUpdateOperationsInput | string
+    targetType?: EnumPredictiveTargetTypeFieldUpdateOperationsInput | $Enums.PredictiveTargetType
+    deploymentSlot?: StringFieldUpdateOperationsInput | string
+    intendedUse?: StringFieldUpdateOperationsInput | string
+    forbiddenUse?: StringFieldUpdateOperationsInput | string
+    featureContractVersion?: StringFieldUpdateOperationsInput | string
+    outcomeContractVersion?: StringFieldUpdateOperationsInput | string
+    trainingCodeVersion?: StringFieldUpdateOperationsInput | string
+    artifactReference?: StringFieldUpdateOperationsInput | string
+    artifactDigest?: StringFieldUpdateOperationsInput | string
+    artifactFormat?: StringFieldUpdateOperationsInput | string
+    artifactSizeBytes?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    trainingTimestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    lifecycleStatus?: EnumPredictiveModelLifecycleStatusFieldUpdateOperationsInput | $Enums.PredictiveModelLifecycleStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    validatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type PredictiveModelVersionUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    modelName?: StringFieldUpdateOperationsInput | string
+    modelVersion?: StringFieldUpdateOperationsInput | string
+    targetType?: EnumPredictiveTargetTypeFieldUpdateOperationsInput | $Enums.PredictiveTargetType
+    deploymentSlot?: StringFieldUpdateOperationsInput | string
+    intendedUse?: StringFieldUpdateOperationsInput | string
+    forbiddenUse?: StringFieldUpdateOperationsInput | string
+    featureContractVersion?: StringFieldUpdateOperationsInput | string
+    outcomeContractVersion?: StringFieldUpdateOperationsInput | string
+    datasetSnapshotId?: StringFieldUpdateOperationsInput | string
+    trainingCodeVersion?: StringFieldUpdateOperationsInput | string
+    artifactReference?: StringFieldUpdateOperationsInput | string
+    artifactDigest?: StringFieldUpdateOperationsInput | string
+    artifactFormat?: StringFieldUpdateOperationsInput | string
+    artifactSizeBytes?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    trainingTimestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    lifecycleStatus?: EnumPredictiveModelLifecycleStatusFieldUpdateOperationsInput | $Enums.PredictiveModelLifecycleStatus
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    validatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    validatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type PredictiveModelEvaluationCreateInput = {
+    id?: string
+    evaluationContractVersion: string
+    splitStrategy: string
+    evaluationPeriodStart: Date | string
+    evaluationPeriodEnd: Date | string
+    testSampleCount: number
+    lateCount: number
+    onTimeCount: number
+    truePositiveCount: number
+    trueNegativeCount: number
+    falsePositiveCount: number
+    falseNegativeCount: number
+    precision: number
+    recall: number
+    f1: number
+    prAuc: number
+    calibrationError: number
+    falseNegativeRate: number
+    baselineEvidence: JsonNullValueInput | InputJsonValue
+    subgroupMetricsReference?: NullableJsonNullValueInput | InputJsonValue
+    featureDistributionReference?: NullableJsonNullValueInput | InputJsonValue
+    missingnessReference?: NullableJsonNullValueInput | InputJsonValue
+    evaluationArtifactReference: string
+    evaluationFingerprint: string
+    recordedAt?: Date | string
+    modelVersion: PredictiveModelVersionCreateNestedOneWithoutEvaluationsInput
+    datasetSnapshot: PredictiveDatasetSnapshotCreateNestedOneWithoutEvaluationsInput
+    recordedBy: UserCreateNestedOneWithoutRecordedPredictiveEvaluationsInput
+  }
+
+  export type PredictiveModelEvaluationUncheckedCreateInput = {
+    id?: string
+    modelVersionId: string
+    datasetSnapshotId: string
+    evaluationContractVersion: string
+    splitStrategy: string
+    evaluationPeriodStart: Date | string
+    evaluationPeriodEnd: Date | string
+    testSampleCount: number
+    lateCount: number
+    onTimeCount: number
+    truePositiveCount: number
+    trueNegativeCount: number
+    falsePositiveCount: number
+    falseNegativeCount: number
+    precision: number
+    recall: number
+    f1: number
+    prAuc: number
+    calibrationError: number
+    falseNegativeRate: number
+    baselineEvidence: JsonNullValueInput | InputJsonValue
+    subgroupMetricsReference?: NullableJsonNullValueInput | InputJsonValue
+    featureDistributionReference?: NullableJsonNullValueInput | InputJsonValue
+    missingnessReference?: NullableJsonNullValueInput | InputJsonValue
+    evaluationArtifactReference: string
+    evaluationFingerprint: string
+    recordedById: string
+    recordedAt?: Date | string
+  }
+
+  export type PredictiveModelEvaluationUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    evaluationContractVersion?: StringFieldUpdateOperationsInput | string
+    splitStrategy?: StringFieldUpdateOperationsInput | string
+    evaluationPeriodStart?: DateTimeFieldUpdateOperationsInput | Date | string
+    evaluationPeriodEnd?: DateTimeFieldUpdateOperationsInput | Date | string
+    testSampleCount?: IntFieldUpdateOperationsInput | number
+    lateCount?: IntFieldUpdateOperationsInput | number
+    onTimeCount?: IntFieldUpdateOperationsInput | number
+    truePositiveCount?: IntFieldUpdateOperationsInput | number
+    trueNegativeCount?: IntFieldUpdateOperationsInput | number
+    falsePositiveCount?: IntFieldUpdateOperationsInput | number
+    falseNegativeCount?: IntFieldUpdateOperationsInput | number
+    precision?: FloatFieldUpdateOperationsInput | number
+    recall?: FloatFieldUpdateOperationsInput | number
+    f1?: FloatFieldUpdateOperationsInput | number
+    prAuc?: FloatFieldUpdateOperationsInput | number
+    calibrationError?: FloatFieldUpdateOperationsInput | number
+    falseNegativeRate?: FloatFieldUpdateOperationsInput | number
+    baselineEvidence?: JsonNullValueInput | InputJsonValue
+    subgroupMetricsReference?: NullableJsonNullValueInput | InputJsonValue
+    featureDistributionReference?: NullableJsonNullValueInput | InputJsonValue
+    missingnessReference?: NullableJsonNullValueInput | InputJsonValue
+    evaluationArtifactReference?: StringFieldUpdateOperationsInput | string
+    evaluationFingerprint?: StringFieldUpdateOperationsInput | string
+    recordedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    modelVersion?: PredictiveModelVersionUpdateOneRequiredWithoutEvaluationsNestedInput
+    datasetSnapshot?: PredictiveDatasetSnapshotUpdateOneRequiredWithoutEvaluationsNestedInput
+    recordedBy?: UserUpdateOneRequiredWithoutRecordedPredictiveEvaluationsNestedInput
+  }
+
+  export type PredictiveModelEvaluationUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    modelVersionId?: StringFieldUpdateOperationsInput | string
+    datasetSnapshotId?: StringFieldUpdateOperationsInput | string
+    evaluationContractVersion?: StringFieldUpdateOperationsInput | string
+    splitStrategy?: StringFieldUpdateOperationsInput | string
+    evaluationPeriodStart?: DateTimeFieldUpdateOperationsInput | Date | string
+    evaluationPeriodEnd?: DateTimeFieldUpdateOperationsInput | Date | string
+    testSampleCount?: IntFieldUpdateOperationsInput | number
+    lateCount?: IntFieldUpdateOperationsInput | number
+    onTimeCount?: IntFieldUpdateOperationsInput | number
+    truePositiveCount?: IntFieldUpdateOperationsInput | number
+    trueNegativeCount?: IntFieldUpdateOperationsInput | number
+    falsePositiveCount?: IntFieldUpdateOperationsInput | number
+    falseNegativeCount?: IntFieldUpdateOperationsInput | number
+    precision?: FloatFieldUpdateOperationsInput | number
+    recall?: FloatFieldUpdateOperationsInput | number
+    f1?: FloatFieldUpdateOperationsInput | number
+    prAuc?: FloatFieldUpdateOperationsInput | number
+    calibrationError?: FloatFieldUpdateOperationsInput | number
+    falseNegativeRate?: FloatFieldUpdateOperationsInput | number
+    baselineEvidence?: JsonNullValueInput | InputJsonValue
+    subgroupMetricsReference?: NullableJsonNullValueInput | InputJsonValue
+    featureDistributionReference?: NullableJsonNullValueInput | InputJsonValue
+    missingnessReference?: NullableJsonNullValueInput | InputJsonValue
+    evaluationArtifactReference?: StringFieldUpdateOperationsInput | string
+    evaluationFingerprint?: StringFieldUpdateOperationsInput | string
+    recordedById?: StringFieldUpdateOperationsInput | string
+    recordedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PredictiveModelEvaluationCreateManyInput = {
+    id?: string
+    modelVersionId: string
+    datasetSnapshotId: string
+    evaluationContractVersion: string
+    splitStrategy: string
+    evaluationPeriodStart: Date | string
+    evaluationPeriodEnd: Date | string
+    testSampleCount: number
+    lateCount: number
+    onTimeCount: number
+    truePositiveCount: number
+    trueNegativeCount: number
+    falsePositiveCount: number
+    falseNegativeCount: number
+    precision: number
+    recall: number
+    f1: number
+    prAuc: number
+    calibrationError: number
+    falseNegativeRate: number
+    baselineEvidence: JsonNullValueInput | InputJsonValue
+    subgroupMetricsReference?: NullableJsonNullValueInput | InputJsonValue
+    featureDistributionReference?: NullableJsonNullValueInput | InputJsonValue
+    missingnessReference?: NullableJsonNullValueInput | InputJsonValue
+    evaluationArtifactReference: string
+    evaluationFingerprint: string
+    recordedById: string
+    recordedAt?: Date | string
+  }
+
+  export type PredictiveModelEvaluationUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    evaluationContractVersion?: StringFieldUpdateOperationsInput | string
+    splitStrategy?: StringFieldUpdateOperationsInput | string
+    evaluationPeriodStart?: DateTimeFieldUpdateOperationsInput | Date | string
+    evaluationPeriodEnd?: DateTimeFieldUpdateOperationsInput | Date | string
+    testSampleCount?: IntFieldUpdateOperationsInput | number
+    lateCount?: IntFieldUpdateOperationsInput | number
+    onTimeCount?: IntFieldUpdateOperationsInput | number
+    truePositiveCount?: IntFieldUpdateOperationsInput | number
+    trueNegativeCount?: IntFieldUpdateOperationsInput | number
+    falsePositiveCount?: IntFieldUpdateOperationsInput | number
+    falseNegativeCount?: IntFieldUpdateOperationsInput | number
+    precision?: FloatFieldUpdateOperationsInput | number
+    recall?: FloatFieldUpdateOperationsInput | number
+    f1?: FloatFieldUpdateOperationsInput | number
+    prAuc?: FloatFieldUpdateOperationsInput | number
+    calibrationError?: FloatFieldUpdateOperationsInput | number
+    falseNegativeRate?: FloatFieldUpdateOperationsInput | number
+    baselineEvidence?: JsonNullValueInput | InputJsonValue
+    subgroupMetricsReference?: NullableJsonNullValueInput | InputJsonValue
+    featureDistributionReference?: NullableJsonNullValueInput | InputJsonValue
+    missingnessReference?: NullableJsonNullValueInput | InputJsonValue
+    evaluationArtifactReference?: StringFieldUpdateOperationsInput | string
+    evaluationFingerprint?: StringFieldUpdateOperationsInput | string
+    recordedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PredictiveModelEvaluationUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    modelVersionId?: StringFieldUpdateOperationsInput | string
+    datasetSnapshotId?: StringFieldUpdateOperationsInput | string
+    evaluationContractVersion?: StringFieldUpdateOperationsInput | string
+    splitStrategy?: StringFieldUpdateOperationsInput | string
+    evaluationPeriodStart?: DateTimeFieldUpdateOperationsInput | Date | string
+    evaluationPeriodEnd?: DateTimeFieldUpdateOperationsInput | Date | string
+    testSampleCount?: IntFieldUpdateOperationsInput | number
+    lateCount?: IntFieldUpdateOperationsInput | number
+    onTimeCount?: IntFieldUpdateOperationsInput | number
+    truePositiveCount?: IntFieldUpdateOperationsInput | number
+    trueNegativeCount?: IntFieldUpdateOperationsInput | number
+    falsePositiveCount?: IntFieldUpdateOperationsInput | number
+    falseNegativeCount?: IntFieldUpdateOperationsInput | number
+    precision?: FloatFieldUpdateOperationsInput | number
+    recall?: FloatFieldUpdateOperationsInput | number
+    f1?: FloatFieldUpdateOperationsInput | number
+    prAuc?: FloatFieldUpdateOperationsInput | number
+    calibrationError?: FloatFieldUpdateOperationsInput | number
+    falseNegativeRate?: FloatFieldUpdateOperationsInput | number
+    baselineEvidence?: JsonNullValueInput | InputJsonValue
+    subgroupMetricsReference?: NullableJsonNullValueInput | InputJsonValue
+    featureDistributionReference?: NullableJsonNullValueInput | InputJsonValue
+    missingnessReference?: NullableJsonNullValueInput | InputJsonValue
+    evaluationArtifactReference?: StringFieldUpdateOperationsInput | string
+    evaluationFingerprint?: StringFieldUpdateOperationsInput | string
+    recordedById?: StringFieldUpdateOperationsInput | string
+    recordedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PredictiveModelApprovalCreateInput = {
+    id?: string
+    decision: $Enums.PredictiveModelApprovalDecision
+    reason: string
+    restrictions?: NullableJsonNullValueInput | InputJsonValue
+    reviewDueAt?: Date | string | null
+    approvalExpiresAt?: Date | string | null
+    decidedAt?: Date | string
+    modelVersion: PredictiveModelVersionCreateNestedOneWithoutApprovalsInput
+    approvedBy: UserCreateNestedOneWithoutDecidedPredictiveApprovalsInput
+  }
+
+  export type PredictiveModelApprovalUncheckedCreateInput = {
+    id?: string
+    modelVersionId: string
+    decision: $Enums.PredictiveModelApprovalDecision
+    reason: string
+    restrictions?: NullableJsonNullValueInput | InputJsonValue
+    reviewDueAt?: Date | string | null
+    approvalExpiresAt?: Date | string | null
+    approvedById: string
+    decidedAt?: Date | string
+  }
+
+  export type PredictiveModelApprovalUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    decision?: EnumPredictiveModelApprovalDecisionFieldUpdateOperationsInput | $Enums.PredictiveModelApprovalDecision
+    reason?: StringFieldUpdateOperationsInput | string
+    restrictions?: NullableJsonNullValueInput | InputJsonValue
+    reviewDueAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    decidedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    modelVersion?: PredictiveModelVersionUpdateOneRequiredWithoutApprovalsNestedInput
+    approvedBy?: UserUpdateOneRequiredWithoutDecidedPredictiveApprovalsNestedInput
+  }
+
+  export type PredictiveModelApprovalUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    modelVersionId?: StringFieldUpdateOperationsInput | string
+    decision?: EnumPredictiveModelApprovalDecisionFieldUpdateOperationsInput | $Enums.PredictiveModelApprovalDecision
+    reason?: StringFieldUpdateOperationsInput | string
+    restrictions?: NullableJsonNullValueInput | InputJsonValue
+    reviewDueAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvedById?: StringFieldUpdateOperationsInput | string
+    decidedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PredictiveModelApprovalCreateManyInput = {
+    id?: string
+    modelVersionId: string
+    decision: $Enums.PredictiveModelApprovalDecision
+    reason: string
+    restrictions?: NullableJsonNullValueInput | InputJsonValue
+    reviewDueAt?: Date | string | null
+    approvalExpiresAt?: Date | string | null
+    approvedById: string
+    decidedAt?: Date | string
+  }
+
+  export type PredictiveModelApprovalUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    decision?: EnumPredictiveModelApprovalDecisionFieldUpdateOperationsInput | $Enums.PredictiveModelApprovalDecision
+    reason?: StringFieldUpdateOperationsInput | string
+    restrictions?: NullableJsonNullValueInput | InputJsonValue
+    reviewDueAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    decidedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PredictiveModelApprovalUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    modelVersionId?: StringFieldUpdateOperationsInput | string
+    decision?: EnumPredictiveModelApprovalDecisionFieldUpdateOperationsInput | $Enums.PredictiveModelApprovalDecision
+    reason?: StringFieldUpdateOperationsInput | string
+    restrictions?: NullableJsonNullValueInput | InputJsonValue
+    reviewDueAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvedById?: StringFieldUpdateOperationsInput | string
+    decidedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PredictiveModelLifecycleEventCreateInput = {
+    id?: string
+    action: $Enums.PredictiveModelLifecycleAction
+    fromStatus?: $Enums.PredictiveModelLifecycleStatus | null
+    toStatus: $Enums.PredictiveModelLifecycleStatus
+    reason: string
+    relatedModelVersionId?: string | null
+    occurredAt?: Date | string
+    modelVersion: PredictiveModelVersionCreateNestedOneWithoutLifecycleEventsInput
+    actor: UserCreateNestedOneWithoutPredictiveModelLifecycleEventsInput
+  }
+
+  export type PredictiveModelLifecycleEventUncheckedCreateInput = {
+    id?: string
+    modelVersionId: string
+    action: $Enums.PredictiveModelLifecycleAction
+    fromStatus?: $Enums.PredictiveModelLifecycleStatus | null
+    toStatus: $Enums.PredictiveModelLifecycleStatus
+    reason: string
+    relatedModelVersionId?: string | null
+    actorId: string
+    occurredAt?: Date | string
+  }
+
+  export type PredictiveModelLifecycleEventUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    action?: EnumPredictiveModelLifecycleActionFieldUpdateOperationsInput | $Enums.PredictiveModelLifecycleAction
+    fromStatus?: NullableEnumPredictiveModelLifecycleStatusFieldUpdateOperationsInput | $Enums.PredictiveModelLifecycleStatus | null
+    toStatus?: EnumPredictiveModelLifecycleStatusFieldUpdateOperationsInput | $Enums.PredictiveModelLifecycleStatus
+    reason?: StringFieldUpdateOperationsInput | string
+    relatedModelVersionId?: NullableStringFieldUpdateOperationsInput | string | null
+    occurredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    modelVersion?: PredictiveModelVersionUpdateOneRequiredWithoutLifecycleEventsNestedInput
+    actor?: UserUpdateOneRequiredWithoutPredictiveModelLifecycleEventsNestedInput
+  }
+
+  export type PredictiveModelLifecycleEventUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    modelVersionId?: StringFieldUpdateOperationsInput | string
+    action?: EnumPredictiveModelLifecycleActionFieldUpdateOperationsInput | $Enums.PredictiveModelLifecycleAction
+    fromStatus?: NullableEnumPredictiveModelLifecycleStatusFieldUpdateOperationsInput | $Enums.PredictiveModelLifecycleStatus | null
+    toStatus?: EnumPredictiveModelLifecycleStatusFieldUpdateOperationsInput | $Enums.PredictiveModelLifecycleStatus
+    reason?: StringFieldUpdateOperationsInput | string
+    relatedModelVersionId?: NullableStringFieldUpdateOperationsInput | string | null
+    actorId?: StringFieldUpdateOperationsInput | string
+    occurredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PredictiveModelLifecycleEventCreateManyInput = {
+    id?: string
+    modelVersionId: string
+    action: $Enums.PredictiveModelLifecycleAction
+    fromStatus?: $Enums.PredictiveModelLifecycleStatus | null
+    toStatus: $Enums.PredictiveModelLifecycleStatus
+    reason: string
+    relatedModelVersionId?: string | null
+    actorId: string
+    occurredAt?: Date | string
+  }
+
+  export type PredictiveModelLifecycleEventUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    action?: EnumPredictiveModelLifecycleActionFieldUpdateOperationsInput | $Enums.PredictiveModelLifecycleAction
+    fromStatus?: NullableEnumPredictiveModelLifecycleStatusFieldUpdateOperationsInput | $Enums.PredictiveModelLifecycleStatus | null
+    toStatus?: EnumPredictiveModelLifecycleStatusFieldUpdateOperationsInput | $Enums.PredictiveModelLifecycleStatus
+    reason?: StringFieldUpdateOperationsInput | string
+    relatedModelVersionId?: NullableStringFieldUpdateOperationsInput | string | null
+    occurredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PredictiveModelLifecycleEventUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    modelVersionId?: StringFieldUpdateOperationsInput | string
+    action?: EnumPredictiveModelLifecycleActionFieldUpdateOperationsInput | $Enums.PredictiveModelLifecycleAction
+    fromStatus?: NullableEnumPredictiveModelLifecycleStatusFieldUpdateOperationsInput | $Enums.PredictiveModelLifecycleStatus | null
+    toStatus?: EnumPredictiveModelLifecycleStatusFieldUpdateOperationsInput | $Enums.PredictiveModelLifecycleStatus
+    reason?: StringFieldUpdateOperationsInput | string
+    relatedModelVersionId?: NullableStringFieldUpdateOperationsInput | string | null
+    actorId?: StringFieldUpdateOperationsInput | string
+    occurredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type ExecutionTaskDependencyCreateInput = {
     id?: string
     createdAt?: Date | string
@@ -59190,6 +67875,36 @@ export namespace Prisma {
     none?: PredictiveOutcomeWhereInput
   }
 
+  export type PredictiveDatasetSnapshotListRelationFilter = {
+    every?: PredictiveDatasetSnapshotWhereInput
+    some?: PredictiveDatasetSnapshotWhereInput
+    none?: PredictiveDatasetSnapshotWhereInput
+  }
+
+  export type PredictiveModelVersionListRelationFilter = {
+    every?: PredictiveModelVersionWhereInput
+    some?: PredictiveModelVersionWhereInput
+    none?: PredictiveModelVersionWhereInput
+  }
+
+  export type PredictiveModelEvaluationListRelationFilter = {
+    every?: PredictiveModelEvaluationWhereInput
+    some?: PredictiveModelEvaluationWhereInput
+    none?: PredictiveModelEvaluationWhereInput
+  }
+
+  export type PredictiveModelApprovalListRelationFilter = {
+    every?: PredictiveModelApprovalWhereInput
+    some?: PredictiveModelApprovalWhereInput
+    none?: PredictiveModelApprovalWhereInput
+  }
+
+  export type PredictiveModelLifecycleEventListRelationFilter = {
+    every?: PredictiveModelLifecycleEventWhereInput
+    some?: PredictiveModelLifecycleEventWhereInput
+    none?: PredictiveModelLifecycleEventWhereInput
+  }
+
   export type InspectionOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -59243,6 +67958,26 @@ export namespace Prisma {
   }
 
   export type PredictiveOutcomeOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type PredictiveDatasetSnapshotOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type PredictiveModelVersionOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type PredictiveModelEvaluationOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type PredictiveModelApprovalOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type PredictiveModelLifecycleEventOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -61941,6 +70676,476 @@ export namespace Prisma {
     _max?: NestedEnumPredictiveOutcomeValueFilter<$PrismaModel>
   }
 
+  export type PredictiveDatasetSnapshotCountOrderByAggregateInput = {
+    id?: SortOrder
+    datasetContractVersion?: SortOrder
+    targetType?: SortOrder
+    featureContractVersion?: SortOrder
+    outcomeContractVersion?: SortOrder
+    departmentId?: SortOrder
+    jurisdictionId?: SortOrder
+    includedProvenance?: SortOrder
+    sampleCount?: SortOrder
+    classBalance?: SortOrder
+    periodStart?: SortOrder
+    periodEnd?: SortOrder
+    sampleIdentities?: SortOrder
+    datasetFingerprint?: SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type PredictiveDatasetSnapshotAvgOrderByAggregateInput = {
+    sampleCount?: SortOrder
+  }
+
+  export type PredictiveDatasetSnapshotMaxOrderByAggregateInput = {
+    id?: SortOrder
+    datasetContractVersion?: SortOrder
+    targetType?: SortOrder
+    featureContractVersion?: SortOrder
+    outcomeContractVersion?: SortOrder
+    departmentId?: SortOrder
+    jurisdictionId?: SortOrder
+    sampleCount?: SortOrder
+    periodStart?: SortOrder
+    periodEnd?: SortOrder
+    datasetFingerprint?: SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type PredictiveDatasetSnapshotMinOrderByAggregateInput = {
+    id?: SortOrder
+    datasetContractVersion?: SortOrder
+    targetType?: SortOrder
+    featureContractVersion?: SortOrder
+    outcomeContractVersion?: SortOrder
+    departmentId?: SortOrder
+    jurisdictionId?: SortOrder
+    sampleCount?: SortOrder
+    periodStart?: SortOrder
+    periodEnd?: SortOrder
+    datasetFingerprint?: SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type PredictiveDatasetSnapshotSumOrderByAggregateInput = {
+    sampleCount?: SortOrder
+  }
+
+  export type BigIntNullableFilter<$PrismaModel = never> = {
+    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel> | null
+    in?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel> | null
+    notIn?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel> | null
+    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    not?: NestedBigIntNullableFilter<$PrismaModel> | bigint | number | null
+  }
+
+  export type EnumPredictiveModelLifecycleStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.PredictiveModelLifecycleStatus | EnumPredictiveModelLifecycleStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.PredictiveModelLifecycleStatus[] | ListEnumPredictiveModelLifecycleStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PredictiveModelLifecycleStatus[] | ListEnumPredictiveModelLifecycleStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumPredictiveModelLifecycleStatusFilter<$PrismaModel> | $Enums.PredictiveModelLifecycleStatus
+  }
+
+  export type PredictiveDatasetSnapshotScalarRelationFilter = {
+    is?: PredictiveDatasetSnapshotWhereInput
+    isNot?: PredictiveDatasetSnapshotWhereInput
+  }
+
+  export type PredictiveModelVersionModelNameModelVersionTargetTypeCompoundUniqueInput = {
+    modelName: string
+    modelVersion: string
+    targetType: $Enums.PredictiveTargetType
+  }
+
+  export type PredictiveModelVersionCountOrderByAggregateInput = {
+    id?: SortOrder
+    modelName?: SortOrder
+    modelVersion?: SortOrder
+    targetType?: SortOrder
+    deploymentSlot?: SortOrder
+    intendedUse?: SortOrder
+    forbiddenUse?: SortOrder
+    featureContractVersion?: SortOrder
+    outcomeContractVersion?: SortOrder
+    datasetSnapshotId?: SortOrder
+    trainingCodeVersion?: SortOrder
+    artifactReference?: SortOrder
+    artifactDigest?: SortOrder
+    artifactFormat?: SortOrder
+    artifactSizeBytes?: SortOrder
+    trainingTimestamp?: SortOrder
+    lifecycleStatus?: SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+    validatedById?: SortOrder
+    validatedAt?: SortOrder
+  }
+
+  export type PredictiveModelVersionAvgOrderByAggregateInput = {
+    artifactSizeBytes?: SortOrder
+  }
+
+  export type PredictiveModelVersionMaxOrderByAggregateInput = {
+    id?: SortOrder
+    modelName?: SortOrder
+    modelVersion?: SortOrder
+    targetType?: SortOrder
+    deploymentSlot?: SortOrder
+    intendedUse?: SortOrder
+    forbiddenUse?: SortOrder
+    featureContractVersion?: SortOrder
+    outcomeContractVersion?: SortOrder
+    datasetSnapshotId?: SortOrder
+    trainingCodeVersion?: SortOrder
+    artifactReference?: SortOrder
+    artifactDigest?: SortOrder
+    artifactFormat?: SortOrder
+    artifactSizeBytes?: SortOrder
+    trainingTimestamp?: SortOrder
+    lifecycleStatus?: SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+    validatedById?: SortOrder
+    validatedAt?: SortOrder
+  }
+
+  export type PredictiveModelVersionMinOrderByAggregateInput = {
+    id?: SortOrder
+    modelName?: SortOrder
+    modelVersion?: SortOrder
+    targetType?: SortOrder
+    deploymentSlot?: SortOrder
+    intendedUse?: SortOrder
+    forbiddenUse?: SortOrder
+    featureContractVersion?: SortOrder
+    outcomeContractVersion?: SortOrder
+    datasetSnapshotId?: SortOrder
+    trainingCodeVersion?: SortOrder
+    artifactReference?: SortOrder
+    artifactDigest?: SortOrder
+    artifactFormat?: SortOrder
+    artifactSizeBytes?: SortOrder
+    trainingTimestamp?: SortOrder
+    lifecycleStatus?: SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+    validatedById?: SortOrder
+    validatedAt?: SortOrder
+  }
+
+  export type PredictiveModelVersionSumOrderByAggregateInput = {
+    artifactSizeBytes?: SortOrder
+  }
+
+  export type BigIntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel> | null
+    in?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel> | null
+    notIn?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel> | null
+    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    not?: NestedBigIntNullableWithAggregatesFilter<$PrismaModel> | bigint | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedBigIntNullableFilter<$PrismaModel>
+    _min?: NestedBigIntNullableFilter<$PrismaModel>
+    _max?: NestedBigIntNullableFilter<$PrismaModel>
+  }
+
+  export type EnumPredictiveModelLifecycleStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.PredictiveModelLifecycleStatus | EnumPredictiveModelLifecycleStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.PredictiveModelLifecycleStatus[] | ListEnumPredictiveModelLifecycleStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PredictiveModelLifecycleStatus[] | ListEnumPredictiveModelLifecycleStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumPredictiveModelLifecycleStatusWithAggregatesFilter<$PrismaModel> | $Enums.PredictiveModelLifecycleStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumPredictiveModelLifecycleStatusFilter<$PrismaModel>
+    _max?: NestedEnumPredictiveModelLifecycleStatusFilter<$PrismaModel>
+  }
+
+  export type FloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
+  export type PredictiveModelVersionScalarRelationFilter = {
+    is?: PredictiveModelVersionWhereInput
+    isNot?: PredictiveModelVersionWhereInput
+  }
+
+  export type PredictiveModelEvaluationModelVersionIdDatasetSnapshotIdEvaluationContractVersionCompoundUniqueInput = {
+    modelVersionId: string
+    datasetSnapshotId: string
+    evaluationContractVersion: string
+  }
+
+  export type PredictiveModelEvaluationCountOrderByAggregateInput = {
+    id?: SortOrder
+    modelVersionId?: SortOrder
+    datasetSnapshotId?: SortOrder
+    evaluationContractVersion?: SortOrder
+    splitStrategy?: SortOrder
+    evaluationPeriodStart?: SortOrder
+    evaluationPeriodEnd?: SortOrder
+    testSampleCount?: SortOrder
+    lateCount?: SortOrder
+    onTimeCount?: SortOrder
+    truePositiveCount?: SortOrder
+    trueNegativeCount?: SortOrder
+    falsePositiveCount?: SortOrder
+    falseNegativeCount?: SortOrder
+    precision?: SortOrder
+    recall?: SortOrder
+    f1?: SortOrder
+    prAuc?: SortOrder
+    calibrationError?: SortOrder
+    falseNegativeRate?: SortOrder
+    baselineEvidence?: SortOrder
+    subgroupMetricsReference?: SortOrder
+    featureDistributionReference?: SortOrder
+    missingnessReference?: SortOrder
+    evaluationArtifactReference?: SortOrder
+    evaluationFingerprint?: SortOrder
+    recordedById?: SortOrder
+    recordedAt?: SortOrder
+  }
+
+  export type PredictiveModelEvaluationAvgOrderByAggregateInput = {
+    testSampleCount?: SortOrder
+    lateCount?: SortOrder
+    onTimeCount?: SortOrder
+    truePositiveCount?: SortOrder
+    trueNegativeCount?: SortOrder
+    falsePositiveCount?: SortOrder
+    falseNegativeCount?: SortOrder
+    precision?: SortOrder
+    recall?: SortOrder
+    f1?: SortOrder
+    prAuc?: SortOrder
+    calibrationError?: SortOrder
+    falseNegativeRate?: SortOrder
+  }
+
+  export type PredictiveModelEvaluationMaxOrderByAggregateInput = {
+    id?: SortOrder
+    modelVersionId?: SortOrder
+    datasetSnapshotId?: SortOrder
+    evaluationContractVersion?: SortOrder
+    splitStrategy?: SortOrder
+    evaluationPeriodStart?: SortOrder
+    evaluationPeriodEnd?: SortOrder
+    testSampleCount?: SortOrder
+    lateCount?: SortOrder
+    onTimeCount?: SortOrder
+    truePositiveCount?: SortOrder
+    trueNegativeCount?: SortOrder
+    falsePositiveCount?: SortOrder
+    falseNegativeCount?: SortOrder
+    precision?: SortOrder
+    recall?: SortOrder
+    f1?: SortOrder
+    prAuc?: SortOrder
+    calibrationError?: SortOrder
+    falseNegativeRate?: SortOrder
+    evaluationArtifactReference?: SortOrder
+    evaluationFingerprint?: SortOrder
+    recordedById?: SortOrder
+    recordedAt?: SortOrder
+  }
+
+  export type PredictiveModelEvaluationMinOrderByAggregateInput = {
+    id?: SortOrder
+    modelVersionId?: SortOrder
+    datasetSnapshotId?: SortOrder
+    evaluationContractVersion?: SortOrder
+    splitStrategy?: SortOrder
+    evaluationPeriodStart?: SortOrder
+    evaluationPeriodEnd?: SortOrder
+    testSampleCount?: SortOrder
+    lateCount?: SortOrder
+    onTimeCount?: SortOrder
+    truePositiveCount?: SortOrder
+    trueNegativeCount?: SortOrder
+    falsePositiveCount?: SortOrder
+    falseNegativeCount?: SortOrder
+    precision?: SortOrder
+    recall?: SortOrder
+    f1?: SortOrder
+    prAuc?: SortOrder
+    calibrationError?: SortOrder
+    falseNegativeRate?: SortOrder
+    evaluationArtifactReference?: SortOrder
+    evaluationFingerprint?: SortOrder
+    recordedById?: SortOrder
+    recordedAt?: SortOrder
+  }
+
+  export type PredictiveModelEvaluationSumOrderByAggregateInput = {
+    testSampleCount?: SortOrder
+    lateCount?: SortOrder
+    onTimeCount?: SortOrder
+    truePositiveCount?: SortOrder
+    trueNegativeCount?: SortOrder
+    falsePositiveCount?: SortOrder
+    falseNegativeCount?: SortOrder
+    precision?: SortOrder
+    recall?: SortOrder
+    f1?: SortOrder
+    prAuc?: SortOrder
+    calibrationError?: SortOrder
+    falseNegativeRate?: SortOrder
+  }
+
+  export type FloatWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedFloatFilter<$PrismaModel>
+    _min?: NestedFloatFilter<$PrismaModel>
+    _max?: NestedFloatFilter<$PrismaModel>
+  }
+
+  export type EnumPredictiveModelApprovalDecisionFilter<$PrismaModel = never> = {
+    equals?: $Enums.PredictiveModelApprovalDecision | EnumPredictiveModelApprovalDecisionFieldRefInput<$PrismaModel>
+    in?: $Enums.PredictiveModelApprovalDecision[] | ListEnumPredictiveModelApprovalDecisionFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PredictiveModelApprovalDecision[] | ListEnumPredictiveModelApprovalDecisionFieldRefInput<$PrismaModel>
+    not?: NestedEnumPredictiveModelApprovalDecisionFilter<$PrismaModel> | $Enums.PredictiveModelApprovalDecision
+  }
+
+  export type PredictiveModelApprovalCountOrderByAggregateInput = {
+    id?: SortOrder
+    modelVersionId?: SortOrder
+    decision?: SortOrder
+    reason?: SortOrder
+    restrictions?: SortOrder
+    reviewDueAt?: SortOrder
+    approvalExpiresAt?: SortOrder
+    approvedById?: SortOrder
+    decidedAt?: SortOrder
+  }
+
+  export type PredictiveModelApprovalMaxOrderByAggregateInput = {
+    id?: SortOrder
+    modelVersionId?: SortOrder
+    decision?: SortOrder
+    reason?: SortOrder
+    reviewDueAt?: SortOrder
+    approvalExpiresAt?: SortOrder
+    approvedById?: SortOrder
+    decidedAt?: SortOrder
+  }
+
+  export type PredictiveModelApprovalMinOrderByAggregateInput = {
+    id?: SortOrder
+    modelVersionId?: SortOrder
+    decision?: SortOrder
+    reason?: SortOrder
+    reviewDueAt?: SortOrder
+    approvalExpiresAt?: SortOrder
+    approvedById?: SortOrder
+    decidedAt?: SortOrder
+  }
+
+  export type EnumPredictiveModelApprovalDecisionWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.PredictiveModelApprovalDecision | EnumPredictiveModelApprovalDecisionFieldRefInput<$PrismaModel>
+    in?: $Enums.PredictiveModelApprovalDecision[] | ListEnumPredictiveModelApprovalDecisionFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PredictiveModelApprovalDecision[] | ListEnumPredictiveModelApprovalDecisionFieldRefInput<$PrismaModel>
+    not?: NestedEnumPredictiveModelApprovalDecisionWithAggregatesFilter<$PrismaModel> | $Enums.PredictiveModelApprovalDecision
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumPredictiveModelApprovalDecisionFilter<$PrismaModel>
+    _max?: NestedEnumPredictiveModelApprovalDecisionFilter<$PrismaModel>
+  }
+
+  export type EnumPredictiveModelLifecycleActionFilter<$PrismaModel = never> = {
+    equals?: $Enums.PredictiveModelLifecycleAction | EnumPredictiveModelLifecycleActionFieldRefInput<$PrismaModel>
+    in?: $Enums.PredictiveModelLifecycleAction[] | ListEnumPredictiveModelLifecycleActionFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PredictiveModelLifecycleAction[] | ListEnumPredictiveModelLifecycleActionFieldRefInput<$PrismaModel>
+    not?: NestedEnumPredictiveModelLifecycleActionFilter<$PrismaModel> | $Enums.PredictiveModelLifecycleAction
+  }
+
+  export type EnumPredictiveModelLifecycleStatusNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.PredictiveModelLifecycleStatus | EnumPredictiveModelLifecycleStatusFieldRefInput<$PrismaModel> | null
+    in?: $Enums.PredictiveModelLifecycleStatus[] | ListEnumPredictiveModelLifecycleStatusFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.PredictiveModelLifecycleStatus[] | ListEnumPredictiveModelLifecycleStatusFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumPredictiveModelLifecycleStatusNullableFilter<$PrismaModel> | $Enums.PredictiveModelLifecycleStatus | null
+  }
+
+  export type PredictiveModelLifecycleEventCountOrderByAggregateInput = {
+    id?: SortOrder
+    modelVersionId?: SortOrder
+    action?: SortOrder
+    fromStatus?: SortOrder
+    toStatus?: SortOrder
+    reason?: SortOrder
+    relatedModelVersionId?: SortOrder
+    actorId?: SortOrder
+    occurredAt?: SortOrder
+  }
+
+  export type PredictiveModelLifecycleEventMaxOrderByAggregateInput = {
+    id?: SortOrder
+    modelVersionId?: SortOrder
+    action?: SortOrder
+    fromStatus?: SortOrder
+    toStatus?: SortOrder
+    reason?: SortOrder
+    relatedModelVersionId?: SortOrder
+    actorId?: SortOrder
+    occurredAt?: SortOrder
+  }
+
+  export type PredictiveModelLifecycleEventMinOrderByAggregateInput = {
+    id?: SortOrder
+    modelVersionId?: SortOrder
+    action?: SortOrder
+    fromStatus?: SortOrder
+    toStatus?: SortOrder
+    reason?: SortOrder
+    relatedModelVersionId?: SortOrder
+    actorId?: SortOrder
+    occurredAt?: SortOrder
+  }
+
+  export type EnumPredictiveModelLifecycleActionWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.PredictiveModelLifecycleAction | EnumPredictiveModelLifecycleActionFieldRefInput<$PrismaModel>
+    in?: $Enums.PredictiveModelLifecycleAction[] | ListEnumPredictiveModelLifecycleActionFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PredictiveModelLifecycleAction[] | ListEnumPredictiveModelLifecycleActionFieldRefInput<$PrismaModel>
+    not?: NestedEnumPredictiveModelLifecycleActionWithAggregatesFilter<$PrismaModel> | $Enums.PredictiveModelLifecycleAction
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumPredictiveModelLifecycleActionFilter<$PrismaModel>
+    _max?: NestedEnumPredictiveModelLifecycleActionFilter<$PrismaModel>
+  }
+
+  export type EnumPredictiveModelLifecycleStatusNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.PredictiveModelLifecycleStatus | EnumPredictiveModelLifecycleStatusFieldRefInput<$PrismaModel> | null
+    in?: $Enums.PredictiveModelLifecycleStatus[] | ListEnumPredictiveModelLifecycleStatusFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.PredictiveModelLifecycleStatus[] | ListEnumPredictiveModelLifecycleStatusFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumPredictiveModelLifecycleStatusNullableWithAggregatesFilter<$PrismaModel> | $Enums.PredictiveModelLifecycleStatus | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumPredictiveModelLifecycleStatusNullableFilter<$PrismaModel>
+    _max?: NestedEnumPredictiveModelLifecycleStatusNullableFilter<$PrismaModel>
+  }
+
   export type ExecutionTaskDependencyDependentTaskIdPredecessorTaskIdCompoundUniqueInput = {
     dependentTaskId: string
     predecessorTaskId: string
@@ -63335,6 +72540,48 @@ export namespace Prisma {
     connect?: PredictiveOutcomeWhereUniqueInput | PredictiveOutcomeWhereUniqueInput[]
   }
 
+  export type PredictiveDatasetSnapshotCreateNestedManyWithoutCreatedByInput = {
+    create?: XOR<PredictiveDatasetSnapshotCreateWithoutCreatedByInput, PredictiveDatasetSnapshotUncheckedCreateWithoutCreatedByInput> | PredictiveDatasetSnapshotCreateWithoutCreatedByInput[] | PredictiveDatasetSnapshotUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: PredictiveDatasetSnapshotCreateOrConnectWithoutCreatedByInput | PredictiveDatasetSnapshotCreateOrConnectWithoutCreatedByInput[]
+    createMany?: PredictiveDatasetSnapshotCreateManyCreatedByInputEnvelope
+    connect?: PredictiveDatasetSnapshotWhereUniqueInput | PredictiveDatasetSnapshotWhereUniqueInput[]
+  }
+
+  export type PredictiveModelVersionCreateNestedManyWithoutCreatedByInput = {
+    create?: XOR<PredictiveModelVersionCreateWithoutCreatedByInput, PredictiveModelVersionUncheckedCreateWithoutCreatedByInput> | PredictiveModelVersionCreateWithoutCreatedByInput[] | PredictiveModelVersionUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: PredictiveModelVersionCreateOrConnectWithoutCreatedByInput | PredictiveModelVersionCreateOrConnectWithoutCreatedByInput[]
+    createMany?: PredictiveModelVersionCreateManyCreatedByInputEnvelope
+    connect?: PredictiveModelVersionWhereUniqueInput | PredictiveModelVersionWhereUniqueInput[]
+  }
+
+  export type PredictiveModelVersionCreateNestedManyWithoutValidatedByInput = {
+    create?: XOR<PredictiveModelVersionCreateWithoutValidatedByInput, PredictiveModelVersionUncheckedCreateWithoutValidatedByInput> | PredictiveModelVersionCreateWithoutValidatedByInput[] | PredictiveModelVersionUncheckedCreateWithoutValidatedByInput[]
+    connectOrCreate?: PredictiveModelVersionCreateOrConnectWithoutValidatedByInput | PredictiveModelVersionCreateOrConnectWithoutValidatedByInput[]
+    createMany?: PredictiveModelVersionCreateManyValidatedByInputEnvelope
+    connect?: PredictiveModelVersionWhereUniqueInput | PredictiveModelVersionWhereUniqueInput[]
+  }
+
+  export type PredictiveModelEvaluationCreateNestedManyWithoutRecordedByInput = {
+    create?: XOR<PredictiveModelEvaluationCreateWithoutRecordedByInput, PredictiveModelEvaluationUncheckedCreateWithoutRecordedByInput> | PredictiveModelEvaluationCreateWithoutRecordedByInput[] | PredictiveModelEvaluationUncheckedCreateWithoutRecordedByInput[]
+    connectOrCreate?: PredictiveModelEvaluationCreateOrConnectWithoutRecordedByInput | PredictiveModelEvaluationCreateOrConnectWithoutRecordedByInput[]
+    createMany?: PredictiveModelEvaluationCreateManyRecordedByInputEnvelope
+    connect?: PredictiveModelEvaluationWhereUniqueInput | PredictiveModelEvaluationWhereUniqueInput[]
+  }
+
+  export type PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput = {
+    create?: XOR<PredictiveModelApprovalCreateWithoutApprovedByInput, PredictiveModelApprovalUncheckedCreateWithoutApprovedByInput> | PredictiveModelApprovalCreateWithoutApprovedByInput[] | PredictiveModelApprovalUncheckedCreateWithoutApprovedByInput[]
+    connectOrCreate?: PredictiveModelApprovalCreateOrConnectWithoutApprovedByInput | PredictiveModelApprovalCreateOrConnectWithoutApprovedByInput[]
+    createMany?: PredictiveModelApprovalCreateManyApprovedByInputEnvelope
+    connect?: PredictiveModelApprovalWhereUniqueInput | PredictiveModelApprovalWhereUniqueInput[]
+  }
+
+  export type PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput = {
+    create?: XOR<PredictiveModelLifecycleEventCreateWithoutActorInput, PredictiveModelLifecycleEventUncheckedCreateWithoutActorInput> | PredictiveModelLifecycleEventCreateWithoutActorInput[] | PredictiveModelLifecycleEventUncheckedCreateWithoutActorInput[]
+    connectOrCreate?: PredictiveModelLifecycleEventCreateOrConnectWithoutActorInput | PredictiveModelLifecycleEventCreateOrConnectWithoutActorInput[]
+    createMany?: PredictiveModelLifecycleEventCreateManyActorInputEnvelope
+    connect?: PredictiveModelLifecycleEventWhereUniqueInput | PredictiveModelLifecycleEventWhereUniqueInput[]
+  }
+
   export type InspectionUncheckedCreateNestedManyWithoutInspectorInput = {
     create?: XOR<InspectionCreateWithoutInspectorInput, InspectionUncheckedCreateWithoutInspectorInput> | InspectionCreateWithoutInspectorInput[] | InspectionUncheckedCreateWithoutInspectorInput[]
     connectOrCreate?: InspectionCreateOrConnectWithoutInspectorInput | InspectionCreateOrConnectWithoutInspectorInput[]
@@ -63578,6 +72825,48 @@ export namespace Prisma {
     connectOrCreate?: PredictiveOutcomeCreateOrConnectWithoutVoidedByInput | PredictiveOutcomeCreateOrConnectWithoutVoidedByInput[]
     createMany?: PredictiveOutcomeCreateManyVoidedByInputEnvelope
     connect?: PredictiveOutcomeWhereUniqueInput | PredictiveOutcomeWhereUniqueInput[]
+  }
+
+  export type PredictiveDatasetSnapshotUncheckedCreateNestedManyWithoutCreatedByInput = {
+    create?: XOR<PredictiveDatasetSnapshotCreateWithoutCreatedByInput, PredictiveDatasetSnapshotUncheckedCreateWithoutCreatedByInput> | PredictiveDatasetSnapshotCreateWithoutCreatedByInput[] | PredictiveDatasetSnapshotUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: PredictiveDatasetSnapshotCreateOrConnectWithoutCreatedByInput | PredictiveDatasetSnapshotCreateOrConnectWithoutCreatedByInput[]
+    createMany?: PredictiveDatasetSnapshotCreateManyCreatedByInputEnvelope
+    connect?: PredictiveDatasetSnapshotWhereUniqueInput | PredictiveDatasetSnapshotWhereUniqueInput[]
+  }
+
+  export type PredictiveModelVersionUncheckedCreateNestedManyWithoutCreatedByInput = {
+    create?: XOR<PredictiveModelVersionCreateWithoutCreatedByInput, PredictiveModelVersionUncheckedCreateWithoutCreatedByInput> | PredictiveModelVersionCreateWithoutCreatedByInput[] | PredictiveModelVersionUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: PredictiveModelVersionCreateOrConnectWithoutCreatedByInput | PredictiveModelVersionCreateOrConnectWithoutCreatedByInput[]
+    createMany?: PredictiveModelVersionCreateManyCreatedByInputEnvelope
+    connect?: PredictiveModelVersionWhereUniqueInput | PredictiveModelVersionWhereUniqueInput[]
+  }
+
+  export type PredictiveModelVersionUncheckedCreateNestedManyWithoutValidatedByInput = {
+    create?: XOR<PredictiveModelVersionCreateWithoutValidatedByInput, PredictiveModelVersionUncheckedCreateWithoutValidatedByInput> | PredictiveModelVersionCreateWithoutValidatedByInput[] | PredictiveModelVersionUncheckedCreateWithoutValidatedByInput[]
+    connectOrCreate?: PredictiveModelVersionCreateOrConnectWithoutValidatedByInput | PredictiveModelVersionCreateOrConnectWithoutValidatedByInput[]
+    createMany?: PredictiveModelVersionCreateManyValidatedByInputEnvelope
+    connect?: PredictiveModelVersionWhereUniqueInput | PredictiveModelVersionWhereUniqueInput[]
+  }
+
+  export type PredictiveModelEvaluationUncheckedCreateNestedManyWithoutRecordedByInput = {
+    create?: XOR<PredictiveModelEvaluationCreateWithoutRecordedByInput, PredictiveModelEvaluationUncheckedCreateWithoutRecordedByInput> | PredictiveModelEvaluationCreateWithoutRecordedByInput[] | PredictiveModelEvaluationUncheckedCreateWithoutRecordedByInput[]
+    connectOrCreate?: PredictiveModelEvaluationCreateOrConnectWithoutRecordedByInput | PredictiveModelEvaluationCreateOrConnectWithoutRecordedByInput[]
+    createMany?: PredictiveModelEvaluationCreateManyRecordedByInputEnvelope
+    connect?: PredictiveModelEvaluationWhereUniqueInput | PredictiveModelEvaluationWhereUniqueInput[]
+  }
+
+  export type PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput = {
+    create?: XOR<PredictiveModelApprovalCreateWithoutApprovedByInput, PredictiveModelApprovalUncheckedCreateWithoutApprovedByInput> | PredictiveModelApprovalCreateWithoutApprovedByInput[] | PredictiveModelApprovalUncheckedCreateWithoutApprovedByInput[]
+    connectOrCreate?: PredictiveModelApprovalCreateOrConnectWithoutApprovedByInput | PredictiveModelApprovalCreateOrConnectWithoutApprovedByInput[]
+    createMany?: PredictiveModelApprovalCreateManyApprovedByInputEnvelope
+    connect?: PredictiveModelApprovalWhereUniqueInput | PredictiveModelApprovalWhereUniqueInput[]
+  }
+
+  export type PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput = {
+    create?: XOR<PredictiveModelLifecycleEventCreateWithoutActorInput, PredictiveModelLifecycleEventUncheckedCreateWithoutActorInput> | PredictiveModelLifecycleEventCreateWithoutActorInput[] | PredictiveModelLifecycleEventUncheckedCreateWithoutActorInput[]
+    connectOrCreate?: PredictiveModelLifecycleEventCreateOrConnectWithoutActorInput | PredictiveModelLifecycleEventCreateOrConnectWithoutActorInput[]
+    createMany?: PredictiveModelLifecycleEventCreateManyActorInputEnvelope
+    connect?: PredictiveModelLifecycleEventWhereUniqueInput | PredictiveModelLifecycleEventWhereUniqueInput[]
   }
 
   export type EnumSystemRoleFieldUpdateOperationsInput = {
@@ -64094,6 +73383,90 @@ export namespace Prisma {
     deleteMany?: PredictiveOutcomeScalarWhereInput | PredictiveOutcomeScalarWhereInput[]
   }
 
+  export type PredictiveDatasetSnapshotUpdateManyWithoutCreatedByNestedInput = {
+    create?: XOR<PredictiveDatasetSnapshotCreateWithoutCreatedByInput, PredictiveDatasetSnapshotUncheckedCreateWithoutCreatedByInput> | PredictiveDatasetSnapshotCreateWithoutCreatedByInput[] | PredictiveDatasetSnapshotUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: PredictiveDatasetSnapshotCreateOrConnectWithoutCreatedByInput | PredictiveDatasetSnapshotCreateOrConnectWithoutCreatedByInput[]
+    upsert?: PredictiveDatasetSnapshotUpsertWithWhereUniqueWithoutCreatedByInput | PredictiveDatasetSnapshotUpsertWithWhereUniqueWithoutCreatedByInput[]
+    createMany?: PredictiveDatasetSnapshotCreateManyCreatedByInputEnvelope
+    set?: PredictiveDatasetSnapshotWhereUniqueInput | PredictiveDatasetSnapshotWhereUniqueInput[]
+    disconnect?: PredictiveDatasetSnapshotWhereUniqueInput | PredictiveDatasetSnapshotWhereUniqueInput[]
+    delete?: PredictiveDatasetSnapshotWhereUniqueInput | PredictiveDatasetSnapshotWhereUniqueInput[]
+    connect?: PredictiveDatasetSnapshotWhereUniqueInput | PredictiveDatasetSnapshotWhereUniqueInput[]
+    update?: PredictiveDatasetSnapshotUpdateWithWhereUniqueWithoutCreatedByInput | PredictiveDatasetSnapshotUpdateWithWhereUniqueWithoutCreatedByInput[]
+    updateMany?: PredictiveDatasetSnapshotUpdateManyWithWhereWithoutCreatedByInput | PredictiveDatasetSnapshotUpdateManyWithWhereWithoutCreatedByInput[]
+    deleteMany?: PredictiveDatasetSnapshotScalarWhereInput | PredictiveDatasetSnapshotScalarWhereInput[]
+  }
+
+  export type PredictiveModelVersionUpdateManyWithoutCreatedByNestedInput = {
+    create?: XOR<PredictiveModelVersionCreateWithoutCreatedByInput, PredictiveModelVersionUncheckedCreateWithoutCreatedByInput> | PredictiveModelVersionCreateWithoutCreatedByInput[] | PredictiveModelVersionUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: PredictiveModelVersionCreateOrConnectWithoutCreatedByInput | PredictiveModelVersionCreateOrConnectWithoutCreatedByInput[]
+    upsert?: PredictiveModelVersionUpsertWithWhereUniqueWithoutCreatedByInput | PredictiveModelVersionUpsertWithWhereUniqueWithoutCreatedByInput[]
+    createMany?: PredictiveModelVersionCreateManyCreatedByInputEnvelope
+    set?: PredictiveModelVersionWhereUniqueInput | PredictiveModelVersionWhereUniqueInput[]
+    disconnect?: PredictiveModelVersionWhereUniqueInput | PredictiveModelVersionWhereUniqueInput[]
+    delete?: PredictiveModelVersionWhereUniqueInput | PredictiveModelVersionWhereUniqueInput[]
+    connect?: PredictiveModelVersionWhereUniqueInput | PredictiveModelVersionWhereUniqueInput[]
+    update?: PredictiveModelVersionUpdateWithWhereUniqueWithoutCreatedByInput | PredictiveModelVersionUpdateWithWhereUniqueWithoutCreatedByInput[]
+    updateMany?: PredictiveModelVersionUpdateManyWithWhereWithoutCreatedByInput | PredictiveModelVersionUpdateManyWithWhereWithoutCreatedByInput[]
+    deleteMany?: PredictiveModelVersionScalarWhereInput | PredictiveModelVersionScalarWhereInput[]
+  }
+
+  export type PredictiveModelVersionUpdateManyWithoutValidatedByNestedInput = {
+    create?: XOR<PredictiveModelVersionCreateWithoutValidatedByInput, PredictiveModelVersionUncheckedCreateWithoutValidatedByInput> | PredictiveModelVersionCreateWithoutValidatedByInput[] | PredictiveModelVersionUncheckedCreateWithoutValidatedByInput[]
+    connectOrCreate?: PredictiveModelVersionCreateOrConnectWithoutValidatedByInput | PredictiveModelVersionCreateOrConnectWithoutValidatedByInput[]
+    upsert?: PredictiveModelVersionUpsertWithWhereUniqueWithoutValidatedByInput | PredictiveModelVersionUpsertWithWhereUniqueWithoutValidatedByInput[]
+    createMany?: PredictiveModelVersionCreateManyValidatedByInputEnvelope
+    set?: PredictiveModelVersionWhereUniqueInput | PredictiveModelVersionWhereUniqueInput[]
+    disconnect?: PredictiveModelVersionWhereUniqueInput | PredictiveModelVersionWhereUniqueInput[]
+    delete?: PredictiveModelVersionWhereUniqueInput | PredictiveModelVersionWhereUniqueInput[]
+    connect?: PredictiveModelVersionWhereUniqueInput | PredictiveModelVersionWhereUniqueInput[]
+    update?: PredictiveModelVersionUpdateWithWhereUniqueWithoutValidatedByInput | PredictiveModelVersionUpdateWithWhereUniqueWithoutValidatedByInput[]
+    updateMany?: PredictiveModelVersionUpdateManyWithWhereWithoutValidatedByInput | PredictiveModelVersionUpdateManyWithWhereWithoutValidatedByInput[]
+    deleteMany?: PredictiveModelVersionScalarWhereInput | PredictiveModelVersionScalarWhereInput[]
+  }
+
+  export type PredictiveModelEvaluationUpdateManyWithoutRecordedByNestedInput = {
+    create?: XOR<PredictiveModelEvaluationCreateWithoutRecordedByInput, PredictiveModelEvaluationUncheckedCreateWithoutRecordedByInput> | PredictiveModelEvaluationCreateWithoutRecordedByInput[] | PredictiveModelEvaluationUncheckedCreateWithoutRecordedByInput[]
+    connectOrCreate?: PredictiveModelEvaluationCreateOrConnectWithoutRecordedByInput | PredictiveModelEvaluationCreateOrConnectWithoutRecordedByInput[]
+    upsert?: PredictiveModelEvaluationUpsertWithWhereUniqueWithoutRecordedByInput | PredictiveModelEvaluationUpsertWithWhereUniqueWithoutRecordedByInput[]
+    createMany?: PredictiveModelEvaluationCreateManyRecordedByInputEnvelope
+    set?: PredictiveModelEvaluationWhereUniqueInput | PredictiveModelEvaluationWhereUniqueInput[]
+    disconnect?: PredictiveModelEvaluationWhereUniqueInput | PredictiveModelEvaluationWhereUniqueInput[]
+    delete?: PredictiveModelEvaluationWhereUniqueInput | PredictiveModelEvaluationWhereUniqueInput[]
+    connect?: PredictiveModelEvaluationWhereUniqueInput | PredictiveModelEvaluationWhereUniqueInput[]
+    update?: PredictiveModelEvaluationUpdateWithWhereUniqueWithoutRecordedByInput | PredictiveModelEvaluationUpdateWithWhereUniqueWithoutRecordedByInput[]
+    updateMany?: PredictiveModelEvaluationUpdateManyWithWhereWithoutRecordedByInput | PredictiveModelEvaluationUpdateManyWithWhereWithoutRecordedByInput[]
+    deleteMany?: PredictiveModelEvaluationScalarWhereInput | PredictiveModelEvaluationScalarWhereInput[]
+  }
+
+  export type PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput = {
+    create?: XOR<PredictiveModelApprovalCreateWithoutApprovedByInput, PredictiveModelApprovalUncheckedCreateWithoutApprovedByInput> | PredictiveModelApprovalCreateWithoutApprovedByInput[] | PredictiveModelApprovalUncheckedCreateWithoutApprovedByInput[]
+    connectOrCreate?: PredictiveModelApprovalCreateOrConnectWithoutApprovedByInput | PredictiveModelApprovalCreateOrConnectWithoutApprovedByInput[]
+    upsert?: PredictiveModelApprovalUpsertWithWhereUniqueWithoutApprovedByInput | PredictiveModelApprovalUpsertWithWhereUniqueWithoutApprovedByInput[]
+    createMany?: PredictiveModelApprovalCreateManyApprovedByInputEnvelope
+    set?: PredictiveModelApprovalWhereUniqueInput | PredictiveModelApprovalWhereUniqueInput[]
+    disconnect?: PredictiveModelApprovalWhereUniqueInput | PredictiveModelApprovalWhereUniqueInput[]
+    delete?: PredictiveModelApprovalWhereUniqueInput | PredictiveModelApprovalWhereUniqueInput[]
+    connect?: PredictiveModelApprovalWhereUniqueInput | PredictiveModelApprovalWhereUniqueInput[]
+    update?: PredictiveModelApprovalUpdateWithWhereUniqueWithoutApprovedByInput | PredictiveModelApprovalUpdateWithWhereUniqueWithoutApprovedByInput[]
+    updateMany?: PredictiveModelApprovalUpdateManyWithWhereWithoutApprovedByInput | PredictiveModelApprovalUpdateManyWithWhereWithoutApprovedByInput[]
+    deleteMany?: PredictiveModelApprovalScalarWhereInput | PredictiveModelApprovalScalarWhereInput[]
+  }
+
+  export type PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput = {
+    create?: XOR<PredictiveModelLifecycleEventCreateWithoutActorInput, PredictiveModelLifecycleEventUncheckedCreateWithoutActorInput> | PredictiveModelLifecycleEventCreateWithoutActorInput[] | PredictiveModelLifecycleEventUncheckedCreateWithoutActorInput[]
+    connectOrCreate?: PredictiveModelLifecycleEventCreateOrConnectWithoutActorInput | PredictiveModelLifecycleEventCreateOrConnectWithoutActorInput[]
+    upsert?: PredictiveModelLifecycleEventUpsertWithWhereUniqueWithoutActorInput | PredictiveModelLifecycleEventUpsertWithWhereUniqueWithoutActorInput[]
+    createMany?: PredictiveModelLifecycleEventCreateManyActorInputEnvelope
+    set?: PredictiveModelLifecycleEventWhereUniqueInput | PredictiveModelLifecycleEventWhereUniqueInput[]
+    disconnect?: PredictiveModelLifecycleEventWhereUniqueInput | PredictiveModelLifecycleEventWhereUniqueInput[]
+    delete?: PredictiveModelLifecycleEventWhereUniqueInput | PredictiveModelLifecycleEventWhereUniqueInput[]
+    connect?: PredictiveModelLifecycleEventWhereUniqueInput | PredictiveModelLifecycleEventWhereUniqueInput[]
+    update?: PredictiveModelLifecycleEventUpdateWithWhereUniqueWithoutActorInput | PredictiveModelLifecycleEventUpdateWithWhereUniqueWithoutActorInput[]
+    updateMany?: PredictiveModelLifecycleEventUpdateManyWithWhereWithoutActorInput | PredictiveModelLifecycleEventUpdateManyWithWhereWithoutActorInput[]
+    deleteMany?: PredictiveModelLifecycleEventScalarWhereInput | PredictiveModelLifecycleEventScalarWhereInput[]
+  }
+
   export type InspectionUncheckedUpdateManyWithoutInspectorNestedInput = {
     create?: XOR<InspectionCreateWithoutInspectorInput, InspectionUncheckedCreateWithoutInspectorInput> | InspectionCreateWithoutInspectorInput[] | InspectionUncheckedCreateWithoutInspectorInput[]
     connectOrCreate?: InspectionCreateOrConnectWithoutInspectorInput | InspectionCreateOrConnectWithoutInspectorInput[]
@@ -64582,6 +73955,90 @@ export namespace Prisma {
     update?: PredictiveOutcomeUpdateWithWhereUniqueWithoutVoidedByInput | PredictiveOutcomeUpdateWithWhereUniqueWithoutVoidedByInput[]
     updateMany?: PredictiveOutcomeUpdateManyWithWhereWithoutVoidedByInput | PredictiveOutcomeUpdateManyWithWhereWithoutVoidedByInput[]
     deleteMany?: PredictiveOutcomeScalarWhereInput | PredictiveOutcomeScalarWhereInput[]
+  }
+
+  export type PredictiveDatasetSnapshotUncheckedUpdateManyWithoutCreatedByNestedInput = {
+    create?: XOR<PredictiveDatasetSnapshotCreateWithoutCreatedByInput, PredictiveDatasetSnapshotUncheckedCreateWithoutCreatedByInput> | PredictiveDatasetSnapshotCreateWithoutCreatedByInput[] | PredictiveDatasetSnapshotUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: PredictiveDatasetSnapshotCreateOrConnectWithoutCreatedByInput | PredictiveDatasetSnapshotCreateOrConnectWithoutCreatedByInput[]
+    upsert?: PredictiveDatasetSnapshotUpsertWithWhereUniqueWithoutCreatedByInput | PredictiveDatasetSnapshotUpsertWithWhereUniqueWithoutCreatedByInput[]
+    createMany?: PredictiveDatasetSnapshotCreateManyCreatedByInputEnvelope
+    set?: PredictiveDatasetSnapshotWhereUniqueInput | PredictiveDatasetSnapshotWhereUniqueInput[]
+    disconnect?: PredictiveDatasetSnapshotWhereUniqueInput | PredictiveDatasetSnapshotWhereUniqueInput[]
+    delete?: PredictiveDatasetSnapshotWhereUniqueInput | PredictiveDatasetSnapshotWhereUniqueInput[]
+    connect?: PredictiveDatasetSnapshotWhereUniqueInput | PredictiveDatasetSnapshotWhereUniqueInput[]
+    update?: PredictiveDatasetSnapshotUpdateWithWhereUniqueWithoutCreatedByInput | PredictiveDatasetSnapshotUpdateWithWhereUniqueWithoutCreatedByInput[]
+    updateMany?: PredictiveDatasetSnapshotUpdateManyWithWhereWithoutCreatedByInput | PredictiveDatasetSnapshotUpdateManyWithWhereWithoutCreatedByInput[]
+    deleteMany?: PredictiveDatasetSnapshotScalarWhereInput | PredictiveDatasetSnapshotScalarWhereInput[]
+  }
+
+  export type PredictiveModelVersionUncheckedUpdateManyWithoutCreatedByNestedInput = {
+    create?: XOR<PredictiveModelVersionCreateWithoutCreatedByInput, PredictiveModelVersionUncheckedCreateWithoutCreatedByInput> | PredictiveModelVersionCreateWithoutCreatedByInput[] | PredictiveModelVersionUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: PredictiveModelVersionCreateOrConnectWithoutCreatedByInput | PredictiveModelVersionCreateOrConnectWithoutCreatedByInput[]
+    upsert?: PredictiveModelVersionUpsertWithWhereUniqueWithoutCreatedByInput | PredictiveModelVersionUpsertWithWhereUniqueWithoutCreatedByInput[]
+    createMany?: PredictiveModelVersionCreateManyCreatedByInputEnvelope
+    set?: PredictiveModelVersionWhereUniqueInput | PredictiveModelVersionWhereUniqueInput[]
+    disconnect?: PredictiveModelVersionWhereUniqueInput | PredictiveModelVersionWhereUniqueInput[]
+    delete?: PredictiveModelVersionWhereUniqueInput | PredictiveModelVersionWhereUniqueInput[]
+    connect?: PredictiveModelVersionWhereUniqueInput | PredictiveModelVersionWhereUniqueInput[]
+    update?: PredictiveModelVersionUpdateWithWhereUniqueWithoutCreatedByInput | PredictiveModelVersionUpdateWithWhereUniqueWithoutCreatedByInput[]
+    updateMany?: PredictiveModelVersionUpdateManyWithWhereWithoutCreatedByInput | PredictiveModelVersionUpdateManyWithWhereWithoutCreatedByInput[]
+    deleteMany?: PredictiveModelVersionScalarWhereInput | PredictiveModelVersionScalarWhereInput[]
+  }
+
+  export type PredictiveModelVersionUncheckedUpdateManyWithoutValidatedByNestedInput = {
+    create?: XOR<PredictiveModelVersionCreateWithoutValidatedByInput, PredictiveModelVersionUncheckedCreateWithoutValidatedByInput> | PredictiveModelVersionCreateWithoutValidatedByInput[] | PredictiveModelVersionUncheckedCreateWithoutValidatedByInput[]
+    connectOrCreate?: PredictiveModelVersionCreateOrConnectWithoutValidatedByInput | PredictiveModelVersionCreateOrConnectWithoutValidatedByInput[]
+    upsert?: PredictiveModelVersionUpsertWithWhereUniqueWithoutValidatedByInput | PredictiveModelVersionUpsertWithWhereUniqueWithoutValidatedByInput[]
+    createMany?: PredictiveModelVersionCreateManyValidatedByInputEnvelope
+    set?: PredictiveModelVersionWhereUniqueInput | PredictiveModelVersionWhereUniqueInput[]
+    disconnect?: PredictiveModelVersionWhereUniqueInput | PredictiveModelVersionWhereUniqueInput[]
+    delete?: PredictiveModelVersionWhereUniqueInput | PredictiveModelVersionWhereUniqueInput[]
+    connect?: PredictiveModelVersionWhereUniqueInput | PredictiveModelVersionWhereUniqueInput[]
+    update?: PredictiveModelVersionUpdateWithWhereUniqueWithoutValidatedByInput | PredictiveModelVersionUpdateWithWhereUniqueWithoutValidatedByInput[]
+    updateMany?: PredictiveModelVersionUpdateManyWithWhereWithoutValidatedByInput | PredictiveModelVersionUpdateManyWithWhereWithoutValidatedByInput[]
+    deleteMany?: PredictiveModelVersionScalarWhereInput | PredictiveModelVersionScalarWhereInput[]
+  }
+
+  export type PredictiveModelEvaluationUncheckedUpdateManyWithoutRecordedByNestedInput = {
+    create?: XOR<PredictiveModelEvaluationCreateWithoutRecordedByInput, PredictiveModelEvaluationUncheckedCreateWithoutRecordedByInput> | PredictiveModelEvaluationCreateWithoutRecordedByInput[] | PredictiveModelEvaluationUncheckedCreateWithoutRecordedByInput[]
+    connectOrCreate?: PredictiveModelEvaluationCreateOrConnectWithoutRecordedByInput | PredictiveModelEvaluationCreateOrConnectWithoutRecordedByInput[]
+    upsert?: PredictiveModelEvaluationUpsertWithWhereUniqueWithoutRecordedByInput | PredictiveModelEvaluationUpsertWithWhereUniqueWithoutRecordedByInput[]
+    createMany?: PredictiveModelEvaluationCreateManyRecordedByInputEnvelope
+    set?: PredictiveModelEvaluationWhereUniqueInput | PredictiveModelEvaluationWhereUniqueInput[]
+    disconnect?: PredictiveModelEvaluationWhereUniqueInput | PredictiveModelEvaluationWhereUniqueInput[]
+    delete?: PredictiveModelEvaluationWhereUniqueInput | PredictiveModelEvaluationWhereUniqueInput[]
+    connect?: PredictiveModelEvaluationWhereUniqueInput | PredictiveModelEvaluationWhereUniqueInput[]
+    update?: PredictiveModelEvaluationUpdateWithWhereUniqueWithoutRecordedByInput | PredictiveModelEvaluationUpdateWithWhereUniqueWithoutRecordedByInput[]
+    updateMany?: PredictiveModelEvaluationUpdateManyWithWhereWithoutRecordedByInput | PredictiveModelEvaluationUpdateManyWithWhereWithoutRecordedByInput[]
+    deleteMany?: PredictiveModelEvaluationScalarWhereInput | PredictiveModelEvaluationScalarWhereInput[]
+  }
+
+  export type PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput = {
+    create?: XOR<PredictiveModelApprovalCreateWithoutApprovedByInput, PredictiveModelApprovalUncheckedCreateWithoutApprovedByInput> | PredictiveModelApprovalCreateWithoutApprovedByInput[] | PredictiveModelApprovalUncheckedCreateWithoutApprovedByInput[]
+    connectOrCreate?: PredictiveModelApprovalCreateOrConnectWithoutApprovedByInput | PredictiveModelApprovalCreateOrConnectWithoutApprovedByInput[]
+    upsert?: PredictiveModelApprovalUpsertWithWhereUniqueWithoutApprovedByInput | PredictiveModelApprovalUpsertWithWhereUniqueWithoutApprovedByInput[]
+    createMany?: PredictiveModelApprovalCreateManyApprovedByInputEnvelope
+    set?: PredictiveModelApprovalWhereUniqueInput | PredictiveModelApprovalWhereUniqueInput[]
+    disconnect?: PredictiveModelApprovalWhereUniqueInput | PredictiveModelApprovalWhereUniqueInput[]
+    delete?: PredictiveModelApprovalWhereUniqueInput | PredictiveModelApprovalWhereUniqueInput[]
+    connect?: PredictiveModelApprovalWhereUniqueInput | PredictiveModelApprovalWhereUniqueInput[]
+    update?: PredictiveModelApprovalUpdateWithWhereUniqueWithoutApprovedByInput | PredictiveModelApprovalUpdateWithWhereUniqueWithoutApprovedByInput[]
+    updateMany?: PredictiveModelApprovalUpdateManyWithWhereWithoutApprovedByInput | PredictiveModelApprovalUpdateManyWithWhereWithoutApprovedByInput[]
+    deleteMany?: PredictiveModelApprovalScalarWhereInput | PredictiveModelApprovalScalarWhereInput[]
+  }
+
+  export type PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput = {
+    create?: XOR<PredictiveModelLifecycleEventCreateWithoutActorInput, PredictiveModelLifecycleEventUncheckedCreateWithoutActorInput> | PredictiveModelLifecycleEventCreateWithoutActorInput[] | PredictiveModelLifecycleEventUncheckedCreateWithoutActorInput[]
+    connectOrCreate?: PredictiveModelLifecycleEventCreateOrConnectWithoutActorInput | PredictiveModelLifecycleEventCreateOrConnectWithoutActorInput[]
+    upsert?: PredictiveModelLifecycleEventUpsertWithWhereUniqueWithoutActorInput | PredictiveModelLifecycleEventUpsertWithWhereUniqueWithoutActorInput[]
+    createMany?: PredictiveModelLifecycleEventCreateManyActorInputEnvelope
+    set?: PredictiveModelLifecycleEventWhereUniqueInput | PredictiveModelLifecycleEventWhereUniqueInput[]
+    disconnect?: PredictiveModelLifecycleEventWhereUniqueInput | PredictiveModelLifecycleEventWhereUniqueInput[]
+    delete?: PredictiveModelLifecycleEventWhereUniqueInput | PredictiveModelLifecycleEventWhereUniqueInput[]
+    connect?: PredictiveModelLifecycleEventWhereUniqueInput | PredictiveModelLifecycleEventWhereUniqueInput[]
+    update?: PredictiveModelLifecycleEventUpdateWithWhereUniqueWithoutActorInput | PredictiveModelLifecycleEventUpdateWithWhereUniqueWithoutActorInput[]
+    updateMany?: PredictiveModelLifecycleEventUpdateManyWithWhereWithoutActorInput | PredictiveModelLifecycleEventUpdateManyWithWhereWithoutActorInput[]
+    deleteMany?: PredictiveModelLifecycleEventScalarWhereInput | PredictiveModelLifecycleEventScalarWhereInput[]
   }
 
   export type DepartmentCreateNestedOneWithoutAssetsInput = {
@@ -68180,6 +77637,404 @@ export namespace Prisma {
     update?: XOR<XOR<PredictiveOutcomeUpdateToOneWithWhereWithoutReplacementOutcomeInput, PredictiveOutcomeUpdateWithoutReplacementOutcomeInput>, PredictiveOutcomeUncheckedUpdateWithoutReplacementOutcomeInput>
   }
 
+  export type UserCreateNestedOneWithoutCreatedPredictiveDatasetSnapshotsInput = {
+    create?: XOR<UserCreateWithoutCreatedPredictiveDatasetSnapshotsInput, UserUncheckedCreateWithoutCreatedPredictiveDatasetSnapshotsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCreatedPredictiveDatasetSnapshotsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type PredictiveModelVersionCreateNestedManyWithoutDatasetSnapshotInput = {
+    create?: XOR<PredictiveModelVersionCreateWithoutDatasetSnapshotInput, PredictiveModelVersionUncheckedCreateWithoutDatasetSnapshotInput> | PredictiveModelVersionCreateWithoutDatasetSnapshotInput[] | PredictiveModelVersionUncheckedCreateWithoutDatasetSnapshotInput[]
+    connectOrCreate?: PredictiveModelVersionCreateOrConnectWithoutDatasetSnapshotInput | PredictiveModelVersionCreateOrConnectWithoutDatasetSnapshotInput[]
+    createMany?: PredictiveModelVersionCreateManyDatasetSnapshotInputEnvelope
+    connect?: PredictiveModelVersionWhereUniqueInput | PredictiveModelVersionWhereUniqueInput[]
+  }
+
+  export type PredictiveModelEvaluationCreateNestedManyWithoutDatasetSnapshotInput = {
+    create?: XOR<PredictiveModelEvaluationCreateWithoutDatasetSnapshotInput, PredictiveModelEvaluationUncheckedCreateWithoutDatasetSnapshotInput> | PredictiveModelEvaluationCreateWithoutDatasetSnapshotInput[] | PredictiveModelEvaluationUncheckedCreateWithoutDatasetSnapshotInput[]
+    connectOrCreate?: PredictiveModelEvaluationCreateOrConnectWithoutDatasetSnapshotInput | PredictiveModelEvaluationCreateOrConnectWithoutDatasetSnapshotInput[]
+    createMany?: PredictiveModelEvaluationCreateManyDatasetSnapshotInputEnvelope
+    connect?: PredictiveModelEvaluationWhereUniqueInput | PredictiveModelEvaluationWhereUniqueInput[]
+  }
+
+  export type PredictiveModelVersionUncheckedCreateNestedManyWithoutDatasetSnapshotInput = {
+    create?: XOR<PredictiveModelVersionCreateWithoutDatasetSnapshotInput, PredictiveModelVersionUncheckedCreateWithoutDatasetSnapshotInput> | PredictiveModelVersionCreateWithoutDatasetSnapshotInput[] | PredictiveModelVersionUncheckedCreateWithoutDatasetSnapshotInput[]
+    connectOrCreate?: PredictiveModelVersionCreateOrConnectWithoutDatasetSnapshotInput | PredictiveModelVersionCreateOrConnectWithoutDatasetSnapshotInput[]
+    createMany?: PredictiveModelVersionCreateManyDatasetSnapshotInputEnvelope
+    connect?: PredictiveModelVersionWhereUniqueInput | PredictiveModelVersionWhereUniqueInput[]
+  }
+
+  export type PredictiveModelEvaluationUncheckedCreateNestedManyWithoutDatasetSnapshotInput = {
+    create?: XOR<PredictiveModelEvaluationCreateWithoutDatasetSnapshotInput, PredictiveModelEvaluationUncheckedCreateWithoutDatasetSnapshotInput> | PredictiveModelEvaluationCreateWithoutDatasetSnapshotInput[] | PredictiveModelEvaluationUncheckedCreateWithoutDatasetSnapshotInput[]
+    connectOrCreate?: PredictiveModelEvaluationCreateOrConnectWithoutDatasetSnapshotInput | PredictiveModelEvaluationCreateOrConnectWithoutDatasetSnapshotInput[]
+    createMany?: PredictiveModelEvaluationCreateManyDatasetSnapshotInputEnvelope
+    connect?: PredictiveModelEvaluationWhereUniqueInput | PredictiveModelEvaluationWhereUniqueInput[]
+  }
+
+  export type UserUpdateOneRequiredWithoutCreatedPredictiveDatasetSnapshotsNestedInput = {
+    create?: XOR<UserCreateWithoutCreatedPredictiveDatasetSnapshotsInput, UserUncheckedCreateWithoutCreatedPredictiveDatasetSnapshotsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCreatedPredictiveDatasetSnapshotsInput
+    upsert?: UserUpsertWithoutCreatedPredictiveDatasetSnapshotsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutCreatedPredictiveDatasetSnapshotsInput, UserUpdateWithoutCreatedPredictiveDatasetSnapshotsInput>, UserUncheckedUpdateWithoutCreatedPredictiveDatasetSnapshotsInput>
+  }
+
+  export type PredictiveModelVersionUpdateManyWithoutDatasetSnapshotNestedInput = {
+    create?: XOR<PredictiveModelVersionCreateWithoutDatasetSnapshotInput, PredictiveModelVersionUncheckedCreateWithoutDatasetSnapshotInput> | PredictiveModelVersionCreateWithoutDatasetSnapshotInput[] | PredictiveModelVersionUncheckedCreateWithoutDatasetSnapshotInput[]
+    connectOrCreate?: PredictiveModelVersionCreateOrConnectWithoutDatasetSnapshotInput | PredictiveModelVersionCreateOrConnectWithoutDatasetSnapshotInput[]
+    upsert?: PredictiveModelVersionUpsertWithWhereUniqueWithoutDatasetSnapshotInput | PredictiveModelVersionUpsertWithWhereUniqueWithoutDatasetSnapshotInput[]
+    createMany?: PredictiveModelVersionCreateManyDatasetSnapshotInputEnvelope
+    set?: PredictiveModelVersionWhereUniqueInput | PredictiveModelVersionWhereUniqueInput[]
+    disconnect?: PredictiveModelVersionWhereUniqueInput | PredictiveModelVersionWhereUniqueInput[]
+    delete?: PredictiveModelVersionWhereUniqueInput | PredictiveModelVersionWhereUniqueInput[]
+    connect?: PredictiveModelVersionWhereUniqueInput | PredictiveModelVersionWhereUniqueInput[]
+    update?: PredictiveModelVersionUpdateWithWhereUniqueWithoutDatasetSnapshotInput | PredictiveModelVersionUpdateWithWhereUniqueWithoutDatasetSnapshotInput[]
+    updateMany?: PredictiveModelVersionUpdateManyWithWhereWithoutDatasetSnapshotInput | PredictiveModelVersionUpdateManyWithWhereWithoutDatasetSnapshotInput[]
+    deleteMany?: PredictiveModelVersionScalarWhereInput | PredictiveModelVersionScalarWhereInput[]
+  }
+
+  export type PredictiveModelEvaluationUpdateManyWithoutDatasetSnapshotNestedInput = {
+    create?: XOR<PredictiveModelEvaluationCreateWithoutDatasetSnapshotInput, PredictiveModelEvaluationUncheckedCreateWithoutDatasetSnapshotInput> | PredictiveModelEvaluationCreateWithoutDatasetSnapshotInput[] | PredictiveModelEvaluationUncheckedCreateWithoutDatasetSnapshotInput[]
+    connectOrCreate?: PredictiveModelEvaluationCreateOrConnectWithoutDatasetSnapshotInput | PredictiveModelEvaluationCreateOrConnectWithoutDatasetSnapshotInput[]
+    upsert?: PredictiveModelEvaluationUpsertWithWhereUniqueWithoutDatasetSnapshotInput | PredictiveModelEvaluationUpsertWithWhereUniqueWithoutDatasetSnapshotInput[]
+    createMany?: PredictiveModelEvaluationCreateManyDatasetSnapshotInputEnvelope
+    set?: PredictiveModelEvaluationWhereUniqueInput | PredictiveModelEvaluationWhereUniqueInput[]
+    disconnect?: PredictiveModelEvaluationWhereUniqueInput | PredictiveModelEvaluationWhereUniqueInput[]
+    delete?: PredictiveModelEvaluationWhereUniqueInput | PredictiveModelEvaluationWhereUniqueInput[]
+    connect?: PredictiveModelEvaluationWhereUniqueInput | PredictiveModelEvaluationWhereUniqueInput[]
+    update?: PredictiveModelEvaluationUpdateWithWhereUniqueWithoutDatasetSnapshotInput | PredictiveModelEvaluationUpdateWithWhereUniqueWithoutDatasetSnapshotInput[]
+    updateMany?: PredictiveModelEvaluationUpdateManyWithWhereWithoutDatasetSnapshotInput | PredictiveModelEvaluationUpdateManyWithWhereWithoutDatasetSnapshotInput[]
+    deleteMany?: PredictiveModelEvaluationScalarWhereInput | PredictiveModelEvaluationScalarWhereInput[]
+  }
+
+  export type PredictiveModelVersionUncheckedUpdateManyWithoutDatasetSnapshotNestedInput = {
+    create?: XOR<PredictiveModelVersionCreateWithoutDatasetSnapshotInput, PredictiveModelVersionUncheckedCreateWithoutDatasetSnapshotInput> | PredictiveModelVersionCreateWithoutDatasetSnapshotInput[] | PredictiveModelVersionUncheckedCreateWithoutDatasetSnapshotInput[]
+    connectOrCreate?: PredictiveModelVersionCreateOrConnectWithoutDatasetSnapshotInput | PredictiveModelVersionCreateOrConnectWithoutDatasetSnapshotInput[]
+    upsert?: PredictiveModelVersionUpsertWithWhereUniqueWithoutDatasetSnapshotInput | PredictiveModelVersionUpsertWithWhereUniqueWithoutDatasetSnapshotInput[]
+    createMany?: PredictiveModelVersionCreateManyDatasetSnapshotInputEnvelope
+    set?: PredictiveModelVersionWhereUniqueInput | PredictiveModelVersionWhereUniqueInput[]
+    disconnect?: PredictiveModelVersionWhereUniqueInput | PredictiveModelVersionWhereUniqueInput[]
+    delete?: PredictiveModelVersionWhereUniqueInput | PredictiveModelVersionWhereUniqueInput[]
+    connect?: PredictiveModelVersionWhereUniqueInput | PredictiveModelVersionWhereUniqueInput[]
+    update?: PredictiveModelVersionUpdateWithWhereUniqueWithoutDatasetSnapshotInput | PredictiveModelVersionUpdateWithWhereUniqueWithoutDatasetSnapshotInput[]
+    updateMany?: PredictiveModelVersionUpdateManyWithWhereWithoutDatasetSnapshotInput | PredictiveModelVersionUpdateManyWithWhereWithoutDatasetSnapshotInput[]
+    deleteMany?: PredictiveModelVersionScalarWhereInput | PredictiveModelVersionScalarWhereInput[]
+  }
+
+  export type PredictiveModelEvaluationUncheckedUpdateManyWithoutDatasetSnapshotNestedInput = {
+    create?: XOR<PredictiveModelEvaluationCreateWithoutDatasetSnapshotInput, PredictiveModelEvaluationUncheckedCreateWithoutDatasetSnapshotInput> | PredictiveModelEvaluationCreateWithoutDatasetSnapshotInput[] | PredictiveModelEvaluationUncheckedCreateWithoutDatasetSnapshotInput[]
+    connectOrCreate?: PredictiveModelEvaluationCreateOrConnectWithoutDatasetSnapshotInput | PredictiveModelEvaluationCreateOrConnectWithoutDatasetSnapshotInput[]
+    upsert?: PredictiveModelEvaluationUpsertWithWhereUniqueWithoutDatasetSnapshotInput | PredictiveModelEvaluationUpsertWithWhereUniqueWithoutDatasetSnapshotInput[]
+    createMany?: PredictiveModelEvaluationCreateManyDatasetSnapshotInputEnvelope
+    set?: PredictiveModelEvaluationWhereUniqueInput | PredictiveModelEvaluationWhereUniqueInput[]
+    disconnect?: PredictiveModelEvaluationWhereUniqueInput | PredictiveModelEvaluationWhereUniqueInput[]
+    delete?: PredictiveModelEvaluationWhereUniqueInput | PredictiveModelEvaluationWhereUniqueInput[]
+    connect?: PredictiveModelEvaluationWhereUniqueInput | PredictiveModelEvaluationWhereUniqueInput[]
+    update?: PredictiveModelEvaluationUpdateWithWhereUniqueWithoutDatasetSnapshotInput | PredictiveModelEvaluationUpdateWithWhereUniqueWithoutDatasetSnapshotInput[]
+    updateMany?: PredictiveModelEvaluationUpdateManyWithWhereWithoutDatasetSnapshotInput | PredictiveModelEvaluationUpdateManyWithWhereWithoutDatasetSnapshotInput[]
+    deleteMany?: PredictiveModelEvaluationScalarWhereInput | PredictiveModelEvaluationScalarWhereInput[]
+  }
+
+  export type PredictiveDatasetSnapshotCreateNestedOneWithoutModelVersionsInput = {
+    create?: XOR<PredictiveDatasetSnapshotCreateWithoutModelVersionsInput, PredictiveDatasetSnapshotUncheckedCreateWithoutModelVersionsInput>
+    connectOrCreate?: PredictiveDatasetSnapshotCreateOrConnectWithoutModelVersionsInput
+    connect?: PredictiveDatasetSnapshotWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutCreatedPredictiveModelVersionsInput = {
+    create?: XOR<UserCreateWithoutCreatedPredictiveModelVersionsInput, UserUncheckedCreateWithoutCreatedPredictiveModelVersionsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCreatedPredictiveModelVersionsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutValidatedPredictiveModelVersionsInput = {
+    create?: XOR<UserCreateWithoutValidatedPredictiveModelVersionsInput, UserUncheckedCreateWithoutValidatedPredictiveModelVersionsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutValidatedPredictiveModelVersionsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type PredictiveModelEvaluationCreateNestedManyWithoutModelVersionInput = {
+    create?: XOR<PredictiveModelEvaluationCreateWithoutModelVersionInput, PredictiveModelEvaluationUncheckedCreateWithoutModelVersionInput> | PredictiveModelEvaluationCreateWithoutModelVersionInput[] | PredictiveModelEvaluationUncheckedCreateWithoutModelVersionInput[]
+    connectOrCreate?: PredictiveModelEvaluationCreateOrConnectWithoutModelVersionInput | PredictiveModelEvaluationCreateOrConnectWithoutModelVersionInput[]
+    createMany?: PredictiveModelEvaluationCreateManyModelVersionInputEnvelope
+    connect?: PredictiveModelEvaluationWhereUniqueInput | PredictiveModelEvaluationWhereUniqueInput[]
+  }
+
+  export type PredictiveModelApprovalCreateNestedManyWithoutModelVersionInput = {
+    create?: XOR<PredictiveModelApprovalCreateWithoutModelVersionInput, PredictiveModelApprovalUncheckedCreateWithoutModelVersionInput> | PredictiveModelApprovalCreateWithoutModelVersionInput[] | PredictiveModelApprovalUncheckedCreateWithoutModelVersionInput[]
+    connectOrCreate?: PredictiveModelApprovalCreateOrConnectWithoutModelVersionInput | PredictiveModelApprovalCreateOrConnectWithoutModelVersionInput[]
+    createMany?: PredictiveModelApprovalCreateManyModelVersionInputEnvelope
+    connect?: PredictiveModelApprovalWhereUniqueInput | PredictiveModelApprovalWhereUniqueInput[]
+  }
+
+  export type PredictiveModelLifecycleEventCreateNestedManyWithoutModelVersionInput = {
+    create?: XOR<PredictiveModelLifecycleEventCreateWithoutModelVersionInput, PredictiveModelLifecycleEventUncheckedCreateWithoutModelVersionInput> | PredictiveModelLifecycleEventCreateWithoutModelVersionInput[] | PredictiveModelLifecycleEventUncheckedCreateWithoutModelVersionInput[]
+    connectOrCreate?: PredictiveModelLifecycleEventCreateOrConnectWithoutModelVersionInput | PredictiveModelLifecycleEventCreateOrConnectWithoutModelVersionInput[]
+    createMany?: PredictiveModelLifecycleEventCreateManyModelVersionInputEnvelope
+    connect?: PredictiveModelLifecycleEventWhereUniqueInput | PredictiveModelLifecycleEventWhereUniqueInput[]
+  }
+
+  export type PredictiveModelEvaluationUncheckedCreateNestedManyWithoutModelVersionInput = {
+    create?: XOR<PredictiveModelEvaluationCreateWithoutModelVersionInput, PredictiveModelEvaluationUncheckedCreateWithoutModelVersionInput> | PredictiveModelEvaluationCreateWithoutModelVersionInput[] | PredictiveModelEvaluationUncheckedCreateWithoutModelVersionInput[]
+    connectOrCreate?: PredictiveModelEvaluationCreateOrConnectWithoutModelVersionInput | PredictiveModelEvaluationCreateOrConnectWithoutModelVersionInput[]
+    createMany?: PredictiveModelEvaluationCreateManyModelVersionInputEnvelope
+    connect?: PredictiveModelEvaluationWhereUniqueInput | PredictiveModelEvaluationWhereUniqueInput[]
+  }
+
+  export type PredictiveModelApprovalUncheckedCreateNestedManyWithoutModelVersionInput = {
+    create?: XOR<PredictiveModelApprovalCreateWithoutModelVersionInput, PredictiveModelApprovalUncheckedCreateWithoutModelVersionInput> | PredictiveModelApprovalCreateWithoutModelVersionInput[] | PredictiveModelApprovalUncheckedCreateWithoutModelVersionInput[]
+    connectOrCreate?: PredictiveModelApprovalCreateOrConnectWithoutModelVersionInput | PredictiveModelApprovalCreateOrConnectWithoutModelVersionInput[]
+    createMany?: PredictiveModelApprovalCreateManyModelVersionInputEnvelope
+    connect?: PredictiveModelApprovalWhereUniqueInput | PredictiveModelApprovalWhereUniqueInput[]
+  }
+
+  export type PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutModelVersionInput = {
+    create?: XOR<PredictiveModelLifecycleEventCreateWithoutModelVersionInput, PredictiveModelLifecycleEventUncheckedCreateWithoutModelVersionInput> | PredictiveModelLifecycleEventCreateWithoutModelVersionInput[] | PredictiveModelLifecycleEventUncheckedCreateWithoutModelVersionInput[]
+    connectOrCreate?: PredictiveModelLifecycleEventCreateOrConnectWithoutModelVersionInput | PredictiveModelLifecycleEventCreateOrConnectWithoutModelVersionInput[]
+    createMany?: PredictiveModelLifecycleEventCreateManyModelVersionInputEnvelope
+    connect?: PredictiveModelLifecycleEventWhereUniqueInput | PredictiveModelLifecycleEventWhereUniqueInput[]
+  }
+
+  export type NullableBigIntFieldUpdateOperationsInput = {
+    set?: bigint | number | null
+    increment?: bigint | number
+    decrement?: bigint | number
+    multiply?: bigint | number
+    divide?: bigint | number
+  }
+
+  export type EnumPredictiveModelLifecycleStatusFieldUpdateOperationsInput = {
+    set?: $Enums.PredictiveModelLifecycleStatus
+  }
+
+  export type PredictiveDatasetSnapshotUpdateOneRequiredWithoutModelVersionsNestedInput = {
+    create?: XOR<PredictiveDatasetSnapshotCreateWithoutModelVersionsInput, PredictiveDatasetSnapshotUncheckedCreateWithoutModelVersionsInput>
+    connectOrCreate?: PredictiveDatasetSnapshotCreateOrConnectWithoutModelVersionsInput
+    upsert?: PredictiveDatasetSnapshotUpsertWithoutModelVersionsInput
+    connect?: PredictiveDatasetSnapshotWhereUniqueInput
+    update?: XOR<XOR<PredictiveDatasetSnapshotUpdateToOneWithWhereWithoutModelVersionsInput, PredictiveDatasetSnapshotUpdateWithoutModelVersionsInput>, PredictiveDatasetSnapshotUncheckedUpdateWithoutModelVersionsInput>
+  }
+
+  export type UserUpdateOneRequiredWithoutCreatedPredictiveModelVersionsNestedInput = {
+    create?: XOR<UserCreateWithoutCreatedPredictiveModelVersionsInput, UserUncheckedCreateWithoutCreatedPredictiveModelVersionsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCreatedPredictiveModelVersionsInput
+    upsert?: UserUpsertWithoutCreatedPredictiveModelVersionsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutCreatedPredictiveModelVersionsInput, UserUpdateWithoutCreatedPredictiveModelVersionsInput>, UserUncheckedUpdateWithoutCreatedPredictiveModelVersionsInput>
+  }
+
+  export type UserUpdateOneWithoutValidatedPredictiveModelVersionsNestedInput = {
+    create?: XOR<UserCreateWithoutValidatedPredictiveModelVersionsInput, UserUncheckedCreateWithoutValidatedPredictiveModelVersionsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutValidatedPredictiveModelVersionsInput
+    upsert?: UserUpsertWithoutValidatedPredictiveModelVersionsInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutValidatedPredictiveModelVersionsInput, UserUpdateWithoutValidatedPredictiveModelVersionsInput>, UserUncheckedUpdateWithoutValidatedPredictiveModelVersionsInput>
+  }
+
+  export type PredictiveModelEvaluationUpdateManyWithoutModelVersionNestedInput = {
+    create?: XOR<PredictiveModelEvaluationCreateWithoutModelVersionInput, PredictiveModelEvaluationUncheckedCreateWithoutModelVersionInput> | PredictiveModelEvaluationCreateWithoutModelVersionInput[] | PredictiveModelEvaluationUncheckedCreateWithoutModelVersionInput[]
+    connectOrCreate?: PredictiveModelEvaluationCreateOrConnectWithoutModelVersionInput | PredictiveModelEvaluationCreateOrConnectWithoutModelVersionInput[]
+    upsert?: PredictiveModelEvaluationUpsertWithWhereUniqueWithoutModelVersionInput | PredictiveModelEvaluationUpsertWithWhereUniqueWithoutModelVersionInput[]
+    createMany?: PredictiveModelEvaluationCreateManyModelVersionInputEnvelope
+    set?: PredictiveModelEvaluationWhereUniqueInput | PredictiveModelEvaluationWhereUniqueInput[]
+    disconnect?: PredictiveModelEvaluationWhereUniqueInput | PredictiveModelEvaluationWhereUniqueInput[]
+    delete?: PredictiveModelEvaluationWhereUniqueInput | PredictiveModelEvaluationWhereUniqueInput[]
+    connect?: PredictiveModelEvaluationWhereUniqueInput | PredictiveModelEvaluationWhereUniqueInput[]
+    update?: PredictiveModelEvaluationUpdateWithWhereUniqueWithoutModelVersionInput | PredictiveModelEvaluationUpdateWithWhereUniqueWithoutModelVersionInput[]
+    updateMany?: PredictiveModelEvaluationUpdateManyWithWhereWithoutModelVersionInput | PredictiveModelEvaluationUpdateManyWithWhereWithoutModelVersionInput[]
+    deleteMany?: PredictiveModelEvaluationScalarWhereInput | PredictiveModelEvaluationScalarWhereInput[]
+  }
+
+  export type PredictiveModelApprovalUpdateManyWithoutModelVersionNestedInput = {
+    create?: XOR<PredictiveModelApprovalCreateWithoutModelVersionInput, PredictiveModelApprovalUncheckedCreateWithoutModelVersionInput> | PredictiveModelApprovalCreateWithoutModelVersionInput[] | PredictiveModelApprovalUncheckedCreateWithoutModelVersionInput[]
+    connectOrCreate?: PredictiveModelApprovalCreateOrConnectWithoutModelVersionInput | PredictiveModelApprovalCreateOrConnectWithoutModelVersionInput[]
+    upsert?: PredictiveModelApprovalUpsertWithWhereUniqueWithoutModelVersionInput | PredictiveModelApprovalUpsertWithWhereUniqueWithoutModelVersionInput[]
+    createMany?: PredictiveModelApprovalCreateManyModelVersionInputEnvelope
+    set?: PredictiveModelApprovalWhereUniqueInput | PredictiveModelApprovalWhereUniqueInput[]
+    disconnect?: PredictiveModelApprovalWhereUniqueInput | PredictiveModelApprovalWhereUniqueInput[]
+    delete?: PredictiveModelApprovalWhereUniqueInput | PredictiveModelApprovalWhereUniqueInput[]
+    connect?: PredictiveModelApprovalWhereUniqueInput | PredictiveModelApprovalWhereUniqueInput[]
+    update?: PredictiveModelApprovalUpdateWithWhereUniqueWithoutModelVersionInput | PredictiveModelApprovalUpdateWithWhereUniqueWithoutModelVersionInput[]
+    updateMany?: PredictiveModelApprovalUpdateManyWithWhereWithoutModelVersionInput | PredictiveModelApprovalUpdateManyWithWhereWithoutModelVersionInput[]
+    deleteMany?: PredictiveModelApprovalScalarWhereInput | PredictiveModelApprovalScalarWhereInput[]
+  }
+
+  export type PredictiveModelLifecycleEventUpdateManyWithoutModelVersionNestedInput = {
+    create?: XOR<PredictiveModelLifecycleEventCreateWithoutModelVersionInput, PredictiveModelLifecycleEventUncheckedCreateWithoutModelVersionInput> | PredictiveModelLifecycleEventCreateWithoutModelVersionInput[] | PredictiveModelLifecycleEventUncheckedCreateWithoutModelVersionInput[]
+    connectOrCreate?: PredictiveModelLifecycleEventCreateOrConnectWithoutModelVersionInput | PredictiveModelLifecycleEventCreateOrConnectWithoutModelVersionInput[]
+    upsert?: PredictiveModelLifecycleEventUpsertWithWhereUniqueWithoutModelVersionInput | PredictiveModelLifecycleEventUpsertWithWhereUniqueWithoutModelVersionInput[]
+    createMany?: PredictiveModelLifecycleEventCreateManyModelVersionInputEnvelope
+    set?: PredictiveModelLifecycleEventWhereUniqueInput | PredictiveModelLifecycleEventWhereUniqueInput[]
+    disconnect?: PredictiveModelLifecycleEventWhereUniqueInput | PredictiveModelLifecycleEventWhereUniqueInput[]
+    delete?: PredictiveModelLifecycleEventWhereUniqueInput | PredictiveModelLifecycleEventWhereUniqueInput[]
+    connect?: PredictiveModelLifecycleEventWhereUniqueInput | PredictiveModelLifecycleEventWhereUniqueInput[]
+    update?: PredictiveModelLifecycleEventUpdateWithWhereUniqueWithoutModelVersionInput | PredictiveModelLifecycleEventUpdateWithWhereUniqueWithoutModelVersionInput[]
+    updateMany?: PredictiveModelLifecycleEventUpdateManyWithWhereWithoutModelVersionInput | PredictiveModelLifecycleEventUpdateManyWithWhereWithoutModelVersionInput[]
+    deleteMany?: PredictiveModelLifecycleEventScalarWhereInput | PredictiveModelLifecycleEventScalarWhereInput[]
+  }
+
+  export type PredictiveModelEvaluationUncheckedUpdateManyWithoutModelVersionNestedInput = {
+    create?: XOR<PredictiveModelEvaluationCreateWithoutModelVersionInput, PredictiveModelEvaluationUncheckedCreateWithoutModelVersionInput> | PredictiveModelEvaluationCreateWithoutModelVersionInput[] | PredictiveModelEvaluationUncheckedCreateWithoutModelVersionInput[]
+    connectOrCreate?: PredictiveModelEvaluationCreateOrConnectWithoutModelVersionInput | PredictiveModelEvaluationCreateOrConnectWithoutModelVersionInput[]
+    upsert?: PredictiveModelEvaluationUpsertWithWhereUniqueWithoutModelVersionInput | PredictiveModelEvaluationUpsertWithWhereUniqueWithoutModelVersionInput[]
+    createMany?: PredictiveModelEvaluationCreateManyModelVersionInputEnvelope
+    set?: PredictiveModelEvaluationWhereUniqueInput | PredictiveModelEvaluationWhereUniqueInput[]
+    disconnect?: PredictiveModelEvaluationWhereUniqueInput | PredictiveModelEvaluationWhereUniqueInput[]
+    delete?: PredictiveModelEvaluationWhereUniqueInput | PredictiveModelEvaluationWhereUniqueInput[]
+    connect?: PredictiveModelEvaluationWhereUniqueInput | PredictiveModelEvaluationWhereUniqueInput[]
+    update?: PredictiveModelEvaluationUpdateWithWhereUniqueWithoutModelVersionInput | PredictiveModelEvaluationUpdateWithWhereUniqueWithoutModelVersionInput[]
+    updateMany?: PredictiveModelEvaluationUpdateManyWithWhereWithoutModelVersionInput | PredictiveModelEvaluationUpdateManyWithWhereWithoutModelVersionInput[]
+    deleteMany?: PredictiveModelEvaluationScalarWhereInput | PredictiveModelEvaluationScalarWhereInput[]
+  }
+
+  export type PredictiveModelApprovalUncheckedUpdateManyWithoutModelVersionNestedInput = {
+    create?: XOR<PredictiveModelApprovalCreateWithoutModelVersionInput, PredictiveModelApprovalUncheckedCreateWithoutModelVersionInput> | PredictiveModelApprovalCreateWithoutModelVersionInput[] | PredictiveModelApprovalUncheckedCreateWithoutModelVersionInput[]
+    connectOrCreate?: PredictiveModelApprovalCreateOrConnectWithoutModelVersionInput | PredictiveModelApprovalCreateOrConnectWithoutModelVersionInput[]
+    upsert?: PredictiveModelApprovalUpsertWithWhereUniqueWithoutModelVersionInput | PredictiveModelApprovalUpsertWithWhereUniqueWithoutModelVersionInput[]
+    createMany?: PredictiveModelApprovalCreateManyModelVersionInputEnvelope
+    set?: PredictiveModelApprovalWhereUniqueInput | PredictiveModelApprovalWhereUniqueInput[]
+    disconnect?: PredictiveModelApprovalWhereUniqueInput | PredictiveModelApprovalWhereUniqueInput[]
+    delete?: PredictiveModelApprovalWhereUniqueInput | PredictiveModelApprovalWhereUniqueInput[]
+    connect?: PredictiveModelApprovalWhereUniqueInput | PredictiveModelApprovalWhereUniqueInput[]
+    update?: PredictiveModelApprovalUpdateWithWhereUniqueWithoutModelVersionInput | PredictiveModelApprovalUpdateWithWhereUniqueWithoutModelVersionInput[]
+    updateMany?: PredictiveModelApprovalUpdateManyWithWhereWithoutModelVersionInput | PredictiveModelApprovalUpdateManyWithWhereWithoutModelVersionInput[]
+    deleteMany?: PredictiveModelApprovalScalarWhereInput | PredictiveModelApprovalScalarWhereInput[]
+  }
+
+  export type PredictiveModelLifecycleEventUncheckedUpdateManyWithoutModelVersionNestedInput = {
+    create?: XOR<PredictiveModelLifecycleEventCreateWithoutModelVersionInput, PredictiveModelLifecycleEventUncheckedCreateWithoutModelVersionInput> | PredictiveModelLifecycleEventCreateWithoutModelVersionInput[] | PredictiveModelLifecycleEventUncheckedCreateWithoutModelVersionInput[]
+    connectOrCreate?: PredictiveModelLifecycleEventCreateOrConnectWithoutModelVersionInput | PredictiveModelLifecycleEventCreateOrConnectWithoutModelVersionInput[]
+    upsert?: PredictiveModelLifecycleEventUpsertWithWhereUniqueWithoutModelVersionInput | PredictiveModelLifecycleEventUpsertWithWhereUniqueWithoutModelVersionInput[]
+    createMany?: PredictiveModelLifecycleEventCreateManyModelVersionInputEnvelope
+    set?: PredictiveModelLifecycleEventWhereUniqueInput | PredictiveModelLifecycleEventWhereUniqueInput[]
+    disconnect?: PredictiveModelLifecycleEventWhereUniqueInput | PredictiveModelLifecycleEventWhereUniqueInput[]
+    delete?: PredictiveModelLifecycleEventWhereUniqueInput | PredictiveModelLifecycleEventWhereUniqueInput[]
+    connect?: PredictiveModelLifecycleEventWhereUniqueInput | PredictiveModelLifecycleEventWhereUniqueInput[]
+    update?: PredictiveModelLifecycleEventUpdateWithWhereUniqueWithoutModelVersionInput | PredictiveModelLifecycleEventUpdateWithWhereUniqueWithoutModelVersionInput[]
+    updateMany?: PredictiveModelLifecycleEventUpdateManyWithWhereWithoutModelVersionInput | PredictiveModelLifecycleEventUpdateManyWithWhereWithoutModelVersionInput[]
+    deleteMany?: PredictiveModelLifecycleEventScalarWhereInput | PredictiveModelLifecycleEventScalarWhereInput[]
+  }
+
+  export type PredictiveModelVersionCreateNestedOneWithoutEvaluationsInput = {
+    create?: XOR<PredictiveModelVersionCreateWithoutEvaluationsInput, PredictiveModelVersionUncheckedCreateWithoutEvaluationsInput>
+    connectOrCreate?: PredictiveModelVersionCreateOrConnectWithoutEvaluationsInput
+    connect?: PredictiveModelVersionWhereUniqueInput
+  }
+
+  export type PredictiveDatasetSnapshotCreateNestedOneWithoutEvaluationsInput = {
+    create?: XOR<PredictiveDatasetSnapshotCreateWithoutEvaluationsInput, PredictiveDatasetSnapshotUncheckedCreateWithoutEvaluationsInput>
+    connectOrCreate?: PredictiveDatasetSnapshotCreateOrConnectWithoutEvaluationsInput
+    connect?: PredictiveDatasetSnapshotWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutRecordedPredictiveEvaluationsInput = {
+    create?: XOR<UserCreateWithoutRecordedPredictiveEvaluationsInput, UserUncheckedCreateWithoutRecordedPredictiveEvaluationsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutRecordedPredictiveEvaluationsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type FloatFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type PredictiveModelVersionUpdateOneRequiredWithoutEvaluationsNestedInput = {
+    create?: XOR<PredictiveModelVersionCreateWithoutEvaluationsInput, PredictiveModelVersionUncheckedCreateWithoutEvaluationsInput>
+    connectOrCreate?: PredictiveModelVersionCreateOrConnectWithoutEvaluationsInput
+    upsert?: PredictiveModelVersionUpsertWithoutEvaluationsInput
+    connect?: PredictiveModelVersionWhereUniqueInput
+    update?: XOR<XOR<PredictiveModelVersionUpdateToOneWithWhereWithoutEvaluationsInput, PredictiveModelVersionUpdateWithoutEvaluationsInput>, PredictiveModelVersionUncheckedUpdateWithoutEvaluationsInput>
+  }
+
+  export type PredictiveDatasetSnapshotUpdateOneRequiredWithoutEvaluationsNestedInput = {
+    create?: XOR<PredictiveDatasetSnapshotCreateWithoutEvaluationsInput, PredictiveDatasetSnapshotUncheckedCreateWithoutEvaluationsInput>
+    connectOrCreate?: PredictiveDatasetSnapshotCreateOrConnectWithoutEvaluationsInput
+    upsert?: PredictiveDatasetSnapshotUpsertWithoutEvaluationsInput
+    connect?: PredictiveDatasetSnapshotWhereUniqueInput
+    update?: XOR<XOR<PredictiveDatasetSnapshotUpdateToOneWithWhereWithoutEvaluationsInput, PredictiveDatasetSnapshotUpdateWithoutEvaluationsInput>, PredictiveDatasetSnapshotUncheckedUpdateWithoutEvaluationsInput>
+  }
+
+  export type UserUpdateOneRequiredWithoutRecordedPredictiveEvaluationsNestedInput = {
+    create?: XOR<UserCreateWithoutRecordedPredictiveEvaluationsInput, UserUncheckedCreateWithoutRecordedPredictiveEvaluationsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutRecordedPredictiveEvaluationsInput
+    upsert?: UserUpsertWithoutRecordedPredictiveEvaluationsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutRecordedPredictiveEvaluationsInput, UserUpdateWithoutRecordedPredictiveEvaluationsInput>, UserUncheckedUpdateWithoutRecordedPredictiveEvaluationsInput>
+  }
+
+  export type PredictiveModelVersionCreateNestedOneWithoutApprovalsInput = {
+    create?: XOR<PredictiveModelVersionCreateWithoutApprovalsInput, PredictiveModelVersionUncheckedCreateWithoutApprovalsInput>
+    connectOrCreate?: PredictiveModelVersionCreateOrConnectWithoutApprovalsInput
+    connect?: PredictiveModelVersionWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutDecidedPredictiveApprovalsInput = {
+    create?: XOR<UserCreateWithoutDecidedPredictiveApprovalsInput, UserUncheckedCreateWithoutDecidedPredictiveApprovalsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutDecidedPredictiveApprovalsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type EnumPredictiveModelApprovalDecisionFieldUpdateOperationsInput = {
+    set?: $Enums.PredictiveModelApprovalDecision
+  }
+
+  export type PredictiveModelVersionUpdateOneRequiredWithoutApprovalsNestedInput = {
+    create?: XOR<PredictiveModelVersionCreateWithoutApprovalsInput, PredictiveModelVersionUncheckedCreateWithoutApprovalsInput>
+    connectOrCreate?: PredictiveModelVersionCreateOrConnectWithoutApprovalsInput
+    upsert?: PredictiveModelVersionUpsertWithoutApprovalsInput
+    connect?: PredictiveModelVersionWhereUniqueInput
+    update?: XOR<XOR<PredictiveModelVersionUpdateToOneWithWhereWithoutApprovalsInput, PredictiveModelVersionUpdateWithoutApprovalsInput>, PredictiveModelVersionUncheckedUpdateWithoutApprovalsInput>
+  }
+
+  export type UserUpdateOneRequiredWithoutDecidedPredictiveApprovalsNestedInput = {
+    create?: XOR<UserCreateWithoutDecidedPredictiveApprovalsInput, UserUncheckedCreateWithoutDecidedPredictiveApprovalsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutDecidedPredictiveApprovalsInput
+    upsert?: UserUpsertWithoutDecidedPredictiveApprovalsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutDecidedPredictiveApprovalsInput, UserUpdateWithoutDecidedPredictiveApprovalsInput>, UserUncheckedUpdateWithoutDecidedPredictiveApprovalsInput>
+  }
+
+  export type PredictiveModelVersionCreateNestedOneWithoutLifecycleEventsInput = {
+    create?: XOR<PredictiveModelVersionCreateWithoutLifecycleEventsInput, PredictiveModelVersionUncheckedCreateWithoutLifecycleEventsInput>
+    connectOrCreate?: PredictiveModelVersionCreateOrConnectWithoutLifecycleEventsInput
+    connect?: PredictiveModelVersionWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutPredictiveModelLifecycleEventsInput = {
+    create?: XOR<UserCreateWithoutPredictiveModelLifecycleEventsInput, UserUncheckedCreateWithoutPredictiveModelLifecycleEventsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutPredictiveModelLifecycleEventsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type EnumPredictiveModelLifecycleActionFieldUpdateOperationsInput = {
+    set?: $Enums.PredictiveModelLifecycleAction
+  }
+
+  export type NullableEnumPredictiveModelLifecycleStatusFieldUpdateOperationsInput = {
+    set?: $Enums.PredictiveModelLifecycleStatus | null
+  }
+
+  export type PredictiveModelVersionUpdateOneRequiredWithoutLifecycleEventsNestedInput = {
+    create?: XOR<PredictiveModelVersionCreateWithoutLifecycleEventsInput, PredictiveModelVersionUncheckedCreateWithoutLifecycleEventsInput>
+    connectOrCreate?: PredictiveModelVersionCreateOrConnectWithoutLifecycleEventsInput
+    upsert?: PredictiveModelVersionUpsertWithoutLifecycleEventsInput
+    connect?: PredictiveModelVersionWhereUniqueInput
+    update?: XOR<XOR<PredictiveModelVersionUpdateToOneWithWhereWithoutLifecycleEventsInput, PredictiveModelVersionUpdateWithoutLifecycleEventsInput>, PredictiveModelVersionUncheckedUpdateWithoutLifecycleEventsInput>
+  }
+
+  export type UserUpdateOneRequiredWithoutPredictiveModelLifecycleEventsNestedInput = {
+    create?: XOR<UserCreateWithoutPredictiveModelLifecycleEventsInput, UserUncheckedCreateWithoutPredictiveModelLifecycleEventsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutPredictiveModelLifecycleEventsInput
+    upsert?: UserUpsertWithoutPredictiveModelLifecycleEventsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutPredictiveModelLifecycleEventsInput, UserUpdateWithoutPredictiveModelLifecycleEventsInput>, UserUncheckedUpdateWithoutPredictiveModelLifecycleEventsInput>
+  }
+
   export type ExecutionPlanCreateNestedOneWithoutTaskDependenciesInput = {
     create?: XOR<ExecutionPlanCreateWithoutTaskDependenciesInput, ExecutionPlanUncheckedCreateWithoutTaskDependenciesInput>
     connectOrCreate?: ExecutionPlanCreateOrConnectWithoutTaskDependenciesInput
@@ -69247,6 +79102,117 @@ export namespace Prisma {
     _max?: NestedEnumPredictiveOutcomeValueFilter<$PrismaModel>
   }
 
+  export type NestedBigIntNullableFilter<$PrismaModel = never> = {
+    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel> | null
+    in?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel> | null
+    notIn?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel> | null
+    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    not?: NestedBigIntNullableFilter<$PrismaModel> | bigint | number | null
+  }
+
+  export type NestedEnumPredictiveModelLifecycleStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.PredictiveModelLifecycleStatus | EnumPredictiveModelLifecycleStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.PredictiveModelLifecycleStatus[] | ListEnumPredictiveModelLifecycleStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PredictiveModelLifecycleStatus[] | ListEnumPredictiveModelLifecycleStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumPredictiveModelLifecycleStatusFilter<$PrismaModel> | $Enums.PredictiveModelLifecycleStatus
+  }
+
+  export type NestedBigIntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel> | null
+    in?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel> | null
+    notIn?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel> | null
+    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    not?: NestedBigIntNullableWithAggregatesFilter<$PrismaModel> | bigint | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedBigIntNullableFilter<$PrismaModel>
+    _min?: NestedBigIntNullableFilter<$PrismaModel>
+    _max?: NestedBigIntNullableFilter<$PrismaModel>
+  }
+
+  export type NestedEnumPredictiveModelLifecycleStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.PredictiveModelLifecycleStatus | EnumPredictiveModelLifecycleStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.PredictiveModelLifecycleStatus[] | ListEnumPredictiveModelLifecycleStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PredictiveModelLifecycleStatus[] | ListEnumPredictiveModelLifecycleStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumPredictiveModelLifecycleStatusWithAggregatesFilter<$PrismaModel> | $Enums.PredictiveModelLifecycleStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumPredictiveModelLifecycleStatusFilter<$PrismaModel>
+    _max?: NestedEnumPredictiveModelLifecycleStatusFilter<$PrismaModel>
+  }
+
+  export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedFloatFilter<$PrismaModel>
+    _min?: NestedFloatFilter<$PrismaModel>
+    _max?: NestedFloatFilter<$PrismaModel>
+  }
+
+  export type NestedEnumPredictiveModelApprovalDecisionFilter<$PrismaModel = never> = {
+    equals?: $Enums.PredictiveModelApprovalDecision | EnumPredictiveModelApprovalDecisionFieldRefInput<$PrismaModel>
+    in?: $Enums.PredictiveModelApprovalDecision[] | ListEnumPredictiveModelApprovalDecisionFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PredictiveModelApprovalDecision[] | ListEnumPredictiveModelApprovalDecisionFieldRefInput<$PrismaModel>
+    not?: NestedEnumPredictiveModelApprovalDecisionFilter<$PrismaModel> | $Enums.PredictiveModelApprovalDecision
+  }
+
+  export type NestedEnumPredictiveModelApprovalDecisionWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.PredictiveModelApprovalDecision | EnumPredictiveModelApprovalDecisionFieldRefInput<$PrismaModel>
+    in?: $Enums.PredictiveModelApprovalDecision[] | ListEnumPredictiveModelApprovalDecisionFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PredictiveModelApprovalDecision[] | ListEnumPredictiveModelApprovalDecisionFieldRefInput<$PrismaModel>
+    not?: NestedEnumPredictiveModelApprovalDecisionWithAggregatesFilter<$PrismaModel> | $Enums.PredictiveModelApprovalDecision
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumPredictiveModelApprovalDecisionFilter<$PrismaModel>
+    _max?: NestedEnumPredictiveModelApprovalDecisionFilter<$PrismaModel>
+  }
+
+  export type NestedEnumPredictiveModelLifecycleActionFilter<$PrismaModel = never> = {
+    equals?: $Enums.PredictiveModelLifecycleAction | EnumPredictiveModelLifecycleActionFieldRefInput<$PrismaModel>
+    in?: $Enums.PredictiveModelLifecycleAction[] | ListEnumPredictiveModelLifecycleActionFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PredictiveModelLifecycleAction[] | ListEnumPredictiveModelLifecycleActionFieldRefInput<$PrismaModel>
+    not?: NestedEnumPredictiveModelLifecycleActionFilter<$PrismaModel> | $Enums.PredictiveModelLifecycleAction
+  }
+
+  export type NestedEnumPredictiveModelLifecycleStatusNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.PredictiveModelLifecycleStatus | EnumPredictiveModelLifecycleStatusFieldRefInput<$PrismaModel> | null
+    in?: $Enums.PredictiveModelLifecycleStatus[] | ListEnumPredictiveModelLifecycleStatusFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.PredictiveModelLifecycleStatus[] | ListEnumPredictiveModelLifecycleStatusFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumPredictiveModelLifecycleStatusNullableFilter<$PrismaModel> | $Enums.PredictiveModelLifecycleStatus | null
+  }
+
+  export type NestedEnumPredictiveModelLifecycleActionWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.PredictiveModelLifecycleAction | EnumPredictiveModelLifecycleActionFieldRefInput<$PrismaModel>
+    in?: $Enums.PredictiveModelLifecycleAction[] | ListEnumPredictiveModelLifecycleActionFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PredictiveModelLifecycleAction[] | ListEnumPredictiveModelLifecycleActionFieldRefInput<$PrismaModel>
+    not?: NestedEnumPredictiveModelLifecycleActionWithAggregatesFilter<$PrismaModel> | $Enums.PredictiveModelLifecycleAction
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumPredictiveModelLifecycleActionFilter<$PrismaModel>
+    _max?: NestedEnumPredictiveModelLifecycleActionFilter<$PrismaModel>
+  }
+
+  export type NestedEnumPredictiveModelLifecycleStatusNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.PredictiveModelLifecycleStatus | EnumPredictiveModelLifecycleStatusFieldRefInput<$PrismaModel> | null
+    in?: $Enums.PredictiveModelLifecycleStatus[] | ListEnumPredictiveModelLifecycleStatusFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.PredictiveModelLifecycleStatus[] | ListEnumPredictiveModelLifecycleStatusFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumPredictiveModelLifecycleStatusNullableWithAggregatesFilter<$PrismaModel> | $Enums.PredictiveModelLifecycleStatus | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumPredictiveModelLifecycleStatusNullableFilter<$PrismaModel>
+    _max?: NestedEnumPredictiveModelLifecycleStatusNullableFilter<$PrismaModel>
+  }
+
   export type NestedEnumExecutionBlockerCategoryFilter<$PrismaModel = never> = {
     equals?: $Enums.ExecutionBlockerCategory | EnumExecutionBlockerCategoryFieldRefInput<$PrismaModel>
     in?: $Enums.ExecutionBlockerCategory[] | ListEnumExecutionBlockerCategoryFieldRefInput<$PrismaModel>
@@ -69345,6 +79311,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutVoidedByInput
     recordedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutRecordedByInput
     voidedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutVoidedByInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotCreateNestedManyWithoutCreatedByInput
+    createdPredictiveModelVersions?: PredictiveModelVersionCreateNestedManyWithoutCreatedByInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionCreateNestedManyWithoutValidatedByInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationCreateNestedManyWithoutRecordedByInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
   }
 
   export type UserUncheckedCreateWithoutDepartmentInput = {
@@ -69394,6 +79366,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutVoidedByInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutRecordedByInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutVoidedByInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUncheckedCreateNestedManyWithoutCreatedByInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUncheckedCreateNestedManyWithoutValidatedByInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedCreateNestedManyWithoutRecordedByInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
   }
 
   export type UserCreateOrConnectWithoutDepartmentInput = {
@@ -70413,6 +80391,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutVoidedByInput
     recordedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutRecordedByInput
     voidedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutVoidedByInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotCreateNestedManyWithoutCreatedByInput
+    createdPredictiveModelVersions?: PredictiveModelVersionCreateNestedManyWithoutCreatedByInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionCreateNestedManyWithoutValidatedByInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationCreateNestedManyWithoutRecordedByInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
   }
 
   export type UserUncheckedCreateWithoutJurisdictionInput = {
@@ -70462,6 +80446,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutVoidedByInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutRecordedByInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutVoidedByInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUncheckedCreateNestedManyWithoutCreatedByInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUncheckedCreateNestedManyWithoutValidatedByInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedCreateNestedManyWithoutRecordedByInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
   }
 
   export type UserCreateOrConnectWithoutJurisdictionInput = {
@@ -73119,6 +83109,314 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type PredictiveDatasetSnapshotCreateWithoutCreatedByInput = {
+    id?: string
+    datasetContractVersion: string
+    targetType: $Enums.PredictiveTargetType
+    featureContractVersion: string
+    outcomeContractVersion: string
+    departmentId?: string | null
+    jurisdictionId?: string | null
+    includedProvenance: JsonNullValueInput | InputJsonValue
+    sampleCount: number
+    classBalance: JsonNullValueInput | InputJsonValue
+    periodStart?: Date | string | null
+    periodEnd?: Date | string | null
+    sampleIdentities: JsonNullValueInput | InputJsonValue
+    datasetFingerprint: string
+    createdAt?: Date | string
+    modelVersions?: PredictiveModelVersionCreateNestedManyWithoutDatasetSnapshotInput
+    evaluations?: PredictiveModelEvaluationCreateNestedManyWithoutDatasetSnapshotInput
+  }
+
+  export type PredictiveDatasetSnapshotUncheckedCreateWithoutCreatedByInput = {
+    id?: string
+    datasetContractVersion: string
+    targetType: $Enums.PredictiveTargetType
+    featureContractVersion: string
+    outcomeContractVersion: string
+    departmentId?: string | null
+    jurisdictionId?: string | null
+    includedProvenance: JsonNullValueInput | InputJsonValue
+    sampleCount: number
+    classBalance: JsonNullValueInput | InputJsonValue
+    periodStart?: Date | string | null
+    periodEnd?: Date | string | null
+    sampleIdentities: JsonNullValueInput | InputJsonValue
+    datasetFingerprint: string
+    createdAt?: Date | string
+    modelVersions?: PredictiveModelVersionUncheckedCreateNestedManyWithoutDatasetSnapshotInput
+    evaluations?: PredictiveModelEvaluationUncheckedCreateNestedManyWithoutDatasetSnapshotInput
+  }
+
+  export type PredictiveDatasetSnapshotCreateOrConnectWithoutCreatedByInput = {
+    where: PredictiveDatasetSnapshotWhereUniqueInput
+    create: XOR<PredictiveDatasetSnapshotCreateWithoutCreatedByInput, PredictiveDatasetSnapshotUncheckedCreateWithoutCreatedByInput>
+  }
+
+  export type PredictiveDatasetSnapshotCreateManyCreatedByInputEnvelope = {
+    data: PredictiveDatasetSnapshotCreateManyCreatedByInput | PredictiveDatasetSnapshotCreateManyCreatedByInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type PredictiveModelVersionCreateWithoutCreatedByInput = {
+    id?: string
+    modelName: string
+    modelVersion: string
+    targetType: $Enums.PredictiveTargetType
+    deploymentSlot: string
+    intendedUse: string
+    forbiddenUse: string
+    featureContractVersion: string
+    outcomeContractVersion: string
+    trainingCodeVersion: string
+    artifactReference: string
+    artifactDigest: string
+    artifactFormat: string
+    artifactSizeBytes?: bigint | number | null
+    trainingTimestamp: Date | string
+    lifecycleStatus?: $Enums.PredictiveModelLifecycleStatus
+    createdAt?: Date | string
+    validatedAt?: Date | string | null
+    datasetSnapshot: PredictiveDatasetSnapshotCreateNestedOneWithoutModelVersionsInput
+    validatedBy?: UserCreateNestedOneWithoutValidatedPredictiveModelVersionsInput
+    evaluations?: PredictiveModelEvaluationCreateNestedManyWithoutModelVersionInput
+    approvals?: PredictiveModelApprovalCreateNestedManyWithoutModelVersionInput
+    lifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutModelVersionInput
+  }
+
+  export type PredictiveModelVersionUncheckedCreateWithoutCreatedByInput = {
+    id?: string
+    modelName: string
+    modelVersion: string
+    targetType: $Enums.PredictiveTargetType
+    deploymentSlot: string
+    intendedUse: string
+    forbiddenUse: string
+    featureContractVersion: string
+    outcomeContractVersion: string
+    datasetSnapshotId: string
+    trainingCodeVersion: string
+    artifactReference: string
+    artifactDigest: string
+    artifactFormat: string
+    artifactSizeBytes?: bigint | number | null
+    trainingTimestamp: Date | string
+    lifecycleStatus?: $Enums.PredictiveModelLifecycleStatus
+    createdAt?: Date | string
+    validatedById?: string | null
+    validatedAt?: Date | string | null
+    evaluations?: PredictiveModelEvaluationUncheckedCreateNestedManyWithoutModelVersionInput
+    approvals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutModelVersionInput
+    lifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutModelVersionInput
+  }
+
+  export type PredictiveModelVersionCreateOrConnectWithoutCreatedByInput = {
+    where: PredictiveModelVersionWhereUniqueInput
+    create: XOR<PredictiveModelVersionCreateWithoutCreatedByInput, PredictiveModelVersionUncheckedCreateWithoutCreatedByInput>
+  }
+
+  export type PredictiveModelVersionCreateManyCreatedByInputEnvelope = {
+    data: PredictiveModelVersionCreateManyCreatedByInput | PredictiveModelVersionCreateManyCreatedByInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type PredictiveModelVersionCreateWithoutValidatedByInput = {
+    id?: string
+    modelName: string
+    modelVersion: string
+    targetType: $Enums.PredictiveTargetType
+    deploymentSlot: string
+    intendedUse: string
+    forbiddenUse: string
+    featureContractVersion: string
+    outcomeContractVersion: string
+    trainingCodeVersion: string
+    artifactReference: string
+    artifactDigest: string
+    artifactFormat: string
+    artifactSizeBytes?: bigint | number | null
+    trainingTimestamp: Date | string
+    lifecycleStatus?: $Enums.PredictiveModelLifecycleStatus
+    createdAt?: Date | string
+    validatedAt?: Date | string | null
+    datasetSnapshot: PredictiveDatasetSnapshotCreateNestedOneWithoutModelVersionsInput
+    createdBy: UserCreateNestedOneWithoutCreatedPredictiveModelVersionsInput
+    evaluations?: PredictiveModelEvaluationCreateNestedManyWithoutModelVersionInput
+    approvals?: PredictiveModelApprovalCreateNestedManyWithoutModelVersionInput
+    lifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutModelVersionInput
+  }
+
+  export type PredictiveModelVersionUncheckedCreateWithoutValidatedByInput = {
+    id?: string
+    modelName: string
+    modelVersion: string
+    targetType: $Enums.PredictiveTargetType
+    deploymentSlot: string
+    intendedUse: string
+    forbiddenUse: string
+    featureContractVersion: string
+    outcomeContractVersion: string
+    datasetSnapshotId: string
+    trainingCodeVersion: string
+    artifactReference: string
+    artifactDigest: string
+    artifactFormat: string
+    artifactSizeBytes?: bigint | number | null
+    trainingTimestamp: Date | string
+    lifecycleStatus?: $Enums.PredictiveModelLifecycleStatus
+    createdById: string
+    createdAt?: Date | string
+    validatedAt?: Date | string | null
+    evaluations?: PredictiveModelEvaluationUncheckedCreateNestedManyWithoutModelVersionInput
+    approvals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutModelVersionInput
+    lifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutModelVersionInput
+  }
+
+  export type PredictiveModelVersionCreateOrConnectWithoutValidatedByInput = {
+    where: PredictiveModelVersionWhereUniqueInput
+    create: XOR<PredictiveModelVersionCreateWithoutValidatedByInput, PredictiveModelVersionUncheckedCreateWithoutValidatedByInput>
+  }
+
+  export type PredictiveModelVersionCreateManyValidatedByInputEnvelope = {
+    data: PredictiveModelVersionCreateManyValidatedByInput | PredictiveModelVersionCreateManyValidatedByInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type PredictiveModelEvaluationCreateWithoutRecordedByInput = {
+    id?: string
+    evaluationContractVersion: string
+    splitStrategy: string
+    evaluationPeriodStart: Date | string
+    evaluationPeriodEnd: Date | string
+    testSampleCount: number
+    lateCount: number
+    onTimeCount: number
+    truePositiveCount: number
+    trueNegativeCount: number
+    falsePositiveCount: number
+    falseNegativeCount: number
+    precision: number
+    recall: number
+    f1: number
+    prAuc: number
+    calibrationError: number
+    falseNegativeRate: number
+    baselineEvidence: JsonNullValueInput | InputJsonValue
+    subgroupMetricsReference?: NullableJsonNullValueInput | InputJsonValue
+    featureDistributionReference?: NullableJsonNullValueInput | InputJsonValue
+    missingnessReference?: NullableJsonNullValueInput | InputJsonValue
+    evaluationArtifactReference: string
+    evaluationFingerprint: string
+    recordedAt?: Date | string
+    modelVersion: PredictiveModelVersionCreateNestedOneWithoutEvaluationsInput
+    datasetSnapshot: PredictiveDatasetSnapshotCreateNestedOneWithoutEvaluationsInput
+  }
+
+  export type PredictiveModelEvaluationUncheckedCreateWithoutRecordedByInput = {
+    id?: string
+    modelVersionId: string
+    datasetSnapshotId: string
+    evaluationContractVersion: string
+    splitStrategy: string
+    evaluationPeriodStart: Date | string
+    evaluationPeriodEnd: Date | string
+    testSampleCount: number
+    lateCount: number
+    onTimeCount: number
+    truePositiveCount: number
+    trueNegativeCount: number
+    falsePositiveCount: number
+    falseNegativeCount: number
+    precision: number
+    recall: number
+    f1: number
+    prAuc: number
+    calibrationError: number
+    falseNegativeRate: number
+    baselineEvidence: JsonNullValueInput | InputJsonValue
+    subgroupMetricsReference?: NullableJsonNullValueInput | InputJsonValue
+    featureDistributionReference?: NullableJsonNullValueInput | InputJsonValue
+    missingnessReference?: NullableJsonNullValueInput | InputJsonValue
+    evaluationArtifactReference: string
+    evaluationFingerprint: string
+    recordedAt?: Date | string
+  }
+
+  export type PredictiveModelEvaluationCreateOrConnectWithoutRecordedByInput = {
+    where: PredictiveModelEvaluationWhereUniqueInput
+    create: XOR<PredictiveModelEvaluationCreateWithoutRecordedByInput, PredictiveModelEvaluationUncheckedCreateWithoutRecordedByInput>
+  }
+
+  export type PredictiveModelEvaluationCreateManyRecordedByInputEnvelope = {
+    data: PredictiveModelEvaluationCreateManyRecordedByInput | PredictiveModelEvaluationCreateManyRecordedByInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type PredictiveModelApprovalCreateWithoutApprovedByInput = {
+    id?: string
+    decision: $Enums.PredictiveModelApprovalDecision
+    reason: string
+    restrictions?: NullableJsonNullValueInput | InputJsonValue
+    reviewDueAt?: Date | string | null
+    approvalExpiresAt?: Date | string | null
+    decidedAt?: Date | string
+    modelVersion: PredictiveModelVersionCreateNestedOneWithoutApprovalsInput
+  }
+
+  export type PredictiveModelApprovalUncheckedCreateWithoutApprovedByInput = {
+    id?: string
+    modelVersionId: string
+    decision: $Enums.PredictiveModelApprovalDecision
+    reason: string
+    restrictions?: NullableJsonNullValueInput | InputJsonValue
+    reviewDueAt?: Date | string | null
+    approvalExpiresAt?: Date | string | null
+    decidedAt?: Date | string
+  }
+
+  export type PredictiveModelApprovalCreateOrConnectWithoutApprovedByInput = {
+    where: PredictiveModelApprovalWhereUniqueInput
+    create: XOR<PredictiveModelApprovalCreateWithoutApprovedByInput, PredictiveModelApprovalUncheckedCreateWithoutApprovedByInput>
+  }
+
+  export type PredictiveModelApprovalCreateManyApprovedByInputEnvelope = {
+    data: PredictiveModelApprovalCreateManyApprovedByInput | PredictiveModelApprovalCreateManyApprovedByInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type PredictiveModelLifecycleEventCreateWithoutActorInput = {
+    id?: string
+    action: $Enums.PredictiveModelLifecycleAction
+    fromStatus?: $Enums.PredictiveModelLifecycleStatus | null
+    toStatus: $Enums.PredictiveModelLifecycleStatus
+    reason: string
+    relatedModelVersionId?: string | null
+    occurredAt?: Date | string
+    modelVersion: PredictiveModelVersionCreateNestedOneWithoutLifecycleEventsInput
+  }
+
+  export type PredictiveModelLifecycleEventUncheckedCreateWithoutActorInput = {
+    id?: string
+    modelVersionId: string
+    action: $Enums.PredictiveModelLifecycleAction
+    fromStatus?: $Enums.PredictiveModelLifecycleStatus | null
+    toStatus: $Enums.PredictiveModelLifecycleStatus
+    reason: string
+    relatedModelVersionId?: string | null
+    occurredAt?: Date | string
+  }
+
+  export type PredictiveModelLifecycleEventCreateOrConnectWithoutActorInput = {
+    where: PredictiveModelLifecycleEventWhereUniqueInput
+    create: XOR<PredictiveModelLifecycleEventCreateWithoutActorInput, PredictiveModelLifecycleEventUncheckedCreateWithoutActorInput>
+  }
+
+  export type PredictiveModelLifecycleEventCreateManyActorInputEnvelope = {
+    data: PredictiveModelLifecycleEventCreateManyActorInput | PredictiveModelLifecycleEventCreateManyActorInput[]
+    skipDuplicates?: boolean
+  }
+
   export type DepartmentUpsertWithoutUsersInput = {
     update: XOR<DepartmentUpdateWithoutUsersInput, DepartmentUncheckedUpdateWithoutUsersInput>
     create: XOR<DepartmentCreateWithoutUsersInput, DepartmentUncheckedCreateWithoutUsersInput>
@@ -74055,6 +84353,215 @@ export namespace Prisma {
     data: XOR<PredictiveOutcomeUpdateManyMutationInput, PredictiveOutcomeUncheckedUpdateManyWithoutVoidedByInput>
   }
 
+  export type PredictiveDatasetSnapshotUpsertWithWhereUniqueWithoutCreatedByInput = {
+    where: PredictiveDatasetSnapshotWhereUniqueInput
+    update: XOR<PredictiveDatasetSnapshotUpdateWithoutCreatedByInput, PredictiveDatasetSnapshotUncheckedUpdateWithoutCreatedByInput>
+    create: XOR<PredictiveDatasetSnapshotCreateWithoutCreatedByInput, PredictiveDatasetSnapshotUncheckedCreateWithoutCreatedByInput>
+  }
+
+  export type PredictiveDatasetSnapshotUpdateWithWhereUniqueWithoutCreatedByInput = {
+    where: PredictiveDatasetSnapshotWhereUniqueInput
+    data: XOR<PredictiveDatasetSnapshotUpdateWithoutCreatedByInput, PredictiveDatasetSnapshotUncheckedUpdateWithoutCreatedByInput>
+  }
+
+  export type PredictiveDatasetSnapshotUpdateManyWithWhereWithoutCreatedByInput = {
+    where: PredictiveDatasetSnapshotScalarWhereInput
+    data: XOR<PredictiveDatasetSnapshotUpdateManyMutationInput, PredictiveDatasetSnapshotUncheckedUpdateManyWithoutCreatedByInput>
+  }
+
+  export type PredictiveDatasetSnapshotScalarWhereInput = {
+    AND?: PredictiveDatasetSnapshotScalarWhereInput | PredictiveDatasetSnapshotScalarWhereInput[]
+    OR?: PredictiveDatasetSnapshotScalarWhereInput[]
+    NOT?: PredictiveDatasetSnapshotScalarWhereInput | PredictiveDatasetSnapshotScalarWhereInput[]
+    id?: StringFilter<"PredictiveDatasetSnapshot"> | string
+    datasetContractVersion?: StringFilter<"PredictiveDatasetSnapshot"> | string
+    targetType?: EnumPredictiveTargetTypeFilter<"PredictiveDatasetSnapshot"> | $Enums.PredictiveTargetType
+    featureContractVersion?: StringFilter<"PredictiveDatasetSnapshot"> | string
+    outcomeContractVersion?: StringFilter<"PredictiveDatasetSnapshot"> | string
+    departmentId?: StringNullableFilter<"PredictiveDatasetSnapshot"> | string | null
+    jurisdictionId?: StringNullableFilter<"PredictiveDatasetSnapshot"> | string | null
+    includedProvenance?: JsonFilter<"PredictiveDatasetSnapshot">
+    sampleCount?: IntFilter<"PredictiveDatasetSnapshot"> | number
+    classBalance?: JsonFilter<"PredictiveDatasetSnapshot">
+    periodStart?: DateTimeNullableFilter<"PredictiveDatasetSnapshot"> | Date | string | null
+    periodEnd?: DateTimeNullableFilter<"PredictiveDatasetSnapshot"> | Date | string | null
+    sampleIdentities?: JsonFilter<"PredictiveDatasetSnapshot">
+    datasetFingerprint?: StringFilter<"PredictiveDatasetSnapshot"> | string
+    createdById?: StringFilter<"PredictiveDatasetSnapshot"> | string
+    createdAt?: DateTimeFilter<"PredictiveDatasetSnapshot"> | Date | string
+  }
+
+  export type PredictiveModelVersionUpsertWithWhereUniqueWithoutCreatedByInput = {
+    where: PredictiveModelVersionWhereUniqueInput
+    update: XOR<PredictiveModelVersionUpdateWithoutCreatedByInput, PredictiveModelVersionUncheckedUpdateWithoutCreatedByInput>
+    create: XOR<PredictiveModelVersionCreateWithoutCreatedByInput, PredictiveModelVersionUncheckedCreateWithoutCreatedByInput>
+  }
+
+  export type PredictiveModelVersionUpdateWithWhereUniqueWithoutCreatedByInput = {
+    where: PredictiveModelVersionWhereUniqueInput
+    data: XOR<PredictiveModelVersionUpdateWithoutCreatedByInput, PredictiveModelVersionUncheckedUpdateWithoutCreatedByInput>
+  }
+
+  export type PredictiveModelVersionUpdateManyWithWhereWithoutCreatedByInput = {
+    where: PredictiveModelVersionScalarWhereInput
+    data: XOR<PredictiveModelVersionUpdateManyMutationInput, PredictiveModelVersionUncheckedUpdateManyWithoutCreatedByInput>
+  }
+
+  export type PredictiveModelVersionScalarWhereInput = {
+    AND?: PredictiveModelVersionScalarWhereInput | PredictiveModelVersionScalarWhereInput[]
+    OR?: PredictiveModelVersionScalarWhereInput[]
+    NOT?: PredictiveModelVersionScalarWhereInput | PredictiveModelVersionScalarWhereInput[]
+    id?: StringFilter<"PredictiveModelVersion"> | string
+    modelName?: StringFilter<"PredictiveModelVersion"> | string
+    modelVersion?: StringFilter<"PredictiveModelVersion"> | string
+    targetType?: EnumPredictiveTargetTypeFilter<"PredictiveModelVersion"> | $Enums.PredictiveTargetType
+    deploymentSlot?: StringFilter<"PredictiveModelVersion"> | string
+    intendedUse?: StringFilter<"PredictiveModelVersion"> | string
+    forbiddenUse?: StringFilter<"PredictiveModelVersion"> | string
+    featureContractVersion?: StringFilter<"PredictiveModelVersion"> | string
+    outcomeContractVersion?: StringFilter<"PredictiveModelVersion"> | string
+    datasetSnapshotId?: StringFilter<"PredictiveModelVersion"> | string
+    trainingCodeVersion?: StringFilter<"PredictiveModelVersion"> | string
+    artifactReference?: StringFilter<"PredictiveModelVersion"> | string
+    artifactDigest?: StringFilter<"PredictiveModelVersion"> | string
+    artifactFormat?: StringFilter<"PredictiveModelVersion"> | string
+    artifactSizeBytes?: BigIntNullableFilter<"PredictiveModelVersion"> | bigint | number | null
+    trainingTimestamp?: DateTimeFilter<"PredictiveModelVersion"> | Date | string
+    lifecycleStatus?: EnumPredictiveModelLifecycleStatusFilter<"PredictiveModelVersion"> | $Enums.PredictiveModelLifecycleStatus
+    createdById?: StringFilter<"PredictiveModelVersion"> | string
+    createdAt?: DateTimeFilter<"PredictiveModelVersion"> | Date | string
+    validatedById?: StringNullableFilter<"PredictiveModelVersion"> | string | null
+    validatedAt?: DateTimeNullableFilter<"PredictiveModelVersion"> | Date | string | null
+  }
+
+  export type PredictiveModelVersionUpsertWithWhereUniqueWithoutValidatedByInput = {
+    where: PredictiveModelVersionWhereUniqueInput
+    update: XOR<PredictiveModelVersionUpdateWithoutValidatedByInput, PredictiveModelVersionUncheckedUpdateWithoutValidatedByInput>
+    create: XOR<PredictiveModelVersionCreateWithoutValidatedByInput, PredictiveModelVersionUncheckedCreateWithoutValidatedByInput>
+  }
+
+  export type PredictiveModelVersionUpdateWithWhereUniqueWithoutValidatedByInput = {
+    where: PredictiveModelVersionWhereUniqueInput
+    data: XOR<PredictiveModelVersionUpdateWithoutValidatedByInput, PredictiveModelVersionUncheckedUpdateWithoutValidatedByInput>
+  }
+
+  export type PredictiveModelVersionUpdateManyWithWhereWithoutValidatedByInput = {
+    where: PredictiveModelVersionScalarWhereInput
+    data: XOR<PredictiveModelVersionUpdateManyMutationInput, PredictiveModelVersionUncheckedUpdateManyWithoutValidatedByInput>
+  }
+
+  export type PredictiveModelEvaluationUpsertWithWhereUniqueWithoutRecordedByInput = {
+    where: PredictiveModelEvaluationWhereUniqueInput
+    update: XOR<PredictiveModelEvaluationUpdateWithoutRecordedByInput, PredictiveModelEvaluationUncheckedUpdateWithoutRecordedByInput>
+    create: XOR<PredictiveModelEvaluationCreateWithoutRecordedByInput, PredictiveModelEvaluationUncheckedCreateWithoutRecordedByInput>
+  }
+
+  export type PredictiveModelEvaluationUpdateWithWhereUniqueWithoutRecordedByInput = {
+    where: PredictiveModelEvaluationWhereUniqueInput
+    data: XOR<PredictiveModelEvaluationUpdateWithoutRecordedByInput, PredictiveModelEvaluationUncheckedUpdateWithoutRecordedByInput>
+  }
+
+  export type PredictiveModelEvaluationUpdateManyWithWhereWithoutRecordedByInput = {
+    where: PredictiveModelEvaluationScalarWhereInput
+    data: XOR<PredictiveModelEvaluationUpdateManyMutationInput, PredictiveModelEvaluationUncheckedUpdateManyWithoutRecordedByInput>
+  }
+
+  export type PredictiveModelEvaluationScalarWhereInput = {
+    AND?: PredictiveModelEvaluationScalarWhereInput | PredictiveModelEvaluationScalarWhereInput[]
+    OR?: PredictiveModelEvaluationScalarWhereInput[]
+    NOT?: PredictiveModelEvaluationScalarWhereInput | PredictiveModelEvaluationScalarWhereInput[]
+    id?: StringFilter<"PredictiveModelEvaluation"> | string
+    modelVersionId?: StringFilter<"PredictiveModelEvaluation"> | string
+    datasetSnapshotId?: StringFilter<"PredictiveModelEvaluation"> | string
+    evaluationContractVersion?: StringFilter<"PredictiveModelEvaluation"> | string
+    splitStrategy?: StringFilter<"PredictiveModelEvaluation"> | string
+    evaluationPeriodStart?: DateTimeFilter<"PredictiveModelEvaluation"> | Date | string
+    evaluationPeriodEnd?: DateTimeFilter<"PredictiveModelEvaluation"> | Date | string
+    testSampleCount?: IntFilter<"PredictiveModelEvaluation"> | number
+    lateCount?: IntFilter<"PredictiveModelEvaluation"> | number
+    onTimeCount?: IntFilter<"PredictiveModelEvaluation"> | number
+    truePositiveCount?: IntFilter<"PredictiveModelEvaluation"> | number
+    trueNegativeCount?: IntFilter<"PredictiveModelEvaluation"> | number
+    falsePositiveCount?: IntFilter<"PredictiveModelEvaluation"> | number
+    falseNegativeCount?: IntFilter<"PredictiveModelEvaluation"> | number
+    precision?: FloatFilter<"PredictiveModelEvaluation"> | number
+    recall?: FloatFilter<"PredictiveModelEvaluation"> | number
+    f1?: FloatFilter<"PredictiveModelEvaluation"> | number
+    prAuc?: FloatFilter<"PredictiveModelEvaluation"> | number
+    calibrationError?: FloatFilter<"PredictiveModelEvaluation"> | number
+    falseNegativeRate?: FloatFilter<"PredictiveModelEvaluation"> | number
+    baselineEvidence?: JsonFilter<"PredictiveModelEvaluation">
+    subgroupMetricsReference?: JsonNullableFilter<"PredictiveModelEvaluation">
+    featureDistributionReference?: JsonNullableFilter<"PredictiveModelEvaluation">
+    missingnessReference?: JsonNullableFilter<"PredictiveModelEvaluation">
+    evaluationArtifactReference?: StringFilter<"PredictiveModelEvaluation"> | string
+    evaluationFingerprint?: StringFilter<"PredictiveModelEvaluation"> | string
+    recordedById?: StringFilter<"PredictiveModelEvaluation"> | string
+    recordedAt?: DateTimeFilter<"PredictiveModelEvaluation"> | Date | string
+  }
+
+  export type PredictiveModelApprovalUpsertWithWhereUniqueWithoutApprovedByInput = {
+    where: PredictiveModelApprovalWhereUniqueInput
+    update: XOR<PredictiveModelApprovalUpdateWithoutApprovedByInput, PredictiveModelApprovalUncheckedUpdateWithoutApprovedByInput>
+    create: XOR<PredictiveModelApprovalCreateWithoutApprovedByInput, PredictiveModelApprovalUncheckedCreateWithoutApprovedByInput>
+  }
+
+  export type PredictiveModelApprovalUpdateWithWhereUniqueWithoutApprovedByInput = {
+    where: PredictiveModelApprovalWhereUniqueInput
+    data: XOR<PredictiveModelApprovalUpdateWithoutApprovedByInput, PredictiveModelApprovalUncheckedUpdateWithoutApprovedByInput>
+  }
+
+  export type PredictiveModelApprovalUpdateManyWithWhereWithoutApprovedByInput = {
+    where: PredictiveModelApprovalScalarWhereInput
+    data: XOR<PredictiveModelApprovalUpdateManyMutationInput, PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByInput>
+  }
+
+  export type PredictiveModelApprovalScalarWhereInput = {
+    AND?: PredictiveModelApprovalScalarWhereInput | PredictiveModelApprovalScalarWhereInput[]
+    OR?: PredictiveModelApprovalScalarWhereInput[]
+    NOT?: PredictiveModelApprovalScalarWhereInput | PredictiveModelApprovalScalarWhereInput[]
+    id?: StringFilter<"PredictiveModelApproval"> | string
+    modelVersionId?: StringFilter<"PredictiveModelApproval"> | string
+    decision?: EnumPredictiveModelApprovalDecisionFilter<"PredictiveModelApproval"> | $Enums.PredictiveModelApprovalDecision
+    reason?: StringFilter<"PredictiveModelApproval"> | string
+    restrictions?: JsonNullableFilter<"PredictiveModelApproval">
+    reviewDueAt?: DateTimeNullableFilter<"PredictiveModelApproval"> | Date | string | null
+    approvalExpiresAt?: DateTimeNullableFilter<"PredictiveModelApproval"> | Date | string | null
+    approvedById?: StringFilter<"PredictiveModelApproval"> | string
+    decidedAt?: DateTimeFilter<"PredictiveModelApproval"> | Date | string
+  }
+
+  export type PredictiveModelLifecycleEventUpsertWithWhereUniqueWithoutActorInput = {
+    where: PredictiveModelLifecycleEventWhereUniqueInput
+    update: XOR<PredictiveModelLifecycleEventUpdateWithoutActorInput, PredictiveModelLifecycleEventUncheckedUpdateWithoutActorInput>
+    create: XOR<PredictiveModelLifecycleEventCreateWithoutActorInput, PredictiveModelLifecycleEventUncheckedCreateWithoutActorInput>
+  }
+
+  export type PredictiveModelLifecycleEventUpdateWithWhereUniqueWithoutActorInput = {
+    where: PredictiveModelLifecycleEventWhereUniqueInput
+    data: XOR<PredictiveModelLifecycleEventUpdateWithoutActorInput, PredictiveModelLifecycleEventUncheckedUpdateWithoutActorInput>
+  }
+
+  export type PredictiveModelLifecycleEventUpdateManyWithWhereWithoutActorInput = {
+    where: PredictiveModelLifecycleEventScalarWhereInput
+    data: XOR<PredictiveModelLifecycleEventUpdateManyMutationInput, PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorInput>
+  }
+
+  export type PredictiveModelLifecycleEventScalarWhereInput = {
+    AND?: PredictiveModelLifecycleEventScalarWhereInput | PredictiveModelLifecycleEventScalarWhereInput[]
+    OR?: PredictiveModelLifecycleEventScalarWhereInput[]
+    NOT?: PredictiveModelLifecycleEventScalarWhereInput | PredictiveModelLifecycleEventScalarWhereInput[]
+    id?: StringFilter<"PredictiveModelLifecycleEvent"> | string
+    modelVersionId?: StringFilter<"PredictiveModelLifecycleEvent"> | string
+    action?: EnumPredictiveModelLifecycleActionFilter<"PredictiveModelLifecycleEvent"> | $Enums.PredictiveModelLifecycleAction
+    fromStatus?: EnumPredictiveModelLifecycleStatusNullableFilter<"PredictiveModelLifecycleEvent"> | $Enums.PredictiveModelLifecycleStatus | null
+    toStatus?: EnumPredictiveModelLifecycleStatusFilter<"PredictiveModelLifecycleEvent"> | $Enums.PredictiveModelLifecycleStatus
+    reason?: StringFilter<"PredictiveModelLifecycleEvent"> | string
+    relatedModelVersionId?: StringNullableFilter<"PredictiveModelLifecycleEvent"> | string | null
+    actorId?: StringFilter<"PredictiveModelLifecycleEvent"> | string
+    occurredAt?: DateTimeFilter<"PredictiveModelLifecycleEvent"> | Date | string
+  }
+
   export type DepartmentCreateWithoutAssetsInput = {
     id?: string
     name: string
@@ -74683,6 +85190,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutVoidedByInput
     recordedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutRecordedByInput
     voidedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutVoidedByInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotCreateNestedManyWithoutCreatedByInput
+    createdPredictiveModelVersions?: PredictiveModelVersionCreateNestedManyWithoutCreatedByInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionCreateNestedManyWithoutValidatedByInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationCreateNestedManyWithoutRecordedByInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
   }
 
   export type UserUncheckedCreateWithoutReviewedPublicReportsInput = {
@@ -74732,6 +85245,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutVoidedByInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutRecordedByInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutVoidedByInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUncheckedCreateNestedManyWithoutCreatedByInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUncheckedCreateNestedManyWithoutValidatedByInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedCreateNestedManyWithoutRecordedByInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
   }
 
   export type UserCreateOrConnectWithoutReviewedPublicReportsInput = {
@@ -74786,6 +85305,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutVoidedByInput
     recordedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutRecordedByInput
     voidedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutVoidedByInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotCreateNestedManyWithoutCreatedByInput
+    createdPredictiveModelVersions?: PredictiveModelVersionCreateNestedManyWithoutCreatedByInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionCreateNestedManyWithoutValidatedByInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationCreateNestedManyWithoutRecordedByInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
   }
 
   export type UserUncheckedCreateWithoutDecidedPublicReportsInput = {
@@ -74835,6 +85360,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutVoidedByInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutRecordedByInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutVoidedByInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUncheckedCreateNestedManyWithoutCreatedByInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUncheckedCreateNestedManyWithoutValidatedByInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedCreateNestedManyWithoutRecordedByInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
   }
 
   export type UserCreateOrConnectWithoutDecidedPublicReportsInput = {
@@ -75132,6 +85663,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutVoidedByNestedInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutRecordedByNestedInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutVoidedByNestedInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUpdateManyWithoutCreatedByNestedInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUpdateManyWithoutValidatedByNestedInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUpdateManyWithoutRecordedByNestedInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
   }
 
   export type UserUncheckedUpdateWithoutReviewedPublicReportsInput = {
@@ -75181,6 +85718,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutVoidedByNestedInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutRecordedByNestedInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutVoidedByNestedInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUncheckedUpdateManyWithoutCreatedByNestedInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUncheckedUpdateManyWithoutValidatedByNestedInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedUpdateManyWithoutRecordedByNestedInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
   }
 
   export type UserUpsertWithoutDecidedPublicReportsInput = {
@@ -75241,6 +85784,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutVoidedByNestedInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutRecordedByNestedInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutVoidedByNestedInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUpdateManyWithoutCreatedByNestedInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUpdateManyWithoutValidatedByNestedInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUpdateManyWithoutRecordedByNestedInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
   }
 
   export type UserUncheckedUpdateWithoutDecidedPublicReportsInput = {
@@ -75290,6 +85839,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutVoidedByNestedInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutRecordedByNestedInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutVoidedByNestedInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUncheckedUpdateManyWithoutCreatedByNestedInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUncheckedUpdateManyWithoutValidatedByNestedInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedUpdateManyWithoutRecordedByNestedInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
   }
 
   export type CaseUpsertWithoutSourcePublicReportInput = {
@@ -75516,6 +86071,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutVoidedByInput
     recordedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutRecordedByInput
     voidedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutVoidedByInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotCreateNestedManyWithoutCreatedByInput
+    createdPredictiveModelVersions?: PredictiveModelVersionCreateNestedManyWithoutCreatedByInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionCreateNestedManyWithoutValidatedByInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationCreateNestedManyWithoutRecordedByInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
   }
 
   export type UserUncheckedCreateWithoutCreatedTriageAnalysesInput = {
@@ -75565,6 +86126,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutVoidedByInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutRecordedByInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutVoidedByInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUncheckedCreateNestedManyWithoutCreatedByInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUncheckedCreateNestedManyWithoutValidatedByInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedCreateNestedManyWithoutRecordedByInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
   }
 
   export type UserCreateOrConnectWithoutCreatedTriageAnalysesInput = {
@@ -75740,6 +86307,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutVoidedByNestedInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutRecordedByNestedInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutVoidedByNestedInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUpdateManyWithoutCreatedByNestedInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUpdateManyWithoutValidatedByNestedInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUpdateManyWithoutRecordedByNestedInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCreatedTriageAnalysesInput = {
@@ -75789,6 +86362,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutVoidedByNestedInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutRecordedByNestedInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutVoidedByNestedInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUncheckedUpdateManyWithoutCreatedByNestedInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUncheckedUpdateManyWithoutValidatedByNestedInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedUpdateManyWithoutRecordedByNestedInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
   }
 
   export type DepartmentCreateWithoutPolicyDocumentsInput = {
@@ -75916,6 +86495,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutVoidedByInput
     recordedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutRecordedByInput
     voidedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutVoidedByInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotCreateNestedManyWithoutCreatedByInput
+    createdPredictiveModelVersions?: PredictiveModelVersionCreateNestedManyWithoutCreatedByInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionCreateNestedManyWithoutValidatedByInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationCreateNestedManyWithoutRecordedByInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
   }
 
   export type UserUncheckedCreateWithoutCreatedPolicyDocumentsInput = {
@@ -75965,6 +86550,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutVoidedByInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutRecordedByInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutVoidedByInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUncheckedCreateNestedManyWithoutCreatedByInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUncheckedCreateNestedManyWithoutValidatedByInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedCreateNestedManyWithoutRecordedByInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
   }
 
   export type UserCreateOrConnectWithoutCreatedPolicyDocumentsInput = {
@@ -76019,6 +86610,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutVoidedByInput
     recordedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutRecordedByInput
     voidedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutVoidedByInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotCreateNestedManyWithoutCreatedByInput
+    createdPredictiveModelVersions?: PredictiveModelVersionCreateNestedManyWithoutCreatedByInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionCreateNestedManyWithoutValidatedByInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationCreateNestedManyWithoutRecordedByInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
   }
 
   export type UserUncheckedCreateWithoutApprovedPolicyDocumentsInput = {
@@ -76068,6 +86665,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutVoidedByInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutRecordedByInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutVoidedByInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUncheckedCreateNestedManyWithoutCreatedByInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUncheckedCreateNestedManyWithoutValidatedByInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedCreateNestedManyWithoutRecordedByInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
   }
 
   export type UserCreateOrConnectWithoutApprovedPolicyDocumentsInput = {
@@ -76317,6 +86920,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutVoidedByNestedInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutRecordedByNestedInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutVoidedByNestedInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUpdateManyWithoutCreatedByNestedInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUpdateManyWithoutValidatedByNestedInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUpdateManyWithoutRecordedByNestedInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCreatedPolicyDocumentsInput = {
@@ -76366,6 +86975,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutVoidedByNestedInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutRecordedByNestedInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutVoidedByNestedInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUncheckedUpdateManyWithoutCreatedByNestedInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUncheckedUpdateManyWithoutValidatedByNestedInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedUpdateManyWithoutRecordedByNestedInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
   }
 
   export type UserUpsertWithoutApprovedPolicyDocumentsInput = {
@@ -76426,6 +87041,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutVoidedByNestedInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutRecordedByNestedInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutVoidedByNestedInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUpdateManyWithoutCreatedByNestedInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUpdateManyWithoutValidatedByNestedInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUpdateManyWithoutRecordedByNestedInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
   }
 
   export type UserUncheckedUpdateWithoutApprovedPolicyDocumentsInput = {
@@ -76475,6 +87096,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutVoidedByNestedInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutRecordedByNestedInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutVoidedByNestedInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUncheckedUpdateManyWithoutCreatedByNestedInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUncheckedUpdateManyWithoutValidatedByNestedInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedUpdateManyWithoutRecordedByNestedInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
   }
 
   export type PolicyRuleUpsertWithWhereUniqueWithoutPolicyDocumentInput = {
@@ -76699,6 +87326,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutVoidedByInput
     recordedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutRecordedByInput
     voidedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutVoidedByInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotCreateNestedManyWithoutCreatedByInput
+    createdPredictiveModelVersions?: PredictiveModelVersionCreateNestedManyWithoutCreatedByInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionCreateNestedManyWithoutValidatedByInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationCreateNestedManyWithoutRecordedByInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
   }
 
   export type UserUncheckedCreateWithoutCreatedApprovedActionsInput = {
@@ -76748,6 +87381,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutVoidedByInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutRecordedByInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutVoidedByInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUncheckedCreateNestedManyWithoutCreatedByInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUncheckedCreateNestedManyWithoutValidatedByInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedCreateNestedManyWithoutRecordedByInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
   }
 
   export type UserCreateOrConnectWithoutCreatedApprovedActionsInput = {
@@ -76802,6 +87441,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutVoidedByInput
     recordedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutRecordedByInput
     voidedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutVoidedByInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotCreateNestedManyWithoutCreatedByInput
+    createdPredictiveModelVersions?: PredictiveModelVersionCreateNestedManyWithoutCreatedByInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionCreateNestedManyWithoutValidatedByInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationCreateNestedManyWithoutRecordedByInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
   }
 
   export type UserUncheckedCreateWithoutApprovedApprovedActionsInput = {
@@ -76851,6 +87496,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutVoidedByInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutRecordedByInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutVoidedByInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUncheckedCreateNestedManyWithoutCreatedByInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUncheckedCreateNestedManyWithoutValidatedByInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedCreateNestedManyWithoutRecordedByInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
   }
 
   export type UserCreateOrConnectWithoutApprovedApprovedActionsInput = {
@@ -77243,6 +87894,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutVoidedByNestedInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutRecordedByNestedInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutVoidedByNestedInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUpdateManyWithoutCreatedByNestedInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUpdateManyWithoutValidatedByNestedInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUpdateManyWithoutRecordedByNestedInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCreatedApprovedActionsInput = {
@@ -77292,6 +87949,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutVoidedByNestedInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutRecordedByNestedInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutVoidedByNestedInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUncheckedUpdateManyWithoutCreatedByNestedInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUncheckedUpdateManyWithoutValidatedByNestedInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedUpdateManyWithoutRecordedByNestedInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
   }
 
   export type UserUpsertWithoutApprovedApprovedActionsInput = {
@@ -77352,6 +88015,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutVoidedByNestedInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutRecordedByNestedInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutVoidedByNestedInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUpdateManyWithoutCreatedByNestedInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUpdateManyWithoutValidatedByNestedInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUpdateManyWithoutRecordedByNestedInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
   }
 
   export type UserUncheckedUpdateWithoutApprovedApprovedActionsInput = {
@@ -77401,6 +88070,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutVoidedByNestedInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutRecordedByNestedInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutVoidedByNestedInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUncheckedUpdateManyWithoutCreatedByNestedInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUncheckedUpdateManyWithoutValidatedByNestedInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedUpdateManyWithoutRecordedByNestedInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
   }
 
   export type PolicyRuleUpsertWithWhereUniqueWithoutActionInput = {
@@ -77631,6 +88306,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutVoidedByInput
     recordedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutRecordedByInput
     voidedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutVoidedByInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotCreateNestedManyWithoutCreatedByInput
+    createdPredictiveModelVersions?: PredictiveModelVersionCreateNestedManyWithoutCreatedByInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionCreateNestedManyWithoutValidatedByInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationCreateNestedManyWithoutRecordedByInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
   }
 
   export type UserUncheckedCreateWithoutCreatedGovernedExecutionTemplatesInput = {
@@ -77680,6 +88361,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutVoidedByInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutRecordedByInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutVoidedByInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUncheckedCreateNestedManyWithoutCreatedByInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUncheckedCreateNestedManyWithoutValidatedByInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedCreateNestedManyWithoutRecordedByInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
   }
 
   export type UserCreateOrConnectWithoutCreatedGovernedExecutionTemplatesInput = {
@@ -77734,6 +88421,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutVoidedByInput
     recordedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutRecordedByInput
     voidedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutVoidedByInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotCreateNestedManyWithoutCreatedByInput
+    createdPredictiveModelVersions?: PredictiveModelVersionCreateNestedManyWithoutCreatedByInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionCreateNestedManyWithoutValidatedByInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationCreateNestedManyWithoutRecordedByInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
   }
 
   export type UserUncheckedCreateWithoutApprovedGovernedExecutionTemplatesInput = {
@@ -77783,6 +88476,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutVoidedByInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutRecordedByInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutVoidedByInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUncheckedCreateNestedManyWithoutCreatedByInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUncheckedCreateNestedManyWithoutValidatedByInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedCreateNestedManyWithoutRecordedByInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
   }
 
   export type UserCreateOrConnectWithoutApprovedGovernedExecutionTemplatesInput = {
@@ -78137,6 +88836,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutVoidedByNestedInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutRecordedByNestedInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutVoidedByNestedInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUpdateManyWithoutCreatedByNestedInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUpdateManyWithoutValidatedByNestedInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUpdateManyWithoutRecordedByNestedInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCreatedGovernedExecutionTemplatesInput = {
@@ -78186,6 +88891,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutVoidedByNestedInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutRecordedByNestedInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutVoidedByNestedInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUncheckedUpdateManyWithoutCreatedByNestedInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUncheckedUpdateManyWithoutValidatedByNestedInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedUpdateManyWithoutRecordedByNestedInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
   }
 
   export type UserUpsertWithoutApprovedGovernedExecutionTemplatesInput = {
@@ -78246,6 +88957,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutVoidedByNestedInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutRecordedByNestedInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutVoidedByNestedInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUpdateManyWithoutCreatedByNestedInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUpdateManyWithoutValidatedByNestedInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUpdateManyWithoutRecordedByNestedInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
   }
 
   export type UserUncheckedUpdateWithoutApprovedGovernedExecutionTemplatesInput = {
@@ -78295,6 +89012,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutVoidedByNestedInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutRecordedByNestedInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutVoidedByNestedInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUncheckedUpdateManyWithoutCreatedByNestedInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUncheckedUpdateManyWithoutValidatedByNestedInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedUpdateManyWithoutRecordedByNestedInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
   }
 
   export type GovernedExecutionTaskTemplateUpsertWithWhereUniqueWithoutExecutionTemplateInput = {
@@ -79879,6 +90602,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutVoidedByInput
     recordedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutRecordedByInput
     voidedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutVoidedByInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotCreateNestedManyWithoutCreatedByInput
+    createdPredictiveModelVersions?: PredictiveModelVersionCreateNestedManyWithoutCreatedByInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionCreateNestedManyWithoutValidatedByInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationCreateNestedManyWithoutRecordedByInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
   }
 
   export type UserUncheckedCreateWithoutPreparedCaseResourceEstimatesInput = {
@@ -79928,6 +90657,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutVoidedByInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutRecordedByInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutVoidedByInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUncheckedCreateNestedManyWithoutCreatedByInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUncheckedCreateNestedManyWithoutValidatedByInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedCreateNestedManyWithoutRecordedByInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
   }
 
   export type UserCreateOrConnectWithoutPreparedCaseResourceEstimatesInput = {
@@ -80056,6 +90791,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutVoidedByNestedInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutRecordedByNestedInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutVoidedByNestedInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUpdateManyWithoutCreatedByNestedInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUpdateManyWithoutValidatedByNestedInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUpdateManyWithoutRecordedByNestedInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPreparedCaseResourceEstimatesInput = {
@@ -80105,6 +90846,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutVoidedByNestedInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutRecordedByNestedInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutVoidedByNestedInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUncheckedUpdateManyWithoutCreatedByNestedInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUncheckedUpdateManyWithoutValidatedByNestedInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedUpdateManyWithoutRecordedByNestedInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
   }
 
   export type DepartmentCreateWithoutPortfolioScenariosInput = {
@@ -80232,6 +90979,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutVoidedByInput
     recordedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutRecordedByInput
     voidedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutVoidedByInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotCreateNestedManyWithoutCreatedByInput
+    createdPredictiveModelVersions?: PredictiveModelVersionCreateNestedManyWithoutCreatedByInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionCreateNestedManyWithoutValidatedByInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationCreateNestedManyWithoutRecordedByInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
   }
 
   export type UserUncheckedCreateWithoutCreatedPortfolioScenariosInput = {
@@ -80281,6 +91034,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutVoidedByInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutRecordedByInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutVoidedByInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUncheckedCreateNestedManyWithoutCreatedByInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUncheckedCreateNestedManyWithoutValidatedByInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedCreateNestedManyWithoutRecordedByInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
   }
 
   export type UserCreateOrConnectWithoutCreatedPortfolioScenariosInput = {
@@ -80436,6 +91195,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutVoidedByNestedInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutRecordedByNestedInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutVoidedByNestedInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUpdateManyWithoutCreatedByNestedInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUpdateManyWithoutValidatedByNestedInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUpdateManyWithoutRecordedByNestedInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCreatedPortfolioScenariosInput = {
@@ -80485,6 +91250,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutVoidedByNestedInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutRecordedByNestedInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutVoidedByNestedInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUncheckedUpdateManyWithoutCreatedByNestedInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUncheckedUpdateManyWithoutValidatedByNestedInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedUpdateManyWithoutRecordedByNestedInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
   }
 
   export type DepartmentCreateWithoutObservationSourcesInput = {
@@ -80612,6 +91383,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutVoidedByInput
     recordedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutRecordedByInput
     voidedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutVoidedByInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotCreateNestedManyWithoutCreatedByInput
+    createdPredictiveModelVersions?: PredictiveModelVersionCreateNestedManyWithoutCreatedByInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionCreateNestedManyWithoutValidatedByInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationCreateNestedManyWithoutRecordedByInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
   }
 
   export type UserUncheckedCreateWithoutCreatedObservationSourcesInput = {
@@ -80661,6 +91438,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutVoidedByInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutRecordedByInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutVoidedByInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUncheckedCreateNestedManyWithoutCreatedByInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUncheckedCreateNestedManyWithoutValidatedByInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedCreateNestedManyWithoutRecordedByInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
   }
 
   export type UserCreateOrConnectWithoutCreatedObservationSourcesInput = {
@@ -80715,6 +91498,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutVoidedByInput
     recordedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutRecordedByInput
     voidedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutVoidedByInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotCreateNestedManyWithoutCreatedByInput
+    createdPredictiveModelVersions?: PredictiveModelVersionCreateNestedManyWithoutCreatedByInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionCreateNestedManyWithoutValidatedByInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationCreateNestedManyWithoutRecordedByInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
   }
 
   export type UserUncheckedCreateWithoutDeactivatedObservationSourcesInput = {
@@ -80764,6 +91553,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutVoidedByInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutRecordedByInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutVoidedByInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUncheckedCreateNestedManyWithoutCreatedByInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUncheckedCreateNestedManyWithoutValidatedByInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedCreateNestedManyWithoutRecordedByInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
   }
 
   export type UserCreateOrConnectWithoutDeactivatedObservationSourcesInput = {
@@ -80969,6 +91764,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutVoidedByNestedInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutRecordedByNestedInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutVoidedByNestedInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUpdateManyWithoutCreatedByNestedInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUpdateManyWithoutValidatedByNestedInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUpdateManyWithoutRecordedByNestedInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCreatedObservationSourcesInput = {
@@ -81018,6 +91819,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutVoidedByNestedInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutRecordedByNestedInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutVoidedByNestedInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUncheckedUpdateManyWithoutCreatedByNestedInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUncheckedUpdateManyWithoutValidatedByNestedInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedUpdateManyWithoutRecordedByNestedInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
   }
 
   export type UserUpsertWithoutDeactivatedObservationSourcesInput = {
@@ -81078,6 +91885,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutVoidedByNestedInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutRecordedByNestedInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutVoidedByNestedInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUpdateManyWithoutCreatedByNestedInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUpdateManyWithoutValidatedByNestedInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUpdateManyWithoutRecordedByNestedInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
   }
 
   export type UserUncheckedUpdateWithoutDeactivatedObservationSourcesInput = {
@@ -81127,6 +91940,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutVoidedByNestedInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutRecordedByNestedInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutVoidedByNestedInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUncheckedUpdateManyWithoutCreatedByNestedInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUncheckedUpdateManyWithoutValidatedByNestedInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedUpdateManyWithoutRecordedByNestedInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
   }
 
   export type ExternalObservationUpsertWithWhereUniqueWithoutSourceInput = {
@@ -81415,6 +92234,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutVoidedByInput
     recordedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutRecordedByInput
     voidedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutVoidedByInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotCreateNestedManyWithoutCreatedByInput
+    createdPredictiveModelVersions?: PredictiveModelVersionCreateNestedManyWithoutCreatedByInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionCreateNestedManyWithoutValidatedByInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationCreateNestedManyWithoutRecordedByInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
   }
 
   export type UserUncheckedCreateWithoutIngestedExternalObservationsInput = {
@@ -81464,6 +92289,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutVoidedByInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutRecordedByInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutVoidedByInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUncheckedCreateNestedManyWithoutCreatedByInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUncheckedCreateNestedManyWithoutValidatedByInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedCreateNestedManyWithoutRecordedByInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
   }
 
   export type UserCreateOrConnectWithoutIngestedExternalObservationsInput = {
@@ -81782,6 +92613,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutVoidedByNestedInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutRecordedByNestedInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutVoidedByNestedInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUpdateManyWithoutCreatedByNestedInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUpdateManyWithoutValidatedByNestedInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUpdateManyWithoutRecordedByNestedInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
   }
 
   export type UserUncheckedUpdateWithoutIngestedExternalObservationsInput = {
@@ -81831,6 +92668,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutVoidedByNestedInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutRecordedByNestedInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutVoidedByNestedInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUncheckedUpdateManyWithoutCreatedByNestedInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUncheckedUpdateManyWithoutValidatedByNestedInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedUpdateManyWithoutRecordedByNestedInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
   }
 
   export type CaseCreateWithoutInspectionsInput = {
@@ -81937,6 +92780,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutVoidedByInput
     recordedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutRecordedByInput
     voidedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutVoidedByInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotCreateNestedManyWithoutCreatedByInput
+    createdPredictiveModelVersions?: PredictiveModelVersionCreateNestedManyWithoutCreatedByInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionCreateNestedManyWithoutValidatedByInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationCreateNestedManyWithoutRecordedByInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
   }
 
   export type UserUncheckedCreateWithoutInspectionsInput = {
@@ -81986,6 +92835,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutVoidedByInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutRecordedByInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutVoidedByInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUncheckedCreateNestedManyWithoutCreatedByInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUncheckedCreateNestedManyWithoutValidatedByInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedCreateNestedManyWithoutRecordedByInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
   }
 
   export type UserCreateOrConnectWithoutInspectionsInput = {
@@ -82276,6 +93131,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutVoidedByNestedInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutRecordedByNestedInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutVoidedByNestedInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUpdateManyWithoutCreatedByNestedInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUpdateManyWithoutValidatedByNestedInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUpdateManyWithoutRecordedByNestedInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
   }
 
   export type UserUncheckedUpdateWithoutInspectionsInput = {
@@ -82325,6 +93186,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutVoidedByNestedInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutRecordedByNestedInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutVoidedByNestedInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUncheckedUpdateManyWithoutCreatedByNestedInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUncheckedUpdateManyWithoutValidatedByNestedInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedUpdateManyWithoutRecordedByNestedInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
   }
 
   export type RiskAssessmentUpsertWithWhereUniqueWithoutInspectionInput = {
@@ -84063,6 +94930,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutVoidedByInput
     recordedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutRecordedByInput
     voidedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutVoidedByInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotCreateNestedManyWithoutCreatedByInput
+    createdPredictiveModelVersions?: PredictiveModelVersionCreateNestedManyWithoutCreatedByInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionCreateNestedManyWithoutValidatedByInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationCreateNestedManyWithoutRecordedByInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
   }
 
   export type UserUncheckedCreateWithoutPreparedDecisionPackagesInput = {
@@ -84112,6 +94985,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutVoidedByInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutRecordedByInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutVoidedByInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUncheckedCreateNestedManyWithoutCreatedByInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUncheckedCreateNestedManyWithoutValidatedByInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedCreateNestedManyWithoutRecordedByInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
   }
 
   export type UserCreateOrConnectWithoutPreparedDecisionPackagesInput = {
@@ -84386,6 +95265,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutVoidedByNestedInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutRecordedByNestedInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutVoidedByNestedInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUpdateManyWithoutCreatedByNestedInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUpdateManyWithoutValidatedByNestedInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUpdateManyWithoutRecordedByNestedInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPreparedDecisionPackagesInput = {
@@ -84435,6 +95320,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutVoidedByNestedInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutRecordedByNestedInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutVoidedByNestedInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUncheckedUpdateManyWithoutCreatedByNestedInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUncheckedUpdateManyWithoutValidatedByNestedInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedUpdateManyWithoutRecordedByNestedInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
   }
 
   export type OperationalResponsePlanUpsertWithWhereUniqueWithoutDecisionPackageInput = {
@@ -84500,6 +95391,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutVoidedByInput
     recordedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutRecordedByInput
     voidedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutVoidedByInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotCreateNestedManyWithoutCreatedByInput
+    createdPredictiveModelVersions?: PredictiveModelVersionCreateNestedManyWithoutCreatedByInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionCreateNestedManyWithoutValidatedByInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationCreateNestedManyWithoutRecordedByInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
   }
 
   export type UserUncheckedCreateWithoutApprovalAuthoritiesInput = {
@@ -84549,6 +95446,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutVoidedByInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutRecordedByInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutVoidedByInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUncheckedCreateNestedManyWithoutCreatedByInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUncheckedCreateNestedManyWithoutValidatedByInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedCreateNestedManyWithoutRecordedByInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
   }
 
   export type UserCreateOrConnectWithoutApprovalAuthoritiesInput = {
@@ -84760,6 +95663,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutVoidedByNestedInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutRecordedByNestedInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutVoidedByNestedInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUpdateManyWithoutCreatedByNestedInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUpdateManyWithoutValidatedByNestedInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUpdateManyWithoutRecordedByNestedInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
   }
 
   export type UserUncheckedUpdateWithoutApprovalAuthoritiesInput = {
@@ -84809,6 +95718,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutVoidedByNestedInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutRecordedByNestedInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutVoidedByNestedInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUncheckedUpdateManyWithoutCreatedByNestedInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUncheckedUpdateManyWithoutValidatedByNestedInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedUpdateManyWithoutRecordedByNestedInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
   }
 
   export type DepartmentUpsertWithoutApprovalAuthoritiesInput = {
@@ -85084,6 +95999,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutVoidedByInput
     recordedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutRecordedByInput
     voidedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutVoidedByInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotCreateNestedManyWithoutCreatedByInput
+    createdPredictiveModelVersions?: PredictiveModelVersionCreateNestedManyWithoutCreatedByInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionCreateNestedManyWithoutValidatedByInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationCreateNestedManyWithoutRecordedByInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
   }
 
   export type UserUncheckedCreateWithoutReviewedOrpDecisionsInput = {
@@ -85133,6 +96054,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutVoidedByInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutRecordedByInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutVoidedByInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUncheckedCreateNestedManyWithoutCreatedByInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUncheckedCreateNestedManyWithoutValidatedByInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedCreateNestedManyWithoutRecordedByInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
   }
 
   export type UserCreateOrConnectWithoutReviewedOrpDecisionsInput = {
@@ -85232,6 +96159,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutVoidedByInput
     recordedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutRecordedByInput
     voidedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutVoidedByInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotCreateNestedManyWithoutCreatedByInput
+    createdPredictiveModelVersions?: PredictiveModelVersionCreateNestedManyWithoutCreatedByInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionCreateNestedManyWithoutValidatedByInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationCreateNestedManyWithoutRecordedByInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
   }
 
   export type UserUncheckedCreateWithoutForwardedOrpDecisionsInput = {
@@ -85281,6 +96214,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutVoidedByInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutRecordedByInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutVoidedByInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUncheckedCreateNestedManyWithoutCreatedByInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUncheckedCreateNestedManyWithoutValidatedByInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedCreateNestedManyWithoutRecordedByInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
   }
 
   export type UserCreateOrConnectWithoutForwardedOrpDecisionsInput = {
@@ -85515,6 +96454,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutVoidedByNestedInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutRecordedByNestedInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutVoidedByNestedInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUpdateManyWithoutCreatedByNestedInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUpdateManyWithoutValidatedByNestedInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUpdateManyWithoutRecordedByNestedInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
   }
 
   export type UserUncheckedUpdateWithoutReviewedOrpDecisionsInput = {
@@ -85564,6 +96509,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutVoidedByNestedInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutRecordedByNestedInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutVoidedByNestedInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUncheckedUpdateManyWithoutCreatedByNestedInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUncheckedUpdateManyWithoutValidatedByNestedInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedUpdateManyWithoutRecordedByNestedInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
   }
 
   export type ApprovalAuthorityUpsertWithoutDecisionsInput = {
@@ -85675,6 +96626,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutVoidedByNestedInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutRecordedByNestedInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutVoidedByNestedInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUpdateManyWithoutCreatedByNestedInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUpdateManyWithoutValidatedByNestedInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUpdateManyWithoutRecordedByNestedInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
   }
 
   export type UserUncheckedUpdateWithoutForwardedOrpDecisionsInput = {
@@ -85724,6 +96681,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutVoidedByNestedInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutRecordedByNestedInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutVoidedByNestedInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUncheckedUpdateManyWithoutCreatedByNestedInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUncheckedUpdateManyWithoutValidatedByNestedInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedUpdateManyWithoutRecordedByNestedInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
   }
 
   export type ExecutionPlanUpsertWithoutApprovalDecisionInput = {
@@ -85969,6 +96932,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutVoidedByInput
     recordedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutRecordedByInput
     voidedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutVoidedByInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotCreateNestedManyWithoutCreatedByInput
+    createdPredictiveModelVersions?: PredictiveModelVersionCreateNestedManyWithoutCreatedByInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionCreateNestedManyWithoutValidatedByInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationCreateNestedManyWithoutRecordedByInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
   }
 
   export type UserUncheckedCreateWithoutCreatedExecutionPlansInput = {
@@ -86018,6 +96987,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutVoidedByInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutRecordedByInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutVoidedByInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUncheckedCreateNestedManyWithoutCreatedByInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUncheckedCreateNestedManyWithoutValidatedByInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedCreateNestedManyWithoutRecordedByInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
   }
 
   export type UserCreateOrConnectWithoutCreatedExecutionPlansInput = {
@@ -86421,6 +97396,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutVoidedByNestedInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutRecordedByNestedInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutVoidedByNestedInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUpdateManyWithoutCreatedByNestedInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUpdateManyWithoutValidatedByNestedInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUpdateManyWithoutRecordedByNestedInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCreatedExecutionPlansInput = {
@@ -86470,6 +97451,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutVoidedByNestedInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutRecordedByNestedInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutVoidedByNestedInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUncheckedUpdateManyWithoutCreatedByNestedInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUncheckedUpdateManyWithoutValidatedByNestedInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedUpdateManyWithoutRecordedByNestedInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
   }
 
   export type ExecutionTaskUpsertWithWhereUniqueWithoutExecutionPlanInput = {
@@ -86651,6 +97638,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutVoidedByInput
     recordedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutRecordedByInput
     voidedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutVoidedByInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotCreateNestedManyWithoutCreatedByInput
+    createdPredictiveModelVersions?: PredictiveModelVersionCreateNestedManyWithoutCreatedByInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionCreateNestedManyWithoutValidatedByInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationCreateNestedManyWithoutRecordedByInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
   }
 
   export type UserUncheckedCreateWithoutAssignedExecutionTasksInput = {
@@ -86700,6 +97693,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutVoidedByInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutRecordedByInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutVoidedByInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUncheckedCreateNestedManyWithoutCreatedByInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUncheckedCreateNestedManyWithoutValidatedByInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedCreateNestedManyWithoutRecordedByInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
   }
 
   export type UserCreateOrConnectWithoutAssignedExecutionTasksInput = {
@@ -86754,6 +97753,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutVoidedByInput
     recordedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutRecordedByInput
     voidedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutVoidedByInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotCreateNestedManyWithoutCreatedByInput
+    createdPredictiveModelVersions?: PredictiveModelVersionCreateNestedManyWithoutCreatedByInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionCreateNestedManyWithoutValidatedByInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationCreateNestedManyWithoutRecordedByInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
   }
 
   export type UserUncheckedCreateWithoutAssignedByExecutionTasksInput = {
@@ -86803,6 +97808,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutVoidedByInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutRecordedByInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutVoidedByInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUncheckedCreateNestedManyWithoutCreatedByInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUncheckedCreateNestedManyWithoutValidatedByInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedCreateNestedManyWithoutRecordedByInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
   }
 
   export type UserCreateOrConnectWithoutAssignedByExecutionTasksInput = {
@@ -86857,6 +97868,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutVoidedByInput
     recordedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutRecordedByInput
     voidedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutVoidedByInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotCreateNestedManyWithoutCreatedByInput
+    createdPredictiveModelVersions?: PredictiveModelVersionCreateNestedManyWithoutCreatedByInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionCreateNestedManyWithoutValidatedByInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationCreateNestedManyWithoutRecordedByInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
   }
 
   export type UserUncheckedCreateWithoutCompletedExecutionTasksInput = {
@@ -86906,6 +97923,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutVoidedByInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutRecordedByInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutVoidedByInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUncheckedCreateNestedManyWithoutCreatedByInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUncheckedCreateNestedManyWithoutValidatedByInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedCreateNestedManyWithoutRecordedByInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
   }
 
   export type UserCreateOrConnectWithoutCompletedExecutionTasksInput = {
@@ -86960,6 +97983,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutVoidedByInput
     recordedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutRecordedByInput
     voidedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutVoidedByInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotCreateNestedManyWithoutCreatedByInput
+    createdPredictiveModelVersions?: PredictiveModelVersionCreateNestedManyWithoutCreatedByInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionCreateNestedManyWithoutValidatedByInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationCreateNestedManyWithoutRecordedByInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
   }
 
   export type UserUncheckedCreateWithoutVerifiedExecutionTasksInput = {
@@ -87009,6 +98038,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutVoidedByInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutRecordedByInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutVoidedByInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUncheckedCreateNestedManyWithoutCreatedByInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUncheckedCreateNestedManyWithoutValidatedByInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedCreateNestedManyWithoutRecordedByInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
   }
 
   export type UserCreateOrConnectWithoutVerifiedExecutionTasksInput = {
@@ -87063,6 +98098,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutVoidedByInput
     recordedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutRecordedByInput
     voidedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutVoidedByInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotCreateNestedManyWithoutCreatedByInput
+    createdPredictiveModelVersions?: PredictiveModelVersionCreateNestedManyWithoutCreatedByInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionCreateNestedManyWithoutValidatedByInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationCreateNestedManyWithoutRecordedByInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
   }
 
   export type UserUncheckedCreateWithoutCancelledExecutionTasksInput = {
@@ -87112,6 +98153,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutVoidedByInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutRecordedByInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutVoidedByInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUncheckedCreateNestedManyWithoutCreatedByInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUncheckedCreateNestedManyWithoutValidatedByInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedCreateNestedManyWithoutRecordedByInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
   }
 
   export type UserCreateOrConnectWithoutCancelledExecutionTasksInput = {
@@ -87581,6 +98628,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutVoidedByNestedInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutRecordedByNestedInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutVoidedByNestedInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUpdateManyWithoutCreatedByNestedInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUpdateManyWithoutValidatedByNestedInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUpdateManyWithoutRecordedByNestedInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAssignedExecutionTasksInput = {
@@ -87630,6 +98683,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutVoidedByNestedInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutRecordedByNestedInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutVoidedByNestedInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUncheckedUpdateManyWithoutCreatedByNestedInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUncheckedUpdateManyWithoutValidatedByNestedInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedUpdateManyWithoutRecordedByNestedInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
   }
 
   export type UserUpsertWithoutAssignedByExecutionTasksInput = {
@@ -87690,6 +98749,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutVoidedByNestedInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutRecordedByNestedInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutVoidedByNestedInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUpdateManyWithoutCreatedByNestedInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUpdateManyWithoutValidatedByNestedInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUpdateManyWithoutRecordedByNestedInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAssignedByExecutionTasksInput = {
@@ -87739,6 +98804,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutVoidedByNestedInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutRecordedByNestedInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutVoidedByNestedInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUncheckedUpdateManyWithoutCreatedByNestedInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUncheckedUpdateManyWithoutValidatedByNestedInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedUpdateManyWithoutRecordedByNestedInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
   }
 
   export type UserUpsertWithoutCompletedExecutionTasksInput = {
@@ -87799,6 +98870,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutVoidedByNestedInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutRecordedByNestedInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutVoidedByNestedInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUpdateManyWithoutCreatedByNestedInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUpdateManyWithoutValidatedByNestedInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUpdateManyWithoutRecordedByNestedInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCompletedExecutionTasksInput = {
@@ -87848,6 +98925,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutVoidedByNestedInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutRecordedByNestedInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutVoidedByNestedInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUncheckedUpdateManyWithoutCreatedByNestedInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUncheckedUpdateManyWithoutValidatedByNestedInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedUpdateManyWithoutRecordedByNestedInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
   }
 
   export type UserUpsertWithoutVerifiedExecutionTasksInput = {
@@ -87908,6 +98991,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutVoidedByNestedInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutRecordedByNestedInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutVoidedByNestedInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUpdateManyWithoutCreatedByNestedInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUpdateManyWithoutValidatedByNestedInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUpdateManyWithoutRecordedByNestedInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
   }
 
   export type UserUncheckedUpdateWithoutVerifiedExecutionTasksInput = {
@@ -87957,6 +99046,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutVoidedByNestedInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutRecordedByNestedInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutVoidedByNestedInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUncheckedUpdateManyWithoutCreatedByNestedInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUncheckedUpdateManyWithoutValidatedByNestedInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedUpdateManyWithoutRecordedByNestedInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
   }
 
   export type UserUpsertWithoutCancelledExecutionTasksInput = {
@@ -88017,6 +99112,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutVoidedByNestedInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutRecordedByNestedInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutVoidedByNestedInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUpdateManyWithoutCreatedByNestedInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUpdateManyWithoutValidatedByNestedInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUpdateManyWithoutRecordedByNestedInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCancelledExecutionTasksInput = {
@@ -88066,6 +99167,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutVoidedByNestedInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutRecordedByNestedInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutVoidedByNestedInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUncheckedUpdateManyWithoutCreatedByNestedInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUncheckedUpdateManyWithoutValidatedByNestedInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedUpdateManyWithoutRecordedByNestedInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
   }
 
   export type ExecutionEvidenceUpsertWithWhereUniqueWithoutExecutionTaskInput = {
@@ -88457,6 +99564,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutVoidedByInput
     recordedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutRecordedByInput
     voidedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutVoidedByInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotCreateNestedManyWithoutCreatedByInput
+    createdPredictiveModelVersions?: PredictiveModelVersionCreateNestedManyWithoutCreatedByInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionCreateNestedManyWithoutValidatedByInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationCreateNestedManyWithoutRecordedByInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
   }
 
   export type UserUncheckedCreateWithoutCreatedPredictiveSnapshotsInput = {
@@ -88506,6 +99619,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutVoidedByInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutRecordedByInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutVoidedByInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUncheckedCreateNestedManyWithoutCreatedByInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUncheckedCreateNestedManyWithoutValidatedByInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedCreateNestedManyWithoutRecordedByInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
   }
 
   export type UserCreateOrConnectWithoutCreatedPredictiveSnapshotsInput = {
@@ -88560,6 +99679,12 @@ export namespace Prisma {
     createdPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutCreatedByInput
     recordedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutRecordedByInput
     voidedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutVoidedByInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotCreateNestedManyWithoutCreatedByInput
+    createdPredictiveModelVersions?: PredictiveModelVersionCreateNestedManyWithoutCreatedByInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionCreateNestedManyWithoutValidatedByInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationCreateNestedManyWithoutRecordedByInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
   }
 
   export type UserUncheckedCreateWithoutVoidedPredictiveSnapshotsInput = {
@@ -88609,6 +99734,12 @@ export namespace Prisma {
     createdPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutCreatedByInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutRecordedByInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutVoidedByInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUncheckedCreateNestedManyWithoutCreatedByInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUncheckedCreateNestedManyWithoutValidatedByInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedCreateNestedManyWithoutRecordedByInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
   }
 
   export type UserCreateOrConnectWithoutVoidedPredictiveSnapshotsInput = {
@@ -88925,6 +100056,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutVoidedByNestedInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutRecordedByNestedInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutVoidedByNestedInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUpdateManyWithoutCreatedByNestedInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUpdateManyWithoutValidatedByNestedInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUpdateManyWithoutRecordedByNestedInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCreatedPredictiveSnapshotsInput = {
@@ -88974,6 +100111,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutVoidedByNestedInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutRecordedByNestedInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutVoidedByNestedInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUncheckedUpdateManyWithoutCreatedByNestedInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUncheckedUpdateManyWithoutValidatedByNestedInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedUpdateManyWithoutRecordedByNestedInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
   }
 
   export type UserUpsertWithoutVoidedPredictiveSnapshotsInput = {
@@ -89034,6 +100177,12 @@ export namespace Prisma {
     createdPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutCreatedByNestedInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutRecordedByNestedInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutVoidedByNestedInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUpdateManyWithoutCreatedByNestedInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUpdateManyWithoutValidatedByNestedInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUpdateManyWithoutRecordedByNestedInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
   }
 
   export type UserUncheckedUpdateWithoutVoidedPredictiveSnapshotsInput = {
@@ -89083,6 +100232,12 @@ export namespace Prisma {
     createdPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutCreatedByNestedInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutRecordedByNestedInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutVoidedByNestedInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUncheckedUpdateManyWithoutCreatedByNestedInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUncheckedUpdateManyWithoutValidatedByNestedInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedUpdateManyWithoutRecordedByNestedInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
   }
 
   export type PredictiveFeatureSnapshotUpsertWithoutReplacesInput = {
@@ -89319,6 +100474,12 @@ export namespace Prisma {
     createdPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutCreatedByInput
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutVoidedByInput
     voidedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutVoidedByInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotCreateNestedManyWithoutCreatedByInput
+    createdPredictiveModelVersions?: PredictiveModelVersionCreateNestedManyWithoutCreatedByInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionCreateNestedManyWithoutValidatedByInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationCreateNestedManyWithoutRecordedByInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
   }
 
   export type UserUncheckedCreateWithoutRecordedPredictiveOutcomesInput = {
@@ -89368,6 +100529,12 @@ export namespace Prisma {
     createdPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutCreatedByInput
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutVoidedByInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutVoidedByInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUncheckedCreateNestedManyWithoutCreatedByInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUncheckedCreateNestedManyWithoutValidatedByInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedCreateNestedManyWithoutRecordedByInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
   }
 
   export type UserCreateOrConnectWithoutRecordedPredictiveOutcomesInput = {
@@ -89422,6 +100589,12 @@ export namespace Prisma {
     createdPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutCreatedByInput
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutVoidedByInput
     recordedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutRecordedByInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotCreateNestedManyWithoutCreatedByInput
+    createdPredictiveModelVersions?: PredictiveModelVersionCreateNestedManyWithoutCreatedByInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionCreateNestedManyWithoutValidatedByInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationCreateNestedManyWithoutRecordedByInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
   }
 
   export type UserUncheckedCreateWithoutVoidedPredictiveOutcomesInput = {
@@ -89471,6 +100644,12 @@ export namespace Prisma {
     createdPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutCreatedByInput
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutVoidedByInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutRecordedByInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUncheckedCreateNestedManyWithoutCreatedByInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUncheckedCreateNestedManyWithoutValidatedByInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedCreateNestedManyWithoutRecordedByInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
   }
 
   export type UserCreateOrConnectWithoutVoidedPredictiveOutcomesInput = {
@@ -89677,6 +100856,12 @@ export namespace Prisma {
     createdPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutCreatedByNestedInput
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutVoidedByNestedInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutVoidedByNestedInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUpdateManyWithoutCreatedByNestedInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUpdateManyWithoutValidatedByNestedInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUpdateManyWithoutRecordedByNestedInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
   }
 
   export type UserUncheckedUpdateWithoutRecordedPredictiveOutcomesInput = {
@@ -89726,6 +100911,12 @@ export namespace Prisma {
     createdPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutCreatedByNestedInput
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutVoidedByNestedInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutVoidedByNestedInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUncheckedUpdateManyWithoutCreatedByNestedInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUncheckedUpdateManyWithoutValidatedByNestedInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedUpdateManyWithoutRecordedByNestedInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
   }
 
   export type UserUpsertWithoutVoidedPredictiveOutcomesInput = {
@@ -89786,6 +100977,12 @@ export namespace Prisma {
     createdPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutCreatedByNestedInput
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutVoidedByNestedInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutRecordedByNestedInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUpdateManyWithoutCreatedByNestedInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUpdateManyWithoutValidatedByNestedInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUpdateManyWithoutRecordedByNestedInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
   }
 
   export type UserUncheckedUpdateWithoutVoidedPredictiveOutcomesInput = {
@@ -89835,6 +101032,12 @@ export namespace Prisma {
     createdPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutCreatedByNestedInput
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutVoidedByNestedInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutRecordedByNestedInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUncheckedUpdateManyWithoutCreatedByNestedInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUncheckedUpdateManyWithoutValidatedByNestedInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedUpdateManyWithoutRecordedByNestedInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
   }
 
   export type PredictiveOutcomeUpsertWithoutReplacesInput = {
@@ -89929,6 +101132,2320 @@ export namespace Prisma {
     voidedById?: NullableStringFieldUpdateOperationsInput | string | null
     voidReason?: NullableStringFieldUpdateOperationsInput | string | null
     replaces?: PredictiveOutcomeUncheckedUpdateOneWithoutReplacementOutcomeNestedInput
+  }
+
+  export type UserCreateWithoutCreatedPredictiveDatasetSnapshotsInput = {
+    id?: string
+    employeeCode: string
+    name: string
+    email: string
+    passwordHash: string
+    designation: string
+    role?: $Enums.SystemRole
+    status?: $Enums.UserStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    department: DepartmentCreateNestedOneWithoutUsersInput
+    jurisdiction: JurisdictionCreateNestedOneWithoutUsersInput
+    inspections?: InspectionCreateNestedManyWithoutInspectorInput
+    approvalAuthorities?: ApprovalAuthorityCreateNestedManyWithoutUserInput
+    reviewedOrpDecisions?: OrpDecisionCreateNestedManyWithoutReviewerInput
+    forwardedOrpDecisions?: OrpDecisionCreateNestedManyWithoutForwardedUserInput
+    createdExecutionPlans?: ExecutionPlanCreateNestedManyWithoutCreatedByInput
+    assignedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutAssignedToInput
+    assignedByExecutionTasks?: ExecutionTaskCreateNestedManyWithoutAssignedByInput
+    completedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCompletionSubmittedByInput
+    verifiedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutVerifiedByInput
+    cancelledExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCancelledByInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionCreateNestedManyWithoutChangedByInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutBlockedByInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutResolvedByInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyCreateNestedManyWithoutCreatedByInput
+    submittedExecutionEvidence?: ExecutionEvidenceCreateNestedManyWithoutSubmittedByInput
+    closedCases?: CaseClosureCreateNestedManyWithoutClosedByInput
+    reviewedPublicReports?: PublicReportCreateNestedManyWithoutReviewedByInput
+    decidedPublicReports?: PublicReportCreateNestedManyWithoutDecisionByInput
+    createdTriageAnalyses?: PublicReportTriageAnalysisCreateNestedManyWithoutCreatedByInput
+    createdPolicyDocuments?: PolicyDocumentCreateNestedManyWithoutCreatedByInput
+    approvedPolicyDocuments?: PolicyDocumentCreateNestedManyWithoutApprovedByInput
+    createdApprovedActions?: ApprovedActionVersionCreateNestedManyWithoutCreatedByInput
+    approvedApprovedActions?: ApprovedActionVersionCreateNestedManyWithoutApprovedByInput
+    preparedDecisionPackages?: DecisionPackageCreateNestedManyWithoutPreparedByInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutCreatedByInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutApprovedByInput
+    createdObservationSources?: ObservationSourceCreateNestedManyWithoutCreatedByInput
+    deactivatedObservationSources?: ObservationSourceCreateNestedManyWithoutDeactivatedByInput
+    ingestedExternalObservations?: ExternalObservationCreateNestedManyWithoutIngestedByInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutPreparedByInput
+    createdPortfolioScenarios?: PortfolioScenarioCreateNestedManyWithoutCreatedByInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutCreatedByInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutVoidedByInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutRecordedByInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutVoidedByInput
+    createdPredictiveModelVersions?: PredictiveModelVersionCreateNestedManyWithoutCreatedByInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionCreateNestedManyWithoutValidatedByInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationCreateNestedManyWithoutRecordedByInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
+  }
+
+  export type UserUncheckedCreateWithoutCreatedPredictiveDatasetSnapshotsInput = {
+    id?: string
+    employeeCode: string
+    name: string
+    email: string
+    passwordHash: string
+    designation: string
+    role?: $Enums.SystemRole
+    status?: $Enums.UserStatus
+    departmentId: string
+    jurisdictionId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    inspections?: InspectionUncheckedCreateNestedManyWithoutInspectorInput
+    approvalAuthorities?: ApprovalAuthorityUncheckedCreateNestedManyWithoutUserInput
+    reviewedOrpDecisions?: OrpDecisionUncheckedCreateNestedManyWithoutReviewerInput
+    forwardedOrpDecisions?: OrpDecisionUncheckedCreateNestedManyWithoutForwardedUserInput
+    createdExecutionPlans?: ExecutionPlanUncheckedCreateNestedManyWithoutCreatedByInput
+    assignedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutAssignedToInput
+    assignedByExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutAssignedByInput
+    completedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCompletionSubmittedByInput
+    verifiedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutVerifiedByInput
+    cancelledExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCancelledByInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUncheckedCreateNestedManyWithoutChangedByInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutBlockedByInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutResolvedByInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutCreatedByInput
+    submittedExecutionEvidence?: ExecutionEvidenceUncheckedCreateNestedManyWithoutSubmittedByInput
+    closedCases?: CaseClosureUncheckedCreateNestedManyWithoutClosedByInput
+    reviewedPublicReports?: PublicReportUncheckedCreateNestedManyWithoutReviewedByInput
+    decidedPublicReports?: PublicReportUncheckedCreateNestedManyWithoutDecisionByInput
+    createdTriageAnalyses?: PublicReportTriageAnalysisUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPolicyDocuments?: PolicyDocumentUncheckedCreateNestedManyWithoutCreatedByInput
+    approvedPolicyDocuments?: PolicyDocumentUncheckedCreateNestedManyWithoutApprovedByInput
+    createdApprovedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutCreatedByInput
+    approvedApprovedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutApprovedByInput
+    preparedDecisionPackages?: DecisionPackageUncheckedCreateNestedManyWithoutPreparedByInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutCreatedByInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutApprovedByInput
+    createdObservationSources?: ObservationSourceUncheckedCreateNestedManyWithoutCreatedByInput
+    deactivatedObservationSources?: ObservationSourceUncheckedCreateNestedManyWithoutDeactivatedByInput
+    ingestedExternalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutIngestedByInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutPreparedByInput
+    createdPortfolioScenarios?: PortfolioScenarioUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutCreatedByInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutVoidedByInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutRecordedByInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutVoidedByInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUncheckedCreateNestedManyWithoutCreatedByInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUncheckedCreateNestedManyWithoutValidatedByInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedCreateNestedManyWithoutRecordedByInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
+  }
+
+  export type UserCreateOrConnectWithoutCreatedPredictiveDatasetSnapshotsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutCreatedPredictiveDatasetSnapshotsInput, UserUncheckedCreateWithoutCreatedPredictiveDatasetSnapshotsInput>
+  }
+
+  export type PredictiveModelVersionCreateWithoutDatasetSnapshotInput = {
+    id?: string
+    modelName: string
+    modelVersion: string
+    targetType: $Enums.PredictiveTargetType
+    deploymentSlot: string
+    intendedUse: string
+    forbiddenUse: string
+    featureContractVersion: string
+    outcomeContractVersion: string
+    trainingCodeVersion: string
+    artifactReference: string
+    artifactDigest: string
+    artifactFormat: string
+    artifactSizeBytes?: bigint | number | null
+    trainingTimestamp: Date | string
+    lifecycleStatus?: $Enums.PredictiveModelLifecycleStatus
+    createdAt?: Date | string
+    validatedAt?: Date | string | null
+    createdBy: UserCreateNestedOneWithoutCreatedPredictiveModelVersionsInput
+    validatedBy?: UserCreateNestedOneWithoutValidatedPredictiveModelVersionsInput
+    evaluations?: PredictiveModelEvaluationCreateNestedManyWithoutModelVersionInput
+    approvals?: PredictiveModelApprovalCreateNestedManyWithoutModelVersionInput
+    lifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutModelVersionInput
+  }
+
+  export type PredictiveModelVersionUncheckedCreateWithoutDatasetSnapshotInput = {
+    id?: string
+    modelName: string
+    modelVersion: string
+    targetType: $Enums.PredictiveTargetType
+    deploymentSlot: string
+    intendedUse: string
+    forbiddenUse: string
+    featureContractVersion: string
+    outcomeContractVersion: string
+    trainingCodeVersion: string
+    artifactReference: string
+    artifactDigest: string
+    artifactFormat: string
+    artifactSizeBytes?: bigint | number | null
+    trainingTimestamp: Date | string
+    lifecycleStatus?: $Enums.PredictiveModelLifecycleStatus
+    createdById: string
+    createdAt?: Date | string
+    validatedById?: string | null
+    validatedAt?: Date | string | null
+    evaluations?: PredictiveModelEvaluationUncheckedCreateNestedManyWithoutModelVersionInput
+    approvals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutModelVersionInput
+    lifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutModelVersionInput
+  }
+
+  export type PredictiveModelVersionCreateOrConnectWithoutDatasetSnapshotInput = {
+    where: PredictiveModelVersionWhereUniqueInput
+    create: XOR<PredictiveModelVersionCreateWithoutDatasetSnapshotInput, PredictiveModelVersionUncheckedCreateWithoutDatasetSnapshotInput>
+  }
+
+  export type PredictiveModelVersionCreateManyDatasetSnapshotInputEnvelope = {
+    data: PredictiveModelVersionCreateManyDatasetSnapshotInput | PredictiveModelVersionCreateManyDatasetSnapshotInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type PredictiveModelEvaluationCreateWithoutDatasetSnapshotInput = {
+    id?: string
+    evaluationContractVersion: string
+    splitStrategy: string
+    evaluationPeriodStart: Date | string
+    evaluationPeriodEnd: Date | string
+    testSampleCount: number
+    lateCount: number
+    onTimeCount: number
+    truePositiveCount: number
+    trueNegativeCount: number
+    falsePositiveCount: number
+    falseNegativeCount: number
+    precision: number
+    recall: number
+    f1: number
+    prAuc: number
+    calibrationError: number
+    falseNegativeRate: number
+    baselineEvidence: JsonNullValueInput | InputJsonValue
+    subgroupMetricsReference?: NullableJsonNullValueInput | InputJsonValue
+    featureDistributionReference?: NullableJsonNullValueInput | InputJsonValue
+    missingnessReference?: NullableJsonNullValueInput | InputJsonValue
+    evaluationArtifactReference: string
+    evaluationFingerprint: string
+    recordedAt?: Date | string
+    modelVersion: PredictiveModelVersionCreateNestedOneWithoutEvaluationsInput
+    recordedBy: UserCreateNestedOneWithoutRecordedPredictiveEvaluationsInput
+  }
+
+  export type PredictiveModelEvaluationUncheckedCreateWithoutDatasetSnapshotInput = {
+    id?: string
+    modelVersionId: string
+    evaluationContractVersion: string
+    splitStrategy: string
+    evaluationPeriodStart: Date | string
+    evaluationPeriodEnd: Date | string
+    testSampleCount: number
+    lateCount: number
+    onTimeCount: number
+    truePositiveCount: number
+    trueNegativeCount: number
+    falsePositiveCount: number
+    falseNegativeCount: number
+    precision: number
+    recall: number
+    f1: number
+    prAuc: number
+    calibrationError: number
+    falseNegativeRate: number
+    baselineEvidence: JsonNullValueInput | InputJsonValue
+    subgroupMetricsReference?: NullableJsonNullValueInput | InputJsonValue
+    featureDistributionReference?: NullableJsonNullValueInput | InputJsonValue
+    missingnessReference?: NullableJsonNullValueInput | InputJsonValue
+    evaluationArtifactReference: string
+    evaluationFingerprint: string
+    recordedById: string
+    recordedAt?: Date | string
+  }
+
+  export type PredictiveModelEvaluationCreateOrConnectWithoutDatasetSnapshotInput = {
+    where: PredictiveModelEvaluationWhereUniqueInput
+    create: XOR<PredictiveModelEvaluationCreateWithoutDatasetSnapshotInput, PredictiveModelEvaluationUncheckedCreateWithoutDatasetSnapshotInput>
+  }
+
+  export type PredictiveModelEvaluationCreateManyDatasetSnapshotInputEnvelope = {
+    data: PredictiveModelEvaluationCreateManyDatasetSnapshotInput | PredictiveModelEvaluationCreateManyDatasetSnapshotInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type UserUpsertWithoutCreatedPredictiveDatasetSnapshotsInput = {
+    update: XOR<UserUpdateWithoutCreatedPredictiveDatasetSnapshotsInput, UserUncheckedUpdateWithoutCreatedPredictiveDatasetSnapshotsInput>
+    create: XOR<UserCreateWithoutCreatedPredictiveDatasetSnapshotsInput, UserUncheckedCreateWithoutCreatedPredictiveDatasetSnapshotsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutCreatedPredictiveDatasetSnapshotsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutCreatedPredictiveDatasetSnapshotsInput, UserUncheckedUpdateWithoutCreatedPredictiveDatasetSnapshotsInput>
+  }
+
+  export type UserUpdateWithoutCreatedPredictiveDatasetSnapshotsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    employeeCode?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    designation?: StringFieldUpdateOperationsInput | string
+    role?: EnumSystemRoleFieldUpdateOperationsInput | $Enums.SystemRole
+    status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    department?: DepartmentUpdateOneRequiredWithoutUsersNestedInput
+    jurisdiction?: JurisdictionUpdateOneRequiredWithoutUsersNestedInput
+    inspections?: InspectionUpdateManyWithoutInspectorNestedInput
+    approvalAuthorities?: ApprovalAuthorityUpdateManyWithoutUserNestedInput
+    reviewedOrpDecisions?: OrpDecisionUpdateManyWithoutReviewerNestedInput
+    forwardedOrpDecisions?: OrpDecisionUpdateManyWithoutForwardedUserNestedInput
+    createdExecutionPlans?: ExecutionPlanUpdateManyWithoutCreatedByNestedInput
+    assignedExecutionTasks?: ExecutionTaskUpdateManyWithoutAssignedToNestedInput
+    assignedByExecutionTasks?: ExecutionTaskUpdateManyWithoutAssignedByNestedInput
+    completedExecutionTasks?: ExecutionTaskUpdateManyWithoutCompletionSubmittedByNestedInput
+    verifiedExecutionTasks?: ExecutionTaskUpdateManyWithoutVerifiedByNestedInput
+    cancelledExecutionTasks?: ExecutionTaskUpdateManyWithoutCancelledByNestedInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUpdateManyWithoutChangedByNestedInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUpdateManyWithoutBlockedByNestedInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUpdateManyWithoutResolvedByNestedInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUpdateManyWithoutCreatedByNestedInput
+    submittedExecutionEvidence?: ExecutionEvidenceUpdateManyWithoutSubmittedByNestedInput
+    closedCases?: CaseClosureUpdateManyWithoutClosedByNestedInput
+    reviewedPublicReports?: PublicReportUpdateManyWithoutReviewedByNestedInput
+    decidedPublicReports?: PublicReportUpdateManyWithoutDecisionByNestedInput
+    createdTriageAnalyses?: PublicReportTriageAnalysisUpdateManyWithoutCreatedByNestedInput
+    createdPolicyDocuments?: PolicyDocumentUpdateManyWithoutCreatedByNestedInput
+    approvedPolicyDocuments?: PolicyDocumentUpdateManyWithoutApprovedByNestedInput
+    createdApprovedActions?: ApprovedActionVersionUpdateManyWithoutCreatedByNestedInput
+    approvedApprovedActions?: ApprovedActionVersionUpdateManyWithoutApprovedByNestedInput
+    preparedDecisionPackages?: DecisionPackageUpdateManyWithoutPreparedByNestedInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutCreatedByNestedInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutApprovedByNestedInput
+    createdObservationSources?: ObservationSourceUpdateManyWithoutCreatedByNestedInput
+    deactivatedObservationSources?: ObservationSourceUpdateManyWithoutDeactivatedByNestedInput
+    ingestedExternalObservations?: ExternalObservationUpdateManyWithoutIngestedByNestedInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUpdateManyWithoutPreparedByNestedInput
+    createdPortfolioScenarios?: PortfolioScenarioUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutCreatedByNestedInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutVoidedByNestedInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutRecordedByNestedInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutVoidedByNestedInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUpdateManyWithoutCreatedByNestedInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUpdateManyWithoutValidatedByNestedInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUpdateManyWithoutRecordedByNestedInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutCreatedPredictiveDatasetSnapshotsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    employeeCode?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    designation?: StringFieldUpdateOperationsInput | string
+    role?: EnumSystemRoleFieldUpdateOperationsInput | $Enums.SystemRole
+    status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+    departmentId?: StringFieldUpdateOperationsInput | string
+    jurisdictionId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    inspections?: InspectionUncheckedUpdateManyWithoutInspectorNestedInput
+    approvalAuthorities?: ApprovalAuthorityUncheckedUpdateManyWithoutUserNestedInput
+    reviewedOrpDecisions?: OrpDecisionUncheckedUpdateManyWithoutReviewerNestedInput
+    forwardedOrpDecisions?: OrpDecisionUncheckedUpdateManyWithoutForwardedUserNestedInput
+    createdExecutionPlans?: ExecutionPlanUncheckedUpdateManyWithoutCreatedByNestedInput
+    assignedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutAssignedToNestedInput
+    assignedByExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutAssignedByNestedInput
+    completedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCompletionSubmittedByNestedInput
+    verifiedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutVerifiedByNestedInput
+    cancelledExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCancelledByNestedInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUncheckedUpdateManyWithoutChangedByNestedInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutBlockedByNestedInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutResolvedByNestedInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUncheckedUpdateManyWithoutCreatedByNestedInput
+    submittedExecutionEvidence?: ExecutionEvidenceUncheckedUpdateManyWithoutSubmittedByNestedInput
+    closedCases?: CaseClosureUncheckedUpdateManyWithoutClosedByNestedInput
+    reviewedPublicReports?: PublicReportUncheckedUpdateManyWithoutReviewedByNestedInput
+    decidedPublicReports?: PublicReportUncheckedUpdateManyWithoutDecisionByNestedInput
+    createdTriageAnalyses?: PublicReportTriageAnalysisUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPolicyDocuments?: PolicyDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
+    approvedPolicyDocuments?: PolicyDocumentUncheckedUpdateManyWithoutApprovedByNestedInput
+    createdApprovedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutCreatedByNestedInput
+    approvedApprovedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutApprovedByNestedInput
+    preparedDecisionPackages?: DecisionPackageUncheckedUpdateManyWithoutPreparedByNestedInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutCreatedByNestedInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutApprovedByNestedInput
+    createdObservationSources?: ObservationSourceUncheckedUpdateManyWithoutCreatedByNestedInput
+    deactivatedObservationSources?: ObservationSourceUncheckedUpdateManyWithoutDeactivatedByNestedInput
+    ingestedExternalObservations?: ExternalObservationUncheckedUpdateManyWithoutIngestedByNestedInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutPreparedByNestedInput
+    createdPortfolioScenarios?: PortfolioScenarioUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutCreatedByNestedInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutVoidedByNestedInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutRecordedByNestedInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutVoidedByNestedInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUncheckedUpdateManyWithoutCreatedByNestedInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUncheckedUpdateManyWithoutValidatedByNestedInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedUpdateManyWithoutRecordedByNestedInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
+  }
+
+  export type PredictiveModelVersionUpsertWithWhereUniqueWithoutDatasetSnapshotInput = {
+    where: PredictiveModelVersionWhereUniqueInput
+    update: XOR<PredictiveModelVersionUpdateWithoutDatasetSnapshotInput, PredictiveModelVersionUncheckedUpdateWithoutDatasetSnapshotInput>
+    create: XOR<PredictiveModelVersionCreateWithoutDatasetSnapshotInput, PredictiveModelVersionUncheckedCreateWithoutDatasetSnapshotInput>
+  }
+
+  export type PredictiveModelVersionUpdateWithWhereUniqueWithoutDatasetSnapshotInput = {
+    where: PredictiveModelVersionWhereUniqueInput
+    data: XOR<PredictiveModelVersionUpdateWithoutDatasetSnapshotInput, PredictiveModelVersionUncheckedUpdateWithoutDatasetSnapshotInput>
+  }
+
+  export type PredictiveModelVersionUpdateManyWithWhereWithoutDatasetSnapshotInput = {
+    where: PredictiveModelVersionScalarWhereInput
+    data: XOR<PredictiveModelVersionUpdateManyMutationInput, PredictiveModelVersionUncheckedUpdateManyWithoutDatasetSnapshotInput>
+  }
+
+  export type PredictiveModelEvaluationUpsertWithWhereUniqueWithoutDatasetSnapshotInput = {
+    where: PredictiveModelEvaluationWhereUniqueInput
+    update: XOR<PredictiveModelEvaluationUpdateWithoutDatasetSnapshotInput, PredictiveModelEvaluationUncheckedUpdateWithoutDatasetSnapshotInput>
+    create: XOR<PredictiveModelEvaluationCreateWithoutDatasetSnapshotInput, PredictiveModelEvaluationUncheckedCreateWithoutDatasetSnapshotInput>
+  }
+
+  export type PredictiveModelEvaluationUpdateWithWhereUniqueWithoutDatasetSnapshotInput = {
+    where: PredictiveModelEvaluationWhereUniqueInput
+    data: XOR<PredictiveModelEvaluationUpdateWithoutDatasetSnapshotInput, PredictiveModelEvaluationUncheckedUpdateWithoutDatasetSnapshotInput>
+  }
+
+  export type PredictiveModelEvaluationUpdateManyWithWhereWithoutDatasetSnapshotInput = {
+    where: PredictiveModelEvaluationScalarWhereInput
+    data: XOR<PredictiveModelEvaluationUpdateManyMutationInput, PredictiveModelEvaluationUncheckedUpdateManyWithoutDatasetSnapshotInput>
+  }
+
+  export type PredictiveDatasetSnapshotCreateWithoutModelVersionsInput = {
+    id?: string
+    datasetContractVersion: string
+    targetType: $Enums.PredictiveTargetType
+    featureContractVersion: string
+    outcomeContractVersion: string
+    departmentId?: string | null
+    jurisdictionId?: string | null
+    includedProvenance: JsonNullValueInput | InputJsonValue
+    sampleCount: number
+    classBalance: JsonNullValueInput | InputJsonValue
+    periodStart?: Date | string | null
+    periodEnd?: Date | string | null
+    sampleIdentities: JsonNullValueInput | InputJsonValue
+    datasetFingerprint: string
+    createdAt?: Date | string
+    createdBy: UserCreateNestedOneWithoutCreatedPredictiveDatasetSnapshotsInput
+    evaluations?: PredictiveModelEvaluationCreateNestedManyWithoutDatasetSnapshotInput
+  }
+
+  export type PredictiveDatasetSnapshotUncheckedCreateWithoutModelVersionsInput = {
+    id?: string
+    datasetContractVersion: string
+    targetType: $Enums.PredictiveTargetType
+    featureContractVersion: string
+    outcomeContractVersion: string
+    departmentId?: string | null
+    jurisdictionId?: string | null
+    includedProvenance: JsonNullValueInput | InputJsonValue
+    sampleCount: number
+    classBalance: JsonNullValueInput | InputJsonValue
+    periodStart?: Date | string | null
+    periodEnd?: Date | string | null
+    sampleIdentities: JsonNullValueInput | InputJsonValue
+    datasetFingerprint: string
+    createdById: string
+    createdAt?: Date | string
+    evaluations?: PredictiveModelEvaluationUncheckedCreateNestedManyWithoutDatasetSnapshotInput
+  }
+
+  export type PredictiveDatasetSnapshotCreateOrConnectWithoutModelVersionsInput = {
+    where: PredictiveDatasetSnapshotWhereUniqueInput
+    create: XOR<PredictiveDatasetSnapshotCreateWithoutModelVersionsInput, PredictiveDatasetSnapshotUncheckedCreateWithoutModelVersionsInput>
+  }
+
+  export type UserCreateWithoutCreatedPredictiveModelVersionsInput = {
+    id?: string
+    employeeCode: string
+    name: string
+    email: string
+    passwordHash: string
+    designation: string
+    role?: $Enums.SystemRole
+    status?: $Enums.UserStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    department: DepartmentCreateNestedOneWithoutUsersInput
+    jurisdiction: JurisdictionCreateNestedOneWithoutUsersInput
+    inspections?: InspectionCreateNestedManyWithoutInspectorInput
+    approvalAuthorities?: ApprovalAuthorityCreateNestedManyWithoutUserInput
+    reviewedOrpDecisions?: OrpDecisionCreateNestedManyWithoutReviewerInput
+    forwardedOrpDecisions?: OrpDecisionCreateNestedManyWithoutForwardedUserInput
+    createdExecutionPlans?: ExecutionPlanCreateNestedManyWithoutCreatedByInput
+    assignedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutAssignedToInput
+    assignedByExecutionTasks?: ExecutionTaskCreateNestedManyWithoutAssignedByInput
+    completedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCompletionSubmittedByInput
+    verifiedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutVerifiedByInput
+    cancelledExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCancelledByInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionCreateNestedManyWithoutChangedByInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutBlockedByInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutResolvedByInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyCreateNestedManyWithoutCreatedByInput
+    submittedExecutionEvidence?: ExecutionEvidenceCreateNestedManyWithoutSubmittedByInput
+    closedCases?: CaseClosureCreateNestedManyWithoutClosedByInput
+    reviewedPublicReports?: PublicReportCreateNestedManyWithoutReviewedByInput
+    decidedPublicReports?: PublicReportCreateNestedManyWithoutDecisionByInput
+    createdTriageAnalyses?: PublicReportTriageAnalysisCreateNestedManyWithoutCreatedByInput
+    createdPolicyDocuments?: PolicyDocumentCreateNestedManyWithoutCreatedByInput
+    approvedPolicyDocuments?: PolicyDocumentCreateNestedManyWithoutApprovedByInput
+    createdApprovedActions?: ApprovedActionVersionCreateNestedManyWithoutCreatedByInput
+    approvedApprovedActions?: ApprovedActionVersionCreateNestedManyWithoutApprovedByInput
+    preparedDecisionPackages?: DecisionPackageCreateNestedManyWithoutPreparedByInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutCreatedByInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutApprovedByInput
+    createdObservationSources?: ObservationSourceCreateNestedManyWithoutCreatedByInput
+    deactivatedObservationSources?: ObservationSourceCreateNestedManyWithoutDeactivatedByInput
+    ingestedExternalObservations?: ExternalObservationCreateNestedManyWithoutIngestedByInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutPreparedByInput
+    createdPortfolioScenarios?: PortfolioScenarioCreateNestedManyWithoutCreatedByInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutCreatedByInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutVoidedByInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutRecordedByInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutVoidedByInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotCreateNestedManyWithoutCreatedByInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionCreateNestedManyWithoutValidatedByInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationCreateNestedManyWithoutRecordedByInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
+  }
+
+  export type UserUncheckedCreateWithoutCreatedPredictiveModelVersionsInput = {
+    id?: string
+    employeeCode: string
+    name: string
+    email: string
+    passwordHash: string
+    designation: string
+    role?: $Enums.SystemRole
+    status?: $Enums.UserStatus
+    departmentId: string
+    jurisdictionId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    inspections?: InspectionUncheckedCreateNestedManyWithoutInspectorInput
+    approvalAuthorities?: ApprovalAuthorityUncheckedCreateNestedManyWithoutUserInput
+    reviewedOrpDecisions?: OrpDecisionUncheckedCreateNestedManyWithoutReviewerInput
+    forwardedOrpDecisions?: OrpDecisionUncheckedCreateNestedManyWithoutForwardedUserInput
+    createdExecutionPlans?: ExecutionPlanUncheckedCreateNestedManyWithoutCreatedByInput
+    assignedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutAssignedToInput
+    assignedByExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutAssignedByInput
+    completedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCompletionSubmittedByInput
+    verifiedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutVerifiedByInput
+    cancelledExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCancelledByInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUncheckedCreateNestedManyWithoutChangedByInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutBlockedByInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutResolvedByInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutCreatedByInput
+    submittedExecutionEvidence?: ExecutionEvidenceUncheckedCreateNestedManyWithoutSubmittedByInput
+    closedCases?: CaseClosureUncheckedCreateNestedManyWithoutClosedByInput
+    reviewedPublicReports?: PublicReportUncheckedCreateNestedManyWithoutReviewedByInput
+    decidedPublicReports?: PublicReportUncheckedCreateNestedManyWithoutDecisionByInput
+    createdTriageAnalyses?: PublicReportTriageAnalysisUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPolicyDocuments?: PolicyDocumentUncheckedCreateNestedManyWithoutCreatedByInput
+    approvedPolicyDocuments?: PolicyDocumentUncheckedCreateNestedManyWithoutApprovedByInput
+    createdApprovedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutCreatedByInput
+    approvedApprovedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutApprovedByInput
+    preparedDecisionPackages?: DecisionPackageUncheckedCreateNestedManyWithoutPreparedByInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutCreatedByInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutApprovedByInput
+    createdObservationSources?: ObservationSourceUncheckedCreateNestedManyWithoutCreatedByInput
+    deactivatedObservationSources?: ObservationSourceUncheckedCreateNestedManyWithoutDeactivatedByInput
+    ingestedExternalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutIngestedByInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutPreparedByInput
+    createdPortfolioScenarios?: PortfolioScenarioUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutCreatedByInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutVoidedByInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutRecordedByInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutVoidedByInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUncheckedCreateNestedManyWithoutCreatedByInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUncheckedCreateNestedManyWithoutValidatedByInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedCreateNestedManyWithoutRecordedByInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
+  }
+
+  export type UserCreateOrConnectWithoutCreatedPredictiveModelVersionsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutCreatedPredictiveModelVersionsInput, UserUncheckedCreateWithoutCreatedPredictiveModelVersionsInput>
+  }
+
+  export type UserCreateWithoutValidatedPredictiveModelVersionsInput = {
+    id?: string
+    employeeCode: string
+    name: string
+    email: string
+    passwordHash: string
+    designation: string
+    role?: $Enums.SystemRole
+    status?: $Enums.UserStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    department: DepartmentCreateNestedOneWithoutUsersInput
+    jurisdiction: JurisdictionCreateNestedOneWithoutUsersInput
+    inspections?: InspectionCreateNestedManyWithoutInspectorInput
+    approvalAuthorities?: ApprovalAuthorityCreateNestedManyWithoutUserInput
+    reviewedOrpDecisions?: OrpDecisionCreateNestedManyWithoutReviewerInput
+    forwardedOrpDecisions?: OrpDecisionCreateNestedManyWithoutForwardedUserInput
+    createdExecutionPlans?: ExecutionPlanCreateNestedManyWithoutCreatedByInput
+    assignedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutAssignedToInput
+    assignedByExecutionTasks?: ExecutionTaskCreateNestedManyWithoutAssignedByInput
+    completedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCompletionSubmittedByInput
+    verifiedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutVerifiedByInput
+    cancelledExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCancelledByInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionCreateNestedManyWithoutChangedByInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutBlockedByInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutResolvedByInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyCreateNestedManyWithoutCreatedByInput
+    submittedExecutionEvidence?: ExecutionEvidenceCreateNestedManyWithoutSubmittedByInput
+    closedCases?: CaseClosureCreateNestedManyWithoutClosedByInput
+    reviewedPublicReports?: PublicReportCreateNestedManyWithoutReviewedByInput
+    decidedPublicReports?: PublicReportCreateNestedManyWithoutDecisionByInput
+    createdTriageAnalyses?: PublicReportTriageAnalysisCreateNestedManyWithoutCreatedByInput
+    createdPolicyDocuments?: PolicyDocumentCreateNestedManyWithoutCreatedByInput
+    approvedPolicyDocuments?: PolicyDocumentCreateNestedManyWithoutApprovedByInput
+    createdApprovedActions?: ApprovedActionVersionCreateNestedManyWithoutCreatedByInput
+    approvedApprovedActions?: ApprovedActionVersionCreateNestedManyWithoutApprovedByInput
+    preparedDecisionPackages?: DecisionPackageCreateNestedManyWithoutPreparedByInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutCreatedByInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutApprovedByInput
+    createdObservationSources?: ObservationSourceCreateNestedManyWithoutCreatedByInput
+    deactivatedObservationSources?: ObservationSourceCreateNestedManyWithoutDeactivatedByInput
+    ingestedExternalObservations?: ExternalObservationCreateNestedManyWithoutIngestedByInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutPreparedByInput
+    createdPortfolioScenarios?: PortfolioScenarioCreateNestedManyWithoutCreatedByInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutCreatedByInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutVoidedByInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutRecordedByInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutVoidedByInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotCreateNestedManyWithoutCreatedByInput
+    createdPredictiveModelVersions?: PredictiveModelVersionCreateNestedManyWithoutCreatedByInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationCreateNestedManyWithoutRecordedByInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
+  }
+
+  export type UserUncheckedCreateWithoutValidatedPredictiveModelVersionsInput = {
+    id?: string
+    employeeCode: string
+    name: string
+    email: string
+    passwordHash: string
+    designation: string
+    role?: $Enums.SystemRole
+    status?: $Enums.UserStatus
+    departmentId: string
+    jurisdictionId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    inspections?: InspectionUncheckedCreateNestedManyWithoutInspectorInput
+    approvalAuthorities?: ApprovalAuthorityUncheckedCreateNestedManyWithoutUserInput
+    reviewedOrpDecisions?: OrpDecisionUncheckedCreateNestedManyWithoutReviewerInput
+    forwardedOrpDecisions?: OrpDecisionUncheckedCreateNestedManyWithoutForwardedUserInput
+    createdExecutionPlans?: ExecutionPlanUncheckedCreateNestedManyWithoutCreatedByInput
+    assignedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutAssignedToInput
+    assignedByExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutAssignedByInput
+    completedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCompletionSubmittedByInput
+    verifiedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutVerifiedByInput
+    cancelledExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCancelledByInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUncheckedCreateNestedManyWithoutChangedByInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutBlockedByInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutResolvedByInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutCreatedByInput
+    submittedExecutionEvidence?: ExecutionEvidenceUncheckedCreateNestedManyWithoutSubmittedByInput
+    closedCases?: CaseClosureUncheckedCreateNestedManyWithoutClosedByInput
+    reviewedPublicReports?: PublicReportUncheckedCreateNestedManyWithoutReviewedByInput
+    decidedPublicReports?: PublicReportUncheckedCreateNestedManyWithoutDecisionByInput
+    createdTriageAnalyses?: PublicReportTriageAnalysisUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPolicyDocuments?: PolicyDocumentUncheckedCreateNestedManyWithoutCreatedByInput
+    approvedPolicyDocuments?: PolicyDocumentUncheckedCreateNestedManyWithoutApprovedByInput
+    createdApprovedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutCreatedByInput
+    approvedApprovedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutApprovedByInput
+    preparedDecisionPackages?: DecisionPackageUncheckedCreateNestedManyWithoutPreparedByInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutCreatedByInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutApprovedByInput
+    createdObservationSources?: ObservationSourceUncheckedCreateNestedManyWithoutCreatedByInput
+    deactivatedObservationSources?: ObservationSourceUncheckedCreateNestedManyWithoutDeactivatedByInput
+    ingestedExternalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutIngestedByInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutPreparedByInput
+    createdPortfolioScenarios?: PortfolioScenarioUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutCreatedByInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutVoidedByInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutRecordedByInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutVoidedByInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUncheckedCreateNestedManyWithoutCreatedByInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedCreateNestedManyWithoutRecordedByInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
+  }
+
+  export type UserCreateOrConnectWithoutValidatedPredictiveModelVersionsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutValidatedPredictiveModelVersionsInput, UserUncheckedCreateWithoutValidatedPredictiveModelVersionsInput>
+  }
+
+  export type PredictiveModelEvaluationCreateWithoutModelVersionInput = {
+    id?: string
+    evaluationContractVersion: string
+    splitStrategy: string
+    evaluationPeriodStart: Date | string
+    evaluationPeriodEnd: Date | string
+    testSampleCount: number
+    lateCount: number
+    onTimeCount: number
+    truePositiveCount: number
+    trueNegativeCount: number
+    falsePositiveCount: number
+    falseNegativeCount: number
+    precision: number
+    recall: number
+    f1: number
+    prAuc: number
+    calibrationError: number
+    falseNegativeRate: number
+    baselineEvidence: JsonNullValueInput | InputJsonValue
+    subgroupMetricsReference?: NullableJsonNullValueInput | InputJsonValue
+    featureDistributionReference?: NullableJsonNullValueInput | InputJsonValue
+    missingnessReference?: NullableJsonNullValueInput | InputJsonValue
+    evaluationArtifactReference: string
+    evaluationFingerprint: string
+    recordedAt?: Date | string
+    datasetSnapshot: PredictiveDatasetSnapshotCreateNestedOneWithoutEvaluationsInput
+    recordedBy: UserCreateNestedOneWithoutRecordedPredictiveEvaluationsInput
+  }
+
+  export type PredictiveModelEvaluationUncheckedCreateWithoutModelVersionInput = {
+    id?: string
+    datasetSnapshotId: string
+    evaluationContractVersion: string
+    splitStrategy: string
+    evaluationPeriodStart: Date | string
+    evaluationPeriodEnd: Date | string
+    testSampleCount: number
+    lateCount: number
+    onTimeCount: number
+    truePositiveCount: number
+    trueNegativeCount: number
+    falsePositiveCount: number
+    falseNegativeCount: number
+    precision: number
+    recall: number
+    f1: number
+    prAuc: number
+    calibrationError: number
+    falseNegativeRate: number
+    baselineEvidence: JsonNullValueInput | InputJsonValue
+    subgroupMetricsReference?: NullableJsonNullValueInput | InputJsonValue
+    featureDistributionReference?: NullableJsonNullValueInput | InputJsonValue
+    missingnessReference?: NullableJsonNullValueInput | InputJsonValue
+    evaluationArtifactReference: string
+    evaluationFingerprint: string
+    recordedById: string
+    recordedAt?: Date | string
+  }
+
+  export type PredictiveModelEvaluationCreateOrConnectWithoutModelVersionInput = {
+    where: PredictiveModelEvaluationWhereUniqueInput
+    create: XOR<PredictiveModelEvaluationCreateWithoutModelVersionInput, PredictiveModelEvaluationUncheckedCreateWithoutModelVersionInput>
+  }
+
+  export type PredictiveModelEvaluationCreateManyModelVersionInputEnvelope = {
+    data: PredictiveModelEvaluationCreateManyModelVersionInput | PredictiveModelEvaluationCreateManyModelVersionInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type PredictiveModelApprovalCreateWithoutModelVersionInput = {
+    id?: string
+    decision: $Enums.PredictiveModelApprovalDecision
+    reason: string
+    restrictions?: NullableJsonNullValueInput | InputJsonValue
+    reviewDueAt?: Date | string | null
+    approvalExpiresAt?: Date | string | null
+    decidedAt?: Date | string
+    approvedBy: UserCreateNestedOneWithoutDecidedPredictiveApprovalsInput
+  }
+
+  export type PredictiveModelApprovalUncheckedCreateWithoutModelVersionInput = {
+    id?: string
+    decision: $Enums.PredictiveModelApprovalDecision
+    reason: string
+    restrictions?: NullableJsonNullValueInput | InputJsonValue
+    reviewDueAt?: Date | string | null
+    approvalExpiresAt?: Date | string | null
+    approvedById: string
+    decidedAt?: Date | string
+  }
+
+  export type PredictiveModelApprovalCreateOrConnectWithoutModelVersionInput = {
+    where: PredictiveModelApprovalWhereUniqueInput
+    create: XOR<PredictiveModelApprovalCreateWithoutModelVersionInput, PredictiveModelApprovalUncheckedCreateWithoutModelVersionInput>
+  }
+
+  export type PredictiveModelApprovalCreateManyModelVersionInputEnvelope = {
+    data: PredictiveModelApprovalCreateManyModelVersionInput | PredictiveModelApprovalCreateManyModelVersionInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type PredictiveModelLifecycleEventCreateWithoutModelVersionInput = {
+    id?: string
+    action: $Enums.PredictiveModelLifecycleAction
+    fromStatus?: $Enums.PredictiveModelLifecycleStatus | null
+    toStatus: $Enums.PredictiveModelLifecycleStatus
+    reason: string
+    relatedModelVersionId?: string | null
+    occurredAt?: Date | string
+    actor: UserCreateNestedOneWithoutPredictiveModelLifecycleEventsInput
+  }
+
+  export type PredictiveModelLifecycleEventUncheckedCreateWithoutModelVersionInput = {
+    id?: string
+    action: $Enums.PredictiveModelLifecycleAction
+    fromStatus?: $Enums.PredictiveModelLifecycleStatus | null
+    toStatus: $Enums.PredictiveModelLifecycleStatus
+    reason: string
+    relatedModelVersionId?: string | null
+    actorId: string
+    occurredAt?: Date | string
+  }
+
+  export type PredictiveModelLifecycleEventCreateOrConnectWithoutModelVersionInput = {
+    where: PredictiveModelLifecycleEventWhereUniqueInput
+    create: XOR<PredictiveModelLifecycleEventCreateWithoutModelVersionInput, PredictiveModelLifecycleEventUncheckedCreateWithoutModelVersionInput>
+  }
+
+  export type PredictiveModelLifecycleEventCreateManyModelVersionInputEnvelope = {
+    data: PredictiveModelLifecycleEventCreateManyModelVersionInput | PredictiveModelLifecycleEventCreateManyModelVersionInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type PredictiveDatasetSnapshotUpsertWithoutModelVersionsInput = {
+    update: XOR<PredictiveDatasetSnapshotUpdateWithoutModelVersionsInput, PredictiveDatasetSnapshotUncheckedUpdateWithoutModelVersionsInput>
+    create: XOR<PredictiveDatasetSnapshotCreateWithoutModelVersionsInput, PredictiveDatasetSnapshotUncheckedCreateWithoutModelVersionsInput>
+    where?: PredictiveDatasetSnapshotWhereInput
+  }
+
+  export type PredictiveDatasetSnapshotUpdateToOneWithWhereWithoutModelVersionsInput = {
+    where?: PredictiveDatasetSnapshotWhereInput
+    data: XOR<PredictiveDatasetSnapshotUpdateWithoutModelVersionsInput, PredictiveDatasetSnapshotUncheckedUpdateWithoutModelVersionsInput>
+  }
+
+  export type PredictiveDatasetSnapshotUpdateWithoutModelVersionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    datasetContractVersion?: StringFieldUpdateOperationsInput | string
+    targetType?: EnumPredictiveTargetTypeFieldUpdateOperationsInput | $Enums.PredictiveTargetType
+    featureContractVersion?: StringFieldUpdateOperationsInput | string
+    outcomeContractVersion?: StringFieldUpdateOperationsInput | string
+    departmentId?: NullableStringFieldUpdateOperationsInput | string | null
+    jurisdictionId?: NullableStringFieldUpdateOperationsInput | string | null
+    includedProvenance?: JsonNullValueInput | InputJsonValue
+    sampleCount?: IntFieldUpdateOperationsInput | number
+    classBalance?: JsonNullValueInput | InputJsonValue
+    periodStart?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    periodEnd?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    sampleIdentities?: JsonNullValueInput | InputJsonValue
+    datasetFingerprint?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: UserUpdateOneRequiredWithoutCreatedPredictiveDatasetSnapshotsNestedInput
+    evaluations?: PredictiveModelEvaluationUpdateManyWithoutDatasetSnapshotNestedInput
+  }
+
+  export type PredictiveDatasetSnapshotUncheckedUpdateWithoutModelVersionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    datasetContractVersion?: StringFieldUpdateOperationsInput | string
+    targetType?: EnumPredictiveTargetTypeFieldUpdateOperationsInput | $Enums.PredictiveTargetType
+    featureContractVersion?: StringFieldUpdateOperationsInput | string
+    outcomeContractVersion?: StringFieldUpdateOperationsInput | string
+    departmentId?: NullableStringFieldUpdateOperationsInput | string | null
+    jurisdictionId?: NullableStringFieldUpdateOperationsInput | string | null
+    includedProvenance?: JsonNullValueInput | InputJsonValue
+    sampleCount?: IntFieldUpdateOperationsInput | number
+    classBalance?: JsonNullValueInput | InputJsonValue
+    periodStart?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    periodEnd?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    sampleIdentities?: JsonNullValueInput | InputJsonValue
+    datasetFingerprint?: StringFieldUpdateOperationsInput | string
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    evaluations?: PredictiveModelEvaluationUncheckedUpdateManyWithoutDatasetSnapshotNestedInput
+  }
+
+  export type UserUpsertWithoutCreatedPredictiveModelVersionsInput = {
+    update: XOR<UserUpdateWithoutCreatedPredictiveModelVersionsInput, UserUncheckedUpdateWithoutCreatedPredictiveModelVersionsInput>
+    create: XOR<UserCreateWithoutCreatedPredictiveModelVersionsInput, UserUncheckedCreateWithoutCreatedPredictiveModelVersionsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutCreatedPredictiveModelVersionsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutCreatedPredictiveModelVersionsInput, UserUncheckedUpdateWithoutCreatedPredictiveModelVersionsInput>
+  }
+
+  export type UserUpdateWithoutCreatedPredictiveModelVersionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    employeeCode?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    designation?: StringFieldUpdateOperationsInput | string
+    role?: EnumSystemRoleFieldUpdateOperationsInput | $Enums.SystemRole
+    status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    department?: DepartmentUpdateOneRequiredWithoutUsersNestedInput
+    jurisdiction?: JurisdictionUpdateOneRequiredWithoutUsersNestedInput
+    inspections?: InspectionUpdateManyWithoutInspectorNestedInput
+    approvalAuthorities?: ApprovalAuthorityUpdateManyWithoutUserNestedInput
+    reviewedOrpDecisions?: OrpDecisionUpdateManyWithoutReviewerNestedInput
+    forwardedOrpDecisions?: OrpDecisionUpdateManyWithoutForwardedUserNestedInput
+    createdExecutionPlans?: ExecutionPlanUpdateManyWithoutCreatedByNestedInput
+    assignedExecutionTasks?: ExecutionTaskUpdateManyWithoutAssignedToNestedInput
+    assignedByExecutionTasks?: ExecutionTaskUpdateManyWithoutAssignedByNestedInput
+    completedExecutionTasks?: ExecutionTaskUpdateManyWithoutCompletionSubmittedByNestedInput
+    verifiedExecutionTasks?: ExecutionTaskUpdateManyWithoutVerifiedByNestedInput
+    cancelledExecutionTasks?: ExecutionTaskUpdateManyWithoutCancelledByNestedInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUpdateManyWithoutChangedByNestedInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUpdateManyWithoutBlockedByNestedInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUpdateManyWithoutResolvedByNestedInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUpdateManyWithoutCreatedByNestedInput
+    submittedExecutionEvidence?: ExecutionEvidenceUpdateManyWithoutSubmittedByNestedInput
+    closedCases?: CaseClosureUpdateManyWithoutClosedByNestedInput
+    reviewedPublicReports?: PublicReportUpdateManyWithoutReviewedByNestedInput
+    decidedPublicReports?: PublicReportUpdateManyWithoutDecisionByNestedInput
+    createdTriageAnalyses?: PublicReportTriageAnalysisUpdateManyWithoutCreatedByNestedInput
+    createdPolicyDocuments?: PolicyDocumentUpdateManyWithoutCreatedByNestedInput
+    approvedPolicyDocuments?: PolicyDocumentUpdateManyWithoutApprovedByNestedInput
+    createdApprovedActions?: ApprovedActionVersionUpdateManyWithoutCreatedByNestedInput
+    approvedApprovedActions?: ApprovedActionVersionUpdateManyWithoutApprovedByNestedInput
+    preparedDecisionPackages?: DecisionPackageUpdateManyWithoutPreparedByNestedInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutCreatedByNestedInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutApprovedByNestedInput
+    createdObservationSources?: ObservationSourceUpdateManyWithoutCreatedByNestedInput
+    deactivatedObservationSources?: ObservationSourceUpdateManyWithoutDeactivatedByNestedInput
+    ingestedExternalObservations?: ExternalObservationUpdateManyWithoutIngestedByNestedInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUpdateManyWithoutPreparedByNestedInput
+    createdPortfolioScenarios?: PortfolioScenarioUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutCreatedByNestedInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutVoidedByNestedInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutRecordedByNestedInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutVoidedByNestedInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUpdateManyWithoutCreatedByNestedInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUpdateManyWithoutValidatedByNestedInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUpdateManyWithoutRecordedByNestedInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutCreatedPredictiveModelVersionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    employeeCode?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    designation?: StringFieldUpdateOperationsInput | string
+    role?: EnumSystemRoleFieldUpdateOperationsInput | $Enums.SystemRole
+    status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+    departmentId?: StringFieldUpdateOperationsInput | string
+    jurisdictionId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    inspections?: InspectionUncheckedUpdateManyWithoutInspectorNestedInput
+    approvalAuthorities?: ApprovalAuthorityUncheckedUpdateManyWithoutUserNestedInput
+    reviewedOrpDecisions?: OrpDecisionUncheckedUpdateManyWithoutReviewerNestedInput
+    forwardedOrpDecisions?: OrpDecisionUncheckedUpdateManyWithoutForwardedUserNestedInput
+    createdExecutionPlans?: ExecutionPlanUncheckedUpdateManyWithoutCreatedByNestedInput
+    assignedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutAssignedToNestedInput
+    assignedByExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutAssignedByNestedInput
+    completedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCompletionSubmittedByNestedInput
+    verifiedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutVerifiedByNestedInput
+    cancelledExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCancelledByNestedInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUncheckedUpdateManyWithoutChangedByNestedInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutBlockedByNestedInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutResolvedByNestedInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUncheckedUpdateManyWithoutCreatedByNestedInput
+    submittedExecutionEvidence?: ExecutionEvidenceUncheckedUpdateManyWithoutSubmittedByNestedInput
+    closedCases?: CaseClosureUncheckedUpdateManyWithoutClosedByNestedInput
+    reviewedPublicReports?: PublicReportUncheckedUpdateManyWithoutReviewedByNestedInput
+    decidedPublicReports?: PublicReportUncheckedUpdateManyWithoutDecisionByNestedInput
+    createdTriageAnalyses?: PublicReportTriageAnalysisUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPolicyDocuments?: PolicyDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
+    approvedPolicyDocuments?: PolicyDocumentUncheckedUpdateManyWithoutApprovedByNestedInput
+    createdApprovedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutCreatedByNestedInput
+    approvedApprovedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutApprovedByNestedInput
+    preparedDecisionPackages?: DecisionPackageUncheckedUpdateManyWithoutPreparedByNestedInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutCreatedByNestedInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutApprovedByNestedInput
+    createdObservationSources?: ObservationSourceUncheckedUpdateManyWithoutCreatedByNestedInput
+    deactivatedObservationSources?: ObservationSourceUncheckedUpdateManyWithoutDeactivatedByNestedInput
+    ingestedExternalObservations?: ExternalObservationUncheckedUpdateManyWithoutIngestedByNestedInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutPreparedByNestedInput
+    createdPortfolioScenarios?: PortfolioScenarioUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutCreatedByNestedInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutVoidedByNestedInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutRecordedByNestedInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutVoidedByNestedInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUncheckedUpdateManyWithoutCreatedByNestedInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUncheckedUpdateManyWithoutValidatedByNestedInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedUpdateManyWithoutRecordedByNestedInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
+  }
+
+  export type UserUpsertWithoutValidatedPredictiveModelVersionsInput = {
+    update: XOR<UserUpdateWithoutValidatedPredictiveModelVersionsInput, UserUncheckedUpdateWithoutValidatedPredictiveModelVersionsInput>
+    create: XOR<UserCreateWithoutValidatedPredictiveModelVersionsInput, UserUncheckedCreateWithoutValidatedPredictiveModelVersionsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutValidatedPredictiveModelVersionsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutValidatedPredictiveModelVersionsInput, UserUncheckedUpdateWithoutValidatedPredictiveModelVersionsInput>
+  }
+
+  export type UserUpdateWithoutValidatedPredictiveModelVersionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    employeeCode?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    designation?: StringFieldUpdateOperationsInput | string
+    role?: EnumSystemRoleFieldUpdateOperationsInput | $Enums.SystemRole
+    status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    department?: DepartmentUpdateOneRequiredWithoutUsersNestedInput
+    jurisdiction?: JurisdictionUpdateOneRequiredWithoutUsersNestedInput
+    inspections?: InspectionUpdateManyWithoutInspectorNestedInput
+    approvalAuthorities?: ApprovalAuthorityUpdateManyWithoutUserNestedInput
+    reviewedOrpDecisions?: OrpDecisionUpdateManyWithoutReviewerNestedInput
+    forwardedOrpDecisions?: OrpDecisionUpdateManyWithoutForwardedUserNestedInput
+    createdExecutionPlans?: ExecutionPlanUpdateManyWithoutCreatedByNestedInput
+    assignedExecutionTasks?: ExecutionTaskUpdateManyWithoutAssignedToNestedInput
+    assignedByExecutionTasks?: ExecutionTaskUpdateManyWithoutAssignedByNestedInput
+    completedExecutionTasks?: ExecutionTaskUpdateManyWithoutCompletionSubmittedByNestedInput
+    verifiedExecutionTasks?: ExecutionTaskUpdateManyWithoutVerifiedByNestedInput
+    cancelledExecutionTasks?: ExecutionTaskUpdateManyWithoutCancelledByNestedInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUpdateManyWithoutChangedByNestedInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUpdateManyWithoutBlockedByNestedInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUpdateManyWithoutResolvedByNestedInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUpdateManyWithoutCreatedByNestedInput
+    submittedExecutionEvidence?: ExecutionEvidenceUpdateManyWithoutSubmittedByNestedInput
+    closedCases?: CaseClosureUpdateManyWithoutClosedByNestedInput
+    reviewedPublicReports?: PublicReportUpdateManyWithoutReviewedByNestedInput
+    decidedPublicReports?: PublicReportUpdateManyWithoutDecisionByNestedInput
+    createdTriageAnalyses?: PublicReportTriageAnalysisUpdateManyWithoutCreatedByNestedInput
+    createdPolicyDocuments?: PolicyDocumentUpdateManyWithoutCreatedByNestedInput
+    approvedPolicyDocuments?: PolicyDocumentUpdateManyWithoutApprovedByNestedInput
+    createdApprovedActions?: ApprovedActionVersionUpdateManyWithoutCreatedByNestedInput
+    approvedApprovedActions?: ApprovedActionVersionUpdateManyWithoutApprovedByNestedInput
+    preparedDecisionPackages?: DecisionPackageUpdateManyWithoutPreparedByNestedInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutCreatedByNestedInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutApprovedByNestedInput
+    createdObservationSources?: ObservationSourceUpdateManyWithoutCreatedByNestedInput
+    deactivatedObservationSources?: ObservationSourceUpdateManyWithoutDeactivatedByNestedInput
+    ingestedExternalObservations?: ExternalObservationUpdateManyWithoutIngestedByNestedInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUpdateManyWithoutPreparedByNestedInput
+    createdPortfolioScenarios?: PortfolioScenarioUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutCreatedByNestedInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutVoidedByNestedInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutRecordedByNestedInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutVoidedByNestedInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUpdateManyWithoutCreatedByNestedInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUpdateManyWithoutRecordedByNestedInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutValidatedPredictiveModelVersionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    employeeCode?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    designation?: StringFieldUpdateOperationsInput | string
+    role?: EnumSystemRoleFieldUpdateOperationsInput | $Enums.SystemRole
+    status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+    departmentId?: StringFieldUpdateOperationsInput | string
+    jurisdictionId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    inspections?: InspectionUncheckedUpdateManyWithoutInspectorNestedInput
+    approvalAuthorities?: ApprovalAuthorityUncheckedUpdateManyWithoutUserNestedInput
+    reviewedOrpDecisions?: OrpDecisionUncheckedUpdateManyWithoutReviewerNestedInput
+    forwardedOrpDecisions?: OrpDecisionUncheckedUpdateManyWithoutForwardedUserNestedInput
+    createdExecutionPlans?: ExecutionPlanUncheckedUpdateManyWithoutCreatedByNestedInput
+    assignedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutAssignedToNestedInput
+    assignedByExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutAssignedByNestedInput
+    completedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCompletionSubmittedByNestedInput
+    verifiedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutVerifiedByNestedInput
+    cancelledExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCancelledByNestedInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUncheckedUpdateManyWithoutChangedByNestedInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutBlockedByNestedInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutResolvedByNestedInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUncheckedUpdateManyWithoutCreatedByNestedInput
+    submittedExecutionEvidence?: ExecutionEvidenceUncheckedUpdateManyWithoutSubmittedByNestedInput
+    closedCases?: CaseClosureUncheckedUpdateManyWithoutClosedByNestedInput
+    reviewedPublicReports?: PublicReportUncheckedUpdateManyWithoutReviewedByNestedInput
+    decidedPublicReports?: PublicReportUncheckedUpdateManyWithoutDecisionByNestedInput
+    createdTriageAnalyses?: PublicReportTriageAnalysisUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPolicyDocuments?: PolicyDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
+    approvedPolicyDocuments?: PolicyDocumentUncheckedUpdateManyWithoutApprovedByNestedInput
+    createdApprovedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutCreatedByNestedInput
+    approvedApprovedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutApprovedByNestedInput
+    preparedDecisionPackages?: DecisionPackageUncheckedUpdateManyWithoutPreparedByNestedInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutCreatedByNestedInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutApprovedByNestedInput
+    createdObservationSources?: ObservationSourceUncheckedUpdateManyWithoutCreatedByNestedInput
+    deactivatedObservationSources?: ObservationSourceUncheckedUpdateManyWithoutDeactivatedByNestedInput
+    ingestedExternalObservations?: ExternalObservationUncheckedUpdateManyWithoutIngestedByNestedInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutPreparedByNestedInput
+    createdPortfolioScenarios?: PortfolioScenarioUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutCreatedByNestedInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutVoidedByNestedInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutRecordedByNestedInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutVoidedByNestedInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUncheckedUpdateManyWithoutCreatedByNestedInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedUpdateManyWithoutRecordedByNestedInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
+  }
+
+  export type PredictiveModelEvaluationUpsertWithWhereUniqueWithoutModelVersionInput = {
+    where: PredictiveModelEvaluationWhereUniqueInput
+    update: XOR<PredictiveModelEvaluationUpdateWithoutModelVersionInput, PredictiveModelEvaluationUncheckedUpdateWithoutModelVersionInput>
+    create: XOR<PredictiveModelEvaluationCreateWithoutModelVersionInput, PredictiveModelEvaluationUncheckedCreateWithoutModelVersionInput>
+  }
+
+  export type PredictiveModelEvaluationUpdateWithWhereUniqueWithoutModelVersionInput = {
+    where: PredictiveModelEvaluationWhereUniqueInput
+    data: XOR<PredictiveModelEvaluationUpdateWithoutModelVersionInput, PredictiveModelEvaluationUncheckedUpdateWithoutModelVersionInput>
+  }
+
+  export type PredictiveModelEvaluationUpdateManyWithWhereWithoutModelVersionInput = {
+    where: PredictiveModelEvaluationScalarWhereInput
+    data: XOR<PredictiveModelEvaluationUpdateManyMutationInput, PredictiveModelEvaluationUncheckedUpdateManyWithoutModelVersionInput>
+  }
+
+  export type PredictiveModelApprovalUpsertWithWhereUniqueWithoutModelVersionInput = {
+    where: PredictiveModelApprovalWhereUniqueInput
+    update: XOR<PredictiveModelApprovalUpdateWithoutModelVersionInput, PredictiveModelApprovalUncheckedUpdateWithoutModelVersionInput>
+    create: XOR<PredictiveModelApprovalCreateWithoutModelVersionInput, PredictiveModelApprovalUncheckedCreateWithoutModelVersionInput>
+  }
+
+  export type PredictiveModelApprovalUpdateWithWhereUniqueWithoutModelVersionInput = {
+    where: PredictiveModelApprovalWhereUniqueInput
+    data: XOR<PredictiveModelApprovalUpdateWithoutModelVersionInput, PredictiveModelApprovalUncheckedUpdateWithoutModelVersionInput>
+  }
+
+  export type PredictiveModelApprovalUpdateManyWithWhereWithoutModelVersionInput = {
+    where: PredictiveModelApprovalScalarWhereInput
+    data: XOR<PredictiveModelApprovalUpdateManyMutationInput, PredictiveModelApprovalUncheckedUpdateManyWithoutModelVersionInput>
+  }
+
+  export type PredictiveModelLifecycleEventUpsertWithWhereUniqueWithoutModelVersionInput = {
+    where: PredictiveModelLifecycleEventWhereUniqueInput
+    update: XOR<PredictiveModelLifecycleEventUpdateWithoutModelVersionInput, PredictiveModelLifecycleEventUncheckedUpdateWithoutModelVersionInput>
+    create: XOR<PredictiveModelLifecycleEventCreateWithoutModelVersionInput, PredictiveModelLifecycleEventUncheckedCreateWithoutModelVersionInput>
+  }
+
+  export type PredictiveModelLifecycleEventUpdateWithWhereUniqueWithoutModelVersionInput = {
+    where: PredictiveModelLifecycleEventWhereUniqueInput
+    data: XOR<PredictiveModelLifecycleEventUpdateWithoutModelVersionInput, PredictiveModelLifecycleEventUncheckedUpdateWithoutModelVersionInput>
+  }
+
+  export type PredictiveModelLifecycleEventUpdateManyWithWhereWithoutModelVersionInput = {
+    where: PredictiveModelLifecycleEventScalarWhereInput
+    data: XOR<PredictiveModelLifecycleEventUpdateManyMutationInput, PredictiveModelLifecycleEventUncheckedUpdateManyWithoutModelVersionInput>
+  }
+
+  export type PredictiveModelVersionCreateWithoutEvaluationsInput = {
+    id?: string
+    modelName: string
+    modelVersion: string
+    targetType: $Enums.PredictiveTargetType
+    deploymentSlot: string
+    intendedUse: string
+    forbiddenUse: string
+    featureContractVersion: string
+    outcomeContractVersion: string
+    trainingCodeVersion: string
+    artifactReference: string
+    artifactDigest: string
+    artifactFormat: string
+    artifactSizeBytes?: bigint | number | null
+    trainingTimestamp: Date | string
+    lifecycleStatus?: $Enums.PredictiveModelLifecycleStatus
+    createdAt?: Date | string
+    validatedAt?: Date | string | null
+    datasetSnapshot: PredictiveDatasetSnapshotCreateNestedOneWithoutModelVersionsInput
+    createdBy: UserCreateNestedOneWithoutCreatedPredictiveModelVersionsInput
+    validatedBy?: UserCreateNestedOneWithoutValidatedPredictiveModelVersionsInput
+    approvals?: PredictiveModelApprovalCreateNestedManyWithoutModelVersionInput
+    lifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutModelVersionInput
+  }
+
+  export type PredictiveModelVersionUncheckedCreateWithoutEvaluationsInput = {
+    id?: string
+    modelName: string
+    modelVersion: string
+    targetType: $Enums.PredictiveTargetType
+    deploymentSlot: string
+    intendedUse: string
+    forbiddenUse: string
+    featureContractVersion: string
+    outcomeContractVersion: string
+    datasetSnapshotId: string
+    trainingCodeVersion: string
+    artifactReference: string
+    artifactDigest: string
+    artifactFormat: string
+    artifactSizeBytes?: bigint | number | null
+    trainingTimestamp: Date | string
+    lifecycleStatus?: $Enums.PredictiveModelLifecycleStatus
+    createdById: string
+    createdAt?: Date | string
+    validatedById?: string | null
+    validatedAt?: Date | string | null
+    approvals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutModelVersionInput
+    lifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutModelVersionInput
+  }
+
+  export type PredictiveModelVersionCreateOrConnectWithoutEvaluationsInput = {
+    where: PredictiveModelVersionWhereUniqueInput
+    create: XOR<PredictiveModelVersionCreateWithoutEvaluationsInput, PredictiveModelVersionUncheckedCreateWithoutEvaluationsInput>
+  }
+
+  export type PredictiveDatasetSnapshotCreateWithoutEvaluationsInput = {
+    id?: string
+    datasetContractVersion: string
+    targetType: $Enums.PredictiveTargetType
+    featureContractVersion: string
+    outcomeContractVersion: string
+    departmentId?: string | null
+    jurisdictionId?: string | null
+    includedProvenance: JsonNullValueInput | InputJsonValue
+    sampleCount: number
+    classBalance: JsonNullValueInput | InputJsonValue
+    periodStart?: Date | string | null
+    periodEnd?: Date | string | null
+    sampleIdentities: JsonNullValueInput | InputJsonValue
+    datasetFingerprint: string
+    createdAt?: Date | string
+    createdBy: UserCreateNestedOneWithoutCreatedPredictiveDatasetSnapshotsInput
+    modelVersions?: PredictiveModelVersionCreateNestedManyWithoutDatasetSnapshotInput
+  }
+
+  export type PredictiveDatasetSnapshotUncheckedCreateWithoutEvaluationsInput = {
+    id?: string
+    datasetContractVersion: string
+    targetType: $Enums.PredictiveTargetType
+    featureContractVersion: string
+    outcomeContractVersion: string
+    departmentId?: string | null
+    jurisdictionId?: string | null
+    includedProvenance: JsonNullValueInput | InputJsonValue
+    sampleCount: number
+    classBalance: JsonNullValueInput | InputJsonValue
+    periodStart?: Date | string | null
+    periodEnd?: Date | string | null
+    sampleIdentities: JsonNullValueInput | InputJsonValue
+    datasetFingerprint: string
+    createdById: string
+    createdAt?: Date | string
+    modelVersions?: PredictiveModelVersionUncheckedCreateNestedManyWithoutDatasetSnapshotInput
+  }
+
+  export type PredictiveDatasetSnapshotCreateOrConnectWithoutEvaluationsInput = {
+    where: PredictiveDatasetSnapshotWhereUniqueInput
+    create: XOR<PredictiveDatasetSnapshotCreateWithoutEvaluationsInput, PredictiveDatasetSnapshotUncheckedCreateWithoutEvaluationsInput>
+  }
+
+  export type UserCreateWithoutRecordedPredictiveEvaluationsInput = {
+    id?: string
+    employeeCode: string
+    name: string
+    email: string
+    passwordHash: string
+    designation: string
+    role?: $Enums.SystemRole
+    status?: $Enums.UserStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    department: DepartmentCreateNestedOneWithoutUsersInput
+    jurisdiction: JurisdictionCreateNestedOneWithoutUsersInput
+    inspections?: InspectionCreateNestedManyWithoutInspectorInput
+    approvalAuthorities?: ApprovalAuthorityCreateNestedManyWithoutUserInput
+    reviewedOrpDecisions?: OrpDecisionCreateNestedManyWithoutReviewerInput
+    forwardedOrpDecisions?: OrpDecisionCreateNestedManyWithoutForwardedUserInput
+    createdExecutionPlans?: ExecutionPlanCreateNestedManyWithoutCreatedByInput
+    assignedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutAssignedToInput
+    assignedByExecutionTasks?: ExecutionTaskCreateNestedManyWithoutAssignedByInput
+    completedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCompletionSubmittedByInput
+    verifiedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutVerifiedByInput
+    cancelledExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCancelledByInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionCreateNestedManyWithoutChangedByInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutBlockedByInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutResolvedByInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyCreateNestedManyWithoutCreatedByInput
+    submittedExecutionEvidence?: ExecutionEvidenceCreateNestedManyWithoutSubmittedByInput
+    closedCases?: CaseClosureCreateNestedManyWithoutClosedByInput
+    reviewedPublicReports?: PublicReportCreateNestedManyWithoutReviewedByInput
+    decidedPublicReports?: PublicReportCreateNestedManyWithoutDecisionByInput
+    createdTriageAnalyses?: PublicReportTriageAnalysisCreateNestedManyWithoutCreatedByInput
+    createdPolicyDocuments?: PolicyDocumentCreateNestedManyWithoutCreatedByInput
+    approvedPolicyDocuments?: PolicyDocumentCreateNestedManyWithoutApprovedByInput
+    createdApprovedActions?: ApprovedActionVersionCreateNestedManyWithoutCreatedByInput
+    approvedApprovedActions?: ApprovedActionVersionCreateNestedManyWithoutApprovedByInput
+    preparedDecisionPackages?: DecisionPackageCreateNestedManyWithoutPreparedByInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutCreatedByInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutApprovedByInput
+    createdObservationSources?: ObservationSourceCreateNestedManyWithoutCreatedByInput
+    deactivatedObservationSources?: ObservationSourceCreateNestedManyWithoutDeactivatedByInput
+    ingestedExternalObservations?: ExternalObservationCreateNestedManyWithoutIngestedByInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutPreparedByInput
+    createdPortfolioScenarios?: PortfolioScenarioCreateNestedManyWithoutCreatedByInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutCreatedByInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutVoidedByInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutRecordedByInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutVoidedByInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotCreateNestedManyWithoutCreatedByInput
+    createdPredictiveModelVersions?: PredictiveModelVersionCreateNestedManyWithoutCreatedByInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionCreateNestedManyWithoutValidatedByInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
+  }
+
+  export type UserUncheckedCreateWithoutRecordedPredictiveEvaluationsInput = {
+    id?: string
+    employeeCode: string
+    name: string
+    email: string
+    passwordHash: string
+    designation: string
+    role?: $Enums.SystemRole
+    status?: $Enums.UserStatus
+    departmentId: string
+    jurisdictionId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    inspections?: InspectionUncheckedCreateNestedManyWithoutInspectorInput
+    approvalAuthorities?: ApprovalAuthorityUncheckedCreateNestedManyWithoutUserInput
+    reviewedOrpDecisions?: OrpDecisionUncheckedCreateNestedManyWithoutReviewerInput
+    forwardedOrpDecisions?: OrpDecisionUncheckedCreateNestedManyWithoutForwardedUserInput
+    createdExecutionPlans?: ExecutionPlanUncheckedCreateNestedManyWithoutCreatedByInput
+    assignedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutAssignedToInput
+    assignedByExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutAssignedByInput
+    completedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCompletionSubmittedByInput
+    verifiedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutVerifiedByInput
+    cancelledExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCancelledByInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUncheckedCreateNestedManyWithoutChangedByInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutBlockedByInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutResolvedByInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutCreatedByInput
+    submittedExecutionEvidence?: ExecutionEvidenceUncheckedCreateNestedManyWithoutSubmittedByInput
+    closedCases?: CaseClosureUncheckedCreateNestedManyWithoutClosedByInput
+    reviewedPublicReports?: PublicReportUncheckedCreateNestedManyWithoutReviewedByInput
+    decidedPublicReports?: PublicReportUncheckedCreateNestedManyWithoutDecisionByInput
+    createdTriageAnalyses?: PublicReportTriageAnalysisUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPolicyDocuments?: PolicyDocumentUncheckedCreateNestedManyWithoutCreatedByInput
+    approvedPolicyDocuments?: PolicyDocumentUncheckedCreateNestedManyWithoutApprovedByInput
+    createdApprovedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutCreatedByInput
+    approvedApprovedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutApprovedByInput
+    preparedDecisionPackages?: DecisionPackageUncheckedCreateNestedManyWithoutPreparedByInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutCreatedByInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutApprovedByInput
+    createdObservationSources?: ObservationSourceUncheckedCreateNestedManyWithoutCreatedByInput
+    deactivatedObservationSources?: ObservationSourceUncheckedCreateNestedManyWithoutDeactivatedByInput
+    ingestedExternalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutIngestedByInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutPreparedByInput
+    createdPortfolioScenarios?: PortfolioScenarioUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutCreatedByInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutVoidedByInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutRecordedByInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutVoidedByInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUncheckedCreateNestedManyWithoutCreatedByInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUncheckedCreateNestedManyWithoutValidatedByInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
+  }
+
+  export type UserCreateOrConnectWithoutRecordedPredictiveEvaluationsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutRecordedPredictiveEvaluationsInput, UserUncheckedCreateWithoutRecordedPredictiveEvaluationsInput>
+  }
+
+  export type PredictiveModelVersionUpsertWithoutEvaluationsInput = {
+    update: XOR<PredictiveModelVersionUpdateWithoutEvaluationsInput, PredictiveModelVersionUncheckedUpdateWithoutEvaluationsInput>
+    create: XOR<PredictiveModelVersionCreateWithoutEvaluationsInput, PredictiveModelVersionUncheckedCreateWithoutEvaluationsInput>
+    where?: PredictiveModelVersionWhereInput
+  }
+
+  export type PredictiveModelVersionUpdateToOneWithWhereWithoutEvaluationsInput = {
+    where?: PredictiveModelVersionWhereInput
+    data: XOR<PredictiveModelVersionUpdateWithoutEvaluationsInput, PredictiveModelVersionUncheckedUpdateWithoutEvaluationsInput>
+  }
+
+  export type PredictiveModelVersionUpdateWithoutEvaluationsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    modelName?: StringFieldUpdateOperationsInput | string
+    modelVersion?: StringFieldUpdateOperationsInput | string
+    targetType?: EnumPredictiveTargetTypeFieldUpdateOperationsInput | $Enums.PredictiveTargetType
+    deploymentSlot?: StringFieldUpdateOperationsInput | string
+    intendedUse?: StringFieldUpdateOperationsInput | string
+    forbiddenUse?: StringFieldUpdateOperationsInput | string
+    featureContractVersion?: StringFieldUpdateOperationsInput | string
+    outcomeContractVersion?: StringFieldUpdateOperationsInput | string
+    trainingCodeVersion?: StringFieldUpdateOperationsInput | string
+    artifactReference?: StringFieldUpdateOperationsInput | string
+    artifactDigest?: StringFieldUpdateOperationsInput | string
+    artifactFormat?: StringFieldUpdateOperationsInput | string
+    artifactSizeBytes?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    trainingTimestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    lifecycleStatus?: EnumPredictiveModelLifecycleStatusFieldUpdateOperationsInput | $Enums.PredictiveModelLifecycleStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    validatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    datasetSnapshot?: PredictiveDatasetSnapshotUpdateOneRequiredWithoutModelVersionsNestedInput
+    createdBy?: UserUpdateOneRequiredWithoutCreatedPredictiveModelVersionsNestedInput
+    validatedBy?: UserUpdateOneWithoutValidatedPredictiveModelVersionsNestedInput
+    approvals?: PredictiveModelApprovalUpdateManyWithoutModelVersionNestedInput
+    lifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutModelVersionNestedInput
+  }
+
+  export type PredictiveModelVersionUncheckedUpdateWithoutEvaluationsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    modelName?: StringFieldUpdateOperationsInput | string
+    modelVersion?: StringFieldUpdateOperationsInput | string
+    targetType?: EnumPredictiveTargetTypeFieldUpdateOperationsInput | $Enums.PredictiveTargetType
+    deploymentSlot?: StringFieldUpdateOperationsInput | string
+    intendedUse?: StringFieldUpdateOperationsInput | string
+    forbiddenUse?: StringFieldUpdateOperationsInput | string
+    featureContractVersion?: StringFieldUpdateOperationsInput | string
+    outcomeContractVersion?: StringFieldUpdateOperationsInput | string
+    datasetSnapshotId?: StringFieldUpdateOperationsInput | string
+    trainingCodeVersion?: StringFieldUpdateOperationsInput | string
+    artifactReference?: StringFieldUpdateOperationsInput | string
+    artifactDigest?: StringFieldUpdateOperationsInput | string
+    artifactFormat?: StringFieldUpdateOperationsInput | string
+    artifactSizeBytes?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    trainingTimestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    lifecycleStatus?: EnumPredictiveModelLifecycleStatusFieldUpdateOperationsInput | $Enums.PredictiveModelLifecycleStatus
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    validatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    validatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvals?: PredictiveModelApprovalUncheckedUpdateManyWithoutModelVersionNestedInput
+    lifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutModelVersionNestedInput
+  }
+
+  export type PredictiveDatasetSnapshotUpsertWithoutEvaluationsInput = {
+    update: XOR<PredictiveDatasetSnapshotUpdateWithoutEvaluationsInput, PredictiveDatasetSnapshotUncheckedUpdateWithoutEvaluationsInput>
+    create: XOR<PredictiveDatasetSnapshotCreateWithoutEvaluationsInput, PredictiveDatasetSnapshotUncheckedCreateWithoutEvaluationsInput>
+    where?: PredictiveDatasetSnapshotWhereInput
+  }
+
+  export type PredictiveDatasetSnapshotUpdateToOneWithWhereWithoutEvaluationsInput = {
+    where?: PredictiveDatasetSnapshotWhereInput
+    data: XOR<PredictiveDatasetSnapshotUpdateWithoutEvaluationsInput, PredictiveDatasetSnapshotUncheckedUpdateWithoutEvaluationsInput>
+  }
+
+  export type PredictiveDatasetSnapshotUpdateWithoutEvaluationsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    datasetContractVersion?: StringFieldUpdateOperationsInput | string
+    targetType?: EnumPredictiveTargetTypeFieldUpdateOperationsInput | $Enums.PredictiveTargetType
+    featureContractVersion?: StringFieldUpdateOperationsInput | string
+    outcomeContractVersion?: StringFieldUpdateOperationsInput | string
+    departmentId?: NullableStringFieldUpdateOperationsInput | string | null
+    jurisdictionId?: NullableStringFieldUpdateOperationsInput | string | null
+    includedProvenance?: JsonNullValueInput | InputJsonValue
+    sampleCount?: IntFieldUpdateOperationsInput | number
+    classBalance?: JsonNullValueInput | InputJsonValue
+    periodStart?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    periodEnd?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    sampleIdentities?: JsonNullValueInput | InputJsonValue
+    datasetFingerprint?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: UserUpdateOneRequiredWithoutCreatedPredictiveDatasetSnapshotsNestedInput
+    modelVersions?: PredictiveModelVersionUpdateManyWithoutDatasetSnapshotNestedInput
+  }
+
+  export type PredictiveDatasetSnapshotUncheckedUpdateWithoutEvaluationsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    datasetContractVersion?: StringFieldUpdateOperationsInput | string
+    targetType?: EnumPredictiveTargetTypeFieldUpdateOperationsInput | $Enums.PredictiveTargetType
+    featureContractVersion?: StringFieldUpdateOperationsInput | string
+    outcomeContractVersion?: StringFieldUpdateOperationsInput | string
+    departmentId?: NullableStringFieldUpdateOperationsInput | string | null
+    jurisdictionId?: NullableStringFieldUpdateOperationsInput | string | null
+    includedProvenance?: JsonNullValueInput | InputJsonValue
+    sampleCount?: IntFieldUpdateOperationsInput | number
+    classBalance?: JsonNullValueInput | InputJsonValue
+    periodStart?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    periodEnd?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    sampleIdentities?: JsonNullValueInput | InputJsonValue
+    datasetFingerprint?: StringFieldUpdateOperationsInput | string
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    modelVersions?: PredictiveModelVersionUncheckedUpdateManyWithoutDatasetSnapshotNestedInput
+  }
+
+  export type UserUpsertWithoutRecordedPredictiveEvaluationsInput = {
+    update: XOR<UserUpdateWithoutRecordedPredictiveEvaluationsInput, UserUncheckedUpdateWithoutRecordedPredictiveEvaluationsInput>
+    create: XOR<UserCreateWithoutRecordedPredictiveEvaluationsInput, UserUncheckedCreateWithoutRecordedPredictiveEvaluationsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutRecordedPredictiveEvaluationsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutRecordedPredictiveEvaluationsInput, UserUncheckedUpdateWithoutRecordedPredictiveEvaluationsInput>
+  }
+
+  export type UserUpdateWithoutRecordedPredictiveEvaluationsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    employeeCode?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    designation?: StringFieldUpdateOperationsInput | string
+    role?: EnumSystemRoleFieldUpdateOperationsInput | $Enums.SystemRole
+    status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    department?: DepartmentUpdateOneRequiredWithoutUsersNestedInput
+    jurisdiction?: JurisdictionUpdateOneRequiredWithoutUsersNestedInput
+    inspections?: InspectionUpdateManyWithoutInspectorNestedInput
+    approvalAuthorities?: ApprovalAuthorityUpdateManyWithoutUserNestedInput
+    reviewedOrpDecisions?: OrpDecisionUpdateManyWithoutReviewerNestedInput
+    forwardedOrpDecisions?: OrpDecisionUpdateManyWithoutForwardedUserNestedInput
+    createdExecutionPlans?: ExecutionPlanUpdateManyWithoutCreatedByNestedInput
+    assignedExecutionTasks?: ExecutionTaskUpdateManyWithoutAssignedToNestedInput
+    assignedByExecutionTasks?: ExecutionTaskUpdateManyWithoutAssignedByNestedInput
+    completedExecutionTasks?: ExecutionTaskUpdateManyWithoutCompletionSubmittedByNestedInput
+    verifiedExecutionTasks?: ExecutionTaskUpdateManyWithoutVerifiedByNestedInput
+    cancelledExecutionTasks?: ExecutionTaskUpdateManyWithoutCancelledByNestedInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUpdateManyWithoutChangedByNestedInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUpdateManyWithoutBlockedByNestedInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUpdateManyWithoutResolvedByNestedInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUpdateManyWithoutCreatedByNestedInput
+    submittedExecutionEvidence?: ExecutionEvidenceUpdateManyWithoutSubmittedByNestedInput
+    closedCases?: CaseClosureUpdateManyWithoutClosedByNestedInput
+    reviewedPublicReports?: PublicReportUpdateManyWithoutReviewedByNestedInput
+    decidedPublicReports?: PublicReportUpdateManyWithoutDecisionByNestedInput
+    createdTriageAnalyses?: PublicReportTriageAnalysisUpdateManyWithoutCreatedByNestedInput
+    createdPolicyDocuments?: PolicyDocumentUpdateManyWithoutCreatedByNestedInput
+    approvedPolicyDocuments?: PolicyDocumentUpdateManyWithoutApprovedByNestedInput
+    createdApprovedActions?: ApprovedActionVersionUpdateManyWithoutCreatedByNestedInput
+    approvedApprovedActions?: ApprovedActionVersionUpdateManyWithoutApprovedByNestedInput
+    preparedDecisionPackages?: DecisionPackageUpdateManyWithoutPreparedByNestedInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutCreatedByNestedInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutApprovedByNestedInput
+    createdObservationSources?: ObservationSourceUpdateManyWithoutCreatedByNestedInput
+    deactivatedObservationSources?: ObservationSourceUpdateManyWithoutDeactivatedByNestedInput
+    ingestedExternalObservations?: ExternalObservationUpdateManyWithoutIngestedByNestedInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUpdateManyWithoutPreparedByNestedInput
+    createdPortfolioScenarios?: PortfolioScenarioUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutCreatedByNestedInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutVoidedByNestedInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutRecordedByNestedInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutVoidedByNestedInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUpdateManyWithoutCreatedByNestedInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUpdateManyWithoutValidatedByNestedInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutRecordedPredictiveEvaluationsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    employeeCode?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    designation?: StringFieldUpdateOperationsInput | string
+    role?: EnumSystemRoleFieldUpdateOperationsInput | $Enums.SystemRole
+    status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+    departmentId?: StringFieldUpdateOperationsInput | string
+    jurisdictionId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    inspections?: InspectionUncheckedUpdateManyWithoutInspectorNestedInput
+    approvalAuthorities?: ApprovalAuthorityUncheckedUpdateManyWithoutUserNestedInput
+    reviewedOrpDecisions?: OrpDecisionUncheckedUpdateManyWithoutReviewerNestedInput
+    forwardedOrpDecisions?: OrpDecisionUncheckedUpdateManyWithoutForwardedUserNestedInput
+    createdExecutionPlans?: ExecutionPlanUncheckedUpdateManyWithoutCreatedByNestedInput
+    assignedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutAssignedToNestedInput
+    assignedByExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutAssignedByNestedInput
+    completedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCompletionSubmittedByNestedInput
+    verifiedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutVerifiedByNestedInput
+    cancelledExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCancelledByNestedInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUncheckedUpdateManyWithoutChangedByNestedInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutBlockedByNestedInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutResolvedByNestedInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUncheckedUpdateManyWithoutCreatedByNestedInput
+    submittedExecutionEvidence?: ExecutionEvidenceUncheckedUpdateManyWithoutSubmittedByNestedInput
+    closedCases?: CaseClosureUncheckedUpdateManyWithoutClosedByNestedInput
+    reviewedPublicReports?: PublicReportUncheckedUpdateManyWithoutReviewedByNestedInput
+    decidedPublicReports?: PublicReportUncheckedUpdateManyWithoutDecisionByNestedInput
+    createdTriageAnalyses?: PublicReportTriageAnalysisUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPolicyDocuments?: PolicyDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
+    approvedPolicyDocuments?: PolicyDocumentUncheckedUpdateManyWithoutApprovedByNestedInput
+    createdApprovedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutCreatedByNestedInput
+    approvedApprovedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutApprovedByNestedInput
+    preparedDecisionPackages?: DecisionPackageUncheckedUpdateManyWithoutPreparedByNestedInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutCreatedByNestedInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutApprovedByNestedInput
+    createdObservationSources?: ObservationSourceUncheckedUpdateManyWithoutCreatedByNestedInput
+    deactivatedObservationSources?: ObservationSourceUncheckedUpdateManyWithoutDeactivatedByNestedInput
+    ingestedExternalObservations?: ExternalObservationUncheckedUpdateManyWithoutIngestedByNestedInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutPreparedByNestedInput
+    createdPortfolioScenarios?: PortfolioScenarioUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutCreatedByNestedInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutVoidedByNestedInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutRecordedByNestedInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutVoidedByNestedInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUncheckedUpdateManyWithoutCreatedByNestedInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUncheckedUpdateManyWithoutValidatedByNestedInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
+  }
+
+  export type PredictiveModelVersionCreateWithoutApprovalsInput = {
+    id?: string
+    modelName: string
+    modelVersion: string
+    targetType: $Enums.PredictiveTargetType
+    deploymentSlot: string
+    intendedUse: string
+    forbiddenUse: string
+    featureContractVersion: string
+    outcomeContractVersion: string
+    trainingCodeVersion: string
+    artifactReference: string
+    artifactDigest: string
+    artifactFormat: string
+    artifactSizeBytes?: bigint | number | null
+    trainingTimestamp: Date | string
+    lifecycleStatus?: $Enums.PredictiveModelLifecycleStatus
+    createdAt?: Date | string
+    validatedAt?: Date | string | null
+    datasetSnapshot: PredictiveDatasetSnapshotCreateNestedOneWithoutModelVersionsInput
+    createdBy: UserCreateNestedOneWithoutCreatedPredictiveModelVersionsInput
+    validatedBy?: UserCreateNestedOneWithoutValidatedPredictiveModelVersionsInput
+    evaluations?: PredictiveModelEvaluationCreateNestedManyWithoutModelVersionInput
+    lifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutModelVersionInput
+  }
+
+  export type PredictiveModelVersionUncheckedCreateWithoutApprovalsInput = {
+    id?: string
+    modelName: string
+    modelVersion: string
+    targetType: $Enums.PredictiveTargetType
+    deploymentSlot: string
+    intendedUse: string
+    forbiddenUse: string
+    featureContractVersion: string
+    outcomeContractVersion: string
+    datasetSnapshotId: string
+    trainingCodeVersion: string
+    artifactReference: string
+    artifactDigest: string
+    artifactFormat: string
+    artifactSizeBytes?: bigint | number | null
+    trainingTimestamp: Date | string
+    lifecycleStatus?: $Enums.PredictiveModelLifecycleStatus
+    createdById: string
+    createdAt?: Date | string
+    validatedById?: string | null
+    validatedAt?: Date | string | null
+    evaluations?: PredictiveModelEvaluationUncheckedCreateNestedManyWithoutModelVersionInput
+    lifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutModelVersionInput
+  }
+
+  export type PredictiveModelVersionCreateOrConnectWithoutApprovalsInput = {
+    where: PredictiveModelVersionWhereUniqueInput
+    create: XOR<PredictiveModelVersionCreateWithoutApprovalsInput, PredictiveModelVersionUncheckedCreateWithoutApprovalsInput>
+  }
+
+  export type UserCreateWithoutDecidedPredictiveApprovalsInput = {
+    id?: string
+    employeeCode: string
+    name: string
+    email: string
+    passwordHash: string
+    designation: string
+    role?: $Enums.SystemRole
+    status?: $Enums.UserStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    department: DepartmentCreateNestedOneWithoutUsersInput
+    jurisdiction: JurisdictionCreateNestedOneWithoutUsersInput
+    inspections?: InspectionCreateNestedManyWithoutInspectorInput
+    approvalAuthorities?: ApprovalAuthorityCreateNestedManyWithoutUserInput
+    reviewedOrpDecisions?: OrpDecisionCreateNestedManyWithoutReviewerInput
+    forwardedOrpDecisions?: OrpDecisionCreateNestedManyWithoutForwardedUserInput
+    createdExecutionPlans?: ExecutionPlanCreateNestedManyWithoutCreatedByInput
+    assignedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutAssignedToInput
+    assignedByExecutionTasks?: ExecutionTaskCreateNestedManyWithoutAssignedByInput
+    completedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCompletionSubmittedByInput
+    verifiedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutVerifiedByInput
+    cancelledExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCancelledByInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionCreateNestedManyWithoutChangedByInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutBlockedByInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutResolvedByInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyCreateNestedManyWithoutCreatedByInput
+    submittedExecutionEvidence?: ExecutionEvidenceCreateNestedManyWithoutSubmittedByInput
+    closedCases?: CaseClosureCreateNestedManyWithoutClosedByInput
+    reviewedPublicReports?: PublicReportCreateNestedManyWithoutReviewedByInput
+    decidedPublicReports?: PublicReportCreateNestedManyWithoutDecisionByInput
+    createdTriageAnalyses?: PublicReportTriageAnalysisCreateNestedManyWithoutCreatedByInput
+    createdPolicyDocuments?: PolicyDocumentCreateNestedManyWithoutCreatedByInput
+    approvedPolicyDocuments?: PolicyDocumentCreateNestedManyWithoutApprovedByInput
+    createdApprovedActions?: ApprovedActionVersionCreateNestedManyWithoutCreatedByInput
+    approvedApprovedActions?: ApprovedActionVersionCreateNestedManyWithoutApprovedByInput
+    preparedDecisionPackages?: DecisionPackageCreateNestedManyWithoutPreparedByInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutCreatedByInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutApprovedByInput
+    createdObservationSources?: ObservationSourceCreateNestedManyWithoutCreatedByInput
+    deactivatedObservationSources?: ObservationSourceCreateNestedManyWithoutDeactivatedByInput
+    ingestedExternalObservations?: ExternalObservationCreateNestedManyWithoutIngestedByInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutPreparedByInput
+    createdPortfolioScenarios?: PortfolioScenarioCreateNestedManyWithoutCreatedByInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutCreatedByInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutVoidedByInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutRecordedByInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutVoidedByInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotCreateNestedManyWithoutCreatedByInput
+    createdPredictiveModelVersions?: PredictiveModelVersionCreateNestedManyWithoutCreatedByInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionCreateNestedManyWithoutValidatedByInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationCreateNestedManyWithoutRecordedByInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
+  }
+
+  export type UserUncheckedCreateWithoutDecidedPredictiveApprovalsInput = {
+    id?: string
+    employeeCode: string
+    name: string
+    email: string
+    passwordHash: string
+    designation: string
+    role?: $Enums.SystemRole
+    status?: $Enums.UserStatus
+    departmentId: string
+    jurisdictionId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    inspections?: InspectionUncheckedCreateNestedManyWithoutInspectorInput
+    approvalAuthorities?: ApprovalAuthorityUncheckedCreateNestedManyWithoutUserInput
+    reviewedOrpDecisions?: OrpDecisionUncheckedCreateNestedManyWithoutReviewerInput
+    forwardedOrpDecisions?: OrpDecisionUncheckedCreateNestedManyWithoutForwardedUserInput
+    createdExecutionPlans?: ExecutionPlanUncheckedCreateNestedManyWithoutCreatedByInput
+    assignedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutAssignedToInput
+    assignedByExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutAssignedByInput
+    completedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCompletionSubmittedByInput
+    verifiedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutVerifiedByInput
+    cancelledExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCancelledByInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUncheckedCreateNestedManyWithoutChangedByInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutBlockedByInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutResolvedByInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutCreatedByInput
+    submittedExecutionEvidence?: ExecutionEvidenceUncheckedCreateNestedManyWithoutSubmittedByInput
+    closedCases?: CaseClosureUncheckedCreateNestedManyWithoutClosedByInput
+    reviewedPublicReports?: PublicReportUncheckedCreateNestedManyWithoutReviewedByInput
+    decidedPublicReports?: PublicReportUncheckedCreateNestedManyWithoutDecisionByInput
+    createdTriageAnalyses?: PublicReportTriageAnalysisUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPolicyDocuments?: PolicyDocumentUncheckedCreateNestedManyWithoutCreatedByInput
+    approvedPolicyDocuments?: PolicyDocumentUncheckedCreateNestedManyWithoutApprovedByInput
+    createdApprovedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutCreatedByInput
+    approvedApprovedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutApprovedByInput
+    preparedDecisionPackages?: DecisionPackageUncheckedCreateNestedManyWithoutPreparedByInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutCreatedByInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutApprovedByInput
+    createdObservationSources?: ObservationSourceUncheckedCreateNestedManyWithoutCreatedByInput
+    deactivatedObservationSources?: ObservationSourceUncheckedCreateNestedManyWithoutDeactivatedByInput
+    ingestedExternalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutIngestedByInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutPreparedByInput
+    createdPortfolioScenarios?: PortfolioScenarioUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutCreatedByInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutVoidedByInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutRecordedByInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutVoidedByInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUncheckedCreateNestedManyWithoutCreatedByInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUncheckedCreateNestedManyWithoutValidatedByInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedCreateNestedManyWithoutRecordedByInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
+  }
+
+  export type UserCreateOrConnectWithoutDecidedPredictiveApprovalsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutDecidedPredictiveApprovalsInput, UserUncheckedCreateWithoutDecidedPredictiveApprovalsInput>
+  }
+
+  export type PredictiveModelVersionUpsertWithoutApprovalsInput = {
+    update: XOR<PredictiveModelVersionUpdateWithoutApprovalsInput, PredictiveModelVersionUncheckedUpdateWithoutApprovalsInput>
+    create: XOR<PredictiveModelVersionCreateWithoutApprovalsInput, PredictiveModelVersionUncheckedCreateWithoutApprovalsInput>
+    where?: PredictiveModelVersionWhereInput
+  }
+
+  export type PredictiveModelVersionUpdateToOneWithWhereWithoutApprovalsInput = {
+    where?: PredictiveModelVersionWhereInput
+    data: XOR<PredictiveModelVersionUpdateWithoutApprovalsInput, PredictiveModelVersionUncheckedUpdateWithoutApprovalsInput>
+  }
+
+  export type PredictiveModelVersionUpdateWithoutApprovalsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    modelName?: StringFieldUpdateOperationsInput | string
+    modelVersion?: StringFieldUpdateOperationsInput | string
+    targetType?: EnumPredictiveTargetTypeFieldUpdateOperationsInput | $Enums.PredictiveTargetType
+    deploymentSlot?: StringFieldUpdateOperationsInput | string
+    intendedUse?: StringFieldUpdateOperationsInput | string
+    forbiddenUse?: StringFieldUpdateOperationsInput | string
+    featureContractVersion?: StringFieldUpdateOperationsInput | string
+    outcomeContractVersion?: StringFieldUpdateOperationsInput | string
+    trainingCodeVersion?: StringFieldUpdateOperationsInput | string
+    artifactReference?: StringFieldUpdateOperationsInput | string
+    artifactDigest?: StringFieldUpdateOperationsInput | string
+    artifactFormat?: StringFieldUpdateOperationsInput | string
+    artifactSizeBytes?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    trainingTimestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    lifecycleStatus?: EnumPredictiveModelLifecycleStatusFieldUpdateOperationsInput | $Enums.PredictiveModelLifecycleStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    validatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    datasetSnapshot?: PredictiveDatasetSnapshotUpdateOneRequiredWithoutModelVersionsNestedInput
+    createdBy?: UserUpdateOneRequiredWithoutCreatedPredictiveModelVersionsNestedInput
+    validatedBy?: UserUpdateOneWithoutValidatedPredictiveModelVersionsNestedInput
+    evaluations?: PredictiveModelEvaluationUpdateManyWithoutModelVersionNestedInput
+    lifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutModelVersionNestedInput
+  }
+
+  export type PredictiveModelVersionUncheckedUpdateWithoutApprovalsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    modelName?: StringFieldUpdateOperationsInput | string
+    modelVersion?: StringFieldUpdateOperationsInput | string
+    targetType?: EnumPredictiveTargetTypeFieldUpdateOperationsInput | $Enums.PredictiveTargetType
+    deploymentSlot?: StringFieldUpdateOperationsInput | string
+    intendedUse?: StringFieldUpdateOperationsInput | string
+    forbiddenUse?: StringFieldUpdateOperationsInput | string
+    featureContractVersion?: StringFieldUpdateOperationsInput | string
+    outcomeContractVersion?: StringFieldUpdateOperationsInput | string
+    datasetSnapshotId?: StringFieldUpdateOperationsInput | string
+    trainingCodeVersion?: StringFieldUpdateOperationsInput | string
+    artifactReference?: StringFieldUpdateOperationsInput | string
+    artifactDigest?: StringFieldUpdateOperationsInput | string
+    artifactFormat?: StringFieldUpdateOperationsInput | string
+    artifactSizeBytes?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    trainingTimestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    lifecycleStatus?: EnumPredictiveModelLifecycleStatusFieldUpdateOperationsInput | $Enums.PredictiveModelLifecycleStatus
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    validatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    validatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    evaluations?: PredictiveModelEvaluationUncheckedUpdateManyWithoutModelVersionNestedInput
+    lifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutModelVersionNestedInput
+  }
+
+  export type UserUpsertWithoutDecidedPredictiveApprovalsInput = {
+    update: XOR<UserUpdateWithoutDecidedPredictiveApprovalsInput, UserUncheckedUpdateWithoutDecidedPredictiveApprovalsInput>
+    create: XOR<UserCreateWithoutDecidedPredictiveApprovalsInput, UserUncheckedCreateWithoutDecidedPredictiveApprovalsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutDecidedPredictiveApprovalsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutDecidedPredictiveApprovalsInput, UserUncheckedUpdateWithoutDecidedPredictiveApprovalsInput>
+  }
+
+  export type UserUpdateWithoutDecidedPredictiveApprovalsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    employeeCode?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    designation?: StringFieldUpdateOperationsInput | string
+    role?: EnumSystemRoleFieldUpdateOperationsInput | $Enums.SystemRole
+    status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    department?: DepartmentUpdateOneRequiredWithoutUsersNestedInput
+    jurisdiction?: JurisdictionUpdateOneRequiredWithoutUsersNestedInput
+    inspections?: InspectionUpdateManyWithoutInspectorNestedInput
+    approvalAuthorities?: ApprovalAuthorityUpdateManyWithoutUserNestedInput
+    reviewedOrpDecisions?: OrpDecisionUpdateManyWithoutReviewerNestedInput
+    forwardedOrpDecisions?: OrpDecisionUpdateManyWithoutForwardedUserNestedInput
+    createdExecutionPlans?: ExecutionPlanUpdateManyWithoutCreatedByNestedInput
+    assignedExecutionTasks?: ExecutionTaskUpdateManyWithoutAssignedToNestedInput
+    assignedByExecutionTasks?: ExecutionTaskUpdateManyWithoutAssignedByNestedInput
+    completedExecutionTasks?: ExecutionTaskUpdateManyWithoutCompletionSubmittedByNestedInput
+    verifiedExecutionTasks?: ExecutionTaskUpdateManyWithoutVerifiedByNestedInput
+    cancelledExecutionTasks?: ExecutionTaskUpdateManyWithoutCancelledByNestedInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUpdateManyWithoutChangedByNestedInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUpdateManyWithoutBlockedByNestedInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUpdateManyWithoutResolvedByNestedInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUpdateManyWithoutCreatedByNestedInput
+    submittedExecutionEvidence?: ExecutionEvidenceUpdateManyWithoutSubmittedByNestedInput
+    closedCases?: CaseClosureUpdateManyWithoutClosedByNestedInput
+    reviewedPublicReports?: PublicReportUpdateManyWithoutReviewedByNestedInput
+    decidedPublicReports?: PublicReportUpdateManyWithoutDecisionByNestedInput
+    createdTriageAnalyses?: PublicReportTriageAnalysisUpdateManyWithoutCreatedByNestedInput
+    createdPolicyDocuments?: PolicyDocumentUpdateManyWithoutCreatedByNestedInput
+    approvedPolicyDocuments?: PolicyDocumentUpdateManyWithoutApprovedByNestedInput
+    createdApprovedActions?: ApprovedActionVersionUpdateManyWithoutCreatedByNestedInput
+    approvedApprovedActions?: ApprovedActionVersionUpdateManyWithoutApprovedByNestedInput
+    preparedDecisionPackages?: DecisionPackageUpdateManyWithoutPreparedByNestedInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutCreatedByNestedInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutApprovedByNestedInput
+    createdObservationSources?: ObservationSourceUpdateManyWithoutCreatedByNestedInput
+    deactivatedObservationSources?: ObservationSourceUpdateManyWithoutDeactivatedByNestedInput
+    ingestedExternalObservations?: ExternalObservationUpdateManyWithoutIngestedByNestedInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUpdateManyWithoutPreparedByNestedInput
+    createdPortfolioScenarios?: PortfolioScenarioUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutCreatedByNestedInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutVoidedByNestedInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutRecordedByNestedInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutVoidedByNestedInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUpdateManyWithoutCreatedByNestedInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUpdateManyWithoutValidatedByNestedInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUpdateManyWithoutRecordedByNestedInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutDecidedPredictiveApprovalsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    employeeCode?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    designation?: StringFieldUpdateOperationsInput | string
+    role?: EnumSystemRoleFieldUpdateOperationsInput | $Enums.SystemRole
+    status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+    departmentId?: StringFieldUpdateOperationsInput | string
+    jurisdictionId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    inspections?: InspectionUncheckedUpdateManyWithoutInspectorNestedInput
+    approvalAuthorities?: ApprovalAuthorityUncheckedUpdateManyWithoutUserNestedInput
+    reviewedOrpDecisions?: OrpDecisionUncheckedUpdateManyWithoutReviewerNestedInput
+    forwardedOrpDecisions?: OrpDecisionUncheckedUpdateManyWithoutForwardedUserNestedInput
+    createdExecutionPlans?: ExecutionPlanUncheckedUpdateManyWithoutCreatedByNestedInput
+    assignedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutAssignedToNestedInput
+    assignedByExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutAssignedByNestedInput
+    completedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCompletionSubmittedByNestedInput
+    verifiedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutVerifiedByNestedInput
+    cancelledExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCancelledByNestedInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUncheckedUpdateManyWithoutChangedByNestedInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutBlockedByNestedInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutResolvedByNestedInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUncheckedUpdateManyWithoutCreatedByNestedInput
+    submittedExecutionEvidence?: ExecutionEvidenceUncheckedUpdateManyWithoutSubmittedByNestedInput
+    closedCases?: CaseClosureUncheckedUpdateManyWithoutClosedByNestedInput
+    reviewedPublicReports?: PublicReportUncheckedUpdateManyWithoutReviewedByNestedInput
+    decidedPublicReports?: PublicReportUncheckedUpdateManyWithoutDecisionByNestedInput
+    createdTriageAnalyses?: PublicReportTriageAnalysisUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPolicyDocuments?: PolicyDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
+    approvedPolicyDocuments?: PolicyDocumentUncheckedUpdateManyWithoutApprovedByNestedInput
+    createdApprovedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutCreatedByNestedInput
+    approvedApprovedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutApprovedByNestedInput
+    preparedDecisionPackages?: DecisionPackageUncheckedUpdateManyWithoutPreparedByNestedInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutCreatedByNestedInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutApprovedByNestedInput
+    createdObservationSources?: ObservationSourceUncheckedUpdateManyWithoutCreatedByNestedInput
+    deactivatedObservationSources?: ObservationSourceUncheckedUpdateManyWithoutDeactivatedByNestedInput
+    ingestedExternalObservations?: ExternalObservationUncheckedUpdateManyWithoutIngestedByNestedInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutPreparedByNestedInput
+    createdPortfolioScenarios?: PortfolioScenarioUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutCreatedByNestedInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutVoidedByNestedInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutRecordedByNestedInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutVoidedByNestedInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUncheckedUpdateManyWithoutCreatedByNestedInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUncheckedUpdateManyWithoutValidatedByNestedInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedUpdateManyWithoutRecordedByNestedInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
+  }
+
+  export type PredictiveModelVersionCreateWithoutLifecycleEventsInput = {
+    id?: string
+    modelName: string
+    modelVersion: string
+    targetType: $Enums.PredictiveTargetType
+    deploymentSlot: string
+    intendedUse: string
+    forbiddenUse: string
+    featureContractVersion: string
+    outcomeContractVersion: string
+    trainingCodeVersion: string
+    artifactReference: string
+    artifactDigest: string
+    artifactFormat: string
+    artifactSizeBytes?: bigint | number | null
+    trainingTimestamp: Date | string
+    lifecycleStatus?: $Enums.PredictiveModelLifecycleStatus
+    createdAt?: Date | string
+    validatedAt?: Date | string | null
+    datasetSnapshot: PredictiveDatasetSnapshotCreateNestedOneWithoutModelVersionsInput
+    createdBy: UserCreateNestedOneWithoutCreatedPredictiveModelVersionsInput
+    validatedBy?: UserCreateNestedOneWithoutValidatedPredictiveModelVersionsInput
+    evaluations?: PredictiveModelEvaluationCreateNestedManyWithoutModelVersionInput
+    approvals?: PredictiveModelApprovalCreateNestedManyWithoutModelVersionInput
+  }
+
+  export type PredictiveModelVersionUncheckedCreateWithoutLifecycleEventsInput = {
+    id?: string
+    modelName: string
+    modelVersion: string
+    targetType: $Enums.PredictiveTargetType
+    deploymentSlot: string
+    intendedUse: string
+    forbiddenUse: string
+    featureContractVersion: string
+    outcomeContractVersion: string
+    datasetSnapshotId: string
+    trainingCodeVersion: string
+    artifactReference: string
+    artifactDigest: string
+    artifactFormat: string
+    artifactSizeBytes?: bigint | number | null
+    trainingTimestamp: Date | string
+    lifecycleStatus?: $Enums.PredictiveModelLifecycleStatus
+    createdById: string
+    createdAt?: Date | string
+    validatedById?: string | null
+    validatedAt?: Date | string | null
+    evaluations?: PredictiveModelEvaluationUncheckedCreateNestedManyWithoutModelVersionInput
+    approvals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutModelVersionInput
+  }
+
+  export type PredictiveModelVersionCreateOrConnectWithoutLifecycleEventsInput = {
+    where: PredictiveModelVersionWhereUniqueInput
+    create: XOR<PredictiveModelVersionCreateWithoutLifecycleEventsInput, PredictiveModelVersionUncheckedCreateWithoutLifecycleEventsInput>
+  }
+
+  export type UserCreateWithoutPredictiveModelLifecycleEventsInput = {
+    id?: string
+    employeeCode: string
+    name: string
+    email: string
+    passwordHash: string
+    designation: string
+    role?: $Enums.SystemRole
+    status?: $Enums.UserStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    department: DepartmentCreateNestedOneWithoutUsersInput
+    jurisdiction: JurisdictionCreateNestedOneWithoutUsersInput
+    inspections?: InspectionCreateNestedManyWithoutInspectorInput
+    approvalAuthorities?: ApprovalAuthorityCreateNestedManyWithoutUserInput
+    reviewedOrpDecisions?: OrpDecisionCreateNestedManyWithoutReviewerInput
+    forwardedOrpDecisions?: OrpDecisionCreateNestedManyWithoutForwardedUserInput
+    createdExecutionPlans?: ExecutionPlanCreateNestedManyWithoutCreatedByInput
+    assignedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutAssignedToInput
+    assignedByExecutionTasks?: ExecutionTaskCreateNestedManyWithoutAssignedByInput
+    completedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCompletionSubmittedByInput
+    verifiedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutVerifiedByInput
+    cancelledExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCancelledByInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionCreateNestedManyWithoutChangedByInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutBlockedByInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutResolvedByInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyCreateNestedManyWithoutCreatedByInput
+    submittedExecutionEvidence?: ExecutionEvidenceCreateNestedManyWithoutSubmittedByInput
+    closedCases?: CaseClosureCreateNestedManyWithoutClosedByInput
+    reviewedPublicReports?: PublicReportCreateNestedManyWithoutReviewedByInput
+    decidedPublicReports?: PublicReportCreateNestedManyWithoutDecisionByInput
+    createdTriageAnalyses?: PublicReportTriageAnalysisCreateNestedManyWithoutCreatedByInput
+    createdPolicyDocuments?: PolicyDocumentCreateNestedManyWithoutCreatedByInput
+    approvedPolicyDocuments?: PolicyDocumentCreateNestedManyWithoutApprovedByInput
+    createdApprovedActions?: ApprovedActionVersionCreateNestedManyWithoutCreatedByInput
+    approvedApprovedActions?: ApprovedActionVersionCreateNestedManyWithoutApprovedByInput
+    preparedDecisionPackages?: DecisionPackageCreateNestedManyWithoutPreparedByInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutCreatedByInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutApprovedByInput
+    createdObservationSources?: ObservationSourceCreateNestedManyWithoutCreatedByInput
+    deactivatedObservationSources?: ObservationSourceCreateNestedManyWithoutDeactivatedByInput
+    ingestedExternalObservations?: ExternalObservationCreateNestedManyWithoutIngestedByInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutPreparedByInput
+    createdPortfolioScenarios?: PortfolioScenarioCreateNestedManyWithoutCreatedByInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutCreatedByInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutVoidedByInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutRecordedByInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutVoidedByInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotCreateNestedManyWithoutCreatedByInput
+    createdPredictiveModelVersions?: PredictiveModelVersionCreateNestedManyWithoutCreatedByInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionCreateNestedManyWithoutValidatedByInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationCreateNestedManyWithoutRecordedByInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
+  }
+
+  export type UserUncheckedCreateWithoutPredictiveModelLifecycleEventsInput = {
+    id?: string
+    employeeCode: string
+    name: string
+    email: string
+    passwordHash: string
+    designation: string
+    role?: $Enums.SystemRole
+    status?: $Enums.UserStatus
+    departmentId: string
+    jurisdictionId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    inspections?: InspectionUncheckedCreateNestedManyWithoutInspectorInput
+    approvalAuthorities?: ApprovalAuthorityUncheckedCreateNestedManyWithoutUserInput
+    reviewedOrpDecisions?: OrpDecisionUncheckedCreateNestedManyWithoutReviewerInput
+    forwardedOrpDecisions?: OrpDecisionUncheckedCreateNestedManyWithoutForwardedUserInput
+    createdExecutionPlans?: ExecutionPlanUncheckedCreateNestedManyWithoutCreatedByInput
+    assignedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutAssignedToInput
+    assignedByExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutAssignedByInput
+    completedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCompletionSubmittedByInput
+    verifiedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutVerifiedByInput
+    cancelledExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCancelledByInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUncheckedCreateNestedManyWithoutChangedByInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutBlockedByInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutResolvedByInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutCreatedByInput
+    submittedExecutionEvidence?: ExecutionEvidenceUncheckedCreateNestedManyWithoutSubmittedByInput
+    closedCases?: CaseClosureUncheckedCreateNestedManyWithoutClosedByInput
+    reviewedPublicReports?: PublicReportUncheckedCreateNestedManyWithoutReviewedByInput
+    decidedPublicReports?: PublicReportUncheckedCreateNestedManyWithoutDecisionByInput
+    createdTriageAnalyses?: PublicReportTriageAnalysisUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPolicyDocuments?: PolicyDocumentUncheckedCreateNestedManyWithoutCreatedByInput
+    approvedPolicyDocuments?: PolicyDocumentUncheckedCreateNestedManyWithoutApprovedByInput
+    createdApprovedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutCreatedByInput
+    approvedApprovedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutApprovedByInput
+    preparedDecisionPackages?: DecisionPackageUncheckedCreateNestedManyWithoutPreparedByInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutCreatedByInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutApprovedByInput
+    createdObservationSources?: ObservationSourceUncheckedCreateNestedManyWithoutCreatedByInput
+    deactivatedObservationSources?: ObservationSourceUncheckedCreateNestedManyWithoutDeactivatedByInput
+    ingestedExternalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutIngestedByInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutPreparedByInput
+    createdPortfolioScenarios?: PortfolioScenarioUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutCreatedByInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutVoidedByInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutRecordedByInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutVoidedByInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUncheckedCreateNestedManyWithoutCreatedByInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUncheckedCreateNestedManyWithoutValidatedByInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedCreateNestedManyWithoutRecordedByInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
+  }
+
+  export type UserCreateOrConnectWithoutPredictiveModelLifecycleEventsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutPredictiveModelLifecycleEventsInput, UserUncheckedCreateWithoutPredictiveModelLifecycleEventsInput>
+  }
+
+  export type PredictiveModelVersionUpsertWithoutLifecycleEventsInput = {
+    update: XOR<PredictiveModelVersionUpdateWithoutLifecycleEventsInput, PredictiveModelVersionUncheckedUpdateWithoutLifecycleEventsInput>
+    create: XOR<PredictiveModelVersionCreateWithoutLifecycleEventsInput, PredictiveModelVersionUncheckedCreateWithoutLifecycleEventsInput>
+    where?: PredictiveModelVersionWhereInput
+  }
+
+  export type PredictiveModelVersionUpdateToOneWithWhereWithoutLifecycleEventsInput = {
+    where?: PredictiveModelVersionWhereInput
+    data: XOR<PredictiveModelVersionUpdateWithoutLifecycleEventsInput, PredictiveModelVersionUncheckedUpdateWithoutLifecycleEventsInput>
+  }
+
+  export type PredictiveModelVersionUpdateWithoutLifecycleEventsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    modelName?: StringFieldUpdateOperationsInput | string
+    modelVersion?: StringFieldUpdateOperationsInput | string
+    targetType?: EnumPredictiveTargetTypeFieldUpdateOperationsInput | $Enums.PredictiveTargetType
+    deploymentSlot?: StringFieldUpdateOperationsInput | string
+    intendedUse?: StringFieldUpdateOperationsInput | string
+    forbiddenUse?: StringFieldUpdateOperationsInput | string
+    featureContractVersion?: StringFieldUpdateOperationsInput | string
+    outcomeContractVersion?: StringFieldUpdateOperationsInput | string
+    trainingCodeVersion?: StringFieldUpdateOperationsInput | string
+    artifactReference?: StringFieldUpdateOperationsInput | string
+    artifactDigest?: StringFieldUpdateOperationsInput | string
+    artifactFormat?: StringFieldUpdateOperationsInput | string
+    artifactSizeBytes?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    trainingTimestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    lifecycleStatus?: EnumPredictiveModelLifecycleStatusFieldUpdateOperationsInput | $Enums.PredictiveModelLifecycleStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    validatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    datasetSnapshot?: PredictiveDatasetSnapshotUpdateOneRequiredWithoutModelVersionsNestedInput
+    createdBy?: UserUpdateOneRequiredWithoutCreatedPredictiveModelVersionsNestedInput
+    validatedBy?: UserUpdateOneWithoutValidatedPredictiveModelVersionsNestedInput
+    evaluations?: PredictiveModelEvaluationUpdateManyWithoutModelVersionNestedInput
+    approvals?: PredictiveModelApprovalUpdateManyWithoutModelVersionNestedInput
+  }
+
+  export type PredictiveModelVersionUncheckedUpdateWithoutLifecycleEventsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    modelName?: StringFieldUpdateOperationsInput | string
+    modelVersion?: StringFieldUpdateOperationsInput | string
+    targetType?: EnumPredictiveTargetTypeFieldUpdateOperationsInput | $Enums.PredictiveTargetType
+    deploymentSlot?: StringFieldUpdateOperationsInput | string
+    intendedUse?: StringFieldUpdateOperationsInput | string
+    forbiddenUse?: StringFieldUpdateOperationsInput | string
+    featureContractVersion?: StringFieldUpdateOperationsInput | string
+    outcomeContractVersion?: StringFieldUpdateOperationsInput | string
+    datasetSnapshotId?: StringFieldUpdateOperationsInput | string
+    trainingCodeVersion?: StringFieldUpdateOperationsInput | string
+    artifactReference?: StringFieldUpdateOperationsInput | string
+    artifactDigest?: StringFieldUpdateOperationsInput | string
+    artifactFormat?: StringFieldUpdateOperationsInput | string
+    artifactSizeBytes?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    trainingTimestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    lifecycleStatus?: EnumPredictiveModelLifecycleStatusFieldUpdateOperationsInput | $Enums.PredictiveModelLifecycleStatus
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    validatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    validatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    evaluations?: PredictiveModelEvaluationUncheckedUpdateManyWithoutModelVersionNestedInput
+    approvals?: PredictiveModelApprovalUncheckedUpdateManyWithoutModelVersionNestedInput
+  }
+
+  export type UserUpsertWithoutPredictiveModelLifecycleEventsInput = {
+    update: XOR<UserUpdateWithoutPredictiveModelLifecycleEventsInput, UserUncheckedUpdateWithoutPredictiveModelLifecycleEventsInput>
+    create: XOR<UserCreateWithoutPredictiveModelLifecycleEventsInput, UserUncheckedCreateWithoutPredictiveModelLifecycleEventsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutPredictiveModelLifecycleEventsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutPredictiveModelLifecycleEventsInput, UserUncheckedUpdateWithoutPredictiveModelLifecycleEventsInput>
+  }
+
+  export type UserUpdateWithoutPredictiveModelLifecycleEventsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    employeeCode?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    designation?: StringFieldUpdateOperationsInput | string
+    role?: EnumSystemRoleFieldUpdateOperationsInput | $Enums.SystemRole
+    status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    department?: DepartmentUpdateOneRequiredWithoutUsersNestedInput
+    jurisdiction?: JurisdictionUpdateOneRequiredWithoutUsersNestedInput
+    inspections?: InspectionUpdateManyWithoutInspectorNestedInput
+    approvalAuthorities?: ApprovalAuthorityUpdateManyWithoutUserNestedInput
+    reviewedOrpDecisions?: OrpDecisionUpdateManyWithoutReviewerNestedInput
+    forwardedOrpDecisions?: OrpDecisionUpdateManyWithoutForwardedUserNestedInput
+    createdExecutionPlans?: ExecutionPlanUpdateManyWithoutCreatedByNestedInput
+    assignedExecutionTasks?: ExecutionTaskUpdateManyWithoutAssignedToNestedInput
+    assignedByExecutionTasks?: ExecutionTaskUpdateManyWithoutAssignedByNestedInput
+    completedExecutionTasks?: ExecutionTaskUpdateManyWithoutCompletionSubmittedByNestedInput
+    verifiedExecutionTasks?: ExecutionTaskUpdateManyWithoutVerifiedByNestedInput
+    cancelledExecutionTasks?: ExecutionTaskUpdateManyWithoutCancelledByNestedInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUpdateManyWithoutChangedByNestedInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUpdateManyWithoutBlockedByNestedInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUpdateManyWithoutResolvedByNestedInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUpdateManyWithoutCreatedByNestedInput
+    submittedExecutionEvidence?: ExecutionEvidenceUpdateManyWithoutSubmittedByNestedInput
+    closedCases?: CaseClosureUpdateManyWithoutClosedByNestedInput
+    reviewedPublicReports?: PublicReportUpdateManyWithoutReviewedByNestedInput
+    decidedPublicReports?: PublicReportUpdateManyWithoutDecisionByNestedInput
+    createdTriageAnalyses?: PublicReportTriageAnalysisUpdateManyWithoutCreatedByNestedInput
+    createdPolicyDocuments?: PolicyDocumentUpdateManyWithoutCreatedByNestedInput
+    approvedPolicyDocuments?: PolicyDocumentUpdateManyWithoutApprovedByNestedInput
+    createdApprovedActions?: ApprovedActionVersionUpdateManyWithoutCreatedByNestedInput
+    approvedApprovedActions?: ApprovedActionVersionUpdateManyWithoutApprovedByNestedInput
+    preparedDecisionPackages?: DecisionPackageUpdateManyWithoutPreparedByNestedInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutCreatedByNestedInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutApprovedByNestedInput
+    createdObservationSources?: ObservationSourceUpdateManyWithoutCreatedByNestedInput
+    deactivatedObservationSources?: ObservationSourceUpdateManyWithoutDeactivatedByNestedInput
+    ingestedExternalObservations?: ExternalObservationUpdateManyWithoutIngestedByNestedInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUpdateManyWithoutPreparedByNestedInput
+    createdPortfolioScenarios?: PortfolioScenarioUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutCreatedByNestedInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutVoidedByNestedInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutRecordedByNestedInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutVoidedByNestedInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUpdateManyWithoutCreatedByNestedInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUpdateManyWithoutValidatedByNestedInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUpdateManyWithoutRecordedByNestedInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutPredictiveModelLifecycleEventsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    employeeCode?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    designation?: StringFieldUpdateOperationsInput | string
+    role?: EnumSystemRoleFieldUpdateOperationsInput | $Enums.SystemRole
+    status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+    departmentId?: StringFieldUpdateOperationsInput | string
+    jurisdictionId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    inspections?: InspectionUncheckedUpdateManyWithoutInspectorNestedInput
+    approvalAuthorities?: ApprovalAuthorityUncheckedUpdateManyWithoutUserNestedInput
+    reviewedOrpDecisions?: OrpDecisionUncheckedUpdateManyWithoutReviewerNestedInput
+    forwardedOrpDecisions?: OrpDecisionUncheckedUpdateManyWithoutForwardedUserNestedInput
+    createdExecutionPlans?: ExecutionPlanUncheckedUpdateManyWithoutCreatedByNestedInput
+    assignedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutAssignedToNestedInput
+    assignedByExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutAssignedByNestedInput
+    completedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCompletionSubmittedByNestedInput
+    verifiedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutVerifiedByNestedInput
+    cancelledExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCancelledByNestedInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUncheckedUpdateManyWithoutChangedByNestedInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutBlockedByNestedInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutResolvedByNestedInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUncheckedUpdateManyWithoutCreatedByNestedInput
+    submittedExecutionEvidence?: ExecutionEvidenceUncheckedUpdateManyWithoutSubmittedByNestedInput
+    closedCases?: CaseClosureUncheckedUpdateManyWithoutClosedByNestedInput
+    reviewedPublicReports?: PublicReportUncheckedUpdateManyWithoutReviewedByNestedInput
+    decidedPublicReports?: PublicReportUncheckedUpdateManyWithoutDecisionByNestedInput
+    createdTriageAnalyses?: PublicReportTriageAnalysisUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPolicyDocuments?: PolicyDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
+    approvedPolicyDocuments?: PolicyDocumentUncheckedUpdateManyWithoutApprovedByNestedInput
+    createdApprovedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutCreatedByNestedInput
+    approvedApprovedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutApprovedByNestedInput
+    preparedDecisionPackages?: DecisionPackageUncheckedUpdateManyWithoutPreparedByNestedInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutCreatedByNestedInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutApprovedByNestedInput
+    createdObservationSources?: ObservationSourceUncheckedUpdateManyWithoutCreatedByNestedInput
+    deactivatedObservationSources?: ObservationSourceUncheckedUpdateManyWithoutDeactivatedByNestedInput
+    ingestedExternalObservations?: ExternalObservationUncheckedUpdateManyWithoutIngestedByNestedInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutPreparedByNestedInput
+    createdPortfolioScenarios?: PortfolioScenarioUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutCreatedByNestedInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutVoidedByNestedInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutRecordedByNestedInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutVoidedByNestedInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUncheckedUpdateManyWithoutCreatedByNestedInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUncheckedUpdateManyWithoutValidatedByNestedInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedUpdateManyWithoutRecordedByNestedInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
   }
 
   export type ExecutionPlanCreateWithoutTaskDependenciesInput = {
@@ -90217,6 +103734,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutVoidedByInput
     recordedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutRecordedByInput
     voidedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutVoidedByInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotCreateNestedManyWithoutCreatedByInput
+    createdPredictiveModelVersions?: PredictiveModelVersionCreateNestedManyWithoutCreatedByInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionCreateNestedManyWithoutValidatedByInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationCreateNestedManyWithoutRecordedByInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
   }
 
   export type UserUncheckedCreateWithoutCreatedExecutionTaskDependenciesInput = {
@@ -90266,6 +103789,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutVoidedByInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutRecordedByInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutVoidedByInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUncheckedCreateNestedManyWithoutCreatedByInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUncheckedCreateNestedManyWithoutValidatedByInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedCreateNestedManyWithoutRecordedByInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
   }
 
   export type UserCreateOrConnectWithoutCreatedExecutionTaskDependenciesInput = {
@@ -90588,6 +104117,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutVoidedByNestedInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutRecordedByNestedInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutVoidedByNestedInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUpdateManyWithoutCreatedByNestedInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUpdateManyWithoutValidatedByNestedInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUpdateManyWithoutRecordedByNestedInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCreatedExecutionTaskDependenciesInput = {
@@ -90637,6 +104172,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutVoidedByNestedInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutRecordedByNestedInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutVoidedByNestedInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUncheckedUpdateManyWithoutCreatedByNestedInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUncheckedUpdateManyWithoutValidatedByNestedInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedUpdateManyWithoutRecordedByNestedInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
   }
 
   export type ExecutionTaskCreateWithoutBlockerEventsInput = {
@@ -90779,6 +104320,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutVoidedByInput
     recordedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutRecordedByInput
     voidedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutVoidedByInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotCreateNestedManyWithoutCreatedByInput
+    createdPredictiveModelVersions?: PredictiveModelVersionCreateNestedManyWithoutCreatedByInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionCreateNestedManyWithoutValidatedByInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationCreateNestedManyWithoutRecordedByInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
   }
 
   export type UserUncheckedCreateWithoutBlockedExecutionTaskEventsInput = {
@@ -90828,6 +104375,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutVoidedByInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutRecordedByInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutVoidedByInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUncheckedCreateNestedManyWithoutCreatedByInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUncheckedCreateNestedManyWithoutValidatedByInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedCreateNestedManyWithoutRecordedByInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
   }
 
   export type UserCreateOrConnectWithoutBlockedExecutionTaskEventsInput = {
@@ -90882,6 +104435,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutVoidedByInput
     recordedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutRecordedByInput
     voidedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutVoidedByInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotCreateNestedManyWithoutCreatedByInput
+    createdPredictiveModelVersions?: PredictiveModelVersionCreateNestedManyWithoutCreatedByInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionCreateNestedManyWithoutValidatedByInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationCreateNestedManyWithoutRecordedByInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
   }
 
   export type UserUncheckedCreateWithoutResolvedExecutionTaskEventsInput = {
@@ -90931,6 +104490,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutVoidedByInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutRecordedByInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutVoidedByInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUncheckedCreateNestedManyWithoutCreatedByInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUncheckedCreateNestedManyWithoutValidatedByInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedCreateNestedManyWithoutRecordedByInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
   }
 
   export type UserCreateOrConnectWithoutResolvedExecutionTaskEventsInput = {
@@ -91095,6 +104660,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutVoidedByNestedInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutRecordedByNestedInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutVoidedByNestedInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUpdateManyWithoutCreatedByNestedInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUpdateManyWithoutValidatedByNestedInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUpdateManyWithoutRecordedByNestedInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
   }
 
   export type UserUncheckedUpdateWithoutBlockedExecutionTaskEventsInput = {
@@ -91144,6 +104715,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutVoidedByNestedInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutRecordedByNestedInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutVoidedByNestedInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUncheckedUpdateManyWithoutCreatedByNestedInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUncheckedUpdateManyWithoutValidatedByNestedInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedUpdateManyWithoutRecordedByNestedInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
   }
 
   export type UserUpsertWithoutResolvedExecutionTaskEventsInput = {
@@ -91204,6 +104781,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutVoidedByNestedInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutRecordedByNestedInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutVoidedByNestedInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUpdateManyWithoutCreatedByNestedInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUpdateManyWithoutValidatedByNestedInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUpdateManyWithoutRecordedByNestedInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
   }
 
   export type UserUncheckedUpdateWithoutResolvedExecutionTaskEventsInput = {
@@ -91253,6 +104836,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutVoidedByNestedInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutRecordedByNestedInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutVoidedByNestedInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUncheckedUpdateManyWithoutCreatedByNestedInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUncheckedUpdateManyWithoutValidatedByNestedInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedUpdateManyWithoutRecordedByNestedInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
   }
 
   export type ExecutionPlanCreateWithoutScheduleRevisionsInput = {
@@ -91448,6 +105037,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutVoidedByInput
     recordedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutRecordedByInput
     voidedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutVoidedByInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotCreateNestedManyWithoutCreatedByInput
+    createdPredictiveModelVersions?: PredictiveModelVersionCreateNestedManyWithoutCreatedByInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionCreateNestedManyWithoutValidatedByInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationCreateNestedManyWithoutRecordedByInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
   }
 
   export type UserUncheckedCreateWithoutExecutionScheduleRevisionsInput = {
@@ -91497,6 +105092,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutVoidedByInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutRecordedByInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutVoidedByInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUncheckedCreateNestedManyWithoutCreatedByInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUncheckedCreateNestedManyWithoutValidatedByInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedCreateNestedManyWithoutRecordedByInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
   }
 
   export type UserCreateOrConnectWithoutExecutionScheduleRevisionsInput = {
@@ -91720,6 +105321,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutVoidedByNestedInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutRecordedByNestedInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutVoidedByNestedInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUpdateManyWithoutCreatedByNestedInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUpdateManyWithoutValidatedByNestedInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUpdateManyWithoutRecordedByNestedInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
   }
 
   export type UserUncheckedUpdateWithoutExecutionScheduleRevisionsInput = {
@@ -91769,6 +105376,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutVoidedByNestedInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutRecordedByNestedInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutVoidedByNestedInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUncheckedUpdateManyWithoutCreatedByNestedInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUncheckedUpdateManyWithoutValidatedByNestedInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedUpdateManyWithoutRecordedByNestedInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
   }
 
   export type ExecutionTaskCreateWithoutEvidenceInput = {
@@ -91911,6 +105524,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutVoidedByInput
     recordedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutRecordedByInput
     voidedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutVoidedByInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotCreateNestedManyWithoutCreatedByInput
+    createdPredictiveModelVersions?: PredictiveModelVersionCreateNestedManyWithoutCreatedByInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionCreateNestedManyWithoutValidatedByInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationCreateNestedManyWithoutRecordedByInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
   }
 
   export type UserUncheckedCreateWithoutSubmittedExecutionEvidenceInput = {
@@ -91960,6 +105579,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutVoidedByInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutRecordedByInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutVoidedByInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUncheckedCreateNestedManyWithoutCreatedByInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUncheckedCreateNestedManyWithoutValidatedByInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedCreateNestedManyWithoutRecordedByInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
   }
 
   export type UserCreateOrConnectWithoutSubmittedExecutionEvidenceInput = {
@@ -92124,6 +105749,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutVoidedByNestedInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutRecordedByNestedInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutVoidedByNestedInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUpdateManyWithoutCreatedByNestedInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUpdateManyWithoutValidatedByNestedInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUpdateManyWithoutRecordedByNestedInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSubmittedExecutionEvidenceInput = {
@@ -92173,6 +105804,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutVoidedByNestedInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutRecordedByNestedInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutVoidedByNestedInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUncheckedUpdateManyWithoutCreatedByNestedInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUncheckedUpdateManyWithoutValidatedByNestedInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedUpdateManyWithoutRecordedByNestedInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
   }
 
   export type CaseCreateWithoutClosureInput = {
@@ -92332,6 +105969,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutVoidedByInput
     recordedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutRecordedByInput
     voidedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutVoidedByInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotCreateNestedManyWithoutCreatedByInput
+    createdPredictiveModelVersions?: PredictiveModelVersionCreateNestedManyWithoutCreatedByInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionCreateNestedManyWithoutValidatedByInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationCreateNestedManyWithoutRecordedByInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
   }
 
   export type UserUncheckedCreateWithoutClosedCasesInput = {
@@ -92381,6 +106024,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutVoidedByInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutRecordedByInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutVoidedByInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUncheckedCreateNestedManyWithoutCreatedByInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUncheckedCreateNestedManyWithoutValidatedByInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedCreateNestedManyWithoutRecordedByInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
   }
 
   export type UserCreateOrConnectWithoutClosedCasesInput = {
@@ -92613,6 +106262,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutVoidedByNestedInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutRecordedByNestedInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutVoidedByNestedInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUpdateManyWithoutCreatedByNestedInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUpdateManyWithoutValidatedByNestedInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUpdateManyWithoutRecordedByNestedInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
   }
 
   export type UserUncheckedUpdateWithoutClosedCasesInput = {
@@ -92662,6 +106317,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutVoidedByNestedInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutRecordedByNestedInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutVoidedByNestedInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUncheckedUpdateManyWithoutCreatedByNestedInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUncheckedUpdateManyWithoutValidatedByNestedInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedUpdateManyWithoutRecordedByNestedInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
   }
 
   export type ApprovalAuthorityUpsertWithoutCaseClosuresInput = {
@@ -92955,6 +106616,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutVoidedByNestedInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutRecordedByNestedInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutVoidedByNestedInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUpdateManyWithoutCreatedByNestedInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUpdateManyWithoutValidatedByNestedInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUpdateManyWithoutRecordedByNestedInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
   }
 
   export type UserUncheckedUpdateWithoutDepartmentInput = {
@@ -93004,6 +106671,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutVoidedByNestedInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutRecordedByNestedInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutVoidedByNestedInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUncheckedUpdateManyWithoutCreatedByNestedInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUncheckedUpdateManyWithoutValidatedByNestedInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedUpdateManyWithoutRecordedByNestedInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
   }
 
   export type UserUncheckedUpdateManyWithoutDepartmentInput = {
@@ -93840,6 +107513,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutVoidedByNestedInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutRecordedByNestedInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutVoidedByNestedInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUpdateManyWithoutCreatedByNestedInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUpdateManyWithoutValidatedByNestedInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUpdateManyWithoutRecordedByNestedInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
   }
 
   export type UserUncheckedUpdateWithoutJurisdictionInput = {
@@ -93889,6 +107568,12 @@ export namespace Prisma {
     voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutVoidedByNestedInput
     recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutRecordedByNestedInput
     voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutVoidedByNestedInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUncheckedUpdateManyWithoutCreatedByNestedInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUncheckedUpdateManyWithoutValidatedByNestedInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedUpdateManyWithoutRecordedByNestedInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
   }
 
   export type UserUncheckedUpdateManyWithoutJurisdictionInput = {
@@ -95157,6 +108842,122 @@ export namespace Prisma {
     voidedAt?: Date | string | null
     voidReason?: string | null
     replacementOutcomeId?: string | null
+  }
+
+  export type PredictiveDatasetSnapshotCreateManyCreatedByInput = {
+    id?: string
+    datasetContractVersion: string
+    targetType: $Enums.PredictiveTargetType
+    featureContractVersion: string
+    outcomeContractVersion: string
+    departmentId?: string | null
+    jurisdictionId?: string | null
+    includedProvenance: JsonNullValueInput | InputJsonValue
+    sampleCount: number
+    classBalance: JsonNullValueInput | InputJsonValue
+    periodStart?: Date | string | null
+    periodEnd?: Date | string | null
+    sampleIdentities: JsonNullValueInput | InputJsonValue
+    datasetFingerprint: string
+    createdAt?: Date | string
+  }
+
+  export type PredictiveModelVersionCreateManyCreatedByInput = {
+    id?: string
+    modelName: string
+    modelVersion: string
+    targetType: $Enums.PredictiveTargetType
+    deploymentSlot: string
+    intendedUse: string
+    forbiddenUse: string
+    featureContractVersion: string
+    outcomeContractVersion: string
+    datasetSnapshotId: string
+    trainingCodeVersion: string
+    artifactReference: string
+    artifactDigest: string
+    artifactFormat: string
+    artifactSizeBytes?: bigint | number | null
+    trainingTimestamp: Date | string
+    lifecycleStatus?: $Enums.PredictiveModelLifecycleStatus
+    createdAt?: Date | string
+    validatedById?: string | null
+    validatedAt?: Date | string | null
+  }
+
+  export type PredictiveModelVersionCreateManyValidatedByInput = {
+    id?: string
+    modelName: string
+    modelVersion: string
+    targetType: $Enums.PredictiveTargetType
+    deploymentSlot: string
+    intendedUse: string
+    forbiddenUse: string
+    featureContractVersion: string
+    outcomeContractVersion: string
+    datasetSnapshotId: string
+    trainingCodeVersion: string
+    artifactReference: string
+    artifactDigest: string
+    artifactFormat: string
+    artifactSizeBytes?: bigint | number | null
+    trainingTimestamp: Date | string
+    lifecycleStatus?: $Enums.PredictiveModelLifecycleStatus
+    createdById: string
+    createdAt?: Date | string
+    validatedAt?: Date | string | null
+  }
+
+  export type PredictiveModelEvaluationCreateManyRecordedByInput = {
+    id?: string
+    modelVersionId: string
+    datasetSnapshotId: string
+    evaluationContractVersion: string
+    splitStrategy: string
+    evaluationPeriodStart: Date | string
+    evaluationPeriodEnd: Date | string
+    testSampleCount: number
+    lateCount: number
+    onTimeCount: number
+    truePositiveCount: number
+    trueNegativeCount: number
+    falsePositiveCount: number
+    falseNegativeCount: number
+    precision: number
+    recall: number
+    f1: number
+    prAuc: number
+    calibrationError: number
+    falseNegativeRate: number
+    baselineEvidence: JsonNullValueInput | InputJsonValue
+    subgroupMetricsReference?: NullableJsonNullValueInput | InputJsonValue
+    featureDistributionReference?: NullableJsonNullValueInput | InputJsonValue
+    missingnessReference?: NullableJsonNullValueInput | InputJsonValue
+    evaluationArtifactReference: string
+    evaluationFingerprint: string
+    recordedAt?: Date | string
+  }
+
+  export type PredictiveModelApprovalCreateManyApprovedByInput = {
+    id?: string
+    modelVersionId: string
+    decision: $Enums.PredictiveModelApprovalDecision
+    reason: string
+    restrictions?: NullableJsonNullValueInput | InputJsonValue
+    reviewDueAt?: Date | string | null
+    approvalExpiresAt?: Date | string | null
+    decidedAt?: Date | string
+  }
+
+  export type PredictiveModelLifecycleEventCreateManyActorInput = {
+    id?: string
+    modelVersionId: string
+    action: $Enums.PredictiveModelLifecycleAction
+    fromStatus?: $Enums.PredictiveModelLifecycleStatus | null
+    toStatus: $Enums.PredictiveModelLifecycleStatus
+    reason: string
+    relatedModelVersionId?: string | null
+    occurredAt?: Date | string
   }
 
   export type InspectionUpdateWithoutInspectorInput = {
@@ -97413,6 +111214,370 @@ export namespace Prisma {
     voidedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     voidReason?: NullableStringFieldUpdateOperationsInput | string | null
     replacementOutcomeId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type PredictiveDatasetSnapshotUpdateWithoutCreatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    datasetContractVersion?: StringFieldUpdateOperationsInput | string
+    targetType?: EnumPredictiveTargetTypeFieldUpdateOperationsInput | $Enums.PredictiveTargetType
+    featureContractVersion?: StringFieldUpdateOperationsInput | string
+    outcomeContractVersion?: StringFieldUpdateOperationsInput | string
+    departmentId?: NullableStringFieldUpdateOperationsInput | string | null
+    jurisdictionId?: NullableStringFieldUpdateOperationsInput | string | null
+    includedProvenance?: JsonNullValueInput | InputJsonValue
+    sampleCount?: IntFieldUpdateOperationsInput | number
+    classBalance?: JsonNullValueInput | InputJsonValue
+    periodStart?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    periodEnd?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    sampleIdentities?: JsonNullValueInput | InputJsonValue
+    datasetFingerprint?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    modelVersions?: PredictiveModelVersionUpdateManyWithoutDatasetSnapshotNestedInput
+    evaluations?: PredictiveModelEvaluationUpdateManyWithoutDatasetSnapshotNestedInput
+  }
+
+  export type PredictiveDatasetSnapshotUncheckedUpdateWithoutCreatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    datasetContractVersion?: StringFieldUpdateOperationsInput | string
+    targetType?: EnumPredictiveTargetTypeFieldUpdateOperationsInput | $Enums.PredictiveTargetType
+    featureContractVersion?: StringFieldUpdateOperationsInput | string
+    outcomeContractVersion?: StringFieldUpdateOperationsInput | string
+    departmentId?: NullableStringFieldUpdateOperationsInput | string | null
+    jurisdictionId?: NullableStringFieldUpdateOperationsInput | string | null
+    includedProvenance?: JsonNullValueInput | InputJsonValue
+    sampleCount?: IntFieldUpdateOperationsInput | number
+    classBalance?: JsonNullValueInput | InputJsonValue
+    periodStart?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    periodEnd?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    sampleIdentities?: JsonNullValueInput | InputJsonValue
+    datasetFingerprint?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    modelVersions?: PredictiveModelVersionUncheckedUpdateManyWithoutDatasetSnapshotNestedInput
+    evaluations?: PredictiveModelEvaluationUncheckedUpdateManyWithoutDatasetSnapshotNestedInput
+  }
+
+  export type PredictiveDatasetSnapshotUncheckedUpdateManyWithoutCreatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    datasetContractVersion?: StringFieldUpdateOperationsInput | string
+    targetType?: EnumPredictiveTargetTypeFieldUpdateOperationsInput | $Enums.PredictiveTargetType
+    featureContractVersion?: StringFieldUpdateOperationsInput | string
+    outcomeContractVersion?: StringFieldUpdateOperationsInput | string
+    departmentId?: NullableStringFieldUpdateOperationsInput | string | null
+    jurisdictionId?: NullableStringFieldUpdateOperationsInput | string | null
+    includedProvenance?: JsonNullValueInput | InputJsonValue
+    sampleCount?: IntFieldUpdateOperationsInput | number
+    classBalance?: JsonNullValueInput | InputJsonValue
+    periodStart?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    periodEnd?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    sampleIdentities?: JsonNullValueInput | InputJsonValue
+    datasetFingerprint?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PredictiveModelVersionUpdateWithoutCreatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    modelName?: StringFieldUpdateOperationsInput | string
+    modelVersion?: StringFieldUpdateOperationsInput | string
+    targetType?: EnumPredictiveTargetTypeFieldUpdateOperationsInput | $Enums.PredictiveTargetType
+    deploymentSlot?: StringFieldUpdateOperationsInput | string
+    intendedUse?: StringFieldUpdateOperationsInput | string
+    forbiddenUse?: StringFieldUpdateOperationsInput | string
+    featureContractVersion?: StringFieldUpdateOperationsInput | string
+    outcomeContractVersion?: StringFieldUpdateOperationsInput | string
+    trainingCodeVersion?: StringFieldUpdateOperationsInput | string
+    artifactReference?: StringFieldUpdateOperationsInput | string
+    artifactDigest?: StringFieldUpdateOperationsInput | string
+    artifactFormat?: StringFieldUpdateOperationsInput | string
+    artifactSizeBytes?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    trainingTimestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    lifecycleStatus?: EnumPredictiveModelLifecycleStatusFieldUpdateOperationsInput | $Enums.PredictiveModelLifecycleStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    validatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    datasetSnapshot?: PredictiveDatasetSnapshotUpdateOneRequiredWithoutModelVersionsNestedInput
+    validatedBy?: UserUpdateOneWithoutValidatedPredictiveModelVersionsNestedInput
+    evaluations?: PredictiveModelEvaluationUpdateManyWithoutModelVersionNestedInput
+    approvals?: PredictiveModelApprovalUpdateManyWithoutModelVersionNestedInput
+    lifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutModelVersionNestedInput
+  }
+
+  export type PredictiveModelVersionUncheckedUpdateWithoutCreatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    modelName?: StringFieldUpdateOperationsInput | string
+    modelVersion?: StringFieldUpdateOperationsInput | string
+    targetType?: EnumPredictiveTargetTypeFieldUpdateOperationsInput | $Enums.PredictiveTargetType
+    deploymentSlot?: StringFieldUpdateOperationsInput | string
+    intendedUse?: StringFieldUpdateOperationsInput | string
+    forbiddenUse?: StringFieldUpdateOperationsInput | string
+    featureContractVersion?: StringFieldUpdateOperationsInput | string
+    outcomeContractVersion?: StringFieldUpdateOperationsInput | string
+    datasetSnapshotId?: StringFieldUpdateOperationsInput | string
+    trainingCodeVersion?: StringFieldUpdateOperationsInput | string
+    artifactReference?: StringFieldUpdateOperationsInput | string
+    artifactDigest?: StringFieldUpdateOperationsInput | string
+    artifactFormat?: StringFieldUpdateOperationsInput | string
+    artifactSizeBytes?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    trainingTimestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    lifecycleStatus?: EnumPredictiveModelLifecycleStatusFieldUpdateOperationsInput | $Enums.PredictiveModelLifecycleStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    validatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    validatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    evaluations?: PredictiveModelEvaluationUncheckedUpdateManyWithoutModelVersionNestedInput
+    approvals?: PredictiveModelApprovalUncheckedUpdateManyWithoutModelVersionNestedInput
+    lifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutModelVersionNestedInput
+  }
+
+  export type PredictiveModelVersionUncheckedUpdateManyWithoutCreatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    modelName?: StringFieldUpdateOperationsInput | string
+    modelVersion?: StringFieldUpdateOperationsInput | string
+    targetType?: EnumPredictiveTargetTypeFieldUpdateOperationsInput | $Enums.PredictiveTargetType
+    deploymentSlot?: StringFieldUpdateOperationsInput | string
+    intendedUse?: StringFieldUpdateOperationsInput | string
+    forbiddenUse?: StringFieldUpdateOperationsInput | string
+    featureContractVersion?: StringFieldUpdateOperationsInput | string
+    outcomeContractVersion?: StringFieldUpdateOperationsInput | string
+    datasetSnapshotId?: StringFieldUpdateOperationsInput | string
+    trainingCodeVersion?: StringFieldUpdateOperationsInput | string
+    artifactReference?: StringFieldUpdateOperationsInput | string
+    artifactDigest?: StringFieldUpdateOperationsInput | string
+    artifactFormat?: StringFieldUpdateOperationsInput | string
+    artifactSizeBytes?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    trainingTimestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    lifecycleStatus?: EnumPredictiveModelLifecycleStatusFieldUpdateOperationsInput | $Enums.PredictiveModelLifecycleStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    validatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    validatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type PredictiveModelVersionUpdateWithoutValidatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    modelName?: StringFieldUpdateOperationsInput | string
+    modelVersion?: StringFieldUpdateOperationsInput | string
+    targetType?: EnumPredictiveTargetTypeFieldUpdateOperationsInput | $Enums.PredictiveTargetType
+    deploymentSlot?: StringFieldUpdateOperationsInput | string
+    intendedUse?: StringFieldUpdateOperationsInput | string
+    forbiddenUse?: StringFieldUpdateOperationsInput | string
+    featureContractVersion?: StringFieldUpdateOperationsInput | string
+    outcomeContractVersion?: StringFieldUpdateOperationsInput | string
+    trainingCodeVersion?: StringFieldUpdateOperationsInput | string
+    artifactReference?: StringFieldUpdateOperationsInput | string
+    artifactDigest?: StringFieldUpdateOperationsInput | string
+    artifactFormat?: StringFieldUpdateOperationsInput | string
+    artifactSizeBytes?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    trainingTimestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    lifecycleStatus?: EnumPredictiveModelLifecycleStatusFieldUpdateOperationsInput | $Enums.PredictiveModelLifecycleStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    validatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    datasetSnapshot?: PredictiveDatasetSnapshotUpdateOneRequiredWithoutModelVersionsNestedInput
+    createdBy?: UserUpdateOneRequiredWithoutCreatedPredictiveModelVersionsNestedInput
+    evaluations?: PredictiveModelEvaluationUpdateManyWithoutModelVersionNestedInput
+    approvals?: PredictiveModelApprovalUpdateManyWithoutModelVersionNestedInput
+    lifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutModelVersionNestedInput
+  }
+
+  export type PredictiveModelVersionUncheckedUpdateWithoutValidatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    modelName?: StringFieldUpdateOperationsInput | string
+    modelVersion?: StringFieldUpdateOperationsInput | string
+    targetType?: EnumPredictiveTargetTypeFieldUpdateOperationsInput | $Enums.PredictiveTargetType
+    deploymentSlot?: StringFieldUpdateOperationsInput | string
+    intendedUse?: StringFieldUpdateOperationsInput | string
+    forbiddenUse?: StringFieldUpdateOperationsInput | string
+    featureContractVersion?: StringFieldUpdateOperationsInput | string
+    outcomeContractVersion?: StringFieldUpdateOperationsInput | string
+    datasetSnapshotId?: StringFieldUpdateOperationsInput | string
+    trainingCodeVersion?: StringFieldUpdateOperationsInput | string
+    artifactReference?: StringFieldUpdateOperationsInput | string
+    artifactDigest?: StringFieldUpdateOperationsInput | string
+    artifactFormat?: StringFieldUpdateOperationsInput | string
+    artifactSizeBytes?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    trainingTimestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    lifecycleStatus?: EnumPredictiveModelLifecycleStatusFieldUpdateOperationsInput | $Enums.PredictiveModelLifecycleStatus
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    validatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    evaluations?: PredictiveModelEvaluationUncheckedUpdateManyWithoutModelVersionNestedInput
+    approvals?: PredictiveModelApprovalUncheckedUpdateManyWithoutModelVersionNestedInput
+    lifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutModelVersionNestedInput
+  }
+
+  export type PredictiveModelVersionUncheckedUpdateManyWithoutValidatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    modelName?: StringFieldUpdateOperationsInput | string
+    modelVersion?: StringFieldUpdateOperationsInput | string
+    targetType?: EnumPredictiveTargetTypeFieldUpdateOperationsInput | $Enums.PredictiveTargetType
+    deploymentSlot?: StringFieldUpdateOperationsInput | string
+    intendedUse?: StringFieldUpdateOperationsInput | string
+    forbiddenUse?: StringFieldUpdateOperationsInput | string
+    featureContractVersion?: StringFieldUpdateOperationsInput | string
+    outcomeContractVersion?: StringFieldUpdateOperationsInput | string
+    datasetSnapshotId?: StringFieldUpdateOperationsInput | string
+    trainingCodeVersion?: StringFieldUpdateOperationsInput | string
+    artifactReference?: StringFieldUpdateOperationsInput | string
+    artifactDigest?: StringFieldUpdateOperationsInput | string
+    artifactFormat?: StringFieldUpdateOperationsInput | string
+    artifactSizeBytes?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    trainingTimestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    lifecycleStatus?: EnumPredictiveModelLifecycleStatusFieldUpdateOperationsInput | $Enums.PredictiveModelLifecycleStatus
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    validatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type PredictiveModelEvaluationUpdateWithoutRecordedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    evaluationContractVersion?: StringFieldUpdateOperationsInput | string
+    splitStrategy?: StringFieldUpdateOperationsInput | string
+    evaluationPeriodStart?: DateTimeFieldUpdateOperationsInput | Date | string
+    evaluationPeriodEnd?: DateTimeFieldUpdateOperationsInput | Date | string
+    testSampleCount?: IntFieldUpdateOperationsInput | number
+    lateCount?: IntFieldUpdateOperationsInput | number
+    onTimeCount?: IntFieldUpdateOperationsInput | number
+    truePositiveCount?: IntFieldUpdateOperationsInput | number
+    trueNegativeCount?: IntFieldUpdateOperationsInput | number
+    falsePositiveCount?: IntFieldUpdateOperationsInput | number
+    falseNegativeCount?: IntFieldUpdateOperationsInput | number
+    precision?: FloatFieldUpdateOperationsInput | number
+    recall?: FloatFieldUpdateOperationsInput | number
+    f1?: FloatFieldUpdateOperationsInput | number
+    prAuc?: FloatFieldUpdateOperationsInput | number
+    calibrationError?: FloatFieldUpdateOperationsInput | number
+    falseNegativeRate?: FloatFieldUpdateOperationsInput | number
+    baselineEvidence?: JsonNullValueInput | InputJsonValue
+    subgroupMetricsReference?: NullableJsonNullValueInput | InputJsonValue
+    featureDistributionReference?: NullableJsonNullValueInput | InputJsonValue
+    missingnessReference?: NullableJsonNullValueInput | InputJsonValue
+    evaluationArtifactReference?: StringFieldUpdateOperationsInput | string
+    evaluationFingerprint?: StringFieldUpdateOperationsInput | string
+    recordedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    modelVersion?: PredictiveModelVersionUpdateOneRequiredWithoutEvaluationsNestedInput
+    datasetSnapshot?: PredictiveDatasetSnapshotUpdateOneRequiredWithoutEvaluationsNestedInput
+  }
+
+  export type PredictiveModelEvaluationUncheckedUpdateWithoutRecordedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    modelVersionId?: StringFieldUpdateOperationsInput | string
+    datasetSnapshotId?: StringFieldUpdateOperationsInput | string
+    evaluationContractVersion?: StringFieldUpdateOperationsInput | string
+    splitStrategy?: StringFieldUpdateOperationsInput | string
+    evaluationPeriodStart?: DateTimeFieldUpdateOperationsInput | Date | string
+    evaluationPeriodEnd?: DateTimeFieldUpdateOperationsInput | Date | string
+    testSampleCount?: IntFieldUpdateOperationsInput | number
+    lateCount?: IntFieldUpdateOperationsInput | number
+    onTimeCount?: IntFieldUpdateOperationsInput | number
+    truePositiveCount?: IntFieldUpdateOperationsInput | number
+    trueNegativeCount?: IntFieldUpdateOperationsInput | number
+    falsePositiveCount?: IntFieldUpdateOperationsInput | number
+    falseNegativeCount?: IntFieldUpdateOperationsInput | number
+    precision?: FloatFieldUpdateOperationsInput | number
+    recall?: FloatFieldUpdateOperationsInput | number
+    f1?: FloatFieldUpdateOperationsInput | number
+    prAuc?: FloatFieldUpdateOperationsInput | number
+    calibrationError?: FloatFieldUpdateOperationsInput | number
+    falseNegativeRate?: FloatFieldUpdateOperationsInput | number
+    baselineEvidence?: JsonNullValueInput | InputJsonValue
+    subgroupMetricsReference?: NullableJsonNullValueInput | InputJsonValue
+    featureDistributionReference?: NullableJsonNullValueInput | InputJsonValue
+    missingnessReference?: NullableJsonNullValueInput | InputJsonValue
+    evaluationArtifactReference?: StringFieldUpdateOperationsInput | string
+    evaluationFingerprint?: StringFieldUpdateOperationsInput | string
+    recordedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PredictiveModelEvaluationUncheckedUpdateManyWithoutRecordedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    modelVersionId?: StringFieldUpdateOperationsInput | string
+    datasetSnapshotId?: StringFieldUpdateOperationsInput | string
+    evaluationContractVersion?: StringFieldUpdateOperationsInput | string
+    splitStrategy?: StringFieldUpdateOperationsInput | string
+    evaluationPeriodStart?: DateTimeFieldUpdateOperationsInput | Date | string
+    evaluationPeriodEnd?: DateTimeFieldUpdateOperationsInput | Date | string
+    testSampleCount?: IntFieldUpdateOperationsInput | number
+    lateCount?: IntFieldUpdateOperationsInput | number
+    onTimeCount?: IntFieldUpdateOperationsInput | number
+    truePositiveCount?: IntFieldUpdateOperationsInput | number
+    trueNegativeCount?: IntFieldUpdateOperationsInput | number
+    falsePositiveCount?: IntFieldUpdateOperationsInput | number
+    falseNegativeCount?: IntFieldUpdateOperationsInput | number
+    precision?: FloatFieldUpdateOperationsInput | number
+    recall?: FloatFieldUpdateOperationsInput | number
+    f1?: FloatFieldUpdateOperationsInput | number
+    prAuc?: FloatFieldUpdateOperationsInput | number
+    calibrationError?: FloatFieldUpdateOperationsInput | number
+    falseNegativeRate?: FloatFieldUpdateOperationsInput | number
+    baselineEvidence?: JsonNullValueInput | InputJsonValue
+    subgroupMetricsReference?: NullableJsonNullValueInput | InputJsonValue
+    featureDistributionReference?: NullableJsonNullValueInput | InputJsonValue
+    missingnessReference?: NullableJsonNullValueInput | InputJsonValue
+    evaluationArtifactReference?: StringFieldUpdateOperationsInput | string
+    evaluationFingerprint?: StringFieldUpdateOperationsInput | string
+    recordedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PredictiveModelApprovalUpdateWithoutApprovedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    decision?: EnumPredictiveModelApprovalDecisionFieldUpdateOperationsInput | $Enums.PredictiveModelApprovalDecision
+    reason?: StringFieldUpdateOperationsInput | string
+    restrictions?: NullableJsonNullValueInput | InputJsonValue
+    reviewDueAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    decidedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    modelVersion?: PredictiveModelVersionUpdateOneRequiredWithoutApprovalsNestedInput
+  }
+
+  export type PredictiveModelApprovalUncheckedUpdateWithoutApprovedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    modelVersionId?: StringFieldUpdateOperationsInput | string
+    decision?: EnumPredictiveModelApprovalDecisionFieldUpdateOperationsInput | $Enums.PredictiveModelApprovalDecision
+    reason?: StringFieldUpdateOperationsInput | string
+    restrictions?: NullableJsonNullValueInput | InputJsonValue
+    reviewDueAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    decidedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    modelVersionId?: StringFieldUpdateOperationsInput | string
+    decision?: EnumPredictiveModelApprovalDecisionFieldUpdateOperationsInput | $Enums.PredictiveModelApprovalDecision
+    reason?: StringFieldUpdateOperationsInput | string
+    restrictions?: NullableJsonNullValueInput | InputJsonValue
+    reviewDueAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    decidedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PredictiveModelLifecycleEventUpdateWithoutActorInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    action?: EnumPredictiveModelLifecycleActionFieldUpdateOperationsInput | $Enums.PredictiveModelLifecycleAction
+    fromStatus?: NullableEnumPredictiveModelLifecycleStatusFieldUpdateOperationsInput | $Enums.PredictiveModelLifecycleStatus | null
+    toStatus?: EnumPredictiveModelLifecycleStatusFieldUpdateOperationsInput | $Enums.PredictiveModelLifecycleStatus
+    reason?: StringFieldUpdateOperationsInput | string
+    relatedModelVersionId?: NullableStringFieldUpdateOperationsInput | string | null
+    occurredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    modelVersion?: PredictiveModelVersionUpdateOneRequiredWithoutLifecycleEventsNestedInput
+  }
+
+  export type PredictiveModelLifecycleEventUncheckedUpdateWithoutActorInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    modelVersionId?: StringFieldUpdateOperationsInput | string
+    action?: EnumPredictiveModelLifecycleActionFieldUpdateOperationsInput | $Enums.PredictiveModelLifecycleAction
+    fromStatus?: NullableEnumPredictiveModelLifecycleStatusFieldUpdateOperationsInput | $Enums.PredictiveModelLifecycleStatus | null
+    toStatus?: EnumPredictiveModelLifecycleStatusFieldUpdateOperationsInput | $Enums.PredictiveModelLifecycleStatus
+    reason?: StringFieldUpdateOperationsInput | string
+    relatedModelVersionId?: NullableStringFieldUpdateOperationsInput | string | null
+    occurredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    modelVersionId?: StringFieldUpdateOperationsInput | string
+    action?: EnumPredictiveModelLifecycleActionFieldUpdateOperationsInput | $Enums.PredictiveModelLifecycleAction
+    fromStatus?: NullableEnumPredictiveModelLifecycleStatusFieldUpdateOperationsInput | $Enums.PredictiveModelLifecycleStatus | null
+    toStatus?: EnumPredictiveModelLifecycleStatusFieldUpdateOperationsInput | $Enums.PredictiveModelLifecycleStatus
+    reason?: StringFieldUpdateOperationsInput | string
+    relatedModelVersionId?: NullableStringFieldUpdateOperationsInput | string | null
+    occurredAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type CaseCreateManyAssetInput = {
@@ -100845,6 +115010,432 @@ export namespace Prisma {
     voidedById?: NullableStringFieldUpdateOperationsInput | string | null
     voidReason?: NullableStringFieldUpdateOperationsInput | string | null
     replacementOutcomeId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type PredictiveModelVersionCreateManyDatasetSnapshotInput = {
+    id?: string
+    modelName: string
+    modelVersion: string
+    targetType: $Enums.PredictiveTargetType
+    deploymentSlot: string
+    intendedUse: string
+    forbiddenUse: string
+    featureContractVersion: string
+    outcomeContractVersion: string
+    trainingCodeVersion: string
+    artifactReference: string
+    artifactDigest: string
+    artifactFormat: string
+    artifactSizeBytes?: bigint | number | null
+    trainingTimestamp: Date | string
+    lifecycleStatus?: $Enums.PredictiveModelLifecycleStatus
+    createdById: string
+    createdAt?: Date | string
+    validatedById?: string | null
+    validatedAt?: Date | string | null
+  }
+
+  export type PredictiveModelEvaluationCreateManyDatasetSnapshotInput = {
+    id?: string
+    modelVersionId: string
+    evaluationContractVersion: string
+    splitStrategy: string
+    evaluationPeriodStart: Date | string
+    evaluationPeriodEnd: Date | string
+    testSampleCount: number
+    lateCount: number
+    onTimeCount: number
+    truePositiveCount: number
+    trueNegativeCount: number
+    falsePositiveCount: number
+    falseNegativeCount: number
+    precision: number
+    recall: number
+    f1: number
+    prAuc: number
+    calibrationError: number
+    falseNegativeRate: number
+    baselineEvidence: JsonNullValueInput | InputJsonValue
+    subgroupMetricsReference?: NullableJsonNullValueInput | InputJsonValue
+    featureDistributionReference?: NullableJsonNullValueInput | InputJsonValue
+    missingnessReference?: NullableJsonNullValueInput | InputJsonValue
+    evaluationArtifactReference: string
+    evaluationFingerprint: string
+    recordedById: string
+    recordedAt?: Date | string
+  }
+
+  export type PredictiveModelVersionUpdateWithoutDatasetSnapshotInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    modelName?: StringFieldUpdateOperationsInput | string
+    modelVersion?: StringFieldUpdateOperationsInput | string
+    targetType?: EnumPredictiveTargetTypeFieldUpdateOperationsInput | $Enums.PredictiveTargetType
+    deploymentSlot?: StringFieldUpdateOperationsInput | string
+    intendedUse?: StringFieldUpdateOperationsInput | string
+    forbiddenUse?: StringFieldUpdateOperationsInput | string
+    featureContractVersion?: StringFieldUpdateOperationsInput | string
+    outcomeContractVersion?: StringFieldUpdateOperationsInput | string
+    trainingCodeVersion?: StringFieldUpdateOperationsInput | string
+    artifactReference?: StringFieldUpdateOperationsInput | string
+    artifactDigest?: StringFieldUpdateOperationsInput | string
+    artifactFormat?: StringFieldUpdateOperationsInput | string
+    artifactSizeBytes?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    trainingTimestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    lifecycleStatus?: EnumPredictiveModelLifecycleStatusFieldUpdateOperationsInput | $Enums.PredictiveModelLifecycleStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    validatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdBy?: UserUpdateOneRequiredWithoutCreatedPredictiveModelVersionsNestedInput
+    validatedBy?: UserUpdateOneWithoutValidatedPredictiveModelVersionsNestedInput
+    evaluations?: PredictiveModelEvaluationUpdateManyWithoutModelVersionNestedInput
+    approvals?: PredictiveModelApprovalUpdateManyWithoutModelVersionNestedInput
+    lifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutModelVersionNestedInput
+  }
+
+  export type PredictiveModelVersionUncheckedUpdateWithoutDatasetSnapshotInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    modelName?: StringFieldUpdateOperationsInput | string
+    modelVersion?: StringFieldUpdateOperationsInput | string
+    targetType?: EnumPredictiveTargetTypeFieldUpdateOperationsInput | $Enums.PredictiveTargetType
+    deploymentSlot?: StringFieldUpdateOperationsInput | string
+    intendedUse?: StringFieldUpdateOperationsInput | string
+    forbiddenUse?: StringFieldUpdateOperationsInput | string
+    featureContractVersion?: StringFieldUpdateOperationsInput | string
+    outcomeContractVersion?: StringFieldUpdateOperationsInput | string
+    trainingCodeVersion?: StringFieldUpdateOperationsInput | string
+    artifactReference?: StringFieldUpdateOperationsInput | string
+    artifactDigest?: StringFieldUpdateOperationsInput | string
+    artifactFormat?: StringFieldUpdateOperationsInput | string
+    artifactSizeBytes?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    trainingTimestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    lifecycleStatus?: EnumPredictiveModelLifecycleStatusFieldUpdateOperationsInput | $Enums.PredictiveModelLifecycleStatus
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    validatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    validatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    evaluations?: PredictiveModelEvaluationUncheckedUpdateManyWithoutModelVersionNestedInput
+    approvals?: PredictiveModelApprovalUncheckedUpdateManyWithoutModelVersionNestedInput
+    lifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutModelVersionNestedInput
+  }
+
+  export type PredictiveModelVersionUncheckedUpdateManyWithoutDatasetSnapshotInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    modelName?: StringFieldUpdateOperationsInput | string
+    modelVersion?: StringFieldUpdateOperationsInput | string
+    targetType?: EnumPredictiveTargetTypeFieldUpdateOperationsInput | $Enums.PredictiveTargetType
+    deploymentSlot?: StringFieldUpdateOperationsInput | string
+    intendedUse?: StringFieldUpdateOperationsInput | string
+    forbiddenUse?: StringFieldUpdateOperationsInput | string
+    featureContractVersion?: StringFieldUpdateOperationsInput | string
+    outcomeContractVersion?: StringFieldUpdateOperationsInput | string
+    trainingCodeVersion?: StringFieldUpdateOperationsInput | string
+    artifactReference?: StringFieldUpdateOperationsInput | string
+    artifactDigest?: StringFieldUpdateOperationsInput | string
+    artifactFormat?: StringFieldUpdateOperationsInput | string
+    artifactSizeBytes?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    trainingTimestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    lifecycleStatus?: EnumPredictiveModelLifecycleStatusFieldUpdateOperationsInput | $Enums.PredictiveModelLifecycleStatus
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    validatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    validatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type PredictiveModelEvaluationUpdateWithoutDatasetSnapshotInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    evaluationContractVersion?: StringFieldUpdateOperationsInput | string
+    splitStrategy?: StringFieldUpdateOperationsInput | string
+    evaluationPeriodStart?: DateTimeFieldUpdateOperationsInput | Date | string
+    evaluationPeriodEnd?: DateTimeFieldUpdateOperationsInput | Date | string
+    testSampleCount?: IntFieldUpdateOperationsInput | number
+    lateCount?: IntFieldUpdateOperationsInput | number
+    onTimeCount?: IntFieldUpdateOperationsInput | number
+    truePositiveCount?: IntFieldUpdateOperationsInput | number
+    trueNegativeCount?: IntFieldUpdateOperationsInput | number
+    falsePositiveCount?: IntFieldUpdateOperationsInput | number
+    falseNegativeCount?: IntFieldUpdateOperationsInput | number
+    precision?: FloatFieldUpdateOperationsInput | number
+    recall?: FloatFieldUpdateOperationsInput | number
+    f1?: FloatFieldUpdateOperationsInput | number
+    prAuc?: FloatFieldUpdateOperationsInput | number
+    calibrationError?: FloatFieldUpdateOperationsInput | number
+    falseNegativeRate?: FloatFieldUpdateOperationsInput | number
+    baselineEvidence?: JsonNullValueInput | InputJsonValue
+    subgroupMetricsReference?: NullableJsonNullValueInput | InputJsonValue
+    featureDistributionReference?: NullableJsonNullValueInput | InputJsonValue
+    missingnessReference?: NullableJsonNullValueInput | InputJsonValue
+    evaluationArtifactReference?: StringFieldUpdateOperationsInput | string
+    evaluationFingerprint?: StringFieldUpdateOperationsInput | string
+    recordedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    modelVersion?: PredictiveModelVersionUpdateOneRequiredWithoutEvaluationsNestedInput
+    recordedBy?: UserUpdateOneRequiredWithoutRecordedPredictiveEvaluationsNestedInput
+  }
+
+  export type PredictiveModelEvaluationUncheckedUpdateWithoutDatasetSnapshotInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    modelVersionId?: StringFieldUpdateOperationsInput | string
+    evaluationContractVersion?: StringFieldUpdateOperationsInput | string
+    splitStrategy?: StringFieldUpdateOperationsInput | string
+    evaluationPeriodStart?: DateTimeFieldUpdateOperationsInput | Date | string
+    evaluationPeriodEnd?: DateTimeFieldUpdateOperationsInput | Date | string
+    testSampleCount?: IntFieldUpdateOperationsInput | number
+    lateCount?: IntFieldUpdateOperationsInput | number
+    onTimeCount?: IntFieldUpdateOperationsInput | number
+    truePositiveCount?: IntFieldUpdateOperationsInput | number
+    trueNegativeCount?: IntFieldUpdateOperationsInput | number
+    falsePositiveCount?: IntFieldUpdateOperationsInput | number
+    falseNegativeCount?: IntFieldUpdateOperationsInput | number
+    precision?: FloatFieldUpdateOperationsInput | number
+    recall?: FloatFieldUpdateOperationsInput | number
+    f1?: FloatFieldUpdateOperationsInput | number
+    prAuc?: FloatFieldUpdateOperationsInput | number
+    calibrationError?: FloatFieldUpdateOperationsInput | number
+    falseNegativeRate?: FloatFieldUpdateOperationsInput | number
+    baselineEvidence?: JsonNullValueInput | InputJsonValue
+    subgroupMetricsReference?: NullableJsonNullValueInput | InputJsonValue
+    featureDistributionReference?: NullableJsonNullValueInput | InputJsonValue
+    missingnessReference?: NullableJsonNullValueInput | InputJsonValue
+    evaluationArtifactReference?: StringFieldUpdateOperationsInput | string
+    evaluationFingerprint?: StringFieldUpdateOperationsInput | string
+    recordedById?: StringFieldUpdateOperationsInput | string
+    recordedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PredictiveModelEvaluationUncheckedUpdateManyWithoutDatasetSnapshotInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    modelVersionId?: StringFieldUpdateOperationsInput | string
+    evaluationContractVersion?: StringFieldUpdateOperationsInput | string
+    splitStrategy?: StringFieldUpdateOperationsInput | string
+    evaluationPeriodStart?: DateTimeFieldUpdateOperationsInput | Date | string
+    evaluationPeriodEnd?: DateTimeFieldUpdateOperationsInput | Date | string
+    testSampleCount?: IntFieldUpdateOperationsInput | number
+    lateCount?: IntFieldUpdateOperationsInput | number
+    onTimeCount?: IntFieldUpdateOperationsInput | number
+    truePositiveCount?: IntFieldUpdateOperationsInput | number
+    trueNegativeCount?: IntFieldUpdateOperationsInput | number
+    falsePositiveCount?: IntFieldUpdateOperationsInput | number
+    falseNegativeCount?: IntFieldUpdateOperationsInput | number
+    precision?: FloatFieldUpdateOperationsInput | number
+    recall?: FloatFieldUpdateOperationsInput | number
+    f1?: FloatFieldUpdateOperationsInput | number
+    prAuc?: FloatFieldUpdateOperationsInput | number
+    calibrationError?: FloatFieldUpdateOperationsInput | number
+    falseNegativeRate?: FloatFieldUpdateOperationsInput | number
+    baselineEvidence?: JsonNullValueInput | InputJsonValue
+    subgroupMetricsReference?: NullableJsonNullValueInput | InputJsonValue
+    featureDistributionReference?: NullableJsonNullValueInput | InputJsonValue
+    missingnessReference?: NullableJsonNullValueInput | InputJsonValue
+    evaluationArtifactReference?: StringFieldUpdateOperationsInput | string
+    evaluationFingerprint?: StringFieldUpdateOperationsInput | string
+    recordedById?: StringFieldUpdateOperationsInput | string
+    recordedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PredictiveModelEvaluationCreateManyModelVersionInput = {
+    id?: string
+    datasetSnapshotId: string
+    evaluationContractVersion: string
+    splitStrategy: string
+    evaluationPeriodStart: Date | string
+    evaluationPeriodEnd: Date | string
+    testSampleCount: number
+    lateCount: number
+    onTimeCount: number
+    truePositiveCount: number
+    trueNegativeCount: number
+    falsePositiveCount: number
+    falseNegativeCount: number
+    precision: number
+    recall: number
+    f1: number
+    prAuc: number
+    calibrationError: number
+    falseNegativeRate: number
+    baselineEvidence: JsonNullValueInput | InputJsonValue
+    subgroupMetricsReference?: NullableJsonNullValueInput | InputJsonValue
+    featureDistributionReference?: NullableJsonNullValueInput | InputJsonValue
+    missingnessReference?: NullableJsonNullValueInput | InputJsonValue
+    evaluationArtifactReference: string
+    evaluationFingerprint: string
+    recordedById: string
+    recordedAt?: Date | string
+  }
+
+  export type PredictiveModelApprovalCreateManyModelVersionInput = {
+    id?: string
+    decision: $Enums.PredictiveModelApprovalDecision
+    reason: string
+    restrictions?: NullableJsonNullValueInput | InputJsonValue
+    reviewDueAt?: Date | string | null
+    approvalExpiresAt?: Date | string | null
+    approvedById: string
+    decidedAt?: Date | string
+  }
+
+  export type PredictiveModelLifecycleEventCreateManyModelVersionInput = {
+    id?: string
+    action: $Enums.PredictiveModelLifecycleAction
+    fromStatus?: $Enums.PredictiveModelLifecycleStatus | null
+    toStatus: $Enums.PredictiveModelLifecycleStatus
+    reason: string
+    relatedModelVersionId?: string | null
+    actorId: string
+    occurredAt?: Date | string
+  }
+
+  export type PredictiveModelEvaluationUpdateWithoutModelVersionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    evaluationContractVersion?: StringFieldUpdateOperationsInput | string
+    splitStrategy?: StringFieldUpdateOperationsInput | string
+    evaluationPeriodStart?: DateTimeFieldUpdateOperationsInput | Date | string
+    evaluationPeriodEnd?: DateTimeFieldUpdateOperationsInput | Date | string
+    testSampleCount?: IntFieldUpdateOperationsInput | number
+    lateCount?: IntFieldUpdateOperationsInput | number
+    onTimeCount?: IntFieldUpdateOperationsInput | number
+    truePositiveCount?: IntFieldUpdateOperationsInput | number
+    trueNegativeCount?: IntFieldUpdateOperationsInput | number
+    falsePositiveCount?: IntFieldUpdateOperationsInput | number
+    falseNegativeCount?: IntFieldUpdateOperationsInput | number
+    precision?: FloatFieldUpdateOperationsInput | number
+    recall?: FloatFieldUpdateOperationsInput | number
+    f1?: FloatFieldUpdateOperationsInput | number
+    prAuc?: FloatFieldUpdateOperationsInput | number
+    calibrationError?: FloatFieldUpdateOperationsInput | number
+    falseNegativeRate?: FloatFieldUpdateOperationsInput | number
+    baselineEvidence?: JsonNullValueInput | InputJsonValue
+    subgroupMetricsReference?: NullableJsonNullValueInput | InputJsonValue
+    featureDistributionReference?: NullableJsonNullValueInput | InputJsonValue
+    missingnessReference?: NullableJsonNullValueInput | InputJsonValue
+    evaluationArtifactReference?: StringFieldUpdateOperationsInput | string
+    evaluationFingerprint?: StringFieldUpdateOperationsInput | string
+    recordedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    datasetSnapshot?: PredictiveDatasetSnapshotUpdateOneRequiredWithoutEvaluationsNestedInput
+    recordedBy?: UserUpdateOneRequiredWithoutRecordedPredictiveEvaluationsNestedInput
+  }
+
+  export type PredictiveModelEvaluationUncheckedUpdateWithoutModelVersionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    datasetSnapshotId?: StringFieldUpdateOperationsInput | string
+    evaluationContractVersion?: StringFieldUpdateOperationsInput | string
+    splitStrategy?: StringFieldUpdateOperationsInput | string
+    evaluationPeriodStart?: DateTimeFieldUpdateOperationsInput | Date | string
+    evaluationPeriodEnd?: DateTimeFieldUpdateOperationsInput | Date | string
+    testSampleCount?: IntFieldUpdateOperationsInput | number
+    lateCount?: IntFieldUpdateOperationsInput | number
+    onTimeCount?: IntFieldUpdateOperationsInput | number
+    truePositiveCount?: IntFieldUpdateOperationsInput | number
+    trueNegativeCount?: IntFieldUpdateOperationsInput | number
+    falsePositiveCount?: IntFieldUpdateOperationsInput | number
+    falseNegativeCount?: IntFieldUpdateOperationsInput | number
+    precision?: FloatFieldUpdateOperationsInput | number
+    recall?: FloatFieldUpdateOperationsInput | number
+    f1?: FloatFieldUpdateOperationsInput | number
+    prAuc?: FloatFieldUpdateOperationsInput | number
+    calibrationError?: FloatFieldUpdateOperationsInput | number
+    falseNegativeRate?: FloatFieldUpdateOperationsInput | number
+    baselineEvidence?: JsonNullValueInput | InputJsonValue
+    subgroupMetricsReference?: NullableJsonNullValueInput | InputJsonValue
+    featureDistributionReference?: NullableJsonNullValueInput | InputJsonValue
+    missingnessReference?: NullableJsonNullValueInput | InputJsonValue
+    evaluationArtifactReference?: StringFieldUpdateOperationsInput | string
+    evaluationFingerprint?: StringFieldUpdateOperationsInput | string
+    recordedById?: StringFieldUpdateOperationsInput | string
+    recordedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PredictiveModelEvaluationUncheckedUpdateManyWithoutModelVersionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    datasetSnapshotId?: StringFieldUpdateOperationsInput | string
+    evaluationContractVersion?: StringFieldUpdateOperationsInput | string
+    splitStrategy?: StringFieldUpdateOperationsInput | string
+    evaluationPeriodStart?: DateTimeFieldUpdateOperationsInput | Date | string
+    evaluationPeriodEnd?: DateTimeFieldUpdateOperationsInput | Date | string
+    testSampleCount?: IntFieldUpdateOperationsInput | number
+    lateCount?: IntFieldUpdateOperationsInput | number
+    onTimeCount?: IntFieldUpdateOperationsInput | number
+    truePositiveCount?: IntFieldUpdateOperationsInput | number
+    trueNegativeCount?: IntFieldUpdateOperationsInput | number
+    falsePositiveCount?: IntFieldUpdateOperationsInput | number
+    falseNegativeCount?: IntFieldUpdateOperationsInput | number
+    precision?: FloatFieldUpdateOperationsInput | number
+    recall?: FloatFieldUpdateOperationsInput | number
+    f1?: FloatFieldUpdateOperationsInput | number
+    prAuc?: FloatFieldUpdateOperationsInput | number
+    calibrationError?: FloatFieldUpdateOperationsInput | number
+    falseNegativeRate?: FloatFieldUpdateOperationsInput | number
+    baselineEvidence?: JsonNullValueInput | InputJsonValue
+    subgroupMetricsReference?: NullableJsonNullValueInput | InputJsonValue
+    featureDistributionReference?: NullableJsonNullValueInput | InputJsonValue
+    missingnessReference?: NullableJsonNullValueInput | InputJsonValue
+    evaluationArtifactReference?: StringFieldUpdateOperationsInput | string
+    evaluationFingerprint?: StringFieldUpdateOperationsInput | string
+    recordedById?: StringFieldUpdateOperationsInput | string
+    recordedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PredictiveModelApprovalUpdateWithoutModelVersionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    decision?: EnumPredictiveModelApprovalDecisionFieldUpdateOperationsInput | $Enums.PredictiveModelApprovalDecision
+    reason?: StringFieldUpdateOperationsInput | string
+    restrictions?: NullableJsonNullValueInput | InputJsonValue
+    reviewDueAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    decidedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    approvedBy?: UserUpdateOneRequiredWithoutDecidedPredictiveApprovalsNestedInput
+  }
+
+  export type PredictiveModelApprovalUncheckedUpdateWithoutModelVersionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    decision?: EnumPredictiveModelApprovalDecisionFieldUpdateOperationsInput | $Enums.PredictiveModelApprovalDecision
+    reason?: StringFieldUpdateOperationsInput | string
+    restrictions?: NullableJsonNullValueInput | InputJsonValue
+    reviewDueAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvedById?: StringFieldUpdateOperationsInput | string
+    decidedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PredictiveModelApprovalUncheckedUpdateManyWithoutModelVersionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    decision?: EnumPredictiveModelApprovalDecisionFieldUpdateOperationsInput | $Enums.PredictiveModelApprovalDecision
+    reason?: StringFieldUpdateOperationsInput | string
+    restrictions?: NullableJsonNullValueInput | InputJsonValue
+    reviewDueAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvedById?: StringFieldUpdateOperationsInput | string
+    decidedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PredictiveModelLifecycleEventUpdateWithoutModelVersionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    action?: EnumPredictiveModelLifecycleActionFieldUpdateOperationsInput | $Enums.PredictiveModelLifecycleAction
+    fromStatus?: NullableEnumPredictiveModelLifecycleStatusFieldUpdateOperationsInput | $Enums.PredictiveModelLifecycleStatus | null
+    toStatus?: EnumPredictiveModelLifecycleStatusFieldUpdateOperationsInput | $Enums.PredictiveModelLifecycleStatus
+    reason?: StringFieldUpdateOperationsInput | string
+    relatedModelVersionId?: NullableStringFieldUpdateOperationsInput | string | null
+    occurredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    actor?: UserUpdateOneRequiredWithoutPredictiveModelLifecycleEventsNestedInput
+  }
+
+  export type PredictiveModelLifecycleEventUncheckedUpdateWithoutModelVersionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    action?: EnumPredictiveModelLifecycleActionFieldUpdateOperationsInput | $Enums.PredictiveModelLifecycleAction
+    fromStatus?: NullableEnumPredictiveModelLifecycleStatusFieldUpdateOperationsInput | $Enums.PredictiveModelLifecycleStatus | null
+    toStatus?: EnumPredictiveModelLifecycleStatusFieldUpdateOperationsInput | $Enums.PredictiveModelLifecycleStatus
+    reason?: StringFieldUpdateOperationsInput | string
+    relatedModelVersionId?: NullableStringFieldUpdateOperationsInput | string | null
+    actorId?: StringFieldUpdateOperationsInput | string
+    occurredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PredictiveModelLifecycleEventUncheckedUpdateManyWithoutModelVersionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    action?: EnumPredictiveModelLifecycleActionFieldUpdateOperationsInput | $Enums.PredictiveModelLifecycleAction
+    fromStatus?: NullableEnumPredictiveModelLifecycleStatusFieldUpdateOperationsInput | $Enums.PredictiveModelLifecycleStatus | null
+    toStatus?: EnumPredictiveModelLifecycleStatusFieldUpdateOperationsInput | $Enums.PredictiveModelLifecycleStatus
+    reason?: StringFieldUpdateOperationsInput | string
+    relatedModelVersionId?: NullableStringFieldUpdateOperationsInput | string | null
+    actorId?: StringFieldUpdateOperationsInput | string
+    occurredAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 

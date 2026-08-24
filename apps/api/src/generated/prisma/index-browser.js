@@ -637,6 +637,104 @@ exports.Prisma.PredictiveOutcomeScalarFieldEnum = {
   replacementOutcomeId: 'replacementOutcomeId'
 };
 
+exports.Prisma.PredictiveDatasetSnapshotScalarFieldEnum = {
+  id: 'id',
+  datasetContractVersion: 'datasetContractVersion',
+  targetType: 'targetType',
+  featureContractVersion: 'featureContractVersion',
+  outcomeContractVersion: 'outcomeContractVersion',
+  departmentId: 'departmentId',
+  jurisdictionId: 'jurisdictionId',
+  includedProvenance: 'includedProvenance',
+  sampleCount: 'sampleCount',
+  classBalance: 'classBalance',
+  periodStart: 'periodStart',
+  periodEnd: 'periodEnd',
+  sampleIdentities: 'sampleIdentities',
+  datasetFingerprint: 'datasetFingerprint',
+  createdById: 'createdById',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.PredictiveModelVersionScalarFieldEnum = {
+  id: 'id',
+  modelName: 'modelName',
+  modelVersion: 'modelVersion',
+  targetType: 'targetType',
+  deploymentSlot: 'deploymentSlot',
+  intendedUse: 'intendedUse',
+  forbiddenUse: 'forbiddenUse',
+  featureContractVersion: 'featureContractVersion',
+  outcomeContractVersion: 'outcomeContractVersion',
+  datasetSnapshotId: 'datasetSnapshotId',
+  trainingCodeVersion: 'trainingCodeVersion',
+  artifactReference: 'artifactReference',
+  artifactDigest: 'artifactDigest',
+  artifactFormat: 'artifactFormat',
+  artifactSizeBytes: 'artifactSizeBytes',
+  trainingTimestamp: 'trainingTimestamp',
+  lifecycleStatus: 'lifecycleStatus',
+  createdById: 'createdById',
+  createdAt: 'createdAt',
+  validatedById: 'validatedById',
+  validatedAt: 'validatedAt'
+};
+
+exports.Prisma.PredictiveModelEvaluationScalarFieldEnum = {
+  id: 'id',
+  modelVersionId: 'modelVersionId',
+  datasetSnapshotId: 'datasetSnapshotId',
+  evaluationContractVersion: 'evaluationContractVersion',
+  splitStrategy: 'splitStrategy',
+  evaluationPeriodStart: 'evaluationPeriodStart',
+  evaluationPeriodEnd: 'evaluationPeriodEnd',
+  testSampleCount: 'testSampleCount',
+  lateCount: 'lateCount',
+  onTimeCount: 'onTimeCount',
+  truePositiveCount: 'truePositiveCount',
+  trueNegativeCount: 'trueNegativeCount',
+  falsePositiveCount: 'falsePositiveCount',
+  falseNegativeCount: 'falseNegativeCount',
+  precision: 'precision',
+  recall: 'recall',
+  f1: 'f1',
+  prAuc: 'prAuc',
+  calibrationError: 'calibrationError',
+  falseNegativeRate: 'falseNegativeRate',
+  baselineEvidence: 'baselineEvidence',
+  subgroupMetricsReference: 'subgroupMetricsReference',
+  featureDistributionReference: 'featureDistributionReference',
+  missingnessReference: 'missingnessReference',
+  evaluationArtifactReference: 'evaluationArtifactReference',
+  evaluationFingerprint: 'evaluationFingerprint',
+  recordedById: 'recordedById',
+  recordedAt: 'recordedAt'
+};
+
+exports.Prisma.PredictiveModelApprovalScalarFieldEnum = {
+  id: 'id',
+  modelVersionId: 'modelVersionId',
+  decision: 'decision',
+  reason: 'reason',
+  restrictions: 'restrictions',
+  reviewDueAt: 'reviewDueAt',
+  approvalExpiresAt: 'approvalExpiresAt',
+  approvedById: 'approvedById',
+  decidedAt: 'decidedAt'
+};
+
+exports.Prisma.PredictiveModelLifecycleEventScalarFieldEnum = {
+  id: 'id',
+  modelVersionId: 'modelVersionId',
+  action: 'action',
+  fromStatus: 'fromStatus',
+  toStatus: 'toStatus',
+  reason: 'reason',
+  relatedModelVersionId: 'relatedModelVersionId',
+  actorId: 'actorId',
+  occurredAt: 'occurredAt'
+};
+
 exports.Prisma.ExecutionTaskDependencyScalarFieldEnum = {
   id: 'id',
   executionPlanId: 'executionPlanId',
@@ -929,6 +1027,33 @@ exports.PredictiveOutcomeValue = exports.$Enums.PredictiveOutcomeValue = {
   CANCELLED: 'CANCELLED'
 };
 
+exports.PredictiveModelLifecycleStatus = exports.$Enums.PredictiveModelLifecycleStatus = {
+  EXPERIMENTAL: 'EXPERIMENTAL',
+  EVALUATED: 'EVALUATED',
+  REJECTED: 'REJECTED',
+  VALIDATED: 'VALIDATED',
+  APPROVED: 'APPROVED',
+  ACTIVE: 'ACTIVE',
+  DEPRECATED: 'DEPRECATED'
+};
+
+exports.PredictiveModelApprovalDecision = exports.$Enums.PredictiveModelApprovalDecision = {
+  APPROVED: 'APPROVED',
+  REJECTED: 'REJECTED'
+};
+
+exports.PredictiveModelLifecycleAction = exports.$Enums.PredictiveModelLifecycleAction = {
+  REGISTERED: 'REGISTERED',
+  EVALUATED: 'EVALUATED',
+  VALIDATED: 'VALIDATED',
+  APPROVED: 'APPROVED',
+  REJECTED: 'REJECTED',
+  ACTIVATED: 'ACTIVATED',
+  REPLACED: 'REPLACED',
+  DEPRECATED: 'DEPRECATED',
+  ROLLED_BACK: 'ROLLED_BACK'
+};
+
 exports.ExecutionBlockerCategory = exports.$Enums.ExecutionBlockerCategory = {
   RESOURCE_UNAVAILABLE: 'RESOURCE_UNAVAILABLE',
   ACCESS_RESTRICTED: 'ACCESS_RESTRICTED',
@@ -982,6 +1107,11 @@ exports.Prisma.ModelName = {
   ExecutionTask: 'ExecutionTask',
   PredictiveFeatureSnapshot: 'PredictiveFeatureSnapshot',
   PredictiveOutcome: 'PredictiveOutcome',
+  PredictiveDatasetSnapshot: 'PredictiveDatasetSnapshot',
+  PredictiveModelVersion: 'PredictiveModelVersion',
+  PredictiveModelEvaluation: 'PredictiveModelEvaluation',
+  PredictiveModelApproval: 'PredictiveModelApproval',
+  PredictiveModelLifecycleEvent: 'PredictiveModelLifecycleEvent',
   ExecutionTaskDependency: 'ExecutionTaskDependency',
   ExecutionTaskBlockerEvent: 'ExecutionTaskBlockerEvent',
   ExecutionScheduleRevision: 'ExecutionScheduleRevision',
