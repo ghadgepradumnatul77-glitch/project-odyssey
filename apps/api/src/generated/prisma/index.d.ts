@@ -104,6 +104,11 @@ export type Inspection = $Result.DefaultSelection<Prisma.$InspectionPayload>
  */
 export type RiskAssessment = $Result.DefaultSelection<Prisma.$RiskAssessmentPayload>
 /**
+ * Model TrustedComputationReceipt
+ * 
+ */
+export type TrustedComputationReceipt = $Result.DefaultSelection<Prisma.$TrustedComputationReceiptPayload>
+/**
  * Model InfrastructureIntelligenceAssessment
  * 
  */
@@ -1002,6 +1007,16 @@ export class PrismaClient<
   get riskAssessment(): Prisma.RiskAssessmentDelegate<ExtArgs, ClientOptions>;
 
   /**
+   * `prisma.trustedComputationReceipt`: Exposes CRUD operations for the **TrustedComputationReceipt** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more TrustedComputationReceipts
+    * const trustedComputationReceipts = await prisma.trustedComputationReceipt.findMany()
+    * ```
+    */
+  get trustedComputationReceipt(): Prisma.TrustedComputationReceiptDelegate<ExtArgs, ClientOptions>;
+
+  /**
    * `prisma.infrastructureIntelligenceAssessment`: Exposes CRUD operations for the **InfrastructureIntelligenceAssessment** model.
     * Example usage:
     * ```ts
@@ -1659,6 +1674,7 @@ export namespace Prisma {
     ExternalObservation: 'ExternalObservation',
     Inspection: 'Inspection',
     RiskAssessment: 'RiskAssessment',
+    TrustedComputationReceipt: 'TrustedComputationReceipt',
     InfrastructureIntelligenceAssessment: 'InfrastructureIntelligenceAssessment',
     InfrastructureIntelligenceReconciliation: 'InfrastructureIntelligenceReconciliation',
     OperationalResponsePlan: 'OperationalResponsePlan',
@@ -1697,7 +1713,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "department" | "jurisdiction" | "user" | "asset" | "publicReport" | "publicReportTriageAnalysis" | "policyDocument" | "approvedActionVersion" | "governedExecutionTemplate" | "governedExecutionTaskTemplate" | "policyRule" | "case" | "caseResourceEstimate" | "portfolioScenario" | "observationSource" | "externalObservation" | "inspection" | "riskAssessment" | "infrastructureIntelligenceAssessment" | "infrastructureIntelligenceReconciliation" | "operationalResponsePlan" | "decisionPackage" | "approvalAuthority" | "orpDecision" | "executionPlan" | "executionTask" | "predictiveFeatureSnapshot" | "predictiveOutcome" | "predictiveDatasetSnapshot" | "predictiveModelVersion" | "predictiveModelEvaluation" | "predictiveModelApproval" | "predictiveModelLifecycleEvent" | "executionTaskDependency" | "executionTaskBlockerEvent" | "executionScheduleRevision" | "executionEvidence" | "caseClosure"
+      modelProps: "department" | "jurisdiction" | "user" | "asset" | "publicReport" | "publicReportTriageAnalysis" | "policyDocument" | "approvedActionVersion" | "governedExecutionTemplate" | "governedExecutionTaskTemplate" | "policyRule" | "case" | "caseResourceEstimate" | "portfolioScenario" | "observationSource" | "externalObservation" | "inspection" | "riskAssessment" | "trustedComputationReceipt" | "infrastructureIntelligenceAssessment" | "infrastructureIntelligenceReconciliation" | "operationalResponsePlan" | "decisionPackage" | "approvalAuthority" | "orpDecision" | "executionPlan" | "executionTask" | "predictiveFeatureSnapshot" | "predictiveOutcome" | "predictiveDatasetSnapshot" | "predictiveModelVersion" | "predictiveModelEvaluation" | "predictiveModelApproval" | "predictiveModelLifecycleEvent" | "executionTaskDependency" | "executionTaskBlockerEvent" | "executionScheduleRevision" | "executionEvidence" | "caseClosure"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -3030,6 +3046,80 @@ export namespace Prisma {
           count: {
             args: Prisma.RiskAssessmentCountArgs<ExtArgs>
             result: $Utils.Optional<RiskAssessmentCountAggregateOutputType> | number
+          }
+        }
+      }
+      TrustedComputationReceipt: {
+        payload: Prisma.$TrustedComputationReceiptPayload<ExtArgs>
+        fields: Prisma.TrustedComputationReceiptFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.TrustedComputationReceiptFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TrustedComputationReceiptPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.TrustedComputationReceiptFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TrustedComputationReceiptPayload>
+          }
+          findFirst: {
+            args: Prisma.TrustedComputationReceiptFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TrustedComputationReceiptPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.TrustedComputationReceiptFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TrustedComputationReceiptPayload>
+          }
+          findMany: {
+            args: Prisma.TrustedComputationReceiptFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TrustedComputationReceiptPayload>[]
+          }
+          create: {
+            args: Prisma.TrustedComputationReceiptCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TrustedComputationReceiptPayload>
+          }
+          createMany: {
+            args: Prisma.TrustedComputationReceiptCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.TrustedComputationReceiptCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TrustedComputationReceiptPayload>[]
+          }
+          delete: {
+            args: Prisma.TrustedComputationReceiptDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TrustedComputationReceiptPayload>
+          }
+          update: {
+            args: Prisma.TrustedComputationReceiptUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TrustedComputationReceiptPayload>
+          }
+          deleteMany: {
+            args: Prisma.TrustedComputationReceiptDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.TrustedComputationReceiptUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.TrustedComputationReceiptUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TrustedComputationReceiptPayload>[]
+          }
+          upsert: {
+            args: Prisma.TrustedComputationReceiptUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TrustedComputationReceiptPayload>
+          }
+          aggregate: {
+            args: Prisma.TrustedComputationReceiptAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateTrustedComputationReceipt>
+          }
+          groupBy: {
+            args: Prisma.TrustedComputationReceiptGroupByArgs<ExtArgs>
+            result: $Utils.Optional<TrustedComputationReceiptGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.TrustedComputationReceiptCountArgs<ExtArgs>
+            result: $Utils.Optional<TrustedComputationReceiptCountAggregateOutputType> | number
           }
         }
       }
@@ -4627,6 +4717,7 @@ export namespace Prisma {
     externalObservation?: ExternalObservationOmit
     inspection?: InspectionOmit
     riskAssessment?: RiskAssessmentOmit
+    trustedComputationReceipt?: TrustedComputationReceiptOmit
     infrastructureIntelligenceAssessment?: InfrastructureIntelligenceAssessmentOmit
     infrastructureIntelligenceReconciliation?: InfrastructureIntelligenceReconciliationOmit
     operationalResponsePlan?: OperationalResponsePlanOmit
@@ -29947,6 +30038,7 @@ export namespace Prisma {
     operationalResponsePlans?: boolean | RiskAssessment$operationalResponsePlansArgs<ExtArgs>
     decisionPackages?: boolean | RiskAssessment$decisionPackagesArgs<ExtArgs>
     intelligenceAssessments?: boolean | RiskAssessment$intelligenceAssessmentsArgs<ExtArgs>
+    trustedComputationReceipt?: boolean | RiskAssessment$trustedComputationReceiptArgs<ExtArgs>
     _count?: boolean | RiskAssessmentCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["riskAssessment"]>
 
@@ -30003,6 +30095,7 @@ export namespace Prisma {
     operationalResponsePlans?: boolean | RiskAssessment$operationalResponsePlansArgs<ExtArgs>
     decisionPackages?: boolean | RiskAssessment$decisionPackagesArgs<ExtArgs>
     intelligenceAssessments?: boolean | RiskAssessment$intelligenceAssessmentsArgs<ExtArgs>
+    trustedComputationReceipt?: boolean | RiskAssessment$trustedComputationReceiptArgs<ExtArgs>
     _count?: boolean | RiskAssessmentCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type RiskAssessmentIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -30022,6 +30115,7 @@ export namespace Prisma {
       operationalResponsePlans: Prisma.$OperationalResponsePlanPayload<ExtArgs>[]
       decisionPackages: Prisma.$DecisionPackagePayload<ExtArgs>[]
       intelligenceAssessments: Prisma.$InfrastructureIntelligenceAssessmentPayload<ExtArgs>[]
+      trustedComputationReceipt: Prisma.$TrustedComputationReceiptPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -30434,6 +30528,7 @@ export namespace Prisma {
     operationalResponsePlans<T extends RiskAssessment$operationalResponsePlansArgs<ExtArgs> = {}>(args?: Subset<T, RiskAssessment$operationalResponsePlansArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OperationalResponsePlanPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     decisionPackages<T extends RiskAssessment$decisionPackagesArgs<ExtArgs> = {}>(args?: Subset<T, RiskAssessment$decisionPackagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DecisionPackagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     intelligenceAssessments<T extends RiskAssessment$intelligenceAssessmentsArgs<ExtArgs> = {}>(args?: Subset<T, RiskAssessment$intelligenceAssessmentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InfrastructureIntelligenceAssessmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    trustedComputationReceipt<T extends RiskAssessment$trustedComputationReceiptArgs<ExtArgs> = {}>(args?: Subset<T, RiskAssessment$trustedComputationReceiptArgs<ExtArgs>>): Prisma__TrustedComputationReceiptClient<$Result.GetResult<Prisma.$TrustedComputationReceiptPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -30942,6 +31037,25 @@ export namespace Prisma {
   }
 
   /**
+   * RiskAssessment.trustedComputationReceipt
+   */
+  export type RiskAssessment$trustedComputationReceiptArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TrustedComputationReceipt
+     */
+    select?: TrustedComputationReceiptSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TrustedComputationReceipt
+     */
+    omit?: TrustedComputationReceiptOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TrustedComputationReceiptInclude<ExtArgs> | null
+    where?: TrustedComputationReceiptWhereInput
+  }
+
+  /**
    * RiskAssessment without action
    */
   export type RiskAssessmentDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -30957,6 +31071,1181 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: RiskAssessmentInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model TrustedComputationReceipt
+   */
+
+  export type AggregateTrustedComputationReceipt = {
+    _count: TrustedComputationReceiptCountAggregateOutputType | null
+    _min: TrustedComputationReceiptMinAggregateOutputType | null
+    _max: TrustedComputationReceiptMaxAggregateOutputType | null
+  }
+
+  export type TrustedComputationReceiptMinAggregateOutputType = {
+    id: string | null
+    riskAssessmentId: string | null
+    receiptVersion: string | null
+    computationType: string | null
+    inputContractVersion: string | null
+    inputFingerprint: string | null
+    computationVersion: string | null
+    providerId: string | null
+    runtimeTrustLevel: string | null
+    resultFingerprint: string | null
+    executedAt: Date | null
+    attestationState: string | null
+    attestationReference: string | null
+    createdAt: Date | null
+  }
+
+  export type TrustedComputationReceiptMaxAggregateOutputType = {
+    id: string | null
+    riskAssessmentId: string | null
+    receiptVersion: string | null
+    computationType: string | null
+    inputContractVersion: string | null
+    inputFingerprint: string | null
+    computationVersion: string | null
+    providerId: string | null
+    runtimeTrustLevel: string | null
+    resultFingerprint: string | null
+    executedAt: Date | null
+    attestationState: string | null
+    attestationReference: string | null
+    createdAt: Date | null
+  }
+
+  export type TrustedComputationReceiptCountAggregateOutputType = {
+    id: number
+    riskAssessmentId: number
+    receiptVersion: number
+    computationType: number
+    inputContractVersion: number
+    inputFingerprint: number
+    computationVersion: number
+    providerId: number
+    runtimeTrustLevel: number
+    resultFingerprint: number
+    executedAt: number
+    attestationState: number
+    attestationReference: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type TrustedComputationReceiptMinAggregateInputType = {
+    id?: true
+    riskAssessmentId?: true
+    receiptVersion?: true
+    computationType?: true
+    inputContractVersion?: true
+    inputFingerprint?: true
+    computationVersion?: true
+    providerId?: true
+    runtimeTrustLevel?: true
+    resultFingerprint?: true
+    executedAt?: true
+    attestationState?: true
+    attestationReference?: true
+    createdAt?: true
+  }
+
+  export type TrustedComputationReceiptMaxAggregateInputType = {
+    id?: true
+    riskAssessmentId?: true
+    receiptVersion?: true
+    computationType?: true
+    inputContractVersion?: true
+    inputFingerprint?: true
+    computationVersion?: true
+    providerId?: true
+    runtimeTrustLevel?: true
+    resultFingerprint?: true
+    executedAt?: true
+    attestationState?: true
+    attestationReference?: true
+    createdAt?: true
+  }
+
+  export type TrustedComputationReceiptCountAggregateInputType = {
+    id?: true
+    riskAssessmentId?: true
+    receiptVersion?: true
+    computationType?: true
+    inputContractVersion?: true
+    inputFingerprint?: true
+    computationVersion?: true
+    providerId?: true
+    runtimeTrustLevel?: true
+    resultFingerprint?: true
+    executedAt?: true
+    attestationState?: true
+    attestationReference?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type TrustedComputationReceiptAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which TrustedComputationReceipt to aggregate.
+     */
+    where?: TrustedComputationReceiptWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TrustedComputationReceipts to fetch.
+     */
+    orderBy?: TrustedComputationReceiptOrderByWithRelationInput | TrustedComputationReceiptOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: TrustedComputationReceiptWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TrustedComputationReceipts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TrustedComputationReceipts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned TrustedComputationReceipts
+    **/
+    _count?: true | TrustedComputationReceiptCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: TrustedComputationReceiptMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: TrustedComputationReceiptMaxAggregateInputType
+  }
+
+  export type GetTrustedComputationReceiptAggregateType<T extends TrustedComputationReceiptAggregateArgs> = {
+        [P in keyof T & keyof AggregateTrustedComputationReceipt]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateTrustedComputationReceipt[P]>
+      : GetScalarType<T[P], AggregateTrustedComputationReceipt[P]>
+  }
+
+
+
+
+  export type TrustedComputationReceiptGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TrustedComputationReceiptWhereInput
+    orderBy?: TrustedComputationReceiptOrderByWithAggregationInput | TrustedComputationReceiptOrderByWithAggregationInput[]
+    by: TrustedComputationReceiptScalarFieldEnum[] | TrustedComputationReceiptScalarFieldEnum
+    having?: TrustedComputationReceiptScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: TrustedComputationReceiptCountAggregateInputType | true
+    _min?: TrustedComputationReceiptMinAggregateInputType
+    _max?: TrustedComputationReceiptMaxAggregateInputType
+  }
+
+  export type TrustedComputationReceiptGroupByOutputType = {
+    id: string
+    riskAssessmentId: string
+    receiptVersion: string
+    computationType: string
+    inputContractVersion: string
+    inputFingerprint: string
+    computationVersion: string
+    providerId: string
+    runtimeTrustLevel: string
+    resultFingerprint: string
+    executedAt: Date
+    attestationState: string
+    attestationReference: string | null
+    createdAt: Date
+    _count: TrustedComputationReceiptCountAggregateOutputType | null
+    _min: TrustedComputationReceiptMinAggregateOutputType | null
+    _max: TrustedComputationReceiptMaxAggregateOutputType | null
+  }
+
+  type GetTrustedComputationReceiptGroupByPayload<T extends TrustedComputationReceiptGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<TrustedComputationReceiptGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof TrustedComputationReceiptGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], TrustedComputationReceiptGroupByOutputType[P]>
+            : GetScalarType<T[P], TrustedComputationReceiptGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type TrustedComputationReceiptSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    riskAssessmentId?: boolean
+    receiptVersion?: boolean
+    computationType?: boolean
+    inputContractVersion?: boolean
+    inputFingerprint?: boolean
+    computationVersion?: boolean
+    providerId?: boolean
+    runtimeTrustLevel?: boolean
+    resultFingerprint?: boolean
+    executedAt?: boolean
+    attestationState?: boolean
+    attestationReference?: boolean
+    createdAt?: boolean
+    riskAssessment?: boolean | RiskAssessmentDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["trustedComputationReceipt"]>
+
+  export type TrustedComputationReceiptSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    riskAssessmentId?: boolean
+    receiptVersion?: boolean
+    computationType?: boolean
+    inputContractVersion?: boolean
+    inputFingerprint?: boolean
+    computationVersion?: boolean
+    providerId?: boolean
+    runtimeTrustLevel?: boolean
+    resultFingerprint?: boolean
+    executedAt?: boolean
+    attestationState?: boolean
+    attestationReference?: boolean
+    createdAt?: boolean
+    riskAssessment?: boolean | RiskAssessmentDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["trustedComputationReceipt"]>
+
+  export type TrustedComputationReceiptSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    riskAssessmentId?: boolean
+    receiptVersion?: boolean
+    computationType?: boolean
+    inputContractVersion?: boolean
+    inputFingerprint?: boolean
+    computationVersion?: boolean
+    providerId?: boolean
+    runtimeTrustLevel?: boolean
+    resultFingerprint?: boolean
+    executedAt?: boolean
+    attestationState?: boolean
+    attestationReference?: boolean
+    createdAt?: boolean
+    riskAssessment?: boolean | RiskAssessmentDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["trustedComputationReceipt"]>
+
+  export type TrustedComputationReceiptSelectScalar = {
+    id?: boolean
+    riskAssessmentId?: boolean
+    receiptVersion?: boolean
+    computationType?: boolean
+    inputContractVersion?: boolean
+    inputFingerprint?: boolean
+    computationVersion?: boolean
+    providerId?: boolean
+    runtimeTrustLevel?: boolean
+    resultFingerprint?: boolean
+    executedAt?: boolean
+    attestationState?: boolean
+    attestationReference?: boolean
+    createdAt?: boolean
+  }
+
+  export type TrustedComputationReceiptOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "riskAssessmentId" | "receiptVersion" | "computationType" | "inputContractVersion" | "inputFingerprint" | "computationVersion" | "providerId" | "runtimeTrustLevel" | "resultFingerprint" | "executedAt" | "attestationState" | "attestationReference" | "createdAt", ExtArgs["result"]["trustedComputationReceipt"]>
+  export type TrustedComputationReceiptInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    riskAssessment?: boolean | RiskAssessmentDefaultArgs<ExtArgs>
+  }
+  export type TrustedComputationReceiptIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    riskAssessment?: boolean | RiskAssessmentDefaultArgs<ExtArgs>
+  }
+  export type TrustedComputationReceiptIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    riskAssessment?: boolean | RiskAssessmentDefaultArgs<ExtArgs>
+  }
+
+  export type $TrustedComputationReceiptPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "TrustedComputationReceipt"
+    objects: {
+      riskAssessment: Prisma.$RiskAssessmentPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      riskAssessmentId: string
+      receiptVersion: string
+      computationType: string
+      inputContractVersion: string
+      inputFingerprint: string
+      computationVersion: string
+      providerId: string
+      runtimeTrustLevel: string
+      resultFingerprint: string
+      executedAt: Date
+      attestationState: string
+      attestationReference: string | null
+      createdAt: Date
+    }, ExtArgs["result"]["trustedComputationReceipt"]>
+    composites: {}
+  }
+
+  type TrustedComputationReceiptGetPayload<S extends boolean | null | undefined | TrustedComputationReceiptDefaultArgs> = $Result.GetResult<Prisma.$TrustedComputationReceiptPayload, S>
+
+  type TrustedComputationReceiptCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<TrustedComputationReceiptFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: TrustedComputationReceiptCountAggregateInputType | true
+    }
+
+  export interface TrustedComputationReceiptDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['TrustedComputationReceipt'], meta: { name: 'TrustedComputationReceipt' } }
+    /**
+     * Find zero or one TrustedComputationReceipt that matches the filter.
+     * @param {TrustedComputationReceiptFindUniqueArgs} args - Arguments to find a TrustedComputationReceipt
+     * @example
+     * // Get one TrustedComputationReceipt
+     * const trustedComputationReceipt = await prisma.trustedComputationReceipt.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends TrustedComputationReceiptFindUniqueArgs>(args: SelectSubset<T, TrustedComputationReceiptFindUniqueArgs<ExtArgs>>): Prisma__TrustedComputationReceiptClient<$Result.GetResult<Prisma.$TrustedComputationReceiptPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one TrustedComputationReceipt that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {TrustedComputationReceiptFindUniqueOrThrowArgs} args - Arguments to find a TrustedComputationReceipt
+     * @example
+     * // Get one TrustedComputationReceipt
+     * const trustedComputationReceipt = await prisma.trustedComputationReceipt.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends TrustedComputationReceiptFindUniqueOrThrowArgs>(args: SelectSubset<T, TrustedComputationReceiptFindUniqueOrThrowArgs<ExtArgs>>): Prisma__TrustedComputationReceiptClient<$Result.GetResult<Prisma.$TrustedComputationReceiptPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first TrustedComputationReceipt that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TrustedComputationReceiptFindFirstArgs} args - Arguments to find a TrustedComputationReceipt
+     * @example
+     * // Get one TrustedComputationReceipt
+     * const trustedComputationReceipt = await prisma.trustedComputationReceipt.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends TrustedComputationReceiptFindFirstArgs>(args?: SelectSubset<T, TrustedComputationReceiptFindFirstArgs<ExtArgs>>): Prisma__TrustedComputationReceiptClient<$Result.GetResult<Prisma.$TrustedComputationReceiptPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first TrustedComputationReceipt that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TrustedComputationReceiptFindFirstOrThrowArgs} args - Arguments to find a TrustedComputationReceipt
+     * @example
+     * // Get one TrustedComputationReceipt
+     * const trustedComputationReceipt = await prisma.trustedComputationReceipt.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends TrustedComputationReceiptFindFirstOrThrowArgs>(args?: SelectSubset<T, TrustedComputationReceiptFindFirstOrThrowArgs<ExtArgs>>): Prisma__TrustedComputationReceiptClient<$Result.GetResult<Prisma.$TrustedComputationReceiptPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more TrustedComputationReceipts that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TrustedComputationReceiptFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all TrustedComputationReceipts
+     * const trustedComputationReceipts = await prisma.trustedComputationReceipt.findMany()
+     * 
+     * // Get first 10 TrustedComputationReceipts
+     * const trustedComputationReceipts = await prisma.trustedComputationReceipt.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const trustedComputationReceiptWithIdOnly = await prisma.trustedComputationReceipt.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends TrustedComputationReceiptFindManyArgs>(args?: SelectSubset<T, TrustedComputationReceiptFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TrustedComputationReceiptPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a TrustedComputationReceipt.
+     * @param {TrustedComputationReceiptCreateArgs} args - Arguments to create a TrustedComputationReceipt.
+     * @example
+     * // Create one TrustedComputationReceipt
+     * const TrustedComputationReceipt = await prisma.trustedComputationReceipt.create({
+     *   data: {
+     *     // ... data to create a TrustedComputationReceipt
+     *   }
+     * })
+     * 
+     */
+    create<T extends TrustedComputationReceiptCreateArgs>(args: SelectSubset<T, TrustedComputationReceiptCreateArgs<ExtArgs>>): Prisma__TrustedComputationReceiptClient<$Result.GetResult<Prisma.$TrustedComputationReceiptPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many TrustedComputationReceipts.
+     * @param {TrustedComputationReceiptCreateManyArgs} args - Arguments to create many TrustedComputationReceipts.
+     * @example
+     * // Create many TrustedComputationReceipts
+     * const trustedComputationReceipt = await prisma.trustedComputationReceipt.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends TrustedComputationReceiptCreateManyArgs>(args?: SelectSubset<T, TrustedComputationReceiptCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many TrustedComputationReceipts and returns the data saved in the database.
+     * @param {TrustedComputationReceiptCreateManyAndReturnArgs} args - Arguments to create many TrustedComputationReceipts.
+     * @example
+     * // Create many TrustedComputationReceipts
+     * const trustedComputationReceipt = await prisma.trustedComputationReceipt.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many TrustedComputationReceipts and only return the `id`
+     * const trustedComputationReceiptWithIdOnly = await prisma.trustedComputationReceipt.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends TrustedComputationReceiptCreateManyAndReturnArgs>(args?: SelectSubset<T, TrustedComputationReceiptCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TrustedComputationReceiptPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a TrustedComputationReceipt.
+     * @param {TrustedComputationReceiptDeleteArgs} args - Arguments to delete one TrustedComputationReceipt.
+     * @example
+     * // Delete one TrustedComputationReceipt
+     * const TrustedComputationReceipt = await prisma.trustedComputationReceipt.delete({
+     *   where: {
+     *     // ... filter to delete one TrustedComputationReceipt
+     *   }
+     * })
+     * 
+     */
+    delete<T extends TrustedComputationReceiptDeleteArgs>(args: SelectSubset<T, TrustedComputationReceiptDeleteArgs<ExtArgs>>): Prisma__TrustedComputationReceiptClient<$Result.GetResult<Prisma.$TrustedComputationReceiptPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one TrustedComputationReceipt.
+     * @param {TrustedComputationReceiptUpdateArgs} args - Arguments to update one TrustedComputationReceipt.
+     * @example
+     * // Update one TrustedComputationReceipt
+     * const trustedComputationReceipt = await prisma.trustedComputationReceipt.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends TrustedComputationReceiptUpdateArgs>(args: SelectSubset<T, TrustedComputationReceiptUpdateArgs<ExtArgs>>): Prisma__TrustedComputationReceiptClient<$Result.GetResult<Prisma.$TrustedComputationReceiptPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more TrustedComputationReceipts.
+     * @param {TrustedComputationReceiptDeleteManyArgs} args - Arguments to filter TrustedComputationReceipts to delete.
+     * @example
+     * // Delete a few TrustedComputationReceipts
+     * const { count } = await prisma.trustedComputationReceipt.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends TrustedComputationReceiptDeleteManyArgs>(args?: SelectSubset<T, TrustedComputationReceiptDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more TrustedComputationReceipts.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TrustedComputationReceiptUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many TrustedComputationReceipts
+     * const trustedComputationReceipt = await prisma.trustedComputationReceipt.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends TrustedComputationReceiptUpdateManyArgs>(args: SelectSubset<T, TrustedComputationReceiptUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more TrustedComputationReceipts and returns the data updated in the database.
+     * @param {TrustedComputationReceiptUpdateManyAndReturnArgs} args - Arguments to update many TrustedComputationReceipts.
+     * @example
+     * // Update many TrustedComputationReceipts
+     * const trustedComputationReceipt = await prisma.trustedComputationReceipt.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more TrustedComputationReceipts and only return the `id`
+     * const trustedComputationReceiptWithIdOnly = await prisma.trustedComputationReceipt.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends TrustedComputationReceiptUpdateManyAndReturnArgs>(args: SelectSubset<T, TrustedComputationReceiptUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TrustedComputationReceiptPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one TrustedComputationReceipt.
+     * @param {TrustedComputationReceiptUpsertArgs} args - Arguments to update or create a TrustedComputationReceipt.
+     * @example
+     * // Update or create a TrustedComputationReceipt
+     * const trustedComputationReceipt = await prisma.trustedComputationReceipt.upsert({
+     *   create: {
+     *     // ... data to create a TrustedComputationReceipt
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the TrustedComputationReceipt we want to update
+     *   }
+     * })
+     */
+    upsert<T extends TrustedComputationReceiptUpsertArgs>(args: SelectSubset<T, TrustedComputationReceiptUpsertArgs<ExtArgs>>): Prisma__TrustedComputationReceiptClient<$Result.GetResult<Prisma.$TrustedComputationReceiptPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of TrustedComputationReceipts.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TrustedComputationReceiptCountArgs} args - Arguments to filter TrustedComputationReceipts to count.
+     * @example
+     * // Count the number of TrustedComputationReceipts
+     * const count = await prisma.trustedComputationReceipt.count({
+     *   where: {
+     *     // ... the filter for the TrustedComputationReceipts we want to count
+     *   }
+     * })
+    **/
+    count<T extends TrustedComputationReceiptCountArgs>(
+      args?: Subset<T, TrustedComputationReceiptCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], TrustedComputationReceiptCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a TrustedComputationReceipt.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TrustedComputationReceiptAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends TrustedComputationReceiptAggregateArgs>(args: Subset<T, TrustedComputationReceiptAggregateArgs>): Prisma.PrismaPromise<GetTrustedComputationReceiptAggregateType<T>>
+
+    /**
+     * Group by TrustedComputationReceipt.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TrustedComputationReceiptGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends TrustedComputationReceiptGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: TrustedComputationReceiptGroupByArgs['orderBy'] }
+        : { orderBy?: TrustedComputationReceiptGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, TrustedComputationReceiptGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetTrustedComputationReceiptGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the TrustedComputationReceipt model
+   */
+  readonly fields: TrustedComputationReceiptFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for TrustedComputationReceipt.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__TrustedComputationReceiptClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    riskAssessment<T extends RiskAssessmentDefaultArgs<ExtArgs> = {}>(args?: Subset<T, RiskAssessmentDefaultArgs<ExtArgs>>): Prisma__RiskAssessmentClient<$Result.GetResult<Prisma.$RiskAssessmentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the TrustedComputationReceipt model
+   */
+  interface TrustedComputationReceiptFieldRefs {
+    readonly id: FieldRef<"TrustedComputationReceipt", 'String'>
+    readonly riskAssessmentId: FieldRef<"TrustedComputationReceipt", 'String'>
+    readonly receiptVersion: FieldRef<"TrustedComputationReceipt", 'String'>
+    readonly computationType: FieldRef<"TrustedComputationReceipt", 'String'>
+    readonly inputContractVersion: FieldRef<"TrustedComputationReceipt", 'String'>
+    readonly inputFingerprint: FieldRef<"TrustedComputationReceipt", 'String'>
+    readonly computationVersion: FieldRef<"TrustedComputationReceipt", 'String'>
+    readonly providerId: FieldRef<"TrustedComputationReceipt", 'String'>
+    readonly runtimeTrustLevel: FieldRef<"TrustedComputationReceipt", 'String'>
+    readonly resultFingerprint: FieldRef<"TrustedComputationReceipt", 'String'>
+    readonly executedAt: FieldRef<"TrustedComputationReceipt", 'DateTime'>
+    readonly attestationState: FieldRef<"TrustedComputationReceipt", 'String'>
+    readonly attestationReference: FieldRef<"TrustedComputationReceipt", 'String'>
+    readonly createdAt: FieldRef<"TrustedComputationReceipt", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * TrustedComputationReceipt findUnique
+   */
+  export type TrustedComputationReceiptFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TrustedComputationReceipt
+     */
+    select?: TrustedComputationReceiptSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TrustedComputationReceipt
+     */
+    omit?: TrustedComputationReceiptOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TrustedComputationReceiptInclude<ExtArgs> | null
+    /**
+     * Filter, which TrustedComputationReceipt to fetch.
+     */
+    where: TrustedComputationReceiptWhereUniqueInput
+  }
+
+  /**
+   * TrustedComputationReceipt findUniqueOrThrow
+   */
+  export type TrustedComputationReceiptFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TrustedComputationReceipt
+     */
+    select?: TrustedComputationReceiptSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TrustedComputationReceipt
+     */
+    omit?: TrustedComputationReceiptOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TrustedComputationReceiptInclude<ExtArgs> | null
+    /**
+     * Filter, which TrustedComputationReceipt to fetch.
+     */
+    where: TrustedComputationReceiptWhereUniqueInput
+  }
+
+  /**
+   * TrustedComputationReceipt findFirst
+   */
+  export type TrustedComputationReceiptFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TrustedComputationReceipt
+     */
+    select?: TrustedComputationReceiptSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TrustedComputationReceipt
+     */
+    omit?: TrustedComputationReceiptOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TrustedComputationReceiptInclude<ExtArgs> | null
+    /**
+     * Filter, which TrustedComputationReceipt to fetch.
+     */
+    where?: TrustedComputationReceiptWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TrustedComputationReceipts to fetch.
+     */
+    orderBy?: TrustedComputationReceiptOrderByWithRelationInput | TrustedComputationReceiptOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for TrustedComputationReceipts.
+     */
+    cursor?: TrustedComputationReceiptWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TrustedComputationReceipts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TrustedComputationReceipts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of TrustedComputationReceipts.
+     */
+    distinct?: TrustedComputationReceiptScalarFieldEnum | TrustedComputationReceiptScalarFieldEnum[]
+  }
+
+  /**
+   * TrustedComputationReceipt findFirstOrThrow
+   */
+  export type TrustedComputationReceiptFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TrustedComputationReceipt
+     */
+    select?: TrustedComputationReceiptSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TrustedComputationReceipt
+     */
+    omit?: TrustedComputationReceiptOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TrustedComputationReceiptInclude<ExtArgs> | null
+    /**
+     * Filter, which TrustedComputationReceipt to fetch.
+     */
+    where?: TrustedComputationReceiptWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TrustedComputationReceipts to fetch.
+     */
+    orderBy?: TrustedComputationReceiptOrderByWithRelationInput | TrustedComputationReceiptOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for TrustedComputationReceipts.
+     */
+    cursor?: TrustedComputationReceiptWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TrustedComputationReceipts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TrustedComputationReceipts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of TrustedComputationReceipts.
+     */
+    distinct?: TrustedComputationReceiptScalarFieldEnum | TrustedComputationReceiptScalarFieldEnum[]
+  }
+
+  /**
+   * TrustedComputationReceipt findMany
+   */
+  export type TrustedComputationReceiptFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TrustedComputationReceipt
+     */
+    select?: TrustedComputationReceiptSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TrustedComputationReceipt
+     */
+    omit?: TrustedComputationReceiptOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TrustedComputationReceiptInclude<ExtArgs> | null
+    /**
+     * Filter, which TrustedComputationReceipts to fetch.
+     */
+    where?: TrustedComputationReceiptWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TrustedComputationReceipts to fetch.
+     */
+    orderBy?: TrustedComputationReceiptOrderByWithRelationInput | TrustedComputationReceiptOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing TrustedComputationReceipts.
+     */
+    cursor?: TrustedComputationReceiptWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TrustedComputationReceipts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TrustedComputationReceipts.
+     */
+    skip?: number
+    distinct?: TrustedComputationReceiptScalarFieldEnum | TrustedComputationReceiptScalarFieldEnum[]
+  }
+
+  /**
+   * TrustedComputationReceipt create
+   */
+  export type TrustedComputationReceiptCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TrustedComputationReceipt
+     */
+    select?: TrustedComputationReceiptSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TrustedComputationReceipt
+     */
+    omit?: TrustedComputationReceiptOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TrustedComputationReceiptInclude<ExtArgs> | null
+    /**
+     * The data needed to create a TrustedComputationReceipt.
+     */
+    data: XOR<TrustedComputationReceiptCreateInput, TrustedComputationReceiptUncheckedCreateInput>
+  }
+
+  /**
+   * TrustedComputationReceipt createMany
+   */
+  export type TrustedComputationReceiptCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many TrustedComputationReceipts.
+     */
+    data: TrustedComputationReceiptCreateManyInput | TrustedComputationReceiptCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * TrustedComputationReceipt createManyAndReturn
+   */
+  export type TrustedComputationReceiptCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TrustedComputationReceipt
+     */
+    select?: TrustedComputationReceiptSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the TrustedComputationReceipt
+     */
+    omit?: TrustedComputationReceiptOmit<ExtArgs> | null
+    /**
+     * The data used to create many TrustedComputationReceipts.
+     */
+    data: TrustedComputationReceiptCreateManyInput | TrustedComputationReceiptCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TrustedComputationReceiptIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * TrustedComputationReceipt update
+   */
+  export type TrustedComputationReceiptUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TrustedComputationReceipt
+     */
+    select?: TrustedComputationReceiptSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TrustedComputationReceipt
+     */
+    omit?: TrustedComputationReceiptOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TrustedComputationReceiptInclude<ExtArgs> | null
+    /**
+     * The data needed to update a TrustedComputationReceipt.
+     */
+    data: XOR<TrustedComputationReceiptUpdateInput, TrustedComputationReceiptUncheckedUpdateInput>
+    /**
+     * Choose, which TrustedComputationReceipt to update.
+     */
+    where: TrustedComputationReceiptWhereUniqueInput
+  }
+
+  /**
+   * TrustedComputationReceipt updateMany
+   */
+  export type TrustedComputationReceiptUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update TrustedComputationReceipts.
+     */
+    data: XOR<TrustedComputationReceiptUpdateManyMutationInput, TrustedComputationReceiptUncheckedUpdateManyInput>
+    /**
+     * Filter which TrustedComputationReceipts to update
+     */
+    where?: TrustedComputationReceiptWhereInput
+    /**
+     * Limit how many TrustedComputationReceipts to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * TrustedComputationReceipt updateManyAndReturn
+   */
+  export type TrustedComputationReceiptUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TrustedComputationReceipt
+     */
+    select?: TrustedComputationReceiptSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the TrustedComputationReceipt
+     */
+    omit?: TrustedComputationReceiptOmit<ExtArgs> | null
+    /**
+     * The data used to update TrustedComputationReceipts.
+     */
+    data: XOR<TrustedComputationReceiptUpdateManyMutationInput, TrustedComputationReceiptUncheckedUpdateManyInput>
+    /**
+     * Filter which TrustedComputationReceipts to update
+     */
+    where?: TrustedComputationReceiptWhereInput
+    /**
+     * Limit how many TrustedComputationReceipts to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TrustedComputationReceiptIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * TrustedComputationReceipt upsert
+   */
+  export type TrustedComputationReceiptUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TrustedComputationReceipt
+     */
+    select?: TrustedComputationReceiptSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TrustedComputationReceipt
+     */
+    omit?: TrustedComputationReceiptOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TrustedComputationReceiptInclude<ExtArgs> | null
+    /**
+     * The filter to search for the TrustedComputationReceipt to update in case it exists.
+     */
+    where: TrustedComputationReceiptWhereUniqueInput
+    /**
+     * In case the TrustedComputationReceipt found by the `where` argument doesn't exist, create a new TrustedComputationReceipt with this data.
+     */
+    create: XOR<TrustedComputationReceiptCreateInput, TrustedComputationReceiptUncheckedCreateInput>
+    /**
+     * In case the TrustedComputationReceipt was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<TrustedComputationReceiptUpdateInput, TrustedComputationReceiptUncheckedUpdateInput>
+  }
+
+  /**
+   * TrustedComputationReceipt delete
+   */
+  export type TrustedComputationReceiptDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TrustedComputationReceipt
+     */
+    select?: TrustedComputationReceiptSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TrustedComputationReceipt
+     */
+    omit?: TrustedComputationReceiptOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TrustedComputationReceiptInclude<ExtArgs> | null
+    /**
+     * Filter which TrustedComputationReceipt to delete.
+     */
+    where: TrustedComputationReceiptWhereUniqueInput
+  }
+
+  /**
+   * TrustedComputationReceipt deleteMany
+   */
+  export type TrustedComputationReceiptDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which TrustedComputationReceipts to delete
+     */
+    where?: TrustedComputationReceiptWhereInput
+    /**
+     * Limit how many TrustedComputationReceipts to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * TrustedComputationReceipt without action
+   */
+  export type TrustedComputationReceiptDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TrustedComputationReceipt
+     */
+    select?: TrustedComputationReceiptSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TrustedComputationReceipt
+     */
+    omit?: TrustedComputationReceiptOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TrustedComputationReceiptInclude<ExtArgs> | null
   }
 
 
@@ -56834,6 +58123,26 @@ export namespace Prisma {
   export type RiskAssessmentScalarFieldEnum = (typeof RiskAssessmentScalarFieldEnum)[keyof typeof RiskAssessmentScalarFieldEnum]
 
 
+  export const TrustedComputationReceiptScalarFieldEnum: {
+    id: 'id',
+    riskAssessmentId: 'riskAssessmentId',
+    receiptVersion: 'receiptVersion',
+    computationType: 'computationType',
+    inputContractVersion: 'inputContractVersion',
+    inputFingerprint: 'inputFingerprint',
+    computationVersion: 'computationVersion',
+    providerId: 'providerId',
+    runtimeTrustLevel: 'runtimeTrustLevel',
+    resultFingerprint: 'resultFingerprint',
+    executedAt: 'executedAt',
+    attestationState: 'attestationState',
+    attestationReference: 'attestationReference',
+    createdAt: 'createdAt'
+  };
+
+  export type TrustedComputationReceiptScalarFieldEnum = (typeof TrustedComputationReceiptScalarFieldEnum)[keyof typeof TrustedComputationReceiptScalarFieldEnum]
+
+
   export const InfrastructureIntelligenceAssessmentScalarFieldEnum: {
     id: 'id',
     caseId: 'caseId',
@@ -60001,6 +61310,7 @@ export namespace Prisma {
     operationalResponsePlans?: OperationalResponsePlanListRelationFilter
     decisionPackages?: DecisionPackageListRelationFilter
     intelligenceAssessments?: InfrastructureIntelligenceAssessmentListRelationFilter
+    trustedComputationReceipt?: XOR<TrustedComputationReceiptNullableScalarRelationFilter, TrustedComputationReceiptWhereInput> | null
   }
 
   export type RiskAssessmentOrderByWithRelationInput = {
@@ -60020,6 +61330,7 @@ export namespace Prisma {
     operationalResponsePlans?: OperationalResponsePlanOrderByRelationAggregateInput
     decisionPackages?: DecisionPackageOrderByRelationAggregateInput
     intelligenceAssessments?: InfrastructureIntelligenceAssessmentOrderByRelationAggregateInput
+    trustedComputationReceipt?: TrustedComputationReceiptOrderByWithRelationInput
   }
 
   export type RiskAssessmentWhereUniqueInput = Prisma.AtLeast<{
@@ -60042,6 +61353,7 @@ export namespace Prisma {
     operationalResponsePlans?: OperationalResponsePlanListRelationFilter
     decisionPackages?: DecisionPackageListRelationFilter
     intelligenceAssessments?: InfrastructureIntelligenceAssessmentListRelationFilter
+    trustedComputationReceipt?: XOR<TrustedComputationReceiptNullableScalarRelationFilter, TrustedComputationReceiptWhereInput> | null
   }, "id" | "sourceFingerprint">
 
   export type RiskAssessmentOrderByWithAggregationInput = {
@@ -60078,6 +61390,106 @@ export namespace Prisma {
     assessmentVersion?: StringWithAggregatesFilter<"RiskAssessment"> | string
     sourceFingerprint?: StringWithAggregatesFilter<"RiskAssessment"> | string
     createdAt?: DateTimeWithAggregatesFilter<"RiskAssessment"> | Date | string
+  }
+
+  export type TrustedComputationReceiptWhereInput = {
+    AND?: TrustedComputationReceiptWhereInput | TrustedComputationReceiptWhereInput[]
+    OR?: TrustedComputationReceiptWhereInput[]
+    NOT?: TrustedComputationReceiptWhereInput | TrustedComputationReceiptWhereInput[]
+    id?: StringFilter<"TrustedComputationReceipt"> | string
+    riskAssessmentId?: StringFilter<"TrustedComputationReceipt"> | string
+    receiptVersion?: StringFilter<"TrustedComputationReceipt"> | string
+    computationType?: StringFilter<"TrustedComputationReceipt"> | string
+    inputContractVersion?: StringFilter<"TrustedComputationReceipt"> | string
+    inputFingerprint?: StringFilter<"TrustedComputationReceipt"> | string
+    computationVersion?: StringFilter<"TrustedComputationReceipt"> | string
+    providerId?: StringFilter<"TrustedComputationReceipt"> | string
+    runtimeTrustLevel?: StringFilter<"TrustedComputationReceipt"> | string
+    resultFingerprint?: StringFilter<"TrustedComputationReceipt"> | string
+    executedAt?: DateTimeFilter<"TrustedComputationReceipt"> | Date | string
+    attestationState?: StringFilter<"TrustedComputationReceipt"> | string
+    attestationReference?: StringNullableFilter<"TrustedComputationReceipt"> | string | null
+    createdAt?: DateTimeFilter<"TrustedComputationReceipt"> | Date | string
+    riskAssessment?: XOR<RiskAssessmentScalarRelationFilter, RiskAssessmentWhereInput>
+  }
+
+  export type TrustedComputationReceiptOrderByWithRelationInput = {
+    id?: SortOrder
+    riskAssessmentId?: SortOrder
+    receiptVersion?: SortOrder
+    computationType?: SortOrder
+    inputContractVersion?: SortOrder
+    inputFingerprint?: SortOrder
+    computationVersion?: SortOrder
+    providerId?: SortOrder
+    runtimeTrustLevel?: SortOrder
+    resultFingerprint?: SortOrder
+    executedAt?: SortOrder
+    attestationState?: SortOrder
+    attestationReference?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    riskAssessment?: RiskAssessmentOrderByWithRelationInput
+  }
+
+  export type TrustedComputationReceiptWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    riskAssessmentId?: string
+    AND?: TrustedComputationReceiptWhereInput | TrustedComputationReceiptWhereInput[]
+    OR?: TrustedComputationReceiptWhereInput[]
+    NOT?: TrustedComputationReceiptWhereInput | TrustedComputationReceiptWhereInput[]
+    receiptVersion?: StringFilter<"TrustedComputationReceipt"> | string
+    computationType?: StringFilter<"TrustedComputationReceipt"> | string
+    inputContractVersion?: StringFilter<"TrustedComputationReceipt"> | string
+    inputFingerprint?: StringFilter<"TrustedComputationReceipt"> | string
+    computationVersion?: StringFilter<"TrustedComputationReceipt"> | string
+    providerId?: StringFilter<"TrustedComputationReceipt"> | string
+    runtimeTrustLevel?: StringFilter<"TrustedComputationReceipt"> | string
+    resultFingerprint?: StringFilter<"TrustedComputationReceipt"> | string
+    executedAt?: DateTimeFilter<"TrustedComputationReceipt"> | Date | string
+    attestationState?: StringFilter<"TrustedComputationReceipt"> | string
+    attestationReference?: StringNullableFilter<"TrustedComputationReceipt"> | string | null
+    createdAt?: DateTimeFilter<"TrustedComputationReceipt"> | Date | string
+    riskAssessment?: XOR<RiskAssessmentScalarRelationFilter, RiskAssessmentWhereInput>
+  }, "id" | "riskAssessmentId">
+
+  export type TrustedComputationReceiptOrderByWithAggregationInput = {
+    id?: SortOrder
+    riskAssessmentId?: SortOrder
+    receiptVersion?: SortOrder
+    computationType?: SortOrder
+    inputContractVersion?: SortOrder
+    inputFingerprint?: SortOrder
+    computationVersion?: SortOrder
+    providerId?: SortOrder
+    runtimeTrustLevel?: SortOrder
+    resultFingerprint?: SortOrder
+    executedAt?: SortOrder
+    attestationState?: SortOrder
+    attestationReference?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    _count?: TrustedComputationReceiptCountOrderByAggregateInput
+    _max?: TrustedComputationReceiptMaxOrderByAggregateInput
+    _min?: TrustedComputationReceiptMinOrderByAggregateInput
+  }
+
+  export type TrustedComputationReceiptScalarWhereWithAggregatesInput = {
+    AND?: TrustedComputationReceiptScalarWhereWithAggregatesInput | TrustedComputationReceiptScalarWhereWithAggregatesInput[]
+    OR?: TrustedComputationReceiptScalarWhereWithAggregatesInput[]
+    NOT?: TrustedComputationReceiptScalarWhereWithAggregatesInput | TrustedComputationReceiptScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"TrustedComputationReceipt"> | string
+    riskAssessmentId?: StringWithAggregatesFilter<"TrustedComputationReceipt"> | string
+    receiptVersion?: StringWithAggregatesFilter<"TrustedComputationReceipt"> | string
+    computationType?: StringWithAggregatesFilter<"TrustedComputationReceipt"> | string
+    inputContractVersion?: StringWithAggregatesFilter<"TrustedComputationReceipt"> | string
+    inputFingerprint?: StringWithAggregatesFilter<"TrustedComputationReceipt"> | string
+    computationVersion?: StringWithAggregatesFilter<"TrustedComputationReceipt"> | string
+    providerId?: StringWithAggregatesFilter<"TrustedComputationReceipt"> | string
+    runtimeTrustLevel?: StringWithAggregatesFilter<"TrustedComputationReceipt"> | string
+    resultFingerprint?: StringWithAggregatesFilter<"TrustedComputationReceipt"> | string
+    executedAt?: DateTimeWithAggregatesFilter<"TrustedComputationReceipt"> | Date | string
+    attestationState?: StringWithAggregatesFilter<"TrustedComputationReceipt"> | string
+    attestationReference?: StringNullableWithAggregatesFilter<"TrustedComputationReceipt"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"TrustedComputationReceipt"> | Date | string
   }
 
   export type InfrastructureIntelligenceAssessmentWhereInput = {
@@ -64811,6 +66223,7 @@ export namespace Prisma {
     operationalResponsePlans?: OperationalResponsePlanCreateNestedManyWithoutRiskAssessmentInput
     decisionPackages?: DecisionPackageCreateNestedManyWithoutRiskAssessmentInput
     intelligenceAssessments?: InfrastructureIntelligenceAssessmentCreateNestedManyWithoutRiskAssessmentInput
+    trustedComputationReceipt?: TrustedComputationReceiptCreateNestedOneWithoutRiskAssessmentInput
   }
 
   export type RiskAssessmentUncheckedCreateInput = {
@@ -64828,6 +66241,7 @@ export namespace Prisma {
     operationalResponsePlans?: OperationalResponsePlanUncheckedCreateNestedManyWithoutRiskAssessmentInput
     decisionPackages?: DecisionPackageUncheckedCreateNestedManyWithoutRiskAssessmentInput
     intelligenceAssessments?: InfrastructureIntelligenceAssessmentUncheckedCreateNestedManyWithoutRiskAssessmentInput
+    trustedComputationReceipt?: TrustedComputationReceiptUncheckedCreateNestedOneWithoutRiskAssessmentInput
   }
 
   export type RiskAssessmentUpdateInput = {
@@ -64845,6 +66259,7 @@ export namespace Prisma {
     operationalResponsePlans?: OperationalResponsePlanUpdateManyWithoutRiskAssessmentNestedInput
     decisionPackages?: DecisionPackageUpdateManyWithoutRiskAssessmentNestedInput
     intelligenceAssessments?: InfrastructureIntelligenceAssessmentUpdateManyWithoutRiskAssessmentNestedInput
+    trustedComputationReceipt?: TrustedComputationReceiptUpdateOneWithoutRiskAssessmentNestedInput
   }
 
   export type RiskAssessmentUncheckedUpdateInput = {
@@ -64862,6 +66277,7 @@ export namespace Prisma {
     operationalResponsePlans?: OperationalResponsePlanUncheckedUpdateManyWithoutRiskAssessmentNestedInput
     decisionPackages?: DecisionPackageUncheckedUpdateManyWithoutRiskAssessmentNestedInput
     intelligenceAssessments?: InfrastructureIntelligenceAssessmentUncheckedUpdateManyWithoutRiskAssessmentNestedInput
+    trustedComputationReceipt?: TrustedComputationReceiptUncheckedUpdateOneWithoutRiskAssessmentNestedInput
   }
 
   export type RiskAssessmentCreateManyInput = {
@@ -64901,6 +66317,124 @@ export namespace Prisma {
     reasons?: JsonNullValueInput | InputJsonValue
     assessmentVersion?: StringFieldUpdateOperationsInput | string
     sourceFingerprint?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TrustedComputationReceiptCreateInput = {
+    id?: string
+    receiptVersion: string
+    computationType: string
+    inputContractVersion: string
+    inputFingerprint: string
+    computationVersion: string
+    providerId: string
+    runtimeTrustLevel: string
+    resultFingerprint: string
+    executedAt: Date | string
+    attestationState: string
+    attestationReference?: string | null
+    createdAt?: Date | string
+    riskAssessment: RiskAssessmentCreateNestedOneWithoutTrustedComputationReceiptInput
+  }
+
+  export type TrustedComputationReceiptUncheckedCreateInput = {
+    id?: string
+    riskAssessmentId: string
+    receiptVersion: string
+    computationType: string
+    inputContractVersion: string
+    inputFingerprint: string
+    computationVersion: string
+    providerId: string
+    runtimeTrustLevel: string
+    resultFingerprint: string
+    executedAt: Date | string
+    attestationState: string
+    attestationReference?: string | null
+    createdAt?: Date | string
+  }
+
+  export type TrustedComputationReceiptUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    receiptVersion?: StringFieldUpdateOperationsInput | string
+    computationType?: StringFieldUpdateOperationsInput | string
+    inputContractVersion?: StringFieldUpdateOperationsInput | string
+    inputFingerprint?: StringFieldUpdateOperationsInput | string
+    computationVersion?: StringFieldUpdateOperationsInput | string
+    providerId?: StringFieldUpdateOperationsInput | string
+    runtimeTrustLevel?: StringFieldUpdateOperationsInput | string
+    resultFingerprint?: StringFieldUpdateOperationsInput | string
+    executedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    attestationState?: StringFieldUpdateOperationsInput | string
+    attestationReference?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    riskAssessment?: RiskAssessmentUpdateOneRequiredWithoutTrustedComputationReceiptNestedInput
+  }
+
+  export type TrustedComputationReceiptUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    riskAssessmentId?: StringFieldUpdateOperationsInput | string
+    receiptVersion?: StringFieldUpdateOperationsInput | string
+    computationType?: StringFieldUpdateOperationsInput | string
+    inputContractVersion?: StringFieldUpdateOperationsInput | string
+    inputFingerprint?: StringFieldUpdateOperationsInput | string
+    computationVersion?: StringFieldUpdateOperationsInput | string
+    providerId?: StringFieldUpdateOperationsInput | string
+    runtimeTrustLevel?: StringFieldUpdateOperationsInput | string
+    resultFingerprint?: StringFieldUpdateOperationsInput | string
+    executedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    attestationState?: StringFieldUpdateOperationsInput | string
+    attestationReference?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TrustedComputationReceiptCreateManyInput = {
+    id?: string
+    riskAssessmentId: string
+    receiptVersion: string
+    computationType: string
+    inputContractVersion: string
+    inputFingerprint: string
+    computationVersion: string
+    providerId: string
+    runtimeTrustLevel: string
+    resultFingerprint: string
+    executedAt: Date | string
+    attestationState: string
+    attestationReference?: string | null
+    createdAt?: Date | string
+  }
+
+  export type TrustedComputationReceiptUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    receiptVersion?: StringFieldUpdateOperationsInput | string
+    computationType?: StringFieldUpdateOperationsInput | string
+    inputContractVersion?: StringFieldUpdateOperationsInput | string
+    inputFingerprint?: StringFieldUpdateOperationsInput | string
+    computationVersion?: StringFieldUpdateOperationsInput | string
+    providerId?: StringFieldUpdateOperationsInput | string
+    runtimeTrustLevel?: StringFieldUpdateOperationsInput | string
+    resultFingerprint?: StringFieldUpdateOperationsInput | string
+    executedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    attestationState?: StringFieldUpdateOperationsInput | string
+    attestationReference?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TrustedComputationReceiptUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    riskAssessmentId?: StringFieldUpdateOperationsInput | string
+    receiptVersion?: StringFieldUpdateOperationsInput | string
+    computationType?: StringFieldUpdateOperationsInput | string
+    inputContractVersion?: StringFieldUpdateOperationsInput | string
+    inputFingerprint?: StringFieldUpdateOperationsInput | string
+    computationVersion?: StringFieldUpdateOperationsInput | string
+    providerId?: StringFieldUpdateOperationsInput | string
+    runtimeTrustLevel?: StringFieldUpdateOperationsInput | string
+    resultFingerprint?: StringFieldUpdateOperationsInput | string
+    executedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    attestationState?: StringFieldUpdateOperationsInput | string
+    attestationReference?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -69591,6 +71125,11 @@ export namespace Prisma {
     isNot?: InspectionWhereInput
   }
 
+  export type TrustedComputationReceiptNullableScalarRelationFilter = {
+    is?: TrustedComputationReceiptWhereInput | null
+    isNot?: TrustedComputationReceiptWhereInput | null
+  }
+
   export type RiskAssessmentCountOrderByAggregateInput = {
     id?: SortOrder
     caseId?: SortOrder
@@ -69657,6 +71196,62 @@ export namespace Prisma {
     _max?: NestedEnumPriorityLevelFilter<$PrismaModel>
   }
 
+  export type RiskAssessmentScalarRelationFilter = {
+    is?: RiskAssessmentWhereInput
+    isNot?: RiskAssessmentWhereInput
+  }
+
+  export type TrustedComputationReceiptCountOrderByAggregateInput = {
+    id?: SortOrder
+    riskAssessmentId?: SortOrder
+    receiptVersion?: SortOrder
+    computationType?: SortOrder
+    inputContractVersion?: SortOrder
+    inputFingerprint?: SortOrder
+    computationVersion?: SortOrder
+    providerId?: SortOrder
+    runtimeTrustLevel?: SortOrder
+    resultFingerprint?: SortOrder
+    executedAt?: SortOrder
+    attestationState?: SortOrder
+    attestationReference?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type TrustedComputationReceiptMaxOrderByAggregateInput = {
+    id?: SortOrder
+    riskAssessmentId?: SortOrder
+    receiptVersion?: SortOrder
+    computationType?: SortOrder
+    inputContractVersion?: SortOrder
+    inputFingerprint?: SortOrder
+    computationVersion?: SortOrder
+    providerId?: SortOrder
+    runtimeTrustLevel?: SortOrder
+    resultFingerprint?: SortOrder
+    executedAt?: SortOrder
+    attestationState?: SortOrder
+    attestationReference?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type TrustedComputationReceiptMinOrderByAggregateInput = {
+    id?: SortOrder
+    riskAssessmentId?: SortOrder
+    receiptVersion?: SortOrder
+    computationType?: SortOrder
+    inputContractVersion?: SortOrder
+    inputFingerprint?: SortOrder
+    computationVersion?: SortOrder
+    providerId?: SortOrder
+    runtimeTrustLevel?: SortOrder
+    resultFingerprint?: SortOrder
+    executedAt?: SortOrder
+    attestationState?: SortOrder
+    attestationReference?: SortOrder
+    createdAt?: SortOrder
+  }
+
   export type EnumIntelligenceAssessmentStatusFilter<$PrismaModel = never> = {
     equals?: $Enums.IntelligenceAssessmentStatus | EnumIntelligenceAssessmentStatusFieldRefInput<$PrismaModel>
     in?: $Enums.IntelligenceAssessmentStatus[] | ListEnumIntelligenceAssessmentStatusFieldRefInput<$PrismaModel>
@@ -69673,11 +71268,6 @@ export namespace Prisma {
     gt?: number | FloatFieldRefInput<$PrismaModel>
     gte?: number | FloatFieldRefInput<$PrismaModel>
     not?: NestedFloatNullableFilter<$PrismaModel> | number | null
-  }
-
-  export type RiskAssessmentScalarRelationFilter = {
-    is?: RiskAssessmentWhereInput
-    isNot?: RiskAssessmentWhereInput
   }
 
   export type InfrastructureIntelligenceAssessmentCountOrderByAggregateInput = {
@@ -76064,6 +77654,12 @@ export namespace Prisma {
     connect?: InfrastructureIntelligenceAssessmentWhereUniqueInput | InfrastructureIntelligenceAssessmentWhereUniqueInput[]
   }
 
+  export type TrustedComputationReceiptCreateNestedOneWithoutRiskAssessmentInput = {
+    create?: XOR<TrustedComputationReceiptCreateWithoutRiskAssessmentInput, TrustedComputationReceiptUncheckedCreateWithoutRiskAssessmentInput>
+    connectOrCreate?: TrustedComputationReceiptCreateOrConnectWithoutRiskAssessmentInput
+    connect?: TrustedComputationReceiptWhereUniqueInput
+  }
+
   export type OperationalResponsePlanUncheckedCreateNestedManyWithoutRiskAssessmentInput = {
     create?: XOR<OperationalResponsePlanCreateWithoutRiskAssessmentInput, OperationalResponsePlanUncheckedCreateWithoutRiskAssessmentInput> | OperationalResponsePlanCreateWithoutRiskAssessmentInput[] | OperationalResponsePlanUncheckedCreateWithoutRiskAssessmentInput[]
     connectOrCreate?: OperationalResponsePlanCreateOrConnectWithoutRiskAssessmentInput | OperationalResponsePlanCreateOrConnectWithoutRiskAssessmentInput[]
@@ -76083,6 +77679,12 @@ export namespace Prisma {
     connectOrCreate?: InfrastructureIntelligenceAssessmentCreateOrConnectWithoutRiskAssessmentInput | InfrastructureIntelligenceAssessmentCreateOrConnectWithoutRiskAssessmentInput[]
     createMany?: InfrastructureIntelligenceAssessmentCreateManyRiskAssessmentInputEnvelope
     connect?: InfrastructureIntelligenceAssessmentWhereUniqueInput | InfrastructureIntelligenceAssessmentWhereUniqueInput[]
+  }
+
+  export type TrustedComputationReceiptUncheckedCreateNestedOneWithoutRiskAssessmentInput = {
+    create?: XOR<TrustedComputationReceiptCreateWithoutRiskAssessmentInput, TrustedComputationReceiptUncheckedCreateWithoutRiskAssessmentInput>
+    connectOrCreate?: TrustedComputationReceiptCreateOrConnectWithoutRiskAssessmentInput
+    connect?: TrustedComputationReceiptWhereUniqueInput
   }
 
   export type EnumRiskLevelFieldUpdateOperationsInput = {
@@ -76151,6 +77753,16 @@ export namespace Prisma {
     deleteMany?: InfrastructureIntelligenceAssessmentScalarWhereInput | InfrastructureIntelligenceAssessmentScalarWhereInput[]
   }
 
+  export type TrustedComputationReceiptUpdateOneWithoutRiskAssessmentNestedInput = {
+    create?: XOR<TrustedComputationReceiptCreateWithoutRiskAssessmentInput, TrustedComputationReceiptUncheckedCreateWithoutRiskAssessmentInput>
+    connectOrCreate?: TrustedComputationReceiptCreateOrConnectWithoutRiskAssessmentInput
+    upsert?: TrustedComputationReceiptUpsertWithoutRiskAssessmentInput
+    disconnect?: TrustedComputationReceiptWhereInput | boolean
+    delete?: TrustedComputationReceiptWhereInput | boolean
+    connect?: TrustedComputationReceiptWhereUniqueInput
+    update?: XOR<XOR<TrustedComputationReceiptUpdateToOneWithWhereWithoutRiskAssessmentInput, TrustedComputationReceiptUpdateWithoutRiskAssessmentInput>, TrustedComputationReceiptUncheckedUpdateWithoutRiskAssessmentInput>
+  }
+
   export type OperationalResponsePlanUncheckedUpdateManyWithoutRiskAssessmentNestedInput = {
     create?: XOR<OperationalResponsePlanCreateWithoutRiskAssessmentInput, OperationalResponsePlanUncheckedCreateWithoutRiskAssessmentInput> | OperationalResponsePlanCreateWithoutRiskAssessmentInput[] | OperationalResponsePlanUncheckedCreateWithoutRiskAssessmentInput[]
     connectOrCreate?: OperationalResponsePlanCreateOrConnectWithoutRiskAssessmentInput | OperationalResponsePlanCreateOrConnectWithoutRiskAssessmentInput[]
@@ -76191,6 +77803,30 @@ export namespace Prisma {
     update?: InfrastructureIntelligenceAssessmentUpdateWithWhereUniqueWithoutRiskAssessmentInput | InfrastructureIntelligenceAssessmentUpdateWithWhereUniqueWithoutRiskAssessmentInput[]
     updateMany?: InfrastructureIntelligenceAssessmentUpdateManyWithWhereWithoutRiskAssessmentInput | InfrastructureIntelligenceAssessmentUpdateManyWithWhereWithoutRiskAssessmentInput[]
     deleteMany?: InfrastructureIntelligenceAssessmentScalarWhereInput | InfrastructureIntelligenceAssessmentScalarWhereInput[]
+  }
+
+  export type TrustedComputationReceiptUncheckedUpdateOneWithoutRiskAssessmentNestedInput = {
+    create?: XOR<TrustedComputationReceiptCreateWithoutRiskAssessmentInput, TrustedComputationReceiptUncheckedCreateWithoutRiskAssessmentInput>
+    connectOrCreate?: TrustedComputationReceiptCreateOrConnectWithoutRiskAssessmentInput
+    upsert?: TrustedComputationReceiptUpsertWithoutRiskAssessmentInput
+    disconnect?: TrustedComputationReceiptWhereInput | boolean
+    delete?: TrustedComputationReceiptWhereInput | boolean
+    connect?: TrustedComputationReceiptWhereUniqueInput
+    update?: XOR<XOR<TrustedComputationReceiptUpdateToOneWithWhereWithoutRiskAssessmentInput, TrustedComputationReceiptUpdateWithoutRiskAssessmentInput>, TrustedComputationReceiptUncheckedUpdateWithoutRiskAssessmentInput>
+  }
+
+  export type RiskAssessmentCreateNestedOneWithoutTrustedComputationReceiptInput = {
+    create?: XOR<RiskAssessmentCreateWithoutTrustedComputationReceiptInput, RiskAssessmentUncheckedCreateWithoutTrustedComputationReceiptInput>
+    connectOrCreate?: RiskAssessmentCreateOrConnectWithoutTrustedComputationReceiptInput
+    connect?: RiskAssessmentWhereUniqueInput
+  }
+
+  export type RiskAssessmentUpdateOneRequiredWithoutTrustedComputationReceiptNestedInput = {
+    create?: XOR<RiskAssessmentCreateWithoutTrustedComputationReceiptInput, RiskAssessmentUncheckedCreateWithoutTrustedComputationReceiptInput>
+    connectOrCreate?: RiskAssessmentCreateOrConnectWithoutTrustedComputationReceiptInput
+    upsert?: RiskAssessmentUpsertWithoutTrustedComputationReceiptInput
+    connect?: RiskAssessmentWhereUniqueInput
+    update?: XOR<XOR<RiskAssessmentUpdateToOneWithWhereWithoutTrustedComputationReceiptInput, RiskAssessmentUpdateWithoutTrustedComputationReceiptInput>, RiskAssessmentUncheckedUpdateWithoutTrustedComputationReceiptInput>
   }
 
   export type InfrastructureIntelligenceReconciliationCreateNestedManyWithoutIntelligenceAssessmentInput = {
@@ -89605,6 +91241,7 @@ export namespace Prisma {
     operationalResponsePlans?: OperationalResponsePlanCreateNestedManyWithoutRiskAssessmentInput
     decisionPackages?: DecisionPackageCreateNestedManyWithoutRiskAssessmentInput
     intelligenceAssessments?: InfrastructureIntelligenceAssessmentCreateNestedManyWithoutRiskAssessmentInput
+    trustedComputationReceipt?: TrustedComputationReceiptCreateNestedOneWithoutRiskAssessmentInput
   }
 
   export type RiskAssessmentUncheckedCreateWithoutCaseInput = {
@@ -89621,6 +91258,7 @@ export namespace Prisma {
     operationalResponsePlans?: OperationalResponsePlanUncheckedCreateNestedManyWithoutRiskAssessmentInput
     decisionPackages?: DecisionPackageUncheckedCreateNestedManyWithoutRiskAssessmentInput
     intelligenceAssessments?: InfrastructureIntelligenceAssessmentUncheckedCreateNestedManyWithoutRiskAssessmentInput
+    trustedComputationReceipt?: TrustedComputationReceiptUncheckedCreateNestedOneWithoutRiskAssessmentInput
   }
 
   export type RiskAssessmentCreateOrConnectWithoutCaseInput = {
@@ -92862,6 +94500,7 @@ export namespace Prisma {
     operationalResponsePlans?: OperationalResponsePlanCreateNestedManyWithoutRiskAssessmentInput
     decisionPackages?: DecisionPackageCreateNestedManyWithoutRiskAssessmentInput
     intelligenceAssessments?: InfrastructureIntelligenceAssessmentCreateNestedManyWithoutRiskAssessmentInput
+    trustedComputationReceipt?: TrustedComputationReceiptCreateNestedOneWithoutRiskAssessmentInput
   }
 
   export type RiskAssessmentUncheckedCreateWithoutInspectionInput = {
@@ -92878,6 +94517,7 @@ export namespace Prisma {
     operationalResponsePlans?: OperationalResponsePlanUncheckedCreateNestedManyWithoutRiskAssessmentInput
     decisionPackages?: DecisionPackageUncheckedCreateNestedManyWithoutRiskAssessmentInput
     intelligenceAssessments?: InfrastructureIntelligenceAssessmentUncheckedCreateNestedManyWithoutRiskAssessmentInput
+    trustedComputationReceipt?: TrustedComputationReceiptUncheckedCreateNestedOneWithoutRiskAssessmentInput
   }
 
   export type RiskAssessmentCreateOrConnectWithoutInspectionInput = {
@@ -93516,6 +95156,43 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type TrustedComputationReceiptCreateWithoutRiskAssessmentInput = {
+    id?: string
+    receiptVersion: string
+    computationType: string
+    inputContractVersion: string
+    inputFingerprint: string
+    computationVersion: string
+    providerId: string
+    runtimeTrustLevel: string
+    resultFingerprint: string
+    executedAt: Date | string
+    attestationState: string
+    attestationReference?: string | null
+    createdAt?: Date | string
+  }
+
+  export type TrustedComputationReceiptUncheckedCreateWithoutRiskAssessmentInput = {
+    id?: string
+    receiptVersion: string
+    computationType: string
+    inputContractVersion: string
+    inputFingerprint: string
+    computationVersion: string
+    providerId: string
+    runtimeTrustLevel: string
+    resultFingerprint: string
+    executedAt: Date | string
+    attestationState: string
+    attestationReference?: string | null
+    createdAt?: Date | string
+  }
+
+  export type TrustedComputationReceiptCreateOrConnectWithoutRiskAssessmentInput = {
+    where: TrustedComputationReceiptWhereUniqueInput
+    create: XOR<TrustedComputationReceiptCreateWithoutRiskAssessmentInput, TrustedComputationReceiptUncheckedCreateWithoutRiskAssessmentInput>
+  }
+
   export type CaseUpsertWithoutRiskAssessmentsInput = {
     update: XOR<CaseUpdateWithoutRiskAssessmentsInput, CaseUncheckedUpdateWithoutRiskAssessmentsInput>
     create: XOR<CaseCreateWithoutRiskAssessmentsInput, CaseUncheckedCreateWithoutRiskAssessmentsInput>
@@ -93678,6 +95355,133 @@ export namespace Prisma {
     data: XOR<InfrastructureIntelligenceAssessmentUpdateManyMutationInput, InfrastructureIntelligenceAssessmentUncheckedUpdateManyWithoutRiskAssessmentInput>
   }
 
+  export type TrustedComputationReceiptUpsertWithoutRiskAssessmentInput = {
+    update: XOR<TrustedComputationReceiptUpdateWithoutRiskAssessmentInput, TrustedComputationReceiptUncheckedUpdateWithoutRiskAssessmentInput>
+    create: XOR<TrustedComputationReceiptCreateWithoutRiskAssessmentInput, TrustedComputationReceiptUncheckedCreateWithoutRiskAssessmentInput>
+    where?: TrustedComputationReceiptWhereInput
+  }
+
+  export type TrustedComputationReceiptUpdateToOneWithWhereWithoutRiskAssessmentInput = {
+    where?: TrustedComputationReceiptWhereInput
+    data: XOR<TrustedComputationReceiptUpdateWithoutRiskAssessmentInput, TrustedComputationReceiptUncheckedUpdateWithoutRiskAssessmentInput>
+  }
+
+  export type TrustedComputationReceiptUpdateWithoutRiskAssessmentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    receiptVersion?: StringFieldUpdateOperationsInput | string
+    computationType?: StringFieldUpdateOperationsInput | string
+    inputContractVersion?: StringFieldUpdateOperationsInput | string
+    inputFingerprint?: StringFieldUpdateOperationsInput | string
+    computationVersion?: StringFieldUpdateOperationsInput | string
+    providerId?: StringFieldUpdateOperationsInput | string
+    runtimeTrustLevel?: StringFieldUpdateOperationsInput | string
+    resultFingerprint?: StringFieldUpdateOperationsInput | string
+    executedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    attestationState?: StringFieldUpdateOperationsInput | string
+    attestationReference?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TrustedComputationReceiptUncheckedUpdateWithoutRiskAssessmentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    receiptVersion?: StringFieldUpdateOperationsInput | string
+    computationType?: StringFieldUpdateOperationsInput | string
+    inputContractVersion?: StringFieldUpdateOperationsInput | string
+    inputFingerprint?: StringFieldUpdateOperationsInput | string
+    computationVersion?: StringFieldUpdateOperationsInput | string
+    providerId?: StringFieldUpdateOperationsInput | string
+    runtimeTrustLevel?: StringFieldUpdateOperationsInput | string
+    resultFingerprint?: StringFieldUpdateOperationsInput | string
+    executedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    attestationState?: StringFieldUpdateOperationsInput | string
+    attestationReference?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RiskAssessmentCreateWithoutTrustedComputationReceiptInput = {
+    id?: string
+    riskScore: number
+    riskLevel: $Enums.RiskLevel
+    priorityLevel: $Enums.PriorityLevel
+    reasonCodes: JsonNullValueInput | InputJsonValue
+    reasons: JsonNullValueInput | InputJsonValue
+    assessmentVersion?: string
+    sourceFingerprint: string
+    createdAt?: Date | string
+    case: CaseCreateNestedOneWithoutRiskAssessmentsInput
+    inspection: InspectionCreateNestedOneWithoutRiskAssessmentsInput
+    operationalResponsePlans?: OperationalResponsePlanCreateNestedManyWithoutRiskAssessmentInput
+    decisionPackages?: DecisionPackageCreateNestedManyWithoutRiskAssessmentInput
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentCreateNestedManyWithoutRiskAssessmentInput
+  }
+
+  export type RiskAssessmentUncheckedCreateWithoutTrustedComputationReceiptInput = {
+    id?: string
+    caseId: string
+    inspectionId: string
+    riskScore: number
+    riskLevel: $Enums.RiskLevel
+    priorityLevel: $Enums.PriorityLevel
+    reasonCodes: JsonNullValueInput | InputJsonValue
+    reasons: JsonNullValueInput | InputJsonValue
+    assessmentVersion?: string
+    sourceFingerprint: string
+    createdAt?: Date | string
+    operationalResponsePlans?: OperationalResponsePlanUncheckedCreateNestedManyWithoutRiskAssessmentInput
+    decisionPackages?: DecisionPackageUncheckedCreateNestedManyWithoutRiskAssessmentInput
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentUncheckedCreateNestedManyWithoutRiskAssessmentInput
+  }
+
+  export type RiskAssessmentCreateOrConnectWithoutTrustedComputationReceiptInput = {
+    where: RiskAssessmentWhereUniqueInput
+    create: XOR<RiskAssessmentCreateWithoutTrustedComputationReceiptInput, RiskAssessmentUncheckedCreateWithoutTrustedComputationReceiptInput>
+  }
+
+  export type RiskAssessmentUpsertWithoutTrustedComputationReceiptInput = {
+    update: XOR<RiskAssessmentUpdateWithoutTrustedComputationReceiptInput, RiskAssessmentUncheckedUpdateWithoutTrustedComputationReceiptInput>
+    create: XOR<RiskAssessmentCreateWithoutTrustedComputationReceiptInput, RiskAssessmentUncheckedCreateWithoutTrustedComputationReceiptInput>
+    where?: RiskAssessmentWhereInput
+  }
+
+  export type RiskAssessmentUpdateToOneWithWhereWithoutTrustedComputationReceiptInput = {
+    where?: RiskAssessmentWhereInput
+    data: XOR<RiskAssessmentUpdateWithoutTrustedComputationReceiptInput, RiskAssessmentUncheckedUpdateWithoutTrustedComputationReceiptInput>
+  }
+
+  export type RiskAssessmentUpdateWithoutTrustedComputationReceiptInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    riskScore?: IntFieldUpdateOperationsInput | number
+    riskLevel?: EnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel
+    priorityLevel?: EnumPriorityLevelFieldUpdateOperationsInput | $Enums.PriorityLevel
+    reasonCodes?: JsonNullValueInput | InputJsonValue
+    reasons?: JsonNullValueInput | InputJsonValue
+    assessmentVersion?: StringFieldUpdateOperationsInput | string
+    sourceFingerprint?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    case?: CaseUpdateOneRequiredWithoutRiskAssessmentsNestedInput
+    inspection?: InspectionUpdateOneRequiredWithoutRiskAssessmentsNestedInput
+    operationalResponsePlans?: OperationalResponsePlanUpdateManyWithoutRiskAssessmentNestedInput
+    decisionPackages?: DecisionPackageUpdateManyWithoutRiskAssessmentNestedInput
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentUpdateManyWithoutRiskAssessmentNestedInput
+  }
+
+  export type RiskAssessmentUncheckedUpdateWithoutTrustedComputationReceiptInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    caseId?: StringFieldUpdateOperationsInput | string
+    inspectionId?: StringFieldUpdateOperationsInput | string
+    riskScore?: IntFieldUpdateOperationsInput | number
+    riskLevel?: EnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel
+    priorityLevel?: EnumPriorityLevelFieldUpdateOperationsInput | $Enums.PriorityLevel
+    reasonCodes?: JsonNullValueInput | InputJsonValue
+    reasons?: JsonNullValueInput | InputJsonValue
+    assessmentVersion?: StringFieldUpdateOperationsInput | string
+    sourceFingerprint?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    operationalResponsePlans?: OperationalResponsePlanUncheckedUpdateManyWithoutRiskAssessmentNestedInput
+    decisionPackages?: DecisionPackageUncheckedUpdateManyWithoutRiskAssessmentNestedInput
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentUncheckedUpdateManyWithoutRiskAssessmentNestedInput
+  }
+
   export type InfrastructureIntelligenceReconciliationCreateWithoutIntelligenceAssessmentInput = {
     id?: string
     contractVersion: string
@@ -93830,6 +95634,7 @@ export namespace Prisma {
     inspection: InspectionCreateNestedOneWithoutRiskAssessmentsInput
     operationalResponsePlans?: OperationalResponsePlanCreateNestedManyWithoutRiskAssessmentInput
     decisionPackages?: DecisionPackageCreateNestedManyWithoutRiskAssessmentInput
+    trustedComputationReceipt?: TrustedComputationReceiptCreateNestedOneWithoutRiskAssessmentInput
   }
 
   export type RiskAssessmentUncheckedCreateWithoutIntelligenceAssessmentsInput = {
@@ -93846,6 +95651,7 @@ export namespace Prisma {
     createdAt?: Date | string
     operationalResponsePlans?: OperationalResponsePlanUncheckedCreateNestedManyWithoutRiskAssessmentInput
     decisionPackages?: DecisionPackageUncheckedCreateNestedManyWithoutRiskAssessmentInput
+    trustedComputationReceipt?: TrustedComputationReceiptUncheckedCreateNestedOneWithoutRiskAssessmentInput
   }
 
   export type RiskAssessmentCreateOrConnectWithoutIntelligenceAssessmentsInput = {
@@ -94008,6 +95814,7 @@ export namespace Prisma {
     inspection?: InspectionUpdateOneRequiredWithoutRiskAssessmentsNestedInput
     operationalResponsePlans?: OperationalResponsePlanUpdateManyWithoutRiskAssessmentNestedInput
     decisionPackages?: DecisionPackageUpdateManyWithoutRiskAssessmentNestedInput
+    trustedComputationReceipt?: TrustedComputationReceiptUpdateOneWithoutRiskAssessmentNestedInput
   }
 
   export type RiskAssessmentUncheckedUpdateWithoutIntelligenceAssessmentsInput = {
@@ -94024,6 +95831,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     operationalResponsePlans?: OperationalResponsePlanUncheckedUpdateManyWithoutRiskAssessmentNestedInput
     decisionPackages?: DecisionPackageUncheckedUpdateManyWithoutRiskAssessmentNestedInput
+    trustedComputationReceipt?: TrustedComputationReceiptUncheckedUpdateOneWithoutRiskAssessmentNestedInput
   }
 
   export type InfrastructureIntelligenceAssessmentCreateWithoutGovernanceReconciliationsInput = {
@@ -94345,6 +96153,7 @@ export namespace Prisma {
     inspection: InspectionCreateNestedOneWithoutRiskAssessmentsInput
     decisionPackages?: DecisionPackageCreateNestedManyWithoutRiskAssessmentInput
     intelligenceAssessments?: InfrastructureIntelligenceAssessmentCreateNestedManyWithoutRiskAssessmentInput
+    trustedComputationReceipt?: TrustedComputationReceiptCreateNestedOneWithoutRiskAssessmentInput
   }
 
   export type RiskAssessmentUncheckedCreateWithoutOperationalResponsePlansInput = {
@@ -94361,6 +96170,7 @@ export namespace Prisma {
     createdAt?: Date | string
     decisionPackages?: DecisionPackageUncheckedCreateNestedManyWithoutRiskAssessmentInput
     intelligenceAssessments?: InfrastructureIntelligenceAssessmentUncheckedCreateNestedManyWithoutRiskAssessmentInput
+    trustedComputationReceipt?: TrustedComputationReceiptUncheckedCreateNestedOneWithoutRiskAssessmentInput
   }
 
   export type RiskAssessmentCreateOrConnectWithoutOperationalResponsePlansInput = {
@@ -94596,6 +96406,7 @@ export namespace Prisma {
     inspection?: InspectionUpdateOneRequiredWithoutRiskAssessmentsNestedInput
     decisionPackages?: DecisionPackageUpdateManyWithoutRiskAssessmentNestedInput
     intelligenceAssessments?: InfrastructureIntelligenceAssessmentUpdateManyWithoutRiskAssessmentNestedInput
+    trustedComputationReceipt?: TrustedComputationReceiptUpdateOneWithoutRiskAssessmentNestedInput
   }
 
   export type RiskAssessmentUncheckedUpdateWithoutOperationalResponsePlansInput = {
@@ -94612,6 +96423,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     decisionPackages?: DecisionPackageUncheckedUpdateManyWithoutRiskAssessmentNestedInput
     intelligenceAssessments?: InfrastructureIntelligenceAssessmentUncheckedUpdateManyWithoutRiskAssessmentNestedInput
+    trustedComputationReceipt?: TrustedComputationReceiptUncheckedUpdateOneWithoutRiskAssessmentNestedInput
   }
 
   export type OrpDecisionUpsertWithWhereUniqueWithoutOrpInput = {
@@ -94860,6 +96672,7 @@ export namespace Prisma {
     inspection: InspectionCreateNestedOneWithoutRiskAssessmentsInput
     operationalResponsePlans?: OperationalResponsePlanCreateNestedManyWithoutRiskAssessmentInput
     intelligenceAssessments?: InfrastructureIntelligenceAssessmentCreateNestedManyWithoutRiskAssessmentInput
+    trustedComputationReceipt?: TrustedComputationReceiptCreateNestedOneWithoutRiskAssessmentInput
   }
 
   export type RiskAssessmentUncheckedCreateWithoutDecisionPackagesInput = {
@@ -94876,6 +96689,7 @@ export namespace Prisma {
     createdAt?: Date | string
     operationalResponsePlans?: OperationalResponsePlanUncheckedCreateNestedManyWithoutRiskAssessmentInput
     intelligenceAssessments?: InfrastructureIntelligenceAssessmentUncheckedCreateNestedManyWithoutRiskAssessmentInput
+    trustedComputationReceipt?: TrustedComputationReceiptUncheckedCreateNestedOneWithoutRiskAssessmentInput
   }
 
   export type RiskAssessmentCreateOrConnectWithoutDecisionPackagesInput = {
@@ -95189,6 +97003,7 @@ export namespace Prisma {
     inspection?: InspectionUpdateOneRequiredWithoutRiskAssessmentsNestedInput
     operationalResponsePlans?: OperationalResponsePlanUpdateManyWithoutRiskAssessmentNestedInput
     intelligenceAssessments?: InfrastructureIntelligenceAssessmentUpdateManyWithoutRiskAssessmentNestedInput
+    trustedComputationReceipt?: TrustedComputationReceiptUpdateOneWithoutRiskAssessmentNestedInput
   }
 
   export type RiskAssessmentUncheckedUpdateWithoutDecisionPackagesInput = {
@@ -95205,6 +97020,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     operationalResponsePlans?: OperationalResponsePlanUncheckedUpdateManyWithoutRiskAssessmentNestedInput
     intelligenceAssessments?: InfrastructureIntelligenceAssessmentUncheckedUpdateManyWithoutRiskAssessmentNestedInput
+    trustedComputationReceipt?: TrustedComputationReceiptUncheckedUpdateOneWithoutRiskAssessmentNestedInput
   }
 
   export type UserUpsertWithoutPreparedDecisionPackagesInput = {
@@ -113019,6 +114835,7 @@ export namespace Prisma {
     operationalResponsePlans?: OperationalResponsePlanUpdateManyWithoutRiskAssessmentNestedInput
     decisionPackages?: DecisionPackageUpdateManyWithoutRiskAssessmentNestedInput
     intelligenceAssessments?: InfrastructureIntelligenceAssessmentUpdateManyWithoutRiskAssessmentNestedInput
+    trustedComputationReceipt?: TrustedComputationReceiptUpdateOneWithoutRiskAssessmentNestedInput
   }
 
   export type RiskAssessmentUncheckedUpdateWithoutCaseInput = {
@@ -113035,6 +114852,7 @@ export namespace Prisma {
     operationalResponsePlans?: OperationalResponsePlanUncheckedUpdateManyWithoutRiskAssessmentNestedInput
     decisionPackages?: DecisionPackageUncheckedUpdateManyWithoutRiskAssessmentNestedInput
     intelligenceAssessments?: InfrastructureIntelligenceAssessmentUncheckedUpdateManyWithoutRiskAssessmentNestedInput
+    trustedComputationReceipt?: TrustedComputationReceiptUncheckedUpdateOneWithoutRiskAssessmentNestedInput
   }
 
   export type RiskAssessmentUncheckedUpdateManyWithoutCaseInput = {
@@ -113667,6 +115485,7 @@ export namespace Prisma {
     operationalResponsePlans?: OperationalResponsePlanUpdateManyWithoutRiskAssessmentNestedInput
     decisionPackages?: DecisionPackageUpdateManyWithoutRiskAssessmentNestedInput
     intelligenceAssessments?: InfrastructureIntelligenceAssessmentUpdateManyWithoutRiskAssessmentNestedInput
+    trustedComputationReceipt?: TrustedComputationReceiptUpdateOneWithoutRiskAssessmentNestedInput
   }
 
   export type RiskAssessmentUncheckedUpdateWithoutInspectionInput = {
@@ -113683,6 +115502,7 @@ export namespace Prisma {
     operationalResponsePlans?: OperationalResponsePlanUncheckedUpdateManyWithoutRiskAssessmentNestedInput
     decisionPackages?: DecisionPackageUncheckedUpdateManyWithoutRiskAssessmentNestedInput
     intelligenceAssessments?: InfrastructureIntelligenceAssessmentUncheckedUpdateManyWithoutRiskAssessmentNestedInput
+    trustedComputationReceipt?: TrustedComputationReceiptUncheckedUpdateOneWithoutRiskAssessmentNestedInput
   }
 
   export type RiskAssessmentUncheckedUpdateManyWithoutInspectionInput = {

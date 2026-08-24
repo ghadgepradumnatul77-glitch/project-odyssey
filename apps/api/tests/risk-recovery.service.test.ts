@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { CaseStatus, Prisma } from '../src/generated/prisma';
 
-const mocks = vi.hoisted(() => ({ scope: vi.fn(), inspectionFind: vi.fn(), riskFind: vi.fn(), caseFind: vi.fn(), riskCreate: vi.fn(), caseUpdate: vi.fn(), transaction: vi.fn() }));
+const mocks = vi.hoisted(() => ({ scope: vi.fn(), inspectionFind: vi.fn(), riskFind: vi.fn(), caseFind: vi.fn(), riskCreate: vi.fn(), receiptCreate: vi.fn(), caseUpdate: vi.fn(), transaction: vi.fn() }));
 vi.mock('../src/security/organizational-scope', async (original) => ({ ...await original<typeof import('../src/security/organizational-scope')>(), assertOperationalCaseScope: mocks.scope }));
 vi.mock('../src/lib/prisma', () => ({ default: {
   inspection: { findFirst: mocks.inspectionFind },
@@ -22,8 +22,9 @@ describe('deterministic risk recovery state boundary', () => {
     mocks.riskFind.mockResolvedValue(null);
     mocks.caseFind.mockResolvedValue({ status: CaseStatus.ORP_READY, riskLevel: 'VERY_HIGH', priorityLevel: 'CRITICAL' });
     mocks.riskCreate.mockImplementation(({ data }: any) => Promise.resolve({ id: 'risk-new', ...data }));
+    mocks.receiptCreate.mockImplementation(({ data }: any) => Promise.resolve({ id: 'receipt-new', ...data }));
     mocks.caseUpdate.mockResolvedValue({});
-    mocks.transaction.mockImplementation((callback: any) => callback({ riskAssessment: { create: mocks.riskCreate }, case: { update: mocks.caseUpdate } }));
+    mocks.transaction.mockImplementation((callback: any) => callback({ riskAssessment: { create: mocks.riskCreate }, trustedComputationReceipt: { create: mocks.receiptCreate }, case: { update: mocks.caseUpdate } }));
   });
 
   it('selects the deterministic latest inspection and links the new risk to it', async () => {
@@ -31,6 +32,7 @@ describe('deterministic risk recovery state boundary', () => {
     expect(mocks.inspectionFind).toHaveBeenCalledWith({ where: { caseId: 'case' }, orderBy: [{ createdAt: 'desc' }, { id: 'desc' }] });
     expect(result.inspectionId).toBe('inspection-new');
     expect(mocks.riskCreate).toHaveBeenCalledWith(expect.objectContaining({ data: expect.objectContaining({ inspectionId: 'inspection-new' }) }));
+    expect(mocks.receiptCreate).toHaveBeenCalledWith(expect.objectContaining({ data: expect.objectContaining({ riskAssessmentId: 'risk-new', runtimeTrustLevel: 'LOCAL_VERIFIED', attestationState: 'NOT_AVAILABLE', attestationReference: null }) }));
     expect(mocks.caseUpdate).toHaveBeenCalledWith(expect.objectContaining({ data: expect.objectContaining({ status: CaseStatus.ORP_READY }) }));
   });
 
@@ -56,7 +58,7 @@ describe('deterministic risk recovery state boundary', () => {
     mocks.riskFind.mockImplementation(() => Promise.resolve(++lookups <= 2 ? null : winner));
     mocks.transaction.mockImplementation(async (callback: any) => {
       if (++transactions === 2) throw new Prisma.PrismaClientKnownRequestError('unique', { code: 'P2002', clientVersion: 'test' });
-      return callback({ riskAssessment: { create: vi.fn().mockResolvedValue(winner) }, case: { update: mocks.caseUpdate } });
+      return callback({ riskAssessment: { create: vi.fn().mockResolvedValue(winner) }, trustedComputationReceipt: { create: mocks.receiptCreate }, case: { update: mocks.caseUpdate } });
     });
     const [first, second] = await Promise.all([runAssessmentForCase('case', principal), runAssessmentForCase('case', principal)]);
     expect(first.id).toBe('risk-winner'); expect(second.id).toBe('risk-winner');

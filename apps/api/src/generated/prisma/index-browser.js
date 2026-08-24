@@ -419,6 +419,23 @@ exports.Prisma.RiskAssessmentScalarFieldEnum = {
   createdAt: 'createdAt'
 };
 
+exports.Prisma.TrustedComputationReceiptScalarFieldEnum = {
+  id: 'id',
+  riskAssessmentId: 'riskAssessmentId',
+  receiptVersion: 'receiptVersion',
+  computationType: 'computationType',
+  inputContractVersion: 'inputContractVersion',
+  inputFingerprint: 'inputFingerprint',
+  computationVersion: 'computationVersion',
+  providerId: 'providerId',
+  runtimeTrustLevel: 'runtimeTrustLevel',
+  resultFingerprint: 'resultFingerprint',
+  executedAt: 'executedAt',
+  attestationState: 'attestationState',
+  attestationReference: 'attestationReference',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.InfrastructureIntelligenceAssessmentScalarFieldEnum = {
   id: 'id',
   caseId: 'caseId',
@@ -1097,6 +1114,7 @@ exports.Prisma.ModelName = {
   ExternalObservation: 'ExternalObservation',
   Inspection: 'Inspection',
   RiskAssessment: 'RiskAssessment',
+  TrustedComputationReceipt: 'TrustedComputationReceipt',
   InfrastructureIntelligenceAssessment: 'InfrastructureIntelligenceAssessment',
   InfrastructureIntelligenceReconciliation: 'InfrastructureIntelligenceReconciliation',
   OperationalResponsePlan: 'OperationalResponsePlan',

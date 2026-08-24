@@ -63,6 +63,7 @@ import geospatialHotspotRoutes from './modules/geospatial/geospatial-hotspot.rou
 import portfolioRoutes from './modules/portfolio/portfolio.routes';
 import predictiveDataRoutes from './modules/predictive-data/predictive-data.routes';
 import predictiveModelGovernanceRoutes from './modules/predictive-models/predictive-model-governance.routes';
+import trustedComputationRoutes from './modules/trusted-computation/trusted-computation.routes';
 
 import { getRuntimeConfig, isCorsOriginAllowed } from './config/runtime';
 import { authenticate }
@@ -288,6 +289,7 @@ app.use('/api/v1', geospatialHotspotRoutes);
 app.use('/api/v1', portfolioRoutes);
 app.use('/api/v1', predictiveDataRoutes);
 app.use('/api/v1', predictiveModelGovernanceRoutes);
+app.use('/api/v1', trustedComputationRoutes);
 
 
 

@@ -6,6 +6,7 @@ import {
   OrganizationalPrincipal
 } from '../../security/organizational-scope';
 import { riskAssessedTransition } from '../../workflow/case-state-machine';
+import { localVerifiedRiskProvider } from '../trusted-computation/trusted-computation.provider';
 
 // Type definitions for output
 export interface RiskCalculationResult {
@@ -369,7 +370,13 @@ export async function runAssessmentForCase(caseId: string, principal: Organizati
   if (!updatedStatus) throw new Error('INVALID_CASE_STATE');
 
   // Run calculation
-  const calc = calculateRiskAndPriority(latestInspection);
+  const execution = localVerifiedRiskProvider.execute(
+    caseId,
+    latestInspection,
+    RISK_ASSESSMENT_VERSION,
+    calculateRiskAndPriority
+  );
+  const calc = execution.result;
 
   // Prisma atomic transaction to create assessment and update case
   let assessment;
@@ -390,7 +397,12 @@ export async function runAssessmentForCase(caseId: string, principal: Organizati
       }
     });
 
-    // 2. Update Case risk level, priority level, and status
+    // 2. Persist immutable computation lineage in the same transaction.
+    await tx.trustedComputationReceipt.create({
+      data: { riskAssessmentId: createdAssessment.id, ...execution.receipt }
+    });
+
+    // 3. Update Case risk level, priority level, and status
     await tx.case.update({
       where: { id: caseId },
       data: {

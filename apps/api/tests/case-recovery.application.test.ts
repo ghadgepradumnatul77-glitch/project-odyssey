@@ -19,6 +19,7 @@ vi.mock('../src/lib/prisma', () => {
   const tx = {
     inspection: { create: vi.fn(async ({ data }: any) => { const row = { id: `inspection-${fixture.inspections.length + 1}`, ...data, createdAt: new Date(), updatedAt: new Date() }; fixture.inspections.push(row); return row; }) },
     riskAssessment: { create: vi.fn(async ({ data }: any) => { const row = { id: `risk-${fixture.risks.length + 1}`, ...data, createdAt: new Date() }; fixture.risks.push(row); return row; }) },
+    trustedComputationReceipt: { create: vi.fn(async ({ data }: any) => ({ id: `receipt-${data.riskAssessmentId}`, ...data, createdAt: new Date() })) },
     case: { update: vi.fn(async ({ data }: any) => { fixture.status = data.status; fixture.riskLevel = data.riskLevel ?? fixture.riskLevel; fixture.priorityLevel = data.priorityLevel ?? fixture.priorityLevel; fixture.caseUpdate(data); return caseRecord(); }) },
     operationalResponsePlan: {
       findUnique: vi.fn(async () => ({ status: fixture.orpStatus })),

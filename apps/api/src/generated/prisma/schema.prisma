@@ -805,14 +805,37 @@ model RiskAssessment {
   sourceFingerprint String        @unique
   createdAt         DateTime      @default(now())
 
-  case                     Case                                   @relation(fields: [caseId], references: [id], onDelete: Cascade)
-  inspection               Inspection                             @relation(fields: [inspectionId], references: [id], onDelete: Cascade)
-  operationalResponsePlans OperationalResponsePlan[]
-  decisionPackages         DecisionPackage[]
-  intelligenceAssessments  InfrastructureIntelligenceAssessment[]
+  case                      Case                                   @relation(fields: [caseId], references: [id], onDelete: Cascade)
+  inspection                Inspection                             @relation(fields: [inspectionId], references: [id], onDelete: Cascade)
+  operationalResponsePlans  OperationalResponsePlan[]
+  decisionPackages          DecisionPackage[]
+  intelligenceAssessments   InfrastructureIntelligenceAssessment[]
+  trustedComputationReceipt TrustedComputationReceipt?
 
   @@index([caseId])
   @@index([inspectionId])
+}
+
+model TrustedComputationReceipt {
+  id                   String   @id @default(uuid())
+  riskAssessmentId     String   @unique
+  receiptVersion       String
+  computationType      String
+  inputContractVersion String
+  inputFingerprint     String
+  computationVersion   String
+  providerId           String
+  runtimeTrustLevel    String
+  resultFingerprint    String
+  executedAt           DateTime
+  attestationState     String
+  attestationReference String?
+  createdAt            DateTime @default(now())
+
+  riskAssessment RiskAssessment @relation(fields: [riskAssessmentId], references: [id], onDelete: Restrict)
+
+  @@index([computationType, computationVersion])
+  @@index([providerId, runtimeTrustLevel])
 }
 
 model InfrastructureIntelligenceAssessment {

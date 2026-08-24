@@ -8,6 +8,9 @@ export interface InspectionDto {
   estimatedDailyUsers: number | null; inspectionNotes: string | null; createdAt: string; inspector?: SafeActor | null;
 }
 export interface RiskAssessmentDto { id: string; riskScore: number; riskLevel: RiskLevel; priorityLevel: PriorityLevel; reasonCodes: unknown; reasons: unknown; assessmentVersion: string; createdAt: string; }
+export interface ComputationReceiptDto { id: string; receiptVersion: string; computationType: string; inputContractVersion: string; inputFingerprint: string; computationVersion: string; providerId: string; runtimeTrustLevel: 'LOCAL_VERIFIED'; resultFingerprint: string; executedAt: string; attestationState: 'NOT_AVAILABLE'; attestationReference: null; createdAt: string; }
+export interface ComputationReceiptResponse { status: 'AVAILABLE'|'RECEIPT_MISSING'; assessmentId: string; receipt: ComputationReceiptDto|null; }
+export interface ComputationVerificationResponse { status: 'VALID'|'INPUT_MISMATCH'|'RESULT_MISMATCH'|'UNSUPPORTED_VERSION'|'RECEIPT_MISSING'; assessmentId: string; verifiedAt: string; }
 export interface GovernedActionSourceDto { policyId: string; policyCode: string; policyVersion: number; policyTitle: string; policySourceReference: string; ruleId: string; ruleCode: string; ruleDescription: string; }
 export interface GovernedActionDto { actionId?: string; actionCode: string; actionVersion?: number; title: string; category: string; description: string; sourceReference?: string; classification: string; sources?: GovernedActionSourceDto[]; }
 export interface GovernedActionsDto { basis: string; packageId: string; packageVersion: number; MANDATORY: GovernedActionDto[]; RECOMMENDED: GovernedActionDto[]; OPTIONAL: GovernedActionDto[]; PROHIBITED: GovernedActionDto[]; ENGINEERING_RECOMMENDED: GovernedActionDto[]; }
@@ -26,6 +29,8 @@ export const getInspectionsPage = (caseId: string, token: string, query='', sign
 export const listInspections = (caseId: string, token: string, signal?: AbortSignal) => getInspectionsPage(caseId,token,'',signal).then(page=>page.items);
 export const getRiskAssessmentsPage = (caseId: string, token: string, query='', signal?: AbortSignal) => get<Page<RiskAssessmentDto>|RiskAssessmentDto[]>(withQuery(`/cases/${caseId}/risk-assessments`,query), token, signal).then(asPage);
 export const listRiskAssessments = (caseId: string, token: string, signal?: AbortSignal) => getRiskAssessmentsPage(caseId,token,'',signal).then(page=>page.items);
+export const getComputationReceipt = (assessmentId: string, token: string, signal?: AbortSignal) => get<ComputationReceiptResponse>(`/risk-assessments/${assessmentId}/computation-receipt`,token,signal);
+export const verifyComputation = (assessmentId: string, token: string, signal?: AbortSignal) => mutate<ComputationVerificationResponse>(`/risk-assessments/${assessmentId}/verify-computation`,'POST',token,undefined,signal);
 export const getOrpsPage = (caseId: string, token: string, query='', signal?: AbortSignal) => get<Page<OrpDto>|OrpDto[]>(withQuery(`/cases/${caseId}/orps`,query), token, signal).then(asPage).then(page=>({...page,items:page.items.map(item=>({...item,governanceMode:item.governanceMode??'LEGACY' as const}))}));
 export const listOrps = (caseId: string, token: string, signal?: AbortSignal) => getOrpsPage(caseId,token,'',signal).then(page=>page.items);
 export const getOrp = (orpId: string, token: string, signal?: AbortSignal) => get<OrpDto>(`/orps/${orpId}`, token, signal);

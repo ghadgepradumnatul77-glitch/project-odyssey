@@ -1,0 +1,12 @@
+import express from 'express';import request from 'supertest';import { beforeEach,describe,expect,it,vi } from 'vitest';
+const mocks=vi.hoisted(()=>({get:vi.fn(),verify:vi.fn()}));
+vi.mock('../src/middleware/authenticate',()=>({authenticate:(req:any,res:any,next:any)=>{const role=req.header('x-test-role');if(!role)return res.status(401).json({success:false});req.user={id:'u',role,status:'ACTIVE',departmentId:'d',jurisdictionId:'j'};next();}}));
+vi.mock('../src/modules/trusted-computation/trusted-computation.service',async(original)=>({...await original<typeof import('../src/modules/trusted-computation/trusted-computation.service')>(),getComputationReceipt:mocks.get,verifyRiskComputation:mocks.verify}));
+import routes from '../src/modules/trusted-computation/trusted-computation.routes';
+const id='11111111-1111-4111-8111-111111111111';const app=express();app.use(express.json());app.use('/api/v1',routes);
+describe('trusted computation routes',()=>{beforeEach(()=>{vi.clearAllMocks();mocks.get.mockResolvedValue({status:'RECEIPT_MISSING',assessmentId:id,receipt:null});mocks.verify.mockResolvedValue({status:'VALID',assessmentId:id,verified:true});});
+ it('requires authentication',async()=>{expect((await request(app).get(`/api/v1/risk-assessments/${id}/computation-receipt`)).status).toBe(401);});
+ it.each(['SYSTEM_ADMIN','OFFICER','AUDITOR','POLICY_ADMIN'])('passes %s through scoped receipt reads',async(role)=>{expect((await request(app).get(`/api/v1/risk-assessments/${id}/computation-receipt`).set('x-test-role',role)).status).toBe(200);expect(mocks.get).toHaveBeenLastCalledWith(id,expect.objectContaining({role}));});
+ it('supports read-only verification and rejects client metadata injection',async()=>{expect((await request(app).post(`/api/v1/risk-assessments/${id}/verify-computation`).set('x-test-role','OFFICER').send({providerId:'forged'})).status).toBe(400);expect(mocks.verify).not.toHaveBeenCalled();expect((await request(app).post(`/api/v1/risk-assessments/${id}/verify-computation`).set('x-test-role','AUDITOR').send({})).body.data.status).toBe('VALID');});
+ it('rejects invalid identifiers without service access',async()=>{expect((await request(app).get('/api/v1/risk-assessments/not-a-uuid/computation-receipt').set('x-test-role','SYSTEM_ADMIN')).status).toBe(400);expect(mocks.get).not.toHaveBeenCalled();});
+});
