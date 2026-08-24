@@ -1,0 +1,2 @@
+# Prisma Client is deterministic generated output. Its generator emits trailing spaces in documentation comments.
+apps/api/src/generated/prisma/** -whitespace

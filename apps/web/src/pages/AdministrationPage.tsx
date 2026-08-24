@@ -10,6 +10,7 @@ import { Empty, ErrorState, Loading } from '../components/AsyncState';
 import { MutationFeedback } from '../components/workflow/MutationFeedback';
 import type { PriorityLevel } from '../api/cases.api';
 import type { SystemRole } from '../types/api';
+import ObservationSourcesAdmin from '../components/observations/ObservationSourcesAdmin';
 
 export type AdminTab = 'Departments' | 'Jurisdictions' | 'Assets' | 'Users' | 'Approval Authorities';
 const tabs: AdminTab[] = ['Departments', 'Jurisdictions', 'Assets', 'Users', 'Approval Authorities'];
@@ -32,6 +33,7 @@ export default function AdministrationPage({ initialTab = 'Departments' }: { ini
   const [nextCursor, setNextCursor] = useState<string | null>(null);
   const [loadingMore, setLoadingMore] = useState(false);
   const [pageError, setPageError] = useState<unknown>(null);
+  const [showObservationSources, setShowObservationSources] = useState(false);
 
   useEffect(() => { setTab(initialTab); setSearch(''); }, [initialTab]);
 
@@ -143,7 +145,8 @@ export default function AdministrationPage({ initialTab = 'Departments' }: { ini
         aria-current={tab === item ? 'page' : undefined}
         onClick={() => { setTab(item); setSearch(''); setMutationError(null); setSuccess(null); }} key={item}>{item}</button>)}
     </nav>
-    <MutationFeedback error={mutationError} success={success} />
+    <button type="button" className="secondary-button" onClick={() => setShowObservationSources((value) => !value)}>{showObservationSources ? 'Hide observation sources' : 'Manage observation sources'}</button>
+    {showObservationSources && <ObservationSourcesAdmin/>}<MutationFeedback error={mutationError} success={success} />
     <div className="admin-workbench"><section className="admin-registry" aria-labelledby="registry-heading">
       <div className="admin-register-heading"><div><p className="section-label">PERSISTED REGISTRY</p><h2 id="registry-heading">{tab}</h2></div></div>
       <label className="admin-search">Search {tab.toLowerCase()}<input type="search" value={search}

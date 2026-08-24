@@ -313,6 +313,48 @@ exports.Prisma.CaseScalarFieldEnum = {
   closedAt: 'closedAt'
 };
 
+exports.Prisma.ObservationSourceScalarFieldEnum = {
+  id: 'id',
+  sourceCode: 'sourceCode',
+  versionNumber: 'versionNumber',
+  name: 'name',
+  sourceType: 'sourceType',
+  providerReference: 'providerReference',
+  description: 'description',
+  contractVersion: 'contractVersion',
+  provenanceMetadata: 'provenanceMetadata',
+  departmentId: 'departmentId',
+  jurisdictionId: 'jurisdictionId',
+  isActive: 'isActive',
+  createdById: 'createdById',
+  deactivatedById: 'deactivatedById',
+  deactivatedAt: 'deactivatedAt',
+  deactivationReason: 'deactivationReason',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ExternalObservationScalarFieldEnum = {
+  id: 'id',
+  sourceId: 'sourceId',
+  sourceRecordId: 'sourceRecordId',
+  sourceVersion: 'sourceVersion',
+  observationType: 'observationType',
+  schemaVersion: 'schemaVersion',
+  normalizedData: 'normalizedData',
+  sourceMetadata: 'sourceMetadata',
+  observedAt: 'observedAt',
+  ingestedAt: 'ingestedAt',
+  qualityState: 'qualityState',
+  validationState: 'validationState',
+  fingerprint: 'fingerprint',
+  departmentId: 'departmentId',
+  jurisdictionId: 'jurisdictionId',
+  assetId: 'assetId',
+  caseId: 'caseId',
+  ingestedById: 'ingestedById'
+};
+
 exports.Prisma.InspectionScalarFieldEnum = {
   id: 'id',
   caseId: 'caseId',
@@ -666,6 +708,37 @@ exports.PriorityLevel = exports.$Enums.PriorityLevel = {
   CRITICAL: 'CRITICAL'
 };
 
+exports.ObservationSourceType = exports.$Enums.ObservationSourceType = {
+  OFFICIAL_GOVERNMENT: 'OFFICIAL_GOVERNMENT',
+  WEATHER_PROVIDER: 'WEATHER_PROVIDER',
+  TRAFFIC_PROVIDER: 'TRAFFIC_PROVIDER',
+  SENSOR_PLATFORM: 'SENSOR_PLATFORM',
+  MANUAL_IMPORT: 'MANUAL_IMPORT',
+  INTERNAL_SYSTEM: 'INTERNAL_SYSTEM'
+};
+
+exports.ExternalObservationType = exports.$Enums.ExternalObservationType = {
+  WEATHER: 'WEATHER',
+  TRAFFIC: 'TRAFFIC',
+  SENSOR: 'SENSOR',
+  GOVERNMENT_DATA: 'GOVERNMENT_DATA',
+  MANUAL_EXTERNAL: 'MANUAL_EXTERNAL',
+  OTHER: 'OTHER'
+};
+
+exports.ObservationQualityState = exports.$Enums.ObservationQualityState = {
+  VALID: 'VALID',
+  PARTIAL: 'PARTIAL',
+  INVALID: 'INVALID',
+  UNKNOWN: 'UNKNOWN'
+};
+
+exports.ObservationValidationState = exports.$Enums.ObservationValidationState = {
+  ACCEPTED: 'ACCEPTED',
+  REJECTED: 'REJECTED',
+  QUARANTINED: 'QUARANTINED'
+};
+
 exports.IntelligenceAssessmentStatus = exports.$Enums.IntelligenceAssessmentStatus = {
   COMPLETED: 'COMPLETED',
   ABSTAINED: 'ABSTAINED',
@@ -742,6 +815,8 @@ exports.Prisma.ModelName = {
   GovernedExecutionTaskTemplate: 'GovernedExecutionTaskTemplate',
   PolicyRule: 'PolicyRule',
   Case: 'Case',
+  ObservationSource: 'ObservationSource',
+  ExternalObservation: 'ExternalObservation',
   Inspection: 'Inspection',
   RiskAssessment: 'RiskAssessment',
   InfrastructureIntelligenceAssessment: 'InfrastructureIntelligenceAssessment',

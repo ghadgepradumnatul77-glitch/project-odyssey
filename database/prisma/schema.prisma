@@ -57,6 +57,37 @@ enum PriorityLevel {
   CRITICAL
 }
 
+enum ObservationSourceType {
+  OFFICIAL_GOVERNMENT
+  WEATHER_PROVIDER
+  TRAFFIC_PROVIDER
+  SENSOR_PLATFORM
+  MANUAL_IMPORT
+  INTERNAL_SYSTEM
+}
+
+enum ExternalObservationType {
+  WEATHER
+  TRAFFIC
+  SENSOR
+  GOVERNMENT_DATA
+  MANUAL_EXTERNAL
+  OTHER
+}
+
+enum ObservationQualityState {
+  VALID
+  PARTIAL
+  INVALID
+  UNKNOWN
+}
+
+enum ObservationValidationState {
+  ACCEPTED
+  REJECTED
+  QUARANTINED
+}
+
 enum OrpDecisionType {
   APPROVED
   REJECTED
@@ -167,34 +198,38 @@ enum IntelligenceAssessmentStatus {
 }
 
 model Department {
-  id                  String              @id @default(uuid())
-  name                String
-  code                String              @unique
-  users               User[]
-  assets              Asset[]
-  jurisdictions       Jurisdiction[]
-  approvalAuthorities ApprovalAuthority[]
-  publicReports       PublicReport[]
-  policyDocuments     PolicyDocument[]
-  approvedActions     ApprovedActionVersion[]
+  id                         String                      @id @default(uuid())
+  name                       String
+  code                       String                      @unique
+  users                      User[]
+  assets                     Asset[]
+  jurisdictions              Jurisdiction[]
+  approvalAuthorities        ApprovalAuthority[]
+  publicReports              PublicReport[]
+  policyDocuments            PolicyDocument[]
+  approvedActions            ApprovedActionVersion[]
   governedExecutionTemplates GovernedExecutionTemplate[]
-  createdAt           DateTime            @default(now())
+  observationSources         ObservationSource[]
+  externalObservations       ExternalObservation[]
+  createdAt                  DateTime                    @default(now())
 }
 
 model Jurisdiction {
-  id                  String              @id @default(uuid())
-  name                String
-  type                String
-  departmentId        String
-  department          Department          @relation(fields: [departmentId], references: [id])
-  users               User[]
-  assets              Asset[]
-  approvalAuthorities ApprovalAuthority[]
-  publicReports       PublicReport[]
-  policyDocuments     PolicyDocument[]
-  approvedActions     ApprovedActionVersion[]
+  id                         String                      @id @default(uuid())
+  name                       String
+  type                       String
+  departmentId               String
+  department                 Department                  @relation(fields: [departmentId], references: [id])
+  users                      User[]
+  assets                     Asset[]
+  approvalAuthorities        ApprovalAuthority[]
+  publicReports              PublicReport[]
+  policyDocuments            PolicyDocument[]
+  approvedActions            ApprovedActionVersion[]
   governedExecutionTemplates GovernedExecutionTemplate[]
-  createdAt           DateTime            @default(now())
+  observationSources         ObservationSource[]
+  externalObservations       ExternalObservation[]
+  createdAt                  DateTime                    @default(now())
 
   @@index([departmentId])
 }
@@ -215,28 +250,31 @@ model User {
   department   Department   @relation(fields: [departmentId], references: [id])
   jurisdiction Jurisdiction @relation(fields: [jurisdictionId], references: [id])
 
-  inspections                Inspection[]
-  approvalAuthorities        ApprovalAuthority[]
-  reviewedOrpDecisions       OrpDecision[]                @relation("DecisionReviewer")
-  forwardedOrpDecisions      OrpDecision[]                @relation("DecisionForwardedUser")
-  createdExecutionPlans      ExecutionPlan[]              @relation("ExecutionPlanCreator")
-  assignedExecutionTasks     ExecutionTask[]              @relation("ExecutionTaskAssignee")
-  assignedByExecutionTasks   ExecutionTask[]              @relation("ExecutionTaskAssigner")
-  completedExecutionTasks    ExecutionTask[]              @relation("ExecutionTaskCompleter")
-  verifiedExecutionTasks     ExecutionTask[]              @relation("ExecutionTaskVerifier")
-  cancelledExecutionTasks    ExecutionTask[]              @relation("ExecutionTaskCanceller")
-  submittedExecutionEvidence ExecutionEvidence[]
-  closedCases                CaseClosure[]                @relation("CaseClosureCloser")
-  reviewedPublicReports      PublicReport[]               @relation("PublicReportReviewer")
-  decidedPublicReports       PublicReport[]               @relation("PublicReportDecisionActor")
-  createdTriageAnalyses      PublicReportTriageAnalysis[]
-  createdPolicyDocuments     PolicyDocument[]              @relation("PolicyDocumentCreator")
-  approvedPolicyDocuments    PolicyDocument[]              @relation("PolicyDocumentApprover")
-  createdApprovedActions     ApprovedActionVersion[]        @relation("ApprovedActionCreator")
-  approvedApprovedActions    ApprovedActionVersion[]        @relation("ApprovedActionApprover")
-  preparedDecisionPackages   DecisionPackage[]               @relation("DecisionPackagePreparer")
-  createdGovernedExecutionTemplates GovernedExecutionTemplate[] @relation("GovernedExecutionTemplateCreator")
-  approvedGovernedExecutionTemplates GovernedExecutionTemplate[] @relation("GovernedExecutionTemplateApprover")
+  inspections                        Inspection[]
+  approvalAuthorities                ApprovalAuthority[]
+  reviewedOrpDecisions               OrpDecision[]                @relation("DecisionReviewer")
+  forwardedOrpDecisions              OrpDecision[]                @relation("DecisionForwardedUser")
+  createdExecutionPlans              ExecutionPlan[]              @relation("ExecutionPlanCreator")
+  assignedExecutionTasks             ExecutionTask[]              @relation("ExecutionTaskAssignee")
+  assignedByExecutionTasks           ExecutionTask[]              @relation("ExecutionTaskAssigner")
+  completedExecutionTasks            ExecutionTask[]              @relation("ExecutionTaskCompleter")
+  verifiedExecutionTasks             ExecutionTask[]              @relation("ExecutionTaskVerifier")
+  cancelledExecutionTasks            ExecutionTask[]              @relation("ExecutionTaskCanceller")
+  submittedExecutionEvidence         ExecutionEvidence[]
+  closedCases                        CaseClosure[]                @relation("CaseClosureCloser")
+  reviewedPublicReports              PublicReport[]               @relation("PublicReportReviewer")
+  decidedPublicReports               PublicReport[]               @relation("PublicReportDecisionActor")
+  createdTriageAnalyses              PublicReportTriageAnalysis[]
+  createdPolicyDocuments             PolicyDocument[]             @relation("PolicyDocumentCreator")
+  approvedPolicyDocuments            PolicyDocument[]             @relation("PolicyDocumentApprover")
+  createdApprovedActions             ApprovedActionVersion[]      @relation("ApprovedActionCreator")
+  approvedApprovedActions            ApprovedActionVersion[]      @relation("ApprovedActionApprover")
+  preparedDecisionPackages           DecisionPackage[]            @relation("DecisionPackagePreparer")
+  createdGovernedExecutionTemplates  GovernedExecutionTemplate[]  @relation("GovernedExecutionTemplateCreator")
+  approvedGovernedExecutionTemplates GovernedExecutionTemplate[]  @relation("GovernedExecutionTemplateApprover")
+  createdObservationSources          ObservationSource[]          @relation("ObservationSourceCreator")
+  deactivatedObservationSources      ObservationSource[]          @relation("ObservationSourceDeactivator")
+  ingestedExternalObservations       ExternalObservation[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -268,6 +306,7 @@ model Asset {
   cases                      Case[]
   publicReports              PublicReport[]
   suggestedForTriageAnalyses PublicReportTriageAnalysis[]
+  externalObservations       ExternalObservation[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -354,18 +393,18 @@ model PolicyDocument {
   effectiveFrom   DateTime
   effectiveUntil  DateTime?
   status          RegistryLifecycleStatus @default(DRAFT)
-  validationState PolicyValidationState    @default(NOT_VALIDATED)
+  validationState PolicyValidationState   @default(NOT_VALIDATED)
   createdById     String
   approvedById    String?
   approvedAt      DateTime?
-  createdAt       DateTime                 @default(now())
-  updatedAt       DateTime                 @updatedAt
+  createdAt       DateTime                @default(now())
+  updatedAt       DateTime                @updatedAt
 
-  department   Department? @relation(fields: [departmentId], references: [id], onDelete: Restrict)
-  jurisdiction Jurisdiction? @relation(fields: [jurisdictionId], references: [id], onDelete: Restrict)
-  createdBy    User @relation("PolicyDocumentCreator", fields: [createdById], references: [id], onDelete: Restrict)
-  approvedBy   User? @relation("PolicyDocumentApprover", fields: [approvedById], references: [id], onDelete: Restrict)
-  rules        PolicyRule[]
+  department       Department?             @relation(fields: [departmentId], references: [id], onDelete: Restrict)
+  jurisdiction     Jurisdiction?           @relation(fields: [jurisdictionId], references: [id], onDelete: Restrict)
+  createdBy        User                    @relation("PolicyDocumentCreator", fields: [createdById], references: [id], onDelete: Restrict)
+  approvedBy       User?                   @relation("PolicyDocumentApprover", fields: [approvedById], references: [id], onDelete: Restrict)
+  rules            PolicyRule[]
   actionProvenance ApprovedActionVersion[]
 
   @@unique([policyCode, versionNumber])
@@ -376,35 +415,35 @@ model PolicyDocument {
 }
 
 model ApprovedActionVersion {
-  id                        String                    @id @default(uuid())
-  actionCode                String
-  versionNumber             Int
-  title                     String
-  category                  String
-  description               String
-  applicability             Json
-  enforcementClassification EnforcementClassification
+  id                         String                    @id @default(uuid())
+  actionCode                 String
+  versionNumber              Int
+  title                      String
+  category                   String
+  description                String
+  applicability              Json
+  enforcementClassification  EnforcementClassification
   provenancePolicyDocumentId String?
-  sourceReference           String
-  departmentId              String?
-  jurisdictionId            String?
-  effectiveFrom             DateTime
-  effectiveUntil            DateTime?
-  status                    RegistryLifecycleStatus @default(DRAFT)
-  createdById               String
-  approvedById              String?
-  approvedAt                DateTime?
-  createdAt                 DateTime                @default(now())
-  updatedAt                 DateTime                @updatedAt
+  sourceReference            String
+  departmentId               String?
+  jurisdictionId             String?
+  effectiveFrom              DateTime
+  effectiveUntil             DateTime?
+  status                     RegistryLifecycleStatus   @default(DRAFT)
+  createdById                String
+  approvedById               String?
+  approvedAt                 DateTime?
+  createdAt                  DateTime                  @default(now())
+  updatedAt                  DateTime                  @updatedAt
 
-  provenancePolicyDocument PolicyDocument? @relation(fields: [provenancePolicyDocumentId], references: [id], onDelete: Restrict)
-  department Department? @relation(fields: [departmentId], references: [id], onDelete: Restrict)
-  jurisdiction Jurisdiction? @relation(fields: [jurisdictionId], references: [id], onDelete: Restrict)
-  createdBy User @relation("ApprovedActionCreator", fields: [createdById], references: [id], onDelete: Restrict)
-  approvedBy User? @relation("ApprovedActionApprover", fields: [approvedById], references: [id], onDelete: Restrict)
-  rules PolicyRule[]
-  executionTemplates GovernedExecutionTemplate[]
-  executionTasks ExecutionTask[]
+  provenancePolicyDocument PolicyDocument?             @relation(fields: [provenancePolicyDocumentId], references: [id], onDelete: Restrict)
+  department               Department?                 @relation(fields: [departmentId], references: [id], onDelete: Restrict)
+  jurisdiction             Jurisdiction?               @relation(fields: [jurisdictionId], references: [id], onDelete: Restrict)
+  createdBy                User                        @relation("ApprovedActionCreator", fields: [createdById], references: [id], onDelete: Restrict)
+  approvedBy               User?                       @relation("ApprovedActionApprover", fields: [approvedById], references: [id], onDelete: Restrict)
+  rules                    PolicyRule[]
+  executionTemplates       GovernedExecutionTemplate[]
+  executionTasks           ExecutionTask[]
 
   @@unique([actionCode, versionNumber])
   @@index([status, effectiveFrom, effectiveUntil])
@@ -415,7 +454,7 @@ model ApprovedActionVersion {
 }
 
 model GovernedExecutionTemplate {
-  id                      String                    @id @default(uuid())
+  id                      String                  @id @default(uuid())
   templateCode            String
   versionNumber           Int
   approvedActionVersionId String
@@ -429,14 +468,14 @@ model GovernedExecutionTemplate {
   createdById             String
   approvedById            String?
   approvedAt              DateTime?
-  createdAt               DateTime                 @default(now())
-  updatedAt               DateTime                 @updatedAt
+  createdAt               DateTime                @default(now())
+  updatedAt               DateTime                @updatedAt
 
-  approvedActionVersion ApprovedActionVersion @relation(fields: [approvedActionVersionId], references: [id], onDelete: Restrict)
-  department            Department?           @relation(fields: [departmentId], references: [id], onDelete: Restrict)
-  jurisdiction          Jurisdiction?         @relation(fields: [jurisdictionId], references: [id], onDelete: Restrict)
-  createdBy             User                  @relation("GovernedExecutionTemplateCreator", fields: [createdById], references: [id], onDelete: Restrict)
-  approvedBy            User?                 @relation("GovernedExecutionTemplateApprover", fields: [approvedById], references: [id], onDelete: Restrict)
+  approvedActionVersion ApprovedActionVersion           @relation(fields: [approvedActionVersionId], references: [id], onDelete: Restrict)
+  department            Department?                     @relation(fields: [departmentId], references: [id], onDelete: Restrict)
+  jurisdiction          Jurisdiction?                   @relation(fields: [jurisdictionId], references: [id], onDelete: Restrict)
+  createdBy             User                            @relation("GovernedExecutionTemplateCreator", fields: [createdById], references: [id], onDelete: Restrict)
+  approvedBy            User?                           @relation("GovernedExecutionTemplateApprover", fields: [approvedById], references: [id], onDelete: Restrict)
   tasks                 GovernedExecutionTaskTemplate[]
   executionTasks        ExecutionTask[]
 
@@ -448,21 +487,21 @@ model GovernedExecutionTemplate {
 }
 
 model GovernedExecutionTaskTemplate {
-  id                  String   @id @default(uuid())
-  executionTemplateId String
-  sequenceNumber      Int
+  id                   String   @id @default(uuid())
+  executionTemplateId  String
+  sequenceNumber       Int
   taskCode             String
   title                String
   description          String
-  mandatory            Boolean @default(true)
-  evidenceRequired     Boolean @default(true)
-  verificationRequired Boolean @default(true)
-  enabled              Boolean @default(true)
+  mandatory            Boolean  @default(true)
+  evidenceRequired     Boolean  @default(true)
+  verificationRequired Boolean  @default(true)
+  enabled              Boolean  @default(true)
   createdAt            DateTime @default(now())
   updatedAt            DateTime @updatedAt
 
   executionTemplate GovernedExecutionTemplate @relation(fields: [executionTemplateId], references: [id], onDelete: Restrict)
-  executionTasks     ExecutionTask[]
+  executionTasks    ExecutionTask[]
 
   @@unique([executionTemplateId, sequenceNumber])
   @@unique([executionTemplateId, taskCode])
@@ -481,8 +520,8 @@ model PolicyRule {
   createdAt        DateTime                  @default(now())
   updatedAt        DateTime                  @updatedAt
 
-  policyDocument PolicyDocument @relation(fields: [policyDocumentId], references: [id], onDelete: Restrict)
-  action ApprovedActionVersion @relation(fields: [actionId], references: [id], onDelete: Restrict)
+  policyDocument PolicyDocument        @relation(fields: [policyDocumentId], references: [id], onDelete: Restrict)
+  action         ApprovedActionVersion @relation(fields: [actionId], references: [id], onDelete: Restrict)
 
   @@unique([policyDocumentId, ruleCode])
   @@index([actionId])
@@ -502,17 +541,18 @@ model Case {
 
   emergencyFlag Boolean @default(false)
 
-  asset                    Asset                     @relation(fields: [assetId], references: [id])
-  inspections              Inspection[]
-  riskAssessments          RiskAssessment[]
-  operationalResponsePlans OperationalResponsePlan[]
-  orpDecisions             OrpDecision[]
-  executionPlans           ExecutionPlan[]
-  closure                  CaseClosure?
-  sourcePublicReport       PublicReport?             @relation("PublicReportCreatedCase")
-  decisionPackages         DecisionPackage[]
-  intelligenceAssessments InfrastructureIntelligenceAssessment[]
+  asset                       Asset                                      @relation(fields: [assetId], references: [id])
+  inspections                 Inspection[]
+  riskAssessments             RiskAssessment[]
+  operationalResponsePlans    OperationalResponsePlan[]
+  orpDecisions                OrpDecision[]
+  executionPlans              ExecutionPlan[]
+  closure                     CaseClosure?
+  sourcePublicReport          PublicReport?                              @relation("PublicReportCreatedCase")
+  decisionPackages            DecisionPackage[]
+  intelligenceAssessments     InfrastructureIntelligenceAssessment[]
   intelligenceReconciliations InfrastructureIntelligenceReconciliation[]
+  externalObservations        ExternalObservation[]
 
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
@@ -522,6 +562,71 @@ model Case {
   @@index([priorityLevel])
   @@index([riskLevel])
   @@index([assetId])
+}
+
+model ObservationSource {
+  id                 String                @id @default(uuid())
+  sourceCode         String
+  versionNumber      Int
+  name               String
+  sourceType         ObservationSourceType
+  providerReference  String
+  description        String?
+  contractVersion    String
+  provenanceMetadata Json
+  departmentId       String?
+  jurisdictionId     String?
+  isActive           Boolean               @default(true)
+  createdById        String
+  deactivatedById    String?
+  deactivatedAt      DateTime?
+  deactivationReason String?
+  createdAt          DateTime              @default(now())
+  updatedAt          DateTime              @updatedAt
+  department         Department?           @relation(fields: [departmentId], references: [id], onDelete: Restrict)
+  jurisdiction       Jurisdiction?         @relation(fields: [jurisdictionId], references: [id], onDelete: Restrict)
+  createdBy          User                  @relation("ObservationSourceCreator", fields: [createdById], references: [id], onDelete: Restrict)
+  deactivatedBy      User?                 @relation("ObservationSourceDeactivator", fields: [deactivatedById], references: [id], onDelete: Restrict)
+  observations       ExternalObservation[]
+
+  @@unique([sourceCode, versionNumber])
+  @@index([createdAt, id])
+  @@index([isActive, sourceType])
+  @@index([departmentId, jurisdictionId])
+}
+
+model ExternalObservation {
+  id              String                     @id @default(uuid())
+  sourceId        String
+  sourceRecordId  String
+  sourceVersion   String
+  observationType ExternalObservationType
+  schemaVersion   String
+  normalizedData  Json
+  sourceMetadata  Json
+  observedAt      DateTime
+  ingestedAt      DateTime                   @default(now())
+  qualityState    ObservationQualityState
+  validationState ObservationValidationState
+  fingerprint     String
+  departmentId    String
+  jurisdictionId  String
+  assetId         String?
+  caseId          String?
+  ingestedById    String
+  source          ObservationSource          @relation(fields: [sourceId], references: [id], onDelete: Restrict)
+  department      Department                 @relation(fields: [departmentId], references: [id], onDelete: Restrict)
+  jurisdiction    Jurisdiction               @relation(fields: [jurisdictionId], references: [id], onDelete: Restrict)
+  asset           Asset?                     @relation(fields: [assetId], references: [id], onDelete: Restrict)
+  case            Case?                      @relation(fields: [caseId], references: [id], onDelete: Restrict)
+  ingestedBy      User                       @relation(fields: [ingestedById], references: [id], onDelete: Restrict)
+
+  @@unique([sourceId, sourceRecordId])
+  @@index([ingestedAt, id])
+  @@index([departmentId, jurisdictionId, ingestedAt])
+  @@index([assetId, observedAt])
+  @@index([caseId, observedAt])
+  @@index([sourceId, observationType, observedAt])
 }
 
 model Inspection {
@@ -544,10 +649,10 @@ model Inspection {
   estimatedDailyUsers Int?
   inspectionNotes     String?
 
-  case            Case             @relation(fields: [caseId], references: [id])
-  inspector       User             @relation(fields: [inspectorId], references: [id])
-  riskAssessments RiskAssessment[]
-  decisionPackages DecisionPackage[]
+  case                    Case                                   @relation(fields: [caseId], references: [id])
+  inspector               User                                   @relation(fields: [inspectorId], references: [id])
+  riskAssessments         RiskAssessment[]
+  decisionPackages        DecisionPackage[]
   intelligenceAssessments InfrastructureIntelligenceAssessment[]
 
   createdAt DateTime @default(now())
@@ -570,11 +675,11 @@ model RiskAssessment {
   sourceFingerprint String        @unique
   createdAt         DateTime      @default(now())
 
-  case                     Case                      @relation(fields: [caseId], references: [id], onDelete: Cascade)
-  inspection               Inspection                @relation(fields: [inspectionId], references: [id], onDelete: Cascade)
+  case                     Case                                   @relation(fields: [caseId], references: [id], onDelete: Cascade)
+  inspection               Inspection                             @relation(fields: [inspectionId], references: [id], onDelete: Cascade)
   operationalResponsePlans OperationalResponsePlan[]
   decisionPackages         DecisionPackage[]
-  intelligenceAssessments InfrastructureIntelligenceAssessment[]
+  intelligenceAssessments  InfrastructureIntelligenceAssessment[]
 
   @@index([caseId])
   @@index([inspectionId])
@@ -587,28 +692,28 @@ model InfrastructureIntelligenceAssessment {
   riskAssessmentId String
   status           IntelligenceAssessmentStatus
 
-  predictedRiskScore   Int?
-  predictedRiskLevel   RiskLevel?
+  predictedRiskScore  Int?
+  predictedRiskLevel  RiskLevel?
   recommendedPriority PriorityLevel?
-  confidence           Float?
+  confidence          Float?
 
-  provider            String
-  providerType        String
-  modelName           String
-  modelVersion        String
-  modelArtifactDigest String?
+  provider             String
+  providerType         String
+  modelName            String
+  modelVersion         String
+  modelArtifactDigest  String?
   featureSchemaVersion String
   contractVersion      String
-  sourceFingerprint    String                    @unique
+  sourceFingerprint    String    @unique
   inferredAt           DateTime
   expiresAt            DateTime?
 
-  contributingFactors Json
-  explanation         String?
-  recommendedActions  Json
-  abstentionReasons   Json
-  reconciliation      Json
-  createdAt           DateTime @default(now())
+  contributingFactors       Json
+  explanation               String?
+  recommendedActions        Json
+  abstentionReasons         Json
+  reconciliation            Json
+  createdAt                 DateTime                                   @default(now())
   governanceReconciliations InfrastructureIntelligenceReconciliation[]
 
   case           Case           @relation(fields: [caseId], references: [id], onDelete: Restrict)
@@ -643,28 +748,28 @@ model InfrastructureIntelligenceReconciliation {
 }
 
 model OperationalResponsePlan {
-  id                     String   @id @default(uuid())
-  caseId                 String
-  riskAssessmentId       String
-  versionNumber          Int
-  status                 String   @default("AWAITING_REVIEW")
-  urgency                String
-  recommendedActionCodes Json
-  temporaryMeasures      Json
-  reasons                Json
-  alternativeActionCodes Json
-  planVersion            String   @default("ODYSSEY_ORP_V1")
-  createdAt              DateTime @default(now())
-  updatedAt              DateTime @updatedAt
-  decisionPackageId      String?
-  governanceMode         ActionPlanGovernanceMode @default(LEGACY)
-  governedActions        Json?
+  id                        String                   @id @default(uuid())
+  caseId                    String
+  riskAssessmentId          String
+  versionNumber             Int
+  status                    String                   @default("AWAITING_REVIEW")
+  urgency                   String
+  recommendedActionCodes    Json
+  temporaryMeasures         Json
+  reasons                   Json
+  alternativeActionCodes    Json
+  planVersion               String                   @default("ODYSSEY_ORP_V1")
+  createdAt                 DateTime                 @default(now())
+  updatedAt                 DateTime                 @updatedAt
+  decisionPackageId         String?
+  governanceMode            ActionPlanGovernanceMode @default(LEGACY)
+  governedActions           Json?
   actionPlanContractVersion String?
 
-  case           Case           @relation(fields: [caseId], references: [id], onDelete: Cascade)
-  riskAssessment RiskAssessment @relation(fields: [riskAssessmentId], references: [id], onDelete: Cascade)
-  decisions      OrpDecision[]
-  executionPlan  ExecutionPlan?
+  case            Case             @relation(fields: [caseId], references: [id], onDelete: Cascade)
+  riskAssessment  RiskAssessment   @relation(fields: [riskAssessmentId], references: [id], onDelete: Cascade)
+  decisions       OrpDecision[]
+  executionPlan   ExecutionPlan?
   decisionPackage DecisionPackage? @relation(fields: [decisionPackageId], references: [id], onDelete: Restrict)
 
   @@unique([caseId, versionNumber])
@@ -709,7 +814,6 @@ model DecisionPackage {
   @@index([preparedById])
   @@index([preparedAt])
 }
-
 
 model ApprovalAuthority {
   id             String @id @default(uuid())
@@ -773,22 +877,22 @@ model OrpDecision {
 }
 
 model ExecutionPlan {
-  id                 String              @id @default(uuid())
-  orpId              String              @unique
-  caseId             String
-  approvalDecisionId String              @unique
-  status             ExecutionPlanStatus @default(PLANNED)
-  createdById        String
-  templateVersion    String              @default("ODYSSEY_EXECUTION_V1")
-  createdAt          DateTime            @default(now())
-  updatedAt          DateTime            @updatedAt
-  startedAt          DateTime?
-  completedAt        DateTime?
-  cancelledAt        DateTime?
-  cancellationReason String?
-  governanceMode     ExecutionPlanGovernanceMode @default(LEGACY)
+  id                       String                      @id @default(uuid())
+  orpId                    String                      @unique
+  caseId                   String
+  approvalDecisionId       String                      @unique
+  status                   ExecutionPlanStatus         @default(PLANNED)
+  createdById              String
+  templateVersion          String                      @default("ODYSSEY_EXECUTION_V1")
+  createdAt                DateTime                    @default(now())
+  updatedAt                DateTime                    @updatedAt
+  startedAt                DateTime?
+  completedAt              DateTime?
+  cancelledAt              DateTime?
+  cancellationReason       String?
+  governanceMode           ExecutionPlanGovernanceMode @default(LEGACY)
   executionContractVersion String?
-  governedProvenance Json?
+  governedProvenance       Json?
 
   orp              OperationalResponsePlan @relation(fields: [orpId], references: [id], onDelete: Restrict)
   case             Case                    @relation(fields: [caseId], references: [id], onDelete: Restrict)
@@ -803,51 +907,51 @@ model ExecutionPlan {
 }
 
 model ExecutionTask {
-  id                      String              @id @default(uuid())
-  executionPlanId         String
-  sequenceNumber          Int
-  sourceActionCode        String
-  templateTaskKey         String
-  titleSnapshot           String
-  descriptionSnapshot     String
-  categorySnapshot        String
-  isMandatory             Boolean             @default(true)
-  status                  ExecutionTaskStatus @default(PENDING)
-  assignedToId            String?
-  assignedById            String?
-  assignedAt              DateTime?
-  startedAt               DateTime?
-  completionSubmittedById String?
-  completionSubmittedAt   DateTime?
-  completionNote          String?
-  verifiedById            String?
-  verifiedAt              DateTime?
-  verificationNote        String?
-  blockedReason           String?
-  cancelledById           String?
-  cancelledAt             DateTime?
-  cancellationReason      String?
-  createdAt               DateTime            @default(now())
-  updatedAt               DateTime            @updatedAt
-  approvedActionVersionId String?
+  id                          String              @id @default(uuid())
+  executionPlanId             String
+  sequenceNumber              Int
+  sourceActionCode            String
+  templateTaskKey             String
+  titleSnapshot               String
+  descriptionSnapshot         String
+  categorySnapshot            String
+  isMandatory                 Boolean             @default(true)
+  status                      ExecutionTaskStatus @default(PENDING)
+  assignedToId                String?
+  assignedById                String?
+  assignedAt                  DateTime?
+  startedAt                   DateTime?
+  completionSubmittedById     String?
+  completionSubmittedAt       DateTime?
+  completionNote              String?
+  verifiedById                String?
+  verifiedAt                  DateTime?
+  verificationNote            String?
+  blockedReason               String?
+  cancelledById               String?
+  cancelledAt                 DateTime?
+  cancellationReason          String?
+  createdAt                   DateTime            @default(now())
+  updatedAt                   DateTime            @updatedAt
+  approvedActionVersionId     String?
   governedExecutionTemplateId String?
-  governedTaskTemplateId String?
-  sourceActionVersion     Int?
-  sourceTemplateCode      String?
-  sourceTemplateVersion   Int?
-  evidenceRequired        Boolean             @default(true)
-  verificationRequired    Boolean             @default(true)
+  governedTaskTemplateId      String?
+  sourceActionVersion         Int?
+  sourceTemplateCode          String?
+  sourceTemplateVersion       Int?
+  evidenceRequired            Boolean             @default(true)
+  verificationRequired        Boolean             @default(true)
 
-  executionPlan         ExecutionPlan       @relation(fields: [executionPlanId], references: [id], onDelete: Restrict)
-  assignedTo            User?               @relation("ExecutionTaskAssignee", fields: [assignedToId], references: [id], onDelete: Restrict)
-  assignedBy            User?               @relation("ExecutionTaskAssigner", fields: [assignedById], references: [id], onDelete: Restrict)
-  completionSubmittedBy User?               @relation("ExecutionTaskCompleter", fields: [completionSubmittedById], references: [id], onDelete: Restrict)
-  verifiedBy            User?               @relation("ExecutionTaskVerifier", fields: [verifiedById], references: [id], onDelete: Restrict)
-  cancelledBy           User?               @relation("ExecutionTaskCanceller", fields: [cancelledById], references: [id], onDelete: Restrict)
-  evidence              ExecutionEvidence[]
-  approvedActionVersion ApprovedActionVersion? @relation(fields: [approvedActionVersionId], references: [id], onDelete: Restrict)
-  governedExecutionTemplate GovernedExecutionTemplate? @relation(fields: [governedExecutionTemplateId], references: [id], onDelete: Restrict)
-  governedTaskTemplate GovernedExecutionTaskTemplate? @relation(fields: [governedTaskTemplateId], references: [id], onDelete: Restrict)
+  executionPlan             ExecutionPlan                  @relation(fields: [executionPlanId], references: [id], onDelete: Restrict)
+  assignedTo                User?                          @relation("ExecutionTaskAssignee", fields: [assignedToId], references: [id], onDelete: Restrict)
+  assignedBy                User?                          @relation("ExecutionTaskAssigner", fields: [assignedById], references: [id], onDelete: Restrict)
+  completionSubmittedBy     User?                          @relation("ExecutionTaskCompleter", fields: [completionSubmittedById], references: [id], onDelete: Restrict)
+  verifiedBy                User?                          @relation("ExecutionTaskVerifier", fields: [verifiedById], references: [id], onDelete: Restrict)
+  cancelledBy               User?                          @relation("ExecutionTaskCanceller", fields: [cancelledById], references: [id], onDelete: Restrict)
+  evidence                  ExecutionEvidence[]
+  approvedActionVersion     ApprovedActionVersion?         @relation(fields: [approvedActionVersionId], references: [id], onDelete: Restrict)
+  governedExecutionTemplate GovernedExecutionTemplate?     @relation(fields: [governedExecutionTemplateId], references: [id], onDelete: Restrict)
+  governedTaskTemplate      GovernedExecutionTaskTemplate? @relation(fields: [governedTaskTemplateId], references: [id], onDelete: Restrict)
 
   @@unique([executionPlanId, sequenceNumber])
   @@unique([executionPlanId, sourceActionCode, templateTaskKey])
