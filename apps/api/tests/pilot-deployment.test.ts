@@ -49,7 +49,8 @@ describe('pilot deployment packaging', () => {
   });
 
   it('keeps the advisory provider internal, optional and non-root', () => {
-    expect(compose).toContain('ODYSSEY_INTELLIGENCE_SERVICE_URL: http://ai:8000');
+    expect(compose).toContain('ODYSSEY_INTELLIGENCE_SERVICE_URL: ${ODYSSEY_INTELLIGENCE_SERVICE_URL:-http://ai:8000}');
+    expect(compose).toContain('ODYSSEY_INTELLIGENCE_ENABLED:?');
     const aiSection = compose.slice(compose.indexOf('  ai:'), compose.indexOf('\nvolumes:'));
     expect(aiSection).not.toContain('ports:');
     expect(aiDockerfile).toContain('python:3.12-slim');

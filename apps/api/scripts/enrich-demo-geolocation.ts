@@ -1,6 +1,7 @@
 import 'dotenv/config';
 import { pathToFileURL } from 'node:url';
 import { PrismaClient } from '../src/generated/prisma/index.js';
+import { assertNonProductionMutation } from './runtime-safety';
 const prisma = new PrismaClient();
 
 export type DemoCoordinate = { latitude:number;longitude:number;rationale:string };
@@ -37,7 +38,7 @@ function coordinateAction(record:GeoRecord,expected:DemoCoordinate,base:Omit<Geo
   if(latitude!==null&&longitude!==null&&same(latitude,expected.latitude)&&same(longitude,expected.longitude))return{...base,action:'REUSE',message:'Existing coordinates match the synthetic demo manifest.'};
   return{...base,action:'CONFLICT',message:'Existing coordinates are incomplete or differ from the synthetic demo manifest; no overwrite is allowed.'};
 }
-export function assertGeoMutationAllowed(env:NodeJS.ProcessEnv,dryRun:boolean){if(!dryRun&&env.NODE_ENV?.toLowerCase()==='production')throw new Error('Refusing demo geolocation mutations while NODE_ENV=production.');}
+export function assertGeoMutationAllowed(env:NodeJS.ProcessEnv,dryRun:boolean){assertNonProductionMutation(env,'synthetic demo geolocation enrichment',dryRun);}
 export function createDemoGeoPlan(assets:GeoRecord[],reports:GeoRecord[]):GeoPlan{
   const actions:GeoAction[]=[];
   for(const expected of DEMO_ASSET_COORDINATES){const matches=assets.filter((item)=>item.assetCode===expected.assetCode);const base={kind:'asset' as const,id:matches[0]?.id??'',label:`${expected.assetCode} ${expected.name}`,latitude:expected.latitude,longitude:expected.longitude};if(matches.length!==1){actions.push({...base,action:matches.length?'CONFLICT':'SKIP',message:matches.length?'Multiple Assets use this controlled demo code.':'Expected demo Asset is missing.'});continue;}const record=matches[0];if(record.name!==expected.name||record.assetType!==expected.assetType){actions.push({...base,action:'CONFLICT',message:'Stable Asset name or type differs from the demo manifest.'});continue;}actions.push(coordinateAction(record,expected,base));}

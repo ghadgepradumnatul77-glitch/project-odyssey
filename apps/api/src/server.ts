@@ -63,8 +63,7 @@ import portfolioRoutes from './modules/portfolio/portfolio.routes';
 import predictiveDataRoutes from './modules/predictive-data/predictive-data.routes';
 import predictiveModelGovernanceRoutes from './modules/predictive-models/predictive-model-governance.routes';
 
-import { getAuthConfig }
-  from './config/auth';
+import { getRuntimeConfig, isCorsOriginAllowed } from './config/runtime';
 import { authenticate }
   from './middleware/authenticate';
 import { requireRole }
@@ -75,11 +74,10 @@ import { SystemRole }
 
 const app = express();
 
-// Validate authentication configuration during startup, before accepting traffic.
-getAuthConfig();
-
-const port =
-  Number(process.env.API_PORT || 4000);
+// Validate the complete runtime contract before accepting traffic.
+const runtimeConfig = getRuntimeConfig();
+const port = runtimeConfig.port;
+app.set('trust proxy', runtimeConfig.trustProxy);
 
 
 // ======================================================
@@ -90,9 +88,10 @@ app.use(helmet());
 
 app.use(
   cors({
-    origin:
-      process.env.WEB_ORIGIN ||
-      'http://localhost:5173',
+    origin(origin, callback) {
+      if (isCorsOriginAllowed(runtimeConfig, origin)) return callback(null, true);
+      return callback(null, false);
+    },
 
     credentials: true
   })
@@ -302,7 +301,7 @@ app.use((_req, res) => {
 // START SERVER
 // ======================================================
 
-if (process.env.NODE_ENV !== 'test') {
+if (runtimeConfig.environment !== 'test') {
 const server = app.listen(port, () => {
 
   console.log(

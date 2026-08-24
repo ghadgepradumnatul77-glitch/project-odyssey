@@ -1,4 +1,5 @@
 import 'dotenv/config';
+import { assertNonProductionMutation } from './runtime-safety';
 import { pathToFileURL } from 'node:url';
 
 export type TargetStage = 'NEW'|'INSPECTION_IN_PROGRESS'|'RISK_ONLY'|'AWAITING_REVIEW'|'APPROVED'|'EXECUTION'|'VERIFICATION'|'CLOSED';
@@ -46,7 +47,7 @@ export const demoUsers = [
 ] as const;
 
 export function missingSecrets(env:NodeJS.ProcessEnv,publicReportsOnly=false){const required=publicReportsOnly?REQUIRED_SECRETS.slice(0,1):REQUIRED_SECRETS;return required.filter((name)=>!env[name]?.trim());}
-export function assertMutationAllowed(env:NodeJS.ProcessEnv,dryRun:boolean){if(!dryRun&&env.NODE_ENV?.toLowerCase()==='production')throw new Error('Refusing demo bootstrap mutations while NODE_ENV=production.');}
+export function assertMutationAllowed(env:NodeJS.ProcessEnv,dryRun:boolean){assertNonProductionMutation(env,'governed demo bootstrap',dryRun);}
 export function compatible(existing:Record<string,any>,expected:Record<string,any>,fields:string[]){return fields.every((field)=>existing[field]===expected[field]);}
 export function stageAction(current:TargetStage,target:TargetStage){const a=TARGET_ORDER.indexOf(current),b=TARGET_ORDER.indexOf(target);return a>b?'AHEAD':a===b?'SKIP':'ADVANCE';}
 export function hasMatchingEvidence(items:any[],type:string,description:string){return items.some((item)=>item.evidenceType===type&&item.description===description);}

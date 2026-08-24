@@ -4,11 +4,12 @@ import prisma from '../../lib/prisma';
 import { authenticate } from '../../middleware/authenticate';
 import { authenticateCredentials, INVALID_CREDENTIALS } from './auth.service';
 import { safeUserSelect } from '../users/user.select';
+import { getRuntimeConfig } from '../../config/runtime';
 
 const router = Router();
 const loginLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
-  limit: process.env.NODE_ENV === 'test' ? 1000 : 10,
+  limit: getRuntimeConfig().environment === 'test' ? 1000 : 10,
   standardHeaders: true,
   legacyHeaders: false,
   handler: (_req, res) => res.status(429).json({

@@ -74,14 +74,14 @@ Copy `.env.example` to ignored `.env`. Replace all placeholders and never commit
 
 | Variable | Purpose |
 |---|---|
-| `NODE_ENV` | Runtime mode; demo mutation refuses production. |
-| `API_PORT`, `WEB_ORIGIN` | API listener and exact allowed browser origin. |
+| `NODE_ENV` | Exact runtime mode: development, test, staging, or production. |
+| `API_PORT`, `ALLOWED_ORIGINS`, `TRUST_PROXY` | Listener, explicit browser allowlist, and bounded reverse-proxy trust. |
+| `API_PUBLIC_BASE_URL`, `WEB_PUBLIC_BASE_URL` | Externally reachable deployment URLs. |
 | `VITE_API_BASE_URL` | Browser API URL ending in `/api/v1`. |
 | `DATABASE_URL` | PostgreSQL URL; secret-bearing. |
 | `JWT_SECRET` | Strong private signing secret. |
 | `JWT_ISSUER`, `JWT_AUDIENCE`, `JWT_ACCESS_TTL_SECONDS` | Access-token boundaries/lifetime. |
-| `ODYSSEY_INTELLIGENCE_SERVICE_URL`, `...TIMEOUT_MS` | Optional advisory URL and fail-fast timeout. Credential-bearing URLs are rejected. |
-| `AI_SERVICE_URL` | Compatibility/local AI setting; current integration uses the ODYSSEY URL. |
+| `ODYSSEY_INTELLIGENCE_ENABLED`, `...SERVICE_URL`, `...TIMEOUT_MS` | Explicit optional advisory state, URL, and fail-fast timeout. Credential-bearing URLs are rejected. |
 
 ## Database and migrations
 
@@ -158,7 +158,7 @@ Deployment troubleshooting:
 
 - If `migrate` fails, inspect its logs and the external `ODYSSEY_DATABASE_URL`; do not reset the database.
 - If API startup rejects `JWT_SECRET`, supply a non-placeholder value of at least 32 characters.
-- If web loads but API calls fail, verify API health, `ODYSSEY_WEB_ORIGIN`, and the nginx `/api/` proxy.
+- If web loads but API calls fail, verify API health, `ODYSSEY_ALLOWED_ORIGINS`, public URLs, and the nginx `/api/` proxy.
 - Host-port collisions are reported by Docker/API; identify ownership and never kill an unknown process.
 - Container logs use stdout/stderr. No Docker socket, privileged mode, host source mount, or application log volume is required.
 
@@ -262,7 +262,7 @@ The legacy mutable `apps/api/dist` layout is no longer the build/runtime boundar
 ## Troubleshooting
 
 - **Login:** confirm active user/email, matching API/web environment, private current G6 passwords and fresh token. Never patch hashes or print secrets.
-- **CORS:** make `WEB_ORIGIN` exactly match the browser origin and restart API; set `VITE_API_BASE_URL` before Vite starts.
+- **CORS:** include the exact browser origin in `ALLOWED_ORIGINS` and restart API; configure `VITE_API_BASE_URL` only with public browser-safe values.
 - **Prisma connection:** verify Postgres, database, URL and credentials; run validate/status, not reset.
 - **Fingerprint migration:** preserve failure output and remediate duplicates under reviewed backup/governance.
 - **Port 4000/5173 collision:** Odyssey does not kill the listener or silently select a new port. Identify its PID and ownership. Stop it only when it is a confirmed process you own.

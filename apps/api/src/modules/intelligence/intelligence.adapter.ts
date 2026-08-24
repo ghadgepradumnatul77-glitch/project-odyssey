@@ -19,10 +19,10 @@ const abstained = z.object({status:z.literal('ABSTAINED'),contributingFactors:z.
 export const providerResponseSchema = z.discriminatedUnion('status',[completed,abstained]);
 export type ProviderResponse = z.infer<typeof providerResponseSchema>;
 
-export type AdapterResult = {kind:'PROVIDER';data:ProviderResponse}|{kind:'UNAVAILABLE';reasonCode:'SERVICE_TIMEOUT'|'SERVICE_UNAVAILABLE'|'SERVICE_HTTP_ERROR'}|{kind:'INVALID_RESPONSE';reasonCode:'MALFORMED_JSON'|'SCHEMA_INVALID'};
+export type AdapterResult = {kind:'PROVIDER';data:ProviderResponse}|{kind:'UNAVAILABLE';reasonCode:'SERVICE_DISABLED'|'SERVICE_TIMEOUT'|'SERVICE_UNAVAILABLE'|'SERVICE_HTTP_ERROR'}|{kind:'INVALID_RESPONSE';reasonCode:'MALFORMED_JSON'|'SCHEMA_INVALID'};
 
 export async function invokeIntelligenceProvider(payload: unknown, fetchImpl: typeof fetch = fetch): Promise<AdapterResult> {
-  const config=getIntelligenceConfig(); const controller=new AbortController(); const timer=setTimeout(()=>controller.abort(),config.timeoutMs);
+  const config=getIntelligenceConfig(); if(!config.enabled||!config.serviceUrl)return{kind:'UNAVAILABLE',reasonCode:'SERVICE_DISABLED'};const controller=new AbortController(); const timer=setTimeout(()=>controller.abort(),config.timeoutMs);
   try {
     let response:Response;
     try { response=await fetchImpl(`${config.serviceUrl}/v1/intelligence/infer`,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(payload),signal:controller.signal}); }

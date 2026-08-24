@@ -36,13 +36,17 @@ services:
     environment:
       NODE_ENV: production
       API_PORT: 4000
-      WEB_ORIGIN: ${ODYSSEY_WEB_ORIGIN:-http://localhost:8080}
+      ALLOWED_ORIGINS: ${ODYSSEY_ALLOWED_ORIGINS:?set an explicit browser origin allowlist}
+      API_PUBLIC_BASE_URL: ${ODYSSEY_API_PUBLIC_BASE_URL:?set the externally reachable API base URL}
+      WEB_PUBLIC_BASE_URL: ${ODYSSEY_WEB_PUBLIC_BASE_URL:?set the externally reachable web base URL}
+      TRUST_PROXY: ${ODYSSEY_TRUST_PROXY:?set false, loopback, or the trusted proxy hop count}
       DATABASE_URL: ${ODYSSEY_DATABASE_URL:?set ODYSSEY_DATABASE_URL with host db}
       JWT_SECRET: ${JWT_SECRET:?set JWT_SECRET in .env.pilot}
       JWT_ISSUER: ${JWT_ISSUER:-project-odyssey-api}
       JWT_AUDIENCE: ${JWT_AUDIENCE:-project-odyssey-clients}
       JWT_ACCESS_TTL_SECONDS: ${JWT_ACCESS_TTL_SECONDS:-900}
-      ODYSSEY_INTELLIGENCE_SERVICE_URL: http://ai:8000
+      ODYSSEY_INTELLIGENCE_ENABLED: ${ODYSSEY_INTELLIGENCE_ENABLED:?set true or false explicitly}
+      ODYSSEY_INTELLIGENCE_SERVICE_URL: ${ODYSSEY_INTELLIGENCE_SERVICE_URL:-http://ai:8000}
       ODYSSEY_INTELLIGENCE_TIMEOUT_MS: ${ODYSSEY_INTELLIGENCE_TIMEOUT_MS:-2000}
     depends_on:
       migrate:

@@ -5,6 +5,9 @@ import { resolve } from 'node:path';
 
 const root = resolve(import.meta.dirname, '..');
 const schema = 'odyssey_e2e_c6';
+if (process.env.NODE_ENV?.trim().toLowerCase() === 'production') {
+  throw new Error('TEST_HELPER_FORBIDDEN_IN_PRODUCTION: C6 isolated browser data setup cannot run when NODE_ENV=production.');
+}
 const envText = readFileSync(resolve(root, '.env'), 'utf8');
 const baseUrl = envText.match(/^DATABASE_URL=(.*)$/m)?.[1]?.trim().replace(/^"|"$/g, '');
 if (!baseUrl) throw new Error('C6_E2E_SAFETY: canonical DATABASE_URL is unavailable.');

@@ -24,7 +24,7 @@ export default defineConfig({
       command: 'node ../../scripts/c6-e2e-environment.mjs prepare && npx tsx src/server.ts',
       cwd: resolve(root, 'apps/api'),
       url: 'http://127.0.0.1:4100/api/v1/health',
-      env: { ...process.env, DATABASE_URL: databaseUrl, API_PORT: '4100', WEB_ORIGIN: 'http://127.0.0.1:5174', NODE_ENV: 'e2e', JWT_SECRET: 'C6-synthetic-browser-JWT-secret-2026-only', C6_E2E_PASSWORD: password },
+      env: { ...process.env, DATABASE_URL: databaseUrl, API_PORT: '4100', ALLOWED_ORIGINS: 'http://127.0.0.1:5174', NODE_ENV: 'test', JWT_SECRET: 'C6-synthetic-browser-JWT-secret-2026-only', C6_E2E_PASSWORD: password },
       reuseExistingServer: false,
       timeout: 120_000
     },

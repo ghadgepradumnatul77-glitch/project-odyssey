@@ -1,4 +1,6 @@
 const DEVELOPMENT_API_BASE_URL = 'http://localhost:4000/api/v1';
+const DEPLOYMENT_API_BASE_URL = '/api/v1';
+export type PublicEnvironment = 'development' | 'test' | 'staging' | 'production';
 
 export function normalizeApiBaseUrl(value: string): string {
   const normalized = value.trim().replace(/\/+$/, '');
@@ -17,8 +19,9 @@ export function normalizeApiBaseUrl(value: string): string {
   return normalized;
 }
 
-export function getApiBaseUrl(value = import.meta.env.VITE_API_BASE_URL): string {
-  return normalizeApiBaseUrl(value ?? DEVELOPMENT_API_BASE_URL);
+export function getApiBaseUrl(value = import.meta.env.VITE_API_BASE_URL, mode = import.meta.env.MODE): string {
+  if (!['development', 'test', 'staging', 'production'].includes(mode)) throw new Error('Frontend environment mode is unsupported.');
+  return normalizeApiBaseUrl(value ?? (mode === 'development' || mode === 'test' ? DEVELOPMENT_API_BASE_URL : DEPLOYMENT_API_BASE_URL));
 }
 
 export const API_BASE_URL = getApiBaseUrl();
