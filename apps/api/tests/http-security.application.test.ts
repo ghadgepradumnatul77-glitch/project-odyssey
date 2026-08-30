@@ -20,9 +20,17 @@ describe('P3.2 HTTP security controls', () => {
   });
 
   it('returns controlled JSON for malformed JSON without internal disclosure', async () => {
+    const log = vi.spyOn(console, 'log').mockImplementation(() => undefined);
     const response = await request(app).post('/api/v1/public-reports')
       .set('Content-Type', 'application/json').send('{').expect(400);
+    const records = log.mock.calls.map(([line]) => String(line)).filter(line => line.startsWith('{')).map(line => JSON.parse(line));
+    log.mockRestore();
     expect(response.body).toEqual({ success: false, error: { code: 'MALFORMED_JSON', message: 'The request body must contain valid JSON.' } });
+    expect(response.headers['x-request-id']).toMatch(/^[0-9a-f-]{36}$/);
+    expect(records).toEqual(expect.arrayContaining([
+      expect.objectContaining({ event: 'CONTROLLED_REQUEST_ERROR', requestId: response.headers['x-request-id'], errorCode: 'MALFORMED_JSON' }),
+      expect.objectContaining({ event: 'HTTP_REQUEST_COMPLETED', requestId: response.headers['x-request-id'], statusCode: 400 })
+    ]));
     expect(JSON.stringify(response.body)).not.toMatch(/stack|prisma|node_modules|\\|:\//i);
   });
 

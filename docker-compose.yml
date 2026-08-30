@@ -48,13 +48,15 @@ services:
       ODYSSEY_INTELLIGENCE_ENABLED: ${ODYSSEY_INTELLIGENCE_ENABLED:?set true or false explicitly}
       ODYSSEY_INTELLIGENCE_SERVICE_URL: ${ODYSSEY_INTELLIGENCE_SERVICE_URL:-http://ai:8000}
       ODYSSEY_INTELLIGENCE_TIMEOUT_MS: ${ODYSSEY_INTELLIGENCE_TIMEOUT_MS:-2000}
+      ODYSSEY_WEATHER_PROVIDER_ENABLED: ${ODYSSEY_WEATHER_PROVIDER_ENABLED:-false}
+      ODYSSEY_WEATHER_PROVIDER_DEPLOYMENT_CLASS: ${ODYSSEY_WEATHER_PROVIDER_DEPLOYMENT_CLASS:-DISABLED}
     depends_on:
       migrate:
         condition: service_completed_successfully
     ports:
       - "${ODYSSEY_API_PORT:-4000}:4000"
     healthcheck:
-      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:4000/api/v1/health').then(r=>{if(!r.ok)process.exit(1)}).catch(()=>process.exit(1))"]
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:4000/api/v1/health/ready').then(r=>{if(!r.ok)process.exit(1)}).catch(()=>process.exit(1))"]
       interval: 10s
       timeout: 5s
       retries: 12

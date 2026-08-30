@@ -1,6 +1,7 @@
 {
   "scripts": {
-    "dev": "node scripts/dev.mjs"
+    "dev": "node scripts/dev.mjs",
+    "backup:postgres": "node scripts/backup-postgres.mjs"
   },
   "devDependencies": {
     "prisma": "^6.19.3"

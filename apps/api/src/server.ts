@@ -65,6 +65,9 @@ import predictiveDataRoutes from './modules/predictive-data/predictive-data.rout
 import predictiveModelGovernanceRoutes from './modules/predictive-models/predictive-model-governance.routes';
 import trustedComputationRoutes from './modules/trusted-computation/trusted-computation.routes';
 import integrityRoutes from './modules/integrity/integrity.routes';
+import healthRoutes from './operability/health.routes';
+import { normalizedOperationalRoute, requestId, requestObservability, structuredLog } from './operability/logger';
+import { startOdysseyServer } from './operability/lifecycle';
 
 import { getRuntimeConfig, isCorsOriginAllowed } from './config/runtime';
 import { authenticate }
@@ -101,11 +104,15 @@ app.use(
   })
 );
 
+app.use(requestObservability());
+
 app.use(
   express.json({
     limit: '256kb'
   })
 );
+
+app.use('/api/v1', healthRoutes);
 
 app.use(rateLimit({
   windowMs: 15 * 60 * 1000,
@@ -130,8 +137,7 @@ app.get('/api/v1/health', (_req, res) => {
 
     data: {
       service: 'odyssey-api',
-      status: 'ok',
-      timestamp: new Date().toISOString()
+      status: 'ok'
     }
   });
 
@@ -316,18 +322,20 @@ app.use((_req, res) => {
 app.use((error: unknown, _req: express.Request, res: express.Response, _next: express.NextFunction) => {
   const bodyError = error as { type?: string; status?: number };
   if (bodyError?.type === 'entity.too.large' || bodyError?.status === 413) {
+    structuredLog('warn','CONTROLLED_REQUEST_ERROR',{requestId:requestId(_req),route:normalizedOperationalRoute(_req.originalUrl.split('?')[0]),method:_req.method,statusCode:413,errorCode:'REQUEST_TOO_LARGE'});
     return res.status(413).json({
       success: false,
       error: { code: 'REQUEST_TOO_LARGE', message: 'The request body exceeds the permitted size.' }
     });
   }
   if (error instanceof SyntaxError && bodyError?.status === 400) {
+    structuredLog('warn','CONTROLLED_REQUEST_ERROR',{requestId:requestId(_req),route:normalizedOperationalRoute(_req.originalUrl.split('?')[0]),method:_req.method,statusCode:400,errorCode:'MALFORMED_JSON'});
     return res.status(400).json({
       success: false,
       error: { code: 'MALFORMED_JSON', message: 'The request body must contain valid JSON.' }
     });
   }
-  console.error('Unhandled request processing error.');
+  structuredLog('error','UNHANDLED_REQUEST_ERROR',{requestId:requestId(_req),route:normalizedOperationalRoute(_req.originalUrl.split('?')[0]),method:_req.method,statusCode:500,errorCode:'INTERNAL_ERROR'});
   return res.status(500).json({
     success: false,
     error: { code: 'INTERNAL_ERROR', message: 'The request could not be completed.' }
@@ -339,25 +347,6 @@ app.use((error: unknown, _req: express.Request, res: express.Response, _next: ex
 // START SERVER
 // ======================================================
 
-if (runtimeConfig.environment !== 'test') {
-const server = app.listen(port, () => {
-
-  console.log(
-    `ODYSSEY API running on http://localhost:${port}`
-  );
-
-});
-server.on('error', (error: NodeJS.ErrnoException) => {
-  if (error.code === 'EADDRINUSE') {
-    console.error(
-      `ODYSSEY_API_PORT_IN_USE: port ${port} is already occupied. Identify the owning process; Odyssey will not stop it or choose another port.`
-    );
-    process.exitCode = 1;
-    return;
-  }
-  console.error('ODYSSEY_API_START_FAILED:', error.message);
-  process.exitCode = 1;
-});
-}
+if (runtimeConfig.environment !== 'test') void startOdysseyServer(app,runtimeConfig).then(({server})=>server.on('error',(error:NodeJS.ErrnoException)=>{structuredLog('fatal',error.code === 'EADDRINUSE'?'ODYSSEY_API_PORT_IN_USE':'ODYSSEY_API_START_FAILED',{port,errorCode:error.code??'UNKNOWN'});process.exitCode=1})).catch(()=>{process.exitCode=1});
 
 export { app };
