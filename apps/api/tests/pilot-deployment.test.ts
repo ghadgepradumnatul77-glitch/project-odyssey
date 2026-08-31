@@ -66,6 +66,35 @@ describe('pilot deployment packaging', () => {
     expect(dbSection).not.toContain('ports:');
   });
 
+  it('isolates edge, data, and optional intelligence traffic by service role', () => {
+    const dbSection = compose.slice(compose.indexOf('  db:'), compose.indexOf('  migrate:'));
+    const migrateSection = compose.slice(compose.indexOf('  migrate:'), compose.indexOf('  api:'));
+    const apiSection = compose.slice(compose.indexOf('  api:'), compose.indexOf('  web:'));
+    const webSection = compose.slice(compose.indexOf('  web:'), compose.indexOf('  ai:'));
+    const aiSection = compose.slice(compose.indexOf('  ai:'), compose.indexOf('\nvolumes:'));
+    expect(dbSection).toContain('networks: [data]');
+    expect(migrateSection).toContain('networks: [data]');
+    expect(apiSection).toContain('networks: [edge, data, intelligence]');
+    expect(webSection).toContain('networks: [edge]');
+    expect(aiSection).toContain('networks: [intelligence]');
+    expect(compose).toMatch(/data:\s+driver: bridge\s+internal: true/);
+    expect(compose).toMatch(/intelligence:\s+driver: bridge\s+internal: true/);
+  });
+
+  it('adds bounded long-running logs and graceful API/database shutdown', () => {
+    expect(compose).toContain('max-size: "10m"');
+    expect(compose).toContain('max-file: "5"');
+    expect(compose.match(/logging: \*odyssey-logging/g)).toHaveLength(4);
+    const dbSection = compose.slice(compose.indexOf('  db:'), compose.indexOf('  migrate:'));
+    const apiSection = compose.slice(compose.indexOf('  api:'), compose.indexOf('  web:'));
+    expect(dbSection).toContain('stop_grace_period: 30s');
+    expect(apiSection).toContain('stop_grace_period: 30s');
+  });
+
+  it('quotes PostgreSQL health-check values from the container environment', () => {
+    expect(compose).toContain('pg_isready -U \\"$${POSTGRES_USER}\\" -d \\"$${POSTGRES_DB}\\"');
+  });
+
   it('excludes secrets, dependencies and generated artifacts without excluding migrations', () => {
     for (const value of ['.env', '**/node_modules', '**/dist', '**/.runtime-builds', '**/playwright-report', '**/.venv']) {
       expect(dockerignore).toContain(value);

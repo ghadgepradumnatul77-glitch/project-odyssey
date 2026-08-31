@@ -1,3 +1,9 @@
+x-odyssey-logging: &odyssey-logging
+  driver: json-file
+  options:
+    max-size: "10m"
+    max-file: "5"
+
 services:
   db:
     image: postgres:${ODYSSEY_POSTGRES_MAJOR:-16}
@@ -8,12 +14,14 @@ services:
     volumes:
       - odyssey_pgdata:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${ODYSSEY_DB_USER:-odyssey} -d ${ODYSSEY_DB_NAME:-odyssey}"]
+      test: ["CMD-SHELL", "pg_isready -U \"$${POSTGRES_USER}\" -d \"$${POSTGRES_DB}\""]
       interval: 5s
       timeout: 5s
       retries: 20
+    stop_grace_period: 30s
     restart: unless-stopped
-    networks: [odyssey-internal]
+    logging: *odyssey-logging
+    networks: [data]
 
   migrate:
     build:
@@ -26,7 +34,7 @@ services:
       db:
         condition: service_healthy
     restart: "no"
-    networks: [odyssey-internal]
+    networks: [data]
 
   api:
     build:
@@ -61,8 +69,10 @@ services:
       timeout: 5s
       retries: 12
       start_period: 10s
+    stop_grace_period: 30s
     restart: unless-stopped
-    networks: [odyssey-internal]
+    logging: *odyssey-logging
+    networks: [edge, data, intelligence]
 
   web:
     build:
@@ -79,7 +89,8 @@ services:
       timeout: 5s
       retries: 12
     restart: unless-stopped
-    networks: [odyssey-internal]
+    logging: *odyssey-logging
+    networks: [edge]
 
   ai:
     profiles: ["ai"]
@@ -92,11 +103,18 @@ services:
       timeout: 5s
       retries: 12
     restart: unless-stopped
-    networks: [odyssey-internal]
+    logging: *odyssey-logging
+    networks: [intelligence]
 
 volumes:
   odyssey_pgdata:
 
 networks:
-  odyssey-internal:
+  edge:
     driver: bridge
+  data:
+    driver: bridge
+    internal: true
+  intelligence:
+    driver: bridge
+    internal: true
