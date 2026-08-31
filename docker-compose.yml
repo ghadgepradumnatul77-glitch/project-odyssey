@@ -1,6 +1,6 @@
 services:
   db:
-    image: postgres:16
+    image: postgres:${ODYSSEY_POSTGRES_MAJOR:-16}
     environment:
       POSTGRES_USER: ${ODYSSEY_DB_USER:-odyssey}
       POSTGRES_DB: ${ODYSSEY_DB_NAME:-odyssey}
@@ -54,7 +54,7 @@ services:
       migrate:
         condition: service_completed_successfully
     ports:
-      - "${ODYSSEY_API_PORT:-4000}:4000"
+      - "${ODYSSEY_API_BIND_HOST:-127.0.0.1}:${ODYSSEY_API_PORT:-4000}:4000"
     healthcheck:
       test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:4000/api/v1/health/ready').then(r=>{if(!r.ok)process.exit(1)}).catch(()=>process.exit(1))"]
       interval: 10s
@@ -72,7 +72,7 @@ services:
       api:
         condition: service_healthy
     ports:
-      - "${ODYSSEY_WEB_PORT:-8080}:8080"
+      - "${ODYSSEY_WEB_BIND_HOST:-127.0.0.1}:${ODYSSEY_WEB_PORT:-8080}:8080"
     healthcheck:
       test: ["CMD", "wget", "-q", "--spider", "http://127.0.0.1:8080/"]
       interval: 10s

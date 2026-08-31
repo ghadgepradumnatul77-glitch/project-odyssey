@@ -1,7 +1,8 @@
 {
   "scripts": {
     "dev": "node scripts/dev.mjs",
-    "backup:postgres": "node scripts/backup-postgres.mjs"
+    "backup:postgres": "node scripts/backup-postgres.mjs",
+    "pilot:preflight": "node scripts/pilot-preflight.mjs"
   },
   "devDependencies": {
     "prisma": "^6.19.3"
