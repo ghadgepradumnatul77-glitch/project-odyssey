@@ -117,7 +117,7 @@ POSIX activation is `source .venv/bin/activate`. The provider accepts structured
 This is a single-host pilot package, not production high availability. It requires Docker with the Compose plugin. Local development continues to use `npm run dev`; the commands below use production builds and isolated container networking.
 
 1. Copy `.env.pilot.example` to the ignored file `.env.pilot`.
-2. Replace every `replace-*` value. Use a long random JWT secret and a URL-safe database password; keep `ODYSSEY_DATABASE_URL` consistent with the database settings and container host `db`.
+2. Replace every `replace-*` value. Use a long random JWT secret and distinct URL-safe owner, migration, runtime, and backup database passwords; keep each role URL consistent with its identity and container host `db`.
 3. Review the populated-database migration caveats above.
 4. Start the deterministic stack:
 
@@ -156,7 +156,7 @@ To verify or populate the governed synthetic demo, wait for stack health and run
 
 Deployment troubleshooting:
 
-- If `migrate` fails, inspect its logs and the external `ODYSSEY_DATABASE_URL`; do not reset the database.
+- If role provisioning or `migrate` fails, inspect its controlled logs and the corresponding owner/migration role configuration without printing credentials; do not reset the database. New or existing volumes must complete the explicit `operations` profile provisioning procedure in `docs/phase3-pilot-deployment-preflight.md` before API startup.
 - If API startup rejects `JWT_SECRET`, supply a non-placeholder value of at least 32 characters.
 - If web loads but API calls fail, verify API health, `ODYSSEY_ALLOWED_ORIGINS`, public URLs, and the nginx `/api/` proxy.
 - Host-port collisions are reported by Docker/API; identify ownership and never kill an unknown process.

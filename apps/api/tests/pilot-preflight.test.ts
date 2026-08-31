@@ -3,11 +3,21 @@ import { PILOT_MIGRATION_COUNT, PILOT_POSTGRES_MAJOR, runPilotPreflight } from '
 
 const releaseSha = 'a'.repeat(40);
 const validEnv = (overrides: Record<string, string> = {}) => ({
-  ODYSSEY_DB_USER: 'odyssey',
   ODYSSEY_DB_NAME: 'odyssey',
   ODYSSEY_POSTGRES_MAJOR: String(PILOT_POSTGRES_MAJOR),
-  ODYSSEY_DB_PASSWORD: 'valid-db-password-123',
-  ODYSSEY_DATABASE_URL: 'postgresql://odyssey:valid-db-password-123@db:5432/odyssey',
+  ODYSSEY_DB_OWNER_USER: 'odyssey_owner',
+  ODYSSEY_DB_OWNER_PASSWORD: 'valid-owner-password-123',
+  ODYSSEY_DB_OWNER_DATABASE_URL: 'postgresql://odyssey_owner:valid-owner-password-123@db:5432/odyssey',
+  ODYSSEY_DB_MIGRATION_USER: 'odyssey_migration',
+  ODYSSEY_DB_MIGRATION_PASSWORD: 'valid-migration-password-123',
+  ODYSSEY_DB_MIGRATION_DATABASE_URL: 'postgresql://odyssey_migration:valid-migration-password-123@db:5432/odyssey',
+  ODYSSEY_DB_RUNTIME_USER: 'odyssey_runtime',
+  ODYSSEY_DB_RUNTIME_PASSWORD: 'valid-runtime-password-123',
+  ODYSSEY_DB_RUNTIME_DATABASE_URL: 'postgresql://odyssey_runtime:valid-runtime-password-123@db:5432/odyssey',
+  ODYSSEY_DB_BACKUP_USER: 'odyssey_backup',
+  ODYSSEY_DB_BACKUP_PASSWORD: 'valid-backup-password-123',
+  ODYSSEY_DB_BACKUP_DATABASE_URL: 'postgresql://odyssey_backup:valid-backup-password-123@db:5432/odyssey',
+  ODYSSEY_BACKUP_DIRECTORY: 'backups',
   JWT_SECRET: 'valid-jwt-secret-at-least-32-characters',
   ODYSSEY_ALLOWED_ORIGINS: 'http://localhost:8080',
   ODYSSEY_API_PUBLIC_BASE_URL: 'http://localhost:8080/api/v1',
@@ -80,15 +90,15 @@ describe('pilot deployment preflight', () => {
   });
 
   it('rejects placeholder and policy-invalid secrets', async () => {
-    const report = await harness({ env: validEnv({ ODYSSEY_DB_PASSWORD: 'replace-me', ODYSSEY_DATABASE_URL: 'postgresql://odyssey:replace-me@db:5432/odyssey', JWT_SECRET: 'secret' }) }).run();
+    const report = await harness({ env: validEnv({ ODYSSEY_DB_RUNTIME_PASSWORD: 'replace-me', ODYSSEY_DB_RUNTIME_DATABASE_URL: 'postgresql://odyssey_runtime:replace-me@db:5432/odyssey', JWT_SECRET: 'secret' }) }).run();
     expect(status(report, 'ENV_PLACEHOLDERS')).toBe('FAIL');
     expect(status(report, 'JWT_SECRET_POLICY')).toBe('FAIL');
-    expect(status(report, 'DATABASE_PASSWORD_POLICY')).toBe('FAIL');
+    expect(status(report, 'RUNTIME_PASSWORD_POLICY')).toBe('FAIL');
   });
 
   it('rejects a database URL whose password does not match the configured password', async () => {
-    const report = await harness({ env: validEnv({ ODYSSEY_DATABASE_URL: 'postgresql://odyssey:different-password-123@db:5432/odyssey' }) }).run();
-    expect(status(report, 'DATABASE_URL_CONTRACT')).toBe('FAIL');
+    const report = await harness({ env: validEnv({ ODYSSEY_DB_RUNTIME_DATABASE_URL: 'postgresql://odyssey_runtime:different-password-123@db:5432/odyssey' }) }).run();
+    expect(status(report, 'RUNTIME_DATABASE_URL')).toBe('FAIL');
   });
 
   it('reports occupied API and web ports without selecting alternatives', async () => {

@@ -28,10 +28,21 @@ FROM node:22-bookworm-slim AS migration
 ENV NODE_ENV=production
 WORKDIR /workspace
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends openssl \
+    && apt-get install -y --no-install-recommends openssl postgresql-client \
     && rm -rf /var/lib/apt/lists/*
 COPY package.json package-lock.json ./
 RUN npm ci && npm cache clean --force
 COPY --chown=node:node database/prisma ./database/prisma
+COPY --chown=node:node scripts/provision-pilot-db-roles.mjs ./scripts/provision-pilot-db-roles.mjs
 USER node
 CMD ["npx", "prisma", "migrate", "deploy", "--schema", "database/prisma/schema.prisma"]
+
+FROM postgres:16-bookworm AS backup-runtime
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends nodejs \
+    && rm -rf /var/lib/apt/lists/*
+WORKDIR /ops
+COPY --chown=postgres:postgres scripts/backup-postgres.mjs ./scripts/backup-postgres.mjs
+USER postgres
+ENTRYPOINT ["node", "scripts/backup-postgres.mjs"]
+CMD ["create", "--directory", "/backups"]

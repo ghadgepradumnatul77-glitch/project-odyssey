@@ -15,7 +15,7 @@ describe('pilot deployment packaging', () => {
   const dockerignore = read('.dockerignore');
 
   it('defines database, migration, API, web and optional AI services', () => {
-    for (const service of ['db:', 'migrate:', 'api:', 'web:', 'ai:']) expect(compose).toContain(service);
+    for (const service of ['db:', 'migrate:', 'provision-db-roles:', 'backup:', 'api:', 'web:', 'ai:']) expect(compose).toContain(service);
     expect(compose).toContain('profiles: ["ai"]');
     const apiSection = compose.slice(compose.indexOf('  api:'), compose.indexOf('  web:'));
     expect(apiSection).not.toMatch(/depends_on:[\s\S]*\bai:/);
@@ -59,21 +59,50 @@ describe('pilot deployment packaging', () => {
   });
 
   it('requires external secrets and does not expose database by default', () => {
-    expect(compose).toContain('ODYSSEY_DB_PASSWORD:?');
+    expect(compose).toContain('ODYSSEY_DB_OWNER_PASSWORD:?');
     expect(compose).toContain('JWT_SECRET:?');
     expect(compose).not.toMatch(/POSTGRES_PASSWORD:\s*(postgres|odyssey)\s*$/m);
     const dbSection = compose.slice(compose.indexOf('  db:'), compose.indexOf('  migrate:'));
     expect(dbSection).not.toContain('ports:');
   });
 
+  it('separates bootstrap, migration, runtime, and backup database identities', () => {
+    const migrateSection = compose.slice(compose.indexOf('  migrate:'), compose.indexOf('  provision-db-roles:'));
+    const provisionSection = compose.slice(compose.indexOf('  provision-db-roles:'), compose.indexOf('  api:'));
+    const apiSection = compose.slice(compose.indexOf('  api:'), compose.indexOf('  web:'));
+    expect(compose).toContain('POSTGRES_USER: ${ODYSSEY_DB_OWNER_USER:-odyssey_owner}');
+    expect(migrateSection).toContain('DATABASE_URL: ${ODYSSEY_DB_MIGRATION_DATABASE_URL:?');
+    expect(apiSection).toContain('DATABASE_URL: ${ODYSSEY_DB_RUNTIME_DATABASE_URL:?');
+    expect(apiSection).not.toMatch(/OWNER_DATABASE_URL|MIGRATION_DATABASE_URL|BACKUP_DATABASE_URL/);
+    expect(provisionSection).toContain('profiles: ["operations"]');
+    expect(provisionSection).toContain('ODYSSEY_DB_BACKUP_PASSWORD:');
+    expect(apiSection).not.toContain('provision-db-roles');
+  });
+
+  it('keeps manual PostgreSQL 16 backup internal and dedicated-role only', () => {
+    const backupSection = compose.slice(compose.indexOf('  backup:'), compose.indexOf('  api:'));
+    expect(backupSection).toContain('profiles: ["backup"]');
+    expect(backupSection).toContain('target: backup-runtime');
+    expect(backupSection).toContain('ODYSSEY_DB_BACKUP_DATABASE_URL:');
+    expect(backupSection).toContain('source: ${ODYSSEY_BACKUP_DIRECTORY:?');
+    expect(backupSection).toContain('networks: [data]');
+    expect(backupSection).not.toContain('ports:');
+    expect(apiDockerfile).toContain('FROM postgres:16-bookworm AS backup-runtime');
+    expect(apiDockerfile).toContain('ENTRYPOINT ["node", "scripts/backup-postgres.mjs"]');
+  });
+
   it('isolates edge, data, and optional intelligence traffic by service role', () => {
     const dbSection = compose.slice(compose.indexOf('  db:'), compose.indexOf('  migrate:'));
-    const migrateSection = compose.slice(compose.indexOf('  migrate:'), compose.indexOf('  api:'));
+    const migrateSection = compose.slice(compose.indexOf('  migrate:'), compose.indexOf('  provision-db-roles:'));
+    const provisionSection = compose.slice(compose.indexOf('  provision-db-roles:'), compose.indexOf('  backup:'));
+    const backupSection = compose.slice(compose.indexOf('  backup:'), compose.indexOf('  api:'));
     const apiSection = compose.slice(compose.indexOf('  api:'), compose.indexOf('  web:'));
     const webSection = compose.slice(compose.indexOf('  web:'), compose.indexOf('  ai:'));
     const aiSection = compose.slice(compose.indexOf('  ai:'), compose.indexOf('\nvolumes:'));
     expect(dbSection).toContain('networks: [data]');
     expect(migrateSection).toContain('networks: [data]');
+    expect(provisionSection).toContain('networks: [data]');
+    expect(backupSection).toContain('networks: [data]');
     expect(apiSection).toContain('networks: [edge, data, intelligence]');
     expect(webSection).toContain('networks: [edge]');
     expect(aiSection).toContain('networks: [intelligence]');

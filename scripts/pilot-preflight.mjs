@@ -10,7 +10,11 @@ export const PILOT_MIGRATION_COUNT = 27;
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const requiredKeys = [
-  'ODYSSEY_DB_USER', 'ODYSSEY_DB_NAME', 'ODYSSEY_DB_PASSWORD', 'ODYSSEY_DATABASE_URL',
+  'ODYSSEY_DB_NAME', 'ODYSSEY_DB_OWNER_USER', 'ODYSSEY_DB_OWNER_PASSWORD', 'ODYSSEY_DB_OWNER_DATABASE_URL',
+  'ODYSSEY_DB_MIGRATION_USER', 'ODYSSEY_DB_MIGRATION_PASSWORD', 'ODYSSEY_DB_MIGRATION_DATABASE_URL',
+  'ODYSSEY_DB_RUNTIME_USER', 'ODYSSEY_DB_RUNTIME_PASSWORD', 'ODYSSEY_DB_RUNTIME_DATABASE_URL',
+  'ODYSSEY_DB_BACKUP_USER', 'ODYSSEY_DB_BACKUP_PASSWORD', 'ODYSSEY_DB_BACKUP_DATABASE_URL',
+  'ODYSSEY_BACKUP_DIRECTORY',
   'JWT_SECRET', 'ODYSSEY_ALLOWED_ORIGINS', 'ODYSSEY_API_PUBLIC_BASE_URL',
   'ODYSSEY_WEB_PUBLIC_BASE_URL', 'ODYSSEY_TRUST_PROXY', 'ODYSSEY_INTELLIGENCE_ENABLED',
   'ODYSSEY_POSTGRES_MAJOR', 'ODYSSEY_API_BIND_HOST', 'ODYSSEY_WEB_BIND_HOST',
@@ -54,21 +58,38 @@ export function validatePilotEnvironment(env) {
   const missing = requiredKeys.filter((key) => !env[key]?.trim());
   results.push(missing.length ? fail('ENV_REQUIRED', `Missing required keys: ${missing.join(', ')}`) : pass('ENV_REQUIRED', 'All required pilot keys are present.'));
 
-  const sensitiveKeys = ['ODYSSEY_DB_PASSWORD', 'ODYSSEY_DATABASE_URL', 'JWT_SECRET'];
+  const databaseIdentities = [
+    ['OWNER', 'ODYSSEY_DB_OWNER_USER', 'ODYSSEY_DB_OWNER_PASSWORD', 'ODYSSEY_DB_OWNER_DATABASE_URL'],
+    ['MIGRATION', 'ODYSSEY_DB_MIGRATION_USER', 'ODYSSEY_DB_MIGRATION_PASSWORD', 'ODYSSEY_DB_MIGRATION_DATABASE_URL'],
+    ['RUNTIME', 'ODYSSEY_DB_RUNTIME_USER', 'ODYSSEY_DB_RUNTIME_PASSWORD', 'ODYSSEY_DB_RUNTIME_DATABASE_URL'],
+    ['BACKUP', 'ODYSSEY_DB_BACKUP_USER', 'ODYSSEY_DB_BACKUP_PASSWORD', 'ODYSSEY_DB_BACKUP_DATABASE_URL']
+  ];
+  const sensitiveKeys = ['JWT_SECRET', ...databaseIdentities.flatMap(([, , passwordKey, urlKey]) => [passwordKey, urlKey])];
   const placeholders = sensitiveKeys.filter((key) => placeholder(env[key]));
   results.push(placeholders.length ? fail('ENV_PLACEHOLDERS', `Placeholder values remain for: ${placeholders.join(', ')}`) : pass('ENV_PLACEHOLDERS', 'No deployment secret placeholder was detected.'));
 
   results.push(env.JWT_SECRET?.length >= 32 ? pass('JWT_SECRET_POLICY', 'JWT secret meets the minimum length contract.') : fail('JWT_SECRET_POLICY', 'JWT_SECRET must contain at least 32 characters.'));
-  results.push(env.ODYSSEY_DB_PASSWORD?.length >= 16 && /^[A-Za-z0-9._~-]+$/.test(env.ODYSSEY_DB_PASSWORD)
-    ? pass('DATABASE_PASSWORD_POLICY', 'Database password is URL-safe and meets the minimum length contract.')
-    : fail('DATABASE_PASSWORD_POLICY', 'ODYSSEY_DB_PASSWORD must be URL-safe and contain at least 16 characters.'));
-
-  const databaseUrl = parseUrl(env.ODYSSEY_DATABASE_URL);
-  const databaseMatches = databaseUrl?.protocol === 'postgresql:' && databaseUrl.hostname === 'db' && databaseUrl.port === '5432'
-    && decodeURIComponent(databaseUrl.username) === env.ODYSSEY_DB_USER
-    && decodeURIComponent(databaseUrl.password) === env.ODYSSEY_DB_PASSWORD
-    && databaseUrl.pathname === `/${env.ODYSSEY_DB_NAME}`;
-  results.push(databaseMatches ? pass('DATABASE_URL_CONTRACT', 'Database URL targets the internal db service and configured database identity.') : fail('DATABASE_URL_CONTRACT', 'ODYSSEY_DATABASE_URL must target postgresql://<configured-user>@db:5432/<configured-database>.'));
+  const roleNames = databaseIdentities.map(([, userKey]) => env[userKey]);
+  results.push(roleNames.every((value) => /^[a-z_][a-z0-9_]{0,62}$/.test(value || '')) && new Set(roleNames).size === roleNames.length
+    ? pass('DATABASE_ROLE_SEPARATION', 'Owner, migration, runtime, and backup roles are valid and distinct.')
+    : fail('DATABASE_ROLE_SEPARATION', 'Database role names must be valid, lowercase, and distinct.'));
+  for (const [label, userKey, passwordKey, urlKey] of databaseIdentities) {
+    const password = env[passwordKey];
+    results.push(password?.length >= 16 && /^[A-Za-z0-9._~-]+$/.test(password)
+      ? pass(`${label}_PASSWORD_POLICY`, `${label.toLowerCase()} database password meets the deployment contract.`)
+      : fail(`${label}_PASSWORD_POLICY`, `${passwordKey} must be URL-safe and contain at least 16 characters.`));
+    const databaseUrl = parseUrl(env[urlKey]);
+    let databaseMatches = false;
+    try {
+      databaseMatches = databaseUrl?.protocol === 'postgresql:' && databaseUrl.hostname === 'db' && databaseUrl.port === '5432'
+        && decodeURIComponent(databaseUrl.username) === env[userKey]
+        && decodeURIComponent(databaseUrl.password) === password
+        && databaseUrl.pathname === `/${env.ODYSSEY_DB_NAME}`;
+    } catch { databaseMatches = false; }
+    results.push(databaseMatches
+      ? pass(`${label}_DATABASE_URL`, `${label.toLowerCase()} URL targets its distinct internal database identity.`)
+      : fail(`${label}_DATABASE_URL`, `${urlKey} must match its configured role/password and target db:5432.`));
+  }
 
   results.push(Number(env.ODYSSEY_POSTGRES_MAJOR) === PILOT_POSTGRES_MAJOR
     ? pass('POSTGRES_MAJOR', `Pilot PostgreSQL major is ${PILOT_POSTGRES_MAJOR}.`)
@@ -152,13 +173,16 @@ export async function runPilotPreflight(input, overrides = {}) {
   const portProbe = overrides.portProbe || probePort;
   const releaseIdentity = overrides.releaseIdentity || (() => defaultReleaseIdentity(command));
   const envPath = resolve(root, input.envFile);
-  const backupDirectory = resolve(input.backupDirectory);
+  const backupDirectory = resolve(root, input.backupDirectory);
   const results = [];
   let env = {};
 
   try { env = parseEnvText(readText(envPath)); results.push(pass('ENV_FILE', 'Pilot environment file is readable.')); }
   catch { results.push(fail('ENV_FILE', 'Pilot environment file cannot be read.')); }
   results.push(...validatePilotEnvironment(env));
+  results.push(env.ODYSSEY_BACKUP_DIRECTORY && resolve(root, env.ODYSSEY_BACKUP_DIRECTORY) === backupDirectory
+    ? pass('BACKUP_DIRECTORY_CONTRACT', 'Preflight and Compose use the same configured backup destination.')
+    : fail('BACKUP_DIRECTORY_CONTRACT', 'ODYSSEY_BACKUP_DIRECTORY must match --backup-dir.'));
 
   const docker = command('docker', ['version', '--format', '{{.Server.Version}}']);
   results.push(docker.status === 0 && docker.stdout.trim() ? pass('DOCKER_ENGINE', 'Docker engine is available.') : fail('DOCKER_ENGINE', 'Docker engine is unavailable. Preflight will not attempt repair.'));

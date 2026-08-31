@@ -8,9 +8,9 @@ services:
   db:
     image: postgres:${ODYSSEY_POSTGRES_MAJOR:-16}
     environment:
-      POSTGRES_USER: ${ODYSSEY_DB_USER:-odyssey}
+      POSTGRES_USER: ${ODYSSEY_DB_OWNER_USER:-odyssey_owner}
       POSTGRES_DB: ${ODYSSEY_DB_NAME:-odyssey}
-      POSTGRES_PASSWORD: ${ODYSSEY_DB_PASSWORD:?set ODYSSEY_DB_PASSWORD in .env.pilot}
+      POSTGRES_PASSWORD: ${ODYSSEY_DB_OWNER_PASSWORD:?set ODYSSEY_DB_OWNER_PASSWORD in .env.pilot}
     volumes:
       - odyssey_pgdata:/var/lib/postgresql/data
     healthcheck:
@@ -29,7 +29,49 @@ services:
       dockerfile: apps/api/Dockerfile
       target: migration
     environment:
-      DATABASE_URL: ${ODYSSEY_DATABASE_URL:?set ODYSSEY_DATABASE_URL with host db}
+      DATABASE_URL: ${ODYSSEY_DB_MIGRATION_DATABASE_URL:?set the migration role URL with host db}
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: "no"
+    networks: [data]
+
+  provision-db-roles:
+    profiles: ["operations"]
+    build:
+      context: .
+      dockerfile: apps/api/Dockerfile
+      target: migration
+    command: ["node", "scripts/provision-pilot-db-roles.mjs"]
+    environment:
+      ODYSSEY_DB_NAME: ${ODYSSEY_DB_NAME:-odyssey}
+      ODYSSEY_DB_OWNER_USER: ${ODYSSEY_DB_OWNER_USER:-odyssey_owner}
+      ODYSSEY_DB_OWNER_DATABASE_URL: ${ODYSSEY_DB_OWNER_DATABASE_URL:?set the bootstrap owner URL with host db}
+      ODYSSEY_DB_MIGRATION_USER: ${ODYSSEY_DB_MIGRATION_USER:-odyssey_migration}
+      ODYSSEY_DB_MIGRATION_PASSWORD: ${ODYSSEY_DB_MIGRATION_PASSWORD:?set the migration role password}
+      ODYSSEY_DB_RUNTIME_USER: ${ODYSSEY_DB_RUNTIME_USER:-odyssey_runtime}
+      ODYSSEY_DB_RUNTIME_PASSWORD: ${ODYSSEY_DB_RUNTIME_PASSWORD:?set the runtime role password}
+      ODYSSEY_DB_BACKUP_USER: ${ODYSSEY_DB_BACKUP_USER:-odyssey_backup}
+      ODYSSEY_DB_BACKUP_PASSWORD: ${ODYSSEY_DB_BACKUP_PASSWORD:?set the backup role password}
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: "no"
+    networks: [data]
+
+  backup:
+    profiles: ["backup"]
+    build:
+      context: .
+      dockerfile: apps/api/Dockerfile
+      target: backup-runtime
+    environment:
+      ODYSSEY_DB_BACKUP_DATABASE_URL: ${ODYSSEY_DB_BACKUP_DATABASE_URL:?set the backup role URL with host db}
+      ODYSSEY_BACKUP_DIRECTORY: /backups
+    volumes:
+      - type: bind
+        source: ${ODYSSEY_BACKUP_DIRECTORY:?set an existing protected host backup directory}
+        target: /backups
     depends_on:
       db:
         condition: service_healthy
@@ -48,7 +90,7 @@ services:
       API_PUBLIC_BASE_URL: ${ODYSSEY_API_PUBLIC_BASE_URL:?set the externally reachable API base URL}
       WEB_PUBLIC_BASE_URL: ${ODYSSEY_WEB_PUBLIC_BASE_URL:?set the externally reachable web base URL}
       TRUST_PROXY: ${ODYSSEY_TRUST_PROXY:?set false, loopback, or the trusted proxy hop count}
-      DATABASE_URL: ${ODYSSEY_DATABASE_URL:?set ODYSSEY_DATABASE_URL with host db}
+      DATABASE_URL: ${ODYSSEY_DB_RUNTIME_DATABASE_URL:?set the runtime role URL with host db}
       JWT_SECRET: ${JWT_SECRET:?set JWT_SECRET in .env.pilot}
       JWT_ISSUER: ${JWT_ISSUER:-project-odyssey-api}
       JWT_AUDIENCE: ${JWT_AUDIENCE:-project-odyssey-clients}
