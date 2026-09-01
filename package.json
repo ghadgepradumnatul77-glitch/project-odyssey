@@ -4,6 +4,7 @@
     "backup:postgres": "node scripts/backup-postgres.mjs create",
     "backup:status": "node scripts/backup-postgres.mjs status",
     "pilot:preflight": "node scripts/pilot-preflight.mjs",
+    "pilot:status": "node scripts/pilot-status.mjs",
     "pilot:provision-db-roles": "node scripts/provision-pilot-db-roles.mjs"
   },
   "devDependencies": {
