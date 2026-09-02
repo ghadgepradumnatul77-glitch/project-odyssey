@@ -142,6 +142,33 @@ export function probePort(host, port) {
   });
 }
 
+export function containsForbiddenStartupCommand(composeText) {
+  const lines = composeText.split(/\r?\n/);
+  const startupCommands = [];
+  for (let index = 0; index < lines.length; index += 1) {
+    const match = lines[index].match(/^(\s*)(?:command|entrypoint):\s*(.*)$/i);
+    if (!match) continue;
+    const indentation = match[1].length;
+    const command = [match[2]];
+    while (index + 1 < lines.length) {
+      const next = lines[index + 1];
+      if (!next.trim()) { index += 1; continue; }
+      const nextIndentation = next.match(/^\s*/)?.[0].length || 0;
+      if (nextIndentation <= indentation) break;
+      command.push(next.trim());
+      index += 1;
+    }
+    startupCommands.push(command.join(' '));
+  }
+
+  return startupCommands.some((command) => {
+    const normalized = command.replace(/[\[\]{},"']/g, ' ').replace(/\s+/g, ' ').trim();
+    return /\bprisma\s+(?:migrate\s+reset|db\s+push)\b/i.test(normalized)
+      || /\b(?:npm|pnpm|yarn)\s+(?:run\s+)?(?:demo(?::bootstrap)?|seed|reseed|bootstrap|test:e2e)\b/i.test(normalized)
+      || /\b(?:node|tsx)\s+\S*(?:bootstrap|seed|reseed|demo)\S*/i.test(normalized);
+  });
+}
+
 function defaultCommand(command, args) {
   const result = spawnSync(command, args, { cwd: root, encoding: 'utf8', shell: false, windowsHide: true });
   return { status: result.status, stdout: result.stdout || '', stderr: result.stderr || '', error: result.error };
@@ -226,7 +253,7 @@ export async function runPilotPreflight(input, overrides = {}) {
 
   const release = releaseIdentity();
   results.push(release.ok ? pass('RELEASE_IDENTITY', `Release is published clean master commit ${release.sha}.`) : fail('RELEASE_IDENTITY', 'Release must be a clean master commit matching the local origin/master reference.'));
-  const forbiddenCommand = /\b(demo|bootstrap|seed|migrate\s+reset|test:e2e)\b/i.test(composeText);
+  const forbiddenCommand = containsForbiddenStartupCommand(composeText);
   results.push(forbiddenCommand ? fail('NO_MUTATION_STARTUP', 'Compose contains a forbidden demo/test/reset startup command.') : pass('NO_MUTATION_STARTUP', 'Compose startup contains no demo, seed, test, or reset command.'));
 
   return { ok: results.every((result) => result.status === 'PASS'), results, release: release.sha || null };

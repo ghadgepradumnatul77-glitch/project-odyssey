@@ -1,5 +1,7 @@
+import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
 import { describe, expect, it, vi } from 'vitest';
-import { PILOT_MIGRATION_COUNT, PILOT_POSTGRES_MAJOR, runPilotPreflight } from '../../../scripts/pilot-preflight.mjs';
+import { containsForbiddenStartupCommand, PILOT_MIGRATION_COUNT, PILOT_POSTGRES_MAJOR, runPilotPreflight } from '../../../scripts/pilot-preflight.mjs';
 
 const releaseSha = 'a'.repeat(40);
 const validEnv = (overrides: Record<string, string> = {}) => ({
@@ -73,6 +75,21 @@ function harness(options: {
 }
 
 describe('pilot deployment preflight', () => {
+  it('accepts the current Compose contract despite harmless bootstrap-owner prose', () => {
+    const compose = readFileSync(resolve(import.meta.dirname, '../../../docker-compose.yml'), 'utf8');
+    expect(compose).toContain('bootstrap owner URL');
+    expect(containsForbiddenStartupCommand(compose)).toBe(false);
+  });
+
+  it.each([
+    'services:\n  api:\n    command: ["npx", "prisma", "migrate", "reset", "--force"]',
+    'services:\n  api:\n    command: npm run reseed',
+    'services:\n  api:\n    entrypoint: ["node", "scripts/destructive-bootstrap.mjs"]',
+    'services:\n  api:\n    command: |\n      npm run demo:bootstrap\n      node server.js'
+  ])('rejects an actual reset, reseed, or destructive bootstrap startup command', (compose) => {
+    expect(containsForbiddenStartupCommand(compose)).toBe(true);
+  });
+
   it('passes a valid bounded-pilot configuration', async () => {
     const report = await harness().run();
     expect(report.ok).toBe(true);
