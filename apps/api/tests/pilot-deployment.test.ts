@@ -122,6 +122,37 @@ describe('pilot deployment packaging', () => {
     expect(apiSection).toContain('stop_grace_period: 30s');
   });
 
+  it('drops inherited capabilities and prevents privilege escalation for every pilot service', () => {
+    const serviceNames = ['db', 'migrate', 'provision-db-roles', 'backup', 'api', 'web', 'ai'];
+    const boundaries = [...serviceNames.slice(1), '\nvolumes:'];
+    serviceNames.forEach((name, index) => {
+      const section = compose.slice(compose.indexOf(`  ${name}:`), compose.indexOf(`  ${boundaries[index]}:`));
+      expect(section).toContain('no-new-privileges:true');
+      expect(section).toContain('cap_drop: [ALL]');
+    });
+    const dbSection = compose.slice(compose.indexOf('  db:'), compose.indexOf('  migrate:'));
+    expect(dbSection).toContain('cap_add: [CHOWN, DAC_OVERRIDE, FOWNER, SETGID, SETUID]');
+    expect(compose.match(/cap_add:/g)).toHaveLength(1);
+  });
+
+  it('bounds pilot memory, CPU, and process consumption by service role', () => {
+    const expected = {
+      db: ['mem_limit: 1g', 'cpus: 1.0', 'pids_limit: 200'],
+      migrate: ['mem_limit: 1g', 'cpus: 1.0', 'pids_limit: 256'],
+      'provision-db-roles': ['mem_limit: 512m', 'cpus: 0.5', 'pids_limit: 128'],
+      backup: ['mem_limit: 512m', 'cpus: 0.5', 'pids_limit: 128'],
+      api: ['mem_limit: 768m', 'cpus: 1.0', 'pids_limit: 200'],
+      web: ['mem_limit: 256m', 'cpus: 0.5', 'pids_limit: 100'],
+      ai: ['mem_limit: 768m', 'cpus: 1.0', 'pids_limit: 200']
+    } as const;
+    const names = Object.keys(expected);
+    names.forEach((name, index) => {
+      const next = names[index + 1];
+      const section = compose.slice(compose.indexOf(`  ${name}:`), next ? compose.indexOf(`  ${next}:`) : compose.indexOf('\nvolumes:'));
+      for (const value of expected[name as keyof typeof expected]) expect(section).toContain(value);
+    });
+  });
+
   it('quotes PostgreSQL health-check values from the container environment', () => {
     expect(compose).toContain('pg_isready -U \\"$${POSTGRES_USER}\\" -d \\"$${POSTGRES_DB}\\"');
   });

@@ -3,6 +3,7 @@ node_modules/
 .env.*
 !.env.example
 !.env.pilot.example
+.pilot-readiness.json
 
 dist/
 .runtime-builds/

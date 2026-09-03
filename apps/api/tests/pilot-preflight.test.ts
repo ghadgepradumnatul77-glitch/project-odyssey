@@ -20,6 +20,7 @@ const validEnv = (overrides: Record<string, string> = {}) => ({
   ODYSSEY_DB_BACKUP_PASSWORD: 'valid-backup-password-123',
   ODYSSEY_DB_BACKUP_DATABASE_URL: 'postgresql://odyssey_backup:valid-backup-password-123@db:5432/odyssey',
   ODYSSEY_BACKUP_DIRECTORY: 'backups',
+  ODYSSEY_PILOT_READINESS_FILE: '.pilot-readiness.json',
   JWT_SECRET: 'valid-jwt-secret-at-least-32-characters',
   ODYSSEY_ALLOWED_ORIGINS: 'http://localhost:8080',
   ODYSSEY_API_PUBLIC_BASE_URL: 'http://localhost:8080/api/v1',
@@ -37,6 +38,15 @@ const validEnv = (overrides: Record<string, string> = {}) => ({
 });
 
 const envText = (env: Record<string, string>) => Object.entries(env).map(([key, value]) => `${key}=${value}`).join('\n');
+const readiness = {
+  contractVersion: 'ODYSSEY_PILOT_READINESS_V1', deploymentMode: 'LOOPBACK_ONLY',
+  externalBoundary: { remoteAccessEnabled: false, tlsNetworkBoundaryApproved: false, evidenceReference: null },
+  backupSchedule: { configured: true, cadenceHours: 24, command: 'docker compose --env-file .env.pilot --profile backup run --rm backup', evidenceReference: 'scheduler-record-1' },
+  release: { gitSha: releaseSha, evidenceReference: 'release-record-1', images: ['db','migrate','api','web','backup'].map((service) => ({ service, reference: `registry/${service}:pilot`, digest: `sha256:${'b'.repeat(64)}` })) },
+  backupGovernance: { encryptedDestinationApproved: true, encryptionEvidenceReference: 'storage-approval-1', retentionOffHostPolicyApproved: true, retentionOffHostEvidenceReference: 'retention-policy-1' },
+  owners: { application: 'owner-application', recovery: 'owner-recovery', security: 'owner-security' },
+  restoreDrill: { performedAt: new Date().toISOString(), evidenceReference: 'restore-drill-1' }
+};
 const status = (report: Awaited<ReturnType<typeof runPilotPreflight>>, code: string) => report.results.find((result) => result.code === code)?.status;
 
 function harness(options: {
@@ -47,6 +57,7 @@ function harness(options: {
   freeBytes?: number;
   portProbe?: (host: string, port: number) => Promise<void>;
   releaseOk?: boolean;
+  readiness?: Record<string, unknown>;
 } = {}) {
   const calls: Array<{ command: string; args: string[] }> = [];
   const command = vi.fn((commandName: string, args: string[]) => {
@@ -59,6 +70,8 @@ function harness(options: {
   });
   const readText = (path: string) => path.endsWith('pilot.env')
     ? envText(options.env || validEnv())
+    : path.endsWith('.pilot-readiness.json')
+      ? JSON.stringify(options.readiness || readiness)
     : path.endsWith('Dockerfile')
       ? 'CMD ["npx", "prisma", "migrate", "deploy"]'
       : 'services:\n  migrate:\n  api:\n    depends_on:\n      migrate:\n        condition: service_completed_successfully\n';
@@ -152,6 +165,13 @@ describe('pilot deployment preflight', () => {
   it('rejects an unpublished or dirty release identity', async () => {
     const report = await harness({ releaseOk: false }).run();
     expect(status(report, 'RELEASE_IDENTITY')).toBe('FAIL');
+  });
+
+  it('fails closed when final readiness evidence is incomplete', async () => {
+    const report = await harness({ readiness: { contractVersion: 'ODYSSEY_PILOT_READINESS_V1' } }).run();
+    expect(status(report, 'BACKUP_SCHEDULE')).toBe('FAIL');
+    expect(status(report, 'OWNER_ASSIGNMENTS')).toBe('FAIL');
+    expect(status(report, 'RELEASE_IMAGE_IDENTITIES')).toBe('FAIL');
   });
 
   it('never invokes service startup or database mutation commands', async () => {

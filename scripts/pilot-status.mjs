@@ -4,6 +4,7 @@ import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { backupStatus } from './backup-postgres.mjs';
 import { parseEnvText, PILOT_MIN_BACKUP_FREE_BYTES } from './pilot-preflight.mjs';
+import { parsePilotReadiness, validatePilotReadiness } from './pilot-readiness.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const pass = (code, detail) => ({ code, status: 'PASS', detail });
@@ -67,6 +68,24 @@ export async function runPilotStatus(input, overrides = {}) {
     catch { env = {}; results.push(fail('ENV_FILE', 'Pilot environment file is unavailable.')); }
   }
   const backupDirectory = resolve(root, input.backupDirectory || env.ODYSSEY_BACKUP_DIRECTORY || '');
+  const gitHead = overrides.releaseSha ? null : command('git', ['rev-parse', 'HEAD']);
+  const currentReleaseSha = overrides.releaseSha || (gitHead?.status === 0 && /^[0-9a-f]{40}$/.test(gitHead.stdout.trim()) ? gitHead.stdout.trim() : 'UNAVAILABLE');
+
+  try {
+    const readinessPath = resolve(root, env.ODYSSEY_PILOT_READINESS_FILE || '');
+    const readiness = parsePilotReadiness(readText(readinessPath));
+    results.push(...validatePilotReadiness(readiness, {
+      now: overrides.now || new Date(),
+      releaseSha: currentReleaseSha,
+      intelligenceEnabled: env.ODYSSEY_INTELLIGENCE_ENABLED === 'true'
+    }));
+  } catch {
+    results.push(...validatePilotReadiness(null, {
+      now: overrides.now || new Date(),
+      releaseSha: currentReleaseSha,
+      intelligenceEnabled: env.ODYSSEY_INTELLIGENCE_ENABLED === 'true'
+    }));
+  }
 
   const docker = command('docker', ['info', '--format', '{{.ServerVersion}}']);
   const dockerAvailable = docker.status === 0 && Boolean(docker.stdout.trim());

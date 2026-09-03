@@ -3,6 +3,7 @@ import { createServer } from 'node:net';
 import { dirname, resolve } from 'node:path';
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
+import { parsePilotReadiness, validatePilotReadiness } from './pilot-readiness.mjs';
 
 export const PILOT_POSTGRES_MAJOR = 16;
 export const PILOT_MIN_BACKUP_FREE_BYTES = 10 * 1024 * 1024 * 1024;
@@ -14,7 +15,7 @@ const requiredKeys = [
   'ODYSSEY_DB_MIGRATION_USER', 'ODYSSEY_DB_MIGRATION_PASSWORD', 'ODYSSEY_DB_MIGRATION_DATABASE_URL',
   'ODYSSEY_DB_RUNTIME_USER', 'ODYSSEY_DB_RUNTIME_PASSWORD', 'ODYSSEY_DB_RUNTIME_DATABASE_URL',
   'ODYSSEY_DB_BACKUP_USER', 'ODYSSEY_DB_BACKUP_PASSWORD', 'ODYSSEY_DB_BACKUP_DATABASE_URL',
-  'ODYSSEY_BACKUP_DIRECTORY',
+  'ODYSSEY_BACKUP_DIRECTORY', 'ODYSSEY_PILOT_READINESS_FILE',
   'JWT_SECRET', 'ODYSSEY_ALLOWED_ORIGINS', 'ODYSSEY_API_PUBLIC_BASE_URL',
   'ODYSSEY_WEB_PUBLIC_BASE_URL', 'ODYSSEY_TRUST_PROXY', 'ODYSSEY_INTELLIGENCE_ENABLED',
   'ODYSSEY_POSTGRES_MAJOR', 'ODYSSEY_API_BIND_HOST', 'ODYSSEY_WEB_BIND_HOST',
@@ -253,6 +254,19 @@ export async function runPilotPreflight(input, overrides = {}) {
 
   const release = releaseIdentity();
   results.push(release.ok ? pass('RELEASE_IDENTITY', `Release is published clean master commit ${release.sha}.`) : fail('RELEASE_IDENTITY', 'Release must be a clean master commit matching the local origin/master reference.'));
+  try {
+    const readinessPath = resolve(root, env.ODYSSEY_PILOT_READINESS_FILE || '');
+    const readiness = parsePilotReadiness(readText(readinessPath));
+    results.push(...validatePilotReadiness(readiness, {
+      releaseSha: release.sha || null,
+      intelligenceEnabled: env.ODYSSEY_INTELLIGENCE_ENABLED === 'true'
+    }));
+  } catch {
+    results.push(...validatePilotReadiness(null, {
+      releaseSha: release.sha || null,
+      intelligenceEnabled: env.ODYSSEY_INTELLIGENCE_ENABLED === 'true'
+    }));
+  }
   const forbiddenCommand = containsForbiddenStartupCommand(composeText);
   results.push(forbiddenCommand ? fail('NO_MUTATION_STARTUP', 'Compose contains a forbidden demo/test/reset startup command.') : pass('NO_MUTATION_STARTUP', 'Compose startup contains no demo, seed, test, or reset command.'));
 

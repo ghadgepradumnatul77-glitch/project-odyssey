@@ -20,7 +20,14 @@ services:
       retries: 20
     stop_grace_period: 30s
     restart: unless-stopped
+    mem_limit: 1g
+    cpus: 1.0
+    pids_limit: 200
     logging: *odyssey-logging
+    security_opt:
+      - no-new-privileges:true
+    cap_drop: [ALL]
+    cap_add: [CHOWN, DAC_OVERRIDE, FOWNER, SETGID, SETUID]
     networks: [data]
 
   migrate:
@@ -34,6 +41,12 @@ services:
       db:
         condition: service_healthy
     restart: "no"
+    mem_limit: 1g
+    cpus: 1.0
+    pids_limit: 256
+    security_opt:
+      - no-new-privileges:true
+    cap_drop: [ALL]
     networks: [data]
 
   provision-db-roles:
@@ -57,6 +70,12 @@ services:
       db:
         condition: service_healthy
     restart: "no"
+    mem_limit: 512m
+    cpus: 0.5
+    pids_limit: 128
+    security_opt:
+      - no-new-privileges:true
+    cap_drop: [ALL]
     networks: [data]
 
   backup:
@@ -76,6 +95,12 @@ services:
       db:
         condition: service_healthy
     restart: "no"
+    mem_limit: 512m
+    cpus: 0.5
+    pids_limit: 128
+    security_opt:
+      - no-new-privileges:true
+    cap_drop: [ALL]
     networks: [data]
 
   api:
@@ -113,7 +138,13 @@ services:
       start_period: 10s
     stop_grace_period: 30s
     restart: unless-stopped
+    mem_limit: 768m
+    cpus: 1.0
+    pids_limit: 200
     logging: *odyssey-logging
+    security_opt:
+      - no-new-privileges:true
+    cap_drop: [ALL]
     networks: [edge, data, intelligence]
 
   web:
@@ -131,7 +162,13 @@ services:
       timeout: 5s
       retries: 12
     restart: unless-stopped
+    mem_limit: 256m
+    cpus: 0.5
+    pids_limit: 100
     logging: *odyssey-logging
+    security_opt:
+      - no-new-privileges:true
+    cap_drop: [ALL]
     networks: [edge]
 
   ai:
@@ -145,7 +182,13 @@ services:
       timeout: 5s
       retries: 12
     restart: unless-stopped
+    mem_limit: 768m
+    cpus: 1.0
+    pids_limit: 200
     logging: *odyssey-logging
+    security_opt:
+      - no-new-privileges:true
+    cap_drop: [ALL]
     networks: [intelligence]
 
 volumes:

@@ -104,6 +104,37 @@ Recovery acceptance created a real PostgreSQL 16.15 custom-format backup, valida
 
 Live acceptance exposed and corrected three bounded packaging/compatibility defects: clean API image generation now resolves the installed Prisma package without network auto-install; governed demo scripts normalize paginated GET envelopes while preserving detail/mutation responses; and the governed bootstrap loads Prisma Client from its generated source location. Permanent tests cover these contracts. No reset, reseed of canonical data, automatic restore, production entitlement change, or Phase 3.7.6 work occurred.
 
+## P3.7.6 container privilege boundary
+
+Every Compose service runs with `no-new-privileges:true` and drops all inherited Linux capabilities. API, web, optional AI, migration, explicit role provisioning, and manual backup require no capability additions. Their existing non-root runtime users, network separation, ports, PostgreSQL 16 baseline, migration ordering, and backup contracts remain unchanged.
+
+The official PostgreSQL 16 entrypoint cannot initialize a new named data volume with all capabilities dropped: live validation observed permission failures while preparing the data and socket directories and switching from its initial root entrypoint to the `postgres` user. The database therefore adds only `CHOWN`, `DAC_OVERRIDE`, `FOWNER`, `SETGID`, and `SETUID` after dropping `ALL`; it does not retain other default container capabilities. A fresh disposable volume initialized and became healthy with that exact set under `no-new-privileges`.
+
+Isolated validation provisioned the four database roles twice, applied and rechecked all 27 migrations, and started healthy API, web, and optional AI containers with all capabilities dropped. A PostgreSQL 16 custom-format backup completed through the read-only backup role, passed checksum/manifest status, and left no partial file. API and web returned HTTP 200, every running/one-shot container exposed the configured privilege boundary, and API, web, AI, migration, and PostgreSQL stopped with exit code zero; API recorded a completed SIGTERM shutdown and PostgreSQL recorded a clean shutdown. The disposable containers, images, networks, volume, credentials, and backup artifacts were removed afterward.
+
+The bounded pilot also applies explicit resource ceilings sized against the validated host allocation of 16 logical CPUs and approximately 11.5 GiB available to Docker. Long-running limits are PostgreSQL `1 CPU / 1 GiB / 200 PIDs`, API `1 CPU / 768 MiB / 200 PIDs`, web `0.5 CPU / 256 MiB / 100 PIDs`, and optional AI `1 CPU / 768 MiB / 200 PIDs`. Their combined maximum is 3.5 CPUs and 2.75 GiB, leaving substantial host and Docker headroom. The migration job receives `1 CPU / 1 GiB / 256 PIDs` for Prisma/npm startup; explicit role provisioning and manual backup each receive `0.5 CPU / 512 MiB / 128 PIDs`. These one-shot jobs are not normal concurrent steady-state services. The limits are conservative ceilings for the tested single-host synthetic workload, not universal production sizing or a throughput guarantee; operators must reassess them against measured pilot demand before expanding scope.
+
+### Backup scheduling and final readiness evidence
+
+The deploying organization must configure its existing host scheduler—Windows Task Scheduler on the validated pilot host—to run from the repository root under the assigned recovery-owner service account at least once every 24 hours. The scheduled action must invoke exactly:
+
+```powershell
+docker compose --env-file .env.pilot --profile backup run --rm backup
+```
+
+Run it during a staffed initial window, record the scheduler task identity and successful run as external evidence, then run `pilot:status`. The backup command is already atomic and validates the archive, checksum, and manifest. The scheduler must not restore, reset, reseed, prune, or delete backups. A scheduler launch is not proof of backup success: `pilot:status` continues to fail when the newest checksum-valid backup is missing or exceeds the 24-hour RPO.
+
+Copy `.pilot-readiness.example.json` to the ignored `.pilot-readiness.json`, set `ODYSSEY_PILOT_READINESS_FILE=.pilot-readiness.json`, and replace every example value with approved evidence references. Preflight and operator status fail closed unless the file records:
+
+- the exact scheduler command, a cadence no greater than 24 hours, and scheduler evidence;
+- loopback-only operation, or an approved referenced TLS/network boundary before remote access;
+- the published Git SHA and exact `sha256:` image identities for every required service, including AI when enabled;
+- approval references for a protected encrypted backup destination and retention/off-host policy;
+- distinct named application, recovery, and security owners; and
+- an initial restore drill performed within the previous 90 days with an evidence reference.
+
+These checks validate a bounded evidence contract; they do not deploy TLS, configure encryption keys or off-host storage, create the scheduler, or certify the supplied external approvals. Operator status reports the same readiness and schedule failures alongside live service, restart, readiness, backup-age, and disk checks. Record image identities after building the reviewed release, for example with `docker image inspect`, without placing registry credentials in the readiness file.
+
 ## Remaining P3.7 work
 
-Read-only root filesystems, capability dropping, `no-new-privileges`, CPU/memory/PID limits, and immutable image-digest pinning remain deliberately deferred until separately scoped live compatibility and capacity validation. P3.7 still does not establish TLS/reverse-proxy access, rotate deployment credentials, schedule or retain encrypted backups, add centralized monitoring/log aggregation or alerts, perform an operational restore drill, or conduct a real pilot deployment. It does not grant Open-Meteo production entitlement or make AI authoritative.
+Read-only root filesystems, CPU/memory/PID limits, and immutable image-digest pinning remain deliberately deferred until separately scoped live compatibility and capacity validation. P3.7 still does not establish TLS/reverse-proxy access, rotate deployment credentials, schedule or retain encrypted backups, add centralized monitoring/log aggregation or alerts, or conduct a real pilot deployment. The isolated P3.7.5 recovery exercise proves the restore procedure but does not replace the deploying organization's named ownership and recurring restore-drill obligation. P3.7 does not grant Open-Meteo production entitlement or make AI authoritative.

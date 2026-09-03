@@ -1,0 +1,34 @@
+{
+  "contractVersion": "ODYSSEY_PILOT_READINESS_V1",
+  "deploymentMode": "LOOPBACK_ONLY",
+  "externalBoundary": { "remoteAccessEnabled": false, "tlsNetworkBoundaryApproved": false, "evidenceReference": null },
+  "backupSchedule": {
+    "configured": true,
+    "cadenceHours": 24,
+    "command": "docker compose --env-file .env.pilot --profile backup run --rm backup",
+    "evidenceReference": "replace-with-host-scheduler-evidence-reference"
+  },
+  "release": {
+    "gitSha": "replace-with-published-40-character-git-sha",
+    "evidenceReference": "replace-with-release-record-reference",
+    "images": [
+      { "service": "db", "reference": "postgres:16", "digest": "sha256:replace-with-64-hex-digest" },
+      { "service": "migrate", "reference": "replace-with-image-reference", "digest": "sha256:replace-with-64-hex-digest" },
+      { "service": "api", "reference": "replace-with-image-reference", "digest": "sha256:replace-with-64-hex-digest" },
+      { "service": "web", "reference": "replace-with-image-reference", "digest": "sha256:replace-with-64-hex-digest" },
+      { "service": "backup", "reference": "replace-with-image-reference", "digest": "sha256:replace-with-64-hex-digest" }
+    ]
+  },
+  "backupGovernance": {
+    "encryptedDestinationApproved": false,
+    "encryptionEvidenceReference": "replace-with-storage-approval-reference",
+    "retentionOffHostPolicyApproved": false,
+    "retentionOffHostEvidenceReference": "replace-with-policy-reference"
+  },
+  "owners": {
+    "application": "replace-with-application-owner-reference",
+    "recovery": "replace-with-recovery-owner-reference",
+    "security": "replace-with-security-owner-reference"
+  },
+  "restoreDrill": { "performedAt": "replace-with-UTC-timestamp", "evidenceReference": "replace-with-restore-drill-record-reference" }
+}
