@@ -7,8 +7,10 @@ import { buildAssetReadWhere } from '../../security/organizational-scope';
 import { MAP_MAX_ITEMS, pageFromRows, parseCursor, parseLimit, parseSearch, parseUuidQuery, queryError } from '../../lib/pagination';
 import { getAssetConditionHistory } from './condition-history.service';
 import { ScopedResourceNotFoundError } from '../../security/organizational-scope';
+import assetEvidenceBaselineRoutes from './asset-evidence-baseline.routes';
 
 const router = Router();
+router.use(assetEvidenceBaselineRoutes);
 
 router.get('/:assetId/condition-history', authenticate, async (req, res) => {
   try {
