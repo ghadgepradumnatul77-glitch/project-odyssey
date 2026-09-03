@@ -69,11 +69,13 @@ class Api {
     const response=await fetch(`${this.base}${path}`,{method,headers:{'Content-Type':'application/json',...(token?{Authorization:`Bearer ${token}`}:{})},body:body===undefined?undefined:JSON.stringify(body)});
     const payload:any=await response.json().catch(()=>({}));
     if(!response.ok)throw new Error(`${method} ${path} failed (${response.status}): ${payload?.error?.code??'UNKNOWN_ERROR'} ${payload?.error?.message??''}`.trim());
-    return payload.data;
+    return unwrapApiData(method, payload.data);
   }
   get(path:string,token:string){return this.request('GET',path,token);} post(path:string,token:string|undefined,body:unknown={}){return this.request('POST',path,token,body);} patch(path:string,token:string,body:unknown){return this.request('PATCH',path,token,body);}
   async login(email:string,password:string){const data=await this.request('POST','/auth/login',undefined,{email,password});return data.accessToken as string;}
 }
+
+export function unwrapApiData(method:string,data:any){return method==='GET'&&data&&typeof data==='object'&&Array.isArray(data.items)?data.items:data;}
 
 type Counts={created:number;reused:number;advanced:number;skipped:number;conflicts:number};
 const inspectionFields=['structuralCondition','crackSeverity','corrosionLevel','trafficImportance','hospitalRoute','weatherRisk','heavyRainExpected','estimatedDailyUsers'];

@@ -92,6 +92,18 @@ For every check cycle, incident, backup failure, and restore drill, retain a pri
 
 Scheduling of status checks and backups, backup retention, encryption, off-host replication, centralized log collection, automatic alerting, automatic restore, and failover remain unimplemented. Operators must not use reset/reseed or destructive self-healing.
 
+## P3.7.5 isolated live pilot acceptance
+
+P3.7.5 used uniquely named disposable PostgreSQL 16 Compose projects, dedicated volumes, synthetic credentials, loopback-only host ports, and governed synthetic repository data. It did not access or mutate the canonical database, project, volume, or unrelated Docker resources.
+
+Source acceptance passed the read-only preflight, two idempotent role-provisioning runs, all 27 migrations plus a clean rerun, web and API readiness through the public web path, synthetic authentication, an authorized scoped read, and anonymous, wrong-role, and cross-scope denials. The deterministic reference Case remained `77 / VERY_HIGH / CRITICAL / ORP_READY`.
+
+Runtime acceptance proved core readiness with AI disabled, internal AI availability when enabled, `DEGRADED` rather than `NOT_READY` when AI stopped, continued deterministic Case/risk reads during degradation, and recovery without an API restart. API/web restart and full `down`/`up` without `-v` preserved the synthetic Case, risk result, and all 27 migrations. The read-only operator status command returned `PASS` on the final healthy stack without changing container fingerprints or business-data counts.
+
+Recovery acceptance created a real PostgreSQL 16.15 custom-format backup, validated it with `pg_restore --list`, matched the SHA-256 sidecar and manifest, reported current backup status, and left no partial file. A second disposable PostgreSQL 16 project restored the archive without overwriting the source. All 27 migrations, representative counts and relations, synthetic authentication, authorized scope, the reference risk state, trusted-computation, integrity-chain, and external-observation tables, and restored API readiness passed. The restore project, backup artifacts, then the source project and all dedicated containers, networks, volumes, images, and local validation files were removed.
+
+Live acceptance exposed and corrected three bounded packaging/compatibility defects: clean API image generation now resolves the installed Prisma package without network auto-install; governed demo scripts normalize paginated GET envelopes while preserving detail/mutation responses; and the governed bootstrap loads Prisma Client from its generated source location. Permanent tests cover these contracts. No reset, reseed of canonical data, automatic restore, production entitlement change, or Phase 3.7.6 work occurred.
+
 ## Remaining P3.7 work
 
 Read-only root filesystems, capability dropping, `no-new-privileges`, CPU/memory/PID limits, and immutable image-digest pinning remain deliberately deferred until separately scoped live compatibility and capacity validation. P3.7 still does not establish TLS/reverse-proxy access, rotate deployment credentials, schedule or retain encrypted backups, add centralized monitoring/log aggregation or alerts, perform an operational restore drill, or conduct a real pilot deployment. It does not grant Open-Meteo production entitlement or make AI authoritative.

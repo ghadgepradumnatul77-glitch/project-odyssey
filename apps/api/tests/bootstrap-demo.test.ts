@@ -1,5 +1,5 @@
 import { describe,expect,it } from 'vitest';
-import { assertFourEyes,assertMutationAllowed,compatible,createActorAuthenticator,hasMatchingEvidence,missingSecrets,publicReportDemoPlan,publicReportScenarios,shouldIssueMutation,stageAction,TARGET_ORDER } from '../scripts/bootstrap-demo';
+import { assertFourEyes,assertMutationAllowed,compatible,createActorAuthenticator,hasMatchingEvidence,missingSecrets,publicReportDemoPlan,publicReportScenarios,shouldIssueMutation,stageAction,TARGET_ORDER,unwrapApiData } from '../scripts/bootstrap-demo';
 
 describe('governed demo bootstrap safeguards',()=>{
   it('allows dry-run in production but refuses the actual mutation entrypoint',()=>{expect(()=>assertMutationAllowed({NODE_ENV:'production'},true)).not.toThrow();expect(()=>assertMutationAllowed({NODE_ENV:'production'},false)).toThrow(/DEMO_BOOTSTRAP_FORBIDDEN_IN_PRODUCTION/);});
@@ -19,4 +19,5 @@ describe('governed demo bootstrap safeguards',()=>{
   it('prevents duplicate deterministic evidence',()=>{expect(hasMatchingEvidence([{evidenceType:'COMPLETION_NOTE',description:'demo'}],'COMPLETION_NOTE','demo')).toBe(true);expect(hasMatchingEvidence([],'COMPLETION_NOTE','demo')).toBe(false);});
   it('requires distinct performer, verifier, and closer identities',()=>{expect(()=>assertFourEyes('a','b','c')).not.toThrow();expect(()=>assertFourEyes('a','a','c')).toThrow(/three distinct/);});
   it('never rewinds an ahead case',()=>expect(stageAction('VERIFICATION','EXECUTION')).toBe('AHEAD'));
+  it('unwraps paginated GET collections without changing detail or mutation responses',()=>{const items=[{id:'one'}];expect(unwrapApiData('GET',{items,page:1,pageSize:20,total:1,totalPages:1})).toBe(items);expect(unwrapApiData('GET',{id:'detail'})).toEqual({id:'detail'});expect(unwrapApiData('POST',{items})).toEqual({items});});
 });

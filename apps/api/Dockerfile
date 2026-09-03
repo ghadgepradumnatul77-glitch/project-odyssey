@@ -1,10 +1,12 @@
 FROM node:22-bookworm-slim AS api-builder
+ENV PRISMA_GENERATE_SKIP_AUTOINSTALL=true
 RUN apt-get update \
     && apt-get install -y --no-install-recommends openssl \
     && rm -rf /var/lib/apt/lists/*
 WORKDIR /workspace/apps/api
 COPY apps/api/package.json apps/api/package-lock.json ./
 RUN npm ci
+RUN ln -s /workspace/apps/api/node_modules /workspace/node_modules
 COPY database/prisma /workspace/database/prisma
 COPY apps/api/ ./
 RUN npx prisma generate --schema /workspace/database/prisma/schema.prisma

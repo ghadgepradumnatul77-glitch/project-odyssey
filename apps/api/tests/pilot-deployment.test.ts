@@ -32,6 +32,8 @@ describe('pilot deployment packaging', () => {
     expect(apiDockerfile).toContain('RUN npm run build');
     expect(apiDockerfile).toContain('COPY database/prisma /workspace/database/prisma');
     expect(apiDockerfile).toContain('npx prisma generate --schema /workspace/database/prisma/schema.prisma');
+    expect(apiDockerfile).toContain('ENV PRISMA_GENERATE_SKIP_AUTOINSTALL=true');
+    expect(apiDockerfile).toContain('ln -s /workspace/apps/api/node_modules /workspace/node_modules');
     expect(apiDockerfile.indexOf('npx prisma generate')).toBeLessThan(apiDockerfile.indexOf('npm run build'));
     expect(apiDockerfile).toContain('apt-get install -y --no-install-recommends openssl');
     expect(apiDockerfile).toContain('.runtime-builds');
