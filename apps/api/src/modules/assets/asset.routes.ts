@@ -8,9 +8,11 @@ import { MAP_MAX_ITEMS, pageFromRows, parseCursor, parseLimit, parseSearch, pars
 import { getAssetConditionHistory } from './condition-history.service';
 import { ScopedResourceNotFoundError } from '../../security/organizational-scope';
 import assetEvidenceBaselineRoutes from './asset-evidence-baseline.routes';
+import assetAttentionRoutes from './asset-attention.routes';
 
 const router = Router();
 router.use(assetEvidenceBaselineRoutes);
+router.use(assetAttentionRoutes);
 
 router.get('/:assetId/condition-history', authenticate, async (req, res) => {
   try {
