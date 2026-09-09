@@ -247,6 +247,15 @@ enum PredictiveModelLifecycleStatus {
   DEPRECATED
 }
 
+enum AssetAttentionDisposition {
+  ACKNOWLEDGED
+  INSPECTION_FOLLOW_UP_RECOMMENDED
+  CASE_REVIEW_RECOMMENDED
+  MONITOR_WITH_RECORDED_RATIONALE
+  DATA_QUALITY_FOLLOW_UP
+  GOVERNED_ESCALATION_RECOMMENDED
+}
+
 enum PredictiveModelApprovalDecision {
   APPROVED
   REJECTED
@@ -321,45 +330,46 @@ model User {
 
   inspections                        Inspection[]
   approvalAuthorities                ApprovalAuthority[]
-  reviewedOrpDecisions               OrpDecision[]                @relation("DecisionReviewer")
-  forwardedOrpDecisions              OrpDecision[]                @relation("DecisionForwardedUser")
-  createdExecutionPlans              ExecutionPlan[]              @relation("ExecutionPlanCreator")
-  assignedExecutionTasks             ExecutionTask[]              @relation("ExecutionTaskAssignee")
-  assignedByExecutionTasks           ExecutionTask[]              @relation("ExecutionTaskAssigner")
-  completedExecutionTasks            ExecutionTask[]              @relation("ExecutionTaskCompleter")
-  verifiedExecutionTasks             ExecutionTask[]              @relation("ExecutionTaskVerifier")
-  cancelledExecutionTasks            ExecutionTask[]              @relation("ExecutionTaskCanceller")
-  executionScheduleRevisions         ExecutionScheduleRevision[]  @relation("ExecutionScheduleRevisionActor")
-  blockedExecutionTaskEvents         ExecutionTaskBlockerEvent[]  @relation("ExecutionTaskBlocker")
-  resolvedExecutionTaskEvents        ExecutionTaskBlockerEvent[]  @relation("ExecutionTaskBlockerResolver")
+  reviewedOrpDecisions               OrpDecision[]                   @relation("DecisionReviewer")
+  forwardedOrpDecisions              OrpDecision[]                   @relation("DecisionForwardedUser")
+  createdExecutionPlans              ExecutionPlan[]                 @relation("ExecutionPlanCreator")
+  assignedExecutionTasks             ExecutionTask[]                 @relation("ExecutionTaskAssignee")
+  assignedByExecutionTasks           ExecutionTask[]                 @relation("ExecutionTaskAssigner")
+  completedExecutionTasks            ExecutionTask[]                 @relation("ExecutionTaskCompleter")
+  verifiedExecutionTasks             ExecutionTask[]                 @relation("ExecutionTaskVerifier")
+  cancelledExecutionTasks            ExecutionTask[]                 @relation("ExecutionTaskCanceller")
+  executionScheduleRevisions         ExecutionScheduleRevision[]     @relation("ExecutionScheduleRevisionActor")
+  blockedExecutionTaskEvents         ExecutionTaskBlockerEvent[]     @relation("ExecutionTaskBlocker")
+  resolvedExecutionTaskEvents        ExecutionTaskBlockerEvent[]     @relation("ExecutionTaskBlockerResolver")
   createdExecutionTaskDependencies   ExecutionTaskDependency[]
   submittedExecutionEvidence         ExecutionEvidence[]
-  closedCases                        CaseClosure[]                @relation("CaseClosureCloser")
-  reviewedPublicReports              PublicReport[]               @relation("PublicReportReviewer")
-  decidedPublicReports               PublicReport[]               @relation("PublicReportDecisionActor")
+  closedCases                        CaseClosure[]                   @relation("CaseClosureCloser")
+  reviewedPublicReports              PublicReport[]                  @relation("PublicReportReviewer")
+  decidedPublicReports               PublicReport[]                  @relation("PublicReportDecisionActor")
   createdTriageAnalyses              PublicReportTriageAnalysis[]
-  createdPolicyDocuments             PolicyDocument[]             @relation("PolicyDocumentCreator")
-  approvedPolicyDocuments            PolicyDocument[]             @relation("PolicyDocumentApprover")
-  createdApprovedActions             ApprovedActionVersion[]      @relation("ApprovedActionCreator")
-  approvedApprovedActions            ApprovedActionVersion[]      @relation("ApprovedActionApprover")
-  preparedDecisionPackages           DecisionPackage[]            @relation("DecisionPackagePreparer")
-  createdGovernedExecutionTemplates  GovernedExecutionTemplate[]  @relation("GovernedExecutionTemplateCreator")
-  approvedGovernedExecutionTemplates GovernedExecutionTemplate[]  @relation("GovernedExecutionTemplateApprover")
-  createdObservationSources          ObservationSource[]          @relation("ObservationSourceCreator")
-  deactivatedObservationSources      ObservationSource[]          @relation("ObservationSourceDeactivator")
+  createdPolicyDocuments             PolicyDocument[]                @relation("PolicyDocumentCreator")
+  approvedPolicyDocuments            PolicyDocument[]                @relation("PolicyDocumentApprover")
+  createdApprovedActions             ApprovedActionVersion[]         @relation("ApprovedActionCreator")
+  approvedApprovedActions            ApprovedActionVersion[]         @relation("ApprovedActionApprover")
+  preparedDecisionPackages           DecisionPackage[]               @relation("DecisionPackagePreparer")
+  createdGovernedExecutionTemplates  GovernedExecutionTemplate[]     @relation("GovernedExecutionTemplateCreator")
+  approvedGovernedExecutionTemplates GovernedExecutionTemplate[]     @relation("GovernedExecutionTemplateApprover")
+  createdObservationSources          ObservationSource[]             @relation("ObservationSourceCreator")
+  deactivatedObservationSources      ObservationSource[]             @relation("ObservationSourceDeactivator")
   ingestedExternalObservations       ExternalObservation[]
-  preparedCaseResourceEstimates      CaseResourceEstimate[] @relation("CaseResourceEstimatePreparer")
-  createdPortfolioScenarios          PortfolioScenario[] @relation("PortfolioScenarioCreator")
-  createdPredictiveSnapshots         PredictiveFeatureSnapshot[] @relation("PredictiveSnapshotCreator")
-  voidedPredictiveSnapshots          PredictiveFeatureSnapshot[] @relation("PredictiveSnapshotVoider")
-  recordedPredictiveOutcomes         PredictiveOutcome[] @relation("PredictiveOutcomeRecorder")
-  voidedPredictiveOutcomes           PredictiveOutcome[] @relation("PredictiveOutcomeVoider")
-  createdPredictiveDatasetSnapshots  PredictiveDatasetSnapshot[] @relation("PredictiveDatasetSnapshotCreator")
-  createdPredictiveModelVersions     PredictiveModelVersion[] @relation("PredictiveModelCreator")
-  validatedPredictiveModelVersions   PredictiveModelVersion[] @relation("PredictiveModelValidator")
-  recordedPredictiveEvaluations      PredictiveModelEvaluation[] @relation("PredictiveEvaluationRecorder")
-  decidedPredictiveApprovals         PredictiveModelApproval[] @relation("PredictiveModelApprover")
+  preparedCaseResourceEstimates      CaseResourceEstimate[]          @relation("CaseResourceEstimatePreparer")
+  createdPortfolioScenarios          PortfolioScenario[]             @relation("PortfolioScenarioCreator")
+  createdPredictiveSnapshots         PredictiveFeatureSnapshot[]     @relation("PredictiveSnapshotCreator")
+  voidedPredictiveSnapshots          PredictiveFeatureSnapshot[]     @relation("PredictiveSnapshotVoider")
+  recordedPredictiveOutcomes         PredictiveOutcome[]             @relation("PredictiveOutcomeRecorder")
+  voidedPredictiveOutcomes           PredictiveOutcome[]             @relation("PredictiveOutcomeVoider")
+  createdPredictiveDatasetSnapshots  PredictiveDatasetSnapshot[]     @relation("PredictiveDatasetSnapshotCreator")
+  createdPredictiveModelVersions     PredictiveModelVersion[]        @relation("PredictiveModelCreator")
+  validatedPredictiveModelVersions   PredictiveModelVersion[]        @relation("PredictiveModelValidator")
+  recordedPredictiveEvaluations      PredictiveModelEvaluation[]     @relation("PredictiveEvaluationRecorder")
+  decidedPredictiveApprovals         PredictiveModelApproval[]       @relation("PredictiveModelApprover")
   predictiveModelLifecycleEvents     PredictiveModelLifecycleEvent[] @relation("PredictiveModelLifecycleActor")
+  assetAttentionReviews              AssetAttentionReview[]          @relation("AssetAttentionReviewer")
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -392,6 +402,7 @@ model Asset {
   publicReports              PublicReport[]
   suggestedForTriageAnalyses PublicReportTriageAnalysis[]
   externalObservations       ExternalObservation[]
+  attentionReviews           AssetAttentionReview[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -639,6 +650,7 @@ model Case {
   intelligenceReconciliations InfrastructureIntelligenceReconciliation[]
   externalObservations        ExternalObservation[]
   resourceEstimates           CaseResourceEstimate[]
+  attentionReviews            AssetAttentionReview[]
 
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
@@ -664,28 +676,81 @@ model CaseResourceEstimate {
   preparedById          String
   preparedAt            DateTime               @default(now())
   createdAt             DateTime               @default(now())
-  case                   Case                   @relation(fields: [caseId], references: [id], onDelete: Restrict)
-  preparedBy             User                   @relation("CaseResourceEstimatePreparer", fields: [preparedById], references: [id], onDelete: Restrict)
+  case                  Case                   @relation(fields: [caseId], references: [id], onDelete: Restrict)
+  preparedBy            User                   @relation("CaseResourceEstimatePreparer", fields: [preparedById], references: [id], onDelete: Restrict)
 
   @@unique([caseId, estimateVersion])
   @@index([caseId, status, estimateVersion])
   @@index([preparedById])
 }
 
+/// Append-only human disposition over a versioned Asset attention projection.
+/// Corrections create a new row linked through supersedesReviewId; application code must never update or delete reviews.
+model AssetAttentionReview {
+  id                          String                    @id @default(uuid())
+  assetId                     String
+  caseId                      String?
+  reviewerId                  String
+  reviewerRole                SystemRole
+  departmentId                String
+  jurisdictionId              String
+  disposition                 AssetAttentionDisposition
+  rationale                   String
+  attentionContractVersion    String
+  attentionCalculationVersion String
+  projectionAsOf              DateTime
+  sourceSetFingerprint        String
+  clientRequestId             String
+  supersedesReviewId          String?                   @unique
+  createdAt                   DateTime                  @default(now())
+
+  asset            Asset                        @relation(fields: [assetId], references: [id], onDelete: Restrict)
+  case             Case?                        @relation(fields: [caseId], references: [id], onDelete: Restrict)
+  reviewer         User                         @relation("AssetAttentionReviewer", fields: [reviewerId], references: [id], onDelete: Restrict)
+  supersedesReview AssetAttentionReview?        @relation("AssetAttentionReviewSupersession", fields: [supersedesReviewId], references: [id], onDelete: Restrict)
+  supersededBy     AssetAttentionReview?        @relation("AssetAttentionReviewSupersession")
+  selectedSignals  AssetAttentionReviewSignal[]
+
+  @@unique([reviewerId, clientRequestId])
+  @@index([assetId, createdAt, id])
+  @@index([caseId, createdAt, id])
+  @@index([reviewerId, createdAt, id])
+  @@index([departmentId, jurisdictionId, createdAt, id])
+  @@index([sourceSetFingerprint])
+}
+
+/// Controlled selected signal identity plus a digest of its allowlisted evidence references.
+/// No projection JSON, narrative evidence, URLs, reporter data, or predictive payload is persisted here.
+model AssetAttentionReviewSignal {
+  id                           String   @id @default(uuid())
+  reviewId                     String
+  category                     String
+  signalCode                   String
+  state                        String
+  evidenceReferenceFingerprint String
+  createdAt                    DateTime @default(now())
+
+  review AssetAttentionReview @relation(fields: [reviewId], references: [id], onDelete: Restrict)
+
+  @@unique([reviewId, category, signalCode, state, evidenceReferenceFingerprint])
+  @@index([reviewId, createdAt, id])
+  @@index([category, state])
+}
+
 model PortfolioScenario {
-  id                 String   @id @default(uuid())
-  scenarioVersion    Int      @default(1)
+  id                 String       @id @default(uuid())
+  scenarioVersion    Int          @default(1)
   name               String
   departmentId       String
   jurisdictionId     String
   budgetMinor        BigInt
-  currency           String   @default("INR")
+  currency           String       @default("INR")
   resourceCapacities Json
   algorithmVersion   String
   inputSnapshot      Json
   resultSnapshot     Json
   createdById        String
-  createdAt          DateTime @default(now())
+  createdAt          DateTime     @default(now())
   department         Department   @relation(fields: [departmentId], references: [id], onDelete: Restrict)
   jurisdiction       Jurisdiction @relation(fields: [jurisdictionId], references: [id], onDelete: Restrict)
   createdBy          User         @relation("PortfolioScenarioCreator", fields: [createdById], references: [id], onDelete: Restrict)
@@ -805,11 +870,11 @@ model RiskAssessment {
   sourceFingerprint String        @unique
   createdAt         DateTime      @default(now())
 
-  case                     Case                                   @relation(fields: [caseId], references: [id], onDelete: Cascade)
-  inspection               Inspection                             @relation(fields: [inspectionId], references: [id], onDelete: Cascade)
-  operationalResponsePlans OperationalResponsePlan[]
-  decisionPackages         DecisionPackage[]
-  intelligenceAssessments  InfrastructureIntelligenceAssessment[]
+  case                      Case                                   @relation(fields: [caseId], references: [id], onDelete: Cascade)
+  inspection                Inspection                             @relation(fields: [inspectionId], references: [id], onDelete: Cascade)
+  operationalResponsePlans  OperationalResponsePlan[]
+  decisionPackages          DecisionPackage[]
+  intelligenceAssessments   InfrastructureIntelligenceAssessment[]
   trustedComputationReceipt TrustedComputationReceipt?
 
   @@index([caseId])
@@ -841,10 +906,10 @@ model TrustedComputationReceipt {
 model IntegrityChainHead {
   chainKey        String   @id
   chainVersion    String
-  departmentId   String?
-  jurisdictionId String?
-  latestSequence Int      @default(0)
-  latestEventId  String?
+  departmentId    String?
+  jurisdictionId  String?
+  latestSequence  Int      @default(0)
+  latestEventId   String?
   latestEventHash String?
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
@@ -866,8 +931,8 @@ model IntegrityAuditEvent {
   payloadContractVersion String
   payload                Json
   eventType              String
-  actorUserId             String?
-  actorRoleSnapshot       String?
+  actorUserId            String?
+  actorRoleSnapshot      String?
   departmentId           String?
   jurisdictionId         String?
   resourceType           String
@@ -1178,7 +1243,7 @@ model ExecutionTask {
 }
 
 model PredictiveFeatureSnapshot {
-  id                     String                     @id @default(uuid())
+  id                     String                    @id @default(uuid())
   targetType             PredictiveTargetType
   executionTaskId        String
   caseId                 String
@@ -1190,14 +1255,14 @@ model PredictiveFeatureSnapshot {
   featurePayload         Json
   provenanceClass        PredictiveProvenanceClass
   sourceReferences       Json
-  sourceFingerprint      String                     @unique
-  status                 PredictiveRecordStatus     @default(ACTIVE)
+  sourceFingerprint      String                    @unique
+  status                 PredictiveRecordStatus    @default(ACTIVE)
   createdById            String
-  createdAt              DateTime                   @default(now())
+  createdAt              DateTime                  @default(now())
   voidedAt               DateTime?
   voidedById             String?
   voidReason             String?
-  replacementSnapshotId  String?                    @unique
+  replacementSnapshotId  String?                   @unique
 
   executionTask       ExecutionTask              @relation(fields: [executionTaskId], references: [id], onDelete: Restrict)
   createdBy           User                       @relation("PredictiveSnapshotCreator", fields: [createdById], references: [id], onDelete: Restrict)
@@ -1215,21 +1280,21 @@ model PredictiveFeatureSnapshot {
 }
 
 model PredictiveOutcome {
-  id                     String                     @id @default(uuid())
+  id                     String                    @id @default(uuid())
   snapshotId             String
   outcomeContractVersion String
   outcomeTimestamp       DateTime
   outcomeValue           PredictiveOutcomeValue
   provenanceClass        PredictiveProvenanceClass
   sourceReferences       Json
-  sourceFingerprint      String                     @unique
-  status                 PredictiveRecordStatus     @default(ACTIVE)
+  sourceFingerprint      String                    @unique
+  status                 PredictiveRecordStatus    @default(ACTIVE)
   recordedById           String
-  recordedAt             DateTime                   @default(now())
+  recordedAt             DateTime                  @default(now())
   voidedAt               DateTime?
   voidedById             String?
   voidReason             String?
-  replacementOutcomeId   String?                    @unique
+  replacementOutcomeId   String?                   @unique
 
   snapshot           PredictiveFeatureSnapshot @relation(fields: [snapshotId], references: [id], onDelete: Restrict)
   recordedBy         User                      @relation("PredictiveOutcomeRecorder", fields: [recordedById], references: [id], onDelete: Restrict)
@@ -1244,7 +1309,7 @@ model PredictiveOutcome {
 }
 
 model PredictiveDatasetSnapshot {
-  id                     String                     @id @default(uuid())
+  id                     String               @id @default(uuid())
   datasetContractVersion String
   targetType             PredictiveTargetType
   featureContractVersion String
@@ -1257,13 +1322,13 @@ model PredictiveDatasetSnapshot {
   periodStart            DateTime?
   periodEnd              DateTime?
   sampleIdentities       Json
-  datasetFingerprint     String                     @unique
+  datasetFingerprint     String               @unique
   createdById            String
-  createdAt              DateTime                   @default(now())
+  createdAt              DateTime             @default(now())
 
-  createdBy    User                         @relation("PredictiveDatasetSnapshotCreator", fields: [createdById], references: [id], onDelete: Restrict)
+  createdBy     User                        @relation("PredictiveDatasetSnapshotCreator", fields: [createdById], references: [id], onDelete: Restrict)
   modelVersions PredictiveModelVersion[]
-  evaluations  PredictiveModelEvaluation[]
+  evaluations   PredictiveModelEvaluation[]
 
   @@index([targetType, createdAt, id])
   @@index([departmentId, jurisdictionId, createdAt])
@@ -1293,9 +1358,9 @@ model PredictiveModelVersion {
   validatedById          String?
   validatedAt            DateTime?
 
-  datasetSnapshot PredictiveDatasetSnapshot @relation(fields: [datasetSnapshotId], references: [id], onDelete: Restrict)
-  createdBy       User                      @relation("PredictiveModelCreator", fields: [createdById], references: [id], onDelete: Restrict)
-  validatedBy     User?                     @relation("PredictiveModelValidator", fields: [validatedById], references: [id], onDelete: Restrict)
+  datasetSnapshot PredictiveDatasetSnapshot       @relation(fields: [datasetSnapshotId], references: [id], onDelete: Restrict)
+  createdBy       User                            @relation("PredictiveModelCreator", fields: [createdById], references: [id], onDelete: Restrict)
+  validatedBy     User?                           @relation("PredictiveModelValidator", fields: [validatedById], references: [id], onDelete: Restrict)
   evaluations     PredictiveModelEvaluation[]
   approvals       PredictiveModelApproval[]
   lifecycleEvents PredictiveModelLifecycleEvent[]
@@ -1308,34 +1373,34 @@ model PredictiveModelVersion {
 }
 
 model PredictiveModelEvaluation {
-  id                        String   @id @default(uuid())
-  modelVersionId            String
-  datasetSnapshotId         String
-  evaluationContractVersion String
-  splitStrategy             String
-  evaluationPeriodStart     DateTime
-  evaluationPeriodEnd       DateTime
-  testSampleCount           Int
-  lateCount                 Int
-  onTimeCount               Int
-  truePositiveCount         Int
-  trueNegativeCount         Int
-  falsePositiveCount        Int
-  falseNegativeCount        Int
-  precision                 Float
-  recall                    Float
-  f1                        Float
-  prAuc                     Float
-  calibrationError          Float
-  falseNegativeRate         Float
-  baselineEvidence          Json
-  subgroupMetricsReference  Json?
+  id                           String   @id @default(uuid())
+  modelVersionId               String
+  datasetSnapshotId            String
+  evaluationContractVersion    String
+  splitStrategy                String
+  evaluationPeriodStart        DateTime
+  evaluationPeriodEnd          DateTime
+  testSampleCount              Int
+  lateCount                    Int
+  onTimeCount                  Int
+  truePositiveCount            Int
+  trueNegativeCount            Int
+  falsePositiveCount           Int
+  falseNegativeCount           Int
+  precision                    Float
+  recall                       Float
+  f1                           Float
+  prAuc                        Float
+  calibrationError             Float
+  falseNegativeRate            Float
+  baselineEvidence             Json
+  subgroupMetricsReference     Json?
   featureDistributionReference Json?
-  missingnessReference      Json?
-  evaluationArtifactReference String
-  evaluationFingerprint     String   @unique
-  recordedById              String
-  recordedAt                DateTime @default(now())
+  missingnessReference         Json?
+  evaluationArtifactReference  String
+  evaluationFingerprint        String   @unique
+  recordedById                 String
+  recordedAt                   DateTime @default(now())
 
   modelVersion    PredictiveModelVersion    @relation(fields: [modelVersionId], references: [id], onDelete: Restrict)
   datasetSnapshot PredictiveDatasetSnapshot @relation(fields: [datasetSnapshotId], references: [id], onDelete: Restrict)
@@ -1367,15 +1432,15 @@ model PredictiveModelApproval {
 }
 
 model PredictiveModelLifecycleEvent {
-  id             String                         @id @default(uuid())
-  modelVersionId String
-  action         PredictiveModelLifecycleAction
-  fromStatus     PredictiveModelLifecycleStatus?
-  toStatus       PredictiveModelLifecycleStatus
-  reason         String
+  id                    String                          @id @default(uuid())
+  modelVersionId        String
+  action                PredictiveModelLifecycleAction
+  fromStatus            PredictiveModelLifecycleStatus?
+  toStatus              PredictiveModelLifecycleStatus
+  reason                String
   relatedModelVersionId String?
-  actorId        String
-  occurredAt     DateTime                       @default(now())
+  actorId               String
+  occurredAt            DateTime                        @default(now())
 
   modelVersion PredictiveModelVersion @relation(fields: [modelVersionId], references: [id], onDelete: Restrict)
   actor        User                   @relation("PredictiveModelLifecycleActor", fields: [actorId], references: [id], onDelete: Restrict)
