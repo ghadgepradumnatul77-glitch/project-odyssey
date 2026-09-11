@@ -37,6 +37,14 @@ function setup() {
   return { service, tx, project, integrity, transaction, committed: () => committed, events: () => events, business };
 }
 describe('transactional Asset attention review service', () => {
+  it('returns allowlisted history DTOs with scoped rationale and no joined private fields', async () => {
+    const s = setup(); await s.service.create(officer, 'asset', request());
+    s.tx.assetAttentionReview.findMany.mockResolvedValue(s.committed().map(row => ({ ...row, password: 'secret', reporter: 'private', selectedSignals: row.selectedSignals.map((signal: any) => ({ ...signal, narrative: 'hidden' })) })));
+    const page = await s.service.history(officer, 'asset');
+    expect(page.items[0].rationale).toBe(request().rationale);
+    expect(JSON.stringify(page)).not.toMatch(/secret|hidden|password|reporter|narrative/);
+    expect(s.tx.assetAttentionReview.findMany.mock.calls[0][0].where.AND[0]).toMatchObject({ departmentId: 'dep', jurisdictionId: 'jur' });
+  });
   it('requests bounded serializable isolation on the production transaction runner', async () => {
     const spy = vi.spyOn(prisma, '$transaction').mockRejectedValue(new Error('offline'));
     try {

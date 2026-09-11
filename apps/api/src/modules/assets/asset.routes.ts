@@ -9,10 +9,12 @@ import { getAssetConditionHistory } from './condition-history.service';
 import { ScopedResourceNotFoundError } from '../../security/organizational-scope';
 import assetEvidenceBaselineRoutes from './asset-evidence-baseline.routes';
 import assetAttentionRoutes from './asset-attention.routes';
+import assetAttentionReviewRoutes from './asset-attention-review.routes';
 
 const router = Router();
 router.use(assetEvidenceBaselineRoutes);
 router.use(assetAttentionRoutes);
+router.use(assetAttentionReviewRoutes);
 
 router.get('/:assetId/condition-history', authenticate, async (req, res) => {
   try {

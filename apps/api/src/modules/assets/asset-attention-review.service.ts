@@ -72,6 +72,19 @@ function response(row: AttentionReviewRow, outcome: 'CREATED' | 'IDEMPOTENT_REPL
 export function createAssetAttentionReviewService(dependencies: Partial<Dependencies> = {}) {
   const deps = { ...defaults, ...dependencies };
   return {
+    async history(principal: OrganizationalPrincipal | undefined, assetId: string, query: { limit?: unknown; cursor?: unknown } = {}) {
+      if (!principal) throw new AttentionReviewServiceError('AUTHENTICATION_REQUIRED');
+      try {
+        return await deps.transaction(async tx => {
+          const page = await createAssetAttentionReviewRepository(tx).history(principal, assetId, query);
+          return { items: page.items.map(row => response(row, 'CREATED').data.review), limit: page.limit, nextCursor: page.nextCursor };
+        });
+      } catch (error) {
+        if (error instanceof AttentionReviewServiceError) throw error;
+        if (error instanceof AttentionReviewRepositoryError) throw new AttentionReviewServiceError(error.code);
+        throw new AttentionReviewServiceError('REVIEW_UNAVAILABLE');
+      }
+    },
     async create(principal: OrganizationalPrincipal | undefined, assetId: string, raw: unknown): Promise<AssetAttentionReviewSuccess> {
       if (!principal) throw new AttentionReviewServiceError('AUTHENTICATION_REQUIRED');
       if (principal.status !== UserStatus.ACTIVE || principal.role !== SystemRole.OFFICER) throw new AttentionReviewServiceError('REVIEW_FORBIDDEN');
@@ -126,3 +139,5 @@ export function createAssetAttentionReviewService(dependencies: Partial<Dependen
     }
   };
 }
+
+export const assetAttentionReviewService = createAssetAttentionReviewService();
