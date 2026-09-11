@@ -60,6 +60,7 @@ export interface AssetAttentionReviewSuccess {
 
 // Linkage failures must only be emitted after scope checks; hidden resources use RESOURCE_NOT_FOUND.
 export const attentionReviewErrors = {
+  ATTENTION_PROJECTION_STALE: { status: 409, message: 'Attention evidence changed. Refresh the projection before reviewing.' },
   INVALID_REVIEW_INPUT: { status: 400, message: 'Invalid Asset attention review request.' },
   STALE_PROJECTION: { status: 409, message: 'Attention evidence changed. Refresh the projection before reviewing.' },
   IDEMPOTENCY_CONFLICT: { status: 409, message: 'The request identifier was already used for a different review.' },

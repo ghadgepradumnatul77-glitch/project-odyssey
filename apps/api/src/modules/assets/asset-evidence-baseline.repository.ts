@@ -107,6 +107,12 @@ async function loadBatch(tx: Tx, assets: Asset[], principal: OrganizationalPrinc
 }
 export type AssetEvidenceRows = Awaited<ReturnType<typeof loadBatch>>[number];
 
+/** Load one authorized Asset using the caller's existing transaction. */
+export async function loadAssetEvidenceInTransaction(tx: Prisma.TransactionClient, principal: OrganizationalPrincipal, assetId: string) {
+  const assets = await tx.asset.findMany({ where: filters(principal, { assetId }), select: assetSelect, take: 1 });
+  return (await loadBatch(tx, assets, principal))[0] ?? null;
+}
+
 export function createAssetEvidenceRepository(db: Database = prisma) {
   return {
     async page(principal: OrganizationalPrincipal, query: BaselineQuery = {}) {
