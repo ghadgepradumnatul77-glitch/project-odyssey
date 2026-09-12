@@ -34,6 +34,9 @@ describe('P4.3 Asset attention review schema foundation', () => {
     expect(sql).toContain('AssetAttentionReview_reviewerId_clientRequestId_key');
     expect(sql).toContain('AssetAttentionReview_assetId_createdAt_id_idx');
     expect(sql).toContain('AssetAttentionReview_caseId_createdAt_id_idx');
+    expect(sql).toContain('AssetAttentionReview_departmentId_jurisdictionId_createdAt__idx');
+    expect(sql).toContain('AssetAttentionReviewSignal_reviewId_category_signalCode_sta_key');
+    for (const match of sql.matchAll(/CREATE (?:UNIQUE )?INDEX "([^"]+)"/g)) expect(Buffer.byteLength(match[1])).toBeLessThanOrEqual(63);
     for (const target of ['Asset', 'Case', 'User', 'AssetAttentionReview']) expect(sql).toContain(`REFERENCES "${target}"("id") ON DELETE RESTRICT`);
     expect(sql).not.toMatch(/(?:^|;)\s*(?:DROP|TRUNCATE|DELETE|UPDATE)\b/i);
     expect(sql).not.toMatch(/ALTER TABLE "(?:Case|RiskAssessment|OperationalResponsePlan|ExecutionPlan|ExecutionTask)"/);

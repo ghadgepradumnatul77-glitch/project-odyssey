@@ -247,6 +247,15 @@ enum PredictiveModelLifecycleStatus {
   DEPRECATED
 }
 
+enum AssetAttentionDisposition {
+  ACKNOWLEDGED
+  INSPECTION_FOLLOW_UP_RECOMMENDED
+  CASE_REVIEW_RECOMMENDED
+  MONITOR_WITH_RECORDED_RATIONALE
+  DATA_QUALITY_FOLLOW_UP
+  GOVERNED_ESCALATION_RECOMMENDED
+}
+
 enum PredictiveModelApprovalDecision {
   APPROVED
   REJECTED
@@ -360,6 +369,7 @@ model User {
   recordedPredictiveEvaluations      PredictiveModelEvaluation[]     @relation("PredictiveEvaluationRecorder")
   decidedPredictiveApprovals         PredictiveModelApproval[]       @relation("PredictiveModelApprover")
   predictiveModelLifecycleEvents     PredictiveModelLifecycleEvent[] @relation("PredictiveModelLifecycleActor")
+  assetAttentionReviews              AssetAttentionReview[]          @relation("AssetAttentionReviewer")
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -392,6 +402,7 @@ model Asset {
   publicReports              PublicReport[]
   suggestedForTriageAnalyses PublicReportTriageAnalysis[]
   externalObservations       ExternalObservation[]
+  attentionReviews           AssetAttentionReview[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -639,6 +650,7 @@ model Case {
   intelligenceReconciliations InfrastructureIntelligenceReconciliation[]
   externalObservations        ExternalObservation[]
   resourceEstimates           CaseResourceEstimate[]
+  attentionReviews            AssetAttentionReview[]
 
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
@@ -670,6 +682,59 @@ model CaseResourceEstimate {
   @@unique([caseId, estimateVersion])
   @@index([caseId, status, estimateVersion])
   @@index([preparedById])
+}
+
+/// Append-only human disposition over a versioned Asset attention projection.
+/// Corrections create a new row linked through supersedesReviewId; application code must never update or delete reviews.
+model AssetAttentionReview {
+  id                          String                    @id @default(uuid())
+  assetId                     String
+  caseId                      String?
+  reviewerId                  String
+  reviewerRole                SystemRole
+  departmentId                String
+  jurisdictionId              String
+  disposition                 AssetAttentionDisposition
+  rationale                   String
+  attentionContractVersion    String
+  attentionCalculationVersion String
+  projectionAsOf              DateTime
+  sourceSetFingerprint        String
+  clientRequestId             String
+  supersedesReviewId          String?                   @unique
+  createdAt                   DateTime                  @default(now())
+
+  asset            Asset                        @relation(fields: [assetId], references: [id], onDelete: Restrict)
+  case             Case?                        @relation(fields: [caseId], references: [id], onDelete: Restrict)
+  reviewer         User                         @relation("AssetAttentionReviewer", fields: [reviewerId], references: [id], onDelete: Restrict)
+  supersedesReview AssetAttentionReview?        @relation("AssetAttentionReviewSupersession", fields: [supersedesReviewId], references: [id], onDelete: Restrict)
+  supersededBy     AssetAttentionReview?        @relation("AssetAttentionReviewSupersession")
+  selectedSignals  AssetAttentionReviewSignal[]
+
+  @@unique([reviewerId, clientRequestId])
+  @@index([assetId, createdAt, id])
+  @@index([caseId, createdAt, id])
+  @@index([reviewerId, createdAt, id])
+  @@index([departmentId, jurisdictionId, createdAt, id])
+  @@index([sourceSetFingerprint])
+}
+
+/// Controlled selected signal identity plus a digest of its allowlisted evidence references.
+/// No projection JSON, narrative evidence, URLs, reporter data, or predictive payload is persisted here.
+model AssetAttentionReviewSignal {
+  id                           String   @id @default(uuid())
+  reviewId                     String
+  category                     String
+  signalCode                   String
+  state                        String
+  evidenceReferenceFingerprint String
+  createdAt                    DateTime @default(now())
+
+  review AssetAttentionReview @relation(fields: [reviewId], references: [id], onDelete: Restrict)
+
+  @@unique([reviewId, category, signalCode, state, evidenceReferenceFingerprint])
+  @@index([reviewId, createdAt, id])
+  @@index([category, state])
 }
 
 model PortfolioScenario {

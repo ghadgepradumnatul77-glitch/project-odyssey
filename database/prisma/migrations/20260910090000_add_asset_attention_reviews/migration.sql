@@ -49,9 +49,9 @@ CREATE UNIQUE INDEX "AssetAttentionReview_reviewerId_clientRequestId_key" ON "As
 CREATE INDEX "AssetAttentionReview_assetId_createdAt_id_idx" ON "AssetAttentionReview"("assetId", "createdAt", "id");
 CREATE INDEX "AssetAttentionReview_caseId_createdAt_id_idx" ON "AssetAttentionReview"("caseId", "createdAt", "id");
 CREATE INDEX "AssetAttentionReview_reviewerId_createdAt_id_idx" ON "AssetAttentionReview"("reviewerId", "createdAt", "id");
-CREATE INDEX "AssetAttentionReview_departmentId_jurisdictionId_createdAt_id_idx" ON "AssetAttentionReview"("departmentId", "jurisdictionId", "createdAt", "id");
+CREATE INDEX "AssetAttentionReview_departmentId_jurisdictionId_createdAt__idx" ON "AssetAttentionReview"("departmentId", "jurisdictionId", "createdAt", "id");
 CREATE INDEX "AssetAttentionReview_sourceSetFingerprint_idx" ON "AssetAttentionReview"("sourceSetFingerprint");
-CREATE UNIQUE INDEX "AssetAttentionReviewSignal_reviewId_category_signalCode_state_evidenceReferenceFingerprint_key" ON "AssetAttentionReviewSignal"("reviewId", "category", "signalCode", "state", "evidenceReferenceFingerprint");
+CREATE UNIQUE INDEX "AssetAttentionReviewSignal_reviewId_category_signalCode_sta_key" ON "AssetAttentionReviewSignal"("reviewId", "category", "signalCode", "state", "evidenceReferenceFingerprint");
 CREATE INDEX "AssetAttentionReviewSignal_reviewId_createdAt_id_idx" ON "AssetAttentionReviewSignal"("reviewId", "createdAt", "id");
 CREATE INDEX "AssetAttentionReviewSignal_category_state_idx" ON "AssetAttentionReviewSignal"("category", "state");
 

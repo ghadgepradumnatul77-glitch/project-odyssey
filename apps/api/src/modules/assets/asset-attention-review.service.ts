@@ -26,9 +26,7 @@ export class AttentionReviewServiceError extends Error {
 }
 const defaults: Dependencies = {
   transaction: run => prisma.$transaction(async tx => {
-    // The checked-in client predates the pending review migration. Fail closed until regenerated.
-    if (!('assetAttentionReview' in tx)) throw new AttentionReviewServiceError('REVIEW_UNAVAILABLE');
-    return run(tx as Transaction);
+    return run(tx);
   }, { isolationLevel: Prisma.TransactionIsolationLevel.Serializable, timeout: 30000, maxWait: 5000 }),
   async project(tx, principal, assetId, asOf) {
     const row = await loadAssetEvidenceInTransaction(tx, principal, assetId);

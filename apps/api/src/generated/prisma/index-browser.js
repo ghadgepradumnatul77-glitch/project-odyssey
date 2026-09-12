@@ -329,6 +329,35 @@ exports.Prisma.CaseResourceEstimateScalarFieldEnum = {
   createdAt: 'createdAt'
 };
 
+exports.Prisma.AssetAttentionReviewScalarFieldEnum = {
+  id: 'id',
+  assetId: 'assetId',
+  caseId: 'caseId',
+  reviewerId: 'reviewerId',
+  reviewerRole: 'reviewerRole',
+  departmentId: 'departmentId',
+  jurisdictionId: 'jurisdictionId',
+  disposition: 'disposition',
+  rationale: 'rationale',
+  attentionContractVersion: 'attentionContractVersion',
+  attentionCalculationVersion: 'attentionCalculationVersion',
+  projectionAsOf: 'projectionAsOf',
+  sourceSetFingerprint: 'sourceSetFingerprint',
+  clientRequestId: 'clientRequestId',
+  supersedesReviewId: 'supersedesReviewId',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.AssetAttentionReviewSignalScalarFieldEnum = {
+  id: 'id',
+  reviewId: 'reviewId',
+  category: 'category',
+  signalCode: 'signalCode',
+  state: 'state',
+  evidenceReferenceFingerprint: 'evidenceReferenceFingerprint',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.PortfolioScenarioScalarFieldEnum = {
   id: 'id',
   scenarioVersion: 'scenarioVersion',
@@ -975,6 +1004,15 @@ exports.PlanningEstimateStatus = exports.$Enums.PlanningEstimateStatus = {
   WITHDRAWN: 'WITHDRAWN'
 };
 
+exports.AssetAttentionDisposition = exports.$Enums.AssetAttentionDisposition = {
+  ACKNOWLEDGED: 'ACKNOWLEDGED',
+  INSPECTION_FOLLOW_UP_RECOMMENDED: 'INSPECTION_FOLLOW_UP_RECOMMENDED',
+  CASE_REVIEW_RECOMMENDED: 'CASE_REVIEW_RECOMMENDED',
+  MONITOR_WITH_RECORDED_RATIONALE: 'MONITOR_WITH_RECORDED_RATIONALE',
+  DATA_QUALITY_FOLLOW_UP: 'DATA_QUALITY_FOLLOW_UP',
+  GOVERNED_ESCALATION_RECOMMENDED: 'GOVERNED_ESCALATION_RECOMMENDED'
+};
+
 exports.ObservationSourceType = exports.$Enums.ObservationSourceType = {
   OFFICIAL_GOVERNMENT: 'OFFICIAL_GOVERNMENT',
   WEATHER_PROVIDER: 'WEATHER_PROVIDER',
@@ -1144,6 +1182,8 @@ exports.Prisma.ModelName = {
   PolicyRule: 'PolicyRule',
   Case: 'Case',
   CaseResourceEstimate: 'CaseResourceEstimate',
+  AssetAttentionReview: 'AssetAttentionReview',
+  AssetAttentionReviewSignal: 'AssetAttentionReviewSignal',
   PortfolioScenario: 'PortfolioScenario',
   ObservationSource: 'ObservationSource',
   ExternalObservation: 'ExternalObservation',

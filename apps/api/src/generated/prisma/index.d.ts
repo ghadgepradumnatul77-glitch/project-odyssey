@@ -79,6 +79,18 @@ export type Case = $Result.DefaultSelection<Prisma.$CasePayload>
  */
 export type CaseResourceEstimate = $Result.DefaultSelection<Prisma.$CaseResourceEstimatePayload>
 /**
+ * Model AssetAttentionReview
+ * Append-only human disposition over a versioned Asset attention projection.
+ * Corrections create a new row linked through supersedesReviewId; application code must never update or delete reviews.
+ */
+export type AssetAttentionReview = $Result.DefaultSelection<Prisma.$AssetAttentionReviewPayload>
+/**
+ * Model AssetAttentionReviewSignal
+ * Controlled selected signal identity plus a digest of its allowlisted evidence references.
+ * No projection JSON, narrative evidence, URLs, reporter data, or predictive payload is persisted here.
+ */
+export type AssetAttentionReviewSignal = $Result.DefaultSelection<Prisma.$AssetAttentionReviewSignalPayload>
+/**
  * Model PortfolioScenario
  * 
  */
@@ -558,6 +570,18 @@ export const PredictiveModelLifecycleStatus: {
 export type PredictiveModelLifecycleStatus = (typeof PredictiveModelLifecycleStatus)[keyof typeof PredictiveModelLifecycleStatus]
 
 
+export const AssetAttentionDisposition: {
+  ACKNOWLEDGED: 'ACKNOWLEDGED',
+  INSPECTION_FOLLOW_UP_RECOMMENDED: 'INSPECTION_FOLLOW_UP_RECOMMENDED',
+  CASE_REVIEW_RECOMMENDED: 'CASE_REVIEW_RECOMMENDED',
+  MONITOR_WITH_RECORDED_RATIONALE: 'MONITOR_WITH_RECORDED_RATIONALE',
+  DATA_QUALITY_FOLLOW_UP: 'DATA_QUALITY_FOLLOW_UP',
+  GOVERNED_ESCALATION_RECOMMENDED: 'GOVERNED_ESCALATION_RECOMMENDED'
+};
+
+export type AssetAttentionDisposition = (typeof AssetAttentionDisposition)[keyof typeof AssetAttentionDisposition]
+
+
 export const PredictiveModelApprovalDecision: {
   APPROVED: 'APPROVED',
   REJECTED: 'REJECTED'
@@ -709,6 +733,10 @@ export const PredictiveOutcomeValue: typeof $Enums.PredictiveOutcomeValue
 export type PredictiveModelLifecycleStatus = $Enums.PredictiveModelLifecycleStatus
 
 export const PredictiveModelLifecycleStatus: typeof $Enums.PredictiveModelLifecycleStatus
+
+export type AssetAttentionDisposition = $Enums.AssetAttentionDisposition
+
+export const AssetAttentionDisposition: typeof $Enums.AssetAttentionDisposition
 
 export type PredictiveModelApprovalDecision = $Enums.PredictiveModelApprovalDecision
 
@@ -965,6 +993,26 @@ export class PrismaClient<
     * ```
     */
   get caseResourceEstimate(): Prisma.CaseResourceEstimateDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.assetAttentionReview`: Exposes CRUD operations for the **AssetAttentionReview** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more AssetAttentionReviews
+    * const assetAttentionReviews = await prisma.assetAttentionReview.findMany()
+    * ```
+    */
+  get assetAttentionReview(): Prisma.AssetAttentionReviewDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.assetAttentionReviewSignal`: Exposes CRUD operations for the **AssetAttentionReviewSignal** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more AssetAttentionReviewSignals
+    * const assetAttentionReviewSignals = await prisma.assetAttentionReviewSignal.findMany()
+    * ```
+    */
+  get assetAttentionReviewSignal(): Prisma.AssetAttentionReviewSignalDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.portfolioScenario`: Exposes CRUD operations for the **PortfolioScenario** model.
@@ -1699,6 +1747,8 @@ export namespace Prisma {
     PolicyRule: 'PolicyRule',
     Case: 'Case',
     CaseResourceEstimate: 'CaseResourceEstimate',
+    AssetAttentionReview: 'AssetAttentionReview',
+    AssetAttentionReviewSignal: 'AssetAttentionReviewSignal',
     PortfolioScenario: 'PortfolioScenario',
     ObservationSource: 'ObservationSource',
     ExternalObservation: 'ExternalObservation',
@@ -1745,7 +1795,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "department" | "jurisdiction" | "user" | "asset" | "publicReport" | "publicReportTriageAnalysis" | "policyDocument" | "approvedActionVersion" | "governedExecutionTemplate" | "governedExecutionTaskTemplate" | "policyRule" | "case" | "caseResourceEstimate" | "portfolioScenario" | "observationSource" | "externalObservation" | "inspection" | "riskAssessment" | "trustedComputationReceipt" | "integrityChainHead" | "integrityAuditEvent" | "infrastructureIntelligenceAssessment" | "infrastructureIntelligenceReconciliation" | "operationalResponsePlan" | "decisionPackage" | "approvalAuthority" | "orpDecision" | "executionPlan" | "executionTask" | "predictiveFeatureSnapshot" | "predictiveOutcome" | "predictiveDatasetSnapshot" | "predictiveModelVersion" | "predictiveModelEvaluation" | "predictiveModelApproval" | "predictiveModelLifecycleEvent" | "executionTaskDependency" | "executionTaskBlockerEvent" | "executionScheduleRevision" | "executionEvidence" | "caseClosure"
+      modelProps: "department" | "jurisdiction" | "user" | "asset" | "publicReport" | "publicReportTriageAnalysis" | "policyDocument" | "approvedActionVersion" | "governedExecutionTemplate" | "governedExecutionTaskTemplate" | "policyRule" | "case" | "caseResourceEstimate" | "assetAttentionReview" | "assetAttentionReviewSignal" | "portfolioScenario" | "observationSource" | "externalObservation" | "inspection" | "riskAssessment" | "trustedComputationReceipt" | "integrityChainHead" | "integrityAuditEvent" | "infrastructureIntelligenceAssessment" | "infrastructureIntelligenceReconciliation" | "operationalResponsePlan" | "decisionPackage" | "approvalAuthority" | "orpDecision" | "executionPlan" | "executionTask" | "predictiveFeatureSnapshot" | "predictiveOutcome" | "predictiveDatasetSnapshot" | "predictiveModelVersion" | "predictiveModelEvaluation" | "predictiveModelApproval" | "predictiveModelLifecycleEvent" | "executionTaskDependency" | "executionTaskBlockerEvent" | "executionScheduleRevision" | "executionEvidence" | "caseClosure"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -2708,6 +2758,154 @@ export namespace Prisma {
           count: {
             args: Prisma.CaseResourceEstimateCountArgs<ExtArgs>
             result: $Utils.Optional<CaseResourceEstimateCountAggregateOutputType> | number
+          }
+        }
+      }
+      AssetAttentionReview: {
+        payload: Prisma.$AssetAttentionReviewPayload<ExtArgs>
+        fields: Prisma.AssetAttentionReviewFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.AssetAttentionReviewFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AssetAttentionReviewPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.AssetAttentionReviewFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AssetAttentionReviewPayload>
+          }
+          findFirst: {
+            args: Prisma.AssetAttentionReviewFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AssetAttentionReviewPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.AssetAttentionReviewFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AssetAttentionReviewPayload>
+          }
+          findMany: {
+            args: Prisma.AssetAttentionReviewFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AssetAttentionReviewPayload>[]
+          }
+          create: {
+            args: Prisma.AssetAttentionReviewCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AssetAttentionReviewPayload>
+          }
+          createMany: {
+            args: Prisma.AssetAttentionReviewCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.AssetAttentionReviewCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AssetAttentionReviewPayload>[]
+          }
+          delete: {
+            args: Prisma.AssetAttentionReviewDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AssetAttentionReviewPayload>
+          }
+          update: {
+            args: Prisma.AssetAttentionReviewUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AssetAttentionReviewPayload>
+          }
+          deleteMany: {
+            args: Prisma.AssetAttentionReviewDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.AssetAttentionReviewUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.AssetAttentionReviewUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AssetAttentionReviewPayload>[]
+          }
+          upsert: {
+            args: Prisma.AssetAttentionReviewUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AssetAttentionReviewPayload>
+          }
+          aggregate: {
+            args: Prisma.AssetAttentionReviewAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateAssetAttentionReview>
+          }
+          groupBy: {
+            args: Prisma.AssetAttentionReviewGroupByArgs<ExtArgs>
+            result: $Utils.Optional<AssetAttentionReviewGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.AssetAttentionReviewCountArgs<ExtArgs>
+            result: $Utils.Optional<AssetAttentionReviewCountAggregateOutputType> | number
+          }
+        }
+      }
+      AssetAttentionReviewSignal: {
+        payload: Prisma.$AssetAttentionReviewSignalPayload<ExtArgs>
+        fields: Prisma.AssetAttentionReviewSignalFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.AssetAttentionReviewSignalFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AssetAttentionReviewSignalPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.AssetAttentionReviewSignalFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AssetAttentionReviewSignalPayload>
+          }
+          findFirst: {
+            args: Prisma.AssetAttentionReviewSignalFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AssetAttentionReviewSignalPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.AssetAttentionReviewSignalFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AssetAttentionReviewSignalPayload>
+          }
+          findMany: {
+            args: Prisma.AssetAttentionReviewSignalFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AssetAttentionReviewSignalPayload>[]
+          }
+          create: {
+            args: Prisma.AssetAttentionReviewSignalCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AssetAttentionReviewSignalPayload>
+          }
+          createMany: {
+            args: Prisma.AssetAttentionReviewSignalCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.AssetAttentionReviewSignalCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AssetAttentionReviewSignalPayload>[]
+          }
+          delete: {
+            args: Prisma.AssetAttentionReviewSignalDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AssetAttentionReviewSignalPayload>
+          }
+          update: {
+            args: Prisma.AssetAttentionReviewSignalUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AssetAttentionReviewSignalPayload>
+          }
+          deleteMany: {
+            args: Prisma.AssetAttentionReviewSignalDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.AssetAttentionReviewSignalUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.AssetAttentionReviewSignalUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AssetAttentionReviewSignalPayload>[]
+          }
+          upsert: {
+            args: Prisma.AssetAttentionReviewSignalUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AssetAttentionReviewSignalPayload>
+          }
+          aggregate: {
+            args: Prisma.AssetAttentionReviewSignalAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateAssetAttentionReviewSignal>
+          }
+          groupBy: {
+            args: Prisma.AssetAttentionReviewSignalGroupByArgs<ExtArgs>
+            result: $Utils.Optional<AssetAttentionReviewSignalGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.AssetAttentionReviewSignalCountArgs<ExtArgs>
+            result: $Utils.Optional<AssetAttentionReviewSignalCountAggregateOutputType> | number
           }
         }
       }
@@ -4892,6 +5090,8 @@ export namespace Prisma {
     policyRule?: PolicyRuleOmit
     case?: CaseOmit
     caseResourceEstimate?: CaseResourceEstimateOmit
+    assetAttentionReview?: AssetAttentionReviewOmit
+    assetAttentionReviewSignal?: AssetAttentionReviewSignalOmit
     portfolioScenario?: PortfolioScenarioOmit
     observationSource?: ObservationSourceOmit
     externalObservation?: ExternalObservationOmit
@@ -5274,6 +5474,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations: number
     decidedPredictiveApprovals: number
     predictiveModelLifecycleEvents: number
+    assetAttentionReviews: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5318,6 +5519,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: boolean | UserCountOutputTypeCountRecordedPredictiveEvaluationsArgs
     decidedPredictiveApprovals?: boolean | UserCountOutputTypeCountDecidedPredictiveApprovalsArgs
     predictiveModelLifecycleEvents?: boolean | UserCountOutputTypeCountPredictiveModelLifecycleEventsArgs
+    assetAttentionReviews?: boolean | UserCountOutputTypeCountAssetAttentionReviewsArgs
   }
 
   // Custom InputTypes
@@ -5618,6 +5820,13 @@ export namespace Prisma {
     where?: PredictiveModelLifecycleEventWhereInput
   }
 
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountAssetAttentionReviewsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AssetAttentionReviewWhereInput
+  }
+
 
   /**
    * Count Type AssetCountOutputType
@@ -5628,6 +5837,7 @@ export namespace Prisma {
     publicReports: number
     suggestedForTriageAnalyses: number
     externalObservations: number
+    attentionReviews: number
   }
 
   export type AssetCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5635,6 +5845,7 @@ export namespace Prisma {
     publicReports?: boolean | AssetCountOutputTypeCountPublicReportsArgs
     suggestedForTriageAnalyses?: boolean | AssetCountOutputTypeCountSuggestedForTriageAnalysesArgs
     externalObservations?: boolean | AssetCountOutputTypeCountExternalObservationsArgs
+    attentionReviews?: boolean | AssetCountOutputTypeCountAttentionReviewsArgs
   }
 
   // Custom InputTypes
@@ -5674,6 +5885,13 @@ export namespace Prisma {
    */
   export type AssetCountOutputTypeCountExternalObservationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ExternalObservationWhereInput
+  }
+
+  /**
+   * AssetCountOutputType without action
+   */
+  export type AssetCountOutputTypeCountAttentionReviewsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AssetAttentionReviewWhereInput
   }
 
 
@@ -5883,6 +6101,7 @@ export namespace Prisma {
     intelligenceReconciliations: number
     externalObservations: number
     resourceEstimates: number
+    attentionReviews: number
   }
 
   export type CaseCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5896,6 +6115,7 @@ export namespace Prisma {
     intelligenceReconciliations?: boolean | CaseCountOutputTypeCountIntelligenceReconciliationsArgs
     externalObservations?: boolean | CaseCountOutputTypeCountExternalObservationsArgs
     resourceEstimates?: boolean | CaseCountOutputTypeCountResourceEstimatesArgs
+    attentionReviews?: boolean | CaseCountOutputTypeCountAttentionReviewsArgs
   }
 
   // Custom InputTypes
@@ -5977,6 +6197,44 @@ export namespace Prisma {
    */
   export type CaseCountOutputTypeCountResourceEstimatesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: CaseResourceEstimateWhereInput
+  }
+
+  /**
+   * CaseCountOutputType without action
+   */
+  export type CaseCountOutputTypeCountAttentionReviewsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AssetAttentionReviewWhereInput
+  }
+
+
+  /**
+   * Count Type AssetAttentionReviewCountOutputType
+   */
+
+  export type AssetAttentionReviewCountOutputType = {
+    selectedSignals: number
+  }
+
+  export type AssetAttentionReviewCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    selectedSignals?: boolean | AssetAttentionReviewCountOutputTypeCountSelectedSignalsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * AssetAttentionReviewCountOutputType without action
+   */
+  export type AssetAttentionReviewCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AssetAttentionReviewCountOutputType
+     */
+    select?: AssetAttentionReviewCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * AssetAttentionReviewCountOutputType without action
+   */
+  export type AssetAttentionReviewCountOutputTypeCountSelectedSignalsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AssetAttentionReviewSignalWhereInput
   }
 
 
@@ -9462,6 +9720,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: boolean | User$recordedPredictiveEvaluationsArgs<ExtArgs>
     decidedPredictiveApprovals?: boolean | User$decidedPredictiveApprovalsArgs<ExtArgs>
     predictiveModelLifecycleEvents?: boolean | User$predictiveModelLifecycleEventsArgs<ExtArgs>
+    assetAttentionReviews?: boolean | User$assetAttentionReviewsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -9559,6 +9818,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: boolean | User$recordedPredictiveEvaluationsArgs<ExtArgs>
     decidedPredictiveApprovals?: boolean | User$decidedPredictiveApprovalsArgs<ExtArgs>
     predictiveModelLifecycleEvents?: boolean | User$predictiveModelLifecycleEventsArgs<ExtArgs>
+    assetAttentionReviews?: boolean | User$assetAttentionReviewsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -9616,6 +9876,7 @@ export namespace Prisma {
       recordedPredictiveEvaluations: Prisma.$PredictiveModelEvaluationPayload<ExtArgs>[]
       decidedPredictiveApprovals: Prisma.$PredictiveModelApprovalPayload<ExtArgs>[]
       predictiveModelLifecycleEvents: Prisma.$PredictiveModelLifecycleEventPayload<ExtArgs>[]
+      assetAttentionReviews: Prisma.$AssetAttentionReviewPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -10067,6 +10328,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations<T extends User$recordedPredictiveEvaluationsArgs<ExtArgs> = {}>(args?: Subset<T, User$recordedPredictiveEvaluationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PredictiveModelEvaluationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     decidedPredictiveApprovals<T extends User$decidedPredictiveApprovalsArgs<ExtArgs> = {}>(args?: Subset<T, User$decidedPredictiveApprovalsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PredictiveModelApprovalPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     predictiveModelLifecycleEvents<T extends User$predictiveModelLifecycleEventsArgs<ExtArgs> = {}>(args?: Subset<T, User$predictiveModelLifecycleEventsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PredictiveModelLifecycleEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    assetAttentionReviews<T extends User$assetAttentionReviewsArgs<ExtArgs> = {}>(args?: Subset<T, User$assetAttentionReviewsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AssetAttentionReviewPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -11488,6 +11750,30 @@ export namespace Prisma {
   }
 
   /**
+   * User.assetAttentionReviews
+   */
+  export type User$assetAttentionReviewsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AssetAttentionReview
+     */
+    select?: AssetAttentionReviewSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AssetAttentionReview
+     */
+    omit?: AssetAttentionReviewOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AssetAttentionReviewInclude<ExtArgs> | null
+    where?: AssetAttentionReviewWhereInput
+    orderBy?: AssetAttentionReviewOrderByWithRelationInput | AssetAttentionReviewOrderByWithRelationInput[]
+    cursor?: AssetAttentionReviewWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: AssetAttentionReviewScalarFieldEnum | AssetAttentionReviewScalarFieldEnum[]
+  }
+
+  /**
    * User without action
    */
   export type UserDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -11774,6 +12060,7 @@ export namespace Prisma {
     publicReports?: boolean | Asset$publicReportsArgs<ExtArgs>
     suggestedForTriageAnalyses?: boolean | Asset$suggestedForTriageAnalysesArgs<ExtArgs>
     externalObservations?: boolean | Asset$externalObservationsArgs<ExtArgs>
+    attentionReviews?: boolean | Asset$attentionReviewsArgs<ExtArgs>
     _count?: boolean | AssetCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["asset"]>
 
@@ -11834,6 +12121,7 @@ export namespace Prisma {
     publicReports?: boolean | Asset$publicReportsArgs<ExtArgs>
     suggestedForTriageAnalyses?: boolean | Asset$suggestedForTriageAnalysesArgs<ExtArgs>
     externalObservations?: boolean | Asset$externalObservationsArgs<ExtArgs>
+    attentionReviews?: boolean | Asset$attentionReviewsArgs<ExtArgs>
     _count?: boolean | AssetCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type AssetIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -11854,6 +12142,7 @@ export namespace Prisma {
       publicReports: Prisma.$PublicReportPayload<ExtArgs>[]
       suggestedForTriageAnalyses: Prisma.$PublicReportTriageAnalysisPayload<ExtArgs>[]
       externalObservations: Prisma.$ExternalObservationPayload<ExtArgs>[]
+      attentionReviews: Prisma.$AssetAttentionReviewPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -12268,6 +12557,7 @@ export namespace Prisma {
     publicReports<T extends Asset$publicReportsArgs<ExtArgs> = {}>(args?: Subset<T, Asset$publicReportsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PublicReportPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     suggestedForTriageAnalyses<T extends Asset$suggestedForTriageAnalysesArgs<ExtArgs> = {}>(args?: Subset<T, Asset$suggestedForTriageAnalysesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PublicReportTriageAnalysisPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     externalObservations<T extends Asset$externalObservationsArgs<ExtArgs> = {}>(args?: Subset<T, Asset$externalObservationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExternalObservationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    attentionReviews<T extends Asset$attentionReviewsArgs<ExtArgs> = {}>(args?: Subset<T, Asset$attentionReviewsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AssetAttentionReviewPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -12798,6 +13088,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ExternalObservationScalarFieldEnum | ExternalObservationScalarFieldEnum[]
+  }
+
+  /**
+   * Asset.attentionReviews
+   */
+  export type Asset$attentionReviewsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AssetAttentionReview
+     */
+    select?: AssetAttentionReviewSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AssetAttentionReview
+     */
+    omit?: AssetAttentionReviewOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AssetAttentionReviewInclude<ExtArgs> | null
+    where?: AssetAttentionReviewWhereInput
+    orderBy?: AssetAttentionReviewOrderByWithRelationInput | AssetAttentionReviewOrderByWithRelationInput[]
+    cursor?: AssetAttentionReviewWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: AssetAttentionReviewScalarFieldEnum | AssetAttentionReviewScalarFieldEnum[]
   }
 
   /**
@@ -22371,6 +22685,7 @@ export namespace Prisma {
     intelligenceReconciliations?: boolean | Case$intelligenceReconciliationsArgs<ExtArgs>
     externalObservations?: boolean | Case$externalObservationsArgs<ExtArgs>
     resourceEstimates?: boolean | Case$resourceEstimatesArgs<ExtArgs>
+    attentionReviews?: boolean | Case$attentionReviewsArgs<ExtArgs>
     _count?: boolean | CaseCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["case"]>
 
@@ -22436,6 +22751,7 @@ export namespace Prisma {
     intelligenceReconciliations?: boolean | Case$intelligenceReconciliationsArgs<ExtArgs>
     externalObservations?: boolean | Case$externalObservationsArgs<ExtArgs>
     resourceEstimates?: boolean | Case$resourceEstimatesArgs<ExtArgs>
+    attentionReviews?: boolean | Case$attentionReviewsArgs<ExtArgs>
     _count?: boolean | CaseCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type CaseIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -22461,6 +22777,7 @@ export namespace Prisma {
       intelligenceReconciliations: Prisma.$InfrastructureIntelligenceReconciliationPayload<ExtArgs>[]
       externalObservations: Prisma.$ExternalObservationPayload<ExtArgs>[]
       resourceEstimates: Prisma.$CaseResourceEstimatePayload<ExtArgs>[]
+      attentionReviews: Prisma.$AssetAttentionReviewPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -22882,6 +23199,7 @@ export namespace Prisma {
     intelligenceReconciliations<T extends Case$intelligenceReconciliationsArgs<ExtArgs> = {}>(args?: Subset<T, Case$intelligenceReconciliationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InfrastructureIntelligenceReconciliationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     externalObservations<T extends Case$externalObservationsArgs<ExtArgs> = {}>(args?: Subset<T, Case$externalObservationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExternalObservationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     resourceEstimates<T extends Case$resourceEstimatesArgs<ExtArgs> = {}>(args?: Subset<T, Case$resourceEstimatesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CaseResourceEstimatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    attentionReviews<T extends Case$attentionReviewsArgs<ExtArgs> = {}>(args?: Subset<T, Case$attentionReviewsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AssetAttentionReviewPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -23594,6 +23912,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: CaseResourceEstimateScalarFieldEnum | CaseResourceEstimateScalarFieldEnum[]
+  }
+
+  /**
+   * Case.attentionReviews
+   */
+  export type Case$attentionReviewsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AssetAttentionReview
+     */
+    select?: AssetAttentionReviewSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AssetAttentionReview
+     */
+    omit?: AssetAttentionReviewOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AssetAttentionReviewInclude<ExtArgs> | null
+    where?: AssetAttentionReviewWhereInput
+    orderBy?: AssetAttentionReviewOrderByWithRelationInput | AssetAttentionReviewOrderByWithRelationInput[]
+    cursor?: AssetAttentionReviewWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: AssetAttentionReviewScalarFieldEnum | AssetAttentionReviewScalarFieldEnum[]
   }
 
   /**
@@ -24820,6 +25162,2406 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: CaseResourceEstimateInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model AssetAttentionReview
+   */
+
+  export type AggregateAssetAttentionReview = {
+    _count: AssetAttentionReviewCountAggregateOutputType | null
+    _min: AssetAttentionReviewMinAggregateOutputType | null
+    _max: AssetAttentionReviewMaxAggregateOutputType | null
+  }
+
+  export type AssetAttentionReviewMinAggregateOutputType = {
+    id: string | null
+    assetId: string | null
+    caseId: string | null
+    reviewerId: string | null
+    reviewerRole: $Enums.SystemRole | null
+    departmentId: string | null
+    jurisdictionId: string | null
+    disposition: $Enums.AssetAttentionDisposition | null
+    rationale: string | null
+    attentionContractVersion: string | null
+    attentionCalculationVersion: string | null
+    projectionAsOf: Date | null
+    sourceSetFingerprint: string | null
+    clientRequestId: string | null
+    supersedesReviewId: string | null
+    createdAt: Date | null
+  }
+
+  export type AssetAttentionReviewMaxAggregateOutputType = {
+    id: string | null
+    assetId: string | null
+    caseId: string | null
+    reviewerId: string | null
+    reviewerRole: $Enums.SystemRole | null
+    departmentId: string | null
+    jurisdictionId: string | null
+    disposition: $Enums.AssetAttentionDisposition | null
+    rationale: string | null
+    attentionContractVersion: string | null
+    attentionCalculationVersion: string | null
+    projectionAsOf: Date | null
+    sourceSetFingerprint: string | null
+    clientRequestId: string | null
+    supersedesReviewId: string | null
+    createdAt: Date | null
+  }
+
+  export type AssetAttentionReviewCountAggregateOutputType = {
+    id: number
+    assetId: number
+    caseId: number
+    reviewerId: number
+    reviewerRole: number
+    departmentId: number
+    jurisdictionId: number
+    disposition: number
+    rationale: number
+    attentionContractVersion: number
+    attentionCalculationVersion: number
+    projectionAsOf: number
+    sourceSetFingerprint: number
+    clientRequestId: number
+    supersedesReviewId: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type AssetAttentionReviewMinAggregateInputType = {
+    id?: true
+    assetId?: true
+    caseId?: true
+    reviewerId?: true
+    reviewerRole?: true
+    departmentId?: true
+    jurisdictionId?: true
+    disposition?: true
+    rationale?: true
+    attentionContractVersion?: true
+    attentionCalculationVersion?: true
+    projectionAsOf?: true
+    sourceSetFingerprint?: true
+    clientRequestId?: true
+    supersedesReviewId?: true
+    createdAt?: true
+  }
+
+  export type AssetAttentionReviewMaxAggregateInputType = {
+    id?: true
+    assetId?: true
+    caseId?: true
+    reviewerId?: true
+    reviewerRole?: true
+    departmentId?: true
+    jurisdictionId?: true
+    disposition?: true
+    rationale?: true
+    attentionContractVersion?: true
+    attentionCalculationVersion?: true
+    projectionAsOf?: true
+    sourceSetFingerprint?: true
+    clientRequestId?: true
+    supersedesReviewId?: true
+    createdAt?: true
+  }
+
+  export type AssetAttentionReviewCountAggregateInputType = {
+    id?: true
+    assetId?: true
+    caseId?: true
+    reviewerId?: true
+    reviewerRole?: true
+    departmentId?: true
+    jurisdictionId?: true
+    disposition?: true
+    rationale?: true
+    attentionContractVersion?: true
+    attentionCalculationVersion?: true
+    projectionAsOf?: true
+    sourceSetFingerprint?: true
+    clientRequestId?: true
+    supersedesReviewId?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type AssetAttentionReviewAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which AssetAttentionReview to aggregate.
+     */
+    where?: AssetAttentionReviewWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AssetAttentionReviews to fetch.
+     */
+    orderBy?: AssetAttentionReviewOrderByWithRelationInput | AssetAttentionReviewOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: AssetAttentionReviewWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AssetAttentionReviews from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AssetAttentionReviews.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned AssetAttentionReviews
+    **/
+    _count?: true | AssetAttentionReviewCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: AssetAttentionReviewMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: AssetAttentionReviewMaxAggregateInputType
+  }
+
+  export type GetAssetAttentionReviewAggregateType<T extends AssetAttentionReviewAggregateArgs> = {
+        [P in keyof T & keyof AggregateAssetAttentionReview]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateAssetAttentionReview[P]>
+      : GetScalarType<T[P], AggregateAssetAttentionReview[P]>
+  }
+
+
+
+
+  export type AssetAttentionReviewGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AssetAttentionReviewWhereInput
+    orderBy?: AssetAttentionReviewOrderByWithAggregationInput | AssetAttentionReviewOrderByWithAggregationInput[]
+    by: AssetAttentionReviewScalarFieldEnum[] | AssetAttentionReviewScalarFieldEnum
+    having?: AssetAttentionReviewScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: AssetAttentionReviewCountAggregateInputType | true
+    _min?: AssetAttentionReviewMinAggregateInputType
+    _max?: AssetAttentionReviewMaxAggregateInputType
+  }
+
+  export type AssetAttentionReviewGroupByOutputType = {
+    id: string
+    assetId: string
+    caseId: string | null
+    reviewerId: string
+    reviewerRole: $Enums.SystemRole
+    departmentId: string
+    jurisdictionId: string
+    disposition: $Enums.AssetAttentionDisposition
+    rationale: string
+    attentionContractVersion: string
+    attentionCalculationVersion: string
+    projectionAsOf: Date
+    sourceSetFingerprint: string
+    clientRequestId: string
+    supersedesReviewId: string | null
+    createdAt: Date
+    _count: AssetAttentionReviewCountAggregateOutputType | null
+    _min: AssetAttentionReviewMinAggregateOutputType | null
+    _max: AssetAttentionReviewMaxAggregateOutputType | null
+  }
+
+  type GetAssetAttentionReviewGroupByPayload<T extends AssetAttentionReviewGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<AssetAttentionReviewGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof AssetAttentionReviewGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], AssetAttentionReviewGroupByOutputType[P]>
+            : GetScalarType<T[P], AssetAttentionReviewGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type AssetAttentionReviewSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    assetId?: boolean
+    caseId?: boolean
+    reviewerId?: boolean
+    reviewerRole?: boolean
+    departmentId?: boolean
+    jurisdictionId?: boolean
+    disposition?: boolean
+    rationale?: boolean
+    attentionContractVersion?: boolean
+    attentionCalculationVersion?: boolean
+    projectionAsOf?: boolean
+    sourceSetFingerprint?: boolean
+    clientRequestId?: boolean
+    supersedesReviewId?: boolean
+    createdAt?: boolean
+    asset?: boolean | AssetDefaultArgs<ExtArgs>
+    case?: boolean | AssetAttentionReview$caseArgs<ExtArgs>
+    reviewer?: boolean | UserDefaultArgs<ExtArgs>
+    supersedesReview?: boolean | AssetAttentionReview$supersedesReviewArgs<ExtArgs>
+    supersededBy?: boolean | AssetAttentionReview$supersededByArgs<ExtArgs>
+    selectedSignals?: boolean | AssetAttentionReview$selectedSignalsArgs<ExtArgs>
+    _count?: boolean | AssetAttentionReviewCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["assetAttentionReview"]>
+
+  export type AssetAttentionReviewSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    assetId?: boolean
+    caseId?: boolean
+    reviewerId?: boolean
+    reviewerRole?: boolean
+    departmentId?: boolean
+    jurisdictionId?: boolean
+    disposition?: boolean
+    rationale?: boolean
+    attentionContractVersion?: boolean
+    attentionCalculationVersion?: boolean
+    projectionAsOf?: boolean
+    sourceSetFingerprint?: boolean
+    clientRequestId?: boolean
+    supersedesReviewId?: boolean
+    createdAt?: boolean
+    asset?: boolean | AssetDefaultArgs<ExtArgs>
+    case?: boolean | AssetAttentionReview$caseArgs<ExtArgs>
+    reviewer?: boolean | UserDefaultArgs<ExtArgs>
+    supersedesReview?: boolean | AssetAttentionReview$supersedesReviewArgs<ExtArgs>
+  }, ExtArgs["result"]["assetAttentionReview"]>
+
+  export type AssetAttentionReviewSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    assetId?: boolean
+    caseId?: boolean
+    reviewerId?: boolean
+    reviewerRole?: boolean
+    departmentId?: boolean
+    jurisdictionId?: boolean
+    disposition?: boolean
+    rationale?: boolean
+    attentionContractVersion?: boolean
+    attentionCalculationVersion?: boolean
+    projectionAsOf?: boolean
+    sourceSetFingerprint?: boolean
+    clientRequestId?: boolean
+    supersedesReviewId?: boolean
+    createdAt?: boolean
+    asset?: boolean | AssetDefaultArgs<ExtArgs>
+    case?: boolean | AssetAttentionReview$caseArgs<ExtArgs>
+    reviewer?: boolean | UserDefaultArgs<ExtArgs>
+    supersedesReview?: boolean | AssetAttentionReview$supersedesReviewArgs<ExtArgs>
+  }, ExtArgs["result"]["assetAttentionReview"]>
+
+  export type AssetAttentionReviewSelectScalar = {
+    id?: boolean
+    assetId?: boolean
+    caseId?: boolean
+    reviewerId?: boolean
+    reviewerRole?: boolean
+    departmentId?: boolean
+    jurisdictionId?: boolean
+    disposition?: boolean
+    rationale?: boolean
+    attentionContractVersion?: boolean
+    attentionCalculationVersion?: boolean
+    projectionAsOf?: boolean
+    sourceSetFingerprint?: boolean
+    clientRequestId?: boolean
+    supersedesReviewId?: boolean
+    createdAt?: boolean
+  }
+
+  export type AssetAttentionReviewOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "assetId" | "caseId" | "reviewerId" | "reviewerRole" | "departmentId" | "jurisdictionId" | "disposition" | "rationale" | "attentionContractVersion" | "attentionCalculationVersion" | "projectionAsOf" | "sourceSetFingerprint" | "clientRequestId" | "supersedesReviewId" | "createdAt", ExtArgs["result"]["assetAttentionReview"]>
+  export type AssetAttentionReviewInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    asset?: boolean | AssetDefaultArgs<ExtArgs>
+    case?: boolean | AssetAttentionReview$caseArgs<ExtArgs>
+    reviewer?: boolean | UserDefaultArgs<ExtArgs>
+    supersedesReview?: boolean | AssetAttentionReview$supersedesReviewArgs<ExtArgs>
+    supersededBy?: boolean | AssetAttentionReview$supersededByArgs<ExtArgs>
+    selectedSignals?: boolean | AssetAttentionReview$selectedSignalsArgs<ExtArgs>
+    _count?: boolean | AssetAttentionReviewCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type AssetAttentionReviewIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    asset?: boolean | AssetDefaultArgs<ExtArgs>
+    case?: boolean | AssetAttentionReview$caseArgs<ExtArgs>
+    reviewer?: boolean | UserDefaultArgs<ExtArgs>
+    supersedesReview?: boolean | AssetAttentionReview$supersedesReviewArgs<ExtArgs>
+  }
+  export type AssetAttentionReviewIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    asset?: boolean | AssetDefaultArgs<ExtArgs>
+    case?: boolean | AssetAttentionReview$caseArgs<ExtArgs>
+    reviewer?: boolean | UserDefaultArgs<ExtArgs>
+    supersedesReview?: boolean | AssetAttentionReview$supersedesReviewArgs<ExtArgs>
+  }
+
+  export type $AssetAttentionReviewPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "AssetAttentionReview"
+    objects: {
+      asset: Prisma.$AssetPayload<ExtArgs>
+      case: Prisma.$CasePayload<ExtArgs> | null
+      reviewer: Prisma.$UserPayload<ExtArgs>
+      supersedesReview: Prisma.$AssetAttentionReviewPayload<ExtArgs> | null
+      supersededBy: Prisma.$AssetAttentionReviewPayload<ExtArgs> | null
+      selectedSignals: Prisma.$AssetAttentionReviewSignalPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      assetId: string
+      caseId: string | null
+      reviewerId: string
+      reviewerRole: $Enums.SystemRole
+      departmentId: string
+      jurisdictionId: string
+      disposition: $Enums.AssetAttentionDisposition
+      rationale: string
+      attentionContractVersion: string
+      attentionCalculationVersion: string
+      projectionAsOf: Date
+      sourceSetFingerprint: string
+      clientRequestId: string
+      supersedesReviewId: string | null
+      createdAt: Date
+    }, ExtArgs["result"]["assetAttentionReview"]>
+    composites: {}
+  }
+
+  type AssetAttentionReviewGetPayload<S extends boolean | null | undefined | AssetAttentionReviewDefaultArgs> = $Result.GetResult<Prisma.$AssetAttentionReviewPayload, S>
+
+  type AssetAttentionReviewCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<AssetAttentionReviewFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: AssetAttentionReviewCountAggregateInputType | true
+    }
+
+  export interface AssetAttentionReviewDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['AssetAttentionReview'], meta: { name: 'AssetAttentionReview' } }
+    /**
+     * Find zero or one AssetAttentionReview that matches the filter.
+     * @param {AssetAttentionReviewFindUniqueArgs} args - Arguments to find a AssetAttentionReview
+     * @example
+     * // Get one AssetAttentionReview
+     * const assetAttentionReview = await prisma.assetAttentionReview.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends AssetAttentionReviewFindUniqueArgs>(args: SelectSubset<T, AssetAttentionReviewFindUniqueArgs<ExtArgs>>): Prisma__AssetAttentionReviewClient<$Result.GetResult<Prisma.$AssetAttentionReviewPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one AssetAttentionReview that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {AssetAttentionReviewFindUniqueOrThrowArgs} args - Arguments to find a AssetAttentionReview
+     * @example
+     * // Get one AssetAttentionReview
+     * const assetAttentionReview = await prisma.assetAttentionReview.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends AssetAttentionReviewFindUniqueOrThrowArgs>(args: SelectSubset<T, AssetAttentionReviewFindUniqueOrThrowArgs<ExtArgs>>): Prisma__AssetAttentionReviewClient<$Result.GetResult<Prisma.$AssetAttentionReviewPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first AssetAttentionReview that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AssetAttentionReviewFindFirstArgs} args - Arguments to find a AssetAttentionReview
+     * @example
+     * // Get one AssetAttentionReview
+     * const assetAttentionReview = await prisma.assetAttentionReview.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends AssetAttentionReviewFindFirstArgs>(args?: SelectSubset<T, AssetAttentionReviewFindFirstArgs<ExtArgs>>): Prisma__AssetAttentionReviewClient<$Result.GetResult<Prisma.$AssetAttentionReviewPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first AssetAttentionReview that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AssetAttentionReviewFindFirstOrThrowArgs} args - Arguments to find a AssetAttentionReview
+     * @example
+     * // Get one AssetAttentionReview
+     * const assetAttentionReview = await prisma.assetAttentionReview.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends AssetAttentionReviewFindFirstOrThrowArgs>(args?: SelectSubset<T, AssetAttentionReviewFindFirstOrThrowArgs<ExtArgs>>): Prisma__AssetAttentionReviewClient<$Result.GetResult<Prisma.$AssetAttentionReviewPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more AssetAttentionReviews that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AssetAttentionReviewFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all AssetAttentionReviews
+     * const assetAttentionReviews = await prisma.assetAttentionReview.findMany()
+     * 
+     * // Get first 10 AssetAttentionReviews
+     * const assetAttentionReviews = await prisma.assetAttentionReview.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const assetAttentionReviewWithIdOnly = await prisma.assetAttentionReview.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends AssetAttentionReviewFindManyArgs>(args?: SelectSubset<T, AssetAttentionReviewFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AssetAttentionReviewPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a AssetAttentionReview.
+     * @param {AssetAttentionReviewCreateArgs} args - Arguments to create a AssetAttentionReview.
+     * @example
+     * // Create one AssetAttentionReview
+     * const AssetAttentionReview = await prisma.assetAttentionReview.create({
+     *   data: {
+     *     // ... data to create a AssetAttentionReview
+     *   }
+     * })
+     * 
+     */
+    create<T extends AssetAttentionReviewCreateArgs>(args: SelectSubset<T, AssetAttentionReviewCreateArgs<ExtArgs>>): Prisma__AssetAttentionReviewClient<$Result.GetResult<Prisma.$AssetAttentionReviewPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many AssetAttentionReviews.
+     * @param {AssetAttentionReviewCreateManyArgs} args - Arguments to create many AssetAttentionReviews.
+     * @example
+     * // Create many AssetAttentionReviews
+     * const assetAttentionReview = await prisma.assetAttentionReview.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends AssetAttentionReviewCreateManyArgs>(args?: SelectSubset<T, AssetAttentionReviewCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many AssetAttentionReviews and returns the data saved in the database.
+     * @param {AssetAttentionReviewCreateManyAndReturnArgs} args - Arguments to create many AssetAttentionReviews.
+     * @example
+     * // Create many AssetAttentionReviews
+     * const assetAttentionReview = await prisma.assetAttentionReview.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many AssetAttentionReviews and only return the `id`
+     * const assetAttentionReviewWithIdOnly = await prisma.assetAttentionReview.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends AssetAttentionReviewCreateManyAndReturnArgs>(args?: SelectSubset<T, AssetAttentionReviewCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AssetAttentionReviewPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a AssetAttentionReview.
+     * @param {AssetAttentionReviewDeleteArgs} args - Arguments to delete one AssetAttentionReview.
+     * @example
+     * // Delete one AssetAttentionReview
+     * const AssetAttentionReview = await prisma.assetAttentionReview.delete({
+     *   where: {
+     *     // ... filter to delete one AssetAttentionReview
+     *   }
+     * })
+     * 
+     */
+    delete<T extends AssetAttentionReviewDeleteArgs>(args: SelectSubset<T, AssetAttentionReviewDeleteArgs<ExtArgs>>): Prisma__AssetAttentionReviewClient<$Result.GetResult<Prisma.$AssetAttentionReviewPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one AssetAttentionReview.
+     * @param {AssetAttentionReviewUpdateArgs} args - Arguments to update one AssetAttentionReview.
+     * @example
+     * // Update one AssetAttentionReview
+     * const assetAttentionReview = await prisma.assetAttentionReview.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends AssetAttentionReviewUpdateArgs>(args: SelectSubset<T, AssetAttentionReviewUpdateArgs<ExtArgs>>): Prisma__AssetAttentionReviewClient<$Result.GetResult<Prisma.$AssetAttentionReviewPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more AssetAttentionReviews.
+     * @param {AssetAttentionReviewDeleteManyArgs} args - Arguments to filter AssetAttentionReviews to delete.
+     * @example
+     * // Delete a few AssetAttentionReviews
+     * const { count } = await prisma.assetAttentionReview.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends AssetAttentionReviewDeleteManyArgs>(args?: SelectSubset<T, AssetAttentionReviewDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more AssetAttentionReviews.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AssetAttentionReviewUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many AssetAttentionReviews
+     * const assetAttentionReview = await prisma.assetAttentionReview.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends AssetAttentionReviewUpdateManyArgs>(args: SelectSubset<T, AssetAttentionReviewUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more AssetAttentionReviews and returns the data updated in the database.
+     * @param {AssetAttentionReviewUpdateManyAndReturnArgs} args - Arguments to update many AssetAttentionReviews.
+     * @example
+     * // Update many AssetAttentionReviews
+     * const assetAttentionReview = await prisma.assetAttentionReview.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more AssetAttentionReviews and only return the `id`
+     * const assetAttentionReviewWithIdOnly = await prisma.assetAttentionReview.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends AssetAttentionReviewUpdateManyAndReturnArgs>(args: SelectSubset<T, AssetAttentionReviewUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AssetAttentionReviewPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one AssetAttentionReview.
+     * @param {AssetAttentionReviewUpsertArgs} args - Arguments to update or create a AssetAttentionReview.
+     * @example
+     * // Update or create a AssetAttentionReview
+     * const assetAttentionReview = await prisma.assetAttentionReview.upsert({
+     *   create: {
+     *     // ... data to create a AssetAttentionReview
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the AssetAttentionReview we want to update
+     *   }
+     * })
+     */
+    upsert<T extends AssetAttentionReviewUpsertArgs>(args: SelectSubset<T, AssetAttentionReviewUpsertArgs<ExtArgs>>): Prisma__AssetAttentionReviewClient<$Result.GetResult<Prisma.$AssetAttentionReviewPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of AssetAttentionReviews.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AssetAttentionReviewCountArgs} args - Arguments to filter AssetAttentionReviews to count.
+     * @example
+     * // Count the number of AssetAttentionReviews
+     * const count = await prisma.assetAttentionReview.count({
+     *   where: {
+     *     // ... the filter for the AssetAttentionReviews we want to count
+     *   }
+     * })
+    **/
+    count<T extends AssetAttentionReviewCountArgs>(
+      args?: Subset<T, AssetAttentionReviewCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], AssetAttentionReviewCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a AssetAttentionReview.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AssetAttentionReviewAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends AssetAttentionReviewAggregateArgs>(args: Subset<T, AssetAttentionReviewAggregateArgs>): Prisma.PrismaPromise<GetAssetAttentionReviewAggregateType<T>>
+
+    /**
+     * Group by AssetAttentionReview.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AssetAttentionReviewGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends AssetAttentionReviewGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: AssetAttentionReviewGroupByArgs['orderBy'] }
+        : { orderBy?: AssetAttentionReviewGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, AssetAttentionReviewGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetAssetAttentionReviewGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the AssetAttentionReview model
+   */
+  readonly fields: AssetAttentionReviewFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for AssetAttentionReview.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__AssetAttentionReviewClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    asset<T extends AssetDefaultArgs<ExtArgs> = {}>(args?: Subset<T, AssetDefaultArgs<ExtArgs>>): Prisma__AssetClient<$Result.GetResult<Prisma.$AssetPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    case<T extends AssetAttentionReview$caseArgs<ExtArgs> = {}>(args?: Subset<T, AssetAttentionReview$caseArgs<ExtArgs>>): Prisma__CaseClient<$Result.GetResult<Prisma.$CasePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    reviewer<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    supersedesReview<T extends AssetAttentionReview$supersedesReviewArgs<ExtArgs> = {}>(args?: Subset<T, AssetAttentionReview$supersedesReviewArgs<ExtArgs>>): Prisma__AssetAttentionReviewClient<$Result.GetResult<Prisma.$AssetAttentionReviewPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    supersededBy<T extends AssetAttentionReview$supersededByArgs<ExtArgs> = {}>(args?: Subset<T, AssetAttentionReview$supersededByArgs<ExtArgs>>): Prisma__AssetAttentionReviewClient<$Result.GetResult<Prisma.$AssetAttentionReviewPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    selectedSignals<T extends AssetAttentionReview$selectedSignalsArgs<ExtArgs> = {}>(args?: Subset<T, AssetAttentionReview$selectedSignalsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AssetAttentionReviewSignalPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the AssetAttentionReview model
+   */
+  interface AssetAttentionReviewFieldRefs {
+    readonly id: FieldRef<"AssetAttentionReview", 'String'>
+    readonly assetId: FieldRef<"AssetAttentionReview", 'String'>
+    readonly caseId: FieldRef<"AssetAttentionReview", 'String'>
+    readonly reviewerId: FieldRef<"AssetAttentionReview", 'String'>
+    readonly reviewerRole: FieldRef<"AssetAttentionReview", 'SystemRole'>
+    readonly departmentId: FieldRef<"AssetAttentionReview", 'String'>
+    readonly jurisdictionId: FieldRef<"AssetAttentionReview", 'String'>
+    readonly disposition: FieldRef<"AssetAttentionReview", 'AssetAttentionDisposition'>
+    readonly rationale: FieldRef<"AssetAttentionReview", 'String'>
+    readonly attentionContractVersion: FieldRef<"AssetAttentionReview", 'String'>
+    readonly attentionCalculationVersion: FieldRef<"AssetAttentionReview", 'String'>
+    readonly projectionAsOf: FieldRef<"AssetAttentionReview", 'DateTime'>
+    readonly sourceSetFingerprint: FieldRef<"AssetAttentionReview", 'String'>
+    readonly clientRequestId: FieldRef<"AssetAttentionReview", 'String'>
+    readonly supersedesReviewId: FieldRef<"AssetAttentionReview", 'String'>
+    readonly createdAt: FieldRef<"AssetAttentionReview", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * AssetAttentionReview findUnique
+   */
+  export type AssetAttentionReviewFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AssetAttentionReview
+     */
+    select?: AssetAttentionReviewSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AssetAttentionReview
+     */
+    omit?: AssetAttentionReviewOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AssetAttentionReviewInclude<ExtArgs> | null
+    /**
+     * Filter, which AssetAttentionReview to fetch.
+     */
+    where: AssetAttentionReviewWhereUniqueInput
+  }
+
+  /**
+   * AssetAttentionReview findUniqueOrThrow
+   */
+  export type AssetAttentionReviewFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AssetAttentionReview
+     */
+    select?: AssetAttentionReviewSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AssetAttentionReview
+     */
+    omit?: AssetAttentionReviewOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AssetAttentionReviewInclude<ExtArgs> | null
+    /**
+     * Filter, which AssetAttentionReview to fetch.
+     */
+    where: AssetAttentionReviewWhereUniqueInput
+  }
+
+  /**
+   * AssetAttentionReview findFirst
+   */
+  export type AssetAttentionReviewFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AssetAttentionReview
+     */
+    select?: AssetAttentionReviewSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AssetAttentionReview
+     */
+    omit?: AssetAttentionReviewOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AssetAttentionReviewInclude<ExtArgs> | null
+    /**
+     * Filter, which AssetAttentionReview to fetch.
+     */
+    where?: AssetAttentionReviewWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AssetAttentionReviews to fetch.
+     */
+    orderBy?: AssetAttentionReviewOrderByWithRelationInput | AssetAttentionReviewOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for AssetAttentionReviews.
+     */
+    cursor?: AssetAttentionReviewWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AssetAttentionReviews from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AssetAttentionReviews.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of AssetAttentionReviews.
+     */
+    distinct?: AssetAttentionReviewScalarFieldEnum | AssetAttentionReviewScalarFieldEnum[]
+  }
+
+  /**
+   * AssetAttentionReview findFirstOrThrow
+   */
+  export type AssetAttentionReviewFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AssetAttentionReview
+     */
+    select?: AssetAttentionReviewSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AssetAttentionReview
+     */
+    omit?: AssetAttentionReviewOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AssetAttentionReviewInclude<ExtArgs> | null
+    /**
+     * Filter, which AssetAttentionReview to fetch.
+     */
+    where?: AssetAttentionReviewWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AssetAttentionReviews to fetch.
+     */
+    orderBy?: AssetAttentionReviewOrderByWithRelationInput | AssetAttentionReviewOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for AssetAttentionReviews.
+     */
+    cursor?: AssetAttentionReviewWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AssetAttentionReviews from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AssetAttentionReviews.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of AssetAttentionReviews.
+     */
+    distinct?: AssetAttentionReviewScalarFieldEnum | AssetAttentionReviewScalarFieldEnum[]
+  }
+
+  /**
+   * AssetAttentionReview findMany
+   */
+  export type AssetAttentionReviewFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AssetAttentionReview
+     */
+    select?: AssetAttentionReviewSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AssetAttentionReview
+     */
+    omit?: AssetAttentionReviewOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AssetAttentionReviewInclude<ExtArgs> | null
+    /**
+     * Filter, which AssetAttentionReviews to fetch.
+     */
+    where?: AssetAttentionReviewWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AssetAttentionReviews to fetch.
+     */
+    orderBy?: AssetAttentionReviewOrderByWithRelationInput | AssetAttentionReviewOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing AssetAttentionReviews.
+     */
+    cursor?: AssetAttentionReviewWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AssetAttentionReviews from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AssetAttentionReviews.
+     */
+    skip?: number
+    distinct?: AssetAttentionReviewScalarFieldEnum | AssetAttentionReviewScalarFieldEnum[]
+  }
+
+  /**
+   * AssetAttentionReview create
+   */
+  export type AssetAttentionReviewCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AssetAttentionReview
+     */
+    select?: AssetAttentionReviewSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AssetAttentionReview
+     */
+    omit?: AssetAttentionReviewOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AssetAttentionReviewInclude<ExtArgs> | null
+    /**
+     * The data needed to create a AssetAttentionReview.
+     */
+    data: XOR<AssetAttentionReviewCreateInput, AssetAttentionReviewUncheckedCreateInput>
+  }
+
+  /**
+   * AssetAttentionReview createMany
+   */
+  export type AssetAttentionReviewCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many AssetAttentionReviews.
+     */
+    data: AssetAttentionReviewCreateManyInput | AssetAttentionReviewCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * AssetAttentionReview createManyAndReturn
+   */
+  export type AssetAttentionReviewCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AssetAttentionReview
+     */
+    select?: AssetAttentionReviewSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the AssetAttentionReview
+     */
+    omit?: AssetAttentionReviewOmit<ExtArgs> | null
+    /**
+     * The data used to create many AssetAttentionReviews.
+     */
+    data: AssetAttentionReviewCreateManyInput | AssetAttentionReviewCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AssetAttentionReviewIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * AssetAttentionReview update
+   */
+  export type AssetAttentionReviewUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AssetAttentionReview
+     */
+    select?: AssetAttentionReviewSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AssetAttentionReview
+     */
+    omit?: AssetAttentionReviewOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AssetAttentionReviewInclude<ExtArgs> | null
+    /**
+     * The data needed to update a AssetAttentionReview.
+     */
+    data: XOR<AssetAttentionReviewUpdateInput, AssetAttentionReviewUncheckedUpdateInput>
+    /**
+     * Choose, which AssetAttentionReview to update.
+     */
+    where: AssetAttentionReviewWhereUniqueInput
+  }
+
+  /**
+   * AssetAttentionReview updateMany
+   */
+  export type AssetAttentionReviewUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update AssetAttentionReviews.
+     */
+    data: XOR<AssetAttentionReviewUpdateManyMutationInput, AssetAttentionReviewUncheckedUpdateManyInput>
+    /**
+     * Filter which AssetAttentionReviews to update
+     */
+    where?: AssetAttentionReviewWhereInput
+    /**
+     * Limit how many AssetAttentionReviews to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * AssetAttentionReview updateManyAndReturn
+   */
+  export type AssetAttentionReviewUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AssetAttentionReview
+     */
+    select?: AssetAttentionReviewSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the AssetAttentionReview
+     */
+    omit?: AssetAttentionReviewOmit<ExtArgs> | null
+    /**
+     * The data used to update AssetAttentionReviews.
+     */
+    data: XOR<AssetAttentionReviewUpdateManyMutationInput, AssetAttentionReviewUncheckedUpdateManyInput>
+    /**
+     * Filter which AssetAttentionReviews to update
+     */
+    where?: AssetAttentionReviewWhereInput
+    /**
+     * Limit how many AssetAttentionReviews to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AssetAttentionReviewIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * AssetAttentionReview upsert
+   */
+  export type AssetAttentionReviewUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AssetAttentionReview
+     */
+    select?: AssetAttentionReviewSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AssetAttentionReview
+     */
+    omit?: AssetAttentionReviewOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AssetAttentionReviewInclude<ExtArgs> | null
+    /**
+     * The filter to search for the AssetAttentionReview to update in case it exists.
+     */
+    where: AssetAttentionReviewWhereUniqueInput
+    /**
+     * In case the AssetAttentionReview found by the `where` argument doesn't exist, create a new AssetAttentionReview with this data.
+     */
+    create: XOR<AssetAttentionReviewCreateInput, AssetAttentionReviewUncheckedCreateInput>
+    /**
+     * In case the AssetAttentionReview was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<AssetAttentionReviewUpdateInput, AssetAttentionReviewUncheckedUpdateInput>
+  }
+
+  /**
+   * AssetAttentionReview delete
+   */
+  export type AssetAttentionReviewDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AssetAttentionReview
+     */
+    select?: AssetAttentionReviewSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AssetAttentionReview
+     */
+    omit?: AssetAttentionReviewOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AssetAttentionReviewInclude<ExtArgs> | null
+    /**
+     * Filter which AssetAttentionReview to delete.
+     */
+    where: AssetAttentionReviewWhereUniqueInput
+  }
+
+  /**
+   * AssetAttentionReview deleteMany
+   */
+  export type AssetAttentionReviewDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which AssetAttentionReviews to delete
+     */
+    where?: AssetAttentionReviewWhereInput
+    /**
+     * Limit how many AssetAttentionReviews to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * AssetAttentionReview.case
+   */
+  export type AssetAttentionReview$caseArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Case
+     */
+    select?: CaseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Case
+     */
+    omit?: CaseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CaseInclude<ExtArgs> | null
+    where?: CaseWhereInput
+  }
+
+  /**
+   * AssetAttentionReview.supersedesReview
+   */
+  export type AssetAttentionReview$supersedesReviewArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AssetAttentionReview
+     */
+    select?: AssetAttentionReviewSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AssetAttentionReview
+     */
+    omit?: AssetAttentionReviewOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AssetAttentionReviewInclude<ExtArgs> | null
+    where?: AssetAttentionReviewWhereInput
+  }
+
+  /**
+   * AssetAttentionReview.supersededBy
+   */
+  export type AssetAttentionReview$supersededByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AssetAttentionReview
+     */
+    select?: AssetAttentionReviewSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AssetAttentionReview
+     */
+    omit?: AssetAttentionReviewOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AssetAttentionReviewInclude<ExtArgs> | null
+    where?: AssetAttentionReviewWhereInput
+  }
+
+  /**
+   * AssetAttentionReview.selectedSignals
+   */
+  export type AssetAttentionReview$selectedSignalsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AssetAttentionReviewSignal
+     */
+    select?: AssetAttentionReviewSignalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AssetAttentionReviewSignal
+     */
+    omit?: AssetAttentionReviewSignalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AssetAttentionReviewSignalInclude<ExtArgs> | null
+    where?: AssetAttentionReviewSignalWhereInput
+    orderBy?: AssetAttentionReviewSignalOrderByWithRelationInput | AssetAttentionReviewSignalOrderByWithRelationInput[]
+    cursor?: AssetAttentionReviewSignalWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: AssetAttentionReviewSignalScalarFieldEnum | AssetAttentionReviewSignalScalarFieldEnum[]
+  }
+
+  /**
+   * AssetAttentionReview without action
+   */
+  export type AssetAttentionReviewDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AssetAttentionReview
+     */
+    select?: AssetAttentionReviewSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AssetAttentionReview
+     */
+    omit?: AssetAttentionReviewOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AssetAttentionReviewInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model AssetAttentionReviewSignal
+   */
+
+  export type AggregateAssetAttentionReviewSignal = {
+    _count: AssetAttentionReviewSignalCountAggregateOutputType | null
+    _min: AssetAttentionReviewSignalMinAggregateOutputType | null
+    _max: AssetAttentionReviewSignalMaxAggregateOutputType | null
+  }
+
+  export type AssetAttentionReviewSignalMinAggregateOutputType = {
+    id: string | null
+    reviewId: string | null
+    category: string | null
+    signalCode: string | null
+    state: string | null
+    evidenceReferenceFingerprint: string | null
+    createdAt: Date | null
+  }
+
+  export type AssetAttentionReviewSignalMaxAggregateOutputType = {
+    id: string | null
+    reviewId: string | null
+    category: string | null
+    signalCode: string | null
+    state: string | null
+    evidenceReferenceFingerprint: string | null
+    createdAt: Date | null
+  }
+
+  export type AssetAttentionReviewSignalCountAggregateOutputType = {
+    id: number
+    reviewId: number
+    category: number
+    signalCode: number
+    state: number
+    evidenceReferenceFingerprint: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type AssetAttentionReviewSignalMinAggregateInputType = {
+    id?: true
+    reviewId?: true
+    category?: true
+    signalCode?: true
+    state?: true
+    evidenceReferenceFingerprint?: true
+    createdAt?: true
+  }
+
+  export type AssetAttentionReviewSignalMaxAggregateInputType = {
+    id?: true
+    reviewId?: true
+    category?: true
+    signalCode?: true
+    state?: true
+    evidenceReferenceFingerprint?: true
+    createdAt?: true
+  }
+
+  export type AssetAttentionReviewSignalCountAggregateInputType = {
+    id?: true
+    reviewId?: true
+    category?: true
+    signalCode?: true
+    state?: true
+    evidenceReferenceFingerprint?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type AssetAttentionReviewSignalAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which AssetAttentionReviewSignal to aggregate.
+     */
+    where?: AssetAttentionReviewSignalWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AssetAttentionReviewSignals to fetch.
+     */
+    orderBy?: AssetAttentionReviewSignalOrderByWithRelationInput | AssetAttentionReviewSignalOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: AssetAttentionReviewSignalWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AssetAttentionReviewSignals from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AssetAttentionReviewSignals.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned AssetAttentionReviewSignals
+    **/
+    _count?: true | AssetAttentionReviewSignalCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: AssetAttentionReviewSignalMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: AssetAttentionReviewSignalMaxAggregateInputType
+  }
+
+  export type GetAssetAttentionReviewSignalAggregateType<T extends AssetAttentionReviewSignalAggregateArgs> = {
+        [P in keyof T & keyof AggregateAssetAttentionReviewSignal]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateAssetAttentionReviewSignal[P]>
+      : GetScalarType<T[P], AggregateAssetAttentionReviewSignal[P]>
+  }
+
+
+
+
+  export type AssetAttentionReviewSignalGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AssetAttentionReviewSignalWhereInput
+    orderBy?: AssetAttentionReviewSignalOrderByWithAggregationInput | AssetAttentionReviewSignalOrderByWithAggregationInput[]
+    by: AssetAttentionReviewSignalScalarFieldEnum[] | AssetAttentionReviewSignalScalarFieldEnum
+    having?: AssetAttentionReviewSignalScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: AssetAttentionReviewSignalCountAggregateInputType | true
+    _min?: AssetAttentionReviewSignalMinAggregateInputType
+    _max?: AssetAttentionReviewSignalMaxAggregateInputType
+  }
+
+  export type AssetAttentionReviewSignalGroupByOutputType = {
+    id: string
+    reviewId: string
+    category: string
+    signalCode: string
+    state: string
+    evidenceReferenceFingerprint: string
+    createdAt: Date
+    _count: AssetAttentionReviewSignalCountAggregateOutputType | null
+    _min: AssetAttentionReviewSignalMinAggregateOutputType | null
+    _max: AssetAttentionReviewSignalMaxAggregateOutputType | null
+  }
+
+  type GetAssetAttentionReviewSignalGroupByPayload<T extends AssetAttentionReviewSignalGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<AssetAttentionReviewSignalGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof AssetAttentionReviewSignalGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], AssetAttentionReviewSignalGroupByOutputType[P]>
+            : GetScalarType<T[P], AssetAttentionReviewSignalGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type AssetAttentionReviewSignalSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    reviewId?: boolean
+    category?: boolean
+    signalCode?: boolean
+    state?: boolean
+    evidenceReferenceFingerprint?: boolean
+    createdAt?: boolean
+    review?: boolean | AssetAttentionReviewDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["assetAttentionReviewSignal"]>
+
+  export type AssetAttentionReviewSignalSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    reviewId?: boolean
+    category?: boolean
+    signalCode?: boolean
+    state?: boolean
+    evidenceReferenceFingerprint?: boolean
+    createdAt?: boolean
+    review?: boolean | AssetAttentionReviewDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["assetAttentionReviewSignal"]>
+
+  export type AssetAttentionReviewSignalSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    reviewId?: boolean
+    category?: boolean
+    signalCode?: boolean
+    state?: boolean
+    evidenceReferenceFingerprint?: boolean
+    createdAt?: boolean
+    review?: boolean | AssetAttentionReviewDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["assetAttentionReviewSignal"]>
+
+  export type AssetAttentionReviewSignalSelectScalar = {
+    id?: boolean
+    reviewId?: boolean
+    category?: boolean
+    signalCode?: boolean
+    state?: boolean
+    evidenceReferenceFingerprint?: boolean
+    createdAt?: boolean
+  }
+
+  export type AssetAttentionReviewSignalOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "reviewId" | "category" | "signalCode" | "state" | "evidenceReferenceFingerprint" | "createdAt", ExtArgs["result"]["assetAttentionReviewSignal"]>
+  export type AssetAttentionReviewSignalInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    review?: boolean | AssetAttentionReviewDefaultArgs<ExtArgs>
+  }
+  export type AssetAttentionReviewSignalIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    review?: boolean | AssetAttentionReviewDefaultArgs<ExtArgs>
+  }
+  export type AssetAttentionReviewSignalIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    review?: boolean | AssetAttentionReviewDefaultArgs<ExtArgs>
+  }
+
+  export type $AssetAttentionReviewSignalPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "AssetAttentionReviewSignal"
+    objects: {
+      review: Prisma.$AssetAttentionReviewPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      reviewId: string
+      category: string
+      signalCode: string
+      state: string
+      evidenceReferenceFingerprint: string
+      createdAt: Date
+    }, ExtArgs["result"]["assetAttentionReviewSignal"]>
+    composites: {}
+  }
+
+  type AssetAttentionReviewSignalGetPayload<S extends boolean | null | undefined | AssetAttentionReviewSignalDefaultArgs> = $Result.GetResult<Prisma.$AssetAttentionReviewSignalPayload, S>
+
+  type AssetAttentionReviewSignalCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<AssetAttentionReviewSignalFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: AssetAttentionReviewSignalCountAggregateInputType | true
+    }
+
+  export interface AssetAttentionReviewSignalDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['AssetAttentionReviewSignal'], meta: { name: 'AssetAttentionReviewSignal' } }
+    /**
+     * Find zero or one AssetAttentionReviewSignal that matches the filter.
+     * @param {AssetAttentionReviewSignalFindUniqueArgs} args - Arguments to find a AssetAttentionReviewSignal
+     * @example
+     * // Get one AssetAttentionReviewSignal
+     * const assetAttentionReviewSignal = await prisma.assetAttentionReviewSignal.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends AssetAttentionReviewSignalFindUniqueArgs>(args: SelectSubset<T, AssetAttentionReviewSignalFindUniqueArgs<ExtArgs>>): Prisma__AssetAttentionReviewSignalClient<$Result.GetResult<Prisma.$AssetAttentionReviewSignalPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one AssetAttentionReviewSignal that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {AssetAttentionReviewSignalFindUniqueOrThrowArgs} args - Arguments to find a AssetAttentionReviewSignal
+     * @example
+     * // Get one AssetAttentionReviewSignal
+     * const assetAttentionReviewSignal = await prisma.assetAttentionReviewSignal.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends AssetAttentionReviewSignalFindUniqueOrThrowArgs>(args: SelectSubset<T, AssetAttentionReviewSignalFindUniqueOrThrowArgs<ExtArgs>>): Prisma__AssetAttentionReviewSignalClient<$Result.GetResult<Prisma.$AssetAttentionReviewSignalPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first AssetAttentionReviewSignal that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AssetAttentionReviewSignalFindFirstArgs} args - Arguments to find a AssetAttentionReviewSignal
+     * @example
+     * // Get one AssetAttentionReviewSignal
+     * const assetAttentionReviewSignal = await prisma.assetAttentionReviewSignal.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends AssetAttentionReviewSignalFindFirstArgs>(args?: SelectSubset<T, AssetAttentionReviewSignalFindFirstArgs<ExtArgs>>): Prisma__AssetAttentionReviewSignalClient<$Result.GetResult<Prisma.$AssetAttentionReviewSignalPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first AssetAttentionReviewSignal that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AssetAttentionReviewSignalFindFirstOrThrowArgs} args - Arguments to find a AssetAttentionReviewSignal
+     * @example
+     * // Get one AssetAttentionReviewSignal
+     * const assetAttentionReviewSignal = await prisma.assetAttentionReviewSignal.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends AssetAttentionReviewSignalFindFirstOrThrowArgs>(args?: SelectSubset<T, AssetAttentionReviewSignalFindFirstOrThrowArgs<ExtArgs>>): Prisma__AssetAttentionReviewSignalClient<$Result.GetResult<Prisma.$AssetAttentionReviewSignalPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more AssetAttentionReviewSignals that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AssetAttentionReviewSignalFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all AssetAttentionReviewSignals
+     * const assetAttentionReviewSignals = await prisma.assetAttentionReviewSignal.findMany()
+     * 
+     * // Get first 10 AssetAttentionReviewSignals
+     * const assetAttentionReviewSignals = await prisma.assetAttentionReviewSignal.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const assetAttentionReviewSignalWithIdOnly = await prisma.assetAttentionReviewSignal.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends AssetAttentionReviewSignalFindManyArgs>(args?: SelectSubset<T, AssetAttentionReviewSignalFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AssetAttentionReviewSignalPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a AssetAttentionReviewSignal.
+     * @param {AssetAttentionReviewSignalCreateArgs} args - Arguments to create a AssetAttentionReviewSignal.
+     * @example
+     * // Create one AssetAttentionReviewSignal
+     * const AssetAttentionReviewSignal = await prisma.assetAttentionReviewSignal.create({
+     *   data: {
+     *     // ... data to create a AssetAttentionReviewSignal
+     *   }
+     * })
+     * 
+     */
+    create<T extends AssetAttentionReviewSignalCreateArgs>(args: SelectSubset<T, AssetAttentionReviewSignalCreateArgs<ExtArgs>>): Prisma__AssetAttentionReviewSignalClient<$Result.GetResult<Prisma.$AssetAttentionReviewSignalPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many AssetAttentionReviewSignals.
+     * @param {AssetAttentionReviewSignalCreateManyArgs} args - Arguments to create many AssetAttentionReviewSignals.
+     * @example
+     * // Create many AssetAttentionReviewSignals
+     * const assetAttentionReviewSignal = await prisma.assetAttentionReviewSignal.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends AssetAttentionReviewSignalCreateManyArgs>(args?: SelectSubset<T, AssetAttentionReviewSignalCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many AssetAttentionReviewSignals and returns the data saved in the database.
+     * @param {AssetAttentionReviewSignalCreateManyAndReturnArgs} args - Arguments to create many AssetAttentionReviewSignals.
+     * @example
+     * // Create many AssetAttentionReviewSignals
+     * const assetAttentionReviewSignal = await prisma.assetAttentionReviewSignal.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many AssetAttentionReviewSignals and only return the `id`
+     * const assetAttentionReviewSignalWithIdOnly = await prisma.assetAttentionReviewSignal.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends AssetAttentionReviewSignalCreateManyAndReturnArgs>(args?: SelectSubset<T, AssetAttentionReviewSignalCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AssetAttentionReviewSignalPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a AssetAttentionReviewSignal.
+     * @param {AssetAttentionReviewSignalDeleteArgs} args - Arguments to delete one AssetAttentionReviewSignal.
+     * @example
+     * // Delete one AssetAttentionReviewSignal
+     * const AssetAttentionReviewSignal = await prisma.assetAttentionReviewSignal.delete({
+     *   where: {
+     *     // ... filter to delete one AssetAttentionReviewSignal
+     *   }
+     * })
+     * 
+     */
+    delete<T extends AssetAttentionReviewSignalDeleteArgs>(args: SelectSubset<T, AssetAttentionReviewSignalDeleteArgs<ExtArgs>>): Prisma__AssetAttentionReviewSignalClient<$Result.GetResult<Prisma.$AssetAttentionReviewSignalPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one AssetAttentionReviewSignal.
+     * @param {AssetAttentionReviewSignalUpdateArgs} args - Arguments to update one AssetAttentionReviewSignal.
+     * @example
+     * // Update one AssetAttentionReviewSignal
+     * const assetAttentionReviewSignal = await prisma.assetAttentionReviewSignal.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends AssetAttentionReviewSignalUpdateArgs>(args: SelectSubset<T, AssetAttentionReviewSignalUpdateArgs<ExtArgs>>): Prisma__AssetAttentionReviewSignalClient<$Result.GetResult<Prisma.$AssetAttentionReviewSignalPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more AssetAttentionReviewSignals.
+     * @param {AssetAttentionReviewSignalDeleteManyArgs} args - Arguments to filter AssetAttentionReviewSignals to delete.
+     * @example
+     * // Delete a few AssetAttentionReviewSignals
+     * const { count } = await prisma.assetAttentionReviewSignal.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends AssetAttentionReviewSignalDeleteManyArgs>(args?: SelectSubset<T, AssetAttentionReviewSignalDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more AssetAttentionReviewSignals.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AssetAttentionReviewSignalUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many AssetAttentionReviewSignals
+     * const assetAttentionReviewSignal = await prisma.assetAttentionReviewSignal.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends AssetAttentionReviewSignalUpdateManyArgs>(args: SelectSubset<T, AssetAttentionReviewSignalUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more AssetAttentionReviewSignals and returns the data updated in the database.
+     * @param {AssetAttentionReviewSignalUpdateManyAndReturnArgs} args - Arguments to update many AssetAttentionReviewSignals.
+     * @example
+     * // Update many AssetAttentionReviewSignals
+     * const assetAttentionReviewSignal = await prisma.assetAttentionReviewSignal.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more AssetAttentionReviewSignals and only return the `id`
+     * const assetAttentionReviewSignalWithIdOnly = await prisma.assetAttentionReviewSignal.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends AssetAttentionReviewSignalUpdateManyAndReturnArgs>(args: SelectSubset<T, AssetAttentionReviewSignalUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AssetAttentionReviewSignalPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one AssetAttentionReviewSignal.
+     * @param {AssetAttentionReviewSignalUpsertArgs} args - Arguments to update or create a AssetAttentionReviewSignal.
+     * @example
+     * // Update or create a AssetAttentionReviewSignal
+     * const assetAttentionReviewSignal = await prisma.assetAttentionReviewSignal.upsert({
+     *   create: {
+     *     // ... data to create a AssetAttentionReviewSignal
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the AssetAttentionReviewSignal we want to update
+     *   }
+     * })
+     */
+    upsert<T extends AssetAttentionReviewSignalUpsertArgs>(args: SelectSubset<T, AssetAttentionReviewSignalUpsertArgs<ExtArgs>>): Prisma__AssetAttentionReviewSignalClient<$Result.GetResult<Prisma.$AssetAttentionReviewSignalPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of AssetAttentionReviewSignals.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AssetAttentionReviewSignalCountArgs} args - Arguments to filter AssetAttentionReviewSignals to count.
+     * @example
+     * // Count the number of AssetAttentionReviewSignals
+     * const count = await prisma.assetAttentionReviewSignal.count({
+     *   where: {
+     *     // ... the filter for the AssetAttentionReviewSignals we want to count
+     *   }
+     * })
+    **/
+    count<T extends AssetAttentionReviewSignalCountArgs>(
+      args?: Subset<T, AssetAttentionReviewSignalCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], AssetAttentionReviewSignalCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a AssetAttentionReviewSignal.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AssetAttentionReviewSignalAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends AssetAttentionReviewSignalAggregateArgs>(args: Subset<T, AssetAttentionReviewSignalAggregateArgs>): Prisma.PrismaPromise<GetAssetAttentionReviewSignalAggregateType<T>>
+
+    /**
+     * Group by AssetAttentionReviewSignal.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AssetAttentionReviewSignalGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends AssetAttentionReviewSignalGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: AssetAttentionReviewSignalGroupByArgs['orderBy'] }
+        : { orderBy?: AssetAttentionReviewSignalGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, AssetAttentionReviewSignalGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetAssetAttentionReviewSignalGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the AssetAttentionReviewSignal model
+   */
+  readonly fields: AssetAttentionReviewSignalFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for AssetAttentionReviewSignal.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__AssetAttentionReviewSignalClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    review<T extends AssetAttentionReviewDefaultArgs<ExtArgs> = {}>(args?: Subset<T, AssetAttentionReviewDefaultArgs<ExtArgs>>): Prisma__AssetAttentionReviewClient<$Result.GetResult<Prisma.$AssetAttentionReviewPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the AssetAttentionReviewSignal model
+   */
+  interface AssetAttentionReviewSignalFieldRefs {
+    readonly id: FieldRef<"AssetAttentionReviewSignal", 'String'>
+    readonly reviewId: FieldRef<"AssetAttentionReviewSignal", 'String'>
+    readonly category: FieldRef<"AssetAttentionReviewSignal", 'String'>
+    readonly signalCode: FieldRef<"AssetAttentionReviewSignal", 'String'>
+    readonly state: FieldRef<"AssetAttentionReviewSignal", 'String'>
+    readonly evidenceReferenceFingerprint: FieldRef<"AssetAttentionReviewSignal", 'String'>
+    readonly createdAt: FieldRef<"AssetAttentionReviewSignal", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * AssetAttentionReviewSignal findUnique
+   */
+  export type AssetAttentionReviewSignalFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AssetAttentionReviewSignal
+     */
+    select?: AssetAttentionReviewSignalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AssetAttentionReviewSignal
+     */
+    omit?: AssetAttentionReviewSignalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AssetAttentionReviewSignalInclude<ExtArgs> | null
+    /**
+     * Filter, which AssetAttentionReviewSignal to fetch.
+     */
+    where: AssetAttentionReviewSignalWhereUniqueInput
+  }
+
+  /**
+   * AssetAttentionReviewSignal findUniqueOrThrow
+   */
+  export type AssetAttentionReviewSignalFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AssetAttentionReviewSignal
+     */
+    select?: AssetAttentionReviewSignalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AssetAttentionReviewSignal
+     */
+    omit?: AssetAttentionReviewSignalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AssetAttentionReviewSignalInclude<ExtArgs> | null
+    /**
+     * Filter, which AssetAttentionReviewSignal to fetch.
+     */
+    where: AssetAttentionReviewSignalWhereUniqueInput
+  }
+
+  /**
+   * AssetAttentionReviewSignal findFirst
+   */
+  export type AssetAttentionReviewSignalFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AssetAttentionReviewSignal
+     */
+    select?: AssetAttentionReviewSignalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AssetAttentionReviewSignal
+     */
+    omit?: AssetAttentionReviewSignalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AssetAttentionReviewSignalInclude<ExtArgs> | null
+    /**
+     * Filter, which AssetAttentionReviewSignal to fetch.
+     */
+    where?: AssetAttentionReviewSignalWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AssetAttentionReviewSignals to fetch.
+     */
+    orderBy?: AssetAttentionReviewSignalOrderByWithRelationInput | AssetAttentionReviewSignalOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for AssetAttentionReviewSignals.
+     */
+    cursor?: AssetAttentionReviewSignalWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AssetAttentionReviewSignals from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AssetAttentionReviewSignals.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of AssetAttentionReviewSignals.
+     */
+    distinct?: AssetAttentionReviewSignalScalarFieldEnum | AssetAttentionReviewSignalScalarFieldEnum[]
+  }
+
+  /**
+   * AssetAttentionReviewSignal findFirstOrThrow
+   */
+  export type AssetAttentionReviewSignalFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AssetAttentionReviewSignal
+     */
+    select?: AssetAttentionReviewSignalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AssetAttentionReviewSignal
+     */
+    omit?: AssetAttentionReviewSignalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AssetAttentionReviewSignalInclude<ExtArgs> | null
+    /**
+     * Filter, which AssetAttentionReviewSignal to fetch.
+     */
+    where?: AssetAttentionReviewSignalWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AssetAttentionReviewSignals to fetch.
+     */
+    orderBy?: AssetAttentionReviewSignalOrderByWithRelationInput | AssetAttentionReviewSignalOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for AssetAttentionReviewSignals.
+     */
+    cursor?: AssetAttentionReviewSignalWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AssetAttentionReviewSignals from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AssetAttentionReviewSignals.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of AssetAttentionReviewSignals.
+     */
+    distinct?: AssetAttentionReviewSignalScalarFieldEnum | AssetAttentionReviewSignalScalarFieldEnum[]
+  }
+
+  /**
+   * AssetAttentionReviewSignal findMany
+   */
+  export type AssetAttentionReviewSignalFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AssetAttentionReviewSignal
+     */
+    select?: AssetAttentionReviewSignalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AssetAttentionReviewSignal
+     */
+    omit?: AssetAttentionReviewSignalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AssetAttentionReviewSignalInclude<ExtArgs> | null
+    /**
+     * Filter, which AssetAttentionReviewSignals to fetch.
+     */
+    where?: AssetAttentionReviewSignalWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AssetAttentionReviewSignals to fetch.
+     */
+    orderBy?: AssetAttentionReviewSignalOrderByWithRelationInput | AssetAttentionReviewSignalOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing AssetAttentionReviewSignals.
+     */
+    cursor?: AssetAttentionReviewSignalWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AssetAttentionReviewSignals from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AssetAttentionReviewSignals.
+     */
+    skip?: number
+    distinct?: AssetAttentionReviewSignalScalarFieldEnum | AssetAttentionReviewSignalScalarFieldEnum[]
+  }
+
+  /**
+   * AssetAttentionReviewSignal create
+   */
+  export type AssetAttentionReviewSignalCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AssetAttentionReviewSignal
+     */
+    select?: AssetAttentionReviewSignalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AssetAttentionReviewSignal
+     */
+    omit?: AssetAttentionReviewSignalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AssetAttentionReviewSignalInclude<ExtArgs> | null
+    /**
+     * The data needed to create a AssetAttentionReviewSignal.
+     */
+    data: XOR<AssetAttentionReviewSignalCreateInput, AssetAttentionReviewSignalUncheckedCreateInput>
+  }
+
+  /**
+   * AssetAttentionReviewSignal createMany
+   */
+  export type AssetAttentionReviewSignalCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many AssetAttentionReviewSignals.
+     */
+    data: AssetAttentionReviewSignalCreateManyInput | AssetAttentionReviewSignalCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * AssetAttentionReviewSignal createManyAndReturn
+   */
+  export type AssetAttentionReviewSignalCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AssetAttentionReviewSignal
+     */
+    select?: AssetAttentionReviewSignalSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the AssetAttentionReviewSignal
+     */
+    omit?: AssetAttentionReviewSignalOmit<ExtArgs> | null
+    /**
+     * The data used to create many AssetAttentionReviewSignals.
+     */
+    data: AssetAttentionReviewSignalCreateManyInput | AssetAttentionReviewSignalCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AssetAttentionReviewSignalIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * AssetAttentionReviewSignal update
+   */
+  export type AssetAttentionReviewSignalUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AssetAttentionReviewSignal
+     */
+    select?: AssetAttentionReviewSignalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AssetAttentionReviewSignal
+     */
+    omit?: AssetAttentionReviewSignalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AssetAttentionReviewSignalInclude<ExtArgs> | null
+    /**
+     * The data needed to update a AssetAttentionReviewSignal.
+     */
+    data: XOR<AssetAttentionReviewSignalUpdateInput, AssetAttentionReviewSignalUncheckedUpdateInput>
+    /**
+     * Choose, which AssetAttentionReviewSignal to update.
+     */
+    where: AssetAttentionReviewSignalWhereUniqueInput
+  }
+
+  /**
+   * AssetAttentionReviewSignal updateMany
+   */
+  export type AssetAttentionReviewSignalUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update AssetAttentionReviewSignals.
+     */
+    data: XOR<AssetAttentionReviewSignalUpdateManyMutationInput, AssetAttentionReviewSignalUncheckedUpdateManyInput>
+    /**
+     * Filter which AssetAttentionReviewSignals to update
+     */
+    where?: AssetAttentionReviewSignalWhereInput
+    /**
+     * Limit how many AssetAttentionReviewSignals to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * AssetAttentionReviewSignal updateManyAndReturn
+   */
+  export type AssetAttentionReviewSignalUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AssetAttentionReviewSignal
+     */
+    select?: AssetAttentionReviewSignalSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the AssetAttentionReviewSignal
+     */
+    omit?: AssetAttentionReviewSignalOmit<ExtArgs> | null
+    /**
+     * The data used to update AssetAttentionReviewSignals.
+     */
+    data: XOR<AssetAttentionReviewSignalUpdateManyMutationInput, AssetAttentionReviewSignalUncheckedUpdateManyInput>
+    /**
+     * Filter which AssetAttentionReviewSignals to update
+     */
+    where?: AssetAttentionReviewSignalWhereInput
+    /**
+     * Limit how many AssetAttentionReviewSignals to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AssetAttentionReviewSignalIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * AssetAttentionReviewSignal upsert
+   */
+  export type AssetAttentionReviewSignalUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AssetAttentionReviewSignal
+     */
+    select?: AssetAttentionReviewSignalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AssetAttentionReviewSignal
+     */
+    omit?: AssetAttentionReviewSignalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AssetAttentionReviewSignalInclude<ExtArgs> | null
+    /**
+     * The filter to search for the AssetAttentionReviewSignal to update in case it exists.
+     */
+    where: AssetAttentionReviewSignalWhereUniqueInput
+    /**
+     * In case the AssetAttentionReviewSignal found by the `where` argument doesn't exist, create a new AssetAttentionReviewSignal with this data.
+     */
+    create: XOR<AssetAttentionReviewSignalCreateInput, AssetAttentionReviewSignalUncheckedCreateInput>
+    /**
+     * In case the AssetAttentionReviewSignal was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<AssetAttentionReviewSignalUpdateInput, AssetAttentionReviewSignalUncheckedUpdateInput>
+  }
+
+  /**
+   * AssetAttentionReviewSignal delete
+   */
+  export type AssetAttentionReviewSignalDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AssetAttentionReviewSignal
+     */
+    select?: AssetAttentionReviewSignalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AssetAttentionReviewSignal
+     */
+    omit?: AssetAttentionReviewSignalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AssetAttentionReviewSignalInclude<ExtArgs> | null
+    /**
+     * Filter which AssetAttentionReviewSignal to delete.
+     */
+    where: AssetAttentionReviewSignalWhereUniqueInput
+  }
+
+  /**
+   * AssetAttentionReviewSignal deleteMany
+   */
+  export type AssetAttentionReviewSignalDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which AssetAttentionReviewSignals to delete
+     */
+    where?: AssetAttentionReviewSignalWhereInput
+    /**
+     * Limit how many AssetAttentionReviewSignals to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * AssetAttentionReviewSignal without action
+   */
+  export type AssetAttentionReviewSignalDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AssetAttentionReviewSignal
+     */
+    select?: AssetAttentionReviewSignalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AssetAttentionReviewSignal
+     */
+    omit?: AssetAttentionReviewSignalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AssetAttentionReviewSignalInclude<ExtArgs> | null
   }
 
 
@@ -60670,6 +63412,41 @@ export namespace Prisma {
   export type CaseResourceEstimateScalarFieldEnum = (typeof CaseResourceEstimateScalarFieldEnum)[keyof typeof CaseResourceEstimateScalarFieldEnum]
 
 
+  export const AssetAttentionReviewScalarFieldEnum: {
+    id: 'id',
+    assetId: 'assetId',
+    caseId: 'caseId',
+    reviewerId: 'reviewerId',
+    reviewerRole: 'reviewerRole',
+    departmentId: 'departmentId',
+    jurisdictionId: 'jurisdictionId',
+    disposition: 'disposition',
+    rationale: 'rationale',
+    attentionContractVersion: 'attentionContractVersion',
+    attentionCalculationVersion: 'attentionCalculationVersion',
+    projectionAsOf: 'projectionAsOf',
+    sourceSetFingerprint: 'sourceSetFingerprint',
+    clientRequestId: 'clientRequestId',
+    supersedesReviewId: 'supersedesReviewId',
+    createdAt: 'createdAt'
+  };
+
+  export type AssetAttentionReviewScalarFieldEnum = (typeof AssetAttentionReviewScalarFieldEnum)[keyof typeof AssetAttentionReviewScalarFieldEnum]
+
+
+  export const AssetAttentionReviewSignalScalarFieldEnum: {
+    id: 'id',
+    reviewId: 'reviewId',
+    category: 'category',
+    signalCode: 'signalCode',
+    state: 'state',
+    evidenceReferenceFingerprint: 'evidenceReferenceFingerprint',
+    createdAt: 'createdAt'
+  };
+
+  export type AssetAttentionReviewSignalScalarFieldEnum = (typeof AssetAttentionReviewSignalScalarFieldEnum)[keyof typeof AssetAttentionReviewSignalScalarFieldEnum]
+
+
   export const PortfolioScenarioScalarFieldEnum: {
     id: 'id',
     scenarioVersion: 'scenarioVersion',
@@ -61597,6 +64374,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'AssetAttentionDisposition'
+   */
+  export type EnumAssetAttentionDispositionFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AssetAttentionDisposition'>
+    
+
+
+  /**
+   * Reference to a field of type 'AssetAttentionDisposition[]'
+   */
+  export type ListEnumAssetAttentionDispositionFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AssetAttentionDisposition[]'>
+    
+
+
+  /**
    * Reference to a field of type 'ObservationSourceType'
    */
   export type EnumObservationSourceTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ObservationSourceType'>
@@ -62131,6 +64922,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationListRelationFilter
     decidedPredictiveApprovals?: PredictiveModelApprovalListRelationFilter
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventListRelationFilter
+    assetAttentionReviews?: AssetAttentionReviewListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -62189,6 +64981,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationOrderByRelationAggregateInput
     decidedPredictiveApprovals?: PredictiveModelApprovalOrderByRelationAggregateInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventOrderByRelationAggregateInput
+    assetAttentionReviews?: AssetAttentionReviewOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -62250,6 +65043,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationListRelationFilter
     decidedPredictiveApprovals?: PredictiveModelApprovalListRelationFilter
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventListRelationFilter
+    assetAttentionReviews?: AssetAttentionReviewListRelationFilter
   }, "id" | "employeeCode" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -62310,6 +65104,7 @@ export namespace Prisma {
     publicReports?: PublicReportListRelationFilter
     suggestedForTriageAnalyses?: PublicReportTriageAnalysisListRelationFilter
     externalObservations?: ExternalObservationListRelationFilter
+    attentionReviews?: AssetAttentionReviewListRelationFilter
   }
 
   export type AssetOrderByWithRelationInput = {
@@ -62331,6 +65126,7 @@ export namespace Prisma {
     publicReports?: PublicReportOrderByRelationAggregateInput
     suggestedForTriageAnalyses?: PublicReportTriageAnalysisOrderByRelationAggregateInput
     externalObservations?: ExternalObservationOrderByRelationAggregateInput
+    attentionReviews?: AssetAttentionReviewOrderByRelationAggregateInput
   }
 
   export type AssetWhereUniqueInput = Prisma.AtLeast<{
@@ -62355,6 +65151,7 @@ export namespace Prisma {
     publicReports?: PublicReportListRelationFilter
     suggestedForTriageAnalyses?: PublicReportTriageAnalysisListRelationFilter
     externalObservations?: ExternalObservationListRelationFilter
+    attentionReviews?: AssetAttentionReviewListRelationFilter
   }, "id" | "assetCode">
 
   export type AssetOrderByWithAggregationInput = {
@@ -63292,6 +66089,7 @@ export namespace Prisma {
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationListRelationFilter
     externalObservations?: ExternalObservationListRelationFilter
     resourceEstimates?: CaseResourceEstimateListRelationFilter
+    attentionReviews?: AssetAttentionReviewListRelationFilter
   }
 
   export type CaseOrderByWithRelationInput = {
@@ -63320,6 +66118,7 @@ export namespace Prisma {
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationOrderByRelationAggregateInput
     externalObservations?: ExternalObservationOrderByRelationAggregateInput
     resourceEstimates?: CaseResourceEstimateOrderByRelationAggregateInput
+    attentionReviews?: AssetAttentionReviewOrderByRelationAggregateInput
   }
 
   export type CaseWhereUniqueInput = Prisma.AtLeast<{
@@ -63351,6 +66150,7 @@ export namespace Prisma {
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationListRelationFilter
     externalObservations?: ExternalObservationListRelationFilter
     resourceEstimates?: CaseResourceEstimateListRelationFilter
+    attentionReviews?: AssetAttentionReviewListRelationFilter
   }, "id" | "caseNumber">
 
   export type CaseOrderByWithAggregationInput = {
@@ -63488,6 +66288,198 @@ export namespace Prisma {
     preparedById?: StringWithAggregatesFilter<"CaseResourceEstimate"> | string
     preparedAt?: DateTimeWithAggregatesFilter<"CaseResourceEstimate"> | Date | string
     createdAt?: DateTimeWithAggregatesFilter<"CaseResourceEstimate"> | Date | string
+  }
+
+  export type AssetAttentionReviewWhereInput = {
+    AND?: AssetAttentionReviewWhereInput | AssetAttentionReviewWhereInput[]
+    OR?: AssetAttentionReviewWhereInput[]
+    NOT?: AssetAttentionReviewWhereInput | AssetAttentionReviewWhereInput[]
+    id?: StringFilter<"AssetAttentionReview"> | string
+    assetId?: StringFilter<"AssetAttentionReview"> | string
+    caseId?: StringNullableFilter<"AssetAttentionReview"> | string | null
+    reviewerId?: StringFilter<"AssetAttentionReview"> | string
+    reviewerRole?: EnumSystemRoleFilter<"AssetAttentionReview"> | $Enums.SystemRole
+    departmentId?: StringFilter<"AssetAttentionReview"> | string
+    jurisdictionId?: StringFilter<"AssetAttentionReview"> | string
+    disposition?: EnumAssetAttentionDispositionFilter<"AssetAttentionReview"> | $Enums.AssetAttentionDisposition
+    rationale?: StringFilter<"AssetAttentionReview"> | string
+    attentionContractVersion?: StringFilter<"AssetAttentionReview"> | string
+    attentionCalculationVersion?: StringFilter<"AssetAttentionReview"> | string
+    projectionAsOf?: DateTimeFilter<"AssetAttentionReview"> | Date | string
+    sourceSetFingerprint?: StringFilter<"AssetAttentionReview"> | string
+    clientRequestId?: StringFilter<"AssetAttentionReview"> | string
+    supersedesReviewId?: StringNullableFilter<"AssetAttentionReview"> | string | null
+    createdAt?: DateTimeFilter<"AssetAttentionReview"> | Date | string
+    asset?: XOR<AssetScalarRelationFilter, AssetWhereInput>
+    case?: XOR<CaseNullableScalarRelationFilter, CaseWhereInput> | null
+    reviewer?: XOR<UserScalarRelationFilter, UserWhereInput>
+    supersedesReview?: XOR<AssetAttentionReviewNullableScalarRelationFilter, AssetAttentionReviewWhereInput> | null
+    supersededBy?: XOR<AssetAttentionReviewNullableScalarRelationFilter, AssetAttentionReviewWhereInput> | null
+    selectedSignals?: AssetAttentionReviewSignalListRelationFilter
+  }
+
+  export type AssetAttentionReviewOrderByWithRelationInput = {
+    id?: SortOrder
+    assetId?: SortOrder
+    caseId?: SortOrderInput | SortOrder
+    reviewerId?: SortOrder
+    reviewerRole?: SortOrder
+    departmentId?: SortOrder
+    jurisdictionId?: SortOrder
+    disposition?: SortOrder
+    rationale?: SortOrder
+    attentionContractVersion?: SortOrder
+    attentionCalculationVersion?: SortOrder
+    projectionAsOf?: SortOrder
+    sourceSetFingerprint?: SortOrder
+    clientRequestId?: SortOrder
+    supersedesReviewId?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    asset?: AssetOrderByWithRelationInput
+    case?: CaseOrderByWithRelationInput
+    reviewer?: UserOrderByWithRelationInput
+    supersedesReview?: AssetAttentionReviewOrderByWithRelationInput
+    supersededBy?: AssetAttentionReviewOrderByWithRelationInput
+    selectedSignals?: AssetAttentionReviewSignalOrderByRelationAggregateInput
+  }
+
+  export type AssetAttentionReviewWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    supersedesReviewId?: string
+    reviewerId_clientRequestId?: AssetAttentionReviewReviewerIdClientRequestIdCompoundUniqueInput
+    AND?: AssetAttentionReviewWhereInput | AssetAttentionReviewWhereInput[]
+    OR?: AssetAttentionReviewWhereInput[]
+    NOT?: AssetAttentionReviewWhereInput | AssetAttentionReviewWhereInput[]
+    assetId?: StringFilter<"AssetAttentionReview"> | string
+    caseId?: StringNullableFilter<"AssetAttentionReview"> | string | null
+    reviewerId?: StringFilter<"AssetAttentionReview"> | string
+    reviewerRole?: EnumSystemRoleFilter<"AssetAttentionReview"> | $Enums.SystemRole
+    departmentId?: StringFilter<"AssetAttentionReview"> | string
+    jurisdictionId?: StringFilter<"AssetAttentionReview"> | string
+    disposition?: EnumAssetAttentionDispositionFilter<"AssetAttentionReview"> | $Enums.AssetAttentionDisposition
+    rationale?: StringFilter<"AssetAttentionReview"> | string
+    attentionContractVersion?: StringFilter<"AssetAttentionReview"> | string
+    attentionCalculationVersion?: StringFilter<"AssetAttentionReview"> | string
+    projectionAsOf?: DateTimeFilter<"AssetAttentionReview"> | Date | string
+    sourceSetFingerprint?: StringFilter<"AssetAttentionReview"> | string
+    clientRequestId?: StringFilter<"AssetAttentionReview"> | string
+    createdAt?: DateTimeFilter<"AssetAttentionReview"> | Date | string
+    asset?: XOR<AssetScalarRelationFilter, AssetWhereInput>
+    case?: XOR<CaseNullableScalarRelationFilter, CaseWhereInput> | null
+    reviewer?: XOR<UserScalarRelationFilter, UserWhereInput>
+    supersedesReview?: XOR<AssetAttentionReviewNullableScalarRelationFilter, AssetAttentionReviewWhereInput> | null
+    supersededBy?: XOR<AssetAttentionReviewNullableScalarRelationFilter, AssetAttentionReviewWhereInput> | null
+    selectedSignals?: AssetAttentionReviewSignalListRelationFilter
+  }, "id" | "supersedesReviewId" | "reviewerId_clientRequestId">
+
+  export type AssetAttentionReviewOrderByWithAggregationInput = {
+    id?: SortOrder
+    assetId?: SortOrder
+    caseId?: SortOrderInput | SortOrder
+    reviewerId?: SortOrder
+    reviewerRole?: SortOrder
+    departmentId?: SortOrder
+    jurisdictionId?: SortOrder
+    disposition?: SortOrder
+    rationale?: SortOrder
+    attentionContractVersion?: SortOrder
+    attentionCalculationVersion?: SortOrder
+    projectionAsOf?: SortOrder
+    sourceSetFingerprint?: SortOrder
+    clientRequestId?: SortOrder
+    supersedesReviewId?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    _count?: AssetAttentionReviewCountOrderByAggregateInput
+    _max?: AssetAttentionReviewMaxOrderByAggregateInput
+    _min?: AssetAttentionReviewMinOrderByAggregateInput
+  }
+
+  export type AssetAttentionReviewScalarWhereWithAggregatesInput = {
+    AND?: AssetAttentionReviewScalarWhereWithAggregatesInput | AssetAttentionReviewScalarWhereWithAggregatesInput[]
+    OR?: AssetAttentionReviewScalarWhereWithAggregatesInput[]
+    NOT?: AssetAttentionReviewScalarWhereWithAggregatesInput | AssetAttentionReviewScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"AssetAttentionReview"> | string
+    assetId?: StringWithAggregatesFilter<"AssetAttentionReview"> | string
+    caseId?: StringNullableWithAggregatesFilter<"AssetAttentionReview"> | string | null
+    reviewerId?: StringWithAggregatesFilter<"AssetAttentionReview"> | string
+    reviewerRole?: EnumSystemRoleWithAggregatesFilter<"AssetAttentionReview"> | $Enums.SystemRole
+    departmentId?: StringWithAggregatesFilter<"AssetAttentionReview"> | string
+    jurisdictionId?: StringWithAggregatesFilter<"AssetAttentionReview"> | string
+    disposition?: EnumAssetAttentionDispositionWithAggregatesFilter<"AssetAttentionReview"> | $Enums.AssetAttentionDisposition
+    rationale?: StringWithAggregatesFilter<"AssetAttentionReview"> | string
+    attentionContractVersion?: StringWithAggregatesFilter<"AssetAttentionReview"> | string
+    attentionCalculationVersion?: StringWithAggregatesFilter<"AssetAttentionReview"> | string
+    projectionAsOf?: DateTimeWithAggregatesFilter<"AssetAttentionReview"> | Date | string
+    sourceSetFingerprint?: StringWithAggregatesFilter<"AssetAttentionReview"> | string
+    clientRequestId?: StringWithAggregatesFilter<"AssetAttentionReview"> | string
+    supersedesReviewId?: StringNullableWithAggregatesFilter<"AssetAttentionReview"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"AssetAttentionReview"> | Date | string
+  }
+
+  export type AssetAttentionReviewSignalWhereInput = {
+    AND?: AssetAttentionReviewSignalWhereInput | AssetAttentionReviewSignalWhereInput[]
+    OR?: AssetAttentionReviewSignalWhereInput[]
+    NOT?: AssetAttentionReviewSignalWhereInput | AssetAttentionReviewSignalWhereInput[]
+    id?: StringFilter<"AssetAttentionReviewSignal"> | string
+    reviewId?: StringFilter<"AssetAttentionReviewSignal"> | string
+    category?: StringFilter<"AssetAttentionReviewSignal"> | string
+    signalCode?: StringFilter<"AssetAttentionReviewSignal"> | string
+    state?: StringFilter<"AssetAttentionReviewSignal"> | string
+    evidenceReferenceFingerprint?: StringFilter<"AssetAttentionReviewSignal"> | string
+    createdAt?: DateTimeFilter<"AssetAttentionReviewSignal"> | Date | string
+    review?: XOR<AssetAttentionReviewScalarRelationFilter, AssetAttentionReviewWhereInput>
+  }
+
+  export type AssetAttentionReviewSignalOrderByWithRelationInput = {
+    id?: SortOrder
+    reviewId?: SortOrder
+    category?: SortOrder
+    signalCode?: SortOrder
+    state?: SortOrder
+    evidenceReferenceFingerprint?: SortOrder
+    createdAt?: SortOrder
+    review?: AssetAttentionReviewOrderByWithRelationInput
+  }
+
+  export type AssetAttentionReviewSignalWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    reviewId_category_signalCode_state_evidenceReferenceFingerprint?: AssetAttentionReviewSignalReviewIdCategorySignalCodeStateEvidenceReferenceFingerprintCompoundUniqueInput
+    AND?: AssetAttentionReviewSignalWhereInput | AssetAttentionReviewSignalWhereInput[]
+    OR?: AssetAttentionReviewSignalWhereInput[]
+    NOT?: AssetAttentionReviewSignalWhereInput | AssetAttentionReviewSignalWhereInput[]
+    reviewId?: StringFilter<"AssetAttentionReviewSignal"> | string
+    category?: StringFilter<"AssetAttentionReviewSignal"> | string
+    signalCode?: StringFilter<"AssetAttentionReviewSignal"> | string
+    state?: StringFilter<"AssetAttentionReviewSignal"> | string
+    evidenceReferenceFingerprint?: StringFilter<"AssetAttentionReviewSignal"> | string
+    createdAt?: DateTimeFilter<"AssetAttentionReviewSignal"> | Date | string
+    review?: XOR<AssetAttentionReviewScalarRelationFilter, AssetAttentionReviewWhereInput>
+  }, "id" | "reviewId_category_signalCode_state_evidenceReferenceFingerprint">
+
+  export type AssetAttentionReviewSignalOrderByWithAggregationInput = {
+    id?: SortOrder
+    reviewId?: SortOrder
+    category?: SortOrder
+    signalCode?: SortOrder
+    state?: SortOrder
+    evidenceReferenceFingerprint?: SortOrder
+    createdAt?: SortOrder
+    _count?: AssetAttentionReviewSignalCountOrderByAggregateInput
+    _max?: AssetAttentionReviewSignalMaxOrderByAggregateInput
+    _min?: AssetAttentionReviewSignalMinOrderByAggregateInput
+  }
+
+  export type AssetAttentionReviewSignalScalarWhereWithAggregatesInput = {
+    AND?: AssetAttentionReviewSignalScalarWhereWithAggregatesInput | AssetAttentionReviewSignalScalarWhereWithAggregatesInput[]
+    OR?: AssetAttentionReviewSignalScalarWhereWithAggregatesInput[]
+    NOT?: AssetAttentionReviewSignalScalarWhereWithAggregatesInput | AssetAttentionReviewSignalScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"AssetAttentionReviewSignal"> | string
+    reviewId?: StringWithAggregatesFilter<"AssetAttentionReviewSignal"> | string
+    category?: StringWithAggregatesFilter<"AssetAttentionReviewSignal"> | string
+    signalCode?: StringWithAggregatesFilter<"AssetAttentionReviewSignal"> | string
+    state?: StringWithAggregatesFilter<"AssetAttentionReviewSignal"> | string
+    evidenceReferenceFingerprint?: StringWithAggregatesFilter<"AssetAttentionReviewSignal"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"AssetAttentionReviewSignal"> | Date | string
   }
 
   export type PortfolioScenarioWhereInput = {
@@ -67050,6 +70042,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationCreateNestedManyWithoutRecordedByInput
     decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
+    assetAttentionReviews?: AssetAttentionReviewCreateNestedManyWithoutReviewerInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -67106,6 +70099,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedCreateNestedManyWithoutRecordedByInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
+    assetAttentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutReviewerInput
   }
 
   export type UserUpdateInput = {
@@ -67162,6 +70156,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUpdateManyWithoutRecordedByNestedInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
+    assetAttentionReviews?: AssetAttentionReviewUpdateManyWithoutReviewerNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -67218,6 +70213,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedUpdateManyWithoutRecordedByNestedInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
+    assetAttentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutReviewerNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -67280,6 +70276,7 @@ export namespace Prisma {
     publicReports?: PublicReportCreateNestedManyWithoutAssetInput
     suggestedForTriageAnalyses?: PublicReportTriageAnalysisCreateNestedManyWithoutPossibleAssetInput
     externalObservations?: ExternalObservationCreateNestedManyWithoutAssetInput
+    attentionReviews?: AssetAttentionReviewCreateNestedManyWithoutAssetInput
   }
 
   export type AssetUncheckedCreateInput = {
@@ -67299,6 +70296,7 @@ export namespace Prisma {
     publicReports?: PublicReportUncheckedCreateNestedManyWithoutAssetInput
     suggestedForTriageAnalyses?: PublicReportTriageAnalysisUncheckedCreateNestedManyWithoutPossibleAssetInput
     externalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutAssetInput
+    attentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutAssetInput
   }
 
   export type AssetUpdateInput = {
@@ -67318,6 +70316,7 @@ export namespace Prisma {
     publicReports?: PublicReportUpdateManyWithoutAssetNestedInput
     suggestedForTriageAnalyses?: PublicReportTriageAnalysisUpdateManyWithoutPossibleAssetNestedInput
     externalObservations?: ExternalObservationUpdateManyWithoutAssetNestedInput
+    attentionReviews?: AssetAttentionReviewUpdateManyWithoutAssetNestedInput
   }
 
   export type AssetUncheckedUpdateInput = {
@@ -67337,6 +70336,7 @@ export namespace Prisma {
     publicReports?: PublicReportUncheckedUpdateManyWithoutAssetNestedInput
     suggestedForTriageAnalyses?: PublicReportTriageAnalysisUncheckedUpdateManyWithoutPossibleAssetNestedInput
     externalObservations?: ExternalObservationUncheckedUpdateManyWithoutAssetNestedInput
+    attentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutAssetNestedInput
   }
 
   export type AssetCreateManyInput = {
@@ -68341,6 +71341,7 @@ export namespace Prisma {
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationCreateNestedManyWithoutCaseInput
     externalObservations?: ExternalObservationCreateNestedManyWithoutCaseInput
     resourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutCaseInput
+    attentionReviews?: AssetAttentionReviewCreateNestedManyWithoutCaseInput
   }
 
   export type CaseUncheckedCreateInput = {
@@ -68368,6 +71369,7 @@ export namespace Prisma {
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUncheckedCreateNestedManyWithoutCaseInput
     externalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutCaseInput
     resourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutCaseInput
+    attentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutCaseInput
   }
 
   export type CaseUpdateInput = {
@@ -68395,6 +71397,7 @@ export namespace Prisma {
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUpdateManyWithoutCaseNestedInput
     externalObservations?: ExternalObservationUpdateManyWithoutCaseNestedInput
     resourceEstimates?: CaseResourceEstimateUpdateManyWithoutCaseNestedInput
+    attentionReviews?: AssetAttentionReviewUpdateManyWithoutCaseNestedInput
   }
 
   export type CaseUncheckedUpdateInput = {
@@ -68422,6 +71425,7 @@ export namespace Prisma {
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUncheckedUpdateManyWithoutCaseNestedInput
     externalObservations?: ExternalObservationUncheckedUpdateManyWithoutCaseNestedInput
     resourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutCaseNestedInput
+    attentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutCaseNestedInput
   }
 
   export type CaseCreateManyInput = {
@@ -68575,6 +71579,212 @@ export namespace Prisma {
     sourceReference?: StringFieldUpdateOperationsInput | string
     preparedById?: StringFieldUpdateOperationsInput | string
     preparedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AssetAttentionReviewCreateInput = {
+    id?: string
+    reviewerRole: $Enums.SystemRole
+    departmentId: string
+    jurisdictionId: string
+    disposition: $Enums.AssetAttentionDisposition
+    rationale: string
+    attentionContractVersion: string
+    attentionCalculationVersion: string
+    projectionAsOf: Date | string
+    sourceSetFingerprint: string
+    clientRequestId: string
+    createdAt?: Date | string
+    asset: AssetCreateNestedOneWithoutAttentionReviewsInput
+    case?: CaseCreateNestedOneWithoutAttentionReviewsInput
+    reviewer: UserCreateNestedOneWithoutAssetAttentionReviewsInput
+    supersedesReview?: AssetAttentionReviewCreateNestedOneWithoutSupersededByInput
+    supersededBy?: AssetAttentionReviewCreateNestedOneWithoutSupersedesReviewInput
+    selectedSignals?: AssetAttentionReviewSignalCreateNestedManyWithoutReviewInput
+  }
+
+  export type AssetAttentionReviewUncheckedCreateInput = {
+    id?: string
+    assetId: string
+    caseId?: string | null
+    reviewerId: string
+    reviewerRole: $Enums.SystemRole
+    departmentId: string
+    jurisdictionId: string
+    disposition: $Enums.AssetAttentionDisposition
+    rationale: string
+    attentionContractVersion: string
+    attentionCalculationVersion: string
+    projectionAsOf: Date | string
+    sourceSetFingerprint: string
+    clientRequestId: string
+    supersedesReviewId?: string | null
+    createdAt?: Date | string
+    supersededBy?: AssetAttentionReviewUncheckedCreateNestedOneWithoutSupersedesReviewInput
+    selectedSignals?: AssetAttentionReviewSignalUncheckedCreateNestedManyWithoutReviewInput
+  }
+
+  export type AssetAttentionReviewUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reviewerRole?: EnumSystemRoleFieldUpdateOperationsInput | $Enums.SystemRole
+    departmentId?: StringFieldUpdateOperationsInput | string
+    jurisdictionId?: StringFieldUpdateOperationsInput | string
+    disposition?: EnumAssetAttentionDispositionFieldUpdateOperationsInput | $Enums.AssetAttentionDisposition
+    rationale?: StringFieldUpdateOperationsInput | string
+    attentionContractVersion?: StringFieldUpdateOperationsInput | string
+    attentionCalculationVersion?: StringFieldUpdateOperationsInput | string
+    projectionAsOf?: DateTimeFieldUpdateOperationsInput | Date | string
+    sourceSetFingerprint?: StringFieldUpdateOperationsInput | string
+    clientRequestId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    asset?: AssetUpdateOneRequiredWithoutAttentionReviewsNestedInput
+    case?: CaseUpdateOneWithoutAttentionReviewsNestedInput
+    reviewer?: UserUpdateOneRequiredWithoutAssetAttentionReviewsNestedInput
+    supersedesReview?: AssetAttentionReviewUpdateOneWithoutSupersededByNestedInput
+    supersededBy?: AssetAttentionReviewUpdateOneWithoutSupersedesReviewNestedInput
+    selectedSignals?: AssetAttentionReviewSignalUpdateManyWithoutReviewNestedInput
+  }
+
+  export type AssetAttentionReviewUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    assetId?: StringFieldUpdateOperationsInput | string
+    caseId?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewerId?: StringFieldUpdateOperationsInput | string
+    reviewerRole?: EnumSystemRoleFieldUpdateOperationsInput | $Enums.SystemRole
+    departmentId?: StringFieldUpdateOperationsInput | string
+    jurisdictionId?: StringFieldUpdateOperationsInput | string
+    disposition?: EnumAssetAttentionDispositionFieldUpdateOperationsInput | $Enums.AssetAttentionDisposition
+    rationale?: StringFieldUpdateOperationsInput | string
+    attentionContractVersion?: StringFieldUpdateOperationsInput | string
+    attentionCalculationVersion?: StringFieldUpdateOperationsInput | string
+    projectionAsOf?: DateTimeFieldUpdateOperationsInput | Date | string
+    sourceSetFingerprint?: StringFieldUpdateOperationsInput | string
+    clientRequestId?: StringFieldUpdateOperationsInput | string
+    supersedesReviewId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    supersededBy?: AssetAttentionReviewUncheckedUpdateOneWithoutSupersedesReviewNestedInput
+    selectedSignals?: AssetAttentionReviewSignalUncheckedUpdateManyWithoutReviewNestedInput
+  }
+
+  export type AssetAttentionReviewCreateManyInput = {
+    id?: string
+    assetId: string
+    caseId?: string | null
+    reviewerId: string
+    reviewerRole: $Enums.SystemRole
+    departmentId: string
+    jurisdictionId: string
+    disposition: $Enums.AssetAttentionDisposition
+    rationale: string
+    attentionContractVersion: string
+    attentionCalculationVersion: string
+    projectionAsOf: Date | string
+    sourceSetFingerprint: string
+    clientRequestId: string
+    supersedesReviewId?: string | null
+    createdAt?: Date | string
+  }
+
+  export type AssetAttentionReviewUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reviewerRole?: EnumSystemRoleFieldUpdateOperationsInput | $Enums.SystemRole
+    departmentId?: StringFieldUpdateOperationsInput | string
+    jurisdictionId?: StringFieldUpdateOperationsInput | string
+    disposition?: EnumAssetAttentionDispositionFieldUpdateOperationsInput | $Enums.AssetAttentionDisposition
+    rationale?: StringFieldUpdateOperationsInput | string
+    attentionContractVersion?: StringFieldUpdateOperationsInput | string
+    attentionCalculationVersion?: StringFieldUpdateOperationsInput | string
+    projectionAsOf?: DateTimeFieldUpdateOperationsInput | Date | string
+    sourceSetFingerprint?: StringFieldUpdateOperationsInput | string
+    clientRequestId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AssetAttentionReviewUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    assetId?: StringFieldUpdateOperationsInput | string
+    caseId?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewerId?: StringFieldUpdateOperationsInput | string
+    reviewerRole?: EnumSystemRoleFieldUpdateOperationsInput | $Enums.SystemRole
+    departmentId?: StringFieldUpdateOperationsInput | string
+    jurisdictionId?: StringFieldUpdateOperationsInput | string
+    disposition?: EnumAssetAttentionDispositionFieldUpdateOperationsInput | $Enums.AssetAttentionDisposition
+    rationale?: StringFieldUpdateOperationsInput | string
+    attentionContractVersion?: StringFieldUpdateOperationsInput | string
+    attentionCalculationVersion?: StringFieldUpdateOperationsInput | string
+    projectionAsOf?: DateTimeFieldUpdateOperationsInput | Date | string
+    sourceSetFingerprint?: StringFieldUpdateOperationsInput | string
+    clientRequestId?: StringFieldUpdateOperationsInput | string
+    supersedesReviewId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AssetAttentionReviewSignalCreateInput = {
+    id?: string
+    category: string
+    signalCode: string
+    state: string
+    evidenceReferenceFingerprint: string
+    createdAt?: Date | string
+    review: AssetAttentionReviewCreateNestedOneWithoutSelectedSignalsInput
+  }
+
+  export type AssetAttentionReviewSignalUncheckedCreateInput = {
+    id?: string
+    reviewId: string
+    category: string
+    signalCode: string
+    state: string
+    evidenceReferenceFingerprint: string
+    createdAt?: Date | string
+  }
+
+  export type AssetAttentionReviewSignalUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    category?: StringFieldUpdateOperationsInput | string
+    signalCode?: StringFieldUpdateOperationsInput | string
+    state?: StringFieldUpdateOperationsInput | string
+    evidenceReferenceFingerprint?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    review?: AssetAttentionReviewUpdateOneRequiredWithoutSelectedSignalsNestedInput
+  }
+
+  export type AssetAttentionReviewSignalUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reviewId?: StringFieldUpdateOperationsInput | string
+    category?: StringFieldUpdateOperationsInput | string
+    signalCode?: StringFieldUpdateOperationsInput | string
+    state?: StringFieldUpdateOperationsInput | string
+    evidenceReferenceFingerprint?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AssetAttentionReviewSignalCreateManyInput = {
+    id?: string
+    reviewId: string
+    category: string
+    signalCode: string
+    state: string
+    evidenceReferenceFingerprint: string
+    createdAt?: Date | string
+  }
+
+  export type AssetAttentionReviewSignalUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    category?: StringFieldUpdateOperationsInput | string
+    signalCode?: StringFieldUpdateOperationsInput | string
+    state?: StringFieldUpdateOperationsInput | string
+    evidenceReferenceFingerprint?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AssetAttentionReviewSignalUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reviewId?: StringFieldUpdateOperationsInput | string
+    category?: StringFieldUpdateOperationsInput | string
+    signalCode?: StringFieldUpdateOperationsInput | string
+    state?: StringFieldUpdateOperationsInput | string
+    evidenceReferenceFingerprint?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -72590,6 +75800,12 @@ export namespace Prisma {
     none?: PredictiveModelLifecycleEventWhereInput
   }
 
+  export type AssetAttentionReviewListRelationFilter = {
+    every?: AssetAttentionReviewWhereInput
+    some?: AssetAttentionReviewWhereInput
+    none?: AssetAttentionReviewWhereInput
+  }
+
   export type InspectionOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -72663,6 +75879,10 @@ export namespace Prisma {
   }
 
   export type PredictiveModelLifecycleEventOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type AssetAttentionReviewOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -73930,6 +77150,143 @@ export namespace Prisma {
     _sum?: NestedBigIntFilter<$PrismaModel>
     _min?: NestedBigIntFilter<$PrismaModel>
     _max?: NestedBigIntFilter<$PrismaModel>
+  }
+
+  export type EnumAssetAttentionDispositionFilter<$PrismaModel = never> = {
+    equals?: $Enums.AssetAttentionDisposition | EnumAssetAttentionDispositionFieldRefInput<$PrismaModel>
+    in?: $Enums.AssetAttentionDisposition[] | ListEnumAssetAttentionDispositionFieldRefInput<$PrismaModel>
+    notIn?: $Enums.AssetAttentionDisposition[] | ListEnumAssetAttentionDispositionFieldRefInput<$PrismaModel>
+    not?: NestedEnumAssetAttentionDispositionFilter<$PrismaModel> | $Enums.AssetAttentionDisposition
+  }
+
+  export type AssetAttentionReviewNullableScalarRelationFilter = {
+    is?: AssetAttentionReviewWhereInput | null
+    isNot?: AssetAttentionReviewWhereInput | null
+  }
+
+  export type AssetAttentionReviewSignalListRelationFilter = {
+    every?: AssetAttentionReviewSignalWhereInput
+    some?: AssetAttentionReviewSignalWhereInput
+    none?: AssetAttentionReviewSignalWhereInput
+  }
+
+  export type AssetAttentionReviewSignalOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type AssetAttentionReviewReviewerIdClientRequestIdCompoundUniqueInput = {
+    reviewerId: string
+    clientRequestId: string
+  }
+
+  export type AssetAttentionReviewCountOrderByAggregateInput = {
+    id?: SortOrder
+    assetId?: SortOrder
+    caseId?: SortOrder
+    reviewerId?: SortOrder
+    reviewerRole?: SortOrder
+    departmentId?: SortOrder
+    jurisdictionId?: SortOrder
+    disposition?: SortOrder
+    rationale?: SortOrder
+    attentionContractVersion?: SortOrder
+    attentionCalculationVersion?: SortOrder
+    projectionAsOf?: SortOrder
+    sourceSetFingerprint?: SortOrder
+    clientRequestId?: SortOrder
+    supersedesReviewId?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type AssetAttentionReviewMaxOrderByAggregateInput = {
+    id?: SortOrder
+    assetId?: SortOrder
+    caseId?: SortOrder
+    reviewerId?: SortOrder
+    reviewerRole?: SortOrder
+    departmentId?: SortOrder
+    jurisdictionId?: SortOrder
+    disposition?: SortOrder
+    rationale?: SortOrder
+    attentionContractVersion?: SortOrder
+    attentionCalculationVersion?: SortOrder
+    projectionAsOf?: SortOrder
+    sourceSetFingerprint?: SortOrder
+    clientRequestId?: SortOrder
+    supersedesReviewId?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type AssetAttentionReviewMinOrderByAggregateInput = {
+    id?: SortOrder
+    assetId?: SortOrder
+    caseId?: SortOrder
+    reviewerId?: SortOrder
+    reviewerRole?: SortOrder
+    departmentId?: SortOrder
+    jurisdictionId?: SortOrder
+    disposition?: SortOrder
+    rationale?: SortOrder
+    attentionContractVersion?: SortOrder
+    attentionCalculationVersion?: SortOrder
+    projectionAsOf?: SortOrder
+    sourceSetFingerprint?: SortOrder
+    clientRequestId?: SortOrder
+    supersedesReviewId?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type EnumAssetAttentionDispositionWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.AssetAttentionDisposition | EnumAssetAttentionDispositionFieldRefInput<$PrismaModel>
+    in?: $Enums.AssetAttentionDisposition[] | ListEnumAssetAttentionDispositionFieldRefInput<$PrismaModel>
+    notIn?: $Enums.AssetAttentionDisposition[] | ListEnumAssetAttentionDispositionFieldRefInput<$PrismaModel>
+    not?: NestedEnumAssetAttentionDispositionWithAggregatesFilter<$PrismaModel> | $Enums.AssetAttentionDisposition
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumAssetAttentionDispositionFilter<$PrismaModel>
+    _max?: NestedEnumAssetAttentionDispositionFilter<$PrismaModel>
+  }
+
+  export type AssetAttentionReviewScalarRelationFilter = {
+    is?: AssetAttentionReviewWhereInput
+    isNot?: AssetAttentionReviewWhereInput
+  }
+
+  export type AssetAttentionReviewSignalReviewIdCategorySignalCodeStateEvidenceReferenceFingerprintCompoundUniqueInput = {
+    reviewId: string
+    category: string
+    signalCode: string
+    state: string
+    evidenceReferenceFingerprint: string
+  }
+
+  export type AssetAttentionReviewSignalCountOrderByAggregateInput = {
+    id?: SortOrder
+    reviewId?: SortOrder
+    category?: SortOrder
+    signalCode?: SortOrder
+    state?: SortOrder
+    evidenceReferenceFingerprint?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type AssetAttentionReviewSignalMaxOrderByAggregateInput = {
+    id?: SortOrder
+    reviewId?: SortOrder
+    category?: SortOrder
+    signalCode?: SortOrder
+    state?: SortOrder
+    evidenceReferenceFingerprint?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type AssetAttentionReviewSignalMinOrderByAggregateInput = {
+    id?: SortOrder
+    reviewId?: SortOrder
+    category?: SortOrder
+    signalCode?: SortOrder
+    state?: SortOrder
+    evidenceReferenceFingerprint?: SortOrder
+    createdAt?: SortOrder
   }
 
   export type PortfolioScenarioCountOrderByAggregateInput = {
@@ -77462,6 +80819,13 @@ export namespace Prisma {
     connect?: PredictiveModelLifecycleEventWhereUniqueInput | PredictiveModelLifecycleEventWhereUniqueInput[]
   }
 
+  export type AssetAttentionReviewCreateNestedManyWithoutReviewerInput = {
+    create?: XOR<AssetAttentionReviewCreateWithoutReviewerInput, AssetAttentionReviewUncheckedCreateWithoutReviewerInput> | AssetAttentionReviewCreateWithoutReviewerInput[] | AssetAttentionReviewUncheckedCreateWithoutReviewerInput[]
+    connectOrCreate?: AssetAttentionReviewCreateOrConnectWithoutReviewerInput | AssetAttentionReviewCreateOrConnectWithoutReviewerInput[]
+    createMany?: AssetAttentionReviewCreateManyReviewerInputEnvelope
+    connect?: AssetAttentionReviewWhereUniqueInput | AssetAttentionReviewWhereUniqueInput[]
+  }
+
   export type InspectionUncheckedCreateNestedManyWithoutInspectorInput = {
     create?: XOR<InspectionCreateWithoutInspectorInput, InspectionUncheckedCreateWithoutInspectorInput> | InspectionCreateWithoutInspectorInput[] | InspectionUncheckedCreateWithoutInspectorInput[]
     connectOrCreate?: InspectionCreateOrConnectWithoutInspectorInput | InspectionCreateOrConnectWithoutInspectorInput[]
@@ -77747,6 +81111,13 @@ export namespace Prisma {
     connectOrCreate?: PredictiveModelLifecycleEventCreateOrConnectWithoutActorInput | PredictiveModelLifecycleEventCreateOrConnectWithoutActorInput[]
     createMany?: PredictiveModelLifecycleEventCreateManyActorInputEnvelope
     connect?: PredictiveModelLifecycleEventWhereUniqueInput | PredictiveModelLifecycleEventWhereUniqueInput[]
+  }
+
+  export type AssetAttentionReviewUncheckedCreateNestedManyWithoutReviewerInput = {
+    create?: XOR<AssetAttentionReviewCreateWithoutReviewerInput, AssetAttentionReviewUncheckedCreateWithoutReviewerInput> | AssetAttentionReviewCreateWithoutReviewerInput[] | AssetAttentionReviewUncheckedCreateWithoutReviewerInput[]
+    connectOrCreate?: AssetAttentionReviewCreateOrConnectWithoutReviewerInput | AssetAttentionReviewCreateOrConnectWithoutReviewerInput[]
+    createMany?: AssetAttentionReviewCreateManyReviewerInputEnvelope
+    connect?: AssetAttentionReviewWhereUniqueInput | AssetAttentionReviewWhereUniqueInput[]
   }
 
   export type EnumSystemRoleFieldUpdateOperationsInput = {
@@ -78347,6 +81718,20 @@ export namespace Prisma {
     deleteMany?: PredictiveModelLifecycleEventScalarWhereInput | PredictiveModelLifecycleEventScalarWhereInput[]
   }
 
+  export type AssetAttentionReviewUpdateManyWithoutReviewerNestedInput = {
+    create?: XOR<AssetAttentionReviewCreateWithoutReviewerInput, AssetAttentionReviewUncheckedCreateWithoutReviewerInput> | AssetAttentionReviewCreateWithoutReviewerInput[] | AssetAttentionReviewUncheckedCreateWithoutReviewerInput[]
+    connectOrCreate?: AssetAttentionReviewCreateOrConnectWithoutReviewerInput | AssetAttentionReviewCreateOrConnectWithoutReviewerInput[]
+    upsert?: AssetAttentionReviewUpsertWithWhereUniqueWithoutReviewerInput | AssetAttentionReviewUpsertWithWhereUniqueWithoutReviewerInput[]
+    createMany?: AssetAttentionReviewCreateManyReviewerInputEnvelope
+    set?: AssetAttentionReviewWhereUniqueInput | AssetAttentionReviewWhereUniqueInput[]
+    disconnect?: AssetAttentionReviewWhereUniqueInput | AssetAttentionReviewWhereUniqueInput[]
+    delete?: AssetAttentionReviewWhereUniqueInput | AssetAttentionReviewWhereUniqueInput[]
+    connect?: AssetAttentionReviewWhereUniqueInput | AssetAttentionReviewWhereUniqueInput[]
+    update?: AssetAttentionReviewUpdateWithWhereUniqueWithoutReviewerInput | AssetAttentionReviewUpdateWithWhereUniqueWithoutReviewerInput[]
+    updateMany?: AssetAttentionReviewUpdateManyWithWhereWithoutReviewerInput | AssetAttentionReviewUpdateManyWithWhereWithoutReviewerInput[]
+    deleteMany?: AssetAttentionReviewScalarWhereInput | AssetAttentionReviewScalarWhereInput[]
+  }
+
   export type InspectionUncheckedUpdateManyWithoutInspectorNestedInput = {
     create?: XOR<InspectionCreateWithoutInspectorInput, InspectionUncheckedCreateWithoutInspectorInput> | InspectionCreateWithoutInspectorInput[] | InspectionUncheckedCreateWithoutInspectorInput[]
     connectOrCreate?: InspectionCreateOrConnectWithoutInspectorInput | InspectionCreateOrConnectWithoutInspectorInput[]
@@ -78921,6 +82306,20 @@ export namespace Prisma {
     deleteMany?: PredictiveModelLifecycleEventScalarWhereInput | PredictiveModelLifecycleEventScalarWhereInput[]
   }
 
+  export type AssetAttentionReviewUncheckedUpdateManyWithoutReviewerNestedInput = {
+    create?: XOR<AssetAttentionReviewCreateWithoutReviewerInput, AssetAttentionReviewUncheckedCreateWithoutReviewerInput> | AssetAttentionReviewCreateWithoutReviewerInput[] | AssetAttentionReviewUncheckedCreateWithoutReviewerInput[]
+    connectOrCreate?: AssetAttentionReviewCreateOrConnectWithoutReviewerInput | AssetAttentionReviewCreateOrConnectWithoutReviewerInput[]
+    upsert?: AssetAttentionReviewUpsertWithWhereUniqueWithoutReviewerInput | AssetAttentionReviewUpsertWithWhereUniqueWithoutReviewerInput[]
+    createMany?: AssetAttentionReviewCreateManyReviewerInputEnvelope
+    set?: AssetAttentionReviewWhereUniqueInput | AssetAttentionReviewWhereUniqueInput[]
+    disconnect?: AssetAttentionReviewWhereUniqueInput | AssetAttentionReviewWhereUniqueInput[]
+    delete?: AssetAttentionReviewWhereUniqueInput | AssetAttentionReviewWhereUniqueInput[]
+    connect?: AssetAttentionReviewWhereUniqueInput | AssetAttentionReviewWhereUniqueInput[]
+    update?: AssetAttentionReviewUpdateWithWhereUniqueWithoutReviewerInput | AssetAttentionReviewUpdateWithWhereUniqueWithoutReviewerInput[]
+    updateMany?: AssetAttentionReviewUpdateManyWithWhereWithoutReviewerInput | AssetAttentionReviewUpdateManyWithWhereWithoutReviewerInput[]
+    deleteMany?: AssetAttentionReviewScalarWhereInput | AssetAttentionReviewScalarWhereInput[]
+  }
+
   export type DepartmentCreateNestedOneWithoutAssetsInput = {
     create?: XOR<DepartmentCreateWithoutAssetsInput, DepartmentUncheckedCreateWithoutAssetsInput>
     connectOrCreate?: DepartmentCreateOrConnectWithoutAssetsInput
@@ -78961,6 +82360,13 @@ export namespace Prisma {
     connect?: ExternalObservationWhereUniqueInput | ExternalObservationWhereUniqueInput[]
   }
 
+  export type AssetAttentionReviewCreateNestedManyWithoutAssetInput = {
+    create?: XOR<AssetAttentionReviewCreateWithoutAssetInput, AssetAttentionReviewUncheckedCreateWithoutAssetInput> | AssetAttentionReviewCreateWithoutAssetInput[] | AssetAttentionReviewUncheckedCreateWithoutAssetInput[]
+    connectOrCreate?: AssetAttentionReviewCreateOrConnectWithoutAssetInput | AssetAttentionReviewCreateOrConnectWithoutAssetInput[]
+    createMany?: AssetAttentionReviewCreateManyAssetInputEnvelope
+    connect?: AssetAttentionReviewWhereUniqueInput | AssetAttentionReviewWhereUniqueInput[]
+  }
+
   export type CaseUncheckedCreateNestedManyWithoutAssetInput = {
     create?: XOR<CaseCreateWithoutAssetInput, CaseUncheckedCreateWithoutAssetInput> | CaseCreateWithoutAssetInput[] | CaseUncheckedCreateWithoutAssetInput[]
     connectOrCreate?: CaseCreateOrConnectWithoutAssetInput | CaseCreateOrConnectWithoutAssetInput[]
@@ -78987,6 +82393,13 @@ export namespace Prisma {
     connectOrCreate?: ExternalObservationCreateOrConnectWithoutAssetInput | ExternalObservationCreateOrConnectWithoutAssetInput[]
     createMany?: ExternalObservationCreateManyAssetInputEnvelope
     connect?: ExternalObservationWhereUniqueInput | ExternalObservationWhereUniqueInput[]
+  }
+
+  export type AssetAttentionReviewUncheckedCreateNestedManyWithoutAssetInput = {
+    create?: XOR<AssetAttentionReviewCreateWithoutAssetInput, AssetAttentionReviewUncheckedCreateWithoutAssetInput> | AssetAttentionReviewCreateWithoutAssetInput[] | AssetAttentionReviewUncheckedCreateWithoutAssetInput[]
+    connectOrCreate?: AssetAttentionReviewCreateOrConnectWithoutAssetInput | AssetAttentionReviewCreateOrConnectWithoutAssetInput[]
+    createMany?: AssetAttentionReviewCreateManyAssetInputEnvelope
+    connect?: AssetAttentionReviewWhereUniqueInput | AssetAttentionReviewWhereUniqueInput[]
   }
 
   export type EnumAssetTypeFieldUpdateOperationsInput = {
@@ -79085,6 +82498,20 @@ export namespace Prisma {
     deleteMany?: ExternalObservationScalarWhereInput | ExternalObservationScalarWhereInput[]
   }
 
+  export type AssetAttentionReviewUpdateManyWithoutAssetNestedInput = {
+    create?: XOR<AssetAttentionReviewCreateWithoutAssetInput, AssetAttentionReviewUncheckedCreateWithoutAssetInput> | AssetAttentionReviewCreateWithoutAssetInput[] | AssetAttentionReviewUncheckedCreateWithoutAssetInput[]
+    connectOrCreate?: AssetAttentionReviewCreateOrConnectWithoutAssetInput | AssetAttentionReviewCreateOrConnectWithoutAssetInput[]
+    upsert?: AssetAttentionReviewUpsertWithWhereUniqueWithoutAssetInput | AssetAttentionReviewUpsertWithWhereUniqueWithoutAssetInput[]
+    createMany?: AssetAttentionReviewCreateManyAssetInputEnvelope
+    set?: AssetAttentionReviewWhereUniqueInput | AssetAttentionReviewWhereUniqueInput[]
+    disconnect?: AssetAttentionReviewWhereUniqueInput | AssetAttentionReviewWhereUniqueInput[]
+    delete?: AssetAttentionReviewWhereUniqueInput | AssetAttentionReviewWhereUniqueInput[]
+    connect?: AssetAttentionReviewWhereUniqueInput | AssetAttentionReviewWhereUniqueInput[]
+    update?: AssetAttentionReviewUpdateWithWhereUniqueWithoutAssetInput | AssetAttentionReviewUpdateWithWhereUniqueWithoutAssetInput[]
+    updateMany?: AssetAttentionReviewUpdateManyWithWhereWithoutAssetInput | AssetAttentionReviewUpdateManyWithWhereWithoutAssetInput[]
+    deleteMany?: AssetAttentionReviewScalarWhereInput | AssetAttentionReviewScalarWhereInput[]
+  }
+
   export type CaseUncheckedUpdateManyWithoutAssetNestedInput = {
     create?: XOR<CaseCreateWithoutAssetInput, CaseUncheckedCreateWithoutAssetInput> | CaseCreateWithoutAssetInput[] | CaseUncheckedCreateWithoutAssetInput[]
     connectOrCreate?: CaseCreateOrConnectWithoutAssetInput | CaseCreateOrConnectWithoutAssetInput[]
@@ -79139,6 +82566,20 @@ export namespace Prisma {
     update?: ExternalObservationUpdateWithWhereUniqueWithoutAssetInput | ExternalObservationUpdateWithWhereUniqueWithoutAssetInput[]
     updateMany?: ExternalObservationUpdateManyWithWhereWithoutAssetInput | ExternalObservationUpdateManyWithWhereWithoutAssetInput[]
     deleteMany?: ExternalObservationScalarWhereInput | ExternalObservationScalarWhereInput[]
+  }
+
+  export type AssetAttentionReviewUncheckedUpdateManyWithoutAssetNestedInput = {
+    create?: XOR<AssetAttentionReviewCreateWithoutAssetInput, AssetAttentionReviewUncheckedCreateWithoutAssetInput> | AssetAttentionReviewCreateWithoutAssetInput[] | AssetAttentionReviewUncheckedCreateWithoutAssetInput[]
+    connectOrCreate?: AssetAttentionReviewCreateOrConnectWithoutAssetInput | AssetAttentionReviewCreateOrConnectWithoutAssetInput[]
+    upsert?: AssetAttentionReviewUpsertWithWhereUniqueWithoutAssetInput | AssetAttentionReviewUpsertWithWhereUniqueWithoutAssetInput[]
+    createMany?: AssetAttentionReviewCreateManyAssetInputEnvelope
+    set?: AssetAttentionReviewWhereUniqueInput | AssetAttentionReviewWhereUniqueInput[]
+    disconnect?: AssetAttentionReviewWhereUniqueInput | AssetAttentionReviewWhereUniqueInput[]
+    delete?: AssetAttentionReviewWhereUniqueInput | AssetAttentionReviewWhereUniqueInput[]
+    connect?: AssetAttentionReviewWhereUniqueInput | AssetAttentionReviewWhereUniqueInput[]
+    update?: AssetAttentionReviewUpdateWithWhereUniqueWithoutAssetInput | AssetAttentionReviewUpdateWithWhereUniqueWithoutAssetInput[]
+    updateMany?: AssetAttentionReviewUpdateManyWithWhereWithoutAssetInput | AssetAttentionReviewUpdateManyWithWhereWithoutAssetInput[]
+    deleteMany?: AssetAttentionReviewScalarWhereInput | AssetAttentionReviewScalarWhereInput[]
   }
 
   export type DepartmentCreateNestedOneWithoutPublicReportsInput = {
@@ -80045,6 +83486,13 @@ export namespace Prisma {
     connect?: CaseResourceEstimateWhereUniqueInput | CaseResourceEstimateWhereUniqueInput[]
   }
 
+  export type AssetAttentionReviewCreateNestedManyWithoutCaseInput = {
+    create?: XOR<AssetAttentionReviewCreateWithoutCaseInput, AssetAttentionReviewUncheckedCreateWithoutCaseInput> | AssetAttentionReviewCreateWithoutCaseInput[] | AssetAttentionReviewUncheckedCreateWithoutCaseInput[]
+    connectOrCreate?: AssetAttentionReviewCreateOrConnectWithoutCaseInput | AssetAttentionReviewCreateOrConnectWithoutCaseInput[]
+    createMany?: AssetAttentionReviewCreateManyCaseInputEnvelope
+    connect?: AssetAttentionReviewWhereUniqueInput | AssetAttentionReviewWhereUniqueInput[]
+  }
+
   export type InspectionUncheckedCreateNestedManyWithoutCaseInput = {
     create?: XOR<InspectionCreateWithoutCaseInput, InspectionUncheckedCreateWithoutCaseInput> | InspectionCreateWithoutCaseInput[] | InspectionUncheckedCreateWithoutCaseInput[]
     connectOrCreate?: InspectionCreateOrConnectWithoutCaseInput | InspectionCreateOrConnectWithoutCaseInput[]
@@ -80125,6 +83573,13 @@ export namespace Prisma {
     connectOrCreate?: CaseResourceEstimateCreateOrConnectWithoutCaseInput | CaseResourceEstimateCreateOrConnectWithoutCaseInput[]
     createMany?: CaseResourceEstimateCreateManyCaseInputEnvelope
     connect?: CaseResourceEstimateWhereUniqueInput | CaseResourceEstimateWhereUniqueInput[]
+  }
+
+  export type AssetAttentionReviewUncheckedCreateNestedManyWithoutCaseInput = {
+    create?: XOR<AssetAttentionReviewCreateWithoutCaseInput, AssetAttentionReviewUncheckedCreateWithoutCaseInput> | AssetAttentionReviewCreateWithoutCaseInput[] | AssetAttentionReviewUncheckedCreateWithoutCaseInput[]
+    connectOrCreate?: AssetAttentionReviewCreateOrConnectWithoutCaseInput | AssetAttentionReviewCreateOrConnectWithoutCaseInput[]
+    createMany?: AssetAttentionReviewCreateManyCaseInputEnvelope
+    connect?: AssetAttentionReviewWhereUniqueInput | AssetAttentionReviewWhereUniqueInput[]
   }
 
   export type EnumCaseStatusFieldUpdateOperationsInput = {
@@ -80307,6 +83762,20 @@ export namespace Prisma {
     deleteMany?: CaseResourceEstimateScalarWhereInput | CaseResourceEstimateScalarWhereInput[]
   }
 
+  export type AssetAttentionReviewUpdateManyWithoutCaseNestedInput = {
+    create?: XOR<AssetAttentionReviewCreateWithoutCaseInput, AssetAttentionReviewUncheckedCreateWithoutCaseInput> | AssetAttentionReviewCreateWithoutCaseInput[] | AssetAttentionReviewUncheckedCreateWithoutCaseInput[]
+    connectOrCreate?: AssetAttentionReviewCreateOrConnectWithoutCaseInput | AssetAttentionReviewCreateOrConnectWithoutCaseInput[]
+    upsert?: AssetAttentionReviewUpsertWithWhereUniqueWithoutCaseInput | AssetAttentionReviewUpsertWithWhereUniqueWithoutCaseInput[]
+    createMany?: AssetAttentionReviewCreateManyCaseInputEnvelope
+    set?: AssetAttentionReviewWhereUniqueInput | AssetAttentionReviewWhereUniqueInput[]
+    disconnect?: AssetAttentionReviewWhereUniqueInput | AssetAttentionReviewWhereUniqueInput[]
+    delete?: AssetAttentionReviewWhereUniqueInput | AssetAttentionReviewWhereUniqueInput[]
+    connect?: AssetAttentionReviewWhereUniqueInput | AssetAttentionReviewWhereUniqueInput[]
+    update?: AssetAttentionReviewUpdateWithWhereUniqueWithoutCaseInput | AssetAttentionReviewUpdateWithWhereUniqueWithoutCaseInput[]
+    updateMany?: AssetAttentionReviewUpdateManyWithWhereWithoutCaseInput | AssetAttentionReviewUpdateManyWithWhereWithoutCaseInput[]
+    deleteMany?: AssetAttentionReviewScalarWhereInput | AssetAttentionReviewScalarWhereInput[]
+  }
+
   export type InspectionUncheckedUpdateManyWithoutCaseNestedInput = {
     create?: XOR<InspectionCreateWithoutCaseInput, InspectionUncheckedCreateWithoutCaseInput> | InspectionCreateWithoutCaseInput[] | InspectionUncheckedCreateWithoutCaseInput[]
     connectOrCreate?: InspectionCreateOrConnectWithoutCaseInput | InspectionCreateOrConnectWithoutCaseInput[]
@@ -80467,6 +83936,20 @@ export namespace Prisma {
     deleteMany?: CaseResourceEstimateScalarWhereInput | CaseResourceEstimateScalarWhereInput[]
   }
 
+  export type AssetAttentionReviewUncheckedUpdateManyWithoutCaseNestedInput = {
+    create?: XOR<AssetAttentionReviewCreateWithoutCaseInput, AssetAttentionReviewUncheckedCreateWithoutCaseInput> | AssetAttentionReviewCreateWithoutCaseInput[] | AssetAttentionReviewUncheckedCreateWithoutCaseInput[]
+    connectOrCreate?: AssetAttentionReviewCreateOrConnectWithoutCaseInput | AssetAttentionReviewCreateOrConnectWithoutCaseInput[]
+    upsert?: AssetAttentionReviewUpsertWithWhereUniqueWithoutCaseInput | AssetAttentionReviewUpsertWithWhereUniqueWithoutCaseInput[]
+    createMany?: AssetAttentionReviewCreateManyCaseInputEnvelope
+    set?: AssetAttentionReviewWhereUniqueInput | AssetAttentionReviewWhereUniqueInput[]
+    disconnect?: AssetAttentionReviewWhereUniqueInput | AssetAttentionReviewWhereUniqueInput[]
+    delete?: AssetAttentionReviewWhereUniqueInput | AssetAttentionReviewWhereUniqueInput[]
+    connect?: AssetAttentionReviewWhereUniqueInput | AssetAttentionReviewWhereUniqueInput[]
+    update?: AssetAttentionReviewUpdateWithWhereUniqueWithoutCaseInput | AssetAttentionReviewUpdateWithWhereUniqueWithoutCaseInput[]
+    updateMany?: AssetAttentionReviewUpdateManyWithWhereWithoutCaseInput | AssetAttentionReviewUpdateManyWithWhereWithoutCaseInput[]
+    deleteMany?: AssetAttentionReviewScalarWhereInput | AssetAttentionReviewScalarWhereInput[]
+  }
+
   export type CaseCreateNestedOneWithoutResourceEstimatesInput = {
     create?: XOR<CaseCreateWithoutResourceEstimatesInput, CaseUncheckedCreateWithoutResourceEstimatesInput>
     connectOrCreate?: CaseCreateOrConnectWithoutResourceEstimatesInput
@@ -80505,6 +83988,158 @@ export namespace Prisma {
     upsert?: UserUpsertWithoutPreparedCaseResourceEstimatesInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutPreparedCaseResourceEstimatesInput, UserUpdateWithoutPreparedCaseResourceEstimatesInput>, UserUncheckedUpdateWithoutPreparedCaseResourceEstimatesInput>
+  }
+
+  export type AssetCreateNestedOneWithoutAttentionReviewsInput = {
+    create?: XOR<AssetCreateWithoutAttentionReviewsInput, AssetUncheckedCreateWithoutAttentionReviewsInput>
+    connectOrCreate?: AssetCreateOrConnectWithoutAttentionReviewsInput
+    connect?: AssetWhereUniqueInput
+  }
+
+  export type CaseCreateNestedOneWithoutAttentionReviewsInput = {
+    create?: XOR<CaseCreateWithoutAttentionReviewsInput, CaseUncheckedCreateWithoutAttentionReviewsInput>
+    connectOrCreate?: CaseCreateOrConnectWithoutAttentionReviewsInput
+    connect?: CaseWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutAssetAttentionReviewsInput = {
+    create?: XOR<UserCreateWithoutAssetAttentionReviewsInput, UserUncheckedCreateWithoutAssetAttentionReviewsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutAssetAttentionReviewsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type AssetAttentionReviewCreateNestedOneWithoutSupersededByInput = {
+    create?: XOR<AssetAttentionReviewCreateWithoutSupersededByInput, AssetAttentionReviewUncheckedCreateWithoutSupersededByInput>
+    connectOrCreate?: AssetAttentionReviewCreateOrConnectWithoutSupersededByInput
+    connect?: AssetAttentionReviewWhereUniqueInput
+  }
+
+  export type AssetAttentionReviewCreateNestedOneWithoutSupersedesReviewInput = {
+    create?: XOR<AssetAttentionReviewCreateWithoutSupersedesReviewInput, AssetAttentionReviewUncheckedCreateWithoutSupersedesReviewInput>
+    connectOrCreate?: AssetAttentionReviewCreateOrConnectWithoutSupersedesReviewInput
+    connect?: AssetAttentionReviewWhereUniqueInput
+  }
+
+  export type AssetAttentionReviewSignalCreateNestedManyWithoutReviewInput = {
+    create?: XOR<AssetAttentionReviewSignalCreateWithoutReviewInput, AssetAttentionReviewSignalUncheckedCreateWithoutReviewInput> | AssetAttentionReviewSignalCreateWithoutReviewInput[] | AssetAttentionReviewSignalUncheckedCreateWithoutReviewInput[]
+    connectOrCreate?: AssetAttentionReviewSignalCreateOrConnectWithoutReviewInput | AssetAttentionReviewSignalCreateOrConnectWithoutReviewInput[]
+    createMany?: AssetAttentionReviewSignalCreateManyReviewInputEnvelope
+    connect?: AssetAttentionReviewSignalWhereUniqueInput | AssetAttentionReviewSignalWhereUniqueInput[]
+  }
+
+  export type AssetAttentionReviewUncheckedCreateNestedOneWithoutSupersedesReviewInput = {
+    create?: XOR<AssetAttentionReviewCreateWithoutSupersedesReviewInput, AssetAttentionReviewUncheckedCreateWithoutSupersedesReviewInput>
+    connectOrCreate?: AssetAttentionReviewCreateOrConnectWithoutSupersedesReviewInput
+    connect?: AssetAttentionReviewWhereUniqueInput
+  }
+
+  export type AssetAttentionReviewSignalUncheckedCreateNestedManyWithoutReviewInput = {
+    create?: XOR<AssetAttentionReviewSignalCreateWithoutReviewInput, AssetAttentionReviewSignalUncheckedCreateWithoutReviewInput> | AssetAttentionReviewSignalCreateWithoutReviewInput[] | AssetAttentionReviewSignalUncheckedCreateWithoutReviewInput[]
+    connectOrCreate?: AssetAttentionReviewSignalCreateOrConnectWithoutReviewInput | AssetAttentionReviewSignalCreateOrConnectWithoutReviewInput[]
+    createMany?: AssetAttentionReviewSignalCreateManyReviewInputEnvelope
+    connect?: AssetAttentionReviewSignalWhereUniqueInput | AssetAttentionReviewSignalWhereUniqueInput[]
+  }
+
+  export type EnumAssetAttentionDispositionFieldUpdateOperationsInput = {
+    set?: $Enums.AssetAttentionDisposition
+  }
+
+  export type AssetUpdateOneRequiredWithoutAttentionReviewsNestedInput = {
+    create?: XOR<AssetCreateWithoutAttentionReviewsInput, AssetUncheckedCreateWithoutAttentionReviewsInput>
+    connectOrCreate?: AssetCreateOrConnectWithoutAttentionReviewsInput
+    upsert?: AssetUpsertWithoutAttentionReviewsInput
+    connect?: AssetWhereUniqueInput
+    update?: XOR<XOR<AssetUpdateToOneWithWhereWithoutAttentionReviewsInput, AssetUpdateWithoutAttentionReviewsInput>, AssetUncheckedUpdateWithoutAttentionReviewsInput>
+  }
+
+  export type CaseUpdateOneWithoutAttentionReviewsNestedInput = {
+    create?: XOR<CaseCreateWithoutAttentionReviewsInput, CaseUncheckedCreateWithoutAttentionReviewsInput>
+    connectOrCreate?: CaseCreateOrConnectWithoutAttentionReviewsInput
+    upsert?: CaseUpsertWithoutAttentionReviewsInput
+    disconnect?: CaseWhereInput | boolean
+    delete?: CaseWhereInput | boolean
+    connect?: CaseWhereUniqueInput
+    update?: XOR<XOR<CaseUpdateToOneWithWhereWithoutAttentionReviewsInput, CaseUpdateWithoutAttentionReviewsInput>, CaseUncheckedUpdateWithoutAttentionReviewsInput>
+  }
+
+  export type UserUpdateOneRequiredWithoutAssetAttentionReviewsNestedInput = {
+    create?: XOR<UserCreateWithoutAssetAttentionReviewsInput, UserUncheckedCreateWithoutAssetAttentionReviewsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutAssetAttentionReviewsInput
+    upsert?: UserUpsertWithoutAssetAttentionReviewsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutAssetAttentionReviewsInput, UserUpdateWithoutAssetAttentionReviewsInput>, UserUncheckedUpdateWithoutAssetAttentionReviewsInput>
+  }
+
+  export type AssetAttentionReviewUpdateOneWithoutSupersededByNestedInput = {
+    create?: XOR<AssetAttentionReviewCreateWithoutSupersededByInput, AssetAttentionReviewUncheckedCreateWithoutSupersededByInput>
+    connectOrCreate?: AssetAttentionReviewCreateOrConnectWithoutSupersededByInput
+    upsert?: AssetAttentionReviewUpsertWithoutSupersededByInput
+    disconnect?: AssetAttentionReviewWhereInput | boolean
+    delete?: AssetAttentionReviewWhereInput | boolean
+    connect?: AssetAttentionReviewWhereUniqueInput
+    update?: XOR<XOR<AssetAttentionReviewUpdateToOneWithWhereWithoutSupersededByInput, AssetAttentionReviewUpdateWithoutSupersededByInput>, AssetAttentionReviewUncheckedUpdateWithoutSupersededByInput>
+  }
+
+  export type AssetAttentionReviewUpdateOneWithoutSupersedesReviewNestedInput = {
+    create?: XOR<AssetAttentionReviewCreateWithoutSupersedesReviewInput, AssetAttentionReviewUncheckedCreateWithoutSupersedesReviewInput>
+    connectOrCreate?: AssetAttentionReviewCreateOrConnectWithoutSupersedesReviewInput
+    upsert?: AssetAttentionReviewUpsertWithoutSupersedesReviewInput
+    disconnect?: AssetAttentionReviewWhereInput | boolean
+    delete?: AssetAttentionReviewWhereInput | boolean
+    connect?: AssetAttentionReviewWhereUniqueInput
+    update?: XOR<XOR<AssetAttentionReviewUpdateToOneWithWhereWithoutSupersedesReviewInput, AssetAttentionReviewUpdateWithoutSupersedesReviewInput>, AssetAttentionReviewUncheckedUpdateWithoutSupersedesReviewInput>
+  }
+
+  export type AssetAttentionReviewSignalUpdateManyWithoutReviewNestedInput = {
+    create?: XOR<AssetAttentionReviewSignalCreateWithoutReviewInput, AssetAttentionReviewSignalUncheckedCreateWithoutReviewInput> | AssetAttentionReviewSignalCreateWithoutReviewInput[] | AssetAttentionReviewSignalUncheckedCreateWithoutReviewInput[]
+    connectOrCreate?: AssetAttentionReviewSignalCreateOrConnectWithoutReviewInput | AssetAttentionReviewSignalCreateOrConnectWithoutReviewInput[]
+    upsert?: AssetAttentionReviewSignalUpsertWithWhereUniqueWithoutReviewInput | AssetAttentionReviewSignalUpsertWithWhereUniqueWithoutReviewInput[]
+    createMany?: AssetAttentionReviewSignalCreateManyReviewInputEnvelope
+    set?: AssetAttentionReviewSignalWhereUniqueInput | AssetAttentionReviewSignalWhereUniqueInput[]
+    disconnect?: AssetAttentionReviewSignalWhereUniqueInput | AssetAttentionReviewSignalWhereUniqueInput[]
+    delete?: AssetAttentionReviewSignalWhereUniqueInput | AssetAttentionReviewSignalWhereUniqueInput[]
+    connect?: AssetAttentionReviewSignalWhereUniqueInput | AssetAttentionReviewSignalWhereUniqueInput[]
+    update?: AssetAttentionReviewSignalUpdateWithWhereUniqueWithoutReviewInput | AssetAttentionReviewSignalUpdateWithWhereUniqueWithoutReviewInput[]
+    updateMany?: AssetAttentionReviewSignalUpdateManyWithWhereWithoutReviewInput | AssetAttentionReviewSignalUpdateManyWithWhereWithoutReviewInput[]
+    deleteMany?: AssetAttentionReviewSignalScalarWhereInput | AssetAttentionReviewSignalScalarWhereInput[]
+  }
+
+  export type AssetAttentionReviewUncheckedUpdateOneWithoutSupersedesReviewNestedInput = {
+    create?: XOR<AssetAttentionReviewCreateWithoutSupersedesReviewInput, AssetAttentionReviewUncheckedCreateWithoutSupersedesReviewInput>
+    connectOrCreate?: AssetAttentionReviewCreateOrConnectWithoutSupersedesReviewInput
+    upsert?: AssetAttentionReviewUpsertWithoutSupersedesReviewInput
+    disconnect?: AssetAttentionReviewWhereInput | boolean
+    delete?: AssetAttentionReviewWhereInput | boolean
+    connect?: AssetAttentionReviewWhereUniqueInput
+    update?: XOR<XOR<AssetAttentionReviewUpdateToOneWithWhereWithoutSupersedesReviewInput, AssetAttentionReviewUpdateWithoutSupersedesReviewInput>, AssetAttentionReviewUncheckedUpdateWithoutSupersedesReviewInput>
+  }
+
+  export type AssetAttentionReviewSignalUncheckedUpdateManyWithoutReviewNestedInput = {
+    create?: XOR<AssetAttentionReviewSignalCreateWithoutReviewInput, AssetAttentionReviewSignalUncheckedCreateWithoutReviewInput> | AssetAttentionReviewSignalCreateWithoutReviewInput[] | AssetAttentionReviewSignalUncheckedCreateWithoutReviewInput[]
+    connectOrCreate?: AssetAttentionReviewSignalCreateOrConnectWithoutReviewInput | AssetAttentionReviewSignalCreateOrConnectWithoutReviewInput[]
+    upsert?: AssetAttentionReviewSignalUpsertWithWhereUniqueWithoutReviewInput | AssetAttentionReviewSignalUpsertWithWhereUniqueWithoutReviewInput[]
+    createMany?: AssetAttentionReviewSignalCreateManyReviewInputEnvelope
+    set?: AssetAttentionReviewSignalWhereUniqueInput | AssetAttentionReviewSignalWhereUniqueInput[]
+    disconnect?: AssetAttentionReviewSignalWhereUniqueInput | AssetAttentionReviewSignalWhereUniqueInput[]
+    delete?: AssetAttentionReviewSignalWhereUniqueInput | AssetAttentionReviewSignalWhereUniqueInput[]
+    connect?: AssetAttentionReviewSignalWhereUniqueInput | AssetAttentionReviewSignalWhereUniqueInput[]
+    update?: AssetAttentionReviewSignalUpdateWithWhereUniqueWithoutReviewInput | AssetAttentionReviewSignalUpdateWithWhereUniqueWithoutReviewInput[]
+    updateMany?: AssetAttentionReviewSignalUpdateManyWithWhereWithoutReviewInput | AssetAttentionReviewSignalUpdateManyWithWhereWithoutReviewInput[]
+    deleteMany?: AssetAttentionReviewSignalScalarWhereInput | AssetAttentionReviewSignalScalarWhereInput[]
+  }
+
+  export type AssetAttentionReviewCreateNestedOneWithoutSelectedSignalsInput = {
+    create?: XOR<AssetAttentionReviewCreateWithoutSelectedSignalsInput, AssetAttentionReviewUncheckedCreateWithoutSelectedSignalsInput>
+    connectOrCreate?: AssetAttentionReviewCreateOrConnectWithoutSelectedSignalsInput
+    connect?: AssetAttentionReviewWhereUniqueInput
+  }
+
+  export type AssetAttentionReviewUpdateOneRequiredWithoutSelectedSignalsNestedInput = {
+    create?: XOR<AssetAttentionReviewCreateWithoutSelectedSignalsInput, AssetAttentionReviewUncheckedCreateWithoutSelectedSignalsInput>
+    connectOrCreate?: AssetAttentionReviewCreateOrConnectWithoutSelectedSignalsInput
+    upsert?: AssetAttentionReviewUpsertWithoutSelectedSignalsInput
+    connect?: AssetAttentionReviewWhereUniqueInput
+    update?: XOR<XOR<AssetAttentionReviewUpdateToOneWithWhereWithoutSelectedSignalsInput, AssetAttentionReviewUpdateWithoutSelectedSignalsInput>, AssetAttentionReviewUncheckedUpdateWithoutSelectedSignalsInput>
   }
 
   export type DepartmentCreateNestedOneWithoutPortfolioScenariosInput = {
@@ -83756,6 +87391,23 @@ export namespace Prisma {
     _max?: NestedBigIntFilter<$PrismaModel>
   }
 
+  export type NestedEnumAssetAttentionDispositionFilter<$PrismaModel = never> = {
+    equals?: $Enums.AssetAttentionDisposition | EnumAssetAttentionDispositionFieldRefInput<$PrismaModel>
+    in?: $Enums.AssetAttentionDisposition[] | ListEnumAssetAttentionDispositionFieldRefInput<$PrismaModel>
+    notIn?: $Enums.AssetAttentionDisposition[] | ListEnumAssetAttentionDispositionFieldRefInput<$PrismaModel>
+    not?: NestedEnumAssetAttentionDispositionFilter<$PrismaModel> | $Enums.AssetAttentionDisposition
+  }
+
+  export type NestedEnumAssetAttentionDispositionWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.AssetAttentionDisposition | EnumAssetAttentionDispositionFieldRefInput<$PrismaModel>
+    in?: $Enums.AssetAttentionDisposition[] | ListEnumAssetAttentionDispositionFieldRefInput<$PrismaModel>
+    notIn?: $Enums.AssetAttentionDisposition[] | ListEnumAssetAttentionDispositionFieldRefInput<$PrismaModel>
+    not?: NestedEnumAssetAttentionDispositionWithAggregatesFilter<$PrismaModel> | $Enums.AssetAttentionDisposition
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumAssetAttentionDispositionFilter<$PrismaModel>
+    _max?: NestedEnumAssetAttentionDispositionFilter<$PrismaModel>
+  }
+
   export type NestedEnumObservationSourceTypeFilter<$PrismaModel = never> = {
     equals?: $Enums.ObservationSourceType | EnumObservationSourceTypeFieldRefInput<$PrismaModel>
     in?: $Enums.ObservationSourceType[] | ListEnumObservationSourceTypeFieldRefInput<$PrismaModel>
@@ -84299,6 +87951,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationCreateNestedManyWithoutRecordedByInput
     decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
+    assetAttentionReviews?: AssetAttentionReviewCreateNestedManyWithoutReviewerInput
   }
 
   export type UserUncheckedCreateWithoutDepartmentInput = {
@@ -84354,6 +88007,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedCreateNestedManyWithoutRecordedByInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
+    assetAttentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutReviewerInput
   }
 
   export type UserCreateOrConnectWithoutDepartmentInput = {
@@ -84382,6 +88036,7 @@ export namespace Prisma {
     publicReports?: PublicReportCreateNestedManyWithoutAssetInput
     suggestedForTriageAnalyses?: PublicReportTriageAnalysisCreateNestedManyWithoutPossibleAssetInput
     externalObservations?: ExternalObservationCreateNestedManyWithoutAssetInput
+    attentionReviews?: AssetAttentionReviewCreateNestedManyWithoutAssetInput
   }
 
   export type AssetUncheckedCreateWithoutDepartmentInput = {
@@ -84400,6 +88055,7 @@ export namespace Prisma {
     publicReports?: PublicReportUncheckedCreateNestedManyWithoutAssetInput
     suggestedForTriageAnalyses?: PublicReportTriageAnalysisUncheckedCreateNestedManyWithoutPossibleAssetInput
     externalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutAssetInput
+    attentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutAssetInput
   }
 
   export type AssetCreateOrConnectWithoutDepartmentInput = {
@@ -85379,6 +89035,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationCreateNestedManyWithoutRecordedByInput
     decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
+    assetAttentionReviews?: AssetAttentionReviewCreateNestedManyWithoutReviewerInput
   }
 
   export type UserUncheckedCreateWithoutJurisdictionInput = {
@@ -85434,6 +89091,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedCreateNestedManyWithoutRecordedByInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
+    assetAttentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutReviewerInput
   }
 
   export type UserCreateOrConnectWithoutJurisdictionInput = {
@@ -85462,6 +89120,7 @@ export namespace Prisma {
     publicReports?: PublicReportCreateNestedManyWithoutAssetInput
     suggestedForTriageAnalyses?: PublicReportTriageAnalysisCreateNestedManyWithoutPossibleAssetInput
     externalObservations?: ExternalObservationCreateNestedManyWithoutAssetInput
+    attentionReviews?: AssetAttentionReviewCreateNestedManyWithoutAssetInput
   }
 
   export type AssetUncheckedCreateWithoutJurisdictionInput = {
@@ -85480,6 +89139,7 @@ export namespace Prisma {
     publicReports?: PublicReportUncheckedCreateNestedManyWithoutAssetInput
     suggestedForTriageAnalyses?: PublicReportTriageAnalysisUncheckedCreateNestedManyWithoutPossibleAssetInput
     externalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutAssetInput
+    attentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutAssetInput
   }
 
   export type AssetCreateOrConnectWithoutJurisdictionInput = {
@@ -88399,6 +92059,56 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type AssetAttentionReviewCreateWithoutReviewerInput = {
+    id?: string
+    reviewerRole: $Enums.SystemRole
+    departmentId: string
+    jurisdictionId: string
+    disposition: $Enums.AssetAttentionDisposition
+    rationale: string
+    attentionContractVersion: string
+    attentionCalculationVersion: string
+    projectionAsOf: Date | string
+    sourceSetFingerprint: string
+    clientRequestId: string
+    createdAt?: Date | string
+    asset: AssetCreateNestedOneWithoutAttentionReviewsInput
+    case?: CaseCreateNestedOneWithoutAttentionReviewsInput
+    supersedesReview?: AssetAttentionReviewCreateNestedOneWithoutSupersededByInput
+    supersededBy?: AssetAttentionReviewCreateNestedOneWithoutSupersedesReviewInput
+    selectedSignals?: AssetAttentionReviewSignalCreateNestedManyWithoutReviewInput
+  }
+
+  export type AssetAttentionReviewUncheckedCreateWithoutReviewerInput = {
+    id?: string
+    assetId: string
+    caseId?: string | null
+    reviewerRole: $Enums.SystemRole
+    departmentId: string
+    jurisdictionId: string
+    disposition: $Enums.AssetAttentionDisposition
+    rationale: string
+    attentionContractVersion: string
+    attentionCalculationVersion: string
+    projectionAsOf: Date | string
+    sourceSetFingerprint: string
+    clientRequestId: string
+    supersedesReviewId?: string | null
+    createdAt?: Date | string
+    supersededBy?: AssetAttentionReviewUncheckedCreateNestedOneWithoutSupersedesReviewInput
+    selectedSignals?: AssetAttentionReviewSignalUncheckedCreateNestedManyWithoutReviewInput
+  }
+
+  export type AssetAttentionReviewCreateOrConnectWithoutReviewerInput = {
+    where: AssetAttentionReviewWhereUniqueInput
+    create: XOR<AssetAttentionReviewCreateWithoutReviewerInput, AssetAttentionReviewUncheckedCreateWithoutReviewerInput>
+  }
+
+  export type AssetAttentionReviewCreateManyReviewerInputEnvelope = {
+    data: AssetAttentionReviewCreateManyReviewerInput | AssetAttentionReviewCreateManyReviewerInput[]
+    skipDuplicates?: boolean
+  }
+
   export type DepartmentUpsertWithoutUsersInput = {
     update: XOR<DepartmentUpdateWithoutUsersInput, DepartmentUncheckedUpdateWithoutUsersInput>
     create: XOR<DepartmentCreateWithoutUsersInput, DepartmentUncheckedCreateWithoutUsersInput>
@@ -89544,6 +93254,44 @@ export namespace Prisma {
     occurredAt?: DateTimeFilter<"PredictiveModelLifecycleEvent"> | Date | string
   }
 
+  export type AssetAttentionReviewUpsertWithWhereUniqueWithoutReviewerInput = {
+    where: AssetAttentionReviewWhereUniqueInput
+    update: XOR<AssetAttentionReviewUpdateWithoutReviewerInput, AssetAttentionReviewUncheckedUpdateWithoutReviewerInput>
+    create: XOR<AssetAttentionReviewCreateWithoutReviewerInput, AssetAttentionReviewUncheckedCreateWithoutReviewerInput>
+  }
+
+  export type AssetAttentionReviewUpdateWithWhereUniqueWithoutReviewerInput = {
+    where: AssetAttentionReviewWhereUniqueInput
+    data: XOR<AssetAttentionReviewUpdateWithoutReviewerInput, AssetAttentionReviewUncheckedUpdateWithoutReviewerInput>
+  }
+
+  export type AssetAttentionReviewUpdateManyWithWhereWithoutReviewerInput = {
+    where: AssetAttentionReviewScalarWhereInput
+    data: XOR<AssetAttentionReviewUpdateManyMutationInput, AssetAttentionReviewUncheckedUpdateManyWithoutReviewerInput>
+  }
+
+  export type AssetAttentionReviewScalarWhereInput = {
+    AND?: AssetAttentionReviewScalarWhereInput | AssetAttentionReviewScalarWhereInput[]
+    OR?: AssetAttentionReviewScalarWhereInput[]
+    NOT?: AssetAttentionReviewScalarWhereInput | AssetAttentionReviewScalarWhereInput[]
+    id?: StringFilter<"AssetAttentionReview"> | string
+    assetId?: StringFilter<"AssetAttentionReview"> | string
+    caseId?: StringNullableFilter<"AssetAttentionReview"> | string | null
+    reviewerId?: StringFilter<"AssetAttentionReview"> | string
+    reviewerRole?: EnumSystemRoleFilter<"AssetAttentionReview"> | $Enums.SystemRole
+    departmentId?: StringFilter<"AssetAttentionReview"> | string
+    jurisdictionId?: StringFilter<"AssetAttentionReview"> | string
+    disposition?: EnumAssetAttentionDispositionFilter<"AssetAttentionReview"> | $Enums.AssetAttentionDisposition
+    rationale?: StringFilter<"AssetAttentionReview"> | string
+    attentionContractVersion?: StringFilter<"AssetAttentionReview"> | string
+    attentionCalculationVersion?: StringFilter<"AssetAttentionReview"> | string
+    projectionAsOf?: DateTimeFilter<"AssetAttentionReview"> | Date | string
+    sourceSetFingerprint?: StringFilter<"AssetAttentionReview"> | string
+    clientRequestId?: StringFilter<"AssetAttentionReview"> | string
+    supersedesReviewId?: StringNullableFilter<"AssetAttentionReview"> | string | null
+    createdAt?: DateTimeFilter<"AssetAttentionReview"> | Date | string
+  }
+
   export type DepartmentCreateWithoutAssetsInput = {
     id?: string
     name: string
@@ -89646,6 +93394,7 @@ export namespace Prisma {
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationCreateNestedManyWithoutCaseInput
     externalObservations?: ExternalObservationCreateNestedManyWithoutCaseInput
     resourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutCaseInput
+    attentionReviews?: AssetAttentionReviewCreateNestedManyWithoutCaseInput
   }
 
   export type CaseUncheckedCreateWithoutAssetInput = {
@@ -89672,6 +93421,7 @@ export namespace Prisma {
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUncheckedCreateNestedManyWithoutCaseInput
     externalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutCaseInput
     resourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutCaseInput
+    attentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutCaseInput
   }
 
   export type CaseCreateOrConnectWithoutAssetInput = {
@@ -89831,6 +93581,56 @@ export namespace Prisma {
 
   export type ExternalObservationCreateManyAssetInputEnvelope = {
     data: ExternalObservationCreateManyAssetInput | ExternalObservationCreateManyAssetInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type AssetAttentionReviewCreateWithoutAssetInput = {
+    id?: string
+    reviewerRole: $Enums.SystemRole
+    departmentId: string
+    jurisdictionId: string
+    disposition: $Enums.AssetAttentionDisposition
+    rationale: string
+    attentionContractVersion: string
+    attentionCalculationVersion: string
+    projectionAsOf: Date | string
+    sourceSetFingerprint: string
+    clientRequestId: string
+    createdAt?: Date | string
+    case?: CaseCreateNestedOneWithoutAttentionReviewsInput
+    reviewer: UserCreateNestedOneWithoutAssetAttentionReviewsInput
+    supersedesReview?: AssetAttentionReviewCreateNestedOneWithoutSupersededByInput
+    supersededBy?: AssetAttentionReviewCreateNestedOneWithoutSupersedesReviewInput
+    selectedSignals?: AssetAttentionReviewSignalCreateNestedManyWithoutReviewInput
+  }
+
+  export type AssetAttentionReviewUncheckedCreateWithoutAssetInput = {
+    id?: string
+    caseId?: string | null
+    reviewerId: string
+    reviewerRole: $Enums.SystemRole
+    departmentId: string
+    jurisdictionId: string
+    disposition: $Enums.AssetAttentionDisposition
+    rationale: string
+    attentionContractVersion: string
+    attentionCalculationVersion: string
+    projectionAsOf: Date | string
+    sourceSetFingerprint: string
+    clientRequestId: string
+    supersedesReviewId?: string | null
+    createdAt?: Date | string
+    supersededBy?: AssetAttentionReviewUncheckedCreateNestedOneWithoutSupersedesReviewInput
+    selectedSignals?: AssetAttentionReviewSignalUncheckedCreateNestedManyWithoutReviewInput
+  }
+
+  export type AssetAttentionReviewCreateOrConnectWithoutAssetInput = {
+    where: AssetAttentionReviewWhereUniqueInput
+    create: XOR<AssetAttentionReviewCreateWithoutAssetInput, AssetAttentionReviewUncheckedCreateWithoutAssetInput>
+  }
+
+  export type AssetAttentionReviewCreateManyAssetInputEnvelope = {
+    data: AssetAttentionReviewCreateManyAssetInput | AssetAttentionReviewCreateManyAssetInput[]
     skipDuplicates?: boolean
   }
 
@@ -90006,6 +93806,22 @@ export namespace Prisma {
     data: XOR<ExternalObservationUpdateManyMutationInput, ExternalObservationUncheckedUpdateManyWithoutAssetInput>
   }
 
+  export type AssetAttentionReviewUpsertWithWhereUniqueWithoutAssetInput = {
+    where: AssetAttentionReviewWhereUniqueInput
+    update: XOR<AssetAttentionReviewUpdateWithoutAssetInput, AssetAttentionReviewUncheckedUpdateWithoutAssetInput>
+    create: XOR<AssetAttentionReviewCreateWithoutAssetInput, AssetAttentionReviewUncheckedCreateWithoutAssetInput>
+  }
+
+  export type AssetAttentionReviewUpdateWithWhereUniqueWithoutAssetInput = {
+    where: AssetAttentionReviewWhereUniqueInput
+    data: XOR<AssetAttentionReviewUpdateWithoutAssetInput, AssetAttentionReviewUncheckedUpdateWithoutAssetInput>
+  }
+
+  export type AssetAttentionReviewUpdateManyWithWhereWithoutAssetInput = {
+    where: AssetAttentionReviewScalarWhereInput
+    data: XOR<AssetAttentionReviewUpdateManyMutationInput, AssetAttentionReviewUncheckedUpdateManyWithoutAssetInput>
+  }
+
   export type DepartmentCreateWithoutPublicReportsInput = {
     id?: string
     name: string
@@ -90100,6 +93916,7 @@ export namespace Prisma {
     cases?: CaseCreateNestedManyWithoutAssetInput
     suggestedForTriageAnalyses?: PublicReportTriageAnalysisCreateNestedManyWithoutPossibleAssetInput
     externalObservations?: ExternalObservationCreateNestedManyWithoutAssetInput
+    attentionReviews?: AssetAttentionReviewCreateNestedManyWithoutAssetInput
   }
 
   export type AssetUncheckedCreateWithoutPublicReportsInput = {
@@ -90118,6 +93935,7 @@ export namespace Prisma {
     cases?: CaseUncheckedCreateNestedManyWithoutAssetInput
     suggestedForTriageAnalyses?: PublicReportTriageAnalysisUncheckedCreateNestedManyWithoutPossibleAssetInput
     externalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutAssetInput
+    attentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutAssetInput
   }
 
   export type AssetCreateOrConnectWithoutPublicReportsInput = {
@@ -90178,6 +93996,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationCreateNestedManyWithoutRecordedByInput
     decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
+    assetAttentionReviews?: AssetAttentionReviewCreateNestedManyWithoutReviewerInput
   }
 
   export type UserUncheckedCreateWithoutReviewedPublicReportsInput = {
@@ -90233,6 +94052,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedCreateNestedManyWithoutRecordedByInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
+    assetAttentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutReviewerInput
   }
 
   export type UserCreateOrConnectWithoutReviewedPublicReportsInput = {
@@ -90293,6 +94113,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationCreateNestedManyWithoutRecordedByInput
     decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
+    assetAttentionReviews?: AssetAttentionReviewCreateNestedManyWithoutReviewerInput
   }
 
   export type UserUncheckedCreateWithoutDecidedPublicReportsInput = {
@@ -90348,6 +94169,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedCreateNestedManyWithoutRecordedByInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
+    assetAttentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutReviewerInput
   }
 
   export type UserCreateOrConnectWithoutDecidedPublicReportsInput = {
@@ -90379,6 +94201,7 @@ export namespace Prisma {
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationCreateNestedManyWithoutCaseInput
     externalObservations?: ExternalObservationCreateNestedManyWithoutCaseInput
     resourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutCaseInput
+    attentionReviews?: AssetAttentionReviewCreateNestedManyWithoutCaseInput
   }
 
   export type CaseUncheckedCreateWithoutSourcePublicReportInput = {
@@ -90405,6 +94228,7 @@ export namespace Prisma {
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUncheckedCreateNestedManyWithoutCaseInput
     externalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutCaseInput
     resourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutCaseInput
+    attentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutCaseInput
   }
 
   export type CaseCreateOrConnectWithoutSourcePublicReportInput = {
@@ -90567,6 +94391,7 @@ export namespace Prisma {
     cases?: CaseUpdateManyWithoutAssetNestedInput
     suggestedForTriageAnalyses?: PublicReportTriageAnalysisUpdateManyWithoutPossibleAssetNestedInput
     externalObservations?: ExternalObservationUpdateManyWithoutAssetNestedInput
+    attentionReviews?: AssetAttentionReviewUpdateManyWithoutAssetNestedInput
   }
 
   export type AssetUncheckedUpdateWithoutPublicReportsInput = {
@@ -90585,6 +94410,7 @@ export namespace Prisma {
     cases?: CaseUncheckedUpdateManyWithoutAssetNestedInput
     suggestedForTriageAnalyses?: PublicReportTriageAnalysisUncheckedUpdateManyWithoutPossibleAssetNestedInput
     externalObservations?: ExternalObservationUncheckedUpdateManyWithoutAssetNestedInput
+    attentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutAssetNestedInput
   }
 
   export type UserUpsertWithoutReviewedPublicReportsInput = {
@@ -90651,6 +94477,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUpdateManyWithoutRecordedByNestedInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
+    assetAttentionReviews?: AssetAttentionReviewUpdateManyWithoutReviewerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutReviewedPublicReportsInput = {
@@ -90706,6 +94533,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedUpdateManyWithoutRecordedByNestedInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
+    assetAttentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutReviewerNestedInput
   }
 
   export type UserUpsertWithoutDecidedPublicReportsInput = {
@@ -90772,6 +94600,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUpdateManyWithoutRecordedByNestedInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
+    assetAttentionReviews?: AssetAttentionReviewUpdateManyWithoutReviewerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutDecidedPublicReportsInput = {
@@ -90827,6 +94656,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedUpdateManyWithoutRecordedByNestedInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
+    assetAttentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutReviewerNestedInput
   }
 
   export type CaseUpsertWithoutSourcePublicReportInput = {
@@ -90864,6 +94694,7 @@ export namespace Prisma {
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUpdateManyWithoutCaseNestedInput
     externalObservations?: ExternalObservationUpdateManyWithoutCaseNestedInput
     resourceEstimates?: CaseResourceEstimateUpdateManyWithoutCaseNestedInput
+    attentionReviews?: AssetAttentionReviewUpdateManyWithoutCaseNestedInput
   }
 
   export type CaseUncheckedUpdateWithoutSourcePublicReportInput = {
@@ -90890,6 +94721,7 @@ export namespace Prisma {
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUncheckedUpdateManyWithoutCaseNestedInput
     externalObservations?: ExternalObservationUncheckedUpdateManyWithoutCaseNestedInput
     resourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutCaseNestedInput
+    attentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutCaseNestedInput
   }
 
   export type PublicReportTriageAnalysisUpsertWithWhereUniqueWithoutPublicReportInput = {
@@ -90981,6 +94813,7 @@ export namespace Prisma {
     cases?: CaseCreateNestedManyWithoutAssetInput
     publicReports?: PublicReportCreateNestedManyWithoutAssetInput
     externalObservations?: ExternalObservationCreateNestedManyWithoutAssetInput
+    attentionReviews?: AssetAttentionReviewCreateNestedManyWithoutAssetInput
   }
 
   export type AssetUncheckedCreateWithoutSuggestedForTriageAnalysesInput = {
@@ -90999,6 +94832,7 @@ export namespace Prisma {
     cases?: CaseUncheckedCreateNestedManyWithoutAssetInput
     publicReports?: PublicReportUncheckedCreateNestedManyWithoutAssetInput
     externalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutAssetInput
+    attentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutAssetInput
   }
 
   export type AssetCreateOrConnectWithoutSuggestedForTriageAnalysesInput = {
@@ -91059,6 +94893,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationCreateNestedManyWithoutRecordedByInput
     decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
+    assetAttentionReviews?: AssetAttentionReviewCreateNestedManyWithoutReviewerInput
   }
 
   export type UserUncheckedCreateWithoutCreatedTriageAnalysesInput = {
@@ -91114,6 +94949,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedCreateNestedManyWithoutRecordedByInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
+    assetAttentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutReviewerInput
   }
 
   export type UserCreateOrConnectWithoutCreatedTriageAnalysesInput = {
@@ -91211,6 +95047,7 @@ export namespace Prisma {
     cases?: CaseUpdateManyWithoutAssetNestedInput
     publicReports?: PublicReportUpdateManyWithoutAssetNestedInput
     externalObservations?: ExternalObservationUpdateManyWithoutAssetNestedInput
+    attentionReviews?: AssetAttentionReviewUpdateManyWithoutAssetNestedInput
   }
 
   export type AssetUncheckedUpdateWithoutSuggestedForTriageAnalysesInput = {
@@ -91229,6 +95066,7 @@ export namespace Prisma {
     cases?: CaseUncheckedUpdateManyWithoutAssetNestedInput
     publicReports?: PublicReportUncheckedUpdateManyWithoutAssetNestedInput
     externalObservations?: ExternalObservationUncheckedUpdateManyWithoutAssetNestedInput
+    attentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutAssetNestedInput
   }
 
   export type UserUpsertWithoutCreatedTriageAnalysesInput = {
@@ -91295,6 +95133,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUpdateManyWithoutRecordedByNestedInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
+    assetAttentionReviews?: AssetAttentionReviewUpdateManyWithoutReviewerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCreatedTriageAnalysesInput = {
@@ -91350,6 +95189,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedUpdateManyWithoutRecordedByNestedInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
+    assetAttentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutReviewerNestedInput
   }
 
   export type DepartmentCreateWithoutPolicyDocumentsInput = {
@@ -91483,6 +95323,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationCreateNestedManyWithoutRecordedByInput
     decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
+    assetAttentionReviews?: AssetAttentionReviewCreateNestedManyWithoutReviewerInput
   }
 
   export type UserUncheckedCreateWithoutCreatedPolicyDocumentsInput = {
@@ -91538,6 +95379,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedCreateNestedManyWithoutRecordedByInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
+    assetAttentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutReviewerInput
   }
 
   export type UserCreateOrConnectWithoutCreatedPolicyDocumentsInput = {
@@ -91598,6 +95440,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationCreateNestedManyWithoutRecordedByInput
     decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
+    assetAttentionReviews?: AssetAttentionReviewCreateNestedManyWithoutReviewerInput
   }
 
   export type UserUncheckedCreateWithoutApprovedPolicyDocumentsInput = {
@@ -91653,6 +95496,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedCreateNestedManyWithoutRecordedByInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
+    assetAttentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutReviewerInput
   }
 
   export type UserCreateOrConnectWithoutApprovedPolicyDocumentsInput = {
@@ -91908,6 +95752,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUpdateManyWithoutRecordedByNestedInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
+    assetAttentionReviews?: AssetAttentionReviewUpdateManyWithoutReviewerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCreatedPolicyDocumentsInput = {
@@ -91963,6 +95808,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedUpdateManyWithoutRecordedByNestedInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
+    assetAttentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutReviewerNestedInput
   }
 
   export type UserUpsertWithoutApprovedPolicyDocumentsInput = {
@@ -92029,6 +95875,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUpdateManyWithoutRecordedByNestedInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
+    assetAttentionReviews?: AssetAttentionReviewUpdateManyWithoutReviewerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutApprovedPolicyDocumentsInput = {
@@ -92084,6 +95931,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedUpdateManyWithoutRecordedByNestedInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
+    assetAttentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutReviewerNestedInput
   }
 
   export type PolicyRuleUpsertWithWhereUniqueWithoutPolicyDocumentInput = {
@@ -92314,6 +96162,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationCreateNestedManyWithoutRecordedByInput
     decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
+    assetAttentionReviews?: AssetAttentionReviewCreateNestedManyWithoutReviewerInput
   }
 
   export type UserUncheckedCreateWithoutCreatedApprovedActionsInput = {
@@ -92369,6 +96218,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedCreateNestedManyWithoutRecordedByInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
+    assetAttentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutReviewerInput
   }
 
   export type UserCreateOrConnectWithoutCreatedApprovedActionsInput = {
@@ -92429,6 +96279,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationCreateNestedManyWithoutRecordedByInput
     decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
+    assetAttentionReviews?: AssetAttentionReviewCreateNestedManyWithoutReviewerInput
   }
 
   export type UserUncheckedCreateWithoutApprovedApprovedActionsInput = {
@@ -92484,6 +96335,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedCreateNestedManyWithoutRecordedByInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
+    assetAttentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutReviewerInput
   }
 
   export type UserCreateOrConnectWithoutApprovedApprovedActionsInput = {
@@ -92882,6 +96734,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUpdateManyWithoutRecordedByNestedInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
+    assetAttentionReviews?: AssetAttentionReviewUpdateManyWithoutReviewerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCreatedApprovedActionsInput = {
@@ -92937,6 +96790,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedUpdateManyWithoutRecordedByNestedInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
+    assetAttentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutReviewerNestedInput
   }
 
   export type UserUpsertWithoutApprovedApprovedActionsInput = {
@@ -93003,6 +96857,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUpdateManyWithoutRecordedByNestedInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
+    assetAttentionReviews?: AssetAttentionReviewUpdateManyWithoutReviewerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutApprovedApprovedActionsInput = {
@@ -93058,6 +96913,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedUpdateManyWithoutRecordedByNestedInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
+    assetAttentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutReviewerNestedInput
   }
 
   export type PolicyRuleUpsertWithWhereUniqueWithoutActionInput = {
@@ -93294,6 +97150,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationCreateNestedManyWithoutRecordedByInput
     decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
+    assetAttentionReviews?: AssetAttentionReviewCreateNestedManyWithoutReviewerInput
   }
 
   export type UserUncheckedCreateWithoutCreatedGovernedExecutionTemplatesInput = {
@@ -93349,6 +97206,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedCreateNestedManyWithoutRecordedByInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
+    assetAttentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutReviewerInput
   }
 
   export type UserCreateOrConnectWithoutCreatedGovernedExecutionTemplatesInput = {
@@ -93409,6 +97267,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationCreateNestedManyWithoutRecordedByInput
     decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
+    assetAttentionReviews?: AssetAttentionReviewCreateNestedManyWithoutReviewerInput
   }
 
   export type UserUncheckedCreateWithoutApprovedGovernedExecutionTemplatesInput = {
@@ -93464,6 +97323,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedCreateNestedManyWithoutRecordedByInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
+    assetAttentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutReviewerInput
   }
 
   export type UserCreateOrConnectWithoutApprovedGovernedExecutionTemplatesInput = {
@@ -93824,6 +97684,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUpdateManyWithoutRecordedByNestedInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
+    assetAttentionReviews?: AssetAttentionReviewUpdateManyWithoutReviewerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCreatedGovernedExecutionTemplatesInput = {
@@ -93879,6 +97740,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedUpdateManyWithoutRecordedByNestedInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
+    assetAttentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutReviewerNestedInput
   }
 
   export type UserUpsertWithoutApprovedGovernedExecutionTemplatesInput = {
@@ -93945,6 +97807,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUpdateManyWithoutRecordedByNestedInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
+    assetAttentionReviews?: AssetAttentionReviewUpdateManyWithoutReviewerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutApprovedGovernedExecutionTemplatesInput = {
@@ -94000,6 +97863,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedUpdateManyWithoutRecordedByNestedInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
+    assetAttentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutReviewerNestedInput
   }
 
   export type GovernedExecutionTaskTemplateUpsertWithWhereUniqueWithoutExecutionTemplateInput = {
@@ -94498,6 +98362,7 @@ export namespace Prisma {
     publicReports?: PublicReportCreateNestedManyWithoutAssetInput
     suggestedForTriageAnalyses?: PublicReportTriageAnalysisCreateNestedManyWithoutPossibleAssetInput
     externalObservations?: ExternalObservationCreateNestedManyWithoutAssetInput
+    attentionReviews?: AssetAttentionReviewCreateNestedManyWithoutAssetInput
   }
 
   export type AssetUncheckedCreateWithoutCasesInput = {
@@ -94516,6 +98381,7 @@ export namespace Prisma {
     publicReports?: PublicReportUncheckedCreateNestedManyWithoutAssetInput
     suggestedForTriageAnalyses?: PublicReportTriageAnalysisUncheckedCreateNestedManyWithoutPossibleAssetInput
     externalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutAssetInput
+    attentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutAssetInput
   }
 
   export type AssetCreateOrConnectWithoutCasesInput = {
@@ -95093,6 +98959,56 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type AssetAttentionReviewCreateWithoutCaseInput = {
+    id?: string
+    reviewerRole: $Enums.SystemRole
+    departmentId: string
+    jurisdictionId: string
+    disposition: $Enums.AssetAttentionDisposition
+    rationale: string
+    attentionContractVersion: string
+    attentionCalculationVersion: string
+    projectionAsOf: Date | string
+    sourceSetFingerprint: string
+    clientRequestId: string
+    createdAt?: Date | string
+    asset: AssetCreateNestedOneWithoutAttentionReviewsInput
+    reviewer: UserCreateNestedOneWithoutAssetAttentionReviewsInput
+    supersedesReview?: AssetAttentionReviewCreateNestedOneWithoutSupersededByInput
+    supersededBy?: AssetAttentionReviewCreateNestedOneWithoutSupersedesReviewInput
+    selectedSignals?: AssetAttentionReviewSignalCreateNestedManyWithoutReviewInput
+  }
+
+  export type AssetAttentionReviewUncheckedCreateWithoutCaseInput = {
+    id?: string
+    assetId: string
+    reviewerId: string
+    reviewerRole: $Enums.SystemRole
+    departmentId: string
+    jurisdictionId: string
+    disposition: $Enums.AssetAttentionDisposition
+    rationale: string
+    attentionContractVersion: string
+    attentionCalculationVersion: string
+    projectionAsOf: Date | string
+    sourceSetFingerprint: string
+    clientRequestId: string
+    supersedesReviewId?: string | null
+    createdAt?: Date | string
+    supersededBy?: AssetAttentionReviewUncheckedCreateNestedOneWithoutSupersedesReviewInput
+    selectedSignals?: AssetAttentionReviewSignalUncheckedCreateNestedManyWithoutReviewInput
+  }
+
+  export type AssetAttentionReviewCreateOrConnectWithoutCaseInput = {
+    where: AssetAttentionReviewWhereUniqueInput
+    create: XOR<AssetAttentionReviewCreateWithoutCaseInput, AssetAttentionReviewUncheckedCreateWithoutCaseInput>
+  }
+
+  export type AssetAttentionReviewCreateManyCaseInputEnvelope = {
+    data: AssetAttentionReviewCreateManyCaseInput | AssetAttentionReviewCreateManyCaseInput[]
+    skipDuplicates?: boolean
+  }
+
   export type AssetUpsertWithoutCasesInput = {
     update: XOR<AssetUpdateWithoutCasesInput, AssetUncheckedUpdateWithoutCasesInput>
     create: XOR<AssetCreateWithoutCasesInput, AssetUncheckedCreateWithoutCasesInput>
@@ -95120,6 +99036,7 @@ export namespace Prisma {
     publicReports?: PublicReportUpdateManyWithoutAssetNestedInput
     suggestedForTriageAnalyses?: PublicReportTriageAnalysisUpdateManyWithoutPossibleAssetNestedInput
     externalObservations?: ExternalObservationUpdateManyWithoutAssetNestedInput
+    attentionReviews?: AssetAttentionReviewUpdateManyWithoutAssetNestedInput
   }
 
   export type AssetUncheckedUpdateWithoutCasesInput = {
@@ -95138,6 +99055,7 @@ export namespace Prisma {
     publicReports?: PublicReportUncheckedUpdateManyWithoutAssetNestedInput
     suggestedForTriageAnalyses?: PublicReportTriageAnalysisUncheckedUpdateManyWithoutPossibleAssetNestedInput
     externalObservations?: ExternalObservationUncheckedUpdateManyWithoutAssetNestedInput
+    attentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutAssetNestedInput
   }
 
   export type InspectionUpsertWithWhereUniqueWithoutCaseInput = {
@@ -95482,6 +99400,22 @@ export namespace Prisma {
     data: XOR<CaseResourceEstimateUpdateManyMutationInput, CaseResourceEstimateUncheckedUpdateManyWithoutCaseInput>
   }
 
+  export type AssetAttentionReviewUpsertWithWhereUniqueWithoutCaseInput = {
+    where: AssetAttentionReviewWhereUniqueInput
+    update: XOR<AssetAttentionReviewUpdateWithoutCaseInput, AssetAttentionReviewUncheckedUpdateWithoutCaseInput>
+    create: XOR<AssetAttentionReviewCreateWithoutCaseInput, AssetAttentionReviewUncheckedCreateWithoutCaseInput>
+  }
+
+  export type AssetAttentionReviewUpdateWithWhereUniqueWithoutCaseInput = {
+    where: AssetAttentionReviewWhereUniqueInput
+    data: XOR<AssetAttentionReviewUpdateWithoutCaseInput, AssetAttentionReviewUncheckedUpdateWithoutCaseInput>
+  }
+
+  export type AssetAttentionReviewUpdateManyWithWhereWithoutCaseInput = {
+    where: AssetAttentionReviewScalarWhereInput
+    data: XOR<AssetAttentionReviewUpdateManyMutationInput, AssetAttentionReviewUncheckedUpdateManyWithoutCaseInput>
+  }
+
   export type CaseCreateWithoutResourceEstimatesInput = {
     id?: string
     caseNumber: string
@@ -95506,6 +99440,7 @@ export namespace Prisma {
     intelligenceAssessments?: InfrastructureIntelligenceAssessmentCreateNestedManyWithoutCaseInput
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationCreateNestedManyWithoutCaseInput
     externalObservations?: ExternalObservationCreateNestedManyWithoutCaseInput
+    attentionReviews?: AssetAttentionReviewCreateNestedManyWithoutCaseInput
   }
 
   export type CaseUncheckedCreateWithoutResourceEstimatesInput = {
@@ -95532,6 +99467,7 @@ export namespace Prisma {
     intelligenceAssessments?: InfrastructureIntelligenceAssessmentUncheckedCreateNestedManyWithoutCaseInput
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUncheckedCreateNestedManyWithoutCaseInput
     externalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutCaseInput
+    attentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutCaseInput
   }
 
   export type CaseCreateOrConnectWithoutResourceEstimatesInput = {
@@ -95592,6 +99528,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationCreateNestedManyWithoutRecordedByInput
     decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
+    assetAttentionReviews?: AssetAttentionReviewCreateNestedManyWithoutReviewerInput
   }
 
   export type UserUncheckedCreateWithoutPreparedCaseResourceEstimatesInput = {
@@ -95647,6 +99584,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedCreateNestedManyWithoutRecordedByInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
+    assetAttentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutReviewerInput
   }
 
   export type UserCreateOrConnectWithoutPreparedCaseResourceEstimatesInput = {
@@ -95689,6 +99627,7 @@ export namespace Prisma {
     intelligenceAssessments?: InfrastructureIntelligenceAssessmentUpdateManyWithoutCaseNestedInput
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUpdateManyWithoutCaseNestedInput
     externalObservations?: ExternalObservationUpdateManyWithoutCaseNestedInput
+    attentionReviews?: AssetAttentionReviewUpdateManyWithoutCaseNestedInput
   }
 
   export type CaseUncheckedUpdateWithoutResourceEstimatesInput = {
@@ -95715,6 +99654,7 @@ export namespace Prisma {
     intelligenceAssessments?: InfrastructureIntelligenceAssessmentUncheckedUpdateManyWithoutCaseNestedInput
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUncheckedUpdateManyWithoutCaseNestedInput
     externalObservations?: ExternalObservationUncheckedUpdateManyWithoutCaseNestedInput
+    attentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutCaseNestedInput
   }
 
   export type UserUpsertWithoutPreparedCaseResourceEstimatesInput = {
@@ -95781,6 +99721,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUpdateManyWithoutRecordedByNestedInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
+    assetAttentionReviews?: AssetAttentionReviewUpdateManyWithoutReviewerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPreparedCaseResourceEstimatesInput = {
@@ -95836,6 +99777,808 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedUpdateManyWithoutRecordedByNestedInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
+    assetAttentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutReviewerNestedInput
+  }
+
+  export type AssetCreateWithoutAttentionReviewsInput = {
+    id?: string
+    assetCode: string
+    name: string
+    assetType: $Enums.AssetType
+    latitude?: Decimal | DecimalJsLike | number | string | null
+    longitude?: Decimal | DecimalJsLike | number | string | null
+    constructionYear?: number | null
+    conditionStatus?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    department: DepartmentCreateNestedOneWithoutAssetsInput
+    jurisdiction: JurisdictionCreateNestedOneWithoutAssetsInput
+    cases?: CaseCreateNestedManyWithoutAssetInput
+    publicReports?: PublicReportCreateNestedManyWithoutAssetInput
+    suggestedForTriageAnalyses?: PublicReportTriageAnalysisCreateNestedManyWithoutPossibleAssetInput
+    externalObservations?: ExternalObservationCreateNestedManyWithoutAssetInput
+  }
+
+  export type AssetUncheckedCreateWithoutAttentionReviewsInput = {
+    id?: string
+    assetCode: string
+    name: string
+    assetType: $Enums.AssetType
+    departmentId: string
+    jurisdictionId: string
+    latitude?: Decimal | DecimalJsLike | number | string | null
+    longitude?: Decimal | DecimalJsLike | number | string | null
+    constructionYear?: number | null
+    conditionStatus?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    cases?: CaseUncheckedCreateNestedManyWithoutAssetInput
+    publicReports?: PublicReportUncheckedCreateNestedManyWithoutAssetInput
+    suggestedForTriageAnalyses?: PublicReportTriageAnalysisUncheckedCreateNestedManyWithoutPossibleAssetInput
+    externalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutAssetInput
+  }
+
+  export type AssetCreateOrConnectWithoutAttentionReviewsInput = {
+    where: AssetWhereUniqueInput
+    create: XOR<AssetCreateWithoutAttentionReviewsInput, AssetUncheckedCreateWithoutAttentionReviewsInput>
+  }
+
+  export type CaseCreateWithoutAttentionReviewsInput = {
+    id?: string
+    caseNumber: string
+    title: string
+    description?: string | null
+    status?: $Enums.CaseStatus
+    riskLevel?: $Enums.RiskLevel | null
+    priorityLevel?: $Enums.PriorityLevel | null
+    emergencyFlag?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    closedAt?: Date | string | null
+    asset: AssetCreateNestedOneWithoutCasesInput
+    inspections?: InspectionCreateNestedManyWithoutCaseInput
+    riskAssessments?: RiskAssessmentCreateNestedManyWithoutCaseInput
+    operationalResponsePlans?: OperationalResponsePlanCreateNestedManyWithoutCaseInput
+    orpDecisions?: OrpDecisionCreateNestedManyWithoutCaseInput
+    executionPlans?: ExecutionPlanCreateNestedManyWithoutCaseInput
+    closure?: CaseClosureCreateNestedOneWithoutCaseInput
+    sourcePublicReport?: PublicReportCreateNestedOneWithoutCreatedCaseInput
+    decisionPackages?: DecisionPackageCreateNestedManyWithoutCaseInput
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentCreateNestedManyWithoutCaseInput
+    intelligenceReconciliations?: InfrastructureIntelligenceReconciliationCreateNestedManyWithoutCaseInput
+    externalObservations?: ExternalObservationCreateNestedManyWithoutCaseInput
+    resourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutCaseInput
+  }
+
+  export type CaseUncheckedCreateWithoutAttentionReviewsInput = {
+    id?: string
+    caseNumber: string
+    assetId: string
+    title: string
+    description?: string | null
+    status?: $Enums.CaseStatus
+    riskLevel?: $Enums.RiskLevel | null
+    priorityLevel?: $Enums.PriorityLevel | null
+    emergencyFlag?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    closedAt?: Date | string | null
+    inspections?: InspectionUncheckedCreateNestedManyWithoutCaseInput
+    riskAssessments?: RiskAssessmentUncheckedCreateNestedManyWithoutCaseInput
+    operationalResponsePlans?: OperationalResponsePlanUncheckedCreateNestedManyWithoutCaseInput
+    orpDecisions?: OrpDecisionUncheckedCreateNestedManyWithoutCaseInput
+    executionPlans?: ExecutionPlanUncheckedCreateNestedManyWithoutCaseInput
+    closure?: CaseClosureUncheckedCreateNestedOneWithoutCaseInput
+    sourcePublicReport?: PublicReportUncheckedCreateNestedOneWithoutCreatedCaseInput
+    decisionPackages?: DecisionPackageUncheckedCreateNestedManyWithoutCaseInput
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentUncheckedCreateNestedManyWithoutCaseInput
+    intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUncheckedCreateNestedManyWithoutCaseInput
+    externalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutCaseInput
+    resourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutCaseInput
+  }
+
+  export type CaseCreateOrConnectWithoutAttentionReviewsInput = {
+    where: CaseWhereUniqueInput
+    create: XOR<CaseCreateWithoutAttentionReviewsInput, CaseUncheckedCreateWithoutAttentionReviewsInput>
+  }
+
+  export type UserCreateWithoutAssetAttentionReviewsInput = {
+    id?: string
+    employeeCode: string
+    name: string
+    email: string
+    passwordHash: string
+    designation: string
+    role?: $Enums.SystemRole
+    status?: $Enums.UserStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    department: DepartmentCreateNestedOneWithoutUsersInput
+    jurisdiction: JurisdictionCreateNestedOneWithoutUsersInput
+    inspections?: InspectionCreateNestedManyWithoutInspectorInput
+    approvalAuthorities?: ApprovalAuthorityCreateNestedManyWithoutUserInput
+    reviewedOrpDecisions?: OrpDecisionCreateNestedManyWithoutReviewerInput
+    forwardedOrpDecisions?: OrpDecisionCreateNestedManyWithoutForwardedUserInput
+    createdExecutionPlans?: ExecutionPlanCreateNestedManyWithoutCreatedByInput
+    assignedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutAssignedToInput
+    assignedByExecutionTasks?: ExecutionTaskCreateNestedManyWithoutAssignedByInput
+    completedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCompletionSubmittedByInput
+    verifiedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutVerifiedByInput
+    cancelledExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCancelledByInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionCreateNestedManyWithoutChangedByInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutBlockedByInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutResolvedByInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyCreateNestedManyWithoutCreatedByInput
+    submittedExecutionEvidence?: ExecutionEvidenceCreateNestedManyWithoutSubmittedByInput
+    closedCases?: CaseClosureCreateNestedManyWithoutClosedByInput
+    reviewedPublicReports?: PublicReportCreateNestedManyWithoutReviewedByInput
+    decidedPublicReports?: PublicReportCreateNestedManyWithoutDecisionByInput
+    createdTriageAnalyses?: PublicReportTriageAnalysisCreateNestedManyWithoutCreatedByInput
+    createdPolicyDocuments?: PolicyDocumentCreateNestedManyWithoutCreatedByInput
+    approvedPolicyDocuments?: PolicyDocumentCreateNestedManyWithoutApprovedByInput
+    createdApprovedActions?: ApprovedActionVersionCreateNestedManyWithoutCreatedByInput
+    approvedApprovedActions?: ApprovedActionVersionCreateNestedManyWithoutApprovedByInput
+    preparedDecisionPackages?: DecisionPackageCreateNestedManyWithoutPreparedByInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutCreatedByInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutApprovedByInput
+    createdObservationSources?: ObservationSourceCreateNestedManyWithoutCreatedByInput
+    deactivatedObservationSources?: ObservationSourceCreateNestedManyWithoutDeactivatedByInput
+    ingestedExternalObservations?: ExternalObservationCreateNestedManyWithoutIngestedByInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutPreparedByInput
+    createdPortfolioScenarios?: PortfolioScenarioCreateNestedManyWithoutCreatedByInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutCreatedByInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutVoidedByInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutRecordedByInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutVoidedByInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotCreateNestedManyWithoutCreatedByInput
+    createdPredictiveModelVersions?: PredictiveModelVersionCreateNestedManyWithoutCreatedByInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionCreateNestedManyWithoutValidatedByInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationCreateNestedManyWithoutRecordedByInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
+  }
+
+  export type UserUncheckedCreateWithoutAssetAttentionReviewsInput = {
+    id?: string
+    employeeCode: string
+    name: string
+    email: string
+    passwordHash: string
+    designation: string
+    role?: $Enums.SystemRole
+    status?: $Enums.UserStatus
+    departmentId: string
+    jurisdictionId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    inspections?: InspectionUncheckedCreateNestedManyWithoutInspectorInput
+    approvalAuthorities?: ApprovalAuthorityUncheckedCreateNestedManyWithoutUserInput
+    reviewedOrpDecisions?: OrpDecisionUncheckedCreateNestedManyWithoutReviewerInput
+    forwardedOrpDecisions?: OrpDecisionUncheckedCreateNestedManyWithoutForwardedUserInput
+    createdExecutionPlans?: ExecutionPlanUncheckedCreateNestedManyWithoutCreatedByInput
+    assignedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutAssignedToInput
+    assignedByExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutAssignedByInput
+    completedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCompletionSubmittedByInput
+    verifiedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutVerifiedByInput
+    cancelledExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCancelledByInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUncheckedCreateNestedManyWithoutChangedByInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutBlockedByInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutResolvedByInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutCreatedByInput
+    submittedExecutionEvidence?: ExecutionEvidenceUncheckedCreateNestedManyWithoutSubmittedByInput
+    closedCases?: CaseClosureUncheckedCreateNestedManyWithoutClosedByInput
+    reviewedPublicReports?: PublicReportUncheckedCreateNestedManyWithoutReviewedByInput
+    decidedPublicReports?: PublicReportUncheckedCreateNestedManyWithoutDecisionByInput
+    createdTriageAnalyses?: PublicReportTriageAnalysisUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPolicyDocuments?: PolicyDocumentUncheckedCreateNestedManyWithoutCreatedByInput
+    approvedPolicyDocuments?: PolicyDocumentUncheckedCreateNestedManyWithoutApprovedByInput
+    createdApprovedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutCreatedByInput
+    approvedApprovedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutApprovedByInput
+    preparedDecisionPackages?: DecisionPackageUncheckedCreateNestedManyWithoutPreparedByInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutCreatedByInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutApprovedByInput
+    createdObservationSources?: ObservationSourceUncheckedCreateNestedManyWithoutCreatedByInput
+    deactivatedObservationSources?: ObservationSourceUncheckedCreateNestedManyWithoutDeactivatedByInput
+    ingestedExternalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutIngestedByInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutPreparedByInput
+    createdPortfolioScenarios?: PortfolioScenarioUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutCreatedByInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutVoidedByInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutRecordedByInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutVoidedByInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUncheckedCreateNestedManyWithoutCreatedByInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUncheckedCreateNestedManyWithoutValidatedByInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedCreateNestedManyWithoutRecordedByInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
+  }
+
+  export type UserCreateOrConnectWithoutAssetAttentionReviewsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutAssetAttentionReviewsInput, UserUncheckedCreateWithoutAssetAttentionReviewsInput>
+  }
+
+  export type AssetAttentionReviewCreateWithoutSupersededByInput = {
+    id?: string
+    reviewerRole: $Enums.SystemRole
+    departmentId: string
+    jurisdictionId: string
+    disposition: $Enums.AssetAttentionDisposition
+    rationale: string
+    attentionContractVersion: string
+    attentionCalculationVersion: string
+    projectionAsOf: Date | string
+    sourceSetFingerprint: string
+    clientRequestId: string
+    createdAt?: Date | string
+    asset: AssetCreateNestedOneWithoutAttentionReviewsInput
+    case?: CaseCreateNestedOneWithoutAttentionReviewsInput
+    reviewer: UserCreateNestedOneWithoutAssetAttentionReviewsInput
+    supersedesReview?: AssetAttentionReviewCreateNestedOneWithoutSupersededByInput
+    selectedSignals?: AssetAttentionReviewSignalCreateNestedManyWithoutReviewInput
+  }
+
+  export type AssetAttentionReviewUncheckedCreateWithoutSupersededByInput = {
+    id?: string
+    assetId: string
+    caseId?: string | null
+    reviewerId: string
+    reviewerRole: $Enums.SystemRole
+    departmentId: string
+    jurisdictionId: string
+    disposition: $Enums.AssetAttentionDisposition
+    rationale: string
+    attentionContractVersion: string
+    attentionCalculationVersion: string
+    projectionAsOf: Date | string
+    sourceSetFingerprint: string
+    clientRequestId: string
+    supersedesReviewId?: string | null
+    createdAt?: Date | string
+    selectedSignals?: AssetAttentionReviewSignalUncheckedCreateNestedManyWithoutReviewInput
+  }
+
+  export type AssetAttentionReviewCreateOrConnectWithoutSupersededByInput = {
+    where: AssetAttentionReviewWhereUniqueInput
+    create: XOR<AssetAttentionReviewCreateWithoutSupersededByInput, AssetAttentionReviewUncheckedCreateWithoutSupersededByInput>
+  }
+
+  export type AssetAttentionReviewCreateWithoutSupersedesReviewInput = {
+    id?: string
+    reviewerRole: $Enums.SystemRole
+    departmentId: string
+    jurisdictionId: string
+    disposition: $Enums.AssetAttentionDisposition
+    rationale: string
+    attentionContractVersion: string
+    attentionCalculationVersion: string
+    projectionAsOf: Date | string
+    sourceSetFingerprint: string
+    clientRequestId: string
+    createdAt?: Date | string
+    asset: AssetCreateNestedOneWithoutAttentionReviewsInput
+    case?: CaseCreateNestedOneWithoutAttentionReviewsInput
+    reviewer: UserCreateNestedOneWithoutAssetAttentionReviewsInput
+    supersededBy?: AssetAttentionReviewCreateNestedOneWithoutSupersedesReviewInput
+    selectedSignals?: AssetAttentionReviewSignalCreateNestedManyWithoutReviewInput
+  }
+
+  export type AssetAttentionReviewUncheckedCreateWithoutSupersedesReviewInput = {
+    id?: string
+    assetId: string
+    caseId?: string | null
+    reviewerId: string
+    reviewerRole: $Enums.SystemRole
+    departmentId: string
+    jurisdictionId: string
+    disposition: $Enums.AssetAttentionDisposition
+    rationale: string
+    attentionContractVersion: string
+    attentionCalculationVersion: string
+    projectionAsOf: Date | string
+    sourceSetFingerprint: string
+    clientRequestId: string
+    createdAt?: Date | string
+    supersededBy?: AssetAttentionReviewUncheckedCreateNestedOneWithoutSupersedesReviewInput
+    selectedSignals?: AssetAttentionReviewSignalUncheckedCreateNestedManyWithoutReviewInput
+  }
+
+  export type AssetAttentionReviewCreateOrConnectWithoutSupersedesReviewInput = {
+    where: AssetAttentionReviewWhereUniqueInput
+    create: XOR<AssetAttentionReviewCreateWithoutSupersedesReviewInput, AssetAttentionReviewUncheckedCreateWithoutSupersedesReviewInput>
+  }
+
+  export type AssetAttentionReviewSignalCreateWithoutReviewInput = {
+    id?: string
+    category: string
+    signalCode: string
+    state: string
+    evidenceReferenceFingerprint: string
+    createdAt?: Date | string
+  }
+
+  export type AssetAttentionReviewSignalUncheckedCreateWithoutReviewInput = {
+    id?: string
+    category: string
+    signalCode: string
+    state: string
+    evidenceReferenceFingerprint: string
+    createdAt?: Date | string
+  }
+
+  export type AssetAttentionReviewSignalCreateOrConnectWithoutReviewInput = {
+    where: AssetAttentionReviewSignalWhereUniqueInput
+    create: XOR<AssetAttentionReviewSignalCreateWithoutReviewInput, AssetAttentionReviewSignalUncheckedCreateWithoutReviewInput>
+  }
+
+  export type AssetAttentionReviewSignalCreateManyReviewInputEnvelope = {
+    data: AssetAttentionReviewSignalCreateManyReviewInput | AssetAttentionReviewSignalCreateManyReviewInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type AssetUpsertWithoutAttentionReviewsInput = {
+    update: XOR<AssetUpdateWithoutAttentionReviewsInput, AssetUncheckedUpdateWithoutAttentionReviewsInput>
+    create: XOR<AssetCreateWithoutAttentionReviewsInput, AssetUncheckedCreateWithoutAttentionReviewsInput>
+    where?: AssetWhereInput
+  }
+
+  export type AssetUpdateToOneWithWhereWithoutAttentionReviewsInput = {
+    where?: AssetWhereInput
+    data: XOR<AssetUpdateWithoutAttentionReviewsInput, AssetUncheckedUpdateWithoutAttentionReviewsInput>
+  }
+
+  export type AssetUpdateWithoutAttentionReviewsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    assetCode?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    assetType?: EnumAssetTypeFieldUpdateOperationsInput | $Enums.AssetType
+    latitude?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    longitude?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    constructionYear?: NullableIntFieldUpdateOperationsInput | number | null
+    conditionStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    department?: DepartmentUpdateOneRequiredWithoutAssetsNestedInput
+    jurisdiction?: JurisdictionUpdateOneRequiredWithoutAssetsNestedInput
+    cases?: CaseUpdateManyWithoutAssetNestedInput
+    publicReports?: PublicReportUpdateManyWithoutAssetNestedInput
+    suggestedForTriageAnalyses?: PublicReportTriageAnalysisUpdateManyWithoutPossibleAssetNestedInput
+    externalObservations?: ExternalObservationUpdateManyWithoutAssetNestedInput
+  }
+
+  export type AssetUncheckedUpdateWithoutAttentionReviewsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    assetCode?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    assetType?: EnumAssetTypeFieldUpdateOperationsInput | $Enums.AssetType
+    departmentId?: StringFieldUpdateOperationsInput | string
+    jurisdictionId?: StringFieldUpdateOperationsInput | string
+    latitude?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    longitude?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    constructionYear?: NullableIntFieldUpdateOperationsInput | number | null
+    conditionStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    cases?: CaseUncheckedUpdateManyWithoutAssetNestedInput
+    publicReports?: PublicReportUncheckedUpdateManyWithoutAssetNestedInput
+    suggestedForTriageAnalyses?: PublicReportTriageAnalysisUncheckedUpdateManyWithoutPossibleAssetNestedInput
+    externalObservations?: ExternalObservationUncheckedUpdateManyWithoutAssetNestedInput
+  }
+
+  export type CaseUpsertWithoutAttentionReviewsInput = {
+    update: XOR<CaseUpdateWithoutAttentionReviewsInput, CaseUncheckedUpdateWithoutAttentionReviewsInput>
+    create: XOR<CaseCreateWithoutAttentionReviewsInput, CaseUncheckedCreateWithoutAttentionReviewsInput>
+    where?: CaseWhereInput
+  }
+
+  export type CaseUpdateToOneWithWhereWithoutAttentionReviewsInput = {
+    where?: CaseWhereInput
+    data: XOR<CaseUpdateWithoutAttentionReviewsInput, CaseUncheckedUpdateWithoutAttentionReviewsInput>
+  }
+
+  export type CaseUpdateWithoutAttentionReviewsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    caseNumber?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumCaseStatusFieldUpdateOperationsInput | $Enums.CaseStatus
+    riskLevel?: NullableEnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel | null
+    priorityLevel?: NullableEnumPriorityLevelFieldUpdateOperationsInput | $Enums.PriorityLevel | null
+    emergencyFlag?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    asset?: AssetUpdateOneRequiredWithoutCasesNestedInput
+    inspections?: InspectionUpdateManyWithoutCaseNestedInput
+    riskAssessments?: RiskAssessmentUpdateManyWithoutCaseNestedInput
+    operationalResponsePlans?: OperationalResponsePlanUpdateManyWithoutCaseNestedInput
+    orpDecisions?: OrpDecisionUpdateManyWithoutCaseNestedInput
+    executionPlans?: ExecutionPlanUpdateManyWithoutCaseNestedInput
+    closure?: CaseClosureUpdateOneWithoutCaseNestedInput
+    sourcePublicReport?: PublicReportUpdateOneWithoutCreatedCaseNestedInput
+    decisionPackages?: DecisionPackageUpdateManyWithoutCaseNestedInput
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentUpdateManyWithoutCaseNestedInput
+    intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUpdateManyWithoutCaseNestedInput
+    externalObservations?: ExternalObservationUpdateManyWithoutCaseNestedInput
+    resourceEstimates?: CaseResourceEstimateUpdateManyWithoutCaseNestedInput
+  }
+
+  export type CaseUncheckedUpdateWithoutAttentionReviewsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    caseNumber?: StringFieldUpdateOperationsInput | string
+    assetId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumCaseStatusFieldUpdateOperationsInput | $Enums.CaseStatus
+    riskLevel?: NullableEnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel | null
+    priorityLevel?: NullableEnumPriorityLevelFieldUpdateOperationsInput | $Enums.PriorityLevel | null
+    emergencyFlag?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    inspections?: InspectionUncheckedUpdateManyWithoutCaseNestedInput
+    riskAssessments?: RiskAssessmentUncheckedUpdateManyWithoutCaseNestedInput
+    operationalResponsePlans?: OperationalResponsePlanUncheckedUpdateManyWithoutCaseNestedInput
+    orpDecisions?: OrpDecisionUncheckedUpdateManyWithoutCaseNestedInput
+    executionPlans?: ExecutionPlanUncheckedUpdateManyWithoutCaseNestedInput
+    closure?: CaseClosureUncheckedUpdateOneWithoutCaseNestedInput
+    sourcePublicReport?: PublicReportUncheckedUpdateOneWithoutCreatedCaseNestedInput
+    decisionPackages?: DecisionPackageUncheckedUpdateManyWithoutCaseNestedInput
+    intelligenceAssessments?: InfrastructureIntelligenceAssessmentUncheckedUpdateManyWithoutCaseNestedInput
+    intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUncheckedUpdateManyWithoutCaseNestedInput
+    externalObservations?: ExternalObservationUncheckedUpdateManyWithoutCaseNestedInput
+    resourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutCaseNestedInput
+  }
+
+  export type UserUpsertWithoutAssetAttentionReviewsInput = {
+    update: XOR<UserUpdateWithoutAssetAttentionReviewsInput, UserUncheckedUpdateWithoutAssetAttentionReviewsInput>
+    create: XOR<UserCreateWithoutAssetAttentionReviewsInput, UserUncheckedCreateWithoutAssetAttentionReviewsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutAssetAttentionReviewsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutAssetAttentionReviewsInput, UserUncheckedUpdateWithoutAssetAttentionReviewsInput>
+  }
+
+  export type UserUpdateWithoutAssetAttentionReviewsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    employeeCode?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    designation?: StringFieldUpdateOperationsInput | string
+    role?: EnumSystemRoleFieldUpdateOperationsInput | $Enums.SystemRole
+    status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    department?: DepartmentUpdateOneRequiredWithoutUsersNestedInput
+    jurisdiction?: JurisdictionUpdateOneRequiredWithoutUsersNestedInput
+    inspections?: InspectionUpdateManyWithoutInspectorNestedInput
+    approvalAuthorities?: ApprovalAuthorityUpdateManyWithoutUserNestedInput
+    reviewedOrpDecisions?: OrpDecisionUpdateManyWithoutReviewerNestedInput
+    forwardedOrpDecisions?: OrpDecisionUpdateManyWithoutForwardedUserNestedInput
+    createdExecutionPlans?: ExecutionPlanUpdateManyWithoutCreatedByNestedInput
+    assignedExecutionTasks?: ExecutionTaskUpdateManyWithoutAssignedToNestedInput
+    assignedByExecutionTasks?: ExecutionTaskUpdateManyWithoutAssignedByNestedInput
+    completedExecutionTasks?: ExecutionTaskUpdateManyWithoutCompletionSubmittedByNestedInput
+    verifiedExecutionTasks?: ExecutionTaskUpdateManyWithoutVerifiedByNestedInput
+    cancelledExecutionTasks?: ExecutionTaskUpdateManyWithoutCancelledByNestedInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUpdateManyWithoutChangedByNestedInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUpdateManyWithoutBlockedByNestedInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUpdateManyWithoutResolvedByNestedInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUpdateManyWithoutCreatedByNestedInput
+    submittedExecutionEvidence?: ExecutionEvidenceUpdateManyWithoutSubmittedByNestedInput
+    closedCases?: CaseClosureUpdateManyWithoutClosedByNestedInput
+    reviewedPublicReports?: PublicReportUpdateManyWithoutReviewedByNestedInput
+    decidedPublicReports?: PublicReportUpdateManyWithoutDecisionByNestedInput
+    createdTriageAnalyses?: PublicReportTriageAnalysisUpdateManyWithoutCreatedByNestedInput
+    createdPolicyDocuments?: PolicyDocumentUpdateManyWithoutCreatedByNestedInput
+    approvedPolicyDocuments?: PolicyDocumentUpdateManyWithoutApprovedByNestedInput
+    createdApprovedActions?: ApprovedActionVersionUpdateManyWithoutCreatedByNestedInput
+    approvedApprovedActions?: ApprovedActionVersionUpdateManyWithoutApprovedByNestedInput
+    preparedDecisionPackages?: DecisionPackageUpdateManyWithoutPreparedByNestedInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutCreatedByNestedInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutApprovedByNestedInput
+    createdObservationSources?: ObservationSourceUpdateManyWithoutCreatedByNestedInput
+    deactivatedObservationSources?: ObservationSourceUpdateManyWithoutDeactivatedByNestedInput
+    ingestedExternalObservations?: ExternalObservationUpdateManyWithoutIngestedByNestedInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUpdateManyWithoutPreparedByNestedInput
+    createdPortfolioScenarios?: PortfolioScenarioUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutCreatedByNestedInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutVoidedByNestedInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutRecordedByNestedInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutVoidedByNestedInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUpdateManyWithoutCreatedByNestedInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUpdateManyWithoutValidatedByNestedInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUpdateManyWithoutRecordedByNestedInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutAssetAttentionReviewsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    employeeCode?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    designation?: StringFieldUpdateOperationsInput | string
+    role?: EnumSystemRoleFieldUpdateOperationsInput | $Enums.SystemRole
+    status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+    departmentId?: StringFieldUpdateOperationsInput | string
+    jurisdictionId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    inspections?: InspectionUncheckedUpdateManyWithoutInspectorNestedInput
+    approvalAuthorities?: ApprovalAuthorityUncheckedUpdateManyWithoutUserNestedInput
+    reviewedOrpDecisions?: OrpDecisionUncheckedUpdateManyWithoutReviewerNestedInput
+    forwardedOrpDecisions?: OrpDecisionUncheckedUpdateManyWithoutForwardedUserNestedInput
+    createdExecutionPlans?: ExecutionPlanUncheckedUpdateManyWithoutCreatedByNestedInput
+    assignedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutAssignedToNestedInput
+    assignedByExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutAssignedByNestedInput
+    completedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCompletionSubmittedByNestedInput
+    verifiedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutVerifiedByNestedInput
+    cancelledExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCancelledByNestedInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUncheckedUpdateManyWithoutChangedByNestedInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutBlockedByNestedInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutResolvedByNestedInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUncheckedUpdateManyWithoutCreatedByNestedInput
+    submittedExecutionEvidence?: ExecutionEvidenceUncheckedUpdateManyWithoutSubmittedByNestedInput
+    closedCases?: CaseClosureUncheckedUpdateManyWithoutClosedByNestedInput
+    reviewedPublicReports?: PublicReportUncheckedUpdateManyWithoutReviewedByNestedInput
+    decidedPublicReports?: PublicReportUncheckedUpdateManyWithoutDecisionByNestedInput
+    createdTriageAnalyses?: PublicReportTriageAnalysisUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPolicyDocuments?: PolicyDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
+    approvedPolicyDocuments?: PolicyDocumentUncheckedUpdateManyWithoutApprovedByNestedInput
+    createdApprovedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutCreatedByNestedInput
+    approvedApprovedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutApprovedByNestedInput
+    preparedDecisionPackages?: DecisionPackageUncheckedUpdateManyWithoutPreparedByNestedInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutCreatedByNestedInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutApprovedByNestedInput
+    createdObservationSources?: ObservationSourceUncheckedUpdateManyWithoutCreatedByNestedInput
+    deactivatedObservationSources?: ObservationSourceUncheckedUpdateManyWithoutDeactivatedByNestedInput
+    ingestedExternalObservations?: ExternalObservationUncheckedUpdateManyWithoutIngestedByNestedInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutPreparedByNestedInput
+    createdPortfolioScenarios?: PortfolioScenarioUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutCreatedByNestedInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutVoidedByNestedInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutRecordedByNestedInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutVoidedByNestedInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUncheckedUpdateManyWithoutCreatedByNestedInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUncheckedUpdateManyWithoutValidatedByNestedInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedUpdateManyWithoutRecordedByNestedInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
+  }
+
+  export type AssetAttentionReviewUpsertWithoutSupersededByInput = {
+    update: XOR<AssetAttentionReviewUpdateWithoutSupersededByInput, AssetAttentionReviewUncheckedUpdateWithoutSupersededByInput>
+    create: XOR<AssetAttentionReviewCreateWithoutSupersededByInput, AssetAttentionReviewUncheckedCreateWithoutSupersededByInput>
+    where?: AssetAttentionReviewWhereInput
+  }
+
+  export type AssetAttentionReviewUpdateToOneWithWhereWithoutSupersededByInput = {
+    where?: AssetAttentionReviewWhereInput
+    data: XOR<AssetAttentionReviewUpdateWithoutSupersededByInput, AssetAttentionReviewUncheckedUpdateWithoutSupersededByInput>
+  }
+
+  export type AssetAttentionReviewUpdateWithoutSupersededByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reviewerRole?: EnumSystemRoleFieldUpdateOperationsInput | $Enums.SystemRole
+    departmentId?: StringFieldUpdateOperationsInput | string
+    jurisdictionId?: StringFieldUpdateOperationsInput | string
+    disposition?: EnumAssetAttentionDispositionFieldUpdateOperationsInput | $Enums.AssetAttentionDisposition
+    rationale?: StringFieldUpdateOperationsInput | string
+    attentionContractVersion?: StringFieldUpdateOperationsInput | string
+    attentionCalculationVersion?: StringFieldUpdateOperationsInput | string
+    projectionAsOf?: DateTimeFieldUpdateOperationsInput | Date | string
+    sourceSetFingerprint?: StringFieldUpdateOperationsInput | string
+    clientRequestId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    asset?: AssetUpdateOneRequiredWithoutAttentionReviewsNestedInput
+    case?: CaseUpdateOneWithoutAttentionReviewsNestedInput
+    reviewer?: UserUpdateOneRequiredWithoutAssetAttentionReviewsNestedInput
+    supersedesReview?: AssetAttentionReviewUpdateOneWithoutSupersededByNestedInput
+    selectedSignals?: AssetAttentionReviewSignalUpdateManyWithoutReviewNestedInput
+  }
+
+  export type AssetAttentionReviewUncheckedUpdateWithoutSupersededByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    assetId?: StringFieldUpdateOperationsInput | string
+    caseId?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewerId?: StringFieldUpdateOperationsInput | string
+    reviewerRole?: EnumSystemRoleFieldUpdateOperationsInput | $Enums.SystemRole
+    departmentId?: StringFieldUpdateOperationsInput | string
+    jurisdictionId?: StringFieldUpdateOperationsInput | string
+    disposition?: EnumAssetAttentionDispositionFieldUpdateOperationsInput | $Enums.AssetAttentionDisposition
+    rationale?: StringFieldUpdateOperationsInput | string
+    attentionContractVersion?: StringFieldUpdateOperationsInput | string
+    attentionCalculationVersion?: StringFieldUpdateOperationsInput | string
+    projectionAsOf?: DateTimeFieldUpdateOperationsInput | Date | string
+    sourceSetFingerprint?: StringFieldUpdateOperationsInput | string
+    clientRequestId?: StringFieldUpdateOperationsInput | string
+    supersedesReviewId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    selectedSignals?: AssetAttentionReviewSignalUncheckedUpdateManyWithoutReviewNestedInput
+  }
+
+  export type AssetAttentionReviewUpsertWithoutSupersedesReviewInput = {
+    update: XOR<AssetAttentionReviewUpdateWithoutSupersedesReviewInput, AssetAttentionReviewUncheckedUpdateWithoutSupersedesReviewInput>
+    create: XOR<AssetAttentionReviewCreateWithoutSupersedesReviewInput, AssetAttentionReviewUncheckedCreateWithoutSupersedesReviewInput>
+    where?: AssetAttentionReviewWhereInput
+  }
+
+  export type AssetAttentionReviewUpdateToOneWithWhereWithoutSupersedesReviewInput = {
+    where?: AssetAttentionReviewWhereInput
+    data: XOR<AssetAttentionReviewUpdateWithoutSupersedesReviewInput, AssetAttentionReviewUncheckedUpdateWithoutSupersedesReviewInput>
+  }
+
+  export type AssetAttentionReviewUpdateWithoutSupersedesReviewInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reviewerRole?: EnumSystemRoleFieldUpdateOperationsInput | $Enums.SystemRole
+    departmentId?: StringFieldUpdateOperationsInput | string
+    jurisdictionId?: StringFieldUpdateOperationsInput | string
+    disposition?: EnumAssetAttentionDispositionFieldUpdateOperationsInput | $Enums.AssetAttentionDisposition
+    rationale?: StringFieldUpdateOperationsInput | string
+    attentionContractVersion?: StringFieldUpdateOperationsInput | string
+    attentionCalculationVersion?: StringFieldUpdateOperationsInput | string
+    projectionAsOf?: DateTimeFieldUpdateOperationsInput | Date | string
+    sourceSetFingerprint?: StringFieldUpdateOperationsInput | string
+    clientRequestId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    asset?: AssetUpdateOneRequiredWithoutAttentionReviewsNestedInput
+    case?: CaseUpdateOneWithoutAttentionReviewsNestedInput
+    reviewer?: UserUpdateOneRequiredWithoutAssetAttentionReviewsNestedInput
+    supersededBy?: AssetAttentionReviewUpdateOneWithoutSupersedesReviewNestedInput
+    selectedSignals?: AssetAttentionReviewSignalUpdateManyWithoutReviewNestedInput
+  }
+
+  export type AssetAttentionReviewUncheckedUpdateWithoutSupersedesReviewInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    assetId?: StringFieldUpdateOperationsInput | string
+    caseId?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewerId?: StringFieldUpdateOperationsInput | string
+    reviewerRole?: EnumSystemRoleFieldUpdateOperationsInput | $Enums.SystemRole
+    departmentId?: StringFieldUpdateOperationsInput | string
+    jurisdictionId?: StringFieldUpdateOperationsInput | string
+    disposition?: EnumAssetAttentionDispositionFieldUpdateOperationsInput | $Enums.AssetAttentionDisposition
+    rationale?: StringFieldUpdateOperationsInput | string
+    attentionContractVersion?: StringFieldUpdateOperationsInput | string
+    attentionCalculationVersion?: StringFieldUpdateOperationsInput | string
+    projectionAsOf?: DateTimeFieldUpdateOperationsInput | Date | string
+    sourceSetFingerprint?: StringFieldUpdateOperationsInput | string
+    clientRequestId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    supersededBy?: AssetAttentionReviewUncheckedUpdateOneWithoutSupersedesReviewNestedInput
+    selectedSignals?: AssetAttentionReviewSignalUncheckedUpdateManyWithoutReviewNestedInput
+  }
+
+  export type AssetAttentionReviewSignalUpsertWithWhereUniqueWithoutReviewInput = {
+    where: AssetAttentionReviewSignalWhereUniqueInput
+    update: XOR<AssetAttentionReviewSignalUpdateWithoutReviewInput, AssetAttentionReviewSignalUncheckedUpdateWithoutReviewInput>
+    create: XOR<AssetAttentionReviewSignalCreateWithoutReviewInput, AssetAttentionReviewSignalUncheckedCreateWithoutReviewInput>
+  }
+
+  export type AssetAttentionReviewSignalUpdateWithWhereUniqueWithoutReviewInput = {
+    where: AssetAttentionReviewSignalWhereUniqueInput
+    data: XOR<AssetAttentionReviewSignalUpdateWithoutReviewInput, AssetAttentionReviewSignalUncheckedUpdateWithoutReviewInput>
+  }
+
+  export type AssetAttentionReviewSignalUpdateManyWithWhereWithoutReviewInput = {
+    where: AssetAttentionReviewSignalScalarWhereInput
+    data: XOR<AssetAttentionReviewSignalUpdateManyMutationInput, AssetAttentionReviewSignalUncheckedUpdateManyWithoutReviewInput>
+  }
+
+  export type AssetAttentionReviewSignalScalarWhereInput = {
+    AND?: AssetAttentionReviewSignalScalarWhereInput | AssetAttentionReviewSignalScalarWhereInput[]
+    OR?: AssetAttentionReviewSignalScalarWhereInput[]
+    NOT?: AssetAttentionReviewSignalScalarWhereInput | AssetAttentionReviewSignalScalarWhereInput[]
+    id?: StringFilter<"AssetAttentionReviewSignal"> | string
+    reviewId?: StringFilter<"AssetAttentionReviewSignal"> | string
+    category?: StringFilter<"AssetAttentionReviewSignal"> | string
+    signalCode?: StringFilter<"AssetAttentionReviewSignal"> | string
+    state?: StringFilter<"AssetAttentionReviewSignal"> | string
+    evidenceReferenceFingerprint?: StringFilter<"AssetAttentionReviewSignal"> | string
+    createdAt?: DateTimeFilter<"AssetAttentionReviewSignal"> | Date | string
+  }
+
+  export type AssetAttentionReviewCreateWithoutSelectedSignalsInput = {
+    id?: string
+    reviewerRole: $Enums.SystemRole
+    departmentId: string
+    jurisdictionId: string
+    disposition: $Enums.AssetAttentionDisposition
+    rationale: string
+    attentionContractVersion: string
+    attentionCalculationVersion: string
+    projectionAsOf: Date | string
+    sourceSetFingerprint: string
+    clientRequestId: string
+    createdAt?: Date | string
+    asset: AssetCreateNestedOneWithoutAttentionReviewsInput
+    case?: CaseCreateNestedOneWithoutAttentionReviewsInput
+    reviewer: UserCreateNestedOneWithoutAssetAttentionReviewsInput
+    supersedesReview?: AssetAttentionReviewCreateNestedOneWithoutSupersededByInput
+    supersededBy?: AssetAttentionReviewCreateNestedOneWithoutSupersedesReviewInput
+  }
+
+  export type AssetAttentionReviewUncheckedCreateWithoutSelectedSignalsInput = {
+    id?: string
+    assetId: string
+    caseId?: string | null
+    reviewerId: string
+    reviewerRole: $Enums.SystemRole
+    departmentId: string
+    jurisdictionId: string
+    disposition: $Enums.AssetAttentionDisposition
+    rationale: string
+    attentionContractVersion: string
+    attentionCalculationVersion: string
+    projectionAsOf: Date | string
+    sourceSetFingerprint: string
+    clientRequestId: string
+    supersedesReviewId?: string | null
+    createdAt?: Date | string
+    supersededBy?: AssetAttentionReviewUncheckedCreateNestedOneWithoutSupersedesReviewInput
+  }
+
+  export type AssetAttentionReviewCreateOrConnectWithoutSelectedSignalsInput = {
+    where: AssetAttentionReviewWhereUniqueInput
+    create: XOR<AssetAttentionReviewCreateWithoutSelectedSignalsInput, AssetAttentionReviewUncheckedCreateWithoutSelectedSignalsInput>
+  }
+
+  export type AssetAttentionReviewUpsertWithoutSelectedSignalsInput = {
+    update: XOR<AssetAttentionReviewUpdateWithoutSelectedSignalsInput, AssetAttentionReviewUncheckedUpdateWithoutSelectedSignalsInput>
+    create: XOR<AssetAttentionReviewCreateWithoutSelectedSignalsInput, AssetAttentionReviewUncheckedCreateWithoutSelectedSignalsInput>
+    where?: AssetAttentionReviewWhereInput
+  }
+
+  export type AssetAttentionReviewUpdateToOneWithWhereWithoutSelectedSignalsInput = {
+    where?: AssetAttentionReviewWhereInput
+    data: XOR<AssetAttentionReviewUpdateWithoutSelectedSignalsInput, AssetAttentionReviewUncheckedUpdateWithoutSelectedSignalsInput>
+  }
+
+  export type AssetAttentionReviewUpdateWithoutSelectedSignalsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reviewerRole?: EnumSystemRoleFieldUpdateOperationsInput | $Enums.SystemRole
+    departmentId?: StringFieldUpdateOperationsInput | string
+    jurisdictionId?: StringFieldUpdateOperationsInput | string
+    disposition?: EnumAssetAttentionDispositionFieldUpdateOperationsInput | $Enums.AssetAttentionDisposition
+    rationale?: StringFieldUpdateOperationsInput | string
+    attentionContractVersion?: StringFieldUpdateOperationsInput | string
+    attentionCalculationVersion?: StringFieldUpdateOperationsInput | string
+    projectionAsOf?: DateTimeFieldUpdateOperationsInput | Date | string
+    sourceSetFingerprint?: StringFieldUpdateOperationsInput | string
+    clientRequestId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    asset?: AssetUpdateOneRequiredWithoutAttentionReviewsNestedInput
+    case?: CaseUpdateOneWithoutAttentionReviewsNestedInput
+    reviewer?: UserUpdateOneRequiredWithoutAssetAttentionReviewsNestedInput
+    supersedesReview?: AssetAttentionReviewUpdateOneWithoutSupersededByNestedInput
+    supersededBy?: AssetAttentionReviewUpdateOneWithoutSupersedesReviewNestedInput
+  }
+
+  export type AssetAttentionReviewUncheckedUpdateWithoutSelectedSignalsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    assetId?: StringFieldUpdateOperationsInput | string
+    caseId?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewerId?: StringFieldUpdateOperationsInput | string
+    reviewerRole?: EnumSystemRoleFieldUpdateOperationsInput | $Enums.SystemRole
+    departmentId?: StringFieldUpdateOperationsInput | string
+    jurisdictionId?: StringFieldUpdateOperationsInput | string
+    disposition?: EnumAssetAttentionDispositionFieldUpdateOperationsInput | $Enums.AssetAttentionDisposition
+    rationale?: StringFieldUpdateOperationsInput | string
+    attentionContractVersion?: StringFieldUpdateOperationsInput | string
+    attentionCalculationVersion?: StringFieldUpdateOperationsInput | string
+    projectionAsOf?: DateTimeFieldUpdateOperationsInput | Date | string
+    sourceSetFingerprint?: StringFieldUpdateOperationsInput | string
+    clientRequestId?: StringFieldUpdateOperationsInput | string
+    supersedesReviewId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    supersededBy?: AssetAttentionReviewUncheckedUpdateOneWithoutSupersedesReviewNestedInput
   }
 
   export type DepartmentCreateWithoutPortfolioScenariosInput = {
@@ -95969,6 +100712,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationCreateNestedManyWithoutRecordedByInput
     decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
+    assetAttentionReviews?: AssetAttentionReviewCreateNestedManyWithoutReviewerInput
   }
 
   export type UserUncheckedCreateWithoutCreatedPortfolioScenariosInput = {
@@ -96024,6 +100768,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedCreateNestedManyWithoutRecordedByInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
+    assetAttentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutReviewerInput
   }
 
   export type UserCreateOrConnectWithoutCreatedPortfolioScenariosInput = {
@@ -96185,6 +100930,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUpdateManyWithoutRecordedByNestedInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
+    assetAttentionReviews?: AssetAttentionReviewUpdateManyWithoutReviewerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCreatedPortfolioScenariosInput = {
@@ -96240,6 +100986,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedUpdateManyWithoutRecordedByNestedInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
+    assetAttentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutReviewerNestedInput
   }
 
   export type DepartmentCreateWithoutObservationSourcesInput = {
@@ -96373,6 +101120,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationCreateNestedManyWithoutRecordedByInput
     decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
+    assetAttentionReviews?: AssetAttentionReviewCreateNestedManyWithoutReviewerInput
   }
 
   export type UserUncheckedCreateWithoutCreatedObservationSourcesInput = {
@@ -96428,6 +101176,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedCreateNestedManyWithoutRecordedByInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
+    assetAttentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutReviewerInput
   }
 
   export type UserCreateOrConnectWithoutCreatedObservationSourcesInput = {
@@ -96488,6 +101237,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationCreateNestedManyWithoutRecordedByInput
     decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
+    assetAttentionReviews?: AssetAttentionReviewCreateNestedManyWithoutReviewerInput
   }
 
   export type UserUncheckedCreateWithoutDeactivatedObservationSourcesInput = {
@@ -96543,6 +101293,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedCreateNestedManyWithoutRecordedByInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
+    assetAttentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutReviewerInput
   }
 
   export type UserCreateOrConnectWithoutDeactivatedObservationSourcesInput = {
@@ -96754,6 +101505,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUpdateManyWithoutRecordedByNestedInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
+    assetAttentionReviews?: AssetAttentionReviewUpdateManyWithoutReviewerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCreatedObservationSourcesInput = {
@@ -96809,6 +101561,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedUpdateManyWithoutRecordedByNestedInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
+    assetAttentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutReviewerNestedInput
   }
 
   export type UserUpsertWithoutDeactivatedObservationSourcesInput = {
@@ -96875,6 +101628,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUpdateManyWithoutRecordedByNestedInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
+    assetAttentionReviews?: AssetAttentionReviewUpdateManyWithoutReviewerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutDeactivatedObservationSourcesInput = {
@@ -96930,6 +101684,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedUpdateManyWithoutRecordedByNestedInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
+    assetAttentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutReviewerNestedInput
   }
 
   export type ExternalObservationUpsertWithWhereUniqueWithoutSourceInput = {
@@ -97089,6 +101844,7 @@ export namespace Prisma {
     cases?: CaseCreateNestedManyWithoutAssetInput
     publicReports?: PublicReportCreateNestedManyWithoutAssetInput
     suggestedForTriageAnalyses?: PublicReportTriageAnalysisCreateNestedManyWithoutPossibleAssetInput
+    attentionReviews?: AssetAttentionReviewCreateNestedManyWithoutAssetInput
   }
 
   export type AssetUncheckedCreateWithoutExternalObservationsInput = {
@@ -97107,6 +101863,7 @@ export namespace Prisma {
     cases?: CaseUncheckedCreateNestedManyWithoutAssetInput
     publicReports?: PublicReportUncheckedCreateNestedManyWithoutAssetInput
     suggestedForTriageAnalyses?: PublicReportTriageAnalysisUncheckedCreateNestedManyWithoutPossibleAssetInput
+    attentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutAssetInput
   }
 
   export type AssetCreateOrConnectWithoutExternalObservationsInput = {
@@ -97138,6 +101895,7 @@ export namespace Prisma {
     intelligenceAssessments?: InfrastructureIntelligenceAssessmentCreateNestedManyWithoutCaseInput
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationCreateNestedManyWithoutCaseInput
     resourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutCaseInput
+    attentionReviews?: AssetAttentionReviewCreateNestedManyWithoutCaseInput
   }
 
   export type CaseUncheckedCreateWithoutExternalObservationsInput = {
@@ -97164,6 +101922,7 @@ export namespace Prisma {
     intelligenceAssessments?: InfrastructureIntelligenceAssessmentUncheckedCreateNestedManyWithoutCaseInput
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUncheckedCreateNestedManyWithoutCaseInput
     resourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutCaseInput
+    attentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutCaseInput
   }
 
   export type CaseCreateOrConnectWithoutExternalObservationsInput = {
@@ -97224,6 +101983,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationCreateNestedManyWithoutRecordedByInput
     decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
+    assetAttentionReviews?: AssetAttentionReviewCreateNestedManyWithoutReviewerInput
   }
 
   export type UserUncheckedCreateWithoutIngestedExternalObservationsInput = {
@@ -97279,6 +102039,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedCreateNestedManyWithoutRecordedByInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
+    assetAttentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutReviewerInput
   }
 
   export type UserCreateOrConnectWithoutIngestedExternalObservationsInput = {
@@ -97456,6 +102217,7 @@ export namespace Prisma {
     cases?: CaseUpdateManyWithoutAssetNestedInput
     publicReports?: PublicReportUpdateManyWithoutAssetNestedInput
     suggestedForTriageAnalyses?: PublicReportTriageAnalysisUpdateManyWithoutPossibleAssetNestedInput
+    attentionReviews?: AssetAttentionReviewUpdateManyWithoutAssetNestedInput
   }
 
   export type AssetUncheckedUpdateWithoutExternalObservationsInput = {
@@ -97474,6 +102236,7 @@ export namespace Prisma {
     cases?: CaseUncheckedUpdateManyWithoutAssetNestedInput
     publicReports?: PublicReportUncheckedUpdateManyWithoutAssetNestedInput
     suggestedForTriageAnalyses?: PublicReportTriageAnalysisUncheckedUpdateManyWithoutPossibleAssetNestedInput
+    attentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutAssetNestedInput
   }
 
   export type CaseUpsertWithoutExternalObservationsInput = {
@@ -97511,6 +102274,7 @@ export namespace Prisma {
     intelligenceAssessments?: InfrastructureIntelligenceAssessmentUpdateManyWithoutCaseNestedInput
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUpdateManyWithoutCaseNestedInput
     resourceEstimates?: CaseResourceEstimateUpdateManyWithoutCaseNestedInput
+    attentionReviews?: AssetAttentionReviewUpdateManyWithoutCaseNestedInput
   }
 
   export type CaseUncheckedUpdateWithoutExternalObservationsInput = {
@@ -97537,6 +102301,7 @@ export namespace Prisma {
     intelligenceAssessments?: InfrastructureIntelligenceAssessmentUncheckedUpdateManyWithoutCaseNestedInput
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUncheckedUpdateManyWithoutCaseNestedInput
     resourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutCaseNestedInput
+    attentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutCaseNestedInput
   }
 
   export type UserUpsertWithoutIngestedExternalObservationsInput = {
@@ -97603,6 +102368,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUpdateManyWithoutRecordedByNestedInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
+    assetAttentionReviews?: AssetAttentionReviewUpdateManyWithoutReviewerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutIngestedExternalObservationsInput = {
@@ -97658,6 +102424,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedUpdateManyWithoutRecordedByNestedInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
+    assetAttentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutReviewerNestedInput
   }
 
   export type CaseCreateWithoutInspectionsInput = {
@@ -97684,6 +102451,7 @@ export namespace Prisma {
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationCreateNestedManyWithoutCaseInput
     externalObservations?: ExternalObservationCreateNestedManyWithoutCaseInput
     resourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutCaseInput
+    attentionReviews?: AssetAttentionReviewCreateNestedManyWithoutCaseInput
   }
 
   export type CaseUncheckedCreateWithoutInspectionsInput = {
@@ -97710,6 +102478,7 @@ export namespace Prisma {
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUncheckedCreateNestedManyWithoutCaseInput
     externalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutCaseInput
     resourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutCaseInput
+    attentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutCaseInput
   }
 
   export type CaseCreateOrConnectWithoutInspectionsInput = {
@@ -97770,6 +102539,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationCreateNestedManyWithoutRecordedByInput
     decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
+    assetAttentionReviews?: AssetAttentionReviewCreateNestedManyWithoutReviewerInput
   }
 
   export type UserUncheckedCreateWithoutInspectionsInput = {
@@ -97825,6 +102595,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedCreateNestedManyWithoutRecordedByInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
+    assetAttentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutReviewerInput
   }
 
   export type UserCreateOrConnectWithoutInspectionsInput = {
@@ -98031,6 +102802,7 @@ export namespace Prisma {
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUpdateManyWithoutCaseNestedInput
     externalObservations?: ExternalObservationUpdateManyWithoutCaseNestedInput
     resourceEstimates?: CaseResourceEstimateUpdateManyWithoutCaseNestedInput
+    attentionReviews?: AssetAttentionReviewUpdateManyWithoutCaseNestedInput
   }
 
   export type CaseUncheckedUpdateWithoutInspectionsInput = {
@@ -98057,6 +102829,7 @@ export namespace Prisma {
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUncheckedUpdateManyWithoutCaseNestedInput
     externalObservations?: ExternalObservationUncheckedUpdateManyWithoutCaseNestedInput
     resourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutCaseNestedInput
+    attentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutCaseNestedInput
   }
 
   export type UserUpsertWithoutInspectionsInput = {
@@ -98123,6 +102896,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUpdateManyWithoutRecordedByNestedInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
+    assetAttentionReviews?: AssetAttentionReviewUpdateManyWithoutReviewerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutInspectionsInput = {
@@ -98178,6 +102952,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedUpdateManyWithoutRecordedByNestedInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
+    assetAttentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutReviewerNestedInput
   }
 
   export type RiskAssessmentUpsertWithWhereUniqueWithoutInspectionInput = {
@@ -98252,6 +103027,7 @@ export namespace Prisma {
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationCreateNestedManyWithoutCaseInput
     externalObservations?: ExternalObservationCreateNestedManyWithoutCaseInput
     resourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutCaseInput
+    attentionReviews?: AssetAttentionReviewCreateNestedManyWithoutCaseInput
   }
 
   export type CaseUncheckedCreateWithoutRiskAssessmentsInput = {
@@ -98278,6 +103054,7 @@ export namespace Prisma {
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUncheckedCreateNestedManyWithoutCaseInput
     externalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutCaseInput
     resourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutCaseInput
+    attentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutCaseInput
   }
 
   export type CaseCreateOrConnectWithoutRiskAssessmentsInput = {
@@ -98574,6 +103351,7 @@ export namespace Prisma {
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUpdateManyWithoutCaseNestedInput
     externalObservations?: ExternalObservationUpdateManyWithoutCaseNestedInput
     resourceEstimates?: CaseResourceEstimateUpdateManyWithoutCaseNestedInput
+    attentionReviews?: AssetAttentionReviewUpdateManyWithoutCaseNestedInput
   }
 
   export type CaseUncheckedUpdateWithoutRiskAssessmentsInput = {
@@ -98600,6 +103378,7 @@ export namespace Prisma {
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUncheckedUpdateManyWithoutCaseNestedInput
     externalObservations?: ExternalObservationUncheckedUpdateManyWithoutCaseNestedInput
     resourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutCaseNestedInput
+    attentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutCaseNestedInput
   }
 
   export type InspectionUpsertWithoutRiskAssessmentsInput = {
@@ -99048,6 +103827,7 @@ export namespace Prisma {
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationCreateNestedManyWithoutCaseInput
     externalObservations?: ExternalObservationCreateNestedManyWithoutCaseInput
     resourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutCaseInput
+    attentionReviews?: AssetAttentionReviewCreateNestedManyWithoutCaseInput
   }
 
   export type CaseUncheckedCreateWithoutIntelligenceAssessmentsInput = {
@@ -99074,6 +103854,7 @@ export namespace Prisma {
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUncheckedCreateNestedManyWithoutCaseInput
     externalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutCaseInput
     resourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutCaseInput
+    attentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutCaseInput
   }
 
   export type CaseCreateOrConnectWithoutIntelligenceAssessmentsInput = {
@@ -99216,6 +103997,7 @@ export namespace Prisma {
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUpdateManyWithoutCaseNestedInput
     externalObservations?: ExternalObservationUpdateManyWithoutCaseNestedInput
     resourceEstimates?: CaseResourceEstimateUpdateManyWithoutCaseNestedInput
+    attentionReviews?: AssetAttentionReviewUpdateManyWithoutCaseNestedInput
   }
 
   export type CaseUncheckedUpdateWithoutIntelligenceAssessmentsInput = {
@@ -99242,6 +104024,7 @@ export namespace Prisma {
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUncheckedUpdateManyWithoutCaseNestedInput
     externalObservations?: ExternalObservationUncheckedUpdateManyWithoutCaseNestedInput
     resourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutCaseNestedInput
+    attentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutCaseNestedInput
   }
 
   export type InspectionUpsertWithoutIntelligenceAssessmentsInput = {
@@ -99425,6 +104208,7 @@ export namespace Prisma {
     intelligenceAssessments?: InfrastructureIntelligenceAssessmentCreateNestedManyWithoutCaseInput
     externalObservations?: ExternalObservationCreateNestedManyWithoutCaseInput
     resourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutCaseInput
+    attentionReviews?: AssetAttentionReviewCreateNestedManyWithoutCaseInput
   }
 
   export type CaseUncheckedCreateWithoutIntelligenceReconciliationsInput = {
@@ -99451,6 +104235,7 @@ export namespace Prisma {
     intelligenceAssessments?: InfrastructureIntelligenceAssessmentUncheckedCreateNestedManyWithoutCaseInput
     externalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutCaseInput
     resourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutCaseInput
+    attentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutCaseInput
   }
 
   export type CaseCreateOrConnectWithoutIntelligenceReconciliationsInput = {
@@ -99560,6 +104345,7 @@ export namespace Prisma {
     intelligenceAssessments?: InfrastructureIntelligenceAssessmentUpdateManyWithoutCaseNestedInput
     externalObservations?: ExternalObservationUpdateManyWithoutCaseNestedInput
     resourceEstimates?: CaseResourceEstimateUpdateManyWithoutCaseNestedInput
+    attentionReviews?: AssetAttentionReviewUpdateManyWithoutCaseNestedInput
   }
 
   export type CaseUncheckedUpdateWithoutIntelligenceReconciliationsInput = {
@@ -99586,6 +104372,7 @@ export namespace Prisma {
     intelligenceAssessments?: InfrastructureIntelligenceAssessmentUncheckedUpdateManyWithoutCaseNestedInput
     externalObservations?: ExternalObservationUncheckedUpdateManyWithoutCaseNestedInput
     resourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutCaseNestedInput
+    attentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutCaseNestedInput
   }
 
   export type CaseCreateWithoutOperationalResponsePlansInput = {
@@ -99612,6 +104399,7 @@ export namespace Prisma {
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationCreateNestedManyWithoutCaseInput
     externalObservations?: ExternalObservationCreateNestedManyWithoutCaseInput
     resourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutCaseInput
+    attentionReviews?: AssetAttentionReviewCreateNestedManyWithoutCaseInput
   }
 
   export type CaseUncheckedCreateWithoutOperationalResponsePlansInput = {
@@ -99638,6 +104426,7 @@ export namespace Prisma {
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUncheckedCreateNestedManyWithoutCaseInput
     externalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutCaseInput
     resourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutCaseInput
+    attentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutCaseInput
   }
 
   export type CaseCreateOrConnectWithoutOperationalResponsePlansInput = {
@@ -99859,6 +104648,7 @@ export namespace Prisma {
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUpdateManyWithoutCaseNestedInput
     externalObservations?: ExternalObservationUpdateManyWithoutCaseNestedInput
     resourceEstimates?: CaseResourceEstimateUpdateManyWithoutCaseNestedInput
+    attentionReviews?: AssetAttentionReviewUpdateManyWithoutCaseNestedInput
   }
 
   export type CaseUncheckedUpdateWithoutOperationalResponsePlansInput = {
@@ -99885,6 +104675,7 @@ export namespace Prisma {
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUncheckedUpdateManyWithoutCaseNestedInput
     externalObservations?: ExternalObservationUncheckedUpdateManyWithoutCaseNestedInput
     resourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutCaseNestedInput
+    attentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutCaseNestedInput
   }
 
   export type RiskAssessmentUpsertWithoutOperationalResponsePlansInput = {
@@ -100086,6 +104877,7 @@ export namespace Prisma {
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationCreateNestedManyWithoutCaseInput
     externalObservations?: ExternalObservationCreateNestedManyWithoutCaseInput
     resourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutCaseInput
+    attentionReviews?: AssetAttentionReviewCreateNestedManyWithoutCaseInput
   }
 
   export type CaseUncheckedCreateWithoutDecisionPackagesInput = {
@@ -100112,6 +104904,7 @@ export namespace Prisma {
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUncheckedCreateNestedManyWithoutCaseInput
     externalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutCaseInput
     resourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutCaseInput
+    attentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutCaseInput
   }
 
   export type CaseCreateOrConnectWithoutDecisionPackagesInput = {
@@ -100256,6 +105049,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationCreateNestedManyWithoutRecordedByInput
     decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
+    assetAttentionReviews?: AssetAttentionReviewCreateNestedManyWithoutReviewerInput
   }
 
   export type UserUncheckedCreateWithoutPreparedDecisionPackagesInput = {
@@ -100311,6 +105105,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedCreateNestedManyWithoutRecordedByInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
+    assetAttentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutReviewerInput
   }
 
   export type UserCreateOrConnectWithoutPreparedDecisionPackagesInput = {
@@ -100405,6 +105200,7 @@ export namespace Prisma {
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUpdateManyWithoutCaseNestedInput
     externalObservations?: ExternalObservationUpdateManyWithoutCaseNestedInput
     resourceEstimates?: CaseResourceEstimateUpdateManyWithoutCaseNestedInput
+    attentionReviews?: AssetAttentionReviewUpdateManyWithoutCaseNestedInput
   }
 
   export type CaseUncheckedUpdateWithoutDecisionPackagesInput = {
@@ -100431,6 +105227,7 @@ export namespace Prisma {
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUncheckedUpdateManyWithoutCaseNestedInput
     externalObservations?: ExternalObservationUncheckedUpdateManyWithoutCaseNestedInput
     resourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutCaseNestedInput
+    attentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutCaseNestedInput
   }
 
   export type InspectionUpsertWithoutDecisionPackagesInput = {
@@ -100593,6 +105390,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUpdateManyWithoutRecordedByNestedInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
+    assetAttentionReviews?: AssetAttentionReviewUpdateManyWithoutReviewerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPreparedDecisionPackagesInput = {
@@ -100648,6 +105446,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedUpdateManyWithoutRecordedByNestedInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
+    assetAttentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutReviewerNestedInput
   }
 
   export type OperationalResponsePlanUpsertWithWhereUniqueWithoutDecisionPackageInput = {
@@ -100719,6 +105518,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationCreateNestedManyWithoutRecordedByInput
     decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
+    assetAttentionReviews?: AssetAttentionReviewCreateNestedManyWithoutReviewerInput
   }
 
   export type UserUncheckedCreateWithoutApprovalAuthoritiesInput = {
@@ -100774,6 +105574,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedCreateNestedManyWithoutRecordedByInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
+    assetAttentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutReviewerInput
   }
 
   export type UserCreateOrConnectWithoutApprovalAuthoritiesInput = {
@@ -100991,6 +105792,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUpdateManyWithoutRecordedByNestedInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
+    assetAttentionReviews?: AssetAttentionReviewUpdateManyWithoutReviewerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutApprovalAuthoritiesInput = {
@@ -101046,6 +105848,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedUpdateManyWithoutRecordedByNestedInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
+    assetAttentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutReviewerNestedInput
   }
 
   export type DepartmentUpsertWithoutApprovalAuthoritiesInput = {
@@ -101194,6 +105997,7 @@ export namespace Prisma {
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationCreateNestedManyWithoutCaseInput
     externalObservations?: ExternalObservationCreateNestedManyWithoutCaseInput
     resourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutCaseInput
+    attentionReviews?: AssetAttentionReviewCreateNestedManyWithoutCaseInput
   }
 
   export type CaseUncheckedCreateWithoutOrpDecisionsInput = {
@@ -101220,6 +106024,7 @@ export namespace Prisma {
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUncheckedCreateNestedManyWithoutCaseInput
     externalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutCaseInput
     resourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutCaseInput
+    attentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutCaseInput
   }
 
   export type CaseCreateOrConnectWithoutOrpDecisionsInput = {
@@ -101327,6 +106132,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationCreateNestedManyWithoutRecordedByInput
     decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
+    assetAttentionReviews?: AssetAttentionReviewCreateNestedManyWithoutReviewerInput
   }
 
   export type UserUncheckedCreateWithoutReviewedOrpDecisionsInput = {
@@ -101382,6 +106188,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedCreateNestedManyWithoutRecordedByInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
+    assetAttentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutReviewerInput
   }
 
   export type UserCreateOrConnectWithoutReviewedOrpDecisionsInput = {
@@ -101487,6 +106294,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationCreateNestedManyWithoutRecordedByInput
     decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
+    assetAttentionReviews?: AssetAttentionReviewCreateNestedManyWithoutReviewerInput
   }
 
   export type UserUncheckedCreateWithoutForwardedOrpDecisionsInput = {
@@ -101542,6 +106350,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedCreateNestedManyWithoutRecordedByInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
+    assetAttentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutReviewerInput
   }
 
   export type UserCreateOrConnectWithoutForwardedOrpDecisionsInput = {
@@ -101637,6 +106446,7 @@ export namespace Prisma {
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUpdateManyWithoutCaseNestedInput
     externalObservations?: ExternalObservationUpdateManyWithoutCaseNestedInput
     resourceEstimates?: CaseResourceEstimateUpdateManyWithoutCaseNestedInput
+    attentionReviews?: AssetAttentionReviewUpdateManyWithoutCaseNestedInput
   }
 
   export type CaseUncheckedUpdateWithoutOrpDecisionsInput = {
@@ -101663,6 +106473,7 @@ export namespace Prisma {
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUncheckedUpdateManyWithoutCaseNestedInput
     externalObservations?: ExternalObservationUncheckedUpdateManyWithoutCaseNestedInput
     resourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutCaseNestedInput
+    attentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutCaseNestedInput
   }
 
   export type OperationalResponsePlanUpsertWithoutDecisionsInput = {
@@ -101782,6 +106593,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUpdateManyWithoutRecordedByNestedInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
+    assetAttentionReviews?: AssetAttentionReviewUpdateManyWithoutReviewerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutReviewedOrpDecisionsInput = {
@@ -101837,6 +106649,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedUpdateManyWithoutRecordedByNestedInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
+    assetAttentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutReviewerNestedInput
   }
 
   export type ApprovalAuthorityUpsertWithoutDecisionsInput = {
@@ -101954,6 +106767,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUpdateManyWithoutRecordedByNestedInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
+    assetAttentionReviews?: AssetAttentionReviewUpdateManyWithoutReviewerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutForwardedOrpDecisionsInput = {
@@ -102009,6 +106823,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedUpdateManyWithoutRecordedByNestedInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
+    assetAttentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutReviewerNestedInput
   }
 
   export type ExecutionPlanUpsertWithoutApprovalDecisionInput = {
@@ -102141,6 +106956,7 @@ export namespace Prisma {
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationCreateNestedManyWithoutCaseInput
     externalObservations?: ExternalObservationCreateNestedManyWithoutCaseInput
     resourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutCaseInput
+    attentionReviews?: AssetAttentionReviewCreateNestedManyWithoutCaseInput
   }
 
   export type CaseUncheckedCreateWithoutExecutionPlansInput = {
@@ -102167,6 +106983,7 @@ export namespace Prisma {
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUncheckedCreateNestedManyWithoutCaseInput
     externalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutCaseInput
     resourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutCaseInput
+    attentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutCaseInput
   }
 
   export type CaseCreateOrConnectWithoutExecutionPlansInput = {
@@ -102260,6 +107077,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationCreateNestedManyWithoutRecordedByInput
     decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
+    assetAttentionReviews?: AssetAttentionReviewCreateNestedManyWithoutReviewerInput
   }
 
   export type UserUncheckedCreateWithoutCreatedExecutionPlansInput = {
@@ -102315,6 +107133,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedCreateNestedManyWithoutRecordedByInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
+    assetAttentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutReviewerInput
   }
 
   export type UserCreateOrConnectWithoutCreatedExecutionPlansInput = {
@@ -102593,6 +107412,7 @@ export namespace Prisma {
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUpdateManyWithoutCaseNestedInput
     externalObservations?: ExternalObservationUpdateManyWithoutCaseNestedInput
     resourceEstimates?: CaseResourceEstimateUpdateManyWithoutCaseNestedInput
+    attentionReviews?: AssetAttentionReviewUpdateManyWithoutCaseNestedInput
   }
 
   export type CaseUncheckedUpdateWithoutExecutionPlansInput = {
@@ -102619,6 +107439,7 @@ export namespace Prisma {
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUncheckedUpdateManyWithoutCaseNestedInput
     externalObservations?: ExternalObservationUncheckedUpdateManyWithoutCaseNestedInput
     resourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutCaseNestedInput
+    attentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutCaseNestedInput
   }
 
   export type OrpDecisionUpsertWithoutExecutionPlanInput = {
@@ -102724,6 +107545,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUpdateManyWithoutRecordedByNestedInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
+    assetAttentionReviews?: AssetAttentionReviewUpdateManyWithoutReviewerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCreatedExecutionPlansInput = {
@@ -102779,6 +107601,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedUpdateManyWithoutRecordedByNestedInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
+    assetAttentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutReviewerNestedInput
   }
 
   export type ExecutionTaskUpsertWithWhereUniqueWithoutExecutionPlanInput = {
@@ -102966,6 +107789,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationCreateNestedManyWithoutRecordedByInput
     decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
+    assetAttentionReviews?: AssetAttentionReviewCreateNestedManyWithoutReviewerInput
   }
 
   export type UserUncheckedCreateWithoutAssignedExecutionTasksInput = {
@@ -103021,6 +107845,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedCreateNestedManyWithoutRecordedByInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
+    assetAttentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutReviewerInput
   }
 
   export type UserCreateOrConnectWithoutAssignedExecutionTasksInput = {
@@ -103081,6 +107906,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationCreateNestedManyWithoutRecordedByInput
     decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
+    assetAttentionReviews?: AssetAttentionReviewCreateNestedManyWithoutReviewerInput
   }
 
   export type UserUncheckedCreateWithoutAssignedByExecutionTasksInput = {
@@ -103136,6 +107962,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedCreateNestedManyWithoutRecordedByInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
+    assetAttentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutReviewerInput
   }
 
   export type UserCreateOrConnectWithoutAssignedByExecutionTasksInput = {
@@ -103196,6 +108023,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationCreateNestedManyWithoutRecordedByInput
     decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
+    assetAttentionReviews?: AssetAttentionReviewCreateNestedManyWithoutReviewerInput
   }
 
   export type UserUncheckedCreateWithoutCompletedExecutionTasksInput = {
@@ -103251,6 +108079,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedCreateNestedManyWithoutRecordedByInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
+    assetAttentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutReviewerInput
   }
 
   export type UserCreateOrConnectWithoutCompletedExecutionTasksInput = {
@@ -103311,6 +108140,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationCreateNestedManyWithoutRecordedByInput
     decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
+    assetAttentionReviews?: AssetAttentionReviewCreateNestedManyWithoutReviewerInput
   }
 
   export type UserUncheckedCreateWithoutVerifiedExecutionTasksInput = {
@@ -103366,6 +108196,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedCreateNestedManyWithoutRecordedByInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
+    assetAttentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutReviewerInput
   }
 
   export type UserCreateOrConnectWithoutVerifiedExecutionTasksInput = {
@@ -103426,6 +108257,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationCreateNestedManyWithoutRecordedByInput
     decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
+    assetAttentionReviews?: AssetAttentionReviewCreateNestedManyWithoutReviewerInput
   }
 
   export type UserUncheckedCreateWithoutCancelledExecutionTasksInput = {
@@ -103481,6 +108313,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedCreateNestedManyWithoutRecordedByInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
+    assetAttentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutReviewerInput
   }
 
   export type UserCreateOrConnectWithoutCancelledExecutionTasksInput = {
@@ -103956,6 +108789,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUpdateManyWithoutRecordedByNestedInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
+    assetAttentionReviews?: AssetAttentionReviewUpdateManyWithoutReviewerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAssignedExecutionTasksInput = {
@@ -104011,6 +108845,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedUpdateManyWithoutRecordedByNestedInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
+    assetAttentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutReviewerNestedInput
   }
 
   export type UserUpsertWithoutAssignedByExecutionTasksInput = {
@@ -104077,6 +108912,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUpdateManyWithoutRecordedByNestedInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
+    assetAttentionReviews?: AssetAttentionReviewUpdateManyWithoutReviewerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAssignedByExecutionTasksInput = {
@@ -104132,6 +108968,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedUpdateManyWithoutRecordedByNestedInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
+    assetAttentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutReviewerNestedInput
   }
 
   export type UserUpsertWithoutCompletedExecutionTasksInput = {
@@ -104198,6 +109035,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUpdateManyWithoutRecordedByNestedInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
+    assetAttentionReviews?: AssetAttentionReviewUpdateManyWithoutReviewerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCompletedExecutionTasksInput = {
@@ -104253,6 +109091,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedUpdateManyWithoutRecordedByNestedInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
+    assetAttentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutReviewerNestedInput
   }
 
   export type UserUpsertWithoutVerifiedExecutionTasksInput = {
@@ -104319,6 +109158,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUpdateManyWithoutRecordedByNestedInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
+    assetAttentionReviews?: AssetAttentionReviewUpdateManyWithoutReviewerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutVerifiedExecutionTasksInput = {
@@ -104374,6 +109214,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedUpdateManyWithoutRecordedByNestedInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
+    assetAttentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutReviewerNestedInput
   }
 
   export type UserUpsertWithoutCancelledExecutionTasksInput = {
@@ -104440,6 +109281,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUpdateManyWithoutRecordedByNestedInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
+    assetAttentionReviews?: AssetAttentionReviewUpdateManyWithoutReviewerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCancelledExecutionTasksInput = {
@@ -104495,6 +109337,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedUpdateManyWithoutRecordedByNestedInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
+    assetAttentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutReviewerNestedInput
   }
 
   export type ExecutionEvidenceUpsertWithWhereUniqueWithoutExecutionTaskInput = {
@@ -104892,6 +109735,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationCreateNestedManyWithoutRecordedByInput
     decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
+    assetAttentionReviews?: AssetAttentionReviewCreateNestedManyWithoutReviewerInput
   }
 
   export type UserUncheckedCreateWithoutCreatedPredictiveSnapshotsInput = {
@@ -104947,6 +109791,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedCreateNestedManyWithoutRecordedByInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
+    assetAttentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutReviewerInput
   }
 
   export type UserCreateOrConnectWithoutCreatedPredictiveSnapshotsInput = {
@@ -105007,6 +109852,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationCreateNestedManyWithoutRecordedByInput
     decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
+    assetAttentionReviews?: AssetAttentionReviewCreateNestedManyWithoutReviewerInput
   }
 
   export type UserUncheckedCreateWithoutVoidedPredictiveSnapshotsInput = {
@@ -105062,6 +109908,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedCreateNestedManyWithoutRecordedByInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
+    assetAttentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutReviewerInput
   }
 
   export type UserCreateOrConnectWithoutVoidedPredictiveSnapshotsInput = {
@@ -105384,6 +110231,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUpdateManyWithoutRecordedByNestedInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
+    assetAttentionReviews?: AssetAttentionReviewUpdateManyWithoutReviewerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCreatedPredictiveSnapshotsInput = {
@@ -105439,6 +110287,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedUpdateManyWithoutRecordedByNestedInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
+    assetAttentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutReviewerNestedInput
   }
 
   export type UserUpsertWithoutVoidedPredictiveSnapshotsInput = {
@@ -105505,6 +110354,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUpdateManyWithoutRecordedByNestedInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
+    assetAttentionReviews?: AssetAttentionReviewUpdateManyWithoutReviewerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutVoidedPredictiveSnapshotsInput = {
@@ -105560,6 +110410,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedUpdateManyWithoutRecordedByNestedInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
+    assetAttentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutReviewerNestedInput
   }
 
   export type PredictiveFeatureSnapshotUpsertWithoutReplacesInput = {
@@ -105802,6 +110653,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationCreateNestedManyWithoutRecordedByInput
     decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
+    assetAttentionReviews?: AssetAttentionReviewCreateNestedManyWithoutReviewerInput
   }
 
   export type UserUncheckedCreateWithoutRecordedPredictiveOutcomesInput = {
@@ -105857,6 +110709,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedCreateNestedManyWithoutRecordedByInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
+    assetAttentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutReviewerInput
   }
 
   export type UserCreateOrConnectWithoutRecordedPredictiveOutcomesInput = {
@@ -105917,6 +110770,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationCreateNestedManyWithoutRecordedByInput
     decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
+    assetAttentionReviews?: AssetAttentionReviewCreateNestedManyWithoutReviewerInput
   }
 
   export type UserUncheckedCreateWithoutVoidedPredictiveOutcomesInput = {
@@ -105972,6 +110826,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedCreateNestedManyWithoutRecordedByInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
+    assetAttentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutReviewerInput
   }
 
   export type UserCreateOrConnectWithoutVoidedPredictiveOutcomesInput = {
@@ -106184,6 +111039,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUpdateManyWithoutRecordedByNestedInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
+    assetAttentionReviews?: AssetAttentionReviewUpdateManyWithoutReviewerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutRecordedPredictiveOutcomesInput = {
@@ -106239,6 +111095,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedUpdateManyWithoutRecordedByNestedInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
+    assetAttentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutReviewerNestedInput
   }
 
   export type UserUpsertWithoutVoidedPredictiveOutcomesInput = {
@@ -106305,6 +111162,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUpdateManyWithoutRecordedByNestedInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
+    assetAttentionReviews?: AssetAttentionReviewUpdateManyWithoutReviewerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutVoidedPredictiveOutcomesInput = {
@@ -106360,6 +111218,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedUpdateManyWithoutRecordedByNestedInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
+    assetAttentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutReviewerNestedInput
   }
 
   export type PredictiveOutcomeUpsertWithoutReplacesInput = {
@@ -106509,6 +111368,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationCreateNestedManyWithoutRecordedByInput
     decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
+    assetAttentionReviews?: AssetAttentionReviewCreateNestedManyWithoutReviewerInput
   }
 
   export type UserUncheckedCreateWithoutCreatedPredictiveDatasetSnapshotsInput = {
@@ -106564,6 +111424,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedCreateNestedManyWithoutRecordedByInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
+    assetAttentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutReviewerInput
   }
 
   export type UserCreateOrConnectWithoutCreatedPredictiveDatasetSnapshotsInput = {
@@ -106767,6 +111628,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUpdateManyWithoutRecordedByNestedInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
+    assetAttentionReviews?: AssetAttentionReviewUpdateManyWithoutReviewerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCreatedPredictiveDatasetSnapshotsInput = {
@@ -106822,6 +111684,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedUpdateManyWithoutRecordedByNestedInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
+    assetAttentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutReviewerNestedInput
   }
 
   export type PredictiveModelVersionUpsertWithWhereUniqueWithoutDatasetSnapshotInput = {
@@ -106954,6 +111817,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationCreateNestedManyWithoutRecordedByInput
     decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
+    assetAttentionReviews?: AssetAttentionReviewCreateNestedManyWithoutReviewerInput
   }
 
   export type UserUncheckedCreateWithoutCreatedPredictiveModelVersionsInput = {
@@ -107009,6 +111873,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedCreateNestedManyWithoutRecordedByInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
+    assetAttentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutReviewerInput
   }
 
   export type UserCreateOrConnectWithoutCreatedPredictiveModelVersionsInput = {
@@ -107069,6 +111934,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationCreateNestedManyWithoutRecordedByInput
     decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
+    assetAttentionReviews?: AssetAttentionReviewCreateNestedManyWithoutReviewerInput
   }
 
   export type UserUncheckedCreateWithoutValidatedPredictiveModelVersionsInput = {
@@ -107124,6 +111990,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedCreateNestedManyWithoutRecordedByInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
+    assetAttentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutReviewerInput
   }
 
   export type UserCreateOrConnectWithoutValidatedPredictiveModelVersionsInput = {
@@ -107380,6 +112247,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUpdateManyWithoutRecordedByNestedInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
+    assetAttentionReviews?: AssetAttentionReviewUpdateManyWithoutReviewerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCreatedPredictiveModelVersionsInput = {
@@ -107435,6 +112303,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedUpdateManyWithoutRecordedByNestedInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
+    assetAttentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutReviewerNestedInput
   }
 
   export type UserUpsertWithoutValidatedPredictiveModelVersionsInput = {
@@ -107501,6 +112370,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUpdateManyWithoutRecordedByNestedInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
+    assetAttentionReviews?: AssetAttentionReviewUpdateManyWithoutReviewerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutValidatedPredictiveModelVersionsInput = {
@@ -107556,6 +112426,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedUpdateManyWithoutRecordedByNestedInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
+    assetAttentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutReviewerNestedInput
   }
 
   export type PredictiveModelEvaluationUpsertWithWhereUniqueWithoutModelVersionInput = {
@@ -107761,6 +112632,7 @@ export namespace Prisma {
     validatedPredictiveModelVersions?: PredictiveModelVersionCreateNestedManyWithoutValidatedByInput
     decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
+    assetAttentionReviews?: AssetAttentionReviewCreateNestedManyWithoutReviewerInput
   }
 
   export type UserUncheckedCreateWithoutRecordedPredictiveEvaluationsInput = {
@@ -107816,6 +112688,7 @@ export namespace Prisma {
     validatedPredictiveModelVersions?: PredictiveModelVersionUncheckedCreateNestedManyWithoutValidatedByInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
+    assetAttentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutReviewerInput
   }
 
   export type UserCreateOrConnectWithoutRecordedPredictiveEvaluationsInput = {
@@ -108001,6 +112874,7 @@ export namespace Prisma {
     validatedPredictiveModelVersions?: PredictiveModelVersionUpdateManyWithoutValidatedByNestedInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
+    assetAttentionReviews?: AssetAttentionReviewUpdateManyWithoutReviewerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutRecordedPredictiveEvaluationsInput = {
@@ -108056,6 +112930,7 @@ export namespace Prisma {
     validatedPredictiveModelVersions?: PredictiveModelVersionUncheckedUpdateManyWithoutValidatedByNestedInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
+    assetAttentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutReviewerNestedInput
   }
 
   export type PredictiveModelVersionCreateWithoutApprovalsInput = {
@@ -108168,6 +113043,7 @@ export namespace Prisma {
     validatedPredictiveModelVersions?: PredictiveModelVersionCreateNestedManyWithoutValidatedByInput
     recordedPredictiveEvaluations?: PredictiveModelEvaluationCreateNestedManyWithoutRecordedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
+    assetAttentionReviews?: AssetAttentionReviewCreateNestedManyWithoutReviewerInput
   }
 
   export type UserUncheckedCreateWithoutDecidedPredictiveApprovalsInput = {
@@ -108223,6 +113099,7 @@ export namespace Prisma {
     validatedPredictiveModelVersions?: PredictiveModelVersionUncheckedCreateNestedManyWithoutValidatedByInput
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedCreateNestedManyWithoutRecordedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
+    assetAttentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutReviewerInput
   }
 
   export type UserCreateOrConnectWithoutDecidedPredictiveApprovalsInput = {
@@ -108357,6 +113234,7 @@ export namespace Prisma {
     validatedPredictiveModelVersions?: PredictiveModelVersionUpdateManyWithoutValidatedByNestedInput
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUpdateManyWithoutRecordedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
+    assetAttentionReviews?: AssetAttentionReviewUpdateManyWithoutReviewerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutDecidedPredictiveApprovalsInput = {
@@ -108412,6 +113290,7 @@ export namespace Prisma {
     validatedPredictiveModelVersions?: PredictiveModelVersionUncheckedUpdateManyWithoutValidatedByNestedInput
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedUpdateManyWithoutRecordedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
+    assetAttentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutReviewerNestedInput
   }
 
   export type PredictiveModelVersionCreateWithoutLifecycleEventsInput = {
@@ -108524,6 +113403,7 @@ export namespace Prisma {
     validatedPredictiveModelVersions?: PredictiveModelVersionCreateNestedManyWithoutValidatedByInput
     recordedPredictiveEvaluations?: PredictiveModelEvaluationCreateNestedManyWithoutRecordedByInput
     decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
+    assetAttentionReviews?: AssetAttentionReviewCreateNestedManyWithoutReviewerInput
   }
 
   export type UserUncheckedCreateWithoutPredictiveModelLifecycleEventsInput = {
@@ -108579,6 +113459,7 @@ export namespace Prisma {
     validatedPredictiveModelVersions?: PredictiveModelVersionUncheckedCreateNestedManyWithoutValidatedByInput
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedCreateNestedManyWithoutRecordedByInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
+    assetAttentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutReviewerInput
   }
 
   export type UserCreateOrConnectWithoutPredictiveModelLifecycleEventsInput = {
@@ -108713,6 +113594,7 @@ export namespace Prisma {
     validatedPredictiveModelVersions?: PredictiveModelVersionUpdateManyWithoutValidatedByNestedInput
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUpdateManyWithoutRecordedByNestedInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
+    assetAttentionReviews?: AssetAttentionReviewUpdateManyWithoutReviewerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPredictiveModelLifecycleEventsInput = {
@@ -108768,6 +113650,7 @@ export namespace Prisma {
     validatedPredictiveModelVersions?: PredictiveModelVersionUncheckedUpdateManyWithoutValidatedByNestedInput
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedUpdateManyWithoutRecordedByNestedInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
+    assetAttentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutReviewerNestedInput
   }
 
   export type ExecutionPlanCreateWithoutTaskDependenciesInput = {
@@ -109062,6 +113945,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationCreateNestedManyWithoutRecordedByInput
     decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
+    assetAttentionReviews?: AssetAttentionReviewCreateNestedManyWithoutReviewerInput
   }
 
   export type UserUncheckedCreateWithoutCreatedExecutionTaskDependenciesInput = {
@@ -109117,6 +114001,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedCreateNestedManyWithoutRecordedByInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
+    assetAttentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutReviewerInput
   }
 
   export type UserCreateOrConnectWithoutCreatedExecutionTaskDependenciesInput = {
@@ -109445,6 +114330,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUpdateManyWithoutRecordedByNestedInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
+    assetAttentionReviews?: AssetAttentionReviewUpdateManyWithoutReviewerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCreatedExecutionTaskDependenciesInput = {
@@ -109500,6 +114386,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedUpdateManyWithoutRecordedByNestedInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
+    assetAttentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutReviewerNestedInput
   }
 
   export type ExecutionTaskCreateWithoutBlockerEventsInput = {
@@ -109648,6 +114535,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationCreateNestedManyWithoutRecordedByInput
     decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
+    assetAttentionReviews?: AssetAttentionReviewCreateNestedManyWithoutReviewerInput
   }
 
   export type UserUncheckedCreateWithoutBlockedExecutionTaskEventsInput = {
@@ -109703,6 +114591,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedCreateNestedManyWithoutRecordedByInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
+    assetAttentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutReviewerInput
   }
 
   export type UserCreateOrConnectWithoutBlockedExecutionTaskEventsInput = {
@@ -109763,6 +114652,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationCreateNestedManyWithoutRecordedByInput
     decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
+    assetAttentionReviews?: AssetAttentionReviewCreateNestedManyWithoutReviewerInput
   }
 
   export type UserUncheckedCreateWithoutResolvedExecutionTaskEventsInput = {
@@ -109818,6 +114708,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedCreateNestedManyWithoutRecordedByInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
+    assetAttentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutReviewerInput
   }
 
   export type UserCreateOrConnectWithoutResolvedExecutionTaskEventsInput = {
@@ -109988,6 +114879,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUpdateManyWithoutRecordedByNestedInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
+    assetAttentionReviews?: AssetAttentionReviewUpdateManyWithoutReviewerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutBlockedExecutionTaskEventsInput = {
@@ -110043,6 +114935,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedUpdateManyWithoutRecordedByNestedInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
+    assetAttentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutReviewerNestedInput
   }
 
   export type UserUpsertWithoutResolvedExecutionTaskEventsInput = {
@@ -110109,6 +115002,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUpdateManyWithoutRecordedByNestedInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
+    assetAttentionReviews?: AssetAttentionReviewUpdateManyWithoutReviewerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutResolvedExecutionTaskEventsInput = {
@@ -110164,6 +115058,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedUpdateManyWithoutRecordedByNestedInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
+    assetAttentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutReviewerNestedInput
   }
 
   export type ExecutionPlanCreateWithoutScheduleRevisionsInput = {
@@ -110365,6 +115260,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationCreateNestedManyWithoutRecordedByInput
     decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
+    assetAttentionReviews?: AssetAttentionReviewCreateNestedManyWithoutReviewerInput
   }
 
   export type UserUncheckedCreateWithoutExecutionScheduleRevisionsInput = {
@@ -110420,6 +115316,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedCreateNestedManyWithoutRecordedByInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
+    assetAttentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutReviewerInput
   }
 
   export type UserCreateOrConnectWithoutExecutionScheduleRevisionsInput = {
@@ -110649,6 +115546,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUpdateManyWithoutRecordedByNestedInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
+    assetAttentionReviews?: AssetAttentionReviewUpdateManyWithoutReviewerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutExecutionScheduleRevisionsInput = {
@@ -110704,6 +115602,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedUpdateManyWithoutRecordedByNestedInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
+    assetAttentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutReviewerNestedInput
   }
 
   export type ExecutionTaskCreateWithoutEvidenceInput = {
@@ -110852,6 +115751,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationCreateNestedManyWithoutRecordedByInput
     decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
+    assetAttentionReviews?: AssetAttentionReviewCreateNestedManyWithoutReviewerInput
   }
 
   export type UserUncheckedCreateWithoutSubmittedExecutionEvidenceInput = {
@@ -110907,6 +115807,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedCreateNestedManyWithoutRecordedByInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
+    assetAttentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutReviewerInput
   }
 
   export type UserCreateOrConnectWithoutSubmittedExecutionEvidenceInput = {
@@ -111077,6 +115978,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUpdateManyWithoutRecordedByNestedInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
+    assetAttentionReviews?: AssetAttentionReviewUpdateManyWithoutReviewerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSubmittedExecutionEvidenceInput = {
@@ -111132,6 +116034,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedUpdateManyWithoutRecordedByNestedInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
+    assetAttentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutReviewerNestedInput
   }
 
   export type CaseCreateWithoutClosureInput = {
@@ -111158,6 +116061,7 @@ export namespace Prisma {
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationCreateNestedManyWithoutCaseInput
     externalObservations?: ExternalObservationCreateNestedManyWithoutCaseInput
     resourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutCaseInput
+    attentionReviews?: AssetAttentionReviewCreateNestedManyWithoutCaseInput
   }
 
   export type CaseUncheckedCreateWithoutClosureInput = {
@@ -111184,6 +116088,7 @@ export namespace Prisma {
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUncheckedCreateNestedManyWithoutCaseInput
     externalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutCaseInput
     resourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutCaseInput
+    attentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutCaseInput
   }
 
   export type CaseCreateOrConnectWithoutClosureInput = {
@@ -111297,6 +116202,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationCreateNestedManyWithoutRecordedByInput
     decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
+    assetAttentionReviews?: AssetAttentionReviewCreateNestedManyWithoutReviewerInput
   }
 
   export type UserUncheckedCreateWithoutClosedCasesInput = {
@@ -111352,6 +116258,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedCreateNestedManyWithoutRecordedByInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
+    assetAttentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutReviewerInput
   }
 
   export type UserCreateOrConnectWithoutClosedCasesInput = {
@@ -111439,6 +116346,7 @@ export namespace Prisma {
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUpdateManyWithoutCaseNestedInput
     externalObservations?: ExternalObservationUpdateManyWithoutCaseNestedInput
     resourceEstimates?: CaseResourceEstimateUpdateManyWithoutCaseNestedInput
+    attentionReviews?: AssetAttentionReviewUpdateManyWithoutCaseNestedInput
   }
 
   export type CaseUncheckedUpdateWithoutClosureInput = {
@@ -111465,6 +116373,7 @@ export namespace Prisma {
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUncheckedUpdateManyWithoutCaseNestedInput
     externalObservations?: ExternalObservationUncheckedUpdateManyWithoutCaseNestedInput
     resourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutCaseNestedInput
+    attentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutCaseNestedInput
   }
 
   export type ExecutionPlanUpsertWithoutClosureInput = {
@@ -111590,6 +116499,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUpdateManyWithoutRecordedByNestedInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
+    assetAttentionReviews?: AssetAttentionReviewUpdateManyWithoutReviewerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutClosedCasesInput = {
@@ -111645,6 +116555,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedUpdateManyWithoutRecordedByNestedInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
+    assetAttentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutReviewerNestedInput
   }
 
   export type ApprovalAuthorityUpsertWithoutCaseClosuresInput = {
@@ -111944,6 +116855,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUpdateManyWithoutRecordedByNestedInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
+    assetAttentionReviews?: AssetAttentionReviewUpdateManyWithoutReviewerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutDepartmentInput = {
@@ -111999,6 +116911,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedUpdateManyWithoutRecordedByNestedInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
+    assetAttentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutReviewerNestedInput
   }
 
   export type UserUncheckedUpdateManyWithoutDepartmentInput = {
@@ -112031,6 +116944,7 @@ export namespace Prisma {
     publicReports?: PublicReportUpdateManyWithoutAssetNestedInput
     suggestedForTriageAnalyses?: PublicReportTriageAnalysisUpdateManyWithoutPossibleAssetNestedInput
     externalObservations?: ExternalObservationUpdateManyWithoutAssetNestedInput
+    attentionReviews?: AssetAttentionReviewUpdateManyWithoutAssetNestedInput
   }
 
   export type AssetUncheckedUpdateWithoutDepartmentInput = {
@@ -112049,6 +116963,7 @@ export namespace Prisma {
     publicReports?: PublicReportUncheckedUpdateManyWithoutAssetNestedInput
     suggestedForTriageAnalyses?: PublicReportTriageAnalysisUncheckedUpdateManyWithoutPossibleAssetNestedInput
     externalObservations?: ExternalObservationUncheckedUpdateManyWithoutAssetNestedInput
+    attentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutAssetNestedInput
   }
 
   export type AssetUncheckedUpdateManyWithoutDepartmentInput = {
@@ -112841,6 +117756,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUpdateManyWithoutRecordedByNestedInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
+    assetAttentionReviews?: AssetAttentionReviewUpdateManyWithoutReviewerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutJurisdictionInput = {
@@ -112896,6 +117812,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedUpdateManyWithoutRecordedByNestedInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
+    assetAttentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutReviewerNestedInput
   }
 
   export type UserUncheckedUpdateManyWithoutJurisdictionInput = {
@@ -112928,6 +117845,7 @@ export namespace Prisma {
     publicReports?: PublicReportUpdateManyWithoutAssetNestedInput
     suggestedForTriageAnalyses?: PublicReportTriageAnalysisUpdateManyWithoutPossibleAssetNestedInput
     externalObservations?: ExternalObservationUpdateManyWithoutAssetNestedInput
+    attentionReviews?: AssetAttentionReviewUpdateManyWithoutAssetNestedInput
   }
 
   export type AssetUncheckedUpdateWithoutJurisdictionInput = {
@@ -112946,6 +117864,7 @@ export namespace Prisma {
     publicReports?: PublicReportUncheckedUpdateManyWithoutAssetNestedInput
     suggestedForTriageAnalyses?: PublicReportTriageAnalysisUncheckedUpdateManyWithoutPossibleAssetNestedInput
     externalObservations?: ExternalObservationUncheckedUpdateManyWithoutAssetNestedInput
+    attentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutAssetNestedInput
   }
 
   export type AssetUncheckedUpdateManyWithoutJurisdictionInput = {
@@ -114280,6 +119199,24 @@ export namespace Prisma {
     reason: string
     relatedModelVersionId?: string | null
     occurredAt?: Date | string
+  }
+
+  export type AssetAttentionReviewCreateManyReviewerInput = {
+    id?: string
+    assetId: string
+    caseId?: string | null
+    reviewerRole: $Enums.SystemRole
+    departmentId: string
+    jurisdictionId: string
+    disposition: $Enums.AssetAttentionDisposition
+    rationale: string
+    attentionContractVersion: string
+    attentionCalculationVersion: string
+    projectionAsOf: Date | string
+    sourceSetFingerprint: string
+    clientRequestId: string
+    supersedesReviewId?: string | null
+    createdAt?: Date | string
   }
 
   export type InspectionUpdateWithoutInspectorInput = {
@@ -116902,6 +121839,64 @@ export namespace Prisma {
     occurredAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type AssetAttentionReviewUpdateWithoutReviewerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reviewerRole?: EnumSystemRoleFieldUpdateOperationsInput | $Enums.SystemRole
+    departmentId?: StringFieldUpdateOperationsInput | string
+    jurisdictionId?: StringFieldUpdateOperationsInput | string
+    disposition?: EnumAssetAttentionDispositionFieldUpdateOperationsInput | $Enums.AssetAttentionDisposition
+    rationale?: StringFieldUpdateOperationsInput | string
+    attentionContractVersion?: StringFieldUpdateOperationsInput | string
+    attentionCalculationVersion?: StringFieldUpdateOperationsInput | string
+    projectionAsOf?: DateTimeFieldUpdateOperationsInput | Date | string
+    sourceSetFingerprint?: StringFieldUpdateOperationsInput | string
+    clientRequestId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    asset?: AssetUpdateOneRequiredWithoutAttentionReviewsNestedInput
+    case?: CaseUpdateOneWithoutAttentionReviewsNestedInput
+    supersedesReview?: AssetAttentionReviewUpdateOneWithoutSupersededByNestedInput
+    supersededBy?: AssetAttentionReviewUpdateOneWithoutSupersedesReviewNestedInput
+    selectedSignals?: AssetAttentionReviewSignalUpdateManyWithoutReviewNestedInput
+  }
+
+  export type AssetAttentionReviewUncheckedUpdateWithoutReviewerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    assetId?: StringFieldUpdateOperationsInput | string
+    caseId?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewerRole?: EnumSystemRoleFieldUpdateOperationsInput | $Enums.SystemRole
+    departmentId?: StringFieldUpdateOperationsInput | string
+    jurisdictionId?: StringFieldUpdateOperationsInput | string
+    disposition?: EnumAssetAttentionDispositionFieldUpdateOperationsInput | $Enums.AssetAttentionDisposition
+    rationale?: StringFieldUpdateOperationsInput | string
+    attentionContractVersion?: StringFieldUpdateOperationsInput | string
+    attentionCalculationVersion?: StringFieldUpdateOperationsInput | string
+    projectionAsOf?: DateTimeFieldUpdateOperationsInput | Date | string
+    sourceSetFingerprint?: StringFieldUpdateOperationsInput | string
+    clientRequestId?: StringFieldUpdateOperationsInput | string
+    supersedesReviewId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    supersededBy?: AssetAttentionReviewUncheckedUpdateOneWithoutSupersedesReviewNestedInput
+    selectedSignals?: AssetAttentionReviewSignalUncheckedUpdateManyWithoutReviewNestedInput
+  }
+
+  export type AssetAttentionReviewUncheckedUpdateManyWithoutReviewerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    assetId?: StringFieldUpdateOperationsInput | string
+    caseId?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewerRole?: EnumSystemRoleFieldUpdateOperationsInput | $Enums.SystemRole
+    departmentId?: StringFieldUpdateOperationsInput | string
+    jurisdictionId?: StringFieldUpdateOperationsInput | string
+    disposition?: EnumAssetAttentionDispositionFieldUpdateOperationsInput | $Enums.AssetAttentionDisposition
+    rationale?: StringFieldUpdateOperationsInput | string
+    attentionContractVersion?: StringFieldUpdateOperationsInput | string
+    attentionCalculationVersion?: StringFieldUpdateOperationsInput | string
+    projectionAsOf?: DateTimeFieldUpdateOperationsInput | Date | string
+    sourceSetFingerprint?: StringFieldUpdateOperationsInput | string
+    clientRequestId?: StringFieldUpdateOperationsInput | string
+    supersedesReviewId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type CaseCreateManyAssetInput = {
     id?: string
     caseNumber: string
@@ -116975,6 +121970,24 @@ export namespace Prisma {
     ingestedById: string
   }
 
+  export type AssetAttentionReviewCreateManyAssetInput = {
+    id?: string
+    caseId?: string | null
+    reviewerId: string
+    reviewerRole: $Enums.SystemRole
+    departmentId: string
+    jurisdictionId: string
+    disposition: $Enums.AssetAttentionDisposition
+    rationale: string
+    attentionContractVersion: string
+    attentionCalculationVersion: string
+    projectionAsOf: Date | string
+    sourceSetFingerprint: string
+    clientRequestId: string
+    supersedesReviewId?: string | null
+    createdAt?: Date | string
+  }
+
   export type CaseUpdateWithoutAssetInput = {
     id?: StringFieldUpdateOperationsInput | string
     caseNumber?: StringFieldUpdateOperationsInput | string
@@ -116999,6 +122012,7 @@ export namespace Prisma {
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUpdateManyWithoutCaseNestedInput
     externalObservations?: ExternalObservationUpdateManyWithoutCaseNestedInput
     resourceEstimates?: CaseResourceEstimateUpdateManyWithoutCaseNestedInput
+    attentionReviews?: AssetAttentionReviewUpdateManyWithoutCaseNestedInput
   }
 
   export type CaseUncheckedUpdateWithoutAssetInput = {
@@ -117025,6 +122039,7 @@ export namespace Prisma {
     intelligenceReconciliations?: InfrastructureIntelligenceReconciliationUncheckedUpdateManyWithoutCaseNestedInput
     externalObservations?: ExternalObservationUncheckedUpdateManyWithoutCaseNestedInput
     resourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutCaseNestedInput
+    attentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutCaseNestedInput
   }
 
   export type CaseUncheckedUpdateManyWithoutAssetInput = {
@@ -117218,6 +122233,64 @@ export namespace Prisma {
     jurisdictionId?: StringFieldUpdateOperationsInput | string
     caseId?: NullableStringFieldUpdateOperationsInput | string | null
     ingestedById?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type AssetAttentionReviewUpdateWithoutAssetInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reviewerRole?: EnumSystemRoleFieldUpdateOperationsInput | $Enums.SystemRole
+    departmentId?: StringFieldUpdateOperationsInput | string
+    jurisdictionId?: StringFieldUpdateOperationsInput | string
+    disposition?: EnumAssetAttentionDispositionFieldUpdateOperationsInput | $Enums.AssetAttentionDisposition
+    rationale?: StringFieldUpdateOperationsInput | string
+    attentionContractVersion?: StringFieldUpdateOperationsInput | string
+    attentionCalculationVersion?: StringFieldUpdateOperationsInput | string
+    projectionAsOf?: DateTimeFieldUpdateOperationsInput | Date | string
+    sourceSetFingerprint?: StringFieldUpdateOperationsInput | string
+    clientRequestId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    case?: CaseUpdateOneWithoutAttentionReviewsNestedInput
+    reviewer?: UserUpdateOneRequiredWithoutAssetAttentionReviewsNestedInput
+    supersedesReview?: AssetAttentionReviewUpdateOneWithoutSupersededByNestedInput
+    supersededBy?: AssetAttentionReviewUpdateOneWithoutSupersedesReviewNestedInput
+    selectedSignals?: AssetAttentionReviewSignalUpdateManyWithoutReviewNestedInput
+  }
+
+  export type AssetAttentionReviewUncheckedUpdateWithoutAssetInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    caseId?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewerId?: StringFieldUpdateOperationsInput | string
+    reviewerRole?: EnumSystemRoleFieldUpdateOperationsInput | $Enums.SystemRole
+    departmentId?: StringFieldUpdateOperationsInput | string
+    jurisdictionId?: StringFieldUpdateOperationsInput | string
+    disposition?: EnumAssetAttentionDispositionFieldUpdateOperationsInput | $Enums.AssetAttentionDisposition
+    rationale?: StringFieldUpdateOperationsInput | string
+    attentionContractVersion?: StringFieldUpdateOperationsInput | string
+    attentionCalculationVersion?: StringFieldUpdateOperationsInput | string
+    projectionAsOf?: DateTimeFieldUpdateOperationsInput | Date | string
+    sourceSetFingerprint?: StringFieldUpdateOperationsInput | string
+    clientRequestId?: StringFieldUpdateOperationsInput | string
+    supersedesReviewId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    supersededBy?: AssetAttentionReviewUncheckedUpdateOneWithoutSupersedesReviewNestedInput
+    selectedSignals?: AssetAttentionReviewSignalUncheckedUpdateManyWithoutReviewNestedInput
+  }
+
+  export type AssetAttentionReviewUncheckedUpdateManyWithoutAssetInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    caseId?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewerId?: StringFieldUpdateOperationsInput | string
+    reviewerRole?: EnumSystemRoleFieldUpdateOperationsInput | $Enums.SystemRole
+    departmentId?: StringFieldUpdateOperationsInput | string
+    jurisdictionId?: StringFieldUpdateOperationsInput | string
+    disposition?: EnumAssetAttentionDispositionFieldUpdateOperationsInput | $Enums.AssetAttentionDisposition
+    rationale?: StringFieldUpdateOperationsInput | string
+    attentionContractVersion?: StringFieldUpdateOperationsInput | string
+    attentionCalculationVersion?: StringFieldUpdateOperationsInput | string
+    projectionAsOf?: DateTimeFieldUpdateOperationsInput | Date | string
+    sourceSetFingerprint?: StringFieldUpdateOperationsInput | string
+    clientRequestId?: StringFieldUpdateOperationsInput | string
+    supersedesReviewId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type PublicReportTriageAnalysisCreateManyPublicReportInput = {
@@ -118270,6 +123343,24 @@ export namespace Prisma {
     createdAt?: Date | string
   }
 
+  export type AssetAttentionReviewCreateManyCaseInput = {
+    id?: string
+    assetId: string
+    reviewerId: string
+    reviewerRole: $Enums.SystemRole
+    departmentId: string
+    jurisdictionId: string
+    disposition: $Enums.AssetAttentionDisposition
+    rationale: string
+    attentionContractVersion: string
+    attentionCalculationVersion: string
+    projectionAsOf: Date | string
+    sourceSetFingerprint: string
+    clientRequestId: string
+    supersedesReviewId?: string | null
+    createdAt?: Date | string
+  }
+
   export type InspectionUpdateWithoutCaseInput = {
     id?: StringFieldUpdateOperationsInput | string
     inspectionDate?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -118833,6 +123924,100 @@ export namespace Prisma {
     sourceReference?: StringFieldUpdateOperationsInput | string
     preparedById?: StringFieldUpdateOperationsInput | string
     preparedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AssetAttentionReviewUpdateWithoutCaseInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reviewerRole?: EnumSystemRoleFieldUpdateOperationsInput | $Enums.SystemRole
+    departmentId?: StringFieldUpdateOperationsInput | string
+    jurisdictionId?: StringFieldUpdateOperationsInput | string
+    disposition?: EnumAssetAttentionDispositionFieldUpdateOperationsInput | $Enums.AssetAttentionDisposition
+    rationale?: StringFieldUpdateOperationsInput | string
+    attentionContractVersion?: StringFieldUpdateOperationsInput | string
+    attentionCalculationVersion?: StringFieldUpdateOperationsInput | string
+    projectionAsOf?: DateTimeFieldUpdateOperationsInput | Date | string
+    sourceSetFingerprint?: StringFieldUpdateOperationsInput | string
+    clientRequestId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    asset?: AssetUpdateOneRequiredWithoutAttentionReviewsNestedInput
+    reviewer?: UserUpdateOneRequiredWithoutAssetAttentionReviewsNestedInput
+    supersedesReview?: AssetAttentionReviewUpdateOneWithoutSupersededByNestedInput
+    supersededBy?: AssetAttentionReviewUpdateOneWithoutSupersedesReviewNestedInput
+    selectedSignals?: AssetAttentionReviewSignalUpdateManyWithoutReviewNestedInput
+  }
+
+  export type AssetAttentionReviewUncheckedUpdateWithoutCaseInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    assetId?: StringFieldUpdateOperationsInput | string
+    reviewerId?: StringFieldUpdateOperationsInput | string
+    reviewerRole?: EnumSystemRoleFieldUpdateOperationsInput | $Enums.SystemRole
+    departmentId?: StringFieldUpdateOperationsInput | string
+    jurisdictionId?: StringFieldUpdateOperationsInput | string
+    disposition?: EnumAssetAttentionDispositionFieldUpdateOperationsInput | $Enums.AssetAttentionDisposition
+    rationale?: StringFieldUpdateOperationsInput | string
+    attentionContractVersion?: StringFieldUpdateOperationsInput | string
+    attentionCalculationVersion?: StringFieldUpdateOperationsInput | string
+    projectionAsOf?: DateTimeFieldUpdateOperationsInput | Date | string
+    sourceSetFingerprint?: StringFieldUpdateOperationsInput | string
+    clientRequestId?: StringFieldUpdateOperationsInput | string
+    supersedesReviewId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    supersededBy?: AssetAttentionReviewUncheckedUpdateOneWithoutSupersedesReviewNestedInput
+    selectedSignals?: AssetAttentionReviewSignalUncheckedUpdateManyWithoutReviewNestedInput
+  }
+
+  export type AssetAttentionReviewUncheckedUpdateManyWithoutCaseInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    assetId?: StringFieldUpdateOperationsInput | string
+    reviewerId?: StringFieldUpdateOperationsInput | string
+    reviewerRole?: EnumSystemRoleFieldUpdateOperationsInput | $Enums.SystemRole
+    departmentId?: StringFieldUpdateOperationsInput | string
+    jurisdictionId?: StringFieldUpdateOperationsInput | string
+    disposition?: EnumAssetAttentionDispositionFieldUpdateOperationsInput | $Enums.AssetAttentionDisposition
+    rationale?: StringFieldUpdateOperationsInput | string
+    attentionContractVersion?: StringFieldUpdateOperationsInput | string
+    attentionCalculationVersion?: StringFieldUpdateOperationsInput | string
+    projectionAsOf?: DateTimeFieldUpdateOperationsInput | Date | string
+    sourceSetFingerprint?: StringFieldUpdateOperationsInput | string
+    clientRequestId?: StringFieldUpdateOperationsInput | string
+    supersedesReviewId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AssetAttentionReviewSignalCreateManyReviewInput = {
+    id?: string
+    category: string
+    signalCode: string
+    state: string
+    evidenceReferenceFingerprint: string
+    createdAt?: Date | string
+  }
+
+  export type AssetAttentionReviewSignalUpdateWithoutReviewInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    category?: StringFieldUpdateOperationsInput | string
+    signalCode?: StringFieldUpdateOperationsInput | string
+    state?: StringFieldUpdateOperationsInput | string
+    evidenceReferenceFingerprint?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AssetAttentionReviewSignalUncheckedUpdateWithoutReviewInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    category?: StringFieldUpdateOperationsInput | string
+    signalCode?: StringFieldUpdateOperationsInput | string
+    state?: StringFieldUpdateOperationsInput | string
+    evidenceReferenceFingerprint?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AssetAttentionReviewSignalUncheckedUpdateManyWithoutReviewInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    category?: StringFieldUpdateOperationsInput | string
+    signalCode?: StringFieldUpdateOperationsInput | string
+    state?: StringFieldUpdateOperationsInput | string
+    evidenceReferenceFingerprint?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
