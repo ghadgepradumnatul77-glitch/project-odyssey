@@ -6,4 +6,6 @@ router.get('/cases/:caseId/resource-estimates',authenticate,async(req,res)=>{try
 router.get('/portfolio/candidates',authenticate,async(req,res)=>{try{return res.status(200).json({success:true,data:await listCandidates(req.user!,{limit:parseLimit(req.query.limit),cursor:parseCursor(req.query.cursor)})});}catch(error){return fail(res,error);}});
 router.post('/portfolio-scenarios',authenticate,async(req,res)=>{const parsed=scenario.safeParse(req.body);if(!parsed.success)return res.status(400).json({success:false,error:{code:'INVALID_INPUT',message:'A valid INR scenario is required.'}});try{return res.status(201).json({success:true,data:await createScenario({...parsed.data,budgetMinor:BigInt(parsed.data.budgetMinor)},req.user!)});}catch(error){return fail(res,error);}});
 router.get('/portfolio-scenarios/:scenarioId',authenticate,async(req,res)=>{try{return res.status(200).json({success:true,data:await getScenario(String(req.params.scenarioId),req.user!)});}catch(error){return fail(res,error);}});
+import maintenanceScenarioRouter from './maintenance-scenario.routes';
+router.use(maintenanceScenarioRouter);
 export default router;

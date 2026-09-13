@@ -22,6 +22,7 @@ const snapshotSchema = z.object({ asOf: z.string().datetime({ offset: true }), c
   emergencyFlag: z.boolean().nullable(), hospitalRoute: z.boolean().nullable(), createdAt: z.string(), estimates: z.array(z.unknown()).max(1000)
 }).strict()).max(MAX_MAINTENANCE_CASES) }).strict();
 export class MaintenanceCalculationError extends Error { constructor() { super('INVALID_MAINTENANCE_COMPARISON'); } }
+export { envelopeSchema as maintenanceEnvelopeSchema, estimateSchema as maintenanceEstimateSchema };
 
 // Arrays are sets for these contracts; sorted canonical encoding makes insertion order irrelevant.
 function canonical(value: unknown): string {
