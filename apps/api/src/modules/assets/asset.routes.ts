@@ -10,8 +10,10 @@ import { ScopedResourceNotFoundError } from '../../security/organizational-scope
 import assetEvidenceBaselineRoutes from './asset-evidence-baseline.routes';
 import assetAttentionRoutes from './asset-attention.routes';
 import assetAttentionReviewRoutes from './asset-attention-review.routes';
+import recordedOutcomesRoutes from './recorded-outcomes.routes';
 
 const router = Router();
+router.use(recordedOutcomesRoutes);
 router.use(assetEvidenceBaselineRoutes);
 router.use(assetAttentionRoutes);
 router.use(assetAttentionReviewRoutes);

@@ -7,6 +7,29 @@ import {
 } from './recorded-outcomes.contracts';
 
 type Check = { state: OutcomeState; reason: OutcomeReason };
+/** A valid duration is not a valid outcome when its governing record is inconsistent. */
+export function gateRecordedMetric<T>(result: OutcomeMetric<T>, prerequisite: OutcomeMetric<unknown>): OutcomeMetric<T> {
+  if (prerequisite.state === 'PRESENT') return result;
+  return { ...result, state: prerequisite.state, value: null, reasonCodes: [...prerequisite.reasonCodes],
+    sourceIds: [...new Set([...result.sourceIds,...prerequisite.sourceIds])].sort(),
+    sourceFingerprint: 'sha256:' + createHash('sha256').update(result.sourceFingerprint + prerequisite.sourceFingerprint).digest('hex') };
+}
+/** Only PRESENT observations contribute to a ratio. Diagnostic counts are retained separately. */
+export function summarizeRecordedMetrics(rows: OutcomeMetric<unknown>[], name: string, ctx: OutcomeContext) {
+  const stateCounts: Record<OutcomeState,number> = { PRESENT:0,UNKNOWN:0,INVALID:0,NOT_COMPARABLE:0,NOT_APPLICABLE:0 };
+  const counts: OutcomeCounts = { numerator:0,denominator:0,unknown:0,invalid:0,excluded:0 };
+  for (const row of rows) {
+    stateCounts[row.state]++;
+    if (row.counts) {
+      if (row.state === 'PRESENT') { counts.numerator += row.counts.numerator; counts.denominator += row.counts.denominator; }
+      counts.unknown += row.counts.unknown; counts.invalid += row.counts.invalid; counts.excluded += row.counts.excluded;
+    }
+  }
+  const hasRatio = rows.some(r=>r.counts !== null);
+  const check = stateCounts.PRESENT ? null : stateCounts.INVALID ? fail('INVALID','VALUE_INVALID') : stateCounts.UNKNOWN ? fail('UNKNOWN','EVIDENCE_MISSING') : stateCounts.NOT_COMPARABLE ? fail('NOT_COMPARABLE','PAIR_AMBIGUOUS') : fail('NOT_APPLICABLE','ZERO_ELIGIBLE');
+  return { ...metric(ctx,`PRESENT_ONLY_${name}`,rows.map(r=>r.sourceFingerprint),rows.flatMap(r=>r.sourceIds),{ observations:rows.length },check,hasRatio?counts:null),
+    stateCounts, comparableObservations:stateCounts.PRESENT, excludedObservations:rows.length-stateCounts.PRESENT };
+}
 const fail = (state: OutcomeState, reason: OutcomeReason): Check => ({ state, reason });
 function canonical(v: unknown): string {
   if (v === undefined) return 'undefined';
