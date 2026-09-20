@@ -356,6 +356,16 @@ export const OrpDecisionType: {
 export type OrpDecisionType = (typeof OrpDecisionType)[keyof typeof OrpDecisionType]
 
 
+export const ExecutionPlanProvenance: {
+  PILOT: 'PILOT',
+  PRODUCTION: 'PRODUCTION',
+  SYNTHETIC: 'SYNTHETIC',
+  DEMO: 'DEMO'
+};
+
+export type ExecutionPlanProvenance = (typeof ExecutionPlanProvenance)[keyof typeof ExecutionPlanProvenance]
+
+
 export const ExecutionPlanStatus: {
   PLANNED: 'PLANNED',
   IN_PROGRESS: 'IN_PROGRESS',
@@ -649,6 +659,10 @@ export const ObservationValidationState: typeof $Enums.ObservationValidationStat
 export type OrpDecisionType = $Enums.OrpDecisionType
 
 export const OrpDecisionType: typeof $Enums.OrpDecisionType
+
+export type ExecutionPlanProvenance = $Enums.ExecutionPlanProvenance
+
+export const ExecutionPlanProvenance: typeof $Enums.ExecutionPlanProvenance
 
 export type ExecutionPlanStatus = $Enums.ExecutionPlanStatus
 
@@ -5475,6 +5489,7 @@ export namespace Prisma {
     decidedPredictiveApprovals: number
     predictiveModelLifecycleEvents: number
     assetAttentionReviews: number
+    provenanceDeclaredPlans: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5520,6 +5535,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: boolean | UserCountOutputTypeCountDecidedPredictiveApprovalsArgs
     predictiveModelLifecycleEvents?: boolean | UserCountOutputTypeCountPredictiveModelLifecycleEventsArgs
     assetAttentionReviews?: boolean | UserCountOutputTypeCountAssetAttentionReviewsArgs
+    provenanceDeclaredPlans?: boolean | UserCountOutputTypeCountProvenanceDeclaredPlansArgs
   }
 
   // Custom InputTypes
@@ -5825,6 +5841,13 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountAssetAttentionReviewsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: AssetAttentionReviewWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountProvenanceDeclaredPlansArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ExecutionPlanWhereInput
   }
 
 
@@ -6498,11 +6521,13 @@ export namespace Prisma {
   export type ApprovalAuthorityCountOutputType = {
     decisions: number
     caseClosures: number
+    provenanceDeclaredPlans: number
   }
 
   export type ApprovalAuthorityCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     decisions?: boolean | ApprovalAuthorityCountOutputTypeCountDecisionsArgs
     caseClosures?: boolean | ApprovalAuthorityCountOutputTypeCountCaseClosuresArgs
+    provenanceDeclaredPlans?: boolean | ApprovalAuthorityCountOutputTypeCountProvenanceDeclaredPlansArgs
   }
 
   // Custom InputTypes
@@ -6528,6 +6553,13 @@ export namespace Prisma {
    */
   export type ApprovalAuthorityCountOutputTypeCountCaseClosuresArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: CaseClosureWhereInput
+  }
+
+  /**
+   * ApprovalAuthorityCountOutputType without action
+   */
+  export type ApprovalAuthorityCountOutputTypeCountProvenanceDeclaredPlansArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ExecutionPlanWhereInput
   }
 
 
@@ -9721,6 +9753,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: boolean | User$decidedPredictiveApprovalsArgs<ExtArgs>
     predictiveModelLifecycleEvents?: boolean | User$predictiveModelLifecycleEventsArgs<ExtArgs>
     assetAttentionReviews?: boolean | User$assetAttentionReviewsArgs<ExtArgs>
+    provenanceDeclaredPlans?: boolean | User$provenanceDeclaredPlansArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -9819,6 +9852,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: boolean | User$decidedPredictiveApprovalsArgs<ExtArgs>
     predictiveModelLifecycleEvents?: boolean | User$predictiveModelLifecycleEventsArgs<ExtArgs>
     assetAttentionReviews?: boolean | User$assetAttentionReviewsArgs<ExtArgs>
+    provenanceDeclaredPlans?: boolean | User$provenanceDeclaredPlansArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -9877,6 +9911,7 @@ export namespace Prisma {
       decidedPredictiveApprovals: Prisma.$PredictiveModelApprovalPayload<ExtArgs>[]
       predictiveModelLifecycleEvents: Prisma.$PredictiveModelLifecycleEventPayload<ExtArgs>[]
       assetAttentionReviews: Prisma.$AssetAttentionReviewPayload<ExtArgs>[]
+      provenanceDeclaredPlans: Prisma.$ExecutionPlanPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -10329,6 +10364,7 @@ export namespace Prisma {
     decidedPredictiveApprovals<T extends User$decidedPredictiveApprovalsArgs<ExtArgs> = {}>(args?: Subset<T, User$decidedPredictiveApprovalsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PredictiveModelApprovalPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     predictiveModelLifecycleEvents<T extends User$predictiveModelLifecycleEventsArgs<ExtArgs> = {}>(args?: Subset<T, User$predictiveModelLifecycleEventsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PredictiveModelLifecycleEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     assetAttentionReviews<T extends User$assetAttentionReviewsArgs<ExtArgs> = {}>(args?: Subset<T, User$assetAttentionReviewsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AssetAttentionReviewPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    provenanceDeclaredPlans<T extends User$provenanceDeclaredPlansArgs<ExtArgs> = {}>(args?: Subset<T, User$provenanceDeclaredPlansArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExecutionPlanPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -11771,6 +11807,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: AssetAttentionReviewScalarFieldEnum | AssetAttentionReviewScalarFieldEnum[]
+  }
+
+  /**
+   * User.provenanceDeclaredPlans
+   */
+  export type User$provenanceDeclaredPlansArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExecutionPlan
+     */
+    select?: ExecutionPlanSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExecutionPlan
+     */
+    omit?: ExecutionPlanOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExecutionPlanInclude<ExtArgs> | null
+    where?: ExecutionPlanWhereInput
+    orderBy?: ExecutionPlanOrderByWithRelationInput | ExecutionPlanOrderByWithRelationInput[]
+    cursor?: ExecutionPlanWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ExecutionPlanScalarFieldEnum | ExecutionPlanScalarFieldEnum[]
   }
 
   /**
@@ -42798,6 +42858,8 @@ export namespace Prisma {
     canRequestReinspection: boolean | null
     canEscalate: boolean | null
     canCloseCase: boolean | null
+    canDeclareNonOperationalProvenance: boolean | null
+    canDeclareOperationalProvenance: boolean | null
     maxPriorityLevel: $Enums.PriorityLevel | null
     isActive: boolean | null
     validFrom: Date | null
@@ -42817,6 +42879,8 @@ export namespace Prisma {
     canRequestReinspection: boolean | null
     canEscalate: boolean | null
     canCloseCase: boolean | null
+    canDeclareNonOperationalProvenance: boolean | null
+    canDeclareOperationalProvenance: boolean | null
     maxPriorityLevel: $Enums.PriorityLevel | null
     isActive: boolean | null
     validFrom: Date | null
@@ -42836,6 +42900,8 @@ export namespace Prisma {
     canRequestReinspection: number
     canEscalate: number
     canCloseCase: number
+    canDeclareNonOperationalProvenance: number
+    canDeclareOperationalProvenance: number
     maxPriorityLevel: number
     isActive: number
     validFrom: number
@@ -42857,6 +42923,8 @@ export namespace Prisma {
     canRequestReinspection?: true
     canEscalate?: true
     canCloseCase?: true
+    canDeclareNonOperationalProvenance?: true
+    canDeclareOperationalProvenance?: true
     maxPriorityLevel?: true
     isActive?: true
     validFrom?: true
@@ -42876,6 +42944,8 @@ export namespace Prisma {
     canRequestReinspection?: true
     canEscalate?: true
     canCloseCase?: true
+    canDeclareNonOperationalProvenance?: true
+    canDeclareOperationalProvenance?: true
     maxPriorityLevel?: true
     isActive?: true
     validFrom?: true
@@ -42895,6 +42965,8 @@ export namespace Prisma {
     canRequestReinspection?: true
     canEscalate?: true
     canCloseCase?: true
+    canDeclareNonOperationalProvenance?: true
+    canDeclareOperationalProvenance?: true
     maxPriorityLevel?: true
     isActive?: true
     validFrom?: true
@@ -42987,6 +43059,8 @@ export namespace Prisma {
     canRequestReinspection: boolean
     canEscalate: boolean
     canCloseCase: boolean
+    canDeclareNonOperationalProvenance: boolean
+    canDeclareOperationalProvenance: boolean
     maxPriorityLevel: $Enums.PriorityLevel | null
     isActive: boolean
     validFrom: Date | null
@@ -43023,6 +43097,8 @@ export namespace Prisma {
     canRequestReinspection?: boolean
     canEscalate?: boolean
     canCloseCase?: boolean
+    canDeclareNonOperationalProvenance?: boolean
+    canDeclareOperationalProvenance?: boolean
     maxPriorityLevel?: boolean
     isActive?: boolean
     validFrom?: boolean
@@ -43034,6 +43110,7 @@ export namespace Prisma {
     jurisdiction?: boolean | JurisdictionDefaultArgs<ExtArgs>
     decisions?: boolean | ApprovalAuthority$decisionsArgs<ExtArgs>
     caseClosures?: boolean | ApprovalAuthority$caseClosuresArgs<ExtArgs>
+    provenanceDeclaredPlans?: boolean | ApprovalAuthority$provenanceDeclaredPlansArgs<ExtArgs>
     _count?: boolean | ApprovalAuthorityCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["approvalAuthority"]>
 
@@ -43048,6 +43125,8 @@ export namespace Prisma {
     canRequestReinspection?: boolean
     canEscalate?: boolean
     canCloseCase?: boolean
+    canDeclareNonOperationalProvenance?: boolean
+    canDeclareOperationalProvenance?: boolean
     maxPriorityLevel?: boolean
     isActive?: boolean
     validFrom?: boolean
@@ -43070,6 +43149,8 @@ export namespace Prisma {
     canRequestReinspection?: boolean
     canEscalate?: boolean
     canCloseCase?: boolean
+    canDeclareNonOperationalProvenance?: boolean
+    canDeclareOperationalProvenance?: boolean
     maxPriorityLevel?: boolean
     isActive?: boolean
     validFrom?: boolean
@@ -43092,6 +43173,8 @@ export namespace Prisma {
     canRequestReinspection?: boolean
     canEscalate?: boolean
     canCloseCase?: boolean
+    canDeclareNonOperationalProvenance?: boolean
+    canDeclareOperationalProvenance?: boolean
     maxPriorityLevel?: boolean
     isActive?: boolean
     validFrom?: boolean
@@ -43100,13 +43183,14 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type ApprovalAuthorityOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "departmentId" | "jurisdictionId" | "canApprove" | "canReject" | "canRequestModification" | "canRequestReinspection" | "canEscalate" | "canCloseCase" | "maxPriorityLevel" | "isActive" | "validFrom" | "validUntil" | "createdAt" | "updatedAt", ExtArgs["result"]["approvalAuthority"]>
+  export type ApprovalAuthorityOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "departmentId" | "jurisdictionId" | "canApprove" | "canReject" | "canRequestModification" | "canRequestReinspection" | "canEscalate" | "canCloseCase" | "canDeclareNonOperationalProvenance" | "canDeclareOperationalProvenance" | "maxPriorityLevel" | "isActive" | "validFrom" | "validUntil" | "createdAt" | "updatedAt", ExtArgs["result"]["approvalAuthority"]>
   export type ApprovalAuthorityInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     department?: boolean | DepartmentDefaultArgs<ExtArgs>
     jurisdiction?: boolean | JurisdictionDefaultArgs<ExtArgs>
     decisions?: boolean | ApprovalAuthority$decisionsArgs<ExtArgs>
     caseClosures?: boolean | ApprovalAuthority$caseClosuresArgs<ExtArgs>
+    provenanceDeclaredPlans?: boolean | ApprovalAuthority$provenanceDeclaredPlansArgs<ExtArgs>
     _count?: boolean | ApprovalAuthorityCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ApprovalAuthorityIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -43128,6 +43212,7 @@ export namespace Prisma {
       jurisdiction: Prisma.$JurisdictionPayload<ExtArgs>
       decisions: Prisma.$OrpDecisionPayload<ExtArgs>[]
       caseClosures: Prisma.$CaseClosurePayload<ExtArgs>[]
+      provenanceDeclaredPlans: Prisma.$ExecutionPlanPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -43140,6 +43225,8 @@ export namespace Prisma {
       canRequestReinspection: boolean
       canEscalate: boolean
       canCloseCase: boolean
+      canDeclareNonOperationalProvenance: boolean
+      canDeclareOperationalProvenance: boolean
       maxPriorityLevel: $Enums.PriorityLevel | null
       isActive: boolean
       validFrom: Date | null
@@ -43545,6 +43632,7 @@ export namespace Prisma {
     jurisdiction<T extends JurisdictionDefaultArgs<ExtArgs> = {}>(args?: Subset<T, JurisdictionDefaultArgs<ExtArgs>>): Prisma__JurisdictionClient<$Result.GetResult<Prisma.$JurisdictionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     decisions<T extends ApprovalAuthority$decisionsArgs<ExtArgs> = {}>(args?: Subset<T, ApprovalAuthority$decisionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrpDecisionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     caseClosures<T extends ApprovalAuthority$caseClosuresArgs<ExtArgs> = {}>(args?: Subset<T, ApprovalAuthority$caseClosuresArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CaseClosurePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    provenanceDeclaredPlans<T extends ApprovalAuthority$provenanceDeclaredPlansArgs<ExtArgs> = {}>(args?: Subset<T, ApprovalAuthority$provenanceDeclaredPlansArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExecutionPlanPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -43584,6 +43672,8 @@ export namespace Prisma {
     readonly canRequestReinspection: FieldRef<"ApprovalAuthority", 'Boolean'>
     readonly canEscalate: FieldRef<"ApprovalAuthority", 'Boolean'>
     readonly canCloseCase: FieldRef<"ApprovalAuthority", 'Boolean'>
+    readonly canDeclareNonOperationalProvenance: FieldRef<"ApprovalAuthority", 'Boolean'>
+    readonly canDeclareOperationalProvenance: FieldRef<"ApprovalAuthority", 'Boolean'>
     readonly maxPriorityLevel: FieldRef<"ApprovalAuthority", 'PriorityLevel'>
     readonly isActive: FieldRef<"ApprovalAuthority", 'Boolean'>
     readonly validFrom: FieldRef<"ApprovalAuthority", 'DateTime'>
@@ -44031,6 +44121,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: CaseClosureScalarFieldEnum | CaseClosureScalarFieldEnum[]
+  }
+
+  /**
+   * ApprovalAuthority.provenanceDeclaredPlans
+   */
+  export type ApprovalAuthority$provenanceDeclaredPlansArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExecutionPlan
+     */
+    select?: ExecutionPlanSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExecutionPlan
+     */
+    omit?: ExecutionPlanOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExecutionPlanInclude<ExtArgs> | null
+    where?: ExecutionPlanWhereInput
+    orderBy?: ExecutionPlanOrderByWithRelationInput | ExecutionPlanOrderByWithRelationInput[]
+    cursor?: ExecutionPlanWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ExecutionPlanScalarFieldEnum | ExecutionPlanScalarFieldEnum[]
   }
 
   /**
@@ -45284,6 +45398,12 @@ export namespace Prisma {
     cancellationReason: string | null
     governanceMode: $Enums.ExecutionPlanGovernanceMode | null
     executionContractVersion: string | null
+    provenanceClassification: $Enums.ExecutionPlanProvenance | null
+    provenanceDeclaredById: string | null
+    provenanceDeclaredAt: Date | null
+    provenanceAuthorityGrantId: string | null
+    provenanceEvidenceReference: string | null
+    provenanceContractVersion: string | null
     plannedStartAt: Date | null
     plannedEndAt: Date | null
   }
@@ -45304,6 +45424,12 @@ export namespace Prisma {
     cancellationReason: string | null
     governanceMode: $Enums.ExecutionPlanGovernanceMode | null
     executionContractVersion: string | null
+    provenanceClassification: $Enums.ExecutionPlanProvenance | null
+    provenanceDeclaredById: string | null
+    provenanceDeclaredAt: Date | null
+    provenanceAuthorityGrantId: string | null
+    provenanceEvidenceReference: string | null
+    provenanceContractVersion: string | null
     plannedStartAt: Date | null
     plannedEndAt: Date | null
   }
@@ -45325,6 +45451,12 @@ export namespace Prisma {
     governanceMode: number
     executionContractVersion: number
     governedProvenance: number
+    provenanceClassification: number
+    provenanceDeclaredById: number
+    provenanceDeclaredAt: number
+    provenanceAuthorityGrantId: number
+    provenanceEvidenceReference: number
+    provenanceContractVersion: number
     plannedStartAt: number
     plannedEndAt: number
     _all: number
@@ -45347,6 +45479,12 @@ export namespace Prisma {
     cancellationReason?: true
     governanceMode?: true
     executionContractVersion?: true
+    provenanceClassification?: true
+    provenanceDeclaredById?: true
+    provenanceDeclaredAt?: true
+    provenanceAuthorityGrantId?: true
+    provenanceEvidenceReference?: true
+    provenanceContractVersion?: true
     plannedStartAt?: true
     plannedEndAt?: true
   }
@@ -45367,6 +45505,12 @@ export namespace Prisma {
     cancellationReason?: true
     governanceMode?: true
     executionContractVersion?: true
+    provenanceClassification?: true
+    provenanceDeclaredById?: true
+    provenanceDeclaredAt?: true
+    provenanceAuthorityGrantId?: true
+    provenanceEvidenceReference?: true
+    provenanceContractVersion?: true
     plannedStartAt?: true
     plannedEndAt?: true
   }
@@ -45388,6 +45532,12 @@ export namespace Prisma {
     governanceMode?: true
     executionContractVersion?: true
     governedProvenance?: true
+    provenanceClassification?: true
+    provenanceDeclaredById?: true
+    provenanceDeclaredAt?: true
+    provenanceAuthorityGrantId?: true
+    provenanceEvidenceReference?: true
+    provenanceContractVersion?: true
     plannedStartAt?: true
     plannedEndAt?: true
     _all?: true
@@ -45482,6 +45632,12 @@ export namespace Prisma {
     governanceMode: $Enums.ExecutionPlanGovernanceMode
     executionContractVersion: string | null
     governedProvenance: JsonValue | null
+    provenanceClassification: $Enums.ExecutionPlanProvenance | null
+    provenanceDeclaredById: string | null
+    provenanceDeclaredAt: Date | null
+    provenanceAuthorityGrantId: string | null
+    provenanceEvidenceReference: string | null
+    provenanceContractVersion: string | null
     plannedStartAt: Date | null
     plannedEndAt: Date | null
     _count: ExecutionPlanCountAggregateOutputType | null
@@ -45520,12 +45676,20 @@ export namespace Prisma {
     governanceMode?: boolean
     executionContractVersion?: boolean
     governedProvenance?: boolean
+    provenanceClassification?: boolean
+    provenanceDeclaredById?: boolean
+    provenanceDeclaredAt?: boolean
+    provenanceAuthorityGrantId?: boolean
+    provenanceEvidenceReference?: boolean
+    provenanceContractVersion?: boolean
     plannedStartAt?: boolean
     plannedEndAt?: boolean
     orp?: boolean | OperationalResponsePlanDefaultArgs<ExtArgs>
     case?: boolean | CaseDefaultArgs<ExtArgs>
     approvalDecision?: boolean | OrpDecisionDefaultArgs<ExtArgs>
     createdBy?: boolean | UserDefaultArgs<ExtArgs>
+    provenanceDeclaredBy?: boolean | ExecutionPlan$provenanceDeclaredByArgs<ExtArgs>
+    provenanceAuthorityGrant?: boolean | ExecutionPlan$provenanceAuthorityGrantArgs<ExtArgs>
     tasks?: boolean | ExecutionPlan$tasksArgs<ExtArgs>
     closure?: boolean | ExecutionPlan$closureArgs<ExtArgs>
     scheduleRevisions?: boolean | ExecutionPlan$scheduleRevisionsArgs<ExtArgs>
@@ -45550,12 +45714,20 @@ export namespace Prisma {
     governanceMode?: boolean
     executionContractVersion?: boolean
     governedProvenance?: boolean
+    provenanceClassification?: boolean
+    provenanceDeclaredById?: boolean
+    provenanceDeclaredAt?: boolean
+    provenanceAuthorityGrantId?: boolean
+    provenanceEvidenceReference?: boolean
+    provenanceContractVersion?: boolean
     plannedStartAt?: boolean
     plannedEndAt?: boolean
     orp?: boolean | OperationalResponsePlanDefaultArgs<ExtArgs>
     case?: boolean | CaseDefaultArgs<ExtArgs>
     approvalDecision?: boolean | OrpDecisionDefaultArgs<ExtArgs>
     createdBy?: boolean | UserDefaultArgs<ExtArgs>
+    provenanceDeclaredBy?: boolean | ExecutionPlan$provenanceDeclaredByArgs<ExtArgs>
+    provenanceAuthorityGrant?: boolean | ExecutionPlan$provenanceAuthorityGrantArgs<ExtArgs>
   }, ExtArgs["result"]["executionPlan"]>
 
   export type ExecutionPlanSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -45575,12 +45747,20 @@ export namespace Prisma {
     governanceMode?: boolean
     executionContractVersion?: boolean
     governedProvenance?: boolean
+    provenanceClassification?: boolean
+    provenanceDeclaredById?: boolean
+    provenanceDeclaredAt?: boolean
+    provenanceAuthorityGrantId?: boolean
+    provenanceEvidenceReference?: boolean
+    provenanceContractVersion?: boolean
     plannedStartAt?: boolean
     plannedEndAt?: boolean
     orp?: boolean | OperationalResponsePlanDefaultArgs<ExtArgs>
     case?: boolean | CaseDefaultArgs<ExtArgs>
     approvalDecision?: boolean | OrpDecisionDefaultArgs<ExtArgs>
     createdBy?: boolean | UserDefaultArgs<ExtArgs>
+    provenanceDeclaredBy?: boolean | ExecutionPlan$provenanceDeclaredByArgs<ExtArgs>
+    provenanceAuthorityGrant?: boolean | ExecutionPlan$provenanceAuthorityGrantArgs<ExtArgs>
   }, ExtArgs["result"]["executionPlan"]>
 
   export type ExecutionPlanSelectScalar = {
@@ -45600,16 +45780,24 @@ export namespace Prisma {
     governanceMode?: boolean
     executionContractVersion?: boolean
     governedProvenance?: boolean
+    provenanceClassification?: boolean
+    provenanceDeclaredById?: boolean
+    provenanceDeclaredAt?: boolean
+    provenanceAuthorityGrantId?: boolean
+    provenanceEvidenceReference?: boolean
+    provenanceContractVersion?: boolean
     plannedStartAt?: boolean
     plannedEndAt?: boolean
   }
 
-  export type ExecutionPlanOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "orpId" | "caseId" | "approvalDecisionId" | "status" | "createdById" | "templateVersion" | "createdAt" | "updatedAt" | "startedAt" | "completedAt" | "cancelledAt" | "cancellationReason" | "governanceMode" | "executionContractVersion" | "governedProvenance" | "plannedStartAt" | "plannedEndAt", ExtArgs["result"]["executionPlan"]>
+  export type ExecutionPlanOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "orpId" | "caseId" | "approvalDecisionId" | "status" | "createdById" | "templateVersion" | "createdAt" | "updatedAt" | "startedAt" | "completedAt" | "cancelledAt" | "cancellationReason" | "governanceMode" | "executionContractVersion" | "governedProvenance" | "provenanceClassification" | "provenanceDeclaredById" | "provenanceDeclaredAt" | "provenanceAuthorityGrantId" | "provenanceEvidenceReference" | "provenanceContractVersion" | "plannedStartAt" | "plannedEndAt", ExtArgs["result"]["executionPlan"]>
   export type ExecutionPlanInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     orp?: boolean | OperationalResponsePlanDefaultArgs<ExtArgs>
     case?: boolean | CaseDefaultArgs<ExtArgs>
     approvalDecision?: boolean | OrpDecisionDefaultArgs<ExtArgs>
     createdBy?: boolean | UserDefaultArgs<ExtArgs>
+    provenanceDeclaredBy?: boolean | ExecutionPlan$provenanceDeclaredByArgs<ExtArgs>
+    provenanceAuthorityGrant?: boolean | ExecutionPlan$provenanceAuthorityGrantArgs<ExtArgs>
     tasks?: boolean | ExecutionPlan$tasksArgs<ExtArgs>
     closure?: boolean | ExecutionPlan$closureArgs<ExtArgs>
     scheduleRevisions?: boolean | ExecutionPlan$scheduleRevisionsArgs<ExtArgs>
@@ -45621,12 +45809,16 @@ export namespace Prisma {
     case?: boolean | CaseDefaultArgs<ExtArgs>
     approvalDecision?: boolean | OrpDecisionDefaultArgs<ExtArgs>
     createdBy?: boolean | UserDefaultArgs<ExtArgs>
+    provenanceDeclaredBy?: boolean | ExecutionPlan$provenanceDeclaredByArgs<ExtArgs>
+    provenanceAuthorityGrant?: boolean | ExecutionPlan$provenanceAuthorityGrantArgs<ExtArgs>
   }
   export type ExecutionPlanIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     orp?: boolean | OperationalResponsePlanDefaultArgs<ExtArgs>
     case?: boolean | CaseDefaultArgs<ExtArgs>
     approvalDecision?: boolean | OrpDecisionDefaultArgs<ExtArgs>
     createdBy?: boolean | UserDefaultArgs<ExtArgs>
+    provenanceDeclaredBy?: boolean | ExecutionPlan$provenanceDeclaredByArgs<ExtArgs>
+    provenanceAuthorityGrant?: boolean | ExecutionPlan$provenanceAuthorityGrantArgs<ExtArgs>
   }
 
   export type $ExecutionPlanPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -45636,6 +45828,8 @@ export namespace Prisma {
       case: Prisma.$CasePayload<ExtArgs>
       approvalDecision: Prisma.$OrpDecisionPayload<ExtArgs>
       createdBy: Prisma.$UserPayload<ExtArgs>
+      provenanceDeclaredBy: Prisma.$UserPayload<ExtArgs> | null
+      provenanceAuthorityGrant: Prisma.$ApprovalAuthorityPayload<ExtArgs> | null
       tasks: Prisma.$ExecutionTaskPayload<ExtArgs>[]
       closure: Prisma.$CaseClosurePayload<ExtArgs> | null
       scheduleRevisions: Prisma.$ExecutionScheduleRevisionPayload<ExtArgs>[]
@@ -45658,6 +45852,12 @@ export namespace Prisma {
       governanceMode: $Enums.ExecutionPlanGovernanceMode
       executionContractVersion: string | null
       governedProvenance: Prisma.JsonValue | null
+      provenanceClassification: $Enums.ExecutionPlanProvenance | null
+      provenanceDeclaredById: string | null
+      provenanceDeclaredAt: Date | null
+      provenanceAuthorityGrantId: string | null
+      provenanceEvidenceReference: string | null
+      provenanceContractVersion: string | null
       plannedStartAt: Date | null
       plannedEndAt: Date | null
     }, ExtArgs["result"]["executionPlan"]>
@@ -46058,6 +46258,8 @@ export namespace Prisma {
     case<T extends CaseDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CaseDefaultArgs<ExtArgs>>): Prisma__CaseClient<$Result.GetResult<Prisma.$CasePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     approvalDecision<T extends OrpDecisionDefaultArgs<ExtArgs> = {}>(args?: Subset<T, OrpDecisionDefaultArgs<ExtArgs>>): Prisma__OrpDecisionClient<$Result.GetResult<Prisma.$OrpDecisionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     createdBy<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    provenanceDeclaredBy<T extends ExecutionPlan$provenanceDeclaredByArgs<ExtArgs> = {}>(args?: Subset<T, ExecutionPlan$provenanceDeclaredByArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    provenanceAuthorityGrant<T extends ExecutionPlan$provenanceAuthorityGrantArgs<ExtArgs> = {}>(args?: Subset<T, ExecutionPlan$provenanceAuthorityGrantArgs<ExtArgs>>): Prisma__ApprovalAuthorityClient<$Result.GetResult<Prisma.$ApprovalAuthorityPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     tasks<T extends ExecutionPlan$tasksArgs<ExtArgs> = {}>(args?: Subset<T, ExecutionPlan$tasksArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExecutionTaskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     closure<T extends ExecutionPlan$closureArgs<ExtArgs> = {}>(args?: Subset<T, ExecutionPlan$closureArgs<ExtArgs>>): Prisma__CaseClosureClient<$Result.GetResult<Prisma.$CaseClosurePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     scheduleRevisions<T extends ExecutionPlan$scheduleRevisionsArgs<ExtArgs> = {}>(args?: Subset<T, ExecutionPlan$scheduleRevisionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExecutionScheduleRevisionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -46107,6 +46309,12 @@ export namespace Prisma {
     readonly governanceMode: FieldRef<"ExecutionPlan", 'ExecutionPlanGovernanceMode'>
     readonly executionContractVersion: FieldRef<"ExecutionPlan", 'String'>
     readonly governedProvenance: FieldRef<"ExecutionPlan", 'Json'>
+    readonly provenanceClassification: FieldRef<"ExecutionPlan", 'ExecutionPlanProvenance'>
+    readonly provenanceDeclaredById: FieldRef<"ExecutionPlan", 'String'>
+    readonly provenanceDeclaredAt: FieldRef<"ExecutionPlan", 'DateTime'>
+    readonly provenanceAuthorityGrantId: FieldRef<"ExecutionPlan", 'String'>
+    readonly provenanceEvidenceReference: FieldRef<"ExecutionPlan", 'String'>
+    readonly provenanceContractVersion: FieldRef<"ExecutionPlan", 'String'>
     readonly plannedStartAt: FieldRef<"ExecutionPlan", 'DateTime'>
     readonly plannedEndAt: FieldRef<"ExecutionPlan", 'DateTime'>
   }
@@ -46502,6 +46710,44 @@ export namespace Prisma {
      * Limit how many ExecutionPlans to delete.
      */
     limit?: number
+  }
+
+  /**
+   * ExecutionPlan.provenanceDeclaredBy
+   */
+  export type ExecutionPlan$provenanceDeclaredByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+  }
+
+  /**
+   * ExecutionPlan.provenanceAuthorityGrant
+   */
+  export type ExecutionPlan$provenanceAuthorityGrantArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ApprovalAuthority
+     */
+    select?: ApprovalAuthoritySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ApprovalAuthority
+     */
+    omit?: ApprovalAuthorityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ApprovalAuthorityInclude<ExtArgs> | null
+    where?: ApprovalAuthorityWhereInput
   }
 
   /**
@@ -63720,6 +63966,8 @@ export namespace Prisma {
     canRequestReinspection: 'canRequestReinspection',
     canEscalate: 'canEscalate',
     canCloseCase: 'canCloseCase',
+    canDeclareNonOperationalProvenance: 'canDeclareNonOperationalProvenance',
+    canDeclareOperationalProvenance: 'canDeclareOperationalProvenance',
     maxPriorityLevel: 'maxPriorityLevel',
     isActive: 'isActive',
     validFrom: 'validFrom',
@@ -63765,6 +64013,12 @@ export namespace Prisma {
     governanceMode: 'governanceMode',
     executionContractVersion: 'executionContractVersion',
     governedProvenance: 'governedProvenance',
+    provenanceClassification: 'provenanceClassification',
+    provenanceDeclaredById: 'provenanceDeclaredById',
+    provenanceDeclaredAt: 'provenanceDeclaredAt',
+    provenanceAuthorityGrantId: 'provenanceAuthorityGrantId',
+    provenanceEvidenceReference: 'provenanceEvidenceReference',
+    provenanceContractVersion: 'provenanceContractVersion',
     plannedStartAt: 'plannedStartAt',
     plannedEndAt: 'plannedEndAt'
   };
@@ -64542,6 +64796,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'ExecutionPlanProvenance'
+   */
+  export type EnumExecutionPlanProvenanceFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ExecutionPlanProvenance'>
+    
+
+
+  /**
+   * Reference to a field of type 'ExecutionPlanProvenance[]'
+   */
+  export type ListEnumExecutionPlanProvenanceFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ExecutionPlanProvenance[]'>
+    
+
+
+  /**
    * Reference to a field of type 'ExecutionTaskStatus'
    */
   export type EnumExecutionTaskStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ExecutionTaskStatus'>
@@ -64923,6 +65191,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalListRelationFilter
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventListRelationFilter
     assetAttentionReviews?: AssetAttentionReviewListRelationFilter
+    provenanceDeclaredPlans?: ExecutionPlanListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -64982,6 +65251,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalOrderByRelationAggregateInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventOrderByRelationAggregateInput
     assetAttentionReviews?: AssetAttentionReviewOrderByRelationAggregateInput
+    provenanceDeclaredPlans?: ExecutionPlanOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -65044,6 +65314,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalListRelationFilter
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventListRelationFilter
     assetAttentionReviews?: AssetAttentionReviewListRelationFilter
+    provenanceDeclaredPlans?: ExecutionPlanListRelationFilter
   }, "id" | "employeeCode" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -67926,6 +68197,8 @@ export namespace Prisma {
     canRequestReinspection?: BoolFilter<"ApprovalAuthority"> | boolean
     canEscalate?: BoolFilter<"ApprovalAuthority"> | boolean
     canCloseCase?: BoolFilter<"ApprovalAuthority"> | boolean
+    canDeclareNonOperationalProvenance?: BoolFilter<"ApprovalAuthority"> | boolean
+    canDeclareOperationalProvenance?: BoolFilter<"ApprovalAuthority"> | boolean
     maxPriorityLevel?: EnumPriorityLevelNullableFilter<"ApprovalAuthority"> | $Enums.PriorityLevel | null
     isActive?: BoolFilter<"ApprovalAuthority"> | boolean
     validFrom?: DateTimeNullableFilter<"ApprovalAuthority"> | Date | string | null
@@ -67937,6 +68210,7 @@ export namespace Prisma {
     jurisdiction?: XOR<JurisdictionScalarRelationFilter, JurisdictionWhereInput>
     decisions?: OrpDecisionListRelationFilter
     caseClosures?: CaseClosureListRelationFilter
+    provenanceDeclaredPlans?: ExecutionPlanListRelationFilter
   }
 
   export type ApprovalAuthorityOrderByWithRelationInput = {
@@ -67950,6 +68224,8 @@ export namespace Prisma {
     canRequestReinspection?: SortOrder
     canEscalate?: SortOrder
     canCloseCase?: SortOrder
+    canDeclareNonOperationalProvenance?: SortOrder
+    canDeclareOperationalProvenance?: SortOrder
     maxPriorityLevel?: SortOrderInput | SortOrder
     isActive?: SortOrder
     validFrom?: SortOrderInput | SortOrder
@@ -67961,6 +68237,7 @@ export namespace Prisma {
     jurisdiction?: JurisdictionOrderByWithRelationInput
     decisions?: OrpDecisionOrderByRelationAggregateInput
     caseClosures?: CaseClosureOrderByRelationAggregateInput
+    provenanceDeclaredPlans?: ExecutionPlanOrderByRelationAggregateInput
   }
 
   export type ApprovalAuthorityWhereUniqueInput = Prisma.AtLeast<{
@@ -67977,6 +68254,8 @@ export namespace Prisma {
     canRequestReinspection?: BoolFilter<"ApprovalAuthority"> | boolean
     canEscalate?: BoolFilter<"ApprovalAuthority"> | boolean
     canCloseCase?: BoolFilter<"ApprovalAuthority"> | boolean
+    canDeclareNonOperationalProvenance?: BoolFilter<"ApprovalAuthority"> | boolean
+    canDeclareOperationalProvenance?: BoolFilter<"ApprovalAuthority"> | boolean
     maxPriorityLevel?: EnumPriorityLevelNullableFilter<"ApprovalAuthority"> | $Enums.PriorityLevel | null
     isActive?: BoolFilter<"ApprovalAuthority"> | boolean
     validFrom?: DateTimeNullableFilter<"ApprovalAuthority"> | Date | string | null
@@ -67988,6 +68267,7 @@ export namespace Prisma {
     jurisdiction?: XOR<JurisdictionScalarRelationFilter, JurisdictionWhereInput>
     decisions?: OrpDecisionListRelationFilter
     caseClosures?: CaseClosureListRelationFilter
+    provenanceDeclaredPlans?: ExecutionPlanListRelationFilter
   }, "id">
 
   export type ApprovalAuthorityOrderByWithAggregationInput = {
@@ -68001,6 +68281,8 @@ export namespace Prisma {
     canRequestReinspection?: SortOrder
     canEscalate?: SortOrder
     canCloseCase?: SortOrder
+    canDeclareNonOperationalProvenance?: SortOrder
+    canDeclareOperationalProvenance?: SortOrder
     maxPriorityLevel?: SortOrderInput | SortOrder
     isActive?: SortOrder
     validFrom?: SortOrderInput | SortOrder
@@ -68026,6 +68308,8 @@ export namespace Prisma {
     canRequestReinspection?: BoolWithAggregatesFilter<"ApprovalAuthority"> | boolean
     canEscalate?: BoolWithAggregatesFilter<"ApprovalAuthority"> | boolean
     canCloseCase?: BoolWithAggregatesFilter<"ApprovalAuthority"> | boolean
+    canDeclareNonOperationalProvenance?: BoolWithAggregatesFilter<"ApprovalAuthority"> | boolean
+    canDeclareOperationalProvenance?: BoolWithAggregatesFilter<"ApprovalAuthority"> | boolean
     maxPriorityLevel?: EnumPriorityLevelNullableWithAggregatesFilter<"ApprovalAuthority"> | $Enums.PriorityLevel | null
     isActive?: BoolWithAggregatesFilter<"ApprovalAuthority"> | boolean
     validFrom?: DateTimeNullableWithAggregatesFilter<"ApprovalAuthority"> | Date | string | null
@@ -68154,12 +68438,20 @@ export namespace Prisma {
     governanceMode?: EnumExecutionPlanGovernanceModeFilter<"ExecutionPlan"> | $Enums.ExecutionPlanGovernanceMode
     executionContractVersion?: StringNullableFilter<"ExecutionPlan"> | string | null
     governedProvenance?: JsonNullableFilter<"ExecutionPlan">
+    provenanceClassification?: EnumExecutionPlanProvenanceNullableFilter<"ExecutionPlan"> | $Enums.ExecutionPlanProvenance | null
+    provenanceDeclaredById?: StringNullableFilter<"ExecutionPlan"> | string | null
+    provenanceDeclaredAt?: DateTimeNullableFilter<"ExecutionPlan"> | Date | string | null
+    provenanceAuthorityGrantId?: StringNullableFilter<"ExecutionPlan"> | string | null
+    provenanceEvidenceReference?: StringNullableFilter<"ExecutionPlan"> | string | null
+    provenanceContractVersion?: StringNullableFilter<"ExecutionPlan"> | string | null
     plannedStartAt?: DateTimeNullableFilter<"ExecutionPlan"> | Date | string | null
     plannedEndAt?: DateTimeNullableFilter<"ExecutionPlan"> | Date | string | null
     orp?: XOR<OperationalResponsePlanScalarRelationFilter, OperationalResponsePlanWhereInput>
     case?: XOR<CaseScalarRelationFilter, CaseWhereInput>
     approvalDecision?: XOR<OrpDecisionScalarRelationFilter, OrpDecisionWhereInput>
     createdBy?: XOR<UserScalarRelationFilter, UserWhereInput>
+    provenanceDeclaredBy?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+    provenanceAuthorityGrant?: XOR<ApprovalAuthorityNullableScalarRelationFilter, ApprovalAuthorityWhereInput> | null
     tasks?: ExecutionTaskListRelationFilter
     closure?: XOR<CaseClosureNullableScalarRelationFilter, CaseClosureWhereInput> | null
     scheduleRevisions?: ExecutionScheduleRevisionListRelationFilter
@@ -68183,12 +68475,20 @@ export namespace Prisma {
     governanceMode?: SortOrder
     executionContractVersion?: SortOrderInput | SortOrder
     governedProvenance?: SortOrderInput | SortOrder
+    provenanceClassification?: SortOrderInput | SortOrder
+    provenanceDeclaredById?: SortOrderInput | SortOrder
+    provenanceDeclaredAt?: SortOrderInput | SortOrder
+    provenanceAuthorityGrantId?: SortOrderInput | SortOrder
+    provenanceEvidenceReference?: SortOrderInput | SortOrder
+    provenanceContractVersion?: SortOrderInput | SortOrder
     plannedStartAt?: SortOrderInput | SortOrder
     plannedEndAt?: SortOrderInput | SortOrder
     orp?: OperationalResponsePlanOrderByWithRelationInput
     case?: CaseOrderByWithRelationInput
     approvalDecision?: OrpDecisionOrderByWithRelationInput
     createdBy?: UserOrderByWithRelationInput
+    provenanceDeclaredBy?: UserOrderByWithRelationInput
+    provenanceAuthorityGrant?: ApprovalAuthorityOrderByWithRelationInput
     tasks?: ExecutionTaskOrderByRelationAggregateInput
     closure?: CaseClosureOrderByWithRelationInput
     scheduleRevisions?: ExecutionScheduleRevisionOrderByRelationAggregateInput
@@ -68215,12 +68515,20 @@ export namespace Prisma {
     governanceMode?: EnumExecutionPlanGovernanceModeFilter<"ExecutionPlan"> | $Enums.ExecutionPlanGovernanceMode
     executionContractVersion?: StringNullableFilter<"ExecutionPlan"> | string | null
     governedProvenance?: JsonNullableFilter<"ExecutionPlan">
+    provenanceClassification?: EnumExecutionPlanProvenanceNullableFilter<"ExecutionPlan"> | $Enums.ExecutionPlanProvenance | null
+    provenanceDeclaredById?: StringNullableFilter<"ExecutionPlan"> | string | null
+    provenanceDeclaredAt?: DateTimeNullableFilter<"ExecutionPlan"> | Date | string | null
+    provenanceAuthorityGrantId?: StringNullableFilter<"ExecutionPlan"> | string | null
+    provenanceEvidenceReference?: StringNullableFilter<"ExecutionPlan"> | string | null
+    provenanceContractVersion?: StringNullableFilter<"ExecutionPlan"> | string | null
     plannedStartAt?: DateTimeNullableFilter<"ExecutionPlan"> | Date | string | null
     plannedEndAt?: DateTimeNullableFilter<"ExecutionPlan"> | Date | string | null
     orp?: XOR<OperationalResponsePlanScalarRelationFilter, OperationalResponsePlanWhereInput>
     case?: XOR<CaseScalarRelationFilter, CaseWhereInput>
     approvalDecision?: XOR<OrpDecisionScalarRelationFilter, OrpDecisionWhereInput>
     createdBy?: XOR<UserScalarRelationFilter, UserWhereInput>
+    provenanceDeclaredBy?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+    provenanceAuthorityGrant?: XOR<ApprovalAuthorityNullableScalarRelationFilter, ApprovalAuthorityWhereInput> | null
     tasks?: ExecutionTaskListRelationFilter
     closure?: XOR<CaseClosureNullableScalarRelationFilter, CaseClosureWhereInput> | null
     scheduleRevisions?: ExecutionScheduleRevisionListRelationFilter
@@ -68244,6 +68552,12 @@ export namespace Prisma {
     governanceMode?: SortOrder
     executionContractVersion?: SortOrderInput | SortOrder
     governedProvenance?: SortOrderInput | SortOrder
+    provenanceClassification?: SortOrderInput | SortOrder
+    provenanceDeclaredById?: SortOrderInput | SortOrder
+    provenanceDeclaredAt?: SortOrderInput | SortOrder
+    provenanceAuthorityGrantId?: SortOrderInput | SortOrder
+    provenanceEvidenceReference?: SortOrderInput | SortOrder
+    provenanceContractVersion?: SortOrderInput | SortOrder
     plannedStartAt?: SortOrderInput | SortOrder
     plannedEndAt?: SortOrderInput | SortOrder
     _count?: ExecutionPlanCountOrderByAggregateInput
@@ -68271,6 +68585,12 @@ export namespace Prisma {
     governanceMode?: EnumExecutionPlanGovernanceModeWithAggregatesFilter<"ExecutionPlan"> | $Enums.ExecutionPlanGovernanceMode
     executionContractVersion?: StringNullableWithAggregatesFilter<"ExecutionPlan"> | string | null
     governedProvenance?: JsonNullableWithAggregatesFilter<"ExecutionPlan">
+    provenanceClassification?: EnumExecutionPlanProvenanceNullableWithAggregatesFilter<"ExecutionPlan"> | $Enums.ExecutionPlanProvenance | null
+    provenanceDeclaredById?: StringNullableWithAggregatesFilter<"ExecutionPlan"> | string | null
+    provenanceDeclaredAt?: DateTimeNullableWithAggregatesFilter<"ExecutionPlan"> | Date | string | null
+    provenanceAuthorityGrantId?: StringNullableWithAggregatesFilter<"ExecutionPlan"> | string | null
+    provenanceEvidenceReference?: StringNullableWithAggregatesFilter<"ExecutionPlan"> | string | null
+    provenanceContractVersion?: StringNullableWithAggregatesFilter<"ExecutionPlan"> | string | null
     plannedStartAt?: DateTimeNullableWithAggregatesFilter<"ExecutionPlan"> | Date | string | null
     plannedEndAt?: DateTimeNullableWithAggregatesFilter<"ExecutionPlan"> | Date | string | null
   }
@@ -70043,6 +70363,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
     assetAttentionReviews?: AssetAttentionReviewCreateNestedManyWithoutReviewerInput
+    provenanceDeclaredPlans?: ExecutionPlanCreateNestedManyWithoutProvenanceDeclaredByInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -70100,6 +70421,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
     assetAttentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutReviewerInput
+    provenanceDeclaredPlans?: ExecutionPlanUncheckedCreateNestedManyWithoutProvenanceDeclaredByInput
   }
 
   export type UserUpdateInput = {
@@ -70157,6 +70479,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
     assetAttentionReviews?: AssetAttentionReviewUpdateManyWithoutReviewerNestedInput
+    provenanceDeclaredPlans?: ExecutionPlanUpdateManyWithoutProvenanceDeclaredByNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -70214,6 +70537,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
     assetAttentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutReviewerNestedInput
+    provenanceDeclaredPlans?: ExecutionPlanUncheckedUpdateManyWithoutProvenanceDeclaredByNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -73399,6 +73723,8 @@ export namespace Prisma {
     canRequestReinspection?: boolean
     canEscalate?: boolean
     canCloseCase?: boolean
+    canDeclareNonOperationalProvenance?: boolean
+    canDeclareOperationalProvenance?: boolean
     maxPriorityLevel?: $Enums.PriorityLevel | null
     isActive?: boolean
     validFrom?: Date | string | null
@@ -73410,6 +73736,7 @@ export namespace Prisma {
     jurisdiction: JurisdictionCreateNestedOneWithoutApprovalAuthoritiesInput
     decisions?: OrpDecisionCreateNestedManyWithoutAuthorityGrantInput
     caseClosures?: CaseClosureCreateNestedManyWithoutClosureAuthorityGrantInput
+    provenanceDeclaredPlans?: ExecutionPlanCreateNestedManyWithoutProvenanceAuthorityGrantInput
   }
 
   export type ApprovalAuthorityUncheckedCreateInput = {
@@ -73423,6 +73750,8 @@ export namespace Prisma {
     canRequestReinspection?: boolean
     canEscalate?: boolean
     canCloseCase?: boolean
+    canDeclareNonOperationalProvenance?: boolean
+    canDeclareOperationalProvenance?: boolean
     maxPriorityLevel?: $Enums.PriorityLevel | null
     isActive?: boolean
     validFrom?: Date | string | null
@@ -73431,6 +73760,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     decisions?: OrpDecisionUncheckedCreateNestedManyWithoutAuthorityGrantInput
     caseClosures?: CaseClosureUncheckedCreateNestedManyWithoutClosureAuthorityGrantInput
+    provenanceDeclaredPlans?: ExecutionPlanUncheckedCreateNestedManyWithoutProvenanceAuthorityGrantInput
   }
 
   export type ApprovalAuthorityUpdateInput = {
@@ -73441,6 +73771,8 @@ export namespace Prisma {
     canRequestReinspection?: BoolFieldUpdateOperationsInput | boolean
     canEscalate?: BoolFieldUpdateOperationsInput | boolean
     canCloseCase?: BoolFieldUpdateOperationsInput | boolean
+    canDeclareNonOperationalProvenance?: BoolFieldUpdateOperationsInput | boolean
+    canDeclareOperationalProvenance?: BoolFieldUpdateOperationsInput | boolean
     maxPriorityLevel?: NullableEnumPriorityLevelFieldUpdateOperationsInput | $Enums.PriorityLevel | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     validFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -73452,6 +73784,7 @@ export namespace Prisma {
     jurisdiction?: JurisdictionUpdateOneRequiredWithoutApprovalAuthoritiesNestedInput
     decisions?: OrpDecisionUpdateManyWithoutAuthorityGrantNestedInput
     caseClosures?: CaseClosureUpdateManyWithoutClosureAuthorityGrantNestedInput
+    provenanceDeclaredPlans?: ExecutionPlanUpdateManyWithoutProvenanceAuthorityGrantNestedInput
   }
 
   export type ApprovalAuthorityUncheckedUpdateInput = {
@@ -73465,6 +73798,8 @@ export namespace Prisma {
     canRequestReinspection?: BoolFieldUpdateOperationsInput | boolean
     canEscalate?: BoolFieldUpdateOperationsInput | boolean
     canCloseCase?: BoolFieldUpdateOperationsInput | boolean
+    canDeclareNonOperationalProvenance?: BoolFieldUpdateOperationsInput | boolean
+    canDeclareOperationalProvenance?: BoolFieldUpdateOperationsInput | boolean
     maxPriorityLevel?: NullableEnumPriorityLevelFieldUpdateOperationsInput | $Enums.PriorityLevel | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     validFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -73473,6 +73808,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     decisions?: OrpDecisionUncheckedUpdateManyWithoutAuthorityGrantNestedInput
     caseClosures?: CaseClosureUncheckedUpdateManyWithoutClosureAuthorityGrantNestedInput
+    provenanceDeclaredPlans?: ExecutionPlanUncheckedUpdateManyWithoutProvenanceAuthorityGrantNestedInput
   }
 
   export type ApprovalAuthorityCreateManyInput = {
@@ -73486,6 +73822,8 @@ export namespace Prisma {
     canRequestReinspection?: boolean
     canEscalate?: boolean
     canCloseCase?: boolean
+    canDeclareNonOperationalProvenance?: boolean
+    canDeclareOperationalProvenance?: boolean
     maxPriorityLevel?: $Enums.PriorityLevel | null
     isActive?: boolean
     validFrom?: Date | string | null
@@ -73502,6 +73840,8 @@ export namespace Prisma {
     canRequestReinspection?: BoolFieldUpdateOperationsInput | boolean
     canEscalate?: BoolFieldUpdateOperationsInput | boolean
     canCloseCase?: BoolFieldUpdateOperationsInput | boolean
+    canDeclareNonOperationalProvenance?: BoolFieldUpdateOperationsInput | boolean
+    canDeclareOperationalProvenance?: BoolFieldUpdateOperationsInput | boolean
     maxPriorityLevel?: NullableEnumPriorityLevelFieldUpdateOperationsInput | $Enums.PriorityLevel | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     validFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -73521,6 +73861,8 @@ export namespace Prisma {
     canRequestReinspection?: BoolFieldUpdateOperationsInput | boolean
     canEscalate?: BoolFieldUpdateOperationsInput | boolean
     canCloseCase?: BoolFieldUpdateOperationsInput | boolean
+    canDeclareNonOperationalProvenance?: BoolFieldUpdateOperationsInput | boolean
+    canDeclareOperationalProvenance?: BoolFieldUpdateOperationsInput | boolean
     maxPriorityLevel?: NullableEnumPriorityLevelFieldUpdateOperationsInput | $Enums.PriorityLevel | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     validFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -73639,12 +73981,18 @@ export namespace Prisma {
     governanceMode?: $Enums.ExecutionPlanGovernanceMode
     executionContractVersion?: string | null
     governedProvenance?: NullableJsonNullValueInput | InputJsonValue
+    provenanceClassification?: $Enums.ExecutionPlanProvenance | null
+    provenanceDeclaredAt?: Date | string | null
+    provenanceEvidenceReference?: string | null
+    provenanceContractVersion?: string | null
     plannedStartAt?: Date | string | null
     plannedEndAt?: Date | string | null
     orp: OperationalResponsePlanCreateNestedOneWithoutExecutionPlanInput
     case: CaseCreateNestedOneWithoutExecutionPlansInput
     approvalDecision: OrpDecisionCreateNestedOneWithoutExecutionPlanInput
     createdBy: UserCreateNestedOneWithoutCreatedExecutionPlansInput
+    provenanceDeclaredBy?: UserCreateNestedOneWithoutProvenanceDeclaredPlansInput
+    provenanceAuthorityGrant?: ApprovalAuthorityCreateNestedOneWithoutProvenanceDeclaredPlansInput
     tasks?: ExecutionTaskCreateNestedManyWithoutExecutionPlanInput
     closure?: CaseClosureCreateNestedOneWithoutExecutionPlanInput
     scheduleRevisions?: ExecutionScheduleRevisionCreateNestedManyWithoutExecutionPlanInput
@@ -73668,6 +74016,12 @@ export namespace Prisma {
     governanceMode?: $Enums.ExecutionPlanGovernanceMode
     executionContractVersion?: string | null
     governedProvenance?: NullableJsonNullValueInput | InputJsonValue
+    provenanceClassification?: $Enums.ExecutionPlanProvenance | null
+    provenanceDeclaredById?: string | null
+    provenanceDeclaredAt?: Date | string | null
+    provenanceAuthorityGrantId?: string | null
+    provenanceEvidenceReference?: string | null
+    provenanceContractVersion?: string | null
     plannedStartAt?: Date | string | null
     plannedEndAt?: Date | string | null
     tasks?: ExecutionTaskUncheckedCreateNestedManyWithoutExecutionPlanInput
@@ -73689,12 +74043,18 @@ export namespace Prisma {
     governanceMode?: EnumExecutionPlanGovernanceModeFieldUpdateOperationsInput | $Enums.ExecutionPlanGovernanceMode
     executionContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
     governedProvenance?: NullableJsonNullValueInput | InputJsonValue
+    provenanceClassification?: NullableEnumExecutionPlanProvenanceFieldUpdateOperationsInput | $Enums.ExecutionPlanProvenance | null
+    provenanceDeclaredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    provenanceEvidenceReference?: NullableStringFieldUpdateOperationsInput | string | null
+    provenanceContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
     plannedStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     plannedEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     orp?: OperationalResponsePlanUpdateOneRequiredWithoutExecutionPlanNestedInput
     case?: CaseUpdateOneRequiredWithoutExecutionPlansNestedInput
     approvalDecision?: OrpDecisionUpdateOneRequiredWithoutExecutionPlanNestedInput
     createdBy?: UserUpdateOneRequiredWithoutCreatedExecutionPlansNestedInput
+    provenanceDeclaredBy?: UserUpdateOneWithoutProvenanceDeclaredPlansNestedInput
+    provenanceAuthorityGrant?: ApprovalAuthorityUpdateOneWithoutProvenanceDeclaredPlansNestedInput
     tasks?: ExecutionTaskUpdateManyWithoutExecutionPlanNestedInput
     closure?: CaseClosureUpdateOneWithoutExecutionPlanNestedInput
     scheduleRevisions?: ExecutionScheduleRevisionUpdateManyWithoutExecutionPlanNestedInput
@@ -73718,6 +74078,12 @@ export namespace Prisma {
     governanceMode?: EnumExecutionPlanGovernanceModeFieldUpdateOperationsInput | $Enums.ExecutionPlanGovernanceMode
     executionContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
     governedProvenance?: NullableJsonNullValueInput | InputJsonValue
+    provenanceClassification?: NullableEnumExecutionPlanProvenanceFieldUpdateOperationsInput | $Enums.ExecutionPlanProvenance | null
+    provenanceDeclaredById?: NullableStringFieldUpdateOperationsInput | string | null
+    provenanceDeclaredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    provenanceAuthorityGrantId?: NullableStringFieldUpdateOperationsInput | string | null
+    provenanceEvidenceReference?: NullableStringFieldUpdateOperationsInput | string | null
+    provenanceContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
     plannedStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     plannedEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tasks?: ExecutionTaskUncheckedUpdateManyWithoutExecutionPlanNestedInput
@@ -73743,6 +74109,12 @@ export namespace Prisma {
     governanceMode?: $Enums.ExecutionPlanGovernanceMode
     executionContractVersion?: string | null
     governedProvenance?: NullableJsonNullValueInput | InputJsonValue
+    provenanceClassification?: $Enums.ExecutionPlanProvenance | null
+    provenanceDeclaredById?: string | null
+    provenanceDeclaredAt?: Date | string | null
+    provenanceAuthorityGrantId?: string | null
+    provenanceEvidenceReference?: string | null
+    provenanceContractVersion?: string | null
     plannedStartAt?: Date | string | null
     plannedEndAt?: Date | string | null
   }
@@ -73760,6 +74132,10 @@ export namespace Prisma {
     governanceMode?: EnumExecutionPlanGovernanceModeFieldUpdateOperationsInput | $Enums.ExecutionPlanGovernanceMode
     executionContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
     governedProvenance?: NullableJsonNullValueInput | InputJsonValue
+    provenanceClassification?: NullableEnumExecutionPlanProvenanceFieldUpdateOperationsInput | $Enums.ExecutionPlanProvenance | null
+    provenanceDeclaredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    provenanceEvidenceReference?: NullableStringFieldUpdateOperationsInput | string | null
+    provenanceContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
     plannedStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     plannedEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
@@ -73781,6 +74157,12 @@ export namespace Prisma {
     governanceMode?: EnumExecutionPlanGovernanceModeFieldUpdateOperationsInput | $Enums.ExecutionPlanGovernanceMode
     executionContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
     governedProvenance?: NullableJsonNullValueInput | InputJsonValue
+    provenanceClassification?: NullableEnumExecutionPlanProvenanceFieldUpdateOperationsInput | $Enums.ExecutionPlanProvenance | null
+    provenanceDeclaredById?: NullableStringFieldUpdateOperationsInput | string | null
+    provenanceDeclaredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    provenanceAuthorityGrantId?: NullableStringFieldUpdateOperationsInput | string | null
+    provenanceEvidenceReference?: NullableStringFieldUpdateOperationsInput | string | null
+    provenanceContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
     plannedStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     plannedEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
@@ -78307,6 +78689,8 @@ export namespace Prisma {
     canRequestReinspection?: SortOrder
     canEscalate?: SortOrder
     canCloseCase?: SortOrder
+    canDeclareNonOperationalProvenance?: SortOrder
+    canDeclareOperationalProvenance?: SortOrder
     maxPriorityLevel?: SortOrder
     isActive?: SortOrder
     validFrom?: SortOrder
@@ -78326,6 +78710,8 @@ export namespace Prisma {
     canRequestReinspection?: SortOrder
     canEscalate?: SortOrder
     canCloseCase?: SortOrder
+    canDeclareNonOperationalProvenance?: SortOrder
+    canDeclareOperationalProvenance?: SortOrder
     maxPriorityLevel?: SortOrder
     isActive?: SortOrder
     validFrom?: SortOrder
@@ -78345,6 +78731,8 @@ export namespace Prisma {
     canRequestReinspection?: SortOrder
     canEscalate?: SortOrder
     canCloseCase?: SortOrder
+    canDeclareNonOperationalProvenance?: SortOrder
+    canDeclareOperationalProvenance?: SortOrder
     maxPriorityLevel?: SortOrder
     isActive?: SortOrder
     validFrom?: SortOrder
@@ -78434,9 +78822,21 @@ export namespace Prisma {
     not?: NestedEnumExecutionPlanGovernanceModeFilter<$PrismaModel> | $Enums.ExecutionPlanGovernanceMode
   }
 
+  export type EnumExecutionPlanProvenanceNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.ExecutionPlanProvenance | EnumExecutionPlanProvenanceFieldRefInput<$PrismaModel> | null
+    in?: $Enums.ExecutionPlanProvenance[] | ListEnumExecutionPlanProvenanceFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.ExecutionPlanProvenance[] | ListEnumExecutionPlanProvenanceFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumExecutionPlanProvenanceNullableFilter<$PrismaModel> | $Enums.ExecutionPlanProvenance | null
+  }
+
   export type OrpDecisionScalarRelationFilter = {
     is?: OrpDecisionWhereInput
     isNot?: OrpDecisionWhereInput
+  }
+
+  export type ApprovalAuthorityNullableScalarRelationFilter = {
+    is?: ApprovalAuthorityWhereInput | null
+    isNot?: ApprovalAuthorityWhereInput | null
   }
 
   export type ExecutionPlanCountOrderByAggregateInput = {
@@ -78456,6 +78856,12 @@ export namespace Prisma {
     governanceMode?: SortOrder
     executionContractVersion?: SortOrder
     governedProvenance?: SortOrder
+    provenanceClassification?: SortOrder
+    provenanceDeclaredById?: SortOrder
+    provenanceDeclaredAt?: SortOrder
+    provenanceAuthorityGrantId?: SortOrder
+    provenanceEvidenceReference?: SortOrder
+    provenanceContractVersion?: SortOrder
     plannedStartAt?: SortOrder
     plannedEndAt?: SortOrder
   }
@@ -78476,6 +78882,12 @@ export namespace Prisma {
     cancellationReason?: SortOrder
     governanceMode?: SortOrder
     executionContractVersion?: SortOrder
+    provenanceClassification?: SortOrder
+    provenanceDeclaredById?: SortOrder
+    provenanceDeclaredAt?: SortOrder
+    provenanceAuthorityGrantId?: SortOrder
+    provenanceEvidenceReference?: SortOrder
+    provenanceContractVersion?: SortOrder
     plannedStartAt?: SortOrder
     plannedEndAt?: SortOrder
   }
@@ -78496,6 +78908,12 @@ export namespace Prisma {
     cancellationReason?: SortOrder
     governanceMode?: SortOrder
     executionContractVersion?: SortOrder
+    provenanceClassification?: SortOrder
+    provenanceDeclaredById?: SortOrder
+    provenanceDeclaredAt?: SortOrder
+    provenanceAuthorityGrantId?: SortOrder
+    provenanceEvidenceReference?: SortOrder
+    provenanceContractVersion?: SortOrder
     plannedStartAt?: SortOrder
     plannedEndAt?: SortOrder
   }
@@ -78518,6 +78936,16 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumExecutionPlanGovernanceModeFilter<$PrismaModel>
     _max?: NestedEnumExecutionPlanGovernanceModeFilter<$PrismaModel>
+  }
+
+  export type EnumExecutionPlanProvenanceNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ExecutionPlanProvenance | EnumExecutionPlanProvenanceFieldRefInput<$PrismaModel> | null
+    in?: $Enums.ExecutionPlanProvenance[] | ListEnumExecutionPlanProvenanceFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.ExecutionPlanProvenance[] | ListEnumExecutionPlanProvenanceFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumExecutionPlanProvenanceNullableWithAggregatesFilter<$PrismaModel> | $Enums.ExecutionPlanProvenance | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumExecutionPlanProvenanceNullableFilter<$PrismaModel>
+    _max?: NestedEnumExecutionPlanProvenanceNullableFilter<$PrismaModel>
   }
 
   export type EnumExecutionTaskStatusFilter<$PrismaModel = never> = {
@@ -80826,6 +81254,13 @@ export namespace Prisma {
     connect?: AssetAttentionReviewWhereUniqueInput | AssetAttentionReviewWhereUniqueInput[]
   }
 
+  export type ExecutionPlanCreateNestedManyWithoutProvenanceDeclaredByInput = {
+    create?: XOR<ExecutionPlanCreateWithoutProvenanceDeclaredByInput, ExecutionPlanUncheckedCreateWithoutProvenanceDeclaredByInput> | ExecutionPlanCreateWithoutProvenanceDeclaredByInput[] | ExecutionPlanUncheckedCreateWithoutProvenanceDeclaredByInput[]
+    connectOrCreate?: ExecutionPlanCreateOrConnectWithoutProvenanceDeclaredByInput | ExecutionPlanCreateOrConnectWithoutProvenanceDeclaredByInput[]
+    createMany?: ExecutionPlanCreateManyProvenanceDeclaredByInputEnvelope
+    connect?: ExecutionPlanWhereUniqueInput | ExecutionPlanWhereUniqueInput[]
+  }
+
   export type InspectionUncheckedCreateNestedManyWithoutInspectorInput = {
     create?: XOR<InspectionCreateWithoutInspectorInput, InspectionUncheckedCreateWithoutInspectorInput> | InspectionCreateWithoutInspectorInput[] | InspectionUncheckedCreateWithoutInspectorInput[]
     connectOrCreate?: InspectionCreateOrConnectWithoutInspectorInput | InspectionCreateOrConnectWithoutInspectorInput[]
@@ -81118,6 +81553,13 @@ export namespace Prisma {
     connectOrCreate?: AssetAttentionReviewCreateOrConnectWithoutReviewerInput | AssetAttentionReviewCreateOrConnectWithoutReviewerInput[]
     createMany?: AssetAttentionReviewCreateManyReviewerInputEnvelope
     connect?: AssetAttentionReviewWhereUniqueInput | AssetAttentionReviewWhereUniqueInput[]
+  }
+
+  export type ExecutionPlanUncheckedCreateNestedManyWithoutProvenanceDeclaredByInput = {
+    create?: XOR<ExecutionPlanCreateWithoutProvenanceDeclaredByInput, ExecutionPlanUncheckedCreateWithoutProvenanceDeclaredByInput> | ExecutionPlanCreateWithoutProvenanceDeclaredByInput[] | ExecutionPlanUncheckedCreateWithoutProvenanceDeclaredByInput[]
+    connectOrCreate?: ExecutionPlanCreateOrConnectWithoutProvenanceDeclaredByInput | ExecutionPlanCreateOrConnectWithoutProvenanceDeclaredByInput[]
+    createMany?: ExecutionPlanCreateManyProvenanceDeclaredByInputEnvelope
+    connect?: ExecutionPlanWhereUniqueInput | ExecutionPlanWhereUniqueInput[]
   }
 
   export type EnumSystemRoleFieldUpdateOperationsInput = {
@@ -81732,6 +82174,20 @@ export namespace Prisma {
     deleteMany?: AssetAttentionReviewScalarWhereInput | AssetAttentionReviewScalarWhereInput[]
   }
 
+  export type ExecutionPlanUpdateManyWithoutProvenanceDeclaredByNestedInput = {
+    create?: XOR<ExecutionPlanCreateWithoutProvenanceDeclaredByInput, ExecutionPlanUncheckedCreateWithoutProvenanceDeclaredByInput> | ExecutionPlanCreateWithoutProvenanceDeclaredByInput[] | ExecutionPlanUncheckedCreateWithoutProvenanceDeclaredByInput[]
+    connectOrCreate?: ExecutionPlanCreateOrConnectWithoutProvenanceDeclaredByInput | ExecutionPlanCreateOrConnectWithoutProvenanceDeclaredByInput[]
+    upsert?: ExecutionPlanUpsertWithWhereUniqueWithoutProvenanceDeclaredByInput | ExecutionPlanUpsertWithWhereUniqueWithoutProvenanceDeclaredByInput[]
+    createMany?: ExecutionPlanCreateManyProvenanceDeclaredByInputEnvelope
+    set?: ExecutionPlanWhereUniqueInput | ExecutionPlanWhereUniqueInput[]
+    disconnect?: ExecutionPlanWhereUniqueInput | ExecutionPlanWhereUniqueInput[]
+    delete?: ExecutionPlanWhereUniqueInput | ExecutionPlanWhereUniqueInput[]
+    connect?: ExecutionPlanWhereUniqueInput | ExecutionPlanWhereUniqueInput[]
+    update?: ExecutionPlanUpdateWithWhereUniqueWithoutProvenanceDeclaredByInput | ExecutionPlanUpdateWithWhereUniqueWithoutProvenanceDeclaredByInput[]
+    updateMany?: ExecutionPlanUpdateManyWithWhereWithoutProvenanceDeclaredByInput | ExecutionPlanUpdateManyWithWhereWithoutProvenanceDeclaredByInput[]
+    deleteMany?: ExecutionPlanScalarWhereInput | ExecutionPlanScalarWhereInput[]
+  }
+
   export type InspectionUncheckedUpdateManyWithoutInspectorNestedInput = {
     create?: XOR<InspectionCreateWithoutInspectorInput, InspectionUncheckedCreateWithoutInspectorInput> | InspectionCreateWithoutInspectorInput[] | InspectionUncheckedCreateWithoutInspectorInput[]
     connectOrCreate?: InspectionCreateOrConnectWithoutInspectorInput | InspectionCreateOrConnectWithoutInspectorInput[]
@@ -82318,6 +82774,20 @@ export namespace Prisma {
     update?: AssetAttentionReviewUpdateWithWhereUniqueWithoutReviewerInput | AssetAttentionReviewUpdateWithWhereUniqueWithoutReviewerInput[]
     updateMany?: AssetAttentionReviewUpdateManyWithWhereWithoutReviewerInput | AssetAttentionReviewUpdateManyWithWhereWithoutReviewerInput[]
     deleteMany?: AssetAttentionReviewScalarWhereInput | AssetAttentionReviewScalarWhereInput[]
+  }
+
+  export type ExecutionPlanUncheckedUpdateManyWithoutProvenanceDeclaredByNestedInput = {
+    create?: XOR<ExecutionPlanCreateWithoutProvenanceDeclaredByInput, ExecutionPlanUncheckedCreateWithoutProvenanceDeclaredByInput> | ExecutionPlanCreateWithoutProvenanceDeclaredByInput[] | ExecutionPlanUncheckedCreateWithoutProvenanceDeclaredByInput[]
+    connectOrCreate?: ExecutionPlanCreateOrConnectWithoutProvenanceDeclaredByInput | ExecutionPlanCreateOrConnectWithoutProvenanceDeclaredByInput[]
+    upsert?: ExecutionPlanUpsertWithWhereUniqueWithoutProvenanceDeclaredByInput | ExecutionPlanUpsertWithWhereUniqueWithoutProvenanceDeclaredByInput[]
+    createMany?: ExecutionPlanCreateManyProvenanceDeclaredByInputEnvelope
+    set?: ExecutionPlanWhereUniqueInput | ExecutionPlanWhereUniqueInput[]
+    disconnect?: ExecutionPlanWhereUniqueInput | ExecutionPlanWhereUniqueInput[]
+    delete?: ExecutionPlanWhereUniqueInput | ExecutionPlanWhereUniqueInput[]
+    connect?: ExecutionPlanWhereUniqueInput | ExecutionPlanWhereUniqueInput[]
+    update?: ExecutionPlanUpdateWithWhereUniqueWithoutProvenanceDeclaredByInput | ExecutionPlanUpdateWithWhereUniqueWithoutProvenanceDeclaredByInput[]
+    updateMany?: ExecutionPlanUpdateManyWithWhereWithoutProvenanceDeclaredByInput | ExecutionPlanUpdateManyWithWhereWithoutProvenanceDeclaredByInput[]
+    deleteMany?: ExecutionPlanScalarWhereInput | ExecutionPlanScalarWhereInput[]
   }
 
   export type DepartmentCreateNestedOneWithoutAssetsInput = {
@@ -85190,6 +85660,13 @@ export namespace Prisma {
     connect?: CaseClosureWhereUniqueInput | CaseClosureWhereUniqueInput[]
   }
 
+  export type ExecutionPlanCreateNestedManyWithoutProvenanceAuthorityGrantInput = {
+    create?: XOR<ExecutionPlanCreateWithoutProvenanceAuthorityGrantInput, ExecutionPlanUncheckedCreateWithoutProvenanceAuthorityGrantInput> | ExecutionPlanCreateWithoutProvenanceAuthorityGrantInput[] | ExecutionPlanUncheckedCreateWithoutProvenanceAuthorityGrantInput[]
+    connectOrCreate?: ExecutionPlanCreateOrConnectWithoutProvenanceAuthorityGrantInput | ExecutionPlanCreateOrConnectWithoutProvenanceAuthorityGrantInput[]
+    createMany?: ExecutionPlanCreateManyProvenanceAuthorityGrantInputEnvelope
+    connect?: ExecutionPlanWhereUniqueInput | ExecutionPlanWhereUniqueInput[]
+  }
+
   export type OrpDecisionUncheckedCreateNestedManyWithoutAuthorityGrantInput = {
     create?: XOR<OrpDecisionCreateWithoutAuthorityGrantInput, OrpDecisionUncheckedCreateWithoutAuthorityGrantInput> | OrpDecisionCreateWithoutAuthorityGrantInput[] | OrpDecisionUncheckedCreateWithoutAuthorityGrantInput[]
     connectOrCreate?: OrpDecisionCreateOrConnectWithoutAuthorityGrantInput | OrpDecisionCreateOrConnectWithoutAuthorityGrantInput[]
@@ -85202,6 +85679,13 @@ export namespace Prisma {
     connectOrCreate?: CaseClosureCreateOrConnectWithoutClosureAuthorityGrantInput | CaseClosureCreateOrConnectWithoutClosureAuthorityGrantInput[]
     createMany?: CaseClosureCreateManyClosureAuthorityGrantInputEnvelope
     connect?: CaseClosureWhereUniqueInput | CaseClosureWhereUniqueInput[]
+  }
+
+  export type ExecutionPlanUncheckedCreateNestedManyWithoutProvenanceAuthorityGrantInput = {
+    create?: XOR<ExecutionPlanCreateWithoutProvenanceAuthorityGrantInput, ExecutionPlanUncheckedCreateWithoutProvenanceAuthorityGrantInput> | ExecutionPlanCreateWithoutProvenanceAuthorityGrantInput[] | ExecutionPlanUncheckedCreateWithoutProvenanceAuthorityGrantInput[]
+    connectOrCreate?: ExecutionPlanCreateOrConnectWithoutProvenanceAuthorityGrantInput | ExecutionPlanCreateOrConnectWithoutProvenanceAuthorityGrantInput[]
+    createMany?: ExecutionPlanCreateManyProvenanceAuthorityGrantInputEnvelope
+    connect?: ExecutionPlanWhereUniqueInput | ExecutionPlanWhereUniqueInput[]
   }
 
   export type UserUpdateOneRequiredWithoutApprovalAuthoritiesNestedInput = {
@@ -85256,6 +85740,20 @@ export namespace Prisma {
     deleteMany?: CaseClosureScalarWhereInput | CaseClosureScalarWhereInput[]
   }
 
+  export type ExecutionPlanUpdateManyWithoutProvenanceAuthorityGrantNestedInput = {
+    create?: XOR<ExecutionPlanCreateWithoutProvenanceAuthorityGrantInput, ExecutionPlanUncheckedCreateWithoutProvenanceAuthorityGrantInput> | ExecutionPlanCreateWithoutProvenanceAuthorityGrantInput[] | ExecutionPlanUncheckedCreateWithoutProvenanceAuthorityGrantInput[]
+    connectOrCreate?: ExecutionPlanCreateOrConnectWithoutProvenanceAuthorityGrantInput | ExecutionPlanCreateOrConnectWithoutProvenanceAuthorityGrantInput[]
+    upsert?: ExecutionPlanUpsertWithWhereUniqueWithoutProvenanceAuthorityGrantInput | ExecutionPlanUpsertWithWhereUniqueWithoutProvenanceAuthorityGrantInput[]
+    createMany?: ExecutionPlanCreateManyProvenanceAuthorityGrantInputEnvelope
+    set?: ExecutionPlanWhereUniqueInput | ExecutionPlanWhereUniqueInput[]
+    disconnect?: ExecutionPlanWhereUniqueInput | ExecutionPlanWhereUniqueInput[]
+    delete?: ExecutionPlanWhereUniqueInput | ExecutionPlanWhereUniqueInput[]
+    connect?: ExecutionPlanWhereUniqueInput | ExecutionPlanWhereUniqueInput[]
+    update?: ExecutionPlanUpdateWithWhereUniqueWithoutProvenanceAuthorityGrantInput | ExecutionPlanUpdateWithWhereUniqueWithoutProvenanceAuthorityGrantInput[]
+    updateMany?: ExecutionPlanUpdateManyWithWhereWithoutProvenanceAuthorityGrantInput | ExecutionPlanUpdateManyWithWhereWithoutProvenanceAuthorityGrantInput[]
+    deleteMany?: ExecutionPlanScalarWhereInput | ExecutionPlanScalarWhereInput[]
+  }
+
   export type OrpDecisionUncheckedUpdateManyWithoutAuthorityGrantNestedInput = {
     create?: XOR<OrpDecisionCreateWithoutAuthorityGrantInput, OrpDecisionUncheckedCreateWithoutAuthorityGrantInput> | OrpDecisionCreateWithoutAuthorityGrantInput[] | OrpDecisionUncheckedCreateWithoutAuthorityGrantInput[]
     connectOrCreate?: OrpDecisionCreateOrConnectWithoutAuthorityGrantInput | OrpDecisionCreateOrConnectWithoutAuthorityGrantInput[]
@@ -85282,6 +85780,20 @@ export namespace Prisma {
     update?: CaseClosureUpdateWithWhereUniqueWithoutClosureAuthorityGrantInput | CaseClosureUpdateWithWhereUniqueWithoutClosureAuthorityGrantInput[]
     updateMany?: CaseClosureUpdateManyWithWhereWithoutClosureAuthorityGrantInput | CaseClosureUpdateManyWithWhereWithoutClosureAuthorityGrantInput[]
     deleteMany?: CaseClosureScalarWhereInput | CaseClosureScalarWhereInput[]
+  }
+
+  export type ExecutionPlanUncheckedUpdateManyWithoutProvenanceAuthorityGrantNestedInput = {
+    create?: XOR<ExecutionPlanCreateWithoutProvenanceAuthorityGrantInput, ExecutionPlanUncheckedCreateWithoutProvenanceAuthorityGrantInput> | ExecutionPlanCreateWithoutProvenanceAuthorityGrantInput[] | ExecutionPlanUncheckedCreateWithoutProvenanceAuthorityGrantInput[]
+    connectOrCreate?: ExecutionPlanCreateOrConnectWithoutProvenanceAuthorityGrantInput | ExecutionPlanCreateOrConnectWithoutProvenanceAuthorityGrantInput[]
+    upsert?: ExecutionPlanUpsertWithWhereUniqueWithoutProvenanceAuthorityGrantInput | ExecutionPlanUpsertWithWhereUniqueWithoutProvenanceAuthorityGrantInput[]
+    createMany?: ExecutionPlanCreateManyProvenanceAuthorityGrantInputEnvelope
+    set?: ExecutionPlanWhereUniqueInput | ExecutionPlanWhereUniqueInput[]
+    disconnect?: ExecutionPlanWhereUniqueInput | ExecutionPlanWhereUniqueInput[]
+    delete?: ExecutionPlanWhereUniqueInput | ExecutionPlanWhereUniqueInput[]
+    connect?: ExecutionPlanWhereUniqueInput | ExecutionPlanWhereUniqueInput[]
+    update?: ExecutionPlanUpdateWithWhereUniqueWithoutProvenanceAuthorityGrantInput | ExecutionPlanUpdateWithWhereUniqueWithoutProvenanceAuthorityGrantInput[]
+    updateMany?: ExecutionPlanUpdateManyWithWhereWithoutProvenanceAuthorityGrantInput | ExecutionPlanUpdateManyWithWhereWithoutProvenanceAuthorityGrantInput[]
+    deleteMany?: ExecutionPlanScalarWhereInput | ExecutionPlanScalarWhereInput[]
   }
 
   export type CaseCreateNestedOneWithoutOrpDecisionsInput = {
@@ -85416,6 +85928,18 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput
   }
 
+  export type UserCreateNestedOneWithoutProvenanceDeclaredPlansInput = {
+    create?: XOR<UserCreateWithoutProvenanceDeclaredPlansInput, UserUncheckedCreateWithoutProvenanceDeclaredPlansInput>
+    connectOrCreate?: UserCreateOrConnectWithoutProvenanceDeclaredPlansInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type ApprovalAuthorityCreateNestedOneWithoutProvenanceDeclaredPlansInput = {
+    create?: XOR<ApprovalAuthorityCreateWithoutProvenanceDeclaredPlansInput, ApprovalAuthorityUncheckedCreateWithoutProvenanceDeclaredPlansInput>
+    connectOrCreate?: ApprovalAuthorityCreateOrConnectWithoutProvenanceDeclaredPlansInput
+    connect?: ApprovalAuthorityWhereUniqueInput
+  }
+
   export type ExecutionTaskCreateNestedManyWithoutExecutionPlanInput = {
     create?: XOR<ExecutionTaskCreateWithoutExecutionPlanInput, ExecutionTaskUncheckedCreateWithoutExecutionPlanInput> | ExecutionTaskCreateWithoutExecutionPlanInput[] | ExecutionTaskUncheckedCreateWithoutExecutionPlanInput[]
     connectOrCreate?: ExecutionTaskCreateOrConnectWithoutExecutionPlanInput | ExecutionTaskCreateOrConnectWithoutExecutionPlanInput[]
@@ -85478,6 +86002,10 @@ export namespace Prisma {
     set?: $Enums.ExecutionPlanGovernanceMode
   }
 
+  export type NullableEnumExecutionPlanProvenanceFieldUpdateOperationsInput = {
+    set?: $Enums.ExecutionPlanProvenance | null
+  }
+
   export type OperationalResponsePlanUpdateOneRequiredWithoutExecutionPlanNestedInput = {
     create?: XOR<OperationalResponsePlanCreateWithoutExecutionPlanInput, OperationalResponsePlanUncheckedCreateWithoutExecutionPlanInput>
     connectOrCreate?: OperationalResponsePlanCreateOrConnectWithoutExecutionPlanInput
@@ -85508,6 +86036,26 @@ export namespace Prisma {
     upsert?: UserUpsertWithoutCreatedExecutionPlansInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutCreatedExecutionPlansInput, UserUpdateWithoutCreatedExecutionPlansInput>, UserUncheckedUpdateWithoutCreatedExecutionPlansInput>
+  }
+
+  export type UserUpdateOneWithoutProvenanceDeclaredPlansNestedInput = {
+    create?: XOR<UserCreateWithoutProvenanceDeclaredPlansInput, UserUncheckedCreateWithoutProvenanceDeclaredPlansInput>
+    connectOrCreate?: UserCreateOrConnectWithoutProvenanceDeclaredPlansInput
+    upsert?: UserUpsertWithoutProvenanceDeclaredPlansInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutProvenanceDeclaredPlansInput, UserUpdateWithoutProvenanceDeclaredPlansInput>, UserUncheckedUpdateWithoutProvenanceDeclaredPlansInput>
+  }
+
+  export type ApprovalAuthorityUpdateOneWithoutProvenanceDeclaredPlansNestedInput = {
+    create?: XOR<ApprovalAuthorityCreateWithoutProvenanceDeclaredPlansInput, ApprovalAuthorityUncheckedCreateWithoutProvenanceDeclaredPlansInput>
+    connectOrCreate?: ApprovalAuthorityCreateOrConnectWithoutProvenanceDeclaredPlansInput
+    upsert?: ApprovalAuthorityUpsertWithoutProvenanceDeclaredPlansInput
+    disconnect?: ApprovalAuthorityWhereInput | boolean
+    delete?: ApprovalAuthorityWhereInput | boolean
+    connect?: ApprovalAuthorityWhereUniqueInput
+    update?: XOR<XOR<ApprovalAuthorityUpdateToOneWithWhereWithoutProvenanceDeclaredPlansInput, ApprovalAuthorityUpdateWithoutProvenanceDeclaredPlansInput>, ApprovalAuthorityUncheckedUpdateWithoutProvenanceDeclaredPlansInput>
   }
 
   export type ExecutionTaskUpdateManyWithoutExecutionPlanNestedInput = {
@@ -87631,6 +88179,13 @@ export namespace Prisma {
     not?: NestedEnumExecutionPlanGovernanceModeFilter<$PrismaModel> | $Enums.ExecutionPlanGovernanceMode
   }
 
+  export type NestedEnumExecutionPlanProvenanceNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.ExecutionPlanProvenance | EnumExecutionPlanProvenanceFieldRefInput<$PrismaModel> | null
+    in?: $Enums.ExecutionPlanProvenance[] | ListEnumExecutionPlanProvenanceFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.ExecutionPlanProvenance[] | ListEnumExecutionPlanProvenanceFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumExecutionPlanProvenanceNullableFilter<$PrismaModel> | $Enums.ExecutionPlanProvenance | null
+  }
+
   export type NestedEnumExecutionPlanStatusWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.ExecutionPlanStatus | EnumExecutionPlanStatusFieldRefInput<$PrismaModel>
     in?: $Enums.ExecutionPlanStatus[] | ListEnumExecutionPlanStatusFieldRefInput<$PrismaModel>
@@ -87649,6 +88204,16 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumExecutionPlanGovernanceModeFilter<$PrismaModel>
     _max?: NestedEnumExecutionPlanGovernanceModeFilter<$PrismaModel>
+  }
+
+  export type NestedEnumExecutionPlanProvenanceNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ExecutionPlanProvenance | EnumExecutionPlanProvenanceFieldRefInput<$PrismaModel> | null
+    in?: $Enums.ExecutionPlanProvenance[] | ListEnumExecutionPlanProvenanceFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.ExecutionPlanProvenance[] | ListEnumExecutionPlanProvenanceFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumExecutionPlanProvenanceNullableWithAggregatesFilter<$PrismaModel> | $Enums.ExecutionPlanProvenance | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumExecutionPlanProvenanceNullableFilter<$PrismaModel>
+    _max?: NestedEnumExecutionPlanProvenanceNullableFilter<$PrismaModel>
   }
 
   export type NestedEnumExecutionTaskStatusFilter<$PrismaModel = never> = {
@@ -87952,6 +88517,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
     assetAttentionReviews?: AssetAttentionReviewCreateNestedManyWithoutReviewerInput
+    provenanceDeclaredPlans?: ExecutionPlanCreateNestedManyWithoutProvenanceDeclaredByInput
   }
 
   export type UserUncheckedCreateWithoutDepartmentInput = {
@@ -88008,6 +88574,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
     assetAttentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutReviewerInput
+    provenanceDeclaredPlans?: ExecutionPlanUncheckedCreateNestedManyWithoutProvenanceDeclaredByInput
   }
 
   export type UserCreateOrConnectWithoutDepartmentInput = {
@@ -88120,6 +88687,8 @@ export namespace Prisma {
     canRequestReinspection?: boolean
     canEscalate?: boolean
     canCloseCase?: boolean
+    canDeclareNonOperationalProvenance?: boolean
+    canDeclareOperationalProvenance?: boolean
     maxPriorityLevel?: $Enums.PriorityLevel | null
     isActive?: boolean
     validFrom?: Date | string | null
@@ -88130,6 +88699,7 @@ export namespace Prisma {
     jurisdiction: JurisdictionCreateNestedOneWithoutApprovalAuthoritiesInput
     decisions?: OrpDecisionCreateNestedManyWithoutAuthorityGrantInput
     caseClosures?: CaseClosureCreateNestedManyWithoutClosureAuthorityGrantInput
+    provenanceDeclaredPlans?: ExecutionPlanCreateNestedManyWithoutProvenanceAuthorityGrantInput
   }
 
   export type ApprovalAuthorityUncheckedCreateWithoutDepartmentInput = {
@@ -88142,6 +88712,8 @@ export namespace Prisma {
     canRequestReinspection?: boolean
     canEscalate?: boolean
     canCloseCase?: boolean
+    canDeclareNonOperationalProvenance?: boolean
+    canDeclareOperationalProvenance?: boolean
     maxPriorityLevel?: $Enums.PriorityLevel | null
     isActive?: boolean
     validFrom?: Date | string | null
@@ -88150,6 +88722,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     decisions?: OrpDecisionUncheckedCreateNestedManyWithoutAuthorityGrantInput
     caseClosures?: CaseClosureUncheckedCreateNestedManyWithoutClosureAuthorityGrantInput
+    provenanceDeclaredPlans?: ExecutionPlanUncheckedCreateNestedManyWithoutProvenanceAuthorityGrantInput
   }
 
   export type ApprovalAuthorityCreateOrConnectWithoutDepartmentInput = {
@@ -88655,6 +89228,8 @@ export namespace Prisma {
     canRequestReinspection?: BoolFilter<"ApprovalAuthority"> | boolean
     canEscalate?: BoolFilter<"ApprovalAuthority"> | boolean
     canCloseCase?: BoolFilter<"ApprovalAuthority"> | boolean
+    canDeclareNonOperationalProvenance?: BoolFilter<"ApprovalAuthority"> | boolean
+    canDeclareOperationalProvenance?: BoolFilter<"ApprovalAuthority"> | boolean
     maxPriorityLevel?: EnumPriorityLevelNullableFilter<"ApprovalAuthority"> | $Enums.PriorityLevel | null
     isActive?: BoolFilter<"ApprovalAuthority"> | boolean
     validFrom?: DateTimeNullableFilter<"ApprovalAuthority"> | Date | string | null
@@ -89036,6 +89611,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
     assetAttentionReviews?: AssetAttentionReviewCreateNestedManyWithoutReviewerInput
+    provenanceDeclaredPlans?: ExecutionPlanCreateNestedManyWithoutProvenanceDeclaredByInput
   }
 
   export type UserUncheckedCreateWithoutJurisdictionInput = {
@@ -89092,6 +89668,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
     assetAttentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutReviewerInput
+    provenanceDeclaredPlans?: ExecutionPlanUncheckedCreateNestedManyWithoutProvenanceDeclaredByInput
   }
 
   export type UserCreateOrConnectWithoutJurisdictionInput = {
@@ -89160,6 +89737,8 @@ export namespace Prisma {
     canRequestReinspection?: boolean
     canEscalate?: boolean
     canCloseCase?: boolean
+    canDeclareNonOperationalProvenance?: boolean
+    canDeclareOperationalProvenance?: boolean
     maxPriorityLevel?: $Enums.PriorityLevel | null
     isActive?: boolean
     validFrom?: Date | string | null
@@ -89170,6 +89749,7 @@ export namespace Prisma {
     department: DepartmentCreateNestedOneWithoutApprovalAuthoritiesInput
     decisions?: OrpDecisionCreateNestedManyWithoutAuthorityGrantInput
     caseClosures?: CaseClosureCreateNestedManyWithoutClosureAuthorityGrantInput
+    provenanceDeclaredPlans?: ExecutionPlanCreateNestedManyWithoutProvenanceAuthorityGrantInput
   }
 
   export type ApprovalAuthorityUncheckedCreateWithoutJurisdictionInput = {
@@ -89182,6 +89762,8 @@ export namespace Prisma {
     canRequestReinspection?: boolean
     canEscalate?: boolean
     canCloseCase?: boolean
+    canDeclareNonOperationalProvenance?: boolean
+    canDeclareOperationalProvenance?: boolean
     maxPriorityLevel?: $Enums.PriorityLevel | null
     isActive?: boolean
     validFrom?: Date | string | null
@@ -89190,6 +89772,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     decisions?: OrpDecisionUncheckedCreateNestedManyWithoutAuthorityGrantInput
     caseClosures?: CaseClosureUncheckedCreateNestedManyWithoutClosureAuthorityGrantInput
+    provenanceDeclaredPlans?: ExecutionPlanUncheckedCreateNestedManyWithoutProvenanceAuthorityGrantInput
   }
 
   export type ApprovalAuthorityCreateOrConnectWithoutJurisdictionInput = {
@@ -89911,6 +90494,8 @@ export namespace Prisma {
     canRequestReinspection?: boolean
     canEscalate?: boolean
     canCloseCase?: boolean
+    canDeclareNonOperationalProvenance?: boolean
+    canDeclareOperationalProvenance?: boolean
     maxPriorityLevel?: $Enums.PriorityLevel | null
     isActive?: boolean
     validFrom?: Date | string | null
@@ -89921,6 +90506,7 @@ export namespace Prisma {
     jurisdiction: JurisdictionCreateNestedOneWithoutApprovalAuthoritiesInput
     decisions?: OrpDecisionCreateNestedManyWithoutAuthorityGrantInput
     caseClosures?: CaseClosureCreateNestedManyWithoutClosureAuthorityGrantInput
+    provenanceDeclaredPlans?: ExecutionPlanCreateNestedManyWithoutProvenanceAuthorityGrantInput
   }
 
   export type ApprovalAuthorityUncheckedCreateWithoutUserInput = {
@@ -89933,6 +90519,8 @@ export namespace Prisma {
     canRequestReinspection?: boolean
     canEscalate?: boolean
     canCloseCase?: boolean
+    canDeclareNonOperationalProvenance?: boolean
+    canDeclareOperationalProvenance?: boolean
     maxPriorityLevel?: $Enums.PriorityLevel | null
     isActive?: boolean
     validFrom?: Date | string | null
@@ -89941,6 +90529,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     decisions?: OrpDecisionUncheckedCreateNestedManyWithoutAuthorityGrantInput
     caseClosures?: CaseClosureUncheckedCreateNestedManyWithoutClosureAuthorityGrantInput
+    provenanceDeclaredPlans?: ExecutionPlanUncheckedCreateNestedManyWithoutProvenanceAuthorityGrantInput
   }
 
   export type ApprovalAuthorityCreateOrConnectWithoutUserInput = {
@@ -90042,11 +90631,17 @@ export namespace Prisma {
     governanceMode?: $Enums.ExecutionPlanGovernanceMode
     executionContractVersion?: string | null
     governedProvenance?: NullableJsonNullValueInput | InputJsonValue
+    provenanceClassification?: $Enums.ExecutionPlanProvenance | null
+    provenanceDeclaredAt?: Date | string | null
+    provenanceEvidenceReference?: string | null
+    provenanceContractVersion?: string | null
     plannedStartAt?: Date | string | null
     plannedEndAt?: Date | string | null
     orp: OperationalResponsePlanCreateNestedOneWithoutExecutionPlanInput
     case: CaseCreateNestedOneWithoutExecutionPlansInput
     approvalDecision: OrpDecisionCreateNestedOneWithoutExecutionPlanInput
+    provenanceDeclaredBy?: UserCreateNestedOneWithoutProvenanceDeclaredPlansInput
+    provenanceAuthorityGrant?: ApprovalAuthorityCreateNestedOneWithoutProvenanceDeclaredPlansInput
     tasks?: ExecutionTaskCreateNestedManyWithoutExecutionPlanInput
     closure?: CaseClosureCreateNestedOneWithoutExecutionPlanInput
     scheduleRevisions?: ExecutionScheduleRevisionCreateNestedManyWithoutExecutionPlanInput
@@ -90069,6 +90664,12 @@ export namespace Prisma {
     governanceMode?: $Enums.ExecutionPlanGovernanceMode
     executionContractVersion?: string | null
     governedProvenance?: NullableJsonNullValueInput | InputJsonValue
+    provenanceClassification?: $Enums.ExecutionPlanProvenance | null
+    provenanceDeclaredById?: string | null
+    provenanceDeclaredAt?: Date | string | null
+    provenanceAuthorityGrantId?: string | null
+    provenanceEvidenceReference?: string | null
+    provenanceContractVersion?: string | null
     plannedStartAt?: Date | string | null
     plannedEndAt?: Date | string | null
     tasks?: ExecutionTaskUncheckedCreateNestedManyWithoutExecutionPlanInput
@@ -92109,6 +92710,76 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type ExecutionPlanCreateWithoutProvenanceDeclaredByInput = {
+    id?: string
+    status?: $Enums.ExecutionPlanStatus
+    templateVersion?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    startedAt?: Date | string | null
+    completedAt?: Date | string | null
+    cancelledAt?: Date | string | null
+    cancellationReason?: string | null
+    governanceMode?: $Enums.ExecutionPlanGovernanceMode
+    executionContractVersion?: string | null
+    governedProvenance?: NullableJsonNullValueInput | InputJsonValue
+    provenanceClassification?: $Enums.ExecutionPlanProvenance | null
+    provenanceDeclaredAt?: Date | string | null
+    provenanceEvidenceReference?: string | null
+    provenanceContractVersion?: string | null
+    plannedStartAt?: Date | string | null
+    plannedEndAt?: Date | string | null
+    orp: OperationalResponsePlanCreateNestedOneWithoutExecutionPlanInput
+    case: CaseCreateNestedOneWithoutExecutionPlansInput
+    approvalDecision: OrpDecisionCreateNestedOneWithoutExecutionPlanInput
+    createdBy: UserCreateNestedOneWithoutCreatedExecutionPlansInput
+    provenanceAuthorityGrant?: ApprovalAuthorityCreateNestedOneWithoutProvenanceDeclaredPlansInput
+    tasks?: ExecutionTaskCreateNestedManyWithoutExecutionPlanInput
+    closure?: CaseClosureCreateNestedOneWithoutExecutionPlanInput
+    scheduleRevisions?: ExecutionScheduleRevisionCreateNestedManyWithoutExecutionPlanInput
+    taskDependencies?: ExecutionTaskDependencyCreateNestedManyWithoutExecutionPlanInput
+  }
+
+  export type ExecutionPlanUncheckedCreateWithoutProvenanceDeclaredByInput = {
+    id?: string
+    orpId: string
+    caseId: string
+    approvalDecisionId: string
+    status?: $Enums.ExecutionPlanStatus
+    createdById: string
+    templateVersion?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    startedAt?: Date | string | null
+    completedAt?: Date | string | null
+    cancelledAt?: Date | string | null
+    cancellationReason?: string | null
+    governanceMode?: $Enums.ExecutionPlanGovernanceMode
+    executionContractVersion?: string | null
+    governedProvenance?: NullableJsonNullValueInput | InputJsonValue
+    provenanceClassification?: $Enums.ExecutionPlanProvenance | null
+    provenanceDeclaredAt?: Date | string | null
+    provenanceAuthorityGrantId?: string | null
+    provenanceEvidenceReference?: string | null
+    provenanceContractVersion?: string | null
+    plannedStartAt?: Date | string | null
+    plannedEndAt?: Date | string | null
+    tasks?: ExecutionTaskUncheckedCreateNestedManyWithoutExecutionPlanInput
+    closure?: CaseClosureUncheckedCreateNestedOneWithoutExecutionPlanInput
+    scheduleRevisions?: ExecutionScheduleRevisionUncheckedCreateNestedManyWithoutExecutionPlanInput
+    taskDependencies?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutExecutionPlanInput
+  }
+
+  export type ExecutionPlanCreateOrConnectWithoutProvenanceDeclaredByInput = {
+    where: ExecutionPlanWhereUniqueInput
+    create: XOR<ExecutionPlanCreateWithoutProvenanceDeclaredByInput, ExecutionPlanUncheckedCreateWithoutProvenanceDeclaredByInput>
+  }
+
+  export type ExecutionPlanCreateManyProvenanceDeclaredByInputEnvelope = {
+    data: ExecutionPlanCreateManyProvenanceDeclaredByInput | ExecutionPlanCreateManyProvenanceDeclaredByInput[]
+    skipDuplicates?: boolean
+  }
+
   export type DepartmentUpsertWithoutUsersInput = {
     update: XOR<DepartmentUpdateWithoutUsersInput, DepartmentUncheckedUpdateWithoutUsersInput>
     create: XOR<DepartmentCreateWithoutUsersInput, DepartmentUncheckedCreateWithoutUsersInput>
@@ -92337,6 +93008,12 @@ export namespace Prisma {
     governanceMode?: EnumExecutionPlanGovernanceModeFilter<"ExecutionPlan"> | $Enums.ExecutionPlanGovernanceMode
     executionContractVersion?: StringNullableFilter<"ExecutionPlan"> | string | null
     governedProvenance?: JsonNullableFilter<"ExecutionPlan">
+    provenanceClassification?: EnumExecutionPlanProvenanceNullableFilter<"ExecutionPlan"> | $Enums.ExecutionPlanProvenance | null
+    provenanceDeclaredById?: StringNullableFilter<"ExecutionPlan"> | string | null
+    provenanceDeclaredAt?: DateTimeNullableFilter<"ExecutionPlan"> | Date | string | null
+    provenanceAuthorityGrantId?: StringNullableFilter<"ExecutionPlan"> | string | null
+    provenanceEvidenceReference?: StringNullableFilter<"ExecutionPlan"> | string | null
+    provenanceContractVersion?: StringNullableFilter<"ExecutionPlan"> | string | null
     plannedStartAt?: DateTimeNullableFilter<"ExecutionPlan"> | Date | string | null
     plannedEndAt?: DateTimeNullableFilter<"ExecutionPlan"> | Date | string | null
   }
@@ -93292,6 +93969,22 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"AssetAttentionReview"> | Date | string
   }
 
+  export type ExecutionPlanUpsertWithWhereUniqueWithoutProvenanceDeclaredByInput = {
+    where: ExecutionPlanWhereUniqueInput
+    update: XOR<ExecutionPlanUpdateWithoutProvenanceDeclaredByInput, ExecutionPlanUncheckedUpdateWithoutProvenanceDeclaredByInput>
+    create: XOR<ExecutionPlanCreateWithoutProvenanceDeclaredByInput, ExecutionPlanUncheckedCreateWithoutProvenanceDeclaredByInput>
+  }
+
+  export type ExecutionPlanUpdateWithWhereUniqueWithoutProvenanceDeclaredByInput = {
+    where: ExecutionPlanWhereUniqueInput
+    data: XOR<ExecutionPlanUpdateWithoutProvenanceDeclaredByInput, ExecutionPlanUncheckedUpdateWithoutProvenanceDeclaredByInput>
+  }
+
+  export type ExecutionPlanUpdateManyWithWhereWithoutProvenanceDeclaredByInput = {
+    where: ExecutionPlanScalarWhereInput
+    data: XOR<ExecutionPlanUpdateManyMutationInput, ExecutionPlanUncheckedUpdateManyWithoutProvenanceDeclaredByInput>
+  }
+
   export type DepartmentCreateWithoutAssetsInput = {
     id?: string
     name: string
@@ -93997,6 +94690,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
     assetAttentionReviews?: AssetAttentionReviewCreateNestedManyWithoutReviewerInput
+    provenanceDeclaredPlans?: ExecutionPlanCreateNestedManyWithoutProvenanceDeclaredByInput
   }
 
   export type UserUncheckedCreateWithoutReviewedPublicReportsInput = {
@@ -94053,6 +94747,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
     assetAttentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutReviewerInput
+    provenanceDeclaredPlans?: ExecutionPlanUncheckedCreateNestedManyWithoutProvenanceDeclaredByInput
   }
 
   export type UserCreateOrConnectWithoutReviewedPublicReportsInput = {
@@ -94114,6 +94809,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
     assetAttentionReviews?: AssetAttentionReviewCreateNestedManyWithoutReviewerInput
+    provenanceDeclaredPlans?: ExecutionPlanCreateNestedManyWithoutProvenanceDeclaredByInput
   }
 
   export type UserUncheckedCreateWithoutDecidedPublicReportsInput = {
@@ -94170,6 +94866,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
     assetAttentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutReviewerInput
+    provenanceDeclaredPlans?: ExecutionPlanUncheckedCreateNestedManyWithoutProvenanceDeclaredByInput
   }
 
   export type UserCreateOrConnectWithoutDecidedPublicReportsInput = {
@@ -94478,6 +95175,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
     assetAttentionReviews?: AssetAttentionReviewUpdateManyWithoutReviewerNestedInput
+    provenanceDeclaredPlans?: ExecutionPlanUpdateManyWithoutProvenanceDeclaredByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutReviewedPublicReportsInput = {
@@ -94534,6 +95232,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
     assetAttentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutReviewerNestedInput
+    provenanceDeclaredPlans?: ExecutionPlanUncheckedUpdateManyWithoutProvenanceDeclaredByNestedInput
   }
 
   export type UserUpsertWithoutDecidedPublicReportsInput = {
@@ -94601,6 +95300,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
     assetAttentionReviews?: AssetAttentionReviewUpdateManyWithoutReviewerNestedInput
+    provenanceDeclaredPlans?: ExecutionPlanUpdateManyWithoutProvenanceDeclaredByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutDecidedPublicReportsInput = {
@@ -94657,6 +95357,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
     assetAttentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutReviewerNestedInput
+    provenanceDeclaredPlans?: ExecutionPlanUncheckedUpdateManyWithoutProvenanceDeclaredByNestedInput
   }
 
   export type CaseUpsertWithoutSourcePublicReportInput = {
@@ -94894,6 +95595,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
     assetAttentionReviews?: AssetAttentionReviewCreateNestedManyWithoutReviewerInput
+    provenanceDeclaredPlans?: ExecutionPlanCreateNestedManyWithoutProvenanceDeclaredByInput
   }
 
   export type UserUncheckedCreateWithoutCreatedTriageAnalysesInput = {
@@ -94950,6 +95652,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
     assetAttentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutReviewerInput
+    provenanceDeclaredPlans?: ExecutionPlanUncheckedCreateNestedManyWithoutProvenanceDeclaredByInput
   }
 
   export type UserCreateOrConnectWithoutCreatedTriageAnalysesInput = {
@@ -95134,6 +95837,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
     assetAttentionReviews?: AssetAttentionReviewUpdateManyWithoutReviewerNestedInput
+    provenanceDeclaredPlans?: ExecutionPlanUpdateManyWithoutProvenanceDeclaredByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCreatedTriageAnalysesInput = {
@@ -95190,6 +95894,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
     assetAttentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutReviewerNestedInput
+    provenanceDeclaredPlans?: ExecutionPlanUncheckedUpdateManyWithoutProvenanceDeclaredByNestedInput
   }
 
   export type DepartmentCreateWithoutPolicyDocumentsInput = {
@@ -95324,6 +96029,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
     assetAttentionReviews?: AssetAttentionReviewCreateNestedManyWithoutReviewerInput
+    provenanceDeclaredPlans?: ExecutionPlanCreateNestedManyWithoutProvenanceDeclaredByInput
   }
 
   export type UserUncheckedCreateWithoutCreatedPolicyDocumentsInput = {
@@ -95380,6 +96086,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
     assetAttentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutReviewerInput
+    provenanceDeclaredPlans?: ExecutionPlanUncheckedCreateNestedManyWithoutProvenanceDeclaredByInput
   }
 
   export type UserCreateOrConnectWithoutCreatedPolicyDocumentsInput = {
@@ -95441,6 +96148,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
     assetAttentionReviews?: AssetAttentionReviewCreateNestedManyWithoutReviewerInput
+    provenanceDeclaredPlans?: ExecutionPlanCreateNestedManyWithoutProvenanceDeclaredByInput
   }
 
   export type UserUncheckedCreateWithoutApprovedPolicyDocumentsInput = {
@@ -95497,6 +96205,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
     assetAttentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutReviewerInput
+    provenanceDeclaredPlans?: ExecutionPlanUncheckedCreateNestedManyWithoutProvenanceDeclaredByInput
   }
 
   export type UserCreateOrConnectWithoutApprovedPolicyDocumentsInput = {
@@ -95753,6 +96462,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
     assetAttentionReviews?: AssetAttentionReviewUpdateManyWithoutReviewerNestedInput
+    provenanceDeclaredPlans?: ExecutionPlanUpdateManyWithoutProvenanceDeclaredByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCreatedPolicyDocumentsInput = {
@@ -95809,6 +96519,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
     assetAttentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutReviewerNestedInput
+    provenanceDeclaredPlans?: ExecutionPlanUncheckedUpdateManyWithoutProvenanceDeclaredByNestedInput
   }
 
   export type UserUpsertWithoutApprovedPolicyDocumentsInput = {
@@ -95876,6 +96587,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
     assetAttentionReviews?: AssetAttentionReviewUpdateManyWithoutReviewerNestedInput
+    provenanceDeclaredPlans?: ExecutionPlanUpdateManyWithoutProvenanceDeclaredByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutApprovedPolicyDocumentsInput = {
@@ -95932,6 +96644,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
     assetAttentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutReviewerNestedInput
+    provenanceDeclaredPlans?: ExecutionPlanUncheckedUpdateManyWithoutProvenanceDeclaredByNestedInput
   }
 
   export type PolicyRuleUpsertWithWhereUniqueWithoutPolicyDocumentInput = {
@@ -96163,6 +96876,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
     assetAttentionReviews?: AssetAttentionReviewCreateNestedManyWithoutReviewerInput
+    provenanceDeclaredPlans?: ExecutionPlanCreateNestedManyWithoutProvenanceDeclaredByInput
   }
 
   export type UserUncheckedCreateWithoutCreatedApprovedActionsInput = {
@@ -96219,6 +96933,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
     assetAttentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutReviewerInput
+    provenanceDeclaredPlans?: ExecutionPlanUncheckedCreateNestedManyWithoutProvenanceDeclaredByInput
   }
 
   export type UserCreateOrConnectWithoutCreatedApprovedActionsInput = {
@@ -96280,6 +96995,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
     assetAttentionReviews?: AssetAttentionReviewCreateNestedManyWithoutReviewerInput
+    provenanceDeclaredPlans?: ExecutionPlanCreateNestedManyWithoutProvenanceDeclaredByInput
   }
 
   export type UserUncheckedCreateWithoutApprovedApprovedActionsInput = {
@@ -96336,6 +97052,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
     assetAttentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutReviewerInput
+    provenanceDeclaredPlans?: ExecutionPlanUncheckedCreateNestedManyWithoutProvenanceDeclaredByInput
   }
 
   export type UserCreateOrConnectWithoutApprovedApprovedActionsInput = {
@@ -96735,6 +97452,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
     assetAttentionReviews?: AssetAttentionReviewUpdateManyWithoutReviewerNestedInput
+    provenanceDeclaredPlans?: ExecutionPlanUpdateManyWithoutProvenanceDeclaredByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCreatedApprovedActionsInput = {
@@ -96791,6 +97509,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
     assetAttentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutReviewerNestedInput
+    provenanceDeclaredPlans?: ExecutionPlanUncheckedUpdateManyWithoutProvenanceDeclaredByNestedInput
   }
 
   export type UserUpsertWithoutApprovedApprovedActionsInput = {
@@ -96858,6 +97577,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
     assetAttentionReviews?: AssetAttentionReviewUpdateManyWithoutReviewerNestedInput
+    provenanceDeclaredPlans?: ExecutionPlanUpdateManyWithoutProvenanceDeclaredByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutApprovedApprovedActionsInput = {
@@ -96914,6 +97634,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
     assetAttentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutReviewerNestedInput
+    provenanceDeclaredPlans?: ExecutionPlanUncheckedUpdateManyWithoutProvenanceDeclaredByNestedInput
   }
 
   export type PolicyRuleUpsertWithWhereUniqueWithoutActionInput = {
@@ -97151,6 +97872,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
     assetAttentionReviews?: AssetAttentionReviewCreateNestedManyWithoutReviewerInput
+    provenanceDeclaredPlans?: ExecutionPlanCreateNestedManyWithoutProvenanceDeclaredByInput
   }
 
   export type UserUncheckedCreateWithoutCreatedGovernedExecutionTemplatesInput = {
@@ -97207,6 +97929,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
     assetAttentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutReviewerInput
+    provenanceDeclaredPlans?: ExecutionPlanUncheckedCreateNestedManyWithoutProvenanceDeclaredByInput
   }
 
   export type UserCreateOrConnectWithoutCreatedGovernedExecutionTemplatesInput = {
@@ -97268,6 +97991,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
     assetAttentionReviews?: AssetAttentionReviewCreateNestedManyWithoutReviewerInput
+    provenanceDeclaredPlans?: ExecutionPlanCreateNestedManyWithoutProvenanceDeclaredByInput
   }
 
   export type UserUncheckedCreateWithoutApprovedGovernedExecutionTemplatesInput = {
@@ -97324,6 +98048,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
     assetAttentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutReviewerInput
+    provenanceDeclaredPlans?: ExecutionPlanUncheckedCreateNestedManyWithoutProvenanceDeclaredByInput
   }
 
   export type UserCreateOrConnectWithoutApprovedGovernedExecutionTemplatesInput = {
@@ -97685,6 +98410,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
     assetAttentionReviews?: AssetAttentionReviewUpdateManyWithoutReviewerNestedInput
+    provenanceDeclaredPlans?: ExecutionPlanUpdateManyWithoutProvenanceDeclaredByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCreatedGovernedExecutionTemplatesInput = {
@@ -97741,6 +98467,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
     assetAttentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutReviewerNestedInput
+    provenanceDeclaredPlans?: ExecutionPlanUncheckedUpdateManyWithoutProvenanceDeclaredByNestedInput
   }
 
   export type UserUpsertWithoutApprovedGovernedExecutionTemplatesInput = {
@@ -97808,6 +98535,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
     assetAttentionReviews?: AssetAttentionReviewUpdateManyWithoutReviewerNestedInput
+    provenanceDeclaredPlans?: ExecutionPlanUpdateManyWithoutProvenanceDeclaredByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutApprovedGovernedExecutionTemplatesInput = {
@@ -97864,6 +98592,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
     assetAttentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutReviewerNestedInput
+    provenanceDeclaredPlans?: ExecutionPlanUncheckedUpdateManyWithoutProvenanceDeclaredByNestedInput
   }
 
   export type GovernedExecutionTaskTemplateUpsertWithWhereUniqueWithoutExecutionTemplateInput = {
@@ -98586,11 +99315,17 @@ export namespace Prisma {
     governanceMode?: $Enums.ExecutionPlanGovernanceMode
     executionContractVersion?: string | null
     governedProvenance?: NullableJsonNullValueInput | InputJsonValue
+    provenanceClassification?: $Enums.ExecutionPlanProvenance | null
+    provenanceDeclaredAt?: Date | string | null
+    provenanceEvidenceReference?: string | null
+    provenanceContractVersion?: string | null
     plannedStartAt?: Date | string | null
     plannedEndAt?: Date | string | null
     orp: OperationalResponsePlanCreateNestedOneWithoutExecutionPlanInput
     approvalDecision: OrpDecisionCreateNestedOneWithoutExecutionPlanInput
     createdBy: UserCreateNestedOneWithoutCreatedExecutionPlansInput
+    provenanceDeclaredBy?: UserCreateNestedOneWithoutProvenanceDeclaredPlansInput
+    provenanceAuthorityGrant?: ApprovalAuthorityCreateNestedOneWithoutProvenanceDeclaredPlansInput
     tasks?: ExecutionTaskCreateNestedManyWithoutExecutionPlanInput
     closure?: CaseClosureCreateNestedOneWithoutExecutionPlanInput
     scheduleRevisions?: ExecutionScheduleRevisionCreateNestedManyWithoutExecutionPlanInput
@@ -98613,6 +99348,12 @@ export namespace Prisma {
     governanceMode?: $Enums.ExecutionPlanGovernanceMode
     executionContractVersion?: string | null
     governedProvenance?: NullableJsonNullValueInput | InputJsonValue
+    provenanceClassification?: $Enums.ExecutionPlanProvenance | null
+    provenanceDeclaredById?: string | null
+    provenanceDeclaredAt?: Date | string | null
+    provenanceAuthorityGrantId?: string | null
+    provenanceEvidenceReference?: string | null
+    provenanceContractVersion?: string | null
     plannedStartAt?: Date | string | null
     plannedEndAt?: Date | string | null
     tasks?: ExecutionTaskUncheckedCreateNestedManyWithoutExecutionPlanInput
@@ -99529,6 +100270,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
     assetAttentionReviews?: AssetAttentionReviewCreateNestedManyWithoutReviewerInput
+    provenanceDeclaredPlans?: ExecutionPlanCreateNestedManyWithoutProvenanceDeclaredByInput
   }
 
   export type UserUncheckedCreateWithoutPreparedCaseResourceEstimatesInput = {
@@ -99585,6 +100327,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
     assetAttentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutReviewerInput
+    provenanceDeclaredPlans?: ExecutionPlanUncheckedCreateNestedManyWithoutProvenanceDeclaredByInput
   }
 
   export type UserCreateOrConnectWithoutPreparedCaseResourceEstimatesInput = {
@@ -99722,6 +100465,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
     assetAttentionReviews?: AssetAttentionReviewUpdateManyWithoutReviewerNestedInput
+    provenanceDeclaredPlans?: ExecutionPlanUpdateManyWithoutProvenanceDeclaredByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPreparedCaseResourceEstimatesInput = {
@@ -99778,6 +100522,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
     assetAttentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutReviewerNestedInput
+    provenanceDeclaredPlans?: ExecutionPlanUncheckedUpdateManyWithoutProvenanceDeclaredByNestedInput
   }
 
   export type AssetCreateWithoutAttentionReviewsInput = {
@@ -99936,6 +100681,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationCreateNestedManyWithoutRecordedByInput
     decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
+    provenanceDeclaredPlans?: ExecutionPlanCreateNestedManyWithoutProvenanceDeclaredByInput
   }
 
   export type UserUncheckedCreateWithoutAssetAttentionReviewsInput = {
@@ -99992,6 +100738,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedCreateNestedManyWithoutRecordedByInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
+    provenanceDeclaredPlans?: ExecutionPlanUncheckedCreateNestedManyWithoutProvenanceDeclaredByInput
   }
 
   export type UserCreateOrConnectWithoutAssetAttentionReviewsInput = {
@@ -100296,6 +101043,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUpdateManyWithoutRecordedByNestedInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
+    provenanceDeclaredPlans?: ExecutionPlanUpdateManyWithoutProvenanceDeclaredByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAssetAttentionReviewsInput = {
@@ -100352,6 +101100,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedUpdateManyWithoutRecordedByNestedInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
+    provenanceDeclaredPlans?: ExecutionPlanUncheckedUpdateManyWithoutProvenanceDeclaredByNestedInput
   }
 
   export type AssetAttentionReviewUpsertWithoutSupersededByInput = {
@@ -100713,6 +101462,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
     assetAttentionReviews?: AssetAttentionReviewCreateNestedManyWithoutReviewerInput
+    provenanceDeclaredPlans?: ExecutionPlanCreateNestedManyWithoutProvenanceDeclaredByInput
   }
 
   export type UserUncheckedCreateWithoutCreatedPortfolioScenariosInput = {
@@ -100769,6 +101519,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
     assetAttentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutReviewerInput
+    provenanceDeclaredPlans?: ExecutionPlanUncheckedCreateNestedManyWithoutProvenanceDeclaredByInput
   }
 
   export type UserCreateOrConnectWithoutCreatedPortfolioScenariosInput = {
@@ -100931,6 +101682,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
     assetAttentionReviews?: AssetAttentionReviewUpdateManyWithoutReviewerNestedInput
+    provenanceDeclaredPlans?: ExecutionPlanUpdateManyWithoutProvenanceDeclaredByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCreatedPortfolioScenariosInput = {
@@ -100987,6 +101739,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
     assetAttentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutReviewerNestedInput
+    provenanceDeclaredPlans?: ExecutionPlanUncheckedUpdateManyWithoutProvenanceDeclaredByNestedInput
   }
 
   export type DepartmentCreateWithoutObservationSourcesInput = {
@@ -101121,6 +101874,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
     assetAttentionReviews?: AssetAttentionReviewCreateNestedManyWithoutReviewerInput
+    provenanceDeclaredPlans?: ExecutionPlanCreateNestedManyWithoutProvenanceDeclaredByInput
   }
 
   export type UserUncheckedCreateWithoutCreatedObservationSourcesInput = {
@@ -101177,6 +101931,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
     assetAttentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutReviewerInput
+    provenanceDeclaredPlans?: ExecutionPlanUncheckedCreateNestedManyWithoutProvenanceDeclaredByInput
   }
 
   export type UserCreateOrConnectWithoutCreatedObservationSourcesInput = {
@@ -101238,6 +101993,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
     assetAttentionReviews?: AssetAttentionReviewCreateNestedManyWithoutReviewerInput
+    provenanceDeclaredPlans?: ExecutionPlanCreateNestedManyWithoutProvenanceDeclaredByInput
   }
 
   export type UserUncheckedCreateWithoutDeactivatedObservationSourcesInput = {
@@ -101294,6 +102050,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
     assetAttentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutReviewerInput
+    provenanceDeclaredPlans?: ExecutionPlanUncheckedCreateNestedManyWithoutProvenanceDeclaredByInput
   }
 
   export type UserCreateOrConnectWithoutDeactivatedObservationSourcesInput = {
@@ -101506,6 +102263,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
     assetAttentionReviews?: AssetAttentionReviewUpdateManyWithoutReviewerNestedInput
+    provenanceDeclaredPlans?: ExecutionPlanUpdateManyWithoutProvenanceDeclaredByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCreatedObservationSourcesInput = {
@@ -101562,6 +102320,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
     assetAttentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutReviewerNestedInput
+    provenanceDeclaredPlans?: ExecutionPlanUncheckedUpdateManyWithoutProvenanceDeclaredByNestedInput
   }
 
   export type UserUpsertWithoutDeactivatedObservationSourcesInput = {
@@ -101629,6 +102388,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
     assetAttentionReviews?: AssetAttentionReviewUpdateManyWithoutReviewerNestedInput
+    provenanceDeclaredPlans?: ExecutionPlanUpdateManyWithoutProvenanceDeclaredByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutDeactivatedObservationSourcesInput = {
@@ -101685,6 +102445,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
     assetAttentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutReviewerNestedInput
+    provenanceDeclaredPlans?: ExecutionPlanUncheckedUpdateManyWithoutProvenanceDeclaredByNestedInput
   }
 
   export type ExternalObservationUpsertWithWhereUniqueWithoutSourceInput = {
@@ -101984,6 +102745,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
     assetAttentionReviews?: AssetAttentionReviewCreateNestedManyWithoutReviewerInput
+    provenanceDeclaredPlans?: ExecutionPlanCreateNestedManyWithoutProvenanceDeclaredByInput
   }
 
   export type UserUncheckedCreateWithoutIngestedExternalObservationsInput = {
@@ -102040,6 +102802,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
     assetAttentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutReviewerInput
+    provenanceDeclaredPlans?: ExecutionPlanUncheckedCreateNestedManyWithoutProvenanceDeclaredByInput
   }
 
   export type UserCreateOrConnectWithoutIngestedExternalObservationsInput = {
@@ -102369,6 +103132,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
     assetAttentionReviews?: AssetAttentionReviewUpdateManyWithoutReviewerNestedInput
+    provenanceDeclaredPlans?: ExecutionPlanUpdateManyWithoutProvenanceDeclaredByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutIngestedExternalObservationsInput = {
@@ -102425,6 +103189,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
     assetAttentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutReviewerNestedInput
+    provenanceDeclaredPlans?: ExecutionPlanUncheckedUpdateManyWithoutProvenanceDeclaredByNestedInput
   }
 
   export type CaseCreateWithoutInspectionsInput = {
@@ -102540,6 +103305,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
     assetAttentionReviews?: AssetAttentionReviewCreateNestedManyWithoutReviewerInput
+    provenanceDeclaredPlans?: ExecutionPlanCreateNestedManyWithoutProvenanceDeclaredByInput
   }
 
   export type UserUncheckedCreateWithoutInspectionsInput = {
@@ -102596,6 +103362,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
     assetAttentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutReviewerInput
+    provenanceDeclaredPlans?: ExecutionPlanUncheckedCreateNestedManyWithoutProvenanceDeclaredByInput
   }
 
   export type UserCreateOrConnectWithoutInspectionsInput = {
@@ -102897,6 +103664,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
     assetAttentionReviews?: AssetAttentionReviewUpdateManyWithoutReviewerNestedInput
+    provenanceDeclaredPlans?: ExecutionPlanUpdateManyWithoutProvenanceDeclaredByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutInspectionsInput = {
@@ -102953,6 +103721,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
     assetAttentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutReviewerNestedInput
+    provenanceDeclaredPlans?: ExecutionPlanUncheckedUpdateManyWithoutProvenanceDeclaredByNestedInput
   }
 
   export type RiskAssessmentUpsertWithWhereUniqueWithoutInspectionInput = {
@@ -104524,11 +105293,17 @@ export namespace Prisma {
     governanceMode?: $Enums.ExecutionPlanGovernanceMode
     executionContractVersion?: string | null
     governedProvenance?: NullableJsonNullValueInput | InputJsonValue
+    provenanceClassification?: $Enums.ExecutionPlanProvenance | null
+    provenanceDeclaredAt?: Date | string | null
+    provenanceEvidenceReference?: string | null
+    provenanceContractVersion?: string | null
     plannedStartAt?: Date | string | null
     plannedEndAt?: Date | string | null
     case: CaseCreateNestedOneWithoutExecutionPlansInput
     approvalDecision: OrpDecisionCreateNestedOneWithoutExecutionPlanInput
     createdBy: UserCreateNestedOneWithoutCreatedExecutionPlansInput
+    provenanceDeclaredBy?: UserCreateNestedOneWithoutProvenanceDeclaredPlansInput
+    provenanceAuthorityGrant?: ApprovalAuthorityCreateNestedOneWithoutProvenanceDeclaredPlansInput
     tasks?: ExecutionTaskCreateNestedManyWithoutExecutionPlanInput
     closure?: CaseClosureCreateNestedOneWithoutExecutionPlanInput
     scheduleRevisions?: ExecutionScheduleRevisionCreateNestedManyWithoutExecutionPlanInput
@@ -104551,6 +105326,12 @@ export namespace Prisma {
     governanceMode?: $Enums.ExecutionPlanGovernanceMode
     executionContractVersion?: string | null
     governedProvenance?: NullableJsonNullValueInput | InputJsonValue
+    provenanceClassification?: $Enums.ExecutionPlanProvenance | null
+    provenanceDeclaredById?: string | null
+    provenanceDeclaredAt?: Date | string | null
+    provenanceAuthorityGrantId?: string | null
+    provenanceEvidenceReference?: string | null
+    provenanceContractVersion?: string | null
     plannedStartAt?: Date | string | null
     plannedEndAt?: Date | string | null
     tasks?: ExecutionTaskUncheckedCreateNestedManyWithoutExecutionPlanInput
@@ -104763,11 +105544,17 @@ export namespace Prisma {
     governanceMode?: EnumExecutionPlanGovernanceModeFieldUpdateOperationsInput | $Enums.ExecutionPlanGovernanceMode
     executionContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
     governedProvenance?: NullableJsonNullValueInput | InputJsonValue
+    provenanceClassification?: NullableEnumExecutionPlanProvenanceFieldUpdateOperationsInput | $Enums.ExecutionPlanProvenance | null
+    provenanceDeclaredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    provenanceEvidenceReference?: NullableStringFieldUpdateOperationsInput | string | null
+    provenanceContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
     plannedStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     plannedEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     case?: CaseUpdateOneRequiredWithoutExecutionPlansNestedInput
     approvalDecision?: OrpDecisionUpdateOneRequiredWithoutExecutionPlanNestedInput
     createdBy?: UserUpdateOneRequiredWithoutCreatedExecutionPlansNestedInput
+    provenanceDeclaredBy?: UserUpdateOneWithoutProvenanceDeclaredPlansNestedInput
+    provenanceAuthorityGrant?: ApprovalAuthorityUpdateOneWithoutProvenanceDeclaredPlansNestedInput
     tasks?: ExecutionTaskUpdateManyWithoutExecutionPlanNestedInput
     closure?: CaseClosureUpdateOneWithoutExecutionPlanNestedInput
     scheduleRevisions?: ExecutionScheduleRevisionUpdateManyWithoutExecutionPlanNestedInput
@@ -104790,6 +105577,12 @@ export namespace Prisma {
     governanceMode?: EnumExecutionPlanGovernanceModeFieldUpdateOperationsInput | $Enums.ExecutionPlanGovernanceMode
     executionContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
     governedProvenance?: NullableJsonNullValueInput | InputJsonValue
+    provenanceClassification?: NullableEnumExecutionPlanProvenanceFieldUpdateOperationsInput | $Enums.ExecutionPlanProvenance | null
+    provenanceDeclaredById?: NullableStringFieldUpdateOperationsInput | string | null
+    provenanceDeclaredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    provenanceAuthorityGrantId?: NullableStringFieldUpdateOperationsInput | string | null
+    provenanceEvidenceReference?: NullableStringFieldUpdateOperationsInput | string | null
+    provenanceContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
     plannedStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     plannedEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tasks?: ExecutionTaskUncheckedUpdateManyWithoutExecutionPlanNestedInput
@@ -105050,6 +105843,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
     assetAttentionReviews?: AssetAttentionReviewCreateNestedManyWithoutReviewerInput
+    provenanceDeclaredPlans?: ExecutionPlanCreateNestedManyWithoutProvenanceDeclaredByInput
   }
 
   export type UserUncheckedCreateWithoutPreparedDecisionPackagesInput = {
@@ -105106,6 +105900,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
     assetAttentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutReviewerInput
+    provenanceDeclaredPlans?: ExecutionPlanUncheckedCreateNestedManyWithoutProvenanceDeclaredByInput
   }
 
   export type UserCreateOrConnectWithoutPreparedDecisionPackagesInput = {
@@ -105391,6 +106186,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
     assetAttentionReviews?: AssetAttentionReviewUpdateManyWithoutReviewerNestedInput
+    provenanceDeclaredPlans?: ExecutionPlanUpdateManyWithoutProvenanceDeclaredByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPreparedDecisionPackagesInput = {
@@ -105447,6 +106243,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
     assetAttentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutReviewerNestedInput
+    provenanceDeclaredPlans?: ExecutionPlanUncheckedUpdateManyWithoutProvenanceDeclaredByNestedInput
   }
 
   export type OperationalResponsePlanUpsertWithWhereUniqueWithoutDecisionPackageInput = {
@@ -105519,6 +106316,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
     assetAttentionReviews?: AssetAttentionReviewCreateNestedManyWithoutReviewerInput
+    provenanceDeclaredPlans?: ExecutionPlanCreateNestedManyWithoutProvenanceDeclaredByInput
   }
 
   export type UserUncheckedCreateWithoutApprovalAuthoritiesInput = {
@@ -105575,6 +106373,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
     assetAttentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutReviewerInput
+    provenanceDeclaredPlans?: ExecutionPlanUncheckedCreateNestedManyWithoutProvenanceDeclaredByInput
   }
 
   export type UserCreateOrConnectWithoutApprovalAuthoritiesInput = {
@@ -105728,6 +106527,76 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type ExecutionPlanCreateWithoutProvenanceAuthorityGrantInput = {
+    id?: string
+    status?: $Enums.ExecutionPlanStatus
+    templateVersion?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    startedAt?: Date | string | null
+    completedAt?: Date | string | null
+    cancelledAt?: Date | string | null
+    cancellationReason?: string | null
+    governanceMode?: $Enums.ExecutionPlanGovernanceMode
+    executionContractVersion?: string | null
+    governedProvenance?: NullableJsonNullValueInput | InputJsonValue
+    provenanceClassification?: $Enums.ExecutionPlanProvenance | null
+    provenanceDeclaredAt?: Date | string | null
+    provenanceEvidenceReference?: string | null
+    provenanceContractVersion?: string | null
+    plannedStartAt?: Date | string | null
+    plannedEndAt?: Date | string | null
+    orp: OperationalResponsePlanCreateNestedOneWithoutExecutionPlanInput
+    case: CaseCreateNestedOneWithoutExecutionPlansInput
+    approvalDecision: OrpDecisionCreateNestedOneWithoutExecutionPlanInput
+    createdBy: UserCreateNestedOneWithoutCreatedExecutionPlansInput
+    provenanceDeclaredBy?: UserCreateNestedOneWithoutProvenanceDeclaredPlansInput
+    tasks?: ExecutionTaskCreateNestedManyWithoutExecutionPlanInput
+    closure?: CaseClosureCreateNestedOneWithoutExecutionPlanInput
+    scheduleRevisions?: ExecutionScheduleRevisionCreateNestedManyWithoutExecutionPlanInput
+    taskDependencies?: ExecutionTaskDependencyCreateNestedManyWithoutExecutionPlanInput
+  }
+
+  export type ExecutionPlanUncheckedCreateWithoutProvenanceAuthorityGrantInput = {
+    id?: string
+    orpId: string
+    caseId: string
+    approvalDecisionId: string
+    status?: $Enums.ExecutionPlanStatus
+    createdById: string
+    templateVersion?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    startedAt?: Date | string | null
+    completedAt?: Date | string | null
+    cancelledAt?: Date | string | null
+    cancellationReason?: string | null
+    governanceMode?: $Enums.ExecutionPlanGovernanceMode
+    executionContractVersion?: string | null
+    governedProvenance?: NullableJsonNullValueInput | InputJsonValue
+    provenanceClassification?: $Enums.ExecutionPlanProvenance | null
+    provenanceDeclaredById?: string | null
+    provenanceDeclaredAt?: Date | string | null
+    provenanceEvidenceReference?: string | null
+    provenanceContractVersion?: string | null
+    plannedStartAt?: Date | string | null
+    plannedEndAt?: Date | string | null
+    tasks?: ExecutionTaskUncheckedCreateNestedManyWithoutExecutionPlanInput
+    closure?: CaseClosureUncheckedCreateNestedOneWithoutExecutionPlanInput
+    scheduleRevisions?: ExecutionScheduleRevisionUncheckedCreateNestedManyWithoutExecutionPlanInput
+    taskDependencies?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutExecutionPlanInput
+  }
+
+  export type ExecutionPlanCreateOrConnectWithoutProvenanceAuthorityGrantInput = {
+    where: ExecutionPlanWhereUniqueInput
+    create: XOR<ExecutionPlanCreateWithoutProvenanceAuthorityGrantInput, ExecutionPlanUncheckedCreateWithoutProvenanceAuthorityGrantInput>
+  }
+
+  export type ExecutionPlanCreateManyProvenanceAuthorityGrantInputEnvelope = {
+    data: ExecutionPlanCreateManyProvenanceAuthorityGrantInput | ExecutionPlanCreateManyProvenanceAuthorityGrantInput[]
+    skipDuplicates?: boolean
+  }
+
   export type UserUpsertWithoutApprovalAuthoritiesInput = {
     update: XOR<UserUpdateWithoutApprovalAuthoritiesInput, UserUncheckedUpdateWithoutApprovalAuthoritiesInput>
     create: XOR<UserCreateWithoutApprovalAuthoritiesInput, UserUncheckedCreateWithoutApprovalAuthoritiesInput>
@@ -105793,6 +106662,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
     assetAttentionReviews?: AssetAttentionReviewUpdateManyWithoutReviewerNestedInput
+    provenanceDeclaredPlans?: ExecutionPlanUpdateManyWithoutProvenanceDeclaredByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutApprovalAuthoritiesInput = {
@@ -105849,6 +106719,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
     assetAttentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutReviewerNestedInput
+    provenanceDeclaredPlans?: ExecutionPlanUncheckedUpdateManyWithoutProvenanceDeclaredByNestedInput
   }
 
   export type DepartmentUpsertWithoutApprovalAuthoritiesInput = {
@@ -105971,6 +106842,22 @@ export namespace Prisma {
   export type CaseClosureUpdateManyWithWhereWithoutClosureAuthorityGrantInput = {
     where: CaseClosureScalarWhereInput
     data: XOR<CaseClosureUpdateManyMutationInput, CaseClosureUncheckedUpdateManyWithoutClosureAuthorityGrantInput>
+  }
+
+  export type ExecutionPlanUpsertWithWhereUniqueWithoutProvenanceAuthorityGrantInput = {
+    where: ExecutionPlanWhereUniqueInput
+    update: XOR<ExecutionPlanUpdateWithoutProvenanceAuthorityGrantInput, ExecutionPlanUncheckedUpdateWithoutProvenanceAuthorityGrantInput>
+    create: XOR<ExecutionPlanCreateWithoutProvenanceAuthorityGrantInput, ExecutionPlanUncheckedCreateWithoutProvenanceAuthorityGrantInput>
+  }
+
+  export type ExecutionPlanUpdateWithWhereUniqueWithoutProvenanceAuthorityGrantInput = {
+    where: ExecutionPlanWhereUniqueInput
+    data: XOR<ExecutionPlanUpdateWithoutProvenanceAuthorityGrantInput, ExecutionPlanUncheckedUpdateWithoutProvenanceAuthorityGrantInput>
+  }
+
+  export type ExecutionPlanUpdateManyWithWhereWithoutProvenanceAuthorityGrantInput = {
+    where: ExecutionPlanScalarWhereInput
+    data: XOR<ExecutionPlanUpdateManyMutationInput, ExecutionPlanUncheckedUpdateManyWithoutProvenanceAuthorityGrantInput>
   }
 
   export type CaseCreateWithoutOrpDecisionsInput = {
@@ -106133,6 +107020,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
     assetAttentionReviews?: AssetAttentionReviewCreateNestedManyWithoutReviewerInput
+    provenanceDeclaredPlans?: ExecutionPlanCreateNestedManyWithoutProvenanceDeclaredByInput
   }
 
   export type UserUncheckedCreateWithoutReviewedOrpDecisionsInput = {
@@ -106189,6 +107077,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
     assetAttentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutReviewerInput
+    provenanceDeclaredPlans?: ExecutionPlanUncheckedCreateNestedManyWithoutProvenanceDeclaredByInput
   }
 
   export type UserCreateOrConnectWithoutReviewedOrpDecisionsInput = {
@@ -106204,6 +107093,8 @@ export namespace Prisma {
     canRequestReinspection?: boolean
     canEscalate?: boolean
     canCloseCase?: boolean
+    canDeclareNonOperationalProvenance?: boolean
+    canDeclareOperationalProvenance?: boolean
     maxPriorityLevel?: $Enums.PriorityLevel | null
     isActive?: boolean
     validFrom?: Date | string | null
@@ -106214,6 +107105,7 @@ export namespace Prisma {
     department: DepartmentCreateNestedOneWithoutApprovalAuthoritiesInput
     jurisdiction: JurisdictionCreateNestedOneWithoutApprovalAuthoritiesInput
     caseClosures?: CaseClosureCreateNestedManyWithoutClosureAuthorityGrantInput
+    provenanceDeclaredPlans?: ExecutionPlanCreateNestedManyWithoutProvenanceAuthorityGrantInput
   }
 
   export type ApprovalAuthorityUncheckedCreateWithoutDecisionsInput = {
@@ -106227,6 +107119,8 @@ export namespace Prisma {
     canRequestReinspection?: boolean
     canEscalate?: boolean
     canCloseCase?: boolean
+    canDeclareNonOperationalProvenance?: boolean
+    canDeclareOperationalProvenance?: boolean
     maxPriorityLevel?: $Enums.PriorityLevel | null
     isActive?: boolean
     validFrom?: Date | string | null
@@ -106234,6 +107128,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     caseClosures?: CaseClosureUncheckedCreateNestedManyWithoutClosureAuthorityGrantInput
+    provenanceDeclaredPlans?: ExecutionPlanUncheckedCreateNestedManyWithoutProvenanceAuthorityGrantInput
   }
 
   export type ApprovalAuthorityCreateOrConnectWithoutDecisionsInput = {
@@ -106295,6 +107190,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
     assetAttentionReviews?: AssetAttentionReviewCreateNestedManyWithoutReviewerInput
+    provenanceDeclaredPlans?: ExecutionPlanCreateNestedManyWithoutProvenanceDeclaredByInput
   }
 
   export type UserUncheckedCreateWithoutForwardedOrpDecisionsInput = {
@@ -106351,6 +107247,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
     assetAttentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutReviewerInput
+    provenanceDeclaredPlans?: ExecutionPlanUncheckedCreateNestedManyWithoutProvenanceDeclaredByInput
   }
 
   export type UserCreateOrConnectWithoutForwardedOrpDecisionsInput = {
@@ -106371,11 +107268,17 @@ export namespace Prisma {
     governanceMode?: $Enums.ExecutionPlanGovernanceMode
     executionContractVersion?: string | null
     governedProvenance?: NullableJsonNullValueInput | InputJsonValue
+    provenanceClassification?: $Enums.ExecutionPlanProvenance | null
+    provenanceDeclaredAt?: Date | string | null
+    provenanceEvidenceReference?: string | null
+    provenanceContractVersion?: string | null
     plannedStartAt?: Date | string | null
     plannedEndAt?: Date | string | null
     orp: OperationalResponsePlanCreateNestedOneWithoutExecutionPlanInput
     case: CaseCreateNestedOneWithoutExecutionPlansInput
     createdBy: UserCreateNestedOneWithoutCreatedExecutionPlansInput
+    provenanceDeclaredBy?: UserCreateNestedOneWithoutProvenanceDeclaredPlansInput
+    provenanceAuthorityGrant?: ApprovalAuthorityCreateNestedOneWithoutProvenanceDeclaredPlansInput
     tasks?: ExecutionTaskCreateNestedManyWithoutExecutionPlanInput
     closure?: CaseClosureCreateNestedOneWithoutExecutionPlanInput
     scheduleRevisions?: ExecutionScheduleRevisionCreateNestedManyWithoutExecutionPlanInput
@@ -106398,6 +107301,12 @@ export namespace Prisma {
     governanceMode?: $Enums.ExecutionPlanGovernanceMode
     executionContractVersion?: string | null
     governedProvenance?: NullableJsonNullValueInput | InputJsonValue
+    provenanceClassification?: $Enums.ExecutionPlanProvenance | null
+    provenanceDeclaredById?: string | null
+    provenanceDeclaredAt?: Date | string | null
+    provenanceAuthorityGrantId?: string | null
+    provenanceEvidenceReference?: string | null
+    provenanceContractVersion?: string | null
     plannedStartAt?: Date | string | null
     plannedEndAt?: Date | string | null
     tasks?: ExecutionTaskUncheckedCreateNestedManyWithoutExecutionPlanInput
@@ -106594,6 +107503,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
     assetAttentionReviews?: AssetAttentionReviewUpdateManyWithoutReviewerNestedInput
+    provenanceDeclaredPlans?: ExecutionPlanUpdateManyWithoutProvenanceDeclaredByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutReviewedOrpDecisionsInput = {
@@ -106650,6 +107560,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
     assetAttentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutReviewerNestedInput
+    provenanceDeclaredPlans?: ExecutionPlanUncheckedUpdateManyWithoutProvenanceDeclaredByNestedInput
   }
 
   export type ApprovalAuthorityUpsertWithoutDecisionsInput = {
@@ -106671,6 +107582,8 @@ export namespace Prisma {
     canRequestReinspection?: BoolFieldUpdateOperationsInput | boolean
     canEscalate?: BoolFieldUpdateOperationsInput | boolean
     canCloseCase?: BoolFieldUpdateOperationsInput | boolean
+    canDeclareNonOperationalProvenance?: BoolFieldUpdateOperationsInput | boolean
+    canDeclareOperationalProvenance?: BoolFieldUpdateOperationsInput | boolean
     maxPriorityLevel?: NullableEnumPriorityLevelFieldUpdateOperationsInput | $Enums.PriorityLevel | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     validFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -106681,6 +107594,7 @@ export namespace Prisma {
     department?: DepartmentUpdateOneRequiredWithoutApprovalAuthoritiesNestedInput
     jurisdiction?: JurisdictionUpdateOneRequiredWithoutApprovalAuthoritiesNestedInput
     caseClosures?: CaseClosureUpdateManyWithoutClosureAuthorityGrantNestedInput
+    provenanceDeclaredPlans?: ExecutionPlanUpdateManyWithoutProvenanceAuthorityGrantNestedInput
   }
 
   export type ApprovalAuthorityUncheckedUpdateWithoutDecisionsInput = {
@@ -106694,6 +107608,8 @@ export namespace Prisma {
     canRequestReinspection?: BoolFieldUpdateOperationsInput | boolean
     canEscalate?: BoolFieldUpdateOperationsInput | boolean
     canCloseCase?: BoolFieldUpdateOperationsInput | boolean
+    canDeclareNonOperationalProvenance?: BoolFieldUpdateOperationsInput | boolean
+    canDeclareOperationalProvenance?: BoolFieldUpdateOperationsInput | boolean
     maxPriorityLevel?: NullableEnumPriorityLevelFieldUpdateOperationsInput | $Enums.PriorityLevel | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     validFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -106701,6 +107617,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     caseClosures?: CaseClosureUncheckedUpdateManyWithoutClosureAuthorityGrantNestedInput
+    provenanceDeclaredPlans?: ExecutionPlanUncheckedUpdateManyWithoutProvenanceAuthorityGrantNestedInput
   }
 
   export type UserUpsertWithoutForwardedOrpDecisionsInput = {
@@ -106768,6 +107685,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
     assetAttentionReviews?: AssetAttentionReviewUpdateManyWithoutReviewerNestedInput
+    provenanceDeclaredPlans?: ExecutionPlanUpdateManyWithoutProvenanceDeclaredByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutForwardedOrpDecisionsInput = {
@@ -106824,6 +107742,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
     assetAttentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutReviewerNestedInput
+    provenanceDeclaredPlans?: ExecutionPlanUncheckedUpdateManyWithoutProvenanceDeclaredByNestedInput
   }
 
   export type ExecutionPlanUpsertWithoutApprovalDecisionInput = {
@@ -106850,11 +107769,17 @@ export namespace Prisma {
     governanceMode?: EnumExecutionPlanGovernanceModeFieldUpdateOperationsInput | $Enums.ExecutionPlanGovernanceMode
     executionContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
     governedProvenance?: NullableJsonNullValueInput | InputJsonValue
+    provenanceClassification?: NullableEnumExecutionPlanProvenanceFieldUpdateOperationsInput | $Enums.ExecutionPlanProvenance | null
+    provenanceDeclaredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    provenanceEvidenceReference?: NullableStringFieldUpdateOperationsInput | string | null
+    provenanceContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
     plannedStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     plannedEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     orp?: OperationalResponsePlanUpdateOneRequiredWithoutExecutionPlanNestedInput
     case?: CaseUpdateOneRequiredWithoutExecutionPlansNestedInput
     createdBy?: UserUpdateOneRequiredWithoutCreatedExecutionPlansNestedInput
+    provenanceDeclaredBy?: UserUpdateOneWithoutProvenanceDeclaredPlansNestedInput
+    provenanceAuthorityGrant?: ApprovalAuthorityUpdateOneWithoutProvenanceDeclaredPlansNestedInput
     tasks?: ExecutionTaskUpdateManyWithoutExecutionPlanNestedInput
     closure?: CaseClosureUpdateOneWithoutExecutionPlanNestedInput
     scheduleRevisions?: ExecutionScheduleRevisionUpdateManyWithoutExecutionPlanNestedInput
@@ -106877,6 +107802,12 @@ export namespace Prisma {
     governanceMode?: EnumExecutionPlanGovernanceModeFieldUpdateOperationsInput | $Enums.ExecutionPlanGovernanceMode
     executionContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
     governedProvenance?: NullableJsonNullValueInput | InputJsonValue
+    provenanceClassification?: NullableEnumExecutionPlanProvenanceFieldUpdateOperationsInput | $Enums.ExecutionPlanProvenance | null
+    provenanceDeclaredById?: NullableStringFieldUpdateOperationsInput | string | null
+    provenanceDeclaredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    provenanceAuthorityGrantId?: NullableStringFieldUpdateOperationsInput | string | null
+    provenanceEvidenceReference?: NullableStringFieldUpdateOperationsInput | string | null
+    provenanceContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
     plannedStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     plannedEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tasks?: ExecutionTaskUncheckedUpdateManyWithoutExecutionPlanNestedInput
@@ -107078,6 +108009,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
     assetAttentionReviews?: AssetAttentionReviewCreateNestedManyWithoutReviewerInput
+    provenanceDeclaredPlans?: ExecutionPlanCreateNestedManyWithoutProvenanceDeclaredByInput
   }
 
   export type UserUncheckedCreateWithoutCreatedExecutionPlansInput = {
@@ -107134,11 +108066,182 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
     assetAttentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutReviewerInput
+    provenanceDeclaredPlans?: ExecutionPlanUncheckedCreateNestedManyWithoutProvenanceDeclaredByInput
   }
 
   export type UserCreateOrConnectWithoutCreatedExecutionPlansInput = {
     where: UserWhereUniqueInput
     create: XOR<UserCreateWithoutCreatedExecutionPlansInput, UserUncheckedCreateWithoutCreatedExecutionPlansInput>
+  }
+
+  export type UserCreateWithoutProvenanceDeclaredPlansInput = {
+    id?: string
+    employeeCode: string
+    name: string
+    email: string
+    passwordHash: string
+    designation: string
+    role?: $Enums.SystemRole
+    status?: $Enums.UserStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    department: DepartmentCreateNestedOneWithoutUsersInput
+    jurisdiction: JurisdictionCreateNestedOneWithoutUsersInput
+    inspections?: InspectionCreateNestedManyWithoutInspectorInput
+    approvalAuthorities?: ApprovalAuthorityCreateNestedManyWithoutUserInput
+    reviewedOrpDecisions?: OrpDecisionCreateNestedManyWithoutReviewerInput
+    forwardedOrpDecisions?: OrpDecisionCreateNestedManyWithoutForwardedUserInput
+    createdExecutionPlans?: ExecutionPlanCreateNestedManyWithoutCreatedByInput
+    assignedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutAssignedToInput
+    assignedByExecutionTasks?: ExecutionTaskCreateNestedManyWithoutAssignedByInput
+    completedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCompletionSubmittedByInput
+    verifiedExecutionTasks?: ExecutionTaskCreateNestedManyWithoutVerifiedByInput
+    cancelledExecutionTasks?: ExecutionTaskCreateNestedManyWithoutCancelledByInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionCreateNestedManyWithoutChangedByInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutBlockedByInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventCreateNestedManyWithoutResolvedByInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyCreateNestedManyWithoutCreatedByInput
+    submittedExecutionEvidence?: ExecutionEvidenceCreateNestedManyWithoutSubmittedByInput
+    closedCases?: CaseClosureCreateNestedManyWithoutClosedByInput
+    reviewedPublicReports?: PublicReportCreateNestedManyWithoutReviewedByInput
+    decidedPublicReports?: PublicReportCreateNestedManyWithoutDecisionByInput
+    createdTriageAnalyses?: PublicReportTriageAnalysisCreateNestedManyWithoutCreatedByInput
+    createdPolicyDocuments?: PolicyDocumentCreateNestedManyWithoutCreatedByInput
+    approvedPolicyDocuments?: PolicyDocumentCreateNestedManyWithoutApprovedByInput
+    createdApprovedActions?: ApprovedActionVersionCreateNestedManyWithoutCreatedByInput
+    approvedApprovedActions?: ApprovedActionVersionCreateNestedManyWithoutApprovedByInput
+    preparedDecisionPackages?: DecisionPackageCreateNestedManyWithoutPreparedByInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutCreatedByInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateCreateNestedManyWithoutApprovedByInput
+    createdObservationSources?: ObservationSourceCreateNestedManyWithoutCreatedByInput
+    deactivatedObservationSources?: ObservationSourceCreateNestedManyWithoutDeactivatedByInput
+    ingestedExternalObservations?: ExternalObservationCreateNestedManyWithoutIngestedByInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateCreateNestedManyWithoutPreparedByInput
+    createdPortfolioScenarios?: PortfolioScenarioCreateNestedManyWithoutCreatedByInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutCreatedByInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotCreateNestedManyWithoutVoidedByInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutRecordedByInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeCreateNestedManyWithoutVoidedByInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotCreateNestedManyWithoutCreatedByInput
+    createdPredictiveModelVersions?: PredictiveModelVersionCreateNestedManyWithoutCreatedByInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionCreateNestedManyWithoutValidatedByInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationCreateNestedManyWithoutRecordedByInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
+    assetAttentionReviews?: AssetAttentionReviewCreateNestedManyWithoutReviewerInput
+  }
+
+  export type UserUncheckedCreateWithoutProvenanceDeclaredPlansInput = {
+    id?: string
+    employeeCode: string
+    name: string
+    email: string
+    passwordHash: string
+    designation: string
+    role?: $Enums.SystemRole
+    status?: $Enums.UserStatus
+    departmentId: string
+    jurisdictionId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    inspections?: InspectionUncheckedCreateNestedManyWithoutInspectorInput
+    approvalAuthorities?: ApprovalAuthorityUncheckedCreateNestedManyWithoutUserInput
+    reviewedOrpDecisions?: OrpDecisionUncheckedCreateNestedManyWithoutReviewerInput
+    forwardedOrpDecisions?: OrpDecisionUncheckedCreateNestedManyWithoutForwardedUserInput
+    createdExecutionPlans?: ExecutionPlanUncheckedCreateNestedManyWithoutCreatedByInput
+    assignedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutAssignedToInput
+    assignedByExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutAssignedByInput
+    completedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCompletionSubmittedByInput
+    verifiedExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutVerifiedByInput
+    cancelledExecutionTasks?: ExecutionTaskUncheckedCreateNestedManyWithoutCancelledByInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUncheckedCreateNestedManyWithoutChangedByInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutBlockedByInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedCreateNestedManyWithoutResolvedByInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUncheckedCreateNestedManyWithoutCreatedByInput
+    submittedExecutionEvidence?: ExecutionEvidenceUncheckedCreateNestedManyWithoutSubmittedByInput
+    closedCases?: CaseClosureUncheckedCreateNestedManyWithoutClosedByInput
+    reviewedPublicReports?: PublicReportUncheckedCreateNestedManyWithoutReviewedByInput
+    decidedPublicReports?: PublicReportUncheckedCreateNestedManyWithoutDecisionByInput
+    createdTriageAnalyses?: PublicReportTriageAnalysisUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPolicyDocuments?: PolicyDocumentUncheckedCreateNestedManyWithoutCreatedByInput
+    approvedPolicyDocuments?: PolicyDocumentUncheckedCreateNestedManyWithoutApprovedByInput
+    createdApprovedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutCreatedByInput
+    approvedApprovedActions?: ApprovedActionVersionUncheckedCreateNestedManyWithoutApprovedByInput
+    preparedDecisionPackages?: DecisionPackageUncheckedCreateNestedManyWithoutPreparedByInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutCreatedByInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedCreateNestedManyWithoutApprovedByInput
+    createdObservationSources?: ObservationSourceUncheckedCreateNestedManyWithoutCreatedByInput
+    deactivatedObservationSources?: ObservationSourceUncheckedCreateNestedManyWithoutDeactivatedByInput
+    ingestedExternalObservations?: ExternalObservationUncheckedCreateNestedManyWithoutIngestedByInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedCreateNestedManyWithoutPreparedByInput
+    createdPortfolioScenarios?: PortfolioScenarioUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutCreatedByInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedCreateNestedManyWithoutVoidedByInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutRecordedByInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedCreateNestedManyWithoutVoidedByInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUncheckedCreateNestedManyWithoutCreatedByInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUncheckedCreateNestedManyWithoutCreatedByInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUncheckedCreateNestedManyWithoutValidatedByInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedCreateNestedManyWithoutRecordedByInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
+    assetAttentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutReviewerInput
+  }
+
+  export type UserCreateOrConnectWithoutProvenanceDeclaredPlansInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutProvenanceDeclaredPlansInput, UserUncheckedCreateWithoutProvenanceDeclaredPlansInput>
+  }
+
+  export type ApprovalAuthorityCreateWithoutProvenanceDeclaredPlansInput = {
+    id?: string
+    canApprove?: boolean
+    canReject?: boolean
+    canRequestModification?: boolean
+    canRequestReinspection?: boolean
+    canEscalate?: boolean
+    canCloseCase?: boolean
+    canDeclareNonOperationalProvenance?: boolean
+    canDeclareOperationalProvenance?: boolean
+    maxPriorityLevel?: $Enums.PriorityLevel | null
+    isActive?: boolean
+    validFrom?: Date | string | null
+    validUntil?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutApprovalAuthoritiesInput
+    department: DepartmentCreateNestedOneWithoutApprovalAuthoritiesInput
+    jurisdiction: JurisdictionCreateNestedOneWithoutApprovalAuthoritiesInput
+    decisions?: OrpDecisionCreateNestedManyWithoutAuthorityGrantInput
+    caseClosures?: CaseClosureCreateNestedManyWithoutClosureAuthorityGrantInput
+  }
+
+  export type ApprovalAuthorityUncheckedCreateWithoutProvenanceDeclaredPlansInput = {
+    id?: string
+    userId: string
+    departmentId: string
+    jurisdictionId: string
+    canApprove?: boolean
+    canReject?: boolean
+    canRequestModification?: boolean
+    canRequestReinspection?: boolean
+    canEscalate?: boolean
+    canCloseCase?: boolean
+    canDeclareNonOperationalProvenance?: boolean
+    canDeclareOperationalProvenance?: boolean
+    maxPriorityLevel?: $Enums.PriorityLevel | null
+    isActive?: boolean
+    validFrom?: Date | string | null
+    validUntil?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    decisions?: OrpDecisionUncheckedCreateNestedManyWithoutAuthorityGrantInput
+    caseClosures?: CaseClosureUncheckedCreateNestedManyWithoutClosureAuthorityGrantInput
+  }
+
+  export type ApprovalAuthorityCreateOrConnectWithoutProvenanceDeclaredPlansInput = {
+    where: ApprovalAuthorityWhereUniqueInput
+    create: XOR<ApprovalAuthorityCreateWithoutProvenanceDeclaredPlansInput, ApprovalAuthorityUncheckedCreateWithoutProvenanceDeclaredPlansInput>
   }
 
   export type ExecutionTaskCreateWithoutExecutionPlanInput = {
@@ -107546,6 +108649,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
     assetAttentionReviews?: AssetAttentionReviewUpdateManyWithoutReviewerNestedInput
+    provenanceDeclaredPlans?: ExecutionPlanUpdateManyWithoutProvenanceDeclaredByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCreatedExecutionPlansInput = {
@@ -107602,6 +108706,189 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
     assetAttentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutReviewerNestedInput
+    provenanceDeclaredPlans?: ExecutionPlanUncheckedUpdateManyWithoutProvenanceDeclaredByNestedInput
+  }
+
+  export type UserUpsertWithoutProvenanceDeclaredPlansInput = {
+    update: XOR<UserUpdateWithoutProvenanceDeclaredPlansInput, UserUncheckedUpdateWithoutProvenanceDeclaredPlansInput>
+    create: XOR<UserCreateWithoutProvenanceDeclaredPlansInput, UserUncheckedCreateWithoutProvenanceDeclaredPlansInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutProvenanceDeclaredPlansInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutProvenanceDeclaredPlansInput, UserUncheckedUpdateWithoutProvenanceDeclaredPlansInput>
+  }
+
+  export type UserUpdateWithoutProvenanceDeclaredPlansInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    employeeCode?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    designation?: StringFieldUpdateOperationsInput | string
+    role?: EnumSystemRoleFieldUpdateOperationsInput | $Enums.SystemRole
+    status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    department?: DepartmentUpdateOneRequiredWithoutUsersNestedInput
+    jurisdiction?: JurisdictionUpdateOneRequiredWithoutUsersNestedInput
+    inspections?: InspectionUpdateManyWithoutInspectorNestedInput
+    approvalAuthorities?: ApprovalAuthorityUpdateManyWithoutUserNestedInput
+    reviewedOrpDecisions?: OrpDecisionUpdateManyWithoutReviewerNestedInput
+    forwardedOrpDecisions?: OrpDecisionUpdateManyWithoutForwardedUserNestedInput
+    createdExecutionPlans?: ExecutionPlanUpdateManyWithoutCreatedByNestedInput
+    assignedExecutionTasks?: ExecutionTaskUpdateManyWithoutAssignedToNestedInput
+    assignedByExecutionTasks?: ExecutionTaskUpdateManyWithoutAssignedByNestedInput
+    completedExecutionTasks?: ExecutionTaskUpdateManyWithoutCompletionSubmittedByNestedInput
+    verifiedExecutionTasks?: ExecutionTaskUpdateManyWithoutVerifiedByNestedInput
+    cancelledExecutionTasks?: ExecutionTaskUpdateManyWithoutCancelledByNestedInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUpdateManyWithoutChangedByNestedInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUpdateManyWithoutBlockedByNestedInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUpdateManyWithoutResolvedByNestedInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUpdateManyWithoutCreatedByNestedInput
+    submittedExecutionEvidence?: ExecutionEvidenceUpdateManyWithoutSubmittedByNestedInput
+    closedCases?: CaseClosureUpdateManyWithoutClosedByNestedInput
+    reviewedPublicReports?: PublicReportUpdateManyWithoutReviewedByNestedInput
+    decidedPublicReports?: PublicReportUpdateManyWithoutDecisionByNestedInput
+    createdTriageAnalyses?: PublicReportTriageAnalysisUpdateManyWithoutCreatedByNestedInput
+    createdPolicyDocuments?: PolicyDocumentUpdateManyWithoutCreatedByNestedInput
+    approvedPolicyDocuments?: PolicyDocumentUpdateManyWithoutApprovedByNestedInput
+    createdApprovedActions?: ApprovedActionVersionUpdateManyWithoutCreatedByNestedInput
+    approvedApprovedActions?: ApprovedActionVersionUpdateManyWithoutApprovedByNestedInput
+    preparedDecisionPackages?: DecisionPackageUpdateManyWithoutPreparedByNestedInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutCreatedByNestedInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUpdateManyWithoutApprovedByNestedInput
+    createdObservationSources?: ObservationSourceUpdateManyWithoutCreatedByNestedInput
+    deactivatedObservationSources?: ObservationSourceUpdateManyWithoutDeactivatedByNestedInput
+    ingestedExternalObservations?: ExternalObservationUpdateManyWithoutIngestedByNestedInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUpdateManyWithoutPreparedByNestedInput
+    createdPortfolioScenarios?: PortfolioScenarioUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutCreatedByNestedInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUpdateManyWithoutVoidedByNestedInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutRecordedByNestedInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUpdateManyWithoutVoidedByNestedInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUpdateManyWithoutCreatedByNestedInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUpdateManyWithoutValidatedByNestedInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUpdateManyWithoutRecordedByNestedInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
+    assetAttentionReviews?: AssetAttentionReviewUpdateManyWithoutReviewerNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutProvenanceDeclaredPlansInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    employeeCode?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    designation?: StringFieldUpdateOperationsInput | string
+    role?: EnumSystemRoleFieldUpdateOperationsInput | $Enums.SystemRole
+    status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+    departmentId?: StringFieldUpdateOperationsInput | string
+    jurisdictionId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    inspections?: InspectionUncheckedUpdateManyWithoutInspectorNestedInput
+    approvalAuthorities?: ApprovalAuthorityUncheckedUpdateManyWithoutUserNestedInput
+    reviewedOrpDecisions?: OrpDecisionUncheckedUpdateManyWithoutReviewerNestedInput
+    forwardedOrpDecisions?: OrpDecisionUncheckedUpdateManyWithoutForwardedUserNestedInput
+    createdExecutionPlans?: ExecutionPlanUncheckedUpdateManyWithoutCreatedByNestedInput
+    assignedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutAssignedToNestedInput
+    assignedByExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutAssignedByNestedInput
+    completedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCompletionSubmittedByNestedInput
+    verifiedExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutVerifiedByNestedInput
+    cancelledExecutionTasks?: ExecutionTaskUncheckedUpdateManyWithoutCancelledByNestedInput
+    executionScheduleRevisions?: ExecutionScheduleRevisionUncheckedUpdateManyWithoutChangedByNestedInput
+    blockedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutBlockedByNestedInput
+    resolvedExecutionTaskEvents?: ExecutionTaskBlockerEventUncheckedUpdateManyWithoutResolvedByNestedInput
+    createdExecutionTaskDependencies?: ExecutionTaskDependencyUncheckedUpdateManyWithoutCreatedByNestedInput
+    submittedExecutionEvidence?: ExecutionEvidenceUncheckedUpdateManyWithoutSubmittedByNestedInput
+    closedCases?: CaseClosureUncheckedUpdateManyWithoutClosedByNestedInput
+    reviewedPublicReports?: PublicReportUncheckedUpdateManyWithoutReviewedByNestedInput
+    decidedPublicReports?: PublicReportUncheckedUpdateManyWithoutDecisionByNestedInput
+    createdTriageAnalyses?: PublicReportTriageAnalysisUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPolicyDocuments?: PolicyDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
+    approvedPolicyDocuments?: PolicyDocumentUncheckedUpdateManyWithoutApprovedByNestedInput
+    createdApprovedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutCreatedByNestedInput
+    approvedApprovedActions?: ApprovedActionVersionUncheckedUpdateManyWithoutApprovedByNestedInput
+    preparedDecisionPackages?: DecisionPackageUncheckedUpdateManyWithoutPreparedByNestedInput
+    createdGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutCreatedByNestedInput
+    approvedGovernedExecutionTemplates?: GovernedExecutionTemplateUncheckedUpdateManyWithoutApprovedByNestedInput
+    createdObservationSources?: ObservationSourceUncheckedUpdateManyWithoutCreatedByNestedInput
+    deactivatedObservationSources?: ObservationSourceUncheckedUpdateManyWithoutDeactivatedByNestedInput
+    ingestedExternalObservations?: ExternalObservationUncheckedUpdateManyWithoutIngestedByNestedInput
+    preparedCaseResourceEstimates?: CaseResourceEstimateUncheckedUpdateManyWithoutPreparedByNestedInput
+    createdPortfolioScenarios?: PortfolioScenarioUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutCreatedByNestedInput
+    voidedPredictiveSnapshots?: PredictiveFeatureSnapshotUncheckedUpdateManyWithoutVoidedByNestedInput
+    recordedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutRecordedByNestedInput
+    voidedPredictiveOutcomes?: PredictiveOutcomeUncheckedUpdateManyWithoutVoidedByNestedInput
+    createdPredictiveDatasetSnapshots?: PredictiveDatasetSnapshotUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdPredictiveModelVersions?: PredictiveModelVersionUncheckedUpdateManyWithoutCreatedByNestedInput
+    validatedPredictiveModelVersions?: PredictiveModelVersionUncheckedUpdateManyWithoutValidatedByNestedInput
+    recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedUpdateManyWithoutRecordedByNestedInput
+    decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
+    predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
+    assetAttentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutReviewerNestedInput
+  }
+
+  export type ApprovalAuthorityUpsertWithoutProvenanceDeclaredPlansInput = {
+    update: XOR<ApprovalAuthorityUpdateWithoutProvenanceDeclaredPlansInput, ApprovalAuthorityUncheckedUpdateWithoutProvenanceDeclaredPlansInput>
+    create: XOR<ApprovalAuthorityCreateWithoutProvenanceDeclaredPlansInput, ApprovalAuthorityUncheckedCreateWithoutProvenanceDeclaredPlansInput>
+    where?: ApprovalAuthorityWhereInput
+  }
+
+  export type ApprovalAuthorityUpdateToOneWithWhereWithoutProvenanceDeclaredPlansInput = {
+    where?: ApprovalAuthorityWhereInput
+    data: XOR<ApprovalAuthorityUpdateWithoutProvenanceDeclaredPlansInput, ApprovalAuthorityUncheckedUpdateWithoutProvenanceDeclaredPlansInput>
+  }
+
+  export type ApprovalAuthorityUpdateWithoutProvenanceDeclaredPlansInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    canApprove?: BoolFieldUpdateOperationsInput | boolean
+    canReject?: BoolFieldUpdateOperationsInput | boolean
+    canRequestModification?: BoolFieldUpdateOperationsInput | boolean
+    canRequestReinspection?: BoolFieldUpdateOperationsInput | boolean
+    canEscalate?: BoolFieldUpdateOperationsInput | boolean
+    canCloseCase?: BoolFieldUpdateOperationsInput | boolean
+    canDeclareNonOperationalProvenance?: BoolFieldUpdateOperationsInput | boolean
+    canDeclareOperationalProvenance?: BoolFieldUpdateOperationsInput | boolean
+    maxPriorityLevel?: NullableEnumPriorityLevelFieldUpdateOperationsInput | $Enums.PriorityLevel | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    validFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    validUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutApprovalAuthoritiesNestedInput
+    department?: DepartmentUpdateOneRequiredWithoutApprovalAuthoritiesNestedInput
+    jurisdiction?: JurisdictionUpdateOneRequiredWithoutApprovalAuthoritiesNestedInput
+    decisions?: OrpDecisionUpdateManyWithoutAuthorityGrantNestedInput
+    caseClosures?: CaseClosureUpdateManyWithoutClosureAuthorityGrantNestedInput
+  }
+
+  export type ApprovalAuthorityUncheckedUpdateWithoutProvenanceDeclaredPlansInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    departmentId?: StringFieldUpdateOperationsInput | string
+    jurisdictionId?: StringFieldUpdateOperationsInput | string
+    canApprove?: BoolFieldUpdateOperationsInput | boolean
+    canReject?: BoolFieldUpdateOperationsInput | boolean
+    canRequestModification?: BoolFieldUpdateOperationsInput | boolean
+    canRequestReinspection?: BoolFieldUpdateOperationsInput | boolean
+    canEscalate?: BoolFieldUpdateOperationsInput | boolean
+    canCloseCase?: BoolFieldUpdateOperationsInput | boolean
+    canDeclareNonOperationalProvenance?: BoolFieldUpdateOperationsInput | boolean
+    canDeclareOperationalProvenance?: BoolFieldUpdateOperationsInput | boolean
+    maxPriorityLevel?: NullableEnumPriorityLevelFieldUpdateOperationsInput | $Enums.PriorityLevel | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    validFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    validUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    decisions?: OrpDecisionUncheckedUpdateManyWithoutAuthorityGrantNestedInput
+    caseClosures?: CaseClosureUncheckedUpdateManyWithoutClosureAuthorityGrantNestedInput
   }
 
   export type ExecutionTaskUpsertWithWhereUniqueWithoutExecutionPlanInput = {
@@ -107696,12 +108983,18 @@ export namespace Prisma {
     governanceMode?: $Enums.ExecutionPlanGovernanceMode
     executionContractVersion?: string | null
     governedProvenance?: NullableJsonNullValueInput | InputJsonValue
+    provenanceClassification?: $Enums.ExecutionPlanProvenance | null
+    provenanceDeclaredAt?: Date | string | null
+    provenanceEvidenceReference?: string | null
+    provenanceContractVersion?: string | null
     plannedStartAt?: Date | string | null
     plannedEndAt?: Date | string | null
     orp: OperationalResponsePlanCreateNestedOneWithoutExecutionPlanInput
     case: CaseCreateNestedOneWithoutExecutionPlansInput
     approvalDecision: OrpDecisionCreateNestedOneWithoutExecutionPlanInput
     createdBy: UserCreateNestedOneWithoutCreatedExecutionPlansInput
+    provenanceDeclaredBy?: UserCreateNestedOneWithoutProvenanceDeclaredPlansInput
+    provenanceAuthorityGrant?: ApprovalAuthorityCreateNestedOneWithoutProvenanceDeclaredPlansInput
     closure?: CaseClosureCreateNestedOneWithoutExecutionPlanInput
     scheduleRevisions?: ExecutionScheduleRevisionCreateNestedManyWithoutExecutionPlanInput
     taskDependencies?: ExecutionTaskDependencyCreateNestedManyWithoutExecutionPlanInput
@@ -107724,6 +109017,12 @@ export namespace Prisma {
     governanceMode?: $Enums.ExecutionPlanGovernanceMode
     executionContractVersion?: string | null
     governedProvenance?: NullableJsonNullValueInput | InputJsonValue
+    provenanceClassification?: $Enums.ExecutionPlanProvenance | null
+    provenanceDeclaredById?: string | null
+    provenanceDeclaredAt?: Date | string | null
+    provenanceAuthorityGrantId?: string | null
+    provenanceEvidenceReference?: string | null
+    provenanceContractVersion?: string | null
     plannedStartAt?: Date | string | null
     plannedEndAt?: Date | string | null
     closure?: CaseClosureUncheckedCreateNestedOneWithoutExecutionPlanInput
@@ -107790,6 +109089,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
     assetAttentionReviews?: AssetAttentionReviewCreateNestedManyWithoutReviewerInput
+    provenanceDeclaredPlans?: ExecutionPlanCreateNestedManyWithoutProvenanceDeclaredByInput
   }
 
   export type UserUncheckedCreateWithoutAssignedExecutionTasksInput = {
@@ -107846,6 +109146,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
     assetAttentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutReviewerInput
+    provenanceDeclaredPlans?: ExecutionPlanUncheckedCreateNestedManyWithoutProvenanceDeclaredByInput
   }
 
   export type UserCreateOrConnectWithoutAssignedExecutionTasksInput = {
@@ -107907,6 +109208,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
     assetAttentionReviews?: AssetAttentionReviewCreateNestedManyWithoutReviewerInput
+    provenanceDeclaredPlans?: ExecutionPlanCreateNestedManyWithoutProvenanceDeclaredByInput
   }
 
   export type UserUncheckedCreateWithoutAssignedByExecutionTasksInput = {
@@ -107963,6 +109265,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
     assetAttentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutReviewerInput
+    provenanceDeclaredPlans?: ExecutionPlanUncheckedCreateNestedManyWithoutProvenanceDeclaredByInput
   }
 
   export type UserCreateOrConnectWithoutAssignedByExecutionTasksInput = {
@@ -108024,6 +109327,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
     assetAttentionReviews?: AssetAttentionReviewCreateNestedManyWithoutReviewerInput
+    provenanceDeclaredPlans?: ExecutionPlanCreateNestedManyWithoutProvenanceDeclaredByInput
   }
 
   export type UserUncheckedCreateWithoutCompletedExecutionTasksInput = {
@@ -108080,6 +109384,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
     assetAttentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutReviewerInput
+    provenanceDeclaredPlans?: ExecutionPlanUncheckedCreateNestedManyWithoutProvenanceDeclaredByInput
   }
 
   export type UserCreateOrConnectWithoutCompletedExecutionTasksInput = {
@@ -108141,6 +109446,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
     assetAttentionReviews?: AssetAttentionReviewCreateNestedManyWithoutReviewerInput
+    provenanceDeclaredPlans?: ExecutionPlanCreateNestedManyWithoutProvenanceDeclaredByInput
   }
 
   export type UserUncheckedCreateWithoutVerifiedExecutionTasksInput = {
@@ -108197,6 +109503,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
     assetAttentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutReviewerInput
+    provenanceDeclaredPlans?: ExecutionPlanUncheckedCreateNestedManyWithoutProvenanceDeclaredByInput
   }
 
   export type UserCreateOrConnectWithoutVerifiedExecutionTasksInput = {
@@ -108258,6 +109565,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
     assetAttentionReviews?: AssetAttentionReviewCreateNestedManyWithoutReviewerInput
+    provenanceDeclaredPlans?: ExecutionPlanCreateNestedManyWithoutProvenanceDeclaredByInput
   }
 
   export type UserUncheckedCreateWithoutCancelledExecutionTasksInput = {
@@ -108314,6 +109622,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
     assetAttentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutReviewerInput
+    provenanceDeclaredPlans?: ExecutionPlanUncheckedCreateNestedManyWithoutProvenanceDeclaredByInput
   }
 
   export type UserCreateOrConnectWithoutCancelledExecutionTasksInput = {
@@ -108690,12 +109999,18 @@ export namespace Prisma {
     governanceMode?: EnumExecutionPlanGovernanceModeFieldUpdateOperationsInput | $Enums.ExecutionPlanGovernanceMode
     executionContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
     governedProvenance?: NullableJsonNullValueInput | InputJsonValue
+    provenanceClassification?: NullableEnumExecutionPlanProvenanceFieldUpdateOperationsInput | $Enums.ExecutionPlanProvenance | null
+    provenanceDeclaredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    provenanceEvidenceReference?: NullableStringFieldUpdateOperationsInput | string | null
+    provenanceContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
     plannedStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     plannedEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     orp?: OperationalResponsePlanUpdateOneRequiredWithoutExecutionPlanNestedInput
     case?: CaseUpdateOneRequiredWithoutExecutionPlansNestedInput
     approvalDecision?: OrpDecisionUpdateOneRequiredWithoutExecutionPlanNestedInput
     createdBy?: UserUpdateOneRequiredWithoutCreatedExecutionPlansNestedInput
+    provenanceDeclaredBy?: UserUpdateOneWithoutProvenanceDeclaredPlansNestedInput
+    provenanceAuthorityGrant?: ApprovalAuthorityUpdateOneWithoutProvenanceDeclaredPlansNestedInput
     closure?: CaseClosureUpdateOneWithoutExecutionPlanNestedInput
     scheduleRevisions?: ExecutionScheduleRevisionUpdateManyWithoutExecutionPlanNestedInput
     taskDependencies?: ExecutionTaskDependencyUpdateManyWithoutExecutionPlanNestedInput
@@ -108718,6 +110033,12 @@ export namespace Prisma {
     governanceMode?: EnumExecutionPlanGovernanceModeFieldUpdateOperationsInput | $Enums.ExecutionPlanGovernanceMode
     executionContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
     governedProvenance?: NullableJsonNullValueInput | InputJsonValue
+    provenanceClassification?: NullableEnumExecutionPlanProvenanceFieldUpdateOperationsInput | $Enums.ExecutionPlanProvenance | null
+    provenanceDeclaredById?: NullableStringFieldUpdateOperationsInput | string | null
+    provenanceDeclaredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    provenanceAuthorityGrantId?: NullableStringFieldUpdateOperationsInput | string | null
+    provenanceEvidenceReference?: NullableStringFieldUpdateOperationsInput | string | null
+    provenanceContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
     plannedStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     plannedEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     closure?: CaseClosureUncheckedUpdateOneWithoutExecutionPlanNestedInput
@@ -108790,6 +110111,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
     assetAttentionReviews?: AssetAttentionReviewUpdateManyWithoutReviewerNestedInput
+    provenanceDeclaredPlans?: ExecutionPlanUpdateManyWithoutProvenanceDeclaredByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAssignedExecutionTasksInput = {
@@ -108846,6 +110168,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
     assetAttentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutReviewerNestedInput
+    provenanceDeclaredPlans?: ExecutionPlanUncheckedUpdateManyWithoutProvenanceDeclaredByNestedInput
   }
 
   export type UserUpsertWithoutAssignedByExecutionTasksInput = {
@@ -108913,6 +110236,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
     assetAttentionReviews?: AssetAttentionReviewUpdateManyWithoutReviewerNestedInput
+    provenanceDeclaredPlans?: ExecutionPlanUpdateManyWithoutProvenanceDeclaredByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAssignedByExecutionTasksInput = {
@@ -108969,6 +110293,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
     assetAttentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutReviewerNestedInput
+    provenanceDeclaredPlans?: ExecutionPlanUncheckedUpdateManyWithoutProvenanceDeclaredByNestedInput
   }
 
   export type UserUpsertWithoutCompletedExecutionTasksInput = {
@@ -109036,6 +110361,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
     assetAttentionReviews?: AssetAttentionReviewUpdateManyWithoutReviewerNestedInput
+    provenanceDeclaredPlans?: ExecutionPlanUpdateManyWithoutProvenanceDeclaredByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCompletedExecutionTasksInput = {
@@ -109092,6 +110418,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
     assetAttentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutReviewerNestedInput
+    provenanceDeclaredPlans?: ExecutionPlanUncheckedUpdateManyWithoutProvenanceDeclaredByNestedInput
   }
 
   export type UserUpsertWithoutVerifiedExecutionTasksInput = {
@@ -109159,6 +110486,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
     assetAttentionReviews?: AssetAttentionReviewUpdateManyWithoutReviewerNestedInput
+    provenanceDeclaredPlans?: ExecutionPlanUpdateManyWithoutProvenanceDeclaredByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutVerifiedExecutionTasksInput = {
@@ -109215,6 +110543,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
     assetAttentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutReviewerNestedInput
+    provenanceDeclaredPlans?: ExecutionPlanUncheckedUpdateManyWithoutProvenanceDeclaredByNestedInput
   }
 
   export type UserUpsertWithoutCancelledExecutionTasksInput = {
@@ -109282,6 +110611,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
     assetAttentionReviews?: AssetAttentionReviewUpdateManyWithoutReviewerNestedInput
+    provenanceDeclaredPlans?: ExecutionPlanUpdateManyWithoutProvenanceDeclaredByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCancelledExecutionTasksInput = {
@@ -109338,6 +110668,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
     assetAttentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutReviewerNestedInput
+    provenanceDeclaredPlans?: ExecutionPlanUncheckedUpdateManyWithoutProvenanceDeclaredByNestedInput
   }
 
   export type ExecutionEvidenceUpsertWithWhereUniqueWithoutExecutionTaskInput = {
@@ -109736,6 +111067,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
     assetAttentionReviews?: AssetAttentionReviewCreateNestedManyWithoutReviewerInput
+    provenanceDeclaredPlans?: ExecutionPlanCreateNestedManyWithoutProvenanceDeclaredByInput
   }
 
   export type UserUncheckedCreateWithoutCreatedPredictiveSnapshotsInput = {
@@ -109792,6 +111124,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
     assetAttentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutReviewerInput
+    provenanceDeclaredPlans?: ExecutionPlanUncheckedCreateNestedManyWithoutProvenanceDeclaredByInput
   }
 
   export type UserCreateOrConnectWithoutCreatedPredictiveSnapshotsInput = {
@@ -109853,6 +111186,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
     assetAttentionReviews?: AssetAttentionReviewCreateNestedManyWithoutReviewerInput
+    provenanceDeclaredPlans?: ExecutionPlanCreateNestedManyWithoutProvenanceDeclaredByInput
   }
 
   export type UserUncheckedCreateWithoutVoidedPredictiveSnapshotsInput = {
@@ -109909,6 +111243,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
     assetAttentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutReviewerInput
+    provenanceDeclaredPlans?: ExecutionPlanUncheckedCreateNestedManyWithoutProvenanceDeclaredByInput
   }
 
   export type UserCreateOrConnectWithoutVoidedPredictiveSnapshotsInput = {
@@ -110232,6 +111567,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
     assetAttentionReviews?: AssetAttentionReviewUpdateManyWithoutReviewerNestedInput
+    provenanceDeclaredPlans?: ExecutionPlanUpdateManyWithoutProvenanceDeclaredByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCreatedPredictiveSnapshotsInput = {
@@ -110288,6 +111624,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
     assetAttentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutReviewerNestedInput
+    provenanceDeclaredPlans?: ExecutionPlanUncheckedUpdateManyWithoutProvenanceDeclaredByNestedInput
   }
 
   export type UserUpsertWithoutVoidedPredictiveSnapshotsInput = {
@@ -110355,6 +111692,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
     assetAttentionReviews?: AssetAttentionReviewUpdateManyWithoutReviewerNestedInput
+    provenanceDeclaredPlans?: ExecutionPlanUpdateManyWithoutProvenanceDeclaredByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutVoidedPredictiveSnapshotsInput = {
@@ -110411,6 +111749,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
     assetAttentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutReviewerNestedInput
+    provenanceDeclaredPlans?: ExecutionPlanUncheckedUpdateManyWithoutProvenanceDeclaredByNestedInput
   }
 
   export type PredictiveFeatureSnapshotUpsertWithoutReplacesInput = {
@@ -110654,6 +111993,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
     assetAttentionReviews?: AssetAttentionReviewCreateNestedManyWithoutReviewerInput
+    provenanceDeclaredPlans?: ExecutionPlanCreateNestedManyWithoutProvenanceDeclaredByInput
   }
 
   export type UserUncheckedCreateWithoutRecordedPredictiveOutcomesInput = {
@@ -110710,6 +112050,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
     assetAttentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutReviewerInput
+    provenanceDeclaredPlans?: ExecutionPlanUncheckedCreateNestedManyWithoutProvenanceDeclaredByInput
   }
 
   export type UserCreateOrConnectWithoutRecordedPredictiveOutcomesInput = {
@@ -110771,6 +112112,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
     assetAttentionReviews?: AssetAttentionReviewCreateNestedManyWithoutReviewerInput
+    provenanceDeclaredPlans?: ExecutionPlanCreateNestedManyWithoutProvenanceDeclaredByInput
   }
 
   export type UserUncheckedCreateWithoutVoidedPredictiveOutcomesInput = {
@@ -110827,6 +112169,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
     assetAttentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutReviewerInput
+    provenanceDeclaredPlans?: ExecutionPlanUncheckedCreateNestedManyWithoutProvenanceDeclaredByInput
   }
 
   export type UserCreateOrConnectWithoutVoidedPredictiveOutcomesInput = {
@@ -111040,6 +112383,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
     assetAttentionReviews?: AssetAttentionReviewUpdateManyWithoutReviewerNestedInput
+    provenanceDeclaredPlans?: ExecutionPlanUpdateManyWithoutProvenanceDeclaredByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutRecordedPredictiveOutcomesInput = {
@@ -111096,6 +112440,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
     assetAttentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutReviewerNestedInput
+    provenanceDeclaredPlans?: ExecutionPlanUncheckedUpdateManyWithoutProvenanceDeclaredByNestedInput
   }
 
   export type UserUpsertWithoutVoidedPredictiveOutcomesInput = {
@@ -111163,6 +112508,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
     assetAttentionReviews?: AssetAttentionReviewUpdateManyWithoutReviewerNestedInput
+    provenanceDeclaredPlans?: ExecutionPlanUpdateManyWithoutProvenanceDeclaredByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutVoidedPredictiveOutcomesInput = {
@@ -111219,6 +112565,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
     assetAttentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutReviewerNestedInput
+    provenanceDeclaredPlans?: ExecutionPlanUncheckedUpdateManyWithoutProvenanceDeclaredByNestedInput
   }
 
   export type PredictiveOutcomeUpsertWithoutReplacesInput = {
@@ -111369,6 +112716,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
     assetAttentionReviews?: AssetAttentionReviewCreateNestedManyWithoutReviewerInput
+    provenanceDeclaredPlans?: ExecutionPlanCreateNestedManyWithoutProvenanceDeclaredByInput
   }
 
   export type UserUncheckedCreateWithoutCreatedPredictiveDatasetSnapshotsInput = {
@@ -111425,6 +112773,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
     assetAttentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutReviewerInput
+    provenanceDeclaredPlans?: ExecutionPlanUncheckedCreateNestedManyWithoutProvenanceDeclaredByInput
   }
 
   export type UserCreateOrConnectWithoutCreatedPredictiveDatasetSnapshotsInput = {
@@ -111629,6 +112978,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
     assetAttentionReviews?: AssetAttentionReviewUpdateManyWithoutReviewerNestedInput
+    provenanceDeclaredPlans?: ExecutionPlanUpdateManyWithoutProvenanceDeclaredByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCreatedPredictiveDatasetSnapshotsInput = {
@@ -111685,6 +113035,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
     assetAttentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutReviewerNestedInput
+    provenanceDeclaredPlans?: ExecutionPlanUncheckedUpdateManyWithoutProvenanceDeclaredByNestedInput
   }
 
   export type PredictiveModelVersionUpsertWithWhereUniqueWithoutDatasetSnapshotInput = {
@@ -111818,6 +113169,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
     assetAttentionReviews?: AssetAttentionReviewCreateNestedManyWithoutReviewerInput
+    provenanceDeclaredPlans?: ExecutionPlanCreateNestedManyWithoutProvenanceDeclaredByInput
   }
 
   export type UserUncheckedCreateWithoutCreatedPredictiveModelVersionsInput = {
@@ -111874,6 +113226,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
     assetAttentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutReviewerInput
+    provenanceDeclaredPlans?: ExecutionPlanUncheckedCreateNestedManyWithoutProvenanceDeclaredByInput
   }
 
   export type UserCreateOrConnectWithoutCreatedPredictiveModelVersionsInput = {
@@ -111935,6 +113288,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
     assetAttentionReviews?: AssetAttentionReviewCreateNestedManyWithoutReviewerInput
+    provenanceDeclaredPlans?: ExecutionPlanCreateNestedManyWithoutProvenanceDeclaredByInput
   }
 
   export type UserUncheckedCreateWithoutValidatedPredictiveModelVersionsInput = {
@@ -111991,6 +113345,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
     assetAttentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutReviewerInput
+    provenanceDeclaredPlans?: ExecutionPlanUncheckedCreateNestedManyWithoutProvenanceDeclaredByInput
   }
 
   export type UserCreateOrConnectWithoutValidatedPredictiveModelVersionsInput = {
@@ -112248,6 +113603,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
     assetAttentionReviews?: AssetAttentionReviewUpdateManyWithoutReviewerNestedInput
+    provenanceDeclaredPlans?: ExecutionPlanUpdateManyWithoutProvenanceDeclaredByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCreatedPredictiveModelVersionsInput = {
@@ -112304,6 +113660,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
     assetAttentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutReviewerNestedInput
+    provenanceDeclaredPlans?: ExecutionPlanUncheckedUpdateManyWithoutProvenanceDeclaredByNestedInput
   }
 
   export type UserUpsertWithoutValidatedPredictiveModelVersionsInput = {
@@ -112371,6 +113728,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
     assetAttentionReviews?: AssetAttentionReviewUpdateManyWithoutReviewerNestedInput
+    provenanceDeclaredPlans?: ExecutionPlanUpdateManyWithoutProvenanceDeclaredByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutValidatedPredictiveModelVersionsInput = {
@@ -112427,6 +113785,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
     assetAttentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutReviewerNestedInput
+    provenanceDeclaredPlans?: ExecutionPlanUncheckedUpdateManyWithoutProvenanceDeclaredByNestedInput
   }
 
   export type PredictiveModelEvaluationUpsertWithWhereUniqueWithoutModelVersionInput = {
@@ -112633,6 +113992,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
     assetAttentionReviews?: AssetAttentionReviewCreateNestedManyWithoutReviewerInput
+    provenanceDeclaredPlans?: ExecutionPlanCreateNestedManyWithoutProvenanceDeclaredByInput
   }
 
   export type UserUncheckedCreateWithoutRecordedPredictiveEvaluationsInput = {
@@ -112689,6 +114049,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
     assetAttentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutReviewerInput
+    provenanceDeclaredPlans?: ExecutionPlanUncheckedCreateNestedManyWithoutProvenanceDeclaredByInput
   }
 
   export type UserCreateOrConnectWithoutRecordedPredictiveEvaluationsInput = {
@@ -112875,6 +114236,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
     assetAttentionReviews?: AssetAttentionReviewUpdateManyWithoutReviewerNestedInput
+    provenanceDeclaredPlans?: ExecutionPlanUpdateManyWithoutProvenanceDeclaredByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutRecordedPredictiveEvaluationsInput = {
@@ -112931,6 +114293,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
     assetAttentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutReviewerNestedInput
+    provenanceDeclaredPlans?: ExecutionPlanUncheckedUpdateManyWithoutProvenanceDeclaredByNestedInput
   }
 
   export type PredictiveModelVersionCreateWithoutApprovalsInput = {
@@ -113044,6 +114407,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationCreateNestedManyWithoutRecordedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
     assetAttentionReviews?: AssetAttentionReviewCreateNestedManyWithoutReviewerInput
+    provenanceDeclaredPlans?: ExecutionPlanCreateNestedManyWithoutProvenanceDeclaredByInput
   }
 
   export type UserUncheckedCreateWithoutDecidedPredictiveApprovalsInput = {
@@ -113100,6 +114464,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedCreateNestedManyWithoutRecordedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
     assetAttentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutReviewerInput
+    provenanceDeclaredPlans?: ExecutionPlanUncheckedCreateNestedManyWithoutProvenanceDeclaredByInput
   }
 
   export type UserCreateOrConnectWithoutDecidedPredictiveApprovalsInput = {
@@ -113235,6 +114600,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUpdateManyWithoutRecordedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
     assetAttentionReviews?: AssetAttentionReviewUpdateManyWithoutReviewerNestedInput
+    provenanceDeclaredPlans?: ExecutionPlanUpdateManyWithoutProvenanceDeclaredByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutDecidedPredictiveApprovalsInput = {
@@ -113291,6 +114657,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedUpdateManyWithoutRecordedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
     assetAttentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutReviewerNestedInput
+    provenanceDeclaredPlans?: ExecutionPlanUncheckedUpdateManyWithoutProvenanceDeclaredByNestedInput
   }
 
   export type PredictiveModelVersionCreateWithoutLifecycleEventsInput = {
@@ -113404,6 +114771,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationCreateNestedManyWithoutRecordedByInput
     decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
     assetAttentionReviews?: AssetAttentionReviewCreateNestedManyWithoutReviewerInput
+    provenanceDeclaredPlans?: ExecutionPlanCreateNestedManyWithoutProvenanceDeclaredByInput
   }
 
   export type UserUncheckedCreateWithoutPredictiveModelLifecycleEventsInput = {
@@ -113460,6 +114828,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedCreateNestedManyWithoutRecordedByInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
     assetAttentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutReviewerInput
+    provenanceDeclaredPlans?: ExecutionPlanUncheckedCreateNestedManyWithoutProvenanceDeclaredByInput
   }
 
   export type UserCreateOrConnectWithoutPredictiveModelLifecycleEventsInput = {
@@ -113595,6 +114964,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUpdateManyWithoutRecordedByNestedInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
     assetAttentionReviews?: AssetAttentionReviewUpdateManyWithoutReviewerNestedInput
+    provenanceDeclaredPlans?: ExecutionPlanUpdateManyWithoutProvenanceDeclaredByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPredictiveModelLifecycleEventsInput = {
@@ -113651,6 +115021,7 @@ export namespace Prisma {
     recordedPredictiveEvaluations?: PredictiveModelEvaluationUncheckedUpdateManyWithoutRecordedByNestedInput
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
     assetAttentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutReviewerNestedInput
+    provenanceDeclaredPlans?: ExecutionPlanUncheckedUpdateManyWithoutProvenanceDeclaredByNestedInput
   }
 
   export type ExecutionPlanCreateWithoutTaskDependenciesInput = {
@@ -113666,12 +115037,18 @@ export namespace Prisma {
     governanceMode?: $Enums.ExecutionPlanGovernanceMode
     executionContractVersion?: string | null
     governedProvenance?: NullableJsonNullValueInput | InputJsonValue
+    provenanceClassification?: $Enums.ExecutionPlanProvenance | null
+    provenanceDeclaredAt?: Date | string | null
+    provenanceEvidenceReference?: string | null
+    provenanceContractVersion?: string | null
     plannedStartAt?: Date | string | null
     plannedEndAt?: Date | string | null
     orp: OperationalResponsePlanCreateNestedOneWithoutExecutionPlanInput
     case: CaseCreateNestedOneWithoutExecutionPlansInput
     approvalDecision: OrpDecisionCreateNestedOneWithoutExecutionPlanInput
     createdBy: UserCreateNestedOneWithoutCreatedExecutionPlansInput
+    provenanceDeclaredBy?: UserCreateNestedOneWithoutProvenanceDeclaredPlansInput
+    provenanceAuthorityGrant?: ApprovalAuthorityCreateNestedOneWithoutProvenanceDeclaredPlansInput
     tasks?: ExecutionTaskCreateNestedManyWithoutExecutionPlanInput
     closure?: CaseClosureCreateNestedOneWithoutExecutionPlanInput
     scheduleRevisions?: ExecutionScheduleRevisionCreateNestedManyWithoutExecutionPlanInput
@@ -113694,6 +115071,12 @@ export namespace Prisma {
     governanceMode?: $Enums.ExecutionPlanGovernanceMode
     executionContractVersion?: string | null
     governedProvenance?: NullableJsonNullValueInput | InputJsonValue
+    provenanceClassification?: $Enums.ExecutionPlanProvenance | null
+    provenanceDeclaredById?: string | null
+    provenanceDeclaredAt?: Date | string | null
+    provenanceAuthorityGrantId?: string | null
+    provenanceEvidenceReference?: string | null
+    provenanceContractVersion?: string | null
     plannedStartAt?: Date | string | null
     plannedEndAt?: Date | string | null
     tasks?: ExecutionTaskUncheckedCreateNestedManyWithoutExecutionPlanInput
@@ -113946,6 +115329,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
     assetAttentionReviews?: AssetAttentionReviewCreateNestedManyWithoutReviewerInput
+    provenanceDeclaredPlans?: ExecutionPlanCreateNestedManyWithoutProvenanceDeclaredByInput
   }
 
   export type UserUncheckedCreateWithoutCreatedExecutionTaskDependenciesInput = {
@@ -114002,6 +115386,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
     assetAttentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutReviewerInput
+    provenanceDeclaredPlans?: ExecutionPlanUncheckedCreateNestedManyWithoutProvenanceDeclaredByInput
   }
 
   export type UserCreateOrConnectWithoutCreatedExecutionTaskDependenciesInput = {
@@ -114033,12 +115418,18 @@ export namespace Prisma {
     governanceMode?: EnumExecutionPlanGovernanceModeFieldUpdateOperationsInput | $Enums.ExecutionPlanGovernanceMode
     executionContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
     governedProvenance?: NullableJsonNullValueInput | InputJsonValue
+    provenanceClassification?: NullableEnumExecutionPlanProvenanceFieldUpdateOperationsInput | $Enums.ExecutionPlanProvenance | null
+    provenanceDeclaredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    provenanceEvidenceReference?: NullableStringFieldUpdateOperationsInput | string | null
+    provenanceContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
     plannedStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     plannedEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     orp?: OperationalResponsePlanUpdateOneRequiredWithoutExecutionPlanNestedInput
     case?: CaseUpdateOneRequiredWithoutExecutionPlansNestedInput
     approvalDecision?: OrpDecisionUpdateOneRequiredWithoutExecutionPlanNestedInput
     createdBy?: UserUpdateOneRequiredWithoutCreatedExecutionPlansNestedInput
+    provenanceDeclaredBy?: UserUpdateOneWithoutProvenanceDeclaredPlansNestedInput
+    provenanceAuthorityGrant?: ApprovalAuthorityUpdateOneWithoutProvenanceDeclaredPlansNestedInput
     tasks?: ExecutionTaskUpdateManyWithoutExecutionPlanNestedInput
     closure?: CaseClosureUpdateOneWithoutExecutionPlanNestedInput
     scheduleRevisions?: ExecutionScheduleRevisionUpdateManyWithoutExecutionPlanNestedInput
@@ -114061,6 +115452,12 @@ export namespace Prisma {
     governanceMode?: EnumExecutionPlanGovernanceModeFieldUpdateOperationsInput | $Enums.ExecutionPlanGovernanceMode
     executionContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
     governedProvenance?: NullableJsonNullValueInput | InputJsonValue
+    provenanceClassification?: NullableEnumExecutionPlanProvenanceFieldUpdateOperationsInput | $Enums.ExecutionPlanProvenance | null
+    provenanceDeclaredById?: NullableStringFieldUpdateOperationsInput | string | null
+    provenanceDeclaredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    provenanceAuthorityGrantId?: NullableStringFieldUpdateOperationsInput | string | null
+    provenanceEvidenceReference?: NullableStringFieldUpdateOperationsInput | string | null
+    provenanceContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
     plannedStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     plannedEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tasks?: ExecutionTaskUncheckedUpdateManyWithoutExecutionPlanNestedInput
@@ -114331,6 +115728,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
     assetAttentionReviews?: AssetAttentionReviewUpdateManyWithoutReviewerNestedInput
+    provenanceDeclaredPlans?: ExecutionPlanUpdateManyWithoutProvenanceDeclaredByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCreatedExecutionTaskDependenciesInput = {
@@ -114387,6 +115785,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
     assetAttentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutReviewerNestedInput
+    provenanceDeclaredPlans?: ExecutionPlanUncheckedUpdateManyWithoutProvenanceDeclaredByNestedInput
   }
 
   export type ExecutionTaskCreateWithoutBlockerEventsInput = {
@@ -114536,6 +115935,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
     assetAttentionReviews?: AssetAttentionReviewCreateNestedManyWithoutReviewerInput
+    provenanceDeclaredPlans?: ExecutionPlanCreateNestedManyWithoutProvenanceDeclaredByInput
   }
 
   export type UserUncheckedCreateWithoutBlockedExecutionTaskEventsInput = {
@@ -114592,6 +115992,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
     assetAttentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutReviewerInput
+    provenanceDeclaredPlans?: ExecutionPlanUncheckedCreateNestedManyWithoutProvenanceDeclaredByInput
   }
 
   export type UserCreateOrConnectWithoutBlockedExecutionTaskEventsInput = {
@@ -114653,6 +116054,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
     assetAttentionReviews?: AssetAttentionReviewCreateNestedManyWithoutReviewerInput
+    provenanceDeclaredPlans?: ExecutionPlanCreateNestedManyWithoutProvenanceDeclaredByInput
   }
 
   export type UserUncheckedCreateWithoutResolvedExecutionTaskEventsInput = {
@@ -114709,6 +116111,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
     assetAttentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutReviewerInput
+    provenanceDeclaredPlans?: ExecutionPlanUncheckedCreateNestedManyWithoutProvenanceDeclaredByInput
   }
 
   export type UserCreateOrConnectWithoutResolvedExecutionTaskEventsInput = {
@@ -114880,6 +116283,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
     assetAttentionReviews?: AssetAttentionReviewUpdateManyWithoutReviewerNestedInput
+    provenanceDeclaredPlans?: ExecutionPlanUpdateManyWithoutProvenanceDeclaredByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutBlockedExecutionTaskEventsInput = {
@@ -114936,6 +116340,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
     assetAttentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutReviewerNestedInput
+    provenanceDeclaredPlans?: ExecutionPlanUncheckedUpdateManyWithoutProvenanceDeclaredByNestedInput
   }
 
   export type UserUpsertWithoutResolvedExecutionTaskEventsInput = {
@@ -115003,6 +116408,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
     assetAttentionReviews?: AssetAttentionReviewUpdateManyWithoutReviewerNestedInput
+    provenanceDeclaredPlans?: ExecutionPlanUpdateManyWithoutProvenanceDeclaredByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutResolvedExecutionTaskEventsInput = {
@@ -115059,6 +116465,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
     assetAttentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutReviewerNestedInput
+    provenanceDeclaredPlans?: ExecutionPlanUncheckedUpdateManyWithoutProvenanceDeclaredByNestedInput
   }
 
   export type ExecutionPlanCreateWithoutScheduleRevisionsInput = {
@@ -115074,12 +116481,18 @@ export namespace Prisma {
     governanceMode?: $Enums.ExecutionPlanGovernanceMode
     executionContractVersion?: string | null
     governedProvenance?: NullableJsonNullValueInput | InputJsonValue
+    provenanceClassification?: $Enums.ExecutionPlanProvenance | null
+    provenanceDeclaredAt?: Date | string | null
+    provenanceEvidenceReference?: string | null
+    provenanceContractVersion?: string | null
     plannedStartAt?: Date | string | null
     plannedEndAt?: Date | string | null
     orp: OperationalResponsePlanCreateNestedOneWithoutExecutionPlanInput
     case: CaseCreateNestedOneWithoutExecutionPlansInput
     approvalDecision: OrpDecisionCreateNestedOneWithoutExecutionPlanInput
     createdBy: UserCreateNestedOneWithoutCreatedExecutionPlansInput
+    provenanceDeclaredBy?: UserCreateNestedOneWithoutProvenanceDeclaredPlansInput
+    provenanceAuthorityGrant?: ApprovalAuthorityCreateNestedOneWithoutProvenanceDeclaredPlansInput
     tasks?: ExecutionTaskCreateNestedManyWithoutExecutionPlanInput
     closure?: CaseClosureCreateNestedOneWithoutExecutionPlanInput
     taskDependencies?: ExecutionTaskDependencyCreateNestedManyWithoutExecutionPlanInput
@@ -115102,6 +116515,12 @@ export namespace Prisma {
     governanceMode?: $Enums.ExecutionPlanGovernanceMode
     executionContractVersion?: string | null
     governedProvenance?: NullableJsonNullValueInput | InputJsonValue
+    provenanceClassification?: $Enums.ExecutionPlanProvenance | null
+    provenanceDeclaredById?: string | null
+    provenanceDeclaredAt?: Date | string | null
+    provenanceAuthorityGrantId?: string | null
+    provenanceEvidenceReference?: string | null
+    provenanceContractVersion?: string | null
     plannedStartAt?: Date | string | null
     plannedEndAt?: Date | string | null
     tasks?: ExecutionTaskUncheckedCreateNestedManyWithoutExecutionPlanInput
@@ -115261,6 +116680,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
     assetAttentionReviews?: AssetAttentionReviewCreateNestedManyWithoutReviewerInput
+    provenanceDeclaredPlans?: ExecutionPlanCreateNestedManyWithoutProvenanceDeclaredByInput
   }
 
   export type UserUncheckedCreateWithoutExecutionScheduleRevisionsInput = {
@@ -115317,6 +116737,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
     assetAttentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutReviewerInput
+    provenanceDeclaredPlans?: ExecutionPlanUncheckedCreateNestedManyWithoutProvenanceDeclaredByInput
   }
 
   export type UserCreateOrConnectWithoutExecutionScheduleRevisionsInput = {
@@ -115348,12 +116769,18 @@ export namespace Prisma {
     governanceMode?: EnumExecutionPlanGovernanceModeFieldUpdateOperationsInput | $Enums.ExecutionPlanGovernanceMode
     executionContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
     governedProvenance?: NullableJsonNullValueInput | InputJsonValue
+    provenanceClassification?: NullableEnumExecutionPlanProvenanceFieldUpdateOperationsInput | $Enums.ExecutionPlanProvenance | null
+    provenanceDeclaredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    provenanceEvidenceReference?: NullableStringFieldUpdateOperationsInput | string | null
+    provenanceContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
     plannedStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     plannedEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     orp?: OperationalResponsePlanUpdateOneRequiredWithoutExecutionPlanNestedInput
     case?: CaseUpdateOneRequiredWithoutExecutionPlansNestedInput
     approvalDecision?: OrpDecisionUpdateOneRequiredWithoutExecutionPlanNestedInput
     createdBy?: UserUpdateOneRequiredWithoutCreatedExecutionPlansNestedInput
+    provenanceDeclaredBy?: UserUpdateOneWithoutProvenanceDeclaredPlansNestedInput
+    provenanceAuthorityGrant?: ApprovalAuthorityUpdateOneWithoutProvenanceDeclaredPlansNestedInput
     tasks?: ExecutionTaskUpdateManyWithoutExecutionPlanNestedInput
     closure?: CaseClosureUpdateOneWithoutExecutionPlanNestedInput
     taskDependencies?: ExecutionTaskDependencyUpdateManyWithoutExecutionPlanNestedInput
@@ -115376,6 +116803,12 @@ export namespace Prisma {
     governanceMode?: EnumExecutionPlanGovernanceModeFieldUpdateOperationsInput | $Enums.ExecutionPlanGovernanceMode
     executionContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
     governedProvenance?: NullableJsonNullValueInput | InputJsonValue
+    provenanceClassification?: NullableEnumExecutionPlanProvenanceFieldUpdateOperationsInput | $Enums.ExecutionPlanProvenance | null
+    provenanceDeclaredById?: NullableStringFieldUpdateOperationsInput | string | null
+    provenanceDeclaredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    provenanceAuthorityGrantId?: NullableStringFieldUpdateOperationsInput | string | null
+    provenanceEvidenceReference?: NullableStringFieldUpdateOperationsInput | string | null
+    provenanceContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
     plannedStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     plannedEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tasks?: ExecutionTaskUncheckedUpdateManyWithoutExecutionPlanNestedInput
@@ -115547,6 +116980,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
     assetAttentionReviews?: AssetAttentionReviewUpdateManyWithoutReviewerNestedInput
+    provenanceDeclaredPlans?: ExecutionPlanUpdateManyWithoutProvenanceDeclaredByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutExecutionScheduleRevisionsInput = {
@@ -115603,6 +117037,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
     assetAttentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutReviewerNestedInput
+    provenanceDeclaredPlans?: ExecutionPlanUncheckedUpdateManyWithoutProvenanceDeclaredByNestedInput
   }
 
   export type ExecutionTaskCreateWithoutEvidenceInput = {
@@ -115752,6 +117187,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
     assetAttentionReviews?: AssetAttentionReviewCreateNestedManyWithoutReviewerInput
+    provenanceDeclaredPlans?: ExecutionPlanCreateNestedManyWithoutProvenanceDeclaredByInput
   }
 
   export type UserUncheckedCreateWithoutSubmittedExecutionEvidenceInput = {
@@ -115808,6 +117244,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
     assetAttentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutReviewerInput
+    provenanceDeclaredPlans?: ExecutionPlanUncheckedCreateNestedManyWithoutProvenanceDeclaredByInput
   }
 
   export type UserCreateOrConnectWithoutSubmittedExecutionEvidenceInput = {
@@ -115979,6 +117416,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
     assetAttentionReviews?: AssetAttentionReviewUpdateManyWithoutReviewerNestedInput
+    provenanceDeclaredPlans?: ExecutionPlanUpdateManyWithoutProvenanceDeclaredByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSubmittedExecutionEvidenceInput = {
@@ -116035,6 +117473,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
     assetAttentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutReviewerNestedInput
+    provenanceDeclaredPlans?: ExecutionPlanUncheckedUpdateManyWithoutProvenanceDeclaredByNestedInput
   }
 
   export type CaseCreateWithoutClosureInput = {
@@ -116109,12 +117548,18 @@ export namespace Prisma {
     governanceMode?: $Enums.ExecutionPlanGovernanceMode
     executionContractVersion?: string | null
     governedProvenance?: NullableJsonNullValueInput | InputJsonValue
+    provenanceClassification?: $Enums.ExecutionPlanProvenance | null
+    provenanceDeclaredAt?: Date | string | null
+    provenanceEvidenceReference?: string | null
+    provenanceContractVersion?: string | null
     plannedStartAt?: Date | string | null
     plannedEndAt?: Date | string | null
     orp: OperationalResponsePlanCreateNestedOneWithoutExecutionPlanInput
     case: CaseCreateNestedOneWithoutExecutionPlansInput
     approvalDecision: OrpDecisionCreateNestedOneWithoutExecutionPlanInput
     createdBy: UserCreateNestedOneWithoutCreatedExecutionPlansInput
+    provenanceDeclaredBy?: UserCreateNestedOneWithoutProvenanceDeclaredPlansInput
+    provenanceAuthorityGrant?: ApprovalAuthorityCreateNestedOneWithoutProvenanceDeclaredPlansInput
     tasks?: ExecutionTaskCreateNestedManyWithoutExecutionPlanInput
     scheduleRevisions?: ExecutionScheduleRevisionCreateNestedManyWithoutExecutionPlanInput
     taskDependencies?: ExecutionTaskDependencyCreateNestedManyWithoutExecutionPlanInput
@@ -116137,6 +117582,12 @@ export namespace Prisma {
     governanceMode?: $Enums.ExecutionPlanGovernanceMode
     executionContractVersion?: string | null
     governedProvenance?: NullableJsonNullValueInput | InputJsonValue
+    provenanceClassification?: $Enums.ExecutionPlanProvenance | null
+    provenanceDeclaredById?: string | null
+    provenanceDeclaredAt?: Date | string | null
+    provenanceAuthorityGrantId?: string | null
+    provenanceEvidenceReference?: string | null
+    provenanceContractVersion?: string | null
     plannedStartAt?: Date | string | null
     plannedEndAt?: Date | string | null
     tasks?: ExecutionTaskUncheckedCreateNestedManyWithoutExecutionPlanInput
@@ -116203,6 +117654,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventCreateNestedManyWithoutActorInput
     assetAttentionReviews?: AssetAttentionReviewCreateNestedManyWithoutReviewerInput
+    provenanceDeclaredPlans?: ExecutionPlanCreateNestedManyWithoutProvenanceDeclaredByInput
   }
 
   export type UserUncheckedCreateWithoutClosedCasesInput = {
@@ -116259,6 +117711,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedCreateNestedManyWithoutApprovedByInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedCreateNestedManyWithoutActorInput
     assetAttentionReviews?: AssetAttentionReviewUncheckedCreateNestedManyWithoutReviewerInput
+    provenanceDeclaredPlans?: ExecutionPlanUncheckedCreateNestedManyWithoutProvenanceDeclaredByInput
   }
 
   export type UserCreateOrConnectWithoutClosedCasesInput = {
@@ -116274,6 +117727,8 @@ export namespace Prisma {
     canRequestReinspection?: boolean
     canEscalate?: boolean
     canCloseCase?: boolean
+    canDeclareNonOperationalProvenance?: boolean
+    canDeclareOperationalProvenance?: boolean
     maxPriorityLevel?: $Enums.PriorityLevel | null
     isActive?: boolean
     validFrom?: Date | string | null
@@ -116284,6 +117739,7 @@ export namespace Prisma {
     department: DepartmentCreateNestedOneWithoutApprovalAuthoritiesInput
     jurisdiction: JurisdictionCreateNestedOneWithoutApprovalAuthoritiesInput
     decisions?: OrpDecisionCreateNestedManyWithoutAuthorityGrantInput
+    provenanceDeclaredPlans?: ExecutionPlanCreateNestedManyWithoutProvenanceAuthorityGrantInput
   }
 
   export type ApprovalAuthorityUncheckedCreateWithoutCaseClosuresInput = {
@@ -116297,6 +117753,8 @@ export namespace Prisma {
     canRequestReinspection?: boolean
     canEscalate?: boolean
     canCloseCase?: boolean
+    canDeclareNonOperationalProvenance?: boolean
+    canDeclareOperationalProvenance?: boolean
     maxPriorityLevel?: $Enums.PriorityLevel | null
     isActive?: boolean
     validFrom?: Date | string | null
@@ -116304,6 +117762,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     decisions?: OrpDecisionUncheckedCreateNestedManyWithoutAuthorityGrantInput
+    provenanceDeclaredPlans?: ExecutionPlanUncheckedCreateNestedManyWithoutProvenanceAuthorityGrantInput
   }
 
   export type ApprovalAuthorityCreateOrConnectWithoutCaseClosuresInput = {
@@ -116400,12 +117859,18 @@ export namespace Prisma {
     governanceMode?: EnumExecutionPlanGovernanceModeFieldUpdateOperationsInput | $Enums.ExecutionPlanGovernanceMode
     executionContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
     governedProvenance?: NullableJsonNullValueInput | InputJsonValue
+    provenanceClassification?: NullableEnumExecutionPlanProvenanceFieldUpdateOperationsInput | $Enums.ExecutionPlanProvenance | null
+    provenanceDeclaredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    provenanceEvidenceReference?: NullableStringFieldUpdateOperationsInput | string | null
+    provenanceContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
     plannedStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     plannedEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     orp?: OperationalResponsePlanUpdateOneRequiredWithoutExecutionPlanNestedInput
     case?: CaseUpdateOneRequiredWithoutExecutionPlansNestedInput
     approvalDecision?: OrpDecisionUpdateOneRequiredWithoutExecutionPlanNestedInput
     createdBy?: UserUpdateOneRequiredWithoutCreatedExecutionPlansNestedInput
+    provenanceDeclaredBy?: UserUpdateOneWithoutProvenanceDeclaredPlansNestedInput
+    provenanceAuthorityGrant?: ApprovalAuthorityUpdateOneWithoutProvenanceDeclaredPlansNestedInput
     tasks?: ExecutionTaskUpdateManyWithoutExecutionPlanNestedInput
     scheduleRevisions?: ExecutionScheduleRevisionUpdateManyWithoutExecutionPlanNestedInput
     taskDependencies?: ExecutionTaskDependencyUpdateManyWithoutExecutionPlanNestedInput
@@ -116428,6 +117893,12 @@ export namespace Prisma {
     governanceMode?: EnumExecutionPlanGovernanceModeFieldUpdateOperationsInput | $Enums.ExecutionPlanGovernanceMode
     executionContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
     governedProvenance?: NullableJsonNullValueInput | InputJsonValue
+    provenanceClassification?: NullableEnumExecutionPlanProvenanceFieldUpdateOperationsInput | $Enums.ExecutionPlanProvenance | null
+    provenanceDeclaredById?: NullableStringFieldUpdateOperationsInput | string | null
+    provenanceDeclaredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    provenanceAuthorityGrantId?: NullableStringFieldUpdateOperationsInput | string | null
+    provenanceEvidenceReference?: NullableStringFieldUpdateOperationsInput | string | null
+    provenanceContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
     plannedStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     plannedEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tasks?: ExecutionTaskUncheckedUpdateManyWithoutExecutionPlanNestedInput
@@ -116500,6 +117971,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
     assetAttentionReviews?: AssetAttentionReviewUpdateManyWithoutReviewerNestedInput
+    provenanceDeclaredPlans?: ExecutionPlanUpdateManyWithoutProvenanceDeclaredByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutClosedCasesInput = {
@@ -116556,6 +118028,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
     assetAttentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutReviewerNestedInput
+    provenanceDeclaredPlans?: ExecutionPlanUncheckedUpdateManyWithoutProvenanceDeclaredByNestedInput
   }
 
   export type ApprovalAuthorityUpsertWithoutCaseClosuresInput = {
@@ -116577,6 +118050,8 @@ export namespace Prisma {
     canRequestReinspection?: BoolFieldUpdateOperationsInput | boolean
     canEscalate?: BoolFieldUpdateOperationsInput | boolean
     canCloseCase?: BoolFieldUpdateOperationsInput | boolean
+    canDeclareNonOperationalProvenance?: BoolFieldUpdateOperationsInput | boolean
+    canDeclareOperationalProvenance?: BoolFieldUpdateOperationsInput | boolean
     maxPriorityLevel?: NullableEnumPriorityLevelFieldUpdateOperationsInput | $Enums.PriorityLevel | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     validFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -116587,6 +118062,7 @@ export namespace Prisma {
     department?: DepartmentUpdateOneRequiredWithoutApprovalAuthoritiesNestedInput
     jurisdiction?: JurisdictionUpdateOneRequiredWithoutApprovalAuthoritiesNestedInput
     decisions?: OrpDecisionUpdateManyWithoutAuthorityGrantNestedInput
+    provenanceDeclaredPlans?: ExecutionPlanUpdateManyWithoutProvenanceAuthorityGrantNestedInput
   }
 
   export type ApprovalAuthorityUncheckedUpdateWithoutCaseClosuresInput = {
@@ -116600,6 +118076,8 @@ export namespace Prisma {
     canRequestReinspection?: BoolFieldUpdateOperationsInput | boolean
     canEscalate?: BoolFieldUpdateOperationsInput | boolean
     canCloseCase?: BoolFieldUpdateOperationsInput | boolean
+    canDeclareNonOperationalProvenance?: BoolFieldUpdateOperationsInput | boolean
+    canDeclareOperationalProvenance?: BoolFieldUpdateOperationsInput | boolean
     maxPriorityLevel?: NullableEnumPriorityLevelFieldUpdateOperationsInput | $Enums.PriorityLevel | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     validFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -116607,6 +118085,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     decisions?: OrpDecisionUncheckedUpdateManyWithoutAuthorityGrantNestedInput
+    provenanceDeclaredPlans?: ExecutionPlanUncheckedUpdateManyWithoutProvenanceAuthorityGrantNestedInput
   }
 
   export type UserCreateManyDepartmentInput = {
@@ -116654,6 +118133,8 @@ export namespace Prisma {
     canRequestReinspection?: boolean
     canEscalate?: boolean
     canCloseCase?: boolean
+    canDeclareNonOperationalProvenance?: boolean
+    canDeclareOperationalProvenance?: boolean
     maxPriorityLevel?: $Enums.PriorityLevel | null
     isActive?: boolean
     validFrom?: Date | string | null
@@ -116856,6 +118337,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
     assetAttentionReviews?: AssetAttentionReviewUpdateManyWithoutReviewerNestedInput
+    provenanceDeclaredPlans?: ExecutionPlanUpdateManyWithoutProvenanceDeclaredByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutDepartmentInput = {
@@ -116912,6 +118394,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
     assetAttentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutReviewerNestedInput
+    provenanceDeclaredPlans?: ExecutionPlanUncheckedUpdateManyWithoutProvenanceDeclaredByNestedInput
   }
 
   export type UserUncheckedUpdateManyWithoutDepartmentInput = {
@@ -117029,6 +118512,8 @@ export namespace Prisma {
     canRequestReinspection?: BoolFieldUpdateOperationsInput | boolean
     canEscalate?: BoolFieldUpdateOperationsInput | boolean
     canCloseCase?: BoolFieldUpdateOperationsInput | boolean
+    canDeclareNonOperationalProvenance?: BoolFieldUpdateOperationsInput | boolean
+    canDeclareOperationalProvenance?: BoolFieldUpdateOperationsInput | boolean
     maxPriorityLevel?: NullableEnumPriorityLevelFieldUpdateOperationsInput | $Enums.PriorityLevel | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     validFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -117039,6 +118524,7 @@ export namespace Prisma {
     jurisdiction?: JurisdictionUpdateOneRequiredWithoutApprovalAuthoritiesNestedInput
     decisions?: OrpDecisionUpdateManyWithoutAuthorityGrantNestedInput
     caseClosures?: CaseClosureUpdateManyWithoutClosureAuthorityGrantNestedInput
+    provenanceDeclaredPlans?: ExecutionPlanUpdateManyWithoutProvenanceAuthorityGrantNestedInput
   }
 
   export type ApprovalAuthorityUncheckedUpdateWithoutDepartmentInput = {
@@ -117051,6 +118537,8 @@ export namespace Prisma {
     canRequestReinspection?: BoolFieldUpdateOperationsInput | boolean
     canEscalate?: BoolFieldUpdateOperationsInput | boolean
     canCloseCase?: BoolFieldUpdateOperationsInput | boolean
+    canDeclareNonOperationalProvenance?: BoolFieldUpdateOperationsInput | boolean
+    canDeclareOperationalProvenance?: BoolFieldUpdateOperationsInput | boolean
     maxPriorityLevel?: NullableEnumPriorityLevelFieldUpdateOperationsInput | $Enums.PriorityLevel | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     validFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -117059,6 +118547,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     decisions?: OrpDecisionUncheckedUpdateManyWithoutAuthorityGrantNestedInput
     caseClosures?: CaseClosureUncheckedUpdateManyWithoutClosureAuthorityGrantNestedInput
+    provenanceDeclaredPlans?: ExecutionPlanUncheckedUpdateManyWithoutProvenanceAuthorityGrantNestedInput
   }
 
   export type ApprovalAuthorityUncheckedUpdateManyWithoutDepartmentInput = {
@@ -117071,6 +118560,8 @@ export namespace Prisma {
     canRequestReinspection?: BoolFieldUpdateOperationsInput | boolean
     canEscalate?: BoolFieldUpdateOperationsInput | boolean
     canCloseCase?: BoolFieldUpdateOperationsInput | boolean
+    canDeclareNonOperationalProvenance?: BoolFieldUpdateOperationsInput | boolean
+    canDeclareOperationalProvenance?: BoolFieldUpdateOperationsInput | boolean
     maxPriorityLevel?: NullableEnumPriorityLevelFieldUpdateOperationsInput | $Enums.PriorityLevel | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     validFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -117555,6 +119046,8 @@ export namespace Prisma {
     canRequestReinspection?: boolean
     canEscalate?: boolean
     canCloseCase?: boolean
+    canDeclareNonOperationalProvenance?: boolean
+    canDeclareOperationalProvenance?: boolean
     maxPriorityLevel?: $Enums.PriorityLevel | null
     isActive?: boolean
     validFrom?: Date | string | null
@@ -117757,6 +119250,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUpdateManyWithoutActorNestedInput
     assetAttentionReviews?: AssetAttentionReviewUpdateManyWithoutReviewerNestedInput
+    provenanceDeclaredPlans?: ExecutionPlanUpdateManyWithoutProvenanceDeclaredByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutJurisdictionInput = {
@@ -117813,6 +119307,7 @@ export namespace Prisma {
     decidedPredictiveApprovals?: PredictiveModelApprovalUncheckedUpdateManyWithoutApprovedByNestedInput
     predictiveModelLifecycleEvents?: PredictiveModelLifecycleEventUncheckedUpdateManyWithoutActorNestedInput
     assetAttentionReviews?: AssetAttentionReviewUncheckedUpdateManyWithoutReviewerNestedInput
+    provenanceDeclaredPlans?: ExecutionPlanUncheckedUpdateManyWithoutProvenanceDeclaredByNestedInput
   }
 
   export type UserUncheckedUpdateManyWithoutJurisdictionInput = {
@@ -117889,6 +119384,8 @@ export namespace Prisma {
     canRequestReinspection?: BoolFieldUpdateOperationsInput | boolean
     canEscalate?: BoolFieldUpdateOperationsInput | boolean
     canCloseCase?: BoolFieldUpdateOperationsInput | boolean
+    canDeclareNonOperationalProvenance?: BoolFieldUpdateOperationsInput | boolean
+    canDeclareOperationalProvenance?: BoolFieldUpdateOperationsInput | boolean
     maxPriorityLevel?: NullableEnumPriorityLevelFieldUpdateOperationsInput | $Enums.PriorityLevel | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     validFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -117899,6 +119396,7 @@ export namespace Prisma {
     department?: DepartmentUpdateOneRequiredWithoutApprovalAuthoritiesNestedInput
     decisions?: OrpDecisionUpdateManyWithoutAuthorityGrantNestedInput
     caseClosures?: CaseClosureUpdateManyWithoutClosureAuthorityGrantNestedInput
+    provenanceDeclaredPlans?: ExecutionPlanUpdateManyWithoutProvenanceAuthorityGrantNestedInput
   }
 
   export type ApprovalAuthorityUncheckedUpdateWithoutJurisdictionInput = {
@@ -117911,6 +119409,8 @@ export namespace Prisma {
     canRequestReinspection?: BoolFieldUpdateOperationsInput | boolean
     canEscalate?: BoolFieldUpdateOperationsInput | boolean
     canCloseCase?: BoolFieldUpdateOperationsInput | boolean
+    canDeclareNonOperationalProvenance?: BoolFieldUpdateOperationsInput | boolean
+    canDeclareOperationalProvenance?: BoolFieldUpdateOperationsInput | boolean
     maxPriorityLevel?: NullableEnumPriorityLevelFieldUpdateOperationsInput | $Enums.PriorityLevel | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     validFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -117919,6 +119419,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     decisions?: OrpDecisionUncheckedUpdateManyWithoutAuthorityGrantNestedInput
     caseClosures?: CaseClosureUncheckedUpdateManyWithoutClosureAuthorityGrantNestedInput
+    provenanceDeclaredPlans?: ExecutionPlanUncheckedUpdateManyWithoutProvenanceAuthorityGrantNestedInput
   }
 
   export type ApprovalAuthorityUncheckedUpdateManyWithoutJurisdictionInput = {
@@ -117931,6 +119432,8 @@ export namespace Prisma {
     canRequestReinspection?: BoolFieldUpdateOperationsInput | boolean
     canEscalate?: BoolFieldUpdateOperationsInput | boolean
     canCloseCase?: BoolFieldUpdateOperationsInput | boolean
+    canDeclareNonOperationalProvenance?: BoolFieldUpdateOperationsInput | boolean
+    canDeclareOperationalProvenance?: BoolFieldUpdateOperationsInput | boolean
     maxPriorityLevel?: NullableEnumPriorityLevelFieldUpdateOperationsInput | $Enums.PriorityLevel | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     validFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -118404,6 +119907,8 @@ export namespace Prisma {
     canRequestReinspection?: boolean
     canEscalate?: boolean
     canCloseCase?: boolean
+    canDeclareNonOperationalProvenance?: boolean
+    canDeclareOperationalProvenance?: boolean
     maxPriorityLevel?: $Enums.PriorityLevel | null
     isActive?: boolean
     validFrom?: Date | string | null
@@ -118454,6 +119959,12 @@ export namespace Prisma {
     governanceMode?: $Enums.ExecutionPlanGovernanceMode
     executionContractVersion?: string | null
     governedProvenance?: NullableJsonNullValueInput | InputJsonValue
+    provenanceClassification?: $Enums.ExecutionPlanProvenance | null
+    provenanceDeclaredById?: string | null
+    provenanceDeclaredAt?: Date | string | null
+    provenanceAuthorityGrantId?: string | null
+    provenanceEvidenceReference?: string | null
+    provenanceContractVersion?: string | null
     plannedStartAt?: Date | string | null
     plannedEndAt?: Date | string | null
   }
@@ -119219,6 +120730,32 @@ export namespace Prisma {
     createdAt?: Date | string
   }
 
+  export type ExecutionPlanCreateManyProvenanceDeclaredByInput = {
+    id?: string
+    orpId: string
+    caseId: string
+    approvalDecisionId: string
+    status?: $Enums.ExecutionPlanStatus
+    createdById: string
+    templateVersion?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    startedAt?: Date | string | null
+    completedAt?: Date | string | null
+    cancelledAt?: Date | string | null
+    cancellationReason?: string | null
+    governanceMode?: $Enums.ExecutionPlanGovernanceMode
+    executionContractVersion?: string | null
+    governedProvenance?: NullableJsonNullValueInput | InputJsonValue
+    provenanceClassification?: $Enums.ExecutionPlanProvenance | null
+    provenanceDeclaredAt?: Date | string | null
+    provenanceAuthorityGrantId?: string | null
+    provenanceEvidenceReference?: string | null
+    provenanceContractVersion?: string | null
+    plannedStartAt?: Date | string | null
+    plannedEndAt?: Date | string | null
+  }
+
   export type InspectionUpdateWithoutInspectorInput = {
     id?: StringFieldUpdateOperationsInput | string
     inspectionDate?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -119284,6 +120821,8 @@ export namespace Prisma {
     canRequestReinspection?: BoolFieldUpdateOperationsInput | boolean
     canEscalate?: BoolFieldUpdateOperationsInput | boolean
     canCloseCase?: BoolFieldUpdateOperationsInput | boolean
+    canDeclareNonOperationalProvenance?: BoolFieldUpdateOperationsInput | boolean
+    canDeclareOperationalProvenance?: BoolFieldUpdateOperationsInput | boolean
     maxPriorityLevel?: NullableEnumPriorityLevelFieldUpdateOperationsInput | $Enums.PriorityLevel | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     validFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -119294,6 +120833,7 @@ export namespace Prisma {
     jurisdiction?: JurisdictionUpdateOneRequiredWithoutApprovalAuthoritiesNestedInput
     decisions?: OrpDecisionUpdateManyWithoutAuthorityGrantNestedInput
     caseClosures?: CaseClosureUpdateManyWithoutClosureAuthorityGrantNestedInput
+    provenanceDeclaredPlans?: ExecutionPlanUpdateManyWithoutProvenanceAuthorityGrantNestedInput
   }
 
   export type ApprovalAuthorityUncheckedUpdateWithoutUserInput = {
@@ -119306,6 +120846,8 @@ export namespace Prisma {
     canRequestReinspection?: BoolFieldUpdateOperationsInput | boolean
     canEscalate?: BoolFieldUpdateOperationsInput | boolean
     canCloseCase?: BoolFieldUpdateOperationsInput | boolean
+    canDeclareNonOperationalProvenance?: BoolFieldUpdateOperationsInput | boolean
+    canDeclareOperationalProvenance?: BoolFieldUpdateOperationsInput | boolean
     maxPriorityLevel?: NullableEnumPriorityLevelFieldUpdateOperationsInput | $Enums.PriorityLevel | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     validFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -119314,6 +120856,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     decisions?: OrpDecisionUncheckedUpdateManyWithoutAuthorityGrantNestedInput
     caseClosures?: CaseClosureUncheckedUpdateManyWithoutClosureAuthorityGrantNestedInput
+    provenanceDeclaredPlans?: ExecutionPlanUncheckedUpdateManyWithoutProvenanceAuthorityGrantNestedInput
   }
 
   export type ApprovalAuthorityUncheckedUpdateManyWithoutUserInput = {
@@ -119326,6 +120869,8 @@ export namespace Prisma {
     canRequestReinspection?: BoolFieldUpdateOperationsInput | boolean
     canEscalate?: BoolFieldUpdateOperationsInput | boolean
     canCloseCase?: BoolFieldUpdateOperationsInput | boolean
+    canDeclareNonOperationalProvenance?: BoolFieldUpdateOperationsInput | boolean
+    canDeclareOperationalProvenance?: BoolFieldUpdateOperationsInput | boolean
     maxPriorityLevel?: NullableEnumPriorityLevelFieldUpdateOperationsInput | $Enums.PriorityLevel | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     validFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -119429,11 +120974,17 @@ export namespace Prisma {
     governanceMode?: EnumExecutionPlanGovernanceModeFieldUpdateOperationsInput | $Enums.ExecutionPlanGovernanceMode
     executionContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
     governedProvenance?: NullableJsonNullValueInput | InputJsonValue
+    provenanceClassification?: NullableEnumExecutionPlanProvenanceFieldUpdateOperationsInput | $Enums.ExecutionPlanProvenance | null
+    provenanceDeclaredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    provenanceEvidenceReference?: NullableStringFieldUpdateOperationsInput | string | null
+    provenanceContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
     plannedStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     plannedEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     orp?: OperationalResponsePlanUpdateOneRequiredWithoutExecutionPlanNestedInput
     case?: CaseUpdateOneRequiredWithoutExecutionPlansNestedInput
     approvalDecision?: OrpDecisionUpdateOneRequiredWithoutExecutionPlanNestedInput
+    provenanceDeclaredBy?: UserUpdateOneWithoutProvenanceDeclaredPlansNestedInput
+    provenanceAuthorityGrant?: ApprovalAuthorityUpdateOneWithoutProvenanceDeclaredPlansNestedInput
     tasks?: ExecutionTaskUpdateManyWithoutExecutionPlanNestedInput
     closure?: CaseClosureUpdateOneWithoutExecutionPlanNestedInput
     scheduleRevisions?: ExecutionScheduleRevisionUpdateManyWithoutExecutionPlanNestedInput
@@ -119456,6 +121007,12 @@ export namespace Prisma {
     governanceMode?: EnumExecutionPlanGovernanceModeFieldUpdateOperationsInput | $Enums.ExecutionPlanGovernanceMode
     executionContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
     governedProvenance?: NullableJsonNullValueInput | InputJsonValue
+    provenanceClassification?: NullableEnumExecutionPlanProvenanceFieldUpdateOperationsInput | $Enums.ExecutionPlanProvenance | null
+    provenanceDeclaredById?: NullableStringFieldUpdateOperationsInput | string | null
+    provenanceDeclaredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    provenanceAuthorityGrantId?: NullableStringFieldUpdateOperationsInput | string | null
+    provenanceEvidenceReference?: NullableStringFieldUpdateOperationsInput | string | null
+    provenanceContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
     plannedStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     plannedEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tasks?: ExecutionTaskUncheckedUpdateManyWithoutExecutionPlanNestedInput
@@ -119480,6 +121037,12 @@ export namespace Prisma {
     governanceMode?: EnumExecutionPlanGovernanceModeFieldUpdateOperationsInput | $Enums.ExecutionPlanGovernanceMode
     executionContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
     governedProvenance?: NullableJsonNullValueInput | InputJsonValue
+    provenanceClassification?: NullableEnumExecutionPlanProvenanceFieldUpdateOperationsInput | $Enums.ExecutionPlanProvenance | null
+    provenanceDeclaredById?: NullableStringFieldUpdateOperationsInput | string | null
+    provenanceDeclaredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    provenanceAuthorityGrantId?: NullableStringFieldUpdateOperationsInput | string | null
+    provenanceEvidenceReference?: NullableStringFieldUpdateOperationsInput | string | null
+    provenanceContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
     plannedStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     plannedEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
@@ -121897,6 +123460,92 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type ExecutionPlanUpdateWithoutProvenanceDeclaredByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: EnumExecutionPlanStatusFieldUpdateOperationsInput | $Enums.ExecutionPlanStatus
+    templateVersion?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    startedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    governanceMode?: EnumExecutionPlanGovernanceModeFieldUpdateOperationsInput | $Enums.ExecutionPlanGovernanceMode
+    executionContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
+    governedProvenance?: NullableJsonNullValueInput | InputJsonValue
+    provenanceClassification?: NullableEnumExecutionPlanProvenanceFieldUpdateOperationsInput | $Enums.ExecutionPlanProvenance | null
+    provenanceDeclaredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    provenanceEvidenceReference?: NullableStringFieldUpdateOperationsInput | string | null
+    provenanceContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
+    plannedStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    plannedEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    orp?: OperationalResponsePlanUpdateOneRequiredWithoutExecutionPlanNestedInput
+    case?: CaseUpdateOneRequiredWithoutExecutionPlansNestedInput
+    approvalDecision?: OrpDecisionUpdateOneRequiredWithoutExecutionPlanNestedInput
+    createdBy?: UserUpdateOneRequiredWithoutCreatedExecutionPlansNestedInput
+    provenanceAuthorityGrant?: ApprovalAuthorityUpdateOneWithoutProvenanceDeclaredPlansNestedInput
+    tasks?: ExecutionTaskUpdateManyWithoutExecutionPlanNestedInput
+    closure?: CaseClosureUpdateOneWithoutExecutionPlanNestedInput
+    scheduleRevisions?: ExecutionScheduleRevisionUpdateManyWithoutExecutionPlanNestedInput
+    taskDependencies?: ExecutionTaskDependencyUpdateManyWithoutExecutionPlanNestedInput
+  }
+
+  export type ExecutionPlanUncheckedUpdateWithoutProvenanceDeclaredByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    orpId?: StringFieldUpdateOperationsInput | string
+    caseId?: StringFieldUpdateOperationsInput | string
+    approvalDecisionId?: StringFieldUpdateOperationsInput | string
+    status?: EnumExecutionPlanStatusFieldUpdateOperationsInput | $Enums.ExecutionPlanStatus
+    createdById?: StringFieldUpdateOperationsInput | string
+    templateVersion?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    startedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    governanceMode?: EnumExecutionPlanGovernanceModeFieldUpdateOperationsInput | $Enums.ExecutionPlanGovernanceMode
+    executionContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
+    governedProvenance?: NullableJsonNullValueInput | InputJsonValue
+    provenanceClassification?: NullableEnumExecutionPlanProvenanceFieldUpdateOperationsInput | $Enums.ExecutionPlanProvenance | null
+    provenanceDeclaredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    provenanceAuthorityGrantId?: NullableStringFieldUpdateOperationsInput | string | null
+    provenanceEvidenceReference?: NullableStringFieldUpdateOperationsInput | string | null
+    provenanceContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
+    plannedStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    plannedEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    tasks?: ExecutionTaskUncheckedUpdateManyWithoutExecutionPlanNestedInput
+    closure?: CaseClosureUncheckedUpdateOneWithoutExecutionPlanNestedInput
+    scheduleRevisions?: ExecutionScheduleRevisionUncheckedUpdateManyWithoutExecutionPlanNestedInput
+    taskDependencies?: ExecutionTaskDependencyUncheckedUpdateManyWithoutExecutionPlanNestedInput
+  }
+
+  export type ExecutionPlanUncheckedUpdateManyWithoutProvenanceDeclaredByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    orpId?: StringFieldUpdateOperationsInput | string
+    caseId?: StringFieldUpdateOperationsInput | string
+    approvalDecisionId?: StringFieldUpdateOperationsInput | string
+    status?: EnumExecutionPlanStatusFieldUpdateOperationsInput | $Enums.ExecutionPlanStatus
+    createdById?: StringFieldUpdateOperationsInput | string
+    templateVersion?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    startedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    governanceMode?: EnumExecutionPlanGovernanceModeFieldUpdateOperationsInput | $Enums.ExecutionPlanGovernanceMode
+    executionContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
+    governedProvenance?: NullableJsonNullValueInput | InputJsonValue
+    provenanceClassification?: NullableEnumExecutionPlanProvenanceFieldUpdateOperationsInput | $Enums.ExecutionPlanProvenance | null
+    provenanceDeclaredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    provenanceAuthorityGrantId?: NullableStringFieldUpdateOperationsInput | string | null
+    provenanceEvidenceReference?: NullableStringFieldUpdateOperationsInput | string | null
+    provenanceContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
+    plannedStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    plannedEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
   export type CaseCreateManyAssetInput = {
     id?: string
     caseNumber: string
@@ -123243,6 +124892,12 @@ export namespace Prisma {
     governanceMode?: $Enums.ExecutionPlanGovernanceMode
     executionContractVersion?: string | null
     governedProvenance?: NullableJsonNullValueInput | InputJsonValue
+    provenanceClassification?: $Enums.ExecutionPlanProvenance | null
+    provenanceDeclaredById?: string | null
+    provenanceDeclaredAt?: Date | string | null
+    provenanceAuthorityGrantId?: string | null
+    provenanceEvidenceReference?: string | null
+    provenanceContractVersion?: string | null
     plannedStartAt?: Date | string | null
     plannedEndAt?: Date | string | null
   }
@@ -123580,11 +125235,17 @@ export namespace Prisma {
     governanceMode?: EnumExecutionPlanGovernanceModeFieldUpdateOperationsInput | $Enums.ExecutionPlanGovernanceMode
     executionContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
     governedProvenance?: NullableJsonNullValueInput | InputJsonValue
+    provenanceClassification?: NullableEnumExecutionPlanProvenanceFieldUpdateOperationsInput | $Enums.ExecutionPlanProvenance | null
+    provenanceDeclaredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    provenanceEvidenceReference?: NullableStringFieldUpdateOperationsInput | string | null
+    provenanceContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
     plannedStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     plannedEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     orp?: OperationalResponsePlanUpdateOneRequiredWithoutExecutionPlanNestedInput
     approvalDecision?: OrpDecisionUpdateOneRequiredWithoutExecutionPlanNestedInput
     createdBy?: UserUpdateOneRequiredWithoutCreatedExecutionPlansNestedInput
+    provenanceDeclaredBy?: UserUpdateOneWithoutProvenanceDeclaredPlansNestedInput
+    provenanceAuthorityGrant?: ApprovalAuthorityUpdateOneWithoutProvenanceDeclaredPlansNestedInput
     tasks?: ExecutionTaskUpdateManyWithoutExecutionPlanNestedInput
     closure?: CaseClosureUpdateOneWithoutExecutionPlanNestedInput
     scheduleRevisions?: ExecutionScheduleRevisionUpdateManyWithoutExecutionPlanNestedInput
@@ -123607,6 +125268,12 @@ export namespace Prisma {
     governanceMode?: EnumExecutionPlanGovernanceModeFieldUpdateOperationsInput | $Enums.ExecutionPlanGovernanceMode
     executionContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
     governedProvenance?: NullableJsonNullValueInput | InputJsonValue
+    provenanceClassification?: NullableEnumExecutionPlanProvenanceFieldUpdateOperationsInput | $Enums.ExecutionPlanProvenance | null
+    provenanceDeclaredById?: NullableStringFieldUpdateOperationsInput | string | null
+    provenanceDeclaredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    provenanceAuthorityGrantId?: NullableStringFieldUpdateOperationsInput | string | null
+    provenanceEvidenceReference?: NullableStringFieldUpdateOperationsInput | string | null
+    provenanceContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
     plannedStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     plannedEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tasks?: ExecutionTaskUncheckedUpdateManyWithoutExecutionPlanNestedInput
@@ -123631,6 +125298,12 @@ export namespace Prisma {
     governanceMode?: EnumExecutionPlanGovernanceModeFieldUpdateOperationsInput | $Enums.ExecutionPlanGovernanceMode
     executionContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
     governedProvenance?: NullableJsonNullValueInput | InputJsonValue
+    provenanceClassification?: NullableEnumExecutionPlanProvenanceFieldUpdateOperationsInput | $Enums.ExecutionPlanProvenance | null
+    provenanceDeclaredById?: NullableStringFieldUpdateOperationsInput | string | null
+    provenanceDeclaredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    provenanceAuthorityGrantId?: NullableStringFieldUpdateOperationsInput | string | null
+    provenanceEvidenceReference?: NullableStringFieldUpdateOperationsInput | string | null
+    provenanceContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
     plannedStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     plannedEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
@@ -124930,6 +126603,32 @@ export namespace Prisma {
     createdAt?: Date | string
   }
 
+  export type ExecutionPlanCreateManyProvenanceAuthorityGrantInput = {
+    id?: string
+    orpId: string
+    caseId: string
+    approvalDecisionId: string
+    status?: $Enums.ExecutionPlanStatus
+    createdById: string
+    templateVersion?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    startedAt?: Date | string | null
+    completedAt?: Date | string | null
+    cancelledAt?: Date | string | null
+    cancellationReason?: string | null
+    governanceMode?: $Enums.ExecutionPlanGovernanceMode
+    executionContractVersion?: string | null
+    governedProvenance?: NullableJsonNullValueInput | InputJsonValue
+    provenanceClassification?: $Enums.ExecutionPlanProvenance | null
+    provenanceDeclaredById?: string | null
+    provenanceDeclaredAt?: Date | string | null
+    provenanceEvidenceReference?: string | null
+    provenanceContractVersion?: string | null
+    plannedStartAt?: Date | string | null
+    plannedEndAt?: Date | string | null
+  }
+
   export type OrpDecisionUpdateWithoutAuthorityGrantInput = {
     id?: StringFieldUpdateOperationsInput | string
     decisionType?: EnumOrpDecisionTypeFieldUpdateOperationsInput | $Enums.OrpDecisionType
@@ -124999,6 +126698,92 @@ export namespace Prisma {
     closureReason?: EnumCaseClosureReasonFieldUpdateOperationsInput | $Enums.CaseClosureReason
     closureSummary?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ExecutionPlanUpdateWithoutProvenanceAuthorityGrantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: EnumExecutionPlanStatusFieldUpdateOperationsInput | $Enums.ExecutionPlanStatus
+    templateVersion?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    startedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    governanceMode?: EnumExecutionPlanGovernanceModeFieldUpdateOperationsInput | $Enums.ExecutionPlanGovernanceMode
+    executionContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
+    governedProvenance?: NullableJsonNullValueInput | InputJsonValue
+    provenanceClassification?: NullableEnumExecutionPlanProvenanceFieldUpdateOperationsInput | $Enums.ExecutionPlanProvenance | null
+    provenanceDeclaredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    provenanceEvidenceReference?: NullableStringFieldUpdateOperationsInput | string | null
+    provenanceContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
+    plannedStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    plannedEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    orp?: OperationalResponsePlanUpdateOneRequiredWithoutExecutionPlanNestedInput
+    case?: CaseUpdateOneRequiredWithoutExecutionPlansNestedInput
+    approvalDecision?: OrpDecisionUpdateOneRequiredWithoutExecutionPlanNestedInput
+    createdBy?: UserUpdateOneRequiredWithoutCreatedExecutionPlansNestedInput
+    provenanceDeclaredBy?: UserUpdateOneWithoutProvenanceDeclaredPlansNestedInput
+    tasks?: ExecutionTaskUpdateManyWithoutExecutionPlanNestedInput
+    closure?: CaseClosureUpdateOneWithoutExecutionPlanNestedInput
+    scheduleRevisions?: ExecutionScheduleRevisionUpdateManyWithoutExecutionPlanNestedInput
+    taskDependencies?: ExecutionTaskDependencyUpdateManyWithoutExecutionPlanNestedInput
+  }
+
+  export type ExecutionPlanUncheckedUpdateWithoutProvenanceAuthorityGrantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    orpId?: StringFieldUpdateOperationsInput | string
+    caseId?: StringFieldUpdateOperationsInput | string
+    approvalDecisionId?: StringFieldUpdateOperationsInput | string
+    status?: EnumExecutionPlanStatusFieldUpdateOperationsInput | $Enums.ExecutionPlanStatus
+    createdById?: StringFieldUpdateOperationsInput | string
+    templateVersion?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    startedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    governanceMode?: EnumExecutionPlanGovernanceModeFieldUpdateOperationsInput | $Enums.ExecutionPlanGovernanceMode
+    executionContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
+    governedProvenance?: NullableJsonNullValueInput | InputJsonValue
+    provenanceClassification?: NullableEnumExecutionPlanProvenanceFieldUpdateOperationsInput | $Enums.ExecutionPlanProvenance | null
+    provenanceDeclaredById?: NullableStringFieldUpdateOperationsInput | string | null
+    provenanceDeclaredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    provenanceEvidenceReference?: NullableStringFieldUpdateOperationsInput | string | null
+    provenanceContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
+    plannedStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    plannedEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    tasks?: ExecutionTaskUncheckedUpdateManyWithoutExecutionPlanNestedInput
+    closure?: CaseClosureUncheckedUpdateOneWithoutExecutionPlanNestedInput
+    scheduleRevisions?: ExecutionScheduleRevisionUncheckedUpdateManyWithoutExecutionPlanNestedInput
+    taskDependencies?: ExecutionTaskDependencyUncheckedUpdateManyWithoutExecutionPlanNestedInput
+  }
+
+  export type ExecutionPlanUncheckedUpdateManyWithoutProvenanceAuthorityGrantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    orpId?: StringFieldUpdateOperationsInput | string
+    caseId?: StringFieldUpdateOperationsInput | string
+    approvalDecisionId?: StringFieldUpdateOperationsInput | string
+    status?: EnumExecutionPlanStatusFieldUpdateOperationsInput | $Enums.ExecutionPlanStatus
+    createdById?: StringFieldUpdateOperationsInput | string
+    templateVersion?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    startedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    governanceMode?: EnumExecutionPlanGovernanceModeFieldUpdateOperationsInput | $Enums.ExecutionPlanGovernanceMode
+    executionContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
+    governedProvenance?: NullableJsonNullValueInput | InputJsonValue
+    provenanceClassification?: NullableEnumExecutionPlanProvenanceFieldUpdateOperationsInput | $Enums.ExecutionPlanProvenance | null
+    provenanceDeclaredById?: NullableStringFieldUpdateOperationsInput | string | null
+    provenanceDeclaredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    provenanceEvidenceReference?: NullableStringFieldUpdateOperationsInput | string | null
+    provenanceContractVersion?: NullableStringFieldUpdateOperationsInput | string | null
+    plannedStartAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    plannedEndAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type ExecutionTaskCreateManyExecutionPlanInput = {

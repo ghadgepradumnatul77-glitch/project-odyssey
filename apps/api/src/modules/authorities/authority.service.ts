@@ -15,6 +15,8 @@ export interface CreateAuthorityInput {
   canRequestReinspection?: boolean;
   canEscalate?: boolean;
   canCloseCase?: boolean;
+  canDeclareNonOperationalProvenance?: boolean;
+  canDeclareOperationalProvenance?: boolean;
   maxPriorityLevel?: PriorityLevel | null;
   validFrom?: Date | null;
   validUntil?: Date | null;
@@ -54,7 +56,9 @@ export async function createApprovalAuthority(input: CreateAuthorityInput, princ
         canRequestModification: input.canRequestModification ?? false,
         canRequestReinspection: input.canRequestReinspection ?? false,
         canEscalate: input.canEscalate ?? false,
-        canCloseCase: input.canCloseCase ?? false
+        canCloseCase: input.canCloseCase ?? false,
+        canDeclareNonOperationalProvenance: input.canDeclareNonOperationalProvenance ?? false,
+        canDeclareOperationalProvenance: input.canDeclareOperationalProvenance ?? false
       },
       include: {
         user: { select: { id: true, name: true, employeeCode: true, designation: true, role: true, status: true } },
@@ -66,7 +70,7 @@ export async function createApprovalAuthority(input: CreateAuthorityInput, princ
       eventType: 'APPROVAL_AUTHORITY_GRANTED', sourceEventKey: `APPROVAL_AUTHORITY_GRANT:${created.id}`,
       resourceType: 'ApprovalAuthority', resourceId: created.id, actor: principal,
       departmentId: created.departmentId, jurisdictionId: created.jurisdictionId, occurredAt: created.createdAt,
-      facts: { grantId: created.id, officerId: created.userId, canApprove: created.canApprove, canReject: created.canReject, canRequestModification: created.canRequestModification, canRequestReinspection: created.canRequestReinspection, canEscalate: created.canEscalate, canCloseCase: created.canCloseCase, maxPriorityLevel: created.maxPriorityLevel, validFrom: created.validFrom?.toISOString() ?? null, validUntil: created.validUntil?.toISOString() ?? null, isActive: created.isActive }
+      facts: { grantId: created.id, officerId: created.userId, canApprove: created.canApprove, canReject: created.canReject, canRequestModification: created.canRequestModification, canRequestReinspection: created.canRequestReinspection, canEscalate: created.canEscalate, canCloseCase: created.canCloseCase, canDeclareNonOperationalProvenance: created.canDeclareNonOperationalProvenance, canDeclareOperationalProvenance: created.canDeclareOperationalProvenance, maxPriorityLevel: created.maxPriorityLevel, validFrom: created.validFrom?.toISOString() ?? null, validUntil: created.validUntil?.toISOString() ?? null, isActive: created.isActive }
     });
     return created;
   }, { isolationLevel: 'Serializable' });

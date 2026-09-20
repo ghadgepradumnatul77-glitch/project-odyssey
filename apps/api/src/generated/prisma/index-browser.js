@@ -595,6 +595,8 @@ exports.Prisma.ApprovalAuthorityScalarFieldEnum = {
   canRequestReinspection: 'canRequestReinspection',
   canEscalate: 'canEscalate',
   canCloseCase: 'canCloseCase',
+  canDeclareNonOperationalProvenance: 'canDeclareNonOperationalProvenance',
+  canDeclareOperationalProvenance: 'canDeclareOperationalProvenance',
   maxPriorityLevel: 'maxPriorityLevel',
   isActive: 'isActive',
   validFrom: 'validFrom',
@@ -634,6 +636,12 @@ exports.Prisma.ExecutionPlanScalarFieldEnum = {
   governanceMode: 'governanceMode',
   executionContractVersion: 'executionContractVersion',
   governedProvenance: 'governedProvenance',
+  provenanceClassification: 'provenanceClassification',
+  provenanceDeclaredById: 'provenanceDeclaredById',
+  provenanceDeclaredAt: 'provenanceDeclaredAt',
+  provenanceAuthorityGrantId: 'provenanceAuthorityGrantId',
+  provenanceEvidenceReference: 'provenanceEvidenceReference',
+  provenanceContractVersion: 'provenanceContractVersion',
   plannedStartAt: 'plannedStartAt',
   plannedEndAt: 'plannedEndAt'
 };
@@ -1082,6 +1090,13 @@ exports.ExecutionPlanStatus = exports.$Enums.ExecutionPlanStatus = {
 exports.ExecutionPlanGovernanceMode = exports.$Enums.ExecutionPlanGovernanceMode = {
   LEGACY: 'LEGACY',
   GOVERNED: 'GOVERNED'
+};
+
+exports.ExecutionPlanProvenance = exports.$Enums.ExecutionPlanProvenance = {
+  PILOT: 'PILOT',
+  PRODUCTION: 'PRODUCTION',
+  SYNTHETIC: 'SYNTHETIC',
+  DEMO: 'DEMO'
 };
 
 exports.ExecutionTaskStatus = exports.$Enums.ExecutionTaskStatus = {

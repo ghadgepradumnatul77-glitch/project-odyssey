@@ -96,6 +96,13 @@ enum OrpDecisionType {
   ESCALATED
 }
 
+enum ExecutionPlanProvenance {
+  PILOT
+  PRODUCTION
+  SYNTHETIC
+  DEMO
+}
+
 enum ExecutionPlanStatus {
   PLANNED
   IN_PROGRESS
@@ -370,6 +377,7 @@ model User {
   decidedPredictiveApprovals         PredictiveModelApproval[]       @relation("PredictiveModelApprover")
   predictiveModelLifecycleEvents     PredictiveModelLifecycleEvent[] @relation("PredictiveModelLifecycleActor")
   assetAttentionReviews              AssetAttentionReview[]          @relation("AssetAttentionReviewer")
+  provenanceDeclaredPlans            ExecutionPlan[]                 @relation("ExecutionPlanProvenanceDeclarant")
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -1086,23 +1094,26 @@ model ApprovalAuthority {
   departmentId   String
   jurisdictionId String
 
-  canApprove             Boolean @default(false)
-  canReject              Boolean @default(false)
-  canRequestModification Boolean @default(false)
-  canRequestReinspection Boolean @default(false)
-  canEscalate            Boolean @default(false)
-  canCloseCase           Boolean @default(false)
+  canApprove                         Boolean @default(false)
+  canReject                          Boolean @default(false)
+  canRequestModification             Boolean @default(false)
+  canRequestReinspection             Boolean @default(false)
+  canEscalate                        Boolean @default(false)
+  canCloseCase                       Boolean @default(false)
+  canDeclareNonOperationalProvenance Boolean @default(false)
+  canDeclareOperationalProvenance    Boolean @default(false)
 
   maxPriorityLevel PriorityLevel?
   isActive         Boolean        @default(true)
   validFrom        DateTime?
   validUntil       DateTime?
 
-  user         User          @relation(fields: [userId], references: [id])
-  department   Department    @relation(fields: [departmentId], references: [id])
-  jurisdiction Jurisdiction  @relation(fields: [jurisdictionId], references: [id])
-  decisions    OrpDecision[]
-  caseClosures CaseClosure[]
+  user                    User            @relation(fields: [userId], references: [id])
+  department              Department      @relation(fields: [departmentId], references: [id])
+  jurisdiction            Jurisdiction    @relation(fields: [jurisdictionId], references: [id])
+  decisions               OrpDecision[]
+  caseClosures            CaseClosure[]
+  provenanceDeclaredPlans ExecutionPlan[] @relation("ExecutionPlanProvenanceAuthority")
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -1142,34 +1153,44 @@ model OrpDecision {
 }
 
 model ExecutionPlan {
-  id                       String                      @id @default(uuid())
-  orpId                    String                      @unique
-  caseId                   String
-  approvalDecisionId       String                      @unique
-  status                   ExecutionPlanStatus         @default(PLANNED)
-  createdById              String
-  templateVersion          String                      @default("ODYSSEY_EXECUTION_V1")
-  createdAt                DateTime                    @default(now())
-  updatedAt                DateTime                    @updatedAt
-  startedAt                DateTime?
-  completedAt              DateTime?
-  cancelledAt              DateTime?
-  cancellationReason       String?
-  governanceMode           ExecutionPlanGovernanceMode @default(LEGACY)
-  executionContractVersion String?
-  governedProvenance       Json?
-  plannedStartAt           DateTime?
-  plannedEndAt             DateTime?
+  id                          String                      @id @default(uuid())
+  orpId                       String                      @unique
+  caseId                      String
+  approvalDecisionId          String                      @unique
+  status                      ExecutionPlanStatus         @default(PLANNED)
+  createdById                 String
+  templateVersion             String                      @default("ODYSSEY_EXECUTION_V1")
+  createdAt                   DateTime                    @default(now())
+  updatedAt                   DateTime                    @updatedAt
+  startedAt                   DateTime?
+  completedAt                 DateTime?
+  cancelledAt                 DateTime?
+  cancellationReason          String?
+  governanceMode              ExecutionPlanGovernanceMode @default(LEGACY)
+  executionContractVersion    String?
+  governedProvenance          Json?
+  provenanceClassification    ExecutionPlanProvenance?
+  provenanceDeclaredById      String?
+  provenanceDeclaredAt        DateTime?
+  provenanceAuthorityGrantId  String?
+  provenanceEvidenceReference String?                     @db.VarChar(200)
+  provenanceContractVersion   String?                     @db.VarChar(80)
+  plannedStartAt              DateTime?
+  plannedEndAt                DateTime?
 
-  orp               OperationalResponsePlan     @relation(fields: [orpId], references: [id], onDelete: Restrict)
-  case              Case                        @relation(fields: [caseId], references: [id], onDelete: Restrict)
-  approvalDecision  OrpDecision                 @relation(fields: [approvalDecisionId], references: [id], onDelete: Restrict)
-  createdBy         User                        @relation("ExecutionPlanCreator", fields: [createdById], references: [id], onDelete: Restrict)
-  tasks             ExecutionTask[]
-  closure           CaseClosure?
-  scheduleRevisions ExecutionScheduleRevision[]
-  taskDependencies  ExecutionTaskDependency[]
+  orp                      OperationalResponsePlan     @relation(fields: [orpId], references: [id], onDelete: Restrict)
+  case                     Case                        @relation(fields: [caseId], references: [id], onDelete: Restrict)
+  approvalDecision         OrpDecision                 @relation(fields: [approvalDecisionId], references: [id], onDelete: Restrict)
+  createdBy                User                        @relation("ExecutionPlanCreator", fields: [createdById], references: [id], onDelete: Restrict)
+  provenanceDeclaredBy     User?                       @relation("ExecutionPlanProvenanceDeclarant", fields: [provenanceDeclaredById], references: [id], onDelete: Restrict)
+  provenanceAuthorityGrant ApprovalAuthority?          @relation("ExecutionPlanProvenanceAuthority", fields: [provenanceAuthorityGrantId], references: [id], onDelete: Restrict)
+  tasks                    ExecutionTask[]
+  closure                  CaseClosure?
+  scheduleRevisions        ExecutionScheduleRevision[]
+  taskDependencies         ExecutionTaskDependency[]
 
+  @@index([provenanceDeclaredById])
+  @@index([provenanceAuthorityGrantId])
   @@index([caseId])
   @@index([status])
   @@index([createdById])

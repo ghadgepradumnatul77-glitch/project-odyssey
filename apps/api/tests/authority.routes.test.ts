@@ -34,6 +34,16 @@ async function authorize(role: string) {
 }
 
 describe('approval authority routes', () => {
+  it.each(['canDeclareNonOperationalProvenance', 'canDeclareOperationalProvenance'])('round-trips explicit %s without implying other permissions', async capability => {
+    mocks.create.mockImplementation(async input => ({ id: 'grant', ...input }));
+    const response = await request(app).post('/api/v1/approval-authorities').set('Authorization', await authorize('SYSTEM_ADMIN')).send({userId:'u',departmentId:'d',jurisdictionId:'j',[capability]:true}).expect(201);
+    expect(response.body.data[capability]).toBe(true);
+    expect(mocks.create.mock.calls[0][0].canApprove).toBeUndefined();
+    mocks.list.mockResolvedValue([response.body.data]);
+    const read=await request(app).get('/api/v1/approval-authorities').set('Authorization',await authorize('SYSTEM_ADMIN')).expect(200);
+    expect(read.body.data[0][capability]).toBe(true);
+    await request(app).post('/api/v1/approval-authorities').set('Authorization', await authorize('SYSTEM_ADMIN')).send({userId:'u',departmentId:'d',jurisdictionId:'j',[capability]:'true'}).expect(400);
+  });
   it('POST creates an explicit authority grant without designation inference', async () => {
     mocks.create.mockResolvedValue({ id: 'grant-1', canApprove: true, maxPriorityLevel: 'CRITICAL' });
     const response = await request(app).post('/api/v1/approval-authorities').set('Authorization', await authorize('SYSTEM_ADMIN')).send({
