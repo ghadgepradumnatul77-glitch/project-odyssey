@@ -222,6 +222,7 @@ enum PlanningEstimateStatus {
 }
 
 enum PredictiveProvenanceClass {
+  UNKNOWN
   PRODUCTION
   PILOT
   DEMO

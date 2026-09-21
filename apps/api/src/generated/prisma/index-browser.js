@@ -1114,6 +1114,7 @@ exports.PredictiveTargetType = exports.$Enums.PredictiveTargetType = {
 };
 
 exports.PredictiveProvenanceClass = exports.$Enums.PredictiveProvenanceClass = {
+  UNKNOWN: 'UNKNOWN',
   PRODUCTION: 'PRODUCTION',
   PILOT: 'PILOT',
   DEMO: 'DEMO',

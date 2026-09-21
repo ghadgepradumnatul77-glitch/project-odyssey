@@ -533,6 +533,7 @@ export type PlanningEstimateStatus = (typeof PlanningEstimateStatus)[keyof typeo
 
 
 export const PredictiveProvenanceClass: {
+  UNKNOWN: 'UNKNOWN',
   PRODUCTION: 'PRODUCTION',
   PILOT: 'PILOT',
   DEMO: 'DEMO',
