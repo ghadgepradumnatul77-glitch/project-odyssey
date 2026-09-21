@@ -5,10 +5,19 @@ import { requireRole } from '../../middleware/require-role';
 import { ExecutionError } from './execution-error';
 import { addEvidence, assignTask, changeTaskStatus, generateExecutionPlan, getExecutionPlan, hasClientActorFields, listCaseExecutionPlans, listExecutionTasks, resolveEligibleExecutionAssignees, submitCompletion, verifyTask } from './execution.service';
 import { z } from 'zod';
+import { declareExecutionProvenance } from './execution-provenance.service';
 import { parseCursor, parseLimit, queryError } from '../../lib/pagination';
 import { addDependency, analyzeSchedule, blockerCategories, removeDependency, updatePlanSchedule, updateTaskSchedule } from './execution-schedule.service';
 
 const router = Router();
+router.post('/execution-plans/:planId/provenance', authenticate, requireRole(SystemRole.OFFICER), async (req, res) => {
+  try {
+    const planId = uuidParam(req.params.planId);
+    if (!planId) throw new ExecutionError('INVALID_INPUT', 400, 'A valid planId is required.');
+    const result = await declareExecutionProvenance(planId, req.body, req.user!);
+    return res.status(result.idempotent ? 200 : 201).json({ success: true, ...result });
+  } catch (error) { return fail(res, error); }
+});
 const evidenceTypes = new Set(Object.values(ExecutionEvidenceType));
 const actorFields = ['createdById', 'assignedById', 'assignedAt', 'submittedById', 'submittedAt', 'completionSubmittedById', 'verifiedById', 'cancelledById', 'startedAt'];
 function id(value: unknown) { return typeof value === 'string' && value.trim() ? value.trim() : null; }
