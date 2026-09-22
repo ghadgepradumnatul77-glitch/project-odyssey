@@ -9,11 +9,12 @@ const state = vi.hoisted(() => ({ status: 'PENDING', selected: null as string | 
   { id: '33333333-3333-4333-8333-333333333333', name: 'Cross Scope', designation: 'Engineer', employeeCode: 'OTHER-1', status: 'ACTIVE', role: 'OFFICER', departmentId: 'other', jurisdictionId: 'other' }
 ] }));
 
+vi.mock('../src/modules/predictive-data/assignment-snapshot.service', () => ({ captureInitialAssignmentSnapshot: vi.fn() }));
 vi.mock('../src/lib/prisma', () => {
   const task = () => ({ id: '11111111-1111-4111-8111-111111111111', status: state.status, executionPlanId: 'plan', assignedToId: state.selected, evidence: [], executionPlan: { status: 'PLANNED', createdById: 'actor', case: { status: 'EXECUTION', asset: { departmentId: 'dep', jurisdictionId: 'jur' } } } });
   const eligible = (where: any) => state.candidates.filter((user) => user.status === where.status && user.role === where.role && user.departmentId === where.departmentId && user.jurisdictionId === where.jurisdictionId && (!where.id || user.id === where.id));
-  const tx = { executionTask: {
-    findUnique: vi.fn(async () => ({ executionPlan: { status: 'PLANNED', case: { status: 'EXECUTION' } } })),
+  const tx = { user: { findFirst: vi.fn(async ({ where }: any) => eligible(where)[0] ?? null) }, executionTask: {
+    findUnique: vi.fn(async () => task()),
     findUniqueOrThrow: vi.fn(async () => ({ ...task(), assignedTo: state.candidates.find((item) => item.id === state.selected) ?? null, evidence: [] })),
     findMany: vi.fn(async () => [{ status: state.status, isMandatory: true }]),
     updateMany: vi.fn(async ({ where, data }: any) => { if (state.status !== where.status) return { count: 0 }; state.status = data.status; state.selected = data.assignedToId; return { count: 1 }; })

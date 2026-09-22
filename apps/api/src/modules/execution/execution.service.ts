@@ -1,4 +1,5 @@
 import prisma from '../../lib/prisma';
+import { captureInitialAssignmentSnapshot } from '../predictive-data/assignment-snapshot.service';
 import { ExecutionBlockerCategory, ExecutionEvidenceType, ExecutionPlanStatus, ExecutionTaskStatus, OrpDecisionType, Prisma, SystemRole, UserStatus } from '../../generated/prisma';
 import { buildCaseReadWhere, buildExecutionPlanMutationWhere, buildExecutionPlanReadWhere, buildExecutionTaskMutationWhere, buildExecutionTaskReadWhere, buildOrpMutationWhere, isSameOrganizationalScope, OrganizationalPrincipal } from '../../security/organizational-scope';
 import { ExecutionError } from './execution-error';
@@ -6,7 +7,7 @@ import { EXECUTION_TEMPLATE_VERSION, translateActionsToTasks } from './execution
 import { z } from 'zod';
 import { GovernedTemplateError, resolveGovernedTemplate } from '../execution-templates/governed-execution-template.service';
 import { pageFromRows, type StableCursor } from '../../lib/pagination';
-import { collectAssignmentBestEffort, collectOutcomeBestEffort } from '../predictive-data/predictive-data.service';
+import { collectOutcomeBestEffort } from '../predictive-data/predictive-data.service';
 import { appendIntegrityEvent, evidenceIntegrityFacts, integrityTextDigest } from '../integrity/integrity.service';
 
 export const GOVERNED_EXECUTION_CONTRACT_VERSION='ODYSSEY_GOVERNED_EXECUTION_V1';
@@ -131,8 +132,8 @@ export async function listExecutionTasks(planId: string, principal: Organization
   return { ...page, items: page.items.map(presentTask) };
 }
 
-async function scopedTask(taskId: string, principal: OrganizationalPrincipal) {
-  const task = await prisma.executionTask.findUnique({ where: { id: taskId, AND: [buildExecutionTaskMutationWhere(principal)] }, include: { executionPlan: { include: { case: { include: { asset: true } } } }, evidence: { select: { id: true } } } });
+async function scopedTask(taskId: string, principal: OrganizationalPrincipal, db: Prisma.TransactionClient = prisma) {
+  const task = await db.executionTask.findUnique({ where: { id: taskId, AND: [buildExecutionTaskMutationWhere(principal)] }, include: { executionPlan: { include: { case: { include: { asset: true } } } }, evidence: { select: { id: true } } } });
   if (!task) notFound('Execution task');
   if (task.executionPlan.status === ExecutionPlanStatus.COMPLETED || task.executionPlan.case.status === 'CLOSED') {
     throw new ExecutionError('INVALID_EXECUTION_TASK_STATE', 409, 'Completed execution or a closed Case cannot be mutated.');
@@ -140,8 +141,8 @@ async function scopedTask(taskId: string, principal: OrganizationalPrincipal) {
   return task;
 }
 
-async function assignmentContext(taskId: string, principal: OrganizationalPrincipal) {
-  const task = await scopedTask(taskId, principal);
+async function assignmentContext(taskId: string, principal: OrganizationalPrincipal, db: Prisma.TransactionClient = prisma) {
+  const task = await scopedTask(taskId, principal, db);
   if (task.status !== ExecutionTaskStatus.PENDING) {
     throw new ExecutionError('INVALID_EXECUTION_TASK_STATE', 409, 'Task is not pending.');
   }
@@ -163,9 +164,9 @@ export async function resolveEligibleExecutionAssignees(taskId: string, principa
   return {items:rows.slice(0,100),limit:100,truncated:rows.length>100};
 }
 
-export async function assertEligibleExecutionAssignee(taskId: string, assigneeId: string, principal: OrganizationalPrincipal) {
-  const context = await assignmentContext(taskId, principal);
-  const assignee = await prisma.user.findFirst({ where: { id: assigneeId, ...context.eligibility }, select: safeAssigneeCandidate });
+export async function assertEligibleExecutionAssignee(taskId: string, assigneeId: string, principal: OrganizationalPrincipal, db: Prisma.TransactionClient = prisma) {
+  const context = await assignmentContext(taskId, principal, db);
+  const assignee = await db.user.findFirst({ where: { id: assigneeId, ...context.eligibility }, select: safeAssigneeCandidate });
   if (!assignee) throw new ExecutionError('ASSIGNEE_NOT_ELIGIBLE', 404, 'Eligible assignee not found.');
   return { ...context, assignee };
 }
@@ -181,17 +182,17 @@ async function assertTaskMutable(tx: Prisma.TransactionClient, taskId: string) {
 }
 
 export async function assignTask(taskId: string, assigneeId: string, principal: OrganizationalPrincipal) {
-  const { task, assignee } = await assertEligibleExecutionAssignee(taskId, assigneeId, principal);
   const assigned = await prisma.$transaction(async (tx) => {
+    const { task, assignee } = await assertEligibleExecutionAssignee(taskId, assigneeId, principal, tx);
     await assertTaskMutable(tx, taskId);
-    const changed = await tx.executionTask.updateMany({ where: { id: taskId, status: ExecutionTaskStatus.PENDING }, data: { assignedToId: assignee.id, assignedById: principal.id, assignedAt: new Date(), status: ExecutionTaskStatus.ASSIGNED } });
+    const changed = await tx.executionTask.updateMany({ where: { id: taskId, status: ExecutionTaskStatus.PENDING, assignedAt: null }, data: { assignedToId: assignee.id, assignedById: principal.id, assignedAt: new Date(), status: ExecutionTaskStatus.ASSIGNED } });
     if (changed.count !== 1) throw new ExecutionError('INVALID_EXECUTION_TASK_STATE', 409, 'Task is not pending.');
     await refreshPlan(tx, task.executionPlanId);
     const updated=await tx.executionTask.findUniqueOrThrow({ where: { id: taskId }, include: taskInclude });
     await appendIntegrityEvent(tx,{eventType:'EXECUTION_TASK_ASSIGNED',sourceEventKey:`EXECUTION_TASK_ASSIGNED:${taskId}`,resourceType:'ExecutionTask',resourceId:taskId,actor:principal,departmentId:task.executionPlan.case.asset.departmentId,jurisdictionId:task.executionPlan.case.asset.jurisdictionId,occurredAt:updated.assignedAt!,facts:{executionPlanId:task.executionPlanId,taskId,assigneeId:assignee.id,assignedById:principal.id,status:updated.status}});
+    await captureInitialAssignmentSnapshot(tx, taskId, updated.assignedAt!, principal);
     return updated;
   }, { isolationLevel: Prisma.TransactionIsolationLevel.Serializable });
-  await collectAssignmentBestEffort(taskId, principal);
   return assigned;
 }
 

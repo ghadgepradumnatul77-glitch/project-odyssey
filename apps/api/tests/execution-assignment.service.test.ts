@@ -4,9 +4,10 @@ import { ExecutionTaskStatus, SystemRole, UserStatus } from '../src/generated/pr
 const mocks = vi.hoisted(() => ({ task: vi.fn(), users: vi.fn(), user: vi.fn(), updateMany: vi.fn(), taskResult: vi.fn(), plan: vi.fn(), planTasks: vi.fn(), planUpdate: vi.fn() }));
 vi.mock('../src/lib/prisma', () => ({ default: {
   executionTask: { findUnique: mocks.task }, user: { findMany: mocks.users, findFirst: mocks.user },
-  $transaction: vi.fn(async (callback: any) => callback({ executionTask: { findUnique: mocks.taskResult, findUniqueOrThrow: mocks.taskResult, findMany: mocks.planTasks, updateMany: mocks.updateMany }, executionPlan: { findUnique: mocks.plan, update: mocks.planUpdate } }))
+  $transaction: vi.fn(async (callback: any) => callback({ user: { findFirst: mocks.user }, executionTask: { findUnique: mocks.task, findUniqueOrThrow: mocks.taskResult, findMany: mocks.planTasks, updateMany: mocks.updateMany }, executionPlan: { findUnique: mocks.plan, update: mocks.planUpdate } }))
 } }));
 
+vi.mock('../src/modules/predictive-data/assignment-snapshot.service', () => ({ captureInitialAssignmentSnapshot: vi.fn() }));
 import { assignTask, resolveEligibleExecutionAssignees } from '../src/modules/execution/execution.service';
 
 const principal = { id: 'actor', role: SystemRole.OFFICER, status: UserStatus.ACTIVE, departmentId: 'dep', jurisdictionId: 'jur' };
@@ -30,7 +31,7 @@ describe('scoped execution assignment eligibility', () => {
   it('revalidates the selected candidate with the same active officer and exact-scope rule', async () => {
     await assignTask('task', 'candidate', principal);
     expect(mocks.user).toHaveBeenCalledWith({ where: { id: 'candidate', status: 'ACTIVE', role: 'OFFICER', departmentId: 'dep', jurisdictionId: 'jur' }, select: { id: true, employeeCode: true, name: true, designation: true } });
-    expect(mocks.updateMany).toHaveBeenCalledWith(expect.objectContaining({ where: { id: 'task', status: 'PENDING' }, data: expect.objectContaining({ assignedToId: 'candidate', assignedById: 'actor', status: 'ASSIGNED' }) }));
+    expect(mocks.updateMany).toHaveBeenCalledWith(expect.objectContaining({ where: { id: 'task', status: 'PENDING', assignedAt: null }, data: expect.objectContaining({ assignedToId: 'candidate', assignedById: 'actor', status: 'ASSIGNED' }) }));
   });
 
   it.each(['inactive officer', 'policy admin', 'auditor', 'system admin', 'cross department', 'cross jurisdiction', 'unknown id'])('fails safely when candidate is %s', async () => {

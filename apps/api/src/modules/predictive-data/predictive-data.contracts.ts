@@ -1,6 +1,6 @@
 import { createHash } from 'node:crypto';
 import { z } from 'zod';
-import { PredictiveOutcomeValue, PredictiveProvenanceClass } from '../../generated/prisma';
+import { PredictiveOutcomeValue } from '../../generated/prisma';
 
 export const PREDICTIVE_DATASET_CONTRACT_VERSION = 'ODYSSEY_TASK_LATENESS_DATASET_V1';
 export const TASK_LATENESS_FEATURE_CONTRACT_VERSION = 'TASK_LATENESS_FEATURES_V1';
@@ -16,11 +16,6 @@ export const taskLatenessFeatureSchema = z.object({
   activeEstimate: z.object({ estimateId: z.string().uuid(), estimateVersion: z.number().int().positive(), currency: z.string(), estimatedCostMinor: z.string().regex(/^\d+$/), estimatedDurationDays: z.number().int().positive().nullable(), resourceRequirements: z.unknown() }).nullable()
 }).strict();
 export type TaskLatenessFeatures = z.infer<typeof taskLatenessFeatureSchema>;
-
-const demoAssetCodes = new Set(['BR-101','BR-204','FL-301','RD-410','BR-212','RD-118','FL-509','RD-330']);
-export function classifyPredictiveProvenance(assetCode: string) {
-  return demoAssetCodes.has(assetCode) || assetCode.startsWith('DEMO-') ? PredictiveProvenanceClass.DEMO : PredictiveProvenanceClass.PILOT;
-}
 
 function canonical(value: unknown): string {
   if (Array.isArray(value)) return `[${value.map(canonical).join(',')}]`;
